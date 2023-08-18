@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 
 const buildPath = path.resolve(process.cwd(), '../build');
-const BASE_PATH = '/tilleggstonader';
+const BASE_PATH = '/tilleggsstonader';
 const BASE_PATH_SOKNAD = `${BASE_PATH}/soknad`;
 const routes = () => {
     const expressRouter = express.Router();
