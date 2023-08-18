@@ -39,7 +39,6 @@ spec:
     - https://www.nav.no/tilleggsstonader/soknad
   accessPolicy:
     outbound:
-      rules:
       external:
         - host: nav.no
   env:
