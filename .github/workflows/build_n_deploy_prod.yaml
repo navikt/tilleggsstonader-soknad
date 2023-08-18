@@ -19,17 +19,17 @@ jobs:
           node-version: '18'
           cache: yarn
           registry-url: "https://npm.pkg.github.com"
-      #      - name: Yarn install
-      #        run: yarn --prefer-offline --frozen-lockfile
-      #        env:
-      #          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-      #      - name: Yarn build
-      #        run: yarn build
-      #      - name: Yarn install server
-      #        working-directory: ./server
-      #        env:
-      #          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-      #        run: yarn --prefer-offline --frozen-lockfile
+#      - name: Yarn install
+#        run: yarn --prefer-offline --frozen-lockfile
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+#      - name: Yarn build
+#        run: yarn build
+      - name: Yarn install server
+        working-directory: ./src/backend
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+        run: yarn --prefer-offline --frozen-lockfile
       - name: Yarn install server
         working-directory: ./src/backend
         env:
@@ -61,12 +61,12 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: .nais/naiserator/dev.yaml
-      - name: Deploy til prod-gcp
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-gcp
-          RESOURCE: .nais/naiserator/prod.yaml
+#      - name: Deploy til prod-gcp
+#        uses: nais/deploy/actions/deploy@v1
+#        env:
+#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+#          CLUSTER: prod-gcp
+#          RESOURCE: .nais/naiserator/prod.yaml
       - name: Post deploy failures to Slack
         if: failure()
         run: |

@@ -15,7 +15,7 @@ spec:
   replicas:
     min: 1
     max: 2
-  port: 8080
+  port: 3000
   liveness:
     path: /tilleggsstonader/soknad/internal/isAlive
     initialDelay: 5
@@ -39,7 +39,6 @@ spec:
     - https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad
   accessPolicy:
     outbound:
-      rules:
       external:
         - host: nav.no
   env:
