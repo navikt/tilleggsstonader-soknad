@@ -1,4 +1,5 @@
 import path from 'path'
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config = {
     entry: './src/frontend/index.ts',
@@ -16,9 +17,15 @@ const config = {
             },
         ],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Søknad om tilleggsstønader',
+        }),
+    ],
     output: {
         filename: 'main.js',
         path: path.join(process.cwd(), 'dist'),
+        clean: true,
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
