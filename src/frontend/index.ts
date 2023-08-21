@@ -3,6 +3,8 @@ function component() {
 
     element.innerHTML = 'Søknad om tilleggsstønad til barnepass';
 
+    console.log('Med typescript 🚀');
+
     return element;
 }
 
