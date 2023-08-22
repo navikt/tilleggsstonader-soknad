@@ -1,7 +1,7 @@
-import path from 'path'
+import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-const config = {
+const common = {
     entry: './src/frontend/index.ts',
     module: {
         rules: [
@@ -22,14 +22,9 @@ const config = {
             title: 'Søknad om tilleggsstønader',
         }),
     ],
-    output: {
-        filename: 'main.js',
-        path: path.join(process.cwd(), 'dist'),
-        clean: true,
-    },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
 };
 
-export default config;
+export default common;

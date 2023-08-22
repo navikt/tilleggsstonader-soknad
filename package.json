@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "webpack --config ./webpack/webpack.config.js"
+    "build": "webpack --config ./webpack/webpack.production.js",
+    "build:dev": "webpack --config ./webpack/webpack.development.js",
+    "start:dev": "webpack serve --open --config ./webpack/webpack.development.js"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css}": [
@@ -27,6 +29,9 @@
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-middleware": "^6.1.1",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.9.0"
   }
 }
