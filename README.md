@@ -11,4 +11,4 @@ Frontend - søknad for tilleggsstønader
 2. Bruk heading levels for å vise strukturen på siden. 
     - `<H1>` skal beskrive hovedinnholdet.
 3. Bruk [landmarks](https://www.w3schools.com/accessibility/accessibility_landmarks.php) for grov inndeling av innholdet som tilsvarer sidens layout. 
-4. Sjekk at det fungerer å navigere med tastatus.
+4. Sjekk at det fungerer å navigere med tastatur.
