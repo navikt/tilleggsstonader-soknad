@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "webpack --config ./webpack/webpack.production.js",
-    "build:dev": "webpack --config ./webpack/webpack.development.js",
-    "start:dev": "webpack serve --open --config ./webpack/webpack.development.js",
+    "build": "PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.production.js",
+    "build:dev": "PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.development.js",
+    "start:dev": "PUBLIC_URL=/tilleggsstonader/soknad webpack serve --config ./webpack/webpack.development.js",
     "postinstall": "husky install",
     "prepare": "husky install"
   },
@@ -47,9 +47,11 @@
     "webpack-merge": "^5.9.0"
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "@navikt/ds-css": "^5.0.3",
     "@navikt/ds-react": "^5.0.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0"
   }
 }
