@@ -13,6 +13,11 @@ const routes = () => {
 
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
+    expressRouter.use(
+        /^(?!.*\/(internal|static|api)\/).*$/,
+        express.static(buildPath, { index: true })
+    );
+
     return expressRouter;
 };
 
