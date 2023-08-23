@@ -22,9 +22,10 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+        "sourceMap": true
     },
     "include": [
         "src"
-    ],
+    ]
 }

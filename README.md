@@ -2,6 +2,9 @@
 
 Frontend - søknad for tilleggsstønader
 
+### Kjøre app lokalt
+`yarn start:dev`
+
 ## Universell utforming
 
 ### Huskeliste ✨
