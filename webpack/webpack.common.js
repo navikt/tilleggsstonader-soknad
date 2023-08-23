@@ -1,5 +1,5 @@
-import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
 import webpack from 'webpack';
 
 const publicPath = process.env.PUBLIC_URL || '/';
@@ -15,6 +15,7 @@ const common = {
                     compilerOptions: {
                         noEmit: false,
                     },
+                    onlyCompileBundledFiles: true,
                 },
                 exclude: /node_modules/,
             },
@@ -25,6 +26,10 @@ const common = {
                 options: {
                     presets: [['@babel/preset-env'], ['@babel/preset-react']],
                 },
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
             },
         ],
     },
