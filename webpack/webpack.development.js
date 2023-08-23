@@ -1,4 +1,5 @@
 import path from 'path';
+import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 
 import common from './webpack.common.js';
@@ -26,6 +27,11 @@ const developmentConfig = merge(common, {
     optimization: {
         runtimeChunk: 'single',
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('development'),
+        }),
+    ],
 });
 
 export default developmentConfig;

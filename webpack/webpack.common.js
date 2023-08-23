@@ -39,7 +39,6 @@ const common = {
             template: path.join(process.cwd(), 'src/frontend/index.html'),
         }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development'),
             'process.env.PUBLIC_URL': JSON.stringify(publicPath),
         }),
     ],
