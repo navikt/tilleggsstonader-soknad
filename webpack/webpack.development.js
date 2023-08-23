@@ -1,6 +1,7 @@
-import common from './webpack.common.js';
-import { merge } from 'webpack-merge';
 import path from 'path';
+import { merge } from 'webpack-merge';
+
+import common from './webpack.common.js';
 
 const developmentConfig = merge(common, {
     mode: 'development',
