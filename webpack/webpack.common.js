@@ -12,6 +12,7 @@ const common = {
                     compilerOptions: {
                         noEmit: false,
                     },
+                    onlyCompileBundledFiles: true,
                 },
                 exclude: /node_modules/,
             },
