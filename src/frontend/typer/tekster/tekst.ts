@@ -1,3 +1,3 @@
-type Språk = 'nb';
+type Locale = 'nb';
 
-export type Tekst = Record<Språk, string>;
+export type TekstElement = Record<Locale, string>;
