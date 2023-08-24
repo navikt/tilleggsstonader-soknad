@@ -2,7 +2,7 @@ import express from 'express';
 import { Request, Response, Router } from 'express';
 import path from 'path';
 
-const buildPath = path.resolve(process.cwd(), '../dist_production');
+const buildPath = path.resolve(process.cwd(), '../../dist_production');
 const BASE_PATH = '/tilleggsstonader';
 const BASE_PATH_SOKNAD = `${BASE_PATH}/soknad`;
 const routes = () => {
@@ -15,7 +15,7 @@ const routes = () => {
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
     expressRouter.use(/^(?!.*\/(internal|static|api)\/).*$/, (_req: Request, res: Response) => {
-        res.sendFile('index.html', { root: '../../dist_development' });
+        res.sendFile('index.html', { root: buildPath });
     });
 
     return expressRouter;
