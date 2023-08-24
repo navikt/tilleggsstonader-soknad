@@ -1,3 +1,3 @@
 type Språk = 'nb';
 
-export type Tekst = Record<Språk, string>;
+export type Tekster = Record<Språk, string>;

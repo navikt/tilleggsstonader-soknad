@@ -1,5 +1,5 @@
-import { Tekst } from './tekst';
+import { Tekster } from './tekst';
 
 type FellesKeys = 'neste' | 'forrige';
 
-export type FellesInnhold = Record<FellesKeys, Tekst>;
+export type FellesInnhold = Record<FellesKeys, Tekster>;
