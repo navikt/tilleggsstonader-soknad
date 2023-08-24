@@ -1,8 +1,11 @@
+.idea
+.DS_Store
+
+.gradle
+
 node_modules
 build
 yarn-error.log
-.idea
-.DS_Store
 dist
 /dist_development
 /dist_production
