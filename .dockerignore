@@ -2,4 +2,4 @@
 *
 
 !/src/backend
-!/build
+!/dist_production
