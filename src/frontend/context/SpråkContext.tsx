@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
-import { Locale } from '../typer/tekster/tekst';
+import { Locale } from '../typer/tekst';
 
 const [SpråkProvider, useSpråk] = createUseContext(() => {
     const [locale, settLocale] = useState<Locale>('nb');

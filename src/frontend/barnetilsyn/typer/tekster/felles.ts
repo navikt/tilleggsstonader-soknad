@@ -1,4 +1,4 @@
-import { TekstElement } from './tekst';
+import { TekstElement } from '../../../typer/tekst';
 
 type FellesKeys = 'neste' | 'forrige';
 
