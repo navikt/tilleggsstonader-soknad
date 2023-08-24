@@ -9,3 +9,5 @@
 .env
 .gitignore
 .husky/
+
+.gradle
