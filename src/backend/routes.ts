@@ -15,7 +15,7 @@ const routes = () => {
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
     expressRouter.use(/^(?!.*\/(internal|static|api)\/).*$/, (_req: Request, res: Response) => {
-        res.sendFile('index.html', { root: path.join(process.cwd(), 'dist_development') });
+        res.sendFile('index.html', { root: 'dist_development' });
     });
 
     return expressRouter;
