@@ -8,7 +8,7 @@ import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import { Banner } from './Banner';
 import { LocaleTekst } from './LocaleTekst';
-import { fellesTekster } from '../barnetilsyn/tekster/felles';
+import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
