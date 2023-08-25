@@ -2,6 +2,10 @@ import express from 'express';
 import { Request, Response, Router } from 'express';
 import path from 'path';
 
+import { injectDecoratorServerSide } from '@navikt/nav-dekoratoren-moduler/ssr';
+
+import logger from './logger';
+
 const buildPath = path.resolve(process.cwd(), '../../app/build');
 const BASE_PATH = '/tilleggsstonader';
 const BASE_PATH_SOKNAD = `${BASE_PATH}/soknad`;
@@ -15,10 +19,36 @@ const routes = () => {
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
     expressRouter.use(/^(?!.*\/(internal|static|api)\/).*$/, (_req: Request, res: Response) => {
-        res.sendFile('index.html', { root: buildPath });
+        getDecoratedHtml(path.join(buildPath, 'index.html'))
+            .then((html) => {
+                res.send(html);
+            })
+            .catch((e) => {
+                logger.error(e);
+                res.status(500).send(e);
+            });
     });
 
     return expressRouter;
+};
+
+const getDecoratedHtml = (path: string) => {
+    const env = process.env.ENV;
+
+    if (env === undefined) {
+        logger.error('Mangler miljø for dekoratøren');
+    }
+
+    return injectDecoratorServerSide({
+        env: env as 'dev' | 'prod',
+        filePath: path,
+        params: {
+            simple: true,
+            enforceLogin: false,
+            redirectToApp: true,
+            level: 'Level4',
+        },
+    });
 };
 
 export default routes;

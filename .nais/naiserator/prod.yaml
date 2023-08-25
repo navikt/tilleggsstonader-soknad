@@ -38,6 +38,9 @@ spec:
   ingresses:
     - https://www.nav.no/tilleggsstonader/soknad
   accessPolicy:
+    rules:
+      - application: nav-dekoratoren
+        namespace: personbruker
     outbound:
       external:
         - host: nav.no
