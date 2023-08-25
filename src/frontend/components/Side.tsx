@@ -9,11 +9,12 @@ import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 import { LocaleTekst } from './LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
+import { TekstElement } from '../typer/tekst';
 import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface Props {
     stønadstype: Stønadstype;
-    stegtittel: string;
+    stegtittel: TekstElement;
     children?: React.ReactNode;
 }
 
@@ -70,7 +71,7 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children }) => {
         <Container>
             <StegIndikator>
                 <Heading size="medium" as="h2">
-                    {stegtittel}
+                    <LocaleTekst tekst={stegtittel} />
                 </Heading>
                 <BodyShort size="small">
                     Steg {aktivtSteg} av {routes.length - 1}
