@@ -1,6 +1,7 @@
-import { GuidePanel, Heading } from '@navikt/ds-react';
+import { Heading } from '@navikt/ds-react';
 
 import { LocaleTekst } from '../../../components/LocaleTekst';
+import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { personaliaTekster } from '../../tekster/personalia';
@@ -11,9 +12,9 @@ const Personalia = () => {
             <Heading size="medium">
                 <LocaleTekst tekst={personaliaTekster.innhold_tittel} />
             </Heading>
-            <GuidePanel>
+            <PellePanel>
                 <LocaleTekst tekst={personaliaTekster.guide_innhold} />
-            </GuidePanel>
+            </PellePanel>
         </Side>
     );
 };
