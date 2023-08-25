@@ -12,7 +12,7 @@ const developmentConfig = merge(common, {
     devServer: {
         static: '/dist_development',
         port: 8080,
-        open: publicPath,
+        open: publicPath + '/barnetilsyn',
         devMiddleware: { publicPath: publicPath },
         historyApiFallback: {
             index: publicPath,

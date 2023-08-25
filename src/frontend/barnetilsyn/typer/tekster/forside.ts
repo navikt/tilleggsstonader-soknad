@@ -1,4 +1,4 @@
-import { TekstElement } from './tekst';
+import { TekstElement } from '../../../typer/tekst';
 
 type ForsideKeys = 'veileder_tittel';
 
