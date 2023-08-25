@@ -12,7 +12,7 @@ import { fellesTekster } from '../barnetilsyn/tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
-interface ISide {
+interface Props {
     stønadstype: Stønadstype;
     stegtittel: string;
     children?: React.ReactNode;
@@ -49,7 +49,7 @@ const KnappeContainer = styled.div`
     gap: 1rem;
 `;
 
-const Side: React.FC<ISide> = ({ stønadstype, stegtittel, children }) => {
+const Side: React.FC<Props> = ({ stønadstype, stegtittel, children }) => {
     const location = useLocation();
     const navigate = useNavigate();
 
