@@ -1,5 +1,5 @@
 import { TekstElement } from '../../../typer/tekst';
 
-type FellesKeys = 'neste' | 'forrige' | 'banner';
+type FellesKeys = 'banner';
 
 export type FellesInnhold = Record<FellesKeys, TekstElement>;

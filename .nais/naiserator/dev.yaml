@@ -39,6 +39,9 @@ spec:
     - https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad
   accessPolicy:
     outbound:
+      rules:
+        - application: nav-dekoratoren
+          namespace: personbruker
       external:
         - host: nav.no
   env:
