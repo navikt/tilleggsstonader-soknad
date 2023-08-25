@@ -1,5 +1,7 @@
 import Søknadsdialog from './Søknadsdialog';
 
-export const BarnetilsynApp = () => {
+const BarnetilsynApp = () => {
     return <Søknadsdialog />;
 };
+
+export default BarnetilsynApp;

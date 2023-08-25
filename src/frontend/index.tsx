@@ -5,7 +5,7 @@ import '@navikt/ds-css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import App from './App';
-import { BarnetilsynApp } from './barnetilsyn/BarnetilsynApp';
+import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
 import { SpråkProvider } from './context/SpråkContext';
 
 const rootElement = document.getElementById('app');
