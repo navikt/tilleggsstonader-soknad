@@ -17,7 +17,7 @@ interface Props {
     children?: React.ReactNode;
 }
 
-const InnholdContainer = styled.div`
+const Container = styled.div`
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -67,7 +67,7 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children }) => {
     };
 
     return (
-        <InnholdContainer>
+        <Container>
             <Steg>
                 <Heading size="medium" as="h2">
                     {stegtittel}
@@ -85,7 +85,7 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children }) => {
                     <LocaleTekst tekst={fellesTekster.neste} />
                 </Button>
             </KnappeContainer>
-        </InnholdContainer>
+        </Container>
     );
 };
 
