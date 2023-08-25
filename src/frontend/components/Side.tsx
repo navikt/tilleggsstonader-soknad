@@ -6,7 +6,6 @@ import { styled } from 'styled-components';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
-import { Banner } from './Banner';
 import { LocaleTekst } from './LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
@@ -68,28 +67,25 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children }) => {
     };
 
     return (
-        <>
-            <Banner tittel={fellesTekster.banner} />
-            <InnholdContainer>
-                <Steg>
-                    <Heading size="medium" as="h2">
-                        {stegtittel}
-                    </Heading>
-                    <BodyShort size="small">
-                        Steg {aktivtSteg} av {routes.length - 1}
-                    </BodyShort>
-                </Steg>
-                <Innhold>{children}</Innhold>
-                <KnappeContainer>
-                    <Button variant="secondary" onClick={navigerTilForrigeSide}>
-                        <LocaleTekst tekst={fellesTekster.forrige} />
-                    </Button>
-                    <Button onClick={navigerTilNesteSide}>
-                        <LocaleTekst tekst={fellesTekster.neste} />
-                    </Button>
-                </KnappeContainer>
-            </InnholdContainer>
-        </>
+        <InnholdContainer>
+            <Steg>
+                <Heading size="medium" as="h2">
+                    {stegtittel}
+                </Heading>
+                <BodyShort size="small">
+                    Steg {aktivtSteg} av {routes.length - 1}
+                </BodyShort>
+            </Steg>
+            <Innhold>{children}</Innhold>
+            <KnappeContainer>
+                <Button variant="secondary" onClick={navigerTilForrigeSide}>
+                    <LocaleTekst tekst={fellesTekster.forrige} />
+                </Button>
+                <Button onClick={navigerTilNesteSide}>
+                    <LocaleTekst tekst={fellesTekster.neste} />
+                </Button>
+            </KnappeContainer>
+        </InnholdContainer>
     );
 };
 
