@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
@@ -10,7 +10,7 @@ import { Banner } from './Banner';
 import { LocaleTekst } from './LocaleTekst';
 import { fellesTekster } from '../barnetilsyn/tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
-import { hentRoutes } from '../utils/routes';
+import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface ISide {
     stønadstype: Stønadstype;
@@ -51,9 +51,21 @@ const KnappeContainer = styled.div`
 
 const Side: React.FC<ISide> = ({ stønadstype, stegtittel, children }) => {
     const location = useLocation();
+    const navigate = useNavigate();
 
     const routes = hentRoutes(stønadstype);
-    const aktivtSteg = routes.findIndex((steg) => steg.path === location.pathname);
+    const nåværendePath = location.pathname;
+    const aktivtSteg = routes.findIndex((steg) => steg.path === nåværendePath);
+
+    const navigerTilNesteSide = () => {
+        const nesteRoute = hentNesteRoute(routes, nåværendePath);
+        navigate(nesteRoute.path);
+    };
+
+    const navigerTilForrigeSide = () => {
+        const forrigeRoute = hentForrigeRoute(routes, nåværendePath);
+        navigate(forrigeRoute.path);
+    };
 
     return (
         <>
@@ -69,10 +81,10 @@ const Side: React.FC<ISide> = ({ stønadstype, stegtittel, children }) => {
                 </Steg>
                 <Innhold>{children}</Innhold>
                 <KnappeContainer>
-                    <Button variant="secondary">
+                    <Button variant="secondary" onClick={navigerTilForrigeSide}>
                         <LocaleTekst tekst={fellesTekster.forrige} />
                     </Button>
-                    <Button>
+                    <Button onClick={navigerTilNesteSide}>
                         <LocaleTekst tekst={fellesTekster.neste} />
                     </Button>
                 </KnappeContainer>

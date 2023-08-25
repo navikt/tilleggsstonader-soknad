@@ -8,3 +8,13 @@ export const hentRoutes = (stønadstype: Stønadstype): IRoute[] => {
             return RoutesBarnetilsyn;
     }
 };
+
+export const hentNesteRoute = (routes: IRoute[], nåværendePath: string) => {
+    const routeIndex = routes.findIndex((route) => route.path === nåværendePath);
+    return routes[routeIndex + 1];
+};
+
+export const hentForrigeRoute = (routes: IRoute[], nåværendePath: string) => {
+    const routeIndex = routes.findIndex((route) => route.path === nåværendePath);
+    return routes[routeIndex - 1];
+};
