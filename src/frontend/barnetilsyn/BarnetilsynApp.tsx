@@ -1,5 +1,5 @@
-import SøknadsdialogBarnetilsyn from './Søknadsdialog';
+import Søknadsdialog from './Søknadsdialog';
 
 export const BarnetilsynApp = () => {
-    return <SøknadsdialogBarnetilsyn />;
+    return <Søknadsdialog />;
 };

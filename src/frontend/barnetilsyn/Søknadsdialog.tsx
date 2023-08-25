@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router';
 import { Forside } from './Forside';
 import { Personalia } from './steg/1-personalia/Personalia';
 
-const SøknadsdialogBarnetilsyn: React.FC = () => {
+const Søknadsdialog: React.FC = () => {
     return (
         <Routes>
             <Route path={'*'} element={<Forside />} />
@@ -12,4 +12,4 @@ const SøknadsdialogBarnetilsyn: React.FC = () => {
     );
 };
 
-export default SøknadsdialogBarnetilsyn;
+export default Søknadsdialog;
