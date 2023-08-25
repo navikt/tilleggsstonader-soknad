@@ -7,4 +7,7 @@ export const fellesTekster: FellesInnhold = {
     forrige: {
         nb: 'Forrige',
     },
+    banner: {
+        nb: 'Søknad om støtte til pass av barn',
+    },
 };
