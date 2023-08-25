@@ -1,3 +1,5 @@
-export const Forside = () => {
+const Forside = () => {
     return <p>Forside</p>;
 };
+
+export default Forside;

@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router';
 
-import { Forside } from './Forside';
-import { Personalia } from './steg/1-personalia/Personalia';
+import Forside from './Forside';
+import Personalia from './steg/1-personalia/Personalia';
 import { fellesTeksterBT } from './tekster/felles';
 import { Banner } from '../components/Banner';
 
