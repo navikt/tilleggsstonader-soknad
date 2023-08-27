@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@navikt/ds-css": "^5.0.3",
-    "@navikt/ds-react": "^5.0.3",
+    "@navikt/ds-react": "^5.2.0",
     "@navikt/ds-tokens": "^5.1.0",
     "@types/react-router-dom": "^5.3.3",
     "constate": "^3.3.2",

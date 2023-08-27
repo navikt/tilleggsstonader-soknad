@@ -1215,23 +1215,23 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@navikt/aksel-icons@^5.0.3":
-  version "5.0.3"
-  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/5.0.3/26013b244ff878d6bd423761a397e752078e3064#26013b244ff878d6bd423761a397e752078e3064"
-  integrity sha512-WyGBiz5JTPsxVAug19YyfXfsk5+f1Jj97BQRF0NJja87J7YR+sqbwijjWzZMjX0O2tr7US9rABevGlkbtjrhvw==
+"@navikt/aksel-icons@^5.2.0":
+  version "5.2.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/5.2.0/5a8e4d7a8196482e02f9c5decfd9f1c7cef902d1#5a8e4d7a8196482e02f9c5decfd9f1c7cef902d1"
+  integrity sha512-dr9jMPZaew7iGrxcZu85VcHA2mWGFPTKqjZ7NUOb/Dx3nAyyxHJiRf5kshhaGhM1FKUS+efXefwrH9VtE2FKjg==
 
 "@navikt/ds-css@^5.0.3":
   version "5.0.3"
   resolved "https://npm.pkg.github.com/download/@navikt/ds-css/5.0.3/a346a595fd895d36b26186ede8fba6f67c8af462#a346a595fd895d36b26186ede8fba6f67c8af462"
   integrity sha512-MuclDAsUVgCNVtBS/A7PlapE745IC18udnUkBVdpZNrxGquNZwizWzzq/4QC1SLSEeiUCzEQdpvNJBTm5GPCFw==
 
-"@navikt/ds-react@^5.0.3":
-  version "5.0.3"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/5.0.3/0a323bc38af95bca37f068b6caea828516fd8de5#0a323bc38af95bca37f068b6caea828516fd8de5"
-  integrity sha512-6ouDhMWxPsR/7wRYssRSt1XERc2tQzTffNFEQqiPXeKg8i60IhCp3cbhRN5ZYgaxoLJMhvGk9kgJmUaJytn43Q==
+"@navikt/ds-react@^5.2.0":
+  version "5.2.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/5.2.0/bf8c32f95be5cd3f4b269265bbe169af1f53b20a#bf8c32f95be5cd3f4b269265bbe169af1f53b20a"
+  integrity sha512-T+Z68haFvgd/en4dnS7bj++SghEdpDiPZQBD9J85ehblpSI6mTcEUKtLwqyGb31liQFmR8/DaJ04vAVLfvaQxg==
   dependencies:
     "@floating-ui/react" "0.24.1"
-    "@navikt/aksel-icons" "^5.0.3"
+    "@navikt/aksel-icons" "^5.2.0"
     "@radix-ui/react-tabs" "1.0.0"
     "@radix-ui/react-toggle-group" "1.0.0"
     clsx "^1.2.1"
