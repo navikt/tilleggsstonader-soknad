@@ -1238,10 +1238,10 @@
     date-fns "2.29.3"
     react-day-picker "8.3.4"
 
-"@navikt/ds-tokens@^5.1.0":
-  version "5.1.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/5.1.0/1770591ae8c31f68ed27a6117f2ab89b31f5b404#1770591ae8c31f68ed27a6117f2ab89b31f5b404"
-  integrity sha512-U3gWu9JXlnHZl5Xa0DIyfykzaQiA4YkEum9xH3GibUMBx7p9JGCf0+4KovLlVwMZWd6xqW82+nDH6y7DjhoAsg==
+"@navikt/ds-tokens@^5.2.0":
+  version "5.2.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/5.2.0/a5447e4af1d532ee56f26f39f4608126c537b5c2#a5447e4af1d532ee56f26f39f4608126c537b5c2"
+  integrity sha512-a0j36mUW0UXUeeRyuhbR6R4XT/D43KfN6bif+yZiM5wzvrNEqwzA5u6OqglxDxT8IQsr6AWjoKI69UfWSZfqdw==
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
