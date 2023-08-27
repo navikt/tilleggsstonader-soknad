@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: ${{ github.actor != 'dependabot[bot]' && yarn || '' }}
+          cache: ${{ github.actor != 'dependabot[bot]' && 'yarn' || '' }}
           registry-url: "https://npm.pkg.github.com"
       - name: Yarn install
         run: yarn --prefer-offline --frozen-lockfile
