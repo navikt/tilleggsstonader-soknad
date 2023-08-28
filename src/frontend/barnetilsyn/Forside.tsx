@@ -10,7 +10,6 @@ import {
     Heading,
     Label,
     Link,
-    List,
 } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
@@ -19,7 +18,6 @@ import { PellePanel } from '../components/PellePanel/PellePanel';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { useSpråk } from '../context/SpråkContext';
 
 const Container = styled.div`
     padding: 2rem 1rem;
@@ -42,7 +40,6 @@ const KnappeContainer = styled(BodyShort)`
 
 const Forside = () => {
     const navigate = useNavigate();
-    const { locale } = useSpråk();
 
     return (
         <Container>
@@ -60,9 +57,10 @@ const Forside = () => {
                     <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_innhold} />
                 </BodyShort>
             </Alert>
-            <List title={forsideTekster.dine_plikter_tittel[locale]}>
-                <LocalePunktliste tekst={forsideTekster.dine_plikter_innhold} />
-            </List>
+            <LocalePunktliste
+                tittel={forsideTekster.dine_plikter_tittel}
+                innhold={forsideTekster.dine_plikter_innhold}
+            />
             <Accordion>
                 <Accordion.Item>
                     <Accordion.Header>
@@ -78,9 +76,7 @@ const Forside = () => {
                     </Accordion.Header>
                     <Accordion.Content>
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
-                        <List>
-                            <LocalePunktliste tekst={forsideTekster.info_som_hentes_innhold2} />
-                        </List>
+                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
                         <Link>
                             <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />
                         </Link>
