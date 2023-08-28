@@ -9,6 +9,7 @@ import {
     Checkbox,
     Heading,
     Label,
+    Link,
     List,
 } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
@@ -95,7 +96,9 @@ const Forside = () => {
                         <List>
                             <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold2} />
                         </List>
-                        <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />
+                        <Link>
+                            <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />
+                        </Link>
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
