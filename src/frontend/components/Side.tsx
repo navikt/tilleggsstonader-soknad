@@ -31,7 +31,7 @@ const Container = styled.div`
     }
 `;
 
-const Stegindikator = styled.div`
+const StegIndikator = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -69,14 +69,14 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children }) => {
 
     return (
         <Container>
-            <Stegindikator>
+            <StegIndikator>
                 <Heading size="medium" as="h2">
                     <LocaleTekst tekst={stegtittel} />
                 </Heading>
                 <BodyShort size="small">
                     Steg {aktivtSteg} av {routes.length - 1}
                 </BodyShort>
-            </Stegindikator>
+            </StegIndikator>
             <Innhold>{children}</Innhold>
             <KnappeContainer>
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
