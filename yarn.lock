@@ -1110,10 +1110,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@eslint/js@^8.47.0":
-  version "8.47.0"
-  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.47.0.tgz#5478fdf443ff8158f9de171c704ae45308696c7d"
-  integrity sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==
+"@eslint/js@8.48.0":
+  version "8.48.0"
+  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.48.0.tgz#642633964e217905436033a2bd08bf322849b7fb"
+  integrity sha512-ZSjtmelB7IJfWD2Fvb7+Z+ChTIKWq6kjda95fLcQKNS5aheVHn4IkfgRQE3sIIzTcSLwLcLZUD9UBt+V7+h+Pw==
 
 "@floating-ui/core@^1.4.1":
   version "1.4.1"
@@ -1215,33 +1215,33 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@navikt/aksel-icons@^5.0.3":
-  version "5.0.3"
-  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/5.0.3/26013b244ff878d6bd423761a397e752078e3064#26013b244ff878d6bd423761a397e752078e3064"
-  integrity sha512-WyGBiz5JTPsxVAug19YyfXfsk5+f1Jj97BQRF0NJja87J7YR+sqbwijjWzZMjX0O2tr7US9rABevGlkbtjrhvw==
+"@navikt/aksel-icons@^5.2.0":
+  version "5.2.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/5.2.0/5a8e4d7a8196482e02f9c5decfd9f1c7cef902d1#5a8e4d7a8196482e02f9c5decfd9f1c7cef902d1"
+  integrity sha512-dr9jMPZaew7iGrxcZu85VcHA2mWGFPTKqjZ7NUOb/Dx3nAyyxHJiRf5kshhaGhM1FKUS+efXefwrH9VtE2FKjg==
 
-"@navikt/ds-css@^5.0.3":
-  version "5.0.3"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/5.0.3/a346a595fd895d36b26186ede8fba6f67c8af462#a346a595fd895d36b26186ede8fba6f67c8af462"
-  integrity sha512-MuclDAsUVgCNVtBS/A7PlapE745IC18udnUkBVdpZNrxGquNZwizWzzq/4QC1SLSEeiUCzEQdpvNJBTm5GPCFw==
+"@navikt/ds-css@^5.2.0":
+  version "5.2.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/5.2.0/df284b2cc630cab086b2d894fee1aba1bfc2ac9f#df284b2cc630cab086b2d894fee1aba1bfc2ac9f"
+  integrity sha512-xECA2O9emlRIDHcdzfdbV7JCSawclBJXHGyjc3b2i5SILAWJ3X/gN5CM7lUuXeBeDMqetaDOc5/S6ujt9Ux/ww==
 
-"@navikt/ds-react@^5.0.3":
-  version "5.0.3"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/5.0.3/0a323bc38af95bca37f068b6caea828516fd8de5#0a323bc38af95bca37f068b6caea828516fd8de5"
-  integrity sha512-6ouDhMWxPsR/7wRYssRSt1XERc2tQzTffNFEQqiPXeKg8i60IhCp3cbhRN5ZYgaxoLJMhvGk9kgJmUaJytn43Q==
+"@navikt/ds-react@^5.2.0":
+  version "5.2.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/5.2.0/bf8c32f95be5cd3f4b269265bbe169af1f53b20a#bf8c32f95be5cd3f4b269265bbe169af1f53b20a"
+  integrity sha512-T+Z68haFvgd/en4dnS7bj++SghEdpDiPZQBD9J85ehblpSI6mTcEUKtLwqyGb31liQFmR8/DaJ04vAVLfvaQxg==
   dependencies:
     "@floating-ui/react" "0.24.1"
-    "@navikt/aksel-icons" "^5.0.3"
+    "@navikt/aksel-icons" "^5.2.0"
     "@radix-ui/react-tabs" "1.0.0"
     "@radix-ui/react-toggle-group" "1.0.0"
     clsx "^1.2.1"
     date-fns "2.29.3"
     react-day-picker "8.3.4"
 
-"@navikt/ds-tokens@^5.1.0":
-  version "5.1.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/5.1.0/1770591ae8c31f68ed27a6117f2ab89b31f5b404#1770591ae8c31f68ed27a6117f2ab89b31f5b404"
-  integrity sha512-U3gWu9JXlnHZl5Xa0DIyfykzaQiA4YkEum9xH3GibUMBx7p9JGCf0+4KovLlVwMZWd6xqW82+nDH6y7DjhoAsg==
+"@navikt/ds-tokens@^5.2.0":
+  version "5.2.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/5.2.0/a5447e4af1d532ee56f26f39f4608126c537b5c2#a5447e4af1d532ee56f26f39f4608126c537b5c2"
+  integrity sha512-a0j36mUW0UXUeeRyuhbR6R4XT/D43KfN6bif+yZiM5wzvrNEqwzA5u6OqglxDxT8IQsr6AWjoKI69UfWSZfqdw==
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
@@ -2883,10 +2883,10 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-config-prettier@^8.9.0:
-  version "8.10.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.10.0.tgz#3a06a662130807e2502fc3ff8b4143d8a0658e11"
-  integrity sha512-SM8AMJdeQqRYT9O9zguiruQZaN7+z+E4eAP9oiLNGKMtomwaB1E9dcgUD6ZAn/eQAb52USbvezbiljfZUhbJcg==
+eslint-config-prettier@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-9.0.0.tgz#eb25485946dd0c66cd216a46232dc05451518d1f"
+  integrity sha512-IcJsTkJae2S35pRsRAwoCE+925rJJStOdkKnLVgtE+tEpqU0EVVM7OqrwxqgptKdX29NUwC82I5pXsGFIgSevw==
 
 eslint-import-resolver-node@^0.3.7:
   version "0.3.9"
@@ -2983,15 +2983,15 @@ eslint-visitor-keys@^3.3.0, eslint-visitor-keys@^3.4.1, eslint-visitor-keys@^3.4
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.4.3.tgz#0cd72fe8550e3c2eae156a96a4dddcd1c8ac5800"
   integrity sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag==
 
-eslint@^8.46.0:
-  version "8.47.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.47.0.tgz#c95f9b935463fb4fad7005e626c7621052e90806"
-  integrity sha512-spUQWrdPt+pRVP1TTJLmfRNJJHHZryFmptzcafwSvHsceV81djHOdnEeDmkdotZyLNjDhrOasNK8nikkoG1O8Q==
+eslint@^8.48.0:
+  version "8.48.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.48.0.tgz#bf9998ba520063907ba7bfe4c480dc8be03c2155"
+  integrity sha512-sb6DLeIuRXxeM1YljSe1KEx9/YYeZFQWcV8Rq9HfigmdDEugjLEVEa1ozDjL6YDjBpQHPJxJzze+alxi4T3OLg==
   dependencies:
     "@eslint-community/eslint-utils" "^4.2.0"
     "@eslint-community/regexpp" "^4.6.1"
     "@eslint/eslintrc" "^2.1.2"
-    "@eslint/js" "^8.47.0"
+    "@eslint/js" "8.48.0"
     "@humanwhocodes/config-array" "^0.11.10"
     "@humanwhocodes/module-importer" "^1.0.1"
     "@nodelib/fs.walk" "^1.2.8"
@@ -4002,10 +4002,10 @@ lilconfig@2.1.0:
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.1.0.tgz#78e23ac89ebb7e1bfbf25b18043de756548e7f52"
   integrity sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==
 
-lint-staged@^13.2.3:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-13.3.0.tgz#7965d72a8d6a6c932f85e9c13ccf3596782d28a5"
-  integrity sha512-mPRtrYnipYYv1FEE134ufbWpeggNTo+O/UPzngoaKzbzHAthvR55am+8GfHTnqNRQVRRrYQLGW9ZyUoD7DsBHQ==
+lint-staged@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-14.0.1.tgz#57dfa3013a3d60762d9af5d9c83bdb51291a6232"
+  integrity sha512-Mw0cL6HXnHN1ag0mN/Dg4g6sr8uf8sn98w2Oc1ECtFto9tvRF7nkXGJRbx8gPlHyoR0pLyBr2lQHbWwmUHe1Sw==
   dependencies:
     chalk "5.3.0"
     commander "11.0.0"
@@ -5502,10 +5502,10 @@ typed-array-length@^1.0.4:
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
 
-typescript@^5.1.6:
-  version "5.1.6"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.1.6.tgz#02f8ac202b6dad2c0dd5e0913745b47a37998274"
-  integrity sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==
+typescript@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.2.2.tgz#5ebb5e5a5b75f085f22bc3f8460fba308310fa78"
+  integrity sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
