@@ -18,7 +18,7 @@ import { forsideTekster } from './tekster/forside';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
-import TekstContainer from '../components/Teksthåndtering/TekstContainer';
+import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSpråk } from '../context/SpråkContext';
 
 const Container = styled.div`
@@ -47,17 +47,10 @@ const Forside = () => {
     return (
         <Container>
             <PellePanel poster>
-                <TekstContainer>
-                    <Label>
-                        <LocaleTekst tekst={forsideTekster.veileder_tittel} />
-                    </Label>
-                    <BodyShort>
-                        <LocaleTekst tekst={forsideTekster.veileder_innhold1} />
-                    </BodyShort>
-                    <BodyShort>
-                        <LocaleTekst tekst={forsideTekster.veileder_innhold2} />
-                    </BodyShort>
-                </TekstContainer>
+                <Label>
+                    <LocaleTekst tekst={forsideTekster.veileder_tittel} />
+                </Label>
+                <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </PellePanel>
             <Alert variant="info">
                 <Heading size="small">
@@ -76,14 +69,7 @@ const Forside = () => {
                         <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <TekstContainer>
-                            <BodyShort>
-                                <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold1} />
-                            </BodyShort>
-                            <BodyShort>
-                                <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold2} />
-                            </BodyShort>
-                        </TekstContainer>
+                        <LocaleTekstAvsnitt tekst={forsideTekster.utgifter_som_dekkes_innhold} />
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
