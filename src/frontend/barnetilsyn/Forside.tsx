@@ -17,6 +17,7 @@ import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 import { forsideTekster } from './tekster/forside';
 import { LocaleTekst } from '../components/LocaleTekst';
 import { PellePanel } from '../components/PellePanel/PellePanel';
+import TekstContainer from '../components/TekstContainer';
 
 const Container = styled.div`
     padding: 2rem 1rem;
@@ -31,12 +32,6 @@ const Container = styled.div`
     }
 `;
 
-const TextContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-`;
-
 const KnappeContainer = styled(BodyShort)`
     display: flex;
     gap: 1rem;
@@ -48,7 +43,7 @@ const Forside = () => {
     return (
         <Container>
             <PellePanel poster>
-                <TextContainer>
+                <TekstContainer>
                     <Label>
                         <LocaleTekst tekst={forsideTekster.veileder_tittel} />
                     </Label>
@@ -58,7 +53,7 @@ const Forside = () => {
                     <BodyShort>
                         <LocaleTekst tekst={forsideTekster.veileder_innhold2} />
                     </BodyShort>
-                </TextContainer>
+                </TekstContainer>
             </PellePanel>
             <Alert variant="info">
                 <Heading size="small">
@@ -77,14 +72,14 @@ const Forside = () => {
                         <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <TextContainer>
+                        <TekstContainer>
                             <BodyShort>
                                 <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold1} />
                             </BodyShort>
                             <BodyShort>
                                 <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold2} />
                             </BodyShort>
-                        </TextContainer>
+                        </TekstContainer>
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
