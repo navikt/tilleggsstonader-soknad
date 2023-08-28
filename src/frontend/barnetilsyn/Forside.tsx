@@ -15,9 +15,11 @@ import {
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import { forsideTekster } from './tekster/forside';
-import { LocaleTekst } from '../components/LocaleTekst';
 import { PellePanel } from '../components/PellePanel/PellePanel';
-import TekstContainer from '../components/TekstContainer';
+import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
+import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
+import TekstContainer from '../components/Teksthåndtering/TekstContainer';
+import { useSpråk } from '../context/SpråkContext';
 
 const Container = styled.div`
     padding: 2rem 1rem;
@@ -40,6 +42,8 @@ const KnappeContainer = styled(BodyShort)`
 
 const Forside = () => {
     const navigate = useNavigate();
+    const { locale } = useSpråk();
+
     return (
         <Container>
             <PellePanel poster>
@@ -63,8 +67,8 @@ const Forside = () => {
                     <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_innhold} />
                 </BodyShort>
             </Alert>
-            <List title="Dine plikter">
-                <LocaleTekst tekst={forsideTekster.dine_plikter_innhold} />
+            <List title={forsideTekster.dine_plikter_tittel[locale]}>
+                <LocalePunktliste tekst={forsideTekster.dine_plikter_innhold} />
             </List>
             <Accordion>
                 <Accordion.Item>
@@ -89,7 +93,7 @@ const Forside = () => {
                     <Accordion.Content>
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
                         <List>
-                            <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold2} />
+                            <LocalePunktliste tekst={forsideTekster.info_som_hentes_innhold2} />
                         </List>
                         <Link>
                             <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />

@@ -6,7 +6,7 @@ import { styled } from 'styled-components';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
-import { LocaleTekst } from './LocaleTekst';
+import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { TekstElement } from '../typer/tekst';
@@ -14,7 +14,7 @@ import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface Props {
     stønadstype: Stønadstype;
-    stegtittel: TekstElement;
+    stegtittel: TekstElement<string>;
     children?: React.ReactNode;
 }
 

@@ -1,8 +1,8 @@
 import { Heading } from '@navikt/ds-react';
 
-import { LocaleTekst } from '../../../components/LocaleTekst';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
+import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { personaliaTekster } from '../../tekster/personalia';
 
