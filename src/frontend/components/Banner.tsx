@@ -15,7 +15,7 @@ const Container = styled.div`
     align-items: center;
 `;
 
-export const Banner: React.FC<{ tittel: TekstElement }> = ({ tittel }) => {
+export const Banner: React.FC<{ tittel: TekstElement<string> }> = ({ tittel }) => {
     return (
         <Container>
             <Heading size="small" as="h1">

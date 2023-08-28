@@ -1,4 +1,25 @@
-import { ForsideInnhold } from '../typer/tekster/forside';
+import { TekstElement } from '../../typer/tekst';
+
+interface ForsideInnhold {
+    veileder_tittel: TekstElement<string>;
+    veileder_innhold1: TekstElement<string>;
+    veileder_innhold2: TekstElement<string>;
+    mottatt_faktura_alert_tittel: TekstElement<string>;
+    mottatt_faktura_alert_innhold: TekstElement<string>;
+    dine_plikter_tittel: TekstElement<string>;
+    dine_plikter_innhold: TekstElement<string[]>;
+    utgifter_som_dekkes_tittel: TekstElement<string>;
+    utgifter_som_dekkes_innhold1: TekstElement<string>;
+    utgifter_som_dekkes_innhold2: TekstElement<string>;
+    info_som_hentes_tittel: TekstElement<string>;
+    info_som_hentes_innhold1: TekstElement<string>;
+    info_som_hentes_innhold2: TekstElement<string[]>;
+    info_som_hentes_innhold3: TekstElement<string>;
+    dokumentasjon_utgifter_tittel: TekstElement<string>;
+    dokumentasjon_utgifter_innhold: TekstElement<string>;
+    vi_stoler_tittel: TekstElement<string>;
+    vi_stoler_innhold: TekstElement<string>;
+}
 
 export const forsideTekster: ForsideInnhold = {
     veileder_tittel: {
