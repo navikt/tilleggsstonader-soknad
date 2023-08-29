@@ -6,3 +6,8 @@ export type LesMer = {
     header: string;
     innhold: string;
 };
+
+export type Lenke = {
+    tekst: string;
+    url: string;
+};
