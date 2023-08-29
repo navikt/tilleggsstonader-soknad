@@ -1,3 +1,5 @@
+import { Barn } from './barn';
+
 export interface Person {
     fnr: string;
     navn: string;
@@ -5,6 +7,7 @@ export interface Person {
     telefonnr: string;
     epost: string;
     kontonr: string;
+    barn: Barn[];
 }
 
 export interface Adresse {
