@@ -22,10 +22,38 @@ const [PersonProvider, usePerson] = createUseContext(() => {
             telefonnr: '950863265',
             epost: 'mail@gmail.com',
             kontonr: '1234.56.78910',
+            barn: [
+                {
+                    id: '010101',
+                    alder: 6,
+                    fødselsdato: '2017-05-12T00:00:00',
+                    fødselsnummer: '12051711222',
+                    navn: 'Ronja Røverdatter',
+                    skalHaBarnepass: false,
+                },
+                {
+                    id: '020202',
+                    alder: 10,
+                    fødselsdato: '2013-01-05T00:00:00',
+                    fødselsnummer: '05011311222',
+                    navn: 'Espen Askeladden',
+                    skalHaBarnepass: false,
+                },
+            ],
         });
     }, []);
 
-    return { person, settPerson };
+    const toggleSkalHaBarnepass = (id: string) => {
+        settPerson((prevPerson) => ({
+            ...prevPerson,
+
+            barn: prevPerson.barn.map((barn) =>
+                barn.id === id ? { ...barn, skalHaBarnepass: !barn.skalHaBarnepass } : barn
+            ),
+        }));
+    };
+
+    return { person, settPerson, toggleSkalHaBarnepass };
 });
 
 export { PersonProvider, usePerson };

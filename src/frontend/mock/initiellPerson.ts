@@ -11,4 +11,5 @@ export const initiellPerson: Person = {
     telefonnr: '',
     epost: '',
     kontonr: '',
+    barn: [],
 };
