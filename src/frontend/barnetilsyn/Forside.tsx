@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 import { styled } from 'styled-components';
 
 import {
@@ -13,11 +14,14 @@ import {
 } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
+import { RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { useSøknad } from '../context/SøknadContext';
+import { hentNesteRoute } from '../utils/routes';
 
 const Container = styled.div`
     padding: 2rem 1rem;
@@ -38,8 +42,17 @@ const KnappeContainer = styled(BodyShort)`
     justify-content: center;
 `;
 
-const Forside = () => {
+const Forside: React.FC = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { harBekreftet, settHarBekreftet } = useSøknad();
+
+    const startSøknad = () => {
+        if (harBekreftet) {
+            const nesteRoute = hentNesteRoute(RoutesBarnetilsyn, location.pathname);
+            navigate(nesteRoute.path);
+        }
+    };
 
     return (
         <Container>
@@ -95,12 +108,17 @@ const Forside = () => {
                 <Label>
                     <LocaleTekst tekst={forsideTekster.vi_stoler_tittel} />
                 </Label>
-                <Checkbox>
+                <Checkbox
+                    checked={harBekreftet}
+                    onChange={(e) => settHarBekreftet(e.target.checked)}
+                >
                     <LocaleTekst tekst={forsideTekster.vi_stoler_innhold} />
                 </Checkbox>
             </div>
             <KnappeContainer>
-                <Button onClick={() => navigate('/barnetilsyn/personalia')}>Start søknad</Button>
+                <Button onClick={startSøknad} variant="primary">
+                    Start søknad
+                </Button>
             </KnappeContainer>
         </Container>
     );
