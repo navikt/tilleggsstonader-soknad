@@ -6,7 +6,7 @@ import { styled } from 'styled-components';
 import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
-import { LocaleTekst } from './LocaleTekst';
+import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { TekstElement } from '../typer/tekst';
@@ -14,7 +14,7 @@ import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface Props {
     stønadstype: Stønadstype;
-    stegtittel: TekstElement;
+    stegtittel: TekstElement<string>;
     children?: React.ReactNode;
 }
 
@@ -31,7 +31,7 @@ const Container = styled.div`
     }
 `;
 
-const Stegindikator = styled.div`
+const StegIndikator = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -69,14 +69,14 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children }) => {
 
     return (
         <Container>
-            <Stegindikator>
+            <StegIndikator>
                 <Heading size="medium" as="h2">
                     <LocaleTekst tekst={stegtittel} />
                 </Heading>
                 <BodyShort size="small">
                     Steg {aktivtSteg} av {routes.length - 1}
                 </BodyShort>
-            </Stegindikator>
+            </StegIndikator>
             <Innhold>{children}</Innhold>
             <KnappeContainer>
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>

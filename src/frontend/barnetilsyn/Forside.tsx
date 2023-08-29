@@ -10,14 +10,14 @@ import {
     Heading,
     Label,
     Link,
-    List,
 } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import { forsideTekster } from './tekster/forside';
-import { LocaleTekst } from '../components/LocaleTekst';
 import { PellePanel } from '../components/PellePanel/PellePanel';
-import TekstContainer from '../components/TekstContainer';
+import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
+import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
+import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 
 const Container = styled.div`
     padding: 2rem 1rem;
@@ -40,20 +40,14 @@ const KnappeContainer = styled(BodyShort)`
 
 const Forside = () => {
     const navigate = useNavigate();
+
     return (
         <Container>
             <PellePanel poster>
-                <TekstContainer>
-                    <Label>
-                        <LocaleTekst tekst={forsideTekster.veileder_tittel} />
-                    </Label>
-                    <BodyShort>
-                        <LocaleTekst tekst={forsideTekster.veileder_innhold1} />
-                    </BodyShort>
-                    <BodyShort>
-                        <LocaleTekst tekst={forsideTekster.veileder_innhold2} />
-                    </BodyShort>
-                </TekstContainer>
+                <Label>
+                    <LocaleTekst tekst={forsideTekster.veileder_tittel} />
+                </Label>
+                <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </PellePanel>
             <Alert variant="info">
                 <Heading size="small">
@@ -63,23 +57,17 @@ const Forside = () => {
                     <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_innhold} />
                 </BodyShort>
             </Alert>
-            <List title="Dine plikter">
-                <LocaleTekst tekst={forsideTekster.dine_plikter_innhold} />
-            </List>
+            <LocalePunktliste
+                tittel={forsideTekster.dine_plikter_tittel}
+                innhold={forsideTekster.dine_plikter_innhold}
+            />
             <Accordion>
                 <Accordion.Item>
                     <Accordion.Header>
                         <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <TekstContainer>
-                            <BodyShort>
-                                <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold1} />
-                            </BodyShort>
-                            <BodyShort>
-                                <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold2} />
-                            </BodyShort>
-                        </TekstContainer>
+                        <LocaleTekstAvsnitt tekst={forsideTekster.utgifter_som_dekkes_innhold} />
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
@@ -88,9 +76,7 @@ const Forside = () => {
                     </Accordion.Header>
                     <Accordion.Content>
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
-                        <List>
-                            <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold2} />
-                        </List>
+                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
                         <Link>
                             <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />
                         </Link>
