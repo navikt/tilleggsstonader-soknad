@@ -5,21 +5,22 @@ import { Radio, RadioGroup, RadioGroupProps as AkselRadioGroupProps } from '@nav
 import { useSpråk } from '../../context/SpråkContext';
 import { Radiogruppe, TekstElement } from '../../typer/tekst';
 
-type RadioGroupProps<T> = { tekst: TekstElement<Radiogruppe<T>> } & Omit<
-    AkselRadioGroupProps,
-    'legend' | 'description'
->;
-function LocaleRadioGroup<T>(props: RadioGroupProps<T>) {
-    const { children, tekst, ...rest } = props;
-
+interface RadioGroupProps<T> extends Omit<AkselRadioGroupProps, 'legend' | 'description'> {
+    tekst: TekstElement<Radiogruppe<T>>;
+}
+function LocaleRadioGroup<T>({ children, tekst, ...propsUtenChildrenOgTekst }: RadioGroupProps<T>) {
     const { locale } = useSpråk();
 
-    const raadioGroup = tekst[locale];
+    const radioGroupInnhold = tekst[locale];
 
     return (
-        <RadioGroup legend={raadioGroup.header} description={raadioGroup.beskrivelse} {...rest}>
+        <RadioGroup
+            legend={radioGroupInnhold.header}
+            description={radioGroupInnhold.beskrivelse}
+            {...propsUtenChildrenOgTekst}
+        >
             {children}
-            {raadioGroup.alternativer.map((alternativ) => (
+            {radioGroupInnhold.alternativer.map((alternativ) => (
                 <Radio value={alternativ.value}>{alternativ[locale]}</Radio>
             ))}
         </RadioGroup>
