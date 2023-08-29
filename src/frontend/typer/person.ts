@@ -10,5 +10,5 @@ export interface Person {
 export interface Adresse {
     adresse: string;
     postnummer: string;
-    poststed?: string;
+    poststed: string;
 }
