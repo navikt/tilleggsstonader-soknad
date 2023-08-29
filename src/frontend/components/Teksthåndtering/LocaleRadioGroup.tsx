@@ -8,7 +8,7 @@ import { Radiogruppe, TekstElement } from '../../typer/tekst';
 interface RadioGroupProps<T> extends Omit<AkselRadioGroupProps, 'legend' | 'description'> {
     tekst: TekstElement<Radiogruppe<T>>;
 }
-function LocaleRadioGroup<T>({ children, tekst, ...propsUtenChildrenOgTekst }: RadioGroupProps<T>) {
+function LocaleRadioGroup<T>({ children, tekst, ...props }: RadioGroupProps<T>) {
     const { locale } = useSpråk();
 
     const radioGroupInnhold = tekst[locale];
@@ -17,7 +17,7 @@ function LocaleRadioGroup<T>({ children, tekst, ...propsUtenChildrenOgTekst }: R
         <RadioGroup
             legend={radioGroupInnhold.header}
             description={radioGroupInnhold.beskrivelse}
-            {...propsUtenChildrenOgTekst}
+            {...props}
         >
             {children}
             {radioGroupInnhold.alternativer.map((alternativ) => (
