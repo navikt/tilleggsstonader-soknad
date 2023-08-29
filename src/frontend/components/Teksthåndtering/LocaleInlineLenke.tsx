@@ -8,11 +8,11 @@ const LocaleInlineLenke: React.FC<{ tekst: TekstElement<(string | Lenke)[]> }> =
 
     return (
         <>
-            {tekst[locale].map((tekstElement) =>
+            {tekst[locale].map((tekstElement, indeks) =>
                 typeof tekstElement === 'string' ? (
-                    tekstElement
+                    <span key={indeks}>{tekstElement}</span>
                 ) : (
-                    <Link inlineText href={tekstElement.url}>
+                    <Link inlineText href={tekstElement.url} key={indeks}>
                         {tekstElement.tekst}
                     </Link>
                 )
