@@ -8,7 +8,7 @@ export type LesMer = {
 };
 
 export type Radiogruppe<T> = {
-    header: string;
-    beskrivelse?: string;
+    header: TekstElement<string>;
+    beskrivelse?: TekstElement<string>;
     alternativer: (TekstElement<string> & { value: T })[];
 };
