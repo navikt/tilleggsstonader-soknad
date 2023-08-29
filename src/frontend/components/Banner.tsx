@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Heading } from '@navikt/ds-react';
 import { ABlue300, ABlue50 } from '@navikt/ds-tokens/dist/tokens';
 
-import { LocaleTekst } from './LocaleTekst';
+import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { TekstElement } from '../typer/tekst';
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const Container = styled.div`
     align-items: center;
 `;
 
-export const Banner: React.FC<{ tittel: TekstElement }> = ({ tittel }) => {
+export const Banner: React.FC<{ tittel: TekstElement<string> }> = ({ tittel }) => {
     return (
         <Container>
             <Heading size="small" as="h1">

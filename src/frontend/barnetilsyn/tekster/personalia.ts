@@ -1,4 +1,10 @@
-import { PersonaliaInnhold } from '../typer/tekster/personalia';
+import { TekstElement } from '../../typer/tekst';
+
+interface PersonaliaInnhold {
+    steg_tittel: TekstElement<string>;
+    innhold_tittel: TekstElement<string>;
+    guide_innhold: TekstElement<string>;
+}
 
 export const personaliaTekster: PersonaliaInnhold = {
     steg_tittel: {

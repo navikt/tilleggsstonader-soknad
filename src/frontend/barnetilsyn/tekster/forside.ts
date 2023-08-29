@@ -1,14 +1,33 @@
-import { ForsideInnhold } from '../typer/tekster/forside';
+import { TekstElement } from '../../typer/tekst';
+
+interface ForsideInnhold {
+    veileder_tittel: TekstElement<string>;
+    veileder_innhold: TekstElement<string[]>;
+    mottatt_faktura_alert_tittel: TekstElement<string>;
+    mottatt_faktura_alert_innhold: TekstElement<string>;
+    dine_plikter_tittel: TekstElement<string>;
+    dine_plikter_innhold: TekstElement<string[]>;
+    utgifter_som_dekkes_tittel: TekstElement<string>;
+    utgifter_som_dekkes_innhold: TekstElement<string[]>;
+    info_som_hentes_tittel: TekstElement<string>;
+    info_som_hentes_innhold1: TekstElement<string>;
+    info_som_hentes_innhold2: TekstElement<string[]>;
+    info_som_hentes_innhold3: TekstElement<string>;
+    dokumentasjon_utgifter_tittel: TekstElement<string>;
+    dokumentasjon_utgifter_innhold: TekstElement<string>;
+    vi_stoler_tittel: TekstElement<string>;
+    vi_stoler_innhold: TekstElement<string>;
+}
 
 export const forsideTekster: ForsideInnhold = {
     veileder_tittel: {
         nb: 'Hei [0]',
     },
-    veileder_innhold1: {
-        nb: 'Jeg er her for å veilede deg gjennom søknaden.',
-    },
-    veileder_innhold2: {
-        nb: 'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én måned på Ditt NAV.',
+    veileder_innhold: {
+        nb: [
+            'Jeg er her for å veilede deg gjennom søknaden.',
+            'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én måned på Ditt NAV.',
+        ],
     },
     mottatt_faktura_alert_tittel: {
         nb: 'Søker du om støtte til pass av barn for nytt skole/barnehageår?',
@@ -31,11 +50,11 @@ export const forsideTekster: ForsideInnhold = {
     utgifter_som_dekkes_tittel: {
         nb: 'Hvilke utgifter dekker vi?',
     },
-    utgifter_som_dekkes_innhold1: {
-        nb: 'Utgifter til mat og bleier dekkes ikke.',
-    },
-    utgifter_som_dekkes_innhold2: {
-        nb: 'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats.',
+    utgifter_som_dekkes_innhold: {
+        nb: [
+            'Utgifter til mat og bleier dekkes ikke.',
+            'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats.',
+        ],
     },
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',
