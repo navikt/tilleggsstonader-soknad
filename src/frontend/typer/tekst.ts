@@ -10,5 +10,5 @@ export type LesMer = {
 export type Radiogruppe<T> = {
     header: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
-    alternativer: (TekstElement<string> & { value: T })[];
+    alternativer: { label: TekstElement<string>; value: T }[];
 };
