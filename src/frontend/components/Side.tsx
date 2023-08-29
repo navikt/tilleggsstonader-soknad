@@ -19,14 +19,14 @@ interface Props {
     validerSteg?: () => boolean;
 }
 
-const Container = styled.div`
-    padding: 2rem;
+export const Container = styled.div`
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
 
     @media (min-width: ${ABreakpointMd}) {
-        max-width: 40rem;
+        max-width: 35rem;
         margin: auto;
         padding: 2rem 0;
     }
@@ -78,7 +78,7 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
                     <LocaleTekst tekst={stegtittel} />
                 </Heading>
                 <BodyShort size="small">
-                    Steg {aktivtSteg} av {routes.length - 1}
+                    Steg {aktivtSteg} av {routes.length - 2}
                 </BodyShort>
             </StegIndikator>
             <Innhold>{children}</Innhold>

@@ -12,29 +12,16 @@ import {
     Label,
     Link,
 } from '@navikt/ds-react';
-import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import { RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
 import { PellePanel } from '../components/PellePanel/PellePanel';
+import { Container } from '../components/Side';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSøknad } from '../context/SøknadContext';
 import { hentNesteRoute } from '../utils/routes';
-
-const Container = styled.div`
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-
-    @media (min-width: ${ABreakpointMd}) {
-        max-width: 35rem;
-        margin: auto;
-        padding: 2rem 0;
-    }
-`;
 
 const KnappeContainer = styled(BodyShort)`
     display: flex;
