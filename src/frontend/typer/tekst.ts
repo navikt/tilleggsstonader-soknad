@@ -12,5 +12,3 @@ export type Radiogruppe<T> = {
     beskrivelse?: string;
     alternativer: (TekstElement<string> & { value: T })[];
 };
-
-export type Radio = string;
