@@ -12,6 +12,10 @@ const Søknadsdialog: React.FC = () => {
             <Routes>
                 <Route path={'*'} element={<Forside />} />
                 <Route path={'/personalia'} element={<Personalia />} />
+                <Route path={'/hovedytelse'} element={<Personalia />} />
+                <Route path={'/aktivitet'} element={<Personalia />} />
+                <Route path={'/dine-barn'} element={<Personalia />} />
+                <Route path={'/kvittering'} element={<Personalia />} />
             </Routes>
         </>
     );
