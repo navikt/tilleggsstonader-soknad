@@ -33,10 +33,10 @@ const routes = () => {
     });
 
     expressRouter.use(
-        `${BASE_PATH}/api`,
+        `${BASE_PATH_SOKNAD}/api`,
         addRequestInfo(),
         attachToken('tilleggsstonader-soknad-api'),
-        doProxy(miljø.apiUrl, `${BASE_PATH}/api`)
+        doProxy(miljø.apiUrl, `${BASE_PATH_SOKNAD}/api`)
     );
 
     return expressRouter;

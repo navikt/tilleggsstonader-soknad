@@ -1,12 +1,12 @@
 import logger from './logger';
 
 const lokaltMiljø = {
-    apiUrl: 'http://localhost:8001',
+    apiUrl: 'http://localhost:8001/api',
     oauthCallbackUri: 'https://localhost:8080/tilleggsstonader/soknad/soknad/oauth2/callback',
 };
 
 const devMiljø = {
-    apiUrl: 'http://tilleggsstonader-soknad-api/tilleggsstonader/soknad/soknad-api',
+    apiUrl: 'http://tilleggsstonader-soknad-api/api',
     oauthCallbackUri:
         'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/callback',
 };
