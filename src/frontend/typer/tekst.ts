@@ -7,9 +7,10 @@ export type LesMer = {
     innhold: string;
 };
 
-export type Radiogruppe = {
+export type Radiogruppe<T> = {
     header: string;
     beskrivelse?: string;
+    alternativer: (TekstElement<string> & { value: T })[];
 };
 
 export type Radio = string;
