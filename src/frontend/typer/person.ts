@@ -1,13 +1,13 @@
 export interface Person {
     fnr: string;
     navn: string;
-    adresse: IAdresse;
+    adresse: Adresse;
     telefonnr: string;
     epost: string;
     kontonr: string;
 }
 
-export interface IAdresse {
+export interface Adresse {
     adresse: string;
     postnummer: string;
     poststed?: string;
