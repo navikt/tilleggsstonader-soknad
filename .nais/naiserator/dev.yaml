@@ -40,6 +40,7 @@ spec:
   accessPolicy:
     outbound:
       rules:
+        - application: tilleggsstonader-soknad-api
         - application: nav-dekoratoren
           namespace: personbruker
       external:

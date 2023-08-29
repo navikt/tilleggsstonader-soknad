@@ -39,6 +39,7 @@ spec:
     - https://www.nav.no/tilleggsstonader/soknad
   accessPolicy:
     rules:
+      - application: tilleggsstonader-soknad-api
       - application: nav-dekoratoren
         namespace: personbruker
     outbound:
