@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router';
 
 import Forside from './Forside';
+import Kvittering from './Kvittering';
 import Personalia from './steg/1-personalia/Personalia';
 import Aktivitet from './steg/3-aktivitet/Aktivitet';
 import DineBarn from './steg/4-dine-barn/DineBarn';
@@ -17,7 +18,7 @@ const Søknadsdialog: React.FC = () => {
                 <Route path={'/hovedytelse'} element={<Personalia />} />
                 <Route path={'/aktivitet'} element={<Aktivitet />} />
                 <Route path={'/dine-barn'} element={<DineBarn />} />
-                <Route path={'/kvittering'} element={<Personalia />} />
+                <Route path={'/kvittering'} element={<Kvittering />} />
             </Routes>
         </>
     );
