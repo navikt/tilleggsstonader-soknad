@@ -7,8 +7,8 @@ import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
+import { sendInnSøknad } from '../api/api';
 import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
-import { sendInnSøknad } from '../innsending/api';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { TekstElement } from '../typer/tekst';
