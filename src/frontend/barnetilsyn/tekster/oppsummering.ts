@@ -6,6 +6,6 @@ interface OppsummeringInnhold {
 
 export const oppsummeringTekster: OppsummeringInnhold = {
     steg_tittel: {
-        nb: 'Oppsummering',
+        nb: 'Send inn søknad',
     },
 };
