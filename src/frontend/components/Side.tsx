@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -7,6 +7,8 @@ import { BodyShort, Button, Heading } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
+import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
+import { sendInnSøknad } from '../innsending/api';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { TekstElement } from '../typer/tekst';
@@ -54,9 +56,12 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
     const location = useLocation();
     const navigate = useNavigate();
 
+    const [sendInnFeil, settSendInnFeil] = useState<boolean>(false);
+
     const routes = hentRoutes(stønadstype);
     const nåværendePath = location.pathname;
-    const aktivtSteg = routes.findIndex((steg) => steg.path === nåværendePath);
+    const aktivtStegIndex = routes.findIndex((steg) => steg.path === nåværendePath);
+    const aktivtSteg = routes[aktivtStegIndex];
 
     const navigerTilNesteSide = () => {
         if (validerSteg && !validerSteg()) {
@@ -71,6 +76,14 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
         navigate(forrigeRoute.path);
     };
 
+    const sendSøknad = () => {
+        const nesteRoute = hentNesteRoute(routes, nåværendePath);
+        sendInnSøknad(stønadstype, {})
+            .then(() => navigate(nesteRoute.path))
+            // TODO håndtering av 401?
+            .catch(() => settSendInnFeil(true));
+    };
+
     return (
         <Container>
             <StegIndikator>
@@ -78,7 +91,7 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
                     <LocaleTekst tekst={stegtittel} />
                 </Heading>
                 <BodyShort size="small">
-                    Steg {aktivtSteg} av {routes.length - 2}
+                    Steg {aktivtStegIndex} av {routes.length - 2}
                 </BodyShort>
             </StegIndikator>
             <Innhold>{children}</Innhold>
@@ -86,9 +99,18 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
                     <LocaleTekst tekst={fellesTekster.forrige} />
                 </Button>
-                <Button onClick={navigerTilNesteSide}>
-                    <LocaleTekst tekst={fellesTekster.neste} />
-                </Button>
+                {aktivtSteg.route === ERouteBarnetilsyn.OPPSUMMERING ? (
+                    <>
+                        <Button onClick={sendSøknad}>
+                            <LocaleTekst tekst={fellesTekster.sendInnSøknad} />
+                        </Button>
+                        {sendInnFeil && <LocaleTekst tekst={fellesTekster.sendInnSøknadFeil} />}
+                    </>
+                ) : (
+                    <Button onClick={navigerTilNesteSide}>
+                        <LocaleTekst tekst={fellesTekster.neste} />
+                    </Button>
+                )}
             </KnappeContainer>
         </Container>
     );
