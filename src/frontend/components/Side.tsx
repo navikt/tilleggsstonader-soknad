@@ -17,6 +17,7 @@ interface Props {
     stegtittel: TekstElement<string>;
     children?: React.ReactNode;
     validerSteg?: () => boolean;
+    oppdaterSøknad?: () => void;
 }
 
 export const Container = styled.div`
@@ -50,7 +51,13 @@ const KnappeContainer = styled.div`
     gap: 1rem;
 `;
 
-const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg }) => {
+const Side: React.FC<Props> = ({
+    stønadstype,
+    stegtittel,
+    children,
+    validerSteg,
+    oppdaterSøknad,
+}) => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -62,6 +69,9 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
         if (validerSteg && !validerSteg()) {
             return;
         }
+
+        oppdaterSøknad && oppdaterSøknad();
+
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
         navigate(nesteRoute.path);
     };
