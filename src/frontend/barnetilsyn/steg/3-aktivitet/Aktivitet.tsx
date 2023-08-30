@@ -1,14 +1,23 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
+import { BodyShort, Heading } from '@navikt/ds-react';
+
+import UtadnningTiltak from './UtdanningTiltak';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
+import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSøknad } from '../../../context/SøknadContext';
+import { useTiltak } from '../../../hooks/useTiltak';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 const Aktivitet = () => {
     const { aktivitet, settAktivitet } = useSøknad();
+
+    const { tiltak } = useTiltak();
+
     const [barnepassPgaUtdanning, settBarnepassPgaUtdanning] = useState<JaNei | undefined>(
         aktivitet ? aktivitet.barnepassPgaUtdanning : undefined
     );
@@ -36,12 +45,27 @@ const Aktivitet = () => {
                 }
             }}
         >
-            <LocaleRadioGroup
-                tekst={aktivitetTekster.radio_utdanning}
-                value={barnepassPgaUtdanning || ''}
-                onChange={(verdi) => settBarnepassPgaUtdanning(verdi)}
-                error={feil}
-            />
+            {tiltak.type === 'utdanning' && (
+                <>
+                    <Heading size={'medium'}>
+                        <LocaleTekst tekst={aktivitetTekster.innhold_tittel_utdanning} />
+                    </Heading>
+                    <BodyShort>
+                        <LocaleTekst tekst={aktivitetTekster.innhold_utdanning} />
+                    </BodyShort>
+                    <UtadnningTiltak tiltak={tiltak} />
+                    <LocaleReadMore tekst={aktivitetTekster.noe_feil_utdanning_lesmer} />
+                    <LocaleRadioGroup
+                        tekst={aktivitetTekster.radio_utdanning}
+                        value={barnepassPgaUtdanning || ''}
+                        onChange={(verdi) => {
+                            settBarnepassPgaUtdanning(verdi);
+                            settFeil('');
+                        }}
+                        error={feil}
+                    />
+                </>
+            )}
         </Side>
     );
 };
