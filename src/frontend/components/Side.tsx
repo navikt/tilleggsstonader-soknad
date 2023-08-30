@@ -10,6 +10,7 @@ import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { sendInnSøknad } from '../api/api';
 import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { fellesTekster } from '../tekster/felles';
+import { IRoute } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
 import { TekstElement } from '../typer/tekst';
 import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
@@ -65,7 +66,7 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
     const routes = hentRoutes(stønadstype);
     const nåværendePath = location.pathname;
     const aktivtStegIndex = routes.findIndex((steg) => steg.path === nåværendePath);
-    const aktivtSteg = routes[aktivtStegIndex];
+    const aktivtSteg: IRoute | undefined = routes[aktivtStegIndex];
 
     const navigerTilNesteSide = () => {
         if (validerSteg && !validerSteg()) {
