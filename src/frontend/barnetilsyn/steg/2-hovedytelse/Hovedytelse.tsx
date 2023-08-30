@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Heading } from '@navikt/ds-react';
+
 import { AnnenYtelse, erYtelse, Ytelse } from './typer';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -56,6 +58,9 @@ const Hovedytelse = () => {
                 }
             }}
         >
+            <Heading size="medium">
+                <LocaleTekst tekst={hovedytelseInnhold.innhold_tittel} />
+            </Heading>
             <PellePanel>
                 <LocaleTekst tekst={hovedytelseInnhold.guide_innhold} />
             </PellePanel>
