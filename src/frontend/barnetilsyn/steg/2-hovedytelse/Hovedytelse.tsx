@@ -61,7 +61,7 @@ const Hovedytelse = () => {
             </PellePanel>
             <LocaleRadioGroup
                 tekst={hovedytelseInnhold.radio_hovedytelse}
-                value={ytelse}
+                value={ytelse || ''}
                 onChange={(verdi) => {
                     settYtelse(verdi);
                     settAnnenYtelse(undefined);
@@ -73,7 +73,7 @@ const Hovedytelse = () => {
             {ytelse === 'annet' && (
                 <LocaleRadioGroup
                     tekst={hovedytelseInnhold.radio_annen_ytelse}
-                    value={annenYtelse}
+                    value={annenYtelse || ''}
                     onChange={(verdi) => settAnnenYtelse(verdi)}
                     error={annenYtelseFeil}
                 />
