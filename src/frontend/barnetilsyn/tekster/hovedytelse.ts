@@ -14,7 +14,7 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
     steg_tittel: {
         nb: 'Ytelse',
     },
-    innhold_tittel: { nb: 'Din situajson' },
+    innhold_tittel: { nb: 'Din situasjon' },
     guide_innhold: {
         nb: 'Vi spør om dette for å vite hvilke rettigheter du har og hvilke spørsmål vi må stille deg i skjemaet.',
     },
@@ -51,7 +51,7 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
     },
     flere_alternativer_lesmer: {
         nb: {
-            header: 'Mottar du eller har du nylig søkt om noe av dette?',
+            header: 'Hva gjør jeg hvis flere alternativer passer for meg?',
             innhold:
                 'I dette tilfellet er det ikke så viktig. Har du rett på eller mottar flere av ytelsene/pengestøttene nevnt her trenger du bare å velge en.  Er en av ytelsene du mottar AAP, velg AAP.',
         },
