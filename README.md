@@ -5,6 +5,10 @@ Frontend - søknad for tilleggsstønader
 ### Kjøre app lokalt
 `yarn start:dev`
 
+Med api må du sette cookie første gang:
+http://localhost:8001/test/cookie?redirect=http://localhost:8080/tilleggsstonader/soknad/
+Kan sende med annet fnr med `&subject=<fnr>`
+
 ## Universell utforming
 
 ### Huskeliste ✨

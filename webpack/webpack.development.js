@@ -6,6 +6,8 @@ import common from './webpack.common.js';
 
 const publicPath = process.env.PUBLIC_URL || '/';
 
+console.log(`publicPath=${publicPath}`)
+
 const developmentConfig = merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
@@ -17,6 +19,9 @@ const developmentConfig = merge(common, {
         historyApiFallback: {
             index: publicPath,
         },
+        proxy: {
+            '/api': 'http://localhost:8001'
+        }
     },
     output: {
         filename: '[name].bundle.js',

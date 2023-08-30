@@ -5,6 +5,9 @@ import path from 'path';
 import { injectDecoratorServerSide } from '@navikt/nav-dekoratoren-moduler/ssr';
 
 import logger from './logger';
+import { miljø } from './miljø';
+import { addRequestInfo, doProxy } from './proxy';
+import attachToken from './tokenProxy';
 
 const buildPath = path.resolve(process.cwd(), '../../app/build');
 const BASE_PATH = '/tilleggsstonader';
@@ -28,6 +31,13 @@ const routes = () => {
                 res.status(500).send(e);
             });
     });
+
+    expressRouter.use(
+        `${BASE_PATH_SOKNAD}/api`,
+        addRequestInfo(),
+        attachToken('tilleggsstonader-soknad-api'),
+        doProxy(miljø.apiUrl, `${BASE_PATH_SOKNAD}/api`)
+    );
 
     return expressRouter;
 };
