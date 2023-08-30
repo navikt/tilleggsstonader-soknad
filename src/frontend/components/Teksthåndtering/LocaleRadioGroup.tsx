@@ -20,8 +20,10 @@ function LocaleRadioGroup<T>({ children, tekst, ...props }: RadioGroupProps<T>) 
             {...props}
         >
             {children}
-            {tekst.alternativer.map((alternativ) => (
-                <Radio value={alternativ.value}>{alternativ.label[locale]}</Radio>
+            {tekst.alternativer.map((alternativ, indeks) => (
+                <Radio value={alternativ.value} key={indeks}>
+                    {alternativ.label[locale]}
+                </Radio>
             ))}
         </RadioGroup>
     );
