@@ -69,6 +69,7 @@ const Hovedytelse = () => {
                 value={ytelse || ''}
                 onChange={(verdi) => {
                     settYtelse(verdi);
+                    settYtelseFeil('');
                     settAnnenYtelse(undefined);
                 }}
                 error={ytelseFeil}
@@ -79,7 +80,10 @@ const Hovedytelse = () => {
                 <LocaleRadioGroup
                     tekst={hovedytelseInnhold.radio_annen_ytelse}
                     value={annenYtelse || ''}
-                    onChange={(verdi) => settAnnenYtelse(verdi)}
+                    onChange={(verdi) => {
+                        settAnnenYtelse(verdi);
+                        settAnnenYtelseFeil('');
+                    }}
                     error={annenYtelseFeil}
                 />
             )}
