@@ -70,6 +70,7 @@ const Hovedytelse = () => {
                 onChange={(verdi) => {
                     settYtelse(verdi);
                     settYtelseFeil('');
+                    settAnnenYtelseFeil('');
                     settAnnenYtelse(undefined);
                 }}
                 error={ytelseFeil}
