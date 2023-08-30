@@ -16,7 +16,7 @@ const Hovedytelse = () => {
     const { hovedytelse, settHovedytelse } = useSøknad();
 
     const [ytelse, settYtelse] = useState<Ytelse | undefined>(
-        hovedytelse && erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : undefined
+        hovedytelse && erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : 'annet'
     );
     const [ytelseFeil, settYtelseFeil] = useState('');
 
