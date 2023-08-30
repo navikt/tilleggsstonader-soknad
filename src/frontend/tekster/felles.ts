@@ -13,7 +13,7 @@ export const fellesTekster: FellesInnhold = {
         nb: 'Send inn søknad',
     },
     sendInnSøknadFeil: {
-        nb: 'Innsending av søknad feilet, prøv på nytt.',
+        nb: 'Innsending feilet, prøv på nytt.',
     },
     neste: {
         nb: 'Neste',

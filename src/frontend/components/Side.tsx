@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-import { BodyShort, Button, Heading } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
@@ -46,10 +46,14 @@ const Innhold = styled.div`
     gap: 1.5rem;
 `;
 
-const KnappeContainer = styled.div`
+const KnappeContainerMedFeilmelding = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+
+    .feilmelding {
+        grid-column: 1 / span 2;
+    }
 `;
 
 const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg }) => {
@@ -95,23 +99,25 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
                 </BodyShort>
             </StegIndikator>
             <Innhold>{children}</Innhold>
-            <KnappeContainer>
+            <KnappeContainerMedFeilmelding>
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
                     <LocaleTekst tekst={fellesTekster.forrige} />
                 </Button>
                 {aktivtSteg.route === ERouteBarnetilsyn.OPPSUMMERING ? (
-                    <>
-                        <Button onClick={sendSøknad}>
-                            <LocaleTekst tekst={fellesTekster.sendInnSøknad} />
-                        </Button>
-                        {sendInnFeil && <LocaleTekst tekst={fellesTekster.sendInnSøknadFeil} />}
-                    </>
+                    <Button onClick={sendSøknad}>
+                        <LocaleTekst tekst={fellesTekster.sendInnSøknad} />
+                    </Button>
                 ) : (
                     <Button onClick={navigerTilNesteSide}>
                         <LocaleTekst tekst={fellesTekster.neste} />
                     </Button>
                 )}
-            </KnappeContainer>
+                {sendInnFeil && (
+                    <Alert variant={'error'} className="feilmelding">
+                        <LocaleTekst tekst={fellesTekster.sendInnSøknadFeil} />
+                    </Alert>
+                )}
+            </KnappeContainerMedFeilmelding>
         </Container>
     );
 };
