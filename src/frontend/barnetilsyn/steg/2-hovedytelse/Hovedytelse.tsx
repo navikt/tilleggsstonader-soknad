@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { AnnenYtelse, erYtelse, Ytelse } from './typer';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -9,23 +10,17 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
-export type Ytelse = 'aap' | 'overgangsstønad' | 'gjenlevendepensjon' | 'annet';
-export type AnnenYtelse =
-    | 'dagpenger'
-    | 'tiltakspenger'
-    | 'kvalifikasjonsprogrammet'
-    | 'introduksjonsprogrammet'
-    | 'sykepenger'
-    | 'uføretrygd'
-    | 'ingen_pengestøtte';
-
 const Hovedytelse = () => {
-    const { settHovedytelse } = useSøknad();
+    const { hovedytelse, settHovedytelse } = useSøknad();
 
-    const [ytelse, settYtelse] = useState<Ytelse>();
+    const [ytelse, settYtelse] = useState<Ytelse | undefined>(
+        hovedytelse && erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : undefined
+    );
     const [ytelseFeil, settYtelseFeil] = useState('');
 
-    const [annenYtelse, settAnnenYtelse] = useState<AnnenYtelse>();
+    const [annenYtelse, settAnnenYtelse] = useState<AnnenYtelse | undefined>(
+        hovedytelse && !erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : undefined
+    );
     const [annenYtelseFeil, settAnnenYtelseFeil] = useState('');
 
     const kanFortsette = (ytelse?: Ytelse, annenYtelse?: AnnenYtelse): boolean => {

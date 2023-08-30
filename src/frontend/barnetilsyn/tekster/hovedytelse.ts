@@ -1,5 +1,5 @@
 import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
-import { AnnenYtelse, Ytelse } from '../steg/2-hovedytelse/Hovedytelse';
+import { AnnenYtelse, Ytelse } from '../steg/2-hovedytelse/typer';
 
 interface HovedytelseInnhold {
     steg_tittel: TekstElement<string>;
