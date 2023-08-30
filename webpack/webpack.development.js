@@ -5,12 +5,8 @@ import { merge } from 'webpack-merge';
 import common from './webpack.common.js';
 
 const publicPath = process.env.PUBLIC_URL || '/';
-const brukMockLokalt = process.env.BRUK_MOCK_LOKALT && {
-    '/api': 'http://localhost:8001'
-};
 
 console.log(`publicPath=${publicPath}`)
-console.log(`brukMockLokalt=${process.env.BRUK_MOCK_LOKALT}`)
 
 const developmentConfig = merge(common, {
     mode: 'development',
@@ -23,7 +19,9 @@ const developmentConfig = merge(common, {
         historyApiFallback: {
             index: publicPath,
         },
-        proxy: brukMockLokalt
+        proxy: {
+            '/api': 'http://localhost:8001'
+        }
     },
     output: {
         filename: '[name].bundle.js',
