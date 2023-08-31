@@ -47,10 +47,12 @@ const [PersonProvider, usePerson] = createUseContext(() => {
     useEffect(() => {
         if (person.navn === navn) {
             // henter navn når man satt "mock"-verdi
-            hentPersonData().then((response) =>
-                settPerson((prevState) => ({ ...prevState, navn: response.navn }))
-            );
-            // feilhåndtering
+            hentPersonData()
+                .then((response) =>
+                    settPerson((prevState) => ({ ...prevState, navn: response.navn }))
+                )
+                // feilhåndtering
+                .catch(() => {});
         }
     }, [person]);
 
