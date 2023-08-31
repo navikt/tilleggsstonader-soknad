@@ -18,8 +18,8 @@ const Aktivitet = () => {
 
     const { tiltak } = useTiltak();
 
-    const [barnepassPgaUtdanning, settBarnepassPgaUtdanning] = useState<JaNei | undefined>(
-        aktivitet ? aktivitet.barnepassPgaUtdanning : undefined
+    const [utdanning, settUtdanning] = useState<JaNei | undefined>(
+        aktivitet ? aktivitet.utdanning : undefined
     );
     const [feil, settFeil] = useState('');
 
@@ -33,15 +33,15 @@ const Aktivitet = () => {
     };
 
     const oppdaterAktivitetISøknad = () => {
-        if (barnepassPgaUtdanning !== undefined) {
-            settAktivitet({ barnepassPgaUtdanning: barnepassPgaUtdanning });
+        if (utdanning !== undefined) {
+            settAktivitet({ utdanning: utdanning });
         }
     };
     return (
         <Side
             stegtittel={aktivitetTekster.steg_tittel}
             stønadstype={Stønadstype.barnetilsyn}
-            validerSteg={() => kanFortsette(barnepassPgaUtdanning)}
+            validerSteg={() => kanFortsette(utdanning)}
             oppdaterSøknad={oppdaterAktivitetISøknad}
         >
             {tiltak.type === 'utdanning' && (
@@ -56,9 +56,9 @@ const Aktivitet = () => {
                     <LocaleReadMore tekst={aktivitetTekster.noe_feil_utdanning_lesmer} />
                     <LocaleRadioGroup
                         tekst={aktivitetTekster.radio_utdanning}
-                        value={barnepassPgaUtdanning || ''}
+                        value={utdanning || ''}
                         onChange={(verdi) => {
-                            settBarnepassPgaUtdanning(verdi);
+                            settUtdanning(verdi);
                             settFeil('');
                         }}
                         error={feil}

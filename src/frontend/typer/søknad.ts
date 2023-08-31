@@ -5,7 +5,12 @@ export interface Hovedytelse {
 }
 
 export interface Aktivitet {
-    barnepassPgaUtdanning: JaNei;
+    utdanning: JaNei;
 }
 
 export type JaNei = 'ja' | 'nei';
+
+export interface Periode {
+    fom: string;
+    tom: string;
+}
