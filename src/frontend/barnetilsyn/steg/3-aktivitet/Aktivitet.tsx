@@ -32,16 +32,17 @@ const Aktivitet = () => {
         return true;
     };
 
+    const oppdaterAktivitetISøknad = () => {
+        if (barnepassPgaUtdanning !== undefined) {
+            settAktivitet({ barnepassPgaUtdanning: barnepassPgaUtdanning });
+        }
+    };
     return (
         <Side
             stegtittel={aktivitetTekster.steg_tittel}
             stønadstype={Stønadstype.barnetilsyn}
             validerSteg={() => kanFortsette(barnepassPgaUtdanning)}
-            oppdaterSøknad={() => {
-                if (barnepassPgaUtdanning !== undefined) {
-                    settAktivitet({ barnepassPgaUtdanning: barnepassPgaUtdanning });
-                }
-            }}
+            oppdaterSøknad={oppdaterAktivitetISøknad}
         >
             {tiltak.type === 'utdanning' && (
                 <>
