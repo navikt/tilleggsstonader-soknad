@@ -3,19 +3,9 @@ import { useEffect, useState } from 'react';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import Side from '../../../components/Side';
 import { usePerson } from '../../../context/PersonContext';
-import { PassType } from '../../../typer/barn';
+import { BarnMedAllInfo } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { barnepassTekster } from '../../tekster/barnepass';
-
-export interface BarnMedAllInfo {
-    id: string;
-    alder: number;
-    fødselsdato: string;
-    fødselsnummer: string;
-    navn: string;
-    skalHaBarnepass: boolean;
-    passType?: PassType;
-}
 
 const Barnepass = () => {
     const { person } = usePerson();

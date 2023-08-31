@@ -3,7 +3,7 @@ import { Alert, Heading } from '@navikt/ds-react';
 import { BarnMedAllInfo } from './Barnepass';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { PassType } from '../../../typer/barn';
+import { BarnMedAllInfo, PassType } from '../../../typer/barn';
 import { hentFornavn } from '../../../utils/formatering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
