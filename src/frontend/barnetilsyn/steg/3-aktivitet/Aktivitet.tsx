@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
-import { Alert, BodyLong, BodyShort, Heading } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 
 import UtadnningTiltak from './UtdanningTiltak';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSøknad } from '../../../context/SøknadContext';
 import { useTiltak } from '../../../hooks/useTiltak';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -79,21 +80,9 @@ const Aktivitet = () => {
                     {utdanning === 'nei' && (
                         <>
                             <Alert variant={'info'}>
-                                <BodyLong spacing>
-                                    <LocaleTekst
-                                        tekst={aktivitetTekster.feil_utdanning_infoalert1}
-                                    />
-                                </BodyLong>
-                                <BodyLong spacing>
-                                    <LocaleTekst
-                                        tekst={aktivitetTekster.feil_utdanning_infoalert2}
-                                    />
-                                </BodyLong>
-                                <BodyLong>
-                                    <LocaleTekst
-                                        tekst={aktivitetTekster.feil_utdanning_infoalert3}
-                                    />
-                                </BodyLong>
+                                <LocaleTekstAvsnitt
+                                    tekst={aktivitetTekster.feil_utdanning_infoalert}
+                                />
                             </Alert>
                             <LocaleRadioGroup
                                 tekst={aktivitetTekster.radio_utdanning}
