@@ -51,6 +51,7 @@
     "@navikt/ds-react": "^5.2.0",
     "@navikt/ds-tokens": "^5.2.0",
     "@types/react-router-dom": "^5.3.3",
+    "axios": "^1.5.0",
     "constate": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
