@@ -6,3 +6,8 @@ export interface Barn {
     navn: string;
     skalHaBarnepass: boolean;
 }
+
+export enum PassType {
+    BARNEHAGE_SFO_AKS = 'BARNEHAGE_SFO_AKS',
+    ANDRE = 'ANDRE',
+}
