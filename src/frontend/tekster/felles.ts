@@ -1,3 +1,4 @@
+import { JaNei } from '../typer/søknad';
 import { TekstElement } from '../typer/tekst';
 
 export interface FellesInnhold {
@@ -17,3 +18,17 @@ export const fellesTekster: FellesInnhold = {
         nb: 'Søknad om støtte til pass av barn',
     },
 };
+export const jaNeiAlternativer: { value: JaNei; label: TekstElement<string> }[] = [
+    {
+        value: 'ja',
+        label: {
+            nb: 'Ja',
+        },
+    },
+    {
+        value: 'nei',
+        label: {
+            nb: 'Nei',
+        },
+    },
+];

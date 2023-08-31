@@ -1,3 +1,4 @@
+import { jaNeiAlternativer } from '../../tekster/felles';
 import { JaNei } from '../../typer/søknad';
 import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
@@ -21,20 +22,7 @@ export const aktivitetTekster: AktivitetInnhold = {
         header: {
             nb: 'Skal du søke om støtte til pass av barn i forbindelse med denne utdanningen?',
         },
-        alternativer: [
-            {
-                value: 'ja',
-                label: {
-                    nb: 'Ja',
-                },
-            },
-            {
-                value: 'nei',
-                label: {
-                    nb: 'Nei',
-                },
-            },
-        ],
+        alternativer: jaNeiAlternativer,
     },
     innhold_utdanning: {
         nb: 'Vi har registrert dette på deg:',
