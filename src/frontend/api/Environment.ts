@@ -33,7 +33,7 @@ const Environment = (): EnvironmentProps => {
     } else {
         return {
             apiProxyUrl: 'http://localhost:8080/api',
-            wonderwallUrl: `http://localhost:8001/test/cookie?redirect=http://localhost:8080/tilleggsstonader/soknad`,
+            wonderwallUrl: `http://localhost:8001/test/cookie?redirect=`,
             miljø: 'local',
             modellVersjon: modellVersjon,
         };
