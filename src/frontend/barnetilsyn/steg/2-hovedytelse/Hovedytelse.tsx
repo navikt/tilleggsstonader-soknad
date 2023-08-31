@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
+import { styled } from 'styled-components';
+
 import { Heading } from '@navikt/ds-react';
+import { AGray50 } from '@navikt/ds-tokens/dist/tokens';
 
 import { AnnenYtelse, erYtelse, Ytelse } from './typer';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
@@ -12,6 +15,10 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
+const GråBoks = styled.div`
+    background-color: ${AGray50};
+    padding: 2rem 1rem;
+`;
 const Hovedytelse = () => {
     const { hovedytelse, settHovedytelse } = useSøknad();
 
@@ -78,15 +85,17 @@ const Hovedytelse = () => {
                 <LocaleReadMore tekst={hovedytelseInnhold.flere_alternativer_lesmer} />
             </LocaleRadioGroup>
             {ytelse === 'annet' && (
-                <LocaleRadioGroup
-                    tekst={hovedytelseInnhold.radio_annen_ytelse}
-                    value={annenYtelse || ''}
-                    onChange={(verdi) => {
-                        settAnnenYtelse(verdi);
-                        settAnnenYtelseFeil('');
-                    }}
-                    error={annenYtelseFeil}
-                />
+                <GråBoks>
+                    <LocaleRadioGroup
+                        tekst={hovedytelseInnhold.radio_annen_ytelse}
+                        value={annenYtelse || ''}
+                        onChange={(verdi) => {
+                            settAnnenYtelse(verdi);
+                            settAnnenYtelseFeil('');
+                        }}
+                        error={annenYtelseFeil}
+                    />
+                </GråBoks>
             )}
         </Side>
     );
