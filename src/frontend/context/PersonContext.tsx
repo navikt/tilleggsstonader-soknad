@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import createUseContext from 'constate';
 
+import { hentPersonData } from '../api/api';
 import { initiellPerson } from '../mock/initiellPerson';
 import { Person } from '../typer/person';
 
@@ -9,11 +10,11 @@ const [PersonProvider, usePerson] = createUseContext(() => {
     PersonProvider.displayName = 'PERSON_PROVIDER';
     const [person, settPerson] = useState<Person>(initiellPerson);
 
+    const navn = 'Ole Jørgen Nilsen';
     useEffect(() => {
-        // TODO: Fetch persondata.
         settPerson({
             fnr: 'fødselsnummer',
-            navn: 'Ole Jørgen Nilsen',
+            navn: navn,
             adresse: {
                 adresse: 'Liaveien 34',
                 postnummer: '0152',
@@ -42,6 +43,16 @@ const [PersonProvider, usePerson] = createUseContext(() => {
             ],
         });
     }, []);
+
+    useEffect(() => {
+        if (person.navn === navn) {
+            // henter navn når man satt "mock"-verdi
+            hentPersonData().then((response) =>
+                settPerson((prevState) => ({ ...prevState, navn: response.navn }))
+            );
+            // feilhåndtering
+        }
+    }, [person]);
 
     const toggleSkalHaBarnepass = (id: string) => {
         settPerson((prevPerson) => ({
