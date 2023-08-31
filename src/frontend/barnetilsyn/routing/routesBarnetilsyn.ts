@@ -6,6 +6,7 @@ export enum ERouteBarnetilsyn {
     HOVEDYTELSE = 'HOVEDYTELSE',
     AKTIVITET = 'AKTIVITET',
     DINE_BARN = 'DINE_BARN',
+    BARNEPASS = 'BARNEPASS',
     KVITTERING = 'KVITTERING',
 }
 
@@ -33,6 +34,12 @@ export const RoutesBarnetilsyn: IRoute[] = [
         label: 'Personalia',
         route: ERouteBarnetilsyn.DINE_BARN,
     },
+    {
+        path: barnetilsynPath + '/barnepass',
+        label: 'Barnepass',
+        route: ERouteBarnetilsyn.BARNEPASS,
+    },
+
     {
         path: barnetilsynPath + '/kvittering',
         label: 'Personalia',
