@@ -7,6 +7,11 @@ export interface Barn {
     skalHaBarnepass: boolean;
 }
 
+export interface BarnMedBarnepass {
+    id: string;
+    passType: PassType;
+}
+
 export interface BarnMedAllInfo {
     id: string;
     alder: number;
