@@ -47,6 +47,7 @@ const Aktivitet = () => {
             settAktivitet({ utdanning: utdanning });
         }
     };
+    
     return (
         <Side
             stegtittel={aktivitetTekster.steg_tittel}

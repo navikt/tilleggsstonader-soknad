@@ -20,6 +20,7 @@ import { Container } from '../components/Side';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
 import { hentNesteRoute } from '../utils/routes';
 
@@ -33,6 +34,7 @@ const Forside: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { harBekreftet, settHarBekreftet } = useSøknad();
+    const { person } = usePerson();
 
     const startSøknad = () => {
         if (harBekreftet) {
@@ -45,7 +47,7 @@ const Forside: React.FC = () => {
         <Container>
             <PellePanel poster>
                 <Label>
-                    <LocaleTekst tekst={forsideTekster.veileder_tittel} />
+                    <LocaleTekst tekst={forsideTekster.veileder_tittel} argument0={person.navn} />
                 </Label>
                 <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </PellePanel>

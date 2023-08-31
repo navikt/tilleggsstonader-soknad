@@ -1,5 +1,10 @@
 import { useState } from 'react';
 
+import { styled } from 'styled-components';
+
+import { Heading } from '@navikt/ds-react';
+import { AGray50 } from '@navikt/ds-tokens/dist/tokens';
+
 import { AnnenYtelse, erYtelse, Ytelse } from './typer';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -10,11 +15,15 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
+const GråBoks = styled.div`
+    background-color: ${AGray50};
+    padding: 2rem 1rem;
+`;
 const Hovedytelse = () => {
     const { hovedytelse, settHovedytelse } = useSøknad();
 
     const [ytelse, settYtelse] = useState<Ytelse | undefined>(
-        hovedytelse && erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : undefined
+        hovedytelse && (erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : 'annet')
     );
     const [ytelseFeil, settYtelseFeil] = useState('');
 
@@ -56,6 +65,9 @@ const Hovedytelse = () => {
                 }
             }}
         >
+            <Heading size="medium">
+                <LocaleTekst tekst={hovedytelseInnhold.innhold_tittel} />
+            </Heading>
             <PellePanel>
                 <LocaleTekst tekst={hovedytelseInnhold.guide_innhold} />
             </PellePanel>
@@ -64,6 +76,8 @@ const Hovedytelse = () => {
                 value={ytelse || ''}
                 onChange={(verdi) => {
                     settYtelse(verdi);
+                    settYtelseFeil('');
+                    settAnnenYtelseFeil('');
                     settAnnenYtelse(undefined);
                 }}
                 error={ytelseFeil}
@@ -71,12 +85,17 @@ const Hovedytelse = () => {
                 <LocaleReadMore tekst={hovedytelseInnhold.flere_alternativer_lesmer} />
             </LocaleRadioGroup>
             {ytelse === 'annet' && (
-                <LocaleRadioGroup
-                    tekst={hovedytelseInnhold.radio_annen_ytelse}
-                    value={annenYtelse || ''}
-                    onChange={(verdi) => settAnnenYtelse(verdi)}
-                    error={annenYtelseFeil}
-                />
+                <GråBoks>
+                    <LocaleRadioGroup
+                        tekst={hovedytelseInnhold.radio_annen_ytelse}
+                        value={annenYtelse || ''}
+                        onChange={(verdi) => {
+                            settAnnenYtelse(verdi);
+                            settAnnenYtelseFeil('');
+                        }}
+                        error={annenYtelseFeil}
+                    />
+                </GråBoks>
             )}
         </Side>
     );
