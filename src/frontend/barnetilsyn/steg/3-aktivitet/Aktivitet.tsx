@@ -47,7 +47,7 @@ const Aktivitet = () => {
             settAktivitet({ utdanning: utdanning });
         }
     };
-    
+
     return (
         <Side
             stegtittel={aktivitetTekster.steg_tittel}
@@ -70,6 +70,7 @@ const Aktivitet = () => {
                         value={utdanning || ''}
                         onChange={(verdi) => {
                             settUtdanning(verdi);
+                            settFortsattSøke(undefined);
                             settFeil('');
                             settFortsattSøkeFeil('');
                         }}
