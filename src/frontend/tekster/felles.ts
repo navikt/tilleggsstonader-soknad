@@ -1,18 +1,18 @@
 import { TekstElement } from '../typer/tekst';
 
 export interface FellesInnhold {
-    sendInnSøknad: TekstElement<string>;
-    sendInnSøknadFeil: TekstElement<string>;
+    send_inn_søknad: TekstElement<string>;
+    send_inn_søknad_feil: TekstElement<string>;
     neste: TekstElement<string>;
     forrige: TekstElement<string>;
     banner_bt: TekstElement<string>;
 }
 
 export const fellesTekster: FellesInnhold = {
-    sendInnSøknad: {
+    send_inn_søknad: {
         nb: 'Send inn søknad',
     },
-    sendInnSøknadFeil: {
+    send_inn_søknad_feil: {
         nb: 'Innsending feilet, prøv på nytt.',
     },
     neste: {

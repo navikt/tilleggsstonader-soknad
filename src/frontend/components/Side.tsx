@@ -106,7 +106,7 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
                 </Button>
                 {aktivtSteg.route === ERouteBarnetilsyn.OPPSUMMERING ? (
                     <Button onClick={sendSøknad}>
-                        <LocaleTekst tekst={fellesTekster.sendInnSøknad} />
+                        <LocaleTekst tekst={fellesTekster.send_inn_søknad} />
                     </Button>
                 ) : (
                     <Button onClick={navigerTilNesteSide}>
@@ -115,7 +115,7 @@ const Side: React.FC<Props> = ({ stønadstype, stegtittel, children, validerSteg
                 )}
                 {sendInnFeil && (
                     <Alert variant={'error'} className="feilmelding">
-                        <LocaleTekst tekst={fellesTekster.sendInnSøknadFeil} />
+                        <LocaleTekst tekst={fellesTekster.send_inn_søknad_feil} />
                     </Alert>
                 )}
             </KnappeContainerMedFeilmelding>
