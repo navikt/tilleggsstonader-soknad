@@ -9,6 +9,10 @@ interface AktivitetInnhold {
     innhold_utdanning: TekstElement<string>;
     godkjent_utdanning: TekstElement<string>;
     noe_feil_utdanning_lesmer: TekstElement<LesMer>;
+    feil_utdanning_infoalert1: TekstElement<string>;
+    feil_utdanning_infoalert2: TekstElement<string>;
+    feil_utdanning_infoalert3: TekstElement<string>;
+    radio_fortsatt_søke: Radiogruppe<JaNei>;
 }
 
 export const aktivitetTekster: AktivitetInnhold = {
@@ -38,5 +42,20 @@ export const aktivitetTekster: AktivitetInnhold = {
                 'Du kan fortsatt søke nå, men da kan det ta lengre tid for oss å behandle din søknad. ',
             ],
         },
+    },
+    feil_utdanning_infoalert1: {
+        nb: 'Vi anbefaler deg å ta kontakt med din veileder for å få registrert din arbeidsrettede aktivitet eller utdanning.',
+    },
+    feil_utdanning_infoalert2: {
+        nb: 'Du kan fortsatt søke nå, men da vil det ta lengre tid for oss å behandle din søknad.',
+    },
+    feil_utdanning_infoalert3: {
+        nb: 'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
+    },
+    radio_fortsatt_søke: {
+        header: {
+            nb: 'Vil du fortsatt søke nå?',
+        },
+        alternativer: jaNeiAlternativer,
     },
 };
