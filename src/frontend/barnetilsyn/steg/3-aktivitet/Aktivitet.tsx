@@ -24,14 +24,12 @@ const Aktivitet = () => {
     const [feil, settFeil] = useState('');
 
     const kanFortsette = (barnepassPgaUtdanning?: JaNei): boolean => {
-        let kanFortsette = true;
-
         if (barnepassPgaUtdanning === undefined) {
-            kanFortsette = false;
             settFeil('Du må velge et alternativ');
+            return false;
         }
 
-        return kanFortsette;
+        return true;
     };
 
     return (
