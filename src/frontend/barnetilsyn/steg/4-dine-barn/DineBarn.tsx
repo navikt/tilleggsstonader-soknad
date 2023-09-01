@@ -21,7 +21,9 @@ const DineBarn = () => {
                 </Label>
                 {person.barn.map((barn) => (
                     <Checkbox
-                        value={barn.skalHaBarnepass}
+                        key={barn.id}
+                        value={barn.id}
+                        checked={barn.skalHaBarnepass}
                         onChange={() => toggleSkalHaBarnepass(barn.id)}
                     >
                         {barn.navn}, født {barn.fødselsdato}

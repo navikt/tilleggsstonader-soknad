@@ -25,14 +25,16 @@ function LocaleRadioGroup<T>({ children, tekst, argument0, ...props }: RadioGrou
             description={
                 tekst.beskrivelse &&
                 (argument0
-                    ? hentBeskjedMedEttParameter(argument0, tekst.header[locale])
+                    ? hentBeskjedMedEttParameter(argument0, tekst.beskrivelse[locale])
                     : tekst.beskrivelse[locale])
             }
             {...props}
         >
             {children}
-            {tekst.alternativer.map((alternativ) => (
-                <Radio value={alternativ.value}>{alternativ.label[locale]}</Radio>
+            {tekst.alternativer.map((alternativ, indeks) => (
+                <Radio value={alternativ.value} key={indeks}>
+                    {alternativ.label[locale]}
+                </Radio>
             ))}
         </RadioGroup>
     );
