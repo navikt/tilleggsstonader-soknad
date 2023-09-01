@@ -5,6 +5,7 @@ import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
+import { formaterIsoDato } from '../../../utils/formatering';
 import { dineBarnTekster } from '../../tekster/dineBarn';
 
 const DineBarn = () => {
@@ -23,7 +24,7 @@ const DineBarn = () => {
                         value={barn.skalHaBarnepass}
                         onChange={() => toggleSkalHaBarnepass(barn.id)}
                     >
-                        {barn.navn}, født {barn.fødselsdato}
+                        {barn.navn}, født {formaterIsoDato(barn.fødselsdato)}
                     </Checkbox>
                 ))}
             </div>

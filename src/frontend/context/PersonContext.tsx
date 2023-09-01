@@ -27,7 +27,7 @@ const [PersonProvider, usePerson] = createUseContext(() => {
                 {
                     id: '010101',
                     alder: 6,
-                    fødselsdato: '2017-05-12T00:00:00',
+                    fødselsdato: '2017-05-12',
                     fødselsnummer: '12051711222',
                     navn: 'Ronja Røverdatter',
                     skalHaBarnepass: false,
@@ -35,7 +35,7 @@ const [PersonProvider, usePerson] = createUseContext(() => {
                 {
                     id: '020202',
                     alder: 10,
-                    fødselsdato: '2013-01-05T00:00:00',
+                    fødselsdato: '2013-01-05',
                     fødselsnummer: '05011311222',
                     navn: 'Espen Askeladden',
                     skalHaBarnepass: false,
