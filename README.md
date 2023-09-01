@@ -6,7 +6,7 @@ Frontend - søknad for tilleggsstønader
 `yarn start:dev`
 
 Med api må du sette cookie første gang:
-http://localhost:8001/test/cookie?redirect=http://localhost:8080/tilleggsstonader/soknad/
+http://localhost:8001/test/cookie?redirect=http://localhost:8080/tilleggsstonader/soknad/barnetilsyn
 Kan sende med annet fnr med `&subject=<fnr>`
 
 ## Universell utforming

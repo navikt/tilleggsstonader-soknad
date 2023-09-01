@@ -53,7 +53,7 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         nb: {
             header: 'Hva gjør jeg hvis flere alternativer passer for meg?',
             innhold:
-                'I dette tilfellet er det ikke så viktig. Har du rett på eller mottar flere av ytelsene/pengestøttene nevnt her trenger du bare å velge en.  Er en av ytelsene du mottar AAP, velg AAP.',
+                'Har du rett på eller mottar flere av ytelsene/pengestøttene nevnt her trenger du bare å velge en. Er en av ytelsene du mottar AAP, velg AAP.',
         },
     },
     radio_annen_ytelse: {

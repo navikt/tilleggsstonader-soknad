@@ -4,7 +4,7 @@ export type TekstElement<T> = Record<Locale, T>;
 
 export type LesMer = {
     header: string;
-    innhold: string;
+    innhold: string | string[];
 };
 
 export type Lenke = {
@@ -12,7 +12,7 @@ export type Lenke = {
     url: string;
 };
 
-  export type Radiogruppe<T> = {
+export type Radiogruppe<T> = {
     header: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
     alternativer: { label: TekstElement<string>; value: T }[];
