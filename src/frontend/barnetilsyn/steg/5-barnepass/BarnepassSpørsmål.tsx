@@ -30,7 +30,11 @@ const BarnepassSpørsmål: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, 
                 </Alert>
             )}
             {barn.alder >= 9 && (
-                <BarnOver9År barn={barn} oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass} />
+                <BarnOver9År
+                    barn={barn}
+                    oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
+                    visFeilmeldinger={visFeilmelding}
+                />
             )}
         </>
     );

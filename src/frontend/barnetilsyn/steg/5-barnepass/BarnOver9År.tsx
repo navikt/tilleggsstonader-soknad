@@ -7,10 +7,12 @@ import { BarnMedAllInfo, ÅrsakBarnepass } from '../../../typer/barn';
 import { hentFornavn } from '../../../utils/formatering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
-const BarnOver9År: React.FC<{
+interface Props {
     barn: BarnMedAllInfo;
     oppdaterBarnMedBarnepass: (oppdatertBarn: BarnMedAllInfo) => void;
-}> = ({ barn, oppdaterBarnMedBarnepass }) => {
+    visFeilmeldinger: boolean;
+}
+const BarnOver9År: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, visFeilmeldinger }) => {
     const oppdaterStartetIFemte = (val: boolean) => {
         const barnSomSkalOppdateres = barn;
         if (val === false) {
@@ -27,6 +29,11 @@ const BarnOver9År: React.FC<{
                 argument0={hentFornavn(barn.navn)}
                 value={barn.startetIFemte || ''}
                 onChange={(val) => oppdaterStartetIFemte(val)}
+                error={
+                    visFeilmeldinger &&
+                    barn.startetIFemte === undefined &&
+                    'Du må velge et alternativ'
+                }
             >
                 <LocaleReadMore tekst={barnepassTekster.startet_femte_readmore} />
             </LocaleRadioGroup>
@@ -38,6 +45,12 @@ const BarnOver9År: React.FC<{
                         value={barn.årsakBarnepass || ''}
                         onChange={(val) =>
                             oppdaterBarnMedBarnepass({ ...barn, årsakBarnepass: val })
+                        }
+                        error={
+                            visFeilmeldinger &&
+                            barn.startetIFemte !== undefined &&
+                            barn.årsakBarnepass === undefined &&
+                            'Du må velge et alternativ'
                         }
                     />
                     {barn.årsakBarnepass === ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (
