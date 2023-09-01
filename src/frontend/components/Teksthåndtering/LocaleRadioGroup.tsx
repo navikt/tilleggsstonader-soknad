@@ -25,7 +25,7 @@ function LocaleRadioGroup<T>({ children, tekst, argument0, ...props }: RadioGrou
             description={
                 tekst.beskrivelse &&
                 (argument0
-                    ? hentBeskjedMedEttParameter(argument0, tekst.header[locale])
+                    ? hentBeskjedMedEttParameter(argument0, tekst.beskrivelse[locale])
                     : tekst.beskrivelse[locale])
             }
             {...props}
