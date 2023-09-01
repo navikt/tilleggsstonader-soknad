@@ -20,7 +20,7 @@ const DineBarn = () => {
                 </Label>
                 {person.barn.map((barn, indeks) => (
                     <Checkbox
-                        key={indeks}
+                        key={barn.id}
                         value={barn.id}
                         checked={barn.skalHaBarnepass}
                         onChange={() => toggleSkalHaBarnepass(barn.id)}
