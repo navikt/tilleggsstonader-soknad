@@ -1,6 +1,5 @@
 import { Alert, Heading } from '@navikt/ds-react';
 
-import { BarnMedAllInfo } from './Barnepass';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { BarnMedAllInfo, PassType } from '../../../typer/barn';
