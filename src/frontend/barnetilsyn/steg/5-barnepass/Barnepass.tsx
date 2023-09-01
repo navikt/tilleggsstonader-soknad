@@ -18,7 +18,12 @@ const Barnepass = () => {
 
     useEffect(() => {
         const barnSomSkalHaPass = person.barn.filter((barn) => barn.skalHaBarnepass);
-        settBarnMedPass(barnSomSkalHaPass);
+        settBarnMedPass(
+            barnSomSkalHaPass.map((barn) => ({
+                ...barn,
+                startetIFemte: barn.alder < 9 || undefined,
+            }))
+        );
     }, [person]);
 
     const oppdaterBarnMedBarnepass = (oppdatertBarn: BarnMedAllInfo) => {
