@@ -9,6 +9,7 @@ import { dineBarnTekster } from '../../tekster/dineBarn';
 
 const DineBarn = () => {
     const { person, toggleSkalHaBarnepass } = usePerson();
+
     return (
         <Side stegtittel={dineBarnTekster.steg_tittel} stønadstype={Stønadstype.barnetilsyn}>
             <PellePanel>
