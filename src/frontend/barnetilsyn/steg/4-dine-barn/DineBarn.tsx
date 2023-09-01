@@ -18,9 +18,11 @@ const DineBarn = () => {
                 <Label spacing>
                     <LocaleTekst tekst={dineBarnTekster.hvilke_barn_spm} />
                 </Label>
-                {person.barn.map((barn) => (
+                {person.barn.map((barn, indeks) => (
                     <Checkbox
-                        value={barn.skalHaBarnepass}
+                        key={indeks}
+                        value={barn.id}
+                        checked={barn.skalHaBarnepass}
                         onChange={() => toggleSkalHaBarnepass(barn.id)}
                     >
                         {barn.navn}, født {barn.fødselsdato}
