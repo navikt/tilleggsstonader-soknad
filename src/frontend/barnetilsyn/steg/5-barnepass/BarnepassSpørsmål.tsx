@@ -1,6 +1,6 @@
 import { Alert, Heading } from '@navikt/ds-react';
 
-import { BarnMedAllInfo } from './Barnepass';
+import BarnOver9År from './BarnOver9År';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { BarnMedAllInfo, PassType } from '../../../typer/barn';
@@ -28,6 +28,9 @@ const BarnepassSpørsmål: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, 
                 <Alert variant="info">
                     <LocaleInlineLenke tekst={barnepassTekster.hvem_passer_andre_alert} />
                 </Alert>
+            )}
+            {barn.alder >= 9 && (
+                <BarnOver9År barn={barn} oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass} />
             )}
         </>
     );
