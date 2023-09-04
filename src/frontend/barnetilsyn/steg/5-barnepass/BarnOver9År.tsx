@@ -27,7 +27,7 @@ const BarnOver9År: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, visFeil
             <LocaleRadioGroup
                 tekst={barnepassTekster.startet_femte_radio}
                 argument0={hentFornavn(barn.navn)}
-                value={barn.startetIFemte || ''}
+                value={barn.startetIFemte ?? ''}
                 onChange={(val) => oppdaterStartetIFemte(val)}
                 error={
                     visFeilmeldinger &&
