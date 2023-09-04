@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import BarnepassSpørsmål from './BarnepassSpørsmål';
-import { tilpassBarnTilSøknadContext } from './utils';
+import { harBarnMangler, tilpassBarnTilSøknadContext } from './utils';
 import Side from '../../../components/Side';
 import { usePerson } from '../../../context/PersonContext';
 import { useSøknad } from '../../../context/SøknadContext';
@@ -14,16 +14,32 @@ const Barnepass = () => {
     const { settBarnMedBarnepass } = useSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnMedAllInfo[]>([]);
+    const [visFeilmelding, settVisFeilmelding] = useState<boolean>(false);
 
     useEffect(() => {
         const barnSomSkalHaPass = person.barn.filter((barn) => barn.skalHaBarnepass);
-        settBarnMedPass(barnSomSkalHaPass);
+        settBarnMedPass(
+            barnSomSkalHaPass.map((barn) => ({
+                ...barn,
+                startetIFemte: barn.alder < 9 ? false : undefined,
+            }))
+        );
     }, [person]);
 
     const oppdaterBarnMedBarnepass = (oppdatertBarn: BarnMedAllInfo) => {
         settBarnMedPass((prevBarn) =>
             prevBarn.map((barn) => (barn.id === oppdatertBarn.id ? oppdatertBarn : barn))
         );
+    };
+
+    const kanGåVidere = () => {
+        const barnMedMangler = barnMedPass.filter((barn) => harBarnMangler(barn));
+
+        if (barnMedMangler.length !== 0) {
+            settVisFeilmelding(true);
+            return false;
+        }
+        return true;
     };
 
     const oppdaterSøknad = () => {
@@ -45,11 +61,14 @@ const Barnepass = () => {
             stegtittel={barnepassTekster.steg_tittel}
             stønadstype={Stønadstype.barnetilsyn}
             oppdaterSøknad={oppdaterSøknad}
+            validerSteg={kanGåVidere}
         >
             {barnMedPass.map((barn) => (
                 <BarnepassSpørsmål
+                    key={barn.id}
                     barn={barn}
                     oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
+                    visFeilmelding={visFeilmelding}
                 />
             ))}
         </Side>
