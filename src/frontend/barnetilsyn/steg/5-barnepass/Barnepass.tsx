@@ -65,6 +65,7 @@ const Barnepass = () => {
         >
             {barnMedPass.map((barn) => (
                 <BarnepassSpørsmål
+                    key={barn.id}
                     barn={barn}
                     oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
                     visFeilmelding={visFeilmelding}
