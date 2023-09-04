@@ -14,12 +14,11 @@ interface Props {
 }
 const BarnOver9År: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, visFeilmeldinger }) => {
     const oppdaterStartetIFemte = (val: boolean) => {
-        const barnSomSkalOppdateres = barn;
-        if (val === false) {
-            delete barnSomSkalOppdateres.årsakBarnepass;
-        }
-
-        oppdaterBarnMedBarnepass({ ...barnSomSkalOppdateres, startetIFemte: val });
+        oppdaterBarnMedBarnepass({
+            ...barn,
+            startetIFemte: val,
+            årsakBarnepass: undefined,
+        });
     };
 
     return (
