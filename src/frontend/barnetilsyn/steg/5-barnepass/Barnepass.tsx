@@ -21,7 +21,7 @@ const Barnepass = () => {
         settBarnMedPass(
             barnSomSkalHaPass.map((barn) => ({
                 ...barn,
-                startetIFemte: barn.alder < 9 || undefined,
+                startetIFemte: barn.alder < 9 ? false : undefined,
             }))
         );
     }, [person]);
