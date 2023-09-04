@@ -20,7 +20,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, 
             <LocaleRadioGroup
                 tekst={barnepassTekster.hvem_passer_radio}
                 argument0={hentFornavn(barn.navn)}
-                value={barn.passType}
+                value={barn.passType || ''}
                 onChange={(passType) => oppdaterBarnMedBarnepass({ ...barn, passType: passType })}
                 error={visFeilmelding && barn.passType === undefined && 'Du må velge et alernativ'}
             />
