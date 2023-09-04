@@ -9,7 +9,11 @@ export const tilpassBarnTilSøknadContext = (barn: BarnMedAllInfo): BarnMedBarne
 };
 
 export const harBarnMangler = (barn: BarnMedAllInfo): boolean => {
-    if (barn.passType !== undefined && barn.startetIFemte !== undefined) return true;
-    if (barn.startetIFemte === true && barn.årsakBarnepass === undefined) return true;
-    return false;
+    if (barn.passType === undefined || barn.startetIFemte === undefined) {
+        return true;
+    } else if (barn.startetIFemte && barn.årsakBarnepass === undefined) {
+        return true;
+    } else {
+        return false;
+    }
 };
