@@ -16,8 +16,9 @@ updates:
   registries: "*"
   versioning-strategy: increase
   groups:
-    patterns:
-      - "*"
+    frontend:
+      patterns:
+        - "*"
   ignore:
    - dependency-name: "*"
      update-types: ["version-update:semver-patch"]
