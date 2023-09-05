@@ -1,21 +1,28 @@
 import { Alert } from '@navikt/ds-react';
 
+import { BarnepassIntern } from './typer';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import { BarnMedAllInfo, ÅrsakBarnepass } from '../../../typer/barn';
+import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
 import { hentFornavn } from '../../../utils/formatering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 interface Props {
-    barn: BarnMedAllInfo;
-    oppdaterBarnMedBarnepass: (oppdatertBarn: BarnMedAllInfo) => void;
+    barn: Barn;
+    passInfo: BarnepassIntern;
+    oppdaterBarnMedBarnepass: (oppdatertBarn: BarnepassIntern) => void;
     visFeilmeldinger: boolean;
 }
-const BarnOver9År: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, visFeilmeldinger }) => {
+const BarnOver9År: React.FC<Props> = ({
+    barn,
+    passInfo,
+    oppdaterBarnMedBarnepass,
+    visFeilmeldinger,
+}) => {
     const oppdaterStartetIFemte = (val: boolean) => {
         oppdaterBarnMedBarnepass({
-            ...barn,
+            ...passInfo,
             startetIFemte: val,
             årsakBarnepass: undefined,
         });
@@ -26,38 +33,40 @@ const BarnOver9År: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, visFeil
             <LocaleRadioGroup
                 tekst={barnepassTekster.startet_femte_radio}
                 argument0={hentFornavn(barn.navn)}
-                value={barn.startetIFemte ?? ''}
-                onChange={(val) => oppdaterStartetIFemte(val)}
+                value={passInfo.startetIFemte ?? ''}
+                onChange={oppdaterStartetIFemte}
                 error={
                     visFeilmeldinger &&
-                    barn.startetIFemte === undefined &&
+                    passInfo.startetIFemte === undefined &&
                     'Du må velge et alternativ'
                 }
             >
                 <LocaleReadMore tekst={barnepassTekster.startet_femte_readmore} />
             </LocaleRadioGroup>
-            {barn.startetIFemte && (
+            {passInfo.startetIFemte && (
                 <>
                     <LocaleRadioGroup
                         tekst={barnepassTekster.årsak_ekstra_pass_radio}
                         argument0={hentFornavn(barn.navn)}
-                        value={barn.årsakBarnepass || ''}
+                        value={passInfo.årsakBarnepass || ''}
                         onChange={(val) =>
-                            oppdaterBarnMedBarnepass({ ...barn, årsakBarnepass: val })
+                            oppdaterBarnMedBarnepass({ ...passInfo, årsakBarnepass: val })
                         }
                         error={
                             visFeilmeldinger &&
-                            barn.startetIFemte !== undefined &&
-                            barn.årsakBarnepass === undefined &&
+                            passInfo.startetIFemte !== undefined &&
+                            passInfo.årsakBarnepass === undefined &&
                             'Du må velge et alternativ'
                         }
                     />
-                    {barn.årsakBarnepass === ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (
+                    {passInfo.årsakBarnepass ===
+                        ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (
                         <Alert variant="info">
                             <LocaleTekst tekst={barnepassTekster.mer_pleie_alert} />
                         </Alert>
                     )}
-                    {barn.årsakBarnepass === ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID && (
+                    {passInfo.årsakBarnepass ===
+                        ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID && (
                         <Alert variant="info">
                             <LocaleTekst tekst={barnepassTekster.uvanlig_arbeidstid_alert} />
                         </Alert>

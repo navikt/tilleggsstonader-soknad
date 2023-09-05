@@ -7,22 +7,10 @@ export interface Barn {
     skalHaBarnepass: boolean;
 }
 
-export interface BarnMedBarnepass {
-    id: string;
+export interface Barnepass {
+    barnId: string;
     passType: PassType;
     startetIFemte: boolean;
-    årsakBarnepass?: ÅrsakBarnepass;
-}
-
-export interface BarnMedAllInfo {
-    id: string;
-    alder: number;
-    fødselsdato: string;
-    fødselsnummer: string;
-    navn: string;
-    skalHaBarnepass: boolean;
-    passType?: PassType;
-    startetIFemte?: boolean;
     årsakBarnepass?: ÅrsakBarnepass;
 }
 

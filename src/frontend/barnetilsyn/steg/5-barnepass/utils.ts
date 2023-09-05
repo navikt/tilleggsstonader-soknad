@@ -1,19 +1,11 @@
-import { BarnMedAllInfo, BarnMedBarnepass } from '../../../typer/barn';
+import { BarnepassIntern } from './typer';
+import { Barnepass } from '../../../typer/barn';
 
-export const tilpassBarnTilSøknadContext = (barn: BarnMedAllInfo): BarnMedBarnepass | undefined => {
-    if (barn.passType !== undefined && barn.startetIFemte !== undefined) {
-        if (barn.startetIFemte === true && barn.årsakBarnepass === undefined) return undefined;
-
-        return { id: barn.id, passType: barn.passType, startetIFemte: barn.startetIFemte };
-    }
-};
-
-export const harBarnMangler = (barn: BarnMedAllInfo): boolean => {
-    if (barn.passType === undefined || barn.startetIFemte === undefined) {
-        return true;
-    } else if (barn.startetIFemte && barn.årsakBarnepass === undefined) {
-        return true;
-    } else {
+export const validerBarnepass = (barn: BarnepassIntern): barn is Barnepass => {
+    if (!barn.passType || barn.startetIFemte === undefined) {
+        return false;
+    } else if (barn.startetIFemte && !barn.årsakBarnepass) {
         return false;
     }
+    return true;
 };

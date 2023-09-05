@@ -1,30 +1,41 @@
 import { Alert, Heading } from '@navikt/ds-react';
 
 import BarnOver9År from './BarnOver9År';
+import { BarnepassIntern } from './typer';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { BarnMedAllInfo, PassType } from '../../../typer/barn';
+import { Barn, PassType } from '../../../typer/barn';
 import { hentFornavn } from '../../../utils/formatering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 interface Props {
-    barn: BarnMedAllInfo;
-    oppdaterBarnMedBarnepass: (oppdatertBarn: BarnMedAllInfo) => void;
+    barn: Barn;
+    barnepass: BarnepassIntern;
+    oppdaterBarnMedBarnepass: (oppdatertBarn: BarnepassIntern) => void;
     visFeilmelding: boolean;
 }
 
-const BarnepassSpørsmål: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, visFeilmelding }) => {
+const BarnepassSpørsmål: React.FC<Props> = ({
+    barn,
+    barnepass,
+    oppdaterBarnMedBarnepass,
+    visFeilmelding,
+}) => {
     return (
         <>
             <Heading size="medium">{barn.navn}</Heading>
             <LocaleRadioGroup
                 tekst={barnepassTekster.hvem_passer_radio}
                 argument0={hentFornavn(barn.navn)}
-                value={barn.passType || ''}
-                onChange={(passType) => oppdaterBarnMedBarnepass({ ...barn, passType: passType })}
-                error={visFeilmelding && barn.passType === undefined && 'Du må velge et alernativ'}
+                value={barnepass.passType || ''}
+                onChange={(passType) =>
+                    oppdaterBarnMedBarnepass({ ...barnepass, passType: passType })
+                }
+                error={
+                    visFeilmelding && barnepass.passType === undefined && 'Du må velge et alernativ'
+                }
             />
-            {barn.passType === PassType.ANDRE && (
+            {barnepass.passType === PassType.ANDRE && (
                 <Alert variant="info">
                     <LocaleInlineLenke tekst={barnepassTekster.hvem_passer_andre_alert} />
                 </Alert>
@@ -32,6 +43,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({ barn, oppdaterBarnMedBarnepass, 
             {barn.alder >= 9 && (
                 <BarnOver9År
                     barn={barn}
+                    passInfo={barnepass}
                     oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
                     visFeilmeldinger={visFeilmelding}
                 />

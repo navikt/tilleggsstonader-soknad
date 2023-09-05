@@ -1,59 +1,49 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import BarnepassSpørsmål from './BarnepassSpørsmål';
-import { harBarnMangler, tilpassBarnTilSøknadContext } from './utils';
+import { BarnepassIntern } from './typer';
+import { validerBarnepass } from './utils';
 import Side from '../../../components/Side';
 import { usePerson } from '../../../context/PersonContext';
 import { useSøknad } from '../../../context/SøknadContext';
-import { BarnMedAllInfo, BarnMedBarnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
+import { valuerOrThrow } from '../../../utils/typer';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 const Barnepass = () => {
     const { person } = usePerson();
-    const { settBarnMedBarnepass } = useSøknad();
+    const { barnMedBarnepass, settBarnMedBarnepass } = useSøknad();
 
-    const [barnMedPass, settBarnMedPass] = useState<BarnMedAllInfo[]>([]);
+    const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
+        person.barn
+            .filter((barn) => barn.skalHaBarnepass)
+            .map(
+                (barn) =>
+                    barnMedBarnepass.find((barnepass) => barnepass.barnId == barn.id) || {
+                        barnId: barn.id,
+                        startetIFemte: barn.alder < 9 ? false : undefined,
+                    }
+            )
+    );
     const [visFeilmelding, settVisFeilmelding] = useState<boolean>(false);
 
-    useEffect(() => {
-        const barnSomSkalHaPass = person.barn.filter((barn) => barn.skalHaBarnepass);
-        settBarnMedPass(
-            barnSomSkalHaPass.map((barn) => ({
-                ...barn,
-                startetIFemte: barn.alder < 9 ? false : undefined,
-            }))
-        );
-    }, [person]);
-
-    const oppdaterBarnMedBarnepass = (oppdatertBarn: BarnMedAllInfo) => {
+    const oppdaterBarnMedBarnepass = (oppdatertBarn: BarnepassIntern) => {
         settBarnMedPass((prevBarn) =>
-            prevBarn.map((barn) => (barn.id === oppdatertBarn.id ? oppdatertBarn : barn))
+            prevBarn.map((barn) => (barn.barnId === oppdatertBarn.barnId ? oppdatertBarn : barn))
         );
     };
 
     const kanGåVidere = () => {
-        const barnMedMangler = barnMedPass.filter((barn) => harBarnMangler(barn));
+        const validerteBarn = barnMedPass.filter(validerBarnepass);
 
-        if (barnMedMangler.length !== 0) {
+        if (validerteBarn.length !== barnMedPass.length) {
             settVisFeilmelding(true);
             return false;
         }
         return true;
     };
-
     const oppdaterSøknad = () => {
-        const barnTilSøknad: BarnMedBarnepass[] = [];
-
-        barnMedPass.forEach((barn) => {
-            const omgjortBarn = tilpassBarnTilSøknadContext(barn);
-
-            if (omgjortBarn) {
-                barnTilSøknad.push(omgjortBarn);
-            }
-        });
-
-        settBarnMedBarnepass(barnTilSøknad);
+        settBarnMedBarnepass(barnMedPass.filter(validerBarnepass));
     };
 
     return (
@@ -65,8 +55,11 @@ const Barnepass = () => {
         >
             {barnMedPass.map((barn) => (
                 <BarnepassSpørsmål
-                    key={barn.id}
-                    barn={barn}
+                    key={barn.barnId}
+                    barn={valuerOrThrow(
+                        person.barn.find((barneInfo) => barn.barnId === barneInfo.id)
+                    )}
+                    barnepass={barn}
                     oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
                     visFeilmelding={visFeilmelding}
                 />
