@@ -1222,23 +1222,28 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@navikt/aksel-icons@5.2.0", "@navikt/aksel-icons@^5.2.0":
+"@navikt/aksel-icons@5.2.0":
   version "5.2.0"
   resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/5.2.0/5a8e4d7a8196482e02f9c5decfd9f1c7cef902d1#5a8e4d7a8196482e02f9c5decfd9f1c7cef902d1"
   integrity sha512-dr9jMPZaew7iGrxcZu85VcHA2mWGFPTKqjZ7NUOb/Dx3nAyyxHJiRf5kshhaGhM1FKUS+efXefwrH9VtE2FKjg==
+
+"@navikt/aksel-icons@^5.3.1":
+  version "5.3.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/5.3.1/afec1fb5c98bd01bd528f1e345f2f2b2660baaa9#afec1fb5c98bd01bd528f1e345f2f2b2660baaa9"
+  integrity sha512-tJXd9g35VfByWXPtQiEFtcyZl1QVtQVNwkN/gAyev+hYimt1/Xwmre7kaGIgB99QFqS9OQpCwjtSyHQWobcRSw==
 
 "@navikt/ds-css@^5.2.0":
   version "5.2.0"
   resolved "https://npm.pkg.github.com/download/@navikt/ds-css/5.2.0/df284b2cc630cab086b2d894fee1aba1bfc2ac9f#df284b2cc630cab086b2d894fee1aba1bfc2ac9f"
   integrity sha512-xECA2O9emlRIDHcdzfdbV7JCSawclBJXHGyjc3b2i5SILAWJ3X/gN5CM7lUuXeBeDMqetaDOc5/S6ujt9Ux/ww==
 
-"@navikt/ds-react@^5.2.0":
-  version "5.2.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/5.2.0/bf8c32f95be5cd3f4b269265bbe169af1f53b20a#bf8c32f95be5cd3f4b269265bbe169af1f53b20a"
-  integrity sha512-T+Z68haFvgd/en4dnS7bj++SghEdpDiPZQBD9J85ehblpSI6mTcEUKtLwqyGb31liQFmR8/DaJ04vAVLfvaQxg==
+"@navikt/ds-react@^5.3.1":
+  version "5.3.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/5.3.1/d0aca6a5ef46f19da24e6a4a0c3fb9defe5d7bdd#d0aca6a5ef46f19da24e6a4a0c3fb9defe5d7bdd"
+  integrity sha512-cTiq0EWncwkgJlT4qMmlYX2syfZmSR6K3ECd5hMUbwsYHuaO+XIZWS/+xG5cSjGzl4lCBhcjr9z3NUamTBVXxw==
   dependencies:
     "@floating-ui/react" "0.24.1"
-    "@navikt/aksel-icons" "^5.2.0"
+    "@navikt/aksel-icons" "^5.3.1"
     "@radix-ui/react-tabs" "1.0.0"
     "@radix-ui/react-toggle-group" "1.0.0"
     clsx "^1.2.1"
