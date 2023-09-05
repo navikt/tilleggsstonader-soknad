@@ -6,6 +6,7 @@ import Personalia from './steg/1-personalia/Personalia';
 import Hovedytelse from './steg/2-hovedytelse/Hovedytelse';
 import Aktivitet from './steg/3-aktivitet/Aktivitet';
 import DineBarn from './steg/4-dine-barn/DineBarn';
+import Barnepass from './steg/5-barnepass/Barnepass';
 import Oppsummering from './steg/6-oppsummering/Oppsummering';
 import { Banner } from '../components/Banner';
 import { fellesTekster } from '../tekster/felles';
@@ -20,6 +21,7 @@ const Søknadsdialog: React.FC = () => {
                 <Route path={'/hovedytelse'} element={<Hovedytelse />} />
                 <Route path={'/aktivitet'} element={<Aktivitet />} />
                 <Route path={'/dine-barn'} element={<DineBarn />} />
+                <Route path={'/barnepass'} element={<Barnepass />} />
                 <Route path={'/oppsummering'} element={<Oppsummering />} />
                 <Route path={'/kvittering'} element={<Kvittering />} />
             </Routes>
