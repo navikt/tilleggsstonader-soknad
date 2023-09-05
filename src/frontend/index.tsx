@@ -5,16 +5,18 @@ import '@navikt/ds-css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { autentiseringsInterceptor } from './api/autentisering';
+import { initSentry } from './api/Sentry';
 import App from './App';
 import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
 import { PersonProvider } from './context/PersonContext';
 import { SpråkProvider } from './context/SpråkContext';
 import { SøknadProvider } from './context/SøknadContext';
 
+initSentry();
+autentiseringsInterceptor();
+
 const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
-
-autentiseringsInterceptor();
 
 root.render(
     <SpråkProvider>

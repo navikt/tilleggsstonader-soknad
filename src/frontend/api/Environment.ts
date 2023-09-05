@@ -18,7 +18,7 @@ const Environment = (): EnvironmentProps => {
             apiProxyUrl: 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/api',
             wonderwallUrl:
                 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
-            sentryUrl: 'https://88f5ed8ed0fc42139eaf7061abfedb19@sentry.gc.nav.no/36',
+            sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             miljø: 'preprod',
             modellVersjon: modellVersjon,
         };
@@ -26,7 +26,7 @@ const Environment = (): EnvironmentProps => {
         return {
             apiProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api',
             wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
-            sentryUrl: 'https://88f5ed8ed0fc42139eaf7061abfedb19@sentry.gc.nav.no/36',
+            sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             miljø: 'production',
             modellVersjon: modellVersjon,
         };
