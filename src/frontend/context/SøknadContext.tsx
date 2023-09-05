@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
+import { Barnepass } from '../typer/barn';
 import { Hovedytelse, Aktivitet } from '../typer/søknad';
 
 const [SøknadProvider, useSøknad] = createUseContext(() => {
@@ -12,11 +13,15 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
     const [hovedytelse, settHovedytelse] = useState<Hovedytelse>();
     const [aktivitet, settAktivitet] = useState<Aktivitet>();
 
+    const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);
+
     return {
         harBekreftet,
         settHarBekreftet,
         hovedytelse,
         settHovedytelse,
+        barnMedBarnepass,
+        settBarnMedBarnepass,
         aktivitet,
         settAktivitet,
     };
