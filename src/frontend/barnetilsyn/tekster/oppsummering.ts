@@ -12,20 +12,25 @@ interface OppsummeringInnhold {
         ytelse: {
             tittel: TekstElement<string>;
             label: TekstElement<string>;
+            endre_button: TekstElement<string>;
         };
         aktivitet_utdanning: {
             tittel: TekstElement<string>;
+            endre_button: TekstElement<string>;
         };
         dine_barn: {
             tittel: TekstElement<string>;
             label: TekstElement<string>;
+            endre_button: TekstElement<string>;
         };
         barnepass: {
             tittel: TekstElement<string>;
+            endre_button: TekstElement<string>;
         };
         vedlegg: {
             tittel: TekstElement<string>;
             label: TekstElement<string>;
+            endre_button: TekstElement<string>;
         };
     };
 }
@@ -47,10 +52,16 @@ export const oppsummeringTekster: OppsummeringInnhold = {
             tittel: {
                 nb: 'Aktivitet / utdanning',
             },
+            endre_button: {
+                nb: 'Endre aktivitet / utdanning',
+            },
         },
         barnepass: {
             tittel: {
                 nb: 'Pass av barn',
+            },
+            endre_button: {
+                nb: 'Endre barn',
             },
         },
         dine_barn: {
@@ -59,6 +70,9 @@ export const oppsummeringTekster: OppsummeringInnhold = {
             },
             label: {
                 nb: 'Barn som skal ha pass',
+            },
+            endre_button: {
+                nb: 'Endre barn',
             },
         },
         om_deg: {
@@ -73,6 +87,9 @@ export const oppsummeringTekster: OppsummeringInnhold = {
             label: {
                 nb: 'Dokumenter du har lagt ved:',
             },
+            endre_button: {
+                nb: 'Endre vedlegg',
+            },
         },
         ytelse: {
             tittel: {
@@ -80,6 +97,9 @@ export const oppsummeringTekster: OppsummeringInnhold = {
             },
             label: {
                 nb: 'Din situasjon',
+            },
+            endre_button: {
+                nb: 'Endre ytelse',
             },
         },
     },

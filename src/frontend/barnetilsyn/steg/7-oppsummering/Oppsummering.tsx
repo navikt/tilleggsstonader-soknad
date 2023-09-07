@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-import { PaperclipIcon } from '@navikt/aksel-icons';
+import { ChevronLeftIcon, PaperclipIcon } from '@navikt/aksel-icons';
 import {
     Accordion,
     BodyLong,
     BodyShort,
+    Button,
     Checkbox,
     CheckboxGroup,
     Heading,
@@ -22,6 +24,7 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { JaNeiTilTekst } from '../../../tekster/felles';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { formaterAdresse, formaterIsoDato, hentFornavn } from '../../../utils/formatering';
+import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import {
     barnepassTekster,
     PassTypeTilTekst,
@@ -40,6 +43,7 @@ const FlexDiv = styled.div`
 const Oppsummering = () => {
     const { hovedytelse, barnMedBarnepass } = useSøknad();
     const { person } = usePerson();
+    const navigate = useNavigate();
 
     const [harBekreftet, settHarBekreftet] = useState(false);
     const [feil, settFeil] = useState<string>('');
@@ -113,6 +117,16 @@ const Oppsummering = () => {
                                 <LocaleTekst tekst={YtelseTilTekst[hovedytelse.ytelse]} />
                             </BodyShort>
                         )}
+                        <Button
+                            variant={'tertiary'}
+                            onClick={() => navigate(RouteTilPath.HOVEDYTELSE)}
+                            iconPosition="left"
+                            icon={<ChevronLeftIcon aria-hidden />}
+                        >
+                            <LocaleTekst
+                                tekst={oppsummeringTekster.accordians.ytelse.endre_button}
+                            />
+                        </Button>
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
@@ -129,6 +143,18 @@ const Oppsummering = () => {
                         <BodyLong spacing>2004 Lillestrøm</BodyLong>
 
                         <BodyShort>1. januar 2023 - 30. juni 2026</BodyShort>
+                        <Button
+                            variant={'tertiary'}
+                            onClick={() => navigate(RouteTilPath.AKTIVITET)}
+                            iconPosition="left"
+                            icon={<ChevronLeftIcon aria-hidden />}
+                        >
+                            <LocaleTekst
+                                tekst={
+                                    oppsummeringTekster.accordians.aktivitet_utdanning.endre_button
+                                }
+                            />
+                        </Button>
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
@@ -146,6 +172,16 @@ const Oppsummering = () => {
                                     {barn.navn}, født {formaterIsoDato(barn.fødselsdato)}
                                 </BodyShort>
                             ))}
+                        <Button
+                            variant={'tertiary'}
+                            onClick={() => navigate(RouteTilPath.DINE_BARN)}
+                            iconPosition="left"
+                            icon={<ChevronLeftIcon aria-hidden />}
+                        >
+                            <LocaleTekst
+                                tekst={oppsummeringTekster.accordians.dine_barn.endre_button}
+                            />
+                        </Button>
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
@@ -216,6 +252,16 @@ const Oppsummering = () => {
                                     </div>
                                 ) : null;
                             })}
+                            <Button
+                                variant={'tertiary'}
+                                onClick={() => navigate(RouteTilPath.BARNEPASS)}
+                                iconPosition="left"
+                                icon={<ChevronLeftIcon aria-hidden />}
+                            >
+                                <LocaleTekst
+                                    tekst={oppsummeringTekster.accordians.barnepass.endre_button}
+                                />
+                            </Button>
                         </FlexDiv>
                     </Accordion.Content>
                 </Accordion.Item>
@@ -240,6 +286,16 @@ const Oppsummering = () => {
                         <BodyLong spacing>
                             <PaperclipIcon /> legen.pdf
                         </BodyLong>
+                        <Button
+                            variant={'tertiary'}
+                            onClick={() => navigate(RouteTilPath.VEDLEGG)}
+                            iconPosition="left"
+                            icon={<ChevronLeftIcon aria-hidden />}
+                        >
+                            <LocaleTekst
+                                tekst={oppsummeringTekster.accordians.vedlegg.endre_button}
+                            />
+                        </Button>
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
