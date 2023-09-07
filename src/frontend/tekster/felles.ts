@@ -26,17 +26,23 @@ export const fellesTekster: FellesInnhold = {
         nb: 'Søknad om støtte til pass av barn',
     },
 };
+
+export const JaNeiTilTekst: Record<JaNei, TekstElement<string>> = {
+    ja: {
+        nb: 'Ja',
+    },
+    nei: {
+        nb: 'Nei',
+    },
+};
+
 export const jaNeiAlternativer: { value: JaNei; label: TekstElement<string> }[] = [
     {
         value: 'ja',
-        label: {
-            nb: 'Ja',
-        },
+        label: JaNeiTilTekst.ja,
     },
     {
         value: 'nei',
-        label: {
-            nb: 'Nei',
-        },
+        label: JaNeiTilTekst.nei,
     },
 ];

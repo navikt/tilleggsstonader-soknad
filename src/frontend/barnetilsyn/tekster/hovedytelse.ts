@@ -10,6 +10,20 @@ interface HovedytelseInnhold {
     radio_annen_ytelse: Radiogruppe<AnnenYtelse>;
 }
 
+export const YtelseTilTekst: Record<Ytelse | AnnenYtelse, TekstElement<string>> = {
+    aap: { nb: 'Arbeidsavklaringspenger (AAP)' },
+    dagpenger: { nb: 'Dagpenger' },
+    gjenlevendepensjon: { nb: 'Gjenlevendepensjon/etterlattepensjon' },
+    ingen_pengestøtte: { nb: 'Mottar ingen pengestøtte, men har nedsatt arbeidsevne' },
+    introduksjonsprogrammet: { nb: 'Introduksjonsprogrammet' },
+    kvalifikasjonsprogrammet: { nb: 'Kvalifikasjonsprogrammet' },
+    overgangsstønad: { nb: 'Overgangsstønad til enslig mor eller far' },
+    sykepenger: { nb: 'Sykepenger' },
+    tiltakspenger: { nb: 'Tiltakspenger' },
+    uføretrygd: { nb: 'Uføretrygd' },
+    annet: { nb: 'Nei, jeg har annen eller ingen ytelse/pengestøtte' },
+};
+
 export const hovedytelseInnhold: HovedytelseInnhold = {
     steg_tittel: {
         nb: 'Ytelse',
@@ -25,27 +39,19 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         alternativer: [
             {
                 value: 'aap',
-                label: {
-                    nb: 'Arbeidsavklaringspenger (AAP)',
-                },
+                label: YtelseTilTekst.aap,
             },
             {
                 value: 'overgangsstønad',
-                label: {
-                    nb: 'Overgangsstønad til enslig mor eller far',
-                },
+                label: YtelseTilTekst.overgangsstønad,
             },
             {
                 value: 'gjenlevendepensjon',
-                label: {
-                    nb: 'Gjenlevendepensjon/etterlattepensjon',
-                },
+                label: YtelseTilTekst.gjenlevendepensjon,
             },
             {
                 value: 'annet',
-                label: {
-                    nb: 'Nei, jeg har annen eller ingen ytelse/pengestøtte',
-                },
+                label: YtelseTilTekst.annet,
             },
         ],
     },
@@ -66,45 +72,31 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         alternativer: [
             {
                 value: 'dagpenger',
-                label: {
-                    nb: 'Dagpenger',
-                },
+                label: YtelseTilTekst.dagpenger,
             },
             {
                 value: 'tiltakspenger',
-                label: {
-                    nb: 'Tiltakspenger',
-                },
+                label: YtelseTilTekst.tiltakspenger,
             },
             {
                 value: 'kvalifikasjonsprogrammet',
-                label: {
-                    nb: 'Kvalifikasjonsprogrammet',
-                },
+                label: YtelseTilTekst.kvalifikasjonsprogrammet,
             },
             {
                 value: 'introduksjonsprogrammet',
-                label: {
-                    nb: 'Introduksjonsprogrammet',
-                },
+                label: YtelseTilTekst.introduksjonsprogrammet,
             },
             {
                 value: 'sykepenger',
-                label: {
-                    nb: 'Sykepenger',
-                },
+                label: YtelseTilTekst.sykepenger,
             },
             {
                 value: 'uføretrygd',
-                label: {
-                    nb: 'Uføretrygd',
-                },
+                label: YtelseTilTekst.uføretrygd,
             },
             {
                 value: 'ingen_pengestøtte',
-                label: {
-                    nb: 'Mottar ingen pengestøtte, men har nedsatt arbeidsevne',
-                },
+                label: YtelseTilTekst.ingen_pengestøtte,
             },
         ],
     },
