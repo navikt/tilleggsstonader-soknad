@@ -92,6 +92,10 @@ const Side: React.FC<Props> = ({
     };
 
     const sendSøknad = () => {
+        if (validerSteg && !validerSteg()) {
+            return;
+        }
+
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
         sendInnSøknad(stønadstype, {})
             .then(() => navigate(nesteRoute.path))
