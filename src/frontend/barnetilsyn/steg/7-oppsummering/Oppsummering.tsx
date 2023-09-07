@@ -38,6 +38,7 @@ const FlexDiv = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: flex-start;
 `;
 
 const Oppsummering = () => {
