@@ -12,6 +12,22 @@ interface BarnepassInnhold {
     uvanlig_arbeidstid_alert: TekstElement<string>;
 }
 
+export const PassTypeTilTekst: Record<PassType, TekstElement<string>> = {
+    BARNEHAGE_SFO_AKS: { nb: 'Barnehage, skolefritidsordning (SFO) eller aktivitetsskole (AKS)' },
+    ANDRE: {
+        nb: 'Andre',
+    },
+};
+
+export const ÅrsakEkstraPassTilTekst: Record<ÅrsakBarnepass, TekstElement<string>> = {
+    TRENGER_MER_PASS_ENN_JEVNALDRENDE: {
+        nb: 'Trenger mer pleie eller tilsyn enn det som er vanlig for jevnaldrende',
+    },
+    MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID: {
+        nb: 'Jeg må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag ',
+    },
+};
+
 export const barnepassTekster: BarnepassInnhold = {
     steg_tittel: {
         nb: 'Om pass av barn',
@@ -24,13 +40,11 @@ export const barnepassTekster: BarnepassInnhold = {
         alternativer: [
             {
                 value: PassType.BARNEHAGE_SFO_AKS,
-                label: { nb: 'Barnehage, skolefritidsordning (SFO) eller aktivitetsskole (AKS)' },
+                label: PassTypeTilTekst.BARNEHAGE_SFO_AKS,
             },
             {
                 value: PassType.ANDRE,
-                label: {
-                    nb: 'Andre',
-                },
+                label: PassTypeTilTekst.ANDRE,
             },
         ],
     },
@@ -72,15 +86,11 @@ export const barnepassTekster: BarnepassInnhold = {
         alternativer: [
             {
                 value: ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE,
-                label: {
-                    nb: 'Trenger mer pleie eller tilsyn enn det som er vanlig for jevnaldrende',
-                },
+                label: ÅrsakEkstraPassTilTekst.TRENGER_MER_PASS_ENN_JEVNALDRENDE,
             },
             {
                 value: ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
-                label: {
-                    nb: 'Jeg må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag ',
-                },
+                label: ÅrsakEkstraPassTilTekst.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
             },
         ],
     },
