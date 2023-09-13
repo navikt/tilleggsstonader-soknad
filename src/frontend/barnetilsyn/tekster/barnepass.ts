@@ -35,7 +35,7 @@ export const barnepassTekster: BarnepassInnhold = {
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
         beskrivelse: {
-            nb: 'Vi spør om dette fordi vi trenger å vite hva slags dokumentasjon vi trenger å legge ved',
+            nb: 'Vi spør om dette fordi vi trenger å vite hva slags dokumentasjon du trenger å legge ved',
         },
         alternativer: [
             {
@@ -75,7 +75,7 @@ export const barnepassTekster: BarnepassInnhold = {
         nb: {
             header: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.',
             innhold:
-                'Det kan gis støtte etter 4. klasse hvis: barnet trenger mer pleie eller hjelp enn det som er vanlig for jevnaldrende (må dokumenteres på neste side med legeerklæring) du har ett tiltak hvor du må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag (må dokumenteres fra utdanning/tiltakssted)',
+                'Det kan gis støtte til pass etter 4. klasse hvis barnet ditt trenger mer pleie eller hjelp enn det som er vanlig for jevnaldrende eller du er på ett tiltak hvor du må være borte fra hjemmet på andre tidspunkt enn en vanlig arbeidsdag.',
         },
     },
     årsak_ekstra_pass_radio: {
