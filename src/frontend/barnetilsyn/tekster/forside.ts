@@ -30,10 +30,10 @@ export const forsideTekster: ForsideInnhold = {
         ],
     },
     mottatt_faktura_alert_tittel: {
-        nb: 'Søker du om støtte til pass av barn for nytt skole/barnehageår?',
+        nb: 'Søker du om støtte til pass av barn for nytt skole- eller barnehageår?',
     },
     mottatt_faktura_alert_innhold: {
-        nb: 'Du må dokumentere utgiftene til barnepass for perioden du søker for. Vi anbefaler at du venter med å søke til du har fakturaen. ',
+        nb: 'Du må dokumentere utgiftene til barnepass for perioden du søker for. Vi anbefaler at du venter med å søke til du har fakturaen for det nye skole- eller barnehageåret. ',
     },
     dine_plikter_tittel: {
         nb: 'Dine plikter',
@@ -52,8 +52,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     utgifter_som_dekkes_innhold: {
         nb: [
-            'Utgifter til mat og bleier dekkes ikke.',
-            'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats.',
+            'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats. Utgifter til mat og bleier dekkes ikke.',
         ],
     },
     info_som_hentes_tittel: {
@@ -75,7 +74,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Dokumentasjon av utgifter',
     },
     dokumentasjon_utgifter_innhold: {
-        nb: 'Du må dokumentere utgiftene til barnepass med en faktura som inneholder barnets navn, beløp og periode. Vi dekker ikke utgifter til mat og bleier.',
+        nb: 'Du må dokumentere utgiftene til barnepass med en faktura som inneholder barnets navn, beløp og periode.',
     },
     vi_stoler_tittel: { nb: 'Vi stoler på deg' },
     vi_stoler_innhold: {
