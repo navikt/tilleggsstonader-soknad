@@ -85,6 +85,9 @@ Nå ser det ca. slik ut:
 
 For å lage pr-en trykker du på _Create pull request_
 
+### 7. Gi deg selv en klapp på skulderen 👏
+Du er nå ferdig og resten av prosessen avhenger av hva du valgte å skrive i beskrivelsen. Hvis endringen kan legges ut med en gang vil en utvikler gjøre dette, og hvis ikke vil noen ta kontakt med deg og si hva som skjer videre. 
+
 ---
 ### Hva kan jeg redigere selv og når skal jeg be om hjelp? 🤔
 Det er noen begrensninger for hva som kan redigeres direkte. Generelt er det kun mulig å gjøre rene tekstendringer med denne guiden og ikke formattering. Her er noen retningslinjer for hva som er mulig: 
