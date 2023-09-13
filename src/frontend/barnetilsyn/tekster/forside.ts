@@ -25,7 +25,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     veileder_innhold: {
         nb: [
-            'Jeg er her for å veilede deg gjennom søknaden.',
+            'Jeg er her for å hjelpe deg gjennom søknaden.',
             'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én måned på Ditt NAV.',
         ],
     },
