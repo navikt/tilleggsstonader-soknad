@@ -17,7 +17,7 @@ import {
 
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
-import LocaleReadMoreMedLenke from '../../../components/Teksthåndtering/LocaleReadMoreMedLenke';
+import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { useSøknad } from '../../../context/SøknadContext';

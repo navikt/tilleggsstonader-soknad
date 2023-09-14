@@ -5,7 +5,7 @@ import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 import UtdanningTiltak from './UtdanningTiltak';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
+import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSøknad } from '../../../context/SøknadContext';

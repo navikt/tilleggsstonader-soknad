@@ -2,7 +2,7 @@ import { Alert } from '@navikt/ds-react';
 
 import { BarnepassIntern } from './typer';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
+import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
 import { hentFornavn } from '../../../utils/formatering';

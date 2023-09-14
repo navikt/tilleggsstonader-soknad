@@ -8,7 +8,7 @@ import { Accordion, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
-import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
+import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { Stønadstype } from '../../../typer/stønadstyper';
