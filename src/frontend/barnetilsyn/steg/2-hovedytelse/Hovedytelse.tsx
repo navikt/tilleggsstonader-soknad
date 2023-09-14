@@ -9,7 +9,7 @@ import { AnnenYtelse, erYtelse, Ytelse } from './typer';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
+import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
