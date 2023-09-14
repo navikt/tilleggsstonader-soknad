@@ -40,7 +40,7 @@ export const oppsummeringTekster: OppsummeringInnhold = {
         nb: 'Oppsummering',
     },
     guide_innhold: {
-        nb: 'Alt du har fyllt inn er nå lagret. Her kan du se over at alt er riktig. Hvis noe er feil, kan du gå tilbake og endre opplysninger, før du sender inn søknaden din. ',
+        nb: 'Alt du har fyllt inn er nå lagret. Hvis noe er feil, kan du gå tilbake og endre det, før du sender inn søknaden din. ',
     },
 
     bekreft_checkboks: {
