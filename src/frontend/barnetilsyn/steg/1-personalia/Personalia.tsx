@@ -2,7 +2,7 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
-import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
+import LocaleReadMoreMedLenke from '../../../components/Teksthåndtering/LocaleReadMoreMedLenke';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -25,7 +25,7 @@ const Personalia = () => {
                     <LocaleTekst tekst={personaliaTekster.adresse_label} />
                 </Label>
                 <BodyShort>{formaterAdresse(person.adresse)}</BodyShort>
-                <LocaleReadMore tekst={personaliaTekster.adresse_lesmer} />
+                <LocaleReadMoreMedLenke tekst={personaliaTekster.adresse_lesmer} />
             </div>
             <div>
                 <Label>
@@ -38,14 +38,14 @@ const Personalia = () => {
                     <LocaleTekst tekst={personaliaTekster.epost_label} />
                 </Label>
                 <BodyShort>{person.epost}</BodyShort>
-                <LocaleReadMore tekst={personaliaTekster.tlf_epost_lesmer} />
+                <LocaleReadMoreMedLenke tekst={personaliaTekster.tlf_epost_lesmer} />
             </div>
             <div>
                 <Label>
                     <LocaleTekst tekst={personaliaTekster.kontonr_label} />
                 </Label>
                 <BodyShort>{person.epost}</BodyShort>
-                <LocaleReadMore tekst={personaliaTekster.kontonr_lesmer} />
+                <LocaleReadMoreMedLenke tekst={personaliaTekster.kontonr_lesmer} />
             </div>
         </Side>
     );
