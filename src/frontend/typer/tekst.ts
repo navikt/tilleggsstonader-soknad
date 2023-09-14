@@ -2,15 +2,17 @@ export type Locale = 'nb';
 
 export type TekstElement<T> = Record<Locale, T>;
 
-export type LesMer = {
-    header: string;
-    innhold: string | string[];
+export type LesMer<T> = {
+    header: TekstElement<string>;
+    innhold: TekstElement<T>;
 };
 
-export type Lenke = {
+type Lenke = {
     tekst: string;
     url: string;
 };
+
+export type InlineLenke = (string | Lenke)[];
 
 export type Radiogruppe<T> = {
     header: TekstElement<string>;

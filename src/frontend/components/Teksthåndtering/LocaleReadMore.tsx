@@ -1,15 +1,15 @@
 import { BodyLong, ReadMore } from '@navikt/ds-react';
 
 import { useSpråk } from '../../context/SpråkContext';
-import { LesMer, TekstElement } from '../../typer/tekst';
+import { LesMer } from '../../typer/tekst';
 
-const LocaleReadMore: React.FC<{ tekst: TekstElement<LesMer> }> = ({ tekst }) => {
+const LocaleReadMore: React.FC<{ tekst: LesMer<string | string[]> }> = ({ tekst }) => {
     const { locale } = useSpråk();
 
-    const innhold = tekst[locale].innhold;
+    const innhold = tekst.innhold[locale];
 
     return (
-        <ReadMore header={tekst[locale].header}>
+        <ReadMore header={tekst.header[locale]}>
             {Array.isArray(innhold)
                 ? innhold.map((avsnitt, indeks) => (
                       <BodyLong key={indeks} spacing>
