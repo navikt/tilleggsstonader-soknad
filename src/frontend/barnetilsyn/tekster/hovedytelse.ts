@@ -6,7 +6,7 @@ interface HovedytelseInnhold {
     innhold_tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     radio_hovedytelse: Radiogruppe<Ytelse>;
-    flere_alternativer_lesmer: TekstElement<LesMer>;
+    flere_alternativer_lesmer: LesMer<string>;
     radio_annen_ytelse: Radiogruppe<AnnenYtelse>;
 }
 
@@ -56,10 +56,9 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         ],
     },
     flere_alternativer_lesmer: {
-        nb: {
-            header: 'Hva gjør jeg hvis flere alternativer passer for meg?',
-            innhold:
-                'Har du rett på eller mottar flere av ytelsene/pengestøttene nevnt her trenger du bare å velge en. Er en av ytelsene du mottar AAP, velg AAP.',
+        header: { nb: 'Hva gjør jeg hvis flere alternativer passer for meg?' },
+        innhold: {
+            nb: 'Har du rett på eller mottar flere av ytelsene/pengestøttene nevnt her trenger du bare å velge en. Er en av ytelsene du mottar AAP, velg AAP.',
         },
     },
     radio_annen_ytelse: {

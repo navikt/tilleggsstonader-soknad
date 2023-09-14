@@ -6,7 +6,7 @@ interface VedleggInnhold {
     guide_innhold: TekstElement<string[]>;
     du_må_legge_ved: TekstElement<string>;
     samlet_faktura: TekstElement<string>;
-    faktura_lesmer: TekstElement<LesMer>;
+    faktura_lesmer: LesMer<string[]>;
     last_opp_faktura: TekstElement<string>;
     last_opp_legeerklæring: TekstElement<string>;
 
@@ -86,9 +86,9 @@ export const vedleggTekster: VedleggInnhold = {
         nb: 'Har du samlet faktura for flere barn, trenger du bare å laste den opp en gang.',
     },
     faktura_lesmer: {
-        nb: {
-            header: 'Innhold i fakturaene',
-            innhold: [
+        header: { nb: 'Innhold i fakturaene' },
+        innhold: {
+            nb: [
                 'Fakturaen må inneholde barnets navn, beløp og perioden den gjelder for.',
                 'Vi dekker ikke mat eller bleier.',
                 'Vi godkjenner ikke skjermbilde av kontoutskrift, vipps eller lignende fordi vi trenger å se hva som er utgifter til pass av barn og hva som er utgift til bleier eller mat.',

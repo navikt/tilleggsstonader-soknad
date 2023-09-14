@@ -8,7 +8,7 @@ interface AktivitetInnhold {
     innhold_tittel_utdanning: TekstElement<string>;
     innhold_utdanning: TekstElement<string>;
     godkjent_utdanning: TekstElement<string>;
-    noe_feil_utdanning_lesmer: TekstElement<LesMer>;
+    noe_feil_utdanning_lesmer: LesMer<string[]>;
     feil_utdanning_infoalert: TekstElement<string[]>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
 }
@@ -33,9 +33,9 @@ export const aktivitetTekster: AktivitetInnhold = {
         nb: 'Utdanning godkjent av NAV',
     },
     noe_feil_utdanning_lesmer: {
-        nb: {
-            header: 'Hva gjør jeg hvis noe er feil?',
-            innhold: [
+        header: { nb: 'Hva gjør jeg hvis noe er feil?' },
+        innhold: {
+            nb: [
                 'Vi anbefaler deg å ta kontakt med din veileder for å få registrert din arbeidsrettede aktivitet eller utdanning.',
                 'Du kan fortsatt søke nå, men da kan det ta lengre tid for oss å behandle din søknad. ',
             ],

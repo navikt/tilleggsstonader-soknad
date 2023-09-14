@@ -6,7 +6,7 @@ interface BarnepassInnhold {
     hvem_passer_radio: Radiogruppe<PassType>;
     hvem_passer_andre_alert: TekstElement<InlineLenke>;
     startet_femte_radio: Radiogruppe<boolean>;
-    startet_femte_readmore: TekstElement<LesMer>;
+    startet_femte_readmore: LesMer<string>;
     årsak_ekstra_pass_radio: Radiogruppe<ÅrsakBarnepass>;
     mer_pleie_alert: TekstElement<string>;
     uvanlig_arbeidstid_alert: TekstElement<string>;
@@ -72,10 +72,9 @@ export const barnepassTekster: BarnepassInnhold = {
         ],
     },
     startet_femte_readmore: {
-        nb: {
-            header: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.',
-            innhold:
-                'Det kan gis støtte etter 4. klasse hvis: barnet trenger mer pleie eller hjelp enn det som er vanlig for jevnaldrende (må dokumenteres på neste side med legeerklæring) du har ett tiltak hvor du må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag (må dokumenteres fra utdanning/tiltakssted)',
+        header: { nb: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.' },
+        innhold: {
+            nb: 'Det kan gis støtte etter 4. klasse hvis: barnet trenger mer pleie eller hjelp enn det som er vanlig for jevnaldrende (må dokumenteres på neste side med legeerklæring) du har ett tiltak hvor du må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag (må dokumenteres fra utdanning/tiltakssted)',
         },
     },
     årsak_ekstra_pass_radio: {
