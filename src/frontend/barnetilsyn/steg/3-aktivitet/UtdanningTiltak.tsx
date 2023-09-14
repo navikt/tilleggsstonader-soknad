@@ -6,7 +6,7 @@ import { Tiltak } from './typer';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
-const UtadnningTiltak: React.FC<{ tiltak: Tiltak }> = ({ tiltak }) => {
+const UtdanningTiltak: React.FC<{ tiltak: Tiltak }> = ({ tiltak }) => {
     return (
         <div>
             <BodyShort>
@@ -17,4 +17,4 @@ const UtadnningTiltak: React.FC<{ tiltak: Tiltak }> = ({ tiltak }) => {
     );
 };
 
-export default UtadnningTiltak;
+export default UtdanningTiltak;

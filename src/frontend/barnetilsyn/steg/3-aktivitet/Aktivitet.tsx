@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 
-import UtadnningTiltak from './UtdanningTiltak';
+import UtdanningTiltak from './UtdanningTiltak';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
@@ -64,7 +64,7 @@ const Aktivitet = () => {
                     <BodyShort>
                         <LocaleTekst tekst={aktivitetTekster.innhold_utdanning} />
                     </BodyShort>
-                    <UtadnningTiltak tiltak={tiltak} />
+                    <UtdanningTiltak tiltak={tiltak} />
                     <LocaleReadMore tekst={aktivitetTekster.noe_feil_utdanning_lesmer} />
                     <LocaleRadioGroup
                         tekst={aktivitetTekster.radio_utdanning}
