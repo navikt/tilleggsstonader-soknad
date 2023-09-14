@@ -8,7 +8,7 @@ interface ForsideInnhold {
     dine_plikter_tittel: TekstElement<string>;
     dine_plikter_innhold: TekstElement<string[]>;
     utgifter_som_dekkes_tittel: TekstElement<string>;
-    utgifter_som_dekkes_innhold: TekstElement<string[]>;
+    utgifter_som_dekkes_innhold: TekstElement<string>;
     info_som_hentes_tittel: TekstElement<string>;
     info_som_hentes_innhold1: TekstElement<string>;
     info_som_hentes_innhold2: TekstElement<string[]>;
@@ -51,9 +51,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Hvilke utgifter dekker vi?',
     },
     utgifter_som_dekkes_innhold: {
-        nb: [
-            'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats. Utgifter til mat og bleier dekkes ikke.',
-        ],
+        nb: 'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats. Utgifter til mat og bleier dekkes ikke.',
     },
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',
