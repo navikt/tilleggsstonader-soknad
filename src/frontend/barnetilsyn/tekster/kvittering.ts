@@ -1,12 +1,12 @@
-import { Lenke, TekstElement } from '../../typer/tekst';
+import { InlineLenke, TekstElement } from '../../typer/tekst';
 
 interface KvitteringInnhold {
     steg_tittel: TekstElement<string>;
     søknad_mottatt_alert_tittel: TekstElement<string>;
     søknad_mottatt_alert_innhold: TekstElement<string[]>;
     varsel_info: TekstElement<string>;
-    se_søknad: TekstElement<(string | Lenke)[]>;
-    se_saksbehandlingstid: TekstElement<(string | Lenke)[]>;
+    se_søknad: TekstElement<InlineLenke>;
+    se_saksbehandlingstid: TekstElement<InlineLenke>;
 }
 
 export const kvitteringTekster: KvitteringInnhold = {

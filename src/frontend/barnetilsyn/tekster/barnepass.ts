@@ -1,10 +1,10 @@
 import { PassType, ÅrsakBarnepass } from '../../typer/barn';
-import { Lenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface BarnepassInnhold {
     steg_tittel: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
-    hvem_passer_andre_alert: TekstElement<(string | Lenke)[]>;
+    hvem_passer_andre_alert: TekstElement<InlineLenke>;
     startet_femte_radio: Radiogruppe<boolean>;
     startet_femte_readmore: TekstElement<LesMer>;
     årsak_ekstra_pass_radio: Radiogruppe<ÅrsakBarnepass>;

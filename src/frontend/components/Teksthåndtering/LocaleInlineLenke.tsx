@@ -1,9 +1,9 @@
 import { Link } from '@navikt/ds-react';
 
 import { useSpråk } from '../../context/SpråkContext';
-import { Lenke, TekstElement } from '../../typer/tekst';
+import { InlineLenke, TekstElement } from '../../typer/tekst';
 
-const LocaleInlineLenke: React.FC<{ tekst: TekstElement<(string | Lenke)[]> }> = ({ tekst }) => {
+const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tekst }) => {
     const { locale } = useSpråk();
 
     return (

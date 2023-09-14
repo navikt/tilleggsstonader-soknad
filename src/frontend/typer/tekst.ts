@@ -7,10 +7,12 @@ export type LesMer = {
     innhold: string | string[];
 };
 
-export type Lenke = {
+type Lenke = {
     tekst: string;
     url: string;
 };
+
+export type InlineLenke = (string | Lenke)[];
 
 export type Radiogruppe<T> = {
     header: TekstElement<string>;
