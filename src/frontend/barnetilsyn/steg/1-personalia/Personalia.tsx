@@ -44,7 +44,7 @@ const Personalia = () => {
                 <Label>
                     <LocaleTekst tekst={personaliaTekster.kontonr_label} />
                 </Label>
-                <BodyShort>{person.epost}</BodyShort>
+                <BodyShort>{person.kontonr}</BodyShort>
                 <LocaleReadMoreMedLenke tekst={personaliaTekster.kontonr_lesmer} />
             </div>
         </Side>
