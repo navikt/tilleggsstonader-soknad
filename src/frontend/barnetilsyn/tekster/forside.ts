@@ -8,7 +8,7 @@ interface ForsideInnhold {
     dine_plikter_tittel: TekstElement<string>;
     dine_plikter_innhold: TekstElement<string[]>;
     utgifter_som_dekkes_tittel: TekstElement<string>;
-    utgifter_som_dekkes_innhold: TekstElement<string[]>;
+    utgifter_som_dekkes_innhold: TekstElement<string>;
     info_som_hentes_tittel: TekstElement<string>;
     info_som_hentes_innhold1: TekstElement<string>;
     info_som_hentes_innhold2: TekstElement<string[]>;
@@ -25,15 +25,15 @@ export const forsideTekster: ForsideInnhold = {
     },
     veileder_innhold: {
         nb: [
-            'Jeg er her for å veilede deg gjennom søknaden.',
+            'Jeg er her for å hjelpe deg gjennom søknaden.',
             'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én måned på Ditt NAV.',
         ],
     },
     mottatt_faktura_alert_tittel: {
-        nb: 'Søker du om støtte til pass av barn for nytt skole/barnehageår?',
+        nb: 'Søker du om støtte til pass av barn for nytt skole- eller barnehageår?',
     },
     mottatt_faktura_alert_innhold: {
-        nb: 'Du må dokumentere utgiftene til barnepass for perioden du søker for. Vi anbefaler at du venter med å søke til du har fakturaen. ',
+        nb: 'Du må dokumentere utgiftene til barnepass for perioden du søker for. Vi anbefaler at du venter med å søke til du har fakturaen for det nye skole- eller barnehageåret. ',
     },
     dine_plikter_tittel: {
         nb: 'Dine plikter',
@@ -51,10 +51,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Hvilke utgifter dekker vi?',
     },
     utgifter_som_dekkes_innhold: {
-        nb: [
-            'Utgifter til mat og bleier dekkes ikke.',
-            'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats.',
-        ],
+        nb: 'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats. Utgifter til mat og bleier dekkes ikke.',
     },
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',
@@ -75,7 +72,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Dokumentasjon av utgifter',
     },
     dokumentasjon_utgifter_innhold: {
-        nb: 'Du må dokumentere utgiftene til barnepass med en faktura som inneholder barnets navn, beløp og periode. Vi dekker ikke utgifter til mat og bleier.',
+        nb: 'Du må dokumentere utgiftene til barnepass med en faktura som inneholder barnets navn, beløp og periode.',
     },
     vi_stoler_tittel: { nb: 'Vi stoler på deg' },
     vi_stoler_innhold: {

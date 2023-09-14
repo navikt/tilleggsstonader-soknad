@@ -75,8 +75,8 @@ export const vedleggTekster: VedleggInnhold = {
     },
     guide_innhold: {
         nb: [
-            'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post senest innen 14 dager.',
-            'Vi kan ikke starte saksbehandlingen før vi har all dokumentasjon fra deg. Trenger du mer tid, kan du be om lenger frist på Ditt Nav etter at søknaden er sendt inn.',
+            'Vi kan ikke starte saksbehandlingen før vi har all dokumentasjon fra deg.',
+            'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, senest innen 14 dager. Trenger du mer tid, kan du be om lenger frist på Ditt Nav etter at søknaden er sendt inn.',
         ],
     },
     du_må_legge_ved: {
@@ -89,8 +89,7 @@ export const vedleggTekster: VedleggInnhold = {
         header: { nb: 'Innhold i fakturaene' },
         innhold: {
             nb: [
-                'Fakturaen må inneholde barnets navn, beløp og perioden den gjelder for.',
-                'Vi dekker ikke mat eller bleier.',
+                'Fakturaen må inneholde barnets navn, beløp og perioden den gjelder for. Vi dekker ikke mat eller bleier.',
                 'Vi godkjenner ikke skjermbilde av kontoutskrift, vipps eller lignende fordi vi trenger å se hva som er utgifter til pass av barn og hva som er utgift til bleier eller mat.',
             ],
         },
@@ -121,6 +120,6 @@ export const vedleggTekster: VedleggInnhold = {
         nb: 'Legeerklæring for Espen',
     },
     legeerklæring_espen: {
-        nb: 'Legerklæringen må inneholde opplysninger hvorfor Espen trenger ekstra pass. ',
+        nb: 'Legerklæringen må inneholde opplysninger om hvorfor Espen trenger ekstra pass. ',
     },
 };
