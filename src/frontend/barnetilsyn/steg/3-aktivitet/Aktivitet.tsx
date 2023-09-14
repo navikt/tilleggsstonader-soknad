@@ -85,7 +85,7 @@ const Aktivitet = () => {
                                 />
                             </Alert>
                             <LocaleRadioGroup
-                                tekst={aktivitetTekster.radio_utdanning}
+                                tekst={aktivitetTekster.radio_fortsatt_søke}
                                 value={fortsattSøke || ''}
                                 onChange={(verdi) => {
                                     settFortsattSøke(verdi);
