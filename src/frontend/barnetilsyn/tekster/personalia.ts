@@ -18,7 +18,7 @@ export const personaliaTekster: PersonaliaInnhold = {
         nb: 'Om deg',
     },
     innhold_tittel: {
-        nb: 'Vi har registrert dette om deg',
+        nb: 'Denne informasjonen om deg er registrert hos oss',
     },
     guide_innhold: {
         nb: 'Sjekk gjerne om alt er riktig her, så du får svar fra oss i tide og eventuelle utbetalinger kommer til rett konto.',
