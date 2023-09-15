@@ -40,11 +40,11 @@ export const oppsummeringTekster: OppsummeringInnhold = {
         nb: 'Oppsummering',
     },
     guide_innhold: {
-        nb: 'Alt du har fyllt inn er nå lagret. Hvis noe er feil, kan du gå tilbake og endre det, før du sender inn søknaden din. ',
+        nb: 'Alt du har fylt inn er nå lagret. Hvis noe er feil kan du gå tilbake og endre det, før du sender inn søknaden din. ',
     },
 
     bekreft_checkboks: {
-        nb: 'Jeg bekrefter at jeg har lest og forstått informasjonen i søknaden og svarer så godt jeg kan.',
+        nb: 'Jeg bekrefter at jeg har lest og forstått informasjonen i søknaden og at jeg har svart så godt jeg kan.',
     },
 
     accordians: {
