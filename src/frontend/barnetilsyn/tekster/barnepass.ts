@@ -1,12 +1,14 @@
 import { PassType, ÅrsakBarnepass } from '../../typer/barn';
-import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface BarnepassInnhold {
     steg_tittel: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
     hvem_passer_andre_alert: TekstElement<InlineLenke>;
     startet_femte_radio: Radiogruppe<boolean>;
-    startet_femte_readmore: LesMer<string>;
+    startet_femte_readmore_header: TekstElement<string>;
+    startet_femte_readmore_innhold: TekstElement<string>;
+    startet_femte_readmore_punktliste: TekstElement<string[]>;
     årsak_ekstra_pass_radio: Radiogruppe<ÅrsakBarnepass>;
     mer_pleie_alert: TekstElement<string>;
     uvanlig_arbeidstid_alert: TekstElement<string>;
@@ -71,11 +73,15 @@ export const barnepassTekster: BarnepassInnhold = {
             },
         ],
     },
-    startet_femte_readmore: {
-        header: { nb: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.' },
-        innhold: {
-            nb: 'Det kan gis støtte til pass etter 4. klasse hvis barnet ditt trenger mer pleie eller hjelp enn det som er vanlig for jevnaldrende eller du er på ett tiltak hvor du må være borte fra hjemmet på andre tidspunkt enn en vanlig arbeidsdag.',
-        },
+    startet_femte_readmore_header: {
+        nb: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.',
+    },
+    startet_femte_readmore_innhold: { nb: 'Det kan gis støtte til pass etter 4. klasse hvis:' },
+    startet_femte_readmore_punktliste: {
+        nb: [
+            'barnet trenger mer pleie eller hjelp enn det som er vanlig for jevnaldrende (må dokumenteres på neste side med legeerklæring)',
+            'du har ett tiltak hvor du må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag (må dokumenteres fra utdanning/tiltakssted)',
+        ],
     },
     årsak_ekstra_pass_radio: {
         header: { nb: 'Hva er årsaken til at [0] trenger ekstra pass?' },

@@ -1,8 +1,9 @@
 import { Alert } from '@navikt/ds-react';
 
 import { BarnepassIntern } from './typer';
+import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
+import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
 import { hentFornavn } from '../../../utils/formatering';
@@ -41,7 +42,12 @@ const BarnOver9År: React.FC<Props> = ({
                     'Du må velge et alternativ'
                 }
             >
-                <LocaleReadMore tekst={barnepassTekster.startet_femte_readmore} />
+                <LocaleReadMoreMedChildren header={barnepassTekster.startet_femte_readmore_header}>
+                    <LocaleTekst tekst={barnepassTekster.startet_femte_readmore_innhold} />
+                    <LocalePunktliste
+                        innhold={barnepassTekster.startet_femte_readmore_punktliste}
+                    />
+                </LocaleReadMoreMedChildren>
             </LocaleRadioGroup>
             {passInfo.startetIFemte && (
                 <>

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 
-import UtadnningTiltak from './UtdanningTiltak';
+import UtdanningTiltak from './UtdanningTiltak';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import LocaleReadMore from '../../../components/Teksthåndtering/LocaleReadMore';
+import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSøknad } from '../../../context/SøknadContext';
@@ -64,7 +64,7 @@ const Aktivitet = () => {
                     <BodyShort>
                         <LocaleTekst tekst={aktivitetTekster.innhold_utdanning} />
                     </BodyShort>
-                    <UtadnningTiltak tiltak={tiltak} />
+                    <UtdanningTiltak tiltak={tiltak} />
                     <LocaleReadMore tekst={aktivitetTekster.noe_feil_utdanning_lesmer} />
                     <LocaleRadioGroup
                         tekst={aktivitetTekster.radio_utdanning}
@@ -85,7 +85,7 @@ const Aktivitet = () => {
                                 />
                             </Alert>
                             <LocaleRadioGroup
-                                tekst={aktivitetTekster.radio_utdanning}
+                                tekst={aktivitetTekster.radio_fortsatt_søke}
                                 value={fortsattSøke || ''}
                                 onChange={(verdi) => {
                                     settFortsattSøke(verdi);
