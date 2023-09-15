@@ -26,11 +26,11 @@ export const forsideTekster: ForsideInnhold = {
     veileder_innhold: {
         nb: [
             'Jeg er her for å hjelpe deg gjennom søknaden.',
-            'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én måned på Ditt NAV.',
+            'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én måned på Min side på NAV.no.',
         ],
     },
     mottatt_faktura_alert_tittel: {
-        nb: 'Søker du om støtte til pass av barn for nytt skole- eller barnehageår?',
+        nb: 'Søker du for nytt skole- eller barnehageår?',
     },
     mottatt_faktura_alert_innhold: {
         nb: 'Du må dokumentere utgiftene til barnepass for perioden du søker for. Vi anbefaler at du venter med å søke til du har fakturaen for det nye skole- eller barnehageåret. ',
@@ -44,14 +44,14 @@ export const forsideTekster: ForsideInnhold = {
             'Du må dokumentere dine utgifter til pass av barn med faktura som inneholder beløp og periode.',
             'Du må gi beskjed til oss hvis situasjonen din endrer seg. ',
             'Hvis du får penger du ikke har rett på, må du du være forberedt på å måtte betale dem tilbake.',
-            'Du kan bare søke om støtte til pass av barn, hvis ingen andre har fått dekket utgiftene til pass for samme barn. ',
+            'Du kan bare søke om støtte til pass av barn hvis ingen andre har fått dekket utgiftene til pass for samme barn. ',
         ],
     },
     utgifter_som_dekkes_tittel: {
         nb: 'Hvilke utgifter dekker vi?',
     },
     utgifter_som_dekkes_innhold: {
-        nb: 'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats. Utgifter til mat og bleier dekkes ikke.',
+        nb: 'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til et maksbeløp. Utgifter til mat og bleier dekkes ikke.',
     },
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',
