@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import createUseContext from 'constate';
 
-import { hentPersonData } from '../api/api';
+// import { hentPersonData } from '../api/api';
 import { initiellPerson } from '../mock/initiellPerson';
 import { Person } from '../typer/person';
 
@@ -10,7 +10,7 @@ const [PersonProvider, usePerson] = createUseContext(() => {
     PersonProvider.displayName = 'PERSON_PROVIDER';
     const [person, settPerson] = useState<Person>(initiellPerson);
 
-    const navn = 'Ole Jørgen Nilsen';
+    const navn = 'Nora Nilsen';
     useEffect(() => {
         settPerson({
             fnr: 'fødselsnummer',
@@ -44,17 +44,17 @@ const [PersonProvider, usePerson] = createUseContext(() => {
         });
     }, []);
 
-    useEffect(() => {
-        if (person.navn === navn) {
-            // henter navn når man satt "mock"-verdi
-            hentPersonData()
-                .then((response) =>
-                    settPerson((prevState) => ({ ...prevState, navn: response.navn }))
-                )
-                // feilhåndtering
-                .catch(() => {});
-        }
-    }, [person]);
+    // useEffect(() => {
+    //     if (person.navn === navn) {
+    //         // henter navn når man satt "mock"-verdi
+    //         hentPersonData()
+    //             .then((response) =>
+    //                 settPerson((prevState) => ({ ...prevState, navn: response.navn }))
+    //             )
+    //             // feilhåndtering
+    //             .catch(() => {});
+    //     }
+    // }, [person]);
 
     const toggleSkalHaBarnepass = (id: string) => {
         settPerson((prevPerson) => ({

@@ -18,6 +18,14 @@ const StyledKnapp = styled(Button)`
     width: max-content;
     margin-top: 1rem;
 `;
+
+const VedleggContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 1rem 0;
+`;
+
 const Vedlegg = () => {
     return (
         <Side stønadstype={Stønadstype.barnetilsyn} stegtittel={vedleggTekster.steg_tittel}>
@@ -27,33 +35,35 @@ const Vedlegg = () => {
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
             </PellePanel>
-            <section>
-                <Heading size={'small'}>
-                    <LocaleTekst tekst={vedleggTekster.pass_ronja_espen} />
-                </Heading>
-                <BodyShort>
-                    <LocaleTekst tekst={vedleggTekster.du_må_legge_ved} />
-                </BodyShort>
-                <LocalePunktliste innhold={vedleggTekster.vedlegg_espen_ronja} />
-                <BodyShort>
-                    <LocaleTekst tekst={vedleggTekster.samlet_faktura} />
-                </BodyShort>
-                <LocaleReadMore tekst={vedleggTekster.faktura_lesmer} />
-                <StyledKnapp icon={<UploadIcon title="a11y-title" />}>
-                    <LocaleTekst tekst={vedleggTekster.last_opp_faktura} />
-                </StyledKnapp>
-            </section>
-            <section>
-                <Heading size={'small'}>
-                    <LocaleTekst tekst={vedleggTekster.legeerklæring_espen_tittel} />
-                </Heading>
-                <BodyLong>
-                    <LocaleTekst tekst={vedleggTekster.legeerklæring_espen} />
-                </BodyLong>
-                <StyledKnapp icon={<UploadIcon title="a11y-title" />}>
-                    <LocaleTekst tekst={vedleggTekster.last_opp_legeerklæring} />
-                </StyledKnapp>
-            </section>
+            <VedleggContainer>
+                <section>
+                    <Heading size={'small'}>
+                        <LocaleTekst tekst={vedleggTekster.pass_ronja_espen} />
+                    </Heading>
+                    <BodyShort>
+                        <LocaleTekst tekst={vedleggTekster.du_må_legge_ved} />
+                    </BodyShort>
+                    <LocalePunktliste innhold={vedleggTekster.vedlegg_espen_ronja} />
+                    <BodyShort>
+                        <LocaleTekst tekst={vedleggTekster.samlet_faktura} />
+                    </BodyShort>
+                    <LocaleReadMore tekst={vedleggTekster.faktura_lesmer} />
+                    <StyledKnapp icon={<UploadIcon title="a11y-title" />}>
+                        <LocaleTekst tekst={vedleggTekster.last_opp_faktura} />
+                    </StyledKnapp>
+                </section>
+                <section>
+                    <Heading size={'small'}>
+                        <LocaleTekst tekst={vedleggTekster.legeerklæring_espen_tittel} />
+                    </Heading>
+                    <BodyLong>
+                        <LocaleTekst tekst={vedleggTekster.legeerklæring_espen} />
+                    </BodyLong>
+                    <StyledKnapp icon={<UploadIcon title="a11y-title" />}>
+                        <LocaleTekst tekst={vedleggTekster.last_opp_legeerklæring} />
+                    </StyledKnapp>
+                </section>
+            </VedleggContainer>
             <Accordion>
                 <Accordion.Item>
                     <Accordion.Header>
