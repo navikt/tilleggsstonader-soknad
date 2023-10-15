@@ -20,7 +20,7 @@
     "@babel/core": "^7.22.10",
     "@babel/preset-env": "^7.22.10",
     "@babel/preset-react": "^7.22.5",
-    "@sentry/types": "^7.66.0",
+    "@sentry/types": "^7.74.0",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@types/react-router-dom": "^5.3.3",
