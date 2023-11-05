@@ -50,7 +50,7 @@
     "webpack-merge": "^5.9.0"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "5.7.0",
+    "@navikt/aksel-icons": "5.9.2",
     "@navikt/ds-css": "^5.7.0",
     "@navikt/ds-react": "^5.7.0",
     "@navikt/ds-tokens": "^5.3.1",
