@@ -1205,10 +1205,10 @@
     date-fns "2.29.3"
     react-day-picker "8.3.4"
 
-"@navikt/ds-tokens@^5.3.1", "@navikt/ds-tokens@^5.7.0":
-  version "5.7.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/5.7.0/a78c1ceebdd8a9f5060c89878df5087c9d3ad391#a78c1ceebdd8a9f5060c89878df5087c9d3ad391"
-  integrity sha512-pw1D6R60CmB0oiJfBIiq+OeHNkWpKfqMRPo80WwJCYICaBWr3wZe25vfKLXIOYAsibdCeFc4pmCmucIgYXoVqg==
+"@navikt/ds-tokens@^5.7.0", "@navikt/ds-tokens@^5.9.2":
+  version "5.9.2"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/5.9.2/f410260891058d4d3ec19f1c2c175274c3b637ca#f410260891058d4d3ec19f1c2c175274c3b637ca"
+  integrity sha512-MzDHuUE0adzgDfat/CStgHSBtvbIxCpY82VNlJ6qLoC7T/rlDCKAaktjLTD1JHPizlawOqJgQp3tOG2vHJKE6A==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
