@@ -13,7 +13,7 @@ const [PersonProvider, usePerson] = createUseContext(() => {
     const navn = 'Nora Nilsen';
     useEffect(() => {
         settPerson({
-            fnr: 'fødselsnummer',
+            ident: 'fødselsnummer',
             navn: navn,
             adresse: {
                 adresse: 'Liaveien 34',
@@ -25,18 +25,16 @@ const [PersonProvider, usePerson] = createUseContext(() => {
             kontonr: '1234.56.78910',
             barn: [
                 {
-                    id: '010101',
+                    ident: '12051711222',
                     alder: 6,
                     fødselsdato: '2017-05-12',
-                    fødselsnummer: '12051711222',
                     navn: 'Ronja Røverdatter',
                     skalHaBarnepass: false,
                 },
                 {
-                    id: '020202',
+                    ident: '05011311222',
                     alder: 10,
                     fødselsdato: '2013-01-05',
-                    fødselsnummer: '05011311222',
                     navn: 'Espen Askeladden',
                     skalHaBarnepass: false,
                 },
@@ -56,12 +54,12 @@ const [PersonProvider, usePerson] = createUseContext(() => {
     //     }
     // }, [person]);
 
-    const toggleSkalHaBarnepass = (id: string) => {
+    const toggleSkalHaBarnepass = (ident: string) => {
         settPerson((prevPerson) => ({
             ...prevPerson,
 
             barn: prevPerson.barn.map((barn) =>
-                barn.id === id ? { ...barn, skalHaBarnepass: !barn.skalHaBarnepass } : barn
+                barn.ident === ident ? { ...barn, skalHaBarnepass: !barn.skalHaBarnepass } : barn
             ),
         }));
     };

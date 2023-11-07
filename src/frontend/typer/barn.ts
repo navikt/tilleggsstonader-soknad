@@ -1,16 +1,15 @@
 import { JaNei } from './søknad';
 
 export interface Barn {
-    id: string;
+    ident: string;
     alder: number;
     fødselsdato: string;
-    fødselsnummer: string;
     navn: string;
     skalHaBarnepass: boolean;
 }
 
 export interface Barnepass {
-    barnId: string;
+    ident: string;
     type: PassType;
     startetIFemte: JaNei;
     årsakBarnepass?: ÅrsakBarnepass;

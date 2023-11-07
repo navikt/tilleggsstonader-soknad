@@ -22,10 +22,10 @@ const DineBarn = () => {
                 </Label>
                 {person.barn.map((barn) => (
                     <Checkbox
-                        key={barn.id}
-                        value={barn.id}
+                        key={barn.ident}
+                        value={barn.ident}
                         checked={barn.skalHaBarnepass}
-                        onChange={() => toggleSkalHaBarnepass(barn.id)}
+                        onChange={() => toggleSkalHaBarnepass(barn.ident)}
                     >
                         {barn.navn}, født {formaterIsoDato(barn.fødselsdato)}
                     </Checkbox>

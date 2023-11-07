@@ -1,7 +1,7 @@
 import { Barn } from './barn';
 
 export interface Person {
-    fnr: string;
+    ident: string;
     navn: string;
     adresse: Adresse;
     telefonnr: string;

@@ -19,8 +19,8 @@ const Barnepass = () => {
             .filter((barn) => barn.skalHaBarnepass)
             .map(
                 (barn) =>
-                    barnMedBarnepass.find((barnepass) => barnepass.barnId == barn.id) || {
-                        barnId: barn.id,
+                    barnMedBarnepass.find((barnepass) => barnepass.ident == barn.ident) || {
+                        ident: barn.ident,
                         startetIFemte: barn.alder < 9 ? 'NEI' : undefined,
                     }
             )
@@ -29,7 +29,7 @@ const Barnepass = () => {
 
     const oppdaterBarnMedBarnepass = (oppdatertBarn: BarnepassIntern) => {
         settBarnMedPass((prevBarn) =>
-            prevBarn.map((barn) => (barn.barnId === oppdatertBarn.barnId ? oppdatertBarn : barn))
+            prevBarn.map((barn) => (barn.ident === oppdatertBarn.ident ? oppdatertBarn : barn))
         );
     };
 
@@ -55,9 +55,9 @@ const Barnepass = () => {
         >
             {barnMedPass.map((barn) => (
                 <BarnepassSpørsmål
-                    key={barn.barnId}
+                    key={barn.ident}
                     barn={valuerOrThrow(
-                        person.barn.find((barneInfo) => barn.barnId === barneInfo.id)
+                        person.barn.find((barneInfo) => barn.ident === barneInfo.ident)
                     )}
                     barnepass={barn}
                     oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
