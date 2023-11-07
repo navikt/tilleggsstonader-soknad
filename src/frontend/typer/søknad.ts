@@ -8,7 +8,7 @@ export interface Aktivitet {
     utdanning: JaNei;
 }
 
-export type JaNei = 'ja' | 'nei';
+export type JaNei = 'JA' | 'NEI';
 
 export interface Periode {
     fom: string;

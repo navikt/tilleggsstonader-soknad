@@ -21,7 +21,7 @@ const Barnepass = () => {
                 (barn) =>
                     barnMedBarnepass.find((barnepass) => barnepass.barnId == barn.id) || {
                         barnId: barn.id,
-                        startetIFemte: barn.alder < 9 ? false : undefined,
+                        startetIFemte: barn.alder < 9 ? 'NEI' : undefined,
                     }
             )
     );

@@ -1,11 +1,12 @@
 import { PassType, ÅrsakBarnepass } from '../../typer/barn';
+import { JaNei } from '../../typer/søknad';
 import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface BarnepassInnhold {
     steg_tittel: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
     hvem_passer_andre_alert: TekstElement<InlineLenke>;
-    startet_femte_radio: Radiogruppe<boolean>;
+    startet_femte_radio: Radiogruppe<JaNei>;
     startet_femte_readmore_header: TekstElement<string>;
     startet_femte_readmore_innhold: TekstElement<string>;
     startet_femte_readmore_punktliste: TekstElement<string[]>;
@@ -64,11 +65,11 @@ export const barnepassTekster: BarnepassInnhold = {
         beskrivelse: { nb: 'Vi spør om dette fordi vi ser at [0] er over 9 år' },
         alternativer: [
             {
-                value: true,
+                value: 'JA',
                 label: { nb: 'Ja' },
             },
             {
-                value: false,
+                value: 'NEI',
                 label: { nb: 'Nei' },
             },
         ],

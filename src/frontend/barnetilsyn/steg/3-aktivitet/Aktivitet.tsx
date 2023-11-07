@@ -25,7 +25,7 @@ const Aktivitet = () => {
     const [feil, settFeil] = useState('');
 
     const [fortsattSøke, settFortsattSøke] = useState<JaNei | undefined>(
-        aktivitet && aktivitet.utdanning === 'nei' ? 'ja' : undefined
+        aktivitet && aktivitet.utdanning === 'NEI' ? 'JA' : undefined
     );
     const [fortsattSøkeFeil, settFortsattSøkeFeil] = useState('');
 
@@ -35,7 +35,7 @@ const Aktivitet = () => {
             return false;
         }
 
-        if (barnepassPgaUtdanning === 'nei' && fortsattSøke !== 'ja') {
+        if (barnepassPgaUtdanning === 'NEI' && fortsattSøke !== 'JA') {
             settFortsattSøkeFeil('Du må velge et alternativ');
             return false;
         }
@@ -77,7 +77,7 @@ const Aktivitet = () => {
                         }}
                         error={feil}
                     />
-                    {utdanning === 'nei' && (
+                    {utdanning === 'NEI' && (
                         <>
                             <Alert variant={'info'}>
                                 <LocaleTekstAvsnitt
