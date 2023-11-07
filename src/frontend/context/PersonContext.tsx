@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import createUseContext from 'constate';
 
 // import { hentPersonData } from '../api/api';
+import { hentSøker } from '../api/api';
 import { initiellPerson } from '../mock/initiellPerson';
 import { Person } from '../typer/person';
 
@@ -10,7 +11,11 @@ const [PersonProvider, usePerson] = createUseContext(() => {
     PersonProvider.displayName = 'PERSON_PROVIDER';
     const [person, settPerson] = useState<Person>(initiellPerson);
 
-    const navn = 'Nora Nilsen';
+    useEffect(() => {
+        hentSøker().then((søker) => settPerson(søker));
+    }, []);
+    //const navn = 'Nora Nilsen';
+    /*
     useEffect(() => {
         settPerson({
             ident: 'fødselsnummer',
@@ -41,6 +46,8 @@ const [PersonProvider, usePerson] = createUseContext(() => {
             ],
         });
     }, []);
+
+     */
 
     // useEffect(() => {
     //     if (person.navn === navn) {
