@@ -1,3 +1,4 @@
+import { EnumFelt } from './skjema';
 import { JaNei } from './søknad';
 
 export interface Barn {
@@ -10,9 +11,9 @@ export interface Barn {
 
 export interface Barnepass {
     ident: string;
-    type: PassType;
-    startetIFemte: JaNei;
-    årsak?: ÅrsakBarnepass;
+    type: EnumFelt<PassType>;
+    startetIFemte: EnumFelt<JaNei>;
+    årsak?: EnumFelt<ÅrsakBarnepass>;
 }
 
 export enum PassType {

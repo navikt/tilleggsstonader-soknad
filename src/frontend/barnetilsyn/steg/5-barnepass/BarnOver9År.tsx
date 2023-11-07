@@ -6,6 +6,7 @@ import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGr
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
+import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { hentFornavn } from '../../../utils/formatering';
 import { barnepassTekster } from '../../tekster/barnepass';
@@ -22,7 +23,7 @@ const BarnOver9År: React.FC<Props> = ({
     oppdaterBarnMedBarnepass,
     visFeilmeldinger,
 }) => {
-    const oppdaterStartetIFemte = (val: JaNei) => {
+    const oppdaterStartetIFemte = (val: EnumFelt<JaNei>) => {
         oppdaterBarnMedBarnepass({
             ...passInfo,
             startetIFemte: val,
@@ -35,7 +36,7 @@ const BarnOver9År: React.FC<Props> = ({
             <LocaleRadioGroup
                 tekst={barnepassTekster.startet_femte_radio}
                 argument0={hentFornavn(barn.navn)}
-                value={passInfo.startetIFemte ?? ''}
+                value={passInfo.startetIFemte?.verdi ?? ''}
                 onChange={oppdaterStartetIFemte}
                 error={
                     visFeilmeldinger &&
@@ -50,12 +51,12 @@ const BarnOver9År: React.FC<Props> = ({
                     />
                 </LocaleReadMoreMedChildren>
             </LocaleRadioGroup>
-            {passInfo.startetIFemte == 'JA' && (
+            {passInfo.startetIFemte?.verdi == 'JA' && (
                 <>
                     <LocaleRadioGroup
                         tekst={barnepassTekster.årsak_ekstra_pass_radio}
                         argument0={hentFornavn(barn.navn)}
-                        value={passInfo.årsak || ''}
+                        value={passInfo.årsak?.verdi || ''}
                         onChange={(val) => oppdaterBarnMedBarnepass({ ...passInfo, årsak: val })}
                         error={
                             visFeilmeldinger &&
@@ -64,12 +65,13 @@ const BarnOver9År: React.FC<Props> = ({
                             'Du må velge et alternativ'
                         }
                     />
-                    {passInfo.årsak === ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (
+                    {passInfo.årsak?.verdi === ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (
                         <Alert variant="info">
                             <LocaleTekst tekst={barnepassTekster.mer_pleie_alert} />
                         </Alert>
                     )}
-                    {passInfo.årsak === ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID && (
+                    {passInfo.årsak?.verdi ===
+                        ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID && (
                         <Alert variant="info">
                             <LocaleTekst tekst={barnepassTekster.uvanlig_arbeidstid_alert} />
                         </Alert>

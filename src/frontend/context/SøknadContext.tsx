@@ -3,7 +3,7 @@ import { useState } from 'react';
 import createUseContext from 'constate';
 
 import { Barnepass } from '../typer/barn';
-import { Hovedytelse, Aktivitet } from '../typer/søknad';
+import { Aktivitet, Hovedytelse } from '../typer/søknad';
 
 const [SøknadProvider, useSøknad] = createUseContext(() => {
     SøknadProvider.displayName = 'SØKNAD_PROVIDER';
