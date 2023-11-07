@@ -6,6 +6,7 @@ import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGr
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
+import { JaNei } from '../../../typer/søknad';
 import { hentFornavn } from '../../../utils/formatering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
@@ -21,7 +22,7 @@ const BarnOver9År: React.FC<Props> = ({
     oppdaterBarnMedBarnepass,
     visFeilmeldinger,
 }) => {
-    const oppdaterStartetIFemte = (val: boolean) => {
+    const oppdaterStartetIFemte = (val: JaNei) => {
         oppdaterBarnMedBarnepass({
             ...passInfo,
             startetIFemte: val,

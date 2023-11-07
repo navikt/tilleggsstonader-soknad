@@ -178,7 +178,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
             />
         </Label>
         <BodyShort>
-            <LocaleTekst tekst={barnepass.startetIFemte ? JaNeiTilTekst.ja : JaNeiTilTekst.nei} />
+            <LocaleTekst tekst={barnepass.startetIFemte ? JaNeiTilTekst.JA : JaNeiTilTekst.NEI} />
         </BodyShort>
         {barnepass.årsakBarnepass && (
             <>
@@ -219,7 +219,7 @@ const BarnMedBarnepass: React.FC<{ person: Person; barnMedBarnepass: Barnepass[]
                             />
                         </Label>
                         <BodyShort>
-                            <LocaleTekst tekst={PassTypeTilTekst[barnepass.passType]} />
+                            <LocaleTekst tekst={PassTypeTilTekst[barnepass.type]} />
                         </BodyShort>
                         {barn.alder >= 9 && <BarnOver9År barn={barn} barnepass={barnepass} />}
                     </div>

@@ -1,3 +1,5 @@
+import { JaNei } from './søknad';
+
 export interface Barn {
     id: string;
     alder: number;
@@ -9,8 +11,8 @@ export interface Barn {
 
 export interface Barnepass {
     barnId: string;
-    passType: PassType;
-    startetIFemte: boolean;
+    type: PassType;
+    startetIFemte: JaNei;
     årsakBarnepass?: ÅrsakBarnepass;
 }
 

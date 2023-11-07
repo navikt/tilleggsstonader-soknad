@@ -28,21 +28,21 @@ export const fellesTekster: FellesInnhold = {
 };
 
 export const JaNeiTilTekst: Record<JaNei, TekstElement<string>> = {
-    ja: {
+    JA: {
         nb: 'Ja',
     },
-    nei: {
+    NEI: {
         nb: 'Nei',
     },
 };
 
 export const jaNeiAlternativer: { value: JaNei; label: TekstElement<string> }[] = [
     {
-        value: 'ja',
-        label: JaNeiTilTekst.ja,
+        value: 'JA',
+        label: JaNeiTilTekst.JA,
     },
     {
-        value: 'nei',
-        label: JaNeiTilTekst.nei,
+        value: 'NEI',
+        label: JaNeiTilTekst.NEI,
     },
 ];
