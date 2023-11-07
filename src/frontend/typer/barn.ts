@@ -13,7 +13,7 @@ export interface Barnepass {
     barnId: string;
     type: PassType;
     startetIFemte: JaNei;
-    årsakBarnepass?: ÅrsakBarnepass;
+    årsak?: ÅrsakBarnepass;
 }
 
 export enum PassType {

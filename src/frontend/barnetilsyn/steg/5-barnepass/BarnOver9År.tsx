@@ -26,7 +26,7 @@ const BarnOver9År: React.FC<Props> = ({
         oppdaterBarnMedBarnepass({
             ...passInfo,
             startetIFemte: val,
-            årsakBarnepass: undefined,
+            årsak: undefined,
         });
     };
 
@@ -55,25 +55,21 @@ const BarnOver9År: React.FC<Props> = ({
                     <LocaleRadioGroup
                         tekst={barnepassTekster.årsak_ekstra_pass_radio}
                         argument0={hentFornavn(barn.navn)}
-                        value={passInfo.årsakBarnepass || ''}
-                        onChange={(val) =>
-                            oppdaterBarnMedBarnepass({ ...passInfo, årsakBarnepass: val })
-                        }
+                        value={passInfo.årsak || ''}
+                        onChange={(val) => oppdaterBarnMedBarnepass({ ...passInfo, årsak: val })}
                         error={
                             visFeilmeldinger &&
                             passInfo.startetIFemte !== undefined &&
-                            passInfo.årsakBarnepass === undefined &&
+                            passInfo.årsak === undefined &&
                             'Du må velge et alternativ'
                         }
                     />
-                    {passInfo.årsakBarnepass ===
-                        ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (
+                    {passInfo.årsak === ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (
                         <Alert variant="info">
                             <LocaleTekst tekst={barnepassTekster.mer_pleie_alert} />
                         </Alert>
                     )}
-                    {passInfo.årsakBarnepass ===
-                        ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID && (
+                    {passInfo.årsak === ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID && (
                         <Alert variant="info">
                             <LocaleTekst tekst={barnepassTekster.uvanlig_arbeidstid_alert} />
                         </Alert>

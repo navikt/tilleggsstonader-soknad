@@ -180,7 +180,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
         <BodyShort>
             <LocaleTekst tekst={barnepass.startetIFemte ? JaNeiTilTekst.JA : JaNeiTilTekst.NEI} />
         </BodyShort>
-        {barnepass.årsakBarnepass && (
+        {barnepass.årsak && (
             <>
                 <Label>
                     <LocaleTekst
@@ -189,7 +189,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
                     />
                 </Label>
                 <BodyShort>
-                    <LocaleTekst tekst={ÅrsakEkstraPassTilTekst[barnepass.årsakBarnepass]} />
+                    <LocaleTekst tekst={ÅrsakEkstraPassTilTekst[barnepass.årsak]} />
                 </BodyShort>
             </>
         )}
