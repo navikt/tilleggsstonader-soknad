@@ -162,7 +162,7 @@ const DineBarn: React.FC<{ person: Person }> = ({ person }) => (
         {person.barn
             .filter((barn) => barn.skalHaBarnepass)
             .map((barn) => (
-                <BodyShort key={barn.id}>
+                <BodyShort key={barn.ident}>
                     {barn.navn}, født {formaterIsoDato(barn.fødselsdato)}
                 </BodyShort>
             ))}
@@ -209,9 +209,9 @@ const BarnMedBarnepass: React.FC<{ person: Person; barnMedBarnepass: Barnepass[]
     >
         <FlexDiv>
             {barnMedBarnepass.map((barnepass) => {
-                const barn = person.barn.find((barn) => barn.id === barnepass.barnId);
+                const barn = person.barn.find((barn) => barn.ident === barnepass.ident);
                 return barn ? (
-                    <div key={barnepass.barnId}>
+                    <div key={barnepass.ident}>
                         <Label>
                             <LocaleTekst
                                 tekst={barnepassTekster.hvem_passer_radio.header}
