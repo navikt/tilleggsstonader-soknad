@@ -23,7 +23,7 @@ const Hovedytelse = () => {
     const { hovedytelse, settHovedytelse } = useSøknad();
 
     const [ytelse, settYtelse] = useState<Ytelse | undefined>(
-        hovedytelse && (erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : 'annet')
+        hovedytelse && (erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : 'ANNET')
     );
     const [ytelseFeil, settYtelseFeil] = useState('');
 
@@ -42,7 +42,7 @@ const Hovedytelse = () => {
             settYtelseFeil('');
         }
 
-        if (ytelse === 'annet' && annenYtelse === undefined) {
+        if (ytelse === 'ANNET' && annenYtelse === undefined) {
             kanFortsette = false;
             settAnnenYtelseFeil('Du må velge et alternativ');
         } else {
@@ -58,7 +58,7 @@ const Hovedytelse = () => {
             stegtittel={hovedytelseInnhold.steg_tittel}
             validerSteg={() => kanFortsette(ytelse, annenYtelse)}
             oppdaterSøknad={() => {
-                if (ytelse && ytelse !== 'annet') {
+                if (ytelse && ytelse !== 'ANNET') {
                     settHovedytelse({ ytelse: ytelse });
                 } else if (annenYtelse) {
                     settHovedytelse({ ytelse: annenYtelse });
@@ -84,7 +84,7 @@ const Hovedytelse = () => {
             >
                 <LocaleReadMore tekst={hovedytelseInnhold.flere_alternativer_lesmer} />
             </LocaleRadioGroup>
-            {ytelse === 'annet' && (
+            {ytelse === 'ANNET' && (
                 <GråBoks>
                     <LocaleRadioGroup
                         tekst={hovedytelseInnhold.radio_annen_ytelse}

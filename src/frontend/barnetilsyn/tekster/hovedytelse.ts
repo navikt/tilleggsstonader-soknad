@@ -11,17 +11,17 @@ interface HovedytelseInnhold {
 }
 
 export const YtelseTilTekst: Record<Ytelse | AnnenYtelse, TekstElement<string>> = {
-    aap: { nb: 'Arbeidsavklaringspenger (AAP)' },
-    dagpenger: { nb: 'Dagpenger' },
-    gjenlevendepensjon: { nb: 'Gjenlevendepensjon/etterlattepensjon' },
-    ingen_pengestøtte: { nb: 'Mottar ingen pengestøtte, men har nedsatt arbeidsevne' },
-    introduksjonsprogrammet: { nb: 'Introduksjonsprogrammet' },
-    kvalifikasjonsprogrammet: { nb: 'Kvalifikasjonsprogrammet' },
-    overgangsstønad: { nb: 'Overgangsstønad til enslig mor eller far' },
-    sykepenger: { nb: 'Sykepenger' },
-    tiltakspenger: { nb: 'Tiltakspenger' },
-    uføretrygd: { nb: 'Uføretrygd' },
-    annet: { nb: 'Nei, jeg har annen eller ingen ytelse/pengestøtte' },
+    AAP: { nb: 'Arbeidsavklaringspenger (AAP)' },
+    DAGPENGER: { nb: 'Dagpenger' },
+    GJENLEVENDEPENSJON: { nb: 'Gjenlevendepensjon/etterlattepensjon' },
+    INGEN_PENGESTØTTE: { nb: 'Mottar ingen pengestøtte, men har nedsatt arbeidsevne' },
+    INTRODUKSJONSPROGRAMMET: { nb: 'Introduksjonsprogrammet' },
+    KVALIFIKASJONSPROGRAMMET: { nb: 'Kvalifikasjonsprogrammet' },
+    OVERGANGSSTØNAD: { nb: 'Overgangsstønad til enslig mor eller far' },
+    SYKEPENGER: { nb: 'Sykepenger' },
+    TILTAKSPENGER: { nb: 'Tiltakspenger' },
+    UFØRETRYGD: { nb: 'Uføretrygd' },
+    ANNET: { nb: 'Nei, jeg har annen eller ingen ytelse/pengestøtte' },
 };
 
 export const hovedytelseInnhold: HovedytelseInnhold = {
@@ -38,20 +38,20 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         },
         alternativer: [
             {
-                value: 'aap',
-                label: YtelseTilTekst.aap,
+                value: 'AAP',
+                label: YtelseTilTekst.AAP,
             },
             {
-                value: 'overgangsstønad',
-                label: YtelseTilTekst.overgangsstønad,
+                value: 'OVERGANGSSTØNAD',
+                label: YtelseTilTekst.OVERGANGSSTØNAD,
             },
             {
-                value: 'gjenlevendepensjon',
-                label: YtelseTilTekst.gjenlevendepensjon,
+                value: 'GJENLEVENDEPENSJON',
+                label: YtelseTilTekst.GJENLEVENDEPENSJON,
             },
             {
-                value: 'annet',
-                label: YtelseTilTekst.annet,
+                value: 'ANNET',
+                label: YtelseTilTekst.ANNET,
             },
         ],
     },
@@ -70,32 +70,32 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         },
         alternativer: [
             {
-                value: 'dagpenger',
-                label: YtelseTilTekst.dagpenger,
+                value: 'DAGPENGER',
+                label: YtelseTilTekst.DAGPENGER,
             },
             {
-                value: 'tiltakspenger',
-                label: YtelseTilTekst.tiltakspenger,
+                value: 'TILTAKSPENGER',
+                label: YtelseTilTekst.TILTAKSPENGER,
             },
             {
-                value: 'kvalifikasjonsprogrammet',
-                label: YtelseTilTekst.kvalifikasjonsprogrammet,
+                value: 'KVALIFIKASJONSPROGRAMMET',
+                label: YtelseTilTekst.KVALIFIKASJONSPROGRAMMET,
             },
             {
-                value: 'introduksjonsprogrammet',
-                label: YtelseTilTekst.introduksjonsprogrammet,
+                value: 'INTRODUKSJONSPROGRAMMET',
+                label: YtelseTilTekst.INTRODUKSJONSPROGRAMMET,
             },
             {
-                value: 'sykepenger',
-                label: YtelseTilTekst.sykepenger,
+                value: 'SYKEPENGER',
+                label: YtelseTilTekst.SYKEPENGER,
             },
             {
-                value: 'uføretrygd',
-                label: YtelseTilTekst.uføretrygd,
+                value: 'UFØRETRYGD',
+                label: YtelseTilTekst.UFØRETRYGD,
             },
             {
-                value: 'ingen_pengestøtte',
-                label: YtelseTilTekst.ingen_pengestøtte,
+                value: 'INGEN_PENGESTØTTE',
+                label: YtelseTilTekst.INGEN_PENGESTØTTE,
             },
         ],
     },

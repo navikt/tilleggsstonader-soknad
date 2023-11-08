@@ -1,18 +1,18 @@
-export type Ytelse = 'aap' | 'overgangsstønad' | 'gjenlevendepensjon' | 'annet';
+export type Ytelse = 'AAP' | 'OVERGANGSSTØNAD' | 'GJENLEVENDEPENSJON' | 'ANNET';
 export type AnnenYtelse =
-    | 'dagpenger'
-    | 'tiltakspenger'
-    | 'kvalifikasjonsprogrammet'
-    | 'introduksjonsprogrammet'
-    | 'sykepenger'
-    | 'uføretrygd'
-    | 'ingen_pengestøtte';
+    | 'DAGPENGER'
+    | 'TILTAKSPENGER'
+    | 'KVALIFIKASJONSPROGRAMMET'
+    | 'INTRODUKSJONSPROGRAMMET'
+    | 'SYKEPENGER'
+    | 'UFØRETRYGD'
+    | 'INGEN_PENGESTØTTE';
 export const erYtelse = (verdi: Ytelse | AnnenYtelse): verdi is Ytelse => {
     switch (verdi) {
-        case 'aap':
-        case 'overgangsstønad':
-        case 'gjenlevendepensjon':
-        case 'annet':
+        case 'AAP':
+        case 'OVERGANGSSTØNAD':
+        case 'GJENLEVENDEPENSJON':
+        case 'ANNET':
             return true;
         default:
             return false;
