@@ -1,7 +1,6 @@
 import { Person } from '../typer/person';
 
 export const initiellPerson: Person = {
-    ident: '',
     navn: '',
     adresse: {
         adresse: '',

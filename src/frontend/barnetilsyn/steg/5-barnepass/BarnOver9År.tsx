@@ -50,7 +50,7 @@ const BarnOver9År: React.FC<Props> = ({
                     />
                 </LocaleReadMoreMedChildren>
             </LocaleRadioGroup>
-            {passInfo.startetIFemte && (
+            {passInfo.startetIFemte == 'JA' && (
                 <>
                     <LocaleRadioGroup
                         tekst={barnepassTekster.årsak_ekstra_pass_radio}

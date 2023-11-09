@@ -2,7 +2,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import Environment from './Environment';
-import { PersonResponse } from './personResponse';
+import { Person } from '../typer/person';
 import { Stønadstype } from '../typer/stønadstyper';
 
 const requestId = () => uuidv4().replaceAll('-', '');
@@ -17,9 +17,9 @@ const defaultConfig = () => ({
     withCredentials: true,
 });
 
-export const hentPersonData = (): Promise<PersonResponse> => {
+export const hentPersonData = (): Promise<Person> => {
     return axios
-        .get<PersonResponse>(`${Environment().apiProxyUrl}/person`, defaultConfig())
+        .get<Person>(`${Environment().apiProxyUrl}/person`, defaultConfig())
         .then((response) => response.data);
 };
 
