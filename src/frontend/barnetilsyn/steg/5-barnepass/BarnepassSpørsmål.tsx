@@ -27,11 +27,11 @@ const BarnepassSpørsmål: React.FC<Props> = ({
             <LocaleRadioGroup
                 tekst={barnepassTekster.hvem_passer_radio}
                 argument0={hentFornavn(barn.navn)}
-                value={barnepass.type || ''}
-                onChange={(type) => oppdaterBarnMedBarnepass({ ...barnepass, type: type })}
+                value={barnepass.type?.verdi || ''}
+                onChange={(passType) => oppdaterBarnMedBarnepass({ ...barnepass, type: passType })}
                 error={visFeilmelding && barnepass.type === undefined && 'Du må velge et alernativ'}
             />
-            {barnepass.type === PassType.ANDRE && (
+            {barnepass.type?.verdi === PassType.ANDRE && (
                 <Alert variant="info">
                     <LocaleInlineLenke tekst={barnepassTekster.hvem_passer_andre_alert} />
                 </Alert>

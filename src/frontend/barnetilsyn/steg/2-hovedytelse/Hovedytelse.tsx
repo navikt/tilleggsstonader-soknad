@@ -5,13 +5,14 @@ import { styled } from 'styled-components';
 import { Heading } from '@navikt/ds-react';
 import { AGray50 } from '@navikt/ds-tokens/dist/tokens';
 
-import { AnnenYtelse, erYtelse, Ytelse } from './typer';
+import { AnnenYtelse, erAnnenYtelse, erYtelse, erYtelseEllerAnnet, YtelseOgAnnet } from './typer';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSøknad } from '../../../context/SøknadContext';
+import { EnumFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
@@ -19,20 +20,30 @@ const GråBoks = styled.div`
     background-color: ${AGray50};
     padding: 2rem 1rem;
 `;
+
+const annetState: EnumFelt<YtelseOgAnnet> = {
+    label: '',
+    svarTekst: '',
+    verdi: 'ANNET',
+    alternativer: [],
+};
 const Hovedytelse = () => {
     const { hovedytelse, settHovedytelse } = useSøknad();
 
-    const [ytelse, settYtelse] = useState<Ytelse | undefined>(
-        hovedytelse && (erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : 'ANNET')
+    const [ytelse, settYtelse] = useState<EnumFelt<YtelseOgAnnet> | undefined>(
+        hovedytelse && (erYtelseEllerAnnet(hovedytelse.ytelse) ? hovedytelse.ytelse : annetState)
     );
     const [ytelseFeil, settYtelseFeil] = useState('');
 
-    const [annenYtelse, settAnnenYtelse] = useState<AnnenYtelse | undefined>(
-        hovedytelse && !erYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : undefined
+    const [annenYtelse, settAnnenYtelse] = useState<EnumFelt<AnnenYtelse> | undefined>(
+        hovedytelse && erAnnenYtelse(hovedytelse.ytelse) ? hovedytelse.ytelse : undefined
     );
     const [annenYtelseFeil, settAnnenYtelseFeil] = useState('');
 
-    const kanFortsette = (ytelse?: Ytelse, annenYtelse?: AnnenYtelse): boolean => {
+    const kanFortsette = (
+        ytelse?: EnumFelt<YtelseOgAnnet>,
+        annenYtelse?: EnumFelt<AnnenYtelse>
+    ): boolean => {
         let kanFortsette = true;
 
         if (ytelse === undefined) {
@@ -42,7 +53,7 @@ const Hovedytelse = () => {
             settYtelseFeil('');
         }
 
-        if (ytelse === 'ANNET' && annenYtelse === undefined) {
+        if (ytelse?.verdi === 'ANNET' && annenYtelse === undefined) {
             kanFortsette = false;
             settAnnenYtelseFeil('Du må velge et alternativ');
         } else {
@@ -58,7 +69,7 @@ const Hovedytelse = () => {
             stegtittel={hovedytelseInnhold.steg_tittel}
             validerSteg={() => kanFortsette(ytelse, annenYtelse)}
             oppdaterSøknad={() => {
-                if (ytelse && ytelse !== 'ANNET') {
+                if (ytelse && erYtelse(ytelse)) {
                     settHovedytelse({ ytelse: ytelse });
                 } else if (annenYtelse) {
                     settHovedytelse({ ytelse: annenYtelse });
@@ -73,7 +84,7 @@ const Hovedytelse = () => {
             </PellePanel>
             <LocaleRadioGroup
                 tekst={hovedytelseInnhold.radio_hovedytelse}
-                value={ytelse || ''}
+                value={ytelse?.verdi || ''}
                 onChange={(verdi) => {
                     settYtelse(verdi);
                     settYtelseFeil('');
@@ -84,11 +95,11 @@ const Hovedytelse = () => {
             >
                 <LocaleReadMore tekst={hovedytelseInnhold.flere_alternativer_lesmer} />
             </LocaleRadioGroup>
-            {ytelse === 'ANNET' && (
+            {ytelse?.verdi === 'ANNET' && (
                 <GråBoks>
                     <LocaleRadioGroup
                         tekst={hovedytelseInnhold.radio_annen_ytelse}
-                        value={annenYtelse || ''}
+                        value={annenYtelse?.verdi || ''}
                         onChange={(verdi) => {
                             settAnnenYtelse(verdi);
                             settAnnenYtelseFeil('');

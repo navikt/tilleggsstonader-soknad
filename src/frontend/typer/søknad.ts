@@ -1,11 +1,12 @@
+import { EnumFelt } from './skjema';
 import { AnnenYtelse, Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
 
 export interface Hovedytelse {
-    ytelse: Exclude<Ytelse, 'ANNET'> | AnnenYtelse;
+    ytelse: EnumFelt<Ytelse | AnnenYtelse>;
 }
 
 export interface Aktivitet {
-    utdanning: JaNei;
+    utdanning: EnumFelt<JaNei>;
 }
 
 export type JaNei = 'JA' | 'NEI';

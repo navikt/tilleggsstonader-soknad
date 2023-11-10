@@ -10,6 +10,7 @@ import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSøknad } from '../../../context/SøknadContext';
 import { useTiltak } from '../../../hooks/useTiltak';
+import { EnumFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
 import { aktivitetTekster } from '../../tekster/aktivitet';
@@ -19,13 +20,13 @@ const Aktivitet = () => {
 
     const { tiltak } = useTiltak();
 
-    const [utdanning, settUtdanning] = useState<JaNei | undefined>(
+    const [utdanning, settUtdanning] = useState<EnumFelt<JaNei> | undefined>(
         aktivitet ? aktivitet.utdanning : undefined
     );
     const [feil, settFeil] = useState('');
 
     const [fortsattSøke, settFortsattSøke] = useState<JaNei | undefined>(
-        aktivitet && aktivitet.utdanning === 'NEI' ? 'JA' : undefined
+        aktivitet && aktivitet.utdanning.verdi === 'NEI' ? 'JA' : undefined
     );
     const [fortsattSøkeFeil, settFortsattSøkeFeil] = useState('');
 
@@ -53,7 +54,7 @@ const Aktivitet = () => {
         <Side
             stegtittel={aktivitetTekster.steg_tittel}
             stønadstype={Stønadstype.barnetilsyn}
-            validerSteg={() => kanFortsette(utdanning)}
+            validerSteg={() => kanFortsette(utdanning?.verdi)}
             oppdaterSøknad={oppdaterAktivitetISøknad}
         >
             {tiltak.type === 'utdanning' && (
@@ -68,7 +69,7 @@ const Aktivitet = () => {
                     <LocaleReadMore tekst={aktivitetTekster.noe_feil_utdanning_lesmer} />
                     <LocaleRadioGroup
                         tekst={aktivitetTekster.radio_utdanning}
-                        value={utdanning || ''}
+                        value={utdanning?.verdi || ''}
                         onChange={(verdi) => {
                             settUtdanning(verdi);
                             settFortsattSøke(undefined);
@@ -77,7 +78,7 @@ const Aktivitet = () => {
                         }}
                         error={feil}
                     />
-                    {utdanning === 'NEI' && (
+                    {utdanning?.verdi === 'NEI' && (
                         <>
                             <Alert variant={'info'}>
                                 <LocaleTekstAvsnitt
@@ -88,7 +89,7 @@ const Aktivitet = () => {
                                 tekst={aktivitetTekster.radio_fortsatt_søke}
                                 value={fortsattSøke || ''}
                                 onChange={(verdi) => {
-                                    settFortsattSøke(verdi);
+                                    settFortsattSøke(verdi.verdi);
                                     settFortsattSøkeFeil('');
                                 }}
                                 error={fortsattSøkeFeil}

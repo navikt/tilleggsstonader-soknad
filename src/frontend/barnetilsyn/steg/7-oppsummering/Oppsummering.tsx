@@ -124,7 +124,7 @@ const Hovedytelse: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hoved
         </Label>
         {hovedytelse && (
             <BodyShort>
-                <LocaleTekst tekst={YtelseTilTekst[hovedytelse.ytelse]} />
+                <LocaleTekst tekst={YtelseTilTekst[hovedytelse.ytelse.verdi]} />
             </BodyShort>
         )}
     </AccordionItem>
@@ -189,7 +189,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
                     />
                 </Label>
                 <BodyShort>
-                    <LocaleTekst tekst={ÅrsakEkstraPassTilTekst[barnepass.årsak]} />
+                    <LocaleTekst tekst={ÅrsakEkstraPassTilTekst[barnepass.årsak.verdi]} />
                 </BodyShort>
             </>
         )}
@@ -219,7 +219,7 @@ const BarnMedBarnepass: React.FC<{ person: Person; barnMedBarnepass: Barnepass[]
                             />
                         </Label>
                         <BodyShort>
-                            <LocaleTekst tekst={PassTypeTilTekst[barnepass.type]} />
+                            <LocaleTekst tekst={PassTypeTilTekst[barnepass.type.verdi]} />
                         </BodyShort>
                         {barn.alder >= 9 && <BarnOver9År barn={barn} barnepass={barnepass} />}
                     </div>

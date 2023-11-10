@@ -1,16 +1,16 @@
 import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
-import { AnnenYtelse, Ytelse } from '../steg/2-hovedytelse/typer';
+import { AnnenYtelse, YtelseOgAnnet } from '../steg/2-hovedytelse/typer';
 
 interface HovedytelseInnhold {
     steg_tittel: TekstElement<string>;
     innhold_tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
-    radio_hovedytelse: Radiogruppe<Ytelse>;
+    radio_hovedytelse: Radiogruppe<YtelseOgAnnet>;
     flere_alternativer_lesmer: LesMer<string>;
     radio_annen_ytelse: Radiogruppe<AnnenYtelse>;
 }
 
-export const YtelseTilTekst: Record<Ytelse | AnnenYtelse, TekstElement<string>> = {
+export const YtelseTilTekst: Record<YtelseOgAnnet | AnnenYtelse, TekstElement<string>> = {
     AAP: { nb: 'Arbeidsavklaringspenger (AAP)' },
     DAGPENGER: { nb: 'Dagpenger' },
     GJENLEVENDEPENSJON: { nb: 'Gjenlevendepensjon/etterlattepensjon' },

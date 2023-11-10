@@ -9,6 +9,7 @@ import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { sendInnSøknad } from '../api/api';
 import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
+import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { IRoute } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
@@ -67,6 +68,7 @@ const Side: React.FC<Props> = ({
 }) => {
     const location = useLocation();
     const navigate = useNavigate();
+    const { hovedytelse, aktivitet, barnMedBarnepass } = useSøknad();
 
     const [sendInnFeil, settSendInnFeil] = useState<boolean>(false);
 
@@ -97,7 +99,11 @@ const Side: React.FC<Props> = ({
         }
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
-        sendInnSøknad(stønadstype, {})
+        sendInnSøknad(stønadstype, {
+            hovedytelse: hovedytelse?.ytelse,
+            aktivitet,
+            barnMedBarnepass,
+        })
             .then(() => navigate(nesteRoute.path))
             // TODO håndtering av 401?
             .catch(() => settSendInnFeil(true));

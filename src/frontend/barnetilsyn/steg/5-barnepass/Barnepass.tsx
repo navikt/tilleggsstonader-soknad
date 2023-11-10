@@ -21,7 +21,7 @@ const Barnepass = () => {
                 (barn) =>
                     barnMedBarnepass.find((barnepass) => barnepass.ident == barn.ident) || {
                         ident: barn.ident,
-                        startetIFemte: barn.alder < 9 ? 'NEI' : undefined,
+                        //startetIFemte: barn.alder < 9 ? 'NEI' : undefined, TODO fix annars får man ikke gå videre når man velger Ronja
                     }
             )
     );
