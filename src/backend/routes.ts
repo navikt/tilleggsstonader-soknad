@@ -21,18 +21,22 @@ const routes = () => {
 
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
+    expressRouter.use(/^(?!.*\/(internal|static|api)\/).*$/, (_req: Request, res: Response) => {
+        getDecoratedHtml(path.join(buildPath, 'index.html'))
+            .then((html) => {
+                res.send(html);
+            })
+            .catch((e) => {
+                logger.error(e);
+                res.status(500).send(e);
+            });
+    });
+
     expressRouter.use(
-        /^(?!.*\/(internal|static|api|vedlegg)\/).*$/,
-        (_req: Request, res: Response) => {
-            getDecoratedHtml(path.join(buildPath, 'index.html'))
-                .then((html) => {
-                    res.send(html);
-                })
-                .catch((e) => {
-                    logger.error(e);
-                    res.status(500).send(e);
-                });
-        }
+        `${BASE_PATH_SOKNAD}/api/vedlegg`,
+        addRequestInfo(),
+        attachToken('familie-dokument'),
+        doProxy(miljø.vedleggUrl, `${BASE_PATH_SOKNAD}/api/vedlegg`)
     );
 
     expressRouter.use(
@@ -40,13 +44,6 @@ const routes = () => {
         addRequestInfo(),
         attachToken('tilleggsstonader-soknad-api'),
         doProxy(miljø.apiUrl, `${BASE_PATH_SOKNAD}/api`)
-    );
-
-    expressRouter.use(
-        `${BASE_PATH_SOKNAD}/vedlegg`,
-        addRequestInfo(),
-        attachToken('familie-dokument'),
-        doProxy(miljø.vedleggUrl, `${BASE_PATH_SOKNAD}/vedlegg`)
     );
 
     return expressRouter;

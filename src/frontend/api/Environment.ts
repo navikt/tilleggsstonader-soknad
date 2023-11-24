@@ -18,7 +18,7 @@ const Environment = (): EnvironmentProps => {
         return {
             apiProxyUrl: 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/api',
             vedleggProxyUrl:
-                'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/vedlegg',
+                'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/api/vedlegg',
             wonderwallUrl:
                 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
@@ -28,7 +28,7 @@ const Environment = (): EnvironmentProps => {
     } else if (window.location.hostname.indexOf('www') > -1) {
         return {
             apiProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api',
-            vedleggProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/vedlegg',
+            vedleggProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api/vedlegg',
             wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             miljø: 'production',
