@@ -2,7 +2,10 @@ import { Vedleggstype } from '../../typer/skjema';
 import { LesMer, TekstElement } from '../../typer/tekst';
 
 type TekstTypeVedlegg = {
-    [key in Vedleggstype]: TekstElement<string>;
+    [key in Vedleggstype]: {
+        label: TekstElement<string>;
+        knapp: TekstElement<string>;
+    };
 };
 
 interface VedleggInnhold {
@@ -75,7 +78,12 @@ const harIkkeVedleggDigitalAccordian: VedleggInnhold['accordians']['har_ikke_ved
 
 const typerVedlegg: TekstTypeVedlegg = {
     [Vedleggstype.EKSEMPEL]: {
-        nb: 'Eksempel',
+        label: {
+            nb: 'Faktura',
+        },
+        knapp: {
+            nb: 'Last opp faktura',
+        },
     },
 };
 

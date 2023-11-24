@@ -7,10 +7,12 @@ import { Alert, BodyShort, Button } from '@navikt/ds-react';
 
 import { MAKS_FILSTØRRELSE_FORMATTERT, MAX_FILSTØRRELSE, TILLATE_FILTYPER } from './utils';
 import { lastOppVedlegg } from '../../api/api';
+import { vedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
 import { useSpråk } from '../../context/SpråkContext';
 import { Dokument, DokumentasjonFelt } from '../../typer/skjema';
 import { TekstElement } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekster';
+import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 const StyledKnapp = styled(Button)`
     width: max-content;
@@ -96,7 +98,7 @@ const Filopplaster: React.FC<{
                 icon={<UploadIcon title="a11y-title" />}
                 disabled={laster}
             >
-                {dokumentasjonFelt.label}
+                <LocaleTekst tekst={vedleggTekster.typerVedlegg[dokumentasjonFelt.type].knapp} />
             </StyledKnapp>
             <input
                 type="file"

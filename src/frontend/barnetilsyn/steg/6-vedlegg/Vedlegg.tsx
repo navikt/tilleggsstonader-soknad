@@ -39,7 +39,7 @@ const Vedlegg = () => {
             : [
                   {
                       type: Vedleggstype.EKSEMPEL,
-                      label: vedleggTekster.typerVedlegg[Vedleggstype.EKSEMPEL][locale],
+                      label: vedleggTekster.typerVedlegg[Vedleggstype.EKSEMPEL].label[locale],
                       harSendtInn: false,
                       opplastedeVedlegg: [],
                   },
