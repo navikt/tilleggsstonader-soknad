@@ -7,6 +7,11 @@ import logger from './logger';
 import { miljø } from './miljø';
 import { ApplicationName } from './tokenProxy';
 
+const namespace: { [key in ApplicationName]: string } = {
+    'familie-dokument': 'teamfamilie',
+    'tilleggsstonader-soknad-api': 'tilleggsstonader',
+};
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 class TokenXClient {
     private tokenxClient: any = null;
@@ -33,7 +38,7 @@ class TokenXClient {
                 client_assertion: clientAssertion,
                 subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
                 subject_token: idportenToken,
-                audience: `${tokenxConfig.clusterName}:tilleggsstonader:${applicationName}`,
+                audience: `${tokenxConfig.clusterName}:${namespace[applicationName]}:${applicationName}`,
             })
             .then((tokenSet: any) => {
                 return Promise.resolve(tokenSet.access_token);
