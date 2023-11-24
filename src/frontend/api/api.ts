@@ -34,3 +34,25 @@ export const sendInnSøknad = (stønadstype: Stønadstype, søknad: object) => {
     const url = `${Environment().apiProxyUrl}/soknad/${stønadstypeTilPath(stønadstype)}`;
     return axios.post(url, søknad, defaultConfig()).then((response) => response.data);
 };
+
+interface VedleggResponse {
+    data: {
+        dokumentId: string;
+    };
+}
+export const lastOppVedlegg = (fil: File): Promise<string> => {
+    const url = `${Environment().vedleggProxyUrl}`;
+    const requestData = new FormData();
+    requestData.append('file', fil);
+    return axios
+        .post<FormData, VedleggResponse>(url, requestData, {
+            withCredentials: true,
+            headers: {
+                'x-request-id': requestId(),
+                'Content-Type': 'multipart/form-data',
+                accept: 'application/json',
+            },
+            transformRequest: () => requestData,
+        })
+        .then((response: VedleggResponse) => response.data.dokumentId);
+};

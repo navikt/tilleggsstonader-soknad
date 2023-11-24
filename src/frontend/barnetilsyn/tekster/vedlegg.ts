@@ -1,4 +1,9 @@
+import { Vedleggstype } from '../../typer/skjema';
 import { LesMer, TekstElement } from '../../typer/tekst';
+
+type TekstTypeVedlegg = {
+    [key in Vedleggstype]: TekstElement<string>;
+};
 
 interface VedleggInnhold {
     steg_tittel: TekstElement<string>;
@@ -29,6 +34,8 @@ interface VedleggInnhold {
     vedlegg_espen_ronja: TekstElement<string[]>;
     legeerklæring_espen_tittel: TekstElement<string>;
     legeerklæring_espen: TekstElement<string>;
+
+    typerVedlegg: TekstTypeVedlegg;
 }
 
 const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] = {
@@ -63,6 +70,12 @@ const harIkkeVedleggDigitalAccordian: VedleggInnhold['accordians']['har_ikke_ved
             'Teksten til dokumentet er godt leselig.',
             'Bildet er godt opplyst, uten skygger.',
         ],
+    },
+};
+
+const typerVedlegg: TekstTypeVedlegg = {
+    [Vedleggstype.EKSEMPEL]: {
+        nb: 'Eksempel',
     },
 };
 
@@ -122,4 +135,5 @@ export const vedleggTekster: VedleggInnhold = {
     legeerklæring_espen: {
         nb: 'Legerklæringen må inneholde opplysninger om hvorfor Espen trenger ekstra pass. ',
     },
+    typerVedlegg: typerVedlegg,
 };

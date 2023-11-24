@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { styled } from 'styled-components';
 
 import { UploadIcon } from '@navikt/aksel-icons';
 import { Accordion, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/ds-react';
 
+import Filopplaster from '../../../components/Filopplaster/Filopplaster';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { useSpråk } from '../../../context/SpråkContext';
+import { useSøknad } from '../../../context/SøknadContext';
+import { Dokument, DokumentasjonFelt, Vedleggstype } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { vedleggTekster } from '../../tekster/vedlegg';
 
@@ -27,8 +31,27 @@ const VedleggContainer = styled.div`
 `;
 
 const Vedlegg = () => {
+    const { dokumentasjon, settDokumentasjon } = useSøknad();
+    const { locale } = useSpråk();
+    const [nyDokumentasjon, settNyDokumentasjon] = useState<DokumentasjonFelt[]>(
+        dokumentasjon.length
+            ? dokumentasjon
+            : [
+                  {
+                      type: Vedleggstype.EKSEMPEL,
+                      label: vedleggTekster.typerVedlegg[Vedleggstype.EKSEMPEL][locale],
+                      harSendtInn: false,
+                      opplastedeVedlegg: [],
+                  },
+              ]
+    );
+
     return (
-        <Side stønadstype={Stønadstype.barnetilsyn} stegtittel={vedleggTekster.steg_tittel}>
+        <Side
+            stønadstype={Stønadstype.barnetilsyn}
+            stegtittel={vedleggTekster.steg_tittel}
+            oppdaterSøknad={() => settDokumentasjon(nyDokumentasjon)}
+        >
             <Heading size={'medium'}>
                 <LocaleTekst tekst={vedleggTekster.innhold_tittel} />
             </Heading>
@@ -48,9 +71,14 @@ const Vedlegg = () => {
                         <LocaleTekst tekst={vedleggTekster.samlet_faktura} />
                     </BodyShort>
                     <LocaleReadMore tekst={vedleggTekster.faktura_lesmer} />
-                    <StyledKnapp icon={<UploadIcon title="a11y-title" />}>
-                        <LocaleTekst tekst={vedleggTekster.last_opp_faktura} />
-                    </StyledKnapp>
+                    <Filopplaster
+                        dokumentasjonFelt={nyDokumentasjon[0]}
+                        oppdaterVedlegg={(dokument: Dokument[]) => {
+                            settNyDokumentasjon([
+                                { ...nyDokumentasjon[0], opplastedeVedlegg: dokument },
+                            ]);
+                        }}
+                    />
                 </section>
                 <section>
                     <Heading size={'small'}>

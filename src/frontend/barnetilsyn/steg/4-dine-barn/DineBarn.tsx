@@ -24,7 +24,7 @@ const DineBarn = () => {
                     <Checkbox
                         key={barn.ident}
                         value={barn.ident}
-                        checked={barn.skalHaBarnepass}
+                        checked={barn.skalHaBarnepass ?? false}
                         onChange={() => toggleSkalHaBarnepass(barn.ident)}
                     >
                         {barn.navn}, født {formaterIsoDato(barn.fødselsdato)}
