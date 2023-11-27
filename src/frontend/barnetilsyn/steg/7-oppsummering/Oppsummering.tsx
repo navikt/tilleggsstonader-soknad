@@ -24,6 +24,7 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { JaNeiTilTekst } from '../../../tekster/felles';
 import { Barn, Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
+import { DokumentasjonFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { Hovedytelse } from '../../../typer/søknad';
 import { TekstElement } from '../../../typer/tekst';
@@ -229,7 +230,7 @@ const BarnMedBarnepass: React.FC<{ person: Person; barnMedBarnepass: Barnepass[]
     </AccordionItem>
 );
 
-const Vedlegg: React.FC = () => (
+const Vedlegg: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({ dokumentasjon }) => (
     <AccordionItem
         header={oppsummeringTekster.accordians.vedlegg.tittel}
         endreKnapp={{
@@ -240,24 +241,21 @@ const Vedlegg: React.FC = () => (
         <Label spacing>
             <LocaleTekst tekst={oppsummeringTekster.accordians.vedlegg.label} />
         </Label>
-        {/*TODO: Hardkodet*/}
-        <BodyLong>Faktura på pass for Espen og Ronja</BodyLong>
-        <BodyLong>
-            <PaperclipIcon /> barnehage.pdf
-        </BodyLong>
-        <BodyLong spacing>
-            <PaperclipIcon /> sfo.pdf
-        </BodyLong>
-
-        <BodyLong>Legeerklæring for Espen</BodyLong>
-        <BodyLong spacing>
-            <PaperclipIcon /> legen.pdf
-        </BodyLong>
+        {dokumentasjon.map((d) => (
+            <>
+                <BodyLong>{d.label}</BodyLong>
+                {d.opplastedeVedlegg.map((vedlegg) => (
+                    <BodyLong spacing>
+                        <PaperclipIcon /> {vedlegg.navn}
+                    </BodyLong>
+                ))}
+            </>
+        ))}
     </AccordionItem>
 );
 
 const Oppsummering = () => {
-    const { hovedytelse, barnMedBarnepass } = useSøknad();
+    const { hovedytelse, barnMedBarnepass, dokumentasjon } = useSøknad();
     const { person } = usePerson();
     const [harBekreftet, settHarBekreftet] = useState(false);
     const [feil, settFeil] = useState<string>('');
@@ -287,7 +285,7 @@ const Oppsummering = () => {
                 <AktivitetUtdanning />
                 <DineBarn person={person} />
                 <BarnMedBarnepass person={person} barnMedBarnepass={barnMedBarnepass} />
-                <Vedlegg />
+                <Vedlegg dokumentasjon={dokumentasjon} />
             </Accordion>
 
             <CheckboxGroup

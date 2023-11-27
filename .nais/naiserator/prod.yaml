@@ -37,11 +37,13 @@ spec:
   ingresses:
     - https://www.nav.no/tilleggsstonader/soknad
   accessPolicy:
-    rules:
-      - application: tilleggsstonader-soknad-api
-      - application: nav-dekoratoren
-        namespace: personbruker
     outbound:
+      rules:
+        - application: tilleggsstonader-soknad-api
+        - application: familie-dokument
+          namespace: teamfamilie
+        - application: nav-dekoratoren
+          namespace: personbruker
       external:
         - host: nav.no
   env:

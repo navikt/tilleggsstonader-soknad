@@ -68,7 +68,7 @@ const Side: React.FC<Props> = ({
 }) => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { hovedytelse, aktivitet, barnMedBarnepass } = useSøknad();
+    const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon } = useSøknad();
 
     const [sendInnFeil, settSendInnFeil] = useState<boolean>(false);
 
@@ -103,6 +103,7 @@ const Side: React.FC<Props> = ({
             hovedytelse: hovedytelse?.ytelse,
             aktivitet,
             barnMedBarnepass,
+            dokumentasjon,
         })
             .then(() => navigate(nesteRoute.path))
             // TODO håndtering av 401?
