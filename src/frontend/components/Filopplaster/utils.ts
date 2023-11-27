@@ -13,15 +13,10 @@ export const formaterFilstørrelse = (bytes: number, decimals: number = 2) => {
 export const MAX_FILSTØRRELSE = 1024 * 1024 * 10; // 10mb
 export const MAKS_FILSTØRRELSE_FORMATTERT = formaterFilstørrelse(MAX_FILSTØRRELSE);
 
-enum EFiltyper {
+enum Filtyper {
     PDF = 'application/pdf',
     PNG = 'image/png',
     JPG = 'image/jpg',
     JPEG = 'image/jpeg',
 }
-export const TILLATE_FILTYPER: string[] = [
-    EFiltyper.PNG,
-    EFiltyper.PDF,
-    EFiltyper.JPG,
-    EFiltyper.JPEG,
-];
+export const TILLATE_FILTYPER: string[] = [Filtyper.PNG, Filtyper.PDF, Filtyper.JPG, Filtyper.JPEG];
