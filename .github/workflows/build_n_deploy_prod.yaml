@@ -8,6 +8,10 @@ on:
 env:
   IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
 
+permissions:
+  contents: "read"
+  id-token: "write"
+
 jobs:
   build:
     name: Build and push Docker container
@@ -60,13 +64,11 @@ jobs:
       - name: Deploy til dev-gcp
         uses: nais/deploy/actions/deploy@v2
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: .nais/naiserator/dev.yaml
 #      - name: Deploy til prod-gcp
 #        uses: nais/deploy/actions/deploy@v2
 #        env:
-#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
 #          CLUSTER: prod-gcp
 #          RESOURCE: .nais/naiserator/prod.yaml
       - name: Post deploy failures to Slack
