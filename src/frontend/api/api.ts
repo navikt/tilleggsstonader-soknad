@@ -12,7 +12,7 @@ const defaultHeaders = () => ({
     'x-request-id': requestId(),
 });
 
-const defaultConfig = () => ({
+export const defaultConfig = () => ({
     headers: defaultHeaders(),
     withCredentials: true,
 });
