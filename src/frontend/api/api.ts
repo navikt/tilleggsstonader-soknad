@@ -25,7 +25,7 @@ export const hentPersonData = (): Promise<Person> => {
 
 const stønadstypeTilPath = (stønadstype: Stønadstype): string => {
     switch (stønadstype) {
-        case Stønadstype.barnetilsyn:
+        case Stønadstype.BARNETILSYN:
             return 'barnetilsyn';
     }
 };
