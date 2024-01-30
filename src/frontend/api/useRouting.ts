@@ -7,11 +7,11 @@ import Environment from './Environment';
 import { Stønadstype } from '../typer/stønadstyper';
 
 interface SøknadRouting {
-    skalRoutesTilNyLøsning: boolean;
+    skalBehandlesINyLøsning: boolean;
 }
 
 export enum RoutingState {
-    OK = 'OK',
+    NY = 'NY',
     GAMMEL = 'GAMMEL',
     FEILET = 'FEILET',
     HENTER = 'HENTER',
@@ -36,7 +36,7 @@ export const useRouting = (stønadstype: Stønadstype) => {
     useEffect(() => {
         sjekkRouting(stønadstype)
             .then((res) =>
-                setRoutingState(res.skalRoutesTilNyLøsning ? RoutingState.GAMMEL : RoutingState.OK)
+                setRoutingState(res.skalBehandlesINyLøsning ? RoutingState.NY : RoutingState.GAMMEL)
             )
             .catch(() => setRoutingState(RoutingState.FEILET));
     }, [stønadstype]);

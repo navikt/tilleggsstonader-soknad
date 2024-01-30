@@ -13,7 +13,7 @@ const SøknadRouting: React.FC<{ stønadstype: Stønadstype; children: React.Rea
     const { routingState } = useRouting(stønadstype);
 
     switch (routingState) {
-        case RoutingState.OK:
+        case RoutingState.NY:
             return children;
         case RoutingState.HENTER:
             return null;
