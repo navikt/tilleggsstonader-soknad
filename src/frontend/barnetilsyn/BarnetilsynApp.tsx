@@ -1,22 +1,15 @@
-import { Alert } from '@navikt/ds-react';
+import React from 'react';
 
 import Søknadsdialog from './Søknadsdialog';
-import { RoutingState, useRouting } from '../api/useRouting';
+import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
 import { Stønadstype } from '../typer/stønadstyper';
 
 const BarnetilsynApp = () => {
-    const { routingState } = useRouting(Stønadstype.BARNETILSYN);
-
-    switch (routingState) {
-        case RoutingState.OK:
-            return <Søknadsdialog />;
-        case RoutingState.HENTER:
-            return null;
-        case RoutingState.FEILET:
-            return <Alert variant="error">Noe gikk galt! Prøv å laste siden på nytt.</Alert>;
-        case RoutingState.GAMMEL:
-            window.location.href = `http://gammelsoknad`;
-    }
+    return (
+        <SøknadRouting stønadstype={Stønadstype.BARNETILSYN}>
+            <Søknadsdialog />
+        </SøknadRouting>
+    );
 };
 
 export default BarnetilsynApp;
