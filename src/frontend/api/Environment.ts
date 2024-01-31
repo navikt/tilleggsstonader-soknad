@@ -3,6 +3,7 @@ interface EnvironmentProps {
     vedleggProxyUrl: string;
     wonderwallUrl: string;
     sentryUrl?: string;
+    urlGammelSøknad: string;
     miljø: string;
     modellVersjon: IModellversjon;
 }
@@ -22,6 +23,7 @@ const Environment = (): EnvironmentProps => {
             wonderwallUrl:
                 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
+            urlGammelSøknad: 'https://soknad.intern.dev.nav.no/soknadtilleggsstonader',
             miljø: 'preprod',
             modellVersjon: modellVersjon,
         };
@@ -31,6 +33,7 @@ const Environment = (): EnvironmentProps => {
             vedleggProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api/vedlegg',
             wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
+            urlGammelSøknad: 'https://tjenester.nav.no/soknadtilleggsstonader',
             miljø: 'production',
             modellVersjon: modellVersjon,
         };
@@ -39,6 +42,7 @@ const Environment = (): EnvironmentProps => {
             apiProxyUrl: 'http://localhost:8080/api',
             vedleggProxyUrl: 'http://localhost:8080/api/vedlegg/tillegg',
             wonderwallUrl: `http://localhost:8001/test/cookie?redirect=`,
+            urlGammelSøknad: 'https://soknad.intern.dev.nav.no/soknadtilleggsstonader',
             miljø: 'local',
             modellVersjon: modellVersjon,
         };

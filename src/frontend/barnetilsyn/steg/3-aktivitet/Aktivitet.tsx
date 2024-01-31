@@ -53,7 +53,7 @@ const Aktivitet = () => {
     return (
         <Side
             stegtittel={aktivitetTekster.steg_tittel}
-            stønadstype={Stønadstype.barnetilsyn}
+            stønadstype={Stønadstype.BARNETILSYN}
             validerSteg={() => kanFortsette(utdanning?.verdi)}
             oppdaterSøknad={oppdaterAktivitetISøknad}
         >

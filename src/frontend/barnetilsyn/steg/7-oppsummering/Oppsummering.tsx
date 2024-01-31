@@ -263,7 +263,7 @@ const Oppsummering = () => {
     return (
         <Side
             stegtittel={oppsummeringTekster.steg_tittel}
-            stønadstype={Stønadstype.barnetilsyn}
+            stønadstype={Stønadstype.BARNETILSYN}
             validerSteg={() => {
                 if (!harBekreftet) {
                     settFeil('Du må bekrefte for å sende inn søknaden');

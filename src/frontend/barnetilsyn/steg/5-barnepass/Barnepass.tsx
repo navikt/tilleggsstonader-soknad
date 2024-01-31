@@ -49,7 +49,7 @@ const Barnepass = () => {
     return (
         <Side
             stegtittel={barnepassTekster.steg_tittel}
-            stønadstype={Stønadstype.barnetilsyn}
+            stønadstype={Stønadstype.BARNETILSYN}
             oppdaterSøknad={oppdaterSøknad}
             validerSteg={kanGåVidere}
         >

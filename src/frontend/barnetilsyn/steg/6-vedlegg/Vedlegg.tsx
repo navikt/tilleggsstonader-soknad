@@ -48,7 +48,7 @@ const Vedlegg = () => {
 
     return (
         <Side
-            stønadstype={Stønadstype.barnetilsyn}
+            stønadstype={Stønadstype.BARNETILSYN}
             stegtittel={vedleggTekster.steg_tittel}
             oppdaterSøknad={() => settDokumentasjon(nyDokumentasjon)}
         >

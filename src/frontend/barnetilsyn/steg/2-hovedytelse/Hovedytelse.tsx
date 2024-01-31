@@ -65,7 +65,7 @@ const Hovedytelse = () => {
 
     return (
         <Side
-            stønadstype={Stønadstype.barnetilsyn}
+            stønadstype={Stønadstype.BARNETILSYN}
             stegtittel={hovedytelseInnhold.steg_tittel}
             validerSteg={() => kanFortsette(ytelse, annenYtelse)}
             oppdaterSøknad={() => {
