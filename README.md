@@ -3,7 +3,9 @@
 Frontend - søknad for tilleggsstønader
 
 ### Kjøre app lokalt
-`yarn start:dev`
+
+##### Lokal-dev
+`yarn start:dev` 
 Gå inn på http://localhost:8080/tilleggsstonader/soknad/barnetilsyn
 
 Med api må du sette cookie første gang:
