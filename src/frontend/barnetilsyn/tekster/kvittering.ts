@@ -27,7 +27,7 @@ export const kvitteringTekster: KvitteringInnhold = {
     se_søknad: {
         nb: [
             'Du kan se søknaden din på ',
-            { tekst: 'Min side', url: 'https://www.nav.no/min-side' },
+            { tekst: 'Mitt NAV.', url: 'https://www.nav.no/min-side', variant: 'neutral' },
         ],
     },
     se_saksbehandlingstid: {

@@ -10,6 +10,7 @@ export type LesMer<T> = {
 type Lenke = {
     tekst: string;
     url: string;
+    variant?: 'action' | 'neutral' | 'subtle';
 };
 
 export type InlineLenke = (string | Lenke)[];
