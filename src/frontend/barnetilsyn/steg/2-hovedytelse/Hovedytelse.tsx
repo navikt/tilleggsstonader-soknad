@@ -53,7 +53,7 @@ const Hovedytelse = () => {
             </PellePanel>
             <LocaleCheckboxGroup
                 tekst={hovedytelseInnhold.checkbox_hovedytelse}
-                value={ytelse?.verdi}
+                value={(ytelse && ytelse.verdi) || []}
                 onChange={(verdi) => {
                     settYtelse(verdi);
                     settYtelseFeil('');
