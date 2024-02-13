@@ -15,8 +15,6 @@ interface ForsideInnhold {
     info_som_hentes_innhold3: TekstElement<string>;
     dokumentasjon_utgifter_tittel: TekstElement<string>;
     dokumentasjon_utgifter_innhold: TekstElement<string>;
-    vi_stoler_tittel: TekstElement<string>;
-    vi_stoler_innhold: TekstElement<string>;
 }
 
 export const forsideTekster: ForsideInnhold = {
@@ -73,9 +71,5 @@ export const forsideTekster: ForsideInnhold = {
     },
     dokumentasjon_utgifter_innhold: {
         nb: 'Du må dokumentere utgiftene til barnepass med en faktura som inneholder barnets navn, beløp og periode.',
-    },
-    vi_stoler_tittel: { nb: 'Vi stoler på deg' },
-    vi_stoler_innhold: {
-        nb: 'Jeg bekrefter at jeg kjenner til mine plikter og vil svare så godt jeg kan på spørsmålene i søknaden.',
     },
 };

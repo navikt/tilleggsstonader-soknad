@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router';
 import { styled } from 'styled-components';
@@ -8,6 +10,7 @@ import {
     BodyShort,
     Button,
     Checkbox,
+    CheckboxGroup,
     Heading,
     Label,
     Link,
@@ -22,6 +25,7 @@ import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
+import { fellesTekster } from '../tekster/felles';
 import { hentFornavn } from '../utils/formatering';
 import { hentNesteRoute } from '../utils/routes';
 
@@ -37,10 +41,14 @@ const Forside: React.FC = () => {
     const { harBekreftet, settHarBekreftet } = useSøknad();
     const { person } = usePerson();
 
+    const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
+
     const startSøknad = () => {
         if (harBekreftet) {
             const nesteRoute = hentNesteRoute(RoutesBarnetilsyn, location.pathname);
             navigate(nesteRoute.path);
+        } else {
+            settSkalViseFeilmelding(true);
         }
     };
 
@@ -97,17 +105,24 @@ const Forside: React.FC = () => {
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
-            <div>
-                <Label>
-                    <LocaleTekst tekst={forsideTekster.vi_stoler_tittel} />
-                </Label>
+            <CheckboxGroup
+                legend={<LocaleTekst tekst={fellesTekster.vi_stoler_tittel} />}
+                error={
+                    skalViseFeilmelding && (
+                        <LocaleTekst tekst={fellesTekster.vi_stoler_feilmelding} />
+                    )
+                }
+            >
                 <Checkbox
                     checked={harBekreftet}
-                    onChange={(e) => settHarBekreftet(e.target.checked)}
+                    onChange={(e) => {
+                        settHarBekreftet(e.target.checked);
+                        settSkalViseFeilmelding(false);
+                    }}
                 >
-                    <LocaleTekst tekst={forsideTekster.vi_stoler_innhold} />
+                    <LocaleTekst tekst={fellesTekster.vi_stoler_innhold} />
                 </Checkbox>
-            </div>
+            </CheckboxGroup>
             <KnappeContainer>
                 <Button onClick={startSøknad} variant="primary">
                     Start søknad
