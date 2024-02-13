@@ -24,6 +24,8 @@ const Kvittering = () => {
                         tekst={kvitteringTekster.søknad_mottatt_alert_innhold1}
                         argument0={formaterDatoTid(innsentTidspunkt)}
                     />
+                </BodyLong>
+                <BodyLong>
                     <LocaleTekst tekst={kvitteringTekster.søknad_mottatt_alert_innhold2} />
                 </BodyLong>
             </Alert>
