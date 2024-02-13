@@ -11,7 +11,7 @@ interface HovedytelseInnhold {
 export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
     AAP: { nb: 'Arbeidsavklaringspenger (AAP)' },
     OVERGANGSSTØNAD: { nb: 'Overgangsstønad til enslig mor eller far' },
-    GJENLEVENDEPENSJON: { nb: 'Gjenlevendepensjon/etterlattepensjon/omstillingsstønad' },
+    GJENLEVENDEPENSJON: { nb: 'Gjenlevendepensjon / etterlattepensjon / omstillingsstønad' },
     UFØRETRYGD: { nb: 'Uføretrygd' },
     TILTAKSPENGER: { nb: 'Tiltakspenger' },
     DAGPENGER: { nb: 'Dagpenger' },
