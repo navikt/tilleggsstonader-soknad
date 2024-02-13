@@ -114,7 +114,7 @@ const Forside: React.FC = () => {
                 }
             >
                 <Checkbox
-                    checked={harBekreftet}
+                    value={harBekreftet}
                     onChange={(e) => {
                         settHarBekreftet(e.target.checked);
                         settSkalViseFeilmelding(false);
