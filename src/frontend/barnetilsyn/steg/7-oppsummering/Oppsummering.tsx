@@ -125,9 +125,6 @@ const Hovedytelse: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hoved
                 tekst: oppsummeringTekster.accordians.ytelse.endre_button,
             }}
         >
-            <Label>
-                <LocaleTekst tekst={oppsummeringTekster.accordians.ytelse.label} />
-            </Label>
             {ytelser && (
                 <LocalePunktliste
                     tittel={oppsummeringTekster.accordians.ytelse.label}
