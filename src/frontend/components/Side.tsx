@@ -68,7 +68,8 @@ const Side: React.FC<Props> = ({
 }) => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon } = useSøknad();
+    const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon, settInnsentTidspunkt } =
+        useSøknad();
 
     const [sendInnFeil, settSendInnFeil] = useState<boolean>(false);
 
@@ -105,7 +106,10 @@ const Side: React.FC<Props> = ({
             barnMedBarnepass,
             dokumentasjon,
         })
-            .then(() => navigate(nesteRoute.path))
+            .then(() => {
+                settInnsentTidspunkt(new Date());
+                navigate(nesteRoute.path);
+            })
             // TODO håndtering av 401?
             .catch(() => settSendInnFeil(true));
     };

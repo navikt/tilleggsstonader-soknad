@@ -17,6 +17,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);
     const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
 
+    const [innsentTidspunkt, settInnsentTidspunkt] = useState<Date>();
+
     return {
         harBekreftet,
         settHarBekreftet,
@@ -28,6 +30,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         settAktivitet,
         dokumentasjon,
         settDokumentasjon,
+        innsentTidspunkt,
+        settInnsentTidspunkt,
     };
 });
 

@@ -20,3 +20,12 @@ export const hentFornavn = (navn: string) => {
 export const formaterIsoDato = (dato: string): string => {
     return parseISO(dato).toLocaleDateString('no-NO', datoFormat);
 };
+
+export const formaterDatoTid = (dato?: Date): string | undefined => {
+    return (
+        dato &&
+        dato.toLocaleDateString('no-NO', datoFormat) +
+            ', klokken ' +
+            dato.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' })
+    );
+};
