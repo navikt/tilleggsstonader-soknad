@@ -248,15 +248,15 @@ const Vedlegg: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({ dokumentasj
         <Label spacing>
             <LocaleTekst tekst={oppsummeringTekster.accordians.vedlegg.label} />
         </Label>
-        {dokumentasjon.map((d) => (
-            <>
+        {dokumentasjon.map((d, i) => (
+            <React.Fragment key={i}>
                 <BodyLong>{d.label}</BodyLong>
                 {d.opplastedeVedlegg.map((vedlegg) => (
-                    <BodyLong spacing>
+                    <BodyLong spacing key={vedlegg.id}>
                         <PaperclipIcon /> {vedlegg.navn}
                     </BodyLong>
                 ))}
-            </>
+            </React.Fragment>
         ))}
     </AccordionItem>
 );
