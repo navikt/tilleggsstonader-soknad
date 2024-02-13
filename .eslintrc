@@ -14,7 +14,7 @@
         "ecmaVersion": 2020,
         "sourceType": "module"
     },
-    "plugins": ["@typescript-eslint", "prettier", "react-hooks", "import"],
+    "plugins": ["@typescript-eslint", "jsx-a11y", "prettier", "react-hooks", "import"],
     "rules": {
         "import/extensions": [
             "off",
