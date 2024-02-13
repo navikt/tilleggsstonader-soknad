@@ -1,4 +1,6 @@
-export type Locale = 'nb';
+export enum Locale {
+    NB = 'nb',
+}
 
 export type TekstElement<T> = Record<Locale, T>;
 

@@ -1,8 +1,8 @@
 import { EnumFelt } from './skjema';
-import { AnnenYtelse, Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
+import { Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
 
 export interface Hovedytelse {
-    ytelse: EnumFelt<Ytelse | AnnenYtelse>;
+    ytelse: EnumFelt<Ytelse[]>;
 }
 
 export interface Aktivitet {
