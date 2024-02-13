@@ -2,6 +2,9 @@ import { JaNei } from '../typer/søknad';
 import { TekstElement } from '../typer/tekst';
 
 export interface FellesInnhold {
+    vi_stoler_tittel: TekstElement<string>;
+    vi_stoler_innhold: TekstElement<string>;
+    vi_stoler_feilmelding: TekstElement<string>;
     send_inn_søknad: TekstElement<string>;
     send_inn_søknad_feil: TekstElement<string>;
     neste: TekstElement<string>;
@@ -10,6 +13,13 @@ export interface FellesInnhold {
 }
 
 export const fellesTekster: FellesInnhold = {
+    vi_stoler_tittel: { nb: 'Vi stoler på deg' },
+    vi_stoler_innhold: {
+        nb: 'Jeg bekrefter at jeg kjenner til mine plikter og vil svare så godt jeg kan på spørsmålene i søknaden.',
+    },
+    vi_stoler_feilmelding: {
+        nb: 'Du må bekrefte at du vil gi så riktige opplysninger som mulig.',
+    },
     send_inn_søknad: {
         nb: 'Send inn søknad',
     },

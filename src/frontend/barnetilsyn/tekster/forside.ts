@@ -15,25 +15,23 @@ interface ForsideInnhold {
     info_som_hentes_innhold3: TekstElement<string>;
     dokumentasjon_utgifter_tittel: TekstElement<string>;
     dokumentasjon_utgifter_innhold: TekstElement<string>;
-    vi_stoler_tittel: TekstElement<string>;
-    vi_stoler_innhold: TekstElement<string>;
 }
 
 export const forsideTekster: ForsideInnhold = {
     veileder_tittel: {
-        nb: 'Hei [0]',
+        nb: 'Hei [0]!',
     },
     veileder_innhold: {
         nb: [
-            'Jeg er her for å hjelpe deg gjennom søknaden.',
-            'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én måned på Min side på NAV.no.',
+            'Jeg er her for å veilede deg gjennom søknaden.',
+            'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én uke på Ditt NAV.',
         ],
     },
     mottatt_faktura_alert_tittel: {
-        nb: 'Søker du for nytt skole- eller barnehageår?',
+        nb: 'Skal du søke for nytt skole/barnehageår?',
     },
     mottatt_faktura_alert_innhold: {
-        nb: 'Du må dokumentere utgiftene til barnepass for perioden du søker for. Vi anbefaler at du venter med å søke til du har fakturaen for det nye skole- eller barnehageåret. ',
+        nb: 'Du må legge ved faktura for barnepass for perioden du søker for. Det vil ta lengre tid å få svar fra oss hvis vi må hente inn fra deg i etterkant. Har du ikke enda fått faktura for høsten, anbefaler vi deg å vente med å søke til du har det.',
     },
     dine_plikter_tittel: {
         nb: 'Dine plikter',
@@ -41,41 +39,44 @@ export const forsideTekster: ForsideInnhold = {
     dine_plikter_innhold: {
         nb: [
             'Du må gi oss riktige opplysninger i søknaden.',
-            'Du må dokumentere dine utgifter til pass av barn med faktura som inneholder beløp og periode.',
-            'Du må gi beskjed til oss hvis situasjonen din endrer seg. ',
+            'Du må dokumentere dine utgifter til pass av barn med faktura som inneholder beløp og gjelde for perioden du søker for.',
+            'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
             'Hvis du får penger du ikke har rett på, må du du være forberedt på å måtte betale dem tilbake.',
-            'Du kan bare søke om støtte til pass av barn hvis ingen andre har fått dekket utgiftene til pass for samme barn. ',
+            'Du kan bare søke om støtte til pass av barn, hvis ingen andre har fått dekket utgiftene til pass for samme barn.',
         ],
     },
     utgifter_som_dekkes_tittel: {
         nb: 'Hvilke utgifter dekker vi?',
     },
+    //TODO: Fiks med lenke og mellomrom
     utgifter_som_dekkes_innhold: {
-        nb: 'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til et maksbeløp. Utgifter til mat og bleier dekkes ikke.',
+        nb: 'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats.',
     },
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',
     },
     info_som_hentes_innhold1: {
-        nb: 'I tillegg til den informasjonen du oppgir i søknaden, henter vi: ',
+        nb: 'I tillegg til den informasjonen du oppgir i søknaden, henter vi:',
     },
     info_som_hentes_innhold2: {
         nb: [
             'adressen din og opplysninger om dine barn fra Folkeregisteret',
+            'om det utbetales kontantstøtte for barnet du søker støtte til pass for',
             'informasjon om aktivitet eller utdanning som er godkjent av NAV',
+            'hvis du er arbeidssøker sjekker vi om du sender meldekort',
+            'ved behov sjekker vi hvilke andre andre ytelser du mottar fra NAV',
+            'ved behov sjekker vi oppholdstillatelse',
         ],
     },
+    // TODO: Bare halve skal være lenke
     info_som_hentes_innhold3: {
-        nb: 'Slik behandler vi personopplysningene dine',
+        nb: 'NAV er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjon med noen andre. Slik behandler vi personopplysningene dine',
     },
     dokumentasjon_utgifter_tittel: {
-        nb: 'Dokumentasjon av utgifter',
+        nb: 'Dette må legges ved søknaden',
     },
+    // TODO: Overskrifter + innhold (punktlister)
     dokumentasjon_utgifter_innhold: {
         nb: 'Du må dokumentere utgiftene til barnepass med en faktura som inneholder barnets navn, beløp og periode.',
-    },
-    vi_stoler_tittel: { nb: 'Vi stoler på deg' },
-    vi_stoler_innhold: {
-        nb: 'Jeg bekrefter at jeg kjenner til mine plikter og vil svare så godt jeg kan på spørsmålene i søknaden.',
     },
 };
