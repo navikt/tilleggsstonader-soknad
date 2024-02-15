@@ -3,19 +3,21 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { UploadIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button } from '@navikt/ds-react';
+import { Alert, Button, Checkbox, VStack } from '@navikt/ds-react';
+import { ABlue50, ABlue500 } from '@navikt/ds-tokens/dist/tokens';
 
 import { MAX_FILSTØRRELSE, TILLATE_FILTYPER } from './utils';
 import { lastOppVedlegg } from '../../api/api';
-import { vedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
 import { useSpråk } from '../../context/SpråkContext';
+import { filopplastingTekster, teksterFeilmeldinger } from '../../tekster/filopplasting';
 import { Dokument, DokumentasjonFelt } from '../../typer/skjema';
 import { hentBeskjedMedEttParameter } from '../../utils/tekster';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-const StyledKnapp = styled(Button)`
-    width: max-content;
-    margin-top: 1rem;
+const Container = styled(VStack).attrs({ gap: '2', align: 'center' })`
+    border: 1px dashed ${ABlue500};
+    background-color: ${ABlue50};
+    padding: 1rem 0 0.5rem 0;
 `;
 
 const Filopplaster: React.FC<{
@@ -72,20 +74,25 @@ const Filopplaster: React.FC<{
                     {dokument.navn}
                 </BodyShort>
             ))}
-            {feilmelding && <Alert variant="error">{feilmelding}</Alert>}
-            <StyledKnapp
-                onClick={() => hiddenFileInput.current?.click()}
-                icon={<UploadIcon title="a11y-title" />}
-                disabled={laster}
-            >
-                <LocaleTekst tekst={vedleggTekster.typerVedlegg[dokumentasjonFelt.type].knapp} />
-            </StyledKnapp>
-            <input
-                type="file"
-                onChange={lastOppValgteFiler}
-                ref={hiddenFileInput}
-                style={{ display: 'none' }}
-            />
+            <Container>
+                {feilmelding && <Alert variant="error">{feilmelding}</Alert>}
+                <Button
+                    onClick={() => hiddenFileInput.current?.click()}
+                    icon={<UploadIcon title="a11y-title" />}
+                    disabled={laster}
+                >
+                    <LocaleTekst tekst={filopplastingTekster.last_opp_fil_knapp} />
+                </Button>
+                <Checkbox>
+                    <LocaleTekst tekst={filopplastingTekster.delt_tidligere_knapp} />
+                </Checkbox>
+                <input
+                    type="file"
+                    onChange={lastOppValgteFiler}
+                    ref={hiddenFileInput}
+                    style={{ display: 'none' }}
+                />
+            </Container>
         </>
     );
 };
