@@ -6,6 +6,7 @@ import { UploadIcon } from '@navikt/aksel-icons';
 import { Alert, Button, Checkbox, VStack } from '@navikt/ds-react';
 import { ABlue50, ABlue500 } from '@navikt/ds-tokens/dist/tokens';
 
+import FilVisning from './Fil';
 import { MAX_FILSTØRRELSE, TILLATE_FILTYPER } from './utils';
 import { lastOppVedlegg } from '../../api/api';
 import { useSpråk } from '../../context/SpråkContext';
@@ -70,9 +71,7 @@ const Filopplaster: React.FC<{
     return (
         <>
             {dokumentasjonFelt.opplastedeVedlegg.map((dokument) => (
-                <BodyShort key={dokument.id} size="small">
-                    {dokument.navn}
-                </BodyShort>
+                <FilVisning key={dokument.id} dokument={dokument} />
             ))}
             <Container>
                 {feilmelding && <Alert variant="error">{feilmelding}</Alert>}
