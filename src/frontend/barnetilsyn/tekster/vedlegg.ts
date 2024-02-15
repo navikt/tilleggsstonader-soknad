@@ -1,11 +1,8 @@
 import { Vedleggstype } from '../../typer/skjema';
-import { LesMer, TekstElement } from '../../typer/tekst';
+import { LesMer, TekstElement, Vedlegg } from '../../typer/tekst';
 
-type TekstTypeVedlegg = {
-    [key in Vedleggstype]: {
-        label: TekstElement<string>;
-        knapp: TekstElement<string>;
-    };
+export type TekstTypeVedlegg = {
+    [key in Vedleggstype]: Vedlegg;
 };
 
 interface VedleggInnhold {
@@ -31,14 +28,6 @@ interface VedleggInnhold {
             innhold: TekstElement<string>;
         };
     };
-
-    // Hardkodet:
-    pass_ronja_espen: TekstElement<string>;
-    vedlegg_espen_ronja: TekstElement<string[]>;
-    legeerklæring_espen_tittel: TekstElement<string>;
-    legeerklæring_espen: TekstElement<string>;
-
-    typerVedlegg: TekstTypeVedlegg;
 }
 
 const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] = {
@@ -73,17 +62,6 @@ const harIkkeVedleggDigitalAccordian: VedleggInnhold['accordians']['har_ikke_ved
             'Teksten til dokumentet er godt leselig.',
             'Bildet er godt opplyst, uten skygger.',
         ],
-    },
-};
-
-const typerVedlegg: TekstTypeVedlegg = {
-    [Vedleggstype.EKSEMPEL]: {
-        label: {
-            nb: 'Faktura',
-        },
-        knapp: {
-            nb: 'Last opp faktura',
-        },
     },
 };
 
@@ -125,23 +103,47 @@ export const vedleggTekster: VedleggInnhold = {
         har_ikke_vedlegg_digital: harIkkeVedleggDigitalAccordian,
         format_kvalitet: formatKvalitetAccordian,
     },
+};
 
-    // Hardkodet:
-    pass_ronja_espen: {
-        nb: 'Pass av Ronja og Espen',
+export const typerVedleggTekster: TekstTypeVedlegg = {
+    [Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE]: {
+        tittel: {
+            nb: 'Dokumentasjon av utgifter for pass av [0]',
+        },
+        beskrivelse: {
+            nb: 'For eksempel avtale med barnepasser og A-melding sendt Skatteetaten.',
+        },
+        krav_til_dokumentasjon: {
+            nb: [
+                'Dokumentasjon på utgifter må inneholde barnets navn, beløp og perioden den gjelder for. ',
+                'Vi godkjenner ikke bilde av kontoutskrift, vipps eller lignende fordi vi trenger å se hva som er utgifter til pass av barn og hva som er utgift til bleier eller mat.',
+            ],
+        },
     },
-    vedlegg_espen_ronja: {
-        nb: [
-            'Avtale med privat barnepasser for Ronja',
-            'A-melding sendt Skatteetaten for barnepasser for Ronja',
-            'Faktura fra SFO/AKS for Espen',
-        ],
+    [Vedleggstype.UTGIFTER_PASS_ANNET]: {
+        tittel: {
+            nb: 'Dokumentasjon av utgifter for pass av [0]',
+        },
+        beskrivelse: {
+            nb: 'For eksempel avtale med barnepasser og A-melding sendt Skatteetaten.',
+        },
+        krav_til_dokumentasjon: {
+            nb: [
+                'Dokumentasjon på utgifter må inneholde barnets navn, beløp og perioden den gjelder for.',
+                'Vi godkjenner ikke bilde av kontoutskrift, vipps eller lignende fordi vi trenger å se hva som er utgifter til pass av barn og hva som er utgift til bleier eller mat.',
+                'Ved privat barnepass regnes du som arbeidsgiver og derfor er det  egne regler du kan lese om på Skatteetaten. ',
+            ],
+        },
     },
-    legeerklæring_espen_tittel: {
-        nb: 'Legeerklæring for Espen',
+    [Vedleggstype.EKSTRA_PASS_BEHOV]: {
+        tittel: {
+            nb: 'Dokumentasjon på behov for ekstra pass for [0]',
+        },
+        beskrivelse: {
+            nb: 'Legeerklæring eller annen uttalelse fra helsepersonell.',
+        },
+        krav_til_dokumentasjon: {
+            nb: 'Legeerklæringen/uttalelsen fra helsepersonell må inneholde barnets navn og gjelde for perioden du søker om støtte til pass for.',
+        },
     },
-    legeerklæring_espen: {
-        nb: 'Legerklæringen må inneholde opplysninger om hvorfor Espen trenger ekstra pass. ',
-    },
-    typerVedlegg: typerVedlegg,
 };

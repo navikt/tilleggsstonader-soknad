@@ -19,3 +19,9 @@ export type Radiogruppe<T> = {
     beskrivelse?: TekstElement<string>;
     alternativer: { label: TekstElement<string>; value: T }[];
 };
+
+export type Vedlegg = {
+    tittel: TekstElement<string>;
+    beskrivelse: TekstElement<string>;
+    krav_til_dokumentasjon: TekstElement<string | string[]>;
+};
