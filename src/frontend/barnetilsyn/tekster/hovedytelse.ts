@@ -1,11 +1,11 @@
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { CheckboxGruppe, TekstElement } from '../../typer/tekst';
 import { Ytelse } from '../steg/2-hovedytelse/typer';
 
 interface HovedytelseInnhold {
     steg_tittel: TekstElement<string>;
     innhold_tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
-    checkbox_hovedytelse: Radiogruppe<Ytelse>;
+    checkbox_hovedytelse: CheckboxGruppe<Ytelse>;
 }
 
 export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
@@ -36,47 +36,6 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         beskrivelse: {
             nb: 'Du kan velge flere.',
         },
-        alternativer: [
-            {
-                value: 'AAP',
-                label: YtelseTilTekst.AAP,
-            },
-            {
-                value: 'OVERGANGSSTØNAD',
-                label: YtelseTilTekst.OVERGANGSSTØNAD,
-            },
-            {
-                value: 'GJENLEVENDEPENSJON',
-                label: YtelseTilTekst.GJENLEVENDEPENSJON,
-            },
-            {
-                value: 'UFØRETRYGD',
-                label: YtelseTilTekst.UFØRETRYGD,
-            },
-            {
-                value: 'TILTAKSPENGER',
-                label: YtelseTilTekst.TILTAKSPENGER,
-            },
-            {
-                value: 'DAGPENGER',
-                label: YtelseTilTekst.DAGPENGER,
-            },
-            {
-                value: 'SYKEPENGER',
-                label: YtelseTilTekst.SYKEPENGER,
-            },
-            {
-                value: 'KVALIFISERINGSSTØNAD',
-                label: YtelseTilTekst.KVALIFISERINGSSTØNAD,
-            },
-            {
-                value: 'INGEN_PENGESTØTTE',
-                label: YtelseTilTekst.INGEN_PENGESTØTTE,
-            },
-            {
-                value: 'INGEN_PASSENDE_ALTERNATIVER',
-                label: YtelseTilTekst.INGEN_PASSENDE_ALTERNATIVER,
-            },
-        ],
+        alternativer: YtelseTilTekst,
     },
 };

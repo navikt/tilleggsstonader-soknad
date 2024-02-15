@@ -21,3 +21,9 @@ export type Radiogruppe<T> = {
     beskrivelse?: TekstElement<string>;
     alternativer: { label: TekstElement<string>; value: T }[];
 };
+
+export type CheckboxGruppe<T extends string> = {
+    header: TekstElement<string>;
+    beskrivelse?: TekstElement<string>;
+    alternativer: Record<T, TekstElement<string>>;
+};

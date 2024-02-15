@@ -1,8 +1,8 @@
-import { EnumFelt } from './skjema';
+import { EnumFelt, EnumFlereValgFelt } from './skjema';
 import { Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
 
 export interface Hovedytelse {
-    ytelse: EnumFelt<Ytelse[]>;
+    ytelse: EnumFlereValgFelt<Ytelse>;
 }
 
 export interface Aktivitet {

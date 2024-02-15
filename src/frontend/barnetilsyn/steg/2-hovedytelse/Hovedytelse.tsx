@@ -8,23 +8,23 @@ import Side from '../../../components/Side';
 import LocaleCheckboxGroup from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSøknad } from '../../../context/SøknadContext';
-import { EnumFelt } from '../../../typer/skjema';
+import { EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
 const Hovedytelse = () => {
     const { hovedytelse, settHovedytelse } = useSøknad();
 
-    const [ytelse, settYtelse] = useState<EnumFelt<Ytelse[]> | undefined>(
+    const [ytelse, settYtelse] = useState<EnumFlereValgFelt<Ytelse> | undefined>(
         hovedytelse && hovedytelse.ytelse
     );
 
     const [ytelseFeil, settYtelseFeil] = useState('');
 
-    const kanFortsette = (ytelse?: EnumFelt<Ytelse[]>): boolean => {
+    const kanFortsette = (ytelse?: EnumFlereValgFelt<Ytelse>): boolean => {
         let kanFortsette = true;
 
-        if (ytelse === undefined || ytelse.verdi.length === 0) {
+        if (ytelse === undefined || ytelse.verdier.length === 0) {
             kanFortsette = false;
             settYtelseFeil('Du må velge et alternativ');
         } else {
@@ -53,7 +53,7 @@ const Hovedytelse = () => {
             </PellePanel>
             <LocaleCheckboxGroup
                 tekst={hovedytelseInnhold.checkbox_hovedytelse}
-                value={ytelse ? ytelse.verdi : []}
+                value={ytelse ? ytelse.verdier : []}
                 onChange={(verdi) => {
                     settYtelse(verdi);
                     settYtelseFeil('');

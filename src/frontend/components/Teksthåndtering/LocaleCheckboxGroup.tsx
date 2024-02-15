@@ -7,23 +7,25 @@ import {
 } from '@navikt/ds-react';
 
 import { useSpråk } from '../../context/SpråkContext';
-import { EnumFelt } from '../../typer/skjema';
-import { Radiogruppe } from '../../typer/tekst';
+import { EnumFlereValgFelt, VerdiFelt } from '../../typer/skjema';
+import { CheckboxGruppe } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekster';
 
-interface CheckboxGroupProps<T>
+interface CheckboxGroupProps<T extends string>
     extends Omit<AkselCheckboxGroupProps, 'onChange' | 'legend' | 'children'> {
-    tekst: Radiogruppe<T>;
-    onChange: (enumFelt: EnumFelt<T[]>) => void;
+    tekst: CheckboxGruppe<T>;
+    onChange: (enumFelt: EnumFlereValgFelt<T>) => void;
     children?: React.ReactNode;
     argument0?: string;
+    value: VerdiFelt<T>[];
 }
 
-function LocaleCheckboxGroup<T>({
+function LocaleCheckboxGroup<T extends string>({
     children,
     tekst,
     argument0,
     onChange,
+    value,
     ...props
 }: CheckboxGroupProps<T>) {
     const { locale } = useSpråk();
@@ -32,18 +34,24 @@ function LocaleCheckboxGroup<T>({
         ? hentBeskjedMedEttParameter(argument0, tekst.header[locale])
         : tekst.header[locale];
 
-    const oppdaterValgteVerdier = (value: T[]) => {
-        const svarTekst = tekst.alternativer.find((alternativ) => alternativ.value === value);
+    const oppdaterValgteVerdier = (values: T[]) => {
+        const verdier: VerdiFelt<T>[] = values.map((verdi) => ({
+            verdi,
+            label: tekst.alternativer[verdi][locale],
+        }));
+
         onChange({
             label: legend,
-            verdi: value,
-            alternativer: tekst.alternativer.map((alternativ) => alternativ.label[locale]),
-            svarTekst: svarTekst?.label[locale] || '',
+            verdier: verdier,
+            alternativer: Object.keys(tekst.alternativer).map(
+                (key) => tekst.alternativer[key as T][locale]
+            ),
         });
     };
 
     return (
         <CheckboxGroup
+            value={value.map((v) => v.verdi)}
             legend={legend}
             description={
                 tekst.beskrivelse &&
@@ -55,9 +63,9 @@ function LocaleCheckboxGroup<T>({
             {...props}
         >
             {children}
-            {tekst.alternativer.map((alternativ, indeks) => (
-                <Checkbox value={alternativ.value} key={indeks}>
-                    {alternativ.label[locale]}
+            {Object.keys(tekst.alternativer).map((key) => (
+                <Checkbox value={key} key={key}>
+                    {tekst.alternativer[key as T][locale]}
                 </Checkbox>
             ))}
         </CheckboxGroup>
