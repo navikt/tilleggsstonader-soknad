@@ -5,12 +5,11 @@ import styled from 'styled-components';
 import { UploadIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button } from '@navikt/ds-react';
 
-import { MAKS_FILSTØRRELSE_FORMATTERT, MAX_FILSTØRRELSE, TILLATE_FILTYPER } from './utils';
+import { MAX_FILSTØRRELSE, TILLATE_FILTYPER } from './utils';
 import { lastOppVedlegg } from '../../api/api';
 import { vedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
 import { useSpråk } from '../../context/SpråkContext';
 import { Dokument, DokumentasjonFelt } from '../../typer/skjema';
-import { TekstElement } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekster';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
@@ -19,25 +18,6 @@ const StyledKnapp = styled(Button)`
     margin-top: 1rem;
 `;
 
-const teksterFeilmeldinger: {
-    enFil: TekstElement<string>;
-    maksstørrelse: TekstElement<string>;
-    filtype: TekstElement<string>;
-    feiletOpplasting: TekstElement<string>;
-} = {
-    enFil: {
-        nb: `Må laste opp en og en fil`,
-    },
-    maksstørrelse: {
-        nb: `"[0]" er for stor (maksimal filstørrelse er ${MAKS_FILSTØRRELSE_FORMATTERT}).`,
-    },
-    filtype: {
-        nb: '"[0]" – Ugyldig filtype.',
-    },
-    feiletOpplasting: {
-        nb: 'Feilet opplasting av "[0]".',
-    },
-};
 const Filopplaster: React.FC<{
     dokumentasjonFelt: DokumentasjonFelt;
     oppdaterVedlegg: (vedlegg: Dokument[]) => void;
