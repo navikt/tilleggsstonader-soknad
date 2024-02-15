@@ -30,14 +30,13 @@ import { Stønadstype } from '../../../typer/stønadstyper';
 import { Hovedytelse } from '../../../typer/søknad';
 import { TekstElement } from '../../../typer/tekst';
 import { formaterAdresse, formaterIsoDato, hentFornavn } from '../../../utils/formatering';
-import { listeTilTekstElement } from '../../../utils/tekster';
+import { verdiFelterTilTekstElement } from '../../../utils/tekster';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import {
     barnepassTekster,
     PassTypeTilTekst,
     ÅrsakEkstraPassTilTekst,
 } from '../../tekster/barnepass';
-import { YtelseTilTekst } from '../../tekster/hovedytelse';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 import { personaliaTekster } from '../../tekster/personalia';
 
@@ -115,7 +114,7 @@ const OmDeg: React.FC<{ person: Person }> = ({ person }) => (
 );
 
 const Hovedytelse: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hovedytelse }) => {
-    const ytelser = hovedytelse && listeTilTekstElement(hovedytelse.ytelse.verdi, YtelseTilTekst);
+    const ytelser = hovedytelse && verdiFelterTilTekstElement(hovedytelse.ytelse.verdier);
 
     return (
         <AccordionItem
