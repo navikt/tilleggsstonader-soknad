@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { styled } from 'styled-components';
 
-import { Heading } from '@navikt/ds-react';
+import { BodyShort, Heading, Label, List } from '@navikt/ds-react';
 
 import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
@@ -21,6 +21,25 @@ const VedleggContainer = styled.div`
     gap: 2rem;
     margin: 1rem 0;
 `;
+
+const Dokumentasjonskrav = () => {
+    const { dokumentasjon } = useSøknad();
+    return (
+        <div>
+            <Label>
+                <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_tittel} />
+            </Label>
+            <List>
+                {dokumentasjon.map((doc, indeks) => (
+                    <List.Item key={indeks}> {doc.label} </List.Item>
+                ))}
+            </List>
+            <BodyShort>
+                <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />
+            </BodyShort>
+        </div>
+    );
+};
 
 const Vedlegg = () => {
     const { dokumentasjon, settDokumentasjon } = useSøknad();
@@ -50,6 +69,8 @@ const Vedlegg = () => {
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
             </PellePanel>
+            <Dokumentasjonskrav></Dokumentasjonskrav>
+            <VedleggGenerellInfo />
             <VedleggContainer>
                 {nyDokumentasjon.map((dok, indeks) => (
                     <section key={indeks}>
@@ -64,7 +85,6 @@ const Vedlegg = () => {
                     </section>
                 ))}
             </VedleggContainer>
-            <VedleggGenerellInfo />
         </Side>
     );
 };
