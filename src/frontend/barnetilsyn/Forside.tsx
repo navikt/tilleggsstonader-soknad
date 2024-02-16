@@ -7,19 +7,20 @@ import { styled } from 'styled-components';
 import {
     Accordion,
     Alert,
+    BodyLong,
     BodyShort,
     Button,
     Checkbox,
     CheckboxGroup,
     Heading,
     Label,
-    Link,
 } from '@navikt/ds-react';
 
 import { RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
+import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
@@ -81,7 +82,12 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold} />
+                        <BodyLong spacing>
+                            <LocaleInlineLenke
+                                tekst={forsideTekster.utgifter_som_dekkes_innhold_1}
+                            />
+                        </BodyLong>
+                        <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold_2} />
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
@@ -91,9 +97,7 @@ const Forside: React.FC = () => {
                     <Accordion.Content>
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
                         <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
-                        <Link>
-                            <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />
-                        </Link>
+                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold3} />
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
@@ -101,7 +105,7 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_innhold} />
+                        <LocalePunktliste innhold={forsideTekster.dokumentasjon_utgifter_innhold} />
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
