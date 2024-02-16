@@ -18,25 +18,25 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
     const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([
         {
             type: Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE,
-            label: 'label',
+            label: 'Faktura fra SFO/AKS for Spontan',
             harSendtInn: false,
             opplastedeVedlegg: [],
-            barnId: 'Ronja',
+            barnId: 'Spontan',
         },
         {
             type: Vedleggstype.UTGIFTER_PASS_ANNET,
-            label: 'label',
+            label: 'Dokumentasjon på utgifter for privat barnepasser for Ru',
             harSendtInn: false,
             opplastedeVedlegg: [],
-            barnId: 'Espen',
+            barnId: 'Ru',
         },
 
         {
             type: Vedleggstype.EKSTRA_PASS_BEHOV,
-            label: 'label',
+            label: 'Skriftlig uttalelse fra helsepersonell for Ru',
             harSendtInn: false,
             opplastedeVedlegg: [],
-            barnId: 'Espen',
+            barnId: 'Ru',
         },
     ]);
 

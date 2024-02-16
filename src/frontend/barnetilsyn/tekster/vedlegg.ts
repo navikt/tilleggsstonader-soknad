@@ -9,6 +9,8 @@ interface VedleggInnhold {
     steg_tittel: TekstElement<string>;
     innhold_tittel: TekstElement<string>;
     guide_innhold: TekstElement<string[]>;
+    dokumentasjonskrav_tittel: TekstElement<string>;
+    dokumentasjonskrav_samlet_faktura: TekstElement<string>;
 
     accordians: {
         har_ikke_vedlegg_digital: {
@@ -30,7 +32,7 @@ const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] =
         nb: 'Format og kvalitet på vedlegg',
     },
     innhold: {
-        nb: 'Du kan laste opp vedlegg png, pdf eller jpeg. Det er viktig at bildet har god nok oppløsning/kvalitet til at vi kan lese det. ',
+        nb: 'Du kan laste opp vedlegg med filformat .png, .pdf eller .jpeg. Det er viktig at bildet har god nok oppløsning/kvalitet til at vi kan lese det. ',
     },
 };
 
@@ -72,6 +74,10 @@ export const vedleggTekster: VedleggInnhold = {
             'Vi kan ikke starte saksbehandlingen før vi har all dokumentasjon fra deg.',
             'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, senest innen 14 dager. Trenger du mer tid, kan du be om lenger frist på Min side på NAV.no etter at søknaden er sendt inn.',
         ],
+    },
+    dokumentasjonskrav_tittel: { nb: 'Ut fra det du har svart i søknaden, må du legge ved:' },
+    dokumentasjonskrav_samlet_faktura: {
+        nb: 'Har du samlet faktura for flere barn, trenger du bare å laste den opp en gang.',
     },
 
     accordians: {
