@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
-import { Heading } from '@navikt/ds-react';
+import { Heading, HStack } from '@navikt/ds-react';
 
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
-import Side, { Innhold } from '../../../components/Side';
+import Side from '../../../components/Side';
 import LocaleCheckboxGroup from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
@@ -18,7 +18,7 @@ import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
-const OppholdINorge = styled(Innhold)`
+const HStackMedMargin = styled(HStack)`
     margin-top: 3rem;
 `;
 interface Feil {
@@ -112,7 +112,7 @@ const Hovedytelse = () => {
                 error={ytelseFeil?.ytelse}
             />
             {skalTaStillingTilOpphold && (
-                <OppholdINorge>
+                <HStackMedMargin gap="6">
                     <Heading size="medium">
                         <LocaleTekst tekst={hovedytelseInnhold.oppholdINorge.tittel} />
                     </Heading>
@@ -144,7 +144,7 @@ const Hovedytelse = () => {
                             error={ytelseFeil?.planleggerBoINorgeNeste12mnd}
                         />
                     )}
-                </OppholdINorge>
+                </HStackMedMargin>
             )}
         </Side>
     );

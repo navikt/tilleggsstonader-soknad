@@ -43,7 +43,7 @@ const StegIndikator = styled.div`
     gap: 0.5rem;
 `;
 
-export const Innhold = styled.div`
+const Innhold = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
