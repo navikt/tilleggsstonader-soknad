@@ -1,4 +1,4 @@
-import { TekstElement } from '../../typer/tekst';
+import { InlineLenke, TekstElement } from '../../typer/tekst';
 
 interface ForsideInnhold {
     veileder_tittel: TekstElement<string>;
@@ -8,13 +8,14 @@ interface ForsideInnhold {
     dine_plikter_tittel: TekstElement<string>;
     dine_plikter_innhold: TekstElement<string[]>;
     utgifter_som_dekkes_tittel: TekstElement<string>;
-    utgifter_som_dekkes_innhold: TekstElement<string>;
+    utgifter_som_dekkes_innhold_1: TekstElement<InlineLenke>;
+    utgifter_som_dekkes_innhold_2: TekstElement<string>;
     info_som_hentes_tittel: TekstElement<string>;
     info_som_hentes_innhold1: TekstElement<string>;
     info_som_hentes_innhold2: TekstElement<string[]>;
-    info_som_hentes_innhold3: TekstElement<string>;
+    info_som_hentes_innhold3: TekstElement<InlineLenke>;
     dokumentasjon_utgifter_tittel: TekstElement<string>;
-    dokumentasjon_utgifter_innhold: TekstElement<string>;
+    dokumentasjon_utgifter_innhold: TekstElement<string[]>;
 }
 
 export const forsideTekster: ForsideInnhold = {
@@ -49,8 +50,18 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Hvilke utgifter dekker vi?',
     },
     //TODO: Fiks med lenke og mellomrom
-    utgifter_som_dekkes_innhold: {
-        nb: 'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en maksimumssats.',
+    utgifter_som_dekkes_innhold_1: {
+        nb: [
+            'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en ',
+            {
+                tekst: 'maksimumssats.',
+                url: 'https://www.nav.no/tilleggsstonader#hva',
+                variant: 'neutral',
+            },
+        ],
+    },
+    utgifter_som_dekkes_innhold_2: {
+        nb: 'Utgifter til mat og bleier dekkes ikke.  ',
     },
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',
@@ -68,15 +79,24 @@ export const forsideTekster: ForsideInnhold = {
             'ved behov sjekker vi oppholdstillatelse',
         ],
     },
-    // TODO: Bare halve skal være lenke
     info_som_hentes_innhold3: {
-        nb: 'NAV er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjon med noen andre. Slik behandler vi personopplysningene dine',
+        nb: [
+            'NAV er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre.  ',
+            {
+                tekst: 'Personvernerklæringen på nav.no',
+                url: 'https://www.nav.no/personvernerklaering',
+                variant: 'neutral',
+            },
+            ' gir mer informasjon om hvordan vi behandler dine personopplysninger.',
+        ],
     },
     dokumentasjon_utgifter_tittel: {
         nb: 'Dette må legges ved søknaden',
     },
-    // TODO: Overskrifter + innhold (punktlister)
     dokumentasjon_utgifter_innhold: {
-        nb: 'Du må dokumentere utgiftene til barnepass med en faktura som inneholder barnets navn, beløp og periode.',
+        nb: [
+            'at barnet har større behov for pass enn jevnaldrende, med skriftlig uttalelse fra lege, spesialist eller annet helsepersonell, eller',
+            'at du har en arbeidsrettet aktivitet hvor du må være borte på andre tider enn en vanlig arbeidsdag, med dokumentasjon fra utdanning/tiltakssted.',
+        ],
     },
 };
