@@ -42,7 +42,7 @@ const Hovedytelse = () => {
     >(hovedytelse?.planleggerBoINorgeNeste12mnd);
 
     const [skalTaStillingTilOpphold, settSkalTaStillingTilOpphold] = useState(
-        !!hovedytelse?.boddSammenhengende
+        hovedytelse?.ytelse ? skalTaStillingTilOppholdINorge(hovedytelse.ytelse) : false
     );
 
     const [ytelseFeil, settYtelseFeil] = useState<Feil>();
