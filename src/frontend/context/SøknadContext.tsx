@@ -17,14 +17,14 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);
     const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([
         {
-            type: Vedleggstype.UTGIFTER_PASS_ANNET,
+            type: Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE,
             label: 'label',
             harSendtInn: false,
             opplastedeVedlegg: [],
             barnId: 'Ronja',
         },
         {
-            type: Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE,
+            type: Vedleggstype.UTGIFTER_PASS_ANNET,
             label: 'label',
             harSendtInn: false,
             opplastedeVedlegg: [],
