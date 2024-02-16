@@ -1,8 +1,8 @@
-import { EnumFelt } from './skjema';
-import { AnnenYtelse, Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
+import { EnumFelt, EnumFlereValgFelt } from './skjema';
+import { Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
 
 export interface Hovedytelse {
-    ytelse: EnumFelt<Ytelse | AnnenYtelse>;
+    ytelse: EnumFlereValgFelt<Ytelse>;
 }
 
 export interface Aktivitet {
@@ -14,4 +14,8 @@ export type JaNei = 'JA' | 'NEI';
 export interface Periode {
     fom: string;
     tom: string;
+}
+
+export interface Kvittering {
+    mottattTidspunkt: string;
 }

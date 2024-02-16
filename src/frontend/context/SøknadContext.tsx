@@ -40,6 +40,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         },
     ]);
 
+    const [innsentTidspunkt, settInnsentTidspunkt] = useState<string>();
+
     return {
         harBekreftet,
         settHarBekreftet,
@@ -51,6 +53,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         settAktivitet,
         dokumentasjon,
         settDokumentasjon,
+        innsentTidspunkt,
+        settInnsentTidspunkt,
     };
 });
 

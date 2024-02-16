@@ -17,6 +17,7 @@ import {
 
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
+import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
 import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
@@ -29,13 +30,13 @@ import { Stønadstype } from '../../../typer/stønadstyper';
 import { Hovedytelse } from '../../../typer/søknad';
 import { TekstElement } from '../../../typer/tekst';
 import { formaterAdresse, formaterIsoDato, hentFornavn } from '../../../utils/formatering';
+import { verdiFelterTilTekstElement } from '../../../utils/tekster';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import {
     barnepassTekster,
     PassTypeTilTekst,
     ÅrsakEkstraPassTilTekst,
 } from '../../tekster/barnepass';
-import { YtelseTilTekst } from '../../tekster/hovedytelse';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 import { personaliaTekster } from '../../tekster/personalia';
 
@@ -112,24 +113,26 @@ const OmDeg: React.FC<{ person: Person }> = ({ person }) => (
     </AccordionItem>
 );
 
-const Hovedytelse: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hovedytelse }) => (
-    <AccordionItem
-        header={oppsummeringTekster.accordians.ytelse.tittel}
-        endreKnapp={{
-            route: RouteTilPath.HOVEDYTELSE,
-            tekst: oppsummeringTekster.accordians.ytelse.endre_button,
-        }}
-    >
-        <Label>
-            <LocaleTekst tekst={oppsummeringTekster.accordians.ytelse.label} />
-        </Label>
-        {hovedytelse && (
-            <BodyShort>
-                <LocaleTekst tekst={YtelseTilTekst[hovedytelse.ytelse.verdi]} />
-            </BodyShort>
-        )}
-    </AccordionItem>
-);
+const Hovedytelse: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hovedytelse }) => {
+    const ytelser = hovedytelse && verdiFelterTilTekstElement(hovedytelse.ytelse.verdier);
+
+    return (
+        <AccordionItem
+            header={oppsummeringTekster.accordians.ytelse.tittel}
+            endreKnapp={{
+                route: RouteTilPath.HOVEDYTELSE,
+                tekst: oppsummeringTekster.accordians.ytelse.endre_button,
+            }}
+        >
+            {ytelser && (
+                <LocalePunktliste
+                    tittel={oppsummeringTekster.accordians.ytelse.label}
+                    innhold={ytelser}
+                />
+            )}
+        </AccordionItem>
+    );
+};
 
 const AktivitetUtdanning: React.FC = () => (
     <AccordionItem
@@ -241,15 +244,15 @@ const Vedlegg: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({ dokumentasj
         <Label spacing>
             <LocaleTekst tekst={oppsummeringTekster.accordians.vedlegg.label} />
         </Label>
-        {dokumentasjon.map((d) => (
-            <>
+        {dokumentasjon.map((d, i) => (
+            <React.Fragment key={i}>
                 <BodyLong>{d.label}</BodyLong>
                 {d.opplastedeVedlegg.map((vedlegg) => (
-                    <BodyLong spacing>
+                    <BodyLong spacing key={vedlegg.id}>
                         <PaperclipIcon /> {vedlegg.navn}
                     </BodyLong>
                 ))}
-            </>
+            </React.Fragment>
         ))}
     </AccordionItem>
 );

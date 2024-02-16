@@ -12,7 +12,12 @@ const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tek
                 typeof tekstElement === 'string' ? (
                     <span key={indeks}>{tekstElement}</span>
                 ) : (
-                    <Link inlineText href={tekstElement.url} key={indeks}>
+                    <Link
+                        inlineText
+                        href={tekstElement.url}
+                        key={indeks}
+                        variant={tekstElement.variant}
+                    >
                         {tekstElement.tekst}
                     </Link>
                 )

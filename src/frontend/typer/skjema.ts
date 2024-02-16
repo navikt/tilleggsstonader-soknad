@@ -5,6 +5,17 @@ export interface EnumFelt<T> {
     alternativer: string[];
 }
 
+export interface EnumFlereValgFelt<T> {
+    label: string;
+    verdier: VerdiFelt<T>[];
+    alternativer: string[];
+}
+
+export interface VerdiFelt<T> {
+    verdi: T;
+    label: string;
+}
+
 export interface DokumentasjonFelt {
     type: Vedleggstype;
     label: string;
