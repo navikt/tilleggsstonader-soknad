@@ -79,7 +79,6 @@ export const forsideTekster: ForsideInnhold = {
             'ved behov sjekker vi oppholdstillatelse',
         ],
     },
-    // TODO: Bare halve skal være lenke
     info_som_hentes_innhold3: {
         nb: [
             'NAV er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre.  ',
@@ -94,7 +93,6 @@ export const forsideTekster: ForsideInnhold = {
     dokumentasjon_utgifter_tittel: {
         nb: 'Dette må legges ved søknaden',
     },
-    // TODO: Overskrifter + innhold (punktlister)
     dokumentasjon_utgifter_innhold: {
         nb: [
             'at barnet har større behov for pass enn jevnaldrende, med skriftlig uttalelse fra lege, spesialist eller annet helsepersonell, eller',
