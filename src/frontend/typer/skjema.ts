@@ -10,14 +10,16 @@ export interface DokumentasjonFelt {
     label: string;
     harSendtInn: boolean;
     opplastedeVedlegg: Dokument[];
-}
-
-// Disse må synke med Vedleggstype i kontrakter
-export enum Vedleggstype {
-    EKSEMPEL = 'EKSEMPEL',
+    barnId?: string;
 }
 
 export interface Dokument {
     id: string;
     navn: string;
+}
+
+export enum Vedleggstype {
+    UTGIFTER_PASS_SFO_AKS_BARNEHAGE = 'UTGIFTER_PASS_SFO_AKS_BARNEHAGE',
+    UTGIFTER_PASS_ANNET = 'UTGIFER_PASS_ANNET',
+    EKSTRA_PASS_BEHOV = 'EKSTRA_PASS_BEHOV',
 }
