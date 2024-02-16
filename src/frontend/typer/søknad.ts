@@ -3,6 +3,8 @@ import { Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
 
 export interface Hovedytelse {
     ytelse: EnumFlereValgFelt<Ytelse>;
+    boddSammenhengende: EnumFelt<JaNei> | undefined;
+    planleggerBoINorgeNeste12mnd: EnumFelt<JaNei> | undefined;
 }
 
 export interface Aktivitet {
