@@ -18,13 +18,24 @@ const Container = styled.div`
     padding: 0.5rem;
 `;
 
+function splittOppHvisLang(navn: string) {
+    const lengde = navn.length;
+    const splittHvisLengde = 30;
+
+    if (lengde < splittHvisLengde) return navn;
+
+    const navnOgfiltype = navn.split('.');
+
+    return navn.substring(0, splittHvisLengde) + '...' + navnOgfiltype[navnOgfiltype.length - 1];
+}
+
 const FilVisning: React.FC<{
     dokument: Dokument;
 }> = ({ dokument }) => {
     return (
         <Container>
             <FileSuccessIcon />
-            <BodyShort>{dokument.navn}</BodyShort>
+            <BodyShort>{splittOppHvisLang(dokument.navn)}</BodyShort>
             {/* TODO: Legg til slettefunksjonalitet */}
             <Button variant="tertiary" icon={<TrashIcon />}>
                 Slett

@@ -24,8 +24,11 @@ const VedleggContainer = styled.div`
 
 const Vedlegg = () => {
     const { dokumentasjon, settDokumentasjon } = useSøknad();
+
+    // TODO: 🤔 Vurder om denne staten er nødvendig, eller om contexten kan oppdateres direkte
     const [nyDokumentasjon, settNyDokumentasjon] = useState<DokumentasjonFelt[]>(dokumentasjon);
 
+    // TODO: Bruk ID og ikke indeks for å oppdatere
     const oppdaterVedlegg = (vedlegg: Dokument[], indeks: number) => {
         const nyDokumentasjonListe = [...nyDokumentasjon];
         nyDokumentasjonListe[indeks] = {
