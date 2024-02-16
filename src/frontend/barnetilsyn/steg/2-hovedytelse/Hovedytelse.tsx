@@ -77,9 +77,36 @@ const Hovedytelse = () => {
         if (!skalTaStillingTilOpphold) {
             settBoddSammenhengende(undefined);
             settPlanleggerBoINorgeNeste12mnd(undefined);
+            settYtelseFeil(undefined);
+        } else {
+            settYtelseFeil((prevState) => ({ ...prevState, ytelse: undefined }));
         }
     };
 
+    const oppdaterBoddSammenhengende = (verdi: EnumFelt<JaNei>) => {
+        settBoddSammenhengende(verdi);
+        if (verdi.verdi === 'JA') {
+            settPlanleggerBoINorgeNeste12mnd(undefined);
+            settYtelseFeil((prevState) => ({
+                ...prevState,
+                boddSammenhengende: undefined,
+                planleggerBoINorgeNeste12mnd: undefined,
+            }));
+        } else {
+            settYtelseFeil((prevState) => ({
+                ...prevState,
+                boddSammenhengende: undefined,
+            }));
+        }
+    };
+
+    const oppdaterPlanleggerBoINorge = (verdi: EnumFelt<JaNei>) => {
+        settYtelseFeil((prevState) => ({
+            ...prevState,
+            planleggerBoINorgeNeste12mnd: undefined,
+        }));
+        settPlanleggerBoINorgeNeste12mnd(verdi);
+    };
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
@@ -107,7 +134,6 @@ const Hovedytelse = () => {
                 onChange={(ytelse: EnumFlereValgFelt<Ytelse>) => {
                     settYtelse(ytelse);
                     oppdaterSkalTaStillingTilOpphold(ytelse);
-                    settYtelseFeil(undefined);
                 }}
                 error={ytelseFeil?.ytelse}
             />
@@ -122,12 +148,7 @@ const Hovedytelse = () => {
                     <LocaleRadioGroup
                         tekst={hovedytelseInnhold.oppholdINorge.radio_boddSammenhengende}
                         value={boddSammenhengende?.verdi}
-                        onChange={(verdi) => {
-                            settBoddSammenhengende(verdi);
-                            if (verdi.verdi === 'JA') {
-                                settPlanleggerBoINorgeNeste12mnd(undefined);
-                            }
-                        }}
+                        onChange={oppdaterBoddSammenhengende}
                         error={ytelseFeil?.boddSammenhengende}
                     >
                         <LocaleReadMore
@@ -140,7 +161,7 @@ const Hovedytelse = () => {
                                 hovedytelseInnhold.oppholdINorge.radio_planleggerBoINorgeNeste12mnd
                             }
                             value={planleggerBoINorgeNeste12mnd?.verdi}
-                            onChange={settPlanleggerBoINorgeNeste12mnd}
+                            onChange={oppdaterPlanleggerBoINorge}
                             error={ytelseFeil?.planleggerBoINorgeNeste12mnd}
                         />
                     )}
