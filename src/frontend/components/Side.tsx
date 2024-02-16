@@ -101,7 +101,7 @@ const Side: React.FC<Props> = ({
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
         sendInnSøknad(stønadstype, {
-            hovedytelse: hovedytelse?.ytelse,
+            hovedytelse,
             aktivitet,
             barnMedBarnepass,
             dokumentasjon,
