@@ -26,6 +26,15 @@ const Vedlegg = () => {
     const { dokumentasjon, settDokumentasjon } = useSøknad();
     const [nyDokumentasjon, settNyDokumentasjon] = useState<DokumentasjonFelt[]>(dokumentasjon);
 
+    const oppdaterVedlegg = (vedlegg: Dokument[], indeks: number) => {
+        const nyDokumentasjonListe = [...nyDokumentasjon];
+        nyDokumentasjonListe[indeks] = {
+            ...nyDokumentasjonListe[indeks],
+            opplastedeVedlegg: vedlegg,
+        };
+        settNyDokumentasjon(nyDokumentasjonListe);
+    };
+
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
@@ -45,14 +54,9 @@ const Vedlegg = () => {
                             vedlegg={typerVedleggTekster[dok.type]}
                             argument0={dok.barnId} // TODO: Oppdater med barnets navn hentet på id
                             dokumentasjonFelt={nyDokumentasjon[indeks]}
-                            oppdaterVedlegg={(dokument: Dokument[]) => {
-                                const nyDokumentasjonListe = [...nyDokumentasjon];
-                                nyDokumentasjonListe[indeks] = {
-                                    ...nyDokumentasjonListe[indeks],
-                                    opplastedeVedlegg: dokument,
-                                };
-                                settNyDokumentasjon(nyDokumentasjonListe);
-                            }}
+                            oppdaterVedlegg={(dokument: Dokument[]) =>
+                                oppdaterVedlegg(dokument, indeks)
+                            }
                         />
                     </section>
                 ))}
