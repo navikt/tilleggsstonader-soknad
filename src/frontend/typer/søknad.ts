@@ -15,3 +15,7 @@ export interface Periode {
     fom: string;
     tom: string;
 }
+
+export interface Kvittering {
+    mottattTidspunkt: string;
+}

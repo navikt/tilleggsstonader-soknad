@@ -1,4 +1,4 @@
-import { parseISO } from 'date-fns';
+import { parseISO, format } from 'date-fns';
 
 import { Adresse } from '../typer/person';
 
@@ -21,11 +21,10 @@ export const formaterIsoDato = (dato: string): string => {
     return parseISO(dato).toLocaleDateString('no-NO', datoFormat);
 };
 
-export const formaterDatoTid = (dato?: Date): string | undefined => {
-    return (
-        dato &&
-        dato.toLocaleDateString('no-NO', datoFormat) +
-            ', klokken ' +
-            dato.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' })
-    );
+export const formaterIsoDatoTid = (dato: string): string => {
+    return format(parseISO(dato), "dd.MM.yyyy 'kl'.HH:mm");
+};
+
+export const formaterNullableIsoDatoTid = (dato?: string): string | undefined => {
+    return dato && formaterIsoDatoTid(dato);
 };

@@ -106,8 +106,8 @@ const Side: React.FC<Props> = ({
             barnMedBarnepass,
             dokumentasjon,
         })
-            .then(() => {
-                settInnsentTidspunkt(new Date());
+            .then((res) => {
+                settInnsentTidspunkt(res.mottattTidspunkt);
                 navigate(nesteRoute.path);
             })
             // TODO håndtering av 401?

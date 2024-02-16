@@ -5,7 +5,7 @@ import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import { useSøknad } from '../context/SøknadContext';
-import { formaterDatoTid } from '../utils/formatering';
+import { formaterNullableIsoDatoTid } from '../utils/formatering';
 
 const Kvittering = () => {
     const { innsentTidspunkt } = useSøknad();
@@ -22,7 +22,7 @@ const Kvittering = () => {
                 <BodyLong spacing>
                     <LocaleTekst
                         tekst={kvitteringTekster.søknad_mottatt_alert_innhold1}
-                        argument0={formaterDatoTid(innsentTidspunkt)}
+                        argument0={formaterNullableIsoDatoTid(innsentTidspunkt)}
                     />
                 </BodyLong>
                 <BodyLong>

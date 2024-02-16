@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Environment from './Environment';
 import { Person } from '../typer/person';
 import { Stønadstype } from '../typer/stønadstyper';
+import { Kvittering } from '../typer/søknad';
 
 const requestId = () => uuidv4().replaceAll('-', '');
 
@@ -30,7 +31,7 @@ const stønadstypeTilPath = (stønadstype: Stønadstype): string => {
     }
 };
 
-export const sendInnSøknad = (stønadstype: Stønadstype, søknad: object) => {
+export const sendInnSøknad = (stønadstype: Stønadstype, søknad: object): Promise<Kvittering> => {
     const url = `${Environment().apiProxyUrl}/soknad/${stønadstypeTilPath(stønadstype)}`;
     return axios.post(url, søknad, defaultConfig()).then((response) => response.data);
 };
