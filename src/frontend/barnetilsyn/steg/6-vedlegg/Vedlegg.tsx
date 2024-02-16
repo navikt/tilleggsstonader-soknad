@@ -1,27 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { styled } from 'styled-components';
 
-import { UploadIcon } from '@navikt/aksel-icons';
-import { Accordion, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/ds-react';
+import { Accordion, Heading, Label } from '@navikt/ds-react';
 
-import Filopplaster from '../../../components/Filopplaster/Filopplaster';
+import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
-import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
-import { Dokument, DokumentasjonFelt, Vedleggstype } from '../../../typer/skjema';
+import { Dokument, DokumentasjonFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
-import { vedleggTekster } from '../../tekster/vedlegg';
-
-const StyledKnapp = styled(Button)`
-    width: max-content;
-    margin-top: 1rem;
-`;
+import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
 
 const VedleggContainer = styled.div`
     display: flex;
@@ -32,19 +24,19 @@ const VedleggContainer = styled.div`
 
 const Vedlegg = () => {
     const { dokumentasjon, settDokumentasjon } = useSøknad();
-    const { locale } = useSpråk();
-    const [nyDokumentasjon, settNyDokumentasjon] = useState<DokumentasjonFelt[]>(
-        dokumentasjon.length
-            ? dokumentasjon
-            : [
-                  {
-                      type: Vedleggstype.EKSEMPEL,
-                      label: vedleggTekster.typerVedlegg[Vedleggstype.EKSEMPEL].label[locale],
-                      harSendtInn: false,
-                      opplastedeVedlegg: [],
-                  },
-              ]
-    );
+
+    // TODO: 🤔 Vurder om denne staten er nødvendig, eller om contexten kan oppdateres direkte
+    const [nyDokumentasjon, settNyDokumentasjon] = useState<DokumentasjonFelt[]>(dokumentasjon);
+
+    // TODO: Bruk ID og ikke indeks for å oppdatere
+    const oppdaterVedlegg = (vedlegg: Dokument[], indeks: number) => {
+        const nyDokumentasjonListe = [...nyDokumentasjon];
+        nyDokumentasjonListe[indeks] = {
+            ...nyDokumentasjonListe[indeks],
+            opplastedeVedlegg: vedlegg,
+        };
+        settNyDokumentasjon(nyDokumentasjonListe);
+    };
 
     return (
         <Side
@@ -59,38 +51,18 @@ const Vedlegg = () => {
                 <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
             </PellePanel>
             <VedleggContainer>
-                <section>
-                    <Heading size={'small'}>
-                        <LocaleTekst tekst={vedleggTekster.pass_ronja_espen} />
-                    </Heading>
-                    <BodyShort>
-                        <LocaleTekst tekst={vedleggTekster.du_må_legge_ved} />
-                    </BodyShort>
-                    <LocalePunktliste innhold={vedleggTekster.vedlegg_espen_ronja} />
-                    <BodyShort>
-                        <LocaleTekst tekst={vedleggTekster.samlet_faktura} />
-                    </BodyShort>
-                    <LocaleReadMore tekst={vedleggTekster.faktura_lesmer} />
-                    <Filopplaster
-                        dokumentasjonFelt={nyDokumentasjon[0]}
-                        oppdaterVedlegg={(dokument: Dokument[]) => {
-                            settNyDokumentasjon([
-                                { ...nyDokumentasjon[0], opplastedeVedlegg: dokument },
-                            ]);
-                        }}
-                    />
-                </section>
-                <section>
-                    <Heading size={'small'}>
-                        <LocaleTekst tekst={vedleggTekster.legeerklæring_espen_tittel} />
-                    </Heading>
-                    <BodyLong>
-                        <LocaleTekst tekst={vedleggTekster.legeerklæring_espen} />
-                    </BodyLong>
-                    <StyledKnapp icon={<UploadIcon title="a11y-title" />}>
-                        <LocaleTekst tekst={vedleggTekster.last_opp_legeerklæring} />
-                    </StyledKnapp>
-                </section>
+                {nyDokumentasjon.map((dok, indeks) => (
+                    <section key={indeks}>
+                        <VedleggFelt
+                            vedlegg={typerVedleggTekster[dok.type]}
+                            argument0={dok.barnId} // TODO: Oppdater med barnets navn hentet på id
+                            dokumentasjonFelt={nyDokumentasjon[indeks]}
+                            oppdaterVedlegg={(dokument: Dokument[]) =>
+                                oppdaterVedlegg(dokument, indeks)
+                            }
+                        />
+                    </section>
+                ))}
             </VedleggContainer>
             <Accordion>
                 <Accordion.Item>

@@ -3,41 +3,24 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { UploadIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button } from '@navikt/ds-react';
+import { Alert, Button, Checkbox, VStack } from '@navikt/ds-react';
+import { ABlue50, ABlue500 } from '@navikt/ds-tokens/dist/tokens';
 
-import { MAKS_FILSTØRRELSE_FORMATTERT, MAX_FILSTØRRELSE, TILLATE_FILTYPER } from './utils';
+import FilVisning from './Fil';
+import { MAX_FILSTØRRELSE, TILLATE_FILTYPER } from './utils';
 import { lastOppVedlegg } from '../../api/api';
-import { vedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
 import { useSpråk } from '../../context/SpråkContext';
+import { filopplastingTekster, teksterFeilmeldinger } from '../../tekster/filopplasting';
 import { Dokument, DokumentasjonFelt } from '../../typer/skjema';
-import { TekstElement } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekster';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-const StyledKnapp = styled(Button)`
-    width: max-content;
-    margin-top: 1rem;
+const Container = styled(VStack).attrs({ gap: '2', align: 'center' })`
+    border: 1px dashed ${ABlue500};
+    background-color: ${ABlue50};
+    padding: 1rem 0 0.5rem 0;
 `;
 
-const teksterFeilmeldinger: {
-    enFil: TekstElement<string>;
-    maksstørrelse: TekstElement<string>;
-    filtype: TekstElement<string>;
-    feiletOpplasting: TekstElement<string>;
-} = {
-    enFil: {
-        nb: `Må laste opp en og en fil`,
-    },
-    maksstørrelse: {
-        nb: `"[0]" er for stor (maksimal filstørrelse er ${MAKS_FILSTØRRELSE_FORMATTERT}).`,
-    },
-    filtype: {
-        nb: '"[0]" – Ugyldig filtype.',
-    },
-    feiletOpplasting: {
-        nb: 'Feilet opplasting av "[0]".',
-    },
-};
 const Filopplaster: React.FC<{
     dokumentasjonFelt: DokumentasjonFelt;
     oppdaterVedlegg: (vedlegg: Dokument[]) => void;
@@ -88,24 +71,27 @@ const Filopplaster: React.FC<{
     return (
         <>
             {dokumentasjonFelt.opplastedeVedlegg.map((dokument) => (
-                <BodyShort key={dokument.id} size="small">
-                    {dokument.navn}
-                </BodyShort>
+                <FilVisning key={dokument.id} dokument={dokument} />
             ))}
-            {feilmelding && <Alert variant="error">{feilmelding}</Alert>}
-            <StyledKnapp
-                onClick={() => hiddenFileInput.current?.click()}
-                icon={<UploadIcon title="a11y-title" />}
-                disabled={laster}
-            >
-                <LocaleTekst tekst={vedleggTekster.typerVedlegg[dokumentasjonFelt.type].knapp} />
-            </StyledKnapp>
-            <input
-                type="file"
-                onChange={lastOppValgteFiler}
-                ref={hiddenFileInput}
-                style={{ display: 'none' }}
-            />
+            <Container>
+                {feilmelding && <Alert variant="error">{feilmelding}</Alert>}
+                <Button
+                    onClick={() => hiddenFileInput.current?.click()}
+                    icon={<UploadIcon title="a11y-title" />}
+                    disabled={laster}
+                >
+                    <LocaleTekst tekst={filopplastingTekster.last_opp_fil_knapp} />
+                </Button>
+                <Checkbox>
+                    <LocaleTekst tekst={filopplastingTekster.delt_tidligere_knapp} />
+                </Checkbox>
+                <input
+                    type="file"
+                    onChange={lastOppValgteFiler}
+                    ref={hiddenFileInput}
+                    style={{ display: 'none' }}
+                />
+            </Container>
         </>
     );
 };

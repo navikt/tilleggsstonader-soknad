@@ -28,3 +28,9 @@ export type CheckboxGruppe<T extends string> = {
     beskrivelse?: TekstElement<string>;
     alternativer: Record<T, TekstElement<string>>;
 };
+
+export type Vedlegg = {
+    tittel: TekstElement<string>;
+    beskrivelse: TekstElement<string>;
+    krav_til_dokumentasjon: TekstElement<string | string[]>;
+};

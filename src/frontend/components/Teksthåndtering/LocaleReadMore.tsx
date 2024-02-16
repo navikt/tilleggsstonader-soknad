@@ -1,23 +1,36 @@
-import { BodyLong, ReadMore } from '@navikt/ds-react';
+import { BodyLong, List, ReadMore } from '@navikt/ds-react';
 
 import LocaleInlineLenke from './LocaleInlineLenke';
 import { useSpråk } from '../../context/SpråkContext';
 import { InlineLenke, LesMer, TekstElement } from '../../typer/tekst';
 
-export const LocaleReadMore: React.FC<{ tekst: LesMer<string | string[]> }> = ({ tekst }) => {
+export const LocaleReadMore: React.FC<{
+    tekst: LesMer<string | string[]>;
+    somPunktListe?: boolean;
+}> = ({ tekst, somPunktListe = false }) => {
     const { locale } = useSpråk();
 
     const innhold = tekst.innhold[locale];
 
     return (
         <ReadMore header={tekst.header[locale]}>
-            {Array.isArray(innhold)
-                ? innhold.map((avsnitt, indeks) => (
-                      <BodyLong key={indeks} spacing>
-                          {avsnitt}
-                      </BodyLong>
-                  ))
-                : innhold}
+            {Array.isArray(innhold) ? (
+                somPunktListe ? (
+                    <List>
+                        {innhold.map((punkt, indeks) => (
+                            <List.Item key={indeks}>{punkt}</List.Item>
+                        ))}
+                    </List>
+                ) : (
+                    innhold.map((avsnitt, indeks) => (
+                        <BodyLong key={indeks} spacing>
+                            {avsnitt}
+                        </BodyLong>
+                    ))
+                )
+            ) : (
+                innhold
+            )}
         </ReadMore>
     );
 };
