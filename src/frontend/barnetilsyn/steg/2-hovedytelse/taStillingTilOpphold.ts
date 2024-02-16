@@ -2,7 +2,7 @@ import { Ytelse } from './typer';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
 
 const huketAvEnAvYtelser: Ytelse[] = [
-    'INGEN_PENGESTØTTE', // ingen pengestøtte med har nedsatt arbeidsevne
+    'INGEN_PENGESTØTTE', // ingen pengestøtte men har nedsatt arbeidsevne
     'TILTAKSPENGER',
     'INGEN_PASSENDE_ALTERNATIVER',
     'KVALIFISERINGSSTØNAD',
