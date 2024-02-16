@@ -1,4 +1,6 @@
-export type Locale = 'nb';
+export enum Locale {
+    NB = 'nb',
+}
 
 export type TekstElement<T> = Record<Locale, T>;
 
@@ -19,4 +21,10 @@ export type Radiogruppe<T> = {
     header: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
     alternativer: { label: TekstElement<string>; value: T }[];
+};
+
+export type CheckboxGruppe<T extends string> = {
+    header: TekstElement<string>;
+    beskrivelse?: TekstElement<string>;
+    alternativer: Record<T, TekstElement<string>>;
 };
