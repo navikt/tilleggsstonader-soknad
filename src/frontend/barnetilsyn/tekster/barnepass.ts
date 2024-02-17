@@ -65,7 +65,6 @@ export const barnepassTekster: BarnepassInnhold = {
     },
     startet_femte_radio: {
         header: { nb: 'Har [0] startet i 5. klasse når tiltaket ditt starter?' },
-        beskrivelse: { nb: 'Vi spør om dette fordi vi ser at [0] er over 9 år' },
         alternativer: [
             {
                 value: 'JA',
