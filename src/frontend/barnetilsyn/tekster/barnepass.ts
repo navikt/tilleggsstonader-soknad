@@ -29,6 +29,9 @@ export const ÅrsakEkstraPassTilTekst: Record<ÅrsakBarnepass, TekstElement<stri
     MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID: {
         nb: 'Jeg må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag ',
     },
+    INGEN_AV_DISSE: {
+        nb: 'Ingen av disse',
+    },
 };
 
 export const barnepassTekster: BarnepassInnhold = {
@@ -97,6 +100,10 @@ export const barnepassTekster: BarnepassInnhold = {
             {
                 value: ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
                 label: ÅrsakEkstraPassTilTekst.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
+            },
+            {
+                value: ÅrsakBarnepass.INGEN_AV_DISSE,
+                label: ÅrsakEkstraPassTilTekst.INGEN_AV_DISSE,
             },
         ],
     },
