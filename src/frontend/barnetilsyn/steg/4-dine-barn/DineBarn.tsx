@@ -2,6 +2,7 @@ import { Checkbox, Label } from '@navikt/ds-react';
 
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
+import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -14,7 +15,7 @@ const DineBarn = () => {
     return (
         <Side stegtittel={dineBarnTekster.steg_tittel} stønadstype={Stønadstype.BARNETILSYN}>
             <PellePanel>
-                <LocaleTekst tekst={dineBarnTekster.guide_innhold} />
+                <LocaleInlineLenke tekst={dineBarnTekster.guide_innhold} />
             </PellePanel>
             <div>
                 <Label spacing>
