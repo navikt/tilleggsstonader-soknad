@@ -75,8 +75,8 @@ const Vedlegg = () => {
                 {nyDokumentasjon.map((dok, indeks) => (
                     <section key={indeks}>
                         <VedleggFelt
+                            tittel={dok.label}
                             vedlegg={typerVedleggTekster[dok.type]}
-                            argument0={dok.barnId} // TODO: Oppdater med barnets navn hentet på id
                             dokumentasjonFelt={nyDokumentasjon[indeks]}
                             oppdaterVedlegg={(dokument: Dokument[]) =>
                                 oppdaterVedlegg(dokument, indeks)

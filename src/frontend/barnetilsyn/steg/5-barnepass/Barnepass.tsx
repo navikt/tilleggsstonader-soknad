@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { BarnepassIntern } from './typer';
 import { finnBarn, validerBarnepass } from './utils';
 import Side from '../../../components/Side';
 import { usePerson } from '../../../context/PersonContext';
+import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Barnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -13,7 +15,8 @@ import { barnepassTekster } from '../../tekster/barnepass';
 
 const Barnepass = () => {
     const { person } = usePerson();
-    const { barnMedBarnepass, settBarnMedBarnepass } = useSøknad();
+    const { locale } = useSpråk();
+    const { barnMedBarnepass, settBarnMedBarnepass, settDokumentasjon } = useSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
         person.barn
@@ -44,11 +47,15 @@ const Barnepass = () => {
         }
         return true;
     };
+
     const oppdaterSøknad = () => {
         const barnepasses = barnMedPass.filter((barn) =>
             validerBarnepass(barn, finnBarn(person.barn, barn.ident))
         ) as Barnepass[];
         settBarnMedBarnepass(barnepasses);
+        settDokumentasjon((prevState) =>
+            oppdaterDokumentasjonFeltForBarnMedPass(barnepasses, person.barn, prevState, locale)
+        );
     };
 
     return (
