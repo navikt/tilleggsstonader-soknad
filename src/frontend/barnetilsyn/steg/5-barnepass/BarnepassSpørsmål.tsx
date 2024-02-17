@@ -4,6 +4,7 @@ import BarnOver9År from './BarnOver9År';
 import { BarnepassIntern } from './typer';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, PassType } from '../../../typer/barn';
 import { hentFornavn } from '../../../utils/formatering';
 import { barnepassTekster } from '../../tekster/barnepass';
@@ -33,7 +34,10 @@ const BarnepassSpørsmål: React.FC<Props> = ({
             />
             {barnepass.type?.verdi === PassType.ANDRE && (
                 <Alert variant="info">
-                    <LocaleInlineLenke tekst={barnepassTekster.hvem_passer_andre_alert} />
+                    <Heading size="small">
+                        <LocaleTekst tekst={barnepassTekster.hvem_passer_andre_alert.tittel} />
+                    </Heading>
+                    <LocaleInlineLenke tekst={barnepassTekster.hvem_passer_andre_alert.innhold} />
                 </Alert>
             )}
             {barn.alder >= 9 && (
