@@ -11,8 +11,12 @@ interface BarnepassInnhold {
     startet_femte_readmore_innhold: TekstElement<string>;
     startet_femte_readmore_punktliste: TekstElement<string[]>;
     årsak_ekstra_pass_radio: Radiogruppe<ÅrsakBarnepass>;
-    mer_pleie_alert: TekstElement<string>;
+    mer_pleie_alert: {
+        tittel: TekstElement<string>;
+        innhold: TekstElement<string>;
+    };
     uvanlig_arbeidstid_alert: TekstElement<string>;
+    ingen_av_disse_alert: TekstElement<string>;
 }
 
 export const PassTypeTilTekst: Record<PassType, TekstElement<string>> = {
@@ -107,9 +111,17 @@ export const barnepassTekster: BarnepassInnhold = {
         ],
     },
     mer_pleie_alert: {
-        nb: 'På neste siden vil du bli bedt om å dokumentere behovet for ekstra pleie/tilsyn ved legeerklæring.',
+        tittel: {
+            nb: 'Behovet må dokumenteres med skriftlig uttalelse',
+        },
+        innhold: {
+            nb: 'På neste siden vil du bli bedt om å dokumentere behovet for ekstra pleie/tilsyn ved legeerklæring eller annen uttalelse fra helsepersonell.',
+        },
     },
     uvanlig_arbeidstid_alert: {
-        nb: 'På neste siden vil du bli bedt om å dokumentere mer avtale fra arbeidsgiver.',
+        nb: 'På neste siden vil du bli bedt om å dokumentere med avtale fra tiltakssted/utdanningssted.',
+    },
+    ingen_av_disse_alert: {
+        nb: 'Du kan fortsatt søke, men det kan hende du får avslag.',
     },
 };
