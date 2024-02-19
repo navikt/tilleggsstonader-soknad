@@ -1,4 +1,4 @@
-import { Alert } from '@navikt/ds-react';
+import { Alert, Heading } from '@navikt/ds-react';
 
 import { BarnepassIntern } from './typer';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
@@ -67,13 +67,21 @@ const BarnOver9År: React.FC<Props> = ({
                     />
                     {passInfo.årsak?.verdi === ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (
                         <Alert variant="info">
-                            <LocaleTekst tekst={barnepassTekster.mer_pleie_alert} />
+                            <Heading size="small">
+                                <LocaleTekst tekst={barnepassTekster.mer_pleie_alert.tittel} />
+                            </Heading>
+                            <LocaleTekst tekst={barnepassTekster.mer_pleie_alert.innhold} />
                         </Alert>
                     )}
                     {passInfo.årsak?.verdi ===
                         ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID && (
                         <Alert variant="info">
                             <LocaleTekst tekst={barnepassTekster.uvanlig_arbeidstid_alert} />
+                        </Alert>
+                    )}
+                    {passInfo.årsak?.verdi === ÅrsakBarnepass.INGEN_AV_DISSE && (
+                        <Alert variant="info">
+                            <LocaleTekst tekst={barnepassTekster.ingen_av_disse_alert} />
                         </Alert>
                     )}
                 </>
