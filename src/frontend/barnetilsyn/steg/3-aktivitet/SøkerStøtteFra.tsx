@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DatePicker, Label, useDatepicker } from '@navikt/ds-react';
+import { DatePicker, Label, useDatepicker, VStack } from '@navikt/ds-react';
 
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -25,7 +25,7 @@ export const SøkerStøtteFra: React.FC<{
     const søkerFraLabel = <LocaleTekst tekst={aktivitetTekster.søker_fra_label} />;
 
     return (
-        <>
+        <VStack gap="2">
             <Label>{søkerFraLabel}</Label>
             <LocaleReadMore tekst={aktivitetTekster.søker_fra_lesmer} />
             <DatePicker {...datepickerProps}>
@@ -36,6 +36,6 @@ export const SøkerStøtteFra: React.FC<{
                     error={valideringsfeil && <LocaleTekst tekst={valideringsfeil} />}
                 />
             </DatePicker>
-        </>
+        </VStack>
     );
 };
