@@ -4,6 +4,7 @@ import { Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
     steg_tittel: TekstElement<string>;
+    guide_innhold: TekstElement<string>;
     radio_utdanning: Radiogruppe<JaNei>;
     innhold_tittel: TekstElement<string>;
     feil_utdanning_infoalert: TekstElement<string[]>;
@@ -16,6 +17,9 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     innhold_tittel: {
         nb: 'Arbeidsrettet aktivitet',
+    },
+    guide_innhold: {
+        nb: 'For å få dekket pass av barn må du delta på ett tiltak godkjent av NAV eller gjennomføre en arbeidsrettet utredning.',
     },
     radio_utdanning: {
         header: {
