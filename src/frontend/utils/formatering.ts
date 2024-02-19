@@ -1,4 +1,4 @@
-import { parseISO, format } from 'date-fns';
+import { parseISO, format, formatISO } from 'date-fns';
 
 import { Adresse } from '../typer/person';
 
@@ -27,4 +27,14 @@ export const formaterIsoDatoTid = (dato: string): string => {
 
 export const formaterNullableIsoDatoTid = (dato?: string): string | undefined => {
     return dato && formaterIsoDatoTid(dato);
+};
+
+export const tilLocaleDateString = (dato: Date) => formatISO(dato, { representation: 'date' });
+
+export const nullableTilDato = (dato: string | Date | undefined): Date | undefined => {
+    if (typeof dato === 'string') {
+        return dato !== '' ? parseISO(dato) : undefined;
+    } else {
+        return dato;
+    }
 };
