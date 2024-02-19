@@ -27,7 +27,10 @@ export const ÅrsakEkstraPassTilTekst: Record<ÅrsakBarnepass, TekstElement<stri
         nb: 'Trenger mer pleie eller tilsyn enn det som er vanlig for jevnaldrende',
     },
     MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID: {
-        nb: 'Jeg må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag ',
+        nb: 'Jeg må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag',
+    },
+    INGEN_AV_DISSE: {
+        nb: 'Ingen av disse',
     },
 };
 
@@ -38,7 +41,7 @@ export const barnepassTekster: BarnepassInnhold = {
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
         beskrivelse: {
-            nb: 'Vi spør om dette fordi vi trenger å vite hva slags dokumentasjon du trenger å legge ved',
+            nb: 'Vi spør om dette fordi vi trenger å vite hva slags dokumentasjon du trenger å legge ved.',
         },
         alternativer: [
             {
@@ -62,7 +65,6 @@ export const barnepassTekster: BarnepassInnhold = {
     },
     startet_femte_radio: {
         header: { nb: 'Har [0] startet i 5. klasse når tiltaket ditt starter?' },
-        beskrivelse: { nb: 'Vi spør om dette fordi vi ser at [0] er over 9 år' },
         alternativer: [
             {
                 value: 'JA',
@@ -97,6 +99,10 @@ export const barnepassTekster: BarnepassInnhold = {
             {
                 value: ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
                 label: ÅrsakEkstraPassTilTekst.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
+            },
+            {
+                value: ÅrsakBarnepass.INGEN_AV_DISSE,
+                label: ÅrsakEkstraPassTilTekst.INGEN_AV_DISSE,
             },
         ],
     },
