@@ -18,17 +18,15 @@ const Container = styled(VStack).attrs({ gap: '4' })`
 `;
 
 const VedleggFelt: React.FC<{
+    tittel: string;
     vedlegg: Vedlegg;
-    argument0?: string;
     dokumentasjonFelt: DokumentasjonFelt;
     leggTilDokument: (vedlegg: Dokument) => void;
     slettDokument: (vedlegg: Dokument) => void;
-}> = ({ vedlegg, argument0, dokumentasjonFelt, leggTilDokument, slettDokument }) => {
+}> = ({ tittel, vedlegg, dokumentasjonFelt, leggTilDokument, slettDokument }) => {
     return (
         <Container>
-            <Heading size="small">
-                <LocaleTekst tekst={vedlegg.tittel} argument0={argument0} />
-            </Heading>
+            <Heading size="small">{tittel}</Heading>
             <BodyLong>
                 <LocaleTekst tekst={vedlegg.beskrivelse} />
             </BodyLong>
