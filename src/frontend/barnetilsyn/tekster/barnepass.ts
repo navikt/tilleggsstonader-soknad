@@ -5,7 +5,10 @@ import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 interface BarnepassInnhold {
     steg_tittel: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
-    hvem_passer_andre_alert: TekstElement<InlineLenke>;
+    hvem_passer_andre_alert: {
+        tittel: TekstElement<string>;
+        innhold: TekstElement<InlineLenke>;
+    };
     startet_femte_radio: Radiogruppe<JaNei>;
     startet_femte_readmore_header: TekstElement<string>;
     startet_femte_readmore_innhold: TekstElement<string>;
@@ -18,7 +21,7 @@ interface BarnepassInnhold {
 export const PassTypeTilTekst: Record<PassType, TekstElement<string>> = {
     BARNEHAGE_SFO_AKS: { nb: 'Barnehage, skolefritidsordning (SFO) eller aktivitetsskole (AKS)' },
     ANDRE: {
-        nb: 'Andre',
+        nb: 'Dagmamma, praktikant eller annen privat ordning',
     },
 };
 
@@ -55,13 +58,19 @@ export const barnepassTekster: BarnepassInnhold = {
         ],
     },
     hvem_passer_andre_alert: {
-        nb: [
-            'Hvis du har privat barnepass, for eksempel dagmamma eller praktikant, må du legge ved avtalen du har med barnepasseren i tillegg til å dokumentere utgiftene dine. Ved privat barnepass er det ',
-            {
-                tekst: 'egne regler du kan lese om på Skatteetaten.',
-                url: 'https://www.skatteetaten.no/person/skatt/hjelp-til-riktig-skatt/familie-og-helse/barn/betalt-barnepass/',
-            },
-        ],
+        tittel: {
+            nb: 'Privat barnepass krever mer dokumentasjon',
+        },
+        innhold: {
+            nb: [
+                'Ved privat barnepass regnes du som arbeidsgiver og derfor er det ',
+                {
+                    tekst: 'egne regler du kan lese om på Skatteetaten',
+                    url: 'https://www.skatteetaten.no/person/skatt/hjelp-til-riktig-skatt/familie-og-helse/barn/betalt-barnepass/',
+                },
+                '. Hvis du har privat barnepass, for eksempel dagmamma eller praktikant, må du legge ved avtalen du har med barnepasseren i tillegg til å dokumentere utgiftene dine.',
+            ],
+        },
     },
     startet_femte_radio: {
         header: { nb: 'Har [0] startet i 5. klasse når tiltaket ditt starter?' },
