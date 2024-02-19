@@ -31,13 +31,13 @@ function splittOppHvisLang(navn: string) {
 
 const FilVisning: React.FC<{
     dokument: Dokument;
-}> = ({ dokument }) => {
+    slettDokument: () => void;
+}> = ({ dokument, slettDokument }) => {
     return (
         <Container>
             <FileSuccessIcon />
             <BodyShort>{splittOppHvisLang(dokument.navn)}</BodyShort>
-            {/* TODO: Legg til slettefunksjonalitet */}
-            <Button variant="tertiary" icon={<TrashIcon />}>
+            <Button variant="tertiary" icon={<TrashIcon />} onClick={slettDokument}>
                 Slett
             </Button>
         </Container>

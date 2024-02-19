@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 
 import { BodyShort, Heading, Label, List } from '@navikt/ds-react';
 
+import { fjernVedlegg, leggTilVedlegg } from './utils';
 import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -47,14 +48,17 @@ const Vedlegg = () => {
     // TODO: 🤔 Vurder om denne staten er nødvendig, eller om contexten kan oppdateres direkte
     const [nyDokumentasjon, settNyDokumentasjon] = useState<DokumentasjonFelt[]>(dokumentasjon);
 
-    // TODO: Bruk ID og ikke indeks for å oppdatere
-    const oppdaterVedlegg = (vedlegg: Dokument[], indeks: number) => {
-        const nyDokumentasjonListe = [...nyDokumentasjon];
-        nyDokumentasjonListe[indeks] = {
-            ...nyDokumentasjonListe[indeks],
-            opplastedeVedlegg: vedlegg,
-        };
-        settNyDokumentasjon(nyDokumentasjonListe);
+    const leggTilDokument = (dokumentasjonFelt: DokumentasjonFelt, vedlegg: Dokument) => {
+        settNyDokumentasjon((prevState) => leggTilVedlegg(prevState, dokumentasjonFelt, vedlegg));
+    };
+
+    const slettDokument = (
+        dokumentasjonFelt: DokumentasjonFelt,
+        dokumentSomSkalSlettet: Dokument
+    ) => {
+        settNyDokumentasjon((prevState) =>
+            fjernVedlegg(prevState, dokumentasjonFelt, dokumentSomSkalSlettet)
+        );
     };
 
     return (
@@ -78,9 +82,8 @@ const Vedlegg = () => {
                             tittel={dok.label}
                             vedlegg={typerVedleggTekster[dok.type]}
                             dokumentasjonFelt={nyDokumentasjon[indeks]}
-                            oppdaterVedlegg={(dokument: Dokument[]) =>
-                                oppdaterVedlegg(dokument, indeks)
-                            }
+                            leggTilDokument={(dokument: Dokument) => leggTilDokument(dok, dokument)}
+                            slettDokument={(dokument) => slettDokument(dok, dokument)}
                         />
                     </section>
                 ))}

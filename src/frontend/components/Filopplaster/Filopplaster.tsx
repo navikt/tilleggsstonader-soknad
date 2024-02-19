@@ -23,8 +23,9 @@ const Container = styled(VStack).attrs({ gap: '2', align: 'center' })`
 
 const Filopplaster: React.FC<{
     dokumentasjonFelt: DokumentasjonFelt;
-    oppdaterVedlegg: (vedlegg: Dokument[]) => void;
-}> = ({ dokumentasjonFelt, oppdaterVedlegg }) => {
+    leggTilDokument: (vedlegg: Dokument) => void;
+    slettDokument: (vedlegg: Dokument) => void;
+}> = ({ dokumentasjonFelt, leggTilDokument, slettDokument }) => {
     const { locale } = useSpråk();
     const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -50,12 +51,7 @@ const Filopplaster: React.FC<{
         } else {
             settLaster(true);
             lastOppVedlegg(fil)
-                .then((id) =>
-                    oppdaterVedlegg([
-                        ...dokumentasjonFelt.opplastedeVedlegg,
-                        { id: id, navn: fil.name },
-                    ])
-                )
+                .then((id) => leggTilDokument({ id: id, navn: fil.name }))
                 .catch(() => {
                     settFeilmelding(
                         hentBeskjedMedEttParameter(
@@ -71,7 +67,11 @@ const Filopplaster: React.FC<{
     return (
         <>
             {dokumentasjonFelt.opplastedeVedlegg.map((dokument) => (
-                <FilVisning key={dokument.id} dokument={dokument} />
+                <FilVisning
+                    key={dokument.id}
+                    dokument={dokument}
+                    slettDokument={() => slettDokument(dokument)}
+                />
             ))}
             <Container>
                 {feilmelding && <Alert variant="error">{feilmelding}</Alert>}

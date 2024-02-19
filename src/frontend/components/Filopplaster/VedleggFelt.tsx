@@ -21,8 +21,9 @@ const VedleggFelt: React.FC<{
     tittel: string;
     vedlegg: Vedlegg;
     dokumentasjonFelt: DokumentasjonFelt;
-    oppdaterVedlegg: (vedlegg: Dokument[]) => void;
-}> = ({ tittel, vedlegg, dokumentasjonFelt, oppdaterVedlegg }) => {
+    leggTilDokument: (vedlegg: Dokument) => void;
+    slettDokument: (vedlegg: Dokument) => void;
+}> = ({ tittel, vedlegg, dokumentasjonFelt, leggTilDokument, slettDokument }) => {
     return (
         <Container>
             <Heading size="small">{tittel}</Heading>
@@ -37,7 +38,11 @@ const VedleggFelt: React.FC<{
                 somPunktListe
             />
 
-            <Filopplaster dokumentasjonFelt={dokumentasjonFelt} oppdaterVedlegg={oppdaterVedlegg} />
+            <Filopplaster
+                dokumentasjonFelt={dokumentasjonFelt}
+                leggTilDokument={leggTilDokument}
+                slettDokument={slettDokument}
+            />
         </Container>
     );
 };

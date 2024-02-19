@@ -5,20 +5,27 @@ import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 interface BarnepassInnhold {
     steg_tittel: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
-    hvem_passer_andre_alert: TekstElement<InlineLenke>;
+    hvem_passer_andre_alert: {
+        tittel: TekstElement<string>;
+        innhold: TekstElement<InlineLenke>;
+    };
     startet_femte_radio: Radiogruppe<JaNei>;
     startet_femte_readmore_header: TekstElement<string>;
     startet_femte_readmore_innhold: TekstElement<string>;
     startet_femte_readmore_punktliste: TekstElement<string[]>;
     årsak_ekstra_pass_radio: Radiogruppe<ÅrsakBarnepass>;
-    mer_pleie_alert: TekstElement<string>;
+    mer_pleie_alert: {
+        tittel: TekstElement<string>;
+        innhold: TekstElement<string>;
+    };
     uvanlig_arbeidstid_alert: TekstElement<string>;
+    ingen_av_disse_alert: TekstElement<string>;
 }
 
 export const PassTypeTilTekst: Record<PassType, TekstElement<string>> = {
     BARNEHAGE_SFO_AKS: { nb: 'Barnehage, skolefritidsordning (SFO) eller aktivitetsskole (AKS)' },
     ANDRE: {
-        nb: 'Andre',
+        nb: 'Dagmamma, praktikant eller annen privat ordning',
     },
 };
 
@@ -27,7 +34,10 @@ export const ÅrsakEkstraPassTilTekst: Record<ÅrsakBarnepass, TekstElement<stri
         nb: 'Trenger mer pleie eller tilsyn enn det som er vanlig for jevnaldrende',
     },
     MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID: {
-        nb: 'Jeg må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag ',
+        nb: 'Jeg må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag',
+    },
+    INGEN_AV_DISSE: {
+        nb: 'Ingen av disse',
     },
 };
 
@@ -38,7 +48,7 @@ export const barnepassTekster: BarnepassInnhold = {
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
         beskrivelse: {
-            nb: 'Vi spør om dette fordi vi trenger å vite hva slags dokumentasjon du trenger å legge ved',
+            nb: 'Vi spør om dette fordi vi trenger å vite hva slags dokumentasjon du trenger å legge ved.',
         },
         alternativer: [
             {
@@ -52,17 +62,22 @@ export const barnepassTekster: BarnepassInnhold = {
         ],
     },
     hvem_passer_andre_alert: {
-        nb: [
-            'Hvis du har privat barnepass, for eksempel dagmamma eller praktikant, må du legge ved avtalen du har med barnepasseren i tillegg til å dokumentere utgiftene dine. Ved privat barnepass er det ',
-            {
-                tekst: 'egne regler du kan lese om på Skatteetaten.',
-                url: 'https://www.skatteetaten.no/person/skatt/hjelp-til-riktig-skatt/familie-og-helse/barn/betalt-barnepass/',
-            },
-        ],
+        tittel: {
+            nb: 'Privat barnepass krever mer dokumentasjon',
+        },
+        innhold: {
+            nb: [
+                'Ved privat barnepass regnes du som arbeidsgiver og derfor er det ',
+                {
+                    tekst: 'egne regler du kan lese om på Skatteetaten',
+                    url: 'https://www.skatteetaten.no/person/skatt/hjelp-til-riktig-skatt/familie-og-helse/barn/betalt-barnepass/',
+                },
+                '. Hvis du har privat barnepass, for eksempel dagmamma eller praktikant, må du legge ved avtalen du har med barnepasseren i tillegg til å dokumentere utgiftene dine.',
+            ],
+        },
     },
     startet_femte_radio: {
         header: { nb: 'Har [0] startet i 5. klasse når tiltaket ditt starter?' },
-        beskrivelse: { nb: 'Vi spør om dette fordi vi ser at [0] er over 9 år' },
         alternativer: [
             {
                 value: 'JA',
@@ -98,12 +113,24 @@ export const barnepassTekster: BarnepassInnhold = {
                 value: ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
                 label: ÅrsakEkstraPassTilTekst.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
             },
+            {
+                value: ÅrsakBarnepass.INGEN_AV_DISSE,
+                label: ÅrsakEkstraPassTilTekst.INGEN_AV_DISSE,
+            },
         ],
     },
     mer_pleie_alert: {
-        nb: 'På neste siden vil du bli bedt om å dokumentere behovet for ekstra pleie/tilsyn ved legeerklæring.',
+        tittel: {
+            nb: 'Behovet må dokumenteres med skriftlig uttalelse',
+        },
+        innhold: {
+            nb: 'På neste siden vil du bli bedt om å dokumentere behovet for ekstra pleie/tilsyn ved legeerklæring eller annen uttalelse fra helsepersonell.',
+        },
     },
     uvanlig_arbeidstid_alert: {
-        nb: 'På neste siden vil du bli bedt om å dokumentere mer avtale fra arbeidsgiver.',
+        nb: 'På neste siden vil du bli bedt om å dokumentere med avtale fra tiltakssted/utdanningssted.',
+    },
+    ingen_av_disse_alert: {
+        nb: 'Du kan fortsatt søke, men det kan hende du får avslag.',
     },
 };
