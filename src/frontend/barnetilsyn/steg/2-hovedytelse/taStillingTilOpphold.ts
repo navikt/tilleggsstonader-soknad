@@ -1,13 +1,7 @@
 import { Ytelse } from './typer';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
 
-const huketAvEnAvYtelser: Ytelse[] = [
-    'INGEN_PENGESTØTTE', // ingen pengestøtte men har nedsatt arbeidsevne
-    'TILTAKSPENGER',
-    'INGEN_PASSENDE_ALTERNATIVER',
-    'KVALIFISERINGSSTØNAD',
-];
-const ikkeHuketAvEnAvDisse: Ytelse[] = [
+const ytelserMedImplisittMedlemskap: Ytelse[] = [
     'AAP',
     'OVERGANGSSTØNAD',
     'GJENLEVENDEPENSJON',
@@ -18,8 +12,8 @@ const ikkeHuketAvEnAvDisse: Ytelse[] = [
 
 export const skalTaStillingTilOppholdINorge = (ytelse: EnumFlereValgFelt<Ytelse>): boolean => {
     const ytelser: Ytelse[] = ytelse.verdier.map((v) => v.verdi);
-
-    const harValgtEn = ytelser.some((ytelse) => huketAvEnAvYtelser.includes(ytelse));
-    const harValgtEnManIkkeSkal = ytelser.some((ytelse) => ikkeHuketAvEnAvDisse.includes(ytelse));
-    return harValgtEn && !harValgtEnManIkkeSkal;
+    const valgtYtelseMedImplisittMedlemskap = ytelser.some((ytelse) =>
+        ytelserMedImplisittMedlemskap.includes(ytelse)
+    );
+    return !valgtYtelseMedImplisittMedlemskap && ytelser.length > 0;
 };
