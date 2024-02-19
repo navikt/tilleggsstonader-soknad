@@ -4,12 +4,12 @@ import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
     steg_tittel: TekstElement<string>;
+    guide_innhold: TekstElement<string>;
     radio_utdanning: Radiogruppe<JaNei>;
-    innhold_tittel_utdanning: TekstElement<string>;
-    innhold_utdanning: TekstElement<string>;
-    godkjent_utdanning: TekstElement<string>;
-    noe_feil_utdanning_lesmer: LesMer<string[]>;
-    feil_utdanning_infoalert: TekstElement<string[]>;
+    radio_utdanning_lesmer: LesMer<string[]>;
+    innhold_tittel: TekstElement<string>;
+    feil_utdanning_infoalert_title: TekstElement<string>;
+    feil_utdanning_infoalert_innhold: TekstElement<string[]>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
     søker_fra_label: TekstElement<string>;
     søker_fra_lesmer: LesMer<string[]>;
@@ -31,34 +31,31 @@ export const aktivitetTekster: AktivitetInnhold = {
     steg_tittel: {
         nb: 'Aktivitet',
     },
-    innhold_tittel_utdanning: {
-        nb: 'Utdanning',
+    innhold_tittel: {
+        nb: 'Arbeidsrettet aktivitet',
+    },
+    guide_innhold: {
+        nb: 'For å få dekket pass av barn må du delta på ett tiltak godkjent av NAV eller gjennomføre en arbeidsrettet utredning.',
     },
     radio_utdanning: {
         header: {
-            nb: 'Skal du søke om støtte til pass av barn i forbindelse med denne utdanningen?',
+            nb: 'Deltar du på eller skal du begynne på et arbeidsrettet tiltak eller en utredning?',
         },
         alternativer: jaNeiAlternativer,
     },
-    innhold_utdanning: {
-        nb: 'Vi har registrert dette på deg:',
-    },
-    godkjent_utdanning: {
-        nb: 'Utdanning godkjent av NAV',
-    },
-    noe_feil_utdanning_lesmer: {
-        header: { nb: 'Hva gjør jeg hvis noe er feil?' },
+    radio_utdanning_lesmer: {
+        header: { nb: 'Hva betyr tiltak og utredning?' },
         innhold: {
             nb: [
-                'Vi anbefaler deg å ta kontakt med din veileder for å få registrert din arbeidsrettede aktivitet eller utdanning.',
-                'Du kan fortsatt søke nå, men da kan det ta lengre tid for oss å behandle din søknad. ',
+                'Tiltak avtales mellom deg og din veileder og skal hjelpe deg med å komme inn i eller tilbake til arbeidslivet. Et tiltak kan for eksempel være utdanning, kurs eller arbeidstrening.',
+                'Arbeidsrettet utredning er en prosess der dine ferdigheter og muligheter til å utføre arbeid blir vurdert og kartlagt.',
             ],
         },
     },
-    feil_utdanning_infoalert: {
+    feil_utdanning_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
+    feil_utdanning_infoalert_innhold: {
         nb: [
-            'Vi anbefaler deg å ta kontakt med din veileder for å få registrert din arbeidsrettede aktivitet eller utdanning.',
-            'Du kan fortsatt søke nå, men da vil det ta lengre tid for oss å behandle din søknad.',
+            'Du kan fortsatt søke, men det kan hende du får avslag.',
             'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
         ],
     },
