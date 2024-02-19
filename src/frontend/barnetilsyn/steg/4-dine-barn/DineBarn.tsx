@@ -1,4 +1,4 @@
-import { Checkbox, Label } from '@navikt/ds-react';
+import { Alert, BodyShort, Checkbox, Heading, Label } from '@navikt/ds-react';
 
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -8,6 +8,7 @@ import { usePerson } from '../../../context/PersonContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { formaterIsoDato } from '../../../utils/formatering';
 import { dineBarnTekster } from '../../tekster/dineBarn';
+import { er9ellerEldre } from '../5-barnepass/utils';
 
 const DineBarn = () => {
     const { person, toggleSkalHaBarnepass } = usePerson();
@@ -31,6 +32,16 @@ const DineBarn = () => {
                         {barn.navn}, født {formaterIsoDato(barn.fødselsdato)}
                     </Checkbox>
                 ))}
+                {person.barn.some((barn) => barn.skalHaBarnepass && er9ellerEldre(barn)) && (
+                    <Alert variant="info">
+                        <Heading size="small">
+                            <LocaleTekst tekst={dineBarnTekster.alert_barn_over_9.tittel} />
+                        </Heading>
+                        <BodyShort size="medium">
+                            <LocaleTekst tekst={dineBarnTekster.alert_barn_over_9.innhold} />
+                        </BodyShort>
+                    </Alert>
+                )}
             </div>
         </Side>
     );

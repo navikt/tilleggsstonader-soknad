@@ -2,10 +2,11 @@ import { useState } from 'react';
 
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { BarnepassIntern } from './typer';
-import { validerBarnepass } from './utils';
+import { finnBarn, validerBarnepass } from './utils';
 import Side from '../../../components/Side';
 import { usePerson } from '../../../context/PersonContext';
 import { useSøknad } from '../../../context/SøknadContext';
+import { Barnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { valuerOrThrow } from '../../../utils/typer';
 import { barnepassTekster } from '../../tekster/barnepass';
@@ -21,7 +22,6 @@ const Barnepass = () => {
                 (barn) =>
                     barnMedBarnepass.find((barnepass) => barnepass.ident == barn.ident) || {
                         ident: barn.ident,
-                        //startetIFemte: barn.alder < 9 ? 'NEI' : undefined, TODO fix annars får man ikke gå videre når man velger Ronja
                     }
             )
     );
@@ -34,7 +34,9 @@ const Barnepass = () => {
     };
 
     const kanGåVidere = () => {
-        const validerteBarn = barnMedPass.filter(validerBarnepass);
+        const validerteBarn = barnMedPass.filter((barn) =>
+            validerBarnepass(barn, finnBarn(person.barn, barn.ident))
+        );
 
         if (validerteBarn.length !== barnMedPass.length) {
             settVisFeilmelding(true);
@@ -43,7 +45,10 @@ const Barnepass = () => {
         return true;
     };
     const oppdaterSøknad = () => {
-        settBarnMedBarnepass(barnMedPass.filter(validerBarnepass));
+        const barnepasses = barnMedPass.filter((barn) =>
+            validerBarnepass(barn, finnBarn(person.barn, barn.ident))
+        ) as Barnepass[];
+        settBarnMedBarnepass(barnepasses);
     };
 
     return (
