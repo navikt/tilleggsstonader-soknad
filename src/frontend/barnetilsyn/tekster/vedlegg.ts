@@ -92,7 +92,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             nb: 'Dokumentasjon av utgifter for pass av [0]',
         },
         beskrivelse: {
-            nb: 'For eksempel avtale med barnepasser og A-melding sendt Skatteetaten.',
+            nb: 'Fakturaen må være spesifisert. Vi godkjenner ikke skjermbilde av kontoutskrift/vipps eller lignende. ',
         },
         krav_til_dokumentasjon: {
             nb: [
@@ -106,7 +106,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             nb: 'Dokumentasjon av utgifter for pass av [0]',
         },
         beskrivelse: {
-            nb: 'For eksempel avtale med barnepasser og A-melding sendt Skatteetaten.',
+            nb: 'Vi trenger avtale med barnepasser, kvittering for betaling og eventuelt A-melding sendt Skatteetaten.',
         },
         krav_til_dokumentasjon: {
             nb: [
