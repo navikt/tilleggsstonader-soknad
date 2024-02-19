@@ -28,21 +28,11 @@ const Aktivitet = () => {
 
     const [feil, settFeil] = useState('');
 
-    const [fortsattSøke, settFortsattSøke] = useState<JaNei | undefined>(
-        aktivitet && aktivitet.utdanning.verdi === 'NEI' ? 'JA' : undefined
-    );
-    const [fortsattSøkeFeil, settFortsattSøkeFeil] = useState('');
-
     const [søkerFraDatoFeil, settSøkerFraDatoFeil] = useState<TekstElement<string> | undefined>();
 
     const kanFortsette = (barnepassPgaUtdanning?: JaNei): boolean => {
         if (barnepassPgaUtdanning === undefined) {
             settFeil('Du må velge et alternativ');
-            return false;
-        }
-
-        if (barnepassPgaUtdanning === 'NEI' && fortsattSøke !== 'JA') {
-            settFortsattSøkeFeil('Du må velge et alternativ');
             return false;
         }
 
@@ -78,29 +68,19 @@ const Aktivitet = () => {
                 value={utdanning?.verdi || ''}
                 onChange={(verdi) => {
                     settUtdanning(verdi);
-                    settFortsattSøke(undefined);
                     settFeil('');
-                    settFortsattSøkeFeil('');
                 }}
                 error={feil}
             >
                 <LocaleReadMore tekst={aktivitetTekster.radio_utdanning_lesmer} />
             </LocaleRadioGroup>
             {utdanning?.verdi === 'NEI' && (
-                <>
-                    <Alert variant={'info'}>
-                        <LocaleTekstAvsnitt tekst={aktivitetTekster.feil_utdanning_infoalert} />
-                    </Alert>
-                    <LocaleRadioGroup
-                        tekst={aktivitetTekster.radio_fortsatt_søke}
-                        value={fortsattSøke || ''}
-                        onChange={(verdi) => {
-                            settFortsattSøke(verdi.verdi);
-                            settFortsattSøkeFeil('');
-                        }}
-                        error={fortsattSøkeFeil}
-                    />
-                </>
+                <Alert variant={'info'}>
+                    <Heading size="small">
+                        <LocaleTekst tekst={aktivitetTekster.feil_utdanning_infoalert_title} />
+                    </Heading>
+                    <LocaleTekstAvsnitt tekst={aktivitetTekster.feil_utdanning_infoalert_innhold} />
+                </Alert>
             )}
             <SøkerStøtteFra
                 oppdaterSøkerFraDato={(nySøkerFraDato?: string) => settSøkerFraDato(nySøkerFraDato)}

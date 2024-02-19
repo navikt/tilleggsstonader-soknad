@@ -8,7 +8,8 @@ interface AktivitetInnhold {
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
     innhold_tittel: TekstElement<string>;
-    feil_utdanning_infoalert: TekstElement<string[]>;
+    feil_utdanning_infoalert_title: TekstElement<string>;
+    feil_utdanning_infoalert_innhold: TekstElement<string[]>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
     søker_fra_label: TekstElement<string>;
     søker_fra_lesmer: LesMer<string[]>;
@@ -51,10 +52,10 @@ export const aktivitetTekster: AktivitetInnhold = {
             ],
         },
     },
-    feil_utdanning_infoalert: {
+    feil_utdanning_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
+    feil_utdanning_infoalert_innhold: {
         nb: [
-            'Vi anbefaler deg å ta kontakt med din veileder for å få registrert din arbeidsrettede aktivitet eller utdanning.',
-            'Du kan fortsatt søke nå, men da vil det ta lengre tid for oss å behandle din søknad.',
+            'Du kan fortsatt søke, men det kan hende du får avslag.',
             'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
         ],
     },
