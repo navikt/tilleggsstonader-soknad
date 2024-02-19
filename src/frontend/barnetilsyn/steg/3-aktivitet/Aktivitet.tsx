@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Alert, Heading } from '@navikt/ds-react';
 
+import { SøkerStøtteFra } from './SøkerStøtteFra';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -12,6 +13,8 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { EnumFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
+import { TekstElement } from '../../../typer/tekst';
+import { manglerVerdi } from '../../../utils/typer';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 const Aktivitet = () => {
@@ -20,12 +23,17 @@ const Aktivitet = () => {
     const [utdanning, settUtdanning] = useState<EnumFelt<JaNei> | undefined>(
         aktivitet ? aktivitet.utdanning : undefined
     );
+
+    const [søkerFraDato, settSøkerFraDato] = useState<string | undefined>();
+
     const [feil, settFeil] = useState('');
 
     const [fortsattSøke, settFortsattSøke] = useState<JaNei | undefined>(
         aktivitet && aktivitet.utdanning.verdi === 'NEI' ? 'JA' : undefined
     );
     const [fortsattSøkeFeil, settFortsattSøkeFeil] = useState('');
+
+    const [søkerFraDatoFeil, settSøkerFraDatoFeil] = useState<TekstElement<string> | undefined>();
 
     const kanFortsette = (barnepassPgaUtdanning?: JaNei): boolean => {
         if (barnepassPgaUtdanning === undefined) {
@@ -35,6 +43,11 @@ const Aktivitet = () => {
 
         if (barnepassPgaUtdanning === 'NEI' && fortsattSøke !== 'JA') {
             settFortsattSøkeFeil('Du må velge et alternativ');
+            return false;
+        }
+
+        if (manglerVerdi(søkerFraDato)) {
+            settSøkerFraDatoFeil(aktivitetTekster.søker_fra_dato_feilmelding);
             return false;
         }
 
@@ -89,6 +102,12 @@ const Aktivitet = () => {
                     />
                 </>
             )}
+            <SøkerStøtteFra
+                oppdaterSøkerFraDato={(nySøkerFraDato?: string) => settSøkerFraDato(nySøkerFraDato)}
+                søkerFraDato={søkerFraDato}
+                valideringsfeil={søkerFraDatoFeil}
+                resettFeilmelding={() => settSøkerFraDatoFeil(undefined)}
+            />
         </Side>
     );
 };

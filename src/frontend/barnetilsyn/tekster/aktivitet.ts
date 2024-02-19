@@ -10,9 +10,23 @@ interface AktivitetInnhold {
     innhold_tittel: TekstElement<string>;
     feil_utdanning_infoalert: TekstElement<string[]>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
+    søker_fra_label: TekstElement<string>;
+    søker_fra_lesmer: LesMer<string[]>;
+    søker_fra_dato_feilmelding: TekstElement<string>;
 }
 
 export const aktivitetTekster: AktivitetInnhold = {
+    søker_fra_lesmer: {
+        header: { nb: 'Hvordan velge dato' },
+        innhold: {
+            nb: [
+                'Det vanligste er å velge datoen utdanningen din starter eller fra da du ble registrert arbeidssøker. Du får bare dekket utgifter så lenge du har en arbeidsrettet aktivitet. ',
+                'Du kan søke tilbake i tid, men som hovedregel kan vi bare innvilge inntil 3 måneder fra datoen du søker.',
+            ],
+        },
+    },
+    søker_fra_label: { nb: 'Fra hvilken dato søker du om støtte til pass?' },
+    søker_fra_dato_feilmelding: { nb: 'Du må fylle inn en gyldig dato' },
     steg_tittel: {
         nb: 'Aktivitet',
     },
