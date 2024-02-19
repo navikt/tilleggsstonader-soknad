@@ -1,4 +1,6 @@
-import { CheckboxGruppe, TekstElement } from '../../typer/tekst';
+import { jaNeiAlternativer } from '../../tekster/felles';
+import { JaNei } from '../../typer/søknad';
+import { CheckboxGruppe, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 import { Ytelse } from '../steg/2-hovedytelse/typer';
 
 interface HovedytelseInnhold {
@@ -6,6 +8,13 @@ interface HovedytelseInnhold {
     innhold_tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     checkbox_hovedytelse: CheckboxGruppe<Ytelse>;
+    oppholdINorge: {
+        tittel: TekstElement<string>;
+        guide_innhold: TekstElement<string>;
+        radio_boddSammenhengende: Radiogruppe<JaNei>;
+        lesMer_boddSammenhengende: LesMer<string[]>;
+        radio_planleggerBoINorgeNeste12mnd: Radiogruppe<JaNei>;
+    };
 }
 
 export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
@@ -37,5 +46,36 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
             nb: 'Du kan velge flere.',
         },
         alternativer: YtelseTilTekst,
+    },
+    oppholdINorge: {
+        tittel: {
+            nb: 'Opphold i Norge',
+        },
+        guide_innhold: {
+            nb: 'Vi spør om dette fordi vi må vite om du du oppfyller kravene til medlemskap i folketrygden.',
+        },
+        radio_boddSammenhengende: {
+            header: {
+                nb: 'Har du bodd sammenhengende i Norge de siste 12 månedene?',
+            },
+            alternativer: jaNeiAlternativer,
+        },
+        lesMer_boddSammenhengende: {
+            header: {
+                nb: 'Hva menes med å bo sammenhengende?',
+            },
+            innhold: {
+                nb: [
+                    'Med dette mener vi at du ikke har bodd i andre land enn Norge.',
+                    'Ferier utenfor Norge i under 4 uker regnes ikke som å ha bodd i andre land.',
+                ],
+            },
+        },
+        radio_planleggerBoINorgeNeste12mnd: {
+            header: {
+                nb: 'Planlegger du å bo i Norge i de neste 12 månedene?',
+            },
+            alternativer: jaNeiAlternativer,
+        },
     },
 };

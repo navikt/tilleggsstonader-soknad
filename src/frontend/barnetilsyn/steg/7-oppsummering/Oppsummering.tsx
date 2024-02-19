@@ -37,6 +37,7 @@ import {
     PassTypeTilTekst,
     ÅrsakEkstraPassTilTekst,
 } from '../../tekster/barnepass';
+import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 import { personaliaTekster } from '../../tekster/personalia';
 
@@ -129,6 +130,35 @@ const Hovedytelse: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hoved
                     tittel={oppsummeringTekster.accordians.ytelse.label}
                     innhold={ytelser}
                 />
+            )}
+            {hovedytelse?.boddSammenhengende?.verdi && (
+                <>
+                    <Label>
+                        <LocaleTekst
+                            tekst={hovedytelseInnhold.oppholdINorge.radio_boddSammenhengende.header}
+                        />
+                    </Label>
+                    <BodyShort>
+                        <LocaleTekst tekst={JaNeiTilTekst[hovedytelse.boddSammenhengende.verdi]} />
+                    </BodyShort>
+                </>
+            )}
+            {hovedytelse?.planleggerBoINorgeNeste12mnd?.verdi && (
+                <>
+                    <Label>
+                        <LocaleTekst
+                            tekst={
+                                hovedytelseInnhold.oppholdINorge.radio_planleggerBoINorgeNeste12mnd
+                                    .header
+                            }
+                        />
+                    </Label>
+                    <BodyShort>
+                        <LocaleTekst
+                            tekst={JaNeiTilTekst[hovedytelse.planleggerBoINorgeNeste12mnd.verdi]}
+                        />
+                    </BodyShort>
+                </>
             )}
         </AccordionItem>
     );
