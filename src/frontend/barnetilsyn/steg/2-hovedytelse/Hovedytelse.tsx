@@ -41,11 +41,8 @@ const Hovedytelse = () => {
         EnumFelt<JaNei> | undefined
     >(hovedytelse?.planleggerBoINorgeNeste12mnd);
 
-    const [skalTaStillingTilOpphold, settSkalTaStillingTilOpphold] = useState(
-        hovedytelse?.ytelse ? skalTaStillingTilOppholdINorge(hovedytelse.ytelse) : false
-    );
-
     const [ytelseFeil, settYtelseFeil] = useState<Feil>();
+    const skalTaStillingTilOpphold = ytelse ? skalTaStillingTilOppholdINorge(ytelse) : false;
 
     const kanFortsette = (ytelse?: EnumFlereValgFelt<Ytelse>): boolean => {
         let kanFortsette = true;
@@ -72,9 +69,7 @@ const Hovedytelse = () => {
     };
 
     const oppdaterSkalTaStillingTilOpphold = (ytelse: EnumFlereValgFelt<Ytelse>) => {
-        const skalTaStillingTilOpphold = skalTaStillingTilOppholdINorge(ytelse);
-        settSkalTaStillingTilOpphold(skalTaStillingTilOpphold);
-        if (!skalTaStillingTilOpphold) {
+        if (!skalTaStillingTilOppholdINorge(ytelse)) {
             settBoddSammenhengende(undefined);
             settPlanleggerBoINorgeNeste12mnd(undefined);
             settYtelseFeil(undefined);
