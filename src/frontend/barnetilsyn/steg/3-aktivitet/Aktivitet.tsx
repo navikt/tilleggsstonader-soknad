@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 
-import { Alert, BodyShort, Heading } from '@navikt/ds-react';
+import { Alert, Heading } from '@navikt/ds-react';
 
-import UtdanningTiltak from './UtdanningTiltak';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSøknad } from '../../../context/SøknadContext';
-import { useTiltak } from '../../../hooks/useTiltak';
 import { EnumFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
@@ -17,8 +14,6 @@ import { aktivitetTekster } from '../../tekster/aktivitet';
 
 const Aktivitet = () => {
     const { aktivitet, settAktivitet } = useSøknad();
-
-    const { tiltak } = useTiltak();
 
     const [utdanning, settUtdanning] = useState<EnumFelt<JaNei> | undefined>(
         aktivitet ? aktivitet.utdanning : undefined
@@ -57,45 +52,34 @@ const Aktivitet = () => {
             validerSteg={() => kanFortsette(utdanning?.verdi)}
             oppdaterSøknad={oppdaterAktivitetISøknad}
         >
-            {tiltak.type === 'utdanning' && (
+            <Heading size={'medium'}>
+                <LocaleTekst tekst={aktivitetTekster.innhold_tittel} />
+            </Heading>
+            <LocaleRadioGroup
+                tekst={aktivitetTekster.radio_utdanning}
+                value={utdanning?.verdi || ''}
+                onChange={(verdi) => {
+                    settUtdanning(verdi);
+                    settFortsattSøke(undefined);
+                    settFeil('');
+                    settFortsattSøkeFeil('');
+                }}
+                error={feil}
+            />
+            {utdanning?.verdi === 'NEI' && (
                 <>
-                    <Heading size={'medium'}>
-                        <LocaleTekst tekst={aktivitetTekster.innhold_tittel_utdanning} />
-                    </Heading>
-                    <BodyShort>
-                        <LocaleTekst tekst={aktivitetTekster.innhold_utdanning} />
-                    </BodyShort>
-                    <UtdanningTiltak tiltak={tiltak} />
-                    <LocaleReadMore tekst={aktivitetTekster.noe_feil_utdanning_lesmer} />
+                    <Alert variant={'info'}>
+                        <LocaleTekstAvsnitt tekst={aktivitetTekster.feil_utdanning_infoalert} />
+                    </Alert>
                     <LocaleRadioGroup
-                        tekst={aktivitetTekster.radio_utdanning}
-                        value={utdanning?.verdi || ''}
+                        tekst={aktivitetTekster.radio_fortsatt_søke}
+                        value={fortsattSøke || ''}
                         onChange={(verdi) => {
-                            settUtdanning(verdi);
-                            settFortsattSøke(undefined);
-                            settFeil('');
+                            settFortsattSøke(verdi.verdi);
                             settFortsattSøkeFeil('');
                         }}
-                        error={feil}
+                        error={fortsattSøkeFeil}
                     />
-                    {utdanning?.verdi === 'NEI' && (
-                        <>
-                            <Alert variant={'info'}>
-                                <LocaleTekstAvsnitt
-                                    tekst={aktivitetTekster.feil_utdanning_infoalert}
-                                />
-                            </Alert>
-                            <LocaleRadioGroup
-                                tekst={aktivitetTekster.radio_fortsatt_søke}
-                                value={fortsattSøke || ''}
-                                onChange={(verdi) => {
-                                    settFortsattSøke(verdi.verdi);
-                                    settFortsattSøkeFeil('');
-                                }}
-                                error={fortsattSøkeFeil}
-                            />
-                        </>
-                    )}
                 </>
             )}
         </Side>
