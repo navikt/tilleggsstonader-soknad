@@ -5,6 +5,7 @@ import { Alert, Heading } from '@navikt/ds-react';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSøknad } from '../../../context/SøknadContext';
@@ -69,7 +70,9 @@ const Aktivitet = () => {
                     settFortsattSøkeFeil('');
                 }}
                 error={feil}
-            />
+            >
+                <LocaleReadMore tekst={aktivitetTekster.radio_utdanning_lesmer} />
+            </LocaleRadioGroup>
             {utdanning?.verdi === 'NEI' && (
                 <>
                     <Alert variant={'info'}>

@@ -1,11 +1,12 @@
 import { jaNeiAlternativer } from '../../tekster/felles';
 import { JaNei } from '../../typer/søknad';
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
     steg_tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     radio_utdanning: Radiogruppe<JaNei>;
+    radio_utdanning_lesmer: LesMer<string[]>;
     innhold_tittel: TekstElement<string>;
     feil_utdanning_infoalert: TekstElement<string[]>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
@@ -23,9 +24,18 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     radio_utdanning: {
         header: {
-            nb: 'Skal du søke om støtte til pass av barn i forbindelse med denne utdanningen?',
+            nb: 'Deltar du på eller skal du begynne på et arbeidsrettet tiltak eller en utredning?',
         },
         alternativer: jaNeiAlternativer,
+    },
+    radio_utdanning_lesmer: {
+        header: { nb: 'Hva betyr tiltak og utredning?' },
+        innhold: {
+            nb: [
+                'Tiltak avtales mellom deg og din veileder og skal hjelpe deg med å komme inn i eller tilbake til arbeidslivet. Et tiltak kan for eksempel være utdanning, kurs eller arbeidstrening.',
+                'Arbeidsrettet utredning er en prosess der dine ferdigheter og muligheter til å utføre arbeid blir vurdert og kartlagt.',
+            ],
+        },
     },
     feil_utdanning_infoalert: {
         nb: [
