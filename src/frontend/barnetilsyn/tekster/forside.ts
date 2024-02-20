@@ -42,7 +42,7 @@ export const forsideTekster: ForsideInnhold = {
             'Du må gi oss riktige opplysninger i søknaden.',
             'Du må dokumentere dine utgifter til pass av barn med faktura som inneholder beløp og gjelde for perioden du søker for.',
             'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
-            'Hvis du får penger du ikke har rett på, må du du være forberedt på å måtte betale dem tilbake.',
+            'Hvis du får penger du ikke har rett på, kan vi kreve at du betaler dem tilbake.',
             'Du kan bare søke om støtte til pass av barn, hvis ingen andre har fått dekket utgiftene til pass for samme barn.',
         ],
     },
