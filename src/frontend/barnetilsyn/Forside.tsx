@@ -110,6 +110,7 @@ const Forside: React.FC = () => {
                                 key={indeks}
                                 tittel={tekst.tittel}
                                 innhold={tekst.innhold}
+                                tittelSomLabel
                             />
                         ))}
                     </Accordion.Content>
