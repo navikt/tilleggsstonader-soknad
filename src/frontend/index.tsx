@@ -8,6 +8,7 @@ import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
 import App from './App';
 import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
+import ScrollToTop from './components/ScrollToTop';
 import { PersonProvider, usePerson } from './context/PersonContext';
 import { SpråkProvider } from './context/SpråkContext';
 import { SøknadProvider } from './context/SøknadContext';
@@ -34,6 +35,7 @@ const AppRoutes = () => {
     }
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <ScrollToTop />
             <Routes>
                 <Route path={'*'} element={<App />} />
                 <Route path={'/barnetilsyn/*'} element={<BarnetilsynApp />} />
