@@ -1,4 +1,4 @@
-import { InlineLenke, TekstElement } from '../../typer/tekst';
+import { InlineLenke, Punktliste, TekstElement } from '../../typer/tekst';
 
 interface ForsideInnhold {
     veileder_tittel: TekstElement<string>;
@@ -15,7 +15,7 @@ interface ForsideInnhold {
     info_som_hentes_innhold2: TekstElement<string[]>;
     info_som_hentes_innhold3: TekstElement<InlineLenke>;
     dokumentasjon_utgifter_tittel: TekstElement<string>;
-    dokumentasjon_utgifter_innhold: TekstElement<string[]>;
+    dokumentasjon_utgifter_innhold: Punktliste[];
 }
 
 export const forsideTekster: ForsideInnhold = {
@@ -93,10 +93,39 @@ export const forsideTekster: ForsideInnhold = {
     dokumentasjon_utgifter_tittel: {
         nb: 'Dette må legges ved søknaden',
     },
-    dokumentasjon_utgifter_innhold: {
-        nb: [
-            'at barnet har større behov for pass enn jevnaldrende, med skriftlig uttalelse fra lege, spesialist eller annet helsepersonell, eller',
-            'at du har en arbeidsrettet aktivitet hvor du må være borte på andre tider enn en vanlig arbeidsdag, med dokumentasjon fra utdanning/tiltakssted.',
-        ],
-    },
+    dokumentasjon_utgifter_innhold: [
+        {
+            tittel: {
+                nb: 'For barn i barnehage, SFO eller AKS legger du ved faktura som inneholder:',
+            },
+            innhold: {
+                nb: [
+                    'Barnets navn',
+                    'Hva som er utgifter til pass, mat og eventuelt bleier.',
+                    'Perioden utgiftene gjelder for. ',
+                ],
+            },
+        },
+        {
+            tittel: {
+                nb: 'Benyttes privat pass som f.eks. dagmamma eller praktikant:',
+            },
+            innhold: {
+                nb: [
+                    'Dokumentere dine utgifter med f.eks. avtale med barnepasser og/eller A-melding sendt skatteetaten',
+                ],
+            },
+        },
+        {
+            tittel: {
+                nb: 'For barn som er ferdig med 4. skoleår må du dokumentere:',
+            },
+            innhold: {
+                nb: [
+                    'at barnet har større behov for pass enn jevnaldrende, med skriftlig uttalelse fra lege, spesialist eller annet helsepersonell, eller',
+                    'at du har en arbeidsrettet aktivitet hvor du må være borte på andre tider enn en vanlig arbeidsdag, med dokumentasjon fra utdanning/tiltakssted.',
+                ],
+            },
+        },
+    ],
 };

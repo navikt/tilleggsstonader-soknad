@@ -105,7 +105,13 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <LocalePunktliste innhold={forsideTekster.dokumentasjon_utgifter_innhold} />
+                        {forsideTekster.dokumentasjon_utgifter_innhold.map((tekst, indeks) => (
+                            <LocalePunktliste
+                                key={indeks}
+                                tittel={tekst.tittel}
+                                innhold={tekst.innhold}
+                            />
+                        ))}
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
