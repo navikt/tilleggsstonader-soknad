@@ -35,14 +35,14 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Du må legge ved faktura for barnepass for perioden du søker for. Det vil ta lengre tid å få svar fra oss hvis vi må hente inn fra deg i etterkant. Har du ikke enda fått faktura for høsten, anbefaler vi deg å vente med å søke til du har det.',
     },
     dine_plikter_tittel: {
-        nb: 'Dine plikter',
+        nb: 'Viktig å vite før du søker',
     },
     dine_plikter_innhold: {
         nb: [
             'Du må gi oss riktige opplysninger i søknaden.',
             'Du må dokumentere dine utgifter til pass av barn med faktura som inneholder beløp og gjelde for perioden du søker for.',
             'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
-            'Hvis du får penger du ikke har rett på, må du du være forberedt på å måtte betale dem tilbake.',
+            'Hvis du får penger du ikke har rett på, kan vi kreve at du betaler de tilbake.',
             'Du kan bare søke om støtte til pass av barn, hvis ingen andre har fått dekket utgiftene til pass for samme barn.',
         ],
     },
