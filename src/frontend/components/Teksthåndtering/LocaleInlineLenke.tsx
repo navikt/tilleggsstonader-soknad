@@ -17,6 +17,7 @@ const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tek
                         href={tekstElement.url}
                         key={indeks}
                         variant={tekstElement.variant}
+                        target="_blank"
                     >
                         {tekstElement.tekst}
                     </Link>
