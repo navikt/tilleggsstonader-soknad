@@ -17,6 +17,11 @@ type Lenke = {
 
 export type InlineLenke = (string | Lenke)[];
 
+export type Punktliste = {
+    tittel: TekstElement<string>;
+    innhold: TekstElement<string[]>;
+};
+
 export type Radiogruppe<T> = {
     header: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
