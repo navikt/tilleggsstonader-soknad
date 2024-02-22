@@ -4,7 +4,7 @@ import { Stønadstype } from '../typer/stønadstyper';
 
 export const hentRoutes = (stønadstype: Stønadstype): IRoute[] => {
     switch (stønadstype) {
-        case Stønadstype.barnetilsyn:
+        case Stønadstype.BARNETILSYN:
             return RoutesBarnetilsyn;
     }
 };

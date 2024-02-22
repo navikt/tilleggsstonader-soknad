@@ -1,7 +1,6 @@
 import { Person } from '../typer/person';
 
 export const initiellPerson: Person = {
-    fnr: '',
     navn: '',
     adresse: {
         adresse: '',
@@ -11,4 +10,5 @@ export const initiellPerson: Person = {
     telefonnr: '',
     epost: '',
     kontonr: '',
+    barn: [],
 };

@@ -15,6 +15,10 @@ updates:
   open-pull-requests-limit: 30
   registries: "*"
   versioning-strategy: increase
+  groups:
+    frontend:
+      patterns:
+        - "*"
   ignore:
    - dependency-name: "*"
      update-types: ["version-update:semver-patch"]
@@ -28,6 +32,10 @@ updates:
   open-pull-requests-limit: 30
   registries: "*"
   versioning-strategy: increase
+  groups:
+    backend:
+      patterns:
+        - "*"
   ignore:
     - dependency-name: "*"
       update-types: ["version-update:semver-patch"]

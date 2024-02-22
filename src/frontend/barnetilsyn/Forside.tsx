@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router';
 import { styled } from 'styled-components';
@@ -5,22 +7,27 @@ import { styled } from 'styled-components';
 import {
     Accordion,
     Alert,
+    BodyLong,
     BodyShort,
     Button,
     Checkbox,
+    CheckboxGroup,
     Heading,
     Label,
-    Link,
 } from '@navikt/ds-react';
 
 import { RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
+import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
+import { fellesTekster } from '../tekster/felles';
+import { hentFornavn } from '../utils/formatering';
 import { hentNesteRoute } from '../utils/routes';
 
 const KnappeContainer = styled(BodyShort)`
@@ -33,11 +40,16 @@ const Forside: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { harBekreftet, settHarBekreftet } = useSøknad();
+    const { person } = usePerson();
+
+    const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
 
     const startSøknad = () => {
         if (harBekreftet) {
             const nesteRoute = hentNesteRoute(RoutesBarnetilsyn, location.pathname);
             navigate(nesteRoute.path);
+        } else {
+            settSkalViseFeilmelding(true);
         }
     };
 
@@ -45,7 +57,10 @@ const Forside: React.FC = () => {
         <Container>
             <PellePanel poster>
                 <Label>
-                    <LocaleTekst tekst={forsideTekster.veileder_tittel} />
+                    <LocaleTekst
+                        tekst={forsideTekster.veileder_tittel}
+                        argument0={hentFornavn(person.navn)}
+                    />
                 </Label>
                 <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </PellePanel>
@@ -67,7 +82,12 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <LocaleTekstAvsnitt tekst={forsideTekster.utgifter_som_dekkes_innhold} />
+                        <BodyLong spacing>
+                            <LocaleInlineLenke
+                                tekst={forsideTekster.utgifter_som_dekkes_innhold_1}
+                            />
+                        </BodyLong>
+                        <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold_2} />
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
@@ -77,9 +97,7 @@ const Forside: React.FC = () => {
                     <Accordion.Content>
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
                         <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
-                        <Link>
-                            <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />
-                        </Link>
+                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold3} />
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
@@ -87,21 +105,35 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_innhold} />
+                        {forsideTekster.dokumentasjon_utgifter_innhold.map((tekst, indeks) => (
+                            <LocalePunktliste
+                                key={indeks}
+                                tittel={tekst.tittel}
+                                innhold={tekst.innhold}
+                                tittelSomLabel
+                            />
+                        ))}
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
-            <div>
-                <Label>
-                    <LocaleTekst tekst={forsideTekster.vi_stoler_tittel} />
-                </Label>
+            <CheckboxGroup
+                legend={<LocaleTekst tekst={fellesTekster.vi_stoler_tittel} />}
+                error={
+                    skalViseFeilmelding && (
+                        <LocaleTekst tekst={fellesTekster.vi_stoler_feilmelding} />
+                    )
+                }
+            >
                 <Checkbox
-                    checked={harBekreftet}
-                    onChange={(e) => settHarBekreftet(e.target.checked)}
+                    value={harBekreftet}
+                    onChange={(e) => {
+                        settHarBekreftet(e.target.checked);
+                        settSkalViseFeilmelding(false);
+                    }}
                 >
-                    <LocaleTekst tekst={forsideTekster.vi_stoler_innhold} />
+                    <LocaleTekst tekst={fellesTekster.vi_stoler_innhold} />
                 </Checkbox>
-            </div>
+            </CheckboxGroup>
             <KnappeContainer>
                 <Button onClick={startSøknad} variant="primary">
                     Start søknad

@@ -1,3 +1,3 @@
 export enum Stønadstype {
-    barnetilsyn = 'barnetilsyn',
+    BARNETILSYN = 'BARNETILSYN',
 }

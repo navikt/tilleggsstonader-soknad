@@ -8,13 +8,18 @@ on:
 env:
   IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
 
+permissions:
+  contents: "read"
+  id-token: "write"
+  packages: "write"
+
 jobs:
   build:
     name: Build and push Docker container
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: yarn
@@ -54,17 +59,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Deploy til dev-gcp
-        uses: nais/deploy/actions/deploy@v1
+        uses: nais/deploy/actions/deploy@v2
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: .nais/naiserator/dev.yaml
 #      - name: Deploy til prod-gcp
-#        uses: nais/deploy/actions/deploy@v1
+#        uses: nais/deploy/actions/deploy@v2
 #        env:
-#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
 #          CLUSTER: prod-gcp
 #          RESOURCE: .nais/naiserator/prod.yaml
       - name: Post deploy failures to Slack
