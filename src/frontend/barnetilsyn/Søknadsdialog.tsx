@@ -18,20 +18,28 @@ const Søknadsdialog: React.FC = () => {
     return (
         <>
             <Banner tittel={fellesTekster.banner_bt} />
-            <RedirectTilStart stønadstype={Stønadstype.BARNETILSYN}>
-                <Routes>
-                    <Route path={'*'} element={<Forside />} />
-                    <Route path={'/personalia'} element={<Personalia />} />
-                    <Route path={'/hovedytelse'} element={<Hovedytelse />} />
-                    <Route path={'/aktivitet'} element={<Aktivitet />} />
-                    <Route path={'/dine-barn'} element={<DineBarn />} />
-                    <Route path={'/barnepass'} element={<Barnepass />} />
-                    <Route path={'/vedlegg'} element={<Vedlegg />} />
-                    <Route path={'/oppsummering'} element={<Oppsummering />} />
-                    <Route path={'/kvittering'} element={<Kvittering />} />
-                </Routes>
-            </RedirectTilStart>
+            <Routes>
+                <Route path={'/'} element={<Forside />} />
+                <Route path={'*'} element={<SøknadsdialogInnhold />} />
+            </Routes>
         </>
+    );
+};
+
+const SøknadsdialogInnhold = () => {
+    return (
+        <RedirectTilStart stønadstype={Stønadstype.BARNETILSYN}>
+            <Routes>
+                <Route path={'/personalia'} element={<Personalia />} />
+                <Route path={'/hovedytelse'} element={<Hovedytelse />} />
+                <Route path={'/aktivitet'} element={<Aktivitet />} />
+                <Route path={'/dine-barn'} element={<DineBarn />} />
+                <Route path={'/barnepass'} element={<Barnepass />} />
+                <Route path={'/vedlegg'} element={<Vedlegg />} />
+                <Route path={'/oppsummering'} element={<Oppsummering />} />
+                <Route path={'/kvittering'} element={<Kvittering />} />
+            </Routes>
+        </RedirectTilStart>
     );
 };
 

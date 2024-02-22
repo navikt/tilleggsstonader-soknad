@@ -21,7 +21,7 @@ export const hentForrigeRoute = (routes: IRoute[], nåværendePath: string) => {
 
 export const hentStartRoute = (stønadstype: Stønadstype) => {
     switch (stønadstype) {
-        case Stønadstype.barnetilsyn:
+        case Stønadstype.BARNETILSYN:
             return barnetilsynPath;
     }
 };
