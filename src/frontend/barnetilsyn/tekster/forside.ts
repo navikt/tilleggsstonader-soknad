@@ -24,7 +24,6 @@ export const forsideTekster: ForsideInnhold = {
     },
     veileder_innhold: {
         nb: [
-            'Jeg er her for å veilede deg gjennom søknaden.',
             'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én uke på Ditt NAV.',
         ],
     },
@@ -40,10 +39,10 @@ export const forsideTekster: ForsideInnhold = {
     dine_plikter_innhold: {
         nb: [
             'Du må gi oss riktige opplysninger i søknaden.',
-            'Du må dokumentere dine utgifter til pass av barn med faktura som inneholder beløp og gjelde for perioden du søker for.',
+            'Du vil bli bedt om å dokumentere dine utgifter i denne søknaden.',
             'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
             'Hvis du får penger du ikke har rett på, kan vi kreve at du betaler dem tilbake.',
-            'Du kan bare søke om støtte til pass av barn, hvis ingen andre har fått dekket utgiftene til pass for samme barn.',
+            'Du kan bare få støtte til pass av barn, hvis ingen andre har fått dekket utgiftene til pass for samme barn.',
         ],
     },
     utgifter_som_dekkes_tittel: {
@@ -91,7 +90,7 @@ export const forsideTekster: ForsideInnhold = {
         ],
     },
     dokumentasjon_utgifter_tittel: {
-        nb: 'Dette må legges ved søknaden',
+        nb: 'Dokumentasjon av utgifter',
     },
     dokumentasjon_utgifter_innhold: [
         {
