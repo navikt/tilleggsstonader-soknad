@@ -23,7 +23,6 @@ import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
-import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
@@ -63,7 +62,9 @@ const Forside: React.FC = () => {
                         argument0={hentFornavn(person.navn)}
                     />
                 </Label>
-                <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
+                <BodyShort>
+                    <LocaleTekst tekst={forsideTekster.veileder_innhold} />
+                </BodyShort>
             </PellePanel>
             {erSnartNyttSkoleår() && (
                 <Alert variant="info">
