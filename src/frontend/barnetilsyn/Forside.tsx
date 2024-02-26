@@ -27,6 +27,7 @@ import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnit
 import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
+import { erSnartNyttSkoleår } from '../utils/dato';
 import { hentFornavn } from '../utils/formatering';
 import { hentNesteRoute } from '../utils/routes';
 
@@ -64,14 +65,16 @@ const Forside: React.FC = () => {
                 </Label>
                 <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </PellePanel>
-            <Alert variant="info">
-                <Heading size="small">
-                    <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_tittel} />
-                </Heading>
-                <BodyShort size="medium">
-                    <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_innhold} />
-                </BodyShort>
-            </Alert>
+            {erSnartNyttSkoleår() && (
+                <Alert variant="info">
+                    <Heading size="small">
+                        <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_tittel} />
+                    </Heading>
+                    <BodyShort size="medium">
+                        <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_innhold} />
+                    </BodyShort>
+                </Alert>
+            )}
             <LocalePunktliste
                 tittel={forsideTekster.dine_plikter_tittel}
                 innhold={forsideTekster.dine_plikter_innhold}
