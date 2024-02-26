@@ -113,16 +113,5 @@ export const forsideTekster: ForsideInnhold = {
                 ],
             },
         },
-        {
-            tittel: {
-                nb: 'For barn som er ferdig med 4. skoleår må du dokumentere:',
-            },
-            innhold: {
-                nb: [
-                    'at barnet har større behov for pass enn jevnaldrende, med skriftlig uttalelse fra lege, spesialist eller annet helsepersonell, eller',
-                    'at du har en arbeidsrettet aktivitet hvor du må være borte på andre tider enn en vanlig arbeidsdag, med dokumentasjon fra utdanning/tiltakssted.',
-                ],
-            },
-        },
     ],
 };
