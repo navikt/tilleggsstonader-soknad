@@ -32,7 +32,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Du må legge ved faktura for barnepass for perioden du søker for. Det vil ta lengre tid å få svar fra oss hvis vi må hente inn fra deg i etterkant. Har du ikke enda fått faktura for høsten, anbefaler vi deg å vente med å søke til du har det.',
     },
     dine_plikter_tittel: {
-        nb: 'Dine plikter',
+        nb: 'Viktig å vite før du søker',
     },
     dine_plikter_innhold: {
         nb: [
