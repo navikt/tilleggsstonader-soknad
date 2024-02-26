@@ -38,10 +38,10 @@ const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] =
 
 const harIkkeVedleggDigitalAccordian: VedleggInnhold['accordians']['har_ikke_vedlegg_digital'] = {
     har_ikke_vedlegg_digital: {
-        nb: 'Har du ikke vedleggene digitalt?',
+        nb: 'Har du bare vedlegg på papir?',
     },
     slik_ta_bilde: {
-        nb: 'Slik tar du et godt bilde:',
+        nb: 'Du kan skanne eller ta bilde med mobilen:',
     },
     instruksjoner: {
         nb: [
