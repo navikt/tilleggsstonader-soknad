@@ -18,7 +18,7 @@ interface AktivitetInnhold {
 
 export const aktivitetTekster: AktivitetInnhold = {
     søker_fra_lesmer: {
-        header: { nb: 'Hvordan velge dato' },
+        header: { nb: 'Hvilken dato velger jeg?' },
         innhold: {
             nb: [
                 'Det vanligste er å velge datoen utdanningen din starter eller fra da du ble registrert arbeidssøker. Du får bare dekket utgifter så lenge du har en arbeidsrettet aktivitet. ',
