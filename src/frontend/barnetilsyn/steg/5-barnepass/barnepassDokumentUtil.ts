@@ -102,7 +102,10 @@ const lagDokumentasjonsfelt = (
     type: Vedleggstype,
     locale: Locale
 ): DokumentasjonFelt => {
-    const tittel = hentBeskjedMedEttParameter(barn.navn, typerVedleggTekster[type].tittel[locale]);
+    const tittel = hentBeskjedMedEttParameter(
+        barn.visningsnavn,
+        typerVedleggTekster[type].tittel[locale]
+    );
     return {
         type: type,
         label: tittel,

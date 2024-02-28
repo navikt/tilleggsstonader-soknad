@@ -50,7 +50,7 @@ const DineBarn = () => {
                         checked={barn.skalHaBarnepass ?? false}
                         onChange={() => toggleSkalHaBarnepass(barn.ident)}
                     >
-                        {barn.navn}, født {formaterIsoDato(barn.fødselsdato)}
+                        {barn.visningsnavn}, født {formaterIsoDato(barn.fødselsdato)}
                     </Checkbox>
                 ))}
                 {person.barn.some((barn) => barn.skalHaBarnepass && er9ellerEldre(barn)) && (

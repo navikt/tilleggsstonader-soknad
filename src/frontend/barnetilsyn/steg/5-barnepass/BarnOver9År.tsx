@@ -8,7 +8,6 @@ import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
-import { hentFornavn } from '../../../utils/formatering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 interface Props {
@@ -35,7 +34,7 @@ const BarnOver9År: React.FC<Props> = ({
         <>
             <LocaleRadioGroup
                 tekst={barnepassTekster.startet_femte_radio}
-                argument0={hentFornavn(barn.navn)}
+                argument0={barn.fornavn}
                 value={passInfo.startetIFemte?.verdi ?? ''}
                 onChange={oppdaterStartetIFemte}
                 error={
@@ -55,7 +54,7 @@ const BarnOver9År: React.FC<Props> = ({
                 <>
                     <LocaleRadioGroup
                         tekst={barnepassTekster.årsak_ekstra_pass_radio}
-                        argument0={hentFornavn(barn.navn)}
+                        argument0={barn.fornavn}
                         value={passInfo.årsak?.verdi || ''}
                         onChange={(val) => oppdaterBarnMedBarnepass({ ...passInfo, årsak: val })}
                         error={

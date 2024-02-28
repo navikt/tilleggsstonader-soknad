@@ -6,11 +6,6 @@ export const datoFormat = {
     year: 'numeric',
 } as const;
 
-// TODO: Må ta hensyn til dobbeltnavn
-export const hentFornavn = (navn: string) => {
-    return navn.split(' ')[0];
-};
-
 export const formaterIsoDato = (dato: string): string => {
     return parseISO(dato).toLocaleDateString('no-NO', datoFormat);
 };
