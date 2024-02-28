@@ -29,7 +29,7 @@ import { DokumentasjonFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { Hovedytelse } from '../../../typer/søknad';
 import { TekstElement } from '../../../typer/tekst';
-import { formaterAdresse, formaterIsoDato, hentFornavn } from '../../../utils/formatering';
+import { formaterIsoDato, hentFornavn } from '../../../utils/formatering';
 import { verdiFelterTilTekstElement } from '../../../utils/tekster';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import {
@@ -87,7 +87,7 @@ const OmDeg: React.FC<{ person: Person }> = ({ person }) => (
                 <Label>
                     <LocaleTekst tekst={personaliaTekster.adresse_label} />
                 </Label>
-                <BodyShort>{formaterAdresse(person.adresse)}</BodyShort>
+                <BodyShort>{person.adresse}</BodyShort>
                 <LocaleReadMoreMedLenke tekst={personaliaTekster.adresse_lesmer} />
             </div>
             <div>
