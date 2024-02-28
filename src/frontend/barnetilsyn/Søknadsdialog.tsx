@@ -10,14 +10,26 @@ import Barnepass from './steg/5-barnepass/Barnepass';
 import Vedlegg from './steg/6-vedlegg/Vedlegg';
 import Oppsummering from './steg/7-oppsummering/Oppsummering';
 import { Banner } from '../components/Banner';
+import RedirectTilStart from '../components/RedirectTilStart';
 import { fellesTekster } from '../tekster/felles';
+import { Stønadstype } from '../typer/stønadstyper';
 
 const Søknadsdialog: React.FC = () => {
     return (
         <>
             <Banner tittel={fellesTekster.banner_bt} />
             <Routes>
-                <Route path={'*'} element={<Forside />} />
+                <Route path={'/'} element={<Forside />} />
+                <Route path={'*'} element={<SøknadsdialogInnhold />} />
+            </Routes>
+        </>
+    );
+};
+
+const SøknadsdialogInnhold = () => {
+    return (
+        <RedirectTilStart stønadstype={Stønadstype.BARNETILSYN}>
+            <Routes>
                 <Route path={'/personalia'} element={<Personalia />} />
                 <Route path={'/hovedytelse'} element={<Hovedytelse />} />
                 <Route path={'/aktivitet'} element={<Aktivitet />} />
@@ -27,7 +39,7 @@ const Søknadsdialog: React.FC = () => {
                 <Route path={'/oppsummering'} element={<Oppsummering />} />
                 <Route path={'/kvittering'} element={<Kvittering />} />
             </Routes>
-        </>
+        </RedirectTilStart>
     );
 };
 
