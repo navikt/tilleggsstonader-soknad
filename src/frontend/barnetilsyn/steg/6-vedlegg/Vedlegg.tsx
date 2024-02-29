@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 
 import { BodyShort, Heading, Label, List } from '@navikt/ds-react';
 
-import { fjernVedlegg, leggTilVedlegg } from './utils';
+import { fjernVedlegg, leggTilVedlegg, toggleHarSendtInn } from './utils';
 import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -61,6 +61,10 @@ const Vedlegg = () => {
         );
     };
 
+    const toggleHarSendtInnTidligere = (dokumentasjonFelt: DokumentasjonFelt) => {
+        settNyDokumentasjon((prevState) => toggleHarSendtInn(prevState, dokumentasjonFelt));
+    };
+
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
@@ -82,6 +86,7 @@ const Vedlegg = () => {
                             tittel={dok.label}
                             vedlegg={typerVedleggTekster[dok.type]}
                             dokumentasjonFelt={nyDokumentasjon[indeks]}
+                            toggleHarSendtInnTidligere={() => toggleHarSendtInnTidligere(dok)}
                             leggTilDokument={(dokument: Dokument) => leggTilDokument(dok, dokument)}
                             slettDokument={(dokument) => slettDokument(dok, dokument)}
                         />

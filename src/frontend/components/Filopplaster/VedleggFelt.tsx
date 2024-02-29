@@ -21,9 +21,17 @@ const VedleggFelt: React.FC<{
     tittel: string;
     vedlegg: Vedlegg;
     dokumentasjonFelt: DokumentasjonFelt;
+    toggleHarSendtInnTidligere: () => void;
     leggTilDokument: (vedlegg: Dokument) => void;
     slettDokument: (vedlegg: Dokument) => void;
-}> = ({ tittel, vedlegg, dokumentasjonFelt, leggTilDokument, slettDokument }) => {
+}> = ({
+    tittel,
+    vedlegg,
+    dokumentasjonFelt,
+    toggleHarSendtInnTidligere,
+    leggTilDokument,
+    slettDokument,
+}) => {
     return (
         <Container>
             <Heading size="small">{tittel}</Heading>
@@ -40,6 +48,7 @@ const VedleggFelt: React.FC<{
 
             <Filopplaster
                 dokumentasjonFelt={dokumentasjonFelt}
+                toggleHarSendtInnTidligere={toggleHarSendtInnTidligere}
                 leggTilDokument={leggTilDokument}
                 slettDokument={slettDokument}
             />

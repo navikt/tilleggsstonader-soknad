@@ -23,9 +23,10 @@ const Container = styled(VStack).attrs({ gap: '2', align: 'center' })`
 
 const Filopplaster: React.FC<{
     dokumentasjonFelt: DokumentasjonFelt;
+    toggleHarSendtInnTidligere: () => void;
     leggTilDokument: (vedlegg: Dokument) => void;
     slettDokument: (vedlegg: Dokument) => void;
-}> = ({ dokumentasjonFelt, leggTilDokument, slettDokument }) => {
+}> = ({ dokumentasjonFelt, toggleHarSendtInnTidligere, leggTilDokument, slettDokument }) => {
     const { locale } = useSpråk();
     const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -82,7 +83,10 @@ const Filopplaster: React.FC<{
                 >
                     <LocaleTekst tekst={filopplastingTekster.last_opp_fil_knapp} />
                 </Button>
-                <Checkbox>
+                <Checkbox
+                    checked={dokumentasjonFelt.harSendtInn}
+                    onChange={toggleHarSendtInnTidligere}
+                >
                     <LocaleTekst tekst={filopplastingTekster.delt_tidligere_knapp} />
                 </Checkbox>
                 <input
