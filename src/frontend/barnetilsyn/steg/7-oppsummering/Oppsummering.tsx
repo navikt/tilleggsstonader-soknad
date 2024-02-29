@@ -29,7 +29,7 @@ import { DokumentasjonFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { Hovedytelse } from '../../../typer/søknad';
 import { TekstElement } from '../../../typer/tekst';
-import { formaterAdresse, formaterIsoDato, hentFornavn } from '../../../utils/formatering';
+import { formaterIsoDato } from '../../../utils/formatering';
 import { verdiFelterTilTekstElement } from '../../../utils/tekster';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import {
@@ -87,7 +87,7 @@ const OmDeg: React.FC<{ person: Person }> = ({ person }) => (
                 <Label>
                     <LocaleTekst tekst={personaliaTekster.adresse_label} />
                 </Label>
-                <BodyShort>{formaterAdresse(person.adresse)}</BodyShort>
+                <BodyShort>{person.adresse}</BodyShort>
                 <LocaleReadMoreMedLenke tekst={personaliaTekster.adresse_lesmer} />
             </div>
             <div>
@@ -197,7 +197,7 @@ const DineBarn: React.FC<{ person: Person }> = ({ person }) => (
             .filter((barn) => barn.skalHaBarnepass)
             .map((barn) => (
                 <BodyShort key={barn.ident}>
-                    {barn.navn}, født {formaterIsoDato(barn.fødselsdato)}
+                    {barn.visningsnavn}, født {formaterIsoDato(barn.fødselsdato)}
                 </BodyShort>
             ))}
     </AccordionItem>
@@ -208,7 +208,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
         <Label>
             <LocaleTekst
                 tekst={barnepassTekster.startet_femte_radio.header}
-                argument0={hentFornavn(barn.navn)}
+                argument0={barn.fornavn}
             />
         </Label>
         <BodyShort>
@@ -219,7 +219,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
                 <Label>
                     <LocaleTekst
                         tekst={barnepassTekster.årsak_ekstra_pass_radio.header}
-                        argument0={hentFornavn(barn.navn)}
+                        argument0={barn.fornavn}
                     />
                 </Label>
                 <BodyShort>
@@ -249,7 +249,7 @@ const BarnMedBarnepass: React.FC<{ person: Person; barnMedBarnepass: Barnepass[]
                         <Label>
                             <LocaleTekst
                                 tekst={barnepassTekster.hvem_passer_radio.header}
-                                argument0={hentFornavn(barn.navn)}
+                                argument0={barn.fornavn}
                             />
                         </Label>
                         <BodyShort>

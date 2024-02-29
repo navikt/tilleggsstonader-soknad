@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { useNavigate } from 'react-router';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
 import {
@@ -27,7 +26,6 @@ import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { erSnartNyttSkoleår } from '../utils/dato';
-import { hentFornavn } from '../utils/formatering';
 import { hentNesteRoute } from '../utils/routes';
 
 const KnappeContainer = styled(BodyShort)`
@@ -59,7 +57,7 @@ const Forside: React.FC = () => {
                 <Label>
                     <LocaleTekst
                         tekst={forsideTekster.veileder_tittel}
-                        argument0={hentFornavn(person.navn)}
+                        argument0={person.fornavn}
                     />
                 </Label>
                 <BodyShort>

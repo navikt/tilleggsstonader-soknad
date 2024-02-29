@@ -5,7 +5,8 @@ export interface Barn {
     ident: string;
     alder: number;
     fødselsdato: string;
-    navn: string;
+    fornavn: string;
+    visningsnavn: string;
     skalHaBarnepass: boolean;
 }
 

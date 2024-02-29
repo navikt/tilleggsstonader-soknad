@@ -6,7 +6,6 @@ import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/Loc
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
-import { formaterAdresse } from '../../../utils/formatering';
 import { personaliaTekster } from '../../tekster/personalia';
 
 const Personalia = () => {
@@ -24,7 +23,7 @@ const Personalia = () => {
                 <Label>
                     <LocaleTekst tekst={personaliaTekster.adresse_label} />
                 </Label>
-                <BodyShort>{formaterAdresse(person.adresse)}</BodyShort>
+                <BodyShort>{person.adresse}</BodyShort>
                 <LocaleReadMoreMedLenke tekst={personaliaTekster.adresse_lesmer} />
             </div>
             <div>

@@ -7,7 +7,6 @@ import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInline
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, PassType } from '../../../typer/barn';
-import { hentFornavn } from '../../../utils/formatering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 interface Props {
@@ -25,10 +24,10 @@ const BarnepassSpørsmål: React.FC<Props> = ({
 }) => {
     return (
         <>
-            <Heading size="medium">{barn.navn}</Heading>
+            <Heading size="medium">{barn.visningsnavn}</Heading>
             <LocaleRadioGroup
                 tekst={barnepassTekster.hvem_passer_radio}
-                argument0={hentFornavn(barn.navn)}
+                argument0={barn.fornavn}
                 value={barnepass.type?.verdi || ''}
                 onChange={(passType) => oppdaterBarnMedBarnepass({ ...barnepass, type: passType })}
                 error={visFeilmelding && barnepass.type === undefined && 'Du må velge et alernativ'}
