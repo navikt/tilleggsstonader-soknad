@@ -3,7 +3,6 @@ import { JaNei } from '../../typer/søknad';
 import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
-    steg_tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
@@ -28,9 +27,6 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     søker_fra_label: { nb: 'Fra hvilken dato søker du om støtte til pass?' },
     søker_fra_dato_feilmelding: { nb: 'Du må fylle inn en gyldig dato' },
-    steg_tittel: {
-        nb: 'Aktivitet',
-    },
     innhold_tittel: {
         nb: 'Arbeidsrettet aktivitet',
     },

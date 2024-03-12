@@ -105,7 +105,6 @@ const Hovedytelse = () => {
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
-            stegtittel={hovedytelseInnhold.steg_tittel}
             validerSteg={() => kanFortsette(ytelse)}
             oppdaterSøknad={() => {
                 if (ytelse !== undefined) {

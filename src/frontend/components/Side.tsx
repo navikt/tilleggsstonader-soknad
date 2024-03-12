@@ -18,14 +18,14 @@ import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface Props {
     stønadstype: Stønadstype;
-    stegtittel: TekstElement<string>;
+    stegtittel?: TekstElement<string>;
     children?: React.ReactNode;
     validerSteg?: () => boolean;
     oppdaterSøknad?: () => void;
 }
 
 export const Container = styled.div`
-    padding: 2rem 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
@@ -117,9 +117,11 @@ const Side: React.FC<Props> = ({
     return (
         <Container>
             <StegIndikator>
-                <Heading size="medium" as="h2">
-                    <LocaleTekst tekst={stegtittel} />
-                </Heading>
+                {stegtittel && (
+                    <Heading size="medium" as="h2">
+                        <LocaleTekst tekst={stegtittel} />
+                    </Heading>
+                )}
                 <BodyShort size="small">
                     Steg {aktivtStegIndex} av {routes.length - 2}
                 </BodyShort>

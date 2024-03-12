@@ -68,7 +68,6 @@ const Vedlegg = () => {
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
-            stegtittel={vedleggTekster.steg_tittel}
             oppdaterSøknad={() => settDokumentasjon(nyDokumentasjon)}
         >
             <Heading size={'medium'}>

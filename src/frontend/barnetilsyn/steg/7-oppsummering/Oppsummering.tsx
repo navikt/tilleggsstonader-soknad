@@ -295,7 +295,6 @@ const Oppsummering = () => {
 
     return (
         <Side
-            stegtittel={oppsummeringTekster.steg_tittel}
             stønadstype={Stønadstype.BARNETILSYN}
             validerSteg={() => {
                 if (!harBekreftet) {
