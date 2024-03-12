@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react';
+import { Alert, BodyShort, Button } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
@@ -13,12 +13,10 @@ import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { IRoute } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
-import { TekstElement } from '../typer/tekst';
 import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface Props {
     stønadstype: Stønadstype;
-    stegtittel?: TekstElement<string>;
     children?: React.ReactNode;
     validerSteg?: () => boolean;
     oppdaterSøknad?: () => void;
@@ -59,13 +57,7 @@ const KnappeContainerMedFeilmelding = styled.div`
     }
 `;
 
-const Side: React.FC<Props> = ({
-    stønadstype,
-    stegtittel,
-    children,
-    validerSteg,
-    oppdaterSøknad,
-}) => {
+const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterSøknad }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon, settInnsentTidspunkt } =
@@ -117,11 +109,6 @@ const Side: React.FC<Props> = ({
     return (
         <Container>
             <StegIndikator>
-                {stegtittel && (
-                    <Heading size="medium" as="h2">
-                        <LocaleTekst tekst={stegtittel} />
-                    </Heading>
-                )}
                 <BodyShort size="small">
                     Steg {aktivtStegIndex} av {routes.length - 2}
                 </BodyShort>

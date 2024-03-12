@@ -6,7 +6,7 @@ export type TekstTypeVedlegg = {
 };
 
 interface VedleggInnhold {
-    innhold_tittel: TekstElement<string>;
+    steg_tittel: TekstElement<string>;
     guide_innhold: TekstElement<string[]>;
     dokumentasjonskrav_tittel: TekstElement<string>;
     dokumentasjonskrav_samlet_faktura: TekstElement<string>;
@@ -62,7 +62,7 @@ const harIkkeVedleggDigitalAccordian: VedleggInnhold['accordians']['har_ikke_ved
 };
 
 export const vedleggTekster: VedleggInnhold = {
-    innhold_tittel: {
+    steg_tittel: {
         nb: 'Laste opp vedlegg',
     },
     guide_innhold: {

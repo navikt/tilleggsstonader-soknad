@@ -1,7 +1,7 @@
 import { InlineLenke, LesMer, TekstElement } from '../../typer/tekst';
 
 interface PersonaliaInnhold {
-    innhold_tittel: TekstElement<string>;
+    steg_tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     adresse_label: TekstElement<string>;
     adresse_lesmer: LesMer<InlineLenke>;
@@ -13,7 +13,7 @@ interface PersonaliaInnhold {
 }
 
 export const personaliaTekster: PersonaliaInnhold = {
-    innhold_tittel: {
+    steg_tittel: {
         nb: 'Denne informasjonen om deg er registrert hos oss',
     },
     guide_innhold: {
