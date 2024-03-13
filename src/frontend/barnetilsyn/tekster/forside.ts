@@ -4,7 +4,7 @@ interface ForsideInnhold {
     veileder_tittel: TekstElement<string>;
     veileder_innhold: TekstElement<string[]>;
     mottatt_faktura_alert_tittel: TekstElement<string>;
-    mottatt_faktura_alert_innhold: TekstElement<string>;
+    mottatt_faktura_alert_innhold: TekstElement<string[]>;
     dine_plikter_tittel: TekstElement<string>;
     dine_plikter_innhold: TekstElement<string[]>;
     utgifter_som_dekkes_tittel: TekstElement<string>;
@@ -33,7 +33,10 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Skal du søke for nytt skole/barnehageår?',
     },
     mottatt_faktura_alert_innhold: {
-        nb: 'Du må legge ved faktura for barnepass for perioden du søker for. Det vil ta lengre tid å få svar fra oss hvis vi må hente inn fra deg i etterkant. Har du ikke enda fått faktura for høsten, anbefaler vi deg å vente med å søke til du har det.',
+        nb: [
+            'Du må legge ved faktura for perioden du søker for. Det vil ta lengre tid å få svar fra oss hvis vi må hente inn fra deg i etterkant.',
+            'Hvis du ikke har mottatt fakturaen ennå, anbefaler vi at du venter med å søke til du får den.',
+        ],
     },
     dine_plikter_tittel: {
         nb: 'Viktig å vite før du søker',

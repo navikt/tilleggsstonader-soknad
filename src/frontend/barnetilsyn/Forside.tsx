@@ -64,12 +64,10 @@ const Forside: React.FC = () => {
             </PellePanel>
             {erSnartNyttSkoleår() && (
                 <Alert variant="info">
-                    <Heading size="small">
+                    <Heading size="small" spacing>
                         <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_tittel} />
                     </Heading>
-                    <BodyShort size="medium">
-                        <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_innhold} />
-                    </BodyShort>
+                    <LocaleTekstAvsnitt tekst={forsideTekster.mottatt_faktura_alert_innhold} />
                 </Alert>
             )}
             <LocalePunktliste
