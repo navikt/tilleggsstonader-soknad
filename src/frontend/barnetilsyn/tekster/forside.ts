@@ -8,8 +8,7 @@ interface ForsideInnhold {
     dine_plikter_tittel: TekstElement<string>;
     dine_plikter_innhold: TekstElement<string[]>;
     utgifter_som_dekkes_tittel: TekstElement<string>;
-    utgifter_som_dekkes_innhold_1: TekstElement<InlineLenke>;
-    utgifter_som_dekkes_innhold_2: TekstElement<string>;
+    utgifter_som_dekkes_innhold: TekstElement<string[]>;
     info_som_hentes_tittel: TekstElement<string>;
     info_som_hentes_innhold1: TekstElement<string>;
     info_som_hentes_innhold2: TekstElement<string[]>;
@@ -49,18 +48,12 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Hvilke utgifter dekker vi?',
     },
     //TODO: Fiks med lenke og mellomrom
-    utgifter_som_dekkes_innhold_1: {
+    utgifter_som_dekkes_innhold: {
         nb: [
-            'Vi dekker 64 prosent av utgiftene du har til pass av barn, opp til en ',
-            {
-                tekst: 'maksimumssats.',
-                url: 'https://www.nav.no/tilleggsstonader#hva',
-                variant: 'neutral',
-            },
+            'Vi dekker opp til 64 prosent av utgiftene du har til pass av barn.',
+            'Utgifter til mat og bleier dekkes ikke.',
+            'Som hovedregel gis det bare støtte til pass av barn til og med 4. klasse.',
         ],
-    },
-    utgifter_som_dekkes_innhold_2: {
-        nb: 'Utgifter til mat og bleier dekkes ikke.  ',
     },
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',

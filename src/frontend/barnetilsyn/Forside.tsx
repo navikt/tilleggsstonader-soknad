@@ -6,7 +6,6 @@ import { styled } from 'styled-components';
 import {
     Accordion,
     Alert,
-    BodyLong,
     BodyShort,
     Button,
     Checkbox,
@@ -83,12 +82,7 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <BodyLong spacing>
-                            <LocaleInlineLenke
-                                tekst={forsideTekster.utgifter_som_dekkes_innhold_1}
-                            />
-                        </BodyLong>
-                        <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold_2} />
+                        <LocaleTekstAvsnitt tekst={forsideTekster.utgifter_som_dekkes_innhold} />
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
