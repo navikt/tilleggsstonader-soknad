@@ -87,16 +87,6 @@ const Forside: React.FC = () => {
                 </Accordion.Item>
                 <Accordion.Item>
                     <Accordion.Header>
-                        <LocaleTekst tekst={forsideTekster.info_som_hentes_tittel} />
-                    </Accordion.Header>
-                    <Accordion.Content>
-                        <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
-                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
-                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold3} />
-                    </Accordion.Content>
-                </Accordion.Item>
-                <Accordion.Item>
-                    <Accordion.Header>
                         <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
@@ -108,6 +98,16 @@ const Forside: React.FC = () => {
                                 tittelSomLabel
                             />
                         ))}
+                    </Accordion.Content>
+                </Accordion.Item>
+                <Accordion.Item>
+                    <Accordion.Header>
+                        <LocaleTekst tekst={forsideTekster.info_som_hentes_tittel} />
+                    </Accordion.Header>
+                    <Accordion.Content>
+                        <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
+                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
+                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold3} />
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
