@@ -40,10 +40,9 @@ export const forsideTekster: ForsideInnhold = {
     dine_plikter_innhold: {
         nb: [
             'Du må gi oss riktige opplysninger i søknaden.',
-            'Du vil bli bedt om å dokumentere dine utgifter i denne søknaden.',
+            'Du må dokumentere utgiftene dine i søknaden.',
             'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
-            'Hvis du får penger du ikke har rett på, kan vi kreve at du betaler dem tilbake.',
-            'Du kan bare få støtte til pass av barn, hvis ingen andre har fått dekket utgiftene til pass for samme barn.',
+            'Hvis du får penger du ikke har rett på, kan vi kreve at du betaler de tilbake.',
         ],
     },
     utgifter_som_dekkes_tittel: {
