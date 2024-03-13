@@ -2,7 +2,7 @@ import { InlineLenke, Punktliste, TekstElement } from '../../typer/tekst';
 
 interface ForsideInnhold {
     veileder_tittel: TekstElement<string>;
-    veileder_innhold: TekstElement<string>;
+    veileder_innhold: TekstElement<string[]>;
     mottatt_faktura_alert_tittel: TekstElement<string>;
     mottatt_faktura_alert_innhold: TekstElement<string>;
     dine_plikter_tittel: TekstElement<string>;
@@ -23,7 +23,10 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Hei [0]!',
     },
     veileder_innhold: {
-        nb: 'Svarene dine lagres underveis, slik at du trygt kan gå tilbake og endre dem. En påbegynt søknad lagres i én uke på Ditt NAV.',
+        nb: [
+            'Denne pengestøtten kan gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar AAP, uføretrygd eller har nedsatt arbeidsevne.',
+            'Svarene dine lagres underveis, slik at du kan gå tilbake og endre dem. Vi lagrer påbegynte søknad i én uke på Min side.',
+        ],
     },
     mottatt_faktura_alert_tittel: {
         nb: 'Skal du søke for nytt skole/barnehageår?',
