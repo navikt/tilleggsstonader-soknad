@@ -92,19 +92,21 @@ export const forsideTekster: ForsideInnhold = {
             },
             innhold: {
                 nb: [
-                    'Barnets navn',
-                    'Hva som er utgifter til pass, mat og eventuelt bleier.',
-                    'Perioden utgiftene gjelder for. ',
+                    'barnets navn',
+                    'hva som er utgifter til pass, mat og eventuelt bleier',
+                    'perioden utgiftene gjelder for',
                 ],
             },
         },
         {
             tittel: {
-                nb: 'Benyttes privat pass som f.eks. dagmamma eller praktikant:',
+                nb: 'Har du privat pass som f.eks. dagmamma eller praktikant legger du ved:',
             },
             innhold: {
                 nb: [
-                    'Dokumentere dine utgifter med f.eks. avtale med barnepasser og/eller A-melding sendt skatteetaten',
+                    'avtale med barnepasser',
+                    'kvittering for betaling',
+                    'eventuelt A-melding sendt Skatteetaten',
                 ],
             },
         },
