@@ -107,7 +107,9 @@ const Forside: React.FC = () => {
                     <Accordion.Content>
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
                         <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
-                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold3} />
+                        <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />
+                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold4} />
+                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold5} />
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>

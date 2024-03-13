@@ -12,7 +12,9 @@ interface ForsideInnhold {
     info_som_hentes_tittel: TekstElement<string>;
     info_som_hentes_innhold1: TekstElement<string>;
     info_som_hentes_innhold2: TekstElement<string[]>;
-    info_som_hentes_innhold3: TekstElement<InlineLenke>;
+    info_som_hentes_innhold3: TekstElement<string>;
+    info_som_hentes_innhold4: TekstElement<string[]>;
+    info_som_hentes_innhold5: TekstElement<InlineLenke>;
     dokumentasjon_utgifter_tittel: TekstElement<string>;
     dokumentasjon_utgifter_innhold: Punktliste[];
 }
@@ -64,18 +66,25 @@ export const forsideTekster: ForsideInnhold = {
     info_som_hentes_innhold2: {
         nb: [
             'adressen din og opplysninger om dine barn fra Folkeregisteret',
-            'om det utbetales kontantstøtte for barnet du søker støtte til pass for',
-            'informasjon om aktivitet eller utdanning som er godkjent av NAV',
-            'hvis du er arbeidssøker sjekker vi om du sender meldekort',
-            'ved behov sjekker vi hvilke andre andre ytelser du mottar fra NAV',
-            'ved behov sjekker vi oppholdstillatelse',
+            'informasjon om arbeidsrettet aktivitet',
+            'hvilke andre andre ytelser du mottar fra NAV',
         ],
     },
     info_som_hentes_innhold3: {
+        nb: 'Ved behov sjekker vi:',
+    },
+    info_som_hentes_innhold4: {
+        nb: [
+            'om du har barn det utbetales kontantstøtte for',
+            'om du sender meldekort',
+            'om du er medlem i folketrygden',
+        ],
+    },
+    info_som_hentes_innhold5: {
         nb: [
             'NAV er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre.  ',
             {
-                tekst: 'Personvernerklæringen på nav.no',
+                tekst: 'Personvernerklæringen på nav.no (åpnes i ny fane)',
                 url: 'https://www.nav.no/personvernerklaering',
                 variant: 'neutral',
             },
