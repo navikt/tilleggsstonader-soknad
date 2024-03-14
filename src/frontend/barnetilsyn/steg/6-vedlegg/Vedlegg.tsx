@@ -68,11 +68,10 @@ const Vedlegg = () => {
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
-            stegtittel={vedleggTekster.steg_tittel}
             oppdaterSøknad={() => settDokumentasjon(nyDokumentasjon)}
         >
             <Heading size={'medium'}>
-                <LocaleTekst tekst={vedleggTekster.innhold_tittel} />
+                <LocaleTekst tekst={vedleggTekster.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />

@@ -105,7 +105,6 @@ const Hovedytelse = () => {
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
-            stegtittel={hovedytelseInnhold.steg_tittel}
             validerSteg={() => kanFortsette(ytelse)}
             oppdaterSøknad={() => {
                 if (ytelse !== undefined) {
@@ -118,7 +117,7 @@ const Hovedytelse = () => {
             }}
         >
             <Heading size="medium">
-                <LocaleTekst tekst={hovedytelseInnhold.innhold_tittel} />
+                <LocaleTekst tekst={hovedytelseInnhold.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekst tekst={hovedytelseInnhold.guide_innhold} />
