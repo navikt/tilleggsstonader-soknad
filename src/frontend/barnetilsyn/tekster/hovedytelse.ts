@@ -4,7 +4,7 @@ import { CheckboxGruppe, LesMer, Radiogruppe, TekstElement } from '../../typer/t
 import { Ytelse } from '../steg/2-hovedytelse/typer';
 
 interface HovedytelseInnhold {
-    steg_tittel: TekstElement<string>;
+    tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     checkbox_hovedytelse: CheckboxGruppe<Ytelse>;
     oppholdINorge: {
@@ -30,7 +30,7 @@ export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
 };
 
 export const hovedytelseInnhold: HovedytelseInnhold = {
-    steg_tittel: { nb: 'Din situasjon' },
+    tittel: { nb: 'Din situasjon' },
     guide_innhold: {
         nb: 'Vi spør om dette for å vite hvilke rettigheter du har og hvilke spørsmål vi må stille deg i søknadsskjemaet.',
     },

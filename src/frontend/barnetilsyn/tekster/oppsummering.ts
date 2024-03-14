@@ -1,7 +1,7 @@
 import { TekstElement } from '../../typer/tekst';
 
 interface OppsummeringInnhold {
-    steg_tittel: TekstElement<string>;
+    tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     bekreft_checkboks: TekstElement<string>;
 
@@ -36,7 +36,7 @@ interface OppsummeringInnhold {
 }
 
 export const oppsummeringTekster: OppsummeringInnhold = {
-    steg_tittel: {
+    tittel: {
         nb: 'Oppsummering',
     },
     guide_innhold: {

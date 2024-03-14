@@ -117,7 +117,7 @@ const Hovedytelse = () => {
             }}
         >
             <Heading size="medium">
-                <LocaleTekst tekst={hovedytelseInnhold.steg_tittel} />
+                <LocaleTekst tekst={hovedytelseInnhold.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekst tekst={hovedytelseInnhold.guide_innhold} />

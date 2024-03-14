@@ -13,7 +13,7 @@ const Kvittering = () => {
     return (
         <Container>
             <Heading size="medium" as="h2">
-                <LocaleTekst tekst={kvitteringTekster.steg_tittel} />
+                <LocaleTekst tekst={kvitteringTekster.tittel} />
             </Heading>
             <Alert variant="success">
                 <Heading size="small" as="h3">

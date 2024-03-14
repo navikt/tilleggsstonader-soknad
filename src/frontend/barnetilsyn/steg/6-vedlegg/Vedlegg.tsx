@@ -71,7 +71,7 @@ const Vedlegg = () => {
             oppdaterSøknad={() => settDokumentasjon(nyDokumentasjon)}
         >
             <Heading size={'medium'}>
-                <LocaleTekst tekst={vedleggTekster.steg_tittel} />
+                <LocaleTekst tekst={vedleggTekster.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />

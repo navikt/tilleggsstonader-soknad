@@ -57,7 +57,7 @@ const Aktivitet = () => {
             oppdaterSøknad={oppdaterAktivitetISøknad}
         >
             <Heading size={'medium'}>
-                <LocaleTekst tekst={aktivitetTekster.steg_tittel} />
+                <LocaleTekst tekst={aktivitetTekster.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekst tekst={aktivitetTekster.guide_innhold} />

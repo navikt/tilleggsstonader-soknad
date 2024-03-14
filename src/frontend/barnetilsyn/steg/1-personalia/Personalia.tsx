@@ -14,7 +14,7 @@ const Personalia = () => {
     return (
         <Side stønadstype={Stønadstype.BARNETILSYN}>
             <Heading size="medium">
-                <LocaleTekst tekst={personaliaTekster.steg_tittel} />
+                <LocaleTekst tekst={personaliaTekster.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekst tekst={personaliaTekster.guide_innhold} />

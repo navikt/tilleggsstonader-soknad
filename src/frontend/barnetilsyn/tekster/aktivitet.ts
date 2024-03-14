@@ -6,7 +6,7 @@ interface AktivitetInnhold {
     guide_innhold: TekstElement<string>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
-    steg_tittel: TekstElement<string>;
+    tittel: TekstElement<string>;
     feil_utdanning_infoalert_title: TekstElement<string>;
     feil_utdanning_infoalert_innhold: TekstElement<string[]>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
@@ -27,7 +27,7 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     søker_fra_label: { nb: 'Fra hvilken dato søker du om støtte til pass?' },
     søker_fra_dato_feilmelding: { nb: 'Du må fylle inn en gyldig dato' },
-    steg_tittel: {
+    tittel: {
         nb: 'Arbeidsrettet aktivitet',
     },
     guide_innhold: {

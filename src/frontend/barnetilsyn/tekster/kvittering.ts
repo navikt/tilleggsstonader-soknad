@@ -1,7 +1,7 @@
 import { InlineLenke, TekstElement } from '../../typer/tekst';
 
 interface KvitteringInnhold {
-    steg_tittel: TekstElement<string>;
+    tittel: TekstElement<string>;
     søknad_mottatt_alert_tittel: TekstElement<string>;
     søknad_mottatt_alert_innhold1: TekstElement<string>;
     søknad_mottatt_alert_innhold2: TekstElement<string>;
@@ -11,7 +11,7 @@ interface KvitteringInnhold {
 }
 
 export const kvitteringTekster: KvitteringInnhold = {
-    steg_tittel: {
+    tittel: {
         nb: 'Kvittering',
     },
     søknad_mottatt_alert_tittel: { nb: 'Søknad mottatt' },

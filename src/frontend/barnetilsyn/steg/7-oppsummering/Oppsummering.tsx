@@ -306,7 +306,7 @@ const Oppsummering = () => {
             }}
         >
             <Heading size={'medium'}>
-                <LocaleTekst tekst={oppsummeringTekster.steg_tittel} />
+                <LocaleTekst tekst={oppsummeringTekster.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekst tekst={oppsummeringTekster.guide_innhold} />
