@@ -295,7 +295,6 @@ const Oppsummering = () => {
 
     return (
         <Side
-            stegtittel={oppsummeringTekster.steg_tittel}
             stønadstype={Stønadstype.BARNETILSYN}
             validerSteg={() => {
                 if (!harBekreftet) {
@@ -307,7 +306,7 @@ const Oppsummering = () => {
             }}
         >
             <Heading size={'medium'}>
-                <LocaleTekst tekst={oppsummeringTekster.steg_tittel} />
+                <LocaleTekst tekst={oppsummeringTekster.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekst tekst={oppsummeringTekster.guide_innhold} />

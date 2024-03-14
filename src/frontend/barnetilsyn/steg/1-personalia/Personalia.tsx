@@ -12,9 +12,9 @@ const Personalia = () => {
     const { person } = usePerson();
 
     return (
-        <Side stegtittel={personaliaTekster.steg_tittel} stønadstype={Stønadstype.BARNETILSYN}>
+        <Side stønadstype={Stønadstype.BARNETILSYN}>
             <Heading size="medium">
-                <LocaleTekst tekst={personaliaTekster.innhold_tittel} />
+                <LocaleTekst tekst={personaliaTekster.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekst tekst={personaliaTekster.guide_innhold} />

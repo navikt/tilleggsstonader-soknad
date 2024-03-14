@@ -11,7 +11,6 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { Barnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { valuerOrThrow } from '../../../utils/typer';
-import { barnepassTekster } from '../../tekster/barnepass';
 
 const Barnepass = () => {
     const { person } = usePerson();
@@ -60,7 +59,6 @@ const Barnepass = () => {
 
     return (
         <Side
-            stegtittel={barnepassTekster.steg_tittel}
             stønadstype={Stønadstype.BARNETILSYN}
             oppdaterSøknad={oppdaterSøknad}
             validerSteg={kanGåVidere}

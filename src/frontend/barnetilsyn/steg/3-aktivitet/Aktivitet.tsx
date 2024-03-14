@@ -52,13 +52,12 @@ const Aktivitet = () => {
 
     return (
         <Side
-            stegtittel={aktivitetTekster.steg_tittel}
             stønadstype={Stønadstype.BARNETILSYN}
             validerSteg={() => kanFortsette(utdanning?.verdi)}
             oppdaterSøknad={oppdaterAktivitetISøknad}
         >
             <Heading size={'medium'}>
-                <LocaleTekst tekst={aktivitetTekster.innhold_tittel} />
+                <LocaleTekst tekst={aktivitetTekster.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekst tekst={aktivitetTekster.guide_innhold} />

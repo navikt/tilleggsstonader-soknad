@@ -31,11 +31,7 @@ const DineBarn = () => {
     };
 
     return (
-        <Side
-            stegtittel={dineBarnTekster.steg_tittel}
-            stønadstype={Stønadstype.BARNETILSYN}
-            oppdaterSøknad={oppdaterSøknad}
-        >
+        <Side stønadstype={Stønadstype.BARNETILSYN} oppdaterSøknad={oppdaterSøknad}>
             <PellePanel>
                 <LocaleInlineLenke tekst={dineBarnTekster.guide_innhold} />
             </PellePanel>
