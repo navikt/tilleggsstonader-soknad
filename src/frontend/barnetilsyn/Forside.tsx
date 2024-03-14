@@ -6,7 +6,6 @@ import { styled } from 'styled-components';
 import {
     Accordion,
     Alert,
-    BodyLong,
     BodyShort,
     Button,
     Checkbox,
@@ -22,6 +21,7 @@ import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
+import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
@@ -60,18 +60,14 @@ const Forside: React.FC = () => {
                         argument0={person.fornavn}
                     />
                 </Label>
-                <BodyShort>
-                    <LocaleTekst tekst={forsideTekster.veileder_innhold} />
-                </BodyShort>
+                <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </PellePanel>
             {erSnartNyttSkoleår() && (
                 <Alert variant="info">
-                    <Heading size="small">
+                    <Heading size="small" spacing>
                         <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_tittel} />
                     </Heading>
-                    <BodyShort size="medium">
-                        <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_innhold} />
-                    </BodyShort>
+                    <LocaleTekstAvsnitt tekst={forsideTekster.mottatt_faktura_alert_innhold} />
                 </Alert>
             )}
             <LocalePunktliste
@@ -84,22 +80,7 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <BodyLong spacing>
-                            <LocaleInlineLenke
-                                tekst={forsideTekster.utgifter_som_dekkes_innhold_1}
-                            />
-                        </BodyLong>
-                        <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_innhold_2} />
-                    </Accordion.Content>
-                </Accordion.Item>
-                <Accordion.Item>
-                    <Accordion.Header>
-                        <LocaleTekst tekst={forsideTekster.info_som_hentes_tittel} />
-                    </Accordion.Header>
-                    <Accordion.Content>
-                        <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
-                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
-                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold3} />
+                        <LocaleTekstAvsnitt tekst={forsideTekster.utgifter_som_dekkes_innhold} />
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
@@ -115,6 +96,18 @@ const Forside: React.FC = () => {
                                 tittelSomLabel
                             />
                         ))}
+                    </Accordion.Content>
+                </Accordion.Item>
+                <Accordion.Item>
+                    <Accordion.Header>
+                        <LocaleTekst tekst={forsideTekster.info_som_hentes_tittel} />
+                    </Accordion.Header>
+                    <Accordion.Content>
+                        <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
+                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
+                        <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />
+                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold4} />
+                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold5} />
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
