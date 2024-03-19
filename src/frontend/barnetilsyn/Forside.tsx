@@ -103,14 +103,16 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <BodyShort weight={'semibold'}>
-                            <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold1} />
-                        </BodyShort>
-                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold2} />
-                        <BodyShort weight={'semibold'}>
-                            <LocaleTekst tekst={forsideTekster.info_som_hentes_innhold3} />
-                        </BodyShort>
-                        <LocalePunktliste innhold={forsideTekster.info_som_hentes_innhold4} />
+                        <LocalePunktliste
+                            tittel={forsideTekster.info_som_hentes_innhold1}
+                            innhold={forsideTekster.info_som_hentes_innhold2}
+                            tittelSomLabel
+                        />
+                        <LocalePunktliste
+                            tittel={forsideTekster.info_som_hentes_innhold3}
+                            innhold={forsideTekster.info_som_hentes_innhold4}
+                            tittelSomLabel
+                        />
                         <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold5} />
                     </Accordion.Content>
                 </Accordion.Item>
