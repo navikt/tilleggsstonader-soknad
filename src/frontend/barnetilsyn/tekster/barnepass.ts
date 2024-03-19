@@ -35,7 +35,7 @@ export const ÅrsakEkstraPassTilTekst: Record<ÅrsakBarnepass, TekstElement<stri
         nb: 'Trenger mer pleie eller tilsyn enn det som er vanlig for jevnaldrende',
     },
     MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID: {
-        nb: 'Jeg må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag',
+        nb: 'Jeg må være borte fra hjemmet på kvelden, natta, i helgen eller mer enn 10 timer per dag',
     },
     INGEN_AV_DISSE: {
         nb: 'Ingen av disse',
