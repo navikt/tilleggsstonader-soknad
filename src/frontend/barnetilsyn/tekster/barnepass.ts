@@ -1,6 +1,6 @@
 import { PassType, ÅrsakBarnepass } from '../../typer/barn';
 import { JaNei } from '../../typer/søknad';
-import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface BarnepassInnhold {
     tittel: TekstElement<string>;
@@ -8,7 +8,7 @@ interface BarnepassInnhold {
     hvem_passer_radio: Radiogruppe<PassType>;
     hvem_passer_andre_alert: {
         tittel: TekstElement<string>;
-        innhold: TekstElement<InlineLenke>;
+        innhold: TekstElement<string>;
     };
     startet_femte_radio: Radiogruppe<JaNei>;
     startet_femte_readmore_header: TekstElement<string>;
@@ -67,14 +67,7 @@ export const barnepassTekster: BarnepassInnhold = {
             nb: 'Privat barnepass krever mer dokumentasjon',
         },
         innhold: {
-            nb: [
-                'Ved privat barnepass regnes du som arbeidsgiver og derfor er det ',
-                {
-                    tekst: 'egne regler du kan lese om på Skatteetaten',
-                    url: 'https://www.skatteetaten.no/person/skatt/hjelp-til-riktig-skatt/familie-og-helse/barn/betalt-barnepass/',
-                },
-                '. Hvis du har privat barnepass, for eksempel dagmamma eller praktikant, må du legge ved avtalen du har med barnepasseren i tillegg til å dokumentere utgiftene dine.',
-            ],
+            nb: 'Ved privat barnepass regnes du som arbeidsgiver. Vi kommer til å be deg om å legge ved avtalen du har med barnepasseren og kvittering for betaling.',
         },
     },
     startet_femte_radio: {
