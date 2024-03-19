@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-import { Alert, BodyShort, Button } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, VStack } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
@@ -39,12 +39,6 @@ const StegIndikator = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-`;
-
-const Innhold = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
 `;
 
 const KnappeContainerMedFeilmelding = styled.div`
@@ -113,7 +107,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                     Steg {aktivtStegIndex} av {routes.length - 2}
                 </BodyShort>
             </StegIndikator>
-            <Innhold>{children}</Innhold>
+            <VStack gap={'6'}>{children}</VStack>
             <KnappeContainerMedFeilmelding>
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
                     <LocaleTekst tekst={fellesTekster.forrige} />

@@ -1,4 +1,4 @@
-import { Alert, Heading } from '@navikt/ds-react';
+import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import BarnOver9År from './BarnOver9År';
 import { BarnepassIntern } from './typer';
@@ -22,7 +22,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
     visFeilmelding,
 }) => {
     return (
-        <>
+        <VStack gap={'6'}>
             <LocaleRadioGroup
                 tekst={barnepassTekster.hvem_passer_radio}
                 argument0={barn.fornavn}
@@ -46,7 +46,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                     visFeilmeldinger={visFeilmelding}
                 />
             )}
-        </>
+        </VStack>
     );
 };
 export default BarnepassSpørsmål;
