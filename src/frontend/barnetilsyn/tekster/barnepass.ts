@@ -102,9 +102,6 @@ export const barnepassTekster: BarnepassInnhold = {
     },
     årsak_ekstra_pass_radio: {
         header: { nb: 'Hva er årsaken til at [0] trenger ekstra pass?' },
-        beskrivelse: {
-            nb: 'Vi spør om dette for å vite hvilken dokumentasjon du trenger å legge ved.',
-        },
         alternativer: [
             {
                 value: ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE,
