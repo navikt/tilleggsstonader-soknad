@@ -1,19 +1,21 @@
-import { Alert, BodyShort, Checkbox, Heading, Label } from '@navikt/ds-react';
+import { Alert, BodyLong, BodyShort, Checkbox, Heading, Label } from '@navikt/ds-react';
 
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { formaterIsoDato } from '../../../utils/formatering';
+import { harKunValgtEnsligSomHovedytelse } from '../../../utils/hovedytelse';
 import { dineBarnTekster } from '../../tekster/dineBarn';
 import { harBarnUnder2år, harValgtBarnOver9år } from '../5-barnepass/utils';
 
 const DineBarn = () => {
     const { person, toggleSkalHaBarnepass } = usePerson();
-    const { settDokumentasjon } = useSøknad();
+    const { settDokumentasjon, hovedytelse } = useSøknad();
 
     const fjernDokumentasjonsFeltForBarnSomErFjernet = () => {
         const identer = person.barn
@@ -60,11 +62,26 @@ const DineBarn = () => {
                     </Alert>
                 )}
             </div>
-
             {harBarnUnder2år(person.barn) && (
                 <Alert variant="info">
                     <LocaleTekst tekst={dineBarnTekster.alert_kontantstøtte} />
                 </Alert>
+            )}
+            {!harKunValgtEnsligSomHovedytelse(hovedytelse?.ytelse) && (
+                <LocaleReadMoreMedChildren
+                    header={dineBarnTekster.søke_for_andre_barn_les_mer_header}
+                >
+                    <BodyLong spacing>
+                        <LocaleInlineLenke
+                            tekst={dineBarnTekster.søke_for_andre_barn_les_mer_innhold1}
+                        />
+                    </BodyLong>
+                    <BodyLong>
+                        <LocaleInlineLenke
+                            tekst={dineBarnTekster.søke_for_andre_barn_les_mer_innhold2}
+                        />
+                    </BodyLong>
+                </LocaleReadMoreMedChildren>
             )}
         </Side>
     );
