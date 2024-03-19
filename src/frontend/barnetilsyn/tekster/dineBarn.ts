@@ -7,6 +7,7 @@ interface DineBarnInnhold {
         tittel: TekstElement<string>;
         innhold: TekstElement<string>;
     };
+    alert_kontantstøtte: TekstElement<string>;
 }
 
 export const dineBarnTekster: DineBarnInnhold = {
@@ -25,5 +26,8 @@ export const dineBarnTekster: DineBarnInnhold = {
         innhold: {
             nb: 'Unntaket er hvis ditt barn trenger mer pass eller pleie enn jevnaldrende eller hvis du har ett tiltak/utdanning hvor du må være borte i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag. Dette må dokumenteres.',
         },
+    },
+    alert_kontantstøtte: {
+        nb: 'Fordi du har barn under 2 år, kommer vi til å sjekke om det utbetales kontantstøtte for barnet. Hvis det utbetales kontantstøtte trekker vi det fra utgiftene dine når vi beregner hva du skal få i støtte til pass av barn.',
     },
 };

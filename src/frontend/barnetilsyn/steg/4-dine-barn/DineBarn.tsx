@@ -60,6 +60,11 @@ const DineBarn = () => {
                     </Alert>
                 )}
             </div>
+            {person.barn.some((barn) => barn.alder < 2) && (
+                <Alert variant="info">
+                    <LocaleTekst tekst={dineBarnTekster.alert_kontantstøtte} />
+                </Alert>
+            )}
         </Side>
     );
 };
