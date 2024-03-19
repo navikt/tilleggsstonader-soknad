@@ -177,7 +177,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
                 argument0={barn.fornavn}
             />
         </Label>
-        <BodyShort>
+        <BodyShort spacing>
             <LocaleTekst tekst={barnepass.startetIFemte ? JaNeiTilTekst.JA : JaNeiTilTekst.NEI} />
         </BodyShort>
         {barnepass.årsak && (
@@ -188,7 +188,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
                         argument0={barn.fornavn}
                     />
                 </Label>
-                <BodyShort>
+                <BodyShort spacing>
                     <LocaleTekst tekst={ÅrsakEkstraPassTilTekst[barnepass.årsak.verdi]} />
                 </BodyShort>
             </>
@@ -196,7 +196,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
     </>
 );
 
-const BarnMedBarnepass: React.FC<{ person: Person; barnMedBarnepass: Barnepass[] }> = ({
+const PassAvBarn: React.FC<{ person: Person; barnMedBarnepass: Barnepass[] }> = ({
     person,
     barnMedBarnepass,
 }) => (
@@ -218,7 +218,7 @@ const BarnMedBarnepass: React.FC<{ person: Person; barnMedBarnepass: Barnepass[]
                                 argument0={barn.fornavn}
                             />
                         </Label>
-                        <BodyShort>
+                        <BodyShort spacing>
                             <LocaleTekst tekst={PassTypeTilTekst[barnepass.type.verdi]} />
                         </BodyShort>
                         {barn.alder >= 9 && <BarnOver9År barn={barn} barnepass={barnepass} />}
@@ -237,18 +237,15 @@ const Vedlegg: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({ dokumentasj
             tekst: oppsummeringTekster.accordians.vedlegg.endre_button,
         }}
     >
-        <Label spacing>
-            <LocaleTekst tekst={oppsummeringTekster.accordians.vedlegg.label} />
-        </Label>
-        {dokumentasjon.map((d, i) => (
-            <React.Fragment key={i}>
-                <BodyLong>{d.label}</BodyLong>
-                {d.opplastedeVedlegg.map((vedlegg) => (
-                    <BodyLong spacing key={vedlegg.id}>
+        {dokumentasjon.map((dokumentasjonsfelt, i) => (
+            <div key={i} style={{ marginBottom: '1rem' }}>
+                <Label>{dokumentasjonsfelt.label}</Label>
+                {dokumentasjonsfelt.opplastedeVedlegg.map((vedlegg) => (
+                    <BodyLong key={vedlegg.id}>
                         <PaperclipIcon /> {vedlegg.navn}
                     </BodyLong>
                 ))}
-            </React.Fragment>
+            </div>
         ))}
     </AccordionItem>
 );
@@ -282,7 +279,7 @@ const Oppsummering = () => {
                 <DinSituasjon hovedytelse={hovedytelse} />
                 <AktivitetUtdanning />
                 <DineBarn person={person} />
-                <BarnMedBarnepass person={person} barnMedBarnepass={barnMedBarnepass} />
+                <PassAvBarn person={person} barnMedBarnepass={barnMedBarnepass} />
                 <Vedlegg dokumentasjon={dokumentasjon} />
             </Accordion>
 

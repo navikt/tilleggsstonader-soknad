@@ -71,7 +71,7 @@ export const barnepassTekster: BarnepassInnhold = {
         },
     },
     startet_femte_radio: {
-        header: { nb: 'Har [0] startet i 5. klasse når tiltaket ditt starter?' },
+        header: { nb: 'Har [0] startet i 5.-klasse når tiltaket ditt starter?' },
         alternativer: [
             {
                 value: 'JA',
@@ -95,7 +95,9 @@ export const barnepassTekster: BarnepassInnhold = {
         ],
     },
     årsak_ekstra_pass_radio: {
-        header: { nb: 'Hva er årsaken til at [0] trenger pass etter han har begynt i 5. klasse?' },
+        header: {
+            nb: 'Hva er årsaken til at [0] trenger pass etter at han har begynt i 5.-klasse?',
+        },
         alternativer: [
             {
                 value: ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE,

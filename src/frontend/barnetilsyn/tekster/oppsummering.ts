@@ -31,7 +31,6 @@ interface OppsummeringInnhold {
         };
         vedlegg: {
             tittel: TekstElement<string>;
-            label: TekstElement<string>;
             endre_button: TekstElement<string>;
         };
     };
@@ -63,7 +62,7 @@ export const oppsummeringTekster: OppsummeringInnhold = {
                 nb: 'Pass av barn',
             },
             endre_button: {
-                nb: 'Endre barn',
+                nb: 'Endre pass',
             },
         },
         dine_barn: {
@@ -71,7 +70,7 @@ export const oppsummeringTekster: OppsummeringInnhold = {
                 nb: 'Dine barn',
             },
             label: {
-                nb: 'Barn som skal ha pass',
+                nb: 'Hvilke barn søker du om støtte til pass for?',
             },
             endre_button: {
                 nb: 'Endre barn',
@@ -99,9 +98,6 @@ export const oppsummeringTekster: OppsummeringInnhold = {
         vedlegg: {
             tittel: {
                 nb: 'Vedlegg',
-            },
-            label: {
-                nb: 'Dokumenter du har lagt ved:',
             },
             endre_button: {
                 nb: 'Endre vedlegg',
