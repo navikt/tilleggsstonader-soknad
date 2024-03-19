@@ -86,11 +86,12 @@ export const barnepassTekster: BarnepassInnhold = {
     startet_femte_readmore_header: {
         nb: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.',
     },
-    startet_femte_readmore_innhold: { nb: 'Det kan gis støtte til pass etter 4. klasse hvis:' },
+    startet_femte_readmore_innhold: { nb: 'Unntaket er hvis noe av dette er tilfelle:' },
     startet_femte_readmore_punktliste: {
         nb: [
-            'barnet trenger mer pleie eller hjelp enn det som er vanlig for jevnaldrende (må dokumenteres på neste side med legeerklæring)',
-            'du har ett tiltak hvor du må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag (må dokumenteres fra utdanning/tiltakssted)',
+            'barnet trenger vesentlig mer pleie eller hjelp enn det som er vanlig for jevnaldrende',
+            'du har et tiltak hvor du må være borte fra hjemmet mer enn 10 timer per dag',
+            'du har en arbeidsrettet aktivitet som krever at du jobber på kvelden, natta eller i helger',
         ],
     },
     årsak_ekstra_pass_radio: {
