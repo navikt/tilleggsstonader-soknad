@@ -19,17 +19,7 @@ const [PersonProvider, usePerson] = createUseContext(() => {
             .finally(() => settHarLastetPerson(true));
     }, []);
 
-    const toggleSkalHaBarnepass = (ident: string) => {
-        settPerson((prevPerson) => ({
-            ...prevPerson,
-
-            barn: prevPerson.barn.map((barn) =>
-                barn.ident === ident ? { ...barn, skalHaBarnepass: !barn.skalHaBarnepass } : barn
-            ),
-        }));
-    };
-
-    return { harLastetPerson, feilmelding, person, settPerson, toggleSkalHaBarnepass };
+    return { harLastetPerson, feilmelding, person, settPerson };
 });
 
 export { PersonProvider, usePerson };
