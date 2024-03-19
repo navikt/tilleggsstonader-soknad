@@ -7,12 +7,15 @@ interface HovedytelseInnhold {
     tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     checkbox_hovedytelse: CheckboxGruppe<Ytelse>;
+    hovedytelse_feilmelding: TekstElement<string>;
     oppholdINorge: {
         tittel: TekstElement<string>;
         guide_innhold: TekstElement<InlineLenke>;
         radio_boddSammenhengende: Radiogruppe<JaNei>;
         lesMer_boddSammenhengende: LesMer<string[]>;
+        feilmelding_boddSammenhengende: TekstElement<string>;
         radio_planleggerBoINorgeNeste12mnd: Radiogruppe<JaNei>;
+        feilmelding_planleggerBoINorgeNeste12mnd: TekstElement<string>;
     };
 }
 
@@ -43,6 +46,9 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         },
         alternativer: YtelseTilTekst,
     },
+    hovedytelse_feilmelding: {
+        nb: 'Du må huke av for minst én ytelse eller situasjon som passer for deg',
+    },
     oppholdINorge: {
         tittel: {
             nb: 'Opphold i Norge',
@@ -64,6 +70,9 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
             },
             alternativer: jaNeiAlternativer,
         },
+        feilmelding_boddSammenhengende: {
+            nb: 'Du må svare på om du har bodd sammenhengende i Norge det siste året.',
+        },
         lesMer_boddSammenhengende: {
             header: {
                 nb: 'Hva menes med å bo sammenhengende?',
@@ -80,6 +89,9 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
                 nb: 'Planlegger du å bo i Norge i de neste 12 månedene?',
             },
             alternativer: jaNeiAlternativer,
+        },
+        feilmelding_planleggerBoINorgeNeste12mnd: {
+            nb: 'Du må svare på om du planlegger å bo i Norge de neste 12 mnd.',
         },
     },
 };
