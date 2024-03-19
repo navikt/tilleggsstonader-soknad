@@ -1,16 +1,20 @@
 import { useState } from 'react';
 
+import { Heading } from '@navikt/ds-react';
+
 import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { BarnepassIntern } from './typer';
 import { finnBarn, validerBarnepass } from './utils';
 import Side from '../../../components/Side';
+import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Barnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { valuerOrThrow } from '../../../utils/typer';
+import { barnepassTekster } from '../../tekster/barnepass';
 
 const Barnepass = () => {
     const { person } = usePerson();
@@ -63,6 +67,9 @@ const Barnepass = () => {
             oppdaterSøknad={oppdaterSøknad}
             validerSteg={kanGåVidere}
         >
+            <Heading size="medium">
+                <LocaleTekst tekst={barnepassTekster.tittel} />
+            </Heading>
             {barnMedPass.map((barn) => (
                 <BarnepassSpørsmål
                     key={barn.ident}

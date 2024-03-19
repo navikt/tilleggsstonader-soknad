@@ -3,6 +3,7 @@ import { JaNei } from '../../typer/søknad';
 import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface BarnepassInnhold {
+    tittel: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
     hvem_passer_andre_alert: {
         tittel: TekstElement<string>;
@@ -41,6 +42,9 @@ export const ÅrsakEkstraPassTilTekst: Record<ÅrsakBarnepass, TekstElement<stri
 };
 
 export const barnepassTekster: BarnepassInnhold = {
+    tittel: {
+        nb: 'Pass av dine barn',
+    },
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
         beskrivelse: {
