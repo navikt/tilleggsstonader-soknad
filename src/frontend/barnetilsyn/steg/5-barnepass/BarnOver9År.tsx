@@ -5,6 +5,7 @@ import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktli
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
@@ -51,7 +52,7 @@ const BarnOver9År: React.FC<Props> = ({
                 </LocaleReadMoreMedChildren>
             </LocaleRadioGroup>
             {passInfo.startetIFemte?.verdi == 'JA' && (
-                <>
+                <UnderspørsmålContainer>
                     <LocaleRadioGroup
                         tekst={barnepassTekster.årsak_ekstra_pass_radio}
                         argument0={barn.fornavn}
@@ -83,7 +84,7 @@ const BarnOver9År: React.FC<Props> = ({
                             <LocaleTekst tekst={barnepassTekster.ingen_av_disse_alert} />
                         </Alert>
                     )}
-                </>
+                </UnderspørsmålContainer>
             )}
         </>
     );
