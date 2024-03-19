@@ -12,9 +12,8 @@ interface OppsummeringInnhold {
             adresse_label: TekstElement<string>;
             adresse_lesmer: LesMer<InlineLenke>;
         };
-        ytelse: {
+        din_situasjon: {
             tittel: TekstElement<string>;
-            label: TekstElement<string>;
             endre_button: TekstElement<string>;
         };
         aktivitet_utdanning: {
@@ -32,7 +31,6 @@ interface OppsummeringInnhold {
         };
         vedlegg: {
             tittel: TekstElement<string>;
-            label: TekstElement<string>;
             endre_button: TekstElement<string>;
         };
     };
@@ -43,7 +41,7 @@ export const oppsummeringTekster: OppsummeringInnhold = {
         nb: 'Oppsummering',
     },
     guide_innhold: {
-        nb: 'Alt du har fylt inn er nå lagret. Hvis noe er feil kan du gå tilbake og endre det, før du sender inn søknaden din. ',
+        nb: 'Se over søknaden din før du sender den inn. Alt du har fylt inn er lagret. Hvis noe er feil, så kan du gå tilbake og endre det.',
     },
 
     bekreft_checkboks: {
@@ -53,10 +51,10 @@ export const oppsummeringTekster: OppsummeringInnhold = {
     accordians: {
         aktivitet_utdanning: {
             tittel: {
-                nb: 'Aktivitet / utdanning',
+                nb: 'Arbeidsrettet aktivitet',
             },
             endre_button: {
-                nb: 'Endre aktivitet / utdanning',
+                nb: 'Endre aktivitet',
             },
         },
         barnepass: {
@@ -64,7 +62,7 @@ export const oppsummeringTekster: OppsummeringInnhold = {
                 nb: 'Pass av barn',
             },
             endre_button: {
-                nb: 'Endre barn',
+                nb: 'Endre pass',
             },
         },
         dine_barn: {
@@ -72,7 +70,7 @@ export const oppsummeringTekster: OppsummeringInnhold = {
                 nb: 'Dine barn',
             },
             label: {
-                nb: 'Barn som skal ha pass',
+                nb: 'Hvilke barn søker du om støtte til pass for?',
             },
             endre_button: {
                 nb: 'Endre barn',
@@ -101,18 +99,12 @@ export const oppsummeringTekster: OppsummeringInnhold = {
             tittel: {
                 nb: 'Vedlegg',
             },
-            label: {
-                nb: 'Dokumenter du har lagt ved:',
-            },
             endre_button: {
                 nb: 'Endre vedlegg',
             },
         },
-        ytelse: {
+        din_situasjon: {
             tittel: {
-                nb: 'Ytelse',
-            },
-            label: {
                 nb: 'Din situasjon',
             },
             endre_button: {
