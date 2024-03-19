@@ -1,6 +1,7 @@
 import { InlineLenke, TekstElement } from '../../typer/tekst';
 
 interface DineBarnInnhold {
+    tittel: TekstElement<string>;
     guide_innhold: TekstElement<InlineLenke>;
     hvilke_barn_spm: TekstElement<string>;
     hvilke_barn_feilmelding: TekstElement<string>;
@@ -15,6 +16,9 @@ interface DineBarnInnhold {
 }
 
 export const dineBarnTekster: DineBarnInnhold = {
+    tittel: {
+        nb: 'Dine barn',
+    },
     guide_innhold: {
         nb: [
             'Vi henter opplysninger om barn fra folkeregisteret. Du kan ikke legge til biologiske eller adopterte barn her.  Hvis noe er feil, må du ',

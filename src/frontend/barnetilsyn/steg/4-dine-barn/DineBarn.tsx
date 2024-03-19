@@ -62,6 +62,9 @@ const DineBarn = () => {
             validerSteg={() => kanFortsette(personbarn)}
             oppdaterSøknad={oppdaterSøknad}
         >
+            <Heading size="medium">
+                <LocaleTekst tekst={dineBarnTekster.tittel} />
+            </Heading>
             <PellePanel>
                 <LocaleInlineLenke tekst={dineBarnTekster.guide_innhold} />
             </PellePanel>
