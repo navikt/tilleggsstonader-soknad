@@ -1,4 +1,7 @@
+import styled from 'styled-components';
+
 import { Alert, Heading } from '@navikt/ds-react';
+import { AGray100 } from '@navikt/ds-tokens/dist/tokens';
 
 import { BarnepassIntern } from './typer';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
@@ -9,6 +12,11 @@ import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { barnepassTekster } from '../../tekster/barnepass';
+
+const StartetIFemteContainer = styled.div`
+    background: ${AGray100};
+    padding: 1rem;
+`;
 
 interface Props {
     barn: Barn;
@@ -51,7 +59,7 @@ const BarnOver9År: React.FC<Props> = ({
                 </LocaleReadMoreMedChildren>
             </LocaleRadioGroup>
             {passInfo.startetIFemte?.verdi == 'JA' && (
-                <>
+                <StartetIFemteContainer>
                     <LocaleRadioGroup
                         tekst={barnepassTekster.årsak_ekstra_pass_radio}
                         argument0={barn.fornavn}
@@ -83,7 +91,7 @@ const BarnOver9År: React.FC<Props> = ({
                             <LocaleTekst tekst={barnepassTekster.ingen_av_disse_alert} />
                         </Alert>
                     )}
-                </>
+                </StartetIFemteContainer>
             )}
         </>
     );
