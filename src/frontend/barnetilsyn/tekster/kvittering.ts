@@ -16,7 +16,7 @@ export const kvitteringTekster: KvitteringInnhold = {
     },
     søknad_mottatt_alert_tittel: { nb: 'Søknad mottatt' },
     søknad_mottatt_alert_innhold1: {
-        nb: 'Vi har mottatt søknaden din om støtte til pass av barn [0]. Saken din er nå til behandling hos NAV.',
+        nb: 'Vi har mottatt søknaden din om støtte til pass av barn [0].',
     },
     søknad_mottatt_alert_innhold2: {
         nb: 'Vi vil ta kontakt med deg på telefon eller via Min side hvis vi trenger mer informasjon eller dokumentasjon fra deg.',
@@ -27,16 +27,21 @@ export const kvitteringTekster: KvitteringInnhold = {
     se_søknad: {
         nb: [
             'Du kan se søknaden din på ',
-            { tekst: 'Mitt NAV.', url: 'https://www.nav.no/min-side', variant: 'neutral' },
+            {
+                tekst: 'Min side på nav.no',
+                url: 'https://www.nav.no/min-side',
+            },
+            ' (åpnes i ny fane).',
         ],
     },
     se_saksbehandlingstid: {
         nb: [
             'Du kan se ',
             {
-                tekst: 'forventet saksbehandlingstid på nav.no/saksbehandlingstid.',
-                url: 'https://www.nav.no/saksbehandlingstider',
+                tekst: 'forventet saksbehandlingstid på nav.no/saksbehandlingstid',
+                url: 'https://www.nav.no/saksbehandlingstider#tilleggsstonader',
             },
+            ' (åpnes i ny fane).',
         ],
     },
 };
