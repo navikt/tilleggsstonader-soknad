@@ -6,6 +6,7 @@ import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { BarnepassIntern } from './typer';
 import { finnBarn, validerBarnepass } from './utils';
+import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
@@ -70,6 +71,9 @@ const Barnepass = () => {
             <Heading size="medium">
                 <LocaleTekst tekst={barnepassTekster.tittel} />
             </Heading>
+            <PellePanel>
+                <LocaleTekst tekst={barnepassTekster.guide_innhold} />
+            </PellePanel>
             {barnMedPass.map((barn) => (
                 <BarnepassSpørsmål
                     key={barn.ident}

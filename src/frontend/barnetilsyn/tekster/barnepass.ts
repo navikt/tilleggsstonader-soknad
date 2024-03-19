@@ -4,6 +4,7 @@ import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface BarnepassInnhold {
     tittel: TekstElement<string>;
+    guide_innhold: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
     hvem_passer_andre_alert: {
         tittel: TekstElement<string>;
@@ -44,6 +45,9 @@ export const ÅrsakEkstraPassTilTekst: Record<ÅrsakBarnepass, TekstElement<stri
 export const barnepassTekster: BarnepassInnhold = {
     tittel: {
         nb: 'Pass av dine barn',
+    },
+    guide_innhold: {
+        nb: 'Vi spør om hvordan barna dine skal passes for å informere deg om hvilken dokumentasjon du må legge ved søknaden.',
     },
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
