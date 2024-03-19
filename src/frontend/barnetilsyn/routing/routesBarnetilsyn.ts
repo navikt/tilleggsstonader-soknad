@@ -2,7 +2,6 @@ import { IRoute } from '../../typer/routes';
 
 export enum ERouteBarnetilsyn {
     FORSIDE = 'FORSIDE',
-    PERSONALIA = 'PERSONALIA',
     HOVEDYTELSE = 'HOVEDYTELSE',
     AKTIVITET = 'AKTIVITET',
     DINE_BARN = 'DINE_BARN',
@@ -21,17 +20,11 @@ export const RouteTilPath: Record<ERouteBarnetilsyn, string> = {
     HOVEDYTELSE: barnetilsynPath + '/hovedytelse',
     KVITTERING: barnetilsynPath + '/kvittering',
     OPPSUMMERING: barnetilsynPath + '/oppsummering',
-    PERSONALIA: barnetilsynPath + '/personalia',
     VEDLEGG: barnetilsynPath + '/vedlegg',
 };
 
 export const RoutesBarnetilsyn: IRoute[] = [
     { path: barnetilsynPath, label: 'Forside', route: ERouteBarnetilsyn.FORSIDE },
-    {
-        path: RouteTilPath.PERSONALIA,
-        label: 'Personalia',
-        route: ERouteBarnetilsyn.PERSONALIA,
-    },
     {
         path: RouteTilPath.HOVEDYTELSE,
         label: 'Hovedytelse',
