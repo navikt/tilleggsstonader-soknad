@@ -52,10 +52,10 @@ export const oppsummeringTekster: OppsummeringInnhold = {
     accordians: {
         aktivitet_utdanning: {
             tittel: {
-                nb: 'Aktivitet / utdanning',
+                nb: 'Arbeidsrettet aktivitet',
             },
             endre_button: {
-                nb: 'Endre aktivitet / utdanning',
+                nb: 'Endre aktivitet',
             },
         },
         barnepass: {

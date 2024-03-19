@@ -143,7 +143,7 @@ const AktivitetUtdanning: React.FC = () => (
     >
         {/*TODO: Legg inn tekster for aktivitet når vi får på plass radioknapper.*/}
         <BodyShort>
-            Her skal det komme tekst som er avhengig av hovedytelse og valgt aktivitet.
+            Her skal det komme oppsummering som er avhengig av hovedytelse og valgt aktivitet.
         </BodyShort>
     </AccordionItem>
 );
