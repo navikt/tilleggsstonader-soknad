@@ -23,7 +23,6 @@ const BarnepassSpørsmål: React.FC<Props> = ({
 }) => {
     return (
         <>
-            <Heading size="medium">{barn.visningsnavn}</Heading>
             <LocaleRadioGroup
                 tekst={barnepassTekster.hvem_passer_radio}
                 argument0={barn.fornavn}
