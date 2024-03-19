@@ -14,6 +14,7 @@ import {
     Heading,
     Label,
 } from '@navikt/ds-react';
+import { AccordionItemProps } from '@navikt/ds-react/esm/accordion/AccordionItem';
 
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -46,17 +47,17 @@ const FlexDiv = styled.div`
     align-items: flex-start;
 `;
 
-const AccordionItem: React.FC<{
+interface Props extends AccordionItemProps {
     header: TekstElement<string>;
     endreKnapp?: {
         route: string;
         tekst: TekstElement<string>;
     };
-    children: React.ReactNode;
-}> = ({ header, endreKnapp, children }) => {
+}
+const AccordionItem: React.FC<Props> = ({ header, endreKnapp, children, ...props }) => {
     const navigate = useNavigate();
     return (
-        <Accordion.Item>
+        <Accordion.Item {...props}>
             <Accordion.Header>
                 <LocaleTekst tekst={header} />
             </Accordion.Header>
@@ -79,7 +80,7 @@ const AccordionItem: React.FC<{
 };
 
 const OmDeg: React.FC<{ person: Person }> = ({ person }) => (
-    <AccordionItem header={oppsummeringTekster.accordians.om_deg.tittel}>
+    <AccordionItem header={oppsummeringTekster.accordians.om_deg.tittel} defaultOpen>
         <FlexDiv>
             <div>
                 <Label>
