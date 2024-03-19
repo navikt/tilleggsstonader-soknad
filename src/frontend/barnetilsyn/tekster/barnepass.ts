@@ -1,12 +1,14 @@
 import { PassType, ÅrsakBarnepass } from '../../typer/barn';
 import { JaNei } from '../../typer/søknad';
-import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface BarnepassInnhold {
+    tittel: TekstElement<string>;
+    guide_innhold: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
     hvem_passer_andre_alert: {
         tittel: TekstElement<string>;
-        innhold: TekstElement<InlineLenke>;
+        innhold: TekstElement<string>;
     };
     startet_femte_radio: Radiogruppe<JaNei>;
     startet_femte_readmore_header: TekstElement<string>;
@@ -33,7 +35,7 @@ export const ÅrsakEkstraPassTilTekst: Record<ÅrsakBarnepass, TekstElement<stri
         nb: 'Trenger mer pleie eller tilsyn enn det som er vanlig for jevnaldrende',
     },
     MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID: {
-        nb: 'Jeg må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag',
+        nb: 'Jeg må være borte fra hjemmet på kvelden, natta, i helgen eller mer enn 10 timer per dag',
     },
     INGEN_AV_DISSE: {
         nb: 'Ingen av disse',
@@ -41,11 +43,14 @@ export const ÅrsakEkstraPassTilTekst: Record<ÅrsakBarnepass, TekstElement<stri
 };
 
 export const barnepassTekster: BarnepassInnhold = {
+    tittel: {
+        nb: 'Pass av dine barn',
+    },
+    guide_innhold: {
+        nb: 'Vi spør om hvordan barna dine skal passes for å informere deg om hvilken dokumentasjon du må legge ved søknaden.',
+    },
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
-        beskrivelse: {
-            nb: 'Vi spør om dette fordi vi trenger å vite hva slags dokumentasjon du trenger å legge ved.',
-        },
         alternativer: [
             {
                 value: PassType.BARNEHAGE_SFO_AKS,
@@ -62,14 +67,7 @@ export const barnepassTekster: BarnepassInnhold = {
             nb: 'Privat barnepass krever mer dokumentasjon',
         },
         innhold: {
-            nb: [
-                'Ved privat barnepass regnes du som arbeidsgiver og derfor er det ',
-                {
-                    tekst: 'egne regler du kan lese om på Skatteetaten',
-                    url: 'https://www.skatteetaten.no/person/skatt/hjelp-til-riktig-skatt/familie-og-helse/barn/betalt-barnepass/',
-                },
-                '. Hvis du har privat barnepass, for eksempel dagmamma eller praktikant, må du legge ved avtalen du har med barnepasseren i tillegg til å dokumentere utgiftene dine.',
-            ],
+            nb: 'Ved privat barnepass regnes du som arbeidsgiver. Vi kommer til å be deg om å legge ved avtalen du har med barnepasseren og kvittering for betaling.',
         },
     },
     startet_femte_radio: {
@@ -88,18 +86,16 @@ export const barnepassTekster: BarnepassInnhold = {
     startet_femte_readmore_header: {
         nb: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.',
     },
-    startet_femte_readmore_innhold: { nb: 'Det kan gis støtte til pass etter 4. klasse hvis:' },
+    startet_femte_readmore_innhold: { nb: 'Unntaket er hvis noe av dette er tilfelle:' },
     startet_femte_readmore_punktliste: {
         nb: [
-            'barnet trenger mer pleie eller hjelp enn det som er vanlig for jevnaldrende (må dokumenteres på neste side med legeerklæring)',
-            'du har ett tiltak hvor du må være borte fra hjemmet i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag (må dokumenteres fra utdanning/tiltakssted)',
+            'barnet trenger vesentlig mer pleie eller hjelp enn det som er vanlig for jevnaldrende',
+            'du har et tiltak hvor du må være borte fra hjemmet mer enn 10 timer per dag',
+            'du har en arbeidsrettet aktivitet som krever at du jobber på kvelden, natta eller i helger',
         ],
     },
     årsak_ekstra_pass_radio: {
-        header: { nb: 'Hva er årsaken til at [0] trenger ekstra pass?' },
-        beskrivelse: {
-            nb: 'Vi spør om dette for å vite hvilken dokumentasjon du trenger å legge ved.',
-        },
+        header: { nb: 'Hva er årsaken til at [0] trenger pass etter han har begynt i 5. klasse?' },
         alternativer: [
             {
                 value: ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE,
@@ -124,7 +120,7 @@ export const barnepassTekster: BarnepassInnhold = {
         },
     },
     uvanlig_arbeidstid_alert: {
-        nb: 'På neste siden vil du bli bedt om å dokumentere med avtale fra tiltakssted/utdanningssted.',
+        nb: 'På neste siden vil du bli bedt om å dokumentere med avtale/bekreftelse fra tiltakssted/utdanningssted.',
     },
     ingen_av_disse_alert: {
         nb: 'Du kan fortsatt søke, men det kan hende du får avslag.',

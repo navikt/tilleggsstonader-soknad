@@ -1,16 +1,21 @@
 import { useState } from 'react';
 
+import { Heading, VStack } from '@navikt/ds-react';
+
 import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { BarnepassIntern } from './typer';
 import { finnBarn, validerBarnepass } from './utils';
+import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
+import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Barnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { valuerOrThrow } from '../../../utils/typer';
+import { barnepassTekster } from '../../tekster/barnepass';
 
 const Barnepass = () => {
     const { person } = usePerson();
@@ -63,17 +68,25 @@ const Barnepass = () => {
             oppdaterSøknad={oppdaterSøknad}
             validerSteg={kanGåVidere}
         >
-            {barnMedPass.map((barn) => (
-                <BarnepassSpørsmål
-                    key={barn.ident}
-                    barn={valuerOrThrow(
-                        person.barn.find((barneInfo) => barn.ident === barneInfo.ident)
-                    )}
-                    barnepass={barn}
-                    oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
-                    visFeilmelding={visFeilmelding}
-                />
-            ))}
+            <Heading size="medium">
+                <LocaleTekst tekst={barnepassTekster.tittel} />
+            </Heading>
+            <PellePanel>
+                <LocaleTekst tekst={barnepassTekster.guide_innhold} />
+            </PellePanel>
+            <VStack gap={'10'}>
+                {barnMedPass.map((barn) => (
+                    <BarnepassSpørsmål
+                        key={barn.ident}
+                        barn={valuerOrThrow(
+                            person.barn.find((barneInfo) => barn.ident === barneInfo.ident)
+                        )}
+                        barnepass={barn}
+                        oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
+                        visFeilmelding={visFeilmelding}
+                    />
+                ))}
+            </VStack>
         </Side>
     );
 };

@@ -1,9 +1,8 @@
-import { Alert, Heading } from '@navikt/ds-react';
+import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import BarnOver9År from './BarnOver9År';
 import { BarnepassIntern } from './typer';
 import { er9ellerEldre } from './utils';
-import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, PassType } from '../../../typer/barn';
@@ -23,8 +22,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
     visFeilmelding,
 }) => {
     return (
-        <>
-            <Heading size="medium">{barn.visningsnavn}</Heading>
+        <VStack gap={'6'}>
             <LocaleRadioGroup
                 tekst={barnepassTekster.hvem_passer_radio}
                 argument0={barn.fornavn}
@@ -37,7 +35,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                     <Heading size="small">
                         <LocaleTekst tekst={barnepassTekster.hvem_passer_andre_alert.tittel} />
                     </Heading>
-                    <LocaleInlineLenke tekst={barnepassTekster.hvem_passer_andre_alert.innhold} />
+                    <LocaleTekst tekst={barnepassTekster.hvem_passer_andre_alert.innhold} />
                 </Alert>
             )}
             {er9ellerEldre(barn) && (
@@ -48,7 +46,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                     visFeilmeldinger={visFeilmelding}
                 />
             )}
-        </>
+        </VStack>
     );
 };
 export default BarnepassSpørsmål;
