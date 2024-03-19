@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-import styled from 'styled-components';
-
-import { Heading, HStack } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
@@ -13,15 +11,13 @@ import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInline
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useSøknad } from '../../../context/SøknadContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
-const HStackMedMargin = styled(HStack)`
-    margin-top: 3rem;
-`;
 interface Feil {
     ytelse?: string;
     boddSammenhengende?: string;
@@ -133,34 +129,39 @@ const Hovedytelse = () => {
                 error={ytelseFeil?.ytelse}
             />
             {skalTaStillingTilOpphold && (
-                <HStackMedMargin gap="6">
-                    <Heading size="medium">
-                        <LocaleTekst tekst={hovedytelseInnhold.oppholdINorge.tittel} />
-                    </Heading>
-                    <PellePanel>
-                        <LocaleInlineLenke tekst={hovedytelseInnhold.oppholdINorge.guide_innhold} />
-                    </PellePanel>
-                    <LocaleRadioGroup
-                        tekst={hovedytelseInnhold.oppholdINorge.radio_boddSammenhengende}
-                        value={boddSammenhengende?.verdi}
-                        onChange={oppdaterBoddSammenhengende}
-                        error={ytelseFeil?.boddSammenhengende}
-                    >
-                        <LocaleReadMore
-                            tekst={hovedytelseInnhold.oppholdINorge.lesMer_boddSammenhengende}
-                        />
-                    </LocaleRadioGroup>
-                    {boddSammenhengende?.verdi === 'NEI' && (
+                <UnderspørsmålContainer>
+                    <VStack gap="6">
+                        <Heading size="medium">
+                            <LocaleTekst tekst={hovedytelseInnhold.oppholdINorge.tittel} />
+                        </Heading>
+                        <PellePanel>
+                            <LocaleInlineLenke
+                                tekst={hovedytelseInnhold.oppholdINorge.guide_innhold}
+                            />
+                        </PellePanel>
                         <LocaleRadioGroup
-                            tekst={
-                                hovedytelseInnhold.oppholdINorge.radio_planleggerBoINorgeNeste12mnd
-                            }
-                            value={planleggerBoINorgeNeste12mnd?.verdi}
-                            onChange={oppdaterPlanleggerBoINorge}
-                            error={ytelseFeil?.planleggerBoINorgeNeste12mnd}
-                        />
-                    )}
-                </HStackMedMargin>
+                            tekst={hovedytelseInnhold.oppholdINorge.radio_boddSammenhengende}
+                            value={boddSammenhengende?.verdi}
+                            onChange={oppdaterBoddSammenhengende}
+                            error={ytelseFeil?.boddSammenhengende}
+                        >
+                            <LocaleReadMore
+                                tekst={hovedytelseInnhold.oppholdINorge.lesMer_boddSammenhengende}
+                            />
+                        </LocaleRadioGroup>
+                        {boddSammenhengende?.verdi === 'NEI' && (
+                            <LocaleRadioGroup
+                                tekst={
+                                    hovedytelseInnhold.oppholdINorge
+                                        .radio_planleggerBoINorgeNeste12mnd
+                                }
+                                value={planleggerBoINorgeNeste12mnd?.verdi}
+                                onChange={oppdaterPlanleggerBoINorge}
+                                error={ytelseFeil?.planleggerBoINorgeNeste12mnd}
+                            />
+                        )}
+                    </VStack>
+                </UnderspørsmålContainer>
             )}
         </Side>
     );
