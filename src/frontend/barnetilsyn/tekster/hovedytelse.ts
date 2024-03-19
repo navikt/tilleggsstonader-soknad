@@ -1,6 +1,6 @@
 import { jaNeiAlternativer } from '../../tekster/felles';
 import { JaNei } from '../../typer/søknad';
-import { CheckboxGruppe, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { CheckboxGruppe, InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 import { Ytelse } from '../steg/2-hovedytelse/typer';
 
 interface HovedytelseInnhold {
@@ -9,7 +9,7 @@ interface HovedytelseInnhold {
     checkbox_hovedytelse: CheckboxGruppe<Ytelse>;
     oppholdINorge: {
         tittel: TekstElement<string>;
-        guide_innhold: TekstElement<string>;
+        guide_innhold: TekstElement<InlineLenke>;
         radio_boddSammenhengende: Radiogruppe<JaNei>;
         lesMer_boddSammenhengende: LesMer<string[]>;
         radio_planleggerBoINorgeNeste12mnd: Radiogruppe<JaNei>;
@@ -48,7 +48,15 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
             nb: 'Opphold i Norge',
         },
         guide_innhold: {
-            nb: 'Vi spør om dette fordi vi må vite om du du oppfyller kravene til medlemskap i folketrygden.',
+            nb: [
+                'Vi spør om dette fordi vi må vite om du du oppfyller ',
+                {
+                    tekst: 'kravene til medlemskap i folketrygden',
+                    url: 'https://www.nav.no/no/person/flere-tema/arbeid-og-opphold-i-norge/relatert-informasjon/medlemskap-i-folketrygden',
+                    variant: 'neutral',
+                },
+                ' (åpnes i ny fane).',
+            ],
         },
         radio_boddSammenhengende: {
             header: {

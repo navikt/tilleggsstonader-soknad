@@ -114,3 +114,7 @@ Hvis jeg vil gjerne et punkt må hele linjen fjernes (se hva som er markert):
 <img width="913" alt="image" src="https://github.com/navikt/tilleggsstonader-soknad/assets/46678893/de11a6f9-6f65-457b-94b9-9a5203786749">
 
 Hvis man vil legge til et nytt punkt må det være inni fnutter (`''`) og det må være komma (`,`) mellom hver tekststreng. 
+
+## Kode generert av GitHub Copilot
+
+Dette repoet bruker GitHub Copilot til å generere kode.
