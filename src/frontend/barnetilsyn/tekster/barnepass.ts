@@ -51,9 +51,6 @@ export const barnepassTekster: BarnepassInnhold = {
     },
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
-        beskrivelse: {
-            nb: 'Vi spør om dette fordi vi trenger å vite hva slags dokumentasjon du trenger å legge ved.',
-        },
         alternativer: [
             {
                 value: PassType.BARNEHAGE_SFO_AKS,
