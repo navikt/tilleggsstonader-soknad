@@ -3,6 +3,7 @@ import { InlineLenke, TekstElement } from '../../typer/tekst';
 interface DineBarnInnhold {
     guide_innhold: TekstElement<InlineLenke>;
     hvilke_barn_spm: TekstElement<string>;
+    hvilke_barn_feilmelding: TekstElement<string>;
     alert_barn_over_9: {
         tittel: TekstElement<string>;
         innhold: TekstElement<string>;
@@ -26,6 +27,7 @@ export const dineBarnTekster: DineBarnInnhold = {
         ],
     },
     hvilke_barn_spm: { nb: 'Hvilke barn søker du om støtte til pass for?' },
+    hvilke_barn_feilmelding: { nb: 'Du må velge minst ett barn som du søker støtte til pass for.' },
     alert_barn_over_9: {
         tittel: {
             nb: 'Som hovedregel gis det bare støtte til pass av barn til og med 4. klasse',
