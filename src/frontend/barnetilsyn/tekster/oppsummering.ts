@@ -45,7 +45,7 @@ export const oppsummeringTekster: OppsummeringInnhold = {
     },
 
     bekreft_checkboks: {
-        nb: 'Jeg bekrefter at jeg har lest og forstått informasjonen i søknaden og at jeg har svart så godt jeg kan.',
+        nb: 'Jeg bekrefter at jeg vil svare så godt jeg kan på spørsmålene i søknaden.',
     },
 
     accordians: {

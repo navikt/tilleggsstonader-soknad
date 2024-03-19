@@ -1,8 +1,10 @@
 import { InlineLenke, TekstElement } from '../../typer/tekst';
 
 interface DineBarnInnhold {
+    tittel: TekstElement<string>;
     guide_innhold: TekstElement<InlineLenke>;
     hvilke_barn_spm: TekstElement<string>;
+    hvilke_barn_feilmelding: TekstElement<string>;
     alert_barn_over_9: {
         tittel: TekstElement<string>;
         innhold: TekstElement<string>;
@@ -14,6 +16,9 @@ interface DineBarnInnhold {
 }
 
 export const dineBarnTekster: DineBarnInnhold = {
+    tittel: {
+        nb: 'Dine barn',
+    },
     guide_innhold: {
         nb: [
             'Vi henter opplysninger om barn fra folkeregisteret. Du kan ikke legge til biologiske eller adopterte barn her.  Hvis noe er feil, må du ',
@@ -26,6 +31,7 @@ export const dineBarnTekster: DineBarnInnhold = {
         ],
     },
     hvilke_barn_spm: { nb: 'Hvilke barn søker du om støtte til pass for?' },
+    hvilke_barn_feilmelding: { nb: 'Du må velge minst ett barn som du søker støtte til pass for.' },
     alert_barn_over_9: {
         tittel: {
             nb: 'Som hovedregel gis det bare støtte til pass av barn til og med 4. klasse',
