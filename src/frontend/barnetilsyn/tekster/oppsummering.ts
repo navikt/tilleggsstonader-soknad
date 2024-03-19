@@ -1,4 +1,4 @@
-import { TekstElement } from '../../typer/tekst';
+import { InlineLenke, LesMer, TekstElement } from '../../typer/tekst';
 
 interface OppsummeringInnhold {
     tittel: TekstElement<string>;
@@ -8,6 +8,8 @@ interface OppsummeringInnhold {
     accordians: {
         om_deg: {
             tittel: TekstElement<string>;
+            adresse_label: TekstElement<string>;
+            adresse_lesmer: LesMer<InlineLenke>;
         };
         ytelse: {
             tittel: TekstElement<string>;
@@ -78,6 +80,19 @@ export const oppsummeringTekster: OppsummeringInnhold = {
         om_deg: {
             tittel: {
                 nb: 'Om deg',
+            },
+            adresse_label: { nb: 'Folkeregistrert adresse' },
+            adresse_lesmer: {
+                header: { nb: 'Slik endrer du folkeregistrert adresse' },
+                innhold: {
+                    nb: [
+                        'Vi henter adressen din fra folkeregisteret. Er noe feil, må du ',
+                        {
+                            tekst: 'melde adresseendring på Skattetatens sider.',
+                            url: 'https://www.skatteetaten.no/person/folkeregister/flytte/endre-postadresse/',
+                        },
+                    ],
+                },
             },
         },
         vedlegg: {

@@ -39,7 +39,6 @@ import {
 } from '../../tekster/barnepass';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
-import { personaliaTekster } from '../../tekster/personalia';
 
 const FlexDiv = styled.div`
     display: flex;
@@ -85,30 +84,12 @@ const OmDeg: React.FC<{ person: Person }> = ({ person }) => (
         <FlexDiv>
             <div>
                 <Label>
-                    <LocaleTekst tekst={personaliaTekster.adresse_label} />
+                    <LocaleTekst tekst={oppsummeringTekster.accordians.om_deg.adresse_label} />
                 </Label>
                 <BodyShort>{person.adresse}</BodyShort>
-                <LocaleReadMoreMedLenke tekst={personaliaTekster.adresse_lesmer} />
-            </div>
-            <div>
-                <Label>
-                    <LocaleTekst tekst={personaliaTekster.telefonnr_label} />
-                </Label>
-                <BodyShort>{person.telefonnr}</BodyShort>
-            </div>
-            <div>
-                <Label>
-                    <LocaleTekst tekst={personaliaTekster.epost_label} />
-                </Label>
-                <BodyShort>{person.epost}</BodyShort>
-                <LocaleReadMoreMedLenke tekst={personaliaTekster.tlf_epost_lesmer} />
-            </div>
-            <div>
-                <Label>
-                    <LocaleTekst tekst={personaliaTekster.kontonr_label} />
-                </Label>
-                <BodyShort>{person.epost}</BodyShort>
-                <LocaleReadMoreMedLenke tekst={personaliaTekster.kontonr_lesmer} />
+                <LocaleReadMoreMedLenke
+                    tekst={oppsummeringTekster.accordians.om_deg.adresse_lesmer}
+                />
             </div>
         </FlexDiv>
     </AccordionItem>
