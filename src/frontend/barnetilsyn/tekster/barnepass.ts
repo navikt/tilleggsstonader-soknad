@@ -119,7 +119,7 @@ export const barnepassTekster: BarnepassInnhold = {
         },
     },
     uvanlig_arbeidstid_alert: {
-        nb: 'På neste siden vil du bli bedt om å dokumentere med avtale fra tiltakssted/utdanningssted.',
+        nb: 'På neste siden vil du bli bedt om å dokumentere med avtale/bekreftelse fra tiltakssted/utdanningssted.',
     },
     ingen_av_disse_alert: {
         nb: 'Du kan fortsatt søke, men det kan hende du får avslag.',
