@@ -9,7 +9,7 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { formaterIsoDato } from '../../../utils/formatering';
 import { dineBarnTekster } from '../../tekster/dineBarn';
-import { er9ellerEldre } from '../5-barnepass/utils';
+import { harBarnUnder2år, harValgtBarnOver9år } from '../5-barnepass/utils';
 
 const DineBarn = () => {
     const { person, toggleSkalHaBarnepass } = usePerson();
@@ -49,7 +49,7 @@ const DineBarn = () => {
                         {barn.visningsnavn}, født {formaterIsoDato(barn.fødselsdato)}
                     </Checkbox>
                 ))}
-                {person.barn.some((barn) => barn.skalHaBarnepass && er9ellerEldre(barn)) && (
+                {harValgtBarnOver9år(person.barn) && (
                     <Alert variant="info">
                         <Heading size="small">
                             <LocaleTekst tekst={dineBarnTekster.alert_barn_over_9.tittel} />
@@ -60,7 +60,8 @@ const DineBarn = () => {
                     </Alert>
                 )}
             </div>
-            {person.barn.some((barn) => barn.alder < 2) && (
+
+            {harBarnUnder2år(person.barn) && (
                 <Alert variant="info">
                     <LocaleTekst tekst={dineBarnTekster.alert_kontantstøtte} />
                 </Alert>
