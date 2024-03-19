@@ -9,6 +9,7 @@ import { Ytelse } from './typer';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleCheckboxGroup from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
+import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -137,7 +138,7 @@ const Hovedytelse = () => {
                         <LocaleTekst tekst={hovedytelseInnhold.oppholdINorge.tittel} />
                     </Heading>
                     <PellePanel>
-                        <LocaleTekst tekst={hovedytelseInnhold.oppholdINorge.guide_innhold} />
+                        <LocaleInlineLenke tekst={hovedytelseInnhold.oppholdINorge.guide_innhold} />
                     </PellePanel>
                     <LocaleRadioGroup
                         tekst={hovedytelseInnhold.oppholdINorge.radio_boddSammenhengende}
