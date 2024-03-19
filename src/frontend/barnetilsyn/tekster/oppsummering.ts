@@ -12,9 +12,8 @@ interface OppsummeringInnhold {
             adresse_label: TekstElement<string>;
             adresse_lesmer: LesMer<InlineLenke>;
         };
-        ytelse: {
+        din_situasjon: {
             tittel: TekstElement<string>;
-            label: TekstElement<string>;
             endre_button: TekstElement<string>;
         };
         aktivitet_utdanning: {
@@ -108,11 +107,8 @@ export const oppsummeringTekster: OppsummeringInnhold = {
                 nb: 'Endre vedlegg',
             },
         },
-        ytelse: {
+        din_situasjon: {
             tittel: {
-                nb: 'Ytelse',
-            },
-            label: {
                 nb: 'Din situasjon',
             },
             endre_button: {

@@ -37,7 +37,6 @@ import {
     PassTypeTilTekst,
     ÅrsakEkstraPassTilTekst,
 } from '../../tekster/barnepass';
-import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 const FlexDiv = styled.div`
@@ -101,50 +100,33 @@ const OmDeg: React.FC<{ person: Person }> = ({ person }) => (
     </AccordionItem>
 );
 
-const Hovedytelse: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hovedytelse }) => {
+const DinSituasjon: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hovedytelse }) => {
     const ytelser = hovedytelse && verdiFelterTilTekstElement(hovedytelse.ytelse.verdier);
+    const ytelseslabel = hovedytelse?.ytelse.label;
+
+    const boddSammenhengende = hovedytelse?.boddSammenhengende;
+    const planleggerBoINorgeNeste12mnd = hovedytelse?.planleggerBoINorgeNeste12mnd;
+    // TODO: Hent ut svar om arbeid i eller utenfor norge også. Radiofeltene finnes ikke per nå.
 
     return (
         <AccordionItem
-            header={oppsummeringTekster.accordians.ytelse.tittel}
+            header={oppsummeringTekster.accordians.din_situasjon.tittel}
             endreKnapp={{
                 route: RouteTilPath.HOVEDYTELSE,
-                tekst: oppsummeringTekster.accordians.ytelse.endre_button,
+                tekst: oppsummeringTekster.accordians.din_situasjon.endre_button,
             }}
         >
-            {ytelser && (
-                <LocalePunktliste
-                    tittel={oppsummeringTekster.accordians.ytelse.label}
-                    innhold={ytelser}
-                />
-            )}
-            {hovedytelse?.boddSammenhengende?.verdi && (
+            {ytelser && <LocalePunktliste innhold={ytelser} tittel={{ nb: ytelseslabel || '' }} />}
+            {boddSammenhengende && (
                 <>
-                    <Label>
-                        <LocaleTekst
-                            tekst={hovedytelseInnhold.oppholdINorge.radio_boddSammenhengende.header}
-                        />
-                    </Label>
-                    <BodyShort>
-                        <LocaleTekst tekst={JaNeiTilTekst[hovedytelse.boddSammenhengende.verdi]} />
-                    </BodyShort>
+                    <Label>{boddSammenhengende.label}</Label>
+                    <BodyShort spacing>{boddSammenhengende.svarTekst}</BodyShort>
                 </>
             )}
-            {hovedytelse?.planleggerBoINorgeNeste12mnd?.verdi && (
+            {planleggerBoINorgeNeste12mnd && (
                 <>
-                    <Label>
-                        <LocaleTekst
-                            tekst={
-                                hovedytelseInnhold.oppholdINorge.radio_planleggerBoINorgeNeste12mnd
-                                    .header
-                            }
-                        />
-                    </Label>
-                    <BodyShort>
-                        <LocaleTekst
-                            tekst={JaNeiTilTekst[hovedytelse.planleggerBoINorgeNeste12mnd.verdi]}
-                        />
-                    </BodyShort>
+                    <Label>{planleggerBoINorgeNeste12mnd.label}</Label>
+                    <BodyShort spacing>{planleggerBoINorgeNeste12mnd.svarTekst}</BodyShort>
                 </>
             )}
         </AccordionItem>
@@ -159,13 +141,10 @@ const AktivitetUtdanning: React.FC = () => (
             tekst: oppsummeringTekster.accordians.aktivitet_utdanning.endre_button,
         }}
     >
-        {/*TODO: Hardkodet*/}
-        <Label>Utdanning</Label>
-        <BodyShort>Livets skole</BodyShort>
-        <BodyShort>Universitetsgaten 22</BodyShort>
-        <BodyLong spacing>2004 Lillestrøm</BodyLong>
-
-        <BodyShort>1. januar 2023 - 30. juni 2026</BodyShort>
+        {/*TODO: Legg inn tekster for aktivitet når vi får på plass radioknapper.*/}
+        <BodyShort>
+            Her skal det komme tekst som er avhengig av hovedytelse og valgt aktivitet.
+        </BodyShort>
     </AccordionItem>
 );
 
@@ -300,7 +279,7 @@ const Oppsummering = () => {
             </PellePanel>
             <Accordion>
                 <OmDeg person={person} />
-                <Hovedytelse hovedytelse={hovedytelse} />
+                <DinSituasjon hovedytelse={hovedytelse} />
                 <AktivitetUtdanning />
                 <DineBarn person={person} />
                 <BarnMedBarnepass person={person} barnMedBarnepass={barnMedBarnepass} />
