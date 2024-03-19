@@ -86,6 +86,12 @@ const OmDeg: React.FC<{ person: Person }> = ({ person }) => (
                 <Label>
                     <LocaleTekst tekst={oppsummeringTekster.accordians.om_deg.adresse_label} />
                 </Label>
+                <BodyShort>{person.visningsnavn}</BodyShort>
+            </div>
+            <div>
+                <Label>
+                    <LocaleTekst tekst={oppsummeringTekster.accordians.om_deg.adresse_label} />
+                </Label>
                 <BodyShort>{person.adresse}</BodyShort>
                 <LocaleReadMoreMedLenke
                     tekst={oppsummeringTekster.accordians.om_deg.adresse_lesmer}

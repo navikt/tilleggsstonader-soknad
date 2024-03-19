@@ -8,6 +8,7 @@ interface OppsummeringInnhold {
     accordians: {
         om_deg: {
             tittel: TekstElement<string>;
+            navn_label: TekstElement<string>;
             adresse_label: TekstElement<string>;
             adresse_lesmer: LesMer<InlineLenke>;
         };
@@ -81,6 +82,7 @@ export const oppsummeringTekster: OppsummeringInnhold = {
             tittel: {
                 nb: 'Om deg',
             },
+            navn_label: { nb: 'Navn' },
             adresse_label: { nb: 'Folkeregistrert adresse' },
             adresse_lesmer: {
                 header: { nb: 'Slik endrer du folkeregistrert adresse' },
