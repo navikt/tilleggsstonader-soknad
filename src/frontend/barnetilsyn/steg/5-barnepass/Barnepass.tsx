@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Heading } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 
 import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
@@ -74,17 +74,19 @@ const Barnepass = () => {
             <PellePanel>
                 <LocaleTekst tekst={barnepassTekster.guide_innhold} />
             </PellePanel>
-            {barnMedPass.map((barn) => (
-                <BarnepassSpørsmål
-                    key={barn.ident}
-                    barn={valuerOrThrow(
-                        person.barn.find((barneInfo) => barn.ident === barneInfo.ident)
-                    )}
-                    barnepass={barn}
-                    oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
-                    visFeilmelding={visFeilmelding}
-                />
-            ))}
+            <VStack gap={'10'}>
+                {barnMedPass.map((barn) => (
+                    <BarnepassSpørsmål
+                        key={barn.ident}
+                        barn={valuerOrThrow(
+                            person.barn.find((barneInfo) => barn.ident === barneInfo.ident)
+                        )}
+                        barnepass={barn}
+                        oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
+                        visFeilmelding={visFeilmelding}
+                    />
+                ))}
+            </VStack>
         </Side>
     );
 };
