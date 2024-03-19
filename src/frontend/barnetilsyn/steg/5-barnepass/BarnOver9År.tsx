@@ -6,9 +6,11 @@ import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGr
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
+import { useSpråk } from '../../../context/SpråkContext';
 import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
+import { hentBeskjedMedEttParameter } from '../../../utils/tekster';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 interface Props {
@@ -23,6 +25,7 @@ const BarnOver9År: React.FC<Props> = ({
     oppdaterBarnMedBarnepass,
     visFeilmeldinger,
 }) => {
+    const { locale } = useSpråk();
     const oppdaterStartetIFemte = (val: EnumFelt<JaNei>) => {
         oppdaterBarnMedBarnepass({
             ...passInfo,
@@ -41,7 +44,10 @@ const BarnOver9År: React.FC<Props> = ({
                 error={
                     visFeilmeldinger &&
                     passInfo.startetIFemte === undefined &&
-                    'Du må velge et alternativ'
+                    hentBeskjedMedEttParameter(
+                        barn.fornavn,
+                        barnepassTekster.startet_femte_feilmelding[locale]
+                    )
                 }
             >
                 <LocaleReadMoreMedChildren header={barnepassTekster.startet_femte_readmore_header}>
@@ -62,7 +68,10 @@ const BarnOver9År: React.FC<Props> = ({
                             visFeilmeldinger &&
                             passInfo.startetIFemte !== undefined &&
                             passInfo.årsak === undefined &&
-                            'Du må velge et alternativ'
+                            hentBeskjedMedEttParameter(
+                                barn.fornavn,
+                                barnepassTekster.årsak_ekstra_pass_feilmelding[locale]
+                            )
                         }
                     />
                     {passInfo.årsak?.verdi === ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (

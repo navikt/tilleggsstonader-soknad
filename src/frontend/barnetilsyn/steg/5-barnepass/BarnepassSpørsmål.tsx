@@ -5,7 +5,9 @@ import { BarnepassIntern } from './typer';
 import { er9ellerEldre } from './utils';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { useSpråk } from '../../../context/SpråkContext';
 import { Barn, PassType } from '../../../typer/barn';
+import { hentBeskjedMedEttParameter } from '../../../utils/tekster';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 interface Props {
@@ -21,6 +23,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
     oppdaterBarnMedBarnepass,
     visFeilmelding,
 }) => {
+    const { locale } = useSpråk();
     return (
         <VStack gap={'6'}>
             <LocaleRadioGroup
@@ -28,7 +31,14 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                 argument0={barn.fornavn}
                 value={barnepass.type?.verdi || ''}
                 onChange={(passType) => oppdaterBarnMedBarnepass({ ...barnepass, type: passType })}
-                error={visFeilmelding && barnepass.type === undefined && 'Du må velge et alernativ'}
+                error={
+                    visFeilmelding &&
+                    barnepass.type === undefined &&
+                    hentBeskjedMedEttParameter(
+                        barn.fornavn,
+                        barnepassTekster.hvem_passer_feilmelding[locale]
+                    )
+                }
             />
             {barnepass.type?.verdi === PassType.ANDRE && (
                 <Alert variant="info">
