@@ -109,7 +109,6 @@ const lagDokumentasjonsfelt = (
     return {
         type: type,
         label: tittel,
-        harSendtInn: false,
         opplastedeVedlegg: [],
         barnId: barn.ident,
     };

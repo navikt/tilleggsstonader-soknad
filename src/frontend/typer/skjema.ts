@@ -19,7 +19,6 @@ export interface VerdiFelt<T> {
 export interface DokumentasjonFelt {
     type: Vedleggstype;
     label: string;
-    harSendtInn: boolean;
     opplastedeVedlegg: Dokument[];
     barnId?: string;
 }
