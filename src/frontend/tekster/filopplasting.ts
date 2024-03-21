@@ -3,7 +3,6 @@ import { TekstElement } from '../typer/tekst';
 
 export interface FilopplastingInnhold {
     last_opp_fil_knapp: TekstElement<string>;
-    delt_tidligere_knapp: TekstElement<string>;
     krav_dokumentasjon_overskrift: TekstElement<string>;
 }
 
@@ -11,9 +10,7 @@ export const filopplastingTekster: FilopplastingInnhold = {
     last_opp_fil_knapp: {
         nb: 'Last opp fil',
     },
-    delt_tidligere_knapp: {
-        nb: 'Jeg har delt dette tidligere',
-    },
+
     krav_dokumentasjon_overskrift: {
         nb: 'Krav til dokumentasjonen',
     },
