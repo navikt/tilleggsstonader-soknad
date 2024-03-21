@@ -1,3 +1,5 @@
+import { Barn } from './barn';
+
 export interface EnumFelt<T> {
     label: string;
     verdi: T;
@@ -22,6 +24,11 @@ export interface DokumentasjonFelt {
     harSendtInn: boolean;
     opplastedeVedlegg: Dokument[];
     barnId?: string;
+}
+
+export interface Dokumentasjonsbehov {
+    type: Vedleggstype;
+    barn?: Barn;
 }
 
 export interface Dokument {

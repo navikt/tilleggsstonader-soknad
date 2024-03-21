@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Heading, VStack } from '@navikt/ds-react';
 
-import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil';
+import { oppdaterDokumentasjonsbehovForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { BarnepassIntern } from './typer';
 import { finnBarn, validerBarnepass } from './utils';
@@ -10,7 +10,6 @@ import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
-import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Barnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -19,8 +18,7 @@ import { barnepassTekster } from '../../tekster/barnepass';
 
 const Barnepass = () => {
     const { person } = usePerson();
-    const { locale } = useSpråk();
-    const { barnMedBarnepass, settBarnMedBarnepass, settDokumentasjon } = useSøknad();
+    const { barnMedBarnepass, settBarnMedBarnepass, settDokumentasjonsbehov } = useSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
         person.barn
@@ -56,9 +54,11 @@ const Barnepass = () => {
         const barnepasses = barnMedPass.filter((barn) =>
             validerBarnepass(barn, finnBarn(person.barn, barn.ident))
         ) as Barnepass[];
+
         settBarnMedBarnepass(barnepasses);
-        settDokumentasjon((prevState) =>
-            oppdaterDokumentasjonFeltForBarnMedPass(barnepasses, person.barn, prevState, locale)
+
+        settDokumentasjonsbehov((prevState) =>
+            oppdaterDokumentasjonsbehovForBarnMedPass(barnepasses, person.barn, prevState)
         );
     };
 
