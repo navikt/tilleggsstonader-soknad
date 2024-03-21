@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { styled } from 'styled-components';
 
-import { BodyShort, Heading, Label, List } from '@navikt/ds-react';
+import { Heading } from '@navikt/ds-react';
 
-import { fjernVedlegg, leggTilVedlegg, toggleHarSendtInn } from './utils';
+import Dokumentasjonskrav from './Dokumentasjonskrav';
+import {
+    fjernVedlegg,
+    leggTilVedlegg,
+    opprettDokumentasjonsfelt,
+    toggleHarSendtInn,
+} from './utils';
 import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import VedleggGenerellInfo from '../../../components/VedleggGenerellInfo';
+import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Dokument, DokumentasjonFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -43,33 +50,35 @@ const Dokumentasjonskrav = () => {
 };
 
 const Vedlegg = () => {
-    const { dokumentasjon, settDokumentasjon } = useSøknad();
+    const { locale } = useSpråk();
+    const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = useSøknad();
 
-    // TODO: 🤔 Vurder om denne staten er nødvendig, eller om contexten kan oppdateres direkte
-    const [nyDokumentasjon, settNyDokumentasjon] = useState<DokumentasjonFelt[]>(dokumentasjon);
+    useEffect(() => {
+        settDokumentasjon((prevState) =>
+            opprettDokumentasjonsfelt(dokumentasjonsbehov, prevState, locale)
+        );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dokumentasjonsbehov, locale]);
 
     const leggTilDokument = (dokumentasjonFelt: DokumentasjonFelt, vedlegg: Dokument) => {
-        settNyDokumentasjon((prevState) => leggTilVedlegg(prevState, dokumentasjonFelt, vedlegg));
+        settDokumentasjon((prevState) => leggTilVedlegg(prevState, dokumentasjonFelt, vedlegg));
     };
 
     const slettDokument = (
         dokumentasjonFelt: DokumentasjonFelt,
         dokumentSomSkalSlettet: Dokument
     ) => {
-        settNyDokumentasjon((prevState) =>
+        settDokumentasjon((prevState) =>
             fjernVedlegg(prevState, dokumentasjonFelt, dokumentSomSkalSlettet)
         );
     };
 
     const toggleHarSendtInnTidligere = (dokumentasjonFelt: DokumentasjonFelt) => {
-        settNyDokumentasjon((prevState) => toggleHarSendtInn(prevState, dokumentasjonFelt));
+        settDokumentasjon((prevState) => toggleHarSendtInn(prevState, dokumentasjonFelt));
     };
 
     return (
-        <Side
-            stønadstype={Stønadstype.BARNETILSYN}
-            oppdaterSøknad={() => settDokumentasjon(nyDokumentasjon)}
-        >
+        <Side stønadstype={Stønadstype.BARNETILSYN}>
             <Heading size={'medium'}>
                 <LocaleTekst tekst={vedleggTekster.tittel} />
             </Heading>
@@ -79,12 +88,12 @@ const Vedlegg = () => {
             <Dokumentasjonskrav></Dokumentasjonskrav>
             <VedleggGenerellInfo />
             <VedleggContainer>
-                {nyDokumentasjon.map((dok, indeks) => (
+                {dokumentasjon.map((dok, indeks) => (
                     <section key={indeks}>
                         <VedleggFelt
                             tittel={dok.label}
                             vedlegg={typerVedleggTekster[dok.type]}
-                            dokumentasjonFelt={nyDokumentasjon[indeks]}
+                            dokumentasjonFelt={dok}
                             toggleHarSendtInnTidligere={() => toggleHarSendtInnTidligere(dok)}
                             leggTilDokument={(dokument: Dokument) => leggTilDokument(dok, dokument)}
                             slettDokument={(dokument) => slettDokument(dok, dokument)}

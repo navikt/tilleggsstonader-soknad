@@ -85,7 +85,7 @@ export const vedleggTekster: VedleggInnhold = {
 export const typerVedleggTekster: TekstTypeVedlegg = {
     [Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE]: {
         tittel: {
-            nb: 'Dokumentasjon av utgifter for pass av [0]',
+            nb: 'Faktura fra SFO/AKS/barnehage',
         },
         beskrivelse: {
             nb: 'Fakturaen må være spesifisert. Vi godkjenner ikke skjermbilde av kontoutskrift/vipps eller lignende. ',
@@ -99,7 +99,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
     },
     [Vedleggstype.UTGIFTER_PASS_ANNET]: {
         tittel: {
-            nb: 'Dokumentasjon av utgifter for pass av [0]',
+            nb: 'Dokumentasjon av utgifter til privat pass',
         },
         beskrivelse: {
             nb: 'Vi trenger avtale med barnepasser, kvittering for betaling og eventuelt A-melding sendt Skatteetaten.',
