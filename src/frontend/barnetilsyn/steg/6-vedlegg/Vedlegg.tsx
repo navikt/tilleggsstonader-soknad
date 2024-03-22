@@ -39,7 +39,7 @@ const Vedlegg = () => {
             opprettDokumentasjonsfelt(dokumentasjonsbehov, prevState, locale)
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dokumentasjonsbehov, locale]);
+    }, []);
 
     const leggTilDokument = (dokumentasjonFelt: DokumentasjonFelt, vedlegg: Dokument) => {
         settDokumentasjon((prevState) => leggTilVedlegg(prevState, dokumentasjonFelt, vedlegg));
