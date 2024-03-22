@@ -17,19 +17,14 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
+import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
-
-interface Feil {
-    ytelse?: string;
-    boddSammenhengende?: string;
-    planleggerBoINorgeNeste12mnd?: string;
-}
 
 const teksterOppholdINorge = hovedytelseInnhold.oppholdINorge;
 
 const Hovedytelse = () => {
     const { locale } = useSpråk();
-    const { hovedytelse, settHovedytelse } = useSøknad();
+    const { hovedytelse, settHovedytelse, valideringsfeil, settValideringsfeil } = useSøknad();
 
     const [ytelse, settYtelse] = useState<EnumFlereValgFelt<Ytelse> | undefined>(
         hovedytelse?.ytelse
@@ -42,24 +37,26 @@ const Hovedytelse = () => {
         EnumFelt<JaNei> | undefined
     >(hovedytelse?.planleggerBoINorgeNeste12mnd);
 
-    const [ytelseFeil, settYtelseFeil] = useState<Feil>();
     const skalTaStillingTilOpphold = ytelse ? skalTaStillingTilOppholdINorge(ytelse) : false;
 
     const kanFortsette = (ytelse?: EnumFlereValgFelt<Ytelse>): boolean => {
-        let kanFortsette = true;
-        let feil: Feil = {};
+        let feil: Valideringsfeil = {};
 
         if (ytelse === undefined || ytelse.verdier.length === 0) {
-            feil = { ...feil, ytelse: hovedytelseInnhold.hovedytelse_feilmelding[locale] };
-            kanFortsette = false;
+            feil = {
+                ...feil,
+                ytelse: { id: '1', melding: hovedytelseInnhold.hovedytelse_feilmelding[locale] },
+            };
         }
 
         if (skalTaStillingTilOpphold && boddSammenhengende === undefined) {
             feil = {
                 ...feil,
-                boddSammenhengende: teksterOppholdINorge.feilmelding_boddSammenhengende[locale],
+                boddSammenhengende: {
+                    id: '2',
+                    melding: teksterOppholdINorge.feilmelding_boddSammenhengende[locale],
+                },
             };
-            kanFortsette = false;
         }
         if (
             skalTaStillingTilOpphold &&
@@ -68,22 +65,23 @@ const Hovedytelse = () => {
         ) {
             feil = {
                 ...feil,
-                planleggerBoINorgeNeste12mnd:
-                    teksterOppholdINorge.feilmelding_planleggerBoINorgeNeste12mnd[locale],
+                planleggerBoINorgeNeste12mnd: {
+                    id: '3',
+                    melding: teksterOppholdINorge.feilmelding_planleggerBoINorgeNeste12mnd[locale],
+                },
             };
-            kanFortsette = false;
         }
-        settYtelseFeil(feil);
-        return kanFortsette;
+        settValideringsfeil(feil);
+        return !inneholderFeil(feil);
     };
 
     const oppdaterSkalTaStillingTilOpphold = (ytelse: EnumFlereValgFelt<Ytelse>) => {
         if (!skalTaStillingTilOppholdINorge(ytelse)) {
             settBoddSammenhengende(undefined);
             settPlanleggerBoINorgeNeste12mnd(undefined);
-            settYtelseFeil(undefined);
+            settValideringsfeil({});
         } else {
-            settYtelseFeil((prevState) => ({ ...prevState, ytelse: undefined }));
+            settValideringsfeil((prevState) => ({ ...prevState, ytelse: undefined }));
         }
     };
 
@@ -91,13 +89,13 @@ const Hovedytelse = () => {
         settBoddSammenhengende(verdi);
         if (verdi.verdi === 'JA') {
             settPlanleggerBoINorgeNeste12mnd(undefined);
-            settYtelseFeil((prevState) => ({
+            settValideringsfeil((prevState) => ({
                 ...prevState,
                 boddSammenhengende: undefined,
                 planleggerBoINorgeNeste12mnd: undefined,
             }));
         } else {
-            settYtelseFeil((prevState) => ({
+            settValideringsfeil((prevState) => ({
                 ...prevState,
                 boddSammenhengende: undefined,
             }));
@@ -105,7 +103,7 @@ const Hovedytelse = () => {
     };
 
     const oppdaterPlanleggerBoINorge = (verdi: EnumFelt<JaNei>) => {
-        settYtelseFeil((prevState) => ({
+        settValideringsfeil((prevState) => ({
             ...prevState,
             planleggerBoINorgeNeste12mnd: undefined,
         }));
@@ -132,13 +130,14 @@ const Hovedytelse = () => {
                 <LocaleTekst tekst={hovedytelseInnhold.guide_innhold} />
             </PellePanel>
             <LocaleCheckboxGroup
+                id={valideringsfeil.ytelse?.id}
                 tekst={hovedytelseInnhold.checkbox_hovedytelse}
                 value={ytelse ? ytelse.verdier : []}
                 onChange={(ytelse: EnumFlereValgFelt<Ytelse>) => {
                     settYtelse(ytelse);
                     oppdaterSkalTaStillingTilOpphold(ytelse);
                 }}
-                error={ytelseFeil?.ytelse}
+                error={valideringsfeil?.ytelse?.melding}
             />
             {skalTaStillingTilOpphold && (
                 <UnderspørsmålContainer>
@@ -152,10 +151,11 @@ const Hovedytelse = () => {
                             />
                         </PellePanel>
                         <LocaleRadioGroup
+                            id={valideringsfeil.boddSammenhengende?.id}
                             tekst={hovedytelseInnhold.oppholdINorge.radio_boddSammenhengende}
                             value={boddSammenhengende?.verdi}
                             onChange={oppdaterBoddSammenhengende}
-                            error={ytelseFeil?.boddSammenhengende}
+                            error={valideringsfeil.boddSammenhengende?.melding}
                         >
                             <LocaleReadMore
                                 tekst={hovedytelseInnhold.oppholdINorge.lesMer_boddSammenhengende}
@@ -163,13 +163,14 @@ const Hovedytelse = () => {
                         </LocaleRadioGroup>
                         {boddSammenhengende?.verdi === 'NEI' && (
                             <LocaleRadioGroup
+                                id={valideringsfeil.planleggerBoINorgeNeste12mnd?.id}
                                 tekst={
                                     hovedytelseInnhold.oppholdINorge
                                         .radio_planleggerBoINorgeNeste12mnd
                                 }
                                 value={planleggerBoINorgeNeste12mnd?.verdi}
                                 onChange={oppdaterPlanleggerBoINorge}
-                                error={ytelseFeil?.planleggerBoINorgeNeste12mnd}
+                                error={valideringsfeil?.planleggerBoINorgeNeste12mnd?.melding}
                             />
                         )}
                     </VStack>
