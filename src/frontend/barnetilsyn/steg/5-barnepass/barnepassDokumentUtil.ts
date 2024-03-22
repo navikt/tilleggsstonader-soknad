@@ -23,10 +23,13 @@ const utledDokumentasjonsbehovForBarn = (
 ): Dokumentasjonsbehov[] => {
     const dokumentasjonsbehov = [utledDokumentasjonsbehovPassType(passInfo, barn)];
 
-    if (passInfo.årsak?.verdi) {
+    const årsakEkstraPassVedleggType =
+        passInfo.årsak?.verdi && årsakEkstraPassTilVedlegg[passInfo.årsak?.verdi];
+
+    if (årsakEkstraPassVedleggType !== undefined) {
         dokumentasjonsbehov.push({
             barn: barn,
-            type: årsakEkstraPassTilVedlegg[passInfo.årsak.verdi],
+            type: årsakEkstraPassVedleggType,
         });
     }
 
@@ -45,9 +48,9 @@ const passTypeTilVedlegg: Record<PassType, Vedleggstype> = {
     [PassType.ANDRE]: Vedleggstype.UTGIFTER_PASS_ANNET,
 };
 
-const årsakEkstraPassTilVedlegg: Record<ÅrsakBarnepass, Vedleggstype> = {
-    [ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE]: Vedleggstype.EKSTRA_PASS_BEHOV,
-    // TODO: Skal disse mappes til noe annet eller evt. ikke noe for siste?
-    [ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID]: Vedleggstype.EKSTRA_PASS_BEHOV,
-    [ÅrsakBarnepass.INGEN_AV_DISSE]: Vedleggstype.EKSTRA_PASS_BEHOV,
+const årsakEkstraPassTilVedlegg: Partial<Record<ÅrsakBarnepass, Vedleggstype>> = {
+    [ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE]:
+        Vedleggstype.TRENGER_MER_PASS_ENN_JEVNALDRENDE,
+    [ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID]:
+        Vedleggstype.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
 };

@@ -118,15 +118,23 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             ],
         },
     },
-    [Vedleggstype.EKSTRA_PASS_BEHOV]: {
+    [Vedleggstype.TRENGER_MER_PASS_ENN_JEVNALDRENDE]: {
         tittel: {
-            nb: 'Dokumentasjon på behov for ekstra pass for [0]',
+            nb: 'Skriftlig uttalelse fra helsepersonell for [0]',
         },
         beskrivelse: {
-            nb: 'Legeerklæring eller annen uttalelse fra helsepersonell.',
+            nb: 'Legeerklæring eller annen uttalelse fra helsepersonell som beskriver Espens helsetilstand.',
         },
         krav_til_dokumentasjon: {
             nb: 'Legeerklæringen/uttalelsen fra helsepersonell må inneholde barnets navn og gjelde for perioden du søker om støtte til pass for.',
+        },
+    },
+    [Vedleggstype.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID]: {
+        tittel: {
+            nb: 'Dokumentasjon fra tiltakssted eller utdanningssted',
+        },
+        beskrivelse: {
+            nb: 'For eksempel en avtale, vaktliste eller timeliste som beskriver din arbeidstid eller obligatorisk oppmøtetid.',
         },
     },
 };

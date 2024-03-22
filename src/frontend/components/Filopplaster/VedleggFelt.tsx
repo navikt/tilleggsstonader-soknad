@@ -38,14 +38,15 @@ const VedleggFelt: React.FC<{
             <BodyLong>
                 <LocaleTekst tekst={vedlegg.beskrivelse} />
             </BodyLong>
-            <LocaleReadMore
-                tekst={{
-                    header: filopplastingTekster.krav_dokumentasjon_overskrift,
-                    innhold: vedlegg.krav_til_dokumentasjon,
-                }}
-                somPunktListe
-            />
-
+            {vedlegg.krav_til_dokumentasjon && (
+                <LocaleReadMore
+                    tekst={{
+                        header: filopplastingTekster.krav_dokumentasjon_overskrift,
+                        innhold: vedlegg.krav_til_dokumentasjon,
+                    }}
+                    somPunktListe
+                />
+            )}
             <Filopplaster
                 dokumentasjonFelt={dokumentasjonFelt}
                 toggleHarSendtInnTidligere={toggleHarSendtInnTidligere}
