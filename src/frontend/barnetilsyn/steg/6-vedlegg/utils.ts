@@ -78,14 +78,11 @@ export const opprettDokumentasjonsfelt = (
     eksisterendeDokumentasjon: DokumentasjonFelt[],
     locale: Locale
 ): DokumentasjonFelt[] => {
-    const [kanSamles, kanIkkeSamles] = dokumentasjonsbehov.reduce(
-        ([kanSamles, kanIkkeSamles], currentValue) => {
-            return dokumentasjonSkalHaSamletOpplasting(currentValue)
-                ? [[...kanSamles, currentValue], kanIkkeSamles]
-                : [kanSamles, [...kanIkkeSamles, currentValue]];
-        },
-        [[], []] as [Dokumentasjonsbehov[], Dokumentasjonsbehov[]]
+    const kanSamles = dokumentasjonsbehov.filter(skalHaSamletOpplasting);
+    const kanIkkeSamles = dokumentasjonsbehov.filter(
+        (dokBehov) => !skalHaSamletOpplasting(dokBehov)
     );
+
     const samletDokumentasjon = lagSamledeDokumentasjonsfelter(
         kanSamles,
         eksisterendeDokumentasjon,
@@ -169,7 +166,7 @@ const finnEksisterendeDokumentasjonsfelt = (
  * Sjekker om dokumentasjonsbehovet skal ha samlet felt for opplasting av dokumentasjon.
  * Brukes for å samle utgifter til pass av barn.
  */
-const dokumentasjonSkalHaSamletOpplasting = (dokumentasjonsbehov: Dokumentasjonsbehov): boolean =>
+const skalHaSamletOpplasting = (dokumentasjonsbehov: Dokumentasjonsbehov): boolean =>
     [Vedleggstype.UTGIFTER_PASS_ANNET, Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE].includes(
         dokumentasjonsbehov.type
     );
