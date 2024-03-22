@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { Alert, Heading } from '@navikt/ds-react';
 
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
@@ -42,12 +41,10 @@ const Aktivitet = () => {
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
             tittel={aktivitetTekster.tittel}
+            pellePanel={<LocaleTekst tekst={aktivitetTekster.guide_innhold} />}
             validerSteg={() => kanFortsette(utdanning?.verdi)}
             oppdaterSøknad={oppdaterAktivitetISøknad}
         >
-            <PellePanel>
-                <LocaleTekst tekst={aktivitetTekster.guide_innhold} />
-            </PellePanel>
             <LocaleRadioGroup
                 tekst={aktivitetTekster.radio_utdanning}
                 value={utdanning?.verdi || ''}

@@ -115,6 +115,7 @@ const Hovedytelse = () => {
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
             tittel={hovedytelseInnhold.tittel}
+            pellePanel={<LocaleTekst tekst={hovedytelseInnhold.guide_innhold} />}
             validerSteg={() => kanFortsette(ytelse)}
             oppdaterSøknad={() => {
                 if (ytelse !== undefined) {
@@ -126,9 +127,6 @@ const Hovedytelse = () => {
                 }
             }}
         >
-            <PellePanel>
-                <LocaleTekst tekst={hovedytelseInnhold.guide_innhold} />
-            </PellePanel>
             <LocaleCheckboxGroup
                 tekst={hovedytelseInnhold.checkbox_hovedytelse}
                 value={ytelse ? ytelse.verdier : []}

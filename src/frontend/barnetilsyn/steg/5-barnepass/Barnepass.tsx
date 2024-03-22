@@ -6,7 +6,6 @@ import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { BarnepassIntern } from './typer';
 import { finnBarn, validerBarnepass } from './utils';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
@@ -66,12 +65,10 @@ const Barnepass = () => {
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
             tittel={barnepassTekster.tittel}
+            pellePanel={<LocaleTekst tekst={barnepassTekster.guide_innhold} />}
             oppdaterSøknad={oppdaterSøknad}
             validerSteg={kanGåVidere}
         >
-            <PellePanel>
-                <LocaleTekst tekst={barnepassTekster.guide_innhold} />
-            </PellePanel>
             <VStack gap={'10'}>
                 {barnMedPass.map((barn) => (
                     <BarnepassSpørsmål

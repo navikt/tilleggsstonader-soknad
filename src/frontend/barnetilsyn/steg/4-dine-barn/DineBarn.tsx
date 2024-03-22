@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { Alert, BodyShort, BodyLong, Checkbox, CheckboxGroup, Heading } from '@navikt/ds-react';
 
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
@@ -60,12 +59,10 @@ const DineBarn = () => {
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
             tittel={dineBarnTekster.tittel}
+            pellePanel={<LocaleInlineLenke tekst={dineBarnTekster.guide_innhold} />}
             validerSteg={() => kanFortsette(personbarn)}
             oppdaterSøknad={oppdaterSøknad}
         >
-            <PellePanel>
-                <LocaleInlineLenke tekst={dineBarnTekster.guide_innhold} />
-            </PellePanel>
             <div>
                 <CheckboxGroup
                     legend={dineBarnTekster.hvilke_barn_spm[locale]}

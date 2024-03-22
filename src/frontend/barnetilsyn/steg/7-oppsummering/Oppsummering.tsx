@@ -15,7 +15,6 @@ import {
 } from '@navikt/ds-react';
 import { AccordionItemProps } from '@navikt/ds-react/esm/accordion/AccordionItem';
 
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
 import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
@@ -260,6 +259,7 @@ const Oppsummering = () => {
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
             tittel={oppsummeringTekster.tittel}
+            pellePanel={<LocaleTekst tekst={oppsummeringTekster.guide_innhold} />}
             validerSteg={() => {
                 if (!harBekreftet) {
                     settFeil('Du må bekrefte for å sende inn søknaden');
@@ -269,9 +269,6 @@ const Oppsummering = () => {
                 return true;
             }}
         >
-            <PellePanel>
-                <LocaleTekst tekst={oppsummeringTekster.guide_innhold} />
-            </PellePanel>
             <Accordion>
                 <OmDeg person={person} />
                 <DinSituasjon hovedytelse={hovedytelse} />

@@ -6,6 +6,7 @@ import { styled } from 'styled-components';
 import { Alert, BodyShort, Button, Heading, VStack } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
+import { PellePanel } from './PellePanel/PellePanel';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { sendInnSøknad } from '../api/api';
 import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
@@ -19,6 +20,7 @@ import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 interface Props {
     stønadstype: Stønadstype;
     tittel: TekstElement<string>;
+    pellePanel: React.ReactNode;
     children?: React.ReactNode;
     validerSteg?: () => boolean;
     oppdaterSøknad?: () => void;
@@ -53,7 +55,14 @@ const KnappeContainerMedFeilmelding = styled.div`
     }
 `;
 
-const Side: React.FC<Props> = ({ stønadstype, tittel, children, validerSteg, oppdaterSøknad }) => {
+const Side: React.FC<Props> = ({
+    stønadstype,
+    tittel,
+    pellePanel,
+    children,
+    validerSteg,
+    oppdaterSøknad,
+}) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon, settInnsentTidspunkt } =
@@ -112,6 +121,7 @@ const Side: React.FC<Props> = ({ stønadstype, tittel, children, validerSteg, op
             <Heading size="medium">
                 <LocaleTekst tekst={tittel} />
             </Heading>
+            <PellePanel>{pellePanel}</PellePanel>
             <VStack gap={'6'}>{children}</VStack>
             <KnappeContainerMedFeilmelding>
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>

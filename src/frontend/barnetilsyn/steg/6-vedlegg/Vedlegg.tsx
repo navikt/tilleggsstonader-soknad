@@ -6,7 +6,6 @@ import { BodyShort, Label, List } from '@navikt/ds-react';
 
 import { fjernVedlegg, leggTilVedlegg, toggleHarSendtInn } from './utils';
 import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
@@ -69,11 +68,9 @@ const Vedlegg = () => {
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
             tittel={vedleggTekster.tittel}
+            pellePanel={<LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />}
             oppdaterSøknad={() => settDokumentasjon(nyDokumentasjon)}
         >
-            <PellePanel>
-                <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
-            </PellePanel>
             <Dokumentasjonskrav></Dokumentasjonskrav>
             <VedleggGenerellInfo />
             <VedleggContainer>
