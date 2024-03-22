@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-import { Alert, BodyShort, Button, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, ErrorSummary, VStack } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { sendInnSøknad } from '../api/api';
 import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
+import { useSpråk } from '../context/SpråkContext';
 import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { IRoute } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
+import { inneholderFeil } from '../typer/validering';
 import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface Props {
@@ -54,10 +56,21 @@ const KnappeContainerMedFeilmelding = styled.div`
 const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterSøknad }) => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon, settInnsentTidspunkt } =
-        useSøknad();
+    const { locale } = useSpråk();
+    const {
+        valideringsfeil,
+        settValideringsfeil,
+        hovedytelse,
+        aktivitet,
+        barnMedBarnepass,
+        dokumentasjon,
+        settInnsentTidspunkt,
+    } = useSøknad();
 
+    const errorRef = useRef<HTMLDivElement>(null);
     const [sendInnFeil, settSendInnFeil] = useState<boolean>(false);
+
+    const harValideringsfeil = inneholderFeil(valideringsfeil);
 
     const routes = hentRoutes(stønadstype);
     const nåværendePath = location.pathname;
@@ -76,6 +89,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     };
 
     const navigerTilForrigeSide = () => {
+        settValideringsfeil({});
         const forrigeRoute = hentForrigeRoute(routes, nåværendePath);
         navigate(forrigeRoute.path);
     };
@@ -107,6 +121,18 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                     Steg {aktivtStegIndex} av {routes.length - 2}
                 </BodyShort>
             </StegIndikator>
+            {harValideringsfeil && (
+                <ErrorSummary heading={fellesTekster.tittel_error_summary[locale]} ref={errorRef}>
+                    {Object.entries(valideringsfeil).map(
+                        ([id, error]) =>
+                            error && (
+                                <ErrorSummary.Item key={`${id}`} href={`#${error.id}`}>
+                                    {error.melding}
+                                </ErrorSummary.Item>
+                            )
+                    )}
+                </ErrorSummary>
+            )}
             <VStack gap={'6'}>{children}</VStack>
             <KnappeContainerMedFeilmelding>
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
