@@ -87,6 +87,9 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
         tittel: {
             nb: 'Faktura fra SFO/AKS/barnehage',
         },
+        liste_tittel: {
+            nb: 'Faktura fra SFO/AKS/barnehage for [0]',
+        },
         beskrivelse: {
             nb: 'Fakturaen må være spesifisert. Vi godkjenner ikke skjermbilde av kontoutskrift/vipps eller lignende. ',
         },
@@ -100,6 +103,9 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
     [Vedleggstype.UTGIFTER_PASS_ANNET]: {
         tittel: {
             nb: 'Dokumentasjon av utgifter til privat pass',
+        },
+        liste_tittel: {
+            nb: 'Dokumentasjon av utgifter til privat pass for [0]',
         },
         beskrivelse: {
             nb: 'Vi trenger avtale med barnepasser, kvittering for betaling og eventuelt A-melding sendt Skatteetaten.',

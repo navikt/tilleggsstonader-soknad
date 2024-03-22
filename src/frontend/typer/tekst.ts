@@ -36,6 +36,7 @@ export type CheckboxGruppe<T extends string> = {
 
 export type Vedlegg = {
     tittel: TekstElement<string>;
+    liste_tittel?: TekstElement<string>;
     beskrivelse: TekstElement<string>;
     krav_til_dokumentasjon: TekstElement<string | string[]>;
 };

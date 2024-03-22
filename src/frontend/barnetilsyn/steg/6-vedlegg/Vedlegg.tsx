@@ -30,25 +30,6 @@ const VedleggContainer = styled.div`
     margin: 1rem 0;
 `;
 
-const Dokumentasjonskrav = () => {
-    const { dokumentasjon } = useSøknad();
-    return (
-        <div>
-            <Label>
-                <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_tittel} />
-            </Label>
-            <List>
-                {dokumentasjon.map((doc, indeks) => (
-                    <List.Item key={indeks}> {doc.label} </List.Item>
-                ))}
-            </List>
-            <BodyShort>
-                <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />
-            </BodyShort>
-        </div>
-    );
-};
-
 const Vedlegg = () => {
     const { locale } = useSpråk();
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = useSøknad();
@@ -85,7 +66,7 @@ const Vedlegg = () => {
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
             </PellePanel>
-            <Dokumentasjonskrav></Dokumentasjonskrav>
+            <Dokumentasjonskrav />
             <VedleggGenerellInfo />
             <VedleggContainer>
                 {dokumentasjon.map((dok, indeks) => (
