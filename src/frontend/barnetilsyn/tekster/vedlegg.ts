@@ -26,6 +26,10 @@ interface VedleggInnhold {
     };
 }
 
+interface VedleggFeilmeldinger {
+    overskrift: TekstElement<string>;
+}
+
 const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] = {
     tittel: {
         nb: 'Format og kvalitet på vedlegg',
@@ -128,5 +132,11 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
         krav_til_dokumentasjon: {
             nb: 'Legeerklæringen/uttalelsen fra helsepersonell må inneholde barnets navn og gjelde for perioden du søker om støtte til pass for.',
         },
+    },
+};
+
+export const vedleggFeilmeldinger: VedleggFeilmeldinger = {
+    overskrift: {
+        nb: 'Du må laste opp dokumentasjon for følgende felter før du kan gå videre:',
     },
 };

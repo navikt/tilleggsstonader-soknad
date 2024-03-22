@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { styled } from 'styled-components';
 
-import { Heading } from '@navikt/ds-react';
+import { ErrorSummary, Heading } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
 import {
@@ -21,7 +21,7 @@ import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Dokument, DokumentasjonFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
-import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
+import { typerVedleggTekster, vedleggFeilmeldinger, vedleggTekster } from '../../tekster/vedlegg';
 
 const VedleggContainer = styled.div`
     display: flex;
@@ -34,12 +34,22 @@ const Vedlegg = () => {
     const { locale } = useSpråk();
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = useSøknad();
 
+    const errorRef = useRef<HTMLDivElement>(null);
+
+    const [dokumentasjonSomMangler, settDokumentasjonSomMangler] = React.useState<
+        DokumentasjonFelt[]
+    >([]);
+
     useEffect(() => {
         settDokumentasjon((prevState) =>
             opprettDokumentasjonsfelt(dokumentasjonsbehov, prevState, locale)
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        errorRef.current && errorRef.current.focus();
+    }, [dokumentasjonSomMangler.length]);
 
     const leggTilDokument = (dokumentasjonFelt: DokumentasjonFelt, vedlegg: Dokument) => {
         settDokumentasjon((prevState) => leggTilVedlegg(prevState, dokumentasjonFelt, vedlegg));
@@ -58,8 +68,15 @@ const Vedlegg = () => {
         settDokumentasjon((prevState) => toggleHarSendtInn(prevState, dokumentasjonFelt));
     };
 
+    const validerSteg = () => {
+        const manglerOpplasting = dokumentasjon.filter((dok) => dok.opplastedeVedlegg.length === 0);
+
+        settDokumentasjonSomMangler(manglerOpplasting);
+        return manglerOpplasting.length === 0;
+    };
+
     return (
-        <Side stønadstype={Stønadstype.BARNETILSYN}>
+        <Side stønadstype={Stønadstype.BARNETILSYN} validerSteg={validerSteg}>
             <Heading size={'medium'}>
                 <LocaleTekst tekst={vedleggTekster.tittel} />
             </Heading>
@@ -82,6 +99,16 @@ const Vedlegg = () => {
                     </section>
                 ))}
             </VedleggContainer>
+            {dokumentasjonSomMangler.length > 0 && (
+                <ErrorSummary
+                    ref={errorRef}
+                    heading={<LocaleTekst tekst={vedleggFeilmeldinger.overskrift} />}
+                >
+                    {dokumentasjonSomMangler.map((dok, indeks) => (
+                        <ErrorSummary.Item key={indeks}>{dok.label}</ErrorSummary.Item>
+                    ))}
+                </ErrorSummary>
+            )}
         </Side>
     );
 };
