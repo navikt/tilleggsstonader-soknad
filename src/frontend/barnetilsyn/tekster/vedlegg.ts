@@ -28,6 +28,7 @@ interface VedleggInnhold {
 
 interface VedleggFeilmeldinger {
     overskrift: TekstElement<string>;
+    dokument_mangler: TekstElement<string>;
 }
 
 const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] = {
@@ -139,4 +140,5 @@ export const vedleggFeilmeldinger: VedleggFeilmeldinger = {
     overskrift: {
         nb: 'Du må laste opp dokumentasjon for følgende felter før du kan gå videre:',
     },
+    dokument_mangler: { nb: 'Du må laste opp et dokument før du kan gå videre.' },
 };

@@ -2,10 +2,11 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { BodyLong, Heading, VStack } from '@navikt/ds-react';
+import { Alert, BodyLong, Heading, VStack } from '@navikt/ds-react';
 import { ASurfaceSubtle } from '@navikt/ds-tokens/dist/tokens';
 
 import Filopplaster from './Filopplaster';
+import { vedleggFeilmeldinger } from '../../barnetilsyn/tekster/vedlegg';
 import { filopplastingTekster } from '../../tekster/filopplasting';
 import { Dokument, DokumentasjonFelt } from '../../typer/skjema';
 import { Vedlegg } from '../../typer/tekst';
@@ -24,6 +25,7 @@ const VedleggFelt: React.FC<{
     toggleHarSendtInnTidligere: () => void;
     leggTilDokument: (vedlegg: Dokument) => void;
     slettDokument: (vedlegg: Dokument) => void;
+    visFeilmelding: boolean;
 }> = ({
     tittel,
     vedlegg,
@@ -31,9 +33,10 @@ const VedleggFelt: React.FC<{
     toggleHarSendtInnTidligere,
     leggTilDokument,
     slettDokument,
+    visFeilmelding,
 }) => {
     return (
-        <Container>
+        <Container $visFeilmelding={visFeilmelding}>
             <Heading size="small">{tittel}</Heading>
             <BodyLong>
                 <LocaleTekst tekst={vedlegg.beskrivelse} />
@@ -52,6 +55,12 @@ const VedleggFelt: React.FC<{
                 leggTilDokument={leggTilDokument}
                 slettDokument={slettDokument}
             />
+
+            {visFeilmelding && (
+                <Alert variant="error">
+                    <LocaleTekst tekst={vedleggFeilmeldinger.dokument_mangler} />
+                </Alert>
+            )}
         </Container>
     );
 };

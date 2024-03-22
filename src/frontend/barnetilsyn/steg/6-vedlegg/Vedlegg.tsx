@@ -95,6 +95,7 @@ const Vedlegg = () => {
                             toggleHarSendtInnTidligere={() => toggleHarSendtInnTidligere(dok)}
                             leggTilDokument={(dokument: Dokument) => leggTilDokument(dok, dokument)}
                             slettDokument={(dokument) => slettDokument(dok, dokument)}
+                            visFeilmelding={dokumentasjonSomMangler.includes(dok)}
                         />
                     </section>
                 ))}
