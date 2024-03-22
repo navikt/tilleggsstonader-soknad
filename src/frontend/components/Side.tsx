@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -71,6 +71,9 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     const [sendInnFeil, settSendInnFeil] = useState<boolean>(false);
 
     const harValideringsfeil = inneholderFeil(valideringsfeil);
+    useEffect(() => {
+        errorRef.current && errorRef.current.focus();
+    }, [harValideringsfeil]);
 
     const routes = hentRoutes(stønadstype);
     const nåværendePath = location.pathname;
