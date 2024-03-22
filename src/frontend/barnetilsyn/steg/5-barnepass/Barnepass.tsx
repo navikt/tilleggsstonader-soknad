@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Heading, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 
 import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
@@ -65,12 +65,10 @@ const Barnepass = () => {
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
+            tittel={barnepassTekster.tittel}
             oppdaterSøknad={oppdaterSøknad}
             validerSteg={kanGåVidere}
         >
-            <Heading size="medium">
-                <LocaleTekst tekst={barnepassTekster.tittel} />
-            </Heading>
             <PellePanel>
                 <LocaleTekst tekst={barnepassTekster.guide_innhold} />
             </PellePanel>

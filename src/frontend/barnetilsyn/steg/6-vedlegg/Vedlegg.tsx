@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { styled } from 'styled-components';
 
-import { BodyShort, Heading, Label, List } from '@navikt/ds-react';
+import { BodyShort, Label, List } from '@navikt/ds-react';
 
 import { fjernVedlegg, leggTilVedlegg, toggleHarSendtInn } from './utils';
 import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
@@ -68,11 +68,9 @@ const Vedlegg = () => {
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
+            tittel={vedleggTekster.tittel}
             oppdaterSøknad={() => settDokumentasjon(nyDokumentasjon)}
         >
-            <Heading size={'medium'}>
-                <LocaleTekst tekst={vedleggTekster.tittel} />
-            </Heading>
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
             </PellePanel>

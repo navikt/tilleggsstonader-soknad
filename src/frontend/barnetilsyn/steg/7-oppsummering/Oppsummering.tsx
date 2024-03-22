@@ -11,7 +11,6 @@ import {
     Button,
     Checkbox,
     CheckboxGroup,
-    Heading,
     Label,
 } from '@navikt/ds-react';
 import { AccordionItemProps } from '@navikt/ds-react/esm/accordion/AccordionItem';
@@ -260,6 +259,7 @@ const Oppsummering = () => {
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
+            tittel={oppsummeringTekster.tittel}
             validerSteg={() => {
                 if (!harBekreftet) {
                     settFeil('Du må bekrefte for å sende inn søknaden');
@@ -269,9 +269,6 @@ const Oppsummering = () => {
                 return true;
             }}
         >
-            <Heading size={'medium'}>
-                <LocaleTekst tekst={oppsummeringTekster.tittel} />
-            </Heading>
             <PellePanel>
                 <LocaleTekst tekst={oppsummeringTekster.guide_innhold} />
             </PellePanel>
