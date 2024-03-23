@@ -2,43 +2,40 @@ import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import BarnOver9År from './BarnOver9År';
 import { BarnepassIntern } from './typer';
-import { er9ellerEldre } from './utils';
+import { er9ellerEldre, errorKeyHvemPasser } from './utils';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import { useSpråk } from '../../../context/SpråkContext';
 import { Barn, PassType } from '../../../typer/barn';
-import { hentBeskjedMedEttParameter } from '../../../utils/tekster';
+import { Valideringsfeil } from '../../../typer/validering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 interface Props {
     barn: Barn;
     barnepass: BarnepassIntern;
     oppdaterBarnMedBarnepass: (oppdatertBarn: BarnepassIntern) => void;
-    visFeilmelding: boolean;
+    valideringsfeil: Valideringsfeil;
+    nullstillValideringsfeil: (key: string) => void;
 }
 
 const BarnepassSpørsmål: React.FC<Props> = ({
     barn,
     barnepass,
     oppdaterBarnMedBarnepass,
-    visFeilmelding,
+    valideringsfeil,
+    nullstillValideringsfeil,
 }) => {
-    const { locale } = useSpråk();
     return (
         <VStack gap={'6'}>
             <LocaleRadioGroup
+                id={valideringsfeil[errorKeyHvemPasser(barn)]?.id}
                 tekst={barnepassTekster.hvem_passer_radio}
                 argument0={barn.fornavn}
                 value={barnepass.type?.verdi || ''}
-                onChange={(passType) => oppdaterBarnMedBarnepass({ ...barnepass, type: passType })}
-                error={
-                    visFeilmelding &&
-                    barnepass.type === undefined &&
-                    hentBeskjedMedEttParameter(
-                        barn.fornavn,
-                        barnepassTekster.hvem_passer_feilmelding[locale]
-                    )
-                }
+                onChange={(passType) => {
+                    oppdaterBarnMedBarnepass({ ...barnepass, type: passType });
+                    nullstillValideringsfeil(errorKeyHvemPasser(barn));
+                }}
+                error={valideringsfeil[errorKeyHvemPasser(barn)]?.melding}
             />
             {barnepass.type?.verdi === PassType.ANDRE && (
                 <Alert variant="info">
@@ -53,7 +50,8 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                     barn={barn}
                     passInfo={barnepass}
                     oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
-                    visFeilmeldinger={visFeilmelding}
+                    valideringsfeil={valideringsfeil}
+                    nullstillValideringsfeil={nullstillValideringsfeil}
                 />
             )}
         </VStack>
