@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Alert, BodyShort, BodyLong, Checkbox, CheckboxGroup, Heading } from '@navikt/ds-react';
 
@@ -24,6 +24,12 @@ const DineBarn = () => {
     const { settDokumentasjon, hovedytelse, valideringsfeil, settValideringsfeil } = useSøknad();
 
     const [personbarn, settPersonbarn] = useState<Barn[]>(person.barn);
+
+    useEffect(() => {
+        if (inneholderFeil(valideringsfeil) && personbarn.some((barn) => barn.skalHaBarnepass)) {
+            settValideringsfeil({});
+        }
+    }, [valideringsfeil, personbarn, settValideringsfeil]);
 
     const toggleSkalHaBarnepass = (ident: string) => {
         settPersonbarn((prevBarn) =>
