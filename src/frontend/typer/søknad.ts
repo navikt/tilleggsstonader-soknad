@@ -9,6 +9,8 @@ export interface Hovedytelse {
 export interface ArbeidOgOpphold {
     jobberIAnnetLandEnnNorge?: EnumFelt<JaNei>;
     hvilketLandJobberIAnnetLandEnnNorge?: VerdiFelt<string>;
+    mottarDuPengestøtteFraAnnetLand?: EnumFlereValgFelt<MottarPengestøtteTyper>;
+    hvilketLandMottarDuPengestøtteFra?: VerdiFelt<string>;
 }
 
 export interface Aktivitet {
@@ -16,6 +18,8 @@ export interface Aktivitet {
 }
 
 export type JaNei = 'JA' | 'NEI';
+
+export type MottarPengestøtteTyper = 'SYKEPENGER' | 'PENSJON' | 'ANNEN_PENGESTØTTE' | 'MOTTAR_IKKE';
 
 export interface Periode {
     fom: string;

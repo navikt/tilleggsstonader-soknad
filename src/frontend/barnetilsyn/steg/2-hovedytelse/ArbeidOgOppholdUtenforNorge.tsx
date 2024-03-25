@@ -2,7 +2,9 @@ import React from 'react';
 
 import { Heading, Select, VStack } from '@navikt/ds-react';
 
+import { skalTaStillingTilLandForPengestøtte, skalTaStillingTilPengestøtte } from './validering';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
+import LocaleCheckboxGroup from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -10,8 +12,8 @@ import { UnderspørsmålContainer } from '../../../components/UnderspørsmålCon
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Landkoder } from '../../../typer/kodeverk';
-import { EnumFelt } from '../../../typer/skjema';
-import { ArbeidOgOpphold, JaNei } from '../../../typer/søknad';
+import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
+import { ArbeidOgOpphold, JaNei, MottarPengestøtteTyper } from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typer';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
@@ -31,9 +33,10 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             ...prevState,
             jobberIAnnetLandEnnNorge: verdi,
             hvilketLand: undefined,
+            //mottarDuPengestøtteFraAnnetLand: Trenger ikke å nullstille då man alltid skal vise det spørsmålet
         }));
     };
-    const oppdaterLand = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const oppdatertHvilketLandJobberI = (e: React.ChangeEvent<HTMLSelectElement>) => {
         if (harVerdi(e.target.value)) {
             settArbeidOgOpphold((prevState) => ({
                 ...prevState,
@@ -49,6 +52,34 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             settArbeidOgOpphold((prevState) => ({
                 ...prevState,
                 hvilketLandJobberIAnnetLandEnnNorge: undefined,
+            }));
+        }
+    };
+
+    const oppdaterMottarDuPengestøtte = (verdi: EnumFlereValgFelt<MottarPengestøtteTyper>) => {
+        settArbeidOgOpphold((prevState) => ({
+            ...prevState,
+            mottarDuPengestøtteFraAnnetLand: verdi,
+            hvilketLandMottarDuPengestøtteFra: skalTaStillingTilLandForPengestøtte(verdi)
+                ? prevState.hvilketLandMottarDuPengestøtteFra
+                : undefined,
+        }));
+    };
+
+    const oppdatertHvilketLandMottarPengestøtte = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        if (harVerdi(e.target.value)) {
+            settArbeidOgOpphold((prevState) => ({
+                ...prevState,
+                hvilketLandMottarDuPengestøtteFra: {
+                    label: teksterOppholdINorge.select_hvilket_land_pengestøtte[locale],
+                    verdi: e.target.value,
+                    svarTekst: landkoder[e.target.value] || 'Finner ikke mapping',
+                },
+            }));
+        } else {
+            settArbeidOgOpphold((prevState) => ({
+                ...prevState,
+                hvilketLandMottarDuPengestøtteFra: undefined,
             }));
         }
     };
@@ -79,7 +110,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                 locale
                             ]
                         }
-                        onChange={oppdaterLand}
+                        onChange={oppdatertHvilketLandJobberI}
                         value={arbeidOgOpphold?.hvilketLandJobberIAnnetLandEnnNorge?.verdi || ''}
                         error={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.melding}
                     >
@@ -88,6 +119,36 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                             <option value={kode}>{tekst}</option>
                         ))}
                     </Select>
+                )}
+
+                {skalTaStillingTilPengestøtte(arbeidOgOpphold) && (
+                    <>
+                        <LocaleCheckboxGroup
+                            id={valideringsfeil.mottarDuPengestøtteFraAnnetLand?.id}
+                            tekst={teksterOppholdINorge.checkbox_mottar_du_pengestøtte}
+                            value={arbeidOgOpphold?.mottarDuPengestøtteFraAnnetLand?.verdier || []}
+                            error={valideringsfeil.mottarDuPengestøtteFraAnnetLand?.melding}
+                            onChange={oppdaterMottarDuPengestøtte}
+                        />
+                        {skalTaStillingTilLandForPengestøtte(
+                            arbeidOgOpphold.mottarDuPengestøtteFraAnnetLand
+                        ) && (
+                            <Select
+                                id={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.id}
+                                label={teksterOppholdINorge.select_hvilket_land_pengestøtte[locale]}
+                                onChange={oppdatertHvilketLandMottarPengestøtte}
+                                value={
+                                    arbeidOgOpphold?.hvilketLandMottarDuPengestøtteFra?.verdi || ''
+                                }
+                                error={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.melding}
+                            >
+                                <option value="">Velg land</option>
+                                {Object.entries(landkoder).map(([kode, tekst]) => (
+                                    <option value={kode}>{tekst}</option>
+                                ))}
+                            </Select>
+                        )}
+                    </>
                 )}
             </VStack>
         </UnderspørsmålContainer>

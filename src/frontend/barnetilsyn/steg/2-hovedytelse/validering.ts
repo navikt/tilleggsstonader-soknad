@@ -1,12 +1,30 @@
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { ArbeidOgOpphold } from '../../../typer/søknad';
+import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
+import { harVerdi } from '../../../utils/typer';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
 const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
+
+export const skalTaStillingTilPengestøtte = (opphold: ArbeidOgOpphold) =>
+    opphold?.jobberIAnnetLandEnnNorge?.verdi === 'NEI' ||
+    harVerdi(opphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi);
+
+const mottarPengestøtteTyperSomMåSåTaStillingTilLand: MottarPengestøtteTyper[] = [
+    'SYKEPENGER',
+    'PENSJON',
+    'ANNEN_PENGESTØTTE',
+];
+export const skalTaStillingTilLandForPengestøtte = (
+    verdier: EnumFlereValgFelt<MottarPengestøtteTyper> | undefined
+) =>
+    (verdier?.verdier || []).some(
+        (verdi) => mottarPengestøtteTyperSomMåSåTaStillingTilLand.indexOf(verdi.verdi) > -1
+    );
+
 export const validerHovedytelse = (
     ytelse: EnumFlereValgFelt<Ytelse> | undefined,
     opphold: ArbeidOgOpphold,
@@ -43,6 +61,34 @@ export const validerHovedytelse = (
                     melding:
                         teksterOppholdINorge
                             .feilmelding_select_hvilket_land_jobber_i_annet_land_label[locale],
+                },
+            };
+        }
+
+        if (
+            skalTaStillingTilPengestøtte(opphold) &&
+            (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length === 0
+        ) {
+            feil = {
+                ...feil,
+                mottarDuPengestøtteFraAnnetLand: {
+                    id: '4',
+                    melding: teksterOppholdINorge.feilmnelding_mottar_du_pengestøtte[locale],
+                },
+            };
+        }
+
+        if (
+            skalTaStillingTilPengestøtte(opphold) &&
+            skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand) &&
+            opphold.hvilketLandMottarDuPengestøtteFra?.verdi === undefined
+        ) {
+            feil = {
+                ...feil,
+                hvilketLandMottarDuPengestøtteFra: {
+                    id: '5',
+                    melding:
+                        teksterOppholdINorge.feilmelding_select_hvilket_land_pengestøtte[locale],
                 },
             };
         }

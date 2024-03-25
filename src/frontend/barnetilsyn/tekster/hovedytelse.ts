@@ -1,5 +1,5 @@
 import { jaNeiAlternativer } from '../../tekster/felles';
-import { JaNei } from '../../typer/søknad';
+import { JaNei, MottarPengestøtteTyper } from '../../typer/søknad';
 import { CheckboxGruppe, InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 import { Ytelse } from '../steg/2-hovedytelse/typer';
 
@@ -15,6 +15,11 @@ interface HovedytelseInnhold {
         feilmnelding_jobber_annet_land_enn_norge: TekstElement<string>;
         select_hvilket_land_jobber_i_annet_land_label: TekstElement<string>;
         feilmelding_select_hvilket_land_jobber_i_annet_land_label: TekstElement<string>;
+
+        checkbox_mottar_du_pengestøtte: CheckboxGruppe<MottarPengestøtteTyper>;
+        feilmnelding_mottar_du_pengestøtte: TekstElement<string>;
+        select_hvilket_land_pengestøtte: TekstElement<string>;
+        feilmelding_select_hvilket_land_pengestøtte: TekstElement<string>;
     };
 }
 
@@ -77,6 +82,35 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         },
         feilmelding_select_hvilket_land_jobber_i_annet_land_label: {
             nb: 'Du må velge hvilket land du jobber i.',
+        },
+
+        checkbox_mottar_du_pengestøtte: {
+            header: {
+                nb: 'Mottar du pengestøttene fra et annet land enn Norge?',
+            },
+            alternativer: {
+                SYKEPENGER: {
+                    nb: 'Sykepenger',
+                },
+                PENSJON: {
+                    nb: 'Pensjon',
+                },
+                ANNEN_PENGESTØTTE: {
+                    nb: 'Annen pengestøtte',
+                },
+                MOTTAR_IKKE: {
+                    nb: 'Mottar ikke oengestøtte fra ennet land',
+                },
+            },
+        },
+        feilmnelding_mottar_du_pengestøtte: {
+            nb: 'Du må svare på om du mottar pengestøtte fra ennet land enn Norge.',
+        },
+        select_hvilket_land_pengestøtte: {
+            nb: 'Hvilket land mottar du pengestøtte fra?',
+        },
+        feilmelding_select_hvilket_land_pengestøtte: {
+            nb: 'Du må velge hvilket land du mottar pengestøtte fra.',
         },
     },
 };
