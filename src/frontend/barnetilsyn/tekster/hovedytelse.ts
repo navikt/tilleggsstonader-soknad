@@ -51,17 +51,17 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
     },
     arbeidOgOpphold: {
         tittel: {
-            nb: 'Opphold i Norge',
+            nb: 'Arbeid og opphold utenfor Norge',
         },
         guide_innhold: {
             nb: [
-                'Vi spør om dette fordi vi må vite om du du oppfyller ',
+                'For å finne ut om du oppfyller kravene til ',
                 {
-                    tekst: 'kravene til medlemskap i folketrygden',
+                    tekst: 'medlemskap i folketrygden',
                     url: 'https://www.nav.no/no/person/flere-tema/arbeid-og-opphold-i-norge/relatert-informasjon/medlemskap-i-folketrygden',
                     variant: 'neutral',
                 },
-                ' (åpnes i ny fane).',
+                ' (åpnes i ny fane), trenger vi å vite om du har bodd eller jobbet i utlandet.',
             ],
         },
         radio_boddSammenhengende: {
