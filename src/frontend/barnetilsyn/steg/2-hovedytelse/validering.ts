@@ -30,7 +30,7 @@ export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold) =
     !skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand);
 
 export const skalTaStillingTilOppholdsland = (opphold: ArbeidOgOpphold) =>
-    opphold.oppholdUtenforNorgeSiste12Mnd?.verdi === 'JA';
+    opphold.oppholdUtenforNorge?.verdi === 'JA';
 
 export const validerHovedytelse = (
     ytelse: EnumFlereValgFelt<Ytelse> | undefined,
@@ -102,25 +102,24 @@ export const validerHovedytelse = (
 
         if (
             skalTaStillingTilOppholdUtenforNorge(opphold) &&
-            opphold.oppholdUtenforNorgeSiste12Mnd?.verdi === undefined
+            opphold.oppholdUtenforNorge?.verdi === undefined
         ) {
             feil = {
                 ...feil,
                 oppholdUtenforNorgeSiste12Mnd: {
                     id: '6',
                     melding:
-                        teksterOppholdINorge
-                            .feilmnelding_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd[locale],
+                        teksterOppholdINorge.feilmnelding_har_du_oppholdt_deg_utenfor_norge[locale],
                 },
             };
         }
         if (
             skalTaStillingTilOppholdsland(opphold) &&
-            !harVerdi(opphold.hvilketLandOppholdUtenforNorgeSiste12Mnd?.verdi)
+            !harVerdi(opphold.hvilketLandOppholdUtenforNorge?.verdi)
         ) {
             feil = {
                 ...feil,
-                hvilketLandOppholdUtenforNorgeSiste12Mnd: {
+                hvilketLandOppholdUtenforNorge: {
                     id: '7',
                     melding:
                         teksterOppholdINorge.feilmelding_select_hvilket_land_opphold_utenfor_norge[

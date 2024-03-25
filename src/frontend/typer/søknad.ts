@@ -12,8 +12,8 @@ export interface ArbeidOgOpphold {
     mottarDuPengestøtteFraAnnetLand?: EnumFlereValgFelt<MottarPengestøtteTyper>;
     hvilketLandMottarDuPengestøtteFra?: VerdiFelt<string>;
 
-    oppholdUtenforNorgeSiste12Mnd?: EnumFelt<JaNei>;
-    hvilketLandOppholdUtenforNorgeSiste12Mnd?: VerdiFelt<string>;
+    oppholdUtenforNorge?: EnumFelt<JaNei>;
+    hvilketLandOppholdUtenforNorge?: VerdiFelt<string>;
 }
 
 export interface Aktivitet {

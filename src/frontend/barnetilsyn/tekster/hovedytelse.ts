@@ -21,8 +21,8 @@ interface HovedytelseInnhold {
         select_hvilket_land_pengestøtte: TekstElement<string>;
         feilmelding_select_hvilket_land_pengestøtte: TekstElement<string>;
 
-        radio_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: Radiogruppe<JaNei>;
-        feilmnelding_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: TekstElement<string>;
+        radio_har_du_oppholdt_deg_utenfor_norge: Radiogruppe<JaNei>;
+        feilmnelding_har_du_oppholdt_deg_utenfor_norge: TekstElement<string>;
 
         select_hvilket_land_opphold_utenfor_norge: TekstElement<string>;
         feilmelding_select_hvilket_land_opphold_utenfor_norge: TekstElement<string>;
@@ -118,7 +118,7 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         feilmelding_select_hvilket_land_pengestøtte: {
             nb: 'Du må velge hvilket land du mottar pengestøtte fra.',
         },
-        radio_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: {
+        radio_har_du_oppholdt_deg_utenfor_norge: {
             header: {
                 nb: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?',
             },
@@ -127,7 +127,7 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
             },
             alternativer: jaNeiAlternativer,
         },
-        feilmnelding_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: {
+        feilmnelding_har_du_oppholdt_deg_utenfor_norge: {
             nb: 'Du må svare på om du oppholdt deg utenfor Norge.',
         },
 
