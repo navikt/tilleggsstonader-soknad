@@ -18,7 +18,12 @@ import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Landkoder } from '../../../typer/kodeverk';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { ArbeidOgOpphold, JaNei, MottarPengestøtteTyper } from '../../../typer/søknad';
+import {
+    ArbeidOgOpphold,
+    JaNei,
+    MottarPengestøtteTyper,
+    ÅrsakOppholdUtenforNorge,
+} from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typer';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
@@ -116,6 +121,15 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         }
     };
 
+    const oppdaterÅrsakOppholdUtenforNorge = (
+        verdi: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>
+    ) => {
+        settArbeidOgOpphold((prevState) => ({
+            ...prevState,
+            oppholdUtenforNorgeÅrsak: verdi,
+        }));
+    };
+
     return (
         <UnderspørsmålContainer>
             <VStack gap="6">
@@ -190,22 +204,34 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                             />
                         )}
                         {skalTaStillingTilOppholdsland(arbeidOgOpphold) && (
-                            <Select
-                                id={valideringsfeil.hvilketLandOppholdUtenforNorge?.id}
-                                label={
-                                    teksterOppholdINorge.select_hvilket_land_opphold_utenfor_norge[
-                                        locale
-                                    ]
-                                }
-                                onChange={oppdatertHvilketLandOppholdUtenforNorge}
-                                value={arbeidOgOpphold?.hvilketLandOppholdUtenforNorge?.verdi || ''}
-                                error={valideringsfeil.hvilketLandOppholdUtenforNorge?.melding}
-                            >
-                                <option value="">Velg land</option>
-                                {Object.entries(landkoder).map(([kode, tekst]) => (
-                                    <option value={kode}>{tekst}</option>
-                                ))}
-                            </Select>
+                            <>
+                                <Select
+                                    id={valideringsfeil.hvilketLandOppholdUtenforNorge?.id}
+                                    label={
+                                        teksterOppholdINorge
+                                            .select_hvilket_land_opphold_utenfor_norge[locale]
+                                    }
+                                    onChange={oppdatertHvilketLandOppholdUtenforNorge}
+                                    value={
+                                        arbeidOgOpphold?.hvilketLandOppholdUtenforNorge?.verdi || ''
+                                    }
+                                    error={valideringsfeil.hvilketLandOppholdUtenforNorge?.melding}
+                                >
+                                    <option value="">Velg land</option>
+                                    {Object.entries(landkoder).map(([kode, tekst]) => (
+                                        <option value={kode}>{tekst}</option>
+                                    ))}
+                                </Select>
+                                <LocaleCheckboxGroup
+                                    id={valideringsfeil.oppholdUtenforNorgeÅrsak?.id}
+                                    tekst={
+                                        teksterOppholdINorge.checkbox_årsak_opphold_utenfor_norge
+                                    }
+                                    value={arbeidOgOpphold?.oppholdUtenforNorgeÅrsak?.verdier || []}
+                                    error={valideringsfeil.oppholdUtenforNorgeÅrsak?.melding}
+                                    onChange={oppdaterÅrsakOppholdUtenforNorge}
+                                />
+                            </>
                         )}
                     </>
                 )}

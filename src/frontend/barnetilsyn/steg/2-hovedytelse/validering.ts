@@ -113,20 +113,28 @@ export const validerHovedytelse = (
                 },
             };
         }
-        if (
-            skalTaStillingTilOppholdsland(opphold) &&
-            !harVerdi(opphold.hvilketLandOppholdUtenforNorge?.verdi)
-        ) {
-            feil = {
-                ...feil,
-                hvilketLandOppholdUtenforNorge: {
-                    id: '7',
-                    melding:
-                        teksterOppholdINorge.feilmelding_select_hvilket_land_opphold_utenfor_norge[
-                            locale
-                        ],
-                },
-            };
+        if (skalTaStillingTilOppholdsland(opphold)) {
+            if (!harVerdi(opphold.hvilketLandOppholdUtenforNorge?.verdi)) {
+                feil = {
+                    ...feil,
+                    hvilketLandOppholdUtenforNorge: {
+                        id: '7',
+                        melding:
+                            teksterOppholdINorge
+                                .feilmelding_select_hvilket_land_opphold_utenfor_norge[locale],
+                    },
+                };
+            }
+            if ((opphold.oppholdUtenforNorgeÅrsak?.verdier?.length || 0) === 0) {
+                feil = {
+                    ...feil,
+                    oppholdUtenforNorgeÅrsak: {
+                        id: '8',
+                        melding:
+                            teksterOppholdINorge.feilmelding_årsak_opphold_utenfor_norge[locale],
+                    },
+                };
+            }
         }
     }
     return feil;

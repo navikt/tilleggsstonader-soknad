@@ -14,6 +14,8 @@ export interface ArbeidOgOpphold {
 
     oppholdUtenforNorge?: EnumFelt<JaNei>;
     hvilketLandOppholdUtenforNorge?: VerdiFelt<string>;
+
+    oppholdUtenforNorgeÅrsak?: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>;
 }
 
 export interface Aktivitet {
@@ -23,6 +25,14 @@ export interface Aktivitet {
 export type JaNei = 'JA' | 'NEI';
 
 export type MottarPengestøtteTyper = 'SYKEPENGER' | 'PENSJON' | 'ANNEN_PENGESTØTTE' | 'MOTTAR_IKKE';
+
+export type ÅrsakOppholdUtenforNorge =
+    | 'JOBB'
+    | 'STUDIER'
+    | 'MEDISINSK_BEHANDLING'
+    | 'FERIE'
+    | 'FAMILIE_BESØK'
+    | 'ANNET';
 
 export interface Periode {
     fom: string;

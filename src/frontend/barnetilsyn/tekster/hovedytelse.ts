@@ -1,5 +1,5 @@
 import { jaNeiAlternativer } from '../../tekster/felles';
-import { JaNei, MottarPengestøtteTyper } from '../../typer/søknad';
+import { JaNei, MottarPengestøtteTyper, ÅrsakOppholdUtenforNorge } from '../../typer/søknad';
 import { CheckboxGruppe, InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 import { Ytelse } from '../steg/2-hovedytelse/typer';
 
@@ -26,6 +26,9 @@ interface HovedytelseInnhold {
 
         select_hvilket_land_opphold_utenfor_norge: TekstElement<string>;
         feilmelding_select_hvilket_land_opphold_utenfor_norge: TekstElement<string>;
+
+        checkbox_årsak_opphold_utenfor_norge: CheckboxGruppe<ÅrsakOppholdUtenforNorge>;
+        feilmelding_årsak_opphold_utenfor_norge: TekstElement<string>;
     };
 }
 
@@ -136,6 +139,35 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         },
         feilmelding_select_hvilket_land_opphold_utenfor_norge: {
             nb: 'Du må velge hvilket land du har oppholdt deg i.',
+        },
+
+        checkbox_årsak_opphold_utenfor_norge: {
+            header: {
+                nb: ' Hva gjorde du i dette landet?',
+            },
+            alternativer: {
+                JOBB: {
+                    nb: 'Jobbet',
+                },
+                STUDIER: {
+                    nb: 'Studerte',
+                },
+                MEDISINSK_BEHANDLING: {
+                    nb: 'Fikk medisinsk behandling',
+                },
+                FERIE: {
+                    nb: 'Var på ferie',
+                },
+                FAMILIE_BESØK: {
+                    nb: 'Besøkte familie',
+                },
+                ANNET: {
+                    nb: 'Annet',
+                },
+            },
+        },
+        feilmelding_årsak_opphold_utenfor_norge: {
+            nb: 'Du må velge hva du gjorde i landet du oppholdt deg i.',
         },
     },
 };
