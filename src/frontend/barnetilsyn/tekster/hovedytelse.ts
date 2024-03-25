@@ -20,6 +20,9 @@ interface HovedytelseInnhold {
         feilmnelding_mottar_du_pengestøtte: TekstElement<string>;
         select_hvilket_land_pengestøtte: TekstElement<string>;
         feilmelding_select_hvilket_land_pengestøtte: TekstElement<string>;
+
+        radio_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: Radiogruppe<JaNei>;
+        feilmnelding_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: TekstElement<string>;
     };
 }
 
@@ -111,6 +114,18 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         },
         feilmelding_select_hvilket_land_pengestøtte: {
             nb: 'Du må velge hvilket land du mottar pengestøtte fra.',
+        },
+        radio_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: {
+            header: {
+                nb: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?',
+            },
+            beskrivelse: {
+                nb: 'Opphold under 5 uker trenger du ikke opplyse om.',
+            },
+            alternativer: jaNeiAlternativer,
+        },
+        feilmnelding_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: {
+            nb: 'Du må svare på om du oppholdt deg utenfor Norge.',
         },
     },
 };

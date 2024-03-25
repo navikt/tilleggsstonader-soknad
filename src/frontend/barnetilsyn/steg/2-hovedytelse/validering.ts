@@ -25,6 +25,10 @@ export const skalTaStillingTilLandForPengestøtte = (
         (verdi) => mottarPengestøtteTyperSomMåSåTaStillingTilLand.indexOf(verdi.verdi) > -1
     );
 
+export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold) =>
+    (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length > 0 &&
+    !skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand);
+
 export const validerHovedytelse = (
     ytelse: EnumFlereValgFelt<Ytelse> | undefined,
     opphold: ArbeidOgOpphold,
@@ -89,6 +93,21 @@ export const validerHovedytelse = (
                     id: '5',
                     melding:
                         teksterOppholdINorge.feilmelding_select_hvilket_land_pengestøtte[locale],
+                },
+            };
+        }
+
+        if (
+            skalTaStillingTilOppholdUtenforNorge(opphold) &&
+            opphold.oppholdUtenforNorgeSiste12Mnd?.verdi === undefined
+        ) {
+            feil = {
+                ...feil,
+                oppholdUtenforNorgeSiste12Mnd: {
+                    id: '6',
+                    melding:
+                        teksterOppholdINorge
+                            .feilmnelding_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd[locale],
                 },
             };
         }

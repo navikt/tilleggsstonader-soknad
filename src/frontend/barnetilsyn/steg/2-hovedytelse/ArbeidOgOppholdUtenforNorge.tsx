@@ -2,7 +2,11 @@ import React from 'react';
 
 import { Heading, Select, VStack } from '@navikt/ds-react';
 
-import { skalTaStillingTilLandForPengestøtte, skalTaStillingTilPengestøtte } from './validering';
+import {
+    skalTaStillingTilLandForPengestøtte,
+    skalTaStillingTilOppholdUtenforNorge,
+    skalTaStillingTilPengestøtte,
+} from './validering';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import LocaleCheckboxGroup from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
@@ -34,6 +38,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             jobberIAnnetLandEnnNorge: verdi,
             hvilketLand: undefined,
             //mottarDuPengestøtteFraAnnetLand: Trenger ikke å nullstille då man alltid skal vise det spørsmålet
+            oppholdUtenforNorgeSiste12Mnd: undefined,
         }));
     };
     const oppdatertHvilketLandJobberI = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -82,6 +87,13 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                 hvilketLandMottarDuPengestøtteFra: undefined,
             }));
         }
+    };
+
+    const oppdaterOppholdUtenforNorge = (verdi: EnumFelt<JaNei>) => {
+        settArbeidOgOpphold((prevState) => ({
+            ...prevState,
+            oppholdUtenforNorgeSiste12Mnd: verdi,
+        }));
     };
 
     return (
@@ -147,6 +159,17 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                     <option value={kode}>{tekst}</option>
                                 ))}
                             </Select>
+                        )}
+                        {skalTaStillingTilOppholdUtenforNorge(arbeidOgOpphold) && (
+                            <LocaleRadioGroup
+                                id={valideringsfeil.oppholdUtenforNorgeSiste12Mnd?.id}
+                                tekst={
+                                    teksterOppholdINorge.radio_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd
+                                }
+                                value={arbeidOgOpphold?.oppholdUtenforNorgeSiste12Mnd?.verdi}
+                                onChange={oppdaterOppholdUtenforNorge}
+                                error={valideringsfeil.oppholdUtenforNorgeSiste12Mnd?.melding}
+                            />
                         )}
                     </>
                 )}
