@@ -20,7 +20,7 @@ import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
-const teksterOppholdINorge = hovedytelseInnhold.oppholdINorge;
+const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
 
 const Hovedytelse = () => {
     const { locale } = useSpråk();
@@ -143,31 +143,26 @@ const Hovedytelse = () => {
                 <UnderspørsmålContainer>
                     <VStack gap="6">
                         <Heading size="medium">
-                            <LocaleTekst tekst={hovedytelseInnhold.oppholdINorge.tittel} />
+                            <LocaleTekst tekst={teksterOppholdINorge.tittel} />
                         </Heading>
                         <PellePanel>
-                            <LocaleInlineLenke
-                                tekst={hovedytelseInnhold.oppholdINorge.guide_innhold}
-                            />
+                            <LocaleInlineLenke tekst={teksterOppholdINorge.guide_innhold} />
                         </PellePanel>
                         <LocaleRadioGroup
                             id={valideringsfeil.boddSammenhengende?.id}
-                            tekst={hovedytelseInnhold.oppholdINorge.radio_boddSammenhengende}
+                            tekst={teksterOppholdINorge.radio_boddSammenhengende}
                             value={boddSammenhengende?.verdi}
                             onChange={oppdaterBoddSammenhengende}
                             error={valideringsfeil.boddSammenhengende?.melding}
                         >
                             <LocaleReadMore
-                                tekst={hovedytelseInnhold.oppholdINorge.lesMer_boddSammenhengende}
+                                tekst={teksterOppholdINorge.lesMer_boddSammenhengende}
                             />
                         </LocaleRadioGroup>
                         {boddSammenhengende?.verdi === 'NEI' && (
                             <LocaleRadioGroup
                                 id={valideringsfeil.planleggerBoINorgeNeste12mnd?.id}
-                                tekst={
-                                    hovedytelseInnhold.oppholdINorge
-                                        .radio_planleggerBoINorgeNeste12mnd
-                                }
+                                tekst={teksterOppholdINorge.radio_planleggerBoINorgeNeste12mnd}
                                 value={planleggerBoINorgeNeste12mnd?.verdi}
                                 onChange={oppdaterPlanleggerBoINorge}
                                 error={valideringsfeil?.planleggerBoINorgeNeste12mnd?.melding}

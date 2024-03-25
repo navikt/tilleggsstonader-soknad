@@ -8,7 +8,7 @@ interface HovedytelseInnhold {
     guide_innhold: TekstElement<string>;
     checkbox_hovedytelse: CheckboxGruppe<Ytelse>;
     hovedytelse_feilmelding: TekstElement<string>;
-    oppholdINorge: {
+    arbeidOgOpphold: {
         tittel: TekstElement<string>;
         guide_innhold: TekstElement<InlineLenke>;
         radio_boddSammenhengende: Radiogruppe<JaNei>;
@@ -49,7 +49,7 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
     hovedytelse_feilmelding: {
         nb: 'Du må huke av for minst én ytelse eller situasjon som passer for deg',
     },
-    oppholdINorge: {
+    arbeidOgOpphold: {
         tittel: {
             nb: 'Opphold i Norge',
         },
