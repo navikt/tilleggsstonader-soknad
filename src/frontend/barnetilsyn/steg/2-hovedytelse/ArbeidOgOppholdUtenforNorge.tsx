@@ -4,6 +4,7 @@ import { Heading, Select, VStack } from '@navikt/ds-react';
 
 import {
     skalTaStillingTilLandForPengestøtte,
+    skalTaStillingTilOppholdsland,
     skalTaStillingTilOppholdUtenforNorge,
     skalTaStillingTilPengestøtte,
 } from './validering';
@@ -68,6 +69,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             hvilketLandMottarDuPengestøtteFra: skalTaStillingTilLandForPengestøtte(verdi)
                 ? prevState.hvilketLandMottarDuPengestøtteFra
                 : undefined,
+            oppholdUtenforNorgeSiste12Mnd: undefined,
         }));
     };
 
@@ -94,6 +96,24 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             ...prevState,
             oppholdUtenforNorgeSiste12Mnd: verdi,
         }));
+    };
+
+    const oppdatertHvilketLandOppholdUtenforNorge = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        if (harVerdi(e.target.value)) {
+            settArbeidOgOpphold((prevState) => ({
+                ...prevState,
+                hvilketLandOppholdUtenforNorgeSiste12Mnd: {
+                    label: teksterOppholdINorge.select_hvilket_land_opphold_utenfor_norge[locale],
+                    verdi: e.target.value,
+                    svarTekst: landkoder[e.target.value] || 'Finner ikke mapping',
+                },
+            }));
+        } else {
+            settArbeidOgOpphold((prevState) => ({
+                ...prevState,
+                hvilketLandOppholdUtenforNorgeSiste12Mnd: undefined,
+            }));
+        }
     };
 
     return (
@@ -170,6 +190,30 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                 onChange={oppdaterOppholdUtenforNorge}
                                 error={valideringsfeil.oppholdUtenforNorgeSiste12Mnd?.melding}
                             />
+                        )}
+                        {skalTaStillingTilOppholdsland(arbeidOgOpphold) && (
+                            <Select
+                                id={valideringsfeil.hvilketLandOppholdUtenforNorgeSiste12Mnd?.id}
+                                label={
+                                    teksterOppholdINorge.select_hvilket_land_opphold_utenfor_norge[
+                                        locale
+                                    ]
+                                }
+                                onChange={oppdatertHvilketLandOppholdUtenforNorge}
+                                value={
+                                    arbeidOgOpphold?.hvilketLandOppholdUtenforNorgeSiste12Mnd
+                                        ?.verdi || ''
+                                }
+                                error={
+                                    valideringsfeil.hvilketLandOppholdUtenforNorgeSiste12Mnd
+                                        ?.melding
+                                }
+                            >
+                                <option value="">Velg land</option>
+                                {Object.entries(landkoder).map(([kode, tekst]) => (
+                                    <option value={kode}>{tekst}</option>
+                                ))}
+                            </Select>
                         )}
                     </>
                 )}

@@ -13,6 +13,7 @@ export interface ArbeidOgOpphold {
     hvilketLandMottarDuPengestøtteFra?: VerdiFelt<string>;
 
     oppholdUtenforNorgeSiste12Mnd?: EnumFelt<JaNei>;
+    hvilketLandOppholdUtenforNorgeSiste12Mnd?: VerdiFelt<string>;
 }
 
 export interface Aktivitet {

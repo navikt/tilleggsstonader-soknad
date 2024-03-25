@@ -23,6 +23,9 @@ interface HovedytelseInnhold {
 
         radio_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: Radiogruppe<JaNei>;
         feilmnelding_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: TekstElement<string>;
+
+        select_hvilket_land_opphold_utenfor_norge: TekstElement<string>;
+        feilmelding_select_hvilket_land_opphold_utenfor_norge: TekstElement<string>;
     };
 }
 
@@ -126,6 +129,13 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         },
         feilmnelding_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd: {
             nb: 'Du må svare på om du oppholdt deg utenfor Norge.',
+        },
+
+        select_hvilket_land_opphold_utenfor_norge: {
+            nb: 'Hvilket land har du oppholdt deg i?',
+        },
+        feilmelding_select_hvilket_land_opphold_utenfor_norge: {
+            nb: 'Du må velge hvilket land du har oppholdt deg i.',
         },
     },
 };

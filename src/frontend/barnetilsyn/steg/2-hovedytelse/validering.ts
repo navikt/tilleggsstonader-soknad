@@ -29,6 +29,9 @@ export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold) =
     (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length > 0 &&
     !skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand);
 
+export const skalTaStillingTilOppholdsland = (opphold: ArbeidOgOpphold) =>
+    opphold.oppholdUtenforNorgeSiste12Mnd?.verdi === 'JA';
+
 export const validerHovedytelse = (
     ytelse: EnumFlereValgFelt<Ytelse> | undefined,
     opphold: ArbeidOgOpphold,
@@ -56,7 +59,7 @@ export const validerHovedytelse = (
         }
         if (
             opphold.jobberIAnnetLandEnnNorge?.verdi === 'JA' &&
-            opphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi === undefined
+            !harVerdi(opphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi)
         ) {
             feil = {
                 ...feil,
@@ -85,7 +88,7 @@ export const validerHovedytelse = (
         if (
             skalTaStillingTilPengestøtte(opphold) &&
             skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand) &&
-            opphold.hvilketLandMottarDuPengestøtteFra?.verdi === undefined
+            !harVerdi(opphold.hvilketLandMottarDuPengestøtteFra?.verdi)
         ) {
             feil = {
                 ...feil,
@@ -108,6 +111,21 @@ export const validerHovedytelse = (
                     melding:
                         teksterOppholdINorge
                             .feilmnelding_har_du_oppholdt_deg_utenfor_norge_siste_12_mnd[locale],
+                },
+            };
+        }
+        if (
+            skalTaStillingTilOppholdsland(opphold) &&
+            !harVerdi(opphold.hvilketLandOppholdUtenforNorgeSiste12Mnd?.verdi)
+        ) {
+            feil = {
+                ...feil,
+                hvilketLandOppholdUtenforNorgeSiste12Mnd: {
+                    id: '7',
+                    melding:
+                        teksterOppholdINorge.feilmelding_select_hvilket_land_opphold_utenfor_norge[
+                            locale
+                        ],
                 },
             };
         }
