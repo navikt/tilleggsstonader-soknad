@@ -72,12 +72,14 @@ const DineBarn = () => {
                 <CheckboxGroup
                     legend={dineBarnTekster.hvilke_barn_spm[locale]}
                     error={feilmeldingHarValgtBarn}
+                    value={personbarn
+                        .filter((barn) => barn.skalHaBarnepass)
+                        .map((barn) => barn.ident)}
                 >
                     {personbarn.map((barn) => (
                         <Checkbox
                             key={barn.ident}
                             value={barn.ident}
-                            checked={barn.skalHaBarnepass ?? false}
                             onChange={() => toggleSkalHaBarnepass(barn.ident)}
                         >
                             {barn.visningsnavn}, født {formaterIsoDato(barn.fødselsdato)}
