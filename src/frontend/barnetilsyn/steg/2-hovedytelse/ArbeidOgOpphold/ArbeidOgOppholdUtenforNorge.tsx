@@ -4,7 +4,7 @@ import { Heading, VStack } from '@navikt/ds-react';
 
 import JobberDuIAnnetLand from './JobberDuIAnnetLand';
 import MottarDuPengestøtte from './MottarDuPengestøtte';
-import OppholdUtenforNorgeContainer from './Opphold/OppholdUtenforNorgeContainer';
+import OppholdUtenforNorgeSiste12Mnd from './Opphold/OppholdUtenforNorgeSiste12Mnd';
 import { PellePanel } from '../../../../components/PellePanel/PellePanel';
 import LocaleInlineLenke from '../../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../../../../components/Teksthåndtering/LocaleTekst';
@@ -36,7 +36,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                     arbeidOgOpphold={arbeidOgOpphold}
                     settArbeidOgOpphold={settArbeidOgOpphold}
                 />
-                <OppholdUtenforNorgeContainer
+                <OppholdUtenforNorgeSiste12Mnd
                     arbeidOgOpphold={arbeidOgOpphold}
                     settArbeidOgOpphold={settArbeidOgOpphold}
                 />

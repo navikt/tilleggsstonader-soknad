@@ -28,7 +28,7 @@ interface Props {
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
 }
 
-const OppholdUtenforNorgeContainer: React.FC<Props> = ({
+const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
     arbeidOgOpphold,
     settArbeidOgOpphold,
 }) => {
@@ -111,4 +111,4 @@ const OppholdUtenforNorgeContainer: React.FC<Props> = ({
     );
 };
 
-export default OppholdUtenforNorgeContainer;
+export default OppholdUtenforNorgeSiste12Mnd;
