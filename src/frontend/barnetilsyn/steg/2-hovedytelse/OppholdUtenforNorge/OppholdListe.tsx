@@ -15,7 +15,7 @@ import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../../tekster
 import { validerOppholdUtenforNorgeUnderRedigering } from '../validering';
 
 const teksterOppholdUtenforNorge = hovedytelseInnhold.arbeidOgOpphold.oppholdUtenforNorge;
-// TODO må legge till validering av opphold når man klikker på neste
+
 const OppholdListe: React.FC<{
     keyOpphold: keyof Pick<
         ArbeidOgOpphold,
@@ -89,6 +89,7 @@ const OppholdListe: React.FC<{
 
     const oppholdUtenforNorge = arbeidOgOpphold[keyOpphold];
     const ulagredeOpphold = oppholdUtenforNorge.filter((opphold) => !opphold.lagret);
+    const lagredeOpphold = oppholdUtenforNorge.filter((opphold) => opphold.lagret);
     return (
         <>
             <LagredeOpphold
@@ -96,7 +97,7 @@ const OppholdListe: React.FC<{
                 slettOpphold={slettOpphold}
                 locale={locale}
             />
-            {ulagredeOpphold.length > 0 && (
+            {lagredeOpphold.length > 0 && ulagredeOpphold.length > 0 && (
                 <div>
                     <Label>{teksterOppholdUtenforNorge.label_flere_utenlandsopphold[locale]}</Label>
                     <div>
