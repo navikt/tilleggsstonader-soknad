@@ -14,6 +14,9 @@ export interface ArbeidOgOpphold {
 
     harDuOppholdUtenforNorgeSiste12mnd?: EnumFelt<JaNei>;
     oppholdUtenforNorgeSiste12mnd: OppholdUtenforNorge[];
+
+    harDuOppholdUtenforNorgeNeste12mnd?: EnumFelt<JaNei>;
+    oppholdUtenforNorgeNeste12mnd: OppholdUtenforNorge[];
 }
 
 export interface OppholdUtenforNorge {

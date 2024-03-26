@@ -24,8 +24,11 @@ interface HovedytelseInnhold {
         oppholdUtenforNorge: {
             radioSiste12mnd: Radiogruppe<JaNei>;
             feilmelding_radioSiste12mnd: TekstElement<string>;
-
             siste12mnd: OppholdUtenforNorgeInnhold;
+
+            radioNeste12mnd: Radiogruppe<JaNei>;
+            feilmelding_radioNeste12mnd: TekstElement<string>;
+            neste12mnd: OppholdUtenforNorgeInnhold;
 
             knapp_legg_til: TekstElement<string>;
         };
@@ -60,6 +63,26 @@ export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
     INGEN_PASSENDE_ALTERNATIVER: { nb: 'Ingen av alternativene passer for meg' },
 };
 
+const årsakAlternativer: Record<ÅrsakOppholdUtenforNorge, TekstElement<string>> = {
+    JOBB: {
+        nb: 'Jobbet',
+    },
+    STUDIER: {
+        nb: 'Studerte',
+    },
+    MEDISINSK_BEHANDLING: {
+        nb: 'Fikk medisinsk behandling',
+    },
+    FERIE: {
+        nb: 'Var på ferie',
+    },
+    FAMILIE_BESØK: {
+        nb: 'Besøkte familie',
+    },
+    ANNET: {
+        nb: 'Annet',
+    },
+};
 export const hovedytelseInnhold: HovedytelseInnhold = {
     tittel: { nb: 'Din situasjon' },
     guide_innhold: {
@@ -160,28 +183,9 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
 
                 checkbox_årsak: {
                     header: {
-                        nb: ' Hva gjorde du i dette landet?',
+                        nb: 'Hva gjorde du i dette landet?',
                     },
-                    alternativer: {
-                        JOBB: {
-                            nb: 'Jobbet',
-                        },
-                        STUDIER: {
-                            nb: 'Studerte',
-                        },
-                        MEDISINSK_BEHANDLING: {
-                            nb: 'Fikk medisinsk behandling',
-                        },
-                        FERIE: {
-                            nb: 'Var på ferie',
-                        },
-                        FAMILIE_BESØK: {
-                            nb: 'Besøkte familie',
-                        },
-                        ANNET: {
-                            nb: 'Annet',
-                        },
-                    },
+                    alternativer: årsakAlternativer,
                 },
                 feilmelding_årsak: {
                     nb: 'Du må velge hva du gjorde i landet du oppholdt deg i.',
@@ -189,6 +193,53 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
                 dato: {
                     label: {
                         nb: 'Når var du i dette landet?',
+                    },
+                    fom: {
+                        nb: 'Fra',
+                    },
+                    tom: {
+                        nb: 'Til',
+                    },
+                    feilmelding_fom: {
+                        nb: 'Du må velge fra-dato.',
+                    },
+                    feilmelding_tom: {
+                        nb: 'Du må velge til-dato.',
+                    },
+                },
+            },
+            radioNeste12mnd: {
+                header: {
+                    nb: 'Planlegger du å oppholde deg utenfor Norge de neste 12 månedene?',
+                },
+                beskrivelse: {
+                    nb: 'Opphold under 5 uker trenger du ikke opplyse om.',
+                },
+                alternativer: jaNeiAlternativer,
+            },
+            feilmelding_radioNeste12mnd: {
+                nb: 'Du må ta stilling til om du planlegger opphold utenfor Norge de neste 12 månadene.',
+            },
+            neste12mnd: {
+                select_hvilket_land: {
+                    nb: 'Hvilket land skal du oppholde deg i?',
+                },
+                feilmelding_hvilket_land: {
+                    nb: 'Du må velge hvilket land du skal oppholde deg i.',
+                },
+
+                checkbox_årsak: {
+                    header: {
+                        nb: 'Hva skal du gjøre i dette landet?',
+                    },
+                    alternativer: årsakAlternativer,
+                },
+                feilmelding_årsak: {
+                    nb: 'Du må velge hva du skal gjøre i landet du skal oppholde deg i.',
+                },
+                dato: {
+                    label: {
+                        nb: 'Når skal du være i dette landet?',
                     },
                     fom: {
                         nb: 'Fra',
