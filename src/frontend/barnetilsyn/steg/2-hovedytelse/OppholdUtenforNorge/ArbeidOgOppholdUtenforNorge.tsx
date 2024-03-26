@@ -45,7 +45,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             ...prevState,
             jobberIAnnetLandEnnNorge: verdi,
             hvilketLand: undefined,
-            //mottarDuPengestøtteFraAnnetLand: Trenger ikke å nullstille då man alltid skal vise det spørsmålet
+            mottarDuPengestøtteFraAnnetLand: undefined,
             harDuOppholdUtenforNorgeSiste12mnd: undefined,
             oppholdUtenforNorgeSiste12mnd: [],
             harDuOppholdUtenforNorgeNeste12mnd: undefined,
@@ -55,6 +55,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             ...prevState,
             jobberIAnnetLandEnnNorge: undefined,
             hvilketLand: undefined,
+            mottarDuPengestøtteFraAnnetLand: undefined,
             harDuOppholdUtenforNorgeSiste12mnd: undefined,
             //oppholdUtenforNorgeSiste12mnd: undefined, // TODO
             harDuOppholdUtenforNorgeNeste12mnd: undefined,
