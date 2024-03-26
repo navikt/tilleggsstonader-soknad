@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Button, Heading, Select, VStack } from '@navikt/ds-react';
+import { PlusIcon } from '@navikt/aksel-icons';
+import { Button, Heading, HStack, Select, VStack } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
 import OppholdUtenforNorge from './OppholdUtenforNorge';
@@ -219,24 +220,26 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                         )
                                     )}
 
-                                    <Button
-                                        variant={'tertiary'}
-                                        onClick={() =>
-                                            settArbeidOgOpphold((prevState) => ({
-                                                ...prevState,
-                                                oppholdUtenforNorge: [
-                                                    ...prevState.oppholdUtenforNorgeSiste12mnd,
-                                                    {},
-                                                ],
-                                            }))
-                                        }
-                                    >
-                                        {
-                                            teksterOppholdINorge.oppholdUtenforNorge.knapp_legg_til[
-                                                locale
-                                            ]
-                                        }
-                                    </Button>
+                                    <HStack>
+                                        <Button
+                                            variant={'tertiary'}
+                                            onClick={() =>
+                                                settArbeidOgOpphold((prevState) => ({
+                                                    ...prevState,
+                                                    oppholdUtenforNorge: [
+                                                        ...prevState.oppholdUtenforNorgeSiste12mnd,
+                                                        {},
+                                                    ],
+                                                }))
+                                            }
+                                            icon={<PlusIcon />}
+                                        >
+                                            {
+                                                teksterOppholdINorge.oppholdUtenforNorge
+                                                    .knapp_legg_til[locale]
+                                            }
+                                        </Button>
+                                    </HStack>
                                 </>
                             )}
                     </>
