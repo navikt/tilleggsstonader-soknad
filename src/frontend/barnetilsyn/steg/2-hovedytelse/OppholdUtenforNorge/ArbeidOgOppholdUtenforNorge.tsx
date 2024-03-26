@@ -20,7 +20,6 @@ import {
     MottarPengestøtteTyper,
     OppholdUtenforNorge,
 } from '../../../../typer/søknad';
-import { harVerdi } from '../../../../utils/typer';
 import { hovedytelseInnhold } from '../../../tekster/hovedytelse';
 import {
     skalTaStillingTilLandForPengestøtte,
@@ -87,21 +86,14 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
     };
 
     const oppdatertHvilketLandMottarPengestøtte = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        if (harVerdi(e.target.value)) {
-            settArbeidOgOpphold((prevState) => ({
-                ...prevState,
-                hvilketLandMottarDuPengestøtteFra: {
-                    label: teksterOppholdINorge.select_hvilket_land_pengestøtte[locale],
-                    verdi: e.target.value,
-                    svarTekst: landkoder[e.target.value] || 'Finner ikke mapping',
-                },
-            }));
-        } else {
-            settArbeidOgOpphold((prevState) => ({
-                ...prevState,
-                hvilketLandMottarDuPengestøtteFra: undefined,
-            }));
-        }
+        settArbeidOgOpphold((prevState) => ({
+            ...prevState,
+            hvilketLandMottarDuPengestøtteFra: {
+                label: teksterOppholdINorge.select_hvilket_land_pengestøtte[locale],
+                verdi: e.target.value || '',
+                svarTekst: landkoder[e.target.value] || '',
+            },
+        }));
     };
 
     const oppdaterOppholdSiste12mnd = (verdi: EnumFelt<JaNei>) => {
