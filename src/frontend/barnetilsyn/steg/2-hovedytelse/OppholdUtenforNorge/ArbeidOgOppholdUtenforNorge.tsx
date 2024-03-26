@@ -136,6 +136,8 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             ...prevState,
             harDuOppholdUtenforNorgeSiste12mnd: undefined,
             // TODO oppholdUtenforNorgeSiste12mnd
+            harDuOppholdUtenforNorgeNeste12mnd: undefined,
+            // TODO oppholdUtenforNorgeNeste12mnd
         }));
     };
 
@@ -151,6 +153,11 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                 oppholdUtenforNorgeNeste12mnd: opphold,
             };
         });
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            harDuOppholdUtenforNorgeNeste12mnd: undefined,
+            // TODO oppholdUtenforNorgeSiste12mnd
+        }));
     };
 
     return (
@@ -236,11 +243,11 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                         )}
                         {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
                             <LocaleRadioGroup
-                                //id={valideringsfeil.harDuOppholdUtenforNorge?.id}
+                                id={valideringsfeil.harDuOppholdUtenforNorgeNeste12mnd?.id}
                                 tekst={teksterOppholdINorge.oppholdUtenforNorge.radioNeste12mnd}
                                 value={arbeidOgOpphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi}
                                 onChange={oppdaterOppholdNeste12mnd}
-                                //error={valideringsfeil.harDuOppholdUtenforNorge?.melding}
+                                error={valideringsfeil.harDuOppholdUtenforNorgeNeste12mnd?.melding}
                             />
                         )}
                         {skalTaStillingTilOppholdNeste12mnd(arbeidOgOpphold) && (

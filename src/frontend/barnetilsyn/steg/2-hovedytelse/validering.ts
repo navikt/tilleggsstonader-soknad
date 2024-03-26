@@ -103,6 +103,7 @@ export const validerHovedytelse = (
             };
         }
 
+        const teksterOppholdUtenforNorge = teksterOppholdINorge.oppholdUtenforNorge;
         if (
             skalTaStillingTilOppholdUtenforNorge(opphold) &&
             opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === undefined
@@ -111,10 +112,7 @@ export const validerHovedytelse = (
                 ...feil,
                 harDuOppholdUtenforNorgeSiste12mnd: {
                     id: '6',
-                    melding:
-                        teksterOppholdINorge.oppholdUtenforNorge.feilmelding_radioSiste12mnd[
-                            locale
-                        ],
+                    melding: teksterOppholdUtenforNorge.feilmelding_radioSiste12mnd[locale],
                 },
             };
         }
@@ -145,6 +143,18 @@ export const validerHovedytelse = (
             });
         }
          */
+        if (
+            skalTaStillingTilOppholdSiste12mnd(opphold) &&
+            opphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi === undefined
+        ) {
+            feil = {
+                ...feil,
+                harDuOppholdUtenforNorgeNeste12mnd: {
+                    id: '7', // TODO oppdater?
+                    melding: teksterOppholdUtenforNorge.feilmelding_radioNeste12mnd[locale],
+                },
+            };
+        }
     }
     return feil;
 };
