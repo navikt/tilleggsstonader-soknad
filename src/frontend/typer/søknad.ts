@@ -17,7 +17,7 @@ export interface ArbeidOgOpphold {
 }
 
 export interface OppholdUtenforNorge {
-    _id: number;
+    _id: number; // for å kunne lenke og vise riktig feilmelding - lagres ikke i bakend
     land?: SelectFelt;
     årsak?: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>;
 }

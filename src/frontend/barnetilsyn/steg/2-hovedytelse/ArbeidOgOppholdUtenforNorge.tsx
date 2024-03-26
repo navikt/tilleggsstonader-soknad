@@ -29,6 +29,15 @@ interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
 }
+
+/**
+ * Setter utleders max id for å kunne sette nytt id på neste item for å kunne lenke til unik opphold
+ */
+const utledMaxId = (opphold: ArbeidOgOpphold) => {
+    const ids = opphold.oppholdUtenforNorgeSiste12mnd.map((opphold) => opphold._id);
+    return ids.length > 0 ? Math.max(...ids) : 0;
+};
+
 const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
     const { locale } = useSpråk();
     const { valideringsfeil } = useSøknad();
@@ -93,11 +102,16 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
     };
 
     const oppdaterOppholdUtenforNorge = (verdi: EnumFelt<JaNei>) => {
-        settArbeidOgOpphold((prevState) => ({
-            ...prevState,
-            harDuOppholdUtenforNorgeSiste12mnd: verdi,
-            oppholdUtenforNorge: verdi.verdi === 'JA' ? [{}] : [],
-        }));
+        settArbeidOgOpphold((prevState: ArbeidOgOpphold) => {
+            const maxId = utledMaxId(prevState);
+            const oppholdUtenforNorgeSiste12mnd: OppholdUtenforNorge[] =
+                verdi.verdi === 'JA' ? [{ _id: maxId + 1 }] : [];
+            return {
+                ...prevState,
+                harDuOppholdUtenforNorgeSiste12mnd: verdi,
+                oppholdUtenforNorgeSiste12mnd: oppholdUtenforNorgeSiste12mnd,
+            };
+        });
     };
 
     return (
