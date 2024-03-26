@@ -43,6 +43,8 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
                 ...prevState,
                 harDuOppholdUtenforNorgeSiste12mnd: verdi,
                 oppholdUtenforNorgeSiste12mnd: opphold,
+                harDuOppholdUtenforNorgeNeste12mnd: undefined,
+                oppholdUtenforNorgeNeste12mnd: [],
             };
         });
         settValideringsfeil((prevState) => ({
