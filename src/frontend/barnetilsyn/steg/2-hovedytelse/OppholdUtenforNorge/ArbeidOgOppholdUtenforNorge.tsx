@@ -20,6 +20,7 @@ import LocaleTekst from '../../../../components/Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../../../components/UnderspørsmålContainer';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { useSøknad } from '../../../../context/SøknadContext';
+import { fellesTekster } from '../../../../tekster/felles';
 import { EnumFelt, EnumFlereValgFelt } from '../../../../typer/skjema';
 import {
     ArbeidOgOpphold,
@@ -191,7 +192,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                         value={arbeidOgOpphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi || ''}
                         error={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.melding}
                     >
-                        <option value="">Velg land</option>
+                        <option value="">{fellesTekster.velg_land[locale]}</option>
                         {Object.entries(landkoder).map(([kode, tekst]) => (
                             <option value={kode}>{tekst}</option>
                         ))}
@@ -219,7 +220,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                 }
                                 error={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.melding}
                             >
-                                <option value="">Velg land</option>
+                                <option value="">{fellesTekster.velg_land[locale]}</option>
                                 {Object.entries(landkoder).map(([kode, tekst]) => (
                                     <option value={kode}>{tekst}</option>
                                 ))}

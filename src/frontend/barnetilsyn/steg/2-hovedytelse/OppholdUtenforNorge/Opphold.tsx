@@ -6,6 +6,7 @@ import { landkoder } from './landkoder';
 import { OppdatertOppholdFelt } from './typer';
 import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import { useSøknad } from '../../../../context/SøknadContext';
+import { fellesTekster } from '../../../../tekster/felles';
 import { EnumFlereValgFelt } from '../../../../typer/skjema';
 import {
     ArbeidOgOpphold,
@@ -68,7 +69,7 @@ const Opphold: React.FC<{
                 value={opphold.land?.verdi || ''}
                 error={valideringsfeil[errorKeyLand(keyOpphold)]?.melding}
             >
-                <option value="">Velg land</option>
+                <option value="">{fellesTekster.velg_land[locale]}</option>
                 {Object.entries(landkoder).map(([kode, tekst]) => (
                     <option value={kode}>{tekst}</option>
                 ))}
