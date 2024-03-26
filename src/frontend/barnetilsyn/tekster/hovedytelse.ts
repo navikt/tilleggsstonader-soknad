@@ -1,6 +1,4 @@
-import { jaNeiAlternativer } from '../../tekster/felles';
-import { JaNei } from '../../typer/søknad';
-import { CheckboxGruppe, InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { CheckboxGruppe, TekstElement } from '../../typer/tekst';
 import { Ytelse } from '../steg/2-hovedytelse/typer';
 
 interface HovedytelseInnhold {
@@ -8,15 +6,6 @@ interface HovedytelseInnhold {
     guide_innhold: TekstElement<string>;
     checkbox_hovedytelse: CheckboxGruppe<Ytelse>;
     hovedytelse_feilmelding: TekstElement<string>;
-    oppholdINorge: {
-        tittel: TekstElement<string>;
-        guide_innhold: TekstElement<InlineLenke>;
-        radio_boddSammenhengende: Radiogruppe<JaNei>;
-        lesMer_boddSammenhengende: LesMer<string[]>;
-        feilmelding_boddSammenhengende: TekstElement<string>;
-        radio_planleggerBoINorgeNeste12mnd: Radiogruppe<JaNei>;
-        feilmelding_planleggerBoINorgeNeste12mnd: TekstElement<string>;
-    };
 }
 
 export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
@@ -48,50 +37,5 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
     },
     hovedytelse_feilmelding: {
         nb: 'Du må huke av for minst én ytelse eller situasjon som passer for deg',
-    },
-    oppholdINorge: {
-        tittel: {
-            nb: 'Opphold i Norge',
-        },
-        guide_innhold: {
-            nb: [
-                'Vi spør om dette fordi vi må vite om du du oppfyller ',
-                {
-                    tekst: 'kravene til medlemskap i folketrygden',
-                    url: 'https://www.nav.no/no/person/flere-tema/arbeid-og-opphold-i-norge/relatert-informasjon/medlemskap-i-folketrygden',
-                    variant: 'neutral',
-                },
-                ' (åpnes i ny fane).',
-            ],
-        },
-        radio_boddSammenhengende: {
-            header: {
-                nb: 'Har du bodd sammenhengende i Norge de siste 12 månedene?',
-            },
-            alternativer: jaNeiAlternativer,
-        },
-        feilmelding_boddSammenhengende: {
-            nb: 'Du må svare på om du har bodd sammenhengende i Norge det siste året.',
-        },
-        lesMer_boddSammenhengende: {
-            header: {
-                nb: 'Hva menes med å bo sammenhengende?',
-            },
-            innhold: {
-                nb: [
-                    'Med dette mener vi at du ikke har bodd i andre land enn Norge.',
-                    'Ferier utenfor Norge i under 4 uker regnes ikke som å ha bodd i andre land.',
-                ],
-            },
-        },
-        radio_planleggerBoINorgeNeste12mnd: {
-            header: {
-                nb: 'Planlegger du å bo i Norge i de neste 12 månedene?',
-            },
-            alternativer: jaNeiAlternativer,
-        },
-        feilmelding_planleggerBoINorgeNeste12mnd: {
-            nb: 'Du må svare på om du planlegger å bo i Norge de neste 12 mnd.',
-        },
     },
 };
