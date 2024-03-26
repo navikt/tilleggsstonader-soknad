@@ -5,8 +5,8 @@ import { Button, HStack, Label } from '@navikt/ds-react';
 
 import LagredeOpphold from './LagredeOpphold';
 import Opphold from './Opphold';
-import { oppdaterOpphold, opprettOppholdForNesteId } from './oppholdUtil';
 import { OppdatertOppholdFelt } from './typer';
+import { oppdaterOpphold, opprettOppholdForNesteId } from './util';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { useSøknad } from '../../../../context/SøknadContext';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';

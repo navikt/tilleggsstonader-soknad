@@ -1,11 +1,13 @@
+import {
+    skalTaStillingTilLandForPengestøtte,
+    skalTaStillingTilOppholdSiste12mnd,
+    skalTaStillingTilOppholdUtenforNorge,
+    skalTaStillingTilPengestøtte,
+} from './OppholdUtenforNorge/util';
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
-import {
-    ArbeidOgOpphold,
-    MottarPengestøtteTyper,
-    OppholdUtenforNorge,
-} from '../../../typer/søknad';
+import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { harVerdi } from '../../../utils/typer';
@@ -13,33 +15,6 @@ import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../tekster/ho
 
 const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
 
-export const skalTaStillingTilPengestøtte = (opphold: ArbeidOgOpphold) =>
-    opphold?.jobberIAnnetLandEnnNorge?.verdi === 'NEI' ||
-    harVerdi(opphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi);
-
-const mottarPengestøtteTyperSomMåSåTaStillingTilLand: MottarPengestøtteTyper[] = [
-    'SYKEPENGER',
-    'PENSJON',
-    'ANNEN_PENGESTØTTE',
-];
-export const skalTaStillingTilLandForPengestøtte = (
-    verdier: EnumFlereValgFelt<MottarPengestøtteTyper> | undefined
-) =>
-    (verdier?.verdier || []).some(
-        (verdi) => mottarPengestøtteTyperSomMåSåTaStillingTilLand.indexOf(verdi.verdi) > -1
-    );
-
-export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold) =>
-    (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length > 0 &&
-    !skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand);
-
-export const skalTaStillingTilOppholdSiste12mnd = (opphold: ArbeidOgOpphold) =>
-    opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === 'JA';
-
-export const skalTaStillingTilOppholdNeste12mnd = (opphold: ArbeidOgOpphold) =>
-    opphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi === 'JA';
-
-//export const errorKeyHvemPasser = (barn: Barn) => `${barn.ident}_hvemPasser`;
 export const errorKeyLand = (
     keyOpphold: keyof Pick<
         ArbeidOgOpphold,
@@ -65,6 +40,21 @@ export const errorKeyTom = (
     >
 ) => `${keyOpphold}_tom`;
 
+/**
+ * For å ha unike feilid på felter
+ */
+enum FeilId {
+    YTELSE = '1',
+    JOBBER_I_ANNET_LAND = '2',
+    JOBBER_I_ANNET_LAND_HVILKET_LAND = '3',
+    MOTTAR_DU_PENGESTØTTE = '4',
+    MOTTAR_DU_PENGESTØTTE_HVILKET_LAND = '5',
+    HAR_OPPHOLD_SISTE_12_MND = '6',
+    OPPHOLD_SISTE_12_MND = '7',
+    HAR_OPPHOLD_NESTE_12_MND = '8',
+    OPPHOLD_NESTE_12_MND = '9',
+}
+
 export const validerHovedytelse = (
     ytelse: EnumFlereValgFelt<Ytelse> | undefined,
     opphold: ArbeidOgOpphold,
@@ -75,131 +65,132 @@ export const validerHovedytelse = (
     if (ytelse === undefined || ytelse.verdier.length === 0) {
         feil = {
             ...feil,
-            ytelse: { id: '1', melding: hovedytelseInnhold.hovedytelse_feilmelding[locale] },
+            ytelse: {
+                id: FeilId.YTELSE,
+                melding: hovedytelseInnhold.hovedytelse_feilmelding[locale],
+            },
         };
     }
 
     const skalTaStillingTilOpphold = ytelse ? skalTaStillingTilOppholdINorge(ytelse) : false;
     if (skalTaStillingTilOpphold) {
-        if (opphold.jobberIAnnetLandEnnNorge?.verdi === undefined) {
-            feil = {
-                ...feil,
-                jobberIAnnetLandEnnNorge: {
-                    id: '2',
-                    melding: teksterOppholdINorge.feilmnelding_jobber_annet_land_enn_norge[locale],
-                },
-            };
-        }
-        if (
-            opphold.jobberIAnnetLandEnnNorge?.verdi === 'JA' &&
-            !harVerdi(opphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi)
-        ) {
-            feil = {
-                ...feil,
-                hvilketLandJobberIAnnetLandEnnNorge: {
-                    id: '3',
-                    melding:
-                        teksterOppholdINorge
-                            .feilmelding_select_hvilket_land_jobber_i_annet_land_label[locale],
-                },
-            };
-        }
+        feil = {
+            ...feil,
+            ...validerOpphold(opphold, locale),
+        };
+    }
+    return feil;
+};
 
-        if (
-            skalTaStillingTilPengestøtte(opphold) &&
-            (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length === 0
-        ) {
-            feil = {
-                ...feil,
-                mottarDuPengestøtteFraAnnetLand: {
-                    id: '4',
-                    melding: teksterOppholdINorge.feilmnelding_mottar_du_pengestøtte[locale],
-                },
-            };
-        }
+const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfeil => {
+    let feil: Valideringsfeil = {};
+    if (opphold.jobberIAnnetLandEnnNorge?.verdi === undefined) {
+        feil = {
+            ...feil,
+            jobberIAnnetLandEnnNorge: {
+                id: FeilId.JOBBER_I_ANNET_LAND,
+                melding: teksterOppholdINorge.feilmnelding_jobber_annet_land_enn_norge[locale],
+            },
+        };
+    }
+    if (
+        opphold.jobberIAnnetLandEnnNorge?.verdi === 'JA' &&
+        !harVerdi(opphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi)
+    ) {
+        feil = {
+            ...feil,
+            hvilketLandJobberIAnnetLandEnnNorge: {
+                id: FeilId.JOBBER_I_ANNET_LAND_HVILKET_LAND,
+                melding:
+                    teksterOppholdINorge.feilmelding_select_hvilket_land_jobber_i_annet_land_label[
+                        locale
+                    ],
+            },
+        };
+    }
 
-        if (
-            skalTaStillingTilPengestøtte(opphold) &&
-            skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand) &&
-            !harVerdi(opphold.hvilketLandMottarDuPengestøtteFra?.verdi)
-        ) {
-            feil = {
-                ...feil,
-                hvilketLandMottarDuPengestøtteFra: {
-                    id: '5',
-                    melding:
-                        teksterOppholdINorge.feilmelding_select_hvilket_land_pengestøtte[locale],
-                },
-            };
-        }
+    if (
+        skalTaStillingTilPengestøtte(opphold) &&
+        (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length === 0
+    ) {
+        feil = {
+            ...feil,
+            mottarDuPengestøtteFraAnnetLand: {
+                id: FeilId.MOTTAR_DU_PENGESTØTTE,
+                melding: teksterOppholdINorge.feilmnelding_mottar_du_pengestøtte[locale],
+            },
+        };
+    }
 
-        const teksterOppholdUtenforNorge = teksterOppholdINorge.oppholdUtenforNorge;
-        if (
-            skalTaStillingTilOppholdUtenforNorge(opphold) &&
-            opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === undefined
-        ) {
-            feil = {
-                ...feil,
-                harDuOppholdUtenforNorgeSiste12mnd: {
-                    id: '6',
-                    melding: teksterOppholdUtenforNorge.feilmelding_radioSiste12mnd[locale],
-                },
-            };
-        }
+    if (
+        skalTaStillingTilPengestøtte(opphold) &&
+        skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand) &&
+        !harVerdi(opphold.hvilketLandMottarDuPengestøtteFra?.verdi)
+    ) {
+        feil = {
+            ...feil,
+            hvilketLandMottarDuPengestøtteFra: {
+                id: FeilId.MOTTAR_DU_PENGESTØTTE_HVILKET_LAND,
+                melding: teksterOppholdINorge.feilmelding_select_hvilket_land_pengestøtte[locale],
+            },
+        };
+    }
 
-        /*
-        const teksterSiste12mnd = teksterOppholdINorge.oppholdUtenforNorge.siste12mnd;
-        opphold.oppholdUtenforNorgeSiste12mnd.forEach((opphold, indeks) => {
-            if (!harVerdi(opphold.land?.verdi)) {
-                feil = {
-                    ...feil,
-                    [errorKeyLand(opphold)]: {
-                        id: `8-1-${indeks}`,
-                        melding: teksterSiste12mnd.feilmelding_hvilket_land[locale],
-                    },
-                };
-            }
-            if ((opphold.årsak?.verdier?.length || 0) === 0) {
-                feil = {
-                    ...feil,
-                    oppholdUtenforNorgeÅrsak: {
-                        id: `8-2-${indeks}`,
-                        melding: teksterSiste12mnd.feilmelding_årsak[locale],
-                    },
-                };
-            }
-            if (!harVerdi(opphold.fom?.verdi)) {
-                feil = {
-                    ...feil,
-                    [errorKeyFom(opphold)]: {
-                        id: `8-3-${indeks}`,
-                        melding: teksterSiste12mnd.dato.feilmelding_fom[locale],
-                    },
-                };
-            }
-            if (!harVerdi(opphold.tom?.verdi)) {
-                feil = {
-                    ...feil,
-                    [errorKeyTom(opphold)]: {
-                        id: `8-3-${indeks}`,
-                        melding: teksterSiste12mnd.dato.feilmelding_tom[locale],
-                    },
-                };
-            }
-        });
-         */
-        if (
-            skalTaStillingTilOppholdSiste12mnd(opphold) &&
-            opphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi === undefined
-        ) {
-            feil = {
-                ...feil,
-                harDuOppholdUtenforNorgeNeste12mnd: {
-                    id: '8', // TODO oppdater?
-                    melding: teksterOppholdUtenforNorge.feilmelding_radioNeste12mnd[locale],
-                },
-            };
-        }
+    const teksterOppholdUtenforNorge = teksterOppholdINorge.oppholdUtenforNorge;
+    if (
+        skalTaStillingTilOppholdUtenforNorge(opphold) &&
+        opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === undefined
+    ) {
+        feil = {
+            ...feil,
+            harDuOppholdUtenforNorgeSiste12mnd: {
+                id: FeilId.HAR_OPPHOLD_SISTE_12_MND,
+                melding: teksterOppholdUtenforNorge.feilmelding_radioSiste12mnd[locale],
+            },
+        };
+    }
+
+    const ulagretOppholdSiste12mnd = opphold.oppholdUtenforNorgeSiste12mnd.find(
+        (opphold) => !opphold.lagret
+    );
+    if (ulagretOppholdSiste12mnd) {
+        feil = {
+            ...feil,
+            ...validerOppholdUtenforNorgeUnderRedigering(
+                ulagretOppholdSiste12mnd,
+                teksterOppholdUtenforNorge.siste12mnd,
+                locale,
+                'oppholdUtenforNorgeSiste12mnd'
+            ),
+        };
+    }
+
+    if (
+        skalTaStillingTilOppholdSiste12mnd(opphold) &&
+        opphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi === undefined
+    ) {
+        feil = {
+            ...feil,
+            harDuOppholdUtenforNorgeNeste12mnd: {
+                id: FeilId.HAR_OPPHOLD_NESTE_12_MND,
+                melding: teksterOppholdUtenforNorge.feilmelding_radioNeste12mnd[locale],
+            },
+        };
+    }
+
+    const ulagretOppholdNeste12mnd = opphold.oppholdUtenforNorgeNeste12mnd.find(
+        (opphold) => !opphold.lagret
+    );
+    if (ulagretOppholdNeste12mnd) {
+        feil = {
+            ...feil,
+            ...validerOppholdUtenforNorgeUnderRedigering(
+                ulagretOppholdNeste12mnd,
+                teksterOppholdUtenforNorge.neste12mnd,
+                locale,
+                'oppholdUtenforNorgeNeste12mnd'
+            ),
+        };
     }
     return feil;
 };
@@ -214,12 +205,15 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
     >
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
-    const id = keyOpphold === 'oppholdUtenforNorgeSiste12mnd' ? '8' : '10';
+    const feilId =
+        keyOpphold === 'oppholdUtenforNorgeSiste12mnd'
+            ? FeilId.OPPHOLD_SISTE_12_MND
+            : FeilId.OPPHOLD_NESTE_12_MND;
     if (!harVerdi(opphold.land?.verdi)) {
         feil = {
             ...feil,
             [errorKeyLand(keyOpphold)]: {
-                id: `${id}-1`,
+                id: `${feilId}-1`,
                 melding: tekster.feilmelding_hvilket_land[locale],
             },
         };
@@ -228,7 +222,7 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
         feil = {
             ...feil,
             [errorKeyÅrsak(keyOpphold)]: {
-                id: `${id}-2`,
+                id: `${feilId}-2`,
                 melding: tekster.feilmelding_årsak[locale],
             },
         };
@@ -237,7 +231,7 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
         feil = {
             ...feil,
             [errorKeyFom(keyOpphold)]: {
-                id: `${id}-3`,
+                id: `${feilId}-3`,
                 melding: tekster.dato.feilmelding_fom[locale],
             },
         };
@@ -246,7 +240,7 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
         feil = {
             ...feil,
             [errorKeyTom(keyOpphold)]: {
-                id: `${id}-3`,
+                id: `${feilId}-4`,
                 melding: tekster.dato.feilmelding_tom[locale],
             },
         };

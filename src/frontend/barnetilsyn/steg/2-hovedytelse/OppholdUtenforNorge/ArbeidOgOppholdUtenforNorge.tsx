@@ -4,7 +4,14 @@ import { Heading, Select, VStack } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
 import OppholdListe from './OppholdListe';
-import { opprettOppholdForNesteId } from './oppholdUtil';
+import {
+    opprettOppholdForNesteId,
+    skalTaStillingTilLandForPengestøtte,
+    skalTaStillingTilOppholdNeste12mnd,
+    skalTaStillingTilOppholdSiste12mnd,
+    skalTaStillingTilOppholdUtenforNorge,
+    skalTaStillingTilPengestøtte,
+} from './util';
 import { PellePanel } from '../../../../components/PellePanel/PellePanel';
 import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import LocaleInlineLenke from '../../../../components/Teksthåndtering/LocaleInlineLenke';
@@ -22,13 +29,6 @@ import {
 } from '../../../../typer/søknad';
 import { harVerdi } from '../../../../utils/typer';
 import { hovedytelseInnhold } from '../../../tekster/hovedytelse';
-import {
-    skalTaStillingTilOppholdNeste12mnd,
-    skalTaStillingTilOppholdSiste12mnd,
-    skalTaStillingTilOppholdUtenforNorge,
-    skalTaStillingTilPengestøtte,
-    skalTaStillingTilLandForPengestøtte,
-} from '../validering';
 
 const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
 
