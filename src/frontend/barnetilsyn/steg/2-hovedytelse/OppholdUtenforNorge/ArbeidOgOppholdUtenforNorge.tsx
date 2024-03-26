@@ -39,7 +39,7 @@ interface Props {
 
 const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
     const { locale } = useSpråk();
-    const { valideringsfeil } = useSøknad();
+    const { valideringsfeil, settValideringsfeil } = useSøknad();
 
     const oppdaterJobberIAnnetLandEnnNorge = (verdi: EnumFelt<JaNei>) => {
         settArbeidOgOpphold((prevState) => ({
@@ -51,6 +51,15 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             oppholdUtenforNorgeSiste12mnd: [],
             harDuOppholdUtenforNorgeNeste12mnd: undefined,
             oppholdUtenforNorgeNeste12mnd: [],
+        }));
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            jobberIAnnetLandEnnNorge: undefined,
+            hvilketLand: undefined,
+            harDuOppholdUtenforNorgeSiste12mnd: undefined,
+            //oppholdUtenforNorgeSiste12mnd: undefined, // TODO
+            harDuOppholdUtenforNorgeNeste12mnd: undefined,
+            //oppholdUtenforNorgeNeste12mnd: undefined // TODO
         }));
     };
     const oppdatertHvilketLandJobberI = (e: React.ChangeEvent<HTMLSelectElement>) => {
