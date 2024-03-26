@@ -12,24 +12,26 @@ import { useSøknad } from '../../../context/SøknadContext';
 import { EnumFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
+import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 const Aktivitet = () => {
-    const { aktivitet, settAktivitet } = useSøknad();
+    const { aktivitet, settAktivitet, valideringsfeil, settValideringsfeil } = useSøknad();
 
     const [utdanning, settUtdanning] = useState<EnumFelt<JaNei> | undefined>(
         aktivitet ? aktivitet.utdanning : undefined
     );
 
-    const [feil, settFeil] = useState('');
-
     const kanFortsette = (barnepassPgaUtdanning?: JaNei): boolean => {
+        let feil: Valideringsfeil = {};
         if (barnepassPgaUtdanning === undefined) {
-            settFeil('Du må velge et alternativ');
-            return false;
+            feil = {
+                ...feil,
+                barnepassPgaUtdanning: { id: '1', melding: 'Du må velge et alternativ' },
+            };
         }
-
-        return true;
+        settValideringsfeil(feil);
+        return !inneholderFeil(feil);
     };
 
     const oppdaterAktivitetISøknad = () => {
@@ -51,13 +53,14 @@ const Aktivitet = () => {
                 <LocaleTekst tekst={aktivitetTekster.guide_innhold} />
             </PellePanel>
             <LocaleRadioGroup
+                id={valideringsfeil.barnepassPgaUtdanning?.id}
                 tekst={aktivitetTekster.radio_utdanning}
                 value={utdanning?.verdi || ''}
                 onChange={(verdi) => {
                     settUtdanning(verdi);
-                    settFeil('');
+                    settValideringsfeil({});
                 }}
-                error={feil}
+                error={valideringsfeil.barnepassPgaUtdanning?.melding}
             >
                 <LocaleReadMore tekst={aktivitetTekster.radio_utdanning_lesmer} />
             </LocaleRadioGroup>

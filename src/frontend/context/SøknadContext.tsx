@@ -5,6 +5,7 @@ import createUseContext from 'constate';
 import { Barnepass } from '../typer/barn';
 import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
 import { Aktivitet, Hovedytelse } from '../typer/søknad';
+import { Valideringsfeil } from '../typer/validering';
 
 const [SøknadProvider, useSøknad] = createUseContext(() => {
     SøknadProvider.displayName = 'SØKNAD_PROVIDER';
@@ -21,6 +22,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
 
     const [innsentTidspunkt, settInnsentTidspunkt] = useState<string>();
 
+    const [valideringsfeil, settValideringsfeil] = useState<Valideringsfeil>({});
+
     return {
         harBekreftet,
         settHarBekreftet,
@@ -36,6 +39,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         settDokumentasjon,
         innsentTidspunkt,
         settInnsentTidspunkt,
+        valideringsfeil,
+        settValideringsfeil,
     };
 });
 
