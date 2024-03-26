@@ -1,4 +1,4 @@
-import { EnumFelt, EnumFlereValgFelt, VerdiFelt } from './skjema';
+import { EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
 import { Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
 
 export interface Hovedytelse {
@@ -12,10 +12,14 @@ export interface ArbeidOgOpphold {
     mottarDuPengestøtteFraAnnetLand?: EnumFlereValgFelt<MottarPengestøtteTyper>;
     hvilketLandMottarDuPengestøtteFra?: VerdiFelt<string>;
 
-    oppholdUtenforNorge?: EnumFelt<JaNei>;
-    hvilketLandOppholdUtenforNorge?: VerdiFelt<string>;
+    harDuOppholdUtenforNorgeSiste12mnd?: EnumFelt<JaNei>;
+    oppholdUtenforNorgeSiste12mnd: OppholdUtenforNorge[];
+}
 
-    oppholdUtenforNorgeÅrsak?: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>;
+export interface OppholdUtenforNorge {
+    _id: number;
+    land?: SelectFelt;
+    årsak?: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>;
 }
 
 export interface Aktivitet {

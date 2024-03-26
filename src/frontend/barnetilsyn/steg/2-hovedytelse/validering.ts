@@ -30,7 +30,7 @@ export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold) =
     !skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand);
 
 export const skalTaStillingTilOppholdsland = (opphold: ArbeidOgOpphold) =>
-    opphold.oppholdUtenforNorge?.verdi === 'JA';
+    opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === 'JA';
 
 export const validerHovedytelse = (
     ytelse: EnumFlereValgFelt<Ytelse> | undefined,
@@ -102,40 +102,46 @@ export const validerHovedytelse = (
 
         if (
             skalTaStillingTilOppholdUtenforNorge(opphold) &&
-            opphold.oppholdUtenforNorge?.verdi === undefined
+            opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === undefined
         ) {
             feil = {
                 ...feil,
-                oppholdUtenforNorgeSiste12Mnd: {
+                harDuOppholdUtenforNorge: {
                     id: '6',
                     melding:
-                        teksterOppholdINorge.feilmnelding_har_du_oppholdt_deg_utenfor_norge[locale],
+                        teksterOppholdINorge.oppholdUtenforNorge.feilmelding_radioSiste12mnd[
+                            locale
+                        ],
                 },
             };
         }
-        if (skalTaStillingTilOppholdsland(opphold)) {
-            if (!harVerdi(opphold.hvilketLandOppholdUtenforNorge?.verdi)) {
-                feil = {
-                    ...feil,
-                    hvilketLandOppholdUtenforNorge: {
-                        id: '7',
-                        melding:
-                            teksterOppholdINorge
-                                .feilmelding_select_hvilket_land_opphold_utenfor_norge[locale],
-                    },
-                };
-            }
-            if ((opphold.oppholdUtenforNorgeÅrsak?.verdier?.length || 0) === 0) {
-                feil = {
-                    ...feil,
-                    oppholdUtenforNorgeÅrsak: {
-                        id: '8',
-                        melding:
-                            teksterOppholdINorge.feilmelding_årsak_opphold_utenfor_norge[locale],
-                    },
-                };
-            }
+        /*if (skalTaStillingTilOppholdsland(opphold)) {
+            opphold.oppholdUtenforNorgeSiste12mnd.forEach((opphold, indeks) => {
+                if (!harVerdi(opphold.land?.verdi)) {
+                    feil = {
+                        ...feil,
+                        hvilketLandOppholdUtenforNorge: {
+                            id: '8',
+                            melding:
+                                teksterOppholdINorge.oppholdUtenforNorge.feilmelding_hvilket_land[
+                                    locale
+                                ],
+                        },
+                    };
+                }
+                if ((opphold.årsak?.verdier?.length || 0) === 0) {
+                    feil = {
+                        ...feil,
+                        oppholdUtenforNorgeÅrsak: {
+                            id: '8',
+                            melding:
+                                teksterOppholdINorge.oppholdUtenforNorge.feilmelding_årsak[locale],
+                        },
+                    };
+                }
+            });
         }
+         */
     }
     return feil;
 };

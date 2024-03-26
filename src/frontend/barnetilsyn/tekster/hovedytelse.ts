@@ -21,14 +21,29 @@ interface HovedytelseInnhold {
         select_hvilket_land_pengestøtte: TekstElement<string>;
         feilmelding_select_hvilket_land_pengestøtte: TekstElement<string>;
 
-        radio_har_du_oppholdt_deg_utenfor_norge: Radiogruppe<JaNei>;
-        feilmnelding_har_du_oppholdt_deg_utenfor_norge: TekstElement<string>;
+        oppholdUtenforNorge: {
+            radioSiste12mnd: Radiogruppe<JaNei>;
+            feilmelding_radioSiste12mnd: TekstElement<string>;
 
-        select_hvilket_land_opphold_utenfor_norge: TekstElement<string>;
-        feilmelding_select_hvilket_land_opphold_utenfor_norge: TekstElement<string>;
+            siste12mnd: OppholdUtenforNorgeInnhold;
 
-        checkbox_årsak_opphold_utenfor_norge: CheckboxGruppe<ÅrsakOppholdUtenforNorge>;
-        feilmelding_årsak_opphold_utenfor_norge: TekstElement<string>;
+            knapp_legg_til: TekstElement<string>;
+        };
+    };
+}
+
+export interface OppholdUtenforNorgeInnhold {
+    select_hvilket_land: TekstElement<string>;
+    feilmelding_hvilket_land: TekstElement<string>;
+
+    checkbox_årsak: CheckboxGruppe<ÅrsakOppholdUtenforNorge>;
+    feilmelding_årsak: TekstElement<string>;
+    dato: {
+        label: TekstElement<string>;
+        fom: TekstElement<string>;
+        tom: TekstElement<string>;
+        feilmelding_fom: TekstElement<string>;
+        feilmelding_tom: TekstElement<string>;
     };
 }
 
@@ -84,7 +99,7 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
             alternativer: jaNeiAlternativer,
         },
         feilmnelding_jobber_annet_land_enn_norge: {
-            nb: 'Du må svare på om du jobber i et annet land enn Norge',
+            nb: 'Du må svare på om du jobber i et annet land enn Norge.',
         },
         select_hvilket_land_jobber_i_annet_land_label: {
             nb: 'Hvilket land jobber du i?',
@@ -108,7 +123,7 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
                     nb: 'Annen pengestøtte',
                 },
                 MOTTAR_IKKE: {
-                    nb: 'Mottar ikke oengestøtte fra ennet land',
+                    nb: 'Mottar ikke pengestøtte fra ennet land',
                 },
             },
         },
@@ -121,53 +136,77 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         feilmelding_select_hvilket_land_pengestøtte: {
             nb: 'Du må velge hvilket land du mottar pengestøtte fra.',
         },
-        radio_har_du_oppholdt_deg_utenfor_norge: {
-            header: {
-                nb: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?',
+        oppholdUtenforNorge: {
+            radioSiste12mnd: {
+                header: {
+                    nb: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?',
+                },
+                beskrivelse: {
+                    nb: 'Opphold under 5 uker trenger du ikke opplyse om.',
+                },
+                alternativer: jaNeiAlternativer,
             },
-            beskrivelse: {
-                nb: 'Opphold under 5 uker trenger du ikke opplyse om.',
+            feilmelding_radioSiste12mnd: {
+                nb: 'Du må svare på om du oppholdt deg utenfor Norge.',
             },
-            alternativer: jaNeiAlternativer,
-        },
-        feilmnelding_har_du_oppholdt_deg_utenfor_norge: {
-            nb: 'Du må svare på om du oppholdt deg utenfor Norge.',
-        },
 
-        select_hvilket_land_opphold_utenfor_norge: {
-            nb: 'Hvilket land har du oppholdt deg i?',
-        },
-        feilmelding_select_hvilket_land_opphold_utenfor_norge: {
-            nb: 'Du må velge hvilket land du har oppholdt deg i.',
-        },
+            siste12mnd: {
+                select_hvilket_land: {
+                    nb: 'Hvilket land har du oppholdt deg i?',
+                },
+                feilmelding_hvilket_land: {
+                    nb: 'Du må velge hvilket land du har oppholdt deg i.',
+                },
 
-        checkbox_årsak_opphold_utenfor_norge: {
-            header: {
-                nb: ' Hva gjorde du i dette landet?',
+                checkbox_årsak: {
+                    header: {
+                        nb: ' Hva gjorde du i dette landet?',
+                    },
+                    alternativer: {
+                        JOBB: {
+                            nb: 'Jobbet',
+                        },
+                        STUDIER: {
+                            nb: 'Studerte',
+                        },
+                        MEDISINSK_BEHANDLING: {
+                            nb: 'Fikk medisinsk behandling',
+                        },
+                        FERIE: {
+                            nb: 'Var på ferie',
+                        },
+                        FAMILIE_BESØK: {
+                            nb: 'Besøkte familie',
+                        },
+                        ANNET: {
+                            nb: 'Annet',
+                        },
+                    },
+                },
+                feilmelding_årsak: {
+                    nb: 'Du må velge hva du gjorde i landet du oppholdt deg i.',
+                },
+                dato: {
+                    label: {
+                        nb: 'Når var du i dette landet?',
+                    },
+                    fom: {
+                        nb: 'Fra',
+                    },
+                    tom: {
+                        nb: 'Til',
+                    },
+                    feilmelding_fom: {
+                        nb: 'Du må velge fra-dato.',
+                    },
+                    feilmelding_tom: {
+                        nb: 'Du må velge til-dato.',
+                    },
+                },
             },
-            alternativer: {
-                JOBB: {
-                    nb: 'Jobbet',
-                },
-                STUDIER: {
-                    nb: 'Studerte',
-                },
-                MEDISINSK_BEHANDLING: {
-                    nb: 'Fikk medisinsk behandling',
-                },
-                FERIE: {
-                    nb: 'Var på ferie',
-                },
-                FAMILIE_BESØK: {
-                    nb: 'Besøkte familie',
-                },
-                ANNET: {
-                    nb: 'Annet',
-                },
+            knapp_legg_til: {
+                nb: 'Legg til flere land',
             },
-        },
-        feilmelding_årsak_opphold_utenfor_norge: {
-            nb: 'Du må velge hva du gjorde i landet du oppholdt deg i.',
         },
     },
 };
