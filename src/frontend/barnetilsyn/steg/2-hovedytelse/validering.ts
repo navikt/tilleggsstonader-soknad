@@ -1,3 +1,4 @@
+import { validerArbeidOgOpphold } from './ArbeidOgOpphold/validering';
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
@@ -42,7 +43,7 @@ export const validerHovedytelse = (
     if (skalTaStillingTilOpphold) {
         feil = {
             ...feil,
-            //...validerArbeidOgOpphold(opphold, locale),
+            ...validerArbeidOgOpphold(opphold, locale),
         };
     }
     return feil;
