@@ -116,7 +116,7 @@ const DinSituasjon: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hove
             }}
         >
             {ytelser && <LocalePunktliste innhold={ytelser} tittel={{ nb: ytelseslabel || '' }} />}
-            {/*boddSammenhengende && (
+            {/*boddSammenhengende && ( TODO fiks denne
                 <>
                     <Label>{boddSammenhengende.label}</Label>
                     <BodyShort spacing>{boddSammenhengende.svarTekst}</BodyShort>
