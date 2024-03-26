@@ -1,4 +1,4 @@
-import { validerOpphold } from './OppholdUtenforNorge/validering';
+import { validerOpphold } from './ArbeidOgOpphold/validering';
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
