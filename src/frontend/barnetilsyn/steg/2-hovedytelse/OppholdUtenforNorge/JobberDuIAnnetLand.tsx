@@ -27,7 +27,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
             jobberIAnnetLandEnnNorge: verdi,
-            hvilketLand: undefined,
+            hvilketLandJobberIAnnetLandEnnNorge: undefined,
             mottarDuPengestøtteFraAnnetLand: undefined,
             harDuOppholdUtenforNorgeSiste12mnd: undefined,
             oppholdUtenforNorgeSiste12mnd: [],
@@ -37,7 +37,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
         settValideringsfeil((prevState) => ({
             ...prevState,
             jobberIAnnetLandEnnNorge: undefined,
-            hvilketLand: undefined,
+            hvilketLandJobberIAnnetLandEnnNorge: undefined,
             mottarDuPengestøtteFraAnnetLand: undefined,
             harDuOppholdUtenforNorgeSiste12mnd: undefined,
             harDuOppholdUtenforNorgeNeste12mnd: undefined,
