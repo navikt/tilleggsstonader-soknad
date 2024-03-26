@@ -3,9 +3,8 @@ import React from 'react';
 import { Heading, Select, VStack } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
-import LeggTilOppholdKnapp from './LeggTilOppholdKnapp';
-import Opphold from './Opphold';
-import { oppdaterOpphold, opprettOppholdForNesteId } from './oppholdUtil';
+import OppholdListe from './OppholdListe';
+import { opprettOppholdForNesteId } from './oppholdUtil';
 import {
     skalTaStillingTilLandForPengestøtte,
     skalTaStillingTilOppholdNeste12mnd,
@@ -129,26 +128,6 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         });
     };
 
-    /**
-     * Returnerer en metode som er generisk som oppdaterer felter i oppholdutenfor norge,
-     * [oppholdUtenforNorgeSiste12mnd] eller [oppholdUtenforNorgeNeste12mnd]
-     */
-    const oppdaterOppholdUtenforNorge =
-        (
-            oppholdKey: keyof Pick<
-                ArbeidOgOpphold,
-                'oppholdUtenforNorgeSiste12mnd' | 'oppholdUtenforNorgeNeste12mnd'
-            >
-        ) =>
-        <T extends OppholdUtenforNorge, K extends keyof T>(id: number, key: K, verdi: T[K]) => {
-            settArbeidOgOpphold((prevState) => {
-                return {
-                    ...prevState,
-                    [oppholdKey]: oppdaterOpphold(prevState[oppholdKey], id, key, verdi),
-                };
-            });
-        };
-
     return (
         <UnderspørsmålContainer>
             <VStack gap="6">
@@ -223,24 +202,12 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                             />
                         )}
                         {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
-                            <>
-                                {arbeidOgOpphold.oppholdUtenforNorgeSiste12mnd.map((opphold) => (
-                                    <Opphold
-                                        opphold={opphold}
-                                        oppdater={oppdaterOppholdUtenforNorge(
-                                            'oppholdUtenforNorgeSiste12mnd'
-                                        )}
-                                        tekster={
-                                            teksterOppholdINorge.oppholdUtenforNorge.siste12mnd
-                                        }
-                                        locale={locale}
-                                    />
-                                ))}
-                                <LeggTilOppholdKnapp
-                                    key={'oppholdUtenforNorgeSiste12mnd'}
-                                    settArbeidOgOpphold={settArbeidOgOpphold}
-                                />
-                            </>
+                            <OppholdListe
+                                keyOpphold={'oppholdUtenforNorgeSiste12mnd'}
+                                arbeidOgOpphold={arbeidOgOpphold}
+                                settArbeidOgOpphold={settArbeidOgOpphold}
+                                tekster={teksterOppholdINorge.oppholdUtenforNorge.siste12mnd}
+                            />
                         )}
                         {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
                             <LocaleRadioGroup
@@ -252,24 +219,12 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                             />
                         )}
                         {skalTaStillingTilOppholdNeste12mnd(arbeidOgOpphold) && (
-                            <>
-                                {arbeidOgOpphold.oppholdUtenforNorgeNeste12mnd.map((opphold) => (
-                                    <Opphold
-                                        opphold={opphold}
-                                        oppdater={oppdaterOppholdUtenforNorge(
-                                            'oppholdUtenforNorgeNeste12mnd'
-                                        )}
-                                        tekster={
-                                            teksterOppholdINorge.oppholdUtenforNorge.neste12mnd
-                                        }
-                                        locale={locale}
-                                    />
-                                ))}
-                                <LeggTilOppholdKnapp
-                                    key={'oppholdUtenforNorgeSiste12mnd'}
-                                    settArbeidOgOpphold={settArbeidOgOpphold}
-                                />
-                            </>
+                            <OppholdListe
+                                keyOpphold={'oppholdUtenforNorgeNeste12mnd'}
+                                arbeidOgOpphold={arbeidOgOpphold}
+                                settArbeidOgOpphold={settArbeidOgOpphold}
+                                tekster={teksterOppholdINorge.oppholdUtenforNorge.neste12mnd}
+                            />
                         )}
                     </>
                 )}
