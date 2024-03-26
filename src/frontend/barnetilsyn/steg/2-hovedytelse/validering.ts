@@ -29,8 +29,11 @@ export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold) =
     (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length > 0 &&
     !skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand);
 
-export const skalTaStillingTilOpphold = (opphold: ArbeidOgOpphold) =>
+export const skalTaStillingTilOppholdSiste12mnd = (opphold: ArbeidOgOpphold) =>
     opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === 'JA';
+
+export const skalTaStillingTilOppholdNeste12mnd = (opphold: ArbeidOgOpphold) =>
+    opphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi === 'JA';
 
 export const validerHovedytelse = (
     ytelse: EnumFlereValgFelt<Ytelse> | undefined,

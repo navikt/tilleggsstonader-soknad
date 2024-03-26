@@ -27,7 +27,10 @@ const Hovedytelse = () => {
     );
 
     const [arbeidOgOpphold, settArbeidOgOpphold] = useState<ArbeidOgOpphold>(
-        hovedytelse?.arbeidOgOpphold || { oppholdUtenforNorgeSiste12mnd: [] }
+        hovedytelse?.arbeidOgOpphold || {
+            oppholdUtenforNorgeSiste12mnd: [],
+            oppholdUtenforNorgeNeste12mnd: [],
+        }
     );
 
     const skalTaStillingTilOpphold = ytelse ? skalTaStillingTilOppholdINorge(ytelse) : false;
@@ -40,7 +43,10 @@ const Hovedytelse = () => {
 
     const oppdaterSkalTaStillingTilOpphold = (ytelse: EnumFlereValgFelt<Ytelse>) => {
         if (!skalTaStillingTilOppholdINorge(ytelse)) {
-            settArbeidOgOpphold({ oppholdUtenforNorgeSiste12mnd: [] });
+            settArbeidOgOpphold({
+                oppholdUtenforNorgeSiste12mnd: [],
+                oppholdUtenforNorgeNeste12mnd: [],
+            });
             settValideringsfeil({});
         } else {
             settValideringsfeil((prevState) => ({ ...prevState, ytelse: undefined }));

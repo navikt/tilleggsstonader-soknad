@@ -11,7 +11,7 @@ import { nullableTilDato, tilLocaleDateString } from '../../../utils/formatering
 import { harVerdi } from '../../../utils/typer';
 import { OppholdUtenforNorgeInnhold } from '../../tekster/hovedytelse';
 
-const OppholdUtenforNorge: React.FC<{
+const Opphold: React.FC<{
     opphold: OppholdUtenforNorge;
     oppdater: <T extends OppholdUtenforNorge, K extends keyof T>(
         id: number,
@@ -101,4 +101,4 @@ const OppholdUtenforNorge: React.FC<{
     );
 };
 
-export default OppholdUtenforNorge;
+export default Opphold;

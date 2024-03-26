@@ -4,11 +4,12 @@ import { PlusIcon } from '@navikt/aksel-icons';
 import { Button, Heading, HStack, Select, VStack } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
-import OppholdUtenforNorge from './OppholdUtenforNorge';
+import Opphold from './Opphold';
 import { oppdaterOpphold } from './oppholdUtil';
 import {
     skalTaStillingTilLandForPengestøtte,
-    skalTaStillingTilOpphold,
+    skalTaStillingTilOppholdNeste12mnd,
+    skalTaStillingTilOppholdSiste12mnd,
     skalTaStillingTilOppholdUtenforNorge,
     skalTaStillingTilPengestøtte,
 } from './validering';
@@ -21,7 +22,12 @@ import { UnderspørsmålContainer } from '../../../components/UnderspørsmålCon
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { ArbeidOgOpphold, JaNei, MottarPengestøtteTyper } from '../../../typer/søknad';
+import {
+    ArbeidOgOpphold,
+    JaNei,
+    MottarPengestøtteTyper,
+    OppholdUtenforNorge,
+} from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typer';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
@@ -35,9 +41,14 @@ interface Props {
 /**
  * Setter utleders max id for å kunne sette nytt id på neste item for å kunne lenke til unik opphold
  */
-const utledMaxId = (opphold: ArbeidOgOpphold) => {
-    const ids = opphold.oppholdUtenforNorgeSiste12mnd.map((opphold) => opphold._id);
+const utledMaxId = (oppholdUtenforNorge: OppholdUtenforNorge[]) => {
+    const ids = oppholdUtenforNorge.map((opphold) => opphold._id);
     return ids.length > 0 ? Math.max(...ids) : 0;
+};
+
+const opprettOppholdForNesteId = (opphold: OppholdUtenforNorge[]): OppholdUtenforNorge => {
+    const maxId = utledMaxId(opphold);
+    return { _id: maxId + 1 };
 };
 
 const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
@@ -105,13 +116,14 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
 
     const oppdaterOppholdUtenforNorge = (verdi: EnumFelt<JaNei>) => {
         settArbeidOgOpphold((prevState: ArbeidOgOpphold) => {
-            const maxId = utledMaxId(prevState);
-            const oppholdUtenforNorgeSiste12mnd: OppholdUtenforNorge[] =
-                verdi.verdi === 'JA' ? [{ _id: maxId + 1 }] : [];
+            const opphold: OppholdUtenforNorge[] =
+                verdi.verdi === 'JA'
+                    ? [opprettOppholdForNesteId(prevState.oppholdUtenforNorgeSiste12mnd)]
+                    : [];
             return {
                 ...prevState,
                 harDuOppholdUtenforNorgeSiste12mnd: verdi,
-                oppholdUtenforNorgeSiste12mnd: oppholdUtenforNorgeSiste12mnd,
+                oppholdUtenforNorgeSiste12mnd: opphold,
             };
         });
     };
@@ -126,6 +138,49 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             return {
                 ...prevState,
                 oppholdUtenforNorgeSiste12mnd: oppdaterOpphold(oppholdUtenforNorge, id, key, verdi),
+            };
+        });
+    };
+
+    const oppdaterOppholdUtenforNorgeNeste12mnd = (verdi: EnumFelt<JaNei>) => {
+        settArbeidOgOpphold((prevState: ArbeidOgOpphold) => {
+            const opphold: OppholdUtenforNorge[] =
+                verdi.verdi === 'JA'
+                    ? [opprettOppholdForNesteId(prevState.oppholdUtenforNorgeNeste12mnd)]
+                    : [];
+            return {
+                ...prevState,
+                harDuOppholdUtenforNorgeNeste12mnd: verdi,
+                oppholdUtenforNorgeNeste12mnd: opphold,
+            };
+        });
+    };
+
+    const oppdaterOppholdNeste12mnd = <T extends OppholdUtenforNorge, K extends keyof T>(
+        id: number,
+        key: K,
+        verdi: T[K]
+    ) => {
+        settArbeidOgOpphold((prevState) => {
+            const oppholdUtenforNorge = prevState.oppholdUtenforNorgeNeste12mnd;
+            return {
+                ...prevState,
+                oppholdUtenforNorgeNeste12mnd: oppdaterOpphold(oppholdUtenforNorge, id, key, verdi),
+            };
+        });
+    };
+
+    const leggTilOpphold = (
+        key: keyof Pick<
+            ArbeidOgOpphold,
+            'oppholdUtenforNorgeSiste12mnd' | 'oppholdUtenforNorgeNeste12mnd'
+        >
+    ) => {
+        settArbeidOgOpphold((prevState) => {
+            const opphold = prevState[key];
+            return {
+                ...prevState,
+                [key]: [...prevState[key], opprettOppholdForNesteId(opphold)],
             };
         });
     };
@@ -203,12 +258,12 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                 error={valideringsfeil.harDuOppholdUtenforNorge?.melding}
                             />
                         )}
-                        {skalTaStillingTilOpphold(arbeidOgOpphold) &&
+                        {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) &&
                             arbeidOgOpphold?.harDuOppholdUtenforNorgeSiste12mnd && (
                                 <>
                                     {arbeidOgOpphold?.oppholdUtenforNorgeSiste12mnd.map(
                                         (opphold) => (
-                                            <OppholdUtenforNorge
+                                            <Opphold
                                                 opphold={opphold}
                                                 oppdater={oppdaterOppholdSiste12mnd}
                                                 tekster={
@@ -223,13 +278,48 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                         <Button
                                             variant={'tertiary'}
                                             onClick={() =>
-                                                settArbeidOgOpphold((prevState) => ({
-                                                    ...prevState,
-                                                    oppholdUtenforNorge: [
-                                                        ...prevState.oppholdUtenforNorgeSiste12mnd,
-                                                        {},
-                                                    ],
-                                                }))
+                                                leggTilOpphold('oppholdUtenforNorgeSiste12mnd')
+                                            }
+                                            icon={<PlusIcon />}
+                                        >
+                                            {
+                                                teksterOppholdINorge.oppholdUtenforNorge
+                                                    .knapp_legg_til[locale]
+                                            }
+                                        </Button>
+                                    </HStack>
+                                </>
+                            )}
+                        {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
+                            <LocaleRadioGroup
+                                //id={valideringsfeil.harDuOppholdUtenforNorge?.id}
+                                tekst={teksterOppholdINorge.oppholdUtenforNorge.radioNeste12mnd}
+                                value={arbeidOgOpphold?.harDuOppholdUtenforNorgeNeste12mnd?.verdi}
+                                onChange={oppdaterOppholdUtenforNorgeNeste12mnd}
+                                //error={valideringsfeil.harDuOppholdUtenforNorge?.melding}
+                            />
+                        )}
+                        {skalTaStillingTilOppholdNeste12mnd(arbeidOgOpphold) &&
+                            arbeidOgOpphold?.harDuOppholdUtenforNorgeNeste12mnd && (
+                                <>
+                                    {arbeidOgOpphold?.oppholdUtenforNorgeNeste12mnd.map(
+                                        (opphold) => (
+                                            <Opphold
+                                                opphold={opphold}
+                                                oppdater={oppdaterOppholdNeste12mnd}
+                                                tekster={
+                                                    teksterOppholdINorge.oppholdUtenforNorge
+                                                        .neste12mnd
+                                                }
+                                                locale={locale}
+                                            />
+                                        )
+                                    )}
+                                    <HStack>
+                                        <Button
+                                            variant={'tertiary'}
+                                            onClick={() =>
+                                                leggTilOpphold('oppholdUtenforNorgeNeste12mnd')
                                             }
                                             icon={<PlusIcon />}
                                         >
