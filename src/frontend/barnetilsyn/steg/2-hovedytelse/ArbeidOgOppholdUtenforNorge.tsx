@@ -101,7 +101,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         }
     };
 
-    const oppdaterOppholdUtenforNorge = (verdi: EnumFelt<JaNei>) => {
+    const oppdaterOppholdSiste12mnd = (verdi: EnumFelt<JaNei>) => {
         settArbeidOgOpphold((prevState: ArbeidOgOpphold) => {
             const opphold: OppholdUtenforNorge[] =
                 verdi.verdi === 'JA'
@@ -115,21 +115,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         });
     };
 
-    const oppdaterOppholdSiste12mnd = <T extends OppholdUtenforNorge, K extends keyof T>(
-        id: number,
-        key: K,
-        verdi: T[K]
-    ) => {
-        settArbeidOgOpphold((prevState) => {
-            const oppholdUtenforNorge = prevState.oppholdUtenforNorgeSiste12mnd;
-            return {
-                ...prevState,
-                oppholdUtenforNorgeSiste12mnd: oppdaterOpphold(oppholdUtenforNorge, id, key, verdi),
-            };
-        });
-    };
-
-    const oppdaterOppholdUtenforNorgeNeste12mnd = (verdi: EnumFelt<JaNei>) => {
+    const oppdaterOppholdNeste12mnd = (verdi: EnumFelt<JaNei>) => {
         settArbeidOgOpphold((prevState: ArbeidOgOpphold) => {
             const opphold: OppholdUtenforNorge[] =
                 verdi.verdi === 'JA'
@@ -143,19 +129,25 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         });
     };
 
-    const oppdaterOppholdNeste12mnd = <T extends OppholdUtenforNorge, K extends keyof T>(
-        id: number,
-        key: K,
-        verdi: T[K]
-    ) => {
-        settArbeidOgOpphold((prevState) => {
-            const oppholdUtenforNorge = prevState.oppholdUtenforNorgeNeste12mnd;
-            return {
-                ...prevState,
-                oppholdUtenforNorgeNeste12mnd: oppdaterOpphold(oppholdUtenforNorge, id, key, verdi),
-            };
-        });
-    };
+    /**
+     * Returnerer en metode som er generisk som oppdaterer felter i oppholdutenfor norge,
+     * [oppholdUtenforNorgeSiste12mnd] eller [oppholdUtenforNorgeNeste12mnd]
+     */
+    const oppdaterOppholdUtenforNorge =
+        (
+            oppholdKey: keyof Pick<
+                ArbeidOgOpphold,
+                'oppholdUtenforNorgeSiste12mnd' | 'oppholdUtenforNorgeNeste12mnd'
+            >
+        ) =>
+        <T extends OppholdUtenforNorge, K extends keyof T>(id: number, key: K, verdi: T[K]) => {
+            settArbeidOgOpphold((prevState) => {
+                return {
+                    ...prevState,
+                    [oppholdKey]: oppdaterOpphold(prevState[oppholdKey], id, key, verdi),
+                };
+            });
+        };
 
     return (
         <UnderspørsmålContainer>
@@ -226,7 +218,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                 id={valideringsfeil.harDuOppholdUtenforNorge?.id}
                                 tekst={teksterOppholdINorge.oppholdUtenforNorge.radioSiste12mnd}
                                 value={arbeidOgOpphold?.harDuOppholdUtenforNorgeSiste12mnd?.verdi}
-                                onChange={oppdaterOppholdUtenforNorge}
+                                onChange={oppdaterOppholdSiste12mnd}
                                 error={valideringsfeil.harDuOppholdUtenforNorge?.melding}
                             />
                         )}
@@ -237,7 +229,9 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                         (opphold) => (
                                             <Opphold
                                                 opphold={opphold}
-                                                oppdater={oppdaterOppholdSiste12mnd}
+                                                oppdater={oppdaterOppholdUtenforNorge(
+                                                    'oppholdUtenforNorgeSiste12mnd'
+                                                )}
                                                 tekster={
                                                     teksterOppholdINorge.oppholdUtenforNorge
                                                         .siste12mnd
@@ -257,7 +251,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                 //id={valideringsfeil.harDuOppholdUtenforNorge?.id}
                                 tekst={teksterOppholdINorge.oppholdUtenforNorge.radioNeste12mnd}
                                 value={arbeidOgOpphold?.harDuOppholdUtenforNorgeNeste12mnd?.verdi}
-                                onChange={oppdaterOppholdUtenforNorgeNeste12mnd}
+                                onChange={oppdaterOppholdNeste12mnd}
                                 //error={valideringsfeil.harDuOppholdUtenforNorge?.melding}
                             />
                         )}
@@ -268,7 +262,9 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                         (opphold) => (
                                             <Opphold
                                                 opphold={opphold}
-                                                oppdater={oppdaterOppholdNeste12mnd}
+                                                oppdater={oppdaterOppholdUtenforNorge(
+                                                    'oppholdUtenforNorgeNeste12mnd'
+                                                )}
                                                 tekster={
                                                     teksterOppholdINorge.oppholdUtenforNorge
                                                         .neste12mnd
