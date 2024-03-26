@@ -21,7 +21,7 @@ export const fellesTekster: FellesInnhold = {
         nb: 'Du må bekrefte at du vil gi så riktige opplysninger som mulig.',
     },
     send_inn_søknad: {
-        nb: 'Send inn søknad',
+        nb: 'Send søknad',
     },
     send_inn_søknad_feil: {
         nb: 'Innsending feilet, prøv på nytt.',

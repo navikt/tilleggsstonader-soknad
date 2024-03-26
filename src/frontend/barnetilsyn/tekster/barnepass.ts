@@ -10,11 +10,14 @@ interface BarnepassInnhold {
         tittel: TekstElement<string>;
         innhold: TekstElement<string>;
     };
+    hvem_passer_feilmelding: TekstElement<string>;
     startet_femte_radio: Radiogruppe<JaNei>;
+    startet_femte_feilmelding: TekstElement<string>;
     startet_femte_readmore_header: TekstElement<string>;
     startet_femte_readmore_innhold: TekstElement<string>;
     startet_femte_readmore_punktliste: TekstElement<string[]>;
     årsak_ekstra_pass_radio: Radiogruppe<ÅrsakBarnepass>;
+    årsak_ekstra_pass_feilmelding: TekstElement<string>;
     mer_pleie_alert: {
         tittel: TekstElement<string>;
         innhold: TekstElement<string>;
@@ -70,8 +73,11 @@ export const barnepassTekster: BarnepassInnhold = {
             nb: 'Ved privat barnepass regnes du som arbeidsgiver. Vi kommer til å be deg om å legge ved avtalen du har med barnepasseren og kvittering for betaling.',
         },
     },
+    hvem_passer_feilmelding: {
+        nb: 'Du må velge hva slags pass [0] har.',
+    },
     startet_femte_radio: {
-        header: { nb: 'Har [0] startet i 5. klasse når tiltaket ditt starter?' },
+        header: { nb: 'Har [0] startet i 5.-klasse når tiltaket ditt starter?' },
         alternativer: [
             {
                 value: 'JA',
@@ -82,6 +88,9 @@ export const barnepassTekster: BarnepassInnhold = {
                 label: { nb: 'Nei' },
             },
         ],
+    },
+    startet_femte_feilmelding: {
+        nb: 'Du må svare på om [0] har begynt i 5. klasse.',
     },
     startet_femte_readmore_header: {
         nb: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.',
@@ -95,7 +104,9 @@ export const barnepassTekster: BarnepassInnhold = {
         ],
     },
     årsak_ekstra_pass_radio: {
-        header: { nb: 'Hva er årsaken til at [0] trenger pass etter han har begynt i 5. klasse?' },
+        header: {
+            nb: 'Hva er årsaken til at [0] trenger pass etter at han har begynt i 5.-klasse?',
+        },
         alternativer: [
             {
                 value: ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE,
@@ -110,6 +121,9 @@ export const barnepassTekster: BarnepassInnhold = {
                 label: ÅrsakEkstraPassTilTekst.INGEN_AV_DISSE,
             },
         ],
+    },
+    årsak_ekstra_pass_feilmelding: {
+        nb: 'Du må velge en årsak til at [0] trenger pass etter 5. klasse.',
     },
     mer_pleie_alert: {
         tittel: {

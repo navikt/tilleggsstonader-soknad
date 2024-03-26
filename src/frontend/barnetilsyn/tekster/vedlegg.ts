@@ -120,7 +120,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
     },
     [Vedleggstype.EKSTRA_PASS_BEHOV]: {
         tittel: {
-            nb: 'Dokumentasjon på behov for ekstra pass for [0]',
+            nb: 'Skriftlig uttalelse fra helsepersonell for [0]',
         },
         beskrivelse: {
             nb: 'Legeerklæring eller annen uttalelse fra helsepersonell.',

@@ -12,6 +12,7 @@ import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGr
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
+import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -24,7 +25,10 @@ interface Feil {
     planleggerBoINorgeNeste12mnd?: string;
 }
 
+const teksterOppholdINorge = hovedytelseInnhold.oppholdINorge;
+
 const Hovedytelse = () => {
+    const { locale } = useSpråk();
     const { hovedytelse, settHovedytelse } = useSøknad();
 
     const [ytelse, settYtelse] = useState<EnumFlereValgFelt<Ytelse> | undefined>(
@@ -46,11 +50,15 @@ const Hovedytelse = () => {
         let feil: Feil = {};
 
         if (ytelse === undefined || ytelse.verdier.length === 0) {
-            feil = { ...feil, ytelse: 'Du må velge et alternativ' };
+            feil = { ...feil, ytelse: hovedytelseInnhold.hovedytelse_feilmelding[locale] };
             kanFortsette = false;
         }
+
         if (skalTaStillingTilOpphold && boddSammenhengende === undefined) {
-            feil = { ...feil, boddSammenhengende: 'Du må velge et alternativ' };
+            feil = {
+                ...feil,
+                boddSammenhengende: teksterOppholdINorge.feilmelding_boddSammenhengende[locale],
+            };
             kanFortsette = false;
         }
         if (
@@ -58,7 +66,11 @@ const Hovedytelse = () => {
             boddSammenhengende?.verdi === 'NEI' &&
             planleggerBoINorgeNeste12mnd === undefined
         ) {
-            feil = { ...feil, planleggerBoINorgeNeste12mnd: 'Du må velge et alternativ' };
+            feil = {
+                ...feil,
+                planleggerBoINorgeNeste12mnd:
+                    teksterOppholdINorge.feilmelding_planleggerBoINorgeNeste12mnd[locale],
+            };
             kanFortsette = false;
         }
         settYtelseFeil(feil);
