@@ -3,13 +3,13 @@ import React from 'react';
 import { DatePicker, HStack, Label, Select, VStack, useDatepicker } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
-import LocaleCheckboxGroup from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { OppholdUtenforNorge, ÅrsakOppholdUtenforNorge } from '../../../typer/søknad';
-import { Locale } from '../../../typer/tekst';
-import { nullableTilDato, tilLocaleDateString } from '../../../utils/formatering';
-import { harVerdi } from '../../../utils/typer';
-import { OppholdUtenforNorgeInnhold } from '../../tekster/hovedytelse';
+import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
+import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import { OppholdUtenforNorge, ÅrsakOppholdUtenforNorge } from '../../../../typer/søknad';
+import { Locale } from '../../../../typer/tekst';
+import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
+import { harVerdi } from '../../../../utils/typer';
+import { OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
 
 const Opphold: React.FC<{
     opphold: OppholdUtenforNorge;

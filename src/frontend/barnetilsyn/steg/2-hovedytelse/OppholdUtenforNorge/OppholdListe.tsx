@@ -3,9 +3,9 @@ import React from 'react';
 import LeggTilOppholdKnapp from './LeggTilOppholdKnapp';
 import Opphold from './Opphold';
 import { oppdaterOpphold } from './oppholdUtil';
-import { useSpråk } from '../../../context/SpråkContext';
-import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../typer/søknad';
-import { OppholdUtenforNorgeInnhold } from '../../tekster/hovedytelse';
+import { useSpråk } from '../../../../context/SpråkContext';
+import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../typer/søknad';
+import { OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
 
 const OppholdListe: React.FC<{
     keyOpphold: keyof Pick<

@@ -5,30 +5,30 @@ import { Heading, Select, VStack } from '@navikt/ds-react';
 import { landkoder } from './landkoder';
 import OppholdListe from './OppholdListe';
 import { opprettOppholdForNesteId } from './oppholdUtil';
+import { PellePanel } from '../../../../components/PellePanel/PellePanel';
+import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
+import LocaleInlineLenke from '../../../../components/Teksthåndtering/LocaleInlineLenke';
+import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
+import LocaleTekst from '../../../../components/Teksthåndtering/LocaleTekst';
+import { UnderspørsmålContainer } from '../../../../components/UnderspørsmålContainer';
+import { useSpråk } from '../../../../context/SpråkContext';
+import { useSøknad } from '../../../../context/SøknadContext';
+import { EnumFelt, EnumFlereValgFelt } from '../../../../typer/skjema';
+import {
+    ArbeidOgOpphold,
+    JaNei,
+    MottarPengestøtteTyper,
+    OppholdUtenforNorge,
+} from '../../../../typer/søknad';
+import { harVerdi } from '../../../../utils/typer';
+import { hovedytelseInnhold } from '../../../tekster/hovedytelse';
 import {
     skalTaStillingTilLandForPengestøtte,
     skalTaStillingTilOppholdNeste12mnd,
     skalTaStillingTilOppholdSiste12mnd,
     skalTaStillingTilOppholdUtenforNorge,
     skalTaStillingTilPengestøtte,
-} from './validering';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
-import LocaleCheckboxGroup from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
-import { useSpråk } from '../../../context/SpråkContext';
-import { useSøknad } from '../../../context/SøknadContext';
-import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import {
-    ArbeidOgOpphold,
-    JaNei,
-    MottarPengestøtteTyper,
-    OppholdUtenforNorge,
-} from '../../../typer/søknad';
-import { harVerdi } from '../../../utils/typer';
-import { hovedytelseInnhold } from '../../tekster/hovedytelse';
+} from '../validering';
 
 const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
 

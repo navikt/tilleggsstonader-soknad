@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Heading } from '@navikt/ds-react';
 
-import ArbeidOgOppholdUtenforNorge from './ArbeidOgOppholdUtenforNorge';
+import ArbeidOgOppholdUtenforNorge from './OppholdUtenforNorge/ArbeidOgOppholdUtenforNorge';
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { validerHovedytelse } from './validering';

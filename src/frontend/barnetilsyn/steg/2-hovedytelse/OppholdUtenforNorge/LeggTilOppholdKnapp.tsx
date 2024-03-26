@@ -4,9 +4,9 @@ import { PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack } from '@navikt/ds-react';
 
 import { opprettOppholdForNesteId } from './oppholdUtil';
-import { useSpråk } from '../../../context/SpråkContext';
-import { ArbeidOgOpphold } from '../../../typer/søknad';
-import { hovedytelseInnhold } from '../../tekster/hovedytelse';
+import { useSpråk } from '../../../../context/SpråkContext';
+import { ArbeidOgOpphold } from '../../../../typer/søknad';
+import { hovedytelseInnhold } from '../../../tekster/hovedytelse';
 
 const LeggTilOppholdKnapp: React.FC<{
     key: keyof Pick<

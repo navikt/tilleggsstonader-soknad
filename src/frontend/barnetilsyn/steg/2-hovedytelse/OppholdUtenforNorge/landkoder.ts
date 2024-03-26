@@ -1,4 +1,4 @@
-import { Landkoder } from '../../../typer/kodeverk';
+import { Landkoder } from '../../../../typer/kodeverk';
 
 /**
  * TODO denne burde hentes fra backend eller bruke i18n-iso-countries
