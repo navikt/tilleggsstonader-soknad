@@ -185,6 +185,8 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         });
     };
 
+    const leggTilOppholdTekst = teksterOppholdINorge.oppholdUtenforNorge.knapp_legg_til[locale];
+
     return (
         <UnderspørsmålContainer>
             <VStack gap="6">
@@ -282,10 +284,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                             }
                                             icon={<PlusIcon />}
                                         >
-                                            {
-                                                teksterOppholdINorge.oppholdUtenforNorge
-                                                    .knapp_legg_til[locale]
-                                            }
+                                            {leggTilOppholdTekst}
                                         </Button>
                                     </HStack>
                                 </>
@@ -323,10 +322,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                             }
                                             icon={<PlusIcon />}
                                         >
-                                            {
-                                                teksterOppholdINorge.oppholdUtenforNorge
-                                                    .knapp_legg_til[locale]
-                                            }
+                                            {leggTilOppholdTekst}
                                         </Button>
                                     </HStack>
                                 </>
