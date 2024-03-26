@@ -71,7 +71,9 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             hvilketLandMottarDuPengestøtteFra: skalTaStillingTilLandForPengestøtte(verdi)
                 ? prevState.hvilketLandMottarDuPengestøtteFra
                 : undefined,
-            oppholdUtenforNorge: [],
+            oppholdUtenforNorgeSiste12mnd: [],
+            harDuOppholdUtenforNorgeSiste12mnd: undefined,
+            oppholdUtenforNorgeNeste12mnd: [],
         }));
     };
 
