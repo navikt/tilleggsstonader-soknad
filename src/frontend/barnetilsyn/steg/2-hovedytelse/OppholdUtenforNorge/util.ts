@@ -42,9 +42,14 @@ export const opprettOppholdForNesteId = (opphold: OppholdUtenforNorge[]): Opphol
     const maxId = utledMaxId(opphold);
     return { _id: maxId + 1, lagret: false };
 };
-export const skalTaStillingTilPengestøtte = (opphold: ArbeidOgOpphold) =>
+
+export const skalTaStillingTilLandForJobberIAnnetLand = (opphold: ArbeidOgOpphold): boolean =>
+    opphold.jobberIAnnetLandEnnNorge?.verdi === 'JA';
+
+export const skalTaStillingTilPengestøtte = (opphold: ArbeidOgOpphold): boolean =>
     opphold?.jobberIAnnetLandEnnNorge?.verdi === 'NEI' ||
     harVerdi(opphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi);
+
 const mottarPengestøtteTyperSomMåSåTaStillingTilLand: MottarPengestøtteTyper[] = [
     'SYKEPENGER',
     'PENSJON',
@@ -52,14 +57,14 @@ const mottarPengestøtteTyperSomMåSåTaStillingTilLand: MottarPengestøtteTyper
 ];
 export const skalTaStillingTilLandForPengestøtte = (
     verdier: EnumFlereValgFelt<MottarPengestøtteTyper> | undefined
-) =>
+): boolean =>
     (verdier?.verdier || []).some(
         (verdi) => mottarPengestøtteTyperSomMåSåTaStillingTilLand.indexOf(verdi.verdi) > -1
     );
-export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold) =>
+export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold): boolean =>
     (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length > 0 &&
     !skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand);
-export const skalTaStillingTilOppholdSiste12mnd = (opphold: ArbeidOgOpphold) =>
+export const skalTaStillingTilOppholdSiste12mnd = (opphold: ArbeidOgOpphold): boolean =>
     opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === 'JA';
-export const skalTaStillingTilOppholdNeste12mnd = (opphold: ArbeidOgOpphold) =>
+export const skalTaStillingTilOppholdNeste12mnd = (opphold: ArbeidOgOpphold): boolean =>
     opphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi === 'JA';

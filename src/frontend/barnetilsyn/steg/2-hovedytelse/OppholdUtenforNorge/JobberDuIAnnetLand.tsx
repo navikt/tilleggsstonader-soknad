@@ -3,6 +3,7 @@ import React from 'react';
 import { Select } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
+import { skalTaStillingTilLandForJobberIAnnetLand } from './util';
 import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
 import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
 import { useSpråk } from '../../../../context/SpråkContext';
@@ -71,7 +72,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
                 error={valideringsfeil.jobberIAnnetLandEnnNorge?.melding}
             />
 
-            {arbeidOgOpphold.jobberIAnnetLandEnnNorge?.verdi === 'JA' && (
+            {skalTaStillingTilLandForJobberIAnnetLand(arbeidOgOpphold) && (
                 <BlåVenstreRammeContainer>
                     <Select
                         id={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.id}

@@ -1,4 +1,5 @@
 import {
+    skalTaStillingTilLandForJobberIAnnetLand,
     skalTaStillingTilLandForPengestøtte,
     skalTaStillingTilOppholdSiste12mnd,
     skalTaStillingTilOppholdUtenforNorge,
@@ -111,7 +112,7 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
         };
     }
     if (
-        opphold.jobberIAnnetLandEnnNorge?.verdi === 'JA' &&
+        skalTaStillingTilLandForJobberIAnnetLand(opphold) &&
         !harVerdi(opphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi)
     ) {
         feil = {
