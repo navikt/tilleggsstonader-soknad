@@ -3,6 +3,7 @@ import React from 'react';
 import { Heading, VStack } from '@navikt/ds-react';
 
 import JobberDuIAnnetLand from './JobberDuIAnnetLand';
+import MottarDuPengestøtte from './MottarDuPengestøtte';
 import { PellePanel } from '../../../../components/PellePanel/PellePanel';
 import LocaleInlineLenke from '../../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../../../../components/Teksthåndtering/LocaleTekst';
@@ -27,6 +28,10 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                 </PellePanel>
 
                 <JobberDuIAnnetLand
+                    arbeidOgOpphold={arbeidOgOpphold}
+                    settArbeidOgOpphold={settArbeidOgOpphold}
+                />
+                <MottarDuPengestøtte
                     arbeidOgOpphold={arbeidOgOpphold}
                     settArbeidOgOpphold={settArbeidOgOpphold}
                 />
