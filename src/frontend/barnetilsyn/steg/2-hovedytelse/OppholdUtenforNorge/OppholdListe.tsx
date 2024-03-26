@@ -4,7 +4,7 @@ import { PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label } from '@navikt/ds-react';
 
 import LagredeOpphold from './LagredeOpphold';
-import Opphold from './Opphold';
+import NyttOpphold from './NyttOpphold';
 import { OppdatertOppholdFelt } from './typer';
 import { oppdaterOpphold, opprettOppholdForNesteId } from './util';
 import {
@@ -134,7 +134,7 @@ const OppholdListe: React.FC<{
                 </div>
             )}
             {ulagretOpphold && (
-                <Opphold
+                <NyttOpphold
                     keyOpphold={keyOpphold}
                     opphold={ulagretOpphold}
                     oppdater={oppdaterOppholdUtenforNorge}

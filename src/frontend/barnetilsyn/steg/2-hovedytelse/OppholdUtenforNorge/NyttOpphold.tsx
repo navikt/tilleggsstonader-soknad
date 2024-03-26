@@ -19,7 +19,7 @@ import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formater
 import { harVerdi } from '../../../../utils/typer';
 import { OppholdInnhold } from '../../../tekster/opphold';
 
-const Opphold: React.FC<{
+const NyttOpphold: React.FC<{
     keyOpphold: keyof Pick<
         ArbeidOgOpphold,
         'oppholdUtenforNorgeSiste12mnd' | 'oppholdUtenforNorgeNeste12mnd'
@@ -118,4 +118,4 @@ const Opphold: React.FC<{
     );
 };
 
-export default Opphold;
+export default NyttOpphold;
