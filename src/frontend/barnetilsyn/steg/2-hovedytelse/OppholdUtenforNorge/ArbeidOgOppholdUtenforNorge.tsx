@@ -132,6 +132,11 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                 oppholdUtenforNorgeSiste12mnd: opphold,
             };
         });
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            harDuOppholdUtenforNorgeSiste12mnd: undefined,
+            // TODO oppholdUtenforNorgeSiste12mnd
+        }));
     };
 
     const oppdaterOppholdNeste12mnd = (verdi: EnumFelt<JaNei>) => {
@@ -214,11 +219,11 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                         )}
                         {skalTaStillingTilOppholdUtenforNorge(arbeidOgOpphold) && (
                             <LocaleRadioGroup
-                                id={valideringsfeil.harDuOppholdUtenforNorge?.id}
+                                id={valideringsfeil.harDuOppholdUtenforNorgeSiste12mnd?.id}
                                 tekst={teksterOppholdINorge.oppholdUtenforNorge.radioSiste12mnd}
                                 value={arbeidOgOpphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi}
                                 onChange={oppdaterOppholdSiste12mnd}
-                                error={valideringsfeil.harDuOppholdUtenforNorge?.melding}
+                                error={valideringsfeil.harDuOppholdUtenforNorgeSiste12mnd?.melding}
                             />
                         )}
                         {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (

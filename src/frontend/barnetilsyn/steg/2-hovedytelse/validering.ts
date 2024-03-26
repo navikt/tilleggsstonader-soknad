@@ -109,7 +109,7 @@ export const validerHovedytelse = (
         ) {
             feil = {
                 ...feil,
-                harDuOppholdUtenforNorge: {
+                harDuOppholdUtenforNorgeSiste12mnd: {
                     id: '6',
                     melding:
                         teksterOppholdINorge.oppholdUtenforNorge.feilmelding_radioSiste12mnd[
