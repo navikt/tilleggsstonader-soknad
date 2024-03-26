@@ -1,5 +1,10 @@
 import React from 'react';
 
+import styled from 'styled-components';
+
+import { VStack } from '@navikt/ds-react';
+import { ABlue500 } from '@navikt/ds-tokens/dist/tokens';
+
 import OppholdListe from './OppholdListe';
 import {
     opprettOppholdForNesteId,
@@ -13,6 +18,11 @@ import { EnumFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
 import { oppholdUtenforNorgeInnhold } from '../../../tekster/opphold';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from '../validering';
+
+const BlåVenstreRammeContainer = styled(VStack)`
+    border-left: 5px solid ${ABlue500};
+    padding: 0.5rem;
+`;
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
@@ -76,29 +86,29 @@ const OppholdUtenforNorgeContainer: React.FC<Props> = ({
                 />
             )}
             {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
-                <OppholdListe
-                    keyOpphold={'oppholdUtenforNorgeSiste12mnd'}
-                    arbeidOgOpphold={arbeidOgOpphold}
-                    settArbeidOgOpphold={settArbeidOgOpphold}
-                    tekster={oppholdUtenforNorgeInnhold.siste12mnd}
-                />
-            )}
-            {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
-                <LocaleRadioGroup
-                    id={valideringsfeil.harDuOppholdUtenforNorgeNeste12mnd?.id}
-                    tekst={oppholdUtenforNorgeInnhold.radioNeste12mnd}
-                    value={arbeidOgOpphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi}
-                    onChange={oppdaterOppholdNeste12mnd}
-                    error={valideringsfeil.harDuOppholdUtenforNorgeNeste12mnd?.melding}
-                />
-            )}
-            {skalTaStillingTilOppholdNeste12mnd(arbeidOgOpphold) && (
-                <OppholdListe
-                    keyOpphold={'oppholdUtenforNorgeNeste12mnd'}
-                    arbeidOgOpphold={arbeidOgOpphold}
-                    settArbeidOgOpphold={settArbeidOgOpphold}
-                    tekster={oppholdUtenforNorgeInnhold.neste12mnd}
-                />
+                <BlåVenstreRammeContainer gap={'6'}>
+                    <OppholdListe
+                        keyOpphold={'oppholdUtenforNorgeSiste12mnd'}
+                        arbeidOgOpphold={arbeidOgOpphold}
+                        settArbeidOgOpphold={settArbeidOgOpphold}
+                        tekster={oppholdUtenforNorgeInnhold.siste12mnd}
+                    />
+                    <LocaleRadioGroup
+                        id={valideringsfeil.harDuOppholdUtenforNorgeNeste12mnd?.id}
+                        tekst={oppholdUtenforNorgeInnhold.radioNeste12mnd}
+                        value={arbeidOgOpphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi}
+                        onChange={oppdaterOppholdNeste12mnd}
+                        error={valideringsfeil.harDuOppholdUtenforNorgeNeste12mnd?.melding}
+                    />
+                    {skalTaStillingTilOppholdNeste12mnd(arbeidOgOpphold) && (
+                        <OppholdListe
+                            keyOpphold={'oppholdUtenforNorgeNeste12mnd'}
+                            arbeidOgOpphold={arbeidOgOpphold}
+                            settArbeidOgOpphold={settArbeidOgOpphold}
+                            tekster={oppholdUtenforNorgeInnhold.neste12mnd}
+                        />
+                    )}
+                </BlåVenstreRammeContainer>
             )}
         </>
     );

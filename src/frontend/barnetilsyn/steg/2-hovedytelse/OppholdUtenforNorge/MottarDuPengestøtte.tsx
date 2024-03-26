@@ -4,6 +4,7 @@ import { Select } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
 import { skalTaStillingTilLandForPengestøtte } from './util';
+import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
 import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { useSøknad } from '../../../../context/SøknadContext';
@@ -75,18 +76,20 @@ const MottarDuPengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOp
             {skalTaStillingTilLandForPengestøtte(
                 arbeidOgOpphold.mottarDuPengestøtteFraAnnetLand
             ) && (
-                <Select
-                    id={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.id}
-                    label={arbeidOgOppholdInnhold.select_hvilket_land_pengestøtte[locale]}
-                    onChange={oppdatertHvilketLandMottarPengestøtte}
-                    value={arbeidOgOpphold.hvilketLandMottarDuPengestøtteFra?.verdi || ''}
-                    error={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.melding}
-                >
-                    <option value="">{fellesTekster.velg_land[locale]}</option>
-                    {Object.entries(landkoder).map(([kode, tekst]) => (
-                        <option value={kode}>{tekst}</option>
-                    ))}
-                </Select>
+                <BlåVenstreRammeContainer>
+                    <Select
+                        id={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.id}
+                        label={arbeidOgOppholdInnhold.select_hvilket_land_pengestøtte[locale]}
+                        onChange={oppdatertHvilketLandMottarPengestøtte}
+                        value={arbeidOgOpphold.hvilketLandMottarDuPengestøtteFra?.verdi || ''}
+                        error={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.melding}
+                    >
+                        <option value="">{fellesTekster.velg_land[locale]}</option>
+                        {Object.entries(landkoder).map(([kode, tekst]) => (
+                            <option value={kode}>{tekst}</option>
+                        ))}
+                    </Select>
+                </BlåVenstreRammeContainer>
             )}
         </>
     );

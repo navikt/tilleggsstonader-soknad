@@ -3,6 +3,7 @@ import React from 'react';
 import { Select } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
+import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
 import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { useSøknad } from '../../../../context/SøknadContext';
@@ -71,20 +72,24 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
             />
 
             {arbeidOgOpphold.jobberIAnnetLandEnnNorge?.verdi === 'JA' && (
-                <Select
-                    id={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.id}
-                    label={
-                        arbeidOgOppholdInnhold.select_hvilket_land_jobber_i_annet_land_label[locale]
-                    }
-                    onChange={oppdatertHvilketLandJobberI}
-                    value={arbeidOgOpphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi || ''}
-                    error={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.melding}
-                >
-                    <option value="">{fellesTekster.velg_land[locale]}</option>
-                    {Object.entries(landkoder).map(([kode, tekst]) => (
-                        <option value={kode}>{tekst}</option>
-                    ))}
-                </Select>
+                <BlåVenstreRammeContainer>
+                    <Select
+                        id={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.id}
+                        label={
+                            arbeidOgOppholdInnhold.select_hvilket_land_jobber_i_annet_land_label[
+                                locale
+                            ]
+                        }
+                        onChange={oppdatertHvilketLandJobberI}
+                        value={arbeidOgOpphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi || ''}
+                        error={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.melding}
+                    >
+                        <option value="">{fellesTekster.velg_land[locale]}</option>
+                        {Object.entries(landkoder).map(([kode, tekst]) => (
+                            <option value={kode}>{tekst}</option>
+                        ))}
+                    </Select>
+                </BlåVenstreRammeContainer>
             )}
         </>
     );
