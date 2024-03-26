@@ -2,22 +2,22 @@ import React from 'react';
 
 import { DatePicker, HStack, Label, Select, useDatepicker, VStack } from '@navikt/ds-react';
 
-import { landkoder } from './landkoder';
 import { OppdatertOppholdFelt } from './typer';
-import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from './validering';
-import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import { useSøknad } from '../../../../context/SøknadContext';
-import { fellesTekster } from '../../../../tekster/felles';
-import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import LocaleCheckboxGroup from '../../../../../components/Teksthåndtering/LocaleCheckboxGroup';
+import { useSøknad } from '../../../../../context/SøknadContext';
+import { fellesTekster } from '../../../../../tekster/felles';
+import { EnumFlereValgFelt } from '../../../../../typer/skjema';
 import {
     ArbeidOgOpphold,
     OppholdUtenforNorge,
     ÅrsakOppholdUtenforNorge,
-} from '../../../../typer/søknad';
-import { Locale } from '../../../../typer/tekst';
-import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
-import { harVerdi } from '../../../../utils/typer';
-import { OppholdInnhold } from '../../../tekster/opphold';
+} from '../../../../../typer/søknad';
+import { Locale } from '../../../../../typer/tekst';
+import { nullableTilDato, tilLocaleDateString } from '../../../../../utils/formatering';
+import { harVerdi } from '../../../../../utils/typer';
+import { OppholdInnhold } from '../../../../tekster/opphold';
+import { landkoder } from '../landkoder';
+import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from '../validering';
 
 const NyttOpphold: React.FC<{
     keyOpphold: keyof Pick<

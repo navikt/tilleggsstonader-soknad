@@ -6,17 +6,17 @@ import { VStack } from '@navikt/ds-react';
 import { ABlue500 } from '@navikt/ds-tokens/dist/tokens';
 
 import OppholdListe from './OppholdListe';
+import LocaleRadioGroup from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
+import { useSøknad } from '../../../../../context/SøknadContext';
+import { EnumFelt } from '../../../../../typer/skjema';
+import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../../typer/søknad';
+import { oppholdUtenforNorgeInnhold } from '../../../../tekster/opphold';
 import {
     opprettOppholdForNesteId,
     skalTaStillingTilOppholdNeste12mnd,
     skalTaStillingTilOppholdSiste12mnd,
-} from './util';
-import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
-import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { useSøknad } from '../../../../context/SøknadContext';
-import { EnumFelt } from '../../../../typer/skjema';
-import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
-import { oppholdUtenforNorgeInnhold } from '../../../tekster/opphold';
+} from '../util';
+import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from '../validering';
 
 const BlåVenstreRammeContainer = styled(VStack)`
     border-left: 5px solid ${ABlue500};

@@ -4,7 +4,7 @@ import { Heading, VStack } from '@navikt/ds-react';
 
 import JobberDuIAnnetLand from './JobberDuIAnnetLand';
 import MottarDuPengestøtte from './MottarDuPengestøtte';
-import OppholdUtenforNorgeContainer from './OppholdUtenforNorgeContainer';
+import OppholdUtenforNorgeContainer from './Opphold/OppholdUtenforNorgeContainer';
 import { PellePanel } from '../../../../components/PellePanel/PellePanel';
 import LocaleInlineLenke from '../../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../../../../components/Teksthåndtering/LocaleTekst';
