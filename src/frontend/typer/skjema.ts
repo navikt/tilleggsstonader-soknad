@@ -13,6 +13,12 @@ export interface EnumFlereValgFelt<T> {
     alternativer: string[];
 }
 
+export interface SelectFelt {
+    label: string;
+    verdi: string;
+    svarTekst: string;
+}
+
 export interface VerdiFelt<T> {
     verdi: T;
     label: string;

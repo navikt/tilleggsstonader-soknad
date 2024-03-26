@@ -10,6 +10,9 @@ export const formaterIsoDato = (dato: string): string => {
     return parseISO(dato).toLocaleDateString('no-NO', datoFormat);
 };
 
+export const formaterNullableIsoDato = (dato: string | undefined): string | undefined =>
+    dato && formaterIsoDato(dato);
+
 export const formaterIsoDatoTid = (dato: string): string => {
     return format(parseISO(dato), "dd.MM.yyyy 'kl'.HH:mm");
 };

@@ -2,6 +2,8 @@ export function manglerVerdi<T>(verdi: T | undefined | null) {
     return verdi === undefined || verdi === null;
 }
 
+export const harVerdi = (str: string | undefined | null): boolean => !!str && str.trim() !== '';
+
 export function valuerOrThrow<T>(
     verdi: T | undefined | null,
     message: string = 'Mangler verdi'

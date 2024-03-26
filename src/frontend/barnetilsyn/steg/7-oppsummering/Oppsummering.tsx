@@ -105,8 +105,6 @@ const DinSituasjon: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hove
     const ytelser = hovedytelse && verdiFelterTilTekstElement(hovedytelse.ytelse.verdier);
     const ytelseslabel = hovedytelse?.ytelse.label;
 
-    const boddSammenhengende = hovedytelse?.boddSammenhengende;
-    const planleggerBoINorgeNeste12mnd = hovedytelse?.planleggerBoINorgeNeste12mnd;
     // TODO: Hent ut svar om arbeid i eller utenfor norge også. Radiofeltene finnes ikke per nå.
 
     return (
@@ -118,7 +116,7 @@ const DinSituasjon: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hove
             }}
         >
             {ytelser && <LocalePunktliste innhold={ytelser} tittel={{ nb: ytelseslabel || '' }} />}
-            {boddSammenhengende && (
+            {/*boddSammenhengende && ( TODO fiks denne
                 <>
                     <Label>{boddSammenhengende.label}</Label>
                     <BodyShort spacing>{boddSammenhengende.svarTekst}</BodyShort>
@@ -129,7 +127,7 @@ const DinSituasjon: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hove
                     <Label>{planleggerBoINorgeNeste12mnd.label}</Label>
                     <BodyShort spacing>{planleggerBoINorgeNeste12mnd.svarTekst}</BodyShort>
                 </>
-            )}
+            )*/}
         </AccordionItem>
     );
 };
