@@ -12,19 +12,23 @@ import { OppholdUtenforNorgeInnhold } from '../../tekster/hovedytelse';
 
 const OppholdUtenforNorge: React.FC<{
     opphold: OppholdUtenforNorge;
-    oppdater: <T extends OppholdUtenforNorge, K extends keyof T>(key: K, verdi: T[K]) => void;
+    oppdater: <T extends OppholdUtenforNorge, K extends keyof T>(
+        id: number,
+        key: K,
+        verdi: T[K]
+    ) => void;
     tekster: OppholdUtenforNorgeInnhold;
     locale: Locale;
 }> = ({ opphold, oppdater, tekster, locale }) => {
     const oppdatertHvilketLandOppholdUtenforNorge = (e: React.ChangeEvent<HTMLSelectElement>) => {
         if (harVerdi(e.target.value)) {
-            oppdater('land', {
+            oppdater(opphold._id, 'land', {
                 label: tekster.select_hvilket_land[locale],
                 verdi: e.target.value,
                 svarTekst: landkoder[e.target.value] || 'Finner ikke mapping',
             });
         } else {
-            oppdater('land', undefined);
+            oppdater(opphold._id, 'land', undefined);
         }
     };
 
@@ -47,7 +51,7 @@ const OppholdUtenforNorge: React.FC<{
                 tekst={tekster.checkbox_årsak}
                 value={opphold.årsak?.verdier || []}
                 onChange={(verdi: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>) =>
-                    oppdater('årsak', verdi)
+                    oppdater(opphold._id, 'årsak', verdi)
                 }
                 //error={valideringsfeil.oppholdUtenforNorgeÅrsak?.melding}
             />

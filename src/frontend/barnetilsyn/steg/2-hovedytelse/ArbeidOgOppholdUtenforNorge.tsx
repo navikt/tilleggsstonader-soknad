@@ -4,6 +4,7 @@ import { Button, Heading, Select, VStack } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
 import OppholdUtenforNorge from './OppholdUtenforNorge';
+import { oppdaterOpphold } from './oppholdUtil';
 import {
     skalTaStillingTilLandForPengestøtte,
     skalTaStillingTilOppholdsland,
@@ -114,6 +115,20 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         });
     };
 
+    const oppdaterOppholdSiste12mnd = <T extends OppholdUtenforNorge, K extends keyof T>(
+        id: number,
+        key: K,
+        verdi: T[K]
+    ) => {
+        settArbeidOgOpphold((prevState) => {
+            const oppholdUtenforNorge = prevState.oppholdUtenforNorgeSiste12mnd;
+            return {
+                ...prevState,
+                oppholdUtenforNorgeSiste12mnd: oppdaterOpphold(oppholdUtenforNorge, id, key, verdi),
+            };
+        });
+    };
+
     return (
         <UnderspørsmålContainer>
             <VStack gap="6">
@@ -194,7 +209,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                         (opphold) => (
                                             <OppholdUtenforNorge
                                                 opphold={opphold}
-                                                oppdater={() => {}}
+                                                oppdater={oppdaterOppholdSiste12mnd}
                                                 tekster={
                                                     teksterOppholdINorge.oppholdUtenforNorge
                                                         .siste12mnd
