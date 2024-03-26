@@ -41,6 +41,19 @@ export const errorKeyTom = (
     >
 ) => `${keyOpphold}_tom`;
 
+export const nullstillteOppholsfeilSiste12mnd: Valideringsfeil = {
+    [errorKeyLand('oppholdUtenforNorgeSiste12mnd')]: undefined,
+    [errorKeyÅrsak('oppholdUtenforNorgeSiste12mnd')]: undefined,
+    [errorKeyFom('oppholdUtenforNorgeSiste12mnd')]: undefined,
+    [errorKeyTom('oppholdUtenforNorgeSiste12mnd')]: undefined,
+};
+export const nullstillteOppholsfeilNeste12mnd: Valideringsfeil = {
+    [errorKeyLand('oppholdUtenforNorgeNeste12mnd')]: undefined,
+    [errorKeyÅrsak('oppholdUtenforNorgeNeste12mnd')]: undefined,
+    [errorKeyFom('oppholdUtenforNorgeNeste12mnd')]: undefined,
+    [errorKeyTom('oppholdUtenforNorgeNeste12mnd')]: undefined,
+};
+
 /**
  * For å ha unike feilid på felter
  */

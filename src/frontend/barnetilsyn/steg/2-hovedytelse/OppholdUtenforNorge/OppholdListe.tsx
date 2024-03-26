@@ -12,7 +12,11 @@ import { useSøknad } from '../../../../context/SøknadContext';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { inneholderFeil } from '../../../../typer/validering';
 import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
-import { validerOppholdUtenforNorgeUnderRedigering } from '../validering';
+import {
+    nullstillteOppholsfeilNeste12mnd,
+    nullstillteOppholsfeilSiste12mnd,
+    validerOppholdUtenforNorgeUnderRedigering,
+} from '../validering';
 
 const teksterOppholdUtenforNorge = hovedytelseInnhold.arbeidOgOpphold.oppholdUtenforNorge;
 
@@ -27,6 +31,10 @@ const OppholdListe: React.FC<{
 }> = ({ keyOpphold, arbeidOgOpphold, settArbeidOgOpphold, tekster }) => {
     const { locale } = useSpråk();
     const { settValideringsfeil } = useSøknad();
+
+    const oppholdUtenforNorge = arbeidOgOpphold[keyOpphold];
+    const ulagretOpphold = oppholdUtenforNorge.find((opphold) => !opphold.lagret);
+    const lagredeOpphold = oppholdUtenforNorge.filter((opphold) => opphold.lagret);
 
     /**
      * Returnerer en metode som er generisk som oppdaterer felter i oppholdutenfor norge,
@@ -85,11 +93,18 @@ const OppholdListe: React.FC<{
             ...prevState,
             [keyOpphold]: prevState[keyOpphold].filter((opphold) => opphold._id !== id),
         }));
+        if (ulagretOpphold?._id === id) {
+            const nullstiltefeilter =
+                keyOpphold === 'oppholdUtenforNorgeSiste12mnd'
+                    ? nullstillteOppholsfeilSiste12mnd
+                    : nullstillteOppholsfeilNeste12mnd;
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                ...nullstiltefeilter,
+            }));
+        }
     };
 
-    const oppholdUtenforNorge = arbeidOgOpphold[keyOpphold];
-    const ulagredeOpphold = oppholdUtenforNorge.filter((opphold) => !opphold.lagret);
-    const lagredeOpphold = oppholdUtenforNorge.filter((opphold) => opphold.lagret);
     return (
         <>
             <LagredeOpphold
@@ -97,30 +112,28 @@ const OppholdListe: React.FC<{
                 slettOpphold={slettOpphold}
                 locale={locale}
             />
-            {lagredeOpphold.length > 0 && ulagredeOpphold.length > 0 && (
+            {lagredeOpphold.length > 0 && ulagretOpphold && (
                 <div>
                     <Label>{teksterOppholdUtenforNorge.label_flere_utenlandsopphold[locale]}</Label>
                     <div>
                         <Button
                             variant={'tertiary'}
-                            onClick={() =>
-                                slettOpphold(ulagredeOpphold[ulagredeOpphold.length - 1]._id)
-                            }
+                            onClick={() => slettOpphold(ulagretOpphold._id)}
                         >
                             {teksterOppholdUtenforNorge.knapp_angre_legg_til[locale]}
                         </Button>
                     </div>
                 </div>
             )}
-            {ulagredeOpphold.map((opphold) => (
+            {ulagretOpphold && (
                 <Opphold
                     keyOpphold={keyOpphold}
-                    opphold={opphold}
+                    opphold={ulagretOpphold}
                     oppdater={oppdaterOppholdUtenforNorge}
                     tekster={tekster}
                     locale={locale}
                 />
-            ))}
+            )}
             <HStack>
                 <Button variant={'tertiary'} onClick={leggTilOpphold} icon={<PlusIcon />}>
                     {teksterOppholdUtenforNorge.knapp_legg_til[locale]}
@@ -129,5 +142,4 @@ const OppholdListe: React.FC<{
         </>
     );
 };
-
 export default OppholdListe;

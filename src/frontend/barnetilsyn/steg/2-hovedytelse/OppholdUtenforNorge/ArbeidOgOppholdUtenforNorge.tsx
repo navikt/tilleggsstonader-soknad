@@ -29,6 +29,7 @@ import {
 } from '../../../../typer/søknad';
 import { harVerdi } from '../../../../utils/typer';
 import { hovedytelseInnhold } from '../../../tekster/hovedytelse';
+import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from '../validering';
 
 const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
 
@@ -58,9 +59,9 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             hvilketLand: undefined,
             mottarDuPengestøtteFraAnnetLand: undefined,
             harDuOppholdUtenforNorgeSiste12mnd: undefined,
-            //oppholdUtenforNorgeSiste12mnd: undefined, // TODO
             harDuOppholdUtenforNorgeNeste12mnd: undefined,
-            //oppholdUtenforNorgeNeste12mnd: undefined // TODO
+            ...nullstillteOppholsfeilSiste12mnd,
+            ...nullstillteOppholsfeilNeste12mnd,
         }));
     };
     const oppdatertHvilketLandJobberI = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -97,9 +98,9 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             mottarDuPengestøtteFraAnnetLand: undefined,
             hvilketLandMottarDuPengestøtteFra: undefined,
             harDuOppholdUtenforNorgeSiste12mnd: undefined,
-            //oppholdUtenforNorgeSiste12mnd: undefined, // TODO
             harDuOppholdUtenforNorgeNeste12mnd: undefined,
-            //oppholdUtenforNorgeNeste12mnd: undefined // TODO
+            ...nullstillteOppholsfeilSiste12mnd,
+            ...nullstillteOppholsfeilNeste12mnd,
         }));
     };
 
@@ -135,9 +136,9 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         settValideringsfeil((prevState) => ({
             ...prevState,
             harDuOppholdUtenforNorgeSiste12mnd: undefined,
-            // TODO oppholdUtenforNorgeSiste12mnd
             harDuOppholdUtenforNorgeNeste12mnd: undefined,
-            // TODO oppholdUtenforNorgeNeste12mnd
+            ...nullstillteOppholsfeilSiste12mnd,
+            ...nullstillteOppholsfeilNeste12mnd,
         }));
     };
 
@@ -156,7 +157,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         settValideringsfeil((prevState) => ({
             ...prevState,
             harDuOppholdUtenforNorgeNeste12mnd: undefined,
-            // TODO oppholdUtenforNorgeSiste12mnd
+            ...nullstillteOppholsfeilNeste12mnd,
         }));
     };
 
