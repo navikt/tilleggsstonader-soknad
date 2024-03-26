@@ -11,9 +11,7 @@ import LocaleInlineLenke from '../../../../components/Teksthåndtering/LocaleInl
 import LocaleTekst from '../../../../components/Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../../../components/UnderspørsmålContainer';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
-import { hovedytelseInnhold } from '../../../tekster/hovedytelse';
-
-const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
+import { arbeidOgOppholdInnhold } from '../../../tekster/opphold';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
@@ -25,10 +23,10 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         <UnderspørsmålContainer>
             <VStack gap="6">
                 <Heading size="medium">
-                    <LocaleTekst tekst={teksterOppholdINorge.tittel} />
+                    <LocaleTekst tekst={arbeidOgOppholdInnhold.tittel} />
                 </Heading>
                 <PellePanel>
-                    <LocaleInlineLenke tekst={teksterOppholdINorge.guide_innhold} />
+                    <LocaleInlineLenke tekst={arbeidOgOppholdInnhold.guide_innhold} />
                 </PellePanel>
 
                 <JobberDuIAnnetLand

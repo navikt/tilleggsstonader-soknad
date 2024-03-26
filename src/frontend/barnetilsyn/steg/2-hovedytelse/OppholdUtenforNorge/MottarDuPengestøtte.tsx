@@ -11,7 +11,7 @@ import { fellesTekster } from '../../../../tekster/felles';
 import { EnumFlereValgFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../../typer/søknad';
 import { harVerdi } from '../../../../utils/typer';
-import { teksterArbeidOgOpphold } from '../../../tekster/hovedytelse';
+import { arbeidOgOppholdInnhold } from '../../../tekster/opphold';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from '../validering';
 
 interface Props {
@@ -50,7 +50,7 @@ const MottarDuPengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOp
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
             hvilketLandMottarDuPengestøtteFra: {
-                label: teksterArbeidOgOpphold.select_hvilket_land_pengestøtte[locale],
+                label: arbeidOgOppholdInnhold.select_hvilket_land_pengestøtte[locale],
                 verdi: e.target.value || '',
                 svarTekst: landkoder[e.target.value] || '',
             },
@@ -67,7 +67,7 @@ const MottarDuPengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOp
         <>
             <LocaleCheckboxGroup
                 id={valideringsfeil.mottarDuPengestøtteFraAnnetLand?.id}
-                tekst={teksterArbeidOgOpphold.checkbox_mottar_du_pengestøtte}
+                tekst={arbeidOgOppholdInnhold.checkbox_mottar_du_pengestøtte}
                 value={arbeidOgOpphold.mottarDuPengestøtteFraAnnetLand?.verdier || []}
                 error={valideringsfeil.mottarDuPengestøtteFraAnnetLand?.melding}
                 onChange={oppdaterMottarDuPengestøtte}
@@ -77,7 +77,7 @@ const MottarDuPengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOp
             ) && (
                 <Select
                     id={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.id}
-                    label={teksterArbeidOgOpphold.select_hvilket_land_pengestøtte[locale]}
+                    label={arbeidOgOppholdInnhold.select_hvilket_land_pengestøtte[locale]}
                     onChange={oppdatertHvilketLandMottarPengestøtte}
                     value={arbeidOgOpphold.hvilketLandMottarDuPengestøtteFra?.verdi || ''}
                     error={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.melding}

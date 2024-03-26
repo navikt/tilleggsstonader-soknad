@@ -15,7 +15,7 @@ import {
 } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
 import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
-import { OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
+import { OppholdInnhold } from '../../../tekster/opphold';
 import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from '../validering';
 
 const Opphold: React.FC<{
@@ -25,7 +25,7 @@ const Opphold: React.FC<{
     >;
     opphold: OppholdUtenforNorge;
     oppdater: OppdatertOppholdFelt;
-    tekster: OppholdUtenforNorgeInnhold;
+    tekster: OppholdInnhold;
     locale: Locale;
 }> = ({ keyOpphold, opphold, oppdater, tekster, locale }) => {
     const { valideringsfeil } = useSøknad();

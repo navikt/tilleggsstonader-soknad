@@ -6,9 +6,7 @@ import { AGray800 } from '@navikt/ds-tokens/dist/tokens';
 import { OppholdUtenforNorge } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
 import { formaterNullableIsoDato } from '../../../../utils/formatering';
-import { hovedytelseInnhold } from '../../../tekster/hovedytelse';
-
-const teksterOppholdUtenforNorge = hovedytelseInnhold.arbeidOgOpphold.oppholdUtenforNorge;
+import { oppholdUtenforNorgeInnhold } from '../../../tekster/opphold';
 
 const VisningAvOpphold = styled(VStack)`
     border: 1px solid ${AGray800};
@@ -23,7 +21,7 @@ const LagredeOpphold: React.FC<{
     return (
         <>
             {lagredeOpphold.length > 1 && (
-                <Label>{teksterOppholdUtenforNorge.dineOpphold[locale]}</Label>
+                <Label>{oppholdUtenforNorgeInnhold.dineOpphold[locale]}</Label>
             )}
             {lagredeOpphold.map((opphold) => (
                 <VisningAvOpphold gap={'1'}>
@@ -37,7 +35,7 @@ const LagredeOpphold: React.FC<{
                     </BodyShort>
                     <HStack>
                         <Button variant={'tertiary'} onClick={() => slettOpphold(opphold._id)}>
-                            {teksterOppholdUtenforNorge.knapp_slett[locale]}
+                            {oppholdUtenforNorgeInnhold.knapp_slett[locale]}
                         </Button>
                     </HStack>
                 </VisningAvOpphold>

@@ -10,7 +10,7 @@ import { fellesTekster } from '../../../../tekster/felles';
 import { EnumFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei } from '../../../../typer/søknad';
 import { harVerdi } from '../../../../utils/typer';
-import { teksterArbeidOgOpphold } from '../../../tekster/hovedytelse';
+import { arbeidOgOppholdInnhold } from '../../../tekster/opphold';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from '../validering';
 
 interface Props {
@@ -47,7 +47,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
             hvilketLandJobberIAnnetLandEnnNorge: {
-                label: teksterArbeidOgOpphold.select_hvilket_land_jobber_i_annet_land_label[locale],
+                label: arbeidOgOppholdInnhold.select_hvilket_land_jobber_i_annet_land_label[locale],
                 verdi: e.target.value || '',
                 svarTekst: landkoder[e.target.value] || '',
             },
@@ -64,7 +64,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
         <>
             <LocaleRadioGroup
                 id={valideringsfeil.jobberIAnnetLandEnnNorge?.id}
-                tekst={teksterArbeidOgOpphold.radio_jobber_annet_land_enn_norge}
+                tekst={arbeidOgOppholdInnhold.radio_jobber_annet_land_enn_norge}
                 value={arbeidOgOpphold.jobberIAnnetLandEnnNorge?.verdi}
                 onChange={oppdaterJobberIAnnetLandEnnNorge}
                 error={valideringsfeil.jobberIAnnetLandEnnNorge?.melding}
@@ -74,7 +74,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
                 <Select
                     id={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.id}
                     label={
-                        teksterArbeidOgOpphold.select_hvilket_land_jobber_i_annet_land_label[locale]
+                        arbeidOgOppholdInnhold.select_hvilket_land_jobber_i_annet_land_label[locale]
                     }
                     onChange={oppdatertHvilketLandJobberI}
                     value={arbeidOgOpphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi || ''}

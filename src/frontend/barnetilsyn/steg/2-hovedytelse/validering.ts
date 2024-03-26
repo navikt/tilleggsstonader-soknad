@@ -12,9 +12,12 @@ import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { erDatoEtterEllerLik } from '../../../utils/dato';
 import { harVerdi } from '../../../utils/typer';
-import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../tekster/hovedytelse';
-
-const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
+import { hovedytelseInnhold } from '../../tekster/hovedytelse';
+import {
+    arbeidOgOppholdInnhold,
+    OppholdInnhold,
+    oppholdUtenforNorgeInnhold,
+} from '../../tekster/opphold';
 
 export const errorKeyLand = (
     keyOpphold: keyof Pick<
@@ -103,7 +106,7 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
             ...feil,
             jobberIAnnetLandEnnNorge: {
                 id: FeilId.JOBBER_I_ANNET_LAND,
-                melding: teksterOppholdINorge.feilmnelding_jobber_annet_land_enn_norge[locale],
+                melding: arbeidOgOppholdInnhold.feilmnelding_jobber_annet_land_enn_norge[locale],
             },
         };
     }
@@ -116,9 +119,8 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
             hvilketLandJobberIAnnetLandEnnNorge: {
                 id: FeilId.JOBBER_I_ANNET_LAND_HVILKET_LAND,
                 melding:
-                    teksterOppholdINorge.feilmelding_select_hvilket_land_jobber_i_annet_land_label[
-                        locale
-                    ],
+                    arbeidOgOppholdInnhold
+                        .feilmelding_select_hvilket_land_jobber_i_annet_land_label[locale],
             },
         };
     }
@@ -131,7 +133,7 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
             ...feil,
             mottarDuPengestøtteFraAnnetLand: {
                 id: FeilId.MOTTAR_DU_PENGESTØTTE,
-                melding: teksterOppholdINorge.feilmnelding_mottar_du_pengestøtte[locale],
+                melding: arbeidOgOppholdInnhold.feilmnelding_mottar_du_pengestøtte[locale],
             },
         };
     }
@@ -145,12 +147,11 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
             ...feil,
             hvilketLandMottarDuPengestøtteFra: {
                 id: FeilId.MOTTAR_DU_PENGESTØTTE_HVILKET_LAND,
-                melding: teksterOppholdINorge.feilmelding_select_hvilket_land_pengestøtte[locale],
+                melding: arbeidOgOppholdInnhold.feilmelding_select_hvilket_land_pengestøtte[locale],
             },
         };
     }
 
-    const teksterOppholdUtenforNorge = teksterOppholdINorge.oppholdUtenforNorge;
     if (
         skalTaStillingTilOppholdUtenforNorge(opphold) &&
         opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === undefined
@@ -159,7 +160,7 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
             ...feil,
             harDuOppholdUtenforNorgeSiste12mnd: {
                 id: FeilId.HAR_OPPHOLD_SISTE_12_MND,
-                melding: teksterOppholdUtenforNorge.feilmelding_radioSiste12mnd[locale],
+                melding: oppholdUtenforNorgeInnhold.feilmelding_radioSiste12mnd[locale],
             },
         };
     }
@@ -172,7 +173,7 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
             ...feil,
             ...validerOppholdUtenforNorgeUnderRedigering(
                 ulagretOppholdSiste12mnd,
-                teksterOppholdUtenforNorge.siste12mnd,
+                oppholdUtenforNorgeInnhold.siste12mnd,
                 locale,
                 'oppholdUtenforNorgeSiste12mnd'
             ),
@@ -187,7 +188,7 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
             ...feil,
             harDuOppholdUtenforNorgeNeste12mnd: {
                 id: FeilId.HAR_OPPHOLD_NESTE_12_MND,
-                melding: teksterOppholdUtenforNorge.feilmelding_radioNeste12mnd[locale],
+                melding: oppholdUtenforNorgeInnhold.feilmelding_radioNeste12mnd[locale],
             },
         };
     }
@@ -200,7 +201,7 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
             ...feil,
             ...validerOppholdUtenforNorgeUnderRedigering(
                 ulagretOppholdNeste12mnd,
-                teksterOppholdUtenforNorge.neste12mnd,
+                oppholdUtenforNorgeInnhold.neste12mnd,
                 locale,
                 'oppholdUtenforNorgeNeste12mnd'
             ),
@@ -211,7 +212,7 @@ const validerOpphold = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfe
 
 export const validerOppholdUtenforNorgeUnderRedigering = (
     opphold: OppholdUtenforNorge,
-    tekster: OppholdUtenforNorgeInnhold,
+    tekster: OppholdInnhold,
     locale: Locale,
     keyOpphold: keyof Pick<
         ArbeidOgOpphold,

@@ -11,15 +11,13 @@ import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadi
 import { useSøknad } from '../../../../context/SøknadContext';
 import { EnumFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
-import { hovedytelseInnhold } from '../../../tekster/hovedytelse';
+import { oppholdUtenforNorgeInnhold } from '../../../tekster/opphold';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from '../validering';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
 }
-
-const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
 
 const OppholdUtenforNorgeContainer: React.FC<Props> = ({
     arbeidOgOpphold,
@@ -71,7 +69,7 @@ const OppholdUtenforNorgeContainer: React.FC<Props> = ({
             {skalTaStillingTilOppholdUtenforNorge(arbeidOgOpphold) && (
                 <LocaleRadioGroup
                     id={valideringsfeil.harDuOppholdUtenforNorgeSiste12mnd?.id}
-                    tekst={teksterOppholdINorge.oppholdUtenforNorge.radioSiste12mnd}
+                    tekst={oppholdUtenforNorgeInnhold.radioSiste12mnd}
                     value={arbeidOgOpphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi}
                     onChange={oppdaterOppholdSiste12mnd}
                     error={valideringsfeil.harDuOppholdUtenforNorgeSiste12mnd?.melding}
@@ -82,13 +80,13 @@ const OppholdUtenforNorgeContainer: React.FC<Props> = ({
                     keyOpphold={'oppholdUtenforNorgeSiste12mnd'}
                     arbeidOgOpphold={arbeidOgOpphold}
                     settArbeidOgOpphold={settArbeidOgOpphold}
-                    tekster={teksterOppholdINorge.oppholdUtenforNorge.siste12mnd}
+                    tekster={oppholdUtenforNorgeInnhold.siste12mnd}
                 />
             )}
             {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
                 <LocaleRadioGroup
                     id={valideringsfeil.harDuOppholdUtenforNorgeNeste12mnd?.id}
-                    tekst={teksterOppholdINorge.oppholdUtenforNorge.radioNeste12mnd}
+                    tekst={oppholdUtenforNorgeInnhold.radioNeste12mnd}
                     value={arbeidOgOpphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi}
                     onChange={oppdaterOppholdNeste12mnd}
                     error={valideringsfeil.harDuOppholdUtenforNorgeNeste12mnd?.melding}
@@ -99,7 +97,7 @@ const OppholdUtenforNorgeContainer: React.FC<Props> = ({
                     keyOpphold={'oppholdUtenforNorgeNeste12mnd'}
                     arbeidOgOpphold={arbeidOgOpphold}
                     settArbeidOgOpphold={settArbeidOgOpphold}
-                    tekster={teksterOppholdINorge.oppholdUtenforNorge.neste12mnd}
+                    tekster={oppholdUtenforNorgeInnhold.neste12mnd}
                 />
             )}
         </>

@@ -11,14 +11,12 @@ import { useSpråk } from '../../../../context/SpråkContext';
 import { useSøknad } from '../../../../context/SøknadContext';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { inneholderFeil } from '../../../../typer/validering';
-import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
+import { OppholdInnhold, oppholdUtenforNorgeInnhold } from '../../../tekster/opphold';
 import {
     nullstillteOppholsfeilNeste12mnd,
     nullstillteOppholsfeilSiste12mnd,
     validerOppholdUtenforNorgeUnderRedigering,
 } from '../validering';
-
-const teksterOppholdUtenforNorge = hovedytelseInnhold.arbeidOgOpphold.oppholdUtenforNorge;
 
 const OppholdListe: React.FC<{
     keyOpphold: keyof Pick<
@@ -27,7 +25,7 @@ const OppholdListe: React.FC<{
     >;
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
-    tekster: OppholdUtenforNorgeInnhold;
+    tekster: OppholdInnhold;
 }> = ({ keyOpphold, arbeidOgOpphold, settArbeidOgOpphold, tekster }) => {
     const { locale } = useSpråk();
     const { settValideringsfeil } = useSøknad();
@@ -118,13 +116,13 @@ const OppholdListe: React.FC<{
             />
             {lagredeOpphold.length > 0 && ulagretOpphold && (
                 <div>
-                    <Label>{teksterOppholdUtenforNorge.label_flere_utenlandsopphold[locale]}</Label>
+                    <Label>{oppholdUtenforNorgeInnhold.label_flere_utenlandsopphold[locale]}</Label>
                     <div>
                         <Button
                             variant={'tertiary'}
                             onClick={() => slettOpphold(ulagretOpphold._id)}
                         >
-                            {teksterOppholdUtenforNorge.knapp_angre_legg_til[locale]}
+                            {oppholdUtenforNorgeInnhold.knapp_angre_legg_til[locale]}
                         </Button>
                     </div>
                 </div>
@@ -140,7 +138,7 @@ const OppholdListe: React.FC<{
             )}
             <HStack>
                 <Button variant={'tertiary'} onClick={leggTilOpphold} icon={<PlusIcon />}>
-                    {teksterOppholdUtenforNorge.knapp_legg_til[locale]}
+                    {oppholdUtenforNorgeInnhold.knapp_legg_til[locale]}
                 </Button>
             </HStack>
         </>
