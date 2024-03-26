@@ -88,11 +88,7 @@ const OppholdListe: React.FC<{
         });
     };
 
-    const slettOpphold = (id: number) => {
-        settArbeidOgOpphold((prevState) => ({
-            ...prevState,
-            [keyOpphold]: prevState[keyOpphold].filter((opphold) => opphold._id !== id),
-        }));
+    const slettValideringsfeilHvisUlagret = (id: number) => {
         if (ulagretOpphold?._id === id) {
             const nullstiltefeilter =
                 keyOpphold === 'oppholdUtenforNorgeSiste12mnd'
@@ -103,6 +99,14 @@ const OppholdListe: React.FC<{
                 ...nullstiltefeilter,
             }));
         }
+    };
+
+    const slettOpphold = (id: number) => {
+        settArbeidOgOpphold((prevState) => ({
+            ...prevState,
+            [keyOpphold]: prevState[keyOpphold].filter((opphold) => opphold._id !== id),
+        }));
+        slettValideringsfeilHvisUlagret(id);
     };
 
     return (
