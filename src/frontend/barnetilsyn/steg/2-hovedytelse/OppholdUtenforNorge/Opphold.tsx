@@ -10,6 +10,7 @@ import { OppholdUtenforNorge, ÅrsakOppholdUtenforNorge } from '../../../../type
 import { Locale } from '../../../../typer/tekst';
 import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
 import { OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
+import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from '../validering';
 
 const Opphold: React.FC<{
     opphold: OppholdUtenforNorge;
@@ -50,11 +51,11 @@ const Opphold: React.FC<{
     return (
         <>
             <Select
-                //id={valideringsfeil.hvilketLandOppholdUtenforNorge?.id}
+                id={errorKeyLand(opphold)}
                 label={tekster.select_hvilket_land[locale]}
                 onChange={oppdatertHvilketLandOppholdUtenforNorge}
                 value={opphold.land?.verdi || ''}
-                //error={valideringsfeil.hvilketLandOppholdUtenforNorge?.melding}
+                //error={vali}
             >
                 <option value="">Velg land</option>
                 {Object.entries(landkoder).map(([kode, tekst]) => (
@@ -62,7 +63,7 @@ const Opphold: React.FC<{
                 ))}
             </Select>
             <LocaleCheckboxGroup
-                //id={valideringsfeil.oppholdUtenforNorgeÅrsak?.id}
+                id={errorKeyÅrsak(opphold)}
                 tekst={tekster.checkbox_årsak}
                 value={opphold.årsak?.verdier || []}
                 onChange={(verdi: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>) =>
@@ -75,16 +76,18 @@ const Opphold: React.FC<{
                 <HStack gap={'4'}>
                     <DatePicker {...datepickerPropsFom}>
                         <DatePicker.Input
-                            {...inputPropsFom}
+                            id={errorKeyFom(opphold)}
                             label={tekster.dato.fom[locale]}
                             //error={valideringsfeil && <LocaleTekst tekst={valideringsfeil} />}
+                            {...inputPropsFom}
                         />
                     </DatePicker>
                     <DatePicker {...datepickerPropsTom}>
                         <DatePicker.Input
-                            {...inputPropsTom}
+                            id={errorKeyTom(opphold)}
                             label={tekster.dato.tom[locale]}
                             //error={valideringsfeil && <LocaleTekst tekst={valideringsfeil} />}
+                            {...inputPropsTom}
                         />
                     </DatePicker>
                 </HStack>

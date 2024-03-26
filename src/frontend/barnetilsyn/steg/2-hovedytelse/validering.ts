@@ -1,7 +1,11 @@
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
+import {
+    ArbeidOgOpphold,
+    MottarPengestøtteTyper,
+    OppholdUtenforNorge,
+} from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { harVerdi } from '../../../utils/typer';
@@ -34,6 +38,12 @@ export const skalTaStillingTilOppholdSiste12mnd = (opphold: ArbeidOgOpphold) =>
 
 export const skalTaStillingTilOppholdNeste12mnd = (opphold: ArbeidOgOpphold) =>
     opphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi === 'JA';
+
+//export const errorKeyHvemPasser = (barn: Barn) => `${barn.ident}_hvemPasser`;
+export const errorKeyLand = (opphold: OppholdUtenforNorge) => `${opphold._id}_land`;
+export const errorKeyÅrsak = (opphold: OppholdUtenforNorge) => `${opphold._id}_arsak`;
+export const errorKeyFom = (opphold: OppholdUtenforNorge) => `${opphold._id}_fom`;
+export const errorKeyTom = (opphold: OppholdUtenforNorge) => `${opphold._id}_tom`;
 
 export const validerHovedytelse = (
     ytelse: EnumFlereValgFelt<Ytelse> | undefined,
@@ -116,33 +126,46 @@ export const validerHovedytelse = (
                 },
             };
         }
-        /*if (skalTaStillingTilOppholdsland(opphold)) {
-            opphold.oppholdUtenforNorgeSiste12mnd.forEach((opphold, indeks) => {
-                if (!harVerdi(opphold.land?.verdi)) {
-                    feil = {
-                        ...feil,
-                        hvilketLandOppholdUtenforNorge: {
-                            id: '8',
-                            melding:
-                                teksterOppholdINorge.oppholdUtenforNorge.feilmelding_hvilket_land[
-                                    locale
-                                ],
-                        },
-                    };
-                }
-                if ((opphold.årsak?.verdier?.length || 0) === 0) {
-                    feil = {
-                        ...feil,
-                        oppholdUtenforNorgeÅrsak: {
-                            id: '8',
-                            melding:
-                                teksterOppholdINorge.oppholdUtenforNorge.feilmelding_årsak[locale],
-                        },
-                    };
-                }
-            });
-        }
-         */
+
+        const teksterSiste12mnd = teksterOppholdINorge.oppholdUtenforNorge.siste12mnd;
+        opphold.oppholdUtenforNorgeSiste12mnd.forEach((opphold, indeks) => {
+            if (!harVerdi(opphold.land?.verdi)) {
+                feil = {
+                    ...feil,
+                    [errorKeyLand(opphold)]: {
+                        id: `8-1-${indeks}`,
+                        melding: teksterSiste12mnd.feilmelding_hvilket_land[locale],
+                    },
+                };
+            }
+            if ((opphold.årsak?.verdier?.length || 0) === 0) {
+                feil = {
+                    ...feil,
+                    oppholdUtenforNorgeÅrsak: {
+                        id: `8-2-${indeks}`,
+                        melding: teksterSiste12mnd.feilmelding_årsak[locale],
+                    },
+                };
+            }
+            if (!harVerdi(opphold.fom?.verdi)) {
+                feil = {
+                    ...feil,
+                    [errorKeyFom(opphold)]: {
+                        id: `8-3-${indeks}`,
+                        melding: teksterSiste12mnd.dato.feilmelding_fom[locale],
+                    },
+                };
+            }
+            if (!harVerdi(opphold.tom?.verdi)) {
+                feil = {
+                    ...feil,
+                    [errorKeyTom(opphold)]: {
+                        id: `8-3-${indeks}`,
+                        melding: teksterSiste12mnd.dato.feilmelding_tom[locale],
+                    },
+                };
+            }
+        });
         if (
             skalTaStillingTilOppholdSiste12mnd(opphold) &&
             opphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi === undefined
@@ -150,7 +173,7 @@ export const validerHovedytelse = (
             feil = {
                 ...feil,
                 harDuOppholdUtenforNorgeNeste12mnd: {
-                    id: '7', // TODO oppdater?
+                    id: '8', // TODO oppdater?
                     melding: teksterOppholdUtenforNorge.feilmelding_radioNeste12mnd[locale],
                 },
             };

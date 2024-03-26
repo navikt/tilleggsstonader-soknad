@@ -1,14 +1,25 @@
 import React from 'react';
 
+import styled from 'styled-components';
+
 import { PlusIcon } from '@navikt/aksel-icons';
-import { Button, HStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { AGray800 } from '@navikt/ds-tokens/dist/tokens';
 
 import Opphold from './Opphold';
 import { oppdaterOpphold, opprettOppholdForNesteId } from './oppholdUtil';
 import { OppdatertOppholdFelt } from './typer';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
+import { formaterNullableIsoDato } from '../../../../utils/formatering';
 import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
+
+const teksterOppholdUtenforNorge = hovedytelseInnhold.arbeidOgOpphold.oppholdUtenforNorge;
+
+const VisningAvOpphold = styled(VStack)`
+    border: 1px solid ${AGray800};
+    padding: 1rem 1rem 0 1rem;
+`;
 
 const OppholdListe: React.FC<{
     keyOpphold: keyof Pick<
@@ -35,18 +46,69 @@ const OppholdListe: React.FC<{
     };
 
     const leggTilOpphold = () => {
+        // TODO valider
         settArbeidOgOpphold((prevState) => {
-            const prevOpphold = prevState[keyOpphold];
+            const prevOppholdListe = prevState[keyOpphold];
             return {
                 ...prevState,
-                [keyOpphold]: [...prevOpphold, opprettOppholdForNesteId(prevOpphold)],
+                [keyOpphold]: [
+                    ...prevOppholdListe.map((prevOpphold) => ({ ...prevOpphold, lagret: true })),
+                    opprettOppholdForNesteId(prevOppholdListe),
+                ],
             };
         });
     };
 
+    const slettOpphold = (id: number) => {
+        settArbeidOgOpphold((prevState) => ({
+            ...prevState,
+            [keyOpphold]: prevState[keyOpphold].filter((opphold) => opphold._id !== id),
+        }));
+    };
+
+    const oppholdUtenforNorge = arbeidOgOpphold[keyOpphold];
+    const ulagredeOpphold = oppholdUtenforNorge.filter((opphold) => !opphold.lagret);
     return (
         <>
-            {arbeidOgOpphold[keyOpphold].map((opphold) => (
+            {oppholdUtenforNorge.length > 1 && (
+                <Label>{teksterOppholdUtenforNorge.dineOpphold[locale]}</Label>
+            )}
+            {oppholdUtenforNorge
+                .filter((opphold) => opphold.lagret)
+                .map((opphold) => (
+                    <VisningAvOpphold gap={'1'}>
+                        <BodyShort weight={'semibold'}>{opphold.land?.svarTekst}</BodyShort>
+                        {(opphold.årsak?.verdier || []).map((årsak) => (
+                            <BodyShort>{årsak.label}</BodyShort>
+                        ))}
+                        <BodyShort>
+                            {formaterNullableIsoDato(opphold.fom?.verdi)} -{' '}
+                            {formaterNullableIsoDato(opphold.tom?.verdi)}
+                        </BodyShort>
+                        <HStack>
+                            <Button variant={'tertiary'} onClick={() => slettOpphold(opphold._id)}>
+                                {teksterOppholdUtenforNorge.knapp_slett[locale]}
+                            </Button>
+                        </HStack>
+                    </VisningAvOpphold>
+                ))}
+
+            {ulagredeOpphold.length > 0 && (
+                <div>
+                    <Label>{teksterOppholdUtenforNorge.label_flere_utenlandsopphold[locale]}</Label>
+                    <div>
+                        <Button
+                            variant={'tertiary'}
+                            onClick={() =>
+                                slettOpphold(ulagredeOpphold[ulagredeOpphold.length - 1]._id)
+                            }
+                        >
+                            {teksterOppholdUtenforNorge.knapp_angre_legg_til[locale]}
+                        </Button>
+                    </div>
+                </div>
+            )}
+            {ulagredeOpphold.map((opphold) => (
                 <Opphold
                     opphold={opphold}
                     oppdater={oppdaterOppholdUtenforNorge}
@@ -56,7 +118,7 @@ const OppholdListe: React.FC<{
             ))}
             <HStack>
                 <Button variant={'tertiary'} onClick={leggTilOpphold} icon={<PlusIcon />}>
-                    {hovedytelseInnhold.arbeidOgOpphold.oppholdUtenforNorge.knapp_legg_til[locale]}
+                    {teksterOppholdUtenforNorge.knapp_legg_til[locale]}
                 </Button>
             </HStack>
         </>

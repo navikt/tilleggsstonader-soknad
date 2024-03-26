@@ -22,6 +22,7 @@ interface HovedytelseInnhold {
         feilmelding_select_hvilket_land_pengestøtte: TekstElement<string>;
 
         oppholdUtenforNorge: {
+            dineOpphold: TekstElement<string>;
             radioSiste12mnd: Radiogruppe<JaNei>;
             feilmelding_radioSiste12mnd: TekstElement<string>;
             siste12mnd: OppholdUtenforNorgeInnhold;
@@ -31,6 +32,9 @@ interface HovedytelseInnhold {
             neste12mnd: OppholdUtenforNorgeInnhold;
 
             knapp_legg_til: TekstElement<string>;
+            label_flere_utenlandsopphold: TekstElement<string>;
+            knapp_angre_legg_til: TekstElement<string>;
+            knapp_slett: TekstElement<string>;
         };
     };
 }
@@ -160,6 +164,9 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
             nb: 'Du må velge hvilket land du mottar pengestøtte fra.',
         },
         oppholdUtenforNorge: {
+            dineOpphold: {
+                nb: 'Dine opphold utenfor Norge siste 12 mnd:',
+            },
             radioSiste12mnd: {
                 header: {
                     nb: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?',
@@ -257,6 +264,15 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
             },
             knapp_legg_til: {
                 nb: 'Legg til flere land',
+            },
+            label_flere_utenlandsopphold: {
+                nb: 'Flere utenlandsopphold',
+            },
+            knapp_angre_legg_til: {
+                nb: 'Angre legg til flere',
+            },
+            knapp_slett: {
+                nb: 'Slett',
             },
         },
     },

@@ -21,6 +21,7 @@ export interface ArbeidOgOpphold {
 
 export interface OppholdUtenforNorge {
     _id: number; // for å kunne lenke og vise riktig feilmelding - lagres ikke i bakend
+    lagret: boolean;
     land?: SelectFelt;
     årsak?: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>;
     fom?: VerdiFelt<string>;

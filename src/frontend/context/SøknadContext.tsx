@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
+import { defaultHovedYtelse } from './defaultHovedYtelse';
 import { Barnepass } from '../typer/barn';
 import { DokumentasjonFelt } from '../typer/skjema';
 import { Aktivitet, Hovedytelse } from '../typer/søknad';
@@ -12,7 +13,7 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
 
     const [harBekreftet, settHarBekreftet] = useState<boolean>(false);
 
-    const [hovedytelse, settHovedytelse] = useState<Hovedytelse>();
+    const [hovedytelse, settHovedytelse] = useState<Hovedytelse>(defaultHovedYtelse);
     const [aktivitet, settAktivitet] = useState<Aktivitet>();
 
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);

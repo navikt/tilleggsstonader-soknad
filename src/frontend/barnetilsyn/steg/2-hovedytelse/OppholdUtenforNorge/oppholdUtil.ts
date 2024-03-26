@@ -34,5 +34,5 @@ const utledMaxId = (oppholdUtenforNorge: OppholdUtenforNorge[]) => {
  */
 export const opprettOppholdForNesteId = (opphold: OppholdUtenforNorge[]): OppholdUtenforNorge => {
     const maxId = utledMaxId(opphold);
-    return { _id: maxId + 1 };
+    return { _id: maxId + 1, lagret: false };
 };
