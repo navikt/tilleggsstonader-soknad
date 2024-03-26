@@ -16,6 +16,7 @@ import {
 } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
 import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
+import { harVerdi } from '../../../../utils/typer';
 import { OppholdInnhold } from '../../../tekster/opphold';
 
 const Opphold: React.FC<{
@@ -28,7 +29,16 @@ const Opphold: React.FC<{
     tekster: OppholdInnhold;
     locale: Locale;
 }> = ({ keyOpphold, opphold, oppdater, tekster, locale }) => {
-    const { valideringsfeil } = useSøknad();
+    const { valideringsfeil, settValideringsfeil } = useSøknad();
+
+    const nullstillDatoFeil = (verdi: string | undefined, errorKey: string) => {
+        if (harVerdi(verdi)) {
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                [errorKey]: undefined,
+            }));
+        }
+    };
 
     const { datepickerProps: datepickerPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(opphold.fom?.verdi),
@@ -37,7 +47,7 @@ const Opphold: React.FC<{
                 ? { label: tekster.dato.fom[locale], verdi: tilLocaleDateString(val) }
                 : undefined;
             oppdater(opphold._id, 'fom', verdi);
-            //resettFeilmelding();
+            nullstillDatoFeil(verdi?.verdi, errorKeyFom(keyOpphold));
         },
     });
 
@@ -48,7 +58,7 @@ const Opphold: React.FC<{
                 ? { label: tekster.dato.tom[locale], verdi: tilLocaleDateString(val) }
                 : undefined;
             oppdater(opphold._id, 'tom', verdi);
-            //resettFeilmelding();
+            nullstillDatoFeil(verdi?.verdi, errorKeyFom(keyOpphold));
         },
     });
 
