@@ -18,6 +18,11 @@ import { ArbeidOgOpphold } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 
+const defaultArbeidOgOpphold: ArbeidOgOpphold = {
+    oppholdUtenforNorgeSiste12mnd: [],
+    oppholdUtenforNorgeNeste12mnd: [],
+};
+
 const Hovedytelse = () => {
     const { locale } = useSpråk();
     const { hovedytelse, settHovedytelse, valideringsfeil, settValideringsfeil } = useSøknad();
@@ -27,10 +32,7 @@ const Hovedytelse = () => {
     );
 
     const [arbeidOgOpphold, settArbeidOgOpphold] = useState<ArbeidOgOpphold>(
-        hovedytelse?.arbeidOgOpphold || {
-            oppholdUtenforNorgeSiste12mnd: [],
-            oppholdUtenforNorgeNeste12mnd: [],
-        }
+        hovedytelse?.arbeidOgOpphold || defaultArbeidOgOpphold
     );
 
     const skalTaStillingTilOpphold = ytelse ? skalTaStillingTilOppholdINorge(ytelse) : false;
@@ -43,10 +45,7 @@ const Hovedytelse = () => {
 
     const oppdaterSkalTaStillingTilOpphold = (ytelse: EnumFlereValgFelt<Ytelse>) => {
         if (!skalTaStillingTilOppholdINorge(ytelse)) {
-            settArbeidOgOpphold({
-                oppholdUtenforNorgeSiste12mnd: [],
-                oppholdUtenforNorgeNeste12mnd: [],
-            });
+            settArbeidOgOpphold(defaultArbeidOgOpphold);
             settValideringsfeil({});
         } else {
             settValideringsfeil((prevState) => ({ ...prevState, ytelse: undefined }));
