@@ -1,26 +1,21 @@
 import React from 'react';
 
-import styled from 'styled-components';
-
 import { PlusIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { AGray800 } from '@navikt/ds-tokens/dist/tokens';
+import { Button, HStack, Label } from '@navikt/ds-react';
 
+import LagredeOpphold from './LagredeOpphold';
 import Opphold from './Opphold';
 import { oppdaterOpphold, opprettOppholdForNesteId } from './oppholdUtil';
 import { OppdatertOppholdFelt } from './typer';
 import { useSpråk } from '../../../../context/SpråkContext';
+import { useSøknad } from '../../../../context/SøknadContext';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
-import { formaterNullableIsoDato } from '../../../../utils/formatering';
+import { inneholderFeil } from '../../../../typer/validering';
 import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
+import { validerOppholdUtenforNorgeUnderRedigering } from '../validering';
 
 const teksterOppholdUtenforNorge = hovedytelseInnhold.arbeidOgOpphold.oppholdUtenforNorge;
-
-const VisningAvOpphold = styled(VStack)`
-    border: 1px solid ${AGray800};
-    padding: 1rem 1rem 0 1rem;
-`;
-
+// TODO må legge till validering av opphold når man klikker på neste
 const OppholdListe: React.FC<{
     keyOpphold: keyof Pick<
         ArbeidOgOpphold,
@@ -31,6 +26,7 @@ const OppholdListe: React.FC<{
     tekster: OppholdUtenforNorgeInnhold;
 }> = ({ keyOpphold, arbeidOgOpphold, settArbeidOgOpphold, tekster }) => {
     const { locale } = useSpråk();
+    const { settValideringsfeil } = useSøknad();
 
     /**
      * Returnerer en metode som er generisk som oppdaterer felter i oppholdutenfor norge,
@@ -45,8 +41,33 @@ const OppholdListe: React.FC<{
         });
     };
 
+    const validerOppholdUnderRedigeringOgOppdaterFeil = (): boolean => {
+        const oppholdUnderRedigering = arbeidOgOpphold[keyOpphold].find(
+            (opphold) => !opphold.lagret
+        );
+        if (oppholdUnderRedigering) {
+            const feil = validerOppholdUtenforNorgeUnderRedigering(
+                oppholdUnderRedigering,
+                tekster,
+                locale,
+                keyOpphold
+            );
+            if (inneholderFeil(feil)) {
+                settValideringsfeil((prevState) => ({
+                    ...prevState,
+                    ...feil,
+                }));
+                return false;
+            }
+        }
+        return true;
+    };
+
     const leggTilOpphold = () => {
-        // TODO valider
+        const gyldig = validerOppholdUnderRedigeringOgOppdaterFeil();
+        if (!gyldig) {
+            return;
+        }
         settArbeidOgOpphold((prevState) => {
             const prevOppholdListe = prevState[keyOpphold];
             return {
@@ -70,29 +91,11 @@ const OppholdListe: React.FC<{
     const ulagredeOpphold = oppholdUtenforNorge.filter((opphold) => !opphold.lagret);
     return (
         <>
-            {oppholdUtenforNorge.length > 1 && (
-                <Label>{teksterOppholdUtenforNorge.dineOpphold[locale]}</Label>
-            )}
-            {oppholdUtenforNorge
-                .filter((opphold) => opphold.lagret)
-                .map((opphold) => (
-                    <VisningAvOpphold gap={'1'}>
-                        <BodyShort weight={'semibold'}>{opphold.land?.svarTekst}</BodyShort>
-                        {(opphold.årsak?.verdier || []).map((årsak) => (
-                            <BodyShort>{årsak.label}</BodyShort>
-                        ))}
-                        <BodyShort>
-                            {formaterNullableIsoDato(opphold.fom?.verdi)} -{' '}
-                            {formaterNullableIsoDato(opphold.tom?.verdi)}
-                        </BodyShort>
-                        <HStack>
-                            <Button variant={'tertiary'} onClick={() => slettOpphold(opphold._id)}>
-                                {teksterOppholdUtenforNorge.knapp_slett[locale]}
-                            </Button>
-                        </HStack>
-                    </VisningAvOpphold>
-                ))}
-
+            <LagredeOpphold
+                lagredeOpphold={oppholdUtenforNorge.filter((opphold) => opphold.lagret)}
+                slettOpphold={slettOpphold}
+                locale={locale}
+            />
             {ulagredeOpphold.length > 0 && (
                 <div>
                     <Label>{teksterOppholdUtenforNorge.label_flere_utenlandsopphold[locale]}</Label>
@@ -110,6 +113,7 @@ const OppholdListe: React.FC<{
             )}
             {ulagredeOpphold.map((opphold) => (
                 <Opphold
+                    keyOpphold={keyOpphold}
                     opphold={opphold}
                     oppdater={oppdaterOppholdUtenforNorge}
                     tekster={tekster}

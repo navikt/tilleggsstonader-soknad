@@ -1,23 +1,34 @@
 import React from 'react';
 
-import { DatePicker, HStack, Label, Select, VStack, useDatepicker } from '@navikt/ds-react';
+import { DatePicker, HStack, Label, Select, useDatepicker, VStack } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
 import { OppdatertOppholdFelt } from './typer';
 import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
+import { useSøknad } from '../../../../context/SøknadContext';
 import { EnumFlereValgFelt } from '../../../../typer/skjema';
-import { OppholdUtenforNorge, ÅrsakOppholdUtenforNorge } from '../../../../typer/søknad';
+import {
+    ArbeidOgOpphold,
+    OppholdUtenforNorge,
+    ÅrsakOppholdUtenforNorge,
+} from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
 import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
 import { OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
 import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from '../validering';
 
 const Opphold: React.FC<{
+    keyOpphold: keyof Pick<
+        ArbeidOgOpphold,
+        'oppholdUtenforNorgeSiste12mnd' | 'oppholdUtenforNorgeNeste12mnd'
+    >;
     opphold: OppholdUtenforNorge;
     oppdater: OppdatertOppholdFelt;
     tekster: OppholdUtenforNorgeInnhold;
     locale: Locale;
-}> = ({ opphold, oppdater, tekster, locale }) => {
+}> = ({ keyOpphold, opphold, oppdater, tekster, locale }) => {
+    const { valideringsfeil } = useSøknad();
+
     const { datepickerProps: datepickerPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(opphold.fom?.verdi),
         onDateChange: (val) => {
@@ -51,11 +62,11 @@ const Opphold: React.FC<{
     return (
         <>
             <Select
-                id={errorKeyLand(opphold)}
+                id={valideringsfeil[errorKeyLand(keyOpphold)]?.id}
                 label={tekster.select_hvilket_land[locale]}
                 onChange={oppdatertHvilketLandOppholdUtenforNorge}
                 value={opphold.land?.verdi || ''}
-                //error={vali}
+                error={valideringsfeil[errorKeyLand(keyOpphold)]?.melding}
             >
                 <option value="">Velg land</option>
                 {Object.entries(landkoder).map(([kode, tekst]) => (
@@ -63,30 +74,30 @@ const Opphold: React.FC<{
                 ))}
             </Select>
             <LocaleCheckboxGroup
-                id={errorKeyÅrsak(opphold)}
+                id={valideringsfeil[errorKeyÅrsak(keyOpphold)]?.id}
                 tekst={tekster.checkbox_årsak}
                 value={opphold.årsak?.verdier || []}
                 onChange={(verdi: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>) =>
                     oppdater(opphold._id, 'årsak', verdi)
                 }
-                //error={valideringsfeil.oppholdUtenforNorgeÅrsak?.melding}
+                error={valideringsfeil[errorKeyÅrsak(keyOpphold)]?.melding}
             />
             <VStack>
                 <Label>{tekster.dato.label[locale]}</Label>
                 <HStack gap={'4'}>
                     <DatePicker {...datepickerPropsFom}>
                         <DatePicker.Input
-                            id={errorKeyFom(opphold)}
+                            id={valideringsfeil[errorKeyFom(keyOpphold)]?.id}
                             label={tekster.dato.fom[locale]}
-                            //error={valideringsfeil && <LocaleTekst tekst={valideringsfeil} />}
+                            error={valideringsfeil[errorKeyFom(keyOpphold)]?.melding}
                             {...inputPropsFom}
                         />
                     </DatePicker>
                     <DatePicker {...datepickerPropsTom}>
                         <DatePicker.Input
-                            id={errorKeyTom(opphold)}
+                            id={valideringsfeil[errorKeyTom(keyOpphold)]?.id}
                             label={tekster.dato.tom[locale]}
-                            //error={valideringsfeil && <LocaleTekst tekst={valideringsfeil} />}
+                            error={valideringsfeil[errorKeyTom(keyOpphold)]?.melding}
                             {...inputPropsTom}
                         />
                     </DatePicker>
