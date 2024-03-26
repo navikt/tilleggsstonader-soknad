@@ -162,12 +162,12 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                 <LocaleRadioGroup
                     id={valideringsfeil.jobberIAnnetLandEnnNorge?.id}
                     tekst={teksterOppholdINorge.radio_jobber_annet_land_enn_norge}
-                    value={arbeidOgOpphold?.jobberIAnnetLandEnnNorge?.verdi}
+                    value={arbeidOgOpphold.jobberIAnnetLandEnnNorge?.verdi}
                     onChange={oppdaterJobberIAnnetLandEnnNorge}
                     error={valideringsfeil.jobberIAnnetLandEnnNorge?.melding}
                 />
 
-                {arbeidOgOpphold?.jobberIAnnetLandEnnNorge?.verdi === 'JA' && (
+                {arbeidOgOpphold.jobberIAnnetLandEnnNorge?.verdi === 'JA' && (
                     <Select
                         id={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.id}
                         label={
@@ -176,7 +176,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                             ]
                         }
                         onChange={oppdatertHvilketLandJobberI}
-                        value={arbeidOgOpphold?.hvilketLandJobberIAnnetLandEnnNorge?.verdi || ''}
+                        value={arbeidOgOpphold.hvilketLandJobberIAnnetLandEnnNorge?.verdi || ''}
                         error={valideringsfeil.hvilketLandJobberIAnnetLandEnnNorge?.melding}
                     >
                         <option value="">Velg land</option>
@@ -191,7 +191,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                         <LocaleCheckboxGroup
                             id={valideringsfeil.mottarDuPengestøtteFraAnnetLand?.id}
                             tekst={teksterOppholdINorge.checkbox_mottar_du_pengestøtte}
-                            value={arbeidOgOpphold?.mottarDuPengestøtteFraAnnetLand?.verdier || []}
+                            value={arbeidOgOpphold.mottarDuPengestøtteFraAnnetLand?.verdier || []}
                             error={valideringsfeil.mottarDuPengestøtteFraAnnetLand?.melding}
                             onChange={oppdaterMottarDuPengestøtte}
                         />
@@ -203,7 +203,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                 label={teksterOppholdINorge.select_hvilket_land_pengestøtte[locale]}
                                 onChange={oppdatertHvilketLandMottarPengestøtte}
                                 value={
-                                    arbeidOgOpphold?.hvilketLandMottarDuPengestøtteFra?.verdi || ''
+                                    arbeidOgOpphold.hvilketLandMottarDuPengestøtteFra?.verdi || ''
                                 }
                                 error={valideringsfeil.hvilketLandMottarDuPengestøtteFra?.melding}
                             >
@@ -217,14 +217,14 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                             <LocaleRadioGroup
                                 id={valideringsfeil.harDuOppholdUtenforNorge?.id}
                                 tekst={teksterOppholdINorge.oppholdUtenforNorge.radioSiste12mnd}
-                                value={arbeidOgOpphold?.harDuOppholdUtenforNorgeSiste12mnd?.verdi}
+                                value={arbeidOgOpphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi}
                                 onChange={oppdaterOppholdSiste12mnd}
                                 error={valideringsfeil.harDuOppholdUtenforNorge?.melding}
                             />
                         )}
                         {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
                             <>
-                                {arbeidOgOpphold?.oppholdUtenforNorgeSiste12mnd.map((opphold) => (
+                                {arbeidOgOpphold.oppholdUtenforNorgeSiste12mnd.map((opphold) => (
                                     <Opphold
                                         opphold={opphold}
                                         oppdater={oppdaterOppholdUtenforNorge(
@@ -246,14 +246,14 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                             <LocaleRadioGroup
                                 //id={valideringsfeil.harDuOppholdUtenforNorge?.id}
                                 tekst={teksterOppholdINorge.oppholdUtenforNorge.radioNeste12mnd}
-                                value={arbeidOgOpphold?.harDuOppholdUtenforNorgeNeste12mnd?.verdi}
+                                value={arbeidOgOpphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi}
                                 onChange={oppdaterOppholdNeste12mnd}
                                 //error={valideringsfeil.harDuOppholdUtenforNorge?.melding}
                             />
                         )}
                         {skalTaStillingTilOppholdNeste12mnd(arbeidOgOpphold) && (
                             <>
-                                {arbeidOgOpphold?.oppholdUtenforNorgeNeste12mnd.map((opphold) => (
+                                {arbeidOgOpphold.oppholdUtenforNorgeNeste12mnd.map((opphold) => (
                                     <Opphold
                                         opphold={opphold}
                                         oppdater={oppdaterOppholdUtenforNorge(
