@@ -4,6 +4,7 @@ import { DatePicker, HStack, Label, Select, useDatepicker, VStack } from '@navik
 
 import { landkoder } from './landkoder';
 import { OppdatertOppholdFelt } from './typer';
+import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from './validering';
 import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import { useSøknad } from '../../../../context/SøknadContext';
 import { fellesTekster } from '../../../../tekster/felles';
@@ -16,7 +17,6 @@ import {
 import { Locale } from '../../../../typer/tekst';
 import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
 import { OppholdInnhold } from '../../../tekster/opphold';
-import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from '../validering';
 
 const Opphold: React.FC<{
     keyOpphold: keyof Pick<

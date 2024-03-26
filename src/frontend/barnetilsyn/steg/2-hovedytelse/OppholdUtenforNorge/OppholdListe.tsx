@@ -7,16 +7,16 @@ import LagredeOpphold from './LagredeOpphold';
 import Opphold from './Opphold';
 import { OppdatertOppholdFelt } from './typer';
 import { oppdaterOpphold, opprettOppholdForNesteId } from './util';
+import {
+    nullstillteOppholsfeilNeste12mnd,
+    nullstillteOppholsfeilSiste12mnd,
+    validerOppholdUtenforNorgeUnderRedigering,
+} from './validering';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { useSøknad } from '../../../../context/SøknadContext';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { inneholderFeil } from '../../../../typer/validering';
 import { OppholdInnhold, oppholdUtenforNorgeInnhold } from '../../../tekster/opphold';
-import {
-    nullstillteOppholsfeilNeste12mnd,
-    nullstillteOppholsfeilSiste12mnd,
-    validerOppholdUtenforNorgeUnderRedigering,
-} from '../validering';
 
 const OppholdListe: React.FC<{
     keyOpphold: keyof Pick<

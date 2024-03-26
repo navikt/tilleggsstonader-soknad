@@ -4,6 +4,7 @@ import { Select } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
 import { skalTaStillingTilLandForPengestøtte } from './util';
+import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
 import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
 import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import { useSpråk } from '../../../../context/SpråkContext';
@@ -13,7 +14,6 @@ import { EnumFlereValgFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../../typer/søknad';
 import { harVerdi } from '../../../../utils/typer';
 import { arbeidOgOppholdInnhold } from '../../../tekster/opphold';
-import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from '../validering';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;

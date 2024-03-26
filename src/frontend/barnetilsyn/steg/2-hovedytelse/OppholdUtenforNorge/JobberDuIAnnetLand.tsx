@@ -4,6 +4,7 @@ import { Select } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
 import { skalTaStillingTilLandForJobberIAnnetLand } from './util';
+import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
 import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
 import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
 import { useSpråk } from '../../../../context/SpråkContext';
@@ -13,7 +14,6 @@ import { EnumFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei } from '../../../../typer/søknad';
 import { harVerdi } from '../../../../utils/typer';
 import { arbeidOgOppholdInnhold } from '../../../tekster/opphold';
-import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from '../validering';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;

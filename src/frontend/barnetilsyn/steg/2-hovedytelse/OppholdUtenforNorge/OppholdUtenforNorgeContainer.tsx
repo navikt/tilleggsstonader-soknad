@@ -12,12 +12,12 @@ import {
     skalTaStillingTilOppholdSiste12mnd,
     skalTaStillingTilOppholdUtenforNorge,
 } from './util';
+import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
 import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
 import { useSøknad } from '../../../../context/SøknadContext';
 import { EnumFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
 import { oppholdUtenforNorgeInnhold } from '../../../tekster/opphold';
-import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from '../validering';
 
 const BlåVenstreRammeContainer = styled(VStack)`
     border-left: 5px solid ${ABlue500};
