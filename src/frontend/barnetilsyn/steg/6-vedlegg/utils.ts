@@ -1,4 +1,13 @@
-import { Dokument, DokumentasjonFelt } from '../../../typer/skjema';
+import { Barn } from '../../../typer/barn';
+import {
+    Dokument,
+    DokumentasjonFelt,
+    Dokumentasjonsbehov,
+    Vedleggstype,
+} from '../../../typer/skjema';
+import { Locale } from '../../../typer/tekst';
+import { hentBeskjedMedEttParameter } from '../../../utils/tekster';
+import { typerVedleggTekster } from '../../tekster/vedlegg';
 
 export const leggTilVedlegg = (
     alleDokumentasjonFelter: DokumentasjonFelt[],
@@ -58,3 +67,106 @@ export const toggleHarSendtInn = (
  */
 const dokumentajonFeltEquals = (first: DokumentasjonFelt, second: DokumentasjonFelt) =>
     first.type === second.type && first.barnId === second.barnId;
+
+/**
+ * Brukes for å opprette dokumentasjonsfelter for alle dokumentasjonsbehov funnet i tidligere steg.
+ * Samler noen dokumentasjonsbehov, slik at bruker slipper å feks laste opp samme barnehagefaktura to ganger.
+ * @returns Alle dokumentasjonsfelter bruker må fylle ut på vedleggssiden
+ */
+export const opprettDokumentasjonsfelt = (
+    dokumentasjonsbehov: Dokumentasjonsbehov[],
+    eksisterendeDokumentasjon: DokumentasjonFelt[],
+    locale: Locale
+): DokumentasjonFelt[] => {
+    const kanSamles = dokumentasjonsbehov.filter(skalHaSamletOpplasting);
+    const kanIkkeSamles = dokumentasjonsbehov.filter(
+        (dokBehov) => !skalHaSamletOpplasting(dokBehov)
+    );
+
+    const samletDokumentasjon = lagSamledeDokumentasjonsfelter(
+        kanSamles,
+        eksisterendeDokumentasjon,
+        locale
+    );
+
+    const individuellDokumentasjon = lagIndividuelleDokumentasjonsfelter(
+        kanIkkeSamles,
+        eksisterendeDokumentasjon,
+        locale
+    );
+
+    return [...samletDokumentasjon, ...individuellDokumentasjon];
+};
+
+const lagSamledeDokumentasjonsfelter = (
+    dokumentasjonsbehov: Dokumentasjonsbehov[],
+    eksisterendeDokumentasjon: DokumentasjonFelt[],
+    locale: Locale
+): DokumentasjonFelt[] => {
+    const vedleggstyper = [...new Set(dokumentasjonsbehov.map((dokBehov) => dokBehov.type))];
+
+    return vedleggstyper.map((vedleggstype) => {
+        const eksisterendeDokumentasjonsFelt = finnEksisterendeDokumentasjonsfelt(
+            eksisterendeDokumentasjon,
+            vedleggstype
+        );
+
+        return eksisterendeDokumentasjonsFelt
+            ? eksisterendeDokumentasjonsFelt
+            : lagDokumentasjonsfelt(vedleggstype, locale);
+    });
+};
+
+const lagIndividuelleDokumentasjonsfelter = (
+    dokumentasjonsbehov: Dokumentasjonsbehov[],
+    eksisterendeDokumentasjon: DokumentasjonFelt[],
+    locale: Locale
+): DokumentasjonFelt[] => {
+    return dokumentasjonsbehov.map((dokBehov) => {
+        const eksisterendeDokumentasjonsFelt = finnEksisterendeDokumentasjonsfelt(
+            eksisterendeDokumentasjon,
+            dokBehov.type,
+            dokBehov.barn?.ident
+        );
+
+        return eksisterendeDokumentasjonsFelt
+            ? eksisterendeDokumentasjonsFelt
+            : lagDokumentasjonsfelt(dokBehov.type, locale, dokBehov.barn);
+    });
+};
+
+const lagDokumentasjonsfelt = (
+    type: Vedleggstype,
+    locale: Locale,
+    barn?: Barn
+): DokumentasjonFelt => {
+    const tittel = barn
+        ? hentBeskjedMedEttParameter(barn.visningsnavn, typerVedleggTekster[type].tittel[locale])
+        : typerVedleggTekster[type].tittel[locale];
+
+    return {
+        type: type,
+        label: tittel,
+        harSendtInn: false,
+        opplastedeVedlegg: [],
+        barnId: barn?.ident,
+    };
+};
+
+const finnEksisterendeDokumentasjonsfelt = (
+    eksisterendeDokumentasjon: DokumentasjonFelt[],
+    vedleggstype: Vedleggstype,
+    barnId?: string
+) =>
+    eksisterendeDokumentasjon.find(
+        (dokumentasjon) => dokumentasjon.type === vedleggstype && dokumentasjon.barnId === barnId
+    );
+
+/**
+ * Sjekker om dokumentasjonsbehovet skal ha samlet felt for opplasting av dokumentasjon.
+ * Brukes for å samle utgifter til pass av barn.
+ */
+const skalHaSamletOpplasting = (dokumentasjonsbehov: Dokumentasjonsbehov): boolean =>
+    [Vedleggstype.UTGIFTER_PASS_ANNET, Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE].includes(
+        dokumentasjonsbehov.type
+    );
