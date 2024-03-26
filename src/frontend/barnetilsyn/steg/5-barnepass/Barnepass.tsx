@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Heading, VStack } from '@navikt/ds-react';
 
-import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil';
+import { oppdaterDokumentasjonsbehovForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { BarnepassIntern } from './typer';
 import { valider } from './utils';
@@ -24,7 +24,7 @@ const Barnepass = () => {
     const {
         barnMedBarnepass,
         settBarnMedBarnepass,
-        settDokumentasjon,
+        settDokumentasjonsbehov,
         valideringsfeil,
         settValideringsfeil,
     } = useSøknad();
@@ -62,8 +62,9 @@ const Barnepass = () => {
     const oppdaterSøknad = () => {
         const barnepasses = barnMedPass as Barnepass[];
         settBarnMedBarnepass(barnepasses);
-        settDokumentasjon((prevState) =>
-            oppdaterDokumentasjonFeltForBarnMedPass(barnepasses, person.barn, prevState, locale)
+
+        settDokumentasjonsbehov((prevState) =>
+            oppdaterDokumentasjonsbehovForBarnMedPass(barnepasses, person.barn, prevState)
         );
     };
 

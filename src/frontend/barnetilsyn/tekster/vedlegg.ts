@@ -85,7 +85,10 @@ export const vedleggTekster: VedleggInnhold = {
 export const typerVedleggTekster: TekstTypeVedlegg = {
     [Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE]: {
         tittel: {
-            nb: 'Dokumentasjon av utgifter for pass av [0]',
+            nb: 'Faktura fra SFO/AKS/barnehage',
+        },
+        liste_tittel: {
+            nb: 'Faktura fra SFO/AKS/barnehage for [0]',
         },
         beskrivelse: {
             nb: 'Fakturaen må være spesifisert. Vi godkjenner ikke skjermbilde av kontoutskrift/vipps eller lignende. ',
@@ -99,7 +102,10 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
     },
     [Vedleggstype.UTGIFTER_PASS_ANNET]: {
         tittel: {
-            nb: 'Dokumentasjon av utgifter for pass av [0]',
+            nb: 'Dokumentasjon av utgifter til privat pass',
+        },
+        liste_tittel: {
+            nb: 'Dokumentasjon av utgifter til privat pass for [0]',
         },
         beskrivelse: {
             nb: 'Vi trenger avtale med barnepasser, kvittering for betaling og eventuelt A-melding sendt Skatteetaten.',
@@ -112,15 +118,23 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             ],
         },
     },
-    [Vedleggstype.EKSTRA_PASS_BEHOV]: {
+    [Vedleggstype.TRENGER_MER_PASS_ENN_JEVNALDRENDE]: {
         tittel: {
             nb: 'Skriftlig uttalelse fra helsepersonell for [0]',
         },
         beskrivelse: {
-            nb: 'Legeerklæring eller annen uttalelse fra helsepersonell.',
+            nb: 'Legeerklæring eller annen uttalelse fra helsepersonell som beskriver Espens helsetilstand.',
         },
         krav_til_dokumentasjon: {
             nb: 'Legeerklæringen/uttalelsen fra helsepersonell må inneholde barnets navn og gjelde for perioden du søker om støtte til pass for.',
+        },
+    },
+    [Vedleggstype.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID]: {
+        tittel: {
+            nb: 'Dokumentasjon fra tiltakssted eller utdanningssted',
+        },
+        beskrivelse: {
+            nb: 'For eksempel en avtale, vaktliste eller timeliste som beskriver din arbeidstid eller obligatorisk oppmøtetid.',
         },
     },
 };

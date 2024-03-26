@@ -3,7 +3,7 @@ import { useState } from 'react';
 import createUseContext from 'constate';
 
 import { Barnepass } from '../typer/barn';
-import { DokumentasjonFelt } from '../typer/skjema';
+import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
 import { Aktivitet, Hovedytelse } from '../typer/søknad';
 import { Valideringsfeil } from '../typer/validering';
 
@@ -16,6 +16,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
     const [aktivitet, settAktivitet] = useState<Aktivitet>();
 
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);
+
+    const [dokumentasjonsbehov, settDokumentasjonsbehov] = useState<Dokumentasjonsbehov[]>([]);
     const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
 
     const [innsentTidspunkt, settInnsentTidspunkt] = useState<string>();
@@ -31,6 +33,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         settBarnMedBarnepass,
         aktivitet,
         settAktivitet,
+        dokumentasjonsbehov,
+        settDokumentasjonsbehov,
         dokumentasjon,
         settDokumentasjon,
         innsentTidspunkt,
