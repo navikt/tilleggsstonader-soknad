@@ -1,5 +1,8 @@
 import { OppholdUtenforNorge } from '../../../../typer/søknad';
 
+/**
+ * Oppdaterer felt i [OppholdUtenforNorge] med gitt verdi
+ */
 export const oppdaterOpphold = <T extends OppholdUtenforNorge, K extends keyof T>(
     oppholdUtenforNorge: OppholdUtenforNorge[],
     id: number,
@@ -26,6 +29,9 @@ const utledMaxId = (oppholdUtenforNorge: OppholdUtenforNorge[]) => {
     return ids.length > 0 ? Math.max(...ids) : 0;
 };
 
+/**
+ * Oppretter tomt [OppholdUtenforNorge] med ny [_id]
+ */
 export const opprettOppholdForNesteId = (opphold: OppholdUtenforNorge[]): OppholdUtenforNorge => {
     const maxId = utledMaxId(opphold);
     return { _id: maxId + 1 };

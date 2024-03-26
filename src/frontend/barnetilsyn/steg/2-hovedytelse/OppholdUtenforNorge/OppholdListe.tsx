@@ -1,11 +1,13 @@
 import React from 'react';
 
-import LeggTilOppholdKnapp from './LeggTilOppholdKnapp';
+import { PlusIcon } from '@navikt/aksel-icons';
+import { Button, HStack } from '@navikt/ds-react';
+
 import Opphold from './Opphold';
-import { oppdaterOpphold } from './oppholdUtil';
+import { oppdaterOpphold, opprettOppholdForNesteId } from './oppholdUtil';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../typer/søknad';
-import { OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
+import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
 
 const OppholdListe: React.FC<{
     keyOpphold: keyof Pick<
@@ -17,6 +19,7 @@ const OppholdListe: React.FC<{
     tekster: OppholdUtenforNorgeInnhold;
 }> = ({ keyOpphold, arbeidOgOpphold, settArbeidOgOpphold, tekster }) => {
     const { locale } = useSpråk();
+
     /**
      * Returnerer en metode som er generisk som oppdaterer felter i oppholdutenfor norge,
      * [oppholdUtenforNorgeSiste12mnd] eller [oppholdUtenforNorgeNeste12mnd]
@@ -34,6 +37,16 @@ const OppholdListe: React.FC<{
         });
     };
 
+    const leggTilOpphold = () => {
+        settArbeidOgOpphold((prevState) => {
+            const prevOpphold = prevState[keyOpphold];
+            return {
+                ...prevState,
+                [keyOpphold]: [...prevOpphold, opprettOppholdForNesteId(prevOpphold)],
+            };
+        });
+    };
+
     return (
         <>
             {arbeidOgOpphold[keyOpphold].map((opphold) => (
@@ -44,7 +57,11 @@ const OppholdListe: React.FC<{
                     locale={locale}
                 />
             ))}
-            <LeggTilOppholdKnapp key={keyOpphold} settArbeidOgOpphold={settArbeidOgOpphold} />
+            <HStack>
+                <Button variant={'tertiary'} onClick={leggTilOpphold} icon={<PlusIcon />}>
+                    {hovedytelseInnhold.arbeidOgOpphold.oppholdUtenforNorge.knapp_legg_til[locale]}
+                </Button>
+            </HStack>
         </>
     );
 };
