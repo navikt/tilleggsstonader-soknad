@@ -20,13 +20,14 @@ import {
     MottarPengestøtteTyper,
     OppholdUtenforNorge,
 } from '../../../../typer/søknad';
+import { harVerdi } from '../../../../utils/typer';
 import { hovedytelseInnhold } from '../../../tekster/hovedytelse';
 import {
-    skalTaStillingTilLandForPengestøtte,
     skalTaStillingTilOppholdNeste12mnd,
     skalTaStillingTilOppholdSiste12mnd,
     skalTaStillingTilOppholdUtenforNorge,
     skalTaStillingTilPengestøtte,
+    skalTaStillingTilLandForPengestøtte,
 } from '../validering';
 
 const teksterOppholdINorge = hovedytelseInnhold.arbeidOgOpphold;
@@ -71,6 +72,12 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                 svarTekst: landkoder[e.target.value] || '',
             },
         }));
+        if (harVerdi(e.target.value)) {
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                hvilketLandJobberIAnnetLandEnnNorge: undefined,
+            }));
+        }
     };
 
     const oppdaterMottarDuPengestøtte = (verdi: EnumFlereValgFelt<MottarPengestøtteTyper>) => {
@@ -80,9 +87,19 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             hvilketLandMottarDuPengestøtteFra: skalTaStillingTilLandForPengestøtte(verdi)
                 ? prevState.hvilketLandMottarDuPengestøtteFra
                 : undefined,
-            oppholdUtenforNorgeSiste12mnd: [],
             harDuOppholdUtenforNorgeSiste12mnd: undefined,
+            oppholdUtenforNorgeSiste12mnd: [],
+            harDuOppholdUtenforNorgeNeste12mnd: undefined,
             oppholdUtenforNorgeNeste12mnd: [],
+        }));
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            mottarDuPengestøtteFraAnnetLand: undefined,
+            hvilketLandMottarDuPengestøtteFra: undefined,
+            harDuOppholdUtenforNorgeSiste12mnd: undefined,
+            //oppholdUtenforNorgeSiste12mnd: undefined, // TODO
+            harDuOppholdUtenforNorgeNeste12mnd: undefined,
+            //oppholdUtenforNorgeNeste12mnd: undefined // TODO
         }));
     };
 
@@ -95,6 +112,12 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                 svarTekst: landkoder[e.target.value] || '',
             },
         }));
+        if (harVerdi(e.target.value)) {
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                hvilketLandMottarDuPengestøtteFra: undefined,
+            }));
+        }
     };
 
     const oppdaterOppholdSiste12mnd = (verdi: EnumFelt<JaNei>) => {
