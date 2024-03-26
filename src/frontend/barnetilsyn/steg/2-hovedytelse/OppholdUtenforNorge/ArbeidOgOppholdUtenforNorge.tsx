@@ -47,8 +47,10 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
             jobberIAnnetLandEnnNorge: verdi,
             hvilketLand: undefined,
             //mottarDuPengestøtteFraAnnetLand: Trenger ikke å nullstille då man alltid skal vise det spørsmålet
-            harDuOppholdUtenforNorge: undefined,
-            oppholdUtenforNorge: [],
+            harDuOppholdUtenforNorgeSiste12mnd: undefined,
+            oppholdUtenforNorgeSiste12mnd: [],
+            harDuOppholdUtenforNorgeNeste12mnd: undefined,
+            oppholdUtenforNorgeNeste12mnd: [],
         }));
     };
     const oppdatertHvilketLandJobberI = (e: React.ChangeEvent<HTMLSelectElement>) => {
