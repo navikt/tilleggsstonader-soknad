@@ -18,6 +18,11 @@ import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { inneholderFeil } from '../../../../typer/validering';
 import { OppholdInnhold, oppholdUtenforNorgeInnhold } from '../../../tekster/opphold';
 
+/**
+ * Viser liste over opphold utenfor Norge
+ * Når man legger til et nytt opphold så validerer man den man har under redigering
+ * Man markerer det som lagret og viser det oppholdet i visningsmodus
+ */
 const OppholdListe: React.FC<{
     keyOpphold: keyof Pick<
         ArbeidOgOpphold,
@@ -107,6 +112,7 @@ const OppholdListe: React.FC<{
         slettValideringsfeilHvisUlagret(id);
     };
 
+    const harLagredeOgUlagretOpphold = lagredeOpphold.length > 0 && ulagretOpphold;
     return (
         <>
             <LagredeOpphold
@@ -114,7 +120,7 @@ const OppholdListe: React.FC<{
                 slettOpphold={slettOpphold}
                 locale={locale}
             />
-            {lagredeOpphold.length > 0 && ulagretOpphold && (
+            {harLagredeOgUlagretOpphold && (
                 <div>
                     <Label>{oppholdUtenforNorgeInnhold.label_flere_utenlandsopphold[locale]}</Label>
                     <div>
