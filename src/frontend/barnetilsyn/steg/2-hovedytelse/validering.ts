@@ -10,6 +10,7 @@ import { EnumFlereValgFelt } from '../../../typer/skjema';
 import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
+import { erDatoEtterEllerLik } from '../../../utils/dato';
 import { harVerdi } from '../../../utils/typer';
 import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../tekster/hovedytelse';
 
@@ -244,6 +245,17 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
                 melding: tekster.dato.feilmelding_tom[locale],
             },
         };
+    }
+    if (harVerdi(opphold.fom?.verdi) && harVerdi(opphold.tom?.verdi)) {
+        if (!erDatoEtterEllerLik(opphold.fom?.verdi || '', opphold.tom?.verdi || '')) {
+            feil = {
+                ...feil,
+                [errorKeyTom(keyOpphold)]: {
+                    id: `${feilId}-4`,
+                    melding: tekster.dato.feilmelding_tom_før_fom[locale],
+                },
+            };
+        }
     }
     return feil;
 };

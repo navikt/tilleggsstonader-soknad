@@ -51,6 +51,7 @@ export interface OppholdUtenforNorgeInnhold {
         tom: TekstElement<string>;
         feilmelding_fom: TekstElement<string>;
         feilmelding_tom: TekstElement<string>;
+        feilmelding_tom_før_fom: TekstElement<string>;
     };
 }
 
@@ -213,6 +214,9 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
                     feilmelding_tom: {
                         nb: 'Du må velge til-dato.',
                     },
+                    feilmelding_tom_før_fom: {
+                        nb: 'Til-dato må være eller etter fra-dato.',
+                    },
                 },
             },
             radioNeste12mnd: {
@@ -259,6 +263,9 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
                     },
                     feilmelding_tom: {
                         nb: 'Du må velge til-dato.',
+                    },
+                    feilmelding_tom_før_fom: {
+                        nb: 'Til-dato må være eller etter fra-dato.',
                     },
                 },
             },
