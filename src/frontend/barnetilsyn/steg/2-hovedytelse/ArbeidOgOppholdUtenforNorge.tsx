@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { PlusIcon } from '@navikt/aksel-icons';
-import { Button, Heading, HStack, Select, VStack } from '@navikt/ds-react';
+import { Heading, Select, VStack } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
+import LeggTilOppholdKnapp from './LeggTilOppholdKnapp';
 import Opphold from './Opphold';
-import { oppdaterOpphold } from './oppholdUtil';
+import { oppdaterOpphold, opprettOppholdForNesteId } from './oppholdUtil';
 import {
     skalTaStillingTilLandForPengestøtte,
     skalTaStillingTilOppholdNeste12mnd,
@@ -37,19 +37,6 @@ interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
 }
-
-/**
- * Setter utleders max id for å kunne sette nytt id på neste item for å kunne lenke til unik opphold
- */
-const utledMaxId = (oppholdUtenforNorge: OppholdUtenforNorge[]) => {
-    const ids = oppholdUtenforNorge.map((opphold) => opphold._id);
-    return ids.length > 0 ? Math.max(...ids) : 0;
-};
-
-const opprettOppholdForNesteId = (opphold: OppholdUtenforNorge[]): OppholdUtenforNorge => {
-    const maxId = utledMaxId(opphold);
-    return { _id: maxId + 1 };
-};
 
 const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
     const { locale } = useSpråk();
@@ -170,23 +157,6 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         });
     };
 
-    const leggTilOpphold = (
-        key: keyof Pick<
-            ArbeidOgOpphold,
-            'oppholdUtenforNorgeSiste12mnd' | 'oppholdUtenforNorgeNeste12mnd'
-        >
-    ) => {
-        settArbeidOgOpphold((prevState) => {
-            const opphold = prevState[key];
-            return {
-                ...prevState,
-                [key]: [...prevState[key], opprettOppholdForNesteId(opphold)],
-            };
-        });
-    };
-
-    const leggTilOppholdTekst = teksterOppholdINorge.oppholdUtenforNorge.knapp_legg_til[locale];
-
     return (
         <UnderspørsmålContainer>
             <VStack gap="6">
@@ -276,17 +246,10 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                             />
                                         )
                                     )}
-                                    <HStack>
-                                        <Button
-                                            variant={'tertiary'}
-                                            onClick={() =>
-                                                leggTilOpphold('oppholdUtenforNorgeSiste12mnd')
-                                            }
-                                            icon={<PlusIcon />}
-                                        >
-                                            {leggTilOppholdTekst}
-                                        </Button>
-                                    </HStack>
+                                    <LeggTilOppholdKnapp
+                                        key={'oppholdUtenforNorgeSiste12mnd'}
+                                        settArbeidOgOpphold={settArbeidOgOpphold}
+                                    />
                                 </>
                             )}
                         {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
@@ -314,17 +277,10 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                             />
                                         )
                                     )}
-                                    <HStack>
-                                        <Button
-                                            variant={'tertiary'}
-                                            onClick={() =>
-                                                leggTilOpphold('oppholdUtenforNorgeNeste12mnd')
-                                            }
-                                            icon={<PlusIcon />}
-                                        >
-                                            {leggTilOppholdTekst}
-                                        </Button>
-                                    </HStack>
+                                    <LeggTilOppholdKnapp
+                                        key={'oppholdUtenforNorgeSiste12mnd'}
+                                        settArbeidOgOpphold={settArbeidOgOpphold}
+                                    />
                                 </>
                             )}
                     </>

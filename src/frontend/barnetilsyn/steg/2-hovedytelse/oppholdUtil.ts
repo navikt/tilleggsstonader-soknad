@@ -17,3 +17,16 @@ export const oppdaterOpphold = <T extends OppholdUtenforNorge, K extends keyof T
         }
     });
 };
+
+/**
+ * Utleder max id for å kunne sette nytt id på neste item for å kunne lenke til unik opphold
+ */
+const utledMaxId = (oppholdUtenforNorge: OppholdUtenforNorge[]) => {
+    const ids = oppholdUtenforNorge.map((opphold) => opphold._id);
+    return ids.length > 0 ? Math.max(...ids) : 0;
+};
+
+export const opprettOppholdForNesteId = (opphold: OppholdUtenforNorge[]): OppholdUtenforNorge => {
+    const maxId = utledMaxId(opphold);
+    return { _id: maxId + 1 };
+};
