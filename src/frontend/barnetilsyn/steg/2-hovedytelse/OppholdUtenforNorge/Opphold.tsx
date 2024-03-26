@@ -9,7 +9,6 @@ import { EnumFlereValgFelt } from '../../../../typer/skjema';
 import { OppholdUtenforNorge, ÅrsakOppholdUtenforNorge } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
 import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
-import { harVerdi } from '../../../../utils/typer';
 import { OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
 
 const Opphold: React.FC<{
@@ -41,15 +40,11 @@ const Opphold: React.FC<{
     });
 
     const oppdatertHvilketLandOppholdUtenforNorge = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        if (harVerdi(e.target.value)) {
-            oppdater(opphold._id, 'land', {
-                label: tekster.select_hvilket_land[locale],
-                verdi: e.target.value,
-                svarTekst: landkoder[e.target.value] || 'Finner ikke mapping',
-            });
-        } else {
-            oppdater(opphold._id, 'land', undefined);
-        }
+        oppdater(opphold._id, 'land', {
+            label: tekster.select_hvilket_land[locale],
+            verdi: e.target.value || '',
+            svarTekst: landkoder[e.target.value] || '',
+        });
     };
 
     return (

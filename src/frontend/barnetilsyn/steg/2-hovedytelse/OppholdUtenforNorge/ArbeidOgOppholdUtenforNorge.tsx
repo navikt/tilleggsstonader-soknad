@@ -54,23 +54,14 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
         }));
     };
     const oppdatertHvilketLandJobberI = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        if (harVerdi(e.target.value)) {
-            settArbeidOgOpphold((prevState) => ({
-                ...prevState,
-                hvilketLandJobberIAnnetLandEnnNorge: {
-                    label: teksterOppholdINorge.select_hvilket_land_jobber_i_annet_land_label[
-                        locale
-                    ],
-                    verdi: e.target.value,
-                    svarTekst: landkoder[e.target.value] || 'Finner ikke mapping',
-                },
-            }));
-        } else {
-            settArbeidOgOpphold((prevState) => ({
-                ...prevState,
-                hvilketLandJobberIAnnetLandEnnNorge: undefined,
-            }));
-        }
+        settArbeidOgOpphold((prevState) => ({
+            ...prevState,
+            hvilketLandJobberIAnnetLandEnnNorge: {
+                label: teksterOppholdINorge.select_hvilket_land_jobber_i_annet_land_label[locale],
+                verdi: e.target.value || '',
+                svarTekst: landkoder[e.target.value] || '',
+            },
+        }));
     };
 
     const oppdaterMottarDuPengestøtte = (verdi: EnumFlereValgFelt<MottarPengestøtteTyper>) => {
