@@ -3,6 +3,7 @@ import React from 'react';
 import { DatePicker, HStack, Label, Select, VStack, useDatepicker } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
+import { OppdatertOppholdFelt } from './typer';
 import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import { EnumFlereValgFelt } from '../../../../typer/skjema';
 import { OppholdUtenforNorge, ÅrsakOppholdUtenforNorge } from '../../../../typer/søknad';
@@ -13,11 +14,7 @@ import { OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
 
 const Opphold: React.FC<{
     opphold: OppholdUtenforNorge;
-    oppdater: <T extends OppholdUtenforNorge, K extends keyof T>(
-        id: number,
-        key: K,
-        verdi: T[K]
-    ) => void;
+    oppdater: OppdatertOppholdFelt;
     tekster: OppholdUtenforNorgeInnhold;
     locale: Locale;
 }> = ({ opphold, oppdater, tekster, locale }) => {

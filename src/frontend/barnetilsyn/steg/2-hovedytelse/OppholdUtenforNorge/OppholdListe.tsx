@@ -5,8 +5,9 @@ import { Button, HStack } from '@navikt/ds-react';
 
 import Opphold from './Opphold';
 import { oppdaterOpphold, opprettOppholdForNesteId } from './oppholdUtil';
+import { OppdatertOppholdFelt } from './typer';
 import { useSpråk } from '../../../../context/SpråkContext';
-import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../typer/søknad';
+import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { hovedytelseInnhold, OppholdUtenforNorgeInnhold } from '../../../tekster/hovedytelse';
 
 const OppholdListe: React.FC<{
@@ -24,11 +25,7 @@ const OppholdListe: React.FC<{
      * Returnerer en metode som er generisk som oppdaterer felter i oppholdutenfor norge,
      * [oppholdUtenforNorgeSiste12mnd] eller [oppholdUtenforNorgeNeste12mnd]
      */
-    const oppdaterOppholdUtenforNorge = <T extends OppholdUtenforNorge, K extends keyof T>(
-        id: number,
-        key: K,
-        verdi: T[K]
-    ) => {
+    const oppdaterOppholdUtenforNorge: OppdatertOppholdFelt = (id: number, key, verdi) => {
         settArbeidOgOpphold((prevState) => {
             return {
                 ...prevState,
