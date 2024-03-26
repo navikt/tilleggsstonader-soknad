@@ -29,7 +29,7 @@ export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold) =
     (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length > 0 &&
     !skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand);
 
-export const skalTaStillingTilOppholdsland = (opphold: ArbeidOgOpphold) =>
+export const skalTaStillingTilOpphold = (opphold: ArbeidOgOpphold) =>
     opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === 'JA';
 
 export const validerHovedytelse = (

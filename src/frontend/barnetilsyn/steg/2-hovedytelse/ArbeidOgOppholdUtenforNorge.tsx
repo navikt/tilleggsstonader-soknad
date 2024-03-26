@@ -8,7 +8,7 @@ import OppholdUtenforNorge from './OppholdUtenforNorge';
 import { oppdaterOpphold } from './oppholdUtil';
 import {
     skalTaStillingTilLandForPengestøtte,
-    skalTaStillingTilOppholdsland,
+    skalTaStillingTilOpphold,
     skalTaStillingTilOppholdUtenforNorge,
     skalTaStillingTilPengestøtte,
 } from './validering';
@@ -203,7 +203,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                 error={valideringsfeil.harDuOppholdUtenforNorge?.melding}
                             />
                         )}
-                        {skalTaStillingTilOppholdsland(arbeidOgOpphold) &&
+                        {skalTaStillingTilOpphold(arbeidOgOpphold) &&
                             arbeidOgOpphold?.harDuOppholdUtenforNorgeSiste12mnd && (
                                 <>
                                     {arbeidOgOpphold?.oppholdUtenforNorgeSiste12mnd.map(
@@ -219,7 +219,6 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                                             />
                                         )
                                     )}
-
                                     <HStack>
                                         <Button
                                             variant={'tertiary'}
