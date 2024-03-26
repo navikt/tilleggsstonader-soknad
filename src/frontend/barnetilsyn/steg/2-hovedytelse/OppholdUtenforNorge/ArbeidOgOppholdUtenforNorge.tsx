@@ -5,7 +5,6 @@ import { Heading, VStack } from '@navikt/ds-react';
 import JobberDuIAnnetLand from './JobberDuIAnnetLand';
 import MottarDuPengestøtte from './MottarDuPengestøtte';
 import OppholdUtenforNorgeContainer from './OppholdUtenforNorgeContainer';
-import { skalTaStillingTilOppholdUtenforNorge, skalTaStillingTilPengestøtte } from './util';
 import { PellePanel } from '../../../../components/PellePanel/PellePanel';
 import LocaleInlineLenke from '../../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../../../../components/Teksthåndtering/LocaleTekst';
@@ -33,19 +32,14 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                     arbeidOgOpphold={arbeidOgOpphold}
                     settArbeidOgOpphold={settArbeidOgOpphold}
                 />
-
-                {skalTaStillingTilPengestøtte(arbeidOgOpphold) && (
-                    <MottarDuPengestøtte
-                        arbeidOgOpphold={arbeidOgOpphold}
-                        settArbeidOgOpphold={settArbeidOgOpphold}
-                    />
-                )}
-                {skalTaStillingTilOppholdUtenforNorge(arbeidOgOpphold) && (
-                    <OppholdUtenforNorgeContainer
-                        arbeidOgOpphold={arbeidOgOpphold}
-                        settArbeidOgOpphold={settArbeidOgOpphold}
-                    />
-                )}
+                <MottarDuPengestøtte
+                    arbeidOgOpphold={arbeidOgOpphold}
+                    settArbeidOgOpphold={settArbeidOgOpphold}
+                />
+                <OppholdUtenforNorgeContainer
+                    arbeidOgOpphold={arbeidOgOpphold}
+                    settArbeidOgOpphold={settArbeidOgOpphold}
+                />
             </VStack>
         </UnderspørsmålContainer>
     );

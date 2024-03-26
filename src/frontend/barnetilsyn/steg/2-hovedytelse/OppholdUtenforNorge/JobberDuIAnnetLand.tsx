@@ -4,7 +4,6 @@ import { Select } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
 import { skalTaStillingTilLandForJobberIAnnetLand } from './util';
-import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
 import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
 import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
 import { useSpråk } from '../../../../context/SpråkContext';
@@ -28,21 +27,11 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
             ...prevState,
             jobberIAnnetLandEnnNorge: verdi,
             hvilketLandJobberIAnnetLandEnnNorge: undefined,
-            mottarDuPengestøtteFraAnnetLand: undefined,
-            harDuOppholdUtenforNorgeSiste12mnd: undefined,
-            oppholdUtenforNorgeSiste12mnd: [],
-            harDuOppholdUtenforNorgeNeste12mnd: undefined,
-            oppholdUtenforNorgeNeste12mnd: [],
         }));
         settValideringsfeil((prevState) => ({
             ...prevState,
             jobberIAnnetLandEnnNorge: undefined,
             hvilketLandJobberIAnnetLandEnnNorge: undefined,
-            mottarDuPengestøtteFraAnnetLand: undefined,
-            harDuOppholdUtenforNorgeSiste12mnd: undefined,
-            harDuOppholdUtenforNorgeNeste12mnd: undefined,
-            ...nullstillteOppholsfeilSiste12mnd,
-            ...nullstillteOppholsfeilNeste12mnd,
         }));
     };
     const oppdatertHvilketLandJobberI = (e: React.ChangeEvent<HTMLSelectElement>) => {

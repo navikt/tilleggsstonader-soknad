@@ -2,7 +2,6 @@ import {
     skalTaStillingTilLandForJobberIAnnetLand,
     skalTaStillingTilLandForPengestøtte,
     skalTaStillingTilOppholdSiste12mnd,
-    skalTaStillingTilOppholdUtenforNorge,
     skalTaStillingTilPengestøtte,
 } from './util';
 import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../typer/søknad';
@@ -124,10 +123,7 @@ const validerMottarPengestøtte = (opphold: ArbeidOgOpphold, locale: Locale): Va
 
 const validerOppholdSiste12Mnd = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfeil => {
     let feil: Valideringsfeil = {};
-    if (
-        skalTaStillingTilOppholdUtenforNorge(opphold) &&
-        opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === undefined
-    ) {
+    if (opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === undefined) {
         feil = {
             ...feil,
             harDuOppholdUtenforNorgeSiste12mnd: {

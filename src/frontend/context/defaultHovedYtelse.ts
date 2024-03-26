@@ -2,7 +2,7 @@ import { Hovedytelse } from '../typer/søknad';
 
 // TODO slett
 export const defaultHovedYtelse: Hovedytelse | undefined =
-    document.location.hostname !== 'localhost'
+    document.location.hostname !== 'localhost2'
         ? undefined
         : {
               ytelse: {

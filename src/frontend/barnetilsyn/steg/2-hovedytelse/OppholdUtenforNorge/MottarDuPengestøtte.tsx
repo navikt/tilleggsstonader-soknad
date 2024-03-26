@@ -4,7 +4,6 @@ import { Select } from '@navikt/ds-react';
 
 import { landkoder } from './landkoder';
 import { skalTaStillingTilLandForPengestøtte } from './util';
-import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
 import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
 import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import { useSpråk } from '../../../../context/SpråkContext';
@@ -31,19 +30,11 @@ const MottarDuPengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOp
             hvilketLandMottarDuPengestøtteFra: skalTaStillingTilLandForPengestøtte(verdi)
                 ? prevState.hvilketLandMottarDuPengestøtteFra
                 : undefined,
-            harDuOppholdUtenforNorgeSiste12mnd: undefined,
-            oppholdUtenforNorgeSiste12mnd: [],
-            harDuOppholdUtenforNorgeNeste12mnd: undefined,
-            oppholdUtenforNorgeNeste12mnd: [],
         }));
         settValideringsfeil((prevState) => ({
             ...prevState,
             mottarDuPengestøtteFraAnnetLand: undefined,
             hvilketLandMottarDuPengestøtteFra: undefined,
-            harDuOppholdUtenforNorgeSiste12mnd: undefined,
-            harDuOppholdUtenforNorgeNeste12mnd: undefined,
-            ...nullstillteOppholsfeilSiste12mnd,
-            ...nullstillteOppholsfeilNeste12mnd,
         }));
     };
 

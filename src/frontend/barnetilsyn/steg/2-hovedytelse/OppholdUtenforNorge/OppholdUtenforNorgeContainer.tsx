@@ -10,7 +10,6 @@ import {
     opprettOppholdForNesteId,
     skalTaStillingTilOppholdNeste12mnd,
     skalTaStillingTilOppholdSiste12mnd,
-    skalTaStillingTilOppholdUtenforNorge,
 } from './util';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
 import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -76,15 +75,13 @@ const OppholdUtenforNorgeContainer: React.FC<Props> = ({
 
     return (
         <>
-            {skalTaStillingTilOppholdUtenforNorge(arbeidOgOpphold) && (
-                <LocaleRadioGroup
-                    id={valideringsfeil.harDuOppholdUtenforNorgeSiste12mnd?.id}
-                    tekst={oppholdUtenforNorgeInnhold.radioSiste12mnd}
-                    value={arbeidOgOpphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi}
-                    onChange={oppdaterOppholdSiste12mnd}
-                    error={valideringsfeil.harDuOppholdUtenforNorgeSiste12mnd?.melding}
-                />
-            )}
+            <LocaleRadioGroup
+                id={valideringsfeil.harDuOppholdUtenforNorgeSiste12mnd?.id}
+                tekst={oppholdUtenforNorgeInnhold.radioSiste12mnd}
+                value={arbeidOgOpphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi}
+                onChange={oppdaterOppholdSiste12mnd}
+                error={valideringsfeil.harDuOppholdUtenforNorgeSiste12mnd?.melding}
+            />
             {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
                 <BlåVenstreRammeContainer gap={'6'}>
                     <OppholdListe

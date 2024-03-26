@@ -55,16 +55,16 @@ const mottarPengestøtteTyperSomMåSåTaStillingTilLand: MottarPengestøtteTyper
     'PENSJON',
     'ANNEN_PENGESTØTTE',
 ];
+
 export const skalTaStillingTilLandForPengestøtte = (
     verdier: EnumFlereValgFelt<MottarPengestøtteTyper> | undefined
 ): boolean =>
     (verdier?.verdier || []).some(
         (verdi) => mottarPengestøtteTyperSomMåSåTaStillingTilLand.indexOf(verdi.verdi) > -1
     );
-export const skalTaStillingTilOppholdUtenforNorge = (opphold: ArbeidOgOpphold): boolean =>
-    (opphold.mottarDuPengestøtteFraAnnetLand?.verdier || []).length > 0 &&
-    !skalTaStillingTilLandForPengestøtte(opphold.mottarDuPengestøtteFraAnnetLand);
+
 export const skalTaStillingTilOppholdSiste12mnd = (opphold: ArbeidOgOpphold): boolean =>
     opphold.harDuOppholdUtenforNorgeSiste12mnd?.verdi === 'JA';
+
 export const skalTaStillingTilOppholdNeste12mnd = (opphold: ArbeidOgOpphold): boolean =>
     opphold.harDuOppholdUtenforNorgeNeste12mnd?.verdi === 'JA';
