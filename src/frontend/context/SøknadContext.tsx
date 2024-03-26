@@ -13,7 +13,7 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
 
     const [harBekreftet, settHarBekreftet] = useState<boolean>(false);
 
-    const [hovedytelse, settHovedytelse] = useState<Hovedytelse>(defaultHovedYtelse);
+    const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(defaultHovedYtelse);
     const [aktivitet, settAktivitet] = useState<Aktivitet>();
 
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);
