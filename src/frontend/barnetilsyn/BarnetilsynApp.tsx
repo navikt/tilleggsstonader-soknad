@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { Loader } from '@navikt/ds-react';
 
-import { SøknadTilsynBarn } from './søknad';
+import { MellomlagringSøknadTilsynBarn } from './søknad';
 import Søknadsdialog from './Søknadsdialog';
 import TaStillingTilMellomlagring from './TaStillingTilMellomlagring';
+import Environment from '../api/Environment';
 import { hentMellomlagring, slettMellomlagring } from '../api/mellomlagring';
 import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
@@ -17,12 +18,12 @@ import { Stønadstype } from '../typer/stønadstyper';
 const BarnetilsynApp = () => {
     const [fetching, settFetching] = useState<boolean>(true);
     const [skalBrukeMellomlagring, settSkalBrukeMellomlagring] = useState<boolean>(false);
-    const [mellomlagring, settMellomlagring] = useState<SøknadTilsynBarn>();
+    const [mellomlagring, settMellomlagring] = useState<MellomlagringSøknadTilsynBarn>();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (window.location.hostname === 'localhost') {
-            hentMellomlagring<SøknadTilsynBarn | undefined>('tilsyn-barn')
+        if (Environment().miljø === 'local') {
+            hentMellomlagring<MellomlagringSøknadTilsynBarn | undefined>('tilsyn-barn')
                 .then((data) => {
                     settMellomlagring(data);
                 }) // catch log feil?

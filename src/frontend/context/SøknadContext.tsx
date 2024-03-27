@@ -2,8 +2,9 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
+import Environment from '../api/Environment';
 import { mellomlagreSøknad } from '../api/mellomlagring';
-import { SøknadTilsynBarn } from '../barnetilsyn/søknad';
+import { MellomlagringSøknadTilsynBarn } from '../barnetilsyn/søknad';
 import { useDidMountEffect } from '../hooks/useDidMountEffect';
 import { Barnepass } from '../typer/barn';
 import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
@@ -11,7 +12,7 @@ import { Aktivitet, Hovedytelse } from '../typer/søknad';
 import { Valideringsfeil } from '../typer/validering';
 
 interface Props {
-    mellomlagring?: SøknadTilsynBarn;
+    mellomlagring?: MellomlagringSøknadTilsynBarn;
 }
 
 export const [SøknadProvider, useSøknad] = createUseContext(({ mellomlagring }: Props) => {
@@ -35,8 +36,8 @@ export const [SøknadProvider, useSøknad] = createUseContext(({ mellomlagring }
     const [valideringsfeil, settValideringsfeil] = useState<Valideringsfeil>({});
 
     useDidMountEffect(() => {
-        if (window.location.hostname === 'localhost') {
-            const søknad: SøknadTilsynBarn = {
+        if (Environment().miljø === 'local') {
+            const søknad: MellomlagringSøknadTilsynBarn = {
                 steg: side,
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,

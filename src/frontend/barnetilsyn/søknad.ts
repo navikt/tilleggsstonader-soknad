@@ -2,7 +2,7 @@ import { Barnepass } from '../typer/barn';
 import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
 import { Aktivitet, Hovedytelse } from '../typer/søknad';
 
-export interface SøknadTilsynBarn {
+export interface MellomlagringSøknadTilsynBarn {
     steg: string;
     hovedytelse?: Hovedytelse;
     aktivitet?: Aktivitet;
