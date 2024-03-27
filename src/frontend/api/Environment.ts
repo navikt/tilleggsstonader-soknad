@@ -4,7 +4,7 @@ interface EnvironmentProps {
     wonderwallUrl: string;
     sentryUrl?: string;
     urlGammelSøknad: string;
-    miljø: string;
+    miljø: 'local' | 'preprod' | 'production';
     modellVersjon: IModellversjon;
 }
 

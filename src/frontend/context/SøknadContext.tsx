@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
+import Environment from '../api/Environment';
 import { mellomlagreSøknad } from '../api/mellomlagring';
 import { MellomlagretSøknadTilsynBarn } from '../barnetilsyn/søknad';
 import { useDidMountEffect } from '../hooks/useDidMountEffect';
@@ -53,7 +54,7 @@ export const [SøknadProvider, useSøknad] = createUseContext(({ mellomlagring }
     };
 
     useDidMountEffect(() => {
-        if (window.location.hostname === 'localhost') {
+        if (Environment().miljø === 'local') {
             const søknad: MellomlagretSøknadTilsynBarn = {
                 steg: side,
                 hovedytelse,

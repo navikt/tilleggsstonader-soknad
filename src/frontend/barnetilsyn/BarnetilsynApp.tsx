@@ -7,6 +7,7 @@ import { Loader } from '@navikt/ds-react';
 import { MellomlagretSøknadTilsynBarn } from './søknad';
 import Søknadsdialog from './Søknadsdialog';
 import TaStillingTilMellomlagring from './TaStillingTilMellomlagring';
+import Environment from '../api/Environment';
 import { hentMellomlagring, slettMellomlagring } from '../api/mellomlagring';
 import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
@@ -28,7 +29,7 @@ const BarnetilsynApp = () => {
     }, [locale]);
 
     useEffect(() => {
-        if (window.location.hostname === 'localhost') {
+        if (Environment().miljø === 'local') {
             hentMellomlagring<MellomlagretSøknadTilsynBarn | undefined>('tilsyn-barn')
                 .then((data) => {
                     // TODO fjern barn som ikke lengre er gyldige? Og dokumentasjonen til disse?
