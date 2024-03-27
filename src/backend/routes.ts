@@ -40,6 +40,13 @@ const routes = () => {
     );
 
     expressRouter.use(
+        `${BASE_PATH_SOKNAD}/api/mellomlagring`,
+        addRequestInfo(),
+        attachToken('familie-dokument'),
+        doProxy(miljø.vedleggUrl, `${BASE_PATH_SOKNAD}/api/mellomlagring`)
+    );
+
+    expressRouter.use(
         `${BASE_PATH_SOKNAD}/api`,
         addRequestInfo(),
         attachToken('tilleggsstonader-soknad-api'),

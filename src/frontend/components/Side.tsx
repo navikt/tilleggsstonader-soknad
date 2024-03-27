@@ -15,6 +15,7 @@ import {
     loggSkjemaStegFullført,
 } from '../api/amplitude';
 import { sendInnSøknad } from '../api/api';
+import { slettMellomlagring } from '../api/mellomlagring';
 import { ERouteBarnetilsyn, RouteTilPath } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { useSpråk } from '../context/SpråkContext';
 import { useSøknad } from '../context/SøknadContext';
@@ -62,6 +63,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         barnMedBarnepass,
         dokumentasjon,
         resetSøknad,
+        settSide,
     } = useSøknad();
 
     const errorRef = useRef<HTMLDivElement>(null);
@@ -87,10 +89,15 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
             return;
         }
 
-        oppdaterSøknad && oppdaterSøknad();
+        if (oppdaterSøknad) {
+            // todo send med neste side-id?
+            oppdaterSøknad();
+        }
+
         loggSkjemaStegFullført(stønadstype, aktivtSteg.label);
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
+        settSide(nesteRoute.path);
         navigate(nesteRoute.path);
     };
 
@@ -125,7 +132,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                     RouteTilPath[ERouteBarnetilsyn.KVITTERING],
                     ERouteBarnetilsyn.KVITTERING
                 );
-
+                slettMellomlagring('tilsyn-barn');
                 resetSøknad();
 
                 navigate(nesteRoute.path, { state: { innsendtTidspunkt: res.mottattTidspunkt } });
