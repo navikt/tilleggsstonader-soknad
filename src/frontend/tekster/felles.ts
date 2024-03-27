@@ -2,6 +2,7 @@ import { JaNei } from '../typer/søknad';
 import { TekstElement } from '../typer/tekst';
 
 export interface FellesInnhold {
+    laster: TekstElement<string>;
     vi_stoler_tittel: TekstElement<string>;
     vi_stoler_innhold: TekstElement<string>;
     vi_stoler_feilmelding: TekstElement<string>;
@@ -14,6 +15,9 @@ export interface FellesInnhold {
 }
 
 export const fellesTekster: FellesInnhold = {
+    laster: {
+        nb: 'Laster data...',
+    },
     vi_stoler_tittel: { nb: 'Vi stoler på deg' },
     vi_stoler_innhold: {
         nb: 'Jeg bekrefter at jeg vil svare så godt jeg kan på spørsmålene i søknaden.',

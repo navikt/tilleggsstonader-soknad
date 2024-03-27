@@ -65,6 +65,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         barnMedBarnepass,
         dokumentasjon,
         settInnsentTidspunkt,
+        settSide,
     } = useSøknad();
 
     const errorRef = useRef<HTMLDivElement>(null);
@@ -85,9 +86,11 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
             return;
         }
 
+        // todo send med neste side-id?
         oppdaterSøknad && oppdaterSøknad();
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
+        settSide(nesteRoute.path);
         navigate(nesteRoute.path);
     };
 
@@ -111,6 +114,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         })
             .then((res) => {
                 settInnsentTidspunkt(res.mottattTidspunkt);
+                // slett mellomlagring
                 navigate(nesteRoute.path);
             })
             // TODO håndtering av 401?

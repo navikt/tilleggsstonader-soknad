@@ -2,18 +2,28 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
+import { mellomlagreSøknad } from '../api/mellomlagring';
+import { SøknadTilsynBarn } from '../barnetilsyn/søknad';
+import { useDidMountEffect } from '../hooks/useDidMountEffect';
 import { Barnepass } from '../typer/barn';
 import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
 import { Aktivitet, Hovedytelse } from '../typer/søknad';
 import { Valideringsfeil } from '../typer/validering';
 
-const [SøknadProvider, useSøknad] = createUseContext(() => {
+interface Props {
+    mellomlagring?: SøknadTilsynBarn;
+}
+
+export const [SøknadProvider, useSøknad] = createUseContext(({ mellomlagring }: Props) => {
     SøknadProvider.displayName = 'SØKNAD_PROVIDER';
+    const [side, settSide] = useState<string>('');
 
-    const [harBekreftet, settHarBekreftet] = useState<boolean>(false);
+    const [harBekreftet, settHarBekreftet] = useState<boolean>(!!mellomlagring);
 
-    const [hovedytelse, settHovedytelse] = useState<Hovedytelse>();
-    const [aktivitet, settAktivitet] = useState<Aktivitet>();
+    const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(
+        mellomlagring?.hovedytelse
+    );
+    const [aktivitet, settAktivitet] = useState<Aktivitet | undefined>(mellomlagring?.aktivitet);
 
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);
 
@@ -23,6 +33,20 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
     const [innsentTidspunkt, settInnsentTidspunkt] = useState<string>();
 
     const [valideringsfeil, settValideringsfeil] = useState<Valideringsfeil>({});
+
+    useDidMountEffect(() => {
+        if (window.location.hostname === 'localhost') {
+            const søknad: SøknadTilsynBarn = {
+                steg: side,
+                hovedytelse: hovedytelse,
+                aktivitet: aktivitet,
+                dokumentasjon: dokumentasjon,
+                dokumentasjonsbehov: dokumentasjonsbehov,
+                barnepass: barnMedBarnepass,
+            };
+            mellomlagreSøknad('tilsyn-barn', søknad);
+        }
+    }, [side, hovedytelse, aktivitet, dokumentasjon, dokumentasjonsbehov, barnMedBarnepass]);
 
     return {
         harBekreftet,
@@ -41,7 +65,6 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         settInnsentTidspunkt,
         valideringsfeil,
         settValideringsfeil,
+        settSide,
     };
 });
-
-export { SøknadProvider, useSøknad };

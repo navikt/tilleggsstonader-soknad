@@ -11,7 +11,6 @@ import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
 import ScrollToTop from './components/ScrollToTop';
 import { PersonProvider, usePerson } from './context/PersonContext';
 import { SpråkProvider } from './context/SpråkContext';
-import { SøknadProvider } from './context/SøknadContext';
 
 initSentry();
 autentiseringsInterceptor();
@@ -45,10 +44,8 @@ const AppRoutes = () => {
 };
 root.render(
     <SpråkProvider>
-        <SøknadProvider>
-            <PersonProvider>
-                <AppRoutes />
-            </PersonProvider>
-        </SøknadProvider>
+        <PersonProvider>
+            <AppRoutes />
+        </PersonProvider>
     </SpråkProvider>
 );
