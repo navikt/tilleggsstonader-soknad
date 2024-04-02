@@ -15,13 +15,13 @@ import { Stønadstype } from '../typer/stønadstyper';
 
 const Søknadsdialog: React.FC = () => {
     return (
-        <>
+        <main id="maincontent">
             <Banner tittel={fellesTekster.banner_bt} />
             <Routes>
                 <Route path={'/'} element={<Forside />} />
                 <Route path={'*'} element={<SøknadsdialogInnhold />} />
             </Routes>
-        </>
+        </main>
     );
 };
 
