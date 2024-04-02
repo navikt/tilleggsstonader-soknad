@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Alert, BodyShort, BodyLong, Checkbox, CheckboxGroup, Heading } from '@navikt/ds-react';
 
@@ -12,6 +12,7 @@ import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Barn } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
+import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formatering';
 import { harKunValgtEnsligSomHovedytelse } from '../../../utils/hovedytelse';
 import { dineBarnTekster } from '../../tekster/dineBarn';
@@ -20,11 +21,15 @@ import { harBarnUnder2år, harValgtBarnOver9år } from '../5-barnepass/utils';
 const DineBarn = () => {
     const { locale } = useSpråk();
     const { person, settPerson } = usePerson();
-    const { settDokumentasjon, hovedytelse } = useSøknad();
+    const { settDokumentasjon, hovedytelse, valideringsfeil, settValideringsfeil } = useSøknad();
 
     const [personbarn, settPersonbarn] = useState<Barn[]>(person.barn);
 
-    const [feilmeldingHarValgtBarn, settFeilmeldingHarValgtBarn] = useState<string>();
+    useEffect(() => {
+        if (inneholderFeil(valideringsfeil) && personbarn.some((barn) => barn.skalHaBarnepass)) {
+            settValideringsfeil({});
+        }
+    }, [valideringsfeil, personbarn, settValideringsfeil]);
 
     const toggleSkalHaBarnepass = (ident: string) => {
         settPersonbarn((prevBarn) =>
@@ -44,11 +49,15 @@ const DineBarn = () => {
     };
 
     const kanFortsette = (personbarn: Barn[]): boolean => {
+        let feil: Valideringsfeil = {};
         if (!personbarn.some((barn) => barn.skalHaBarnepass)) {
-            settFeilmeldingHarValgtBarn(dineBarnTekster.hvilke_barn_feilmelding[locale]);
-            return false;
+            feil = {
+                ...feil,
+                hvilkeBarn: { id: '1', melding: dineBarnTekster.hvilke_barn_feilmelding[locale] },
+            };
         }
-        return true;
+        settValideringsfeil(feil);
+        return !inneholderFeil(feil);
     };
 
     const oppdaterSøknad = () => {
@@ -70,8 +79,9 @@ const DineBarn = () => {
             </PellePanel>
             <div>
                 <CheckboxGroup
+                    id={valideringsfeil.hvilkeBarn?.id}
                     legend={dineBarnTekster.hvilke_barn_spm[locale]}
-                    error={feilmeldingHarValgtBarn}
+                    error={valideringsfeil.hvilkeBarn?.melding}
                     value={personbarn
                         .filter((barn) => barn.skalHaBarnepass)
                         .map((barn) => barn.ident)}

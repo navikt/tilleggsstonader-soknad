@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import { Heading, VStack } from '@navikt/ds-react';
 
-import { oppdaterDokumentasjonFeltForBarnMedPass } from './barnepassDokumentUtil';
+import { oppdaterDokumentasjonsbehovForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { BarnepassIntern } from './typer';
-import { finnBarn, validerBarnepass } from './utils';
+import { valider } from './utils';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -14,13 +14,20 @@ import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { Barnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
+import { inneholderFeil } from '../../../typer/validering';
 import { valuerOrThrow } from '../../../utils/typer';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 const Barnepass = () => {
     const { person } = usePerson();
     const { locale } = useSpråk();
-    const { barnMedBarnepass, settBarnMedBarnepass, settDokumentasjon } = useSøknad();
+    const {
+        barnMedBarnepass,
+        settBarnMedBarnepass,
+        settDokumentasjonsbehov,
+        valideringsfeil,
+        settValideringsfeil,
+    } = useSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
         person.barn
@@ -32,7 +39,13 @@ const Barnepass = () => {
                     }
             )
     );
-    const [visFeilmelding, settVisFeilmelding] = useState<boolean>(false);
+
+    const nullstillValideringsfeil = (key: string) => {
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            [key]: undefined,
+        }));
+    };
 
     const oppdaterBarnMedBarnepass = (oppdatertBarn: BarnepassIntern) => {
         settBarnMedPass((prevBarn) =>
@@ -40,25 +53,18 @@ const Barnepass = () => {
         );
     };
 
-    const kanGåVidere = () => {
-        const validerteBarn = barnMedPass.filter((barn) =>
-            validerBarnepass(barn, finnBarn(person.barn, barn.ident))
-        );
-
-        if (validerteBarn.length !== barnMedPass.length) {
-            settVisFeilmelding(true);
-            return false;
-        }
-        return true;
+    const kanGåVidere = (): boolean => {
+        const validerteBarn = valider(barnMedPass, person.barn, locale);
+        settValideringsfeil(validerteBarn);
+        return !inneholderFeil(validerteBarn);
     };
 
     const oppdaterSøknad = () => {
-        const barnepasses = barnMedPass.filter((barn) =>
-            validerBarnepass(barn, finnBarn(person.barn, barn.ident))
-        ) as Barnepass[];
+        const barnepasses = barnMedPass as Barnepass[];
         settBarnMedBarnepass(barnepasses);
-        settDokumentasjon((prevState) =>
-            oppdaterDokumentasjonFeltForBarnMedPass(barnepasses, person.barn, prevState, locale)
+
+        settDokumentasjonsbehov((prevState) =>
+            oppdaterDokumentasjonsbehovForBarnMedPass(barnepasses, person.barn, prevState)
         );
     };
 
@@ -83,7 +89,8 @@ const Barnepass = () => {
                         )}
                         barnepass={barn}
                         oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
-                        visFeilmelding={visFeilmelding}
+                        valideringsfeil={valideringsfeil}
+                        nullstillValideringsfeil={nullstillValideringsfeil}
                     />
                 ))}
             </VStack>

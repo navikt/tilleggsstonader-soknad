@@ -1,54 +1,50 @@
 import { Alert, Heading } from '@navikt/ds-react';
 
 import { BarnepassIntern } from './typer';
+import { errorKeyStartetFemte, errorKeyÅrsak } from './utils';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
-import { useSpråk } from '../../../context/SpråkContext';
 import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
-import { hentBeskjedMedEttParameter } from '../../../utils/tekster';
+import { Valideringsfeil } from '../../../typer/validering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 interface Props {
     barn: Barn;
     passInfo: BarnepassIntern;
     oppdaterBarnMedBarnepass: (oppdatertBarn: BarnepassIntern) => void;
-    visFeilmeldinger: boolean;
+    valideringsfeil: Valideringsfeil;
+    nullstillValideringsfeil: (key: string) => void;
 }
 const BarnOver9År: React.FC<Props> = ({
     barn,
     passInfo,
     oppdaterBarnMedBarnepass,
-    visFeilmeldinger,
+    valideringsfeil,
+    nullstillValideringsfeil,
 }) => {
-    const { locale } = useSpråk();
     const oppdaterStartetIFemte = (val: EnumFelt<JaNei>) => {
         oppdaterBarnMedBarnepass({
             ...passInfo,
             startetIFemte: val,
             årsak: undefined,
         });
+        nullstillValideringsfeil(errorKeyStartetFemte(barn));
     };
 
     return (
         <>
             <LocaleRadioGroup
+                id={valideringsfeil[errorKeyStartetFemte(barn)]?.id}
                 tekst={barnepassTekster.startet_femte_radio}
                 argument0={barn.fornavn}
                 value={passInfo.startetIFemte?.verdi ?? ''}
                 onChange={oppdaterStartetIFemte}
-                error={
-                    visFeilmeldinger &&
-                    passInfo.startetIFemte === undefined &&
-                    hentBeskjedMedEttParameter(
-                        barn.fornavn,
-                        barnepassTekster.startet_femte_feilmelding[locale]
-                    )
-                }
+                error={valideringsfeil[errorKeyStartetFemte(barn)]?.melding}
             >
                 <LocaleReadMoreMedChildren header={barnepassTekster.startet_femte_readmore_header}>
                     <LocaleTekst tekst={barnepassTekster.startet_femte_readmore_innhold} />
@@ -60,19 +56,15 @@ const BarnOver9År: React.FC<Props> = ({
             {passInfo.startetIFemte?.verdi == 'JA' && (
                 <UnderspørsmålContainer>
                     <LocaleRadioGroup
+                        id={valideringsfeil[errorKeyÅrsak(barn)]?.id}
                         tekst={barnepassTekster.årsak_ekstra_pass_radio}
                         argument0={barn.fornavn}
                         value={passInfo.årsak?.verdi || ''}
-                        onChange={(val) => oppdaterBarnMedBarnepass({ ...passInfo, årsak: val })}
-                        error={
-                            visFeilmeldinger &&
-                            passInfo.startetIFemte !== undefined &&
-                            passInfo.årsak === undefined &&
-                            hentBeskjedMedEttParameter(
-                                barn.fornavn,
-                                barnepassTekster.årsak_ekstra_pass_feilmelding[locale]
-                            )
-                        }
+                        onChange={(val) => {
+                            oppdaterBarnMedBarnepass({ ...passInfo, årsak: val });
+                            nullstillValideringsfeil(errorKeyÅrsak(barn));
+                        }}
+                        error={valideringsfeil[errorKeyÅrsak(barn)]?.melding}
                     />
                     {passInfo.årsak?.verdi === ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE && (
                         <Alert variant="info">
