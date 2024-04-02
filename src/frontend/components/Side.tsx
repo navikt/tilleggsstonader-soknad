@@ -38,12 +38,6 @@ export const Container = styled.div`
     }
 `;
 
-const StegIndikator = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-`;
-
 const KnappeContainerMedFeilmelding = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -116,11 +110,11 @@ const Side: React.FC<Props> = ({ st√∏nadstype, children, validerSteg, oppdaterS√
 
     return (
         <Container>
-            <StegIndikator>
-                <BodyShort size="small">
-                    Steg {aktivtStegIndex} av {routes.length - 2}
-                </BodyShort>
-            </StegIndikator>
+            <StegIndikator
+                gjeldendeSteg={aktivtStegIndex}
+                antallStegTotalt={routes.length - 2}
+                autofocus
+            />
             {harValideringsfeil && (
                 <ErrorSummary heading={fellesTekster.tittel_error_summary[locale]} ref={errorRef}>
                     {Object.entries(valideringsfeil).map(
