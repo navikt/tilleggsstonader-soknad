@@ -15,7 +15,7 @@ import { Stønadstype } from '../typer/stønadstyper';
 
 const Søknadsdialog: React.FC = () => {
     return (
-        <main id="maincontent">
+        <main id="maincontent" tabIndex={-1}>
             <Banner tittel={fellesTekster.banner_bt} />
             <Routes>
                 <Route path={'/'} element={<Forside />} />
