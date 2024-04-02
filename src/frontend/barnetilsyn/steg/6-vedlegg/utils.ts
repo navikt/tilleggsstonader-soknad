@@ -45,22 +45,6 @@ export const fjernVedlegg = (
     });
 };
 
-export const toggleHarSendtInn = (
-    alleDokumentasjonFelter: DokumentasjonFelt[],
-    dokumentasjonFeltSomSkalOppdateres: DokumentasjonFelt
-): DokumentasjonFelt[] => {
-    return alleDokumentasjonFelter.map((dokumentasjon) => {
-        if (dokumentajonFeltEquals(dokumentasjon, dokumentasjonFeltSomSkalOppdateres)) {
-            return {
-                ...dokumentasjon,
-                harSendtInn: !dokumentasjon.harSendtInn,
-            };
-        } else {
-            return dokumentasjon;
-        }
-    });
-};
-
 /**
  * Sjekker at det er samme type og barnId
  * Listen over dokumentajonFelt bør kun inneholde unike typer, eller unike typer/barnId
@@ -147,7 +131,6 @@ const lagDokumentasjonsfelt = (
     return {
         type: type,
         label: tittel,
-        harSendtInn: false,
         opplastedeVedlegg: [],
         barnId: barn?.ident,
     };
