@@ -124,9 +124,10 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={fellesTekster.vi_stoler_feilmelding} />
                     )
                 }
+                value={[harBekreftet]}
             >
                 <Checkbox
-                    value={harBekreftet}
+                    value={true}
                     onChange={(e) => {
                         settHarBekreftet(e.target.checked);
                         settSkalViseFeilmelding(false);

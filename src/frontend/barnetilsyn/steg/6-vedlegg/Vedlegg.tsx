@@ -5,12 +5,7 @@ import { styled } from 'styled-components';
 import { Heading } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
-import {
-    fjernVedlegg,
-    leggTilVedlegg,
-    opprettDokumentasjonsfelt,
-    toggleHarSendtInn,
-} from './utils';
+import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './utils';
 import VedleggManglerModal from './VedleggManglerModal';
 import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
@@ -58,10 +53,6 @@ const Vedlegg = () => {
         );
     };
 
-    const toggleHarSendtInnTidligere = (dokumentasjonFelt: DokumentasjonFelt) => {
-        settDokumentasjon((prevState) => toggleHarSendtInn(prevState, dokumentasjonFelt));
-    };
-
     const validerSteg = () => {
         const manglerOpplasting = dokumentasjon
             .filter((dok) => dok.opplastedeVedlegg.length === 0)
@@ -94,7 +85,6 @@ const Vedlegg = () => {
                             tittel={dok.label}
                             vedlegg={typerVedleggTekster[dok.type]}
                             dokumentasjonFelt={dok}
-                            toggleHarSendtInnTidligere={() => toggleHarSendtInnTidligere(dok)}
                             leggTilDokument={(dokument: Dokument) => leggTilDokument(dok, dokument)}
                             slettDokument={(dokument) => slettDokument(dok, dokument)}
                         />
