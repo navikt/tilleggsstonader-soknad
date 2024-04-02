@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { styled } from 'styled-components';
 
@@ -6,6 +6,7 @@ import { Heading } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
 import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './utils';
+import VedleggManglerModal from './VedleggManglerModal';
 import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -29,6 +30,9 @@ const Vedlegg = () => {
     const { locale } = useSpråk();
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = useSøknad();
 
+    const ref = useRef<HTMLDialogElement>(null);
+    const [ikkeOpplastedeDokumenter, settIkkeOpplastedeDokumenter] = React.useState<string[]>([]);
+
     useEffect(() => {
         settDokumentasjon((prevState) =>
             opprettDokumentasjonsfelt(dokumentasjonsbehov, prevState, locale)
@@ -49,8 +53,23 @@ const Vedlegg = () => {
         );
     };
 
+    const validerSteg = () => {
+        const manglerOpplasting = dokumentasjon
+            .filter((dok) => dok.opplastedeVedlegg.length === 0)
+            .map((dok) => dok.label);
+
+        settIkkeOpplastedeDokumenter(manglerOpplasting);
+
+        if (manglerOpplasting.length > 0) {
+            ref.current?.showModal();
+            return false;
+        }
+
+        return true;
+    };
+
     return (
-        <Side stønadstype={Stønadstype.BARNETILSYN}>
+        <Side stønadstype={Stønadstype.BARNETILSYN} validerSteg={validerSteg}>
             <Heading size={'medium'}>
                 <LocaleTekst tekst={vedleggTekster.tittel} />
             </Heading>
@@ -72,6 +91,7 @@ const Vedlegg = () => {
                     </section>
                 ))}
             </VedleggContainer>
+            <VedleggManglerModal innerRef={ref} dokumenterSomMangler={ikkeOpplastedeDokumenter} />
         </Side>
     );
 };
