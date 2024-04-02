@@ -21,11 +21,13 @@ export function StegIndikator(props: {
         }
     }, [props.autofocus]);
 
-    const stegteller = `Steg ${props.gjeldendeSteg} av ${props.antallStegTotalt}`;
+    const tekst = `Steg ${props.gjeldendeSteg} av ${props.antallStegTotalt}`;
 
     return (
-        <BodyShort role="status" tabIndex={-1} ref={stegindikatorRef}>
-            {stegteller}
-        </BodyShort>
+        <span>
+            <BodyShort role="status" tabIndex={-1} ref={stegindikatorRef}>
+                {tekst}
+            </BodyShort>
+        </span>
     );
 }
