@@ -148,7 +148,7 @@ const siste12mndInnhold: OppholdInnhold = {
         nb: 'Hvilket land har du oppholdt deg i?',
     },
     feilmelding_hvilket_land: {
-        nb: 'Du må velge hvilket land du har oppholdt deg i.',
+        nb: 'Du må velge hva du gjorde i landet du har oppholdt deg i.',
     },
 
     checkbox_årsak: {
@@ -177,7 +177,7 @@ const siste12mndInnhold: OppholdInnhold = {
             nb: 'Du må velge til-dato.',
         },
         feilmelding_tom_før_fom: {
-            nb: 'Til-dato må være eller etter fra-dato.',
+            nb: 'Til-dato kan ikke være før fra-dato.',
         },
     },
 };
@@ -215,7 +215,7 @@ const neste12mndInnhold: OppholdInnhold = {
             nb: 'Du må velge til-dato.',
         },
         feilmelding_tom_før_fom: {
-            nb: 'Til-dato må være eller etter fra-dato.',
+            nb: 'Til-dato kan ikke være før fra-dato.',
         },
     },
 };
@@ -233,7 +233,7 @@ export const oppholdUtenforNorgeInnhold: OppholdUtenforNorgeInnhold = {
         alternativer: jaNeiAlternativer,
     },
     feilmelding_radioSiste12mnd: {
-        nb: 'Du må svare på om du oppholdt deg utenfor Norge.',
+        nb: 'Du må svare på om du har oppholdt deg utenfor Norge.',
     },
 
     siste12mnd: siste12mndInnhold,
@@ -247,7 +247,7 @@ export const oppholdUtenforNorgeInnhold: OppholdUtenforNorgeInnhold = {
         alternativer: jaNeiAlternativer,
     },
     feilmelding_radioNeste12mnd: {
-        nb: 'Du må ta stilling til om du planlegger opphold utenfor Norge de neste 12 månadene.',
+        nb: 'Du må ta stilling til om du planlegger opphold utenfor Norge de neste 12 månedene.',
     },
     neste12mnd: neste12mndInnhold,
     knapp_legg_til: {
