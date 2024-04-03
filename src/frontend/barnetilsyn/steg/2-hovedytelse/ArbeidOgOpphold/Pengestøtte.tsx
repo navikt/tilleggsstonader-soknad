@@ -19,7 +19,7 @@ interface Props {
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
 }
 
-const MottarDuPengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
+const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
     const { valideringsfeil, settValideringsfeil } = useSøknad();
     const { locale } = useSpråk();
 
@@ -84,4 +84,4 @@ const MottarDuPengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOp
     );
 };
 
-export default MottarDuPengestøtte;
+export default Pengestøtte;
