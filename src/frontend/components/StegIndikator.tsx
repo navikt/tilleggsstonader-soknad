@@ -5,7 +5,7 @@ import { BodyShort } from '@navikt/ds-react';
 export function StegIndikator(props: {
     gjeldendeSteg: string | number;
     antallStegTotalt: string | number;
-    autofocus?: boolean;
+    autofokoserSkjermleser?: boolean;
 }) {
     const stegindikatorRef = useRef<HTMLParagraphElement>(null);
 
@@ -16,10 +16,10 @@ export function StegIndikator(props: {
     };
 
     useEffect(() => {
-        if (props.autofocus) {
+        if (props.autofokoserSkjermleser) {
             fokuserPåStegindikatoren();
         }
-    }, [props.autofocus]);
+    }, [props.autofokoserSkjermleser]);
 
     const tekst = `Steg ${props.gjeldendeSteg} av ${props.antallStegTotalt}`;
 

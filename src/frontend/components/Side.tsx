@@ -113,7 +113,7 @@ const Side: React.FC<Props> = ({ st√∏nadstype, children, validerSteg, oppdaterS√
             <StegIndikator
                 gjeldendeSteg={aktivtStegIndex}
                 antallStegTotalt={routes.length - 2}
-                autofocus
+                autofokoserSkjermleser
             />
             {harValideringsfeil && (
                 <ErrorSummary heading={fellesTekster.tittel_error_summary[locale]} ref={errorRef}>
