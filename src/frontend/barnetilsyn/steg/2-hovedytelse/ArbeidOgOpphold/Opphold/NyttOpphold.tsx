@@ -31,7 +31,7 @@ const NyttOpphold: React.FC<{
 }> = ({ keyOpphold, opphold, oppdater, tekster, locale }) => {
     const { valideringsfeil, settValideringsfeil } = useSøknad();
 
-    const nullstillDatoFeil = (verdi: string | undefined, errorKey: string) => {
+    const nullstillFeil = (verdi: string | undefined, errorKey: string) => {
         if (harVerdi(verdi)) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
@@ -47,7 +47,7 @@ const NyttOpphold: React.FC<{
                 ? { label: tekster.dato.fom[locale], verdi: tilLocaleDateString(val) }
                 : undefined;
             oppdater(opphold._id, 'fom', verdi);
-            nullstillDatoFeil(verdi?.verdi, errorKeyFom(keyOpphold));
+            nullstillFeil(verdi?.verdi, errorKeyFom(keyOpphold));
         },
     });
 
@@ -58,7 +58,7 @@ const NyttOpphold: React.FC<{
                 ? { label: tekster.dato.tom[locale], verdi: tilLocaleDateString(val) }
                 : undefined;
             oppdater(opphold._id, 'tom', verdi);
-            nullstillDatoFeil(verdi?.verdi, errorKeyFom(keyOpphold));
+            nullstillFeil(verdi?.verdi, errorKeyTom(keyOpphold));
         },
     });
 
@@ -68,6 +68,17 @@ const NyttOpphold: React.FC<{
             verdi: e.target.value || '',
             svarTekst: landkoder[e.target.value] || '',
         });
+        nullstillFeil(e.target.value, errorKeyLand(keyOpphold));
+    };
+
+    const oppdaterÅrsak = (verdi: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>) => {
+        oppdater(opphold._id, 'årsak', verdi);
+        if (verdi.verdier.length > 0) {
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                [errorKeyÅrsak(keyOpphold)]: undefined,
+            }));
+        }
     };
 
     return (
@@ -88,9 +99,7 @@ const NyttOpphold: React.FC<{
                 id={valideringsfeil[errorKeyÅrsak(keyOpphold)]?.id}
                 tekst={tekster.checkbox_årsak}
                 value={opphold.årsak?.verdier || []}
-                onChange={(verdi: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>) =>
-                    oppdater(opphold._id, 'årsak', verdi)
-                }
+                onChange={oppdaterÅrsak}
                 error={valideringsfeil[errorKeyÅrsak(keyOpphold)]?.melding}
             />
             <VStack>
