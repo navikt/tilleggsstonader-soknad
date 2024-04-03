@@ -13,9 +13,11 @@ import {
     CheckboxGroup,
     Heading,
     Label,
+    VStack,
 } from '@navikt/ds-react';
 import { AccordionItemProps } from '@navikt/ds-react/esm/accordion/AccordionItem';
 
+import ArbeidOgOppholdOppsummering from './ArbeidOgOppholdOppsummering';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
@@ -63,7 +65,7 @@ const AccordionItem: React.FC<Props> = ({ header, endreKnapp, children, ...props
             </Accordion.Header>
 
             <Accordion.Content>
-                <div>{children}</div>
+                <VStack gap={'5'}>{children}</VStack>
                 {endreKnapp && (
                     <Button
                         variant={'tertiary'}
@@ -105,8 +107,6 @@ const DinSituasjon: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hove
     const ytelser = hovedytelse && verdiFelterTilTekstElement(hovedytelse.ytelse.verdier);
     const ytelseslabel = hovedytelse?.ytelse.label;
 
-    // TODO: Hent ut svar om arbeid i eller utenfor norge også. Radiofeltene finnes ikke per nå.
-
     return (
         <AccordionItem
             header={oppsummeringTekster.accordians.din_situasjon.tittel}
@@ -116,18 +116,9 @@ const DinSituasjon: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hove
             }}
         >
             {ytelser && <LocalePunktliste innhold={ytelser} tittel={{ nb: ytelseslabel || '' }} />}
-            {/*boddSammenhengende && ( TODO fiks denne
-                <>
-                    <Label>{boddSammenhengende.label}</Label>
-                    <BodyShort spacing>{boddSammenhengende.svarTekst}</BodyShort>
-                </>
+            {hovedytelse && (
+                <ArbeidOgOppholdOppsummering arbeidOgOpphold={hovedytelse.arbeidOgOpphold} />
             )}
-            {planleggerBoINorgeNeste12mnd && (
-                <>
-                    <Label>{planleggerBoINorgeNeste12mnd.label}</Label>
-                    <BodyShort spacing>{planleggerBoINorgeNeste12mnd.svarTekst}</BodyShort>
-                </>
-            )*/}
         </AccordionItem>
     );
 };

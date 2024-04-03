@@ -16,6 +16,12 @@ interface OppsummeringInnhold {
             tittel: TekstElement<string>;
             endre_button: TekstElement<string>;
         };
+        arbeid_og_opphold: {
+            jobb: TekstElement<string>;
+            pengestøtte: TekstElement<string>;
+            oppholdSiste12mnd: TekstElement<string>;
+            oppholdNeste12mnd: TekstElement<string>;
+        };
         aktivitet_utdanning: {
             tittel: TekstElement<string>;
             endre_button: TekstElement<string>;
@@ -109,6 +115,20 @@ export const oppsummeringTekster: OppsummeringInnhold = {
             },
             endre_button: {
                 nb: 'Endre ytelse',
+            },
+        },
+        arbeid_og_opphold: {
+            jobb: {
+                nb: 'Jobb utenfor Norge',
+            },
+            pengestøtte: {
+                nb: 'Pengestøtte fra annet land enn Norge',
+            },
+            oppholdSiste12mnd: {
+                nb: 'Opphold utenfor Norge siste 12 mnd',
+            },
+            oppholdNeste12mnd: {
+                nb: 'Opphold utenfor Norge neste 12 mnd',
             },
         },
     },
