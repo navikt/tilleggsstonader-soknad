@@ -17,6 +17,7 @@ export interface JobberIAnnetLandInnhold {
 export interface MottarDuPengestøtteInnhold {
     checkbox_mottar_du_pengestøtte: CheckboxGruppe<MottarPengestøtteTyper>;
     feilmnelding_mottar_du_pengestøtte: TekstElement<string>;
+    feilmnelding_mottar_ikke_pengestøtte_med_andre_valg: TekstElement<string>;
     select_hvilket_land: TekstElement<string>;
     feilmelding_select_hvilket_land: TekstElement<string>;
 }
@@ -78,6 +79,9 @@ export const mottarPengestøtteInnhold: MottarDuPengestøtteInnhold = {
     },
     feilmnelding_mottar_du_pengestøtte: {
         nb: 'Du må svare på om du mottar pengestøtte fra ennet land enn Norge.',
+    },
+    feilmnelding_mottar_ikke_pengestøtte_med_andre_valg: {
+        nb: '“Ingen pengestøtte” kan ikke kombineres med andre valg',
     },
     select_hvilket_land: {
         nb: 'Hvilket land mottar du pengestøtte fra?',

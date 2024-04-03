@@ -47,12 +47,27 @@ const validerJobberIAnnetLand = (opphold: ArbeidOgOpphold, locale: Locale): Vali
 
 const validerMottarPengestøtte = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfeil => {
     let feil: Valideringsfeil = {};
-    if ((opphold.harPengestøtteAnnetLand?.verdier || []).length === 0) {
+    const harPengestøtteAnnetLand = opphold.harPengestøtteAnnetLand?.verdier || [];
+    const harValgtMottarIkkeOgAnnetValg =
+        harPengestøtteAnnetLand.length > 1 &&
+        harPengestøtteAnnetLand.some((verdi) => verdi.verdi === 'MOTTAR_IKKE');
+    if (harPengestøtteAnnetLand.length === 0) {
         feil = {
             ...feil,
             harPengestøtteAnnetLand: {
                 id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE,
                 melding: mottarPengestøtteInnhold.feilmnelding_mottar_du_pengestøtte[locale],
+            },
+        };
+    } else if (harValgtMottarIkkeOgAnnetValg) {
+        feil = {
+            ...feil,
+            harPengestøtteAnnetLand: {
+                id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE,
+                melding:
+                    mottarPengestøtteInnhold.feilmnelding_mottar_ikke_pengestøtte_med_andre_valg[
+                        locale
+                    ],
             },
         };
     }
