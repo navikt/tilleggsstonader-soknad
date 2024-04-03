@@ -3,7 +3,7 @@ import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
 import { Valideringsfeil } from '../../../../typer/validering';
 import { harVerdi } from '../../../../utils/typer';
-import { jobberDuIAnnetLandInnhold } from '../../../tekster/opphold';
+import { jobberIAnnetLandInnhold } from '../../../tekster/opphold';
 import { FeilIdDinSituasjon } from '../validering';
 
 export const validerArbeidOgOpphold = (
@@ -22,7 +22,7 @@ const validerJobberIAnnetLand = (opphold: ArbeidOgOpphold, locale: Locale): Vali
             ...feil,
             jobberIAnnetLand: {
                 id: FeilIdDinSituasjon.JOBBER_I_ANNET_LAND,
-                melding: jobberDuIAnnetLandInnhold.feilmnelding_jobber_annet_land[locale],
+                melding: jobberIAnnetLandInnhold.feilmnelding_jobber_annet_land[locale],
             },
         };
     }
@@ -34,7 +34,7 @@ const validerJobberIAnnetLand = (opphold: ArbeidOgOpphold, locale: Locale): Vali
             ...feil,
             jobbAnnetLand: {
                 id: FeilIdDinSituasjon.JOBBER_I_ANNET_LAND_HVILKET_LAND,
-                melding: jobberDuIAnnetLandInnhold.feilmelding_select_hvilket_land[locale],
+                melding: jobberIAnnetLandInnhold.feilmelding_select_hvilket_land[locale],
             },
         };
     }

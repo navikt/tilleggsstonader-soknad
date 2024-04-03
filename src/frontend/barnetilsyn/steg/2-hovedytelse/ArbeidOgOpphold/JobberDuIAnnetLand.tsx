@@ -12,7 +12,7 @@ import { EnumFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei } from '../../../../typer/søknad';
 import { landkoder } from '../../../../utils/landkoder';
 import { harVerdi } from '../../../../utils/typer';
-import { jobberDuIAnnetLandInnhold } from '../../../tekster/opphold';
+import { jobberIAnnetLandInnhold } from '../../../tekster/opphold';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
@@ -34,11 +34,11 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
             jobbAnnetLand: undefined,
         }));
     };
-    const oppdatertHvilketLandJobberI = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const oppdaterHvilketLand = (e: React.ChangeEvent<HTMLSelectElement>) => {
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
             jobbAnnetLand: {
-                label: jobberDuIAnnetLandInnhold.select_hvilket_land[locale],
+                label: jobberIAnnetLandInnhold.select_hvilket_land[locale],
                 verdi: e.target.value || '',
                 svarTekst: landkoder[e.target.value] || '',
             },
@@ -55,7 +55,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
         <>
             <LocaleRadioGroup
                 id={valideringsfeil.jobberIAnnetLand?.id}
-                tekst={jobberDuIAnnetLandInnhold.radio_jobber_annet_land}
+                tekst={jobberIAnnetLandInnhold.radio_jobber_annet_land}
                 value={arbeidOgOpphold.jobberIAnnetLand?.verdi}
                 onChange={oppdaterJobberIAnnetLandEnnNorge}
                 error={valideringsfeil.jobberIAnnetLand?.melding}
@@ -65,8 +65,8 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
                 <BlåVenstreRammeContainer>
                     <Select
                         id={valideringsfeil.jobbAnnetLand?.id}
-                        label={jobberDuIAnnetLandInnhold.select_hvilket_land[locale]}
-                        onChange={oppdatertHvilketLandJobberI}
+                        label={jobberIAnnetLandInnhold.select_hvilket_land[locale]}
+                        onChange={oppdaterHvilketLand}
                         value={arbeidOgOpphold.jobbAnnetLand?.verdi || ''}
                         error={valideringsfeil.jobbAnnetLand?.melding}
                     >

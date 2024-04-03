@@ -31,7 +31,7 @@ export const arbeidOgOppholdInnhold: ArbeidOgOppholdInnhold = {
     },
 };
 
-export const jobberDuIAnnetLandInnhold: JobberIAnnetLandInnhold = {
+export const jobberIAnnetLandInnhold: JobberIAnnetLandInnhold = {
     radio_jobber_annet_land: {
         header: {
             nb: 'Jobber du i et annet land enn Norge?',
