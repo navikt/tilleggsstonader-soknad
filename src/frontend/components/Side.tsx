@@ -141,12 +141,12 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                         <LocaleTekst tekst={fellesTekster.neste} />
                     </Button>
                 )}
-                {sendInnFeil && (
-                    <Alert variant={'error'} className="feilmelding">
-                        <LocaleTekst tekst={fellesTekster.send_inn_søknad_feil} />
-                    </Alert>
-                )}
             </KnappeContainerMedFeilmelding>
+            {sendInnFeil && (
+                <Alert variant={'error'}>
+                    <LocaleTekst tekst={fellesTekster.send_inn_søknad_feil} />
+                </Alert>
+            )}
         </Container>
     );
 };
