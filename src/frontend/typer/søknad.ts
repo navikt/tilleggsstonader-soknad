@@ -7,15 +7,15 @@ export interface Hovedytelse {
 }
 
 export interface ArbeidOgOpphold {
-    jobberIAnnetLandEnnNorge?: EnumFelt<JaNei>;
-    hvilketLandJobberIAnnetLandEnnNorge?: VerdiFelt<string>;
-    mottarDuPengestøtteFraAnnetLand?: EnumFlereValgFelt<MottarPengestøtteTyper>;
-    hvilketLandMottarDuPengestøtteFra?: VerdiFelt<string>;
+    jobberIAnnetLand?: EnumFelt<JaNei>;
+    jobbAnnetLand?: VerdiFelt<string>;
+    harPengestøtteAnnetLand?: EnumFlereValgFelt<MottarPengestøtteTyper>;
+    pengestøtteAnnetLand?: VerdiFelt<string>;
 
-    harDuOppholdUtenforNorgeSiste12mnd?: EnumFelt<JaNei>;
+    harOppholdUtenforNorgeSiste12mnd?: EnumFelt<JaNei>;
     oppholdUtenforNorgeSiste12mnd: OppholdUtenforNorge[];
 
-    harDuOppholdUtenforNorgeNeste12mnd?: EnumFelt<JaNei>;
+    harOppholdUtenforNorgeNeste12mnd?: EnumFelt<JaNei>;
     oppholdUtenforNorgeNeste12mnd: OppholdUtenforNorge[];
 }
 
