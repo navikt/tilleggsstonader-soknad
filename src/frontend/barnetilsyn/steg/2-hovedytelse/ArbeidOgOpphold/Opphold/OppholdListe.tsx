@@ -135,6 +135,7 @@ const OppholdListe: React.FC<{
             )}
             {ulagretOpphold && (
                 <NyttOpphold
+                    key={ulagretOpphold._id}
                     keyOpphold={keyOpphold}
                     opphold={ulagretOpphold}
                     oppdater={oppdaterOppholdUtenforNorge}
