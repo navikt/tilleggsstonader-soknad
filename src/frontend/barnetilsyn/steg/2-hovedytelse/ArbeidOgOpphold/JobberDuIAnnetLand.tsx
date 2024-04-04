@@ -1,16 +1,12 @@
 import React from 'react';
 
-import { Select } from '@navikt/ds-react';
-
 import { skalTaStillingTilLandForJobberIAnnetLand } from './util';
 import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
+import Landvelger from '../../../../components/Landvelger/Landvelger';
 import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { useSpråk } from '../../../../context/SpråkContext';
 import { useSøknad } from '../../../../context/SøknadContext';
-import { fellesTekster } from '../../../../tekster/felles';
-import { EnumFelt } from '../../../../typer/skjema';
+import { EnumFelt, SelectFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei } from '../../../../typer/søknad';
-import { landkoder } from '../../../../utils/landkoder';
 import { harVerdi } from '../../../../utils/typer';
 import { jobberIAnnetLandInnhold } from '../../../tekster/opphold';
 
@@ -20,7 +16,6 @@ interface Props {
 }
 const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
     const { valideringsfeil, settValideringsfeil } = useSøknad();
-    const { locale } = useSpråk();
 
     const oppdaterJobberIAnnetLandEnnNorge = (verdi: EnumFelt<JaNei>) => {
         settArbeidOgOpphold((prevState) => ({
@@ -34,16 +29,12 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
             jobbAnnetLand: undefined,
         }));
     };
-    const oppdaterHvilketLand = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const oppdaterHvilketLand = (verdi: SelectFelt) => {
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
-            jobbAnnetLand: {
-                label: jobberIAnnetLandInnhold.select_hvilket_land[locale],
-                verdi: e.target.value || '',
-                svarTekst: landkoder[e.target.value] || '',
-            },
+            jobbAnnetLand: verdi,
         }));
-        if (harVerdi(e.target.value)) {
+        if (harVerdi(verdi.verdi)) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
                 jobbAnnetLand: undefined,
@@ -63,20 +54,13 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
 
             {skalTaStillingTilLandForJobberIAnnetLand(arbeidOgOpphold) && (
                 <BlåVenstreRammeContainer>
-                    <Select
+                    <Landvelger
                         id={valideringsfeil.jobbAnnetLand?.id}
-                        label={jobberIAnnetLandInnhold.select_hvilket_land[locale]}
+                        label={jobberIAnnetLandInnhold.select_hvilket_land}
                         onChange={oppdaterHvilketLand}
                         value={arbeidOgOpphold.jobbAnnetLand?.verdi || ''}
                         error={valideringsfeil.jobbAnnetLand?.melding}
-                    >
-                        <option value="">{fellesTekster.velg_land[locale]}</option>
-                        {Object.entries(landkoder).map(([kode, tekst]) => (
-                            <option key={kode} value={kode}>
-                                {tekst}
-                            </option>
-                        ))}
-                    </Select>
+                    />
                 </BlåVenstreRammeContainer>
             )}
         </>

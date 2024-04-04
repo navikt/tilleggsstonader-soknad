@@ -1,16 +1,12 @@
 import React from 'react';
 
-import { Select } from '@navikt/ds-react';
-
 import { skalTaStillingTilLandForPengestøtte } from './util';
 import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
+import Landvelger from '../../../../components/Landvelger/Landvelger';
 import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import { useSpråk } from '../../../../context/SpråkContext';
 import { useSøknad } from '../../../../context/SøknadContext';
-import { fellesTekster } from '../../../../tekster/felles';
-import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import { EnumFlereValgFelt, SelectFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../../typer/søknad';
-import { landkoder } from '../../../../utils/landkoder';
 import { harVerdi } from '../../../../utils/typer';
 import { mottarPengestøtteInnhold } from '../../../tekster/opphold';
 
@@ -21,7 +17,6 @@ interface Props {
 
 const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
     const { valideringsfeil, settValideringsfeil } = useSøknad();
-    const { locale } = useSpråk();
 
     const oppdaterMottarDuPengestøtte = (verdi: EnumFlereValgFelt<MottarPengestøtteTyper>) => {
         settArbeidOgOpphold((prevState) => ({
@@ -38,16 +33,12 @@ const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold })
         }));
     };
 
-    const oppdatertHvilketLandMottarPengestøtte = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const oppdatertHvilketLandMottarPengestøtte = (verdi: SelectFelt) => {
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
-            pengestøtteAnnetLand: {
-                label: mottarPengestøtteInnhold.select_hvilket_land[locale],
-                verdi: e.target.value || '',
-                svarTekst: landkoder[e.target.value] || '',
-            },
+            pengestøtteAnnetLand: verdi,
         }));
-        if (harVerdi(e.target.value)) {
+        if (harVerdi(verdi.verdi)) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
                 pengestøtteAnnetLand: undefined,
@@ -66,20 +57,13 @@ const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold })
             />
             {skalTaStillingTilLandForPengestøtte(arbeidOgOpphold.harPengestøtteAnnetLand) && (
                 <BlåVenstreRammeContainer>
-                    <Select
+                    <Landvelger
                         id={valideringsfeil.pengestøtteAnnetLand?.id}
-                        label={mottarPengestøtteInnhold.select_hvilket_land[locale]}
+                        label={mottarPengestøtteInnhold.select_hvilket_land}
                         onChange={oppdatertHvilketLandMottarPengestøtte}
                         value={arbeidOgOpphold.pengestøtteAnnetLand?.verdi || ''}
                         error={valideringsfeil.pengestøtteAnnetLand?.melding}
-                    >
-                        <option value="">{fellesTekster.velg_land[locale]}</option>
-                        {Object.entries(landkoder).map(([kode, tekst]) => (
-                            <option key={kode} value={kode}>
-                                {tekst}
-                            </option>
-                        ))}
-                    </Select>
+                    />
                 </BlåVenstreRammeContainer>
             )}
         </>
