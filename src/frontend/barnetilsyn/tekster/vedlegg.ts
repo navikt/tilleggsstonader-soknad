@@ -82,6 +82,30 @@ export const vedleggTekster: VedleggInnhold = {
     },
 };
 
+interface VedleggManglerModalInnhold {
+    heading: TekstElement<string>;
+    punktliste_tittel: TekstElement<string>;
+    ekstra_info1: TekstElement<string>;
+    ekstra_info2: TekstElement<string>;
+    vil_du_fortsette: TekstElement<string>;
+    fortsettKnapp: TekstElement<string>;
+    avbrytKnapp: TekstElement<string>;
+}
+
+export const vedleggModalTekster: VedleggManglerModalInnhold = {
+    heading: { nb: 'Vedlegg mangler' },
+    punktliste_tittel: { nb: 'Vi kan ikke se at du har lagt ved:' },
+    ekstra_info1: {
+        nb: 'Vi kan ikke starte saksbehandlingen før vi har all dokumentasjon fra deg.',
+    },
+    ekstra_info2: {
+        nb: 'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, innen 14 dager.',
+    },
+    vil_du_fortsette: { nb: 'Vil du fortsatt sende søknaden nå? ' },
+    fortsettKnapp: { nb: 'Ja, gå til neste side' },
+    avbrytKnapp: { nb: 'Nei, gå tilbake til vedlegg' },
+};
+
 export const typerVedleggTekster: TekstTypeVedlegg = {
     [Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE]: {
         tittel: {
