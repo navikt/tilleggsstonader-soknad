@@ -1,7 +1,10 @@
 import React from 'react';
 
+import styled from 'styled-components';
+
 import { PlusIcon } from '@navikt/aksel-icons';
-import { Button, HStack, Label } from '@navikt/ds-react';
+import { Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { ABlue500 } from '@navikt/ds-tokens/dist/tokens';
 
 import LagredeOpphold from './LagredeOpphold';
 import NyttOpphold from './NyttOpphold';
@@ -17,6 +20,11 @@ import { useSøknad } from '../../../../../context/SøknadContext';
 import { ArbeidOgOpphold } from '../../../../../typer/søknad';
 import { inneholderFeil } from '../../../../../typer/validering';
 import { OppholdInnhold, oppholdUtenforNorgeInnhold } from '../../../../tekster/opphold';
+
+const BlåVenstreRammeContainer = styled(VStack)`
+    border-left: 5px solid ${ABlue500};
+    padding: 0.5rem;
+`;
 
 /**
  * Viser liste over opphold utenfor Norge
@@ -114,7 +122,7 @@ const OppholdListe: React.FC<{
 
     const harLagredeOgUlagretOpphold = lagredeOpphold.length > 0 && ulagretOpphold;
     return (
-        <>
+        <BlåVenstreRammeContainer gap="6">
             <LagredeOpphold
                 lagredeOpphold={oppholdUtenforNorge.filter((opphold) => opphold.lagret)}
                 slettOpphold={slettOpphold}
@@ -148,7 +156,7 @@ const OppholdListe: React.FC<{
                     {oppholdUtenforNorgeInnhold.knapp_legg_til[locale]}
                 </Button>
             </HStack>
-        </>
+        </BlåVenstreRammeContainer>
     );
 };
 export default OppholdListe;

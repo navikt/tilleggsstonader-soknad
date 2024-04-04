@@ -1,10 +1,5 @@
 import React from 'react';
 
-import styled from 'styled-components';
-
-import { VStack } from '@navikt/ds-react';
-import { ABlue500 } from '@navikt/ds-tokens/dist/tokens';
-
 import OppholdListe from './OppholdListe';
 import {
     opprettOppholdForNesteId,
@@ -17,11 +12,6 @@ import { useSøknad } from '../../../../../context/SøknadContext';
 import { EnumFelt } from '../../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../../typer/søknad';
 import { oppholdUtenforNorgeInnhold } from '../../../../tekster/opphold';
-
-const BlåVenstreRammeContainer = styled(VStack)`
-    border-left: 5px solid ${ABlue500};
-    padding: 0.5rem;
-`;
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
@@ -85,7 +75,7 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
                 error={valideringsfeil.harOppholdUtenforNorgeSiste12mnd?.melding}
             />
             {skalTaStillingTilOppholdSiste12mnd(arbeidOgOpphold) && (
-                <BlåVenstreRammeContainer gap={'6'}>
+                <>
                     <OppholdListe
                         keyOpphold={'oppholdUtenforNorgeSiste12mnd'}
                         arbeidOgOpphold={arbeidOgOpphold}
@@ -107,7 +97,7 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
                             tekster={oppholdUtenforNorgeInnhold.neste12mnd}
                         />
                     )}
-                </BlåVenstreRammeContainer>
+                </>
             )}
         </>
     );
