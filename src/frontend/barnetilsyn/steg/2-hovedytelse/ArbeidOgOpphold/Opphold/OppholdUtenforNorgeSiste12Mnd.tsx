@@ -70,7 +70,7 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
             <LocaleRadioGroup
                 id={valideringsfeil.harOppholdUtenforNorgeSiste12mnd?.id}
                 tekst={oppholdUtenforNorgeInnhold.radioSiste12mnd}
-                value={arbeidOgOpphold.harOppholdUtenforNorgeSiste12mnd?.verdi}
+                value={arbeidOgOpphold.harOppholdUtenforNorgeSiste12mnd?.verdi || ''}
                 onChange={oppdaterOppholdSiste12mnd}
                 error={valideringsfeil.harOppholdUtenforNorgeSiste12mnd?.melding}
             />
@@ -85,7 +85,7 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
                     <LocaleRadioGroup
                         id={valideringsfeil.harOppholdUtenforNorgeNeste12mnd?.id}
                         tekst={oppholdUtenforNorgeInnhold.radioNeste12mnd}
-                        value={arbeidOgOpphold.harOppholdUtenforNorgeNeste12mnd?.verdi}
+                        value={arbeidOgOpphold.harOppholdUtenforNorgeNeste12mnd?.verdi || ''}
                         onChange={oppdaterOppholdNeste12mnd}
                         error={valideringsfeil.harOppholdUtenforNorgeNeste12mnd?.melding}
                     />

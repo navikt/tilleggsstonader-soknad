@@ -56,7 +56,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
             <LocaleRadioGroup
                 id={valideringsfeil.jobberIAnnetLand?.id}
                 tekst={jobberIAnnetLandInnhold.radio_jobber_annet_land}
-                value={arbeidOgOpphold.jobberIAnnetLand?.verdi}
+                value={arbeidOgOpphold.jobberIAnnetLand?.verdi || ''}
                 onChange={oppdaterJobberIAnnetLandEnnNorge}
                 error={valideringsfeil.jobberIAnnetLand?.melding}
             />
