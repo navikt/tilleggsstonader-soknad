@@ -23,6 +23,7 @@ interface Props {
 
 const countryObj = Object.entries(countries.getNames('nb', { select: 'official' }))
     .filter((country) => country[0] !== 'NO' && country[0] !== 'SJ')
+    .map((country) => [countries.alpha2ToAlpha3(country[0]), country[1]] as [string, string])
     .reduce(
         (prev, curr) => {
             prev[curr[0]] = curr[1];
@@ -30,6 +31,7 @@ const countryObj = Object.entries(countries.getNames('nb', { select: 'official' 
         },
         {} as { [key: string]: string }
     );
+
 const countryList = Object.entries(countryObj).sort(
     (a, b) => (a[1] > b[1] ? 1 : -1) // Sorterer alfabetisk på navn i stedet for landkode
 );
