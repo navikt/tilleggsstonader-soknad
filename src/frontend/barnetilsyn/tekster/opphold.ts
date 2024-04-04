@@ -123,26 +123,6 @@ export const mottarPengestøtteInnhold: MottarDuPengestøtteInnhold = {
     },
 };
 
-const årsakAlternativer: Record<ÅrsakOppholdUtenforNorge, TekstElement<string>> = {
-    JOBB: {
-        nb: 'Jobbet',
-    },
-    STUDIER: {
-        nb: 'Studerte',
-    },
-    MEDISINSK_BEHANDLING: {
-        nb: 'Fikk medisinsk behandling',
-    },
-    FERIE: {
-        nb: 'Var på ferie',
-    },
-    FAMILIE_BESØK: {
-        nb: 'Besøkte familie',
-    },
-    ANNET: {
-        nb: 'Annet',
-    },
-};
 const siste12mndInnhold: OppholdInnhold = {
     select_hvilket_land: {
         nb: 'Hvilket land har du oppholdt deg i?',
@@ -155,7 +135,26 @@ const siste12mndInnhold: OppholdInnhold = {
         header: {
             nb: 'Hva gjorde du i dette landet?',
         },
-        alternativer: årsakAlternativer,
+        alternativer: {
+            JOBB: {
+                nb: 'Jobbet',
+            },
+            STUDIER: {
+                nb: 'Studerte',
+            },
+            MEDISINSK_BEHANDLING: {
+                nb: 'Fikk medisinsk behandling',
+            },
+            FERIE: {
+                nb: 'Var på ferie',
+            },
+            FAMILIE_BESØK: {
+                nb: 'Besøkte familie',
+            },
+            ANNET: {
+                nb: 'Annet',
+            },
+        },
     },
     feilmelding_årsak: {
         nb: 'Du må velge hva du gjorde i landet du oppholdt deg i.',
@@ -193,7 +192,26 @@ const neste12mndInnhold: OppholdInnhold = {
         header: {
             nb: 'Hva skal du gjøre i dette landet?',
         },
-        alternativer: årsakAlternativer,
+        alternativer: {
+            JOBB: {
+                nb: 'Jobbe',
+            },
+            STUDIER: {
+                nb: 'Studere',
+            },
+            MEDISINSK_BEHANDLING: {
+                nb: 'Få medisinsk behandling',
+            },
+            FERIE: {
+                nb: 'Være på ferie',
+            },
+            FAMILIE_BESØK: {
+                nb: 'Besøke familie',
+            },
+            ANNET: {
+                nb: 'Annet',
+            },
+        },
     },
     feilmelding_årsak: {
         nb: 'Du må velge hva du skal gjøre i landet du skal oppholde deg i.',
