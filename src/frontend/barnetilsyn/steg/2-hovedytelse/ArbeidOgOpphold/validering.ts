@@ -1,3 +1,4 @@
+import { validerOpphold } from './Opphold/validering';
 import {
     skalTaStillingTilLandForJobberIAnnetLand,
     skalTaStillingTilLandForPengestøtte,
@@ -16,6 +17,7 @@ export const validerArbeidOgOpphold = (
     return {
         ...validerJobberIAnnetLand(opphold, locale),
         ...validerMottarPengestøtte(opphold, locale),
+        ...validerOpphold(opphold, locale),
     };
 };
 
