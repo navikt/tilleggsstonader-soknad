@@ -1,9 +1,12 @@
-import { skalTaStillingTilLandForJobberIAnnetLand } from './util';
+import {
+    skalTaStillingTilLandForJobberIAnnetLand,
+    skalTaStillingTilLandForPengestøtte,
+} from './util';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
 import { Valideringsfeil } from '../../../../typer/validering';
 import { harVerdi } from '../../../../utils/typer';
-import { jobberIAnnetLandInnhold } from '../../../tekster/opphold';
+import { jobberIAnnetLandInnhold, mottarPengestøtteInnhold } from '../../../tekster/opphold';
 import { FeilIdDinSituasjon } from '../validering';
 
 export const validerArbeidOgOpphold = (
@@ -12,6 +15,7 @@ export const validerArbeidOgOpphold = (
 ): Valideringsfeil => {
     return {
         ...validerJobberIAnnetLand(opphold, locale),
+        ...validerMottarPengestøtte(opphold, locale),
     };
 };
 
@@ -35,6 +39,48 @@ const validerJobberIAnnetLand = (opphold: ArbeidOgOpphold, locale: Locale): Vali
             jobbAnnetLand: {
                 id: FeilIdDinSituasjon.JOBBER_I_ANNET_LAND_HVILKET_LAND,
                 melding: jobberIAnnetLandInnhold.feilmelding_select_hvilket_land[locale],
+            },
+        };
+    }
+    return feil;
+};
+
+const validerMottarPengestøtte = (opphold: ArbeidOgOpphold, locale: Locale): Valideringsfeil => {
+    let feil: Valideringsfeil = {};
+    const harPengestøtteAnnetLand = opphold.harPengestøtteAnnetLand?.verdier || [];
+    const harValgtMottarIkkeOgAnnetValg =
+        harPengestøtteAnnetLand.length > 1 &&
+        harPengestøtteAnnetLand.some((verdi) => verdi.verdi === 'MOTTAR_IKKE');
+    if (harPengestøtteAnnetLand.length === 0) {
+        feil = {
+            ...feil,
+            harPengestøtteAnnetLand: {
+                id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE,
+                melding: mottarPengestøtteInnhold.feilmnelding_mottar_du_pengestøtte[locale],
+            },
+        };
+    } else if (harValgtMottarIkkeOgAnnetValg) {
+        feil = {
+            ...feil,
+            harPengestøtteAnnetLand: {
+                id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE,
+                melding:
+                    mottarPengestøtteInnhold.feilmnelding_mottar_ikke_pengestøtte_med_andre_valg[
+                        locale
+                    ],
+            },
+        };
+    }
+
+    if (
+        skalTaStillingTilLandForPengestøtte(opphold.harPengestøtteAnnetLand) &&
+        !harVerdi(opphold.pengestøtteAnnetLand?.verdi)
+    ) {
+        feil = {
+            ...feil,
+            pengestøtteAnnetLand: {
+                id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE_HVILKET_LAND,
+                melding: mottarPengestøtteInnhold.feilmelding_select_hvilket_land[locale],
             },
         };
     }
