@@ -10,6 +10,7 @@ import { oppholdUtenforNorgeInnhold } from '../../../../tekster/opphold';
 
 const VisningAvOpphold = styled(VStack)`
     border: 1px solid ${AGray800};
+    border-radius: 4px;
     padding: 1rem 1rem 0 1rem;
 `;
 
