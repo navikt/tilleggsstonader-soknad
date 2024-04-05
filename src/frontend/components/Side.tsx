@@ -3,9 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-import { Alert, BodyShort, Button, ErrorSummary, VStack } from '@navikt/ds-react';
+import { Alert, Button, ErrorSummary, VStack } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
+import { StegIndikator } from './StegIndikator';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { sendInnSøknad } from '../api/api';
 import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
@@ -37,20 +38,10 @@ export const Container = styled.div`
     }
 `;
 
-const StegIndikator = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-`;
-
 const KnappeContainerMedFeilmelding = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-
-    .feilmelding {
-        grid-column: 1 / span 2;
-    }
 `;
 
 const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterSøknad }) => {
@@ -119,11 +110,11 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
 
     return (
         <Container>
-            <StegIndikator>
-                <BodyShort size="small">
-                    Steg {aktivtStegIndex} av {routes.length - 2}
-                </BodyShort>
-            </StegIndikator>
+            <StegIndikator
+                gjeldendeSteg={aktivtStegIndex}
+                antallStegTotalt={routes.length - 2}
+                autofokoserSkjermleser
+            />
             {harValideringsfeil && (
                 <ErrorSummary heading={fellesTekster.tittel_error_summary[locale]} ref={errorRef}>
                     {Object.entries(valideringsfeil).map(
@@ -150,12 +141,12 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                         <LocaleTekst tekst={fellesTekster.neste} />
                     </Button>
                 )}
-                {sendInnFeil && (
-                    <Alert variant={'error'} className="feilmelding">
-                        <LocaleTekst tekst={fellesTekster.send_inn_søknad_feil} />
-                    </Alert>
-                )}
             </KnappeContainerMedFeilmelding>
+            {sendInnFeil && (
+                <Alert variant={'error'}>
+                    <LocaleTekst tekst={fellesTekster.send_inn_søknad_feil} />
+                </Alert>
+            )}
         </Container>
     );
 };

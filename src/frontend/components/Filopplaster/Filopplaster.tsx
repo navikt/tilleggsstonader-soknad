@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { UploadIcon } from '@navikt/aksel-icons';
-import { Alert, Button, Checkbox, VStack } from '@navikt/ds-react';
+import { Alert, Button, VStack } from '@navikt/ds-react';
 import { ABlue50, ABlue500 } from '@navikt/ds-tokens/dist/tokens';
 
 import FilVisning from './Fil';
@@ -23,10 +23,9 @@ const Container = styled(VStack).attrs({ gap: '2', align: 'center' })`
 
 const Filopplaster: React.FC<{
     dokumentasjonFelt: DokumentasjonFelt;
-    toggleHarSendtInnTidligere: () => void;
     leggTilDokument: (vedlegg: Dokument) => void;
     slettDokument: (vedlegg: Dokument) => void;
-}> = ({ dokumentasjonFelt, toggleHarSendtInnTidligere, leggTilDokument, slettDokument }) => {
+}> = ({ dokumentasjonFelt, leggTilDokument, slettDokument }) => {
     const { locale } = useSpråk();
     const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -83,12 +82,6 @@ const Filopplaster: React.FC<{
                 >
                     <LocaleTekst tekst={filopplastingTekster.last_opp_fil_knapp} />
                 </Button>
-                <Checkbox
-                    checked={dokumentasjonFelt.harSendtInn}
-                    onChange={toggleHarSendtInnTidligere}
-                >
-                    <LocaleTekst tekst={filopplastingTekster.delt_tidligere_knapp} />
-                </Checkbox>
                 <input
                     type="file"
                     onChange={lastOppValgteFiler}

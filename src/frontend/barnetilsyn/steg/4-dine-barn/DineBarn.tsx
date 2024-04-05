@@ -82,12 +82,14 @@ const DineBarn = () => {
                     id={valideringsfeil.hvilkeBarn?.id}
                     legend={dineBarnTekster.hvilke_barn_spm[locale]}
                     error={valideringsfeil.hvilkeBarn?.melding}
+                    value={personbarn
+                        .filter((barn) => barn.skalHaBarnepass)
+                        .map((barn) => barn.ident)}
                 >
                     {personbarn.map((barn) => (
                         <Checkbox
                             key={barn.ident}
                             value={barn.ident}
-                            checked={barn.skalHaBarnepass ?? false}
                             onChange={() => toggleSkalHaBarnepass(barn.ident)}
                         >
                             {barn.visningsnavn}, født {formaterIsoDato(barn.fødselsdato)}

@@ -44,11 +44,13 @@ const AppRoutes = () => {
     );
 };
 root.render(
-    <SpråkProvider>
-        <SøknadProvider>
-            <PersonProvider>
-                <AppRoutes />
-            </PersonProvider>
-        </SøknadProvider>
-    </SpråkProvider>
+    <main id={'maincontent'} tabIndex={-1}>
+        <SpråkProvider>
+            <SøknadProvider>
+                <PersonProvider>
+                    <AppRoutes />
+                </PersonProvider>
+            </SøknadProvider>
+        </SpråkProvider>
+    </main>
 );
