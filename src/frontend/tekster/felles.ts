@@ -12,6 +12,9 @@ export interface FellesInnhold {
     forrige: TekstElement<string>;
     banner_bt: TekstElement<string>;
     velg_land: TekstElement<string>;
+    land: TekstElement<string>;
+    årsak: TekstElement<string>;
+    periode: TekstElement<string>;
 }
 
 export const fellesTekster: FellesInnhold = {
@@ -42,6 +45,15 @@ export const fellesTekster: FellesInnhold = {
     },
     velg_land: {
         nb: 'Velg land',
+    },
+    land: {
+        nb: 'Land',
+    },
+    årsak: {
+        nb: 'Årsak',
+    },
+    periode: {
+        nb: 'Periode',
     },
 };
 
