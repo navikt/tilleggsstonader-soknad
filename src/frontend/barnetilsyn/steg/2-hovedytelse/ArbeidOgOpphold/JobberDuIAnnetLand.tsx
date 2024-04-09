@@ -56,7 +56,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
             <LocaleRadioGroup
                 id={valideringsfeil.jobberIAnnetLand?.id}
                 tekst={jobberIAnnetLandInnhold.radio_jobber_annet_land}
-                value={arbeidOgOpphold.jobberIAnnetLand?.verdi}
+                value={arbeidOgOpphold.jobberIAnnetLand?.verdi || ''}
                 onChange={oppdaterJobberIAnnetLandEnnNorge}
                 error={valideringsfeil.jobberIAnnetLand?.melding}
             />
@@ -72,7 +72,9 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
                     >
                         <option value="">{fellesTekster.velg_land[locale]}</option>
                         {Object.entries(landkoder).map(([kode, tekst]) => (
-                            <option value={kode}>{tekst}</option>
+                            <option key={kode} value={kode}>
+                                {tekst}
+                            </option>
                         ))}
                     </Select>
                 </BlåVenstreRammeContainer>

@@ -92,7 +92,9 @@ const NyttOpphold: React.FC<{
             >
                 <option value="">{fellesTekster.velg_land[locale]}</option>
                 {Object.entries(landkoder).map(([kode, tekst]) => (
-                    <option value={kode}>{tekst}</option>
+                    <option key={kode} value={kode}>
+                        {tekst}
+                    </option>
                 ))}
             </Select>
             <LocaleCheckboxGroup

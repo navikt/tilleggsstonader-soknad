@@ -8,9 +8,9 @@ export interface Hovedytelse {
 
 export interface ArbeidOgOpphold {
     jobberIAnnetLand?: EnumFelt<JaNei>;
-    jobbAnnetLand?: VerdiFelt<string>;
+    jobbAnnetLand?: SelectFelt;
     harPengestøtteAnnetLand?: EnumFlereValgFelt<MottarPengestøtteTyper>;
-    pengestøtteAnnetLand?: VerdiFelt<string>;
+    pengestøtteAnnetLand?: SelectFelt;
 
     harOppholdUtenforNorgeSiste12mnd?: EnumFelt<JaNei>;
     oppholdUtenforNorgeSiste12mnd: OppholdUtenforNorge[];
