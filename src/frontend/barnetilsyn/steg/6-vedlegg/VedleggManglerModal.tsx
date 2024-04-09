@@ -1,8 +1,8 @@
-import { RefObject } from 'react';
+import React, { RefObject } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { BodyLong, Button, HStack, Heading, List, Modal } from '@navikt/ds-react';
+import { BodyLong, Button, HStack, List, Modal } from '@navikt/ds-react';
 
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -12,6 +12,7 @@ interface Props {
     innerRef: RefObject<HTMLDialogElement>;
     dokumenterSomMangler: string[];
 }
+
 const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }) => {
     const { locale } = useSpråk();
     const navigate = useNavigate();
@@ -31,9 +32,9 @@ const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }
                     <BodyLong>
                         <LocaleTekst tekst={vedleggModalTekster.ekstra_info2} />
                     </BodyLong>
-                    <Heading size="small" as="h2">
+                    <BodyLong size="large" weight="semibold">
                         <LocaleTekst tekst={vedleggModalTekster.vil_du_fortsette} />
-                    </Heading>
+                    </BodyLong>
                 </HStack>
             </Modal.Body>
             <Modal.Footer>
