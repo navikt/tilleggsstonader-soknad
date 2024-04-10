@@ -26,7 +26,6 @@ export const forsideTekster: ForsideInnhold = {
     veileder_innhold: {
         nb: [
             'Denne pengestøtten kan gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar AAP, uføretrygd eller har nedsatt arbeidsevne.',
-            'Svarene dine lagres underveis, slik at du kan gå tilbake og endre dem. Vi lagrer påbegynte søknad i én uke på Min side.',
         ],
     },
     mottatt_faktura_alert_tittel: {
