@@ -77,7 +77,7 @@ const Filopplaster: React.FC<{
                 {feilmelding && <Alert variant="error">{feilmelding}</Alert>}
                 <Button
                     onClick={() => hiddenFileInput.current?.click()}
-                    icon={<UploadIcon title="a11y-title" />}
+                    icon={<UploadIcon />}
                     disabled={laster}
                 >
                     <LocaleTekst tekst={filopplastingTekster.last_opp_fil_knapp} />
