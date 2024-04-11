@@ -37,7 +37,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                 }}
                 error={valideringsfeil[errorKeyHvemPasser(barn)]?.melding}
             />
-            {barnepass.type?.verdi === PassType.ANDRE && (
+            {barnepass.type?.verdi === PassType.PRIVAT && (
                 <Alert variant="info">
                     <Heading size="small">
                         <LocaleTekst tekst={barnepassTekster.hvem_passer_andre_alert.tittel} />

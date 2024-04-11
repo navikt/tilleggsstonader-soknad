@@ -150,6 +150,6 @@ const finnEksisterendeDokumentasjonsfelt = (
  * Brukes for å samle utgifter til pass av barn.
  */
 const skalHaSamletOpplasting = (dokumentasjonsbehov: Dokumentasjonsbehov): boolean =>
-    [Vedleggstype.UTGIFTER_PASS_ANNET, Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE].includes(
+    [Vedleggstype.UTGIFTER_PASS_PRIVAT, Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE].includes(
         dokumentasjonsbehov.type
     );

@@ -19,7 +19,7 @@ export interface Barnepass {
 
 export enum PassType {
     BARNEHAGE_SFO_AKS = 'BARNEHAGE_SFO_AKS',
-    ANDRE = 'ANDRE',
+    PRIVAT = 'PRIVAT',
 }
 
 export enum ÅrsakBarnepass {

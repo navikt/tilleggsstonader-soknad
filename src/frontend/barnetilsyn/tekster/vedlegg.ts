@@ -124,7 +124,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             ],
         },
     },
-    [Vedleggstype.UTGIFTER_PASS_ANNET]: {
+    [Vedleggstype.UTGIFTER_PASS_PRIVAT]: {
         tittel: {
             nb: 'Dokumentasjon av utgifter til privat pass',
         },
@@ -142,7 +142,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             ],
         },
     },
-    [Vedleggstype.TRENGER_MER_PASS_ENN_JEVNALDRENDE]: {
+    [Vedleggstype.SKRIFTLIG_UTTALELSE_HELSEPERSONELL]: {
         tittel: {
             nb: 'Skriftlig uttalelse fra helsepersonell for [0]',
         },
@@ -153,7 +153,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             nb: 'Legeerklæringen/uttalelsen fra helsepersonell må inneholde barnets navn og gjelde for perioden du søker om støtte til pass for.',
         },
     },
-    [Vedleggstype.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID]: {
+    [Vedleggstype.TILTAKSSTED_ELLER_UTDANNINGSSTED]: {
         tittel: {
             nb: 'Dokumentasjon fra tiltakssted eller utdanningssted',
         },
