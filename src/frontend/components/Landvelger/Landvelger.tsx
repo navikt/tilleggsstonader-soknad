@@ -20,8 +20,15 @@ interface Props {
     error?: string;
 }
 
+/**
+ * NO = Norge
+ * SJ = Svalbard og Jan Mayen
+ */
+const utenNorskeOmråder = (country: [string, string]): boolean =>
+    country[0] !== 'NO' && country[0] !== 'SJ';
+
 const countryObj = Object.entries(countries.getNames('nb', { select: 'official' }))
-    .filter((country) => country[0] !== 'NO' && country[0] !== 'SJ')
+    .filter(utenNorskeOmråder)
     .map((country) => [countries.alpha2ToAlpha3(country[0]), country[1]] as [string, string])
     .reduce(
         (prev, curr) => {
@@ -40,7 +47,7 @@ const Landvelger: React.FC<Props> = ({ id, label, value, onChange, error }) => {
 
     const oppdaterLand = (e: React.ChangeEvent<HTMLSelectElement>) => {
         onChange({
-            label: jobberIAnnetLandInnhold.select_hvilket_land[locale],
+            label: label[locale],
             verdi: e.target.value || '',
             svarTekst: countryObj[e.target.value] || '',
         });
