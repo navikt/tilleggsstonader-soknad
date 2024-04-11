@@ -28,7 +28,7 @@ interface BarnepassInnhold {
 
 export const PassTypeTilTekst: Record<PassType, TekstElement<string>> = {
     BARNEHAGE_SFO_AKS: { nb: 'Barnehage, skolefritidsordning (SFO) eller aktivitetsskole (AKS)' },
-    ANDRE: {
+    PRIVAT: {
         nb: 'Dagmamma, praktikant eller annen privat ordning',
     },
 };
@@ -60,8 +60,8 @@ export const barnepassTekster: BarnepassInnhold = {
                 label: PassTypeTilTekst.BARNEHAGE_SFO_AKS,
             },
             {
-                value: PassType.ANDRE,
-                label: PassTypeTilTekst.ANDRE,
+                value: PassType.PRIVAT,
+                label: PassTypeTilTekst.PRIVAT,
             },
         ],
     },

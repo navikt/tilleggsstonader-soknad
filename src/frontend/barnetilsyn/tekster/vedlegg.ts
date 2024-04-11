@@ -124,7 +124,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             ],
         },
     },
-    [Vedleggstype.UTGIFTER_PASS_ANNET]: {
+    [Vedleggstype.UTGIFTER_PASS_PRIVAT]: {
         tittel: {
             nb: 'Dokumentasjon av utgifter til privat pass',
         },

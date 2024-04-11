@@ -45,7 +45,7 @@ const utledDokumentasjonsbehovPassType = (passInfo: Barnepass, barn: Barn): Doku
 
 const passTypeTilVedlegg: Record<PassType, Vedleggstype> = {
     [PassType.BARNEHAGE_SFO_AKS]: Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE,
-    [PassType.ANDRE]: Vedleggstype.UTGIFTER_PASS_ANNET,
+    [PassType.PRIVAT]: Vedleggstype.UTGIFTER_PASS_PRIVAT,
 };
 
 const årsakEkstraPassTilVedlegg: Partial<Record<ÅrsakBarnepass, Vedleggstype>> = {
