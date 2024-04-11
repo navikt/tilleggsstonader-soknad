@@ -92,7 +92,7 @@ export const jobberIAnnetLandInnhold: JobberIAnnetLandInnhold = {
 export const mottarPengestøtteInnhold: MottarDuPengestøtteInnhold = {
     checkbox_mottar_du_pengestøtte: {
         header: {
-            nb: 'Mottar du pengestøttene fra et annet land enn Norge?',
+            nb: 'Mottar du pengestøtte fra et annet land enn Norge?',
         },
         alternativer: {
             SYKEPENGER: {
