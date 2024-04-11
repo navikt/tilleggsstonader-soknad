@@ -5,7 +5,6 @@ import nbLocale from 'i18n-iso-countries/langs/nb.json';
 
 import { Select } from '@navikt/ds-react';
 
-import { jobberIAnnetLandInnhold } from '../../barnetilsyn/tekster/opphold';
 import { useSpråk } from '../../context/SpråkContext';
 import { fellesTekster } from '../../tekster/felles';
 import { SelectFelt } from '../../typer/skjema';
