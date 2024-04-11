@@ -50,7 +50,7 @@ const passTypeTilVedlegg: Record<PassType, Vedleggstype> = {
 
 const årsakEkstraPassTilVedlegg: Partial<Record<ÅrsakBarnepass, Vedleggstype>> = {
     [ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE]:
-        Vedleggstype.TRENGER_MER_PASS_ENN_JEVNALDRENDE,
+        Vedleggstype.SKRIFTLIG_UTTALELSE_HELSEPERSONELL,
     [ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID]:
-        Vedleggstype.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
+        Vedleggstype.TILTAKSSTED_ELLER_UTDANNINGSSTED,
 };
