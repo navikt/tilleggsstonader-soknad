@@ -8,7 +8,7 @@ import { sendSøkerTilGammelSøknad } from '../components/SøknadRouting/sendSø
 import { initiellPerson } from '../mock/initiellPerson';
 import { Person } from '../typer/person';
 
-const erFeilOgSkalRouteTilGammelSøknad = (req: AxiosError<{ detail: string }, unknown>) => {
+const erFeilOgSkalRouteTilGammelSøknad = (req: AxiosError<{ detail?: string }, unknown>) => {
     return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
 };
 
@@ -22,12 +22,11 @@ const [PersonProvider, usePerson] = createUseContext(() => {
         hentPersonData()
             .then((resp) => settPerson(resp))
             .catch((req) => {
-                if (axios.isAxiosError(req)) {
-                    if (erFeilOgSkalRouteTilGammelSøknad(req)) {
-                        sendSøkerTilGammelSøknad();
-                    }
+                if (axios.isAxiosError(req) && erFeilOgSkalRouteTilGammelSøknad(req)) {
+                    sendSøkerTilGammelSøknad();
+                } else {
+                    settFeilmelding('Feiltet henting av personopplysninger'); // TODO noe bedre håndtering?
                 }
-                settFeilmelding('Feiltet henting av personopplysninger'); // TODO noe bedre håndtering?
             })
             .finally(() => settHarLastetPerson(true));
     }, []);
