@@ -63,6 +63,7 @@ const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold })
                         onChange={oppdatertHvilketLandMottarPengestøtte}
                         value={arbeidOgOpphold.pengestøtteAnnetLand?.verdi || ''}
                         error={valideringsfeil.pengestøtteAnnetLand?.melding}
+                        medNorskeOmråder={false}
                     />
                 </BlåVenstreRammeContainer>
             )}

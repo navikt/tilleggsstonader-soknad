@@ -84,6 +84,7 @@ const NyttOpphold: React.FC<{
                 onChange={oppdatertHvilketLandOppholdUtenforNorge}
                 value={opphold.land?.verdi || ''}
                 error={valideringsfeil[errorKeyLand(keyOpphold)]?.melding}
+                medNorskeOmråder={false}
             />
             <LocaleCheckboxGroup
                 id={valideringsfeil[errorKeyÅrsak(keyOpphold)]?.id}

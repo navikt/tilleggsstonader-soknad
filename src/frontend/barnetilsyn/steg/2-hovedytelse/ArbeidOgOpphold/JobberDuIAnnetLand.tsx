@@ -60,6 +60,7 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
                         onChange={oppdaterHvilketLand}
                         value={arbeidOgOpphold.jobbAnnetLand?.verdi || ''}
                         error={valideringsfeil.jobbAnnetLand?.melding}
+                        medNorskeOmråder={false}
                     />
                 </BlåVenstreRammeContainer>
             )}
