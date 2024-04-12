@@ -20,15 +20,17 @@ const [PersonProvider, usePerson] = createUseContext(() => {
 
     useEffect(() => {
         hentPersonData()
-            .then((resp) => settPerson(resp))
+            .then((resp) => {
+                settPerson(resp);
+                settHarLastetPerson(true);
+            })
             .catch((req) => {
                 if (axios.isAxiosError(req) && erFeilOgSkalRouteTilGammelSøknad(req)) {
                     sendSøkerTilGammelSøknad();
                 } else {
                     settFeilmelding('Feiltet henting av personopplysninger'); // TODO noe bedre håndtering?
                 }
-            })
-            .finally(() => settHarLastetPerson(true));
+            });
     }, []);
 
     return { harLastetPerson, feilmelding, person, settPerson };
