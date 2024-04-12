@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { DatePicker, HStack, Label, Select, useDatepicker, VStack } from '@navikt/ds-react';
+import { DatePicker, HStack, Label, useDatepicker, VStack } from '@navikt/ds-react';
 
 import { OppdatertOppholdFelt } from './typer';
 import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from './validering';
+import Landvelger from '../../../../../components/Landvelger/Landvelger';
 import LocaleCheckboxGroup from '../../../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import { useSøknad } from '../../../../../context/SøknadContext';
-import { fellesTekster } from '../../../../../tekster/felles';
-import { EnumFlereValgFelt } from '../../../../../typer/skjema';
+import { EnumFlereValgFelt, SelectFelt } from '../../../../../typer/skjema';
 import {
     ArbeidOgOpphold,
     OppholdUtenforNorge,
@@ -15,7 +15,6 @@ import {
 } from '../../../../../typer/søknad';
 import { Locale } from '../../../../../typer/tekst';
 import { nullableTilDato, tilLocaleDateString } from '../../../../../utils/formatering';
-import { landkoder } from '../../../../../utils/landkoder';
 import { harVerdi } from '../../../../../utils/typer';
 import { OppholdInnhold } from '../../../../tekster/opphold';
 
@@ -62,13 +61,9 @@ const NyttOpphold: React.FC<{
         },
     });
 
-    const oppdatertHvilketLandOppholdUtenforNorge = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        oppdater(opphold._id, 'land', {
-            label: tekster.select_hvilket_land[locale],
-            verdi: e.target.value || '',
-            svarTekst: landkoder[e.target.value] || '',
-        });
-        nullstillFeil(e.target.value, errorKeyLand(keyOpphold));
+    const oppdatertHvilketLandOppholdUtenforNorge = (verdi: SelectFelt) => {
+        oppdater(opphold._id, 'land', verdi);
+        nullstillFeil(verdi.verdi, errorKeyLand(keyOpphold));
     };
 
     const oppdaterÅrsak = (verdi: EnumFlereValgFelt<ÅrsakOppholdUtenforNorge>) => {
@@ -83,20 +78,14 @@ const NyttOpphold: React.FC<{
 
     return (
         <>
-            <Select
+            <Landvelger
                 id={valideringsfeil[errorKeyLand(keyOpphold)]?.id}
-                label={tekster.select_hvilket_land[locale]}
+                label={tekster.select_hvilket_land}
                 onChange={oppdatertHvilketLandOppholdUtenforNorge}
                 value={opphold.land?.verdi || ''}
                 error={valideringsfeil[errorKeyLand(keyOpphold)]?.melding}
-            >
-                <option value="">{fellesTekster.velg_land[locale]}</option>
-                {Object.entries(landkoder).map(([kode, tekst]) => (
-                    <option key={kode} value={kode}>
-                        {tekst}
-                    </option>
-                ))}
-            </Select>
+                medNorskeOmråder={false}
+            />
             <LocaleCheckboxGroup
                 id={valideringsfeil[errorKeyÅrsak(keyOpphold)]?.id}
                 tekst={tekster.checkbox_årsak}
