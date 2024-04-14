@@ -1,3 +1,4 @@
+import { FeilmeldingerFraDokument } from '../components/Filopplaster/feilmeldingOpplasting';
 import { MAKS_FILSTØRRELSE_FORMATTERT } from '../components/Filopplaster/utils';
 import { TekstElement } from '../typer/tekst';
 
@@ -14,11 +15,15 @@ export const filopplastingTekster: FilopplastingInnhold = {
         nb: 'Krav til dokumentasjonen',
     },
 };
+
 export const teksterFeilmeldinger: {
     enFil: TekstElement<string>;
     maksstørrelse: TekstElement<string>;
     filtype: TekstElement<string>;
-    feiletOpplasting: TekstElement<string>;
+    feilmeldinger: {
+        generisk: TekstElement<string>;
+        fra_dokument: Record<FeilmeldingerFraDokument, TekstElement<string>>;
+    };
 } = {
     enFil: {
         nb: `Må laste opp en og en fil`,
@@ -29,7 +34,17 @@ export const teksterFeilmeldinger: {
     filtype: {
         nb: '"[0]" – Ugyldig filtype.',
     },
-    feiletOpplasting: {
-        nb: 'Feilet opplasting av "[0]".',
+    feilmeldinger: {
+        generisk: {
+            nb: 'Feilet opplasting av "[0]". ', // Space på slutten fordi det kommer en mer spesifik feilmelding etterpå
+        },
+        fra_dokument: {
+            IMAGE_DIMENSIONS_TOO_SMALL: {
+                nb: 'Bilde du har forsøkt å laste opp er for lite. Bilde må være større enn 400x400 piksler.',
+            },
+            IMAGE_TOO_LARGE: {
+                nb: 'Fil er for stor.',
+            },
+        },
     },
 };
