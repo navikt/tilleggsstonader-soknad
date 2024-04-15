@@ -85,6 +85,10 @@ const Filopplaster: React.FC<{
                 <input
                     type="file"
                     onChange={lastOppValgteFiler}
+                    onClick={(e) => {
+                        // @ts-ignore hack for å kunne laste opp samme fila på nytt i tilfelle opplasting feiler
+                        e.target.value = null;
+                    }}
                     ref={hiddenFileInput}
                     style={{ display: 'none' }}
                 />
