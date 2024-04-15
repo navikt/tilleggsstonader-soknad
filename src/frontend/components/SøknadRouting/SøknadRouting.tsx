@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Alert } from '@navikt/ds-react';
 
-import Environment from '../../api/Environment';
+import { sendSøkerTilGammelSøknad } from './sendSøkerTilGammelSøknad';
 import { RoutingState, useRouting } from '../../api/useRouting';
 import { Stønadstype } from '../../typer/stønadstyper';
 
@@ -20,7 +20,7 @@ const SøknadRouting: React.FC<{ stønadstype: Stønadstype; children: React.Rea
         case RoutingState.FEILET:
             return <Alert variant="error">Noe gikk galt! Prøv å laste siden på nytt.</Alert>;
         case RoutingState.GAMMEL:
-            window.location.href = Environment().urlGammelSøknad;
+            sendSøkerTilGammelSøknad();
             return null;
     }
 };

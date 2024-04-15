@@ -21,9 +21,6 @@ const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
     const { harLastetPerson, feilmelding } = usePerson();
-    if (!harLastetPerson) {
-        return null;
-    }
     if (feilmelding) {
         return (
             <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -32,6 +29,9 @@ const AppRoutes = () => {
                 </Routes>
             </BrowserRouter>
         );
+    }
+    if (!harLastetPerson) {
+        return null;
     }
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>

@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
 
+import axios, { AxiosError } from 'axios';
 import createUseContext from 'constate';
 
 import { hentPersonData } from '../api/api';
+import { sendSøkerTilGammelSøknad } from '../components/SøknadRouting/sendSøkerTilGammelSøknad';
 import { initiellPerson } from '../mock/initiellPerson';
 import { Person } from '../typer/person';
+
+const erFeilOgSkalRouteTilGammelSøknad = (req: AxiosError<{ detail?: string }, unknown>) => {
+    return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
+};
 
 const [PersonProvider, usePerson] = createUseContext(() => {
     PersonProvider.displayName = 'PERSON_PROVIDER';
@@ -14,9 +20,17 @@ const [PersonProvider, usePerson] = createUseContext(() => {
 
     useEffect(() => {
         hentPersonData()
-            .then((søker) => settPerson(søker))
-            .catch(() => settFeilmelding('Feiltet henting av personopplysninger')) // TODO noe bedre håndtering?
-            .finally(() => settHarLastetPerson(true));
+            .then((resp) => {
+                settPerson(resp);
+                settHarLastetPerson(true);
+            })
+            .catch((req) => {
+                if (axios.isAxiosError(req) && erFeilOgSkalRouteTilGammelSøknad(req)) {
+                    sendSøkerTilGammelSøknad();
+                } else {
+                    settFeilmelding('Feiltet henting av personopplysninger'); // TODO noe bedre håndtering?
+                }
+            });
     }, []);
 
     return { harLastetPerson, feilmelding, person, settPerson };
