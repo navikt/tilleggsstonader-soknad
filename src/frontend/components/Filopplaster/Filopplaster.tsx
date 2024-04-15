@@ -6,6 +6,7 @@ import { UploadIcon } from '@navikt/aksel-icons';
 import { Alert, Button, VStack } from '@navikt/ds-react';
 import { ABlue50, ABlue500 } from '@navikt/ds-tokens/dist/tokens';
 
+import { utledFeilmelding } from './feilmeldingOpplasting';
 import FilVisning from './Fil';
 import { MAX_FILSTØRRELSE, TILLATE_FILTYPER } from './utils';
 import { lastOppVedlegg } from '../../api/api';
@@ -52,13 +53,8 @@ const Filopplaster: React.FC<{
             settLaster(true);
             lastOppVedlegg(fil)
                 .then((id) => leggTilDokument({ id: id, navn: fil.name }))
-                .catch(() => {
-                    settFeilmelding(
-                        hentBeskjedMedEttParameter(
-                            fil.name,
-                            teksterFeilmeldinger.feiletOpplasting[locale]
-                        )
-                    );
+                .catch((err) => {
+                    settFeilmelding(utledFeilmelding(err, fil, locale));
                 })
                 .finally(() => settLaster(false));
         }
