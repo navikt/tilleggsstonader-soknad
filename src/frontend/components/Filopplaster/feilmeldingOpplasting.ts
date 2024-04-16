@@ -20,7 +20,7 @@ const REGEX_FEIL = /^CODE=(.*)$/;
  */
 const mapTilFeilmeldingTekst = (req: unknown): TekstElement<string> | undefined => {
     if (axios.isAxiosError(req)) {
-        const melding = req?.response?.data;
+        const melding = req?.response?.data?.melding;
         const matches = REGEX_FEIL.exec(melding || '');
         if (matches?.length && matches?.length > 0) {
             const feilmelding = matches[1];
