@@ -51,6 +51,7 @@ const Filopplaster: React.FC<{
             );
         } else {
             settLaster(true);
+            settFeilmelding(undefined);
             lastOppVedlegg(fil)
                 .then((id) => leggTilDokument({ id: id, navn: fil.name }))
                 .catch((err) => {
