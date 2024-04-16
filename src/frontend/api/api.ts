@@ -2,6 +2,10 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import Environment from './Environment';
+import {
+    ArbeidsrettedeAktiviterFraBackend,
+    ArbeidsrettetAktivitet,
+} from '../typer/arbeidsrettetAktivitet';
 import { Person } from '../typer/person';
 import { Stønadstype } from '../typer/stønadstyper';
 import { Kvittering } from '../typer/søknad';
@@ -22,6 +26,15 @@ export const hentPersonData = (): Promise<Person> => {
     return axios
         .get<Person>(`${Environment().apiProxyUrl}/person`, defaultConfig())
         .then((response) => response.data);
+};
+
+export const hentArbeidsrettedeAktiviteter = (): Promise<ArbeidsrettetAktivitet[]> => {
+    return axios
+        .get<ArbeidsrettedeAktiviterFraBackend>(
+            `${Environment().apiProxyUrl}/aktivitet`,
+            defaultConfig()
+        )
+        .then((response) => response.data.aktiviteter);
 };
 
 const stønadstypeTilPath = (stønadstype: Stønadstype): string => {
