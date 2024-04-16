@@ -49,6 +49,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     const navigate = useNavigate();
     const { locale } = useSpråk();
     const {
+        nullstillSøknad,
         valideringsfeil,
         settValideringsfeil,
         hovedytelse,
@@ -102,9 +103,9 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         })
             .then((res) => {
                 settInnsentTidspunkt(res.mottattTidspunkt);
+                nullstillSøknad();
                 navigate(nesteRoute.path);
             })
-            // TODO håndtering av 401?
             .catch(() => settSendInnFeil(true));
     };
 

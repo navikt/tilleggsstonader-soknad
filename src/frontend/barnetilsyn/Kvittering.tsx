@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { Alert, BodyLong, BodyShort, Heading } from '@navikt/ds-react';
 
 import { kvitteringTekster } from './tekster/kvittering';
@@ -8,7 +10,13 @@ import { useSøknad } from '../context/SøknadContext';
 import { formaterNullableIsoDatoTid } from '../utils/formatering';
 
 const Kvittering = () => {
-    const { innsentTidspunkt } = useSøknad();
+    const { innsentTidspunkt, settInnsentTidspunkt } = useSøknad();
+
+    useEffect(() => {
+        return () => {
+            settInnsentTidspunkt(undefined);
+        };
+    }, [settInnsentTidspunkt]);
 
     return (
         <Container>

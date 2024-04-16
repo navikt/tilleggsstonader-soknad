@@ -12,8 +12,12 @@ interface Props {
 }
 
 const RedirectTilStart: React.FC<Props> = ({ stønadstype, children }) => {
-    const { harBekreftet } = useSøknad();
-    return !harBekreftet ? <Navigate to={hentStartRoute(stønadstype)} /> : children;
+    const { harBekreftet, innsentTidspunkt } = useSøknad();
+    return !harBekreftet && !innsentTidspunkt ? (
+        <Navigate to={hentStartRoute(stønadstype)} />
+    ) : (
+        children
+    );
 };
 
 export default RedirectTilStart;

@@ -24,6 +24,17 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
 
     const [valideringsfeil, settValideringsfeil] = useState<Valideringsfeil>({});
 
+    const nullstillSøknad = () => {
+        settHarBekreftet(false);
+        settHovedytelse(undefined);
+        settAktivitet(undefined);
+        // TODO må nullstille valgte barn
+        settBarnMedBarnepass([]);
+        settDokumentasjonsbehov([]);
+        settDokumentasjon([]);
+        settValideringsfeil({});
+    };
+
     return {
         harBekreftet,
         settHarBekreftet,
@@ -41,6 +52,7 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         settInnsentTidspunkt,
         valideringsfeil,
         settValideringsfeil,
+        nullstillSøknad,
     };
 });
 
