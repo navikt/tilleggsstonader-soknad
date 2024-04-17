@@ -1,4 +1,4 @@
-export interface ArbeidsrettetAktivitet {
+export interface RegisterAktivitet {
     id: string;
     fom: string;
     tom: string;
@@ -6,11 +6,11 @@ export interface ArbeidsrettetAktivitet {
     typeNavn: string;
 }
 
-export interface ArbeidsrettetAktivitetMedLabel extends ArbeidsrettetAktivitet {
+export interface ArbeidsrettetAktivitetMedLabel extends RegisterAktivitet {
     label: string;
 }
 
 export interface ArbeidsrettedeAktiviterFraBackend {
-    aktiviteter: ArbeidsrettetAktivitet[];
+    aktiviteter: RegisterAktivitet[];
     suksess: boolean;
 }

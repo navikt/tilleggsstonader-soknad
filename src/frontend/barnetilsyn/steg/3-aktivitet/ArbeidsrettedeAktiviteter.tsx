@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Checkbox, CheckboxGroup } from '@navikt/ds-react';
 
-import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/arbeidsrettetAktivitet';
+import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { Locale } from '../../../typer/tekst';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 

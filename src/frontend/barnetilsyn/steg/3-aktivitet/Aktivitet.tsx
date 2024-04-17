@@ -15,7 +15,7 @@ import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
-import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/arbeidsrettetAktivitet';
+import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
@@ -90,7 +90,10 @@ const Aktivitet = () => {
             label: aktivitetTekster.hvilken_aktivitet_spm[locale],
             verdier: verdier.map((verdi) => {
                 if (verdi === 'ANNET') {
-                    return { label: aktivitetTekster.checkboks_annet_tekst[locale], verdi: 'ANNET' };
+                    return {
+                        label: aktivitetTekster.checkboks_annet_tekst[locale],
+                        verdi: 'ANNET',
+                    };
                 }
                 const valgtAktivitet = arbeidsrettedeAktiviteter[verdi];
 
