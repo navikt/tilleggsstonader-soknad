@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 
 import { Alert, Heading } from '@navikt/ds-react';
@@ -20,6 +20,7 @@ import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
+import { tilDato } from '../../../utils/dato';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 const Aktivitet = () => {
@@ -34,8 +35,6 @@ const Aktivitet = () => {
     const [arbeidsrettedeAktiviteter, settArbeidsrettedeAktiviteter] =
         useState<Record<string, ArbeidsrettetAktivitetMedLabel>>();
     const [feilmelding, settFeilmelding] = useState<string>();
-    const tilDato = (dato: string | Date): Date =>
-        typeof dato === 'string' ? parseISO(dato) : dato;
 
     //TODO: Legge til støtte for flere Locales enn Norsk Bokmål (nb)
     const tilTekstligDato = (dato: string) => {
