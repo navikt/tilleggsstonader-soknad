@@ -147,7 +147,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             nb: 'Skriftlig uttalelse fra helsepersonell for [0]',
         },
         beskrivelse: {
-            nb: 'Legeerklæring eller annen uttalelse fra helsepersonell som beskriver Espens helsetilstand.',
+            nb: 'Legeerklæring eller annen uttalelse fra helsepersonell som beskriver helsetilstand for [0].',
         },
         krav_til_dokumentasjon: {
             nb: 'Legeerklæringen/uttalelsen fra helsepersonell må inneholde barnets navn og gjelde for perioden du søker om støtte til pass for.',
