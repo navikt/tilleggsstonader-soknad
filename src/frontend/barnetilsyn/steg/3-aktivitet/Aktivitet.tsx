@@ -90,7 +90,7 @@ const Aktivitet = () => {
             label: aktivitetTekster.hvilken_aktivitet_spm[locale],
             verdier: verdier.map((verdi) => {
                 if (verdi === 'ANNET') {
-                    return { label: 'ANNET', verdi: 'ANNET' };
+                    return { label: aktivitetTekster.checkboks_annet_tekst[locale], verdi: 'ANNET' };
                 }
                 const valgtAktivitet = arbeidsrettedeAktiviteter[verdi];
 
