@@ -23,8 +23,8 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
             onChange={oppdaterValgteAktiviteter}
         >
             {arbeidsrettedeAktiviteter
-                ? Object.values(arbeidsrettedeAktiviteter).map((aa) => (
-                      <Checkbox value={aa.id}>{aa.label}</Checkbox>
+                ? Object.values(arbeidsrettedeAktiviteter).map((aktivitet) => (
+                      <Checkbox value={aktivitet.id}>{aktivitet.label}</Checkbox>
                   ))
                 : null}
             <Checkbox value="ANNET">{aktivitetTekster.checkboks_annet_tekst[locale]}</Checkbox>
