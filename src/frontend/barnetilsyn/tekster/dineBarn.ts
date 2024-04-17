@@ -21,7 +21,7 @@ export const dineBarnTekster: DineBarnInnhold = {
     },
     guide_innhold: {
         nb: [
-            'Vi henter opplysninger om barn fra folkeregisteret. Du kan ikke legge til biologiske eller adopterte barn her.  Hvis noe er feil, må du ',
+            'Vi henter opplysninger om barn fra folkeregisteret. Du kan ikke legge til barn her.  Hvis noe er feil, må du  ',
             {
                 tekst: 'melde fra til folkeregisteret',
                 url: 'https://www.skatteetaten.no/person/folkeregister/',
