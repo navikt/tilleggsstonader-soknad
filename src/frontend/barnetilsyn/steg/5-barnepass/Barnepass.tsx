@@ -22,6 +22,7 @@ const Barnepass = () => {
     const { person } = usePerson();
     const { locale } = useSpråk();
     const {
+        valgteBarn,
         barnMedBarnepass,
         settBarnMedBarnepass,
         settDokumentasjonsbehov,
@@ -30,14 +31,12 @@ const Barnepass = () => {
     } = useSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
-        person.barn
-            .filter((barn) => barn.skalHaBarnepass)
-            .map(
-                (barn) =>
-                    barnMedBarnepass.find((barnepass) => barnepass.ident == barn.ident) || {
-                        ident: barn.ident,
-                    }
-            )
+        Array.from(valgteBarn).map(
+            (valgtBarn) =>
+                barnMedBarnepass.find((barnepass) => barnepass.ident == valgtBarn) || {
+                    ident: valgtBarn,
+                }
+        )
     );
 
     const nullstillValideringsfeil = (key: string) => {

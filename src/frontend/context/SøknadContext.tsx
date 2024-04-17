@@ -16,6 +16,7 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
 
     const [aktivitet, settAktivitet] = useState<Aktivitet>();
 
+    const [valgteBarn, settValgteBarn] = useState<Set<string>>(new Set());
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);
 
     const [dokumentasjonsbehov, settDokumentasjonsbehov] = useState<Dokumentasjonsbehov[]>([]);
@@ -50,6 +51,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         valideringsfeil,
         settValideringsfeil,
         resetSøknad,
+        valgteBarn,
+        settValgteBarn,
     };
 });
 

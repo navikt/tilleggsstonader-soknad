@@ -7,7 +7,6 @@ export interface Barn {
     fødselsdato: string;
     fornavn: string;
     visningsnavn: string;
-    skalHaBarnepass: boolean;
 }
 
 export interface Barnepass {
