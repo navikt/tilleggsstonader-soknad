@@ -59,6 +59,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     } = useSøknad();
 
     const errorRef = useRef<HTMLDivElement>(null);
+    const [senderInn, settSenderInn] = useState<boolean>(false);
     const [sendInnFeil, settSendInnFeil] = useState<boolean>(false);
 
     const harValideringsfeil = inneholderFeil(valideringsfeil);
@@ -89,9 +90,11 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     };
 
     const sendSøknad = () => {
-        if (validerSteg && !validerSteg()) {
+        if ((validerSteg && !validerSteg()) || senderInn) {
             return;
         }
+
+        settSenderInn(true);
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
         sendInnSøknad(stønadstype, {
@@ -105,7 +108,8 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                 navigate(nesteRoute.path);
             })
             // TODO håndtering av 401?
-            .catch(() => settSendInnFeil(true));
+            .catch(() => settSendInnFeil(true))
+            .finally(() => settSenderInn(false));
     };
 
     return (
@@ -133,7 +137,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                     <LocaleTekst tekst={fellesTekster.forrige} />
                 </Button>
                 {aktivtSteg.route === ERouteBarnetilsyn.OPPSUMMERING ? (
-                    <Button onClick={sendSøknad}>
+                    <Button onClick={sendSøknad} loading={senderInn}>
                         <LocaleTekst tekst={fellesTekster.send_inn_søknad} />
                     </Button>
                 ) : (
