@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import { format } from 'date-fns';
-import { nb } from 'date-fns/locale';
-
 import { Alert, Heading } from '@navikt/ds-react';
 
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
+import { mapTIlArbeidsrettedeAktiviteterObjektMedLabel } from './utils';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -20,7 +18,6 @@ import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
-import { tilDato } from '../../../utils/dato';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 const Aktivitet = () => {
@@ -36,30 +33,11 @@ const Aktivitet = () => {
         useState<Record<string, ArbeidsrettetAktivitetMedLabel>>();
     const [feilmelding, settFeilmelding] = useState<string>();
 
-    //TODO: Legge til støtte for flere Locales enn Norsk Bokmål (nb)
-    const tilTekstligDato = (dato: string) => {
-        return format(tilDato(dato), 'd. MMMM yyyy', { locale: nb });
-    };
-
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
                 settArbeidsrettedeAktiviteter(
-                    arbeidsrettedeAktiviteter.reduce(
-                        (acc, curr) => ({
-                            ...acc,
-                            [curr.id]: {
-                                ...curr,
-                                label:
-                                    curr.typeNavn +
-                                    ': ' +
-                                    tilTekstligDato(curr.fom) +
-                                    ' - ' +
-                                    tilTekstligDato(curr.tom),
-                            },
-                        }),
-                        {} as Record<string, ArbeidsrettetAktivitetMedLabel>
-                    )
+                    mapTIlArbeidsrettedeAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
                 )
             )
             .catch(() => settFeilmelding('Feiltet henting av arbeidsrettede aktiviteter')); // TODO noe bedre håndtering?
