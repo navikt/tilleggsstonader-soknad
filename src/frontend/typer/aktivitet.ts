@@ -1,0 +1,6 @@
+export enum AktivitetType {
+    TILTAK = 'TILTAK',
+    UTDANNING = 'UTDANNING',
+    ARBEIDSSØKER = 'ARBEIDSSØKER',
+    INGEN_AKTIVITET = 'INGEN_AKTIVITET',
+}

@@ -103,7 +103,15 @@ const Aktivitet = () => {
             />
             {valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ? (
                 <UnderspørsmålContainer>
-                    <div>Hvilken annen type arbeidsrettet aktivitet har du?</div>
+                    <LocaleRadioGroup
+                        id={'asd'}
+                        tekst={aktivitetTekster.radio_annet}
+                        onChange={(verdi) => {
+                            console.log('asd123');
+                        }}
+                        error={valideringsfeil.barnepassPgaUtdanning?.melding}
+                    ></LocaleRadioGroup>
+                    <LocaleReadMore tekst={aktivitetTekster.radio_annet_lesmer} />
                 </UnderspørsmålContainer>
             ) : null}
             <LocaleRadioGroup

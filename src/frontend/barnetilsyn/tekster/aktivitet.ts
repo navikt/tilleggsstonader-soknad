@@ -1,12 +1,15 @@
 import { jaNeiAlternativer } from '../../tekster/felles';
+import { AktivitetType } from '../../typer/aktivitet';
 import { JaNei } from '../../typer/søknad';
 import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
     radio_lonnet: Radiogruppe<JaNei>;
+    radio_annet: Radiogruppe<AktivitetType>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
+    radio_annet_lesmer: LesMer<string[]>;
     tittel: TekstElement<string>;
     feil_utdanning_infoalert_title: TekstElement<string>;
     feil_utdanning_infoalert_innhold: TekstElement<string[]>;
@@ -17,6 +20,19 @@ interface AktivitetInnhold {
     hvilken_aktivitet_spm: TekstElement<string>;
     checkboks_annet_tekst: TekstElement<string>;
 }
+
+export const AktivitetTypeTilTekst: Record<AktivitetType, TekstElement<string>> = {
+    TILTAK: { nb: 'Tiltak / arbeidsrettet utredning' },
+    UTDANNING: {
+        nb: 'Utdanning godkjent av NAV',
+    },
+    ARBEIDSSØKER: {
+        nb: 'Jeg er arbeidssøker',
+    },
+    INGEN_AKTIVITET: {
+        nb: 'Har ingen arbeidsrettet aktivitet',
+    },
+};
 
 export const aktivitetTekster: AktivitetInnhold = {
     hvilken_aktivitet_spm: { nb: 'Hvilken aktivitet søker du om støtte i forbindelse med?' },
@@ -74,5 +90,34 @@ export const aktivitetTekster: AktivitetInnhold = {
             nb: 'Vil du fortsatt søke nå?',
         },
         alternativer: jaNeiAlternativer,
+    },
+    radio_annet_lesmer: {
+        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
+        innhold: {
+            nb: [
+                'Hvis du skal søke i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut papirsøknad.',
+            ],
+        },
+    },
+    radio_annet: {
+        header: { nb: 'Hvilken annen type arbeidsrettet aktivitet har du?' },
+        alternativer: [
+            {
+                value: AktivitetType.TILTAK,
+                label: AktivitetTypeTilTekst.TILTAK,
+            },
+            {
+                value: AktivitetType.UTDANNING,
+                label: AktivitetTypeTilTekst.UTDANNING,
+            },
+            {
+                value: AktivitetType.ARBEIDSSØKER,
+                label: AktivitetTypeTilTekst.ARBEIDSSØKER,
+            },
+            {
+                value: AktivitetType.INGEN_AKTIVITET,
+                label: AktivitetTypeTilTekst.INGEN_AKTIVITET,
+            },
+        ],
     },
 };
