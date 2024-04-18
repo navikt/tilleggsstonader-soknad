@@ -118,6 +118,7 @@ const Aktivitet = () => {
                 arbeidsrettedeAktiviteter={arbeidsrettedeAktiviteter}
                 oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
                 locale={locale}
+                valgteAktiviteter={valgteAktiviteter}
             />
             <LocaleRadioGroup
                 id={valideringsfeil.barnepassPgaUtdanning?.id}
