@@ -11,6 +11,7 @@ import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGr
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
@@ -100,6 +101,11 @@ const Aktivitet = () => {
                 locale={locale}
                 valgteAktiviteter={valgteAktiviteter}
             />
+            {valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ? (
+                <UnderspørsmålContainer>
+                    <div>Hvilken annen type arbeidsrettet aktivitet har du?</div>
+                </UnderspørsmålContainer>
+            ) : null}
             <LocaleRadioGroup
                 id={valideringsfeil.barnepassPgaUtdanning?.id}
                 tekst={aktivitetTekster.radio_utdanning}
