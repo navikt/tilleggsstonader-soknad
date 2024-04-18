@@ -14,6 +14,7 @@ import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekst
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
+import { AktivitetType } from '../../../typer/aktivitet';
 import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -33,6 +34,9 @@ const Aktivitet = () => {
     const [arbeidsrettedeAktiviteter, settArbeidsrettedeAktiviteter] =
         useState<Record<string, ArbeidsrettetAktivitetMedLabel>>();
 
+    const [annenTypeArbeidsrettetAktivitet, setAnnenTypeArbeidsrettetAktivitet] = useState<
+        EnumFelt<AktivitetType> | undefined
+    >(undefined);
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
@@ -104,11 +108,11 @@ const Aktivitet = () => {
             {valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ? (
                 <UnderspørsmålContainer>
                     <LocaleRadioGroup
-                        id={'asd'}
                         tekst={aktivitetTekster.radio_annet}
                         onChange={(verdi) => {
-                            console.log('asd123');
+                            setAnnenTypeArbeidsrettetAktivitet(verdi);
                         }}
+                        value={annenTypeArbeidsrettetAktivitet?.verdi || ''}
                         error={valideringsfeil.barnepassPgaUtdanning?.melding}
                     ></LocaleRadioGroup>
                     <LocaleReadMore tekst={aktivitetTekster.radio_annet_lesmer} />
