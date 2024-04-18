@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import Environment from './Environment';
 import { Person } from '../typer/person';
+import { RegisterAktiviteterResponse, RegisterAktivitet } from '../typer/registerAktivitet';
 import { Stønadstype } from '../typer/stønadstyper';
 import { Kvittering } from '../typer/søknad';
 
@@ -22,6 +23,12 @@ export const hentPersonData = (): Promise<Person> => {
     return axios
         .get<Person>(`${Environment().apiProxyUrl}/person`, defaultConfig())
         .then((response) => response.data);
+};
+
+export const hentArbeidsrettedeAktiviteter = (): Promise<RegisterAktivitet[]> => {
+    return axios
+        .get<RegisterAktiviteterResponse>(`${Environment().apiProxyUrl}/aktivitet`, defaultConfig())
+        .then((response) => response.data.aktiviteter);
 };
 
 const stønadstypeTilPath = (stønadstype: Stønadstype): string => {

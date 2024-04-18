@@ -3,7 +3,8 @@ import { JaNei } from '../../typer/søknad';
 import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
-    guide_innhold: TekstElement<string>;
+    guide_innhold: TekstElement<string[]>;
+    radio_lonnet: Radiogruppe<JaNei>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
     tittel: TekstElement<string>;
@@ -13,9 +14,13 @@ interface AktivitetInnhold {
     søker_fra_label: TekstElement<string>;
     søker_fra_lesmer: LesMer<string[]>;
     søker_fra_dato_feilmelding: TekstElement<string>;
+    hvilken_aktivitet_spm: TekstElement<string>;
+    checkboks_annet_tekst: TekstElement<string>;
 }
 
 export const aktivitetTekster: AktivitetInnhold = {
+    hvilken_aktivitet_spm: { nb: 'Hvilken aktivitet søker du om støtte i forbindelse med?' },
+    checkboks_annet_tekst: { nb: 'Annet' },
     søker_fra_lesmer: {
         header: { nb: 'Hvilken dato velger jeg?' },
         innhold: {
@@ -31,7 +36,16 @@ export const aktivitetTekster: AktivitetInnhold = {
         nb: 'Arbeidsrettet aktivitet',
     },
     guide_innhold: {
-        nb: 'For å få dekket pass av barn må du delta på ett tiltak godkjent av NAV eller gjennomføre en arbeidsrettet utredning.',
+        nb: [
+            'For å få dekket pass av barn må du delta på ett tiltak, ta en utdannelse godkjent av NAV, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
+            'Vi henter aktiviteter registrert på deg 3 måneder tilbake i tid.',
+        ],
+    },
+    radio_lonnet: {
+        header: {
+            nb: 'Mottar du lønn gjennom et tiltak?',
+        },
+        alternativer: jaNeiAlternativer,
     },
     radio_utdanning: {
         header: {
