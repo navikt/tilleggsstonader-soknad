@@ -10,7 +10,7 @@ export interface ArbeidsrettetAktivitetMedLabel extends RegisterAktivitet {
     label: string;
 }
 
-export interface ArbeidsrettedeAktiviterFraBackend {
+export interface RegisterAktiviteterResponse {
     aktiviteter: RegisterAktivitet[];
     suksess: boolean;
 }

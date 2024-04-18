@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import Environment from './Environment';
 import { Person } from '../typer/person';
-import { ArbeidsrettedeAktiviterFraBackend, RegisterAktivitet } from '../typer/registerAktivitet';
+import { RegisterAktiviteterResponse, RegisterAktivitet } from '../typer/registerAktivitet';
 import { Stønadstype } from '../typer/stønadstyper';
 import { Kvittering } from '../typer/søknad';
 
@@ -27,10 +27,7 @@ export const hentPersonData = (): Promise<Person> => {
 
 export const hentArbeidsrettedeAktiviteter = (): Promise<RegisterAktivitet[]> => {
     return axios
-        .get<ArbeidsrettedeAktiviterFraBackend>(
-            `${Environment().apiProxyUrl}/aktivitet`,
-            defaultConfig()
-        )
+        .get<RegisterAktiviteterResponse>(`${Environment().apiProxyUrl}/aktivitet`, defaultConfig())
         .then((response) => response.data.aktiviteter);
 };
 
