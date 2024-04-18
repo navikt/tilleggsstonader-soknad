@@ -31,7 +31,6 @@ const Aktivitet = () => {
     >(aktivitet ? aktivitet.aktivitet : undefined);
     const [arbeidsrettedeAktiviteter, settArbeidsrettedeAktiviteter] =
         useState<Record<string, ArbeidsrettetAktivitetMedLabel>>();
-    const [feilmelding, settFeilmelding] = useState<string>();
 
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
@@ -40,7 +39,7 @@ const Aktivitet = () => {
                     mapTIlArbeidsrettedeAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
                 )
             )
-            .catch(() => settFeilmelding('Feiltet henting av arbeidsrettede aktiviteter')); // TODO noe bedre håndtering?
+            .catch(); // TODO noe bedre håndtering?
     }, []);
 
     const kanFortsette = (barnepassPgaUtdanning?: JaNei): boolean => {
