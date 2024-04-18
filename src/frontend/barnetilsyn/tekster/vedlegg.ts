@@ -31,7 +31,7 @@ const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] =
         nb: 'Format og kvalitet på vedlegg',
     },
     innhold: {
-        nb: 'Du kan laste opp vedlegg med filformat .png, .pdf eller .jpeg. Det er viktig at bildet har god nok oppløsning/kvalitet til at vi kan lese det. ',
+        nb: 'Du kan laste opp vedlegg med filformat .png, .pdf .jpg eller .jpeg. Det er viktig at bildet har god nok oppløsning/kvalitet til at vi kan lese det. ',
     },
 };
 

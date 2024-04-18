@@ -8,7 +8,7 @@ import { ABlue50, ABlue500 } from '@navikt/ds-tokens/dist/tokens';
 
 import { utledFeilmelding } from './feilmeldingOpplasting';
 import FilVisning from './Fil';
-import { MAX_FILSTØRRELSE, TILLATE_FILTYPER } from './utils';
+import { MAX_FILSTØRRELSE, TILLATE_FILENDELSER, TILLATE_FILTYPER } from './utils';
 import { lastOppVedlegg } from '../../api/api';
 import { useSpråk } from '../../context/SpråkContext';
 import { filopplastingTekster, teksterFeilmeldinger } from '../../tekster/filopplasting';
@@ -88,6 +88,7 @@ const Filopplaster: React.FC<{
                     }}
                     ref={hiddenFileInput}
                     style={{ display: 'none' }}
+                    accept={TILLATE_FILENDELSER}
                 />
             </Container>
         </>
