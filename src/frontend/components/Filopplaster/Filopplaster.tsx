@@ -55,7 +55,9 @@ const Filopplaster: React.FC<{
             lastOppVedlegg(fil)
                 .then((id) => leggTilDokument({ id: id, navn: fil.name }))
                 .catch((err) => {
-                    settFeilmelding(utledFeilmelding(err, fil, locale));
+                    setTimeout(() => {
+                        settFeilmelding(utledFeilmelding(err, fil, locale));
+                    }, 500);
                 })
                 .finally(() => settLaster(false));
         }
@@ -71,7 +73,9 @@ const Filopplaster: React.FC<{
                 />
             ))}
             <Container>
-                {feilmelding && <Alert variant="error">{feilmelding}</Alert>}
+                <div hidden={!feilmelding} role="alert">
+                    <Alert variant="error">{feilmelding}</Alert>
+                </div>
                 <Button
                     onClick={() => hiddenFileInput.current?.click()}
                     icon={<UploadIcon />}
