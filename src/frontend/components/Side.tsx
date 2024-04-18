@@ -84,6 +84,9 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     };
 
     const navigerTilForrigeSide = () => {
+        if (senderInn) {
+            return;
+        }
         settValideringsfeil({});
         const forrigeRoute = hentForrigeRoute(routes, nåværendePath);
         navigate(forrigeRoute.path);
