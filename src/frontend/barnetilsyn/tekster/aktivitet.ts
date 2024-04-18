@@ -1,6 +1,6 @@
 import { jaNeiAlternativer } from '../../tekster/felles';
 import { JaNei } from '../../typer/søknad';
-import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
@@ -15,11 +15,65 @@ interface AktivitetInnhold {
     søker_fra_lesmer: LesMer<string[]>;
     søker_fra_dato_feilmelding: TekstElement<string>;
     hvilken_aktivitet_spm: TekstElement<string>;
+    hvilken_aktivitet_les_mer: {
+        header: TekstElement<string>;
+        del1: TekstElement<string[]>;
+        del2_lenker: TekstElement<InlineLenke>[];
+        del3: TekstElement<InlineLenke>;
+    };
     checkboks_annet_tekst: TekstElement<string>;
 }
 
 export const aktivitetTekster: AktivitetInnhold = {
     hvilken_aktivitet_spm: { nb: 'Hvilken aktivitet søker du om støtte i forbindelse med?' },
+    hvilken_aktivitet_les_mer: {
+        header: {
+            nb: 'Hva gjør jeg hvis noe mangler eller er feil?',
+        },
+        del1: {
+            nb: [
+                'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du registrert arbeidssøker kan vi ikke hente det.',
+                'Hvis aktiviteten din mangler eller det er noe feil anbefaler vi deg å ta kontakt med veilederen din. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
+                'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
+                'Er du enslig forsørger/gjenlevende og i arbeid, er det andre søknader du skal fylle ut: ',
+            ],
+        },
+        del2_lenker: [
+            {
+                nb: [
+                    'for ',
+                    {
+                        tekst: 'enslig mor/far',
+                        url: 'https://www.nav.no/barnetilsyn-enslig',
+                        variant: 'neutral',
+                    },
+                    ' (åpnes i ny fane)',
+                ],
+            },
+            {
+                nb: [
+                    'for ',
+                    {
+                        tekst: 'gjenlevende',
+                        url: 'https://www.nav.no/barnetilsyn-gjenlevende',
+                        variant: 'neutral',
+                    },
+                    ' (åpnes i ny fane)',
+                ],
+            },
+        ],
+        del3: {
+            nb: [
+                'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut ',
+                {
+                    tekst: 'papirsøknad',
+                    url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
+                    variant: 'neutral',
+                },
+                '.',
+            ],
+        },
+    },
     checkboks_annet_tekst: { nb: 'Annet' },
     søker_fra_lesmer: {
         header: { nb: 'Hvilken dato velger jeg?' },
