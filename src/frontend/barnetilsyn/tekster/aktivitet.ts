@@ -14,19 +14,24 @@ interface AktivitetInnhold {
     søker_fra_label: TekstElement<string>;
     søker_fra_lesmer: LesMer<string[]>;
     søker_fra_dato_feilmelding: TekstElement<string>;
-    hvilken_aktivitet_spm: TekstElement<string>;
-    hvilken_aktivitet_les_mer: {
+    hvilken_aktivitet: HvilkenAktivitet;
+}
+
+interface HvilkenAktivitet {
+    spm: TekstElement<string>;
+    checkboks_annet_tekst: TekstElement<string>;
+    les_mer: {
         header: TekstElement<string>;
         del1: TekstElement<string[]>;
         del2_lenker: TekstElement<InlineLenke>[];
         del3: TekstElement<InlineLenke>;
     };
-    checkboks_annet_tekst: TekstElement<string>;
 }
 
-export const aktivitetTekster: AktivitetInnhold = {
-    hvilken_aktivitet_spm: { nb: 'Hvilken aktivitet søker du om støtte i forbindelse med?' },
-    hvilken_aktivitet_les_mer: {
+const hvilkenAktivitet: HvilkenAktivitet = {
+    spm: { nb: 'Hvilken aktivitet søker du om støtte i forbindelse med?' },
+    checkboks_annet_tekst: { nb: 'Annet' },
+    les_mer: {
         header: {
             nb: 'Hva gjør jeg hvis noe mangler eller er feil?',
         },
@@ -74,7 +79,9 @@ export const aktivitetTekster: AktivitetInnhold = {
             ],
         },
     },
-    checkboks_annet_tekst: { nb: 'Annet' },
+};
+
+export const aktivitetTekster: AktivitetInnhold = {
     søker_fra_lesmer: {
         header: { nb: 'Hvilken dato velger jeg?' },
         innhold: {
@@ -95,6 +102,7 @@ export const aktivitetTekster: AktivitetInnhold = {
             'Vi henter aktiviteter registrert på deg 3 måneder tilbake i tid.',
         ],
     },
+    hvilken_aktivitet: hvilkenAktivitet,
     radio_lonnet: {
         header: {
             nb: 'Mottar du lønn gjennom et tiltak?',

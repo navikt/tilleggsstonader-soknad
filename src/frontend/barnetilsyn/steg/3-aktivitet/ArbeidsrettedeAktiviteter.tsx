@@ -25,20 +25,20 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
 }) => {
     return (
         <CheckboxGroup
-            legend={aktivitetTekster.hvilken_aktivitet_spm[locale]}
+            legend={aktivitetTekster.hvilken_aktivitet.spm[locale]}
             onChange={oppdaterValgteAktiviteter}
             value={valgteAktiviteter?.verdier?.map((verdi) => verdi.verdi) || []}
         >
-            <LocaleReadMoreMedChildren header={aktivitetTekster.hvilken_aktivitet_les_mer.header}>
-                <LocaleTekstAvsnitt tekst={aktivitetTekster.hvilken_aktivitet_les_mer.del1} />
+            <LocaleReadMoreMedChildren header={aktivitetTekster.hvilken_aktivitet.les_mer.header}>
+                <LocaleTekstAvsnitt tekst={aktivitetTekster.hvilken_aktivitet.les_mer.del1} />
                 <List>
-                    {aktivitetTekster.hvilken_aktivitet_les_mer.del2_lenker.map((lenke, indeks) => (
+                    {aktivitetTekster.hvilken_aktivitet.les_mer.del2_lenker.map((lenke, indeks) => (
                         <List.Item key={indeks}>
                             <LocaleInlineLenke tekst={lenke} />
                         </List.Item>
                     ))}
                 </List>
-                <LocaleInlineLenke tekst={aktivitetTekster.hvilken_aktivitet_les_mer.del3} />
+                <LocaleInlineLenke tekst={aktivitetTekster.hvilken_aktivitet.les_mer.del3} />
             </LocaleReadMoreMedChildren>
             {arbeidsrettedeAktiviteterMedLabeler
                 ? arbeidsrettedeAktiviteterMedLabeler.map((aktivitet) => (
@@ -47,7 +47,9 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
                       </Checkbox>
                   ))
                 : null}
-            <Checkbox value="ANNET">{aktivitetTekster.checkboks_annet_tekst[locale]}</Checkbox>
+            <Checkbox value="ANNET">
+                {aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale]}
+            </Checkbox>
         </CheckboxGroup>
     );
 };

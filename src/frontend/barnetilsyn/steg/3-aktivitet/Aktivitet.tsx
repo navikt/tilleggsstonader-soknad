@@ -63,11 +63,11 @@ const Aktivitet = () => {
     const oppdaterValgteAktiviteter = (verdier: string[]) => {
         if (!arbeidsrettedeAktiviteter) return;
         settValgteAktiviteter({
-            label: aktivitetTekster.hvilken_aktivitet_spm[locale],
+            label: aktivitetTekster.hvilken_aktivitet.spm[locale],
             verdier: verdier.map((verdi) => {
                 if (verdi === 'ANNET') {
                     return {
-                        label: aktivitetTekster.checkboks_annet_tekst[locale],
+                        label: aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale],
                         verdi: 'ANNET',
                     };
                 }
