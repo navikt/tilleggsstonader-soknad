@@ -80,6 +80,9 @@ const Aktivitet = () => {
         });
     };
 
+    const arbeidsrettedeAktiviteterMedLabeler: ArbeidsrettetAktivitetMedLabel[] | undefined =
+        arbeidsrettedeAktiviteter ? Object.values(arbeidsrettedeAktiviteter) : undefined;
+
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
@@ -93,7 +96,7 @@ const Aktivitet = () => {
                 <LocaleTekstAvsnitt tekst={aktivitetTekster.guide_innhold} />
             </PellePanel>
             <ArbeidsrettedeAktiviteter
-                arbeidsrettedeAktiviteter={arbeidsrettedeAktiviteter}
+                arbeidsrettedeAktiviteterMedLabeler={arbeidsrettedeAktiviteterMedLabeler}
                 oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
                 locale={locale}
                 valgteAktiviteter={valgteAktiviteter}

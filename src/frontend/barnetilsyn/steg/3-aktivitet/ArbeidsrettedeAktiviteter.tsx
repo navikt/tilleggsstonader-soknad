@@ -8,14 +8,14 @@ import { Locale } from '../../../typer/tekst';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 interface Props {
-    arbeidsrettedeAktiviteter: Record<string, ArbeidsrettetAktivitetMedLabel> | undefined;
+    arbeidsrettedeAktiviteterMedLabeler: ArbeidsrettetAktivitetMedLabel[] | undefined;
     oppdaterValgteAktiviteter: (verdier: string[]) => void;
     locale: Locale;
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined;
 }
 
 const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
-    arbeidsrettedeAktiviteter,
+    arbeidsrettedeAktiviteterMedLabeler,
     oppdaterValgteAktiviteter,
     locale,
     valgteAktiviteter,
@@ -26,8 +26,8 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
             onChange={oppdaterValgteAktiviteter}
             value={valgteAktiviteter?.verdier?.map((verdi) => verdi.verdi) || []}
         >
-            {arbeidsrettedeAktiviteter
-                ? Object.values(arbeidsrettedeAktiviteter).map((aktivitet) => (
+            {arbeidsrettedeAktiviteterMedLabeler
+                ? arbeidsrettedeAktiviteterMedLabeler.map((aktivitet) => (
                       <Checkbox key={aktivitet.id} value={aktivitet.id}>
                           {aktivitet ? aktivitet.label : ''}
                       </Checkbox>
