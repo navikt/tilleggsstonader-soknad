@@ -6,6 +6,7 @@ import { BodyLong, Heading, VStack } from '@navikt/ds-react';
 import { ASurfaceSubtle } from '@navikt/ds-tokens/dist/tokens';
 
 import Filopplaster from './Filopplaster';
+import { usePerson } from '../../context/PersonContext';
 import { filopplastingTekster } from '../../tekster/filopplasting';
 import { Dokument, DokumentasjonFelt } from '../../typer/skjema';
 import { Vedlegg } from '../../typer/tekst';
@@ -24,11 +25,15 @@ const VedleggFelt: React.FC<{
     leggTilDokument: (vedlegg: Dokument) => void;
     slettDokument: (vedlegg: Dokument) => void;
 }> = ({ tittel, vedlegg, dokumentasjonFelt, leggTilDokument, slettDokument }) => {
+    const { person } = usePerson();
+    const barn = dokumentasjonFelt.barnId
+        ? person.barn.find((barn) => barn.ident === dokumentasjonFelt.barnId)
+        : undefined;
     return (
         <Container>
             <Heading size="small">{tittel}</Heading>
             <BodyLong>
-                <LocaleTekst tekst={vedlegg.beskrivelse} />
+                <LocaleTekst tekst={vedlegg.beskrivelse} argument0={barn?.fornavn} />
             </BodyLong>
             {vedlegg.krav_til_dokumentasjon && (
                 <LocaleReadMore
