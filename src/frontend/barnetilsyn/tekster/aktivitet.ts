@@ -1,7 +1,7 @@
 import { jaNeiAlternativer } from '../../tekster/felles';
 import { AnnenAktivitetType } from '../../typer/aktivitet';
 import { JaNei } from '../../typer/søknad';
-import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
@@ -9,7 +9,7 @@ interface AktivitetInnhold {
     radio_annet: Radiogruppe<AnnenAktivitetType>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
-    radio_annet_lesmer: LesMer<string[]>;
+    radio_annet_lesmer: LesMer<InlineLenke>;
     tittel: TekstElement<string>;
     feil_utdanning_infoalert_title: TekstElement<string>;
     feil_utdanning_infoalert_innhold: TekstElement<string[]>;
@@ -95,7 +95,13 @@ export const aktivitetTekster: AktivitetInnhold = {
         header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
         innhold: {
             nb: [
-                'Hvis du skal søke i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut papirsøknad.',
+                'Hvis du skal søke i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut ',
+                {
+                    tekst: 'papirsøknad',
+                    url: 'https://tjenester.nav.no/soknadtilleggsstonader/app/start',
+                    variant: 'neutral',
+                },
+                '.',
             ],
         },
     },

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
+import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { EnumFelt } from '../../../typer/skjema';
@@ -27,7 +27,7 @@ export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
                 value={annenTypeArbeidsrettetAktivitet?.verdi || []}
                 error={valideringsfeil.barnepassPgaUtdanning?.melding}
             ></LocaleRadioGroup>
-            <LocaleReadMore tekst={aktivitetTekster.radio_annet_lesmer} />
+            <LocaleReadMoreMedLenke tekst={aktivitetTekster.radio_annet_lesmer} />
         </UnderspørsmålContainer>
     );
 };
