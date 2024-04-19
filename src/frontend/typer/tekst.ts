@@ -28,12 +28,6 @@ export type Radiogruppe<T extends string> = {
     alternativer: Alternativer<T>;
 };
 
-export type Selectgruppe = {
-    header: TekstElement<string>;
-    beskrivelse?: TekstElement<string>;
-    alternativer: Alternativer<string>;
-};
-
 export type CheckboxGruppe<T extends string> = {
     header: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
