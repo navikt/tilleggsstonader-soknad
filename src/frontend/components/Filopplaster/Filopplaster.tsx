@@ -33,6 +33,15 @@ const Filopplaster: React.FC<{
     const [feilmelding, settFeilmelding] = useState<string>();
     const [laster, settLaster] = useState<boolean>(false);
 
+    /**
+     * Hack for å få skjermlesere til å trigge feilmelding etter at annet blir lest opp for å trigge opplesing av feilmelding
+     */
+    const settFeilmeldingMedDelay = (feilmelding: string) => {
+        setTimeout(() => {
+            settFeilmelding(feilmelding);
+        }, 1500);
+    };
+
     const lastOppValgteFiler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const filer = event.target.files;
         if (filer?.length !== 1) {
@@ -42,11 +51,11 @@ const Filopplaster: React.FC<{
         const fil = filer[0];
 
         if (fil.size > MAX_FILSTØRRELSE) {
-            settFeilmelding(
+            settFeilmeldingMedDelay(
                 hentBeskjedMedEttParameter(fil.name, teksterFeilmeldinger.maksstørrelse[locale])
             );
         } else if (!TILLATE_FILTYPER.includes(fil.type)) {
-            settFeilmelding(
+            settFeilmeldingMedDelay(
                 hentBeskjedMedEttParameter(fil.name, teksterFeilmeldinger.filtype[locale])
             );
         } else {
@@ -71,7 +80,6 @@ const Filopplaster: React.FC<{
                 />
             ))}
             <Container>
-                {feilmelding && <Alert variant="error">{feilmelding}</Alert>}
                 <Button
                     onClick={() => hiddenFileInput.current?.click()}
                     icon={<UploadIcon />}
@@ -90,6 +98,12 @@ const Filopplaster: React.FC<{
                     style={{ display: 'none' }}
                     accept={TILLATE_FILENDELSER}
                 />
+
+                {feilmelding && (
+                    <div role="alert" aria-live="assertive">
+                        <Alert variant="error">{feilmelding}</Alert>
+                    </div>
+                )}
             </Container>
         </>
     );
