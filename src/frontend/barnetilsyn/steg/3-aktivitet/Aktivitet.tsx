@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Alert, Heading } from '@navikt/ds-react';
 
+import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
 import { mapTIlArbeidsrettedeAktiviteterObjektMedLabel } from './utils';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
@@ -11,7 +12,6 @@ import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGr
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
@@ -110,15 +110,11 @@ const Aktivitet = () => {
                 valgteAktiviteter={valgteAktiviteter}
             />
             {valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ? (
-                <UnderspørsmålContainer>
-                    <LocaleRadioGroup
-                        tekst={aktivitetTekster.radio_annet}
-                        onChange={setAnnenTypeArbeidsrettetAktivitet}
-                        value={annenTypeArbeidsrettetAktivitet?.verdi || []}
-                        error={valideringsfeil.barnepassPgaUtdanning?.melding}
-                    ></LocaleRadioGroup>
-                    <LocaleReadMore tekst={aktivitetTekster.radio_annet_lesmer} />
-                </UnderspørsmålContainer>
+                <AnnenArbeidsrettetAktivitet
+                    setAnnenTypeArbeidsrettetAktivitet={setAnnenTypeArbeidsrettetAktivitet}
+                    annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
+                    valideringsfeil={valideringsfeil}
+                />
             ) : null}
             <LocaleRadioGroup
                 id={valideringsfeil.barnepassPgaUtdanning?.id}
