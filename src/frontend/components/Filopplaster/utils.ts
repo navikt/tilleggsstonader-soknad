@@ -14,9 +14,25 @@ export const MAX_FILSTØRRELSE = 1024 * 1024 * 10; // 10mb
 export const MAKS_FILSTØRRELSE_FORMATTERT = formaterFilstørrelse(MAX_FILSTØRRELSE);
 
 enum Filtyper {
-    PDF = 'application/pdf',
-    PNG = 'image/png',
-    JPG = 'image/jpg',
-    JPEG = 'image/jpeg',
+    PDF = 'PDF',
+    PNG = 'PNG',
+    JPG = 'JPG',
+    JPEG = 'JPEG',
 }
-export const TILLATE_FILTYPER: string[] = [Filtyper.PNG, Filtyper.PDF, Filtyper.JPG, Filtyper.JPEG];
+
+export const filtypeTilMime: Record<Filtyper, string> = {
+    PDF: 'application/pdf',
+    PNG: 'image/png',
+    JPG: 'image/jpg',
+    JPEG: 'image/jpeg',
+};
+
+export const filtypeTilFilendelse: Record<Filtyper, string> = {
+    PDF: '.pdf',
+    PNG: '.png',
+    JPG: '.jpg',
+    JPEG: '.jpeg',
+};
+export const TILLATE_FILTYPER: string[] = Object.values(filtypeTilMime);
+
+export const TILLATE_FILENDELSER: string = Object.values(filtypeTilFilendelse).join(',');
