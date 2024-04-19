@@ -36,7 +36,7 @@ const Aktivitet = () => {
 
     const [annenTypeArbeidsrettetAktivitet, setAnnenTypeArbeidsrettetAktivitet] = useState<
         EnumFelt<AnnenAktivitetType> | undefined
-    >(undefined);
+    >(aktivitet ? aktivitet.annenAktivitet : undefined);
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
@@ -60,8 +60,12 @@ const Aktivitet = () => {
     };
 
     const oppdaterAktivitetISøknad = () => {
-        if (utdanning !== undefined && valgteAktiviteter) {
-            settAktivitet({ utdanning: utdanning, aktivitet: valgteAktiviteter });
+        if (utdanning !== undefined && valgteAktiviteter && annenTypeArbeidsrettetAktivitet) {
+            settAktivitet({
+                utdanning: utdanning,
+                aktivitet: valgteAktiviteter,
+                annenAktivitet: annenTypeArbeidsrettetAktivitet,
+            });
         }
     };
 
@@ -109,10 +113,8 @@ const Aktivitet = () => {
                 <UnderspørsmålContainer>
                     <LocaleRadioGroup
                         tekst={aktivitetTekster.radio_annet}
-                        onChange={(verdi) => {
-                            setAnnenTypeArbeidsrettetAktivitet(verdi);
-                        }}
-                        value={annenTypeArbeidsrettetAktivitet?.verdi || ''}
+                        onChange={setAnnenTypeArbeidsrettetAktivitet}
+                        value={annenTypeArbeidsrettetAktivitet?.verdi || []}
                         error={valideringsfeil.barnepassPgaUtdanning?.melding}
                     ></LocaleRadioGroup>
                     <LocaleReadMore tekst={aktivitetTekster.radio_annet_lesmer} />
