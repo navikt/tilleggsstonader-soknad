@@ -1,12 +1,12 @@
 import { jaNeiAlternativer } from '../../tekster/felles';
-import { AktivitetType } from '../../typer/aktivitet';
+import { AnnenAktivitetType } from '../../typer/aktivitet';
 import { JaNei } from '../../typer/søknad';
 import { LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
     radio_lonnet: Radiogruppe<JaNei>;
-    radio_annet: Radiogruppe<AktivitetType>;
+    radio_annet: Radiogruppe<AnnenAktivitetType>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
     radio_annet_lesmer: LesMer<string[]>;
@@ -21,7 +21,7 @@ interface AktivitetInnhold {
     checkboks_annet_tekst: TekstElement<string>;
 }
 
-export const AktivitetTypeTilTekst: Record<AktivitetType, TekstElement<string>> = {
+export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<string>> = {
     TILTAK: { nb: 'Tiltak / arbeidsrettet utredning' },
     UTDANNING: {
         nb: 'Utdanning godkjent av NAV',
@@ -103,19 +103,19 @@ export const aktivitetTekster: AktivitetInnhold = {
         header: { nb: 'Hvilken annen type arbeidsrettet aktivitet har du?' },
         alternativer: [
             {
-                value: AktivitetType.TILTAK,
+                value: AnnenAktivitetType.TILTAK,
                 label: AktivitetTypeTilTekst.TILTAK,
             },
             {
-                value: AktivitetType.UTDANNING,
+                value: AnnenAktivitetType.UTDANNING,
                 label: AktivitetTypeTilTekst.UTDANNING,
             },
             {
-                value: AktivitetType.ARBEIDSSØKER,
+                value: AnnenAktivitetType.ARBEIDSSØKER,
                 label: AktivitetTypeTilTekst.ARBEIDSSØKER,
             },
             {
-                value: AktivitetType.INGEN_AKTIVITET,
+                value: AnnenAktivitetType.INGEN_AKTIVITET,
                 label: AktivitetTypeTilTekst.INGEN_AKTIVITET,
             },
         ],

@@ -1,4 +1,4 @@
-export enum AktivitetType {
+export enum AnnenAktivitetType {
     TILTAK = 'TILTAK',
     UTDANNING = 'UTDANNING',
     ARBEIDSSØKER = 'ARBEIDSSØKER',

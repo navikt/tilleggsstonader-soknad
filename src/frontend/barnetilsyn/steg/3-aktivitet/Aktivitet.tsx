@@ -14,7 +14,7 @@ import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekst
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
-import { AktivitetType } from '../../../typer/aktivitet';
+import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -35,7 +35,7 @@ const Aktivitet = () => {
         useState<Record<string, ArbeidsrettetAktivitetMedLabel>>();
 
     const [annenTypeArbeidsrettetAktivitet, setAnnenTypeArbeidsrettetAktivitet] = useState<
-        EnumFelt<AktivitetType> | undefined
+        EnumFelt<AnnenAktivitetType> | undefined
     >(undefined);
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
