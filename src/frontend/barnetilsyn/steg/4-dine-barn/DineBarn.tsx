@@ -122,11 +122,6 @@ const DineBarn = () => {
                             tekst={dineBarnTekster.søke_for_andre_barn_les_mer_innhold1}
                         />
                     </BodyLong>
-                    <BodyLong>
-                        <LocaleInlineLenke
-                            tekst={dineBarnTekster.søke_for_andre_barn_les_mer_innhold2}
-                        />
-                    </BodyLong>
                 </LocaleReadMoreMedChildren>
             )}
         </Side>
