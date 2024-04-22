@@ -39,11 +39,13 @@ const Aktivitet = () => {
     const [arbeidsrettedeAktiviteter, settArbeidsrettedeAktiviteter] =
         useState<Record<string, ArbeidsrettetAktivitetMedLabel>>();
 
-    const [annenTypeArbeidsrettetAktivitet, setAnnenTypeArbeidsrettetAktivitet] = useState<
-        EnumFelt<AnnenAktivitetType> | undefined
-    >(aktivitet ? aktivitet.annenAktivitet : undefined);
+    const [annenAktivitet, setAnnenAktivitet] = useState<EnumFelt<AnnenAktivitetType> | undefined>(
+        aktivitet ? aktivitet.annenAktivitet : undefined
+    );
 
-    const [lønnetAktivitet, setLønnetAktivitet] = useState<EnumFelt<JaNei> | undefined>(undefined);
+    const [lønnetAktivitet, setLønnetAktivitet] = useState<EnumFelt<JaNei> | undefined>(
+        aktivitet ? aktivitet.lønnetAktivitet : undefined
+    );
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
@@ -67,11 +69,12 @@ const Aktivitet = () => {
     };
 
     const oppdaterAktivitetISøknad = () => {
-        if (utdanning !== undefined && valgteAktiviteter) {
+        if (utdanning !== undefined) {
             settAktivitet({
                 utdanning: utdanning,
                 aktivitet: valgteAktiviteter,
-                annenAktivitet: annenTypeArbeidsrettetAktivitet,
+                annenAktivitet: annenAktivitet,
+                lønnetAktivitet: lønnetAktivitet,
             });
         }
     };
@@ -99,7 +102,7 @@ const Aktivitet = () => {
         arbeidsrettedeAktiviteter ? Object.values(arbeidsrettedeAktiviteter) : undefined;
 
     const skalTaStillingTilLønnetTiltak = () => {
-        if (annenTypeArbeidsrettetAktivitet?.verdi === 'TILTAK') {
+        if (annenAktivitet?.verdi === 'TILTAK') {
             return true;
         }
         if (!arbeidsrettedeAktiviteter || !valgteAktiviteter) return false;
@@ -134,10 +137,8 @@ const Aktivitet = () => {
                     <VStack gap={'6'}>
                         {skalViseAnnenAktivitet && (
                             <AnnenArbeidsrettetAktivitet
-                                setAnnenTypeArbeidsrettetAktivitet={
-                                    setAnnenTypeArbeidsrettetAktivitet
-                                }
-                                annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
+                                setAnnenTypeArbeidsrettetAktivitet={setAnnenAktivitet}
+                                annenTypeArbeidsrettetAktivitet={annenAktivitet}
                             />
                         )}
                         {skalViseLønnetTiltak && (
