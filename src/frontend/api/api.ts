@@ -34,7 +34,7 @@ export const hentArbeidsrettedeAktiviteter = (): Promise<RegisterAktivitet[]> =>
 const stønadstypeTilPath = (stønadstype: Stønadstype): string => {
     switch (stønadstype) {
         case Stønadstype.BARNETILSYN:
-            return 'barnetilsyn';
+            return 'pass-av-barn';
     }
 };
 

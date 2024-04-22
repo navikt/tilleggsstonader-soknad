@@ -6,10 +6,10 @@ Frontend - søknad for tilleggsstønader
 
 ##### Lokal-dev
 `yarn start:dev` 
-Gå inn på http://localhost:8080/tilleggsstonader/soknad/barnetilsyn
+Gå inn på http://localhost:8080/tilleggsstonader/soknad/tilsyn-barn
 
 Med api må du sette cookie første gang:
-http://localhost:8001/test/cookie?redirect=http://localhost:8080/tilleggsstonader/soknad/barnetilsyn
+http://localhost:8001/test/cookie?redirect=http://localhost:8080/tilleggsstonader/soknad/tilsyn-barn
 Kan sende med annet fnr med `&subject=<fnr>`
 
 ## Universell utforming
@@ -31,7 +31,7 @@ For å kunne redigere tekstene i søknaden må du ha en github-konto og være me
 #### 1. Finn riktig mappe.
    
 Det finnes en mappe per stønad. Direktelenke til hver mappe finner du under: 
-- Rediger tekster for søknad om barnetilsyn [HER](https://github.com/navikt/tilleggsstonader-soknad/tree/main/src/frontend/barnetilsyn/tekster)
+- Rediger tekster for søknad om tilsyn barn [HER](https://github.com/navikt/tilleggsstonader-soknad/tree/main/src/frontend/barnetilsyn/tekster)
 
 #### 2. Finn filen du ønsker å redigere
 I hver mappe er det en fil per side eller steg i søknaden. Dersom man ønsker å redigere innholdet på forsiden finner man dette i `forside.ts`
