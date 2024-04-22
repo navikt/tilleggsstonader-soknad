@@ -5,10 +5,7 @@ import { Alert, Heading, VStack } from '@navikt/ds-react';
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
 import { LønnetTiltak } from './LønnetTiltak';
-import {
-    mapTIlArbeidsrettedeAktiviteterObjektMedLabel,
-    skalTaStillingTilAnnenAktivitet,
-} from './utils';
+import { mapTilRegisterAktiviteterObjektMedLabel, skalTaStillingTilAnnenAktivitet } from './utils';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -20,7 +17,7 @@ import { UnderspørsmålContainer } from '../../../components/UnderspørsmålCon
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
-import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
+import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
@@ -36,8 +33,8 @@ const Aktivitet = () => {
     const [valgteAktiviteter, settValgteAktiviteter] = useState<
         EnumFlereValgFelt<string> | undefined
     >(aktivitet ? aktivitet.aktivitet : undefined);
-    const [arbeidsrettedeAktiviteter, settArbeidsrettedeAktiviteter] =
-        useState<Record<string, ArbeidsrettetAktivitetMedLabel>>();
+    const [registerAktivitet, settRegisterAktivitet] =
+        useState<Record<string, RegisterAktivitetMedLabel>>();
 
     const [annenAktivitet, setAnnenAktivitet] = useState<EnumFelt<AnnenAktivitetType> | undefined>(
         aktivitet ? aktivitet.annenAktivitet : undefined
@@ -49,12 +46,12 @@ const Aktivitet = () => {
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
-                settArbeidsrettedeAktiviteter(
+                settRegisterAktivitet(
                     // {}
-                    mapTIlArbeidsrettedeAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
+                    mapTilRegisterAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
                 )
             )
-            .catch(() => settArbeidsrettedeAktiviteter({}));
+            .catch(() => settRegisterAktivitet({}));
     }, []);
 
     const oppdaterAktivitetISøknad = () => {
@@ -69,7 +66,7 @@ const Aktivitet = () => {
     };
 
     const oppdaterValgteAktiviteter = (verdier: string[]) => {
-        if (!arbeidsrettedeAktiviteter) return;
+        if (!registerAktivitet) return;
         const valgteVerdier = verdier.map((verdi) => {
             if (verdi === 'ANNET') {
                 return {
@@ -77,14 +74,14 @@ const Aktivitet = () => {
                     verdi: 'ANNET',
                 };
             }
-            const valgtAktivitet = arbeidsrettedeAktiviteter[verdi];
+            const valgtAktivitet = registerAktivitet[verdi];
 
             return { label: valgtAktivitet.label, verdi: verdi };
         });
         settValgteAktiviteter({
             label: aktivitetTekster.hvilken_aktivitet.spm[locale],
             verdier: valgteVerdier,
-            alternativer: Object.values(arbeidsrettedeAktiviteter).map((a) => a.label),
+            alternativer: Object.values(registerAktivitet).map((a) => a.label),
         });
         if (valgteVerdier.length > 0) {
             settValideringsfeil((prevState) => ({
@@ -110,28 +107,27 @@ const Aktivitet = () => {
         }));
     };
 
-    const arbeidsrettedeAktiviteterMedLabeler: ArbeidsrettetAktivitetMedLabel[] | undefined =
-        arbeidsrettedeAktiviteter ? Object.values(arbeidsrettedeAktiviteter) : undefined;
+    const arbeidsrettedeAktiviteterMedLabeler: RegisterAktivitetMedLabel[] | undefined =
+        registerAktivitet ? Object.values(registerAktivitet) : undefined;
 
     const skalTaStillingTilLønnetTiltak = () => {
         if (annenAktivitet?.verdi === 'TILTAK') {
             return true;
         }
-        if (!arbeidsrettedeAktiviteter || !valgteAktiviteter) return false;
+        if (!registerAktivitet || !valgteAktiviteter) return false;
         return valgteAktiviteter.verdier.some((valgtAktivitet) => {
-            const aktivitet = arbeidsrettedeAktiviteter[valgtAktivitet.verdi];
+            const aktivitet = registerAktivitet[valgtAktivitet.verdi];
             return aktivitet && !aktivitet.erUtdanning;
         });
     };
 
     const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
     const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak();
-    if (!arbeidsrettedeAktiviteter) {
+    if (!registerAktivitet) {
         // ønsker ikke å vise siden før man har hentet aktivteter fra backend
         return null;
     }
-    const skalViseArbeidsrettedeAktiviteter: boolean =
-        Object.keys(arbeidsrettedeAktiviteter).length > 0;
+    const skalViseArbeidsrettedeAktiviteter: boolean = Object.keys(registerAktivitet).length > 0;
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};

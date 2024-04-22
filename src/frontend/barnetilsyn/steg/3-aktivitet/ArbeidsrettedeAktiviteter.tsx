@@ -5,14 +5,14 @@ import { Checkbox, CheckboxGroup, List } from '@navikt/ds-react';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
+import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
 import { Locale } from '../../../typer/tekst';
 import { Feilmelding } from '../../../typer/validering';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 interface Props {
-    arbeidsrettedeAktiviteterMedLabeler: ArbeidsrettetAktivitetMedLabel[] | undefined;
+    arbeidsrettedeAktiviteterMedLabeler: RegisterAktivitetMedLabel[] | undefined;
     oppdaterValgteAktiviteter: (verdier: string[]) => void;
     locale: Locale;
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined;

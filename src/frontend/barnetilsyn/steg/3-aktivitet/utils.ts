@@ -1,10 +1,7 @@
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 
-import {
-    ArbeidsrettetAktivitetMedLabel,
-    RegisterAktivitet,
-} from '../../../typer/registerAktivitet';
+import { RegisterAktivitetMedLabel, RegisterAktivitet } from '../../../typer/registerAktivitet';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
 import { tilDato } from '../../../utils/dato';
 
@@ -13,9 +10,9 @@ const tilTekstligDato = (dato: string) => {
     return format(tilDato(dato), 'd. MMMM yyyy', { locale: nb });
 };
 
-export const mapTIlArbeidsrettedeAktiviteterObjektMedLabel = (
+export const mapTilRegisterAktiviteterObjektMedLabel = (
     registerAktiviteter: RegisterAktivitet[]
-): Record<string, ArbeidsrettetAktivitetMedLabel> => {
+): Record<string, RegisterAktivitetMedLabel> => {
     return registerAktiviteter.reduce(
         (acc, curr) => ({
             ...acc,
@@ -24,7 +21,7 @@ export const mapTIlArbeidsrettedeAktiviteterObjektMedLabel = (
                 label: `${curr.typeNavn}: ${tilTekstligDato(curr.fom)} - ${tilTekstligDato(curr.tom)}`,
             },
         }),
-        {} as Record<string, ArbeidsrettetAktivitetMedLabel>
+        {} as Record<string, RegisterAktivitetMedLabel>
     );
 };
 
