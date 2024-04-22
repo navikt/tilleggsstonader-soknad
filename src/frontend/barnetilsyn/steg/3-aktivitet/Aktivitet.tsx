@@ -53,7 +53,7 @@ const Aktivitet = () => {
                     mapTIlArbeidsrettedeAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
                 )
             )
-            .catch(); // TODO noe bedre håndtering?
+            .catch(() => settArbeidsrettedeAktiviteter({}));
     }, []);
 
     const kanFortsette = (barnepassPgaUtdanning?: JaNei): boolean => {
@@ -114,6 +114,12 @@ const Aktivitet = () => {
 
     const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
     const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak();
+    if (!arbeidsrettedeAktiviteter) {
+        // ønsker ikke å vise siden før man har hentet aktivteter fra backend
+        return null;
+    }
+    const skalViseArbeidsrettedeAktiviteter: boolean =
+        Object.keys(arbeidsrettedeAktiviteter).length > 0;
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
@@ -126,12 +132,21 @@ const Aktivitet = () => {
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={aktivitetTekster.guide_innhold} />
             </PellePanel>
-            <ArbeidsrettedeAktiviteter
-                arbeidsrettedeAktiviteterMedLabeler={arbeidsrettedeAktiviteterMedLabeler}
-                oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
-                locale={locale}
-                valgteAktiviteter={valgteAktiviteter}
-            />
+            {skalViseArbeidsrettedeAktiviteter && (
+                <ArbeidsrettedeAktiviteter
+                    arbeidsrettedeAktiviteterMedLabeler={arbeidsrettedeAktiviteterMedLabeler}
+                    oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
+                    locale={locale}
+                    valgteAktiviteter={valgteAktiviteter}
+                />
+            )}
+            {!skalViseArbeidsrettedeAktiviteter && (
+                <AnnenArbeidsrettetAktivitet
+                    tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
+                    setAnnenTypeArbeidsrettetAktivitet={setAnnenAktivitet}
+                    annenTypeArbeidsrettetAktivitet={annenAktivitet}
+                />
+            )}
             {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
                 <UnderspørsmålContainer>
                     <VStack gap={'6'}>
