@@ -99,6 +99,9 @@ const Aktivitet = () => {
         arbeidsrettedeAktiviteter ? Object.values(arbeidsrettedeAktiviteter) : undefined;
 
     const skalTaStillingTilLønnetTiltak = () => {
+        if (annenTypeArbeidsrettetAktivitet?.verdi === 'TILTAK') {
+            return true;
+        }
         if (!arbeidsrettedeAktiviteter || !valgteAktiviteter) return false;
         return valgteAktiviteter.verdier.some((valgtAktivitet) => {
             const aktivitet = arbeidsrettedeAktiviteter[valgtAktivitet.verdi];
