@@ -137,6 +137,7 @@ const Aktivitet = () => {
                     <VStack gap={'6'}>
                         {skalViseAnnenAktivitet && (
                             <AnnenArbeidsrettetAktivitet
+                                tekst={aktivitetTekster.radio_annet}
                                 setAnnenTypeArbeidsrettetAktivitet={setAnnenAktivitet}
                                 annenTypeArbeidsrettetAktivitet={annenAktivitet}
                             />

@@ -7,6 +7,7 @@ interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
     radio_lønnet_tiltak: Radiogruppe<JaNei>;
     radio_annet: Radiogruppe<AnnenAktivitetType>;
+    radio_annet_uten_registeraktivitet: Radiogruppe<AnnenAktivitetType>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
     radio_annet_lesmer: LesMer<InlineLenke>;
@@ -176,6 +177,10 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     radio_annet: {
         header: { nb: 'Hvilken annen type arbeidsrettet aktivitet har du?' },
+        alternativer: AktivitetTypeTilTekst,
+    },
+    radio_annet_uten_registeraktivitet: {
+        header: { nb: 'Hvilken arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekst,
     },
 };
