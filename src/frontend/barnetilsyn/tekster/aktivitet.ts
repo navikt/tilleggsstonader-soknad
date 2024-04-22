@@ -5,7 +5,7 @@ import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/teks
 
 interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
-    radio_lonnet: Radiogruppe<JaNei>;
+    radio_lønnet_tiltak: Radiogruppe<JaNei>;
     radio_annet: Radiogruppe<AnnenAktivitetType>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
@@ -13,6 +13,7 @@ interface AktivitetInnhold {
     tittel: TekstElement<string>;
     feil_utdanning_infoalert_title: TekstElement<string>;
     feil_utdanning_infoalert_innhold: TekstElement<string[]>;
+    lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
     søker_fra_label: TekstElement<string>;
     søker_fra_lesmer: LesMer<string[]>;
@@ -119,11 +120,17 @@ export const aktivitetTekster: AktivitetInnhold = {
         ],
     },
     hvilken_aktivitet: hvilkenAktivitet,
-    radio_lonnet: {
+    radio_lønnet_tiltak: {
         header: {
             nb: 'Mottar du lønn gjennom et tiltak?',
         },
         alternativer: jaNeiAlternativer,
+    },
+    lønnet_tiltak_infoalert_innhold: {
+        nb: [
+            'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',
+            'Som lærling kan du få støtte til pass av barn, selv om du mottar lønn.',
+        ],
     },
     radio_utdanning: {
         header: {

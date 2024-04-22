@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { Alert } from '@navikt/ds-react';
+
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
+import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { aktivitetTekster } from '../../tekster/aktivitet';
@@ -15,11 +17,15 @@ export const LønnetTiltak: React.FC<Props> = ({ lønnetAktivitet, setLønnetAkt
     return (
         <div>
             <LocaleRadioGroup
-                tekst={aktivitetTekster.radio_lonnet}
+                tekst={aktivitetTekster.radio_lønnet_tiltak}
                 value={lønnetAktivitet?.verdi || []}
                 onChange={setLønnetAktivitet}
             ></LocaleRadioGroup>
-            <LocaleReadMoreMedLenke tekst={aktivitetTekster.radio_annet_lesmer} />
+            {lønnetAktivitet?.verdi === 'JA' && (
+                <Alert variant={'info'}>
+                    <LocaleTekstAvsnitt tekst={aktivitetTekster.lønnet_tiltak_infoalert_innhold} />
+                </Alert>
+            )}
         </div>
     );
 };
