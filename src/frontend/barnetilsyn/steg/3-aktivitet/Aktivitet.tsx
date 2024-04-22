@@ -70,21 +70,44 @@ const Aktivitet = () => {
 
     const oppdaterValgteAktiviteter = (verdier: string[]) => {
         if (!arbeidsrettedeAktiviteter) return;
+        const valgteVerdier = verdier.map((verdi) => {
+            if (verdi === 'ANNET') {
+                return {
+                    label: aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale],
+                    verdi: 'ANNET',
+                };
+            }
+            const valgtAktivitet = arbeidsrettedeAktiviteter[verdi];
+
+            return { label: valgtAktivitet.label, verdi: verdi };
+        });
         settValgteAktiviteter({
             label: aktivitetTekster.hvilken_aktivitet.spm[locale],
-            verdier: verdier.map((verdi) => {
-                if (verdi === 'ANNET') {
-                    return {
-                        label: aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale],
-                        verdi: 'ANNET',
-                    };
-                }
-                const valgtAktivitet = arbeidsrettedeAktiviteter[verdi];
-
-                return { label: valgtAktivitet.label, verdi: verdi };
-            }),
+            verdier: valgteVerdier,
             alternativer: Object.values(arbeidsrettedeAktiviteter).map((a) => a.label),
         });
+        if (valgteVerdier.length > 0) {
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                valgteAktiviteter: undefined,
+            }));
+        }
+    };
+
+    const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenAktivitetType>) => {
+        setAnnenAktivitet(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            annenAktivitet: undefined,
+        }));
+    };
+
+    const oppdaterLønnetAktivitet = (verdi: EnumFelt<JaNei>) => {
+        setLønnetAktivitet(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            lønnetAktivitet: undefined,
+        }));
     };
 
     const arbeidsrettedeAktiviteterMedLabeler: ArbeidsrettetAktivitetMedLabel[] | undefined =
@@ -171,8 +194,8 @@ const Aktivitet = () => {
             {!skalViseArbeidsrettedeAktiviteter && (
                 <AnnenArbeidsrettetAktivitet
                     tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
-                    setAnnenTypeArbeidsrettetAktivitet={setAnnenAktivitet}
-                    annenTypeArbeidsrettetAktivitet={annenAktivitet}
+                    oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                    annenAktivitet={annenAktivitet}
                     feilmelding={valideringsfeil.annenAktivitet}
                 />
             )}
@@ -182,15 +205,15 @@ const Aktivitet = () => {
                         {skalViseAnnenAktivitet && (
                             <AnnenArbeidsrettetAktivitet
                                 tekst={aktivitetTekster.radio_annet}
-                                setAnnenTypeArbeidsrettetAktivitet={setAnnenAktivitet}
-                                annenTypeArbeidsrettetAktivitet={annenAktivitet}
+                                oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                                annenAktivitet={annenAktivitet}
                                 feilmelding={valideringsfeil.annenAktivitet}
                             />
                         )}
                         {skalViseLønnetTiltak && (
                             <LønnetTiltak
                                 lønnetAktivitet={lønnetAktivitet}
-                                setLønnetAktivitet={setLønnetAktivitet}
+                                oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
                                 feilmelding={valideringsfeil.lønnetAktivitet}
                             />
                         )}

@@ -10,15 +10,15 @@ import { aktivitetTekster } from '../../tekster/aktivitet';
 
 interface Props {
     tekst: Radiogruppe<AnnenAktivitetType>;
-    annenTypeArbeidsrettetAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
-    setAnnenTypeArbeidsrettetAktivitet: (verdier: EnumFelt<AnnenAktivitetType>) => void;
+    annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
+    oppdaterAnnenAktivitet: (verdi: EnumFelt<AnnenAktivitetType>) => void;
     feilmelding: Feilmelding | undefined;
 }
 
 export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
     tekst,
-    setAnnenTypeArbeidsrettetAktivitet,
-    annenTypeArbeidsrettetAktivitet,
+    annenAktivitet,
+    oppdaterAnnenAktivitet,
     feilmelding,
 }) => {
     return (
@@ -26,8 +26,8 @@ export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
             <LocaleRadioGroup
                 id={feilmelding?.id}
                 tekst={tekst}
-                onChange={setAnnenTypeArbeidsrettetAktivitet}
-                value={annenTypeArbeidsrettetAktivitet?.verdi || []}
+                onChange={oppdaterAnnenAktivitet}
+                value={annenAktivitet?.verdi || []}
                 error={feilmelding?.melding}
             ></LocaleRadioGroup>
             <LocaleReadMoreMedLenke tekst={aktivitetTekster.radio_annet_lesmer} />
