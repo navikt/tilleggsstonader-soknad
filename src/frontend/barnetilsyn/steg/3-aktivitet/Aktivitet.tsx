@@ -11,6 +11,7 @@ import {
     skalTaStillingTilLønnetTiltak,
     skalTaStillingTilRegisterAktiviteter,
 } from './utils';
+import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './validering';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -132,34 +133,16 @@ const Aktivitet = () => {
         let feil: Valideringsfeil = {};
         const verdierValgteAktiviteter = valgteAktiviteter?.verdier ?? [];
         if (skalViseArbeidsrettedeAktiviteter && verdierValgteAktiviteter.length === 0) {
-            feil = {
-                ...feil,
-                valgteAktiviteter: {
-                    id: '1',
-                    melding: aktivitetTekster.checkbox_velge_aktivitet_feilmelding[locale],
-                },
-            };
+            feil = feilValgtAktivitet(feil, locale);
         }
         if (skalViseLønnetTiltak && lønnetAktivitet?.verdi === undefined) {
-            feil = {
-                ...feil,
-                lønnetAktivitet: {
-                    id: '2',
-                    melding: aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale],
-                },
-            };
+            feil = feilLønnetAktivitet(feil, locale);
         }
         if (
             (skalViseAnnenAktivitet || !skalViseArbeidsrettedeAktiviteter) &&
             annenAktivitet === undefined
         ) {
-            feil = {
-                ...feil,
-                annenAktivitet: {
-                    id: '3',
-                    melding: aktivitetTekster.radio_annet_feilmelding[locale],
-                },
-            };
+            feil = feilAnnenAktivitet(feil, locale);
         }
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
