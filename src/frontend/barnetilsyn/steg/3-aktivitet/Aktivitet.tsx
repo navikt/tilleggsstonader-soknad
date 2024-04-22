@@ -71,6 +71,34 @@ const Aktivitet = () => {
         }
     };
 
+    const nullstillLønnetAktivitet = (
+        valgteAktiviteter: EnumFlereValgFelt<string> | undefined,
+        annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined
+    ) => {
+        const skalIkkeTaStilling = !skalTaStillingTilLønnetTiltak(
+            valgteAktiviteter,
+            annenAktivitet,
+            registerAktiviteter
+        );
+        if (lønnetAktivitet && skalIkkeTaStilling) {
+            setLønnetAktivitet(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                lønnetAktivitet: undefined,
+            }));
+        }
+    };
+
+    const nullstillAnnenAktivitet = (valgteAktiviteter: EnumFlereValgFelt<string>) => {
+        if (!skalTaStillingTilAnnenAktivitet(valgteAktiviteter)) {
+            setAnnenAktivitet(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                annenAktivitet: undefined,
+            }));
+        }
+    };
+
     const oppdaterValgteAktiviteter = (verdier: string[]) => {
         if (!registerAktiviteter) return;
         const valgteVerdier = verdier.map((verdi) => {
@@ -84,17 +112,20 @@ const Aktivitet = () => {
 
             return { label: valgtAktivitet.label, verdi: verdi };
         });
-        settValgteAktiviteter({
+        const nyeValgteAktiviteter = {
             label: aktivitetTekster.hvilken_aktivitet.spm[locale],
             verdier: valgteVerdier,
             alternativer: Object.values(registerAktiviteter).map((a) => a.label),
-        });
-        if (valgteVerdier.length > 0) {
+        };
+        settValgteAktiviteter(nyeValgteAktiviteter);
+        if (nyeValgteAktiviteter.verdier.length > 0) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
                 valgteAktiviteter: undefined,
             }));
         }
+        nullstillAnnenAktivitet(nyeValgteAktiviteter);
+        nullstillLønnetAktivitet(nyeValgteAktiviteter, annenAktivitet);
     };
 
     const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenAktivitetType>) => {
@@ -103,6 +134,7 @@ const Aktivitet = () => {
             ...prevState,
             annenAktivitet: undefined,
         }));
+        nullstillLønnetAktivitet(valgteAktiviteter, verdi);
     };
 
     const oppdaterLønnetAktivitet = (verdi: EnumFelt<JaNei>) => {
