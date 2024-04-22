@@ -12,6 +12,7 @@ interface AktivitetInnhold {
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
     radio_annet_lesmer: LesMer<InlineLenke>;
+    radio_annet_feilmelding: TekstElement<string>;
     tittel: TekstElement<string>;
     feil_utdanning_infoalert_title: TekstElement<string>;
     feil_utdanning_infoalert_innhold: TekstElement<string[]>;
@@ -190,5 +191,8 @@ export const aktivitetTekster: AktivitetInnhold = {
     radio_annet_uten_registeraktivitet: {
         header: { nb: 'Hvilken arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekst,
+    },
+    radio_annet_feilmelding: {
+        nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
     },
 };

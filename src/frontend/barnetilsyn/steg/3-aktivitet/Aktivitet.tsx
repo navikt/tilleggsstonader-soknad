@@ -131,6 +131,18 @@ const Aktivitet = () => {
                 },
             };
         }
+        if (
+            (skalViseAnnenAktivitet || !skalViseArbeidsrettedeAktiviteter) &&
+            annenAktivitet === undefined
+        ) {
+            feil = {
+                ...feil,
+                annenAktivitet: {
+                    id: '3',
+                    melding: aktivitetTekster.radio_annet_feilmelding[locale],
+                },
+            };
+        }
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
@@ -161,6 +173,7 @@ const Aktivitet = () => {
                     tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
                     setAnnenTypeArbeidsrettetAktivitet={setAnnenAktivitet}
                     annenTypeArbeidsrettetAktivitet={annenAktivitet}
+                    feilmelding={valideringsfeil.annenAktivitet}
                 />
             )}
             {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
@@ -171,6 +184,7 @@ const Aktivitet = () => {
                                 tekst={aktivitetTekster.radio_annet}
                                 setAnnenTypeArbeidsrettetAktivitet={setAnnenAktivitet}
                                 annenTypeArbeidsrettetAktivitet={annenAktivitet}
+                                feilmelding={valideringsfeil.annenAktivitet}
                             />
                         )}
                         {skalViseLønnetTiltak && (
