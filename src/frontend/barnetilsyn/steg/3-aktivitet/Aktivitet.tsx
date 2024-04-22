@@ -5,7 +5,12 @@ import { Alert, Heading, VStack } from '@navikt/ds-react';
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
 import { LønnetTiltak } from './LønnetTiltak';
-import { mapTilRegisterAktiviteterObjektMedLabel, skalTaStillingTilAnnenAktivitet } from './utils';
+import {
+    mapTilRegisterAktiviteterObjektMedLabel,
+    skalTaStillingTilAnnenAktivitet,
+    skalTaStillingTilLønnetTiltak,
+    skalTaStillingTilRegisterAktiviteter,
+} from './utils';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -33,7 +38,7 @@ const Aktivitet = () => {
     const [valgteAktiviteter, settValgteAktiviteter] = useState<
         EnumFlereValgFelt<string> | undefined
     >(aktivitet ? aktivitet.aktivitet : undefined);
-    const [registerAktivitet, settRegisterAktivitet] =
+    const [registerAktiviteter, settRegisterAktiviteter] =
         useState<Record<string, RegisterAktivitetMedLabel>>();
 
     const [annenAktivitet, setAnnenAktivitet] = useState<EnumFelt<AnnenAktivitetType> | undefined>(
@@ -46,12 +51,12 @@ const Aktivitet = () => {
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
-                settRegisterAktivitet(
+                settRegisterAktiviteter(
                     // {}
                     mapTilRegisterAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
                 )
             )
-            .catch(() => settRegisterAktivitet({}));
+            .catch(() => settRegisterAktiviteter({}));
     }, []);
 
     const oppdaterAktivitetISøknad = () => {
@@ -66,7 +71,7 @@ const Aktivitet = () => {
     };
 
     const oppdaterValgteAktiviteter = (verdier: string[]) => {
-        if (!registerAktivitet) return;
+        if (!registerAktiviteter) return;
         const valgteVerdier = verdier.map((verdi) => {
             if (verdi === 'ANNET') {
                 return {
@@ -74,14 +79,14 @@ const Aktivitet = () => {
                     verdi: 'ANNET',
                 };
             }
-            const valgtAktivitet = registerAktivitet[verdi];
+            const valgtAktivitet = registerAktiviteter[verdi];
 
             return { label: valgtAktivitet.label, verdi: verdi };
         });
         settValgteAktiviteter({
             label: aktivitetTekster.hvilken_aktivitet.spm[locale],
             verdier: valgteVerdier,
-            alternativer: Object.values(registerAktivitet).map((a) => a.label),
+            alternativer: Object.values(registerAktiviteter).map((a) => a.label),
         });
         if (valgteVerdier.length > 0) {
             settValideringsfeil((prevState) => ({
@@ -108,26 +113,20 @@ const Aktivitet = () => {
     };
 
     const arbeidsrettedeAktiviteterMedLabeler: RegisterAktivitetMedLabel[] | undefined =
-        registerAktivitet ? Object.values(registerAktivitet) : undefined;
-
-    const skalTaStillingTilLønnetTiltak = () => {
-        if (annenAktivitet?.verdi === 'TILTAK') {
-            return true;
-        }
-        if (!registerAktivitet || !valgteAktiviteter) return false;
-        return valgteAktiviteter.verdier.some((valgtAktivitet) => {
-            const aktivitet = registerAktivitet[valgtAktivitet.verdi];
-            return aktivitet && !aktivitet.erUtdanning;
-        });
-    };
+        registerAktiviteter ? Object.values(registerAktiviteter) : undefined;
 
     const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
-    const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak();
-    if (!registerAktivitet) {
+    const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak(
+        valgteAktiviteter,
+        annenAktivitet,
+        registerAktiviteter
+    );
+    if (!registerAktiviteter) {
         // ønsker ikke å vise siden før man har hentet aktivteter fra backend
         return null;
     }
-    const skalViseArbeidsrettedeAktiviteter: boolean = Object.keys(registerAktivitet).length > 0;
+    const skalViseArbeidsrettedeAktiviteter =
+        skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
