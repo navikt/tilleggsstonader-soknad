@@ -113,7 +113,6 @@ const Aktivitet = () => {
                 <AnnenArbeidsrettetAktivitet
                     setAnnenTypeArbeidsrettetAktivitet={setAnnenTypeArbeidsrettetAktivitet}
                     annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
-                    valideringsfeil={valideringsfeil}
                 />
             ) : null}
             <LocaleRadioGroup
