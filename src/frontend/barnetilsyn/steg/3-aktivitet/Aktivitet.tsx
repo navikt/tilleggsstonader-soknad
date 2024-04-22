@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { Alert, Heading } from '@navikt/ds-react';
+import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
+import { LønnetTiltak } from './LønnetTiltak';
 import { mapTIlArbeidsrettedeAktiviteterObjektMedLabel } from './utils';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
@@ -12,6 +13,7 @@ import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGr
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
@@ -37,6 +39,8 @@ const Aktivitet = () => {
     const [annenTypeArbeidsrettetAktivitet, setAnnenTypeArbeidsrettetAktivitet] = useState<
         EnumFelt<AnnenAktivitetType> | undefined
     >(aktivitet ? aktivitet.annenAktivitet : undefined);
+
+    const [lønnetAktivitet, setLønnetAktivitet] = useState<EnumFelt<JaNei> | undefined>(undefined);
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
@@ -109,12 +113,20 @@ const Aktivitet = () => {
                 locale={locale}
                 valgteAktiviteter={valgteAktiviteter}
             />
-            {valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ? (
-                <AnnenArbeidsrettetAktivitet
-                    setAnnenTypeArbeidsrettetAktivitet={setAnnenTypeArbeidsrettetAktivitet}
-                    annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
-                />
-            ) : null}
+            <UnderspørsmålContainer>
+                <VStack gap={'6'}>
+                    {valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ? (
+                        <AnnenArbeidsrettetAktivitet
+                            setAnnenTypeArbeidsrettetAktivitet={setAnnenTypeArbeidsrettetAktivitet}
+                            annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
+                        />
+                    ) : null}
+                    <LønnetTiltak
+                        lønnetAktivitet={lønnetAktivitet}
+                        setLønnetAktivitet={setLønnetAktivitet}
+                    />
+                </VStack>
+            </UnderspørsmålContainer>
             <LocaleRadioGroup
                 id={valideringsfeil.barnepassPgaUtdanning?.id}
                 tekst={aktivitetTekster.radio_utdanning}
