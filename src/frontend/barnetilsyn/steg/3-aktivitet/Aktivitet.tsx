@@ -113,9 +113,6 @@ const Aktivitet = () => {
         }));
     };
 
-    const arbeidsrettedeAktiviteterMedLabeler: RegisterAktivitetMedLabel[] | undefined =
-        registerAktiviteter ? Object.values(registerAktiviteter) : undefined;
-
     const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
     const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak(
         valgteAktiviteter,
@@ -168,7 +165,7 @@ const Aktivitet = () => {
             </PellePanel>
             {skalViseArbeidsrettedeAktiviteter && (
                 <ArbeidsrettedeAktiviteter
-                    arbeidsrettedeAktiviteterMedLabeler={arbeidsrettedeAktiviteterMedLabeler}
+                    registerAktiviteter={registerAktiviteter}
                     oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
                     locale={locale}
                     valgteAktiviteter={valgteAktiviteter}

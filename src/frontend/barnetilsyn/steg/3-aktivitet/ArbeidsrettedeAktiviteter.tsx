@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { Checkbox, CheckboxGroup, List } from '@navikt/ds-react';
 
@@ -12,7 +12,7 @@ import { Feilmelding } from '../../../typer/validering';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 interface Props {
-    arbeidsrettedeAktiviteterMedLabeler: RegisterAktivitetMedLabel[] | undefined;
+    registerAktiviteter: Record<string, RegisterAktivitetMedLabel>;
     oppdaterValgteAktiviteter: (verdier: string[]) => void;
     locale: Locale;
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined;
@@ -20,12 +20,17 @@ interface Props {
 }
 
 const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
-    arbeidsrettedeAktiviteterMedLabeler,
+    registerAktiviteter,
     oppdaterValgteAktiviteter,
     locale,
     valgteAktiviteter,
     feilmelding,
 }) => {
+    const registerAktiviteterListe = useMemo(
+        () => Object.values(registerAktiviteter),
+        [registerAktiviteter]
+    );
+
     return (
         <CheckboxGroup
             id={feilmelding?.id}
@@ -45,13 +50,11 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
                 </List>
                 <LocaleInlineLenke tekst={aktivitetTekster.hvilken_aktivitet.les_mer.del3} />
             </LocaleReadMoreMedChildren>
-            {arbeidsrettedeAktiviteterMedLabeler
-                ? arbeidsrettedeAktiviteterMedLabeler.map((aktivitet) => (
-                      <Checkbox key={aktivitet.id} value={aktivitet.id}>
-                          {aktivitet ? aktivitet.label : ''}
-                      </Checkbox>
-                  ))
-                : null}
+            {registerAktiviteterListe.map((aktivitet) => (
+                <Checkbox key={aktivitet.id} value={aktivitet.id}>
+                    {aktivitet ? aktivitet.label : ''}
+                </Checkbox>
+            ))}
             <Checkbox value="ANNET">
                 {aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale]}
             </Checkbox>
