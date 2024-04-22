@@ -1,3 +1,4 @@
+import { AnnenAktivitetType } from './aktivitet';
 import { EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
 import { Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
 
@@ -31,6 +32,7 @@ export interface OppholdUtenforNorge {
 export interface Aktivitet {
     utdanning: EnumFelt<JaNei>;
     aktivitet: EnumFlereValgFelt<string>;
+    annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
 }
 
 export type JaNei = 'JA' | 'NEI';

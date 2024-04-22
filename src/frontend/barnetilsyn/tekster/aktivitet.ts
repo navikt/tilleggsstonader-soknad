@@ -1,12 +1,15 @@
 import { jaNeiAlternativer } from '../../tekster/felles';
+import { AnnenAktivitetType } from '../../typer/aktivitet';
 import { JaNei } from '../../typer/søknad';
 import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
     radio_lonnet: Radiogruppe<JaNei>;
+    radio_annet: Radiogruppe<AnnenAktivitetType>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
+    radio_annet_lesmer: LesMer<InlineLenke>;
     tittel: TekstElement<string>;
     feil_utdanning_infoalert_title: TekstElement<string>;
     feil_utdanning_infoalert_innhold: TekstElement<string[]>;
@@ -27,6 +30,19 @@ interface HvilkenAktivitet {
         del3: TekstElement<InlineLenke>;
     };
 }
+
+export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<string>> = {
+    TILTAK: { nb: 'Tiltak / arbeidsrettet utredning' },
+    UTDANNING: {
+        nb: 'Utdanning godkjent av NAV',
+    },
+    ARBEIDSSØKER: {
+        nb: 'Jeg er arbeidssøker',
+    },
+    INGEN_AKTIVITET: {
+        nb: 'Har ingen arbeidsrettet aktivitet',
+    },
+};
 
 const hvilkenAktivitet: HvilkenAktivitet = {
     spm: { nb: 'Hvilken aktivitet søker du om støtte i forbindelse med?' },
@@ -136,5 +152,40 @@ export const aktivitetTekster: AktivitetInnhold = {
             nb: 'Vil du fortsatt søke nå?',
         },
         alternativer: jaNeiAlternativer,
+    },
+    radio_annet_lesmer: {
+        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
+        innhold: {
+            nb: [
+                'Hvis du skal søke i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut ',
+                {
+                    tekst: 'papirsøknad',
+                    url: 'https://tjenester.nav.no/soknadtilleggsstonader/app/start',
+                    variant: 'neutral',
+                },
+                '.',
+            ],
+        },
+    },
+    radio_annet: {
+        header: { nb: 'Hvilken annen type arbeidsrettet aktivitet har du?' },
+        alternativer: [
+            {
+                value: AnnenAktivitetType.TILTAK,
+                label: AktivitetTypeTilTekst.TILTAK,
+            },
+            {
+                value: AnnenAktivitetType.UTDANNING,
+                label: AktivitetTypeTilTekst.UTDANNING,
+            },
+            {
+                value: AnnenAktivitetType.ARBEIDSSØKER,
+                label: AktivitetTypeTilTekst.ARBEIDSSØKER,
+            },
+            {
+                value: AnnenAktivitetType.INGEN_AKTIVITET,
+                label: AktivitetTypeTilTekst.INGEN_AKTIVITET,
+            },
+        ],
     },
 };

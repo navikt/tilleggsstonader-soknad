@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Alert, Heading } from '@navikt/ds-react';
 
+import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
 import { mapTIlArbeidsrettedeAktiviteterObjektMedLabel } from './utils';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
@@ -13,6 +14,7 @@ import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
+import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
@@ -32,6 +34,9 @@ const Aktivitet = () => {
     const [arbeidsrettedeAktiviteter, settArbeidsrettedeAktiviteter] =
         useState<Record<string, ArbeidsrettetAktivitetMedLabel>>();
 
+    const [annenTypeArbeidsrettetAktivitet, setAnnenTypeArbeidsrettetAktivitet] = useState<
+        EnumFelt<AnnenAktivitetType> | undefined
+    >(aktivitet ? aktivitet.annenAktivitet : undefined);
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
@@ -56,7 +61,11 @@ const Aktivitet = () => {
 
     const oppdaterAktivitetISøknad = () => {
         if (utdanning !== undefined && valgteAktiviteter) {
-            settAktivitet({ utdanning: utdanning, aktivitet: valgteAktiviteter });
+            settAktivitet({
+                utdanning: utdanning,
+                aktivitet: valgteAktiviteter,
+                annenAktivitet: annenTypeArbeidsrettetAktivitet,
+            });
         }
     };
 
@@ -100,6 +109,12 @@ const Aktivitet = () => {
                 locale={locale}
                 valgteAktiviteter={valgteAktiviteter}
             />
+            {valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ? (
+                <AnnenArbeidsrettetAktivitet
+                    setAnnenTypeArbeidsrettetAktivitet={setAnnenTypeArbeidsrettetAktivitet}
+                    annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
+                />
+            ) : null}
             <LocaleRadioGroup
                 id={valideringsfeil.barnepassPgaUtdanning?.id}
                 tekst={aktivitetTekster.radio_utdanning}
