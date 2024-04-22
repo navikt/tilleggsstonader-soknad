@@ -222,7 +222,10 @@ const Aktivitet = () => {
                 value={utdanning?.verdi || ''}
                 onChange={(verdi) => {
                     settUtdanning(verdi);
-                    settValideringsfeil({});
+                    settValideringsfeil((prevState) => ({
+                        ...prevState,
+                        barnepassPgaUtdanning: undefined,
+                    }));
                 }}
                 error={valideringsfeil.barnepassPgaUtdanning?.melding}
             >
