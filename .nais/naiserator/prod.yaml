@@ -22,7 +22,7 @@ spec:
     path: /tilleggsstonader/soknad/internal/isReady
     initialDelay: 5
   prometheus:
-    enabled: true
+    enabled: false
     path: /metrics
   idporten:
     enabled: true
