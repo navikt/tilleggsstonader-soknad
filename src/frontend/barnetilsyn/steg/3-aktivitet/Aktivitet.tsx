@@ -95,6 +95,14 @@ const Aktivitet = () => {
     const arbeidsrettedeAktiviteterMedLabeler: ArbeidsrettetAktivitetMedLabel[] | undefined =
         arbeidsrettedeAktiviteter ? Object.values(arbeidsrettedeAktiviteter) : undefined;
 
+    const skalTaStillingTilLønnetTiltak = () => {
+        if (!arbeidsrettedeAktiviteter || !valgteAktiviteter) return false;
+        return valgteAktiviteter.verdier.some((valgtAktivitet) => {
+            const aktivitet = arbeidsrettedeAktiviteter[valgtAktivitet.verdi];
+            return aktivitet && !aktivitet.erUtdanning;
+        });
+    };
+
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
@@ -121,10 +129,12 @@ const Aktivitet = () => {
                             annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
                         />
                     ) : null}
-                    <LønnetTiltak
-                        lønnetAktivitet={lønnetAktivitet}
-                        setLønnetAktivitet={setLønnetAktivitet}
-                    />
+                    {skalTaStillingTilLønnetTiltak() && (
+                        <LønnetTiltak
+                            lønnetAktivitet={lønnetAktivitet}
+                            setLønnetAktivitet={setLønnetAktivitet}
+                        />
+                    )}
                 </VStack>
             </UnderspørsmålContainer>
             <LocaleRadioGroup
