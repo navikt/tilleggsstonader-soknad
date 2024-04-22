@@ -60,7 +60,7 @@ const Aktivitet = () => {
     };
 
     const oppdaterAktivitetISøknad = () => {
-        if (utdanning !== undefined && valgteAktiviteter && annenTypeArbeidsrettetAktivitet) {
+        if (utdanning !== undefined && valgteAktiviteter) {
             settAktivitet({
                 utdanning: utdanning,
                 aktivitet: valgteAktiviteter,
