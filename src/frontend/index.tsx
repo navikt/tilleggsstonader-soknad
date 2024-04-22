@@ -2,11 +2,10 @@ import React from 'react';
 
 import { createRoot } from 'react-dom/client';
 import '@navikt/ds-css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
-import App from './App';
 import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
 import ScrollToTop from './components/ScrollToTop';
 import { PersonProvider, usePerson } from './context/PersonContext';
@@ -37,8 +36,9 @@ const AppRoutes = () => {
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <ScrollToTop />
             <Routes>
-                <Route path={'*'} element={<App />} />
-                <Route path={'/barnetilsyn/*'} element={<BarnetilsynApp />} />
+                <Route path={'/pass-av-barn/*'} element={<BarnetilsynApp />} />
+                <Route path={'/barnetilsyn/*'} element={<Navigate to="/pass-av-barn" replace />} />
+                <Route path={'*'} element={<Navigate to="/pass-av-barn" replace />} />
             </Routes>
         </BrowserRouter>
     );

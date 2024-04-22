@@ -38,7 +38,7 @@ const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }
                 </HStack>
             </Modal.Body>
             <Modal.Footer>
-                <Button type="button" onClick={() => navigate('/barnetilsyn/oppsummering')}>
+                <Button type="button" onClick={() => navigate('/pass-av-barn/oppsummering')}>
                     <LocaleTekst tekst={vedleggModalTekster.fortsettKnapp} />
                 </Button>
                 <Button type="button" variant="secondary" onClick={() => innerRef.current?.close()}>

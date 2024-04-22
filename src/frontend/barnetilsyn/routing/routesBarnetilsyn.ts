@@ -11,7 +11,7 @@ export enum ERouteBarnetilsyn {
     KVITTERING = 'KVITTERING',
 }
 
-export const barnetilsynPath = '/barnetilsyn';
+export const barnetilsynPath = '/pass-av-barn';
 export const RouteTilPath: Record<ERouteBarnetilsyn, string> = {
     AKTIVITET: barnetilsynPath + '/aktivitet',
     BARNEPASS: barnetilsynPath + '/barnepass',
