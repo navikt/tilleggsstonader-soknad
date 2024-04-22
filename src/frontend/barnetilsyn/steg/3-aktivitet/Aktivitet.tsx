@@ -99,24 +99,7 @@ const Aktivitet = () => {
         }
     };
 
-    const oppdaterValgteAktiviteter = (verdier: string[]) => {
-        if (!registerAktiviteter) return;
-        const valgteVerdier = verdier.map((verdi) => {
-            if (verdi === 'ANNET') {
-                return {
-                    label: aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale],
-                    verdi: 'ANNET',
-                };
-            }
-            const valgtAktivitet = registerAktiviteter[verdi];
-
-            return { label: valgtAktivitet.label, verdi: verdi };
-        });
-        const nyeValgteAktiviteter = {
-            label: aktivitetTekster.hvilken_aktivitet.spm[locale],
-            verdier: valgteVerdier,
-            alternativer: Object.values(registerAktiviteter).map((a) => a.label),
-        };
+    const oppdaterValgteAktiviteter = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
         settValgteAktiviteter(nyeValgteAktiviteter);
         if (nyeValgteAktiviteter.verdier.length > 0) {
             settValideringsfeil((prevState) => ({

@@ -13,7 +13,7 @@ import { aktivitetTekster } from '../../tekster/aktivitet';
 
 interface Props {
     registerAktiviteter: Record<string, RegisterAktivitetMedLabel>;
-    oppdaterValgteAktiviteter: (verdier: string[]) => void;
+    oppdaterValgteAktiviteter: (verdier: EnumFlereValgFelt<string>) => void;
     locale: Locale;
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined;
     feilmelding: Feilmelding | undefined;
@@ -31,11 +31,32 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
         [registerAktiviteter]
     );
 
+    const onChange = (verdier: string[]) => {
+        if (!registerAktiviteter) return;
+        const valgteVerdier = verdier.map((verdi) => {
+            if (verdi === 'ANNET') {
+                return {
+                    label: aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale],
+                    verdi: 'ANNET',
+                };
+            }
+            const valgtAktivitet = registerAktiviteter[verdi];
+
+            return { label: valgtAktivitet.label, verdi: verdi };
+        });
+        const nyeValgteAktiviteter = {
+            label: aktivitetTekster.hvilken_aktivitet.spm[locale],
+            verdier: valgteVerdier,
+            alternativer: Object.values(registerAktiviteter).map((a) => a.label),
+        };
+        oppdaterValgteAktiviteter(nyeValgteAktiviteter);
+    };
+
     return (
         <CheckboxGroup
             id={feilmelding?.id}
             legend={aktivitetTekster.hvilken_aktivitet.spm[locale]}
-            onChange={oppdaterValgteAktiviteter}
+            onChange={onChange}
             value={valgteAktiviteter?.verdier?.map((verdi) => verdi.verdi) || []}
             error={feilmelding?.melding}
         >
