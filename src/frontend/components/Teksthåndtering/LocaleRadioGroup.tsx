@@ -4,17 +4,17 @@ import { Radio, RadioGroup, RadioGroupProps as AkselRadioGroupProps } from '@nav
 
 import { useSpråk } from '../../context/SpråkContext';
 import { EnumFelt } from '../../typer/skjema';
-import { Radiogruppe } from '../../typer/tekst';
+import { Radiogruppe, TekstElement } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekster';
 
-interface RadioGroupProps<T>
+interface RadioGroupProps<T extends string>
     extends Omit<AkselRadioGroupProps, 'legend' | 'description' | 'children'> {
     tekst: Radiogruppe<T>;
     onChange: (enumFelt: EnumFelt<T>) => void;
     children?: React.ReactNode;
     argument0?: string;
 }
-function LocaleRadioGroup<T>({
+function LocaleRadioGroup<T extends string>({
     children,
     tekst,
     argument0,
@@ -28,12 +28,14 @@ function LocaleRadioGroup<T>({
         : tekst.header[locale];
 
     const onChangeEnumVerdi = (value: T) => {
-        const svarTekst = tekst.alternativer.find((alternativ) => alternativ.value === value);
+        const svarTekst = tekst.alternativer[value];
         onChange({
             label: legend,
             verdi: value,
-            alternativer: tekst.alternativer.map((alternativ) => alternativ.label[locale]),
-            svarTekst: svarTekst?.label[locale] || '',
+            alternativer: Object.values(tekst.alternativer).map(
+                (alternativ) => (alternativ as TekstElement<string>)[locale]
+            ),
+            svarTekst: svarTekst[locale] || '',
         });
     };
 
@@ -50,9 +52,9 @@ function LocaleRadioGroup<T>({
             {...props}
         >
             {children}
-            {tekst.alternativer.map((alternativ, indeks) => (
-                <Radio value={alternativ.value} key={indeks}>
-                    {alternativ.label[locale]}
+            {Object.entries(tekst.alternativer).map(([value, tekst]) => (
+                <Radio value={value} key={value}>
+                    {(tekst as TekstElement<string>)[locale]}
                 </Radio>
             ))}
         </RadioGroup>

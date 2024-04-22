@@ -1,4 +1,4 @@
-import { jaNeiAlternativer } from '../../tekster/felles';
+import { JaNeiTilTekst } from '../../tekster/felles';
 import { JaNei, MottarPengestøtteTyper, ÅrsakOppholdUtenforNorge } from '../../typer/søknad';
 import { CheckboxGruppe, InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 
@@ -76,7 +76,7 @@ export const jobberIAnnetLandInnhold: JobberIAnnetLandInnhold = {
         header: {
             nb: 'Jobber du i et annet land enn Norge?',
         },
-        alternativer: jaNeiAlternativer,
+        alternativer: JaNeiTilTekst,
     },
     feilmnelding_jobber_annet_land: {
         nb: 'Du må svare på om du jobber i et annet land enn Norge.',
@@ -248,7 +248,7 @@ export const oppholdUtenforNorgeInnhold: OppholdUtenforNorgeInnhold = {
         beskrivelse: {
             nb: 'Opphold under 5 uker trenger du ikke opplyse om.',
         },
-        alternativer: jaNeiAlternativer,
+        alternativer: JaNeiTilTekst,
     },
     feilmelding_radioSiste12mnd: {
         nb: 'Du må svare på om du har oppholdt deg utenfor Norge.',
@@ -262,7 +262,7 @@ export const oppholdUtenforNorgeInnhold: OppholdUtenforNorgeInnhold = {
         beskrivelse: {
             nb: 'Opphold under 5 uker trenger du ikke opplyse om.',
         },
-        alternativer: jaNeiAlternativer,
+        alternativer: JaNeiTilTekst,
     },
     feilmelding_radioNeste12mnd: {
         nb: 'Du må ta stilling til om du planlegger opphold utenfor Norge de neste 12 månedene.',

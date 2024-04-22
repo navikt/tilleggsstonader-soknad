@@ -1,4 +1,4 @@
-import { jaNeiAlternativer } from '../../tekster/felles';
+import { JaNeiTilTekst } from '../../tekster/felles';
 import { AnnenAktivitetType } from '../../typer/aktivitet';
 import { JaNei } from '../../typer/søknad';
 import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
@@ -124,7 +124,7 @@ export const aktivitetTekster: AktivitetInnhold = {
         header: {
             nb: 'Mottar du lønn gjennom et tiltak?',
         },
-        alternativer: jaNeiAlternativer,
+        alternativer: JaNeiTilTekst,
     },
     lønnet_tiltak_infoalert_innhold: {
         nb: [
@@ -136,7 +136,7 @@ export const aktivitetTekster: AktivitetInnhold = {
         header: {
             nb: 'Deltar du på eller skal du begynne på et arbeidsrettet tiltak eller en utredning?',
         },
-        alternativer: jaNeiAlternativer,
+        alternativer: JaNeiTilTekst,
     },
     radio_utdanning_lesmer: {
         header: { nb: 'Hva betyr tiltak og utredning?' },
@@ -158,7 +158,7 @@ export const aktivitetTekster: AktivitetInnhold = {
         header: {
             nb: 'Vil du fortsatt søke nå?',
         },
-        alternativer: jaNeiAlternativer,
+        alternativer: JaNeiTilTekst,
     },
     radio_annet_lesmer: {
         header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
@@ -176,23 +176,6 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     radio_annet: {
         header: { nb: 'Hvilken annen type arbeidsrettet aktivitet har du?' },
-        alternativer: [
-            {
-                value: AnnenAktivitetType.TILTAK,
-                label: AktivitetTypeTilTekst.TILTAK,
-            },
-            {
-                value: AnnenAktivitetType.UTDANNING,
-                label: AktivitetTypeTilTekst.UTDANNING,
-            },
-            {
-                value: AnnenAktivitetType.ARBEIDSSØKER,
-                label: AktivitetTypeTilTekst.ARBEIDSSØKER,
-            },
-            {
-                value: AnnenAktivitetType.INGEN_AKTIVITET,
-                label: AktivitetTypeTilTekst.INGEN_AKTIVITET,
-            },
-        ],
+        alternativer: AktivitetTypeTilTekst,
     },
 };
