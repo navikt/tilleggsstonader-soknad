@@ -5,7 +5,10 @@ import { Alert, Heading, VStack } from '@navikt/ds-react';
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
 import { LønnetTiltak } from './LønnetTiltak';
-import { mapTIlArbeidsrettedeAktiviteterObjektMedLabel } from './utils';
+import {
+    mapTIlArbeidsrettedeAktiviteterObjektMedLabel,
+    skalTaStillingTilAnnenAktivitet,
+} from './utils';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -103,6 +106,8 @@ const Aktivitet = () => {
         });
     };
 
+    const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
+    const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak();
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
@@ -121,22 +126,26 @@ const Aktivitet = () => {
                 locale={locale}
                 valgteAktiviteter={valgteAktiviteter}
             />
-            <UnderspørsmålContainer>
-                <VStack gap={'6'}>
-                    {valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ? (
-                        <AnnenArbeidsrettetAktivitet
-                            setAnnenTypeArbeidsrettetAktivitet={setAnnenTypeArbeidsrettetAktivitet}
-                            annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
-                        />
-                    ) : null}
-                    {skalTaStillingTilLønnetTiltak() && (
-                        <LønnetTiltak
-                            lønnetAktivitet={lønnetAktivitet}
-                            setLønnetAktivitet={setLønnetAktivitet}
-                        />
-                    )}
-                </VStack>
-            </UnderspørsmålContainer>
+            {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
+                <UnderspørsmålContainer>
+                    <VStack gap={'6'}>
+                        {skalViseAnnenAktivitet && (
+                            <AnnenArbeidsrettetAktivitet
+                                setAnnenTypeArbeidsrettetAktivitet={
+                                    setAnnenTypeArbeidsrettetAktivitet
+                                }
+                                annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
+                            />
+                        )}
+                        {skalViseLønnetTiltak && (
+                            <LønnetTiltak
+                                lønnetAktivitet={lønnetAktivitet}
+                                setLønnetAktivitet={setLønnetAktivitet}
+                            />
+                        )}
+                    </VStack>
+                </UnderspørsmålContainer>
+            )}
             <LocaleRadioGroup
                 id={valideringsfeil.barnepassPgaUtdanning?.id}
                 tekst={aktivitetTekster.radio_utdanning}

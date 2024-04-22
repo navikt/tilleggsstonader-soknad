@@ -5,6 +5,7 @@ import {
     ArbeidsrettetAktivitetMedLabel,
     RegisterAktivitet,
 } from '../../../typer/registerAktivitet';
+import { EnumFlereValgFelt } from '../../../typer/skjema';
 import { tilDato } from '../../../utils/dato';
 
 //TODO: Legge til støtte for flere Locales enn Norsk Bokmål (nb)
@@ -26,3 +27,7 @@ export const mapTIlArbeidsrettedeAktiviteterObjektMedLabel = (
         {} as Record<string, ArbeidsrettetAktivitetMedLabel>
     );
 };
+
+export const skalTaStillingTilAnnenAktivitet = (
+    valgteAktiviteter: EnumFlereValgFelt<string> | undefined
+) => valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET');
