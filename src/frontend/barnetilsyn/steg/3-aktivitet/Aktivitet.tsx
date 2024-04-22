@@ -38,7 +38,7 @@ const Aktivitet = () => {
     );
     const [valgteAktiviteter, settValgteAktiviteter] = useState<
         EnumFlereValgFelt<string> | undefined
-    >(aktivitet ? aktivitet.aktivitet : undefined);
+    >(aktivitet ? aktivitet.aktiviteter : undefined);
     const [registerAktiviteter, settRegisterAktiviteter] =
         useState<Record<string, RegisterAktivitetMedLabel>>();
 
@@ -64,7 +64,7 @@ const Aktivitet = () => {
         if (utdanning !== undefined) {
             settAktivitet({
                 utdanning: utdanning,
-                aktivitet: valgteAktiviteter,
+                aktiviteter: valgteAktiviteter,
                 annenAktivitet: annenAktivitet,
                 lønnetAktivitet: lønnetAktivitet,
             });
