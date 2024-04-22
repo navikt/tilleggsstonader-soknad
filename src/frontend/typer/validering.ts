@@ -3,7 +3,11 @@
  * eks kan key brukes til {`aktivitet`: {id: '1', melding: '...'}}
  */
 export interface Valideringsfeil {
-    [key: string]: { id: string; melding: string } | undefined;
+    [key: string]: Feilmelding | undefined;
+}
+export interface Feilmelding {
+    id: string;
+    melding: string;
 }
 
 export const inneholderFeil = (valideringError: Valideringsfeil) =>

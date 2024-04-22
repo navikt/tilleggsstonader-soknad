@@ -8,6 +8,7 @@ import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekst
 import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
 import { Locale } from '../../../typer/tekst';
+import { Feilmelding } from '../../../typer/validering';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
     oppdaterValgteAktiviteter: (verdier: string[]) => void;
     locale: Locale;
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined;
+    feilmelding: Feilmelding | undefined;
 }
 
 const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
@@ -22,12 +24,15 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
     oppdaterValgteAktiviteter,
     locale,
     valgteAktiviteter,
+    feilmelding,
 }) => {
     return (
         <CheckboxGroup
+            id={feilmelding?.id}
             legend={aktivitetTekster.hvilken_aktivitet.spm[locale]}
             onChange={oppdaterValgteAktiviteter}
             value={valgteAktiviteter?.verdier?.map((verdi) => verdi.verdi) || []}
+            error={feilmelding?.melding}
         >
             <LocaleReadMoreMedChildren header={aktivitetTekster.hvilken_aktivitet.les_mer.header}>
                 <LocaleTekstAvsnitt tekst={aktivitetTekster.hvilken_aktivitet.les_mer.del1} />

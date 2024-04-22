@@ -50,23 +50,12 @@ const Aktivitet = () => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
                 settArbeidsrettedeAktiviteter(
+                    // {}
                     mapTIlArbeidsrettedeAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
                 )
             )
             .catch(() => settArbeidsrettedeAktiviteter({}));
     }, []);
-
-    const kanFortsette = (barnepassPgaUtdanning?: JaNei): boolean => {
-        let feil: Valideringsfeil = {};
-        if (barnepassPgaUtdanning === undefined) {
-            feil = {
-                ...feil,
-                barnepassPgaUtdanning: { id: '1', melding: 'Du må velge et alternativ' },
-            };
-        }
-        settValideringsfeil(feil);
-        return !inneholderFeil(feil);
-    };
 
     const oppdaterAktivitetISøknad = () => {
         if (utdanning !== undefined) {
@@ -120,10 +109,27 @@ const Aktivitet = () => {
     }
     const skalViseArbeidsrettedeAktiviteter: boolean =
         Object.keys(arbeidsrettedeAktiviteter).length > 0;
+
+    const kanFortsette = (): boolean => {
+        let feil: Valideringsfeil = {};
+        const verdierValgteAktiviteter = valgteAktiviteter?.verdier ?? [];
+        if (skalViseArbeidsrettedeAktiviteter && verdierValgteAktiviteter.length === 0) {
+            feil = {
+                ...feil,
+                valgteAktiviteter: {
+                    id: '1',
+                    melding: aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale],
+                },
+            };
+        }
+        settValideringsfeil(feil);
+        return !inneholderFeil(feil);
+    };
+
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
-            validerSteg={() => kanFortsette(utdanning?.verdi)}
+            validerSteg={kanFortsette}
             oppdaterSøknad={oppdaterAktivitetISøknad}
         >
             <Heading size={'medium'}>
@@ -138,6 +144,7 @@ const Aktivitet = () => {
                     oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
                     locale={locale}
                     valgteAktiviteter={valgteAktiviteter}
+                    feilmelding={valideringsfeil.valgteAktiviteter}
                 />
             )}
             {!skalViseArbeidsrettedeAktiviteter && (

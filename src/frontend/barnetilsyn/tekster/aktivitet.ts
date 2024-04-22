@@ -6,6 +6,7 @@ import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/teks
 interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
     radio_lønnet_tiltak: Radiogruppe<JaNei>;
+    radio_lønnet_tiltak_feilmelding: TekstElement<string>;
     radio_annet: Radiogruppe<AnnenAktivitetType>;
     radio_annet_uten_registeraktivitet: Radiogruppe<AnnenAktivitetType>;
     radio_utdanning: Radiogruppe<JaNei>;
@@ -126,6 +127,9 @@ export const aktivitetTekster: AktivitetInnhold = {
             nb: 'Mottar du lønn gjennom et tiltak?',
         },
         alternativer: JaNeiTilTekst,
+    },
+    radio_lønnet_tiltak_feilmelding: {
+        nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
     },
     lønnet_tiltak_infoalert_innhold: {
         nb: [
