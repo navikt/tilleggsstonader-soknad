@@ -22,22 +22,16 @@ export type Punktliste = {
     innhold: TekstElement<string[]>;
 };
 
-export type Radiogruppe<T> = {
+export type Radiogruppe<T extends string> = {
     header: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
-    alternativer: { label: TekstElement<string>; value: T }[];
-};
-
-export type Selectgruppe = {
-    header: TekstElement<string>;
-    beskrivelse?: TekstElement<string>;
-    alternativer: { label: TekstElement<string>; value: string }[];
+    alternativer: Alternativer<T>;
 };
 
 export type CheckboxGruppe<T extends string> = {
     header: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
-    alternativer: Record<T, TekstElement<string>>;
+    alternativer: Alternativer<T>;
 };
 
 export type Vedlegg = {
@@ -46,3 +40,5 @@ export type Vedlegg = {
     beskrivelse: TekstElement<string>;
     krav_til_dokumentasjon?: TekstElement<string | string[]>;
 };
+
+export type Alternativer<T extends string> = Record<T, TekstElement<string>>;

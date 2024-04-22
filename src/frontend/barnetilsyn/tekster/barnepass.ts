@@ -1,3 +1,4 @@
+import { JaNeiTilTekst } from '../../tekster/felles';
 import { PassType, ÅrsakBarnepass } from '../../typer/barn';
 import { JaNei } from '../../typer/søknad';
 import { Radiogruppe, TekstElement } from '../../typer/tekst';
@@ -54,16 +55,7 @@ export const barnepassTekster: BarnepassInnhold = {
     },
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
-        alternativer: [
-            {
-                value: PassType.BARNEHAGE_SFO_AKS,
-                label: PassTypeTilTekst.BARNEHAGE_SFO_AKS,
-            },
-            {
-                value: PassType.PRIVAT,
-                label: PassTypeTilTekst.PRIVAT,
-            },
-        ],
+        alternativer: PassTypeTilTekst,
     },
     hvem_passer_andre_alert: {
         tittel: {
@@ -78,16 +70,7 @@ export const barnepassTekster: BarnepassInnhold = {
     },
     startet_femte_radio: {
         header: { nb: 'Har [0] startet i 5.-klasse når tiltaket ditt starter?' },
-        alternativer: [
-            {
-                value: 'JA',
-                label: { nb: 'Ja' },
-            },
-            {
-                value: 'NEI',
-                label: { nb: 'Nei' },
-            },
-        ],
+        alternativer: JaNeiTilTekst,
     },
     startet_femte_feilmelding: {
         nb: 'Du må svare på om [0] har begynt i 5. klasse.',
@@ -107,20 +90,7 @@ export const barnepassTekster: BarnepassInnhold = {
         header: {
             nb: 'Hva er årsaken til at [0] trenger pass etter at han har begynt i 5.-klasse?',
         },
-        alternativer: [
-            {
-                value: ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE,
-                label: ÅrsakEkstraPassTilTekst.TRENGER_MER_PASS_ENN_JEVNALDRENDE,
-            },
-            {
-                value: ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
-                label: ÅrsakEkstraPassTilTekst.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
-            },
-            {
-                value: ÅrsakBarnepass.INGEN_AV_DISSE,
-                label: ÅrsakEkstraPassTilTekst.INGEN_AV_DISSE,
-            },
-        ],
+        alternativer: ÅrsakEkstraPassTilTekst,
     },
     årsak_ekstra_pass_feilmelding: {
         nb: 'Du må velge en årsak til at [0] trenger pass etter 5. klasse.',

@@ -65,14 +65,3 @@ export const JaNeiTilTekst: Record<JaNei, TekstElement<string>> = {
         nb: 'Nei',
     },
 };
-
-export const jaNeiAlternativer: { value: JaNei; label: TekstElement<string> }[] = [
-    {
-        value: 'JA',
-        label: JaNeiTilTekst.JA,
-    },
-    {
-        value: 'NEI',
-        label: JaNeiTilTekst.NEI,
-    },
-];
