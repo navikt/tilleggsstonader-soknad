@@ -118,6 +118,15 @@ const Aktivitet = () => {
                 ...feil,
                 valgteAktiviteter: {
                     id: '1',
+                    melding: aktivitetTekster.checkbox_velge_aktivitet_feilmelding[locale],
+                },
+            };
+        }
+        if (skalViseLønnetTiltak && lønnetAktivitet?.verdi === undefined) {
+            feil = {
+                ...feil,
+                lønnetAktivitet: {
+                    id: '2',
                     melding: aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale],
                 },
             };
@@ -168,6 +177,7 @@ const Aktivitet = () => {
                             <LønnetTiltak
                                 lønnetAktivitet={lønnetAktivitet}
                                 setLønnetAktivitet={setLønnetAktivitet}
+                                feilmelding={valideringsfeil.lønnetAktivitet}
                             />
                         )}
                     </VStack>
