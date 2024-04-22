@@ -132,6 +132,12 @@ const Aktivitet = () => {
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
         const verdierValgteAktiviteter = valgteAktiviteter?.verdier ?? [];
+        if (utdanning === undefined) {
+            feil = {
+                ...feil,
+                barnepassPgaUtdanning: { id: '1', melding: 'Du må velge et alternativ' },
+            };
+        }
         if (skalViseArbeidsrettedeAktiviteter && verdierValgteAktiviteter.length === 0) {
             feil = feilValgtAktivitet(feil, locale);
         }
