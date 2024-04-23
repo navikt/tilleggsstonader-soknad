@@ -15,8 +15,6 @@ import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
@@ -216,21 +214,6 @@ const Aktivitet = () => {
                     </VStack>
                 </UnderspørsmålContainer>
             )}
-            <LocaleRadioGroup
-                id={valideringsfeil.barnepassPgaUtdanning?.id}
-                tekst={aktivitetTekster.radio_utdanning}
-                value={utdanning?.verdi || ''}
-                onChange={(verdi) => {
-                    settUtdanning(verdi);
-                    settValideringsfeil((prevState) => ({
-                        ...prevState,
-                        barnepassPgaUtdanning: undefined,
-                    }));
-                }}
-                error={valideringsfeil.barnepassPgaUtdanning?.melding}
-            >
-                <LocaleReadMore tekst={aktivitetTekster.radio_utdanning_lesmer} />
-            </LocaleRadioGroup>
             {utdanning?.verdi === 'NEI' && (
                 <Alert variant={'info'}>
                     <Heading size="small">
