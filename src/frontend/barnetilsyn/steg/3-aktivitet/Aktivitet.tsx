@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Alert, Heading, VStack } from '@navikt/ds-react';
+import { Alert, Heading, List, VStack } from '@navikt/ds-react';
 
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
@@ -15,6 +15,7 @@ import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
+import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
@@ -214,12 +215,23 @@ const Aktivitet = () => {
                     </VStack>
                 </UnderspørsmålContainer>
             )}
-            {utdanning?.verdi === 'NEI' && (
+            {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
                 <Alert variant={'info'}>
                     <Heading size="small">
-                        <LocaleTekst tekst={aktivitetTekster.feil_utdanning_infoalert_title} />
+                        <LocaleTekst tekst={aktivitetTekster.ingen_aktivitet_infoalert_title} />
                     </Heading>
-                    <LocaleTekstAvsnitt tekst={aktivitetTekster.feil_utdanning_infoalert_innhold} />
+                    <LocaleTekstAvsnitt
+                        tekst={aktivitetTekster.ingen_aktivitet_infoalert_innhold.del1}
+                    />
+                    <List>
+                        {aktivitetTekster.ingen_aktivitet_infoalert_innhold.del2_lenker.map(
+                            (lenke, indeks) => (
+                                <List.Item key={indeks}>
+                                    <LocaleInlineLenke tekst={lenke} />
+                                </List.Item>
+                            )
+                        )}
+                    </List>
                 </Alert>
             )}
         </Side>

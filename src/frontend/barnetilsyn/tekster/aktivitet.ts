@@ -14,8 +14,8 @@ interface AktivitetInnhold {
     radio_annet_lesmer: LesMer<InlineLenke>;
     radio_annet_feilmelding: TekstElement<string>;
     tittel: TekstElement<string>;
-    feil_utdanning_infoalert_title: TekstElement<string>;
-    feil_utdanning_infoalert_innhold: TekstElement<string[]>;
+    ingen_aktivitet_infoalert_title: TekstElement<string>;
+    ingen_aktivitet_infoalert_innhold: IngenAktivitet;
     lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
     radio_lønnet_tiltak_feilmelding: TekstElement<string>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
@@ -34,6 +34,10 @@ interface HvilkenAktivitet {
         del2_lenker: TekstElement<InlineLenke>[];
         del3: TekstElement<InlineLenke>;
     };
+}
+interface IngenAktivitet {
+    del1: TekstElement<string[]>;
+    del2_lenker: TekstElement<InlineLenke>[];
 }
 
 export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<string>> = {
@@ -157,11 +161,38 @@ export const aktivitetTekster: AktivitetInnhold = {
             ],
         },
     },
-    feil_utdanning_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
-    feil_utdanning_infoalert_innhold: {
-        nb: [
-            'Du kan fortsatt søke, men det kan hende du får avslag.',
-            'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
+    ingen_aktivitet_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
+    ingen_aktivitet_infoalert_innhold: {
+        del1: {
+            nb: [
+                'Du kan fortsatt søke, men du kan få avslag.',
+                'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
+                'Er du enslig forsørger/gjenlevende og i arbeid, er det andre søknader du skal fylle ut: ',
+            ],
+        },
+        del2_lenker: [
+            {
+                nb: [
+                    'for ',
+                    {
+                        tekst: 'enslig mor/far',
+                        url: 'https://www.nav.no/barnetilsyn-enslig',
+                        variant: 'neutral',
+                    },
+                    ' (åpnes i ny fane)',
+                ],
+            },
+            {
+                nb: [
+                    'for ',
+                    {
+                        tekst: 'gjenlevende',
+                        url: 'https://www.nav.no/barnetilsyn-gjenlevende',
+                        variant: 'neutral',
+                    },
+                    ' (åpnes i ny fane)',
+                ],
+            },
         ],
     },
     radio_fortsatt_søke: {
