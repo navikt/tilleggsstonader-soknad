@@ -5,14 +5,19 @@ import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/teks
 
 interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
-    radio_lonnet: Radiogruppe<JaNei>;
+    radio_lønnet_tiltak: Radiogruppe<JaNei>;
+    checkbox_velge_aktivitet_feilmelding: TekstElement<string>;
     radio_annet: Radiogruppe<AnnenAktivitetType>;
+    radio_annet_uten_registeraktivitet: Radiogruppe<AnnenAktivitetType>;
     radio_utdanning: Radiogruppe<JaNei>;
     radio_utdanning_lesmer: LesMer<string[]>;
     radio_annet_lesmer: LesMer<InlineLenke>;
+    radio_annet_feilmelding: TekstElement<string>;
     tittel: TekstElement<string>;
     feil_utdanning_infoalert_title: TekstElement<string>;
     feil_utdanning_infoalert_innhold: TekstElement<string[]>;
+    lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
+    radio_lønnet_tiltak_feilmelding: TekstElement<string>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
     søker_fra_label: TekstElement<string>;
     søker_fra_lesmer: LesMer<string[]>;
@@ -114,16 +119,28 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     guide_innhold: {
         nb: [
-            'For å få dekket pass av barn må du delta på ett tiltak, ta en utdannelse godkjent av NAV, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
-            'Vi henter aktiviteter registrert på deg 3 måneder tilbake i tid.',
+            'For å få dekket pass av barn må du delta på tiltak, ta en utdannelse godkjent av NAV, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
+            'Vi viser aktivitetene som er registrert på deg de siste 3 månedene.',
         ],
     },
     hvilken_aktivitet: hvilkenAktivitet,
-    radio_lonnet: {
+    radio_lønnet_tiltak: {
         header: {
             nb: 'Mottar du lønn gjennom et tiltak?',
         },
         alternativer: JaNeiTilTekst,
+    },
+    checkbox_velge_aktivitet_feilmelding: {
+        nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
+    },
+    lønnet_tiltak_infoalert_innhold: {
+        nb: [
+            'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',
+            'Som lærling kan du få støtte til pass av barn, selv om du mottar lønn.',
+        ],
+    },
+    radio_lønnet_tiltak_feilmelding: {
+        nb: 'Du må svare på om du mottar lønn.',
     },
     radio_utdanning: {
         header: {
@@ -170,5 +187,12 @@ export const aktivitetTekster: AktivitetInnhold = {
     radio_annet: {
         header: { nb: 'Hvilken annen type arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekst,
+    },
+    radio_annet_uten_registeraktivitet: {
+        header: { nb: 'Hvilken arbeidsrettet aktivitet har du?' },
+        alternativer: AktivitetTypeTilTekst,
+    },
+    radio_annet_feilmelding: {
+        nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
     },
 };

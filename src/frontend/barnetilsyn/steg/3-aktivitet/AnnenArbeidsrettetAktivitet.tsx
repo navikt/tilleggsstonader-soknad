@@ -2,28 +2,35 @@ import React from 'react';
 
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
-import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { EnumFelt } from '../../../typer/skjema';
+import { Radiogruppe } from '../../../typer/tekst';
+import { Feilmelding } from '../../../typer/validering';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 interface Props {
-    annenTypeArbeidsrettetAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
-    setAnnenTypeArbeidsrettetAktivitet: (verdier: EnumFelt<AnnenAktivitetType>) => void;
+    tekst: Radiogruppe<AnnenAktivitetType>;
+    annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
+    oppdaterAnnenAktivitet: (verdi: EnumFelt<AnnenAktivitetType>) => void;
+    feilmelding: Feilmelding | undefined;
 }
 
 export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
-    setAnnenTypeArbeidsrettetAktivitet,
-    annenTypeArbeidsrettetAktivitet,
+    tekst,
+    annenAktivitet,
+    oppdaterAnnenAktivitet,
+    feilmelding,
 }) => {
     return (
-        <UnderspørsmålContainer>
+        <div>
             <LocaleRadioGroup
-                tekst={aktivitetTekster.radio_annet}
-                onChange={setAnnenTypeArbeidsrettetAktivitet}
-                value={annenTypeArbeidsrettetAktivitet?.verdi || []}
+                id={feilmelding?.id}
+                tekst={tekst}
+                onChange={oppdaterAnnenAktivitet}
+                value={annenAktivitet?.verdi || []}
+                error={feilmelding?.melding}
             ></LocaleRadioGroup>
             <LocaleReadMoreMedLenke tekst={aktivitetTekster.radio_annet_lesmer} />
-        </UnderspørsmålContainer>
+        </div>
     );
 };

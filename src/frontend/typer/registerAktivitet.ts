@@ -6,7 +6,7 @@ export interface RegisterAktivitet {
     typeNavn: string;
 }
 
-export interface ArbeidsrettetAktivitetMedLabel extends RegisterAktivitet {
+export interface RegisterAktivitetMedLabel extends RegisterAktivitet {
     label: string;
 }
 

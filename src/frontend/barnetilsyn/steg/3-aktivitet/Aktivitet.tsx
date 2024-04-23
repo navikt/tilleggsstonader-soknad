@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-import { Alert, Heading } from '@navikt/ds-react';
+import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
-import { mapTIlArbeidsrettedeAktiviteterObjektMedLabel } from './utils';
+import { LønnetTiltak } from './LønnetTiltak';
+import {
+    mapTilRegisterAktiviteterObjektMedLabel,
+    skalTaStillingTilAnnenAktivitet,
+    skalTaStillingTilLønnetTiltak,
+    skalTaStillingTilRegisterAktiviteter,
+} from './utils';
+import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './validering';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
@@ -12,10 +19,11 @@ import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGr
 import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useSøknad } from '../../../context/SøknadContext';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
-import { ArbeidsrettetAktivitetMedLabel } from '../../../typer/registerAktivitet';
+import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
@@ -30,71 +38,138 @@ const Aktivitet = () => {
     );
     const [valgteAktiviteter, settValgteAktiviteter] = useState<
         EnumFlereValgFelt<string> | undefined
-    >(aktivitet ? aktivitet.aktivitet : undefined);
-    const [arbeidsrettedeAktiviteter, settArbeidsrettedeAktiviteter] =
-        useState<Record<string, ArbeidsrettetAktivitetMedLabel>>();
+    >(aktivitet ? aktivitet.aktiviteter : undefined);
+    const [registerAktiviteter, settRegisterAktiviteter] =
+        useState<Record<string, RegisterAktivitetMedLabel>>();
 
-    const [annenTypeArbeidsrettetAktivitet, setAnnenTypeArbeidsrettetAktivitet] = useState<
-        EnumFelt<AnnenAktivitetType> | undefined
-    >(aktivitet ? aktivitet.annenAktivitet : undefined);
+    const [annenAktivitet, setAnnenAktivitet] = useState<EnumFelt<AnnenAktivitetType> | undefined>(
+        aktivitet ? aktivitet.annenAktivitet : undefined
+    );
+
+    const [lønnetAktivitet, setLønnetAktivitet] = useState<EnumFelt<JaNei> | undefined>(
+        aktivitet ? aktivitet.lønnetAktivitet : undefined
+    );
     useEffect(() => {
         hentArbeidsrettedeAktiviteter()
             .then((arbeidsrettedeAktiviteter) =>
-                settArbeidsrettedeAktiviteter(
-                    mapTIlArbeidsrettedeAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
+                settRegisterAktiviteter(
+                    // {}
+                    mapTilRegisterAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
                 )
             )
-            .catch(); // TODO noe bedre håndtering?
+            .catch(() => settRegisterAktiviteter({}));
     }, []);
 
-    const kanFortsette = (barnepassPgaUtdanning?: JaNei): boolean => {
+    const oppdaterAktivitetISøknad = () => {
+        if (utdanning !== undefined) {
+            settAktivitet({
+                utdanning: utdanning,
+                aktiviteter: valgteAktiviteter,
+                annenAktivitet: annenAktivitet,
+                lønnetAktivitet: lønnetAktivitet,
+            });
+        }
+    };
+
+    const nullstillLønnetAktivitet = (
+        valgteAktiviteter: EnumFlereValgFelt<string> | undefined,
+        annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined
+    ) => {
+        const skalIkkeTaStilling = !skalTaStillingTilLønnetTiltak(
+            valgteAktiviteter,
+            annenAktivitet,
+            registerAktiviteter
+        );
+        if (lønnetAktivitet && skalIkkeTaStilling) {
+            setLønnetAktivitet(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                lønnetAktivitet: undefined,
+            }));
+        }
+    };
+
+    const nullstillAnnenAktivitet = (valgteAktiviteter: EnumFlereValgFelt<string>) => {
+        if (!skalTaStillingTilAnnenAktivitet(valgteAktiviteter)) {
+            setAnnenAktivitet(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                annenAktivitet: undefined,
+            }));
+        }
+    };
+
+    const oppdaterValgteAktiviteter = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
+        settValgteAktiviteter(nyeValgteAktiviteter);
+        if (nyeValgteAktiviteter.verdier.length > 0) {
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                valgteAktiviteter: undefined,
+            }));
+        }
+        nullstillAnnenAktivitet(nyeValgteAktiviteter);
+        nullstillLønnetAktivitet(nyeValgteAktiviteter, annenAktivitet);
+    };
+
+    const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenAktivitetType>) => {
+        setAnnenAktivitet(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            annenAktivitet: undefined,
+        }));
+        nullstillLønnetAktivitet(valgteAktiviteter, verdi);
+    };
+
+    const oppdaterLønnetAktivitet = (verdi: EnumFelt<JaNei>) => {
+        setLønnetAktivitet(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            lønnetAktivitet: undefined,
+        }));
+    };
+
+    const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
+    const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak(
+        valgteAktiviteter,
+        annenAktivitet,
+        registerAktiviteter
+    );
+    if (!registerAktiviteter) {
+        // ønsker ikke å vise siden før man har hentet aktivteter fra backend
+        return null;
+    }
+    const skalViseArbeidsrettedeAktiviteter =
+        skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
+
+    const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
-        if (barnepassPgaUtdanning === undefined) {
+        const verdierValgteAktiviteter = valgteAktiviteter?.verdier ?? [];
+        if (utdanning === undefined) {
             feil = {
                 ...feil,
                 barnepassPgaUtdanning: { id: '1', melding: 'Du må velge et alternativ' },
             };
         }
+        if (skalViseArbeidsrettedeAktiviteter && verdierValgteAktiviteter.length === 0) {
+            feil = feilValgtAktivitet(feil, locale);
+        }
+        if (skalViseLønnetTiltak && lønnetAktivitet?.verdi === undefined) {
+            feil = feilLønnetAktivitet(feil, locale);
+        }
+        if (
+            (skalViseAnnenAktivitet || !skalViseArbeidsrettedeAktiviteter) &&
+            annenAktivitet === undefined
+        ) {
+            feil = feilAnnenAktivitet(feil, locale);
+        }
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
 
-    const oppdaterAktivitetISøknad = () => {
-        if (utdanning !== undefined && valgteAktiviteter) {
-            settAktivitet({
-                utdanning: utdanning,
-                aktivitet: valgteAktiviteter,
-                annenAktivitet: annenTypeArbeidsrettetAktivitet,
-            });
-        }
-    };
-
-    const oppdaterValgteAktiviteter = (verdier: string[]) => {
-        if (!arbeidsrettedeAktiviteter) return;
-        settValgteAktiviteter({
-            label: aktivitetTekster.hvilken_aktivitet.spm[locale],
-            verdier: verdier.map((verdi) => {
-                if (verdi === 'ANNET') {
-                    return {
-                        label: aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale],
-                        verdi: 'ANNET',
-                    };
-                }
-                const valgtAktivitet = arbeidsrettedeAktiviteter[verdi];
-
-                return { label: valgtAktivitet.label, verdi: verdi };
-            }),
-            alternativer: Object.values(arbeidsrettedeAktiviteter).map((a) => a.label),
-        });
-    };
-
-    const arbeidsrettedeAktiviteterMedLabeler: ArbeidsrettetAktivitetMedLabel[] | undefined =
-        arbeidsrettedeAktiviteter ? Object.values(arbeidsrettedeAktiviteter) : undefined;
-
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
-            validerSteg={() => kanFortsette(utdanning?.verdi)}
+            validerSteg={kanFortsette}
             oppdaterSøknad={oppdaterAktivitetISøknad}
         >
             <Heading size={'medium'}>
@@ -103,25 +178,54 @@ const Aktivitet = () => {
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={aktivitetTekster.guide_innhold} />
             </PellePanel>
-            <ArbeidsrettedeAktiviteter
-                arbeidsrettedeAktiviteterMedLabeler={arbeidsrettedeAktiviteterMedLabeler}
-                oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
-                locale={locale}
-                valgteAktiviteter={valgteAktiviteter}
-            />
-            {valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ? (
-                <AnnenArbeidsrettetAktivitet
-                    setAnnenTypeArbeidsrettetAktivitet={setAnnenTypeArbeidsrettetAktivitet}
-                    annenTypeArbeidsrettetAktivitet={annenTypeArbeidsrettetAktivitet}
+            {skalViseArbeidsrettedeAktiviteter && (
+                <ArbeidsrettedeAktiviteter
+                    registerAktiviteter={registerAktiviteter}
+                    oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
+                    locale={locale}
+                    valgteAktiviteter={valgteAktiviteter}
+                    feilmelding={valideringsfeil.valgteAktiviteter}
                 />
-            ) : null}
+            )}
+            {!skalViseArbeidsrettedeAktiviteter && (
+                <AnnenArbeidsrettetAktivitet
+                    tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
+                    oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                    annenAktivitet={annenAktivitet}
+                    feilmelding={valideringsfeil.annenAktivitet}
+                />
+            )}
+            {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
+                <UnderspørsmålContainer>
+                    <VStack gap={'6'}>
+                        {skalViseAnnenAktivitet && (
+                            <AnnenArbeidsrettetAktivitet
+                                tekst={aktivitetTekster.radio_annet}
+                                oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                                annenAktivitet={annenAktivitet}
+                                feilmelding={valideringsfeil.annenAktivitet}
+                            />
+                        )}
+                        {skalViseLønnetTiltak && (
+                            <LønnetTiltak
+                                lønnetAktivitet={lønnetAktivitet}
+                                oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
+                                feilmelding={valideringsfeil.lønnetAktivitet}
+                            />
+                        )}
+                    </VStack>
+                </UnderspørsmålContainer>
+            )}
             <LocaleRadioGroup
                 id={valideringsfeil.barnepassPgaUtdanning?.id}
                 tekst={aktivitetTekster.radio_utdanning}
                 value={utdanning?.verdi || ''}
                 onChange={(verdi) => {
                     settUtdanning(verdi);
-                    settValideringsfeil({});
+                    settValideringsfeil((prevState) => ({
+                        ...prevState,
+                        barnepassPgaUtdanning: undefined,
+                    }));
                 }}
                 error={valideringsfeil.barnepassPgaUtdanning?.melding}
             >
