@@ -9,13 +9,11 @@ interface AktivitetInnhold {
     checkbox_velge_aktivitet_feilmelding: TekstElement<string>;
     radio_annet: Radiogruppe<AnnenAktivitetType>;
     radio_annet_uten_registeraktivitet: Radiogruppe<AnnenAktivitetType>;
-    radio_utdanning: Radiogruppe<JaNei>;
-    radio_utdanning_lesmer: LesMer<string[]>;
     radio_annet_lesmer: LesMer<InlineLenke>;
     radio_annet_feilmelding: TekstElement<string>;
     tittel: TekstElement<string>;
-    feil_utdanning_infoalert_title: TekstElement<string>;
-    feil_utdanning_infoalert_innhold: TekstElement<string[]>;
+    ingen_aktivitet_infoalert_title: TekstElement<string>;
+    ingen_aktivitet_infoalert_innhold: IngenAktivitet;
     lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
     radio_lønnet_tiltak_feilmelding: TekstElement<string>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
@@ -34,6 +32,10 @@ interface HvilkenAktivitet {
         del2_lenker: TekstElement<InlineLenke>[];
         del3: TekstElement<InlineLenke>;
     };
+}
+interface IngenAktivitet {
+    del1: TekstElement<string[]>;
+    del2_lenker: TekstElement<InlineLenke>[];
 }
 
 export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<string>> = {
@@ -142,26 +144,38 @@ export const aktivitetTekster: AktivitetInnhold = {
     radio_lønnet_tiltak_feilmelding: {
         nb: 'Du må svare på om du mottar lønn.',
     },
-    radio_utdanning: {
-        header: {
-            nb: 'Deltar du på eller skal du begynne på et arbeidsrettet tiltak eller en utredning?',
-        },
-        alternativer: JaNeiTilTekst,
-    },
-    radio_utdanning_lesmer: {
-        header: { nb: 'Hva betyr tiltak og utredning?' },
-        innhold: {
+    ingen_aktivitet_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
+    ingen_aktivitet_infoalert_innhold: {
+        del1: {
             nb: [
-                'Tiltak avtales mellom deg og din veileder og skal hjelpe deg med å komme inn i eller tilbake til arbeidslivet. Et tiltak kan for eksempel være utdanning, kurs eller arbeidstrening.',
-                'Arbeidsrettet utredning er en prosess der dine ferdigheter og muligheter til å utføre arbeid blir vurdert og kartlagt.',
+                'Du kan fortsatt søke, men du kan få avslag.',
+                'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
+                'Er du enslig forsørger/gjenlevende og i arbeid, er det andre søknader du skal fylle ut: ',
             ],
         },
-    },
-    feil_utdanning_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
-    feil_utdanning_infoalert_innhold: {
-        nb: [
-            'Du kan fortsatt søke, men det kan hende du får avslag.',
-            'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
+        del2_lenker: [
+            {
+                nb: [
+                    'for ',
+                    {
+                        tekst: 'enslig mor/far',
+                        url: 'https://www.nav.no/barnetilsyn-enslig',
+                        variant: 'neutral',
+                    },
+                    ' (åpnes i ny fane)',
+                ],
+            },
+            {
+                nb: [
+                    'for ',
+                    {
+                        tekst: 'gjenlevende',
+                        url: 'https://www.nav.no/barnetilsyn-gjenlevende',
+                        variant: 'neutral',
+                    },
+                    ' (åpnes i ny fane)',
+                ],
+            },
         ],
     },
     radio_fortsatt_søke: {

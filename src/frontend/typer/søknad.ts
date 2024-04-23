@@ -30,7 +30,6 @@ export interface OppholdUtenforNorge {
 }
 
 export interface Aktivitet {
-    utdanning: EnumFelt<JaNei>;
     aktiviteter: EnumFlereValgFelt<string> | undefined;
     annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
     lønnetAktivitet: EnumFelt<JaNei> | undefined;
