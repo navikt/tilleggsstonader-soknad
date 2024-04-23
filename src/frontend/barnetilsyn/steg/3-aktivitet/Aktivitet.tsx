@@ -32,9 +32,6 @@ import { aktivitetTekster } from '../../tekster/aktivitet';
 const Aktivitet = () => {
     const { locale } = useSpråk();
     const { aktivitet, settAktivitet, valideringsfeil, settValideringsfeil } = useSøknad();
-    const [utdanning, settUtdanning] = useState<EnumFelt<JaNei> | undefined>(
-        aktivitet ? aktivitet.utdanning : undefined
-    );
     const [valgteAktiviteter, settValgteAktiviteter] = useState<
         EnumFlereValgFelt<string> | undefined
     >(aktivitet ? aktivitet.aktiviteter : undefined);
@@ -60,14 +57,11 @@ const Aktivitet = () => {
     }, []);
 
     const oppdaterAktivitetISøknad = () => {
-        if (utdanning !== undefined) {
-            settAktivitet({
-                utdanning: utdanning,
-                aktiviteter: valgteAktiviteter,
-                annenAktivitet: annenAktivitet,
-                lønnetAktivitet: lønnetAktivitet,
-            });
-        }
+        settAktivitet({
+            aktiviteter: valgteAktiviteter,
+            annenAktivitet: annenAktivitet,
+            lønnetAktivitet: lønnetAktivitet,
+        });
     };
 
     const nullstillLønnetAktivitet = (
@@ -143,12 +137,6 @@ const Aktivitet = () => {
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
         const verdierValgteAktiviteter = valgteAktiviteter?.verdier ?? [];
-        if (utdanning === undefined) {
-            feil = {
-                ...feil,
-                barnepassPgaUtdanning: { id: '1', melding: 'Du må velge et alternativ' },
-            };
-        }
         if (skalViseArbeidsrettedeAktiviteter && verdierValgteAktiviteter.length === 0) {
             feil = feilValgtAktivitet(feil, locale);
         }

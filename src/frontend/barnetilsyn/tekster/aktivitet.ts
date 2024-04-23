@@ -9,8 +9,6 @@ interface AktivitetInnhold {
     checkbox_velge_aktivitet_feilmelding: TekstElement<string>;
     radio_annet: Radiogruppe<AnnenAktivitetType>;
     radio_annet_uten_registeraktivitet: Radiogruppe<AnnenAktivitetType>;
-    radio_utdanning: Radiogruppe<JaNei>;
-    radio_utdanning_lesmer: LesMer<string[]>;
     radio_annet_lesmer: LesMer<InlineLenke>;
     radio_annet_feilmelding: TekstElement<string>;
     tittel: TekstElement<string>;
@@ -145,21 +143,6 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     radio_lønnet_tiltak_feilmelding: {
         nb: 'Du må svare på om du mottar lønn.',
-    },
-    radio_utdanning: {
-        header: {
-            nb: 'Deltar du på eller skal du begynne på et arbeidsrettet tiltak eller en utredning?',
-        },
-        alternativer: JaNeiTilTekst,
-    },
-    radio_utdanning_lesmer: {
-        header: { nb: 'Hva betyr tiltak og utredning?' },
-        innhold: {
-            nb: [
-                'Tiltak avtales mellom deg og din veileder og skal hjelpe deg med å komme inn i eller tilbake til arbeidslivet. Et tiltak kan for eksempel være utdanning, kurs eller arbeidstrening.',
-                'Arbeidsrettet utredning er en prosess der dine ferdigheter og muligheter til å utføre arbeid blir vurdert og kartlagt.',
-            ],
-        },
     },
     ingen_aktivitet_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
     ingen_aktivitet_infoalert_innhold: {
