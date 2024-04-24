@@ -86,7 +86,7 @@ const OmDeg: React.FC<{ person: Person }> = ({ person }) => (
         <FlexDiv>
             <div>
                 <Label>
-                    <LocaleTekst tekst={oppsummeringTekster.accordians.om_deg.adresse_label} />
+                    <LocaleTekst tekst={oppsummeringTekster.accordians.om_deg.navn_label} />
                 </Label>
                 <BodyShort>{person.visningsnavn}</BodyShort>
             </div>
