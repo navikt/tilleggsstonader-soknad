@@ -8,7 +8,7 @@ const APP_NAVN = 'tilleggsstonader-soknad';
 export const initAmplitude = () => {
     init('default', '', {
         useBatch: true,
-
+        defaultTracking: false,
         serverUrl: 'https://amplitude.nav.no/collect-auto',
         ingestionMetadata: {
             sourceName: window.location.toString(),
