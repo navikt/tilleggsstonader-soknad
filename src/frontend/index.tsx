@@ -19,10 +19,10 @@ autentiseringsInterceptor();
 const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
 
+initAmplitude();
+
 const AppRoutes = () => {
     const { harLastetPerson, feilmelding } = usePerson();
-
-    initAmplitude();
 
     if (feilmelding) {
         return (
