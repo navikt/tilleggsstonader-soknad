@@ -1,6 +1,6 @@
 import { init, track } from '@amplitude/analytics-browser';
 
-import { skjemanavnTilId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
+import { Skjemanavn, skjemanavnTilId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 
 const APP_NAVN = 'tilleggsstonader-soknad';
@@ -67,5 +67,15 @@ export const logNavigereEvent = (
         skjemaId: skjemanavnTilId[skjemanavn],
         destinasjon: destinasjon,
         lenketekst: lenketekst,
+    });
+};
+
+export const loggAlertVist = (variant: string, tekst: string) => {
+    track('alert vist', {
+        app: APP_NAVN,
+        skjemanavn: Skjemanavn.tilsyn_barn,
+        skjemaId: skjemanavnTilId[Skjemanavn.tilsyn_barn],
+        variant: variant,
+        tekst: tekst,
     });
 };

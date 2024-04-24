@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -9,11 +9,13 @@ import { ABlue50, ABlue500 } from '@navikt/ds-tokens/dist/tokens';
 import { utledFeilmelding } from './feilmeldingOpplasting';
 import FilVisning from './Fil';
 import { MAX_FILSTØRRELSE, TILLATE_FILENDELSER, TILLATE_FILTYPER } from './utils';
+import { loggAlertVist } from '../../api/amplitude';
 import { lastOppVedlegg } from '../../api/api';
 import { useSpråk } from '../../context/SpråkContext';
 import { filopplastingTekster, teksterFeilmeldinger } from '../../tekster/filopplasting';
 import { Dokument, DokumentasjonFelt } from '../../typer/skjema';
 import { hentBeskjedMedEttParameter } from '../../utils/tekster';
+import { harVerdi } from '../../utils/typer';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 const Container = styled(VStack).attrs({ gap: '2', align: 'center' })`
@@ -69,6 +71,12 @@ const Filopplaster: React.FC<{
                 .finally(() => settLaster(false));
         }
     };
+
+    useEffect(() => {
+        if (harVerdi(feilmelding)) {
+            loggAlertVist('error', feilmelding!);
+        }
+    }, [feilmelding]);
 
     return (
         <>
