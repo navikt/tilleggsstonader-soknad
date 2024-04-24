@@ -129,7 +129,7 @@ const ArbeidsrettetAktivitet: React.FC<{ aktivitet: Aktivitet | undefined }> = (
         aktivitet.aktiviteter &&
         verdiFelterTilTekstElement(aktivitet.aktiviteter.verdier);
 
-    const aktivitetLabel = aktivitet?.aktiviteter?.label;
+    const aktiviteterLabel = aktivitet?.aktiviteter?.label;
     const annenAktivitetLabel = aktivitet?.annenAktivitet?.label;
     const lønnetAktivitetLabel = aktivitet?.lønnetAktivitet?.label;
 
@@ -144,7 +144,7 @@ const ArbeidsrettetAktivitet: React.FC<{ aktivitet: Aktivitet | undefined }> = (
             {aktiviteterSomTekstfelt && (
                 <LocalePunktliste
                     innhold={aktiviteterSomTekstfelt}
-                    tittel={{ nb: aktivitetLabel || '' }}
+                    tittel={{ nb: aktiviteterLabel || '' }}
                 />
             )}
             <Label>
