@@ -2,7 +2,7 @@ import { Link } from '@navikt/ds-react';
 
 import { logNavigereEvent } from '../../api/amplitude';
 import { useSpråk } from '../../context/SpråkContext';
-import { Skjemanavn } from '../../typer/skjemanavn';
+import { Stønadstype } from '../../typer/stønadstyper';
 import { InlineLenke, TekstElement } from '../../typer/tekst';
 
 const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tekst }) => {
@@ -22,7 +22,7 @@ const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tek
                         target="_blank"
                         onClick={() =>
                             logNavigereEvent(
-                                Skjemanavn.tilsyn_barn,
+                                Stønadstype.BARNETILSYN,
                                 tekstElement.url,
                                 tekstElement.tekst
                             )

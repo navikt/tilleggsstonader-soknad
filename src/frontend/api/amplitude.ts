@@ -1,6 +1,6 @@
 import { init, track } from '@amplitude/analytics-browser';
 
-import { Skjemanavn, skjemanavnTilId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
+import { skjemanavnTilId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 
 const APP_NAVN = 'tilleggsstonader-soknad';
@@ -56,10 +56,11 @@ export const loggSkjemaFullført = (stønadstype: Stønadstype) => {
 };
 
 export const logNavigereEvent = (
-    skjemanavn: Skjemanavn,
+    stønadstype: Stønadstype,
     destinasjon: string,
     lenketekst: string
 ) => {
+    const skjemanavn = stønadstypeTilSkjemanavn[stønadstype];
     track('navigere', {
         app: APP_NAVN,
         skjemanavn: skjemanavn,
