@@ -8,6 +8,11 @@ import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import { StegIndikator } from './StegIndikator';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
+import {
+    loggSkjemaFullført,
+    loggSkjemaInnsendtFeilet,
+    loggSkjemaStegFullført,
+} from '../api/amplitude';
 import { sendInnSøknad } from '../api/api';
 import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { useSpråk } from '../context/SpråkContext';
@@ -78,6 +83,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         }
 
         oppdaterSøknad && oppdaterSøknad();
+        loggSkjemaStegFullført(stønadstype, aktivtSteg.label);
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
         navigate(nesteRoute.path);
@@ -108,10 +114,14 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         })
             .then((res) => {
                 settInnsentTidspunkt(res.mottattTidspunkt);
+                loggSkjemaFullført(stønadstype);
                 navigate(nesteRoute.path);
             })
             // TODO håndtering av 401?
-            .catch(() => settSendInnFeil(true))
+            .catch(() => {
+                settSendInnFeil(true);
+                loggSkjemaInnsendtFeilet(stønadstype);
+            })
             .finally(() => settSenderInn(false));
     };
 
