@@ -30,7 +30,7 @@ import { Barn, Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
 import { DokumentasjonFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
-import { Hovedytelse } from '../../../typer/søknad';
+import { Aktivitet, Hovedytelse } from '../../../typer/søknad';
 import { TekstElement } from '../../../typer/tekst';
 import { formaterIsoDato } from '../../../utils/formatering';
 import { verdiFelterTilTekstElement } from '../../../utils/tekster';
@@ -123,20 +123,41 @@ const DinSituasjon: React.FC<{ hovedytelse: Hovedytelse | undefined }> = ({ hove
     );
 };
 
-const AktivitetUtdanning: React.FC = () => (
-    <AccordionItem
-        header={oppsummeringTekster.accordians.aktivitet_utdanning.tittel}
-        endreKnapp={{
-            route: RouteTilPath.AKTIVITET,
-            tekst: oppsummeringTekster.accordians.aktivitet_utdanning.endre_button,
-        }}
-    >
-        {/*TODO: Legg inn tekster for aktivitet når vi får på plass radioknapper.*/}
-        <BodyShort>
-            Her skal det komme oppsummering som er avhengig av hovedytelse og valgt aktivitet.
-        </BodyShort>
-    </AccordionItem>
-);
+const ArbeidsrettetAktivitet: React.FC<{ aktivitet: Aktivitet | undefined }> = ({ aktivitet }) => {
+    const aktiviteterSomTekstfelt =
+        aktivitet &&
+        aktivitet.aktiviteter &&
+        verdiFelterTilTekstElement(aktivitet.aktiviteter.verdier);
+
+    const aktivitetLabel = aktivitet?.aktiviteter?.label;
+    const annenAktivitetLabel = aktivitet?.annenAktivitet?.label;
+    const lønnetAktivitetLabel = aktivitet?.lønnetAktivitet?.label;
+
+    return (
+        <AccordionItem
+            header={oppsummeringTekster.accordians.arbeidsrettet_aktivitet.tittel}
+            endreKnapp={{
+                route: RouteTilPath.AKTIVITET,
+                tekst: oppsummeringTekster.accordians.arbeidsrettet_aktivitet.endre_button,
+            }}
+        >
+            {aktiviteterSomTekstfelt && (
+                <LocalePunktliste
+                    innhold={aktiviteterSomTekstfelt}
+                    tittel={{ nb: aktivitetLabel || '' }}
+                />
+            )}
+            <Label>
+                <LocaleTekst tekst={{ nb: annenAktivitetLabel || '' }} />
+            </Label>
+            {aktivitet?.annenAktivitet?.svarTekst}
+            <Label>
+                <LocaleTekst tekst={{ nb: lønnetAktivitetLabel || '' }} />
+            </Label>
+            {aktivitet?.lønnetAktivitet?.svarTekst}
+        </AccordionItem>
+    );
+};
 
 const DineBarn: React.FC<{ person: Person }> = ({ person }) => (
     <AccordionItem
@@ -241,7 +262,7 @@ const Vedlegg: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({ dokumentasj
 );
 
 const Oppsummering = () => {
-    const { hovedytelse, barnMedBarnepass, dokumentasjon } = useSøknad();
+    const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon } = useSøknad();
     const { person } = usePerson();
     const [harBekreftet, settHarBekreftet] = useState(false);
     const [feil, settFeil] = useState<string>('');
@@ -267,7 +288,7 @@ const Oppsummering = () => {
             <Accordion>
                 <OmDeg person={person} />
                 <DinSituasjon hovedytelse={hovedytelse} />
-                <AktivitetUtdanning />
+                <ArbeidsrettetAktivitet aktivitet={aktivitet} />
                 <DineBarn person={person} />
                 <PassAvBarn person={person} barnMedBarnepass={barnMedBarnepass} />
                 <Vedlegg dokumentasjon={dokumentasjon} />
