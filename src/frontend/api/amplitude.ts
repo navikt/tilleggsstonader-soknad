@@ -1,9 +1,18 @@
 import { init, track } from '@amplitude/analytics-browser';
 
-import { Skjemanavn, skjemanavnTilId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
+import { stønadstypeTilSkjemaId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 
 const APP_NAVN = 'tilleggsstonader-soknad';
+
+type eventType =
+    | 'skjema startet'
+    | 'skjema steg fullført'
+    | 'skjema innsending feilet'
+    | 'skjema fullført'
+    | 'navigere'
+    | 'alert vist'
+    | 'besøk';
 
 export const initAmplitude = () => {
     init('default', '', {
@@ -16,43 +25,38 @@ export const initAmplitude = () => {
     });
 };
 
+export const loggEventMedSkjema = (
+    event: eventType,
+    stønadstype: Stønadstype,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    event_properties?: any
+) => {
+    track(event, {
+        app: APP_NAVN,
+        skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
+        skjemaId: stønadstypeTilSkjemaId[stønadstype],
+        ...event_properties,
+    });
+};
+
 export const loggSkjemaStartet = (stønadstype: Stønadstype) => {
-    const skjemanavn = stønadstypeTilSkjemanavn[stønadstype];
     track('skjema startet', {
         app: APP_NAVN,
-        skjemanavn: skjemanavn,
-        skjemaId: skjemanavnTilId[skjemanavn],
+        skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
+        skjemaId: stønadstypeTilSkjemaId[stønadstype],
     });
 };
 
 export const loggSkjemaStegFullført = (stønadstype: Stønadstype, steg: string) => {
-    const skjemanavn = stønadstypeTilSkjemanavn[stønadstype];
-    track('skjema steg fullført', {
-        app: APP_NAVN,
-        skjemanavn: skjemanavn,
-        skjemaId: skjemanavnTilId[skjemanavn],
-        steg: steg,
-    });
+    loggEventMedSkjema('skjema steg fullført', stønadstype, { steg: steg });
 };
 
 export const loggSkjemaInnsendtFeilet = (stønadstype: Stønadstype) => {
-    const skjemanavn = stønadstypeTilSkjemanavn[stønadstype];
-
-    track('skjema innsending feilet', {
-        app: APP_NAVN,
-        skjemanavn: skjemanavn,
-        skjemaId: skjemanavnTilId[skjemanavn],
-    });
+    loggEventMedSkjema('skjema innsending feilet', stønadstype);
 };
 
 export const loggSkjemaFullført = (stønadstype: Stønadstype) => {
-    const skjemanavn = stønadstypeTilSkjemanavn[stønadstype];
-
-    track('skjema fullført', {
-        app: APP_NAVN,
-        skjemanavn: skjemanavn,
-        skjemaId: skjemanavnTilId[skjemanavn],
-    });
+    loggEventMedSkjema('skjema fullført', stønadstype);
 };
 
 export const logNavigereEvent = (
@@ -60,21 +64,14 @@ export const logNavigereEvent = (
     destinasjon: string,
     lenketekst: string
 ) => {
-    const skjemanavn = stønadstypeTilSkjemanavn[stønadstype];
-    track('navigere', {
-        app: APP_NAVN,
-        skjemanavn: skjemanavn,
-        skjemaId: skjemanavnTilId[skjemanavn],
+    loggEventMedSkjema('navigere', stønadstype, {
         destinasjon: destinasjon,
         lenketekst: lenketekst,
     });
 };
 
 export const loggAlertVist = (variant: string, tekst: string) => {
-    track('alert vist', {
-        app: APP_NAVN,
-        skjemanavn: Skjemanavn.tilsyn_barn,
-        skjemaId: skjemanavnTilId[Skjemanavn.tilsyn_barn],
+    loggEventMedSkjema('alert vist', Stønadstype.BARNETILSYN, {
         variant: variant,
         tekst: tekst,
     });
