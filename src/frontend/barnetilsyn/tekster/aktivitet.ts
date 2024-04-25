@@ -11,6 +11,7 @@ interface AktivitetInnhold {
     radio_annet_uten_registeraktivitet: Radiogruppe<AnnenAktivitetType>;
     radio_annet_lesmer: LesMer<InlineLenke>;
     radio_annet_feilmelding: TekstElement<string>;
+    ingen_registrerte_aktiviterer_overskrift: TekstElement<string>;
     tittel: TekstElement<string>;
     ingen_aktivitet_infoalert_title: TekstElement<string>;
     ingen_aktivitet_infoalert_innhold: IngenAktivitet;
@@ -28,6 +29,7 @@ interface HvilkenAktivitet {
     checkboks_annet_tekst: TekstElement<string>;
     les_mer: {
         header: TekstElement<string>;
+        header_ingen_registrerte_aktiviteter: TekstElement<string>;
         del1: TekstElement<string[]>;
         del2_lenker: TekstElement<InlineLenke>[];
         del3: TekstElement<InlineLenke>;
@@ -57,6 +59,9 @@ const hvilkenAktivitet: HvilkenAktivitet = {
     les_mer: {
         header: {
             nb: 'Hva gjør jeg hvis noe mangler eller er feil?',
+        },
+        header_ingen_registrerte_aktiviteter: {
+            nb: 'Hva gjør jeg hvis noe mangler?',
         },
         del1: {
             nb: [
@@ -208,5 +213,8 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     radio_annet_feilmelding: {
         nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
+    },
+    ingen_registrerte_aktiviterer_overskrift: {
+        nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.',
     },
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Alert, Heading, List, VStack } from '@navikt/ds-react';
+import { Alert, BodyLong, Heading, List, VStack } from '@navikt/ds-react';
 
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
@@ -16,6 +16,7 @@ import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
@@ -175,12 +176,43 @@ const Aktivitet = () => {
                 />
             )}
             {!skalViseArbeidsrettedeAktiviteter && (
-                <AnnenArbeidsrettetAktivitet
-                    tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
-                    oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
-                    annenAktivitet={annenAktivitet}
-                    feilmelding={valideringsfeil.annenAktivitet}
-                />
+                <>
+                    <div>
+                        <BodyLong weight={'semibold'}>
+                            <LocaleTekst
+                                tekst={aktivitetTekster.ingen_registrerte_aktiviterer_overskrift}
+                            ></LocaleTekst>
+                        </BodyLong>
+                        <LocaleReadMoreMedChildren
+                            header={
+                                aktivitetTekster.hvilken_aktivitet.les_mer
+                                    .header_ingen_registrerte_aktiviteter
+                            }
+                        >
+                            <LocaleTekstAvsnitt
+                                tekst={aktivitetTekster.hvilken_aktivitet.les_mer.del1}
+                            />
+                            <List>
+                                {aktivitetTekster.hvilken_aktivitet.les_mer.del2_lenker.map(
+                                    (lenke, indeks) => (
+                                        <List.Item key={indeks}>
+                                            <LocaleInlineLenke tekst={lenke} />
+                                        </List.Item>
+                                    )
+                                )}
+                            </List>
+                            <LocaleInlineLenke
+                                tekst={aktivitetTekster.hvilken_aktivitet.les_mer.del3}
+                            />
+                        </LocaleReadMoreMedChildren>
+                    </div>
+                    <AnnenArbeidsrettetAktivitet
+                        tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
+                        oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                        annenAktivitet={annenAktivitet}
+                        feilmelding={valideringsfeil.annenAktivitet}
+                    />
+                </>
             )}
             {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
                 <UnderspørsmålContainer>
