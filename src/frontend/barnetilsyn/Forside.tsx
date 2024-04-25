@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router';
 import { styled } from 'styled-components';
@@ -16,7 +16,7 @@ import {
 
 import { RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
-import { loggSkjemaStartet } from '../api/amplitude';
+import { loggBesøkBarnetilsyn, loggSkjemaStartet } from '../api/amplitude';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
@@ -43,6 +43,11 @@ const Forside: React.FC = () => {
     const { person } = usePerson();
 
     const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
+
+    useEffect(() => {
+        const route = RoutesBarnetilsyn[0];
+        loggBesøkBarnetilsyn(route.route, route.label);
+    }, []);
 
     const startSøknad = () => {
         if (harBekreftet) {

@@ -9,6 +9,7 @@ import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 import { StegIndikator } from './StegIndikator';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import {
+    loggBesøkBarnetilsyn,
     loggSkjemaFullført,
     loggSkjemaInnsendtFeilet,
     loggSkjemaStegFullført,
@@ -76,6 +77,10 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     const nåværendePath = location.pathname;
     const aktivtStegIndex = routes.findIndex((steg) => steg.path === nåværendePath);
     const aktivtSteg: IRoute | undefined = routes[aktivtStegIndex];
+
+    useEffect(() => {
+        loggBesøkBarnetilsyn(aktivtSteg.route, aktivtSteg.label);
+    }, [aktivtSteg]);
 
     const navigerTilNesteSide = () => {
         if (validerSteg && !validerSteg()) {

@@ -76,3 +76,10 @@ export const loggAlertVist = (variant: string, tekst: string) => {
         tekst: tekst,
     });
 };
+
+export const loggBesøkBarnetilsyn = (url: string, sidetittel: string) => {
+    loggEventMedSkjema('besøk', Stønadstype.BARNETILSYN, {
+        url: url,
+        sidetittel: sidetittel,
+    });
+};
