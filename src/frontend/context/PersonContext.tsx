@@ -28,7 +28,10 @@ const [PersonProvider, usePerson] = createUseContext(() => {
                 if (axios.isAxiosError(req) && erFeilOgSkalRouteTilGammelSøknad(req)) {
                     sendSøkerTilGammelSøknad();
                 } else {
-                    settFeilmelding('Feiltet henting av personopplysninger'); // TODO noe bedre håndtering?
+                    // TODO noe bedre håndtering?
+                    settFeilmelding(
+                        'Feiltet henting av personopplysninger. Prøv å laste inn siden på nytt'
+                    );
                 }
             });
     }, []);

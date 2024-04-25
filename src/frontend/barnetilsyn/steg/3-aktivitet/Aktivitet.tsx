@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { Alert, Heading, VStack } from '@navikt/ds-react';
+import { Alert, Heading, Label, List, VStack } from '@navikt/ds-react';
 
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
+import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { LønnetTiltak } from './LønnetTiltak';
 import {
     mapTilRegisterAktiviteterObjektMedLabel,
@@ -15,8 +16,7 @@ import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleReadMore } from '../../../components/Teksthåndtering/LocaleReadMore';
+import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
@@ -33,9 +33,6 @@ import { aktivitetTekster } from '../../tekster/aktivitet';
 const Aktivitet = () => {
     const { locale } = useSpråk();
     const { aktivitet, settAktivitet, valideringsfeil, settValideringsfeil } = useSøknad();
-    const [utdanning, settUtdanning] = useState<EnumFelt<JaNei> | undefined>(
-        aktivitet ? aktivitet.utdanning : undefined
-    );
     const [valgteAktiviteter, settValgteAktiviteter] = useState<
         EnumFlereValgFelt<string> | undefined
     >(aktivitet ? aktivitet.aktiviteter : undefined);
@@ -61,14 +58,11 @@ const Aktivitet = () => {
     }, []);
 
     const oppdaterAktivitetISøknad = () => {
-        if (utdanning !== undefined) {
-            settAktivitet({
-                utdanning: utdanning,
-                aktiviteter: valgteAktiviteter,
-                annenAktivitet: annenAktivitet,
-                lønnetAktivitet: lønnetAktivitet,
-            });
-        }
+        settAktivitet({
+            aktiviteter: valgteAktiviteter,
+            annenAktivitet: annenAktivitet,
+            lønnetAktivitet: lønnetAktivitet,
+        });
     };
 
     const nullstillLønnetAktivitet = (
@@ -144,12 +138,6 @@ const Aktivitet = () => {
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
         const verdierValgteAktiviteter = valgteAktiviteter?.verdier ?? [];
-        if (utdanning === undefined) {
-            feil = {
-                ...feil,
-                barnepassPgaUtdanning: { id: '1', melding: 'Du må velge et alternativ' },
-            };
-        }
         if (skalViseArbeidsrettedeAktiviteter && verdierValgteAktiviteter.length === 0) {
             feil = feilValgtAktivitet(feil, locale);
         }
@@ -188,12 +176,27 @@ const Aktivitet = () => {
                 />
             )}
             {!skalViseArbeidsrettedeAktiviteter && (
-                <AnnenArbeidsrettetAktivitet
-                    tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
-                    oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
-                    annenAktivitet={annenAktivitet}
-                    feilmelding={valideringsfeil.annenAktivitet}
-                />
+                <>
+                    <div>
+                        <Label weight={'semibold'}>
+                            <LocaleTekst
+                                tekst={aktivitetTekster.ingen_registrerte_aktiviterer_overskrift}
+                            ></LocaleTekst>
+                        </Label>
+                        <LesMerHvilkenAktivitet
+                            header={
+                                aktivitetTekster.hvilken_aktivitet.les_mer
+                                    .header_ingen_registrerte_aktiviteter
+                            }
+                        />
+                    </div>
+                    <AnnenArbeidsrettetAktivitet
+                        tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
+                        oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                        annenAktivitet={annenAktivitet}
+                        feilmelding={valideringsfeil.annenAktivitet}
+                    />
+                </>
             )}
             {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
                 <UnderspørsmålContainer>
@@ -216,27 +219,23 @@ const Aktivitet = () => {
                     </VStack>
                 </UnderspørsmålContainer>
             )}
-            <LocaleRadioGroup
-                id={valideringsfeil.barnepassPgaUtdanning?.id}
-                tekst={aktivitetTekster.radio_utdanning}
-                value={utdanning?.verdi || ''}
-                onChange={(verdi) => {
-                    settUtdanning(verdi);
-                    settValideringsfeil((prevState) => ({
-                        ...prevState,
-                        barnepassPgaUtdanning: undefined,
-                    }));
-                }}
-                error={valideringsfeil.barnepassPgaUtdanning?.melding}
-            >
-                <LocaleReadMore tekst={aktivitetTekster.radio_utdanning_lesmer} />
-            </LocaleRadioGroup>
-            {utdanning?.verdi === 'NEI' && (
+            {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
                 <Alert variant={'info'}>
                     <Heading size="small">
-                        <LocaleTekst tekst={aktivitetTekster.feil_utdanning_infoalert_title} />
+                        <LocaleTekst tekst={aktivitetTekster.ingen_aktivitet_infoalert_title} />
                     </Heading>
-                    <LocaleTekstAvsnitt tekst={aktivitetTekster.feil_utdanning_infoalert_innhold} />
+                    <LocaleTekstAvsnitt
+                        tekst={aktivitetTekster.ingen_aktivitet_infoalert_innhold.del1}
+                    />
+                    <List>
+                        {aktivitetTekster.ingen_aktivitet_infoalert_innhold.del2_lenker.map(
+                            (lenke, indeks) => (
+                                <List.Item key={indeks}>
+                                    <LocaleInlineLenke tekst={lenke} />
+                                </List.Item>
+                            )
+                        )}
+                    </List>
                 </Alert>
             )}
         </Side>

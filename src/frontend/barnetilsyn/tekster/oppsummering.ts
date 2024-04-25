@@ -22,7 +22,7 @@ interface OppsummeringInnhold {
             oppholdSiste12mnd: TekstElement<string>;
             oppholdNeste12mnd: TekstElement<string>;
         };
-        aktivitet_utdanning: {
+        arbeidsrettet_aktivitet: {
             tittel: TekstElement<string>;
             endre_button: TekstElement<string>;
         };
@@ -55,7 +55,7 @@ export const oppsummeringTekster: OppsummeringInnhold = {
     },
 
     accordians: {
-        aktivitet_utdanning: {
+        arbeidsrettet_aktivitet: {
             tittel: {
                 nb: 'Arbeidsrettet aktivitet',
             },
