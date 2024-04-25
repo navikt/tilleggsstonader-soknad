@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import '@navikt/ds-css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
+import { initAmplitude } from './api/amplitude';
 import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
 import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
@@ -18,8 +19,11 @@ autentiseringsInterceptor();
 const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
 
+initAmplitude();
+
 const AppRoutes = () => {
     const { harLastetPerson, feilmelding } = usePerson();
+
     if (feilmelding) {
         return (
             <BrowserRouter basename={process.env.PUBLIC_URL}>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router';
 import { styled } from 'styled-components';
@@ -16,6 +16,7 @@ import {
 
 import { RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
+import { loggBesøkBarnetilsyn, loggSkjemaStartet } from '../api/amplitude';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
@@ -25,6 +26,7 @@ import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnit
 import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
+import { Stønadstype } from '../typer/stønadstyper';
 import { erSnartNyttSkoleår } from '../utils/dato';
 import { hentNesteRoute } from '../utils/routes';
 
@@ -42,8 +44,14 @@ const Forside: React.FC = () => {
 
     const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
 
+    useEffect(() => {
+        const route = RoutesBarnetilsyn[0];
+        loggBesøkBarnetilsyn(route.path, route.label);
+    }, []);
+
     const startSøknad = () => {
         if (harBekreftet) {
+            loggSkjemaStartet(Stønadstype.BARNETILSYN);
             const nesteRoute = hentNesteRoute(RoutesBarnetilsyn, location.pathname);
             navigate(nesteRoute.path);
         } else {
