@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Alert, BodyLong, Heading, List, VStack } from '@navikt/ds-react';
+import { Alert, Heading, Label, List, VStack } from '@navikt/ds-react';
 
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
@@ -178,11 +178,11 @@ const Aktivitet = () => {
             {!skalViseArbeidsrettedeAktiviteter && (
                 <>
                     <div>
-                        <BodyLong weight={'semibold'}>
+                        <Label weight={'semibold'}>
                             <LocaleTekst
                                 tekst={aktivitetTekster.ingen_registrerte_aktiviterer_overskrift}
                             ></LocaleTekst>
-                        </BodyLong>
+                        </Label>
                         <LocaleReadMoreMedChildren
                             header={
                                 aktivitetTekster.hvilken_aktivitet.les_mer
