@@ -74,7 +74,7 @@ const Filopplaster: React.FC<{
 
     useEffect(() => {
         if (harVerdi(feilmelding)) {
-            loggAlertVist('error', feilmelding!);
+            loggAlertVist('error', feilmelding);
         }
     }, [feilmelding]);
 
