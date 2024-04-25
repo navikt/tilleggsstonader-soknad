@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { Alert, Heading, List, VStack } from '@navikt/ds-react';
+import { Alert, Heading, Label, List, VStack } from '@navikt/ds-react';
 
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
+import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { LønnetTiltak } from './LønnetTiltak';
 import {
     mapTilRegisterAktiviteterObjektMedLabel,
@@ -175,12 +176,27 @@ const Aktivitet = () => {
                 />
             )}
             {!skalViseArbeidsrettedeAktiviteter && (
-                <AnnenArbeidsrettetAktivitet
-                    tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
-                    oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
-                    annenAktivitet={annenAktivitet}
-                    feilmelding={valideringsfeil.annenAktivitet}
-                />
+                <>
+                    <div>
+                        <Label weight={'semibold'}>
+                            <LocaleTekst
+                                tekst={aktivitetTekster.ingen_registrerte_aktiviterer_overskrift}
+                            ></LocaleTekst>
+                        </Label>
+                        <LesMerHvilkenAktivitet
+                            header={
+                                aktivitetTekster.hvilken_aktivitet.les_mer
+                                    .header_ingen_registrerte_aktiviteter
+                            }
+                        />
+                    </div>
+                    <AnnenArbeidsrettetAktivitet
+                        tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
+                        oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                        annenAktivitet={annenAktivitet}
+                        feilmelding={valideringsfeil.annenAktivitet}
+                    />
+                </>
             )}
             {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
                 <UnderspørsmålContainer>
