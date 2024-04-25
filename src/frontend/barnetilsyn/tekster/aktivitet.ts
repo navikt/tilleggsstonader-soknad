@@ -218,7 +218,7 @@ export const aktivitetTekster: AktivitetInnhold = {
                 nb: [
                     'Tiltak og arbeidsrettet utredning er for deg som mottar arbeidsavklaringspenger, uføretrygd eller har nedsatt arbeidsevne. ',
                     'Et tiltak kan for eksempel være kurs eller arbeidstrening. Arbeidsrettet utredning er en prosess der dine ferdigheter og muligheter til å utføre arbeid blir vurdert og kartlagt.',
-                    'Er du enslige forsørger/gjenlevende må en utdanning godkjennes av din veileder for å gi rett til støtte til pass. ',
+                    'Er du enslig forsørger/gjenlevende må en utdanning godkjennes av din veileder for å gi rett til støtte til pass. ',
                     'For å få støtte til pass som arbeidssøker må du være enslig forsørger/gjenlevende, sende meldekort og være registrert som arbeidssøker hos NAV.',
                     'Er du i arbeid, skal du fylle ut en annen søknad avhengig av din situasjon:',
                 ],
