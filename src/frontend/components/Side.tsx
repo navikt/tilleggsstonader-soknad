@@ -79,7 +79,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     const aktivtSteg: IRoute | undefined = routes[aktivtStegIndex];
 
     useEffect(() => {
-        loggBesøkBarnetilsyn(aktivtSteg.route, aktivtSteg.label);
+        loggBesøkBarnetilsyn(aktivtSteg.path, aktivtSteg.label);
     }, [aktivtSteg]);
 
     const navigerTilNesteSide = () => {

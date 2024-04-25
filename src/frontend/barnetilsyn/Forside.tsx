@@ -46,7 +46,7 @@ const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = RoutesBarnetilsyn[0];
-        loggBesøkBarnetilsyn(route.route, route.label);
+        loggBesøkBarnetilsyn(route.path, route.label);
     }, []);
 
     const startSøknad = () => {
