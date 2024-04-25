@@ -10,6 +10,7 @@ interface AktivitetInnhold {
     radio_annet: Radiogruppe<AnnenAktivitetType>;
     radio_annet_uten_registeraktivitet: Radiogruppe<AnnenAktivitetType>;
     radio_annet_lesmer: LesMer<InlineLenke>;
+    radio_annet_lesmer_hva_betyr_alternativene: HvaBetyrAlternativene;
     radio_annet_feilmelding: TekstElement<string>;
     ingen_registrerte_aktiviterer_overskrift: TekstElement<string>;
     tittel: TekstElement<string>;
@@ -33,6 +34,13 @@ interface HvilkenAktivitet {
         del1: TekstElement<string[]>;
         del2_lenker: TekstElement<InlineLenke>[];
         del3: TekstElement<InlineLenke>;
+    };
+}
+interface HvaBetyrAlternativene {
+    header: TekstElement<string>;
+    innhold: {
+        del1: TekstElement<string[]>;
+        del2_lenker: TekstElement<InlineLenke>[];
     };
 }
 interface IngenAktivitet {
@@ -200,6 +208,44 @@ export const aktivitetTekster: AktivitetInnhold = {
                     variant: 'neutral',
                 },
                 '.',
+            ],
+        },
+    },
+    radio_annet_lesmer_hva_betyr_alternativene: {
+        header: { nb: 'Hva betyr alternativene?' },
+        innhold: {
+            del1: {
+                nb: [
+                    'Tiltak og arbeidsrettet utredning er for deg som mottar arbeidsavklaringspenger, uføretrygd eller har nedsatt arbeidsevne. ',
+                    'Et tiltak kan for eksempel være kurs eller arbeidstrening. Arbeidsrettet utredning er en prosess der dine ferdigheter og muligheter til å utføre arbeid blir vurdert og kartlagt.',
+                    'Er du enslig forsørger/gjenlevende må en utdanning godkjennes av din veileder for å gi rett til støtte til pass. ',
+                    'For å få støtte til pass som arbeidssøker må du være enslig forsørger/gjenlevende, sende meldekort og være registrert som arbeidssøker hos NAV.',
+                    'Er du i arbeid, skal du fylle ut en annen søknad avhengig av din situasjon:',
+                ],
+            },
+            del2_lenker: [
+                {
+                    nb: [
+                        'for ',
+                        {
+                            tekst: 'enslig mor/far',
+                            url: 'https://www.nav.no/barnetilsyn-enslig',
+                            variant: 'neutral',
+                        },
+                        ' (åpnes i ny fane)',
+                    ],
+                },
+                {
+                    nb: [
+                        'for ',
+                        {
+                            tekst: 'gjenlevende',
+                            url: 'https://www.nav.no/barnetilsyn-gjenlevende',
+                            variant: 'neutral',
+                        },
+                        ' (åpnes i ny fane)',
+                    ],
+                },
             ],
         },
     },
