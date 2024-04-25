@@ -1,7 +1,14 @@
 import React from 'react';
 
+import { List } from '@navikt/ds-react';
+
+import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
+import {
+    LocaleReadMoreMedChildren,
+    LocaleReadMoreMedLenke,
+} from '../../../components/Teksthåndtering/LocaleReadMore';
+import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { EnumFelt } from '../../../typer/skjema';
 import { Radiogruppe } from '../../../typer/tekst';
@@ -29,7 +36,26 @@ export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
                 onChange={oppdaterAnnenAktivitet}
                 value={annenAktivitet?.verdi || []}
                 error={feilmelding?.melding}
-            ></LocaleRadioGroup>
+            >
+                <LocaleReadMoreMedChildren
+                    header={aktivitetTekster.radio_annet_lesmer_hva_betyr_alternativene.header}
+                >
+                    <LocaleTekstAvsnitt
+                        tekst={
+                            aktivitetTekster.radio_annet_lesmer_hva_betyr_alternativene.innhold.del1
+                        }
+                    />
+                    <List>
+                        {aktivitetTekster.radio_annet_lesmer_hva_betyr_alternativene.innhold.del2_lenker.map(
+                            (lenke, indeks) => (
+                                <List.Item key={indeks}>
+                                    <LocaleInlineLenke tekst={lenke} />
+                                </List.Item>
+                            )
+                        )}
+                    </List>
+                </LocaleReadMoreMedChildren>
+            </LocaleRadioGroup>
             <LocaleReadMoreMedLenke tekst={aktivitetTekster.radio_annet_lesmer} />
         </div>
     );
