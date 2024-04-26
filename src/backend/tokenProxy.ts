@@ -54,6 +54,7 @@ const prepareSecuredRequest = async (req: Request, applicationName: ApplicationN
     const accessToken = await exchangeToken(token, applicationName).then(
         (accessToken) => accessToken
     );
+    logInfo('PrepareSecuredRequest done', req);
     return {
         authorization: `Bearer ${accessToken}`,
     };
