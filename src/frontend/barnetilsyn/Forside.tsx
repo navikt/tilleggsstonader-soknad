@@ -14,9 +14,9 @@ import {
     Label,
 } from '@navikt/ds-react';
 
-import { RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
+import { ERouteBarnetilsyn, RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
-import { loggBesøkBarnetilsyn, loggSkjemaStartet } from '../api/amplitude';
+import { loggAccordionEvent, loggBesøkBarnetilsyn, loggSkjemaStartet } from '../api/amplitude';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
@@ -59,6 +59,10 @@ const Forside: React.FC = () => {
         }
     };
 
+    const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
+        loggAccordionEvent(skalÅpne, tittel, ERouteBarnetilsyn.FORSIDE);
+    };
+
     return (
         <Container>
             <PellePanel poster>
@@ -83,7 +87,11 @@ const Forside: React.FC = () => {
                 innhold={forsideTekster.dine_plikter_innhold}
             />
             <Accordion>
-                <Accordion.Item>
+                <Accordion.Item
+                    onOpenChange={(skalÅpne) =>
+                        loggAccordionÅpning(skalÅpne, 'Hvilke utgifter dekker vi?')
+                    }
+                >
                     <Accordion.Header>
                         <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
                     </Accordion.Header>
@@ -91,7 +99,11 @@ const Forside: React.FC = () => {
                         <LocaleTekstAvsnitt tekst={forsideTekster.utgifter_som_dekkes_innhold} />
                     </Accordion.Content>
                 </Accordion.Item>
-                <Accordion.Item>
+                <Accordion.Item
+                    onOpenChange={(skalÅpne) =>
+                        loggAccordionÅpning(skalÅpne, 'Dokumentasjon av utgifter')
+                    }
+                >
                     <Accordion.Header>
                         <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_tittel} />
                     </Accordion.Header>
@@ -106,7 +118,11 @@ const Forside: React.FC = () => {
                         ))}
                     </Accordion.Content>
                 </Accordion.Item>
-                <Accordion.Item>
+                <Accordion.Item
+                    onOpenChange={(skalÅpne) =>
+                        loggAccordionÅpning(skalÅpne, 'Informasjon vi henter')
+                    }
+                >
                     <Accordion.Header>
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_tittel} />
                     </Accordion.Header>
