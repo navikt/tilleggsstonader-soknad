@@ -12,7 +12,9 @@ type eventType =
     | 'skjema fullført'
     | 'navigere'
     | 'alert vist'
-    | 'besøk';
+    | 'besøk'
+    | 'accordion åpnet'
+    | 'accordion lukket';
 
 export const initAmplitude = () => {
     init('default', '', {
@@ -81,5 +83,14 @@ export const loggBesøkBarnetilsyn = (url: string, sidetittel: string) => {
     loggEventMedSkjema('besøk', Stønadstype.BARNETILSYN, {
         url: url,
         sidetittel: sidetittel,
+    });
+};
+
+export const loggAccordionEvent = (skalÅpnes: boolean, tekst: string, side?: string) => {
+    const event = skalÅpnes ? 'accordion åpnet' : 'accordion lukket';
+
+    loggEventMedSkjema(event, Stønadstype.BARNETILSYN, {
+        tekst: tekst,
+        side: side,
     });
 };

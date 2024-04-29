@@ -1,6 +1,7 @@
 import { BodyLong, List, ReadMore } from '@navikt/ds-react';
 
 import LocaleInlineLenke from './LocaleInlineLenke';
+import { loggAccordionEvent } from '../../api/amplitude';
 import { useSpråk } from '../../context/SpråkContext';
 import { InlineLenke, LesMer, TekstElement } from '../../typer/tekst';
 
@@ -10,10 +11,14 @@ export const LocaleReadMore: React.FC<{
 }> = ({ tekst, somPunktListe = false }) => {
     const { locale } = useSpråk();
 
+    const header = tekst.header[locale];
     const innhold = tekst.innhold[locale];
 
     return (
-        <ReadMore header={tekst.header[locale]}>
+        <ReadMore
+            header={header}
+            onOpenChange={(skalÅpnes) => loggAccordionEvent(skalÅpnes, header)}
+        >
             {Array.isArray(innhold) ? (
                 somPunktListe ? (
                     <List>
@@ -38,8 +43,13 @@ export const LocaleReadMore: React.FC<{
 export const LocaleReadMoreMedLenke: React.FC<{ tekst: LesMer<InlineLenke> }> = ({ tekst }) => {
     const { locale } = useSpråk();
 
+    const header = tekst.header[locale];
+
     return (
-        <ReadMore header={tekst.header[locale]}>
+        <ReadMore
+            header={header}
+            onOpenChange={(skalÅpnes) => loggAccordionEvent(skalÅpnes, header)}
+        >
             <LocaleInlineLenke tekst={tekst.innhold} />
         </ReadMore>
     );
@@ -51,5 +61,14 @@ export const LocaleReadMoreMedChildren: React.FC<{
 }> = ({ header, children }) => {
     const { locale } = useSpråk();
 
-    return <ReadMore header={header[locale]}>{children}</ReadMore>;
+    const headerTekst = header[locale];
+
+    return (
+        <ReadMore
+            header={headerTekst}
+            onOpenChange={(skalÅpnes) => loggAccordionEvent(skalÅpnes, headerTekst)}
+        >
+            {children}
+        </ReadMore>
+    );
 };
