@@ -91,7 +91,7 @@ const Filopplaster: React.FC<{
                 <Button
                     onClick={() => hiddenFileInput.current?.click()}
                     icon={<UploadIcon />}
-                    disabled={laster}
+                    loading={laster}
                 >
                     <LocaleTekst tekst={filopplastingTekster.last_opp_fil_knapp} />
                 </Button>
