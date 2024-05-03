@@ -155,7 +155,7 @@ export const aktivitetTekster: AktivitetInnhold = {
         ],
     },
     radio_lønnet_tiltak_feilmelding: {
-        nb: 'Du må svare på om du mottar lønn.',
+        nb: 'Du må svare på om du mottar lønn gjennom et tiltak.',
     },
     ingen_aktivitet_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
     ingen_aktivitet_infoalert_innhold: {
