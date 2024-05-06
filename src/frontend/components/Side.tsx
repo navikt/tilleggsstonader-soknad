@@ -15,7 +15,7 @@ import {
     loggSkjemaStegFullført,
 } from '../api/amplitude';
 import { sendInnSøknad } from '../api/api';
-import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
+import { ERouteBarnetilsyn, RouteTilPath } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { useSpråk } from '../context/SpråkContext';
 import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
@@ -119,7 +119,13 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         })
             .then((res) => {
                 settInnsentTidspunkt(res.mottattTidspunkt);
+
                 loggSkjemaFullført(stønadstype);
+                loggBesøkBarnetilsyn(
+                    RouteTilPath[ERouteBarnetilsyn.KVITTERING],
+                    ERouteBarnetilsyn.KVITTERING
+                );
+
                 navigate(nesteRoute.path);
             })
             // TODO håndtering av 401?
