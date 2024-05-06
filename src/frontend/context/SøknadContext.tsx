@@ -13,14 +13,14 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
     const [harBekreftet, settHarBekreftet] = useState<boolean>(false);
 
     const [hovedytelse, settHovedytelse] = useState<Hovedytelse>();
+
     const [aktivitet, settAktivitet] = useState<Aktivitet>();
 
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);
 
     const [dokumentasjonsbehov, settDokumentasjonsbehov] = useState<Dokumentasjonsbehov[]>([]);
-    const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
 
-    const [innsentTidspunkt, settInnsentTidspunkt] = useState<string>();
+    const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
 
     const [valideringsfeil, settValideringsfeil] = useState<Valideringsfeil>({});
 
@@ -37,8 +37,6 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         settDokumentasjonsbehov,
         dokumentasjon,
         settDokumentasjon,
-        innsentTidspunkt,
-        settInnsentTidspunkt,
         valideringsfeil,
         settValideringsfeil,
     };
