@@ -61,6 +61,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         aktivitet,
         barnMedBarnepass,
         dokumentasjon,
+        resetSøknad,
     } = useSøknad();
 
     const errorRef = useRef<HTMLDivElement>(null);
@@ -124,6 +125,8 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                     RouteTilPath[ERouteBarnetilsyn.KVITTERING],
                     ERouteBarnetilsyn.KVITTERING
                 );
+
+                resetSøknad();
 
                 navigate(nesteRoute.path, { state: { innsendtTidspunkt: res.mottattTidspunkt } });
             })

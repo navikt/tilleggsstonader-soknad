@@ -24,6 +24,16 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
 
     const [valideringsfeil, settValideringsfeil] = useState<Valideringsfeil>({});
 
+    const resetSøknad = () => {
+        settHarBekreftet(false);
+        settHovedytelse(undefined);
+        settAktivitet(undefined);
+        settBarnMedBarnepass([]);
+        settDokumentasjonsbehov([]);
+        settDokumentasjon([]);
+        settValideringsfeil({});
+    };
+
     return {
         harBekreftet,
         settHarBekreftet,
@@ -39,6 +49,7 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         settDokumentasjon,
         valideringsfeil,
         settValideringsfeil,
+        resetSøknad,
     };
 });
 

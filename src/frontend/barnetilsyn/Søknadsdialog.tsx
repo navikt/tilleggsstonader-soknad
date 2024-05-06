@@ -20,6 +20,7 @@ const Søknadsdialog: React.FC = () => {
             <Routes>
                 <Route path={'/'} element={<Forside />} />
                 <Route path={'*'} element={<SøknadsdialogInnhold />} />
+                <Route path={'/kvittering'} element={<Kvittering />} />
             </Routes>
         </>
     );
@@ -35,7 +36,6 @@ const SøknadsdialogInnhold = () => {
                 <Route path={'/barnepass'} element={<Barnepass />} />
                 <Route path={'/vedlegg'} element={<Vedlegg />} />
                 <Route path={'/oppsummering'} element={<Oppsummering />} />
-                <Route path={'/kvittering'} element={<Kvittering />} />
             </Routes>
         </RedirectTilStart>
     );
