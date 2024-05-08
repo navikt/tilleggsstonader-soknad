@@ -1,7 +1,8 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Alert, BodyLong, BodyShort, Heading } from '@navikt/ds-react';
 
+import { barnetilsynPath } from './routing/routesBarnetilsyn';
 import { kvitteringTekster } from './tekster/kvittering';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
@@ -9,7 +10,13 @@ import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import { formaterNullableIsoDatoTid } from '../utils/formatering';
 
 const Kvittering = () => {
-    const { innsendtTidspunkt } = useLocation().state;
+    const locationState = useLocation().state;
+    const navigate = useNavigate();
+
+    if (locationState === null) {
+        // brukeren har ikke gått inn via oppsummeringssiden
+        navigate(barnetilsynPath);
+    }
 
     return (
         <Container>
@@ -23,7 +30,7 @@ const Kvittering = () => {
                 <BodyLong spacing>
                     <LocaleTekst
                         tekst={kvitteringTekster.søknad_mottatt_alert_innhold1}
-                        argument0={formaterNullableIsoDatoTid(innsendtTidspunkt)}
+                        argument0={formaterNullableIsoDatoTid(locationState.innsendtTidspunkt)}
                     />
                 </BodyLong>
                 <BodyLong>
