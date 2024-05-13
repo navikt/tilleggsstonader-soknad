@@ -33,7 +33,7 @@ export const dineBarnTekster: DineBarnInnhold = {
     hvilke_barn_feilmelding: { nb: 'Du må velge minst ett barn som du søker støtte til pass for.' },
     alert_barn_over_9: {
         tittel: {
-            nb: 'Som hovedregel gis det bare støtte til pass av barn til og med 4. klasse',
+            nb: 'Som hovedregel gis det bare støtte til pass av barn til og med 4.-klasse',
         },
         innhold: {
             nb: 'Unntaket er hvis ditt barn trenger mer pass eller pleie enn jevnaldrende eller hvis du har ett tiltak/utdanning hvor du må være borte i lengre perioder eller på andre tidspunkter enn en vanlig arbeidsdag. Dette må dokumenteres.',
