@@ -69,14 +69,14 @@ export const barnepassTekster: BarnepassInnhold = {
         nb: 'Du må velge hva slags pass [0] har.',
     },
     startet_femte_radio: {
-        header: { nb: 'Har [0] startet i 5.-klasse når tiltaket ditt starter?' },
+        header: { nb: 'Har [0] startet i 5. klasse når tiltaket ditt starter?' },
         alternativer: JaNeiTilTekst,
     },
     startet_femte_feilmelding: {
-        nb: 'Du må svare på om [0] har begynt i 5.-klasse.',
+        nb: 'Du må svare på om [0] har begynt i 5. klasse.',
     },
     startet_femte_readmore_header: {
-        nb: 'Som hovedregel gis det bare støtte for pass av barn til og med 4.-klasse.',
+        nb: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.',
     },
     startet_femte_readmore_innhold: { nb: 'Unntaket er hvis noe av dette er tilfelle:' },
     startet_femte_readmore_punktliste: {
@@ -88,12 +88,12 @@ export const barnepassTekster: BarnepassInnhold = {
     },
     årsak_ekstra_pass_radio: {
         header: {
-            nb: 'Hva er årsaken til at [0] trenger pass etter at han har begynt i 5.-klasse?',
+            nb: 'Hva er årsaken til at [0] trenger pass etter at han har begynt i 5. klasse?',
         },
         alternativer: ÅrsakEkstraPassTilTekst,
     },
     årsak_ekstra_pass_feilmelding: {
-        nb: 'Du må velge en årsak til at [0] trenger pass etter 5.-klasse.',
+        nb: 'Du må velge en årsak til at [0] trenger pass etter 5. klasse.',
     },
     mer_pleie_alert: {
         tittel: {

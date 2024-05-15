@@ -56,7 +56,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: [
             'Vi dekker opp til 64 prosent av utgiftene du har til pass av barn.',
             'Utgifter til mat og bleier dekkes ikke.',
-            'Som hovedregel gis det bare støtte til pass av barn til og med 4.-klasse.',
+            'Som hovedregel gis det bare støtte til pass av barn til og med 4. klasse.',
         ],
     },
     info_som_hentes_tittel: {
