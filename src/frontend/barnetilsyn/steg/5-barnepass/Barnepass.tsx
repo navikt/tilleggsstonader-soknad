@@ -31,7 +31,7 @@ const Barnepass = () => {
     } = useSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
-        Array.from(valgteBarn).map(
+        valgteBarn.map(
             (valgtBarn) =>
                 barnMedBarnepass.find((barnepass) => barnepass.ident == valgtBarn) || {
                     ident: valgtBarn,

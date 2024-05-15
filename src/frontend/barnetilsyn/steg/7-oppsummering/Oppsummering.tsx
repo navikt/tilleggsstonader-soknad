@@ -159,10 +159,7 @@ const ArbeidsrettetAktivitet: React.FC<{ aktivitet: Aktivitet | undefined }> = (
     );
 };
 
-const DineBarn: React.FC<{ person: Person; valgteBarn: Set<string> }> = ({
-    person,
-    valgteBarn,
-}) => (
+const DineBarn: React.FC<{ person: Person; valgteBarn: string[] }> = ({ person, valgteBarn }) => (
     <AccordionItem
         header={oppsummeringTekster.accordians.dine_barn.tittel}
         endreKnapp={{
@@ -174,7 +171,7 @@ const DineBarn: React.FC<{ person: Person; valgteBarn: Set<string> }> = ({
             <LocaleTekst tekst={oppsummeringTekster.accordians.dine_barn.label} />
         </Label>
         {person.barn
-            .filter((barn) => valgteBarn.has(barn.ident))
+            .filter((barn) => valgteBarn.some((ident) => ident === barn.ident))
             .map((barn) => (
                 <BodyShort key={barn.ident}>
                     {barn.visningsnavn}, født {formaterIsoDato(barn.fødselsdato)}

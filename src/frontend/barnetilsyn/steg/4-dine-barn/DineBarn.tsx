@@ -29,23 +29,26 @@ const DineBarn = () => {
         settValideringsfeil,
     } = useSøknad();
 
-    const [personbarn, settPersonbarn] = useState<Set<string>>(valgteBarn);
+    const [personbarn, settPersonbarn] = useState<string[]>(valgteBarn);
 
     useEffect(() => {
-        if (inneholderFeil(valideringsfeil) && personbarn.size > 0) {
+        if (inneholderFeil(valideringsfeil) && personbarn.length > 0) {
             settValideringsfeil({});
         }
     }, [valideringsfeil, personbarn, settValideringsfeil]);
 
     const fjernDokumentasjonsFeltForBarnSomErFjernet = () => {
         settDokumentasjon((prevState) =>
-            prevState.filter((dokument) => !dokument.barnId || personbarn.has(dokument.barnId))
+            prevState.filter(
+                (dokument) =>
+                    !dokument.barnId || personbarn.some((ident) => dokument.barnId === ident)
+            )
         );
     };
 
-    const kanFortsette = (personbarn: Set<string>): boolean => {
+    const kanFortsette = (personbarn: string[]): boolean => {
         let feil: Valideringsfeil = {};
-        if (personbarn.size === 0) {
+        if (personbarn.length === 0) {
             feil = {
                 ...feil,
                 hvilkeBarn: { id: '1', melding: dineBarnTekster.hvilke_barn_feilmelding[locale] },
@@ -77,8 +80,8 @@ const DineBarn = () => {
                     id={valideringsfeil.hvilkeBarn?.id}
                     legend={dineBarnTekster.hvilke_barn_spm[locale]}
                     error={valideringsfeil.hvilkeBarn?.melding}
-                    value={Array.from(personbarn)}
-                    onChange={(values) => settPersonbarn(new Set(values))}
+                    value={personbarn}
+                    onChange={settPersonbarn}
                 >
                     {person.barn.map((barn) => (
                         <Checkbox key={barn.ident} value={barn.ident}>
