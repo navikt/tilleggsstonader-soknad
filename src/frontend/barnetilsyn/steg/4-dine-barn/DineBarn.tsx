@@ -21,27 +21,27 @@ const DineBarn = () => {
     const { locale } = useSpråk();
     const { person } = usePerson();
     const {
-        valgteBarn,
-        settValgteBarn,
+        valgteBarnIdenter,
+        settValgteBarnIdenter,
         settDokumentasjon,
         hovedytelse,
         valideringsfeil,
         settValideringsfeil,
     } = useSøknad();
 
-    const [personbarn, settPersonbarn] = useState<string[]>(valgteBarn);
+    const [barnIdenter, settBarnIdenter] = useState<string[]>(valgteBarnIdenter);
 
     useEffect(() => {
-        if (inneholderFeil(valideringsfeil) && personbarn.length > 0) {
+        if (inneholderFeil(valideringsfeil) && barnIdenter.length > 0) {
             settValideringsfeil({});
         }
-    }, [valideringsfeil, personbarn, settValideringsfeil]);
+    }, [valideringsfeil, barnIdenter, settValideringsfeil]);
 
     const fjernDokumentasjonsFeltForBarnSomErFjernet = () => {
         settDokumentasjon((prevState) =>
             prevState.filter(
                 (dokument) =>
-                    !dokument.barnId || personbarn.some((ident) => dokument.barnId === ident)
+                    !dokument.barnId || barnIdenter.some((ident) => dokument.barnId === ident)
             )
         );
     };
@@ -60,13 +60,13 @@ const DineBarn = () => {
 
     const oppdaterSøknad = () => {
         fjernDokumentasjonsFeltForBarnSomErFjernet();
-        settValgteBarn(personbarn);
+        settValgteBarnIdenter(barnIdenter);
     };
 
     return (
         <Side
             stønadstype={Stønadstype.BARNETILSYN}
-            validerSteg={() => kanFortsette(personbarn)}
+            validerSteg={() => kanFortsette(barnIdenter)}
             oppdaterSøknad={oppdaterSøknad}
         >
             <Heading size="medium">
@@ -80,8 +80,8 @@ const DineBarn = () => {
                     id={valideringsfeil.hvilkeBarn?.id}
                     legend={dineBarnTekster.hvilke_barn_spm[locale]}
                     error={valideringsfeil.hvilkeBarn?.melding}
-                    value={personbarn}
-                    onChange={settPersonbarn}
+                    value={barnIdenter}
+                    onChange={settBarnIdenter}
                 >
                     {person.barn.map((barn) => (
                         <Checkbox key={barn.ident} value={barn.ident}>
@@ -89,7 +89,7 @@ const DineBarn = () => {
                         </Checkbox>
                     ))}
                 </CheckboxGroup>
-                {harValgtBarnOver9år(person.barn, personbarn) && (
+                {harValgtBarnOver9år(person.barn, barnIdenter) && (
                     <Alert variant="info">
                         <Heading size="small">
                             <LocaleTekst tekst={dineBarnTekster.alert_barn_over_9.tittel} />

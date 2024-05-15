@@ -22,7 +22,7 @@ const Barnepass = () => {
     const { person } = usePerson();
     const { locale } = useSpråk();
     const {
-        valgteBarn,
+        valgteBarnIdenter,
         barnMedBarnepass,
         settBarnMedBarnepass,
         settDokumentasjonsbehov,
@@ -31,10 +31,10 @@ const Barnepass = () => {
     } = useSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
-        valgteBarn.map(
-            (valgtBarn) =>
-                barnMedBarnepass.find((barnepass) => barnepass.ident == valgtBarn) || {
-                    ident: valgtBarn,
+        valgteBarnIdenter.map(
+            (ident) =>
+                barnMedBarnepass.find((barnepass) => barnepass.ident == ident) || {
+                    ident: ident,
                 }
         )
     );

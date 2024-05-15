@@ -16,7 +16,7 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
 
     const [aktivitet, settAktivitet] = useState<Aktivitet>();
 
-    const [valgteBarn, settValgteBarn] = useState<string[]>([]);
+    const [valgteBarnIdenter, settValgteBarnIdenter] = useState<string[]>([]);
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);
 
     const [dokumentasjonsbehov, settDokumentasjonsbehov] = useState<Dokumentasjonsbehov[]>([]);
@@ -28,7 +28,7 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
     const resetSøknad = () => {
         settHovedytelse(undefined);
         settAktivitet(undefined);
-        settValgteBarn([]);
+        settValgteBarnIdenter([]);
         settBarnMedBarnepass([]);
         settDokumentasjonsbehov([]);
         settDokumentasjon([]);
@@ -52,8 +52,8 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
         valideringsfeil,
         settValideringsfeil,
         resetSøknad,
-        valgteBarn,
-        settValgteBarn,
+        valgteBarnIdenter,
+        settValgteBarnIdenter,
     };
 });
 
