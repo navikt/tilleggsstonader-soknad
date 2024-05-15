@@ -159,7 +159,10 @@ const ArbeidsrettetAktivitet: React.FC<{ aktivitet: Aktivitet | undefined }> = (
     );
 };
 
-const DineBarn: React.FC<{ person: Person }> = ({ person }) => (
+const DineBarn: React.FC<{ person: Person; valgteBarnIdenter: string[] }> = ({
+    person,
+    valgteBarnIdenter,
+}) => (
     <AccordionItem
         header={oppsummeringTekster.accordians.dine_barn.tittel}
         endreKnapp={{
@@ -171,7 +174,7 @@ const DineBarn: React.FC<{ person: Person }> = ({ person }) => (
             <LocaleTekst tekst={oppsummeringTekster.accordians.dine_barn.label} />
         </Label>
         {person.barn
-            .filter((barn) => barn.skalHaBarnepass)
+            .filter((barn) => valgteBarnIdenter.some((ident) => ident === barn.ident))
             .map((barn) => (
                 <BodyShort key={barn.ident}>
                     {barn.visningsnavn}, født {formaterIsoDato(barn.fødselsdato)}
@@ -262,7 +265,8 @@ const Vedlegg: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({ dokumentasj
 );
 
 const Oppsummering = () => {
-    const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon } = useSøknad();
+    const { hovedytelse, aktivitet, valgteBarnIdenter, barnMedBarnepass, dokumentasjon } =
+        useSøknad();
     const { person } = usePerson();
     const [harBekreftet, settHarBekreftet] = useState(false);
     const [feil, settFeil] = useState<string>('');
@@ -289,7 +293,7 @@ const Oppsummering = () => {
                 <OmDeg person={person} />
                 <DinSituasjon hovedytelse={hovedytelse} />
                 <ArbeidsrettetAktivitet aktivitet={aktivitet} />
-                <DineBarn person={person} />
+                <DineBarn person={person} valgteBarnIdenter={valgteBarnIdenter} />
                 <PassAvBarn person={person} barnMedBarnepass={barnMedBarnepass} />
                 <Vedlegg dokumentasjon={dokumentasjon} />
             </Accordion>

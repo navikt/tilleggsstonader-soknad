@@ -62,7 +62,7 @@ export const finnBarn = (barn: Barn[], ident: string): Barn => {
 
 export const er9ellerEldre = (barn: Barn): boolean => barn.alder >= 9;
 
-export const harValgtBarnOver9år = (barn: Barn[]): boolean =>
-    barn.some((b) => b.skalHaBarnepass && er9ellerEldre(b));
+export const harValgtBarnOver9år = (barn: Barn[], valgteBarn: string[]): boolean =>
+    barn.some((b) => valgteBarn.some((ident) => ident === b.ident) && er9ellerEldre(b));
 
 export const harBarnUnder2år = (barn: Barn[]): boolean => barn.some((b) => b.alder < 2);
