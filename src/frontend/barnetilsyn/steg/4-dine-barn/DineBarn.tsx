@@ -46,9 +46,9 @@ const DineBarn = () => {
         );
     };
 
-    const kanFortsette = (personbarn: string[]): boolean => {
+    const kanFortsette = (valgteBarn: string[]): boolean => {
         let feil: Valideringsfeil = {};
-        if (personbarn.length === 0) {
+        if (valgteBarn.length === 0) {
             feil = {
                 ...feil,
                 hvilkeBarn: { id: '1', melding: dineBarnTekster.hvilke_barn_feilmelding[locale] },
