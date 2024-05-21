@@ -20,17 +20,19 @@ const developmentConfig = merge(common, {
         historyApiFallback: {
             index: publicPath,
         },
-        proxy: {
-            '/api': {
-                target: 'http://localhost:8001',
-                onProxyReq: (proxyReq, req, res) => {
-                    const cookieValue = req.cookies['localhost-idtoken'];
-                    if (cookieValue) {
-                        proxyReq.setHeader('Authorization', `Bearer ${cookieValue}`);
-                    }
+        proxy: [
+            {
+                '/api': {
+                    target: 'http://localhost:8001',
+                    onProxyReq: (proxyReq, req, res) => {
+                        const cookieValue = req.cookies['localhost-idtoken'];
+                        if (cookieValue) {
+                            proxyReq.setHeader('Authorization', `Bearer ${cookieValue}`);
+                        }
+                    },
                 },
             },
-        },
+        ],
         setupMiddlewares: (middlewares, devServer) => {
             if (!devServer) {
                 throw new Error('webpack-dev-server is not defined');
