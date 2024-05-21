@@ -36,14 +36,14 @@ const routes = () => {
         `${BASE_PATH_SOKNAD}/api/vedlegg`,
         addRequestInfo(),
         attachToken('familie-dokument'),
-        doProxy(miljø.vedleggUrl, `${BASE_PATH_SOKNAD}/api/vedlegg`)
+        doProxy(miljø.vedleggUrl)
     );
 
     expressRouter.use(
         `${BASE_PATH_SOKNAD}/api`,
         addRequestInfo(),
         attachToken('tilleggsstonader-soknad-api'),
-        doProxy(miljø.apiUrl, `${BASE_PATH_SOKNAD}/api`)
+        doProxy(miljø.apiUrl)
     );
 
     return expressRouter;
