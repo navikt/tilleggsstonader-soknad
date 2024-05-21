@@ -15,7 +15,7 @@ import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formatering';
 import { harKunValgtEnsligSomHovedytelse } from '../../../utils/hovedytelse';
 import { dineBarnTekster } from '../../tekster/dineBarn';
-import { harBarnUnder2år, harValgtBarnOver9år } from '../5-barnepass/utils';
+import { harBarnUnder2år, harValgtBarnOver9år } from '../5-pass-av-dine-barn/utils';
 
 const DineBarn = () => {
     const { locale } = useSpråk();

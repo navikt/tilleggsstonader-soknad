@@ -5,7 +5,7 @@ import Kvittering from './Kvittering';
 import Hovedytelse from './steg/2-hovedytelse/Hovedytelse';
 import Aktivitet from './steg/3-aktivitet/Aktivitet';
 import DineBarn from './steg/4-dine-barn/DineBarn';
-import Barnepass from './steg/5-barnepass/Barnepass';
+import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
 import Vedlegg from './steg/6-vedlegg/Vedlegg';
 import Oppsummering from './steg/7-oppsummering/Oppsummering';
 import { Banner } from '../components/Banner';
@@ -33,7 +33,7 @@ const SøknadsdialogInnhold = () => {
                 <Route path={'/hovedytelse'} element={<Hovedytelse />} />
                 <Route path={'/aktivitet'} element={<Aktivitet />} />
                 <Route path={'/dine-barn'} element={<DineBarn />} />
-                <Route path={'/barnepass'} element={<Barnepass />} />
+                <Route path={'/barnepass'} element={<PassAvDineBarn />} />
                 <Route path={'/vedlegg'} element={<Vedlegg />} />
                 <Route path={'/oppsummering'} element={<Oppsummering />} />
             </Routes>
