@@ -7,8 +7,6 @@ import common from './webpack.common.js';
 
 const publicPath = process.env.PUBLIC_URL || '/';
 
-console.log(`publicPath=${publicPath}`);
-
 const developmentConfig = merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
@@ -24,7 +22,7 @@ const developmentConfig = merge(common, {
             {
                 context: ['/api'],
                 target: 'http://localhost:8001',
-                onProxyReq: (proxyReq, req, res) => {
+                onProxyReq: (proxyReq, req) => {
                     const cookieValue = req.cookies['localhost-idtoken'];
                     if (cookieValue) {
                         proxyReq.setHeader('Authorization', `Bearer ${cookieValue}`);
