@@ -22,14 +22,13 @@ const developmentConfig = merge(common, {
         },
         proxy: [
             {
-                '/api': {
-                    target: 'http://localhost:8001',
-                    onProxyReq: (proxyReq, req, res) => {
-                        const cookieValue = req.cookies['localhost-idtoken'];
-                        if (cookieValue) {
-                            proxyReq.setHeader('Authorization', `Bearer ${cookieValue}`);
-                        }
-                    },
+                context: ['/api'],
+                target: 'http://localhost:8001',
+                onProxyReq: (proxyReq, req, res) => {
+                    const cookieValue = req.cookies['localhost-idtoken'];
+                    if (cookieValue) {
+                        proxyReq.setHeader('Authorization', `Bearer ${cookieValue}`);
+                    }
                 },
             },
         ],
