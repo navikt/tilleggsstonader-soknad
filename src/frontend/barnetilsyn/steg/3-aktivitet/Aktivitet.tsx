@@ -178,7 +178,7 @@ const Aktivitet = () => {
             {!skalViseArbeidsrettedeAktiviteter && (
                 <>
                     <div>
-                        <Label weight={'semibold'}>
+                        <Label>
                             <LocaleTekst
                                 tekst={aktivitetTekster.ingen_registrerte_aktiviterer_overskrift}
                             ></LocaleTekst>
