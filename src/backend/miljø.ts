@@ -8,14 +8,14 @@ const lokaltMiljø = {
 
 const devMiljø = {
     apiUrl: 'http://tilleggsstonader-soknad-api/api',
-    vedleggUrl: 'http://familie-dokument.teamfamilie/api/mapper/tilleggsstonad',
+    vedleggUrl: 'http://familie-dokument.teamfamilie/api/mapper/tilleggsstonad/vedlegg',
     oauthCallbackUri:
         'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/callback',
 };
 
 const prodMiljø = {
     apiUrl: 'http://tilleggsstonader-soknad-api/api',
-    vedleggUrl: 'http://familie-dokument.teamfamilie/api/mapper/tilleggsstonad',
+    vedleggUrl: 'http://familie-dokument.teamfamilie/api/mapper/tilleggsstonad/vedlegg',
     oauthCallbackUri: 'https://www.nav.no/tilleggsstonader/soknad/soknad/oauth2/callback',
 };
 
