@@ -7,8 +7,6 @@ import common from './webpack.common.js';
 
 const publicPath = process.env.PUBLIC_URL || '/';
 
-console.log(`publicPath=${publicPath}`);
-
 const developmentConfig = merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
@@ -20,17 +18,18 @@ const developmentConfig = merge(common, {
         historyApiFallback: {
             index: publicPath,
         },
-        proxy: {
-            '/api': {
+        proxy: [
+            {
+                context: ['/api'],
                 target: 'http://localhost:8001',
-                onProxyReq: (proxyReq, req, res) => {
+                onProxyReq: (proxyReq, req) => {
                     const cookieValue = req.cookies['localhost-idtoken'];
                     if (cookieValue) {
                         proxyReq.setHeader('Authorization', `Bearer ${cookieValue}`);
                     }
                 },
             },
-        },
+        ],
         setupMiddlewares: (middlewares, devServer) => {
             if (!devServer) {
                 throw new Error('webpack-dev-server is not defined');
