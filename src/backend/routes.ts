@@ -36,7 +36,7 @@ const routes = () => {
         `${BASE_PATH_SOKNAD}/api/vedlegg`,
         addRequestInfo(),
         attachToken('familie-dokument'),
-        doProxy(miljø.vedleggUrl)
+        doProxy(miljø.vedleggUrl, true)
     );
 
     expressRouter.use(

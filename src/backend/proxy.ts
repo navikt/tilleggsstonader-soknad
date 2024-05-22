@@ -28,13 +28,14 @@ const restream = (proxyReq: ClientRequest, req: IncomingMessage) => {
     }
 };
 
-export const doProxy = (targetUrl: string): RequestHandler => {
+export const doProxy = (targetUrl: string, ignorePath: boolean = false): RequestHandler => {
     return createProxyMiddleware({
         target: targetUrl,
-        changeOrigin: true,
+        ignorePath,
         on: {
             proxyReq: restream,
         },
+        changeOrigin: true,
         secure: true,
         logger,
     });
