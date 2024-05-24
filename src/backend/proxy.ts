@@ -28,19 +28,16 @@ const restream = (proxyReq: ClientRequest, req: IncomingMessage) => {
     }
 };
 
-export const doProxy = (targetUrl: string, context: string): RequestHandler => {
-    return createProxyMiddleware(context, {
+export const doProxy = (targetUrl: string, ignorePath: boolean = false): RequestHandler => {
+    return createProxyMiddleware({
+        target: targetUrl,
+        ignorePath, // hvis proxy path er en tom streng, vil ignorePath=true hindre trailing slash etter targetUrl
+        on: {
+            proxyReq: restream,
+        },
         changeOrigin: true,
-        logLevel: 'info',
-        logProvider: () => {
-            return logger;
-        },
-        onProxyReq: restream,
-        pathRewrite: (path: string) => {
-            return path.replace(context, '');
-        },
         secure: true,
-        target: `${targetUrl}`,
+        logger,
     });
 };
 

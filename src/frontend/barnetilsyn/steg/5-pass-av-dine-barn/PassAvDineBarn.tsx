@@ -18,7 +18,7 @@ import { inneholderFeil } from '../../../typer/validering';
 import { valuerOrThrow } from '../../../utils/typer';
 import { barnepassTekster } from '../../tekster/barnepass';
 
-const Barnepass = () => {
+const PassAvDineBarn = () => {
     const { person } = usePerson();
     const { locale } = useSpråk();
     const {
@@ -96,4 +96,4 @@ const Barnepass = () => {
         </Side>
     );
 };
-export default Barnepass;
+export default PassAvDineBarn;
