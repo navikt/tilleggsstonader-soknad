@@ -110,7 +110,7 @@ export const mottarPengestøtteInnhold: MottarDuPengestøtteInnhold = {
         },
     },
     feilmnelding_mottar_du_pengestøtte: {
-        nb: 'Du må svare på om du mottar pengestøtte fra ennet land enn Norge.',
+        nb: 'Du må svare på om du mottar pengestøtte fra annet land enn Norge.',
     },
     feilmnelding_mottar_ikke_pengestøtte_med_andre_valg: {
         nb: '“Ingen pengestøtte” kan ikke kombineres med andre valg',
