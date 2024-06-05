@@ -19,7 +19,7 @@ export const mapTilRegisterAktiviteterObjektMedLabel = (
             ...acc,
             [curr.id]: {
                 ...curr,
-                label: `${curr.typeNavn}: ${tilTekstligDato(curr.fom)} - ${tilTekstligDato(curr.tom)}`,
+                label: `${curr.typeNavn}: ${tilTekstligDato(curr.fom)} - ${curr.tom ? tilTekstligDato(curr.tom) : 'pågående'}`,
             },
         }),
         {} as Record<string, RegisterAktivitetMedLabel>

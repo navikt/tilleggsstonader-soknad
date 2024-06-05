@@ -1,7 +1,7 @@
 export interface RegisterAktivitet {
     id: string;
     fom: string;
-    tom: string;
+    tom: string | null;
     erUtdanning: boolean;
     typeNavn: string;
 }
