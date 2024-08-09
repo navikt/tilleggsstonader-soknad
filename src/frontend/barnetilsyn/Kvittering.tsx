@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Alert, BodyLong, BodyShort, Heading } from '@navikt/ds-react';
@@ -13,9 +15,15 @@ const Kvittering = () => {
     const locationState = useLocation().state;
     const navigate = useNavigate();
 
-    if (locationState === null) {
-        // brukeren har ikke gått inn via oppsummeringssiden
-        navigate(barnetilsynPath);
+    useEffect(() => {
+        if (locationState === null) {
+            navigate(barnetilsynPath);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [locationState]);
+
+    if (locationState == null) {
+        return null;
     }
 
     return (
