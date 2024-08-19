@@ -4,6 +4,7 @@ interface EnvironmentProps {
     wonderwallUrl: string;
     sentryUrl?: string;
     urlGammelSøknad: string;
+    urlPapirsøknad: string;
     miljø: string;
     modellVersjon: IModellversjon;
 }
@@ -25,6 +26,8 @@ const Environment = (): EnvironmentProps => {
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlGammelSøknad:
                 'https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111215b?sub=digital',
+            urlPapirsøknad:
+                'https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111215b?sub=paper',
             miljø: 'preprod',
             modellVersjon: modellVersjon,
         };
@@ -35,6 +38,7 @@ const Environment = (): EnvironmentProps => {
             wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlGammelSøknad: 'https://www.nav.no/fyllut/nav111215b?sub=digital',
+            urlPapirsøknad: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
             miljø: 'production',
             modellVersjon: modellVersjon,
         };
@@ -43,7 +47,10 @@ const Environment = (): EnvironmentProps => {
             apiProxyUrl: 'http://localhost:8080/api',
             vedleggProxyUrl: 'http://localhost:8080/api/vedlegg/tillegg',
             wonderwallUrl: `http://localhost:8001/test/cookie?redirect=`,
-            urlGammelSøknad: 'https://soknad.intern.dev.nav.no/soknadtilleggsstonader',
+            urlGammelSøknad:
+                'https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111215b?sub=digital',
+            urlPapirsøknad:
+                'https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111215b?sub=paper',
             miljø: 'local',
             modellVersjon: modellVersjon,
         };

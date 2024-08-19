@@ -4,11 +4,11 @@ import axios, { AxiosError } from 'axios';
 import createUseContext from 'constate';
 
 import { hentPersonData } from '../api/api';
-import { sendSøkerTilGammelSøknad } from '../components/SøknadRouting/sendSøkerTilGammelSøknad';
+import { sendSøkerTilPapirsøknad } from '../components/SøknadRouting/sendSøkerTilGammelSøknad';
 import { initiellPerson } from '../mock/initiellPerson';
 import { Person } from '../typer/person';
 
-const erFeilOgSkalRouteTilGammelSøknad = (req: AxiosError<{ detail?: string }, unknown>) => {
+const erFeilOgSkalRouteTilPapirsøknad = (req: AxiosError<{ detail?: string }, unknown>) => {
     return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
 };
 
@@ -25,8 +25,8 @@ const [PersonProvider, usePerson] = createUseContext(() => {
                 settHarLastetPerson(true);
             })
             .catch((req) => {
-                if (axios.isAxiosError(req) && erFeilOgSkalRouteTilGammelSøknad(req)) {
-                    sendSøkerTilGammelSøknad();
+                if (axios.isAxiosError(req) && erFeilOgSkalRouteTilPapirsøknad(req)) {
+                    sendSøkerTilPapirsøknad();
                 } else {
                     // TODO noe bedre håndtering?
                     settFeilmelding(
