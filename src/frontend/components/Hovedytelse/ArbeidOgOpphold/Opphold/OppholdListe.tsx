@@ -15,11 +15,14 @@ import {
     nullstillteOppholsfeilSiste12mnd,
     validerOppholdUtenforNorgeUnderRedigering,
 } from './validering';
-import { useSpråk } from '../../../../../context/SpråkContext';
-import { useSøknad } from '../../../../../context/SøknadContext';
-import { ArbeidOgOpphold } from '../../../../../typer/søknad';
-import { inneholderFeil } from '../../../../../typer/validering';
-import { OppholdInnhold, oppholdUtenforNorgeInnhold } from '../../../../tekster/opphold';
+import {
+    OppholdInnhold,
+    oppholdUtenforNorgeInnhold,
+} from '../../../../barnetilsyn/tekster/opphold';
+import { useSpråk } from '../../../../context/SpråkContext';
+import { useSøknad } from '../../../../context/SøknadContext';
+import { ArbeidOgOpphold } from '../../../../typer/søknad';
+import { inneholderFeil } from '../../../../typer/validering';
 
 const BlåVenstreRammeContainer = styled(VStack)`
     border-left: 5px solid ${ABlue500};

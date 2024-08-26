@@ -5,12 +5,12 @@ import { Heading, VStack } from '@navikt/ds-react';
 import JobberDuIAnnetLand from './JobberDuIAnnetLand';
 import OppholdUtenforNorgeSiste12Mnd from './Opphold/OppholdUtenforNorgeSiste12Mnd';
 import Pengestøtte from './Pengestøtte';
-import { PellePanel } from '../../../../components/PellePanel/PellePanel';
-import LocaleInlineLenke from '../../../../components/Teksthåndtering/LocaleInlineLenke';
-import LocaleTekst from '../../../../components/Teksthåndtering/LocaleTekst';
-import { UnderspørsmålContainer } from '../../../../components/UnderspørsmålContainer';
-import { ArbeidOgOpphold } from '../../../../typer/søknad';
-import { arbeidOgOppholdInnhold } from '../../../tekster/opphold';
+import { arbeidOgOppholdInnhold } from '../../../barnetilsyn/tekster/opphold';
+import { ArbeidOgOpphold } from '../../../typer/søknad';
+import { PellePanel } from '../../PellePanel/PellePanel';
+import LocaleInlineLenke from '../../Teksthåndtering/LocaleInlineLenke';
+import LocaleTekst from '../../Teksthåndtering/LocaleTekst';
+import { UnderspørsmålContainer } from '../../UnderspørsmålContainer';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;

@@ -1,6 +1,6 @@
 import { AnnenAktivitetType } from './aktivitet';
 import { EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
-import { Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
+import { Ytelse } from '../components/Hovedytelse/typer';
 
 export interface Hovedytelse {
     ytelse: EnumFlereValgFelt<Ytelse>;

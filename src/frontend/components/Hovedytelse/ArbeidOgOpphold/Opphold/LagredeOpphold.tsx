@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { AGray800 } from '@navikt/ds-tokens/dist/tokens';
 
-import { OppholdUtenforNorge } from '../../../../../typer/søknad';
-import { Locale } from '../../../../../typer/tekst';
-import { formaterNullableIsoDato } from '../../../../../utils/formatering';
-import { oppholdUtenforNorgeInnhold } from '../../../../tekster/opphold';
+import { oppholdUtenforNorgeInnhold } from '../../../../barnetilsyn/tekster/opphold';
+import { OppholdUtenforNorge } from '../../../../typer/søknad';
+import { Locale } from '../../../../typer/tekst';
+import { formaterNullableIsoDato } from '../../../../utils/formatering';
 
 const VisningAvOpphold = styled(VStack)`
     border: 1px solid ${AGray800};

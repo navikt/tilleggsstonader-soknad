@@ -1,5 +1,5 @@
+import { Ytelse } from '../../components/Hovedytelse/typer';
 import { CheckboxGruppe, TekstElement } from '../../typer/tekst';
-import { Ytelse } from '../steg/2-hovedytelse/typer';
 
 interface HovedytelseInnhold {
     tittel: TekstElement<string>;

@@ -7,11 +7,11 @@ import {
     skalTaStillingTilOppholdSiste12mnd,
 } from './util';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
-import LocaleRadioGroup from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { useSøknad } from '../../../../../context/SøknadContext';
-import { EnumFelt } from '../../../../../typer/skjema';
-import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../../typer/søknad';
-import { oppholdUtenforNorgeInnhold } from '../../../../tekster/opphold';
+import { oppholdUtenforNorgeInnhold } from '../../../../barnetilsyn/tekster/opphold';
+import { useSøknad } from '../../../../context/SøknadContext';
+import { EnumFelt } from '../../../../typer/skjema';
+import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
+import LocaleRadioGroup from '../../../Teksthåndtering/LocaleRadioGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;

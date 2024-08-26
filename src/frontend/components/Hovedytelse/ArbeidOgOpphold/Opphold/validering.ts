@@ -1,10 +1,13 @@
 import { skalTaStillingTilOppholdSiste12mnd } from './util';
-import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../../typer/søknad';
-import { Locale } from '../../../../../typer/tekst';
-import { Valideringsfeil } from '../../../../../typer/validering';
-import { erDatoEtterEllerLik } from '../../../../../utils/dato';
-import { harVerdi } from '../../../../../utils/typer';
-import { OppholdInnhold, oppholdUtenforNorgeInnhold } from '../../../../tekster/opphold';
+import {
+    oppholdUtenforNorgeInnhold,
+    OppholdInnhold,
+} from '../../../../barnetilsyn/tekster/opphold';
+import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../typer/søknad';
+import { Locale } from '../../../../typer/tekst';
+import { Valideringsfeil } from '../../../../typer/validering';
+import { erDatoEtterEllerLik } from '../../../../utils/dato';
+import { harVerdi } from '../../../../utils/typer';
 import { FeilIdDinSituasjon } from '../../validering';
 
 export const errorKeyLand = (

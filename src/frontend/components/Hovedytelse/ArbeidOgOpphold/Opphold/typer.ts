@@ -1,4 +1,4 @@
-import { OppholdUtenforNorge } from '../../../../../typer/søknad';
+import { OppholdUtenforNorge } from '../../../../typer/søknad';
 
 export type OppdatertOppholdFelt = <T extends OppholdUtenforNorge, K extends keyof T>(
     id: number,

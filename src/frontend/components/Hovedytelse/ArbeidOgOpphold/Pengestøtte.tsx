@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { skalTaStillingTilLandForPengestøtte } from './util';
-import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
-import Landvelger from '../../../../components/Landvelger/Landvelger';
-import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import { useSøknad } from '../../../../context/SøknadContext';
-import { EnumFlereValgFelt, SelectFelt } from '../../../../typer/skjema';
-import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../../typer/søknad';
-import { harVerdi } from '../../../../utils/typer';
-import { mottarPengestøtteInnhold } from '../../../tekster/opphold';
+import { mottarPengestøtteInnhold } from '../../../barnetilsyn/tekster/opphold';
+import { useSøknad } from '../../../context/SøknadContext';
+import { EnumFlereValgFelt, SelectFelt } from '../../../typer/skjema';
+import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
+import { harVerdi } from '../../../utils/typer';
+import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
+import Landvelger from '../../Landvelger/Landvelger';
+import LocaleCheckboxGroup from '../../Teksthåndtering/LocaleCheckboxGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
