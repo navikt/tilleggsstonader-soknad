@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router';
 
 import Forside from './Forside';
 import Kvittering from './Kvittering';
-import Hovedytelse from './steg/2-hovedytelse/Hovedytelse';
+import HovedytelsePassBarn from './steg/2-hovedytelse/HovedytelsePassBarn';
 import Aktivitet from './steg/3-aktivitet/Aktivitet';
 import DineBarn from './steg/4-dine-barn/DineBarn';
 import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
@@ -30,7 +30,7 @@ const SøknadsdialogInnhold = () => {
     return (
         <RedirectTilStart stønadstype={Stønadstype.BARNETILSYN}>
             <Routes>
-                <Route path={'/hovedytelse'} element={<Hovedytelse />} />
+                <Route path={'/hovedytelse'} element={<HovedytelsePassBarn />} />
                 <Route path={'/aktivitet'} element={<Aktivitet />} />
                 <Route path={'/dine-barn'} element={<DineBarn />} />
                 <Route path={'/barnepass'} element={<PassAvDineBarn />} />
