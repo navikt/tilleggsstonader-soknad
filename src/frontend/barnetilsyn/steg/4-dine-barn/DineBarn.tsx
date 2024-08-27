@@ -7,9 +7,10 @@ import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
-import { useSøknad } from '../../../context/SøknadContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formatering';
@@ -20,14 +21,9 @@ import { harBarnUnder2år, harValgtBarnOver9år } from '../5-pass-av-dine-barn/u
 const DineBarn = () => {
     const { locale } = useSpråk();
     const { person } = usePerson();
-    const {
-        valgteBarnIdenter,
-        settValgteBarnIdenter,
-        settDokumentasjon,
-        hovedytelse,
-        valideringsfeil,
-        settValideringsfeil,
-    } = useSøknad();
+    const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
+    const { valgteBarnIdenter, settValgteBarnIdenter, settDokumentasjon, hovedytelse } =
+        usePassAvBarnSøknad();
 
     const [barnIdenter, settBarnIdenter] = useState<string[]>(valgteBarnIdenter);
 

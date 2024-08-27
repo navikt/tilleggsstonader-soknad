@@ -5,7 +5,7 @@ import { DatePicker, HStack, Label, useDatepicker, VStack } from '@navikt/ds-rea
 import { OppdatertOppholdFelt } from './typer';
 import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from './validering';
 import { OppholdInnhold } from '../../../../barnetilsyn/tekster/opphold';
-import { useSøknad } from '../../../../context/SøknadContext';
+import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
 import { SelectFelt, EnumFlereValgFelt } from '../../../../typer/skjema';
 import {
     ArbeidOgOpphold,
@@ -28,7 +28,7 @@ const NyttOpphold: React.FC<{
     tekster: OppholdInnhold;
     locale: Locale;
 }> = ({ keyOpphold, opphold, oppdater, tekster, locale }) => {
-    const { valideringsfeil, settValideringsfeil } = useSøknad();
+    const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const nullstillFeil = (verdi: string | undefined, errorKey: string) => {
         if (harVerdi(verdi)) {

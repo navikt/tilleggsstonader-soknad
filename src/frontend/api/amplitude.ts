@@ -86,6 +86,13 @@ export const loggBesøkBarnetilsyn = (url: string, sidetittel: string) => {
     });
 };
 
+export const loggBesøkLæremiddel = (url: string, sidetittel: string) => {
+    loggEventMedSkjema('besøk', Stønadstype.LÆREMIDLER, {
+        url: url,
+        sidetittel: sidetittel,
+    });
+};
+
 export const loggAccordionEvent = (skalÅpnes: boolean, tekst: string, side?: string) => {
     const event = skalÅpnes ? 'accordion åpnet' : 'accordion lukket';
 

@@ -23,8 +23,8 @@ import Side from '../../../components/Side';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
 import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
-import { useSøknad } from '../../../context/SøknadContext';
 import { JaNeiTilTekst } from '../../../tekster/felles';
 import { Barn, Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
@@ -266,7 +266,7 @@ const Vedlegg: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({ dokumentasj
 
 const Oppsummering = () => {
     const { hovedytelse, aktivitet, valgteBarnIdenter, barnMedBarnepass, dokumentasjon } =
-        useSøknad();
+        usePassAvBarnSøknad();
     const { person } = usePerson();
     const [harBekreftet, settHarBekreftet] = useState(false);
     const [feil, settFeil] = useState<string>('');

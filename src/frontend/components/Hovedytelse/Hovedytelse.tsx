@@ -8,10 +8,11 @@ import { Ytelse } from './typer';
 import { validerHovedytelse } from './validering';
 import { hovedytelseInnhold } from '../../barnetilsyn/tekster/hovedytelse';
 import { useSpråk } from '../../context/SpråkContext';
+import { useValideringsfeil } from '../../context/ValideringsfeilContext';
 import { EnumFlereValgFelt } from '../../typer/skjema';
 import { Stønadstype } from '../../typer/stønadstyper';
 import { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
-import { inneholderFeil, Valideringsfeil } from '../../typer/validering';
+import { inneholderFeil } from '../../typer/validering';
 import { PellePanel } from '../PellePanel/PellePanel';
 import Side from '../Side';
 import LocaleCheckboxGroup from '../Teksthåndtering/LocaleCheckboxGroup';
@@ -25,17 +26,11 @@ const defaultArbeidOgOpphold: ArbeidOgOpphold = {
 interface Props {
     hovedytelse: Hovedytelse | undefined;
     oppdaterHovedytelse: (hovedytelse: Hovedytelse) => void;
-    valideringsfeil: Valideringsfeil;
-    settValideringsfeil: React.Dispatch<React.SetStateAction<Valideringsfeil>>;
 }
 
-const HovedytelseSide: React.FC<Props> = ({
-    hovedytelse,
-    oppdaterHovedytelse,
-    valideringsfeil,
-    settValideringsfeil,
-}) => {
+const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) => {
     const { locale } = useSpråk();
+    const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const [ytelse, settYtelse] = useState<EnumFlereValgFelt<Ytelse> | undefined>(
         hovedytelse?.ytelse
@@ -95,8 +90,6 @@ const HovedytelseSide: React.FC<Props> = ({
                 <ArbeidOgOppholdUtenforNorge
                     arbeidOgOpphold={arbeidOgOpphold}
                     settArbeidOgOpphold={settArbeidOgOpphold}
-                    valideringsfeil={valideringsfeil}
-                    settValideringsfeil={settValideringsfeil}
                 />
             )}
         </Side>

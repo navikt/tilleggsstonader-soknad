@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
-import { Accordion, Alert, BodyShort, Button, Heading, Label } from '@navikt/ds-react';
+import { Accordion, BodyLong, BodyShort, Button, Label } from '@navikt/ds-react';
 
-import { ERouteBarnetilsyn, RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
+import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
-import { loggAccordionEvent, loggBesøkBarnetilsyn, loggSkjemaStartet } from '../api/amplitude';
+import { loggAccordionEvent, loggBesøkLæremiddel, loggSkjemaStartet } from '../api/amplitude';
 import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
@@ -15,10 +15,9 @@ import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke'
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
+import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { Stønadstype } from '../typer/stønadstyper';
-import { erSnartNyttSkoleår } from '../utils/dato';
 import { hentNesteRoute } from '../utils/routes';
 
 const KnappeContainer = styled(BodyShort)`
@@ -30,20 +29,20 @@ const KnappeContainer = styled(BodyShort)`
 const Forside: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { harBekreftet, settHarBekreftet } = usePassAvBarnSøknad();
+    const { harBekreftet, settHarBekreftet } = useLæremidlerSøknad();
     const { person } = usePerson();
 
     const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
 
     useEffect(() => {
-        const route = RoutesBarnetilsyn[0];
-        loggBesøkBarnetilsyn(route.path, route.label);
+        const route = routesLæremidler[0];
+        loggBesøkLæremiddel(route.path, route.label);
     }, []);
 
     const startSøknad = () => {
         if (harBekreftet) {
-            loggSkjemaStartet(Stønadstype.BARNETILSYN);
-            const nesteRoute = hentNesteRoute(RoutesBarnetilsyn, location.pathname);
+            loggSkjemaStartet(Stønadstype.LÆREMIDLER);
+            const nesteRoute = hentNesteRoute(routesLæremidler, location.pathname);
             navigate(nesteRoute.path);
         } else {
             settSkalViseFeilmelding(true);
@@ -51,7 +50,7 @@ const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(skalÅpne, tittel, ERouteBarnetilsyn.FORSIDE);
+        loggAccordionEvent(skalÅpne, tittel, ERouteLæremidler.FORSIDE);
     };
 
     return (
@@ -65,17 +64,9 @@ const Forside: React.FC = () => {
                 </Label>
                 <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </PellePanel>
-            {erSnartNyttSkoleår() && (
-                <Alert variant="info">
-                    <Heading size="small" spacing>
-                        <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_tittel} />
-                    </Heading>
-                    <LocaleTekstAvsnitt tekst={forsideTekster.mottatt_faktura_alert_innhold} />
-                </Alert>
-            )}
             <LocalePunktliste
-                tittel={forsideTekster.dine_plikter_tittel}
-                innhold={forsideTekster.dine_plikter_innhold}
+                tittel={forsideTekster.viktig_å_vite_tittel}
+                innhold={forsideTekster.viktig_å_vite_innhold}
             />
             <Accordion>
                 <Accordion.Item
@@ -84,29 +75,15 @@ const Forside: React.FC = () => {
                     }
                 >
                     <Accordion.Header>
-                        <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
+                        <LocaleTekst tekst={forsideTekster.mengde_støtte_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <LocaleTekstAvsnitt tekst={forsideTekster.utgifter_som_dekkes_innhold} />
-                    </Accordion.Content>
-                </Accordion.Item>
-                <Accordion.Item
-                    onOpenChange={(skalÅpne) =>
-                        loggAccordionÅpning(skalÅpne, 'Dokumentasjon av utgifter')
-                    }
-                >
-                    <Accordion.Header>
-                        <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_tittel} />
-                    </Accordion.Header>
-                    <Accordion.Content>
-                        {forsideTekster.dokumentasjon_utgifter_innhold.map((tekst, indeks) => (
-                            <LocalePunktliste
-                                key={indeks}
-                                tittel={tekst.tittel}
-                                innhold={tekst.innhold}
-                                tittelSomLabel
-                            />
-                        ))}
+                        <BodyLong spacing>
+                            <LocaleInlineLenke tekst={forsideTekster.mengde_støtte_innhold1} />
+                        </BodyLong>
+                        <BodyLong>
+                            <LocaleTekst tekst={forsideTekster.mengde_støtte_innhold2} />
+                        </BodyLong>
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item

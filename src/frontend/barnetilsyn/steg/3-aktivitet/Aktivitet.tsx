@@ -20,8 +20,9 @@ import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInline
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
+import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
-import { useSøknad } from '../../../context/SøknadContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
@@ -32,10 +33,13 @@ import { aktivitetTekster } from '../../tekster/aktivitet';
 
 const Aktivitet = () => {
     const { locale } = useSpråk();
-    const { aktivitet, settAktivitet, valideringsfeil, settValideringsfeil } = useSøknad();
+    const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
+    const { aktivitet, settAktivitet } = usePassAvBarnSøknad();
+
     const [valgteAktiviteter, settValgteAktiviteter] = useState<
         EnumFlereValgFelt<string> | undefined
     >(aktivitet ? aktivitet.aktiviteter : undefined);
+
     const [registerAktiviteter, settRegisterAktiviteter] =
         useState<Record<string, RegisterAktivitetMedLabel>>();
 

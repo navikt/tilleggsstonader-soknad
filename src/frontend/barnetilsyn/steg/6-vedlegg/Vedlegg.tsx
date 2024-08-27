@@ -13,8 +13,8 @@ import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import VedleggGenerellInfo from '../../../components/VedleggGenerellInfo';
+import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
-import { useSøknad } from '../../../context/SøknadContext';
 import { Dokument, DokumentasjonFelt } from '../../../typer/skjema';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
@@ -28,7 +28,7 @@ const VedleggContainer = styled.div`
 
 const Vedlegg = () => {
     const { locale } = useSpråk();
-    const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = useSøknad();
+    const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = usePassAvBarnSøknad();
 
     const ref = useRef<HTMLDialogElement>(null);
     const [ikkeOpplastedeDokumenter, settIkkeOpplastedeDokumenter] = React.useState<string[]>([]);

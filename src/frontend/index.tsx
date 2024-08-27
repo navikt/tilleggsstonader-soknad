@@ -12,7 +12,6 @@ import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
 import ScrollToTop from './components/ScrollToTop';
 import { PersonProvider, usePerson } from './context/PersonContext';
 import { SpråkProvider } from './context/SpråkContext';
-import { SøknadProvider } from './context/SøknadContext';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { erProd } from './utils/miljø';
@@ -57,11 +56,9 @@ const AppRoutes = () => {
 root.render(
     <main id={'maincontent'} tabIndex={-1}>
         <SpråkProvider>
-            <SøknadProvider>
-                <PersonProvider>
-                    <AppRoutes />
-                </PersonProvider>
-            </SøknadProvider>
+            <PersonProvider>
+                <AppRoutes />
+            </PersonProvider>
         </SpråkProvider>
     </main>
 );
