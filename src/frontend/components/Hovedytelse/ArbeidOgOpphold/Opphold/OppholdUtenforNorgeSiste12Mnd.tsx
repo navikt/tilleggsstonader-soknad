@@ -8,24 +8,22 @@ import {
 } from './util';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
 import { oppholdUtenforNorgeInnhold } from '../../../../barnetilsyn/tekster/opphold';
+import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
 import { EnumFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
-import { Valideringsfeil } from '../../../../typer/validering';
 import LocaleRadioGroup from '../../../Teksthåndtering/LocaleRadioGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
-    valideringsfeil: Valideringsfeil;
-    settValideringsfeil: React.Dispatch<React.SetStateAction<Valideringsfeil>>;
 }
 
 const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
     arbeidOgOpphold,
     settArbeidOgOpphold,
-    valideringsfeil,
-    settValideringsfeil,
 }) => {
+    const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
+
     const oppdaterOppholdSiste12mnd = (verdi: EnumFelt<JaNei>) => {
         settArbeidOgOpphold((prevState: ArbeidOgOpphold) => {
             const opphold: OppholdUtenforNorge[] =
@@ -84,8 +82,6 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
                         arbeidOgOpphold={arbeidOgOpphold}
                         settArbeidOgOpphold={settArbeidOgOpphold}
                         tekster={oppholdUtenforNorgeInnhold.siste12mnd}
-                        valideringsfeil={valideringsfeil}
-                        settValideringsfeil={settValideringsfeil}
                     />
                     <LocaleRadioGroup
                         id={valideringsfeil.harOppholdUtenforNorgeNeste12mnd?.id}
@@ -100,8 +96,6 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
                             arbeidOgOpphold={arbeidOgOpphold}
                             settArbeidOgOpphold={settArbeidOgOpphold}
                             tekster={oppholdUtenforNorgeInnhold.neste12mnd}
-                            valideringsfeil={valideringsfeil}
-                            settValideringsfeil={settValideringsfeil}
                         />
                     )}
                 </>

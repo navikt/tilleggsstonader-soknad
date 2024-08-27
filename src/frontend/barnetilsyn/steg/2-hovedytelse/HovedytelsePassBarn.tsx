@@ -3,15 +3,12 @@ import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext'
 import { Hovedytelse } from '../../../typer/søknad';
 
 const HovedytelsePassBarn = () => {
-    const { hovedytelse, settHovedytelse, valideringsfeil, settValideringsfeil } =
-        usePassAvBarnSøknad();
+    const { hovedytelse, settHovedytelse } = usePassAvBarnSøknad();
 
     return (
         <HovedytelseSide
             hovedytelse={hovedytelse}
             oppdaterHovedytelse={(hovedytelse: Hovedytelse) => settHovedytelse(hovedytelse)}
-            valideringsfeil={valideringsfeil}
-            settValideringsfeil={settValideringsfeil}
         />
     );
 };

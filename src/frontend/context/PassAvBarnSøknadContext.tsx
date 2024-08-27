@@ -5,7 +5,6 @@ import createUseContext from 'constate';
 import { Barnepass } from '../typer/barn';
 import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
 import { Aktivitet, Hovedytelse } from '../typer/søknad';
-import { Valideringsfeil } from '../typer/validering';
 
 const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() => {
     PassAvBarnSøknadProvider.displayName = 'SØKNAD_PASS_AV_BARN_PROVIDER';
@@ -23,8 +22,6 @@ const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() =>
 
     const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
 
-    const [valideringsfeil, settValideringsfeil] = useState<Valideringsfeil>({});
-
     const resetSøknad = () => {
         settHovedytelse(undefined);
         settAktivitet(undefined);
@@ -32,7 +29,6 @@ const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() =>
         settBarnMedBarnepass([]);
         settDokumentasjonsbehov([]);
         settDokumentasjon([]);
-        settValideringsfeil({});
         settHarBekreftet(false);
     };
 
@@ -49,8 +45,6 @@ const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() =>
         settDokumentasjonsbehov,
         dokumentasjon,
         settDokumentasjon,
-        valideringsfeil,
-        settValideringsfeil,
         resetSøknad,
         valgteBarnIdenter,
         settValgteBarnIdenter,
