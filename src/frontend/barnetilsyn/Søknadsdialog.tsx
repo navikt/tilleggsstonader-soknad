@@ -10,6 +10,7 @@ import Vedlegg from './steg/6-vedlegg/Vedlegg';
 import Oppsummering from './steg/7-oppsummering/Oppsummering';
 import { Banner } from '../components/Banner';
 import RedirectTilStart from '../components/RedirectTilStart';
+import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 
@@ -27,8 +28,9 @@ const Søknadsdialog: React.FC = () => {
 };
 
 const SøknadsdialogInnhold = () => {
+    const { harBekreftet } = usePassAvBarnSøknad();
     return (
-        <RedirectTilStart stønadstype={Stønadstype.BARNETILSYN}>
+        <RedirectTilStart harBekreftet={harBekreftet} stønadstype={Stønadstype.BARNETILSYN}>
             <Routes>
                 <Route path={'/hovedytelse'} element={<HovedytelsePassBarn />} />
                 <Route path={'/aktivitet'} element={<Aktivitet />} />

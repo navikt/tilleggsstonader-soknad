@@ -2,17 +2,16 @@ import React from 'react';
 
 import { Navigate } from 'react-router-dom';
 
-import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { Stønadstype } from '../typer/stønadstyper';
 import { hentStartRoute } from '../utils/routes';
 
 interface Props {
+    harBekreftet: boolean;
     stønadstype: Stønadstype;
     children: React.ReactElement;
 }
 
-const RedirectTilStart: React.FC<Props> = ({ stønadstype, children }) => {
-    const { harBekreftet } = usePassAvBarnSøknad();
+const RedirectTilStart: React.FC<Props> = ({ harBekreftet, stønadstype, children }) => {
     return !harBekreftet ? <Navigate to={hentStartRoute(stønadstype)} /> : children;
 };
 
