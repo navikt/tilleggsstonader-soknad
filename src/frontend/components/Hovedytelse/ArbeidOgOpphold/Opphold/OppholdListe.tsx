@@ -19,10 +19,9 @@ import {
     OppholdInnhold,
     oppholdUtenforNorgeInnhold,
 } from '../../../../barnetilsyn/tekster/opphold';
-import { usePassAvBarnSøknad } from '../../../../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
-import { inneholderFeil } from '../../../../typer/validering';
+import { inneholderFeil, Valideringsfeil } from '../../../../typer/validering';
 
 const BlåVenstreRammeContainer = styled(VStack)`
     border-left: 5px solid ${ABlue500};
@@ -42,9 +41,17 @@ const OppholdListe: React.FC<{
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
     tekster: OppholdInnhold;
-}> = ({ keyOpphold, arbeidOgOpphold, settArbeidOgOpphold, tekster }) => {
+    valideringsfeil: Valideringsfeil;
+    settValideringsfeil: React.Dispatch<React.SetStateAction<Valideringsfeil>>;
+}> = ({
+    keyOpphold,
+    arbeidOgOpphold,
+    settArbeidOgOpphold,
+    tekster,
+    valideringsfeil,
+    settValideringsfeil,
+}) => {
     const { locale } = useSpråk();
-    const { settValideringsfeil } = usePassAvBarnSøknad();
 
     const oppholdUtenforNorge = arbeidOgOpphold[keyOpphold];
     const ulagretOpphold = oppholdUtenforNorge.find((opphold) => !opphold.lagret);
@@ -152,6 +159,8 @@ const OppholdListe: React.FC<{
                     oppdater={oppdaterOppholdUtenforNorge}
                     tekster={tekster}
                     locale={locale}
+                    valideringsfeil={valideringsfeil}
+                    settValideringsfeil={settValideringsfeil}
                 />
             )}
             <HStack>

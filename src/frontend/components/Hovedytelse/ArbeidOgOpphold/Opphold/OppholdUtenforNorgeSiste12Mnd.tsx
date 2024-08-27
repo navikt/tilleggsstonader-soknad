@@ -84,6 +84,8 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
                         arbeidOgOpphold={arbeidOgOpphold}
                         settArbeidOgOpphold={settArbeidOgOpphold}
                         tekster={oppholdUtenforNorgeInnhold.siste12mnd}
+                        valideringsfeil={valideringsfeil}
+                        settValideringsfeil={settValideringsfeil}
                     />
                     <LocaleRadioGroup
                         id={valideringsfeil.harOppholdUtenforNorgeNeste12mnd?.id}
@@ -98,6 +100,8 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
                             arbeidOgOpphold={arbeidOgOpphold}
                             settArbeidOgOpphold={settArbeidOgOpphold}
                             tekster={oppholdUtenforNorgeInnhold.neste12mnd}
+                            valideringsfeil={valideringsfeil}
+                            settValideringsfeil={settValideringsfeil}
                         />
                     )}
                 </>

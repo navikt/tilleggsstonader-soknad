@@ -5,7 +5,6 @@ import { DatePicker, HStack, Label, useDatepicker, VStack } from '@navikt/ds-rea
 import { OppdatertOppholdFelt } from './typer';
 import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from './validering';
 import { OppholdInnhold } from '../../../../barnetilsyn/tekster/opphold';
-import { usePassAvBarnSøknad } from '../../../../context/PassAvBarnSøknadContext';
 import { SelectFelt, EnumFlereValgFelt } from '../../../../typer/skjema';
 import {
     ArbeidOgOpphold,
@@ -13,6 +12,7 @@ import {
     ÅrsakOppholdUtenforNorge,
 } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
+import { Valideringsfeil } from '../../../../typer/validering';
 import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
 import { harVerdi } from '../../../../utils/typer';
 import Landvelger from '../../../Landvelger/Landvelger';
@@ -27,9 +27,9 @@ const NyttOpphold: React.FC<{
     oppdater: OppdatertOppholdFelt;
     tekster: OppholdInnhold;
     locale: Locale;
-}> = ({ keyOpphold, opphold, oppdater, tekster, locale }) => {
-    const { valideringsfeil, settValideringsfeil } = usePassAvBarnSøknad();
-
+    valideringsfeil: Valideringsfeil;
+    settValideringsfeil: React.Dispatch<React.SetStateAction<Valideringsfeil>>;
+}> = ({ keyOpphold, opphold, oppdater, tekster, locale, valideringsfeil, settValideringsfeil }) => {
     const nullstillFeil = (verdi: string | undefined, errorKey: string) => {
         if (harVerdi(verdi)) {
             settValideringsfeil((prevState) => ({
