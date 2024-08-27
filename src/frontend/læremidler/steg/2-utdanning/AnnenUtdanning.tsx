@@ -18,14 +18,12 @@ export const AnnenUtdanning: React.FC<Props> = ({
     feilmelding,
 }) => {
     return (
-        <div>
-            <LocaleRadioGroup
-                id={feilmelding?.id}
-                tekst={utdanningTekster.radio_annen_utdanning}
-                onChange={oppdaterAnnenAktivitet}
-                value={annenUtdanning?.verdi || []}
-                error={feilmelding?.melding}
-            />
-        </div>
+        <LocaleRadioGroup
+            id={feilmelding?.id}
+            tekst={utdanningTekster.radio_annen_utdanning}
+            onChange={oppdaterAnnenAktivitet}
+            value={annenUtdanning?.verdi || []}
+            error={feilmelding?.melding}
+        />
     );
 };
