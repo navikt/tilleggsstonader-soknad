@@ -15,7 +15,6 @@ import {
     loggSkjemaStegFullført,
 } from '../api/amplitude';
 import { sendInnSøknad } from '../api/api';
-import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { useSpråk } from '../context/SpråkContext';
 import { useSøknad } from '../context/SøknadContext';
 import { useValideringsfeil } from '../context/ValideringsfeilContext';
@@ -23,7 +22,7 @@ import { fellesTekster } from '../tekster/felles';
 import { IRoute } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
 import { inneholderFeil } from '../typer/validering';
-import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
+import { erOppsummeringsside, hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface Props {
     stønadstype: Stønadstype;
@@ -148,7 +147,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
                     <LocaleTekst tekst={fellesTekster.forrige} />
                 </Button>
-                {aktivtSteg.route === ERouteBarnetilsyn.OPPSUMMERING ? (
+                {erOppsummeringsside(aktivtSteg.route) ? (
                     <Button onClick={sendSøknad} loading={senderInn}>
                         <LocaleTekst tekst={fellesTekster.send_inn_søknad} />
                     </Button>
