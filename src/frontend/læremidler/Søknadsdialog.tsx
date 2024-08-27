@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router';
 
+import Forside from './Forside';
 import { Banner } from '../components/Banner';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
@@ -11,7 +12,7 @@ const Søknadsdialog: React.FC = () => {
         <>
             <Banner tittel={fellesTekster.banner_læremidler} />
             <Routes>
-                <Route path={'/'} element={<p>Forside</p>} />
+                <Route path={'/'} element={<Forside />} />
                 <Route path={'*'} element={<SøknadsdialogInnhold />} />
                 <Route path={'/kvittering'} element={<p>Kvittering</p>} />
             </Routes>
