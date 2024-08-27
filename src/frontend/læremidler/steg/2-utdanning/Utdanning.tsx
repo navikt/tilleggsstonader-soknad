@@ -3,8 +3,13 @@ import React, { useState } from 'react';
 import { Heading } from '@navikt/ds-react';
 
 import { AnnenUtdanning } from './AnnenUtdanning';
+import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
 import { MottarUtstyrsstipend } from './MottarUtstyrsstipend';
-import { feilAnnenUtdanning, feilMottarUtstyrsstipend } from './validering';
+import {
+    feilAnnenUtdanning,
+    feilHarFunksjonsnedsettelse,
+    feilMottarUtstyrsstipend,
+} from './validering';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -30,11 +35,15 @@ const Utdanning = () => {
     const [mottarUtstyrsstipend, settMottarUtstyrsstipend] = useState<EnumFelt<JaNei> | undefined>(
         utdanning ? utdanning.mottarUtstyrsstipend : undefined
     );
+    const [harFunksjonsnedsettelse, settHarFunksjonsnedsettelse] = useState<
+        EnumFelt<JaNei> | undefined
+    >(utdanning ? utdanning.harFunksjonsnedsettelse : undefined);
 
     const oppdaterUtdanningISøknad = () => {
         settUtdanning({
             annenUtdanning: annenUtdanning,
             mottarUtstyrsstipend: mottarUtstyrsstipend,
+            harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
     };
 
@@ -54,14 +63,27 @@ const Utdanning = () => {
         }));
     };
 
+    const oppdaterHarFunksjonsnedsettelse = (verdi: EnumFelt<JaNei>) => {
+        settHarFunksjonsnedsettelse(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            harFunksjonsnedsettelse: undefined,
+        }));
+    };
+
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
+
         if (annenUtdanning === undefined) {
             feil = feilAnnenUtdanning(feil, locale);
         }
         if (mottarUtstyrsstipend === undefined) {
             feil = feilMottarUtstyrsstipend(feil, locale);
         }
+        if (harFunksjonsnedsettelse === undefined) {
+            feil = feilHarFunksjonsnedsettelse(feil, locale);
+        }
+
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
@@ -89,6 +111,12 @@ const Utdanning = () => {
                 mottarUtstyrsstipend={mottarUtstyrsstipend}
                 oppdaterMottarUtstyrsstipend={oppdaterMottarUtstyrsstipend}
                 feilmelding={valideringsfeil.mottarUtstyrsstipend}
+            />
+            {/* TODO: Håndter at dokumentasjon må oppgis */}
+            <HarFunksjonsnedsettelse
+                harFunksjonsnedsettelse={harFunksjonsnedsettelse}
+                oppdaterHarFunksjonsnedsettelse={oppdaterHarFunksjonsnedsettelse}
+                feilmelding={valideringsfeil.harFunksjonsnedsettelse}
             />
         </Side>
     );

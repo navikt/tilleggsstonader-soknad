@@ -4,6 +4,7 @@ import { JaNei } from '../../typer/søknad';
 export interface Utdanning {
     annenUtdanning: EnumFelt<AnnenUtdanningType> | undefined;
     mottarUtstyrsstipend: EnumFelt<JaNei> | undefined;
+    harFunksjonsnedsettelse: EnumFelt<JaNei> | undefined;
 }
 
 export enum AnnenUtdanningType {

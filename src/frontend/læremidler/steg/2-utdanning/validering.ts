@@ -17,3 +17,11 @@ export const feilMottarUtstyrsstipend = (feil: Valideringsfeil, locale: Locale) 
         melding: utdanningTekster.radio_mottar_utstyrsstipend_feilmelding[locale],
     },
 });
+
+export const feilHarFunksjonsnedsettelse = (feil: Valideringsfeil, locale: Locale) => ({
+    ...feil,
+    HarFunksjonsnedsettelse: {
+        id: '3', // TODO: Oppdater når vi hentet utdanning
+        melding: utdanningTekster.radio_mottar_har_funksjonsnedsettelse_feilmelding[locale],
+    },
+});
