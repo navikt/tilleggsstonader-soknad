@@ -7,7 +7,7 @@ import { Accordion, BodyShort, Button, Checkbox, CheckboxGroup, Label } from '@n
 
 import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
-import { loggAccordionEvent, loggBesøkBarnetilsyn, loggSkjemaStartet } from '../api/amplitude';
+import { loggAccordionEvent, loggBesøkLæremiddel, loggSkjemaStartet } from '../api/amplitude';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
@@ -36,7 +36,7 @@ const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = routesLæremidler[0];
-        loggBesøkBarnetilsyn(route.path, route.label);
+        loggBesøkLæremiddel(route.path, route.label);
     }, []);
 
     const startSøknad = () => {
