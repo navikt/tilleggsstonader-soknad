@@ -79,18 +79,19 @@ export const loggAlertVist = (variant: string, tekst: string) => {
     });
 };
 
-export const loggBesøkBarnetilsyn = (url: string, sidetittel: string) => {
-    loggEventMedSkjema('besøk', Stønadstype.BARNETILSYN, {
+export const loggBesøk = (stønadstype: Stønadstype, url: string, sidetittel: string) => {
+    loggEventMedSkjema('besøk', stønadstype, {
         url: url,
         sidetittel: sidetittel,
     });
 };
 
+export const loggBesøkBarnetilsyn = (url: string, sidetittel: string) => {
+    loggBesøk(Stønadstype.BARNETILSYN, url, sidetittel);
+};
+
 export const loggBesøkLæremiddel = (url: string, sidetittel: string) => {
-    loggEventMedSkjema('besøk', Stønadstype.LÆREMIDLER, {
-        url: url,
-        sidetittel: sidetittel,
-    });
+    loggBesøk(Stønadstype.LÆREMIDLER, url, sidetittel);
 };
 
 export const loggAccordionEvent = (skalÅpnes: boolean, tekst: string, side?: string) => {
