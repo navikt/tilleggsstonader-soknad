@@ -3,19 +3,12 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
-import {
-    Accordion,
-    BodyLong,
-    BodyShort,
-    Button,
-    Checkbox,
-    CheckboxGroup,
-    Label,
-} from '@navikt/ds-react';
+import { Accordion, BodyLong, BodyShort, Button, Label } from '@navikt/ds-react';
 
 import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøkLæremiddel, loggSkjemaStartet } from '../api/amplitude';
+import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
@@ -24,7 +17,6 @@ import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { usePerson } from '../context/PersonContext';
-import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { hentNesteRoute } from '../utils/routes';
 
@@ -117,25 +109,12 @@ const Forside: React.FC = () => {
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
-            <CheckboxGroup
-                legend={<LocaleTekst tekst={fellesTekster.vi_stoler_tittel} />}
-                error={
-                    skalViseFeilmelding && (
-                        <LocaleTekst tekst={fellesTekster.vi_stoler_feilmelding} />
-                    )
-                }
-                value={[harBekreftet]}
-            >
-                <Checkbox
-                    value={true}
-                    onChange={(e) => {
-                        settHarBekreftet(e.target.checked);
-                        settSkalViseFeilmelding(false);
-                    }}
-                >
-                    <LocaleTekst tekst={fellesTekster.vi_stoler_innhold} />
-                </Checkbox>
-            </CheckboxGroup>
+            <BekreftelseCheckbox
+                skalViseFeilmelding={skalViseFeilmelding}
+                harBekreftet={harBekreftet}
+                oppdaterHarBekreftet={(harBekreftet) => settHarBekreftet(harBekreftet)}
+                fjernFeilmelding={() => settSkalViseFeilmelding(false)}
+            />
             <KnappeContainer>
                 <Button onClick={startSøknad} variant="primary">
                     Start søknad
