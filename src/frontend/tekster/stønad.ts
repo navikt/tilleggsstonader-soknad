@@ -10,5 +10,8 @@ export const teksterStønad: StønadInnhold = {
         BARNETILSYN: {
             nb: 'Søknad om støtte til pass av barn',
         },
+        LÆREMIDLER: {
+            nb: 'Søknad om støtte til læremidler',
+        },
     },
 };

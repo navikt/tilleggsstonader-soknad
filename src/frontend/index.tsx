@@ -8,10 +8,14 @@ import { initAmplitude } from './api/amplitude';
 import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
 import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
+import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
 import ScrollToTop from './components/ScrollToTop';
 import { PersonProvider, usePerson } from './context/PersonContext';
 import { SpråkProvider } from './context/SpråkContext';
 import { SøknadProvider } from './context/SøknadContext';
+import LæremidlerApp from './læremidler/LæremidlerApp';
+import { læremidlerPath } from './læremidler/routing/routesLæremidler';
+import { erProd } from './utils/miljø';
 
 initSentry();
 autentiseringsInterceptor();
@@ -36,12 +40,15 @@ const AppRoutes = () => {
     if (!harLastetPerson) {
         return null;
     }
+
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <ScrollToTop />
             <Routes>
-                <Route path={'/pass-av-barn/*'} element={<BarnetilsynApp />} />
+                <Route path={`/${barnetilsynPath}/*`} element={<BarnetilsynApp />} />
+                {/* Fallback for gamle lenker */}
                 <Route path={'/barnetilsyn/*'} element={<Navigate to="/pass-av-barn" replace />} />
+                {!erProd() && <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />}
                 <Route path={'*'} element={<Navigate to="/pass-av-barn" replace />} />
             </Routes>
         </BrowserRouter>
