@@ -15,7 +15,7 @@ import {
     loggSkjemaStegFullført,
 } from '../api/amplitude';
 import { sendInnSøknad } from '../api/api';
-import { ERouteBarnetilsyn, RouteTilPath } from '../barnetilsyn/routing/routesBarnetilsyn';
+import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { useSpråk } from '../context/SpråkContext';
 import { useSøknad } from '../context/SøknadContext';
 import { useValideringsfeil } from '../context/ValideringsfeilContext';
@@ -109,12 +109,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         sendInnSøknad(stønadstype, søknad)
             .then((res) => {
                 loggSkjemaFullført(stønadstype);
-
-                loggBesøk(
-                    stønadstype,
-                    RouteTilPath[ERouteBarnetilsyn.KVITTERING],
-                    ERouteBarnetilsyn.KVITTERING
-                );
+                loggBesøk(stønadstype, nåværendePath, 'KVITTERING');
 
                 resetSøknadOgValideringsfeil();
                 resetValideringsfeil();
