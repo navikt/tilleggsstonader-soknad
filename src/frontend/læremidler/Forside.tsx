@@ -3,7 +3,15 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
-import { Accordion, BodyShort, Button, Checkbox, CheckboxGroup, Label } from '@navikt/ds-react';
+import {
+    Accordion,
+    BodyLong,
+    BodyShort,
+    Button,
+    Checkbox,
+    CheckboxGroup,
+    Label,
+} from '@navikt/ds-react';
 
 import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
@@ -65,8 +73,8 @@ const Forside: React.FC = () => {
                 <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </PellePanel>
             <LocalePunktliste
-                tittel={forsideTekster.dine_plikter_tittel}
-                innhold={forsideTekster.dine_plikter_innhold}
+                tittel={forsideTekster.viktig_å_vite_tittel}
+                innhold={forsideTekster.viktig_å_vite_innhold}
             />
             <Accordion>
                 <Accordion.Item
@@ -75,29 +83,15 @@ const Forside: React.FC = () => {
                     }
                 >
                     <Accordion.Header>
-                        <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
+                        <LocaleTekst tekst={forsideTekster.mengde_støtte_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <LocaleTekstAvsnitt tekst={forsideTekster.utgifter_som_dekkes_innhold} />
-                    </Accordion.Content>
-                </Accordion.Item>
-                <Accordion.Item
-                    onOpenChange={(skalÅpne) =>
-                        loggAccordionÅpning(skalÅpne, 'Dokumentasjon av utgifter')
-                    }
-                >
-                    <Accordion.Header>
-                        <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_tittel} />
-                    </Accordion.Header>
-                    <Accordion.Content>
-                        {forsideTekster.dokumentasjon_utgifter_innhold.map((tekst, indeks) => (
-                            <LocalePunktliste
-                                key={indeks}
-                                tittel={tekst.tittel}
-                                innhold={tekst.innhold}
-                                tittelSomLabel
-                            />
-                        ))}
+                        <BodyLong spacing>
+                            <LocaleInlineLenke tekst={forsideTekster.mengde_støtte_innhold1} />
+                        </BodyLong>
+                        <BodyLong>
+                            <LocaleTekst tekst={forsideTekster.mengde_støtte_innhold2} />
+                        </BodyLong>
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item
