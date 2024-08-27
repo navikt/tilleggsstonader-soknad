@@ -3,11 +3,14 @@ import {
     skalTaStillingTilLandForJobberIAnnetLand,
     skalTaStillingTilLandForPengestøtte,
 } from './util';
-import { ArbeidOgOpphold } from '../../../../typer/søknad';
-import { Locale } from '../../../../typer/tekst';
-import { Valideringsfeil } from '../../../../typer/validering';
-import { harVerdi } from '../../../../utils/typer';
-import { jobberIAnnetLandInnhold, mottarPengestøtteInnhold } from '../../../tekster/opphold';
+import {
+    jobberIAnnetLandInnhold,
+    mottarPengestøtteInnhold,
+} from '../../../barnetilsyn/tekster/opphold';
+import { ArbeidOgOpphold } from '../../../typer/søknad';
+import { Locale } from '../../../typer/tekst';
+import { Valideringsfeil } from '../../../typer/validering';
+import { harVerdi } from '../../../utils/typer';
 import { FeilIdDinSituasjon } from '../validering';
 
 export const validerArbeidOgOpphold = (

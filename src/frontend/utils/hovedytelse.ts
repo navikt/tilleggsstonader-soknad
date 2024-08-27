@@ -1,4 +1,4 @@
-import { Ytelse } from '../barnetilsyn/steg/2-hovedytelse/typer';
+import { Ytelse } from '../components/Hovedytelse/typer';
 import { EnumFlereValgFelt } from '../typer/skjema';
 
 export const harKunValgtEnsligSomHovedytelse = (

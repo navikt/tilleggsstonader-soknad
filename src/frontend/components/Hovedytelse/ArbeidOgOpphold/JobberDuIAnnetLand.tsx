@@ -1,22 +1,27 @@
 import React from 'react';
 
 import { skalTaStillingTilLandForJobberIAnnetLand } from './util';
-import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
-import Landvelger from '../../../../components/Landvelger/Landvelger';
-import LocaleRadioGroup from '../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { useSøknad } from '../../../../context/SøknadContext';
-import { EnumFelt, SelectFelt } from '../../../../typer/skjema';
-import { ArbeidOgOpphold, JaNei } from '../../../../typer/søknad';
-import { harVerdi } from '../../../../utils/typer';
-import { jobberIAnnetLandInnhold } from '../../../tekster/opphold';
+import { jobberIAnnetLandInnhold } from '../../../barnetilsyn/tekster/opphold';
+import { EnumFelt, SelectFelt } from '../../../typer/skjema';
+import { ArbeidOgOpphold, JaNei } from '../../../typer/søknad';
+import { Valideringsfeil } from '../../../typer/validering';
+import { harVerdi } from '../../../utils/typer';
+import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
+import Landvelger from '../../Landvelger/Landvelger';
+import LocaleRadioGroup from '../../Teksthåndtering/LocaleRadioGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
+    valideringsfeil: Valideringsfeil;
+    settValideringsfeil: React.Dispatch<React.SetStateAction<Valideringsfeil>>;
 }
-const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
-    const { valideringsfeil, settValideringsfeil } = useSøknad();
-
+const JobberDuIAnnetLand: React.FC<Props> = ({
+    arbeidOgOpphold,
+    settArbeidOgOpphold,
+    valideringsfeil,
+    settValideringsfeil,
+}) => {
     const oppdaterJobberIAnnetLandEnnNorge = (verdi: EnumFelt<JaNei>) => {
         settArbeidOgOpphold((prevState) => ({
             ...prevState,

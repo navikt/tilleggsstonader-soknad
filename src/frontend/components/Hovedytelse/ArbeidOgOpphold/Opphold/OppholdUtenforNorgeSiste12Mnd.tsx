@@ -7,22 +7,25 @@ import {
     skalTaStillingTilOppholdSiste12mnd,
 } from './util';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
-import LocaleRadioGroup from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { useSøknad } from '../../../../../context/SøknadContext';
-import { EnumFelt } from '../../../../../typer/skjema';
-import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../../typer/søknad';
-import { oppholdUtenforNorgeInnhold } from '../../../../tekster/opphold';
+import { oppholdUtenforNorgeInnhold } from '../../../../barnetilsyn/tekster/opphold';
+import { EnumFelt } from '../../../../typer/skjema';
+import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
+import { Valideringsfeil } from '../../../../typer/validering';
+import LocaleRadioGroup from '../../../Teksthåndtering/LocaleRadioGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
+    valideringsfeil: Valideringsfeil;
+    settValideringsfeil: React.Dispatch<React.SetStateAction<Valideringsfeil>>;
 }
 
 const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
     arbeidOgOpphold,
     settArbeidOgOpphold,
+    valideringsfeil,
+    settValideringsfeil,
 }) => {
-    const { valideringsfeil, settValideringsfeil } = useSøknad();
     const oppdaterOppholdSiste12mnd = (verdi: EnumFelt<JaNei>) => {
         settArbeidOgOpphold((prevState: ArbeidOgOpphold) => {
             const opphold: OppholdUtenforNorge[] =

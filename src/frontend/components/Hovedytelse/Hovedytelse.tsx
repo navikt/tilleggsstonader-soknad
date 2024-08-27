@@ -6,26 +6,36 @@ import ArbeidOgOppholdUtenforNorge from './ArbeidOgOpphold/ArbeidOgOppholdUtenfo
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { validerHovedytelse } from './validering';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
-import Side from '../../../components/Side';
-import LocaleCheckboxGroup from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import { useSpråk } from '../../../context/SpråkContext';
-import { useSøknad } from '../../../context/SøknadContext';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { Stønadstype } from '../../../typer/stønadstyper';
-import { ArbeidOgOpphold } from '../../../typer/søknad';
-import { inneholderFeil } from '../../../typer/validering';
-import { hovedytelseInnhold } from '../../tekster/hovedytelse';
+import { hovedytelseInnhold } from '../../barnetilsyn/tekster/hovedytelse';
+import { useSpråk } from '../../context/SpråkContext';
+import { EnumFlereValgFelt } from '../../typer/skjema';
+import { Stønadstype } from '../../typer/stønadstyper';
+import { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
+import { inneholderFeil, Valideringsfeil } from '../../typer/validering';
+import { PellePanel } from '../PellePanel/PellePanel';
+import Side from '../Side';
+import LocaleCheckboxGroup from '../Teksthåndtering/LocaleCheckboxGroup';
+import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 const defaultArbeidOgOpphold: ArbeidOgOpphold = {
     oppholdUtenforNorgeSiste12mnd: [],
     oppholdUtenforNorgeNeste12mnd: [],
 };
 
-const Hovedytelse = () => {
+interface Props {
+    hovedytelse: Hovedytelse | undefined;
+    oppdaterHovedytelse: (hovedytelse: Hovedytelse) => void;
+    valideringsfeil: Valideringsfeil;
+    settValideringsfeil: React.Dispatch<React.SetStateAction<Valideringsfeil>>;
+}
+
+const HovedytelseSide: React.FC<Props> = ({
+    hovedytelse,
+    oppdaterHovedytelse,
+    valideringsfeil,
+    settValideringsfeil,
+}) => {
     const { locale } = useSpråk();
-    const { hovedytelse, settHovedytelse, valideringsfeil, settValideringsfeil } = useSøknad();
 
     const [ytelse, settYtelse] = useState<EnumFlereValgFelt<Ytelse> | undefined>(
         hovedytelse?.ytelse
@@ -58,7 +68,7 @@ const Hovedytelse = () => {
             validerSteg={() => kanFortsette(ytelse)}
             oppdaterSøknad={() => {
                 if (ytelse !== undefined) {
-                    settHovedytelse({
+                    oppdaterHovedytelse({
                         ytelse: ytelse,
                         arbeidOgOpphold: arbeidOgOpphold,
                     });
@@ -85,10 +95,12 @@ const Hovedytelse = () => {
                 <ArbeidOgOppholdUtenforNorge
                     arbeidOgOpphold={arbeidOgOpphold}
                     settArbeidOgOpphold={settArbeidOgOpphold}
+                    valideringsfeil={valideringsfeil}
+                    settValideringsfeil={settValideringsfeil}
                 />
             )}
         </Side>
     );
 };
 
-export default Hovedytelse;
+export default HovedytelseSide;

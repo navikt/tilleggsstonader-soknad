@@ -1,5 +1,5 @@
 import { Ytelse } from './typer';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
+import { EnumFlereValgFelt } from '../../typer/skjema';
 
 const ytelserMedImplisittMedlemskap: Ytelse[] = [
     'AAP',

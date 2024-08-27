@@ -1,4 +1,4 @@
-import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../../typer/søknad';
+import { OppholdUtenforNorge, ArbeidOgOpphold } from '../../../../typer/søknad';
 
 /**
  * Oppdaterer felt i [OppholdUtenforNorge] med gitt verdi

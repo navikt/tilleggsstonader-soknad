@@ -1,23 +1,28 @@
 import React from 'react';
 
 import { skalTaStillingTilLandForPengestøtte } from './util';
-import { BlåVenstreRammeContainer } from '../../../../components/BlåVenstreRammeContainer';
-import Landvelger from '../../../../components/Landvelger/Landvelger';
-import LocaleCheckboxGroup from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import { useSøknad } from '../../../../context/SøknadContext';
-import { EnumFlereValgFelt, SelectFelt } from '../../../../typer/skjema';
-import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../../typer/søknad';
-import { harVerdi } from '../../../../utils/typer';
-import { mottarPengestøtteInnhold } from '../../../tekster/opphold';
+import { mottarPengestøtteInnhold } from '../../../barnetilsyn/tekster/opphold';
+import { EnumFlereValgFelt, SelectFelt } from '../../../typer/skjema';
+import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
+import { Valideringsfeil } from '../../../typer/validering';
+import { harVerdi } from '../../../utils/typer';
+import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
+import Landvelger from '../../Landvelger/Landvelger';
+import LocaleCheckboxGroup from '../../Teksthåndtering/LocaleCheckboxGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
+    valideringsfeil: Valideringsfeil;
+    settValideringsfeil: React.Dispatch<React.SetStateAction<Valideringsfeil>>;
 }
 
-const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
-    const { valideringsfeil, settValideringsfeil } = useSøknad();
-
+const Pengestøtte: React.FC<Props> = ({
+    arbeidOgOpphold,
+    settArbeidOgOpphold,
+    valideringsfeil,
+    settValideringsfeil,
+}) => {
     const oppdaterMottarDuPengestøtte = (verdi: EnumFlereValgFelt<MottarPengestøtteTyper>) => {
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
