@@ -16,8 +16,8 @@ import {
 } from '../api/amplitude';
 import { sendInnSøknad } from '../api/api';
 import { ERouteBarnetilsyn, RouteTilPath } from '../barnetilsyn/routing/routesBarnetilsyn';
-import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../context/SpråkContext';
+import { useSøknad } from '../context/SøknadContext';
 import { useValideringsfeil } from '../context/ValideringsfeilContext';
 import { fellesTekster } from '../tekster/felles';
 import { IRoute } from '../typer/routes';
@@ -55,8 +55,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     const location = useLocation();
     const navigate = useNavigate();
     const { locale } = useSpråk();
-    const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon, resetSøknad } =
-        usePassAvBarnSøknad();
+    const { søknad, resetSøknadOgValideringsfeil } = useSøknad();
     const { valideringsfeil, settValideringsfeil, resetValideringsfeil } = useValideringsfeil();
 
     const errorRef = useRef<HTMLDivElement>(null);
@@ -107,12 +106,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
 
-        sendInnSøknad(stønadstype, {
-            hovedytelse,
-            aktivitet,
-            barnMedBarnepass,
-            dokumentasjon,
-        })
+        sendInnSøknad(stønadstype, søknad)
             .then((res) => {
                 loggSkjemaFullført(stønadstype);
 
@@ -121,7 +115,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                     ERouteBarnetilsyn.KVITTERING
                 );
 
-                resetSøknad();
+                resetSøknadOgValideringsfeil();
                 resetValideringsfeil();
 
                 navigate(nesteRoute.path, { state: { innsendtTidspunkt: res.mottattTidspunkt } });

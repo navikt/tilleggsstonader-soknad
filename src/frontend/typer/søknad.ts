@@ -1,6 +1,20 @@
 import { AnnenAktivitetType } from './aktivitet';
-import { EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
+import { Barnepass } from './barn';
+import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
 import { Ytelse } from '../components/Hovedytelse/typer';
+
+export type Søknad = SøknadPassAvBarn | SøknadLæremidler;
+
+export interface SøknadPassAvBarn {
+    hovedytelse: Hovedytelse | undefined;
+    aktivitet: Aktivitet | undefined;
+    barnMedBarnepass: Barnepass[];
+    dokumentasjon: DokumentasjonFelt[];
+}
+
+export interface SøknadLæremidler {
+    hovedytelse: Hovedytelse;
+}
 
 export interface Hovedytelse {
     ytelse: EnumFlereValgFelt<Ytelse>;
