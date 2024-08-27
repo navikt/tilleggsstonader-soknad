@@ -14,16 +14,16 @@ import {
     Label,
 } from '@navikt/ds-react';
 
+import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøkBarnetilsyn, loggSkjemaStartet } from '../api/amplitude';
-import { RoutesBarnetilsyn, ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
+import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
@@ -39,20 +39,20 @@ const KnappeContainer = styled(BodyShort)`
 const Forside: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { harBekreftet, settHarBekreftet } = usePassAvBarnSøknad();
+    const { harBekreftet, settHarBekreftet } = useLæremidlerSøknad();
     const { person } = usePerson();
 
     const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
 
     useEffect(() => {
-        const route = RoutesBarnetilsyn[0];
+        const route = routesLæremidler[0];
         loggBesøkBarnetilsyn(route.path, route.label);
     }, []);
 
     const startSøknad = () => {
         if (harBekreftet) {
-            loggSkjemaStartet(Stønadstype.BARNETILSYN);
-            const nesteRoute = hentNesteRoute(RoutesBarnetilsyn, location.pathname);
+            loggSkjemaStartet(Stønadstype.LÆREMIDLER);
+            const nesteRoute = hentNesteRoute(routesLæremidler, location.pathname);
             navigate(nesteRoute.path);
         } else {
             settSkalViseFeilmelding(true);
@@ -60,7 +60,7 @@ const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(skalÅpne, tittel, ERouteBarnetilsyn.FORSIDE);
+        loggAccordionEvent(skalÅpne, tittel, ERouteLæremidler.FORSIDE);
     };
 
     return (
