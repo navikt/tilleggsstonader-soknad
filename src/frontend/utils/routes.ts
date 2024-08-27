@@ -1,4 +1,5 @@
 import { RoutesBarnetilsyn, barnetilsynPath } from '../barnetilsyn/routing/routesBarnetilsyn';
+import { læremidlerPath, routesLæremidler } from '../læremidler/routing/routesLæremidler';
 import { IRoute } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
 
@@ -6,6 +7,8 @@ export const hentRoutes = (stønadstype: Stønadstype): IRoute[] => {
     switch (stønadstype) {
         case Stønadstype.BARNETILSYN:
             return RoutesBarnetilsyn;
+        case Stønadstype.LÆREMIDLER:
+            return routesLæremidler;
     }
 };
 
@@ -23,5 +26,7 @@ export const hentStartRoute = (stønadstype: Stønadstype) => {
     switch (stønadstype) {
         case Stønadstype.BARNETILSYN:
             return barnetilsynPath;
+        case Stønadstype.LÆREMIDLER:
+            return læremidlerPath;
     }
 };

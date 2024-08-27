@@ -35,6 +35,9 @@ const stønadstypeTilPath = (stønadstype: Stønadstype): string => {
     switch (stønadstype) {
         case Stønadstype.BARNETILSYN:
             return 'pass-av-barn';
+        // Todo: Oppdater endepunkt når api er klart til å ta i mot søknader
+        case Stønadstype.LÆREMIDLER:
+            return 'laeremidler';
     }
 };
 

@@ -11,6 +11,7 @@ export interface FellesInnhold {
     neste: TekstElement<string>;
     forrige: TekstElement<string>;
     banner_bt: TekstElement<string>;
+    banner_læremidler: TekstElement<string>;
     velg_land: TekstElement<string>;
     land: TekstElement<string>;
     årsak: TekstElement<string>;
@@ -42,6 +43,9 @@ export const fellesTekster: FellesInnhold = {
     },
     banner_bt: {
         nb: 'Søknad om støtte til pass av barn',
+    },
+    banner_læremidler: {
+        nb: 'Søknad om støtte til læremidler',
     },
     velg_land: {
         nb: 'Velg land',
