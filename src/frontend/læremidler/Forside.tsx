@@ -3,16 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
-import {
-    Accordion,
-    Alert,
-    BodyShort,
-    Button,
-    Checkbox,
-    CheckboxGroup,
-    Heading,
-    Label,
-} from '@navikt/ds-react';
+import { Accordion, BodyShort, Button, Checkbox, CheckboxGroup, Label } from '@navikt/ds-react';
 
 import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
@@ -27,7 +18,6 @@ import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
-import { erSnartNyttSkoleår } from '../utils/dato';
 import { hentNesteRoute } from '../utils/routes';
 
 const KnappeContainer = styled(BodyShort)`
@@ -74,14 +64,6 @@ const Forside: React.FC = () => {
                 </Label>
                 <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </PellePanel>
-            {erSnartNyttSkoleår() && (
-                <Alert variant="info">
-                    <Heading size="small" spacing>
-                        <LocaleTekst tekst={forsideTekster.mottatt_faktura_alert_tittel} />
-                    </Heading>
-                    <LocaleTekstAvsnitt tekst={forsideTekster.mottatt_faktura_alert_innhold} />
-                </Alert>
-            )}
             <LocalePunktliste
                 tittel={forsideTekster.dine_plikter_tittel}
                 innhold={forsideTekster.dine_plikter_innhold}
