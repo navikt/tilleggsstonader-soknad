@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router';
 
 import Forside from './Forside';
+import HovedytelseLæremidler from './steg/1-hovedytelse/HovedytelseLæremidler';
 import { Banner } from '../components/Banner';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
@@ -25,7 +26,7 @@ const SøknadsdialogInnhold = () => {
     return (
         <RedirectTilStart harBekreftet={harBekreftet} stønadstype={Stønadstype.LÆREMIDLER}>
             <Routes>
-                <Route path={'/hovedytelse'} element={<h1>Hovedytelse</h1>} />
+                <Route path={'/hovedytelse'} element={<HovedytelseLæremidler />} />
                 <Route path={'/utdanning'} element={<h1>Utdanning</h1>} />
                 <Route path={'/vedlegg'} element={<h1>Vedlegg</h1>} />
                 <Route path={'/oppsummering'} element={<h1>Oppsummering</h1>} />
