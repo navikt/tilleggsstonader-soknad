@@ -1,9 +1,10 @@
 import HovedytelseSide from '../../../components/Hovedytelse/Hovedytelse';
-import { useSøknad } from '../../../context/SøknadContext';
+import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { Hovedytelse } from '../../../typer/søknad';
 
 const HovedytelsePassBarn = () => {
-    const { hovedytelse, settHovedytelse, valideringsfeil, settValideringsfeil } = useSøknad();
+    const { hovedytelse, settHovedytelse, valideringsfeil, settValideringsfeil } =
+        usePassAvBarnSøknad();
 
     return (
         <HovedytelseSide

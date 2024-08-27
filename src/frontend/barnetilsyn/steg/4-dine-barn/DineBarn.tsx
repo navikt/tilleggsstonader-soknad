@@ -7,9 +7,9 @@ import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
-import { useSøknad } from '../../../context/SøknadContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formatering';
@@ -27,7 +27,7 @@ const DineBarn = () => {
         hovedytelse,
         valideringsfeil,
         settValideringsfeil,
-    } = useSøknad();
+    } = usePassAvBarnSøknad();
 
     const [barnIdenter, settBarnIdenter] = useState<string[]>(valgteBarnIdenter);
 

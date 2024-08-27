@@ -16,8 +16,8 @@ import {
 } from '../api/amplitude';
 import { sendInnSøknad } from '../api/api';
 import { ERouteBarnetilsyn, RouteTilPath } from '../barnetilsyn/routing/routesBarnetilsyn';
+import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../context/SpråkContext';
-import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { IRoute } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
@@ -62,7 +62,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
         barnMedBarnepass,
         dokumentasjon,
         resetSøknad,
-    } = useSøknad();
+    } = usePassAvBarnSøknad();
 
     const errorRef = useRef<HTMLDivElement>(null);
     const [senderInn, settSenderInn] = useState<boolean>(false);

@@ -19,8 +19,8 @@ import {
     OppholdInnhold,
     oppholdUtenforNorgeInnhold,
 } from '../../../../barnetilsyn/tekster/opphold';
+import { usePassAvBarnSøknad } from '../../../../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../../../../context/SpråkContext';
-import { useSøknad } from '../../../../context/SøknadContext';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { inneholderFeil } from '../../../../typer/validering';
 
@@ -44,7 +44,7 @@ const OppholdListe: React.FC<{
     tekster: OppholdInnhold;
 }> = ({ keyOpphold, arbeidOgOpphold, settArbeidOgOpphold, tekster }) => {
     const { locale } = useSpråk();
-    const { settValideringsfeil } = useSøknad();
+    const { settValideringsfeil } = usePassAvBarnSøknad();
 
     const oppholdUtenforNorge = arbeidOgOpphold[keyOpphold];
     const ulagretOpphold = oppholdUtenforNorge.find((opphold) => !opphold.lagret);

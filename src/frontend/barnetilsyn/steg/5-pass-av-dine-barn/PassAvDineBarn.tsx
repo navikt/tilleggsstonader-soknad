@@ -9,9 +9,9 @@ import { valider } from './utils';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
-import { useSøknad } from '../../../context/SøknadContext';
 import { Barnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { inneholderFeil } from '../../../typer/validering';
@@ -28,7 +28,7 @@ const PassAvDineBarn = () => {
         settDokumentasjonsbehov,
         valideringsfeil,
         settValideringsfeil,
-    } = useSøknad();
+    } = usePassAvBarnSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
         valgteBarnIdenter.map(

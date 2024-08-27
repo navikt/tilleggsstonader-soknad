@@ -10,9 +10,9 @@ import { initSentry } from './api/Sentry';
 import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
 import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
 import ScrollToTop from './components/ScrollToTop';
+import { PassAvBarnSøknadProvider } from './context/PassAvBarnSøknadContext';
 import { PersonProvider, usePerson } from './context/PersonContext';
 import { SpråkProvider } from './context/SpråkContext';
-import { SøknadProvider } from './context/SøknadContext';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { erProd } from './utils/miljø';
@@ -57,11 +57,11 @@ const AppRoutes = () => {
 root.render(
     <main id={'maincontent'} tabIndex={-1}>
         <SpråkProvider>
-            <SøknadProvider>
+            <PassAvBarnSøknadProvider>
                 <PersonProvider>
                     <AppRoutes />
                 </PersonProvider>
-            </SøknadProvider>
+            </PassAvBarnSøknadProvider>
         </SpråkProvider>
     </main>
 );

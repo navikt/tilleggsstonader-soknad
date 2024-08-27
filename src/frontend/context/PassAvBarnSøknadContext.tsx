@@ -7,8 +7,8 @@ import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
 import { Aktivitet, Hovedytelse } from '../typer/søknad';
 import { Valideringsfeil } from '../typer/validering';
 
-const [SøknadProvider, useSøknad] = createUseContext(() => {
-    SøknadProvider.displayName = 'SØKNAD_PROVIDER';
+const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() => {
+    PassAvBarnSøknadProvider.displayName = 'SØKNAD_PROVIDER';
 
     const [harBekreftet, settHarBekreftet] = useState<boolean>(false);
 
@@ -57,4 +57,4 @@ const [SøknadProvider, useSøknad] = createUseContext(() => {
     };
 });
 
-export { SøknadProvider, useSøknad };
+export { PassAvBarnSøknadProvider, usePassAvBarnSøknad };

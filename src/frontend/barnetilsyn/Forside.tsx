@@ -23,8 +23,8 @@ import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke'
 import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { usePerson } from '../context/PersonContext';
-import { useSøknad } from '../context/SøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { erSnartNyttSkoleår } from '../utils/dato';
@@ -39,7 +39,7 @@ const KnappeContainer = styled(BodyShort)`
 const Forside: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { harBekreftet, settHarBekreftet } = useSøknad();
+    const { harBekreftet, settHarBekreftet } = usePassAvBarnSøknad();
     const { person } = usePerson();
 
     const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
