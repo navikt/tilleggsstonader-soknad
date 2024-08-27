@@ -8,7 +8,7 @@ import { Aktivitet, Hovedytelse } from '../typer/søknad';
 import { Valideringsfeil } from '../typer/validering';
 
 const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() => {
-    PassAvBarnSøknadProvider.displayName = 'SØKNAD_PROVIDER';
+    PassAvBarnSøknadProvider.displayName = 'SØKNAD_PASS_AV_BARN_PROVIDER';
 
     const [harBekreftet, settHarBekreftet] = useState<boolean>(false);
 
