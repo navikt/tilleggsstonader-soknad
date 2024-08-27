@@ -10,6 +10,7 @@ import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formatering';
@@ -20,14 +21,9 @@ import { harBarnUnder2år, harValgtBarnOver9år } from '../5-pass-av-dine-barn/u
 const DineBarn = () => {
     const { locale } = useSpråk();
     const { person } = usePerson();
-    const {
-        valgteBarnIdenter,
-        settValgteBarnIdenter,
-        settDokumentasjon,
-        hovedytelse,
-        valideringsfeil,
-        settValideringsfeil,
-    } = usePassAvBarnSøknad();
+    const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
+    const { valgteBarnIdenter, settValgteBarnIdenter, settDokumentasjon, hovedytelse } =
+        usePassAvBarnSøknad();
 
     const [barnIdenter, settBarnIdenter] = useState<string[]>(valgteBarnIdenter);
 

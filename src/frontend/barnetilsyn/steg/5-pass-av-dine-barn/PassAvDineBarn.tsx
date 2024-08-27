@@ -12,6 +12,7 @@ import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Barnepass } from '../../../typer/barn';
 import { Stønadstype } from '../../../typer/stønadstyper';
 import { inneholderFeil } from '../../../typer/validering';
@@ -21,14 +22,9 @@ import { barnepassTekster } from '../../tekster/barnepass';
 const PassAvDineBarn = () => {
     const { person } = usePerson();
     const { locale } = useSpråk();
-    const {
-        valgteBarnIdenter,
-        barnMedBarnepass,
-        settBarnMedBarnepass,
-        settDokumentasjonsbehov,
-        valideringsfeil,
-        settValideringsfeil,
-    } = usePassAvBarnSøknad();
+    const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
+    const { valgteBarnIdenter, barnMedBarnepass, settBarnMedBarnepass, settDokumentasjonsbehov } =
+        usePassAvBarnSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
         valgteBarnIdenter.map(
