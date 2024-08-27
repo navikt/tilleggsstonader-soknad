@@ -13,7 +13,7 @@ export interface SøknadPassAvBarn {
 }
 
 export interface SøknadLæremidler {
-    hovedytelse: Hovedytelse;
+    hovedytelse: Hovedytelse | undefined;
 }
 
 export interface Hovedytelse {
