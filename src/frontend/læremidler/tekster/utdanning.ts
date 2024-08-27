@@ -1,3 +1,5 @@
+import { JaNeiTilTekst } from '../../tekster/felles';
+import { JaNei } from '../../typer/søknad';
 import { Radiogruppe, TekstElement } from '../../typer/tekst';
 import { AnnenUtdanningType } from '../typer/søknad';
 
@@ -6,6 +8,8 @@ interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
     radio_annen_utdanning: Radiogruppe<AnnenUtdanningType>;
     radio_annen_utdanning_feilmelding: TekstElement<string>;
+    radio_mottar_utstyrsstipend: Radiogruppe<JaNei>;
+    radio_mottar_utstyrsstipend_feilmelding: TekstElement<string>;
 }
 
 const AnnenUtdanningTypeTilTekst: Record<AnnenUtdanningType, TekstElement<string>> = {
@@ -40,5 +44,17 @@ export const utdanningTekster: AktivitetInnhold = {
     },
     radio_annen_utdanning_feilmelding: {
         nb: 'Du må svare på hvilken utdanning du søker om støtte i forbindelse med.',
+    },
+    radio_mottar_utstyrsstipend: {
+        header: {
+            nb: 'Mottar du utstyrsstipend fra Statens lånekasse? ',
+        },
+        beskrivelse: {
+            nb: 'Vi ser at du er under 21 år og går videregående. Da har du mest sannsynlig rett til utstyrstipend fra Lånekassen. ',
+        },
+        alternativer: JaNeiTilTekst,
+    },
+    radio_mottar_utstyrsstipend_feilmelding: {
+        nb: 'Du må svare på om du mottar utstyrsstipend.',
     },
 };
