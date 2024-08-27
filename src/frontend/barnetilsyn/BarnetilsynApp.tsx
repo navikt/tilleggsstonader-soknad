@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import Søknadsdialog from './Søknadsdialog';
 import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
+import { PassAvBarnSøknadProvider } from '../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../context/SpråkContext';
 import { teksterStønad } from '../tekster/stønad';
 import { Stønadstype } from '../typer/stønadstyper';
@@ -14,9 +15,11 @@ const BarnetilsynApp = () => {
     }, [locale]);
 
     return (
-        <SøknadRouting stønadstype={Stønadstype.BARNETILSYN}>
-            <Søknadsdialog />
-        </SøknadRouting>
+        <PassAvBarnSøknadProvider>
+            <SøknadRouting stønadstype={Stønadstype.BARNETILSYN}>
+                <Søknadsdialog />
+            </SøknadRouting>
+        </PassAvBarnSøknadProvider>
     );
 };
 
