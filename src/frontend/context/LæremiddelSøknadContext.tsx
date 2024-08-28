@@ -3,6 +3,7 @@ import { useState } from 'react';
 import createUseContext from 'constate';
 
 import { Utdanning } from '../læremidler/typer/søknad';
+import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
 import { Hovedytelse } from '../typer/søknad';
 
 const [LæremidlerSøknadProvider, useLæremidlerSøknad] = createUseContext(() => {
@@ -15,14 +16,14 @@ const [LæremidlerSøknadProvider, useLæremidlerSøknad] = createUseContext(() 
     const [utdanning, settUtdanning] = useState<Utdanning>();
 
     // TODO: Håndter dokumentasjon
-    // const [dokumentasjonsbehov, settDokumentasjonsbehov] = useState<Dokumentasjonsbehov[]>([]);
-    // const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
+    const [dokumentasjonsbehov, settDokumentasjonsbehov] = useState<Dokumentasjonsbehov[]>([]);
+    const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
 
     const resetSøknad = () => {
         settHovedytelse(undefined);
         settUtdanning(undefined);
-        // settDokumentasjonsbehov([]);
-        // settDokumentasjon([]);
+        settDokumentasjonsbehov([]);
+        settDokumentasjon([]);
         settHarBekreftet(false);
     };
 
@@ -33,6 +34,10 @@ const [LæremidlerSøknadProvider, useLæremidlerSøknad] = createUseContext(() 
         settHovedytelse,
         utdanning,
         settUtdanning,
+        dokumentasjonsbehov,
+        settDokumentasjonsbehov,
+        dokumentasjon,
+        settDokumentasjon,
         resetSøknad,
     };
 });
