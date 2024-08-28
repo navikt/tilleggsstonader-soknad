@@ -4,7 +4,7 @@ import { Accordion, Label } from '@navikt/ds-react';
 
 import LocalePunktliste from './Teksthåndtering/LocalePunktliste';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
-import { vedleggTekster } from '../barnetilsyn/tekster/vedlegg';
+import { vedleggTekster } from '../tekster/vedlegg';
 
 const VedleggGenerellInfo = () => {
     return (

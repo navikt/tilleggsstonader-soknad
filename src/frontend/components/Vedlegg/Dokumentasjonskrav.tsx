@@ -1,7 +1,8 @@
 import { BodyShort, List } from '@navikt/ds-react';
 
-import { vedleggTekster, typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
+import { typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
 import { useSpråk } from '../../context/SpråkContext';
+import { vedleggTekster } from '../../tekster/vedlegg';
 import { Dokumentasjonsbehov } from '../../typer/skjema';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
