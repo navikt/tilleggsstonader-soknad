@@ -14,7 +14,7 @@ interface Props {
 
 export const HarFunksjonsnedsettelse: React.FC<Props> = ({
     harFunksjonsnedsettelse,
-    oppdaterHarFunksjonsnedsettelse: oppdaterMottarUtstyrsstipend,
+    oppdaterHarFunksjonsnedsettelse,
     feilmelding,
 }) => {
     return (
@@ -22,7 +22,7 @@ export const HarFunksjonsnedsettelse: React.FC<Props> = ({
             <LocaleRadioGroup
                 id={feilmelding?.id}
                 tekst={utdanningTekster.radio_mottar_har_funksjonsnedsettelse}
-                onChange={oppdaterMottarUtstyrsstipend}
+                onChange={oppdaterHarFunksjonsnedsettelse}
                 value={harFunksjonsnedsettelse?.verdi || []}
                 error={feilmelding?.melding}
             />
