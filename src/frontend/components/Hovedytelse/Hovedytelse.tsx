@@ -24,11 +24,12 @@ const defaultArbeidOgOpphold: ArbeidOgOpphold = {
 };
 
 interface Props {
+    stønadstype: Stønadstype;
     hovedytelse: Hovedytelse | undefined;
     oppdaterHovedytelse: (hovedytelse: Hovedytelse) => void;
 }
 
-const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) => {
+const HovedytelseSide: React.FC<Props> = ({ stønadstype, hovedytelse, oppdaterHovedytelse }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -59,7 +60,7 @@ const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) 
 
     return (
         <Side
-            stønadstype={Stønadstype.BARNETILSYN}
+            stønadstype={stønadstype}
             validerSteg={() => kanFortsette(ytelse)}
             oppdaterSøknad={() => {
                 if (ytelse !== undefined) {
