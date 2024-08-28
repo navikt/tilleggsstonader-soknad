@@ -8,9 +8,8 @@ import Dokumentasjonskrav from './Dokumentasjonskrav';
 import { opprettDokumentasjonsfelt, leggTilVedlegg, fjernVedlegg } from './utils';
 import VedleggManglerModal from './VedleggManglerModal';
 import { vedleggTekster, typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
-import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../../context/SpråkContext';
-import { DokumentasjonFelt, Dokument } from '../../typer/skjema';
+import { DokumentasjonFelt, Dokument, Dokumentasjonsbehov } from '../../typer/skjema';
 import { Stønadstype } from '../../typer/stønadstyper';
 import VedleggFelt from '../Filopplaster/VedleggFelt';
 import { PellePanel } from '../PellePanel/PellePanel';
@@ -26,9 +25,14 @@ const VedleggContainer = styled.div`
     margin: 1rem 0;
 `;
 
-const Vedlegg = () => {
+interface Props {
+    dokumentasjon: DokumentasjonFelt[];
+    settDokumentasjon: React.Dispatch<React.SetStateAction<DokumentasjonFelt[]>>;
+    dokumentasjonsbehov: Dokumentasjonsbehov[];
+}
+
+const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentasjonsbehov }) => {
     const { locale } = useSpråk();
-    const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = usePassAvBarnSøknad();
 
     const ref = useRef<HTMLDialogElement>(null);
     const [ikkeOpplastedeDokumenter, settIkkeOpplastedeDokumenter] = React.useState<string[]>([]);
@@ -76,7 +80,7 @@ const Vedlegg = () => {
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
             </PellePanel>
-            <Dokumentasjonskrav />
+            <Dokumentasjonskrav dokumentasjonsbehov={dokumentasjonsbehov} />
             <VedleggGenerellInfo />
             <VedleggContainer>
                 {dokumentasjon.map((dok, indeks) => (

@@ -6,10 +6,10 @@ import HovedytelsePassBarn from './steg/2-hovedytelse/HovedytelsePassBarn';
 import Aktivitet from './steg/3-aktivitet/Aktivitet';
 import DineBarn from './steg/4-dine-barn/DineBarn';
 import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
+import VedleggPassAvBarn from './steg/6-vedlegg/VedleggPassAvBarn';
 import Oppsummering from './steg/7-oppsummering/Oppsummering';
 import { Banner } from '../components/Banner';
 import RedirectTilStart from '../components/RedirectTilStart';
-import Vedlegg from '../components/Vedlegg/Vedlegg';
 import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
@@ -36,7 +36,7 @@ const SøknadsdialogInnhold = () => {
                 <Route path={'/aktivitet'} element={<Aktivitet />} />
                 <Route path={'/dine-barn'} element={<DineBarn />} />
                 <Route path={'/barnepass'} element={<PassAvDineBarn />} />
-                <Route path={'/vedlegg'} element={<Vedlegg />} />
+                <Route path={'/vedlegg'} element={<VedleggPassAvBarn />} />
                 <Route path={'/oppsummering'} element={<Oppsummering />} />
             </Routes>
         </RedirectTilStart>

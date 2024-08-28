@@ -1,12 +1,13 @@
 import { BodyShort, List } from '@navikt/ds-react';
 
 import { vedleggTekster, typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
-import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../../context/SpråkContext';
+import { Dokumentasjonsbehov } from '../../typer/skjema';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-const Dokumentasjonskrav = () => {
-    const { dokumentasjonsbehov } = usePassAvBarnSøknad();
+const Dokumentasjonskrav: React.FC<{ dokumentasjonsbehov: Dokumentasjonsbehov[] }> = ({
+    dokumentasjonsbehov,
+}) => {
     const { locale } = useSpråk();
 
     return (
