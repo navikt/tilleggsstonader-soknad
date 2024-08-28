@@ -26,12 +26,18 @@ const VedleggContainer = styled.div`
 `;
 
 interface Props {
+    stønadstype: Stønadstype;
     dokumentasjon: DokumentasjonFelt[];
     settDokumentasjon: React.Dispatch<React.SetStateAction<DokumentasjonFelt[]>>;
     dokumentasjonsbehov: Dokumentasjonsbehov[];
 }
 
-const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentasjonsbehov }) => {
+const Vedlegg: React.FC<Props> = ({
+    stønadstype,
+    dokumentasjon,
+    settDokumentasjon,
+    dokumentasjonsbehov,
+}) => {
     const { locale } = useSpråk();
 
     const ref = useRef<HTMLDialogElement>(null);
@@ -73,7 +79,7 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
     };
 
     return (
-        <Side stønadstype={Stønadstype.BARNETILSYN} validerSteg={validerSteg}>
+        <Side stønadstype={stønadstype} validerSteg={validerSteg}>
             <Heading size={'medium'}>
                 <LocaleTekst tekst={vedleggTekster.tittel} />
             </Heading>
