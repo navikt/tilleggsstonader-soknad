@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { BodyLong, Button, HStack, List, Modal } from '@navikt/ds-react';
 
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import { useSpråk } from '../../../context/SpråkContext';
-import { vedleggModalTekster } from '../../tekster/vedlegg';
+import { vedleggModalTekster } from '../../barnetilsyn/tekster/vedlegg';
+import { useSpråk } from '../../context/SpråkContext';
+import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 interface Props {
     innerRef: RefObject<HTMLDialogElement>;

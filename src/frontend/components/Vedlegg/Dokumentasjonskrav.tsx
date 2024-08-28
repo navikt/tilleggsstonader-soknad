@@ -1,9 +1,9 @@
 import { BodyShort, List } from '@navikt/ds-react';
 
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
-import { useSpråk } from '../../../context/SpråkContext';
-import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
+import { vedleggTekster, typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
+import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
+import { useSpråk } from '../../context/SpråkContext';
+import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 const Dokumentasjonskrav = () => {
     const { dokumentasjonsbehov } = usePassAvBarnSøknad();

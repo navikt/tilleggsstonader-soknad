@@ -5,19 +5,19 @@ import { styled } from 'styled-components';
 import { Heading } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
-import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './utils';
+import { opprettDokumentasjonsfelt, leggTilVedlegg, fjernVedlegg } from './utils';
 import VedleggManglerModal from './VedleggManglerModal';
-import VedleggFelt from '../../../components/Filopplaster/VedleggFelt';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
-import Side from '../../../components/Side';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import VedleggGenerellInfo from '../../../components/VedleggGenerellInfo';
-import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
-import { useSpråk } from '../../../context/SpråkContext';
-import { Dokument, DokumentasjonFelt } from '../../../typer/skjema';
-import { Stønadstype } from '../../../typer/stønadstyper';
-import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
+import { vedleggTekster, typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
+import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
+import { useSpråk } from '../../context/SpråkContext';
+import { DokumentasjonFelt, Dokument } from '../../typer/skjema';
+import { Stønadstype } from '../../typer/stønadstyper';
+import VedleggFelt from '../Filopplaster/VedleggFelt';
+import { PellePanel } from '../PellePanel/PellePanel';
+import Side from '../Side';
+import LocaleTekst from '../Teksthåndtering/LocaleTekst';
+import LocaleTekstAvsnitt from '../Teksthåndtering/LocaleTekstAvsnitt';
+import VedleggGenerellInfo from '../VedleggGenerellInfo';
 
 const VedleggContainer = styled.div`
     display: flex;
