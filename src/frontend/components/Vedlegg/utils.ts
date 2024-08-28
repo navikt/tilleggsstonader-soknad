@@ -1,6 +1,12 @@
-import { typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
+import { typerVedleggTekster } from '../../tekster/vedlegg';
 import { Barn } from '../../typer/barn';
-import { DokumentasjonFelt, Dokument, Dokumentasjonsbehov, Vedleggstype } from '../../typer/skjema';
+import {
+    DokumentasjonFelt,
+    Dokument,
+    Dokumentasjonsbehov,
+    VedleggstypePassAvBarn,
+    Vedleggstype,
+} from '../../typer/skjema';
 import { Locale } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekster';
 
@@ -144,7 +150,10 @@ const finnEksisterendeDokumentasjonsfelt = (
  * Sjekker om dokumentasjonsbehovet skal ha samlet felt for opplasting av dokumentasjon.
  * Brukes for å samle utgifter til pass av barn.
  */
-const skalHaSamletOpplasting = (dokumentasjonsbehov: Dokumentasjonsbehov): boolean =>
-    [Vedleggstype.UTGIFTER_PASS_PRIVAT, Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE].includes(
-        dokumentasjonsbehov.type
-    );
+const skalHaSamletOpplasting = (dokumentasjonsbehov: Dokumentasjonsbehov): boolean => {
+    const list: Vedleggstype[] = [
+        VedleggstypePassAvBarn.UTGIFTER_PASS_PRIVAT,
+        VedleggstypePassAvBarn.UTGIFTER_PASS_SFO_AKS_BARNEHAGE,
+    ];
+    return list.includes(dokumentasjonsbehov.type);
+};
