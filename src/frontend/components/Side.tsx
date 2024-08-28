@@ -9,21 +9,20 @@ import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 import { StegIndikator } from './StegIndikator';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import {
-    loggBesøkBarnetilsyn,
+    loggBesøk,
     loggSkjemaFullført,
     loggSkjemaInnsendtFeilet,
     loggSkjemaStegFullført,
 } from '../api/amplitude';
 import { sendInnSøknad } from '../api/api';
-import { ERouteBarnetilsyn, RouteTilPath } from '../barnetilsyn/routing/routesBarnetilsyn';
-import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { useSpråk } from '../context/SpråkContext';
+import { useSøknad } from '../context/SøknadContext';
 import { useValideringsfeil } from '../context/ValideringsfeilContext';
 import { fellesTekster } from '../tekster/felles';
 import { IRoute } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
 import { inneholderFeil } from '../typer/validering';
-import { hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
+import { erOppsummeringsside, hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface Props {
     stønadstype: Stønadstype;
@@ -55,8 +54,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     const location = useLocation();
     const navigate = useNavigate();
     const { locale } = useSpråk();
-    const { hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon, resetSøknad } =
-        usePassAvBarnSøknad();
+    const { søknad, resetSøknadOgValideringsfeil } = useSøknad();
     const { valideringsfeil, settValideringsfeil, resetValideringsfeil } = useValideringsfeil();
 
     const errorRef = useRef<HTMLDivElement>(null);
@@ -74,8 +72,8 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     const aktivtSteg: IRoute | undefined = routes[aktivtStegIndex];
 
     useEffect(() => {
-        loggBesøkBarnetilsyn(aktivtSteg.path, aktivtSteg.label);
-    }, [aktivtSteg]);
+        loggBesøk(stønadstype, aktivtSteg.path, aktivtSteg.label);
+    }, [aktivtSteg, stønadstype]);
 
     const navigerTilNesteSide = () => {
         if (validerSteg && !validerSteg()) {
@@ -107,21 +105,12 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
 
-        sendInnSøknad(stønadstype, {
-            hovedytelse,
-            aktivitet,
-            barnMedBarnepass,
-            dokumentasjon,
-        })
+        sendInnSøknad(stønadstype, søknad)
             .then((res) => {
                 loggSkjemaFullført(stønadstype);
+                loggBesøk(stønadstype, nåværendePath, 'KVITTERING');
 
-                loggBesøkBarnetilsyn(
-                    RouteTilPath[ERouteBarnetilsyn.KVITTERING],
-                    ERouteBarnetilsyn.KVITTERING
-                );
-
-                resetSøknad();
+                resetSøknadOgValideringsfeil();
                 resetValideringsfeil();
 
                 navigate(nesteRoute.path, { state: { innsendtTidspunkt: res.mottattTidspunkt } });
@@ -158,7 +147,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
                     <LocaleTekst tekst={fellesTekster.forrige} />
                 </Button>
-                {aktivtSteg.route === ERouteBarnetilsyn.OPPSUMMERING ? (
+                {erOppsummeringsside(aktivtSteg.route) ? (
                     <Button onClick={sendSøknad} loading={senderInn}>
                         <LocaleTekst tekst={fellesTekster.send_inn_søknad} />
                     </Button>

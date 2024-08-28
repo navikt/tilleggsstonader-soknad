@@ -1,6 +1,14 @@
-import { RoutesBarnetilsyn, barnetilsynPath } from '../barnetilsyn/routing/routesBarnetilsyn';
-import { læremidlerPath, routesLæremidler } from '../læremidler/routing/routesLæremidler';
-import { IRoute } from '../typer/routes';
+import {
+    ERouteBarnetilsyn,
+    RoutesBarnetilsyn,
+    barnetilsynPath,
+} from '../barnetilsyn/routing/routesBarnetilsyn';
+import {
+    ERouteLæremidler,
+    læremidlerPath,
+    routesLæremidler,
+} from '../læremidler/routing/routesLæremidler';
+import { IRoute, RouteType } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
 
 export const hentRoutes = (stønadstype: Stønadstype): IRoute[] => {
@@ -29,4 +37,12 @@ export const hentStartRoute = (stønadstype: Stønadstype) => {
         case Stønadstype.LÆREMIDLER:
             return læremidlerPath;
     }
+};
+
+export const erOppsummeringsside = (route: RouteType): boolean => {
+    if (route === ERouteBarnetilsyn.OPPSUMMERING || route === ERouteLæremidler.OPPSUMMERING) {
+        return true;
+    }
+
+    return false;
 };
