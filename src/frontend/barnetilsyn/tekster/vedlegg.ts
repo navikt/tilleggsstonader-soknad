@@ -1,12 +1,12 @@
-import { Vedleggstype } from '../../typer/skjema';
+import { VedleggstypePassAvBarn } from '../../typer/skjema';
 import { Vedlegg } from '../../typer/tekst';
 
 export type TekstTypeVedlegg = {
-    [key in Vedleggstype]: Vedlegg;
+    [key in VedleggstypePassAvBarn]: Vedlegg;
 };
 
-export const typerVedleggTekster: TekstTypeVedlegg = {
-    [Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE]: {
+export const typerVedleggTeksterPassAvBarn: TekstTypeVedlegg = {
+    [VedleggstypePassAvBarn.UTGIFTER_PASS_SFO_AKS_BARNEHAGE]: {
         tittel: {
             nb: 'Faktura fra SFO/AKS/barnehage',
         },
@@ -23,7 +23,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             ],
         },
     },
-    [Vedleggstype.UTGIFTER_PASS_PRIVAT]: {
+    [VedleggstypePassAvBarn.UTGIFTER_PASS_PRIVAT]: {
         tittel: {
             nb: 'Dokumentasjon av utgifter til privat pass',
         },
@@ -41,7 +41,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             ],
         },
     },
-    [Vedleggstype.SKRIFTLIG_UTTALELSE_HELSEPERSONELL]: {
+    [VedleggstypePassAvBarn.SKRIFTLIG_UTTALELSE_HELSEPERSONELL]: {
         tittel: {
             nb: 'Skriftlig uttalelse fra helsepersonell for [0]',
         },
@@ -52,7 +52,7 @@ export const typerVedleggTekster: TekstTypeVedlegg = {
             nb: 'Legeerklæringen/uttalelsen fra helsepersonell må inneholde barnets navn og gjelde for perioden du søker om støtte til pass for.',
         },
     },
-    [Vedleggstype.TILTAKSSTED_ELLER_UTDANNINGSSTED]: {
+    [VedleggstypePassAvBarn.TILTAKSSTED_ELLER_UTDANNINGSSTED]: {
         tittel: {
             nb: 'Dokumentasjon fra tiltakssted eller utdanningssted',
         },

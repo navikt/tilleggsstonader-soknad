@@ -1,14 +1,15 @@
 import { BodyShort, List } from '@navikt/ds-react';
 
-import { typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
 import { useSpråk } from '../../context/SpråkContext';
-import { vedleggTekster } from '../../tekster/vedlegg';
+import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
 import { Dokumentasjonsbehov } from '../../typer/skjema';
+import { Stønadstype } from '../../typer/stønadstyper';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-const Dokumentasjonskrav: React.FC<{ dokumentasjonsbehov: Dokumentasjonsbehov[] }> = ({
-    dokumentasjonsbehov,
-}) => {
+const Dokumentasjonskrav: React.FC<{
+    stønadstype: Stønadstype;
+    dokumentasjonsbehov: Dokumentasjonsbehov[];
+}> = ({ stønadstype, dokumentasjonsbehov }) => {
     const { locale } = useSpråk();
 
     return (
@@ -26,9 +27,11 @@ const Dokumentasjonskrav: React.FC<{ dokumentasjonsbehov: Dokumentasjonsbehov[] 
                     </List.Item>
                 ))}
             </List>
-            <BodyShort>
-                <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />
-            </BodyShort>
+            {stønadstype === Stønadstype.BARNETILSYN && (
+                <BodyShort>
+                    <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />
+                </BodyShort>
+            )}
         </>
     );
 };

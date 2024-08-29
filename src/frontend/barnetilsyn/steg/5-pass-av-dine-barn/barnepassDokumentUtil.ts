@@ -1,5 +1,5 @@
 import { Barn, Barnepass, PassType, ÅrsakBarnepass } from '../../../typer/barn';
-import { Dokumentasjonsbehov, Vedleggstype } from '../../../typer/skjema';
+import { Dokumentasjonsbehov, VedleggstypePassAvBarn } from '../../../typer/skjema';
 
 export const oppdaterDokumentasjonsbehovForBarnMedPass = (
     barnMedPass: Barnepass[],
@@ -43,14 +43,14 @@ const utledDokumentasjonsbehovPassType = (passInfo: Barnepass, barn: Barn): Doku
     };
 };
 
-const passTypeTilVedlegg: Record<PassType, Vedleggstype> = {
-    [PassType.BARNEHAGE_SFO_AKS]: Vedleggstype.UTGIFTER_PASS_SFO_AKS_BARNEHAGE,
-    [PassType.PRIVAT]: Vedleggstype.UTGIFTER_PASS_PRIVAT,
+const passTypeTilVedlegg: Record<PassType, VedleggstypePassAvBarn> = {
+    [PassType.BARNEHAGE_SFO_AKS]: VedleggstypePassAvBarn.UTGIFTER_PASS_SFO_AKS_BARNEHAGE,
+    [PassType.PRIVAT]: VedleggstypePassAvBarn.UTGIFTER_PASS_PRIVAT,
 };
 
-const årsakEkstraPassTilVedlegg: Partial<Record<ÅrsakBarnepass, Vedleggstype>> = {
+const årsakEkstraPassTilVedlegg: Partial<Record<ÅrsakBarnepass, VedleggstypePassAvBarn>> = {
     [ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE]:
-        Vedleggstype.SKRIFTLIG_UTTALELSE_HELSEPERSONELL,
+        VedleggstypePassAvBarn.SKRIFTLIG_UTTALELSE_HELSEPERSONELL,
     [ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID]:
-        Vedleggstype.TILTAKSSTED_ELLER_UTDANNINGSSTED,
+        VedleggstypePassAvBarn.TILTAKSSTED_ELLER_UTDANNINGSSTED,
 };

@@ -7,9 +7,8 @@ import { Heading } from '@navikt/ds-react';
 import Dokumentasjonskrav from './Dokumentasjonskrav';
 import { opprettDokumentasjonsfelt, leggTilVedlegg, fjernVedlegg } from './utils';
 import VedleggManglerModal from './VedleggManglerModal';
-import { typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
 import { useSpråk } from '../../context/SpråkContext';
-import { vedleggTekster } from '../../tekster/vedlegg';
+import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
 import { DokumentasjonFelt, Dokument, Dokumentasjonsbehov } from '../../typer/skjema';
 import { Stønadstype } from '../../typer/stønadstyper';
 import VedleggFelt from '../Filopplaster/VedleggFelt';
@@ -27,12 +26,18 @@ const VedleggContainer = styled.div`
 `;
 
 interface Props {
+    stønadstype: Stønadstype;
     dokumentasjon: DokumentasjonFelt[];
     settDokumentasjon: React.Dispatch<React.SetStateAction<DokumentasjonFelt[]>>;
     dokumentasjonsbehov: Dokumentasjonsbehov[];
 }
 
-const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentasjonsbehov }) => {
+const Vedlegg: React.FC<Props> = ({
+    stønadstype,
+    dokumentasjon,
+    settDokumentasjon,
+    dokumentasjonsbehov,
+}) => {
     const { locale } = useSpråk();
 
     const ref = useRef<HTMLDialogElement>(null);
@@ -74,14 +79,17 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
     };
 
     return (
-        <Side stønadstype={Stønadstype.BARNETILSYN} validerSteg={validerSteg}>
+        <Side stønadstype={stønadstype} validerSteg={validerSteg}>
             <Heading size={'medium'}>
                 <LocaleTekst tekst={vedleggTekster.tittel} />
             </Heading>
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
             </PellePanel>
-            <Dokumentasjonskrav dokumentasjonsbehov={dokumentasjonsbehov} />
+            <Dokumentasjonskrav
+                stønadstype={stønadstype}
+                dokumentasjonsbehov={dokumentasjonsbehov}
+            />
             <VedleggGenerellInfo />
             <VedleggContainer>
                 {dokumentasjon.map((dok, indeks) => (
