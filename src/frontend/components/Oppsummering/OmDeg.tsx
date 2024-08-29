@@ -15,7 +15,6 @@ const OmDeg = () => {
                 <FormSummary.Heading level="2">
                     <LocaleTekst tekst={oppsummeringTekster.om_deg_tittel} />
                 </FormSummary.Heading>
-                <FormSummary.EditLink></FormSummary.EditLink>
             </FormSummary.Header>
             <FormSummary.Answers>
                 <FormSummary.Answer>
