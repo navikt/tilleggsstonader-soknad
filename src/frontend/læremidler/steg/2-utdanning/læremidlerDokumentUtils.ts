@@ -5,7 +5,10 @@ export const finnDokumentasjonsbehov = (
     harFunksjonsnedsettelse: EnumFelt<JaNei> | undefined
 ): Dokumentasjonsbehov[] => {
     if (harFunksjonsnedsettelse && harFunksjonsnedsettelse.verdi === 'JA') {
-        return [{ type: VedleggstypeLæremidler.DOKUMENTASJON_FUNKSJONSNEDSETTELSE }];
+        return [
+            { type: VedleggstypeLæremidler.DOKUMENTASJON_FUNKSJONSNEDSETTELSE },
+            { type: VedleggstypeLæremidler.UTGIFTER_FUNKSJONSNEDSETTELSE },
+        ];
     }
     return [];
 };
