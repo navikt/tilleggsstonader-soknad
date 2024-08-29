@@ -1,13 +1,15 @@
 import { InlineLenke, LesMer, TekstElement } from '../typer/tekst';
 
 interface OppsummeringInnhold {
+    endre_knapp: TekstElement<string>;
     om_deg_tittel: TekstElement<string>;
     om_deg_label_navn: TekstElement<string>;
     om_deg_label_adresse: TekstElement<string>;
     om_deg_lesmer: LesMer<InlineLenke>;
 }
 
-export const oppsummeringTekster: OppsummeringInnhold = {
+export const fellesOppsummeringTekster: OppsummeringInnhold = {
+    endre_knapp: { nb: 'Endre' },
     om_deg_tittel: { nb: 'Om deg' },
     om_deg_label_navn: { nb: 'Navn' },
     om_deg_label_adresse: { nb: 'Adresse' },
