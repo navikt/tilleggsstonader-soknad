@@ -13,8 +13,8 @@ const [SøknadProvider, useSøknad] = constate(
         SøknadProvider.displayName = 'SØKNAD_PROVIDER';
 
         const resetSøknadOgValideringsfeil = () => {
-            resetSøknad;
-            resetValideringsfeil;
+            resetSøknad();
+            resetValideringsfeil();
         };
 
         return {
