@@ -26,6 +26,7 @@ interface VedleggInnhold {
             innhold: TekstElement<string>;
         };
     };
+    ingen_dokumentasjonsbehov: TekstElement<string>;
 }
 
 const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] = {
@@ -65,7 +66,7 @@ const harIkkeVedleggDigitalAccordian: VedleggInnhold['accordians']['har_ikke_ved
 
 export const vedleggTekster: VedleggInnhold = {
     tittel: {
-        nb: 'Laste opp vedlegg',
+        nb: 'Vedlegg',
     },
     guide_innhold: {
         nb: [
@@ -82,6 +83,7 @@ export const vedleggTekster: VedleggInnhold = {
         har_ikke_vedlegg_digital: harIkkeVedleggDigitalAccordian,
         format_kvalitet: formatKvalitetAccordian,
     },
+    ingen_dokumentasjonsbehov: { nb: 'Du trenger ikke å legge ved noen dokumentasjon' },
 };
 
 interface VedleggManglerModalInnhold {
