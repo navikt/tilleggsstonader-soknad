@@ -4,6 +4,7 @@ import Forside from './Forside';
 import HovedytelseLæremidler from './steg/1-hovedytelse/HovedytelseLæremidler';
 import Utdanning from './steg/2-utdanning/Utdanning';
 import VedleggLæremidler from './steg/3-vedlegg/VedleggLæremidler';
+import Oppsummering from './steg/4-oppsummering/Oppsummering';
 import { Banner } from '../components/Banner';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
@@ -31,7 +32,7 @@ const SøknadsdialogInnhold = () => {
                 <Route path={'/hovedytelse'} element={<HovedytelseLæremidler />} />
                 <Route path={'/utdanning'} element={<Utdanning />} />
                 <Route path={'/vedlegg'} element={<VedleggLæremidler />} />
-                <Route path={'/oppsummering'} element={<h1>Oppsummering</h1>} />
+                <Route path={'/oppsummering'} element={<Oppsummering />} />
             </Routes>
         </RedirectTilStart>
     );
