@@ -55,7 +55,7 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
     const navigate = useNavigate();
     const { locale } = useSpråk();
     const { søknad, resetSøknadOgValideringsfeil } = useSøknad();
-    const { valideringsfeil, settValideringsfeil, resetValideringsfeil } = useValideringsfeil();
+    const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const errorRef = useRef<HTMLDivElement>(null);
     const [senderInn, settSenderInn] = useState<boolean>(false);
@@ -111,7 +111,6 @@ const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterS�
                 loggBesøk(stønadstype, nåværendePath, 'KVITTERING');
 
                 resetSøknadOgValideringsfeil();
-                resetValideringsfeil();
 
                 navigate(nesteRoute.path, { state: { innsendtTidspunkt: res.mottattTidspunkt } });
             })
