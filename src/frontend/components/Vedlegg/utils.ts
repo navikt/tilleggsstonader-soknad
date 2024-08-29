@@ -1,13 +1,8 @@
-import { Barn } from '../../../typer/barn';
-import {
-    Dokument,
-    DokumentasjonFelt,
-    Dokumentasjonsbehov,
-    Vedleggstype,
-} from '../../../typer/skjema';
-import { Locale } from '../../../typer/tekst';
-import { hentBeskjedMedEttParameter } from '../../../utils/tekster';
-import { typerVedleggTekster } from '../../tekster/vedlegg';
+import { typerVedleggTekster } from '../../barnetilsyn/tekster/vedlegg';
+import { Barn } from '../../typer/barn';
+import { DokumentasjonFelt, Dokument, Dokumentasjonsbehov, Vedleggstype } from '../../typer/skjema';
+import { Locale } from '../../typer/tekst';
+import { hentBeskjedMedEttParameter } from '../../utils/tekster';
 
 export const leggTilVedlegg = (
     alleDokumentasjonFelter: DokumentasjonFelt[],
