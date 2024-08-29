@@ -4,6 +4,7 @@ import { FormSummary } from '@navikt/ds-react';
 
 import { usePerson } from '../../context/PersonContext';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
+import { LocaleReadMoreMedLenke } from '../Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 const OmDeg = () => {
@@ -29,6 +30,7 @@ const OmDeg = () => {
                         <LocaleTekst tekst={oppsummeringTekster.om_deg_label_adresse} />
                     </FormSummary.Label>
                     <FormSummary.Value>{person.adresse}</FormSummary.Value>
+                    <LocaleReadMoreMedLenke tekst={oppsummeringTekster.om_deg_lesmer} />
                 </FormSummary.Answer>
             </FormSummary.Answers>
         </FormSummary>
