@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import { FormSummary } from '@navikt/ds-react';
 
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -9,13 +11,14 @@ import { oppsummeringTekster } from '../../tekster/oppsummering';
 import { Utdanning } from '../../typer/søknad';
 
 const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }) => {
+    const navigate = useNavigate();
     return (
         <FormSummary>
             <FormSummary.Header>
                 <FormSummary.Heading level="2">
                     <LocaleTekst tekst={oppsummeringTekster.utdanning_tittel} />
                 </FormSummary.Heading>
-                <FormSummary.EditLink href={RouteTilPath.UTDANNING}>
+                <FormSummary.EditLink onClick={() => navigate(RouteTilPath.UTDANNING)}>
                     <LocaleTekst tekst={fellesOppsummeringTekster.endre_knapp} />
                 </FormSummary.EditLink>
             </FormSummary.Header>
