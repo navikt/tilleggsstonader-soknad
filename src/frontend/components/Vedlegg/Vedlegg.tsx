@@ -110,6 +110,7 @@ const Vedlegg: React.FC<Props> = ({
                         ))}
                     </VedleggContainer>
                     <VedleggManglerModal
+                        stønadstype={stønadstype}
                         innerRef={ref}
                         dokumenterSomMangler={ikkeOpplastedeDokumenter}
                     />

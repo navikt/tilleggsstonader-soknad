@@ -6,14 +6,17 @@ import { BodyLong, Button, HStack, List, Modal } from '@navikt/ds-react';
 
 import { useSpråk } from '../../context/SpråkContext';
 import { vedleggModalTekster } from '../../tekster/vedlegg';
+import { Stønadstype } from '../../typer/stønadstyper';
+import { finnOppsummeringRoute } from '../../utils/routes';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 interface Props {
+    stønadstype: Stønadstype;
     innerRef: RefObject<HTMLDialogElement>;
     dokumenterSomMangler: string[];
 }
 
-const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }) => {
+const VedleggManglerModal: React.FC<Props> = ({ stønadstype, innerRef, dokumenterSomMangler }) => {
     const { locale } = useSpråk();
     const navigate = useNavigate();
 
@@ -38,7 +41,7 @@ const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }
                 </HStack>
             </Modal.Body>
             <Modal.Footer>
-                <Button type="button" onClick={() => navigate('/pass-av-barn/oppsummering')}>
+                <Button type="button" onClick={() => navigate(finnOppsummeringRoute(stønadstype))}>
                     <LocaleTekst tekst={vedleggModalTekster.fortsettKnapp} />
                 </Button>
                 <Button type="button" variant="secondary" onClick={() => innerRef.current?.close()}>
