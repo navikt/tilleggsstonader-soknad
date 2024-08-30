@@ -92,7 +92,10 @@ const Vedlegg: React.FC<Props> = ({
                     <PellePanel>
                         <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
                     </PellePanel>
-                    <Dokumentasjonskrav dokumentasjonsbehov={dokumentasjonsbehov} />
+                    <Dokumentasjonskrav
+                        stønadstype={stønadstype}
+                        dokumentasjonsbehov={dokumentasjonsbehov}
+                    />
                     <VedleggGenerellInfo />
                     <VedleggContainer>
                         {dokumentasjon.map((dok, indeks) => (
