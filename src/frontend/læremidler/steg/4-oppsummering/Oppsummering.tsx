@@ -11,9 +11,8 @@ import { oppsummeringTekster } from '../../tekster/oppsummering';
 const Oppsummering = () => {
     return (
         <Side stønadstype={Stønadstype.LÆREMIDLER}>
-            {' '}
             <Heading size="medium">
-                <LocaleTekst tekst={oppsummeringTekster.tittel} />´{' '}
+                <LocaleTekst tekst={oppsummeringTekster.tittel} />
             </Heading>
             <OmDeg />
         </Side>
