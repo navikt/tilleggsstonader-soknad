@@ -6,10 +6,18 @@ interface OppsummeringInnhold {
     om_deg_label_navn: TekstElement<string>;
     om_deg_label_adresse: TekstElement<string>;
     om_deg_lesmer: LesMer<InlineLenke>;
+    hovedytelse_tittel: TekstElement<string>;
+    arbeid_og_opphold: {
+        jobb: TekstElement<string>;
+        pengestøtte: TekstElement<string>;
+        oppholdSiste12mnd: TekstElement<string>;
+        oppholdNeste12mnd: TekstElement<string>;
+    };
 }
 
 export const fellesOppsummeringTekster: OppsummeringInnhold = {
     endre_knapp: { nb: 'Endre' },
+
     om_deg_tittel: { nb: 'Om deg' },
     om_deg_label_navn: { nb: 'Navn' },
     om_deg_label_adresse: { nb: 'Adresse' },
@@ -23,6 +31,22 @@ export const fellesOppsummeringTekster: OppsummeringInnhold = {
                     url: 'https://www.skatteetaten.no/person/folkeregister/flytte/endre-postadresse/',
                 },
             ],
+        },
+    },
+
+    hovedytelse_tittel: { nb: 'Din situasjon' },
+    arbeid_og_opphold: {
+        jobb: {
+            nb: 'Jobb utenfor Norge',
+        },
+        pengestøtte: {
+            nb: 'Pengestøtte fra annet land enn Norge',
+        },
+        oppholdSiste12mnd: {
+            nb: 'Opphold utenfor Norge siste 12 mnd',
+        },
+        oppholdNeste12mnd: {
+            nb: 'Opphold utenfor Norge neste 12 mnd',
         },
     },
 };
