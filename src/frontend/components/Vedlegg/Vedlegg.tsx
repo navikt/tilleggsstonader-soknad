@@ -10,7 +10,6 @@ import VedleggManglerModal from './VedleggManglerModal';
 import { useSpråk } from '../../context/SpråkContext';
 import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
 import { DokumentasjonFelt, Dokument, Dokumentasjonsbehov } from '../../typer/skjema';
-import { Stønadstype } from '../../typer/stønadstyper';
 import VedleggFelt from '../Filopplaster/VedleggFelt';
 import { PellePanel } from '../PellePanel/PellePanel';
 import Side from '../Side';
@@ -26,18 +25,12 @@ const VedleggContainer = styled.div`
 `;
 
 interface Props {
-    stønadstype: Stønadstype;
     dokumentasjon: DokumentasjonFelt[];
     settDokumentasjon: React.Dispatch<React.SetStateAction<DokumentasjonFelt[]>>;
     dokumentasjonsbehov: Dokumentasjonsbehov[];
 }
 
-const Vedlegg: React.FC<Props> = ({
-    stønadstype,
-    dokumentasjon,
-    settDokumentasjon,
-    dokumentasjonsbehov,
-}) => {
+const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentasjonsbehov }) => {
     const { locale } = useSpråk();
 
     const ref = useRef<HTMLDialogElement>(null);
@@ -110,7 +103,6 @@ const Vedlegg: React.FC<Props> = ({
                         ))}
                     </VedleggContainer>
                     <VedleggManglerModal
-                        stønadstype={stønadstype}
                         innerRef={ref}
                         dokumenterSomMangler={ikkeOpplastedeDokumenter}
                     />
