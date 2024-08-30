@@ -14,7 +14,6 @@ import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Barnepass } from '../../../typer/barn';
-import { Stønadstype } from '../../../typer/stønadstyper';
 import { inneholderFeil } from '../../../typer/validering';
 import { valuerOrThrow } from '../../../utils/typer';
 import { barnepassTekster } from '../../tekster/barnepass';
@@ -64,11 +63,7 @@ const PassAvDineBarn = () => {
     };
 
     return (
-        <Side
-            stønadstype={Stønadstype.BARNETILSYN}
-            oppdaterSøknad={oppdaterSøknad}
-            validerSteg={kanGåVidere}
-        >
+        <Side oppdaterSøknad={oppdaterSøknad} validerSteg={kanGåVidere}>
             <Heading size="medium">
                 <LocaleTekst tekst={barnepassTekster.tittel} />
             </Heading>

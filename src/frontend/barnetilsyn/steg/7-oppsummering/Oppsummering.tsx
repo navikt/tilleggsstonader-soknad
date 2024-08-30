@@ -29,7 +29,6 @@ import { JaNeiTilTekst } from '../../../tekster/felles';
 import { Barn, Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
 import { DokumentasjonFelt } from '../../../typer/skjema';
-import { Stønadstype } from '../../../typer/stønadstyper';
 import { Aktivitet, Hovedytelse } from '../../../typer/søknad';
 import { TekstElement } from '../../../typer/tekst';
 import { formaterIsoDato } from '../../../utils/formatering';
@@ -273,7 +272,6 @@ const Oppsummering = () => {
 
     return (
         <Side
-            stønadstype={Stønadstype.BARNETILSYN}
             validerSteg={() => {
                 if (!harBekreftet) {
                     settFeil('Du må bekrefte for å sende inn søknaden');

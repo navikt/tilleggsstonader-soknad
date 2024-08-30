@@ -1,6 +1,5 @@
 import HovedytelseSide from '../../../components/Hovedytelse/Hovedytelse';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
-import { Stønadstype } from '../../../typer/stønadstyper';
 import { Hovedytelse } from '../../../typer/søknad';
 
 const HovedytelseLæremidler = () => {
@@ -8,7 +7,6 @@ const HovedytelseLæremidler = () => {
 
     return (
         <HovedytelseSide
-            stønadstype={Stønadstype.LÆREMIDLER}
             hovedytelse={hovedytelse}
             oppdaterHovedytelse={(hovedytelse: Hovedytelse) => settHovedytelse(hovedytelse)}
         />

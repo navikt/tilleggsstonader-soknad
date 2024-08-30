@@ -10,7 +10,6 @@ import { hovedytelseInnhold } from '../../barnetilsyn/tekster/hovedytelse';
 import { useSpråk } from '../../context/SpråkContext';
 import { useValideringsfeil } from '../../context/ValideringsfeilContext';
 import { EnumFlereValgFelt } from '../../typer/skjema';
-import { Stønadstype } from '../../typer/stønadstyper';
 import { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
 import { inneholderFeil } from '../../typer/validering';
 import { PellePanel } from '../PellePanel/PellePanel';
@@ -24,12 +23,11 @@ const defaultArbeidOgOpphold: ArbeidOgOpphold = {
 };
 
 interface Props {
-    stønadstype: Stønadstype;
     hovedytelse: Hovedytelse | undefined;
     oppdaterHovedytelse: (hovedytelse: Hovedytelse) => void;
 }
 
-const HovedytelseSide: React.FC<Props> = ({ stønadstype, hovedytelse, oppdaterHovedytelse }) => {
+const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -60,7 +58,6 @@ const HovedytelseSide: React.FC<Props> = ({ stønadstype, hovedytelse, oppdaterH
 
     return (
         <Side
-            stønadstype={stønadstype}
             validerSteg={() => kanFortsette(ytelse)}
             oppdaterSøknad={() => {
                 if (ytelse !== undefined) {

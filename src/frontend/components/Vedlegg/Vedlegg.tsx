@@ -79,7 +79,7 @@ const Vedlegg: React.FC<Props> = ({
     };
 
     return (
-        <Side stønadstype={stønadstype} validerSteg={validerSteg}>
+        <Side validerSteg={validerSteg}>
             <Heading size={'medium'}>
                 <LocaleTekst tekst={vedleggTekster.tittel} />
             </Heading>

@@ -26,7 +26,6 @@ import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { aktivitetTekster } from '../../tekster/aktivitet';
@@ -159,11 +158,7 @@ const Aktivitet = () => {
     };
 
     return (
-        <Side
-            stønadstype={Stønadstype.BARNETILSYN}
-            validerSteg={kanFortsette}
-            oppdaterSøknad={oppdaterAktivitetISøknad}
-        >
+        <Side validerSteg={kanFortsette} oppdaterSøknad={oppdaterAktivitetISøknad}>
             <Heading size={'medium'}>
                 <LocaleTekst tekst={aktivitetTekster.tittel} />
             </Heading>

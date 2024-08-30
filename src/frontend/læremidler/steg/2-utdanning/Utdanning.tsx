@@ -19,7 +19,6 @@ import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContex
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt } from '../../../typer/skjema';
-import { Stønadstype } from '../../../typer/stønadstyper';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { utdanningTekster } from '../../tekster/utdanning';
@@ -91,11 +90,7 @@ const Utdanning = () => {
     };
 
     return (
-        <Side
-            stønadstype={Stønadstype.LÆREMIDLER}
-            validerSteg={kanFortsette}
-            oppdaterSøknad={oppdaterUtdanningISøknad}
-        >
+        <Side validerSteg={kanFortsette} oppdaterSøknad={oppdaterUtdanningISøknad}>
             <Heading size={'medium'}>
                 <LocaleTekst tekst={utdanningTekster.tittel} />
             </Heading>

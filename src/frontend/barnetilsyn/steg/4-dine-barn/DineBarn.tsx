@@ -11,7 +11,6 @@ import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext'
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { Stønadstype } from '../../../typer/stønadstyper';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formatering';
 import { harKunValgtEnsligSomHovedytelse } from '../../../utils/hovedytelse';
@@ -60,11 +59,7 @@ const DineBarn = () => {
     };
 
     return (
-        <Side
-            stønadstype={Stønadstype.BARNETILSYN}
-            validerSteg={() => kanFortsette(barnIdenter)}
-            oppdaterSøknad={oppdaterSøknad}
-        >
+        <Side validerSteg={() => kanFortsette(barnIdenter)} oppdaterSøknad={oppdaterSøknad}>
             <Heading size="medium">
                 <LocaleTekst tekst={dineBarnTekster.tittel} />
             </Heading>
