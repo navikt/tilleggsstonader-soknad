@@ -2,11 +2,13 @@ import {
     ERouteBarnetilsyn,
     RoutesBarnetilsyn,
     barnetilsynPath,
+    RouteTilPath as RouteToPathPassAvBarn,
 } from '../barnetilsyn/routing/routesBarnetilsyn';
 import {
     ERouteLæremidler,
     læremidlerPath,
     routesLæremidler,
+    RouteTilPath as RouteToPathLæremidler,
 } from '../læremidler/routing/routesLæremidler';
 import { IRoute, RouteType } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
@@ -45,4 +47,13 @@ export const erOppsummeringsside = (route: RouteType): boolean => {
     }
 
     return false;
+};
+
+export const finnOppsummeringRoute = (stønadstype: Stønadstype): string => {
+    switch (stønadstype) {
+        case Stønadstype.BARNETILSYN:
+            return RouteToPathPassAvBarn.OPPSUMMERING;
+        case Stønadstype.LÆREMIDLER:
+            return RouteToPathLæremidler.OPPSUMMERING;
+    }
 };

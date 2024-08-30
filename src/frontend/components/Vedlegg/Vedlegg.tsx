@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { styled } from 'styled-components';
 
-import { Heading } from '@navikt/ds-react';
+import { BodyShort, Heading } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
 import { opprettDokumentasjonsfelt, leggTilVedlegg, fjernVedlegg } from './utils';
@@ -83,28 +83,42 @@ const Vedlegg: React.FC<Props> = ({
             <Heading size={'medium'}>
                 <LocaleTekst tekst={vedleggTekster.tittel} />
             </Heading>
-            <PellePanel>
-                <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
-            </PellePanel>
-            <Dokumentasjonskrav
-                stønadstype={stønadstype}
-                dokumentasjonsbehov={dokumentasjonsbehov}
-            />
-            <VedleggGenerellInfo />
-            <VedleggContainer>
-                {dokumentasjon.map((dok, indeks) => (
-                    <section key={indeks}>
-                        <VedleggFelt
-                            tittel={dok.label}
-                            vedlegg={typerVedleggTekster[dok.type]}
-                            dokumentasjonFelt={dok}
-                            leggTilDokument={(dokument: Dokument) => leggTilDokument(dok, dokument)}
-                            slettDokument={(dokument) => slettDokument(dok, dokument)}
-                        />
-                    </section>
-                ))}
-            </VedleggContainer>
-            <VedleggManglerModal innerRef={ref} dokumenterSomMangler={ikkeOpplastedeDokumenter} />
+            {dokumentasjonsbehov.length === 0 ? (
+                <BodyShort>
+                    <LocaleTekst tekst={vedleggTekster.ingen_dokumentasjonsbehov} />
+                </BodyShort>
+            ) : (
+                <>
+                    <PellePanel>
+                        <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
+                    </PellePanel>
+                    <Dokumentasjonskrav
+                        stønadstype={stønadstype}
+                        dokumentasjonsbehov={dokumentasjonsbehov}
+                    />
+                    <VedleggGenerellInfo />
+                    <VedleggContainer>
+                        {dokumentasjon.map((dok, indeks) => (
+                            <section key={indeks}>
+                                <VedleggFelt
+                                    tittel={dok.label}
+                                    vedlegg={typerVedleggTekster[dok.type]}
+                                    dokumentasjonFelt={dok}
+                                    leggTilDokument={(dokument: Dokument) =>
+                                        leggTilDokument(dok, dokument)
+                                    }
+                                    slettDokument={(dokument) => slettDokument(dok, dokument)}
+                                />
+                            </section>
+                        ))}
+                    </VedleggContainer>
+                    <VedleggManglerModal
+                        stønadstype={stønadstype}
+                        innerRef={ref}
+                        dokumenterSomMangler={ikkeOpplastedeDokumenter}
+                    />
+                </>
+            )}
         </Side>
     );
 };

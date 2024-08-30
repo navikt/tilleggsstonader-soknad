@@ -17,4 +17,15 @@ export const typerVedleggTeksterLæremidler: TekstTypeVedlegg = {
             nb: 'Legeerklæring eller annen uttalelse fra helsepersonell som beskriver din helsetilstand.',
         },
     },
+    [VedleggstypeLæremidler.UTGIFTER_FUNKSJONSNEDSETTELSE]: {
+        tittel: {
+            nb: 'Dokumentasjon på utgifter',
+        },
+        liste_tittel: {
+            nb: 'Dokumentasjon på utgifter til læremidler',
+        },
+        beskrivelse: {
+            nb: 'Fakturaene må være spesifisert. Vi godkjenner ikke skjermbilde av kontoutskrift/vipps eller lignende.',
+        },
+    },
 };

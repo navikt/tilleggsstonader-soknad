@@ -4,6 +4,7 @@ import { Heading } from '@navikt/ds-react';
 
 import { AnnenUtdanning } from './AnnenUtdanning';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
+import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
 import { MottarUtstyrsstipend } from './MottarUtstyrsstipend';
 import {
     feilAnnenUtdanning,
@@ -26,7 +27,7 @@ import { AnnenUtdanningType } from '../../typer/søknad';
 
 const Utdanning = () => {
     const { locale } = useSpråk();
-    const { utdanning, settUtdanning } = useLæremidlerSøknad();
+    const { utdanning, settUtdanning, settDokumentasjonsbehov } = useLæremidlerSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const [annenUtdanning, settAnnenUtdanning] = useState<EnumFelt<AnnenUtdanningType> | undefined>(
@@ -45,6 +46,7 @@ const Utdanning = () => {
             mottarUtstyrsstipend: mottarUtstyrsstipend,
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
+        settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
     };
 
     const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenUtdanningType>) => {

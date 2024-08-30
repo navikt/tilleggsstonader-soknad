@@ -10,12 +10,14 @@ import { Stønadstype } from '../typer/stønadstyper';
 
 const LæremidlerInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, hovedytelse } = useLæremidlerSøknad();
+    const { resetSøknad, hovedytelse, utdanning, dokumentasjon } = useLæremidlerSøknad();
 
     return (
         <SøknadProvider
             søknad={{
                 hovedytelse: hovedytelse,
+                utdanning: utdanning,
+                dokumentasjon: dokumentasjon,
             }}
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}

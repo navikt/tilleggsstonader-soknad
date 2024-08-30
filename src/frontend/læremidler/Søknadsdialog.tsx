@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router';
 import Forside from './Forside';
 import HovedytelseLæremidler from './steg/1-hovedytelse/HovedytelseLæremidler';
 import Utdanning from './steg/2-utdanning/Utdanning';
+import VedleggLæremidler from './steg/3-vedlegg/VedleggLæremidler';
 import { Banner } from '../components/Banner';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
@@ -29,7 +30,7 @@ const SøknadsdialogInnhold = () => {
             <Routes>
                 <Route path={'/hovedytelse'} element={<HovedytelseLæremidler />} />
                 <Route path={'/utdanning'} element={<Utdanning />} />
-                <Route path={'/vedlegg'} element={<h1>Vedlegg</h1>} />
+                <Route path={'/vedlegg'} element={<VedleggLæremidler />} />
                 <Route path={'/oppsummering'} element={<h1>Oppsummering</h1>} />
             </Routes>
         </RedirectTilStart>
