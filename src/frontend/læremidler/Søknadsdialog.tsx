@@ -6,7 +6,7 @@ import HovedytelseLæremidler from './steg/1-hovedytelse/HovedytelseLæremidler'
 import Utdanning from './steg/2-utdanning/Utdanning';
 import VedleggLæremidler from './steg/3-vedlegg/VedleggLæremidler';
 import Oppsummering from './steg/4-oppsummering/Oppsummering';
-import { Banner } from '../components/Banner';
+import { Header } from '../components/Header';
 import Kvittering from '../components/Kvittering/Kvittering';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
@@ -15,7 +15,7 @@ import { fellesTekster } from '../tekster/felles';
 const Søknadsdialog: React.FC = () => {
     return (
         <>
-            <Banner tittel={fellesTekster.banner_læremidler} />
+            <Header tittel={fellesTekster.banner_læremidler} />
             <Routes>
                 <Route path={'/'} element={<Forside />} />
                 <Route path={'*'} element={<SøknadsdialogInnhold />} />
