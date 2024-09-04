@@ -83,6 +83,15 @@ const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) =>
                     <LocaleInlineLenke tekst={kvitteringTekster.vilkår_innhold} />
                 </BodyLong>
             </VStack>
+
+            <VStack gap="4">
+                <Heading size="medium">
+                    <LocaleTekst tekst={kvitteringTekster.relevante_stønader_tittel} />
+                </Heading>
+                <BodyLong>
+                    <LocaleInlineLenke tekst={kvitteringTekster.relevante_stønader_innhold} />
+                </BodyLong>
+            </VStack>
         </Container>
     );
 };

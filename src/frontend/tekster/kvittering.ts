@@ -19,7 +19,7 @@ interface KvitteringInnhold {
     vilkår_innhold: TekstElement<InlineLenke>;
 
     relevante_stønader_tittel: TekstElement<string>;
-    relevante_stønader_innhold: TekstElement<string>;
+    relevante_stønader_innhold: TekstElement<InlineLenke>;
 }
 
 export const kvitteringTekster: KvitteringInnhold = {
@@ -74,6 +74,13 @@ export const kvitteringTekster: KvitteringInnhold = {
     },
     relevante_stønader_tittel: { nb: 'Du kan også ha rett til' },
     relevante_stønader_innhold: {
-        nb: 'Når du gjennomfører en utdanning eller opplæring godkjent av NAV, kan det hende du også har rett til: ',
+        nb: [
+            'Når du gjennomfører en utdanning eller opplæring godkjent av NAV, kan det hende du også har rett til andre tilleggsstønader. ',
+            {
+                tekst: 'Les mer om det her',
+                url: 'https://www.nav.no/tilleggsstonader',
+            },
+            '.',
+        ],
     },
 };
