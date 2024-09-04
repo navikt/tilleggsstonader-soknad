@@ -14,7 +14,6 @@ const Oppsummering = () => {
     const { hovedytelse, utdanning } = useLæremidlerSøknad();
     return (
         <Side>
-            {' '}
             <Heading size="medium">
                 <LocaleTekst tekst={oppsummeringTekster.tittel} />
             </Heading>

@@ -8,6 +8,8 @@ interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
     radio_annen_utdanning: Radiogruppe<AnnenUtdanningType>;
     radio_annen_utdanning_feilmelding: TekstElement<string>;
+    ingen_utdanning_alert_tittel: TekstElement<string>;
+    ingen_utdanning_alert_innhold: TekstElement<string>;
     radio_mottar_utstyrsstipend: Radiogruppe<JaNei>;
     radio_mottar_utstyrsstipend_feilmelding: TekstElement<string>;
     radio_mottar_har_funksjonsnedsettelse: Radiogruppe<JaNei>;
@@ -46,6 +48,12 @@ export const utdanningTekster: AktivitetInnhold = {
     },
     radio_annen_utdanning_feilmelding: {
         nb: 'Du må svare på hvilken utdanning du søker om støtte i forbindelse med.',
+    },
+    ingen_utdanning_alert_tittel: {
+        nb: 'Hvis du ikke gjennomfører utdanning, har du ikke rett til støtte til læremidler',
+    },
+    ingen_utdanning_alert_innhold: {
+        nb: 'Du kan fortsatt søke, men du kan få avslag.',
     },
     radio_mottar_utstyrsstipend: {
         header: {

@@ -1,6 +1,9 @@
 import React from 'react';
 
+import { Alert, BodyShort, Heading } from '@navikt/ds-react';
+
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { EnumFelt } from '../../../typer/skjema';
 import { Feilmelding } from '../../../typer/validering';
 import { utdanningTekster } from '../../tekster/utdanning';
@@ -18,12 +21,24 @@ export const AnnenUtdanning: React.FC<Props> = ({
     feilmelding,
 }) => {
     return (
-        <LocaleRadioGroup
-            id={feilmelding?.id}
-            tekst={utdanningTekster.radio_annen_utdanning}
-            onChange={oppdaterAnnenAktivitet}
-            value={annenUtdanning?.verdi || []}
-            error={feilmelding?.melding}
-        />
+        <>
+            <LocaleRadioGroup
+                id={feilmelding?.id}
+                tekst={utdanningTekster.radio_annen_utdanning}
+                onChange={oppdaterAnnenAktivitet}
+                value={annenUtdanning?.verdi || []}
+                error={feilmelding?.melding}
+            />
+            {annenUtdanning?.verdi === AnnenUtdanningType.INGEN_UTDANNING && (
+                <Alert variant={'info'}>
+                    <Heading size="small">
+                        <LocaleTekst tekst={utdanningTekster.ingen_utdanning_alert_tittel} />
+                    </Heading>
+                    <BodyShort>
+                        <LocaleTekst tekst={utdanningTekster.ingen_utdanning_alert_innhold} />
+                    </BodyShort>
+                </Alert>
+            )}
+        </>
     );
 };
