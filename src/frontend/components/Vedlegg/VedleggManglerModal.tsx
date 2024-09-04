@@ -5,19 +5,19 @@ import { useNavigate } from 'react-router-dom';
 import { BodyLong, Button, HStack, List, Modal } from '@navikt/ds-react';
 
 import { useSpråk } from '../../context/SpråkContext';
+import { useSøknad } from '../../context/SøknadContext';
 import { vedleggModalTekster } from '../../tekster/vedlegg';
-import { Stønadstype } from '../../typer/stønadstyper';
 import { finnOppsummeringRoute } from '../../utils/routes';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 interface Props {
-    stønadstype: Stønadstype;
     innerRef: RefObject<HTMLDialogElement>;
     dokumenterSomMangler: string[];
 }
 
-const VedleggManglerModal: React.FC<Props> = ({ stønadstype, innerRef, dokumenterSomMangler }) => {
+const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }) => {
     const { locale } = useSpråk();
+    const { stønadstype } = useSøknad();
     const navigate = useNavigate();
 
     return (

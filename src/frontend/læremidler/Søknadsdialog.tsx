@@ -9,7 +9,6 @@ import { Banner } from '../components/Banner';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { fellesTekster } from '../tekster/felles';
-import { Stønadstype } from '../typer/stønadstyper';
 
 const Søknadsdialog: React.FC = () => {
     return (
@@ -27,7 +26,7 @@ const Søknadsdialog: React.FC = () => {
 const SøknadsdialogInnhold = () => {
     const { harBekreftet } = useLæremidlerSøknad();
     return (
-        <RedirectTilStart harBekreftet={harBekreftet} stønadstype={Stønadstype.LÆREMIDLER}>
+        <RedirectTilStart harBekreftet={harBekreftet}>
             <Routes>
                 <Route path={'/hovedytelse'} element={<HovedytelseLæremidler />} />
                 <Route path={'/utdanning'} element={<Utdanning />} />

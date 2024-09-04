@@ -16,6 +16,7 @@ const BarnetilsynInnhold = () => {
 
     return (
         <SøknadProvider
+            stønadstype={Stønadstype.BARNETILSYN}
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,

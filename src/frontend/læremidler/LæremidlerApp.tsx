@@ -14,6 +14,7 @@ const LæremidlerInnhold = () => {
 
     return (
         <SøknadProvider
+            stønadstype={Stønadstype.LÆREMIDLER}
             søknad={{
                 hovedytelse: hovedytelse,
                 utdanning: utdanning,

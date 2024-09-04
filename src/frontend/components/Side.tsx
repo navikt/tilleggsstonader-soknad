@@ -20,12 +20,10 @@ import { useSøknad } from '../context/SøknadContext';
 import { useValideringsfeil } from '../context/ValideringsfeilContext';
 import { fellesTekster } from '../tekster/felles';
 import { IRoute } from '../typer/routes';
-import { Stønadstype } from '../typer/stønadstyper';
 import { inneholderFeil } from '../typer/validering';
 import { erOppsummeringsside, hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
 
 interface Props {
-    stønadstype: Stønadstype;
     children?: React.ReactNode;
     validerSteg?: () => boolean;
     oppdaterSøknad?: () => void;
@@ -50,11 +48,11 @@ const KnappeContainerMedFeilmelding = styled.div`
     gap: 1rem;
 `;
 
-const Side: React.FC<Props> = ({ stønadstype, children, validerSteg, oppdaterSøknad }) => {
+const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { locale } = useSpråk();
-    const { søknad, resetSøknadOgValideringsfeil } = useSøknad();
+    const { stønadstype, søknad, resetSøknadOgValideringsfeil } = useSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const errorRef = useRef<HTMLDivElement>(null);

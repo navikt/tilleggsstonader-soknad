@@ -1,16 +1,17 @@
 import { BodyShort, List } from '@navikt/ds-react';
 
 import { useSpråk } from '../../context/SpråkContext';
+import { useSøknad } from '../../context/SøknadContext';
 import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
 import { Dokumentasjonsbehov } from '../../typer/skjema';
 import { Stønadstype } from '../../typer/stønadstyper';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 const Dokumentasjonskrav: React.FC<{
-    stønadstype: Stønadstype;
     dokumentasjonsbehov: Dokumentasjonsbehov[];
-}> = ({ stønadstype, dokumentasjonsbehov }) => {
+}> = ({ dokumentasjonsbehov }) => {
     const { locale } = useSpråk();
+    const { stønadstype } = useSøknad();
 
     return (
         <>
