@@ -13,6 +13,11 @@ const erFeilOgSkalRouteTilPapirsøknad = (req: AxiosError<{ detail?: string }, u
     return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
 };
 
+const stønadstyperMedBarn = [Stønadstype.BARNETILSYN];
+
+const skalHenteMedBarn = (stønadstype: Stønadstype) =>
+    stønadstyperMedBarn.indexOf(stønadstype) > -1;
+
 export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: React.ReactNode }> = ({
     stønadstype,
     children,
@@ -22,8 +27,7 @@ export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: Rea
     const [feilmelding, settFeilmelding] = useState<string>();
 
     useEffect(() => {
-        // TODO hent data basert på om brukeren skal ha barn eller ikke, kun barn-kall kan ev sende til papirsøknad
-        hentPersonData()
+        hentPersonData(skalHenteMedBarn(stønadstype))
             .then((resp) => {
                 settPerson(resp);
                 settHarLastetPerson(true);
