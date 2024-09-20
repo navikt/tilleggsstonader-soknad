@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import Søknadsdialog from './Søknadsdialog';
 import { PersonRouting } from '../components/PersonRouting';
+import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
 import { LæremidlerSøknadProvider, useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
@@ -24,7 +25,9 @@ const LæremidlerInnhold = () => {
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}
         >
-            <Søknadsdialog />
+            <SøknadRouting stønadstype={Stønadstype.LÆREMIDLER}>
+                <Søknadsdialog />
+            </SøknadRouting>
         </SøknadProvider>
     );
 };

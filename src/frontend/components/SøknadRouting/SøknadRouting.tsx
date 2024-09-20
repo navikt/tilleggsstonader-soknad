@@ -20,7 +20,7 @@ const SøknadRouting: React.FC<{ stønadstype: Stønadstype; children: React.Rea
         case RoutingState.FEILET:
             return <Alert variant="error">Noe gikk galt! Prøv å laste siden på nytt.</Alert>;
         case RoutingState.GAMMEL:
-            sendSøkerTilGammelSøknad();
+            sendSøkerTilGammelSøknad(stønadstype);
             return null;
     }
 };
