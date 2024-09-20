@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import Søknadsdialog from './Søknadsdialog';
+import { PersonRouting } from '../components/PersonRouting';
 import { LæremidlerSøknadProvider, useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
@@ -37,11 +38,13 @@ const LæremidlerApp = () => {
 
     // TODO: Implementer logikk for routing
     return (
-        <ValideringsfeilProvider>
-            <LæremidlerSøknadProvider>
-                <LæremidlerInnhold />
-            </LæremidlerSøknadProvider>
-        </ValideringsfeilProvider>
+        <PersonRouting stønadstype={Stønadstype.LÆREMIDLER}>
+            <ValideringsfeilProvider>
+                <LæremidlerSøknadProvider>
+                    <LæremidlerInnhold />
+                </LæremidlerSøknadProvider>
+            </ValideringsfeilProvider>
+        </PersonRouting>
     );
 };
 
