@@ -14,7 +14,7 @@ const erFeilOgSkalRouteTilPapirsøknad = (req: AxiosError<{ detail?: string }, u
 };
 
 export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: React.ReactNode }> = ({
-    //stønadstype,
+    stønadstype,
     children,
 }) => {
     const [person, settPerson] = useState<Person>(initiellPerson);
@@ -30,14 +30,14 @@ export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: Rea
             })
             .catch((req) => {
                 if (axios.isAxiosError(req) && erFeilOgSkalRouteTilPapirsøknad(req)) {
-                    sendSøkerTilPapirsøknad();
+                    sendSøkerTilPapirsøknad(stønadstype);
                 } else {
                     settFeilmelding(
                         'Feilet henting av personopplysninger. Prøv å laste inn siden på nytt'
                     );
                 }
             });
-    }, []);
+    }, [stønadstype]);
 
     if (feilmelding) {
         return <div>{feilmelding}</div>;
