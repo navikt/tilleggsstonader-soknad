@@ -2,11 +2,11 @@ import { Route, Routes } from 'react-router';
 
 import Forside from './Forside';
 import { læremidlerPath } from './routing/routesLæremidler';
+import { Header } from '../components/Header';
 import HovedytelseLæremidler from './steg/1-hovedytelse/HovedytelseLæremidler';
 import Utdanning from './steg/2-utdanning/Utdanning';
 import VedleggLæremidler from './steg/3-vedlegg/VedleggLæremidler';
 import Oppsummering from './steg/4-oppsummering/Oppsummering';
-import { Header } from '../components/Header';
 import Kvittering from '../components/Kvittering/Kvittering';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';

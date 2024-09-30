@@ -2,16 +2,16 @@ import { Route, Routes } from 'react-router';
 
 import Forside from './Forside';
 import Kvittering from './Kvittering';
+import { Header } from '../components/Header';
+import RedirectTilStart from '../components/RedirectTilStart';
+import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
+import { fellesTekster } from '../tekster/felles';
 import HovedytelsePassBarn from './steg/2-hovedytelse/HovedytelsePassBarn';
 import Aktivitet from './steg/3-aktivitet/Aktivitet';
 import DineBarn from './steg/4-dine-barn/DineBarn';
 import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
 import VedleggPassAvBarn from './steg/6-vedlegg/VedleggPassAvBarn';
 import Oppsummering from './steg/7-oppsummering/Oppsummering';
-import { Header } from '../components/Header';
-import RedirectTilStart from '../components/RedirectTilStart';
-import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
-import { fellesTekster } from '../tekster/felles';
 
 const Søknadsdialog: React.FC = () => {
     return (
