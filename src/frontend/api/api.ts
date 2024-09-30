@@ -19,9 +19,12 @@ export const defaultConfig = () => ({
     withCredentials: true,
 });
 
-export const hentPersonData = (): Promise<Person> => {
+export const hentPersonData = (medBarn: boolean): Promise<Person> => {
     return axios
-        .get<Person>(`${Environment().apiProxyUrl}/person`, defaultConfig())
+        .get<Person>(
+            `${Environment().apiProxyUrl}/person${medBarn ? '/med-barn' : ''}`,
+            defaultConfig()
+        )
         .then((response) => response.data);
 };
 

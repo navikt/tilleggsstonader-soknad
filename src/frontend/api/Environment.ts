@@ -1,10 +1,12 @@
+import { Stønadstype } from '../typer/stønadstyper';
+
 interface EnvironmentProps {
     apiProxyUrl: string;
     vedleggProxyUrl: string;
     wonderwallUrl: string;
     sentryUrl?: string;
-    urlGammelSøknad: string;
-    urlPapirsøknad: string;
+    urlGammelSøknad: (stønadstype: Stønadstype) => string;
+    urlPapirsøknad: (stønadstype: Stønadstype) => string;
     miljø: string;
     modellVersjon: IModellversjon;
 }
@@ -12,6 +14,23 @@ interface EnvironmentProps {
 interface IModellversjon {
     barnetilsyn: number;
 }
+
+const StønadstypeTilFyllutSkjema: Record<Stønadstype, string> = {
+    BARNETILSYN: 'nav111215b',
+    LÆREMIDLER: 'nav111216b',
+};
+
+const urlGammelSøknadProd = (stønadstype: Stønadstype) =>
+    `https://www.nav.no/fyllut/${StønadstypeTilFyllutSkjema[stønadstype]}?sub=digital`;
+
+const urlGammelSøknadDev = (stønadstype: Stønadstype) =>
+    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilFyllutSkjema[stønadstype]}?sub=digital`;
+
+const urlPapirsøknadProd = (stønadstype: Stønadstype) =>
+    `https://www.nav.no/fyllut/${StønadstypeTilFyllutSkjema[stønadstype]}?sub=paper`;
+
+const urlPapirsøknadDev = (stønadstype: Stønadstype) =>
+    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilFyllutSkjema[stønadstype]}?sub=paper`;
 
 const Environment = (): EnvironmentProps => {
     const modellVersjon = { overgangsstønad: 7, barnetilsyn: 2, skolepenger: 2 };
@@ -24,21 +43,19 @@ const Environment = (): EnvironmentProps => {
             wonderwallUrl:
                 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
-            urlGammelSøknad:
-                'https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111215b?sub=digital',
-            urlPapirsøknad:
-                'https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111215b?sub=paper',
+            urlGammelSøknad: urlGammelSøknadDev,
+            urlPapirsøknad: urlPapirsøknadDev,
             miljø: 'preprod',
             modellVersjon: modellVersjon,
         };
-    } else if (window.location.hostname.indexOf('www') > -1) {
+    } else if (window.location.hostname.indexOf('nav.no') > -1) {
         return {
             apiProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api',
             vedleggProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api/vedlegg',
             wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
-            urlGammelSøknad: 'https://www.nav.no/fyllut/nav111215b?sub=digital',
-            urlPapirsøknad: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
+            urlGammelSøknad: urlGammelSøknadProd,
+            urlPapirsøknad: urlPapirsøknadProd,
             miljø: 'production',
             modellVersjon: modellVersjon,
         };
@@ -47,10 +64,8 @@ const Environment = (): EnvironmentProps => {
             apiProxyUrl: 'http://localhost:8080/api',
             vedleggProxyUrl: 'http://localhost:8080/api/vedlegg/tillegg',
             wonderwallUrl: `http://localhost:8001/test/cookie?redirect=`,
-            urlGammelSøknad:
-                'https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111215b?sub=digital',
-            urlPapirsøknad:
-                'https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111215b?sub=paper',
+            urlGammelSøknad: urlGammelSøknadDev,
+            urlPapirsøknad: urlPapirsøknadDev,
             miljø: 'local',
             modellVersjon: modellVersjon,
         };
