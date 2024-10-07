@@ -1,7 +1,8 @@
-import { EnumFelt } from '../../typer/skjema';
+import { EnumFelt, EnumFlereValgFelt } from '../../typer/skjema';
 import { JaNei } from '../../typer/søknad';
 
 export interface Utdanning {
+    aktiviteter: EnumFlereValgFelt<string> | undefined;
     annenUtdanning: EnumFelt<AnnenUtdanningType> | undefined;
     mottarUtstyrsstipend: EnumFelt<JaNei> | undefined;
     harFunksjonsnedsettelse: EnumFelt<JaNei> | undefined;
