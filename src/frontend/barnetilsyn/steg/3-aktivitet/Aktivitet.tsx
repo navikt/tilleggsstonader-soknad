@@ -7,13 +7,13 @@ import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { LønnetTiltak } from './LønnetTiltak';
 import {
-    mapTilRegisterAktiviteterObjektMedLabel,
     skalTaStillingTilAnnenAktivitet,
     skalTaStillingTilLønnetTiltak,
     skalTaStillingTilRegisterAktiviteter,
 } from './utils';
 import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './validering';
 import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
+import { mapTilRegisterAktiviteterObjektMedLabel } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
