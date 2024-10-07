@@ -9,6 +9,7 @@ interface AktivitetInnhold {
     guide_innhold: TekstElement<string[]>;
     hvilken_aktivitet: HvilkenAktivitet;
     ingen_registrerte_aktiviterer_overskrift: TekstElement<string>;
+    checkbox_velge_aktivitet_feilmelding: TekstElement<string>;
     radio_annen_utdanning: Radiogruppe<AnnenUtdanningType>;
     radio_annen_utdanning_feilmelding: TekstElement<string>;
     ingen_utdanning_alert_tittel: TekstElement<string>;
@@ -82,6 +83,9 @@ export const utdanningTekster: AktivitetInnhold = {
     hvilken_aktivitet: hvilkenAktivitet,
     ingen_registrerte_aktiviterer_overskrift: {
         nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.',
+    },
+    checkbox_velge_aktivitet_feilmelding: {
+        nb: 'Du må svare på hvilken utdanning eller opplæring du søker om støtte i forbindelse med.',
     },
     radio_annen_utdanning: {
         header: {

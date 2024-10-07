@@ -11,6 +11,7 @@ import {
     feilAnnenUtdanning,
     feilHarFunksjonsnedsettelse,
     feilMottarUtstyrsstipend,
+    feilValgtAktivitet,
 } from './validering';
 import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import {
@@ -106,10 +107,24 @@ const Utdanning = () => {
         nullstillAnnenAktivitet(nyeValgteAktiviteter);
     };
 
+    if (!registerAktiviteter) {
+        // ønsker ikke å vise siden før man har hentet aktivteter fra backend
+        return null;
+    }
+
+    const skalViseArbeidsrettedeAktiviteter =
+        skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
+    const skalViseAnnenAktivitet =
+        !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
+
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
 
-        if (annenUtdanning === undefined) {
+        const verdierValgteAktiviteter = valgteAktiviteter?.verdier ?? [];
+        if (skalViseArbeidsrettedeAktiviteter && verdierValgteAktiviteter.length === 0) {
+            feil = feilValgtAktivitet(feil, locale);
+        }
+        if (skalViseAnnenAktivitet && annenUtdanning === undefined) {
             feil = feilAnnenUtdanning(feil, locale);
         }
         if (mottarUtstyrsstipend === undefined) {
@@ -122,15 +137,6 @@ const Utdanning = () => {
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
-
-    if (!registerAktiviteter) {
-        // ønsker ikke å vise siden før man har hentet aktivteter fra backend
-        return null;
-    }
-
-    const skalViseArbeidsrettedeAktiviteter =
-        skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
-    const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
 
     return (
         <Side validerSteg={kanFortsette} oppdaterSøknad={oppdaterUtdanningISøknad}>
@@ -171,7 +177,7 @@ const Utdanning = () => {
                     </div>
                 </>
             )}
-            {(!skalViseArbeidsrettedeAktiviteter || skalViseAnnenAktivitet) && (
+            {skalViseAnnenAktivitet && (
                 <AnnenUtdanning
                     annenUtdanning={annenUtdanning}
                     oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
