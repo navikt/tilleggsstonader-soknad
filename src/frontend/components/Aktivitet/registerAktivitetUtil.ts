@@ -20,3 +20,7 @@ export const mapTilRegisterAktiviteterObjektMedLabel = (
 export const skalTaStillingTilAnnenAktivitet = (
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined
 ): boolean => valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ?? false;
+
+export const skalTaStillingTilRegisterAktiviteter = (
+    registerAktiviteter: Record<string, RegisterAktivitetMedLabel>
+): boolean => Object.keys(registerAktiviteter).length > 0;

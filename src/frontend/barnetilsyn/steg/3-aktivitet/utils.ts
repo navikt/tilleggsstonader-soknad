@@ -16,7 +16,3 @@ export const skalTaStillingTilLønnetTiltak = (
         return aktivitet && !aktivitet.erUtdanning;
     });
 };
-
-export const skalTaStillingTilRegisterAktiviteter = (
-    registerAktiviteter: Record<string, RegisterAktivitetMedLabel>
-): boolean => Object.keys(registerAktiviteter).length > 0;
