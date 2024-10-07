@@ -2,7 +2,7 @@ import React, { ReactNode, useMemo } from 'react';
 
 import { Checkbox, CheckboxGroup } from '@navikt/ds-react';
 
-import { aktivitetTekster } from '../../barnetilsyn/tekster/aktivitet';
+import { tekstArbeidsrettedeAktiviteter } from '../../tekster/aktivitet';
 import { RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
 import { EnumFlereValgFelt } from '../../typer/skjema';
 import { Locale, TekstElement } from '../../typer/tekst';
@@ -37,7 +37,7 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
         const valgteVerdier = verdier.map((verdi) => {
             if (verdi === 'ANNET') {
                 return {
-                    label: aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale],
+                    label: tekstArbeidsrettedeAktiviteter.checkboks_annet_tekst[locale],
                     verdi: 'ANNET',
                 };
             }
@@ -68,7 +68,7 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
                 </Checkbox>
             ))}
             <Checkbox value="ANNET">
-                {aktivitetTekster.hvilken_aktivitet.checkboks_annet_tekst[locale]}
+                {tekstArbeidsrettedeAktiviteter.checkboks_annet_tekst[locale]}
             </Checkbox>
         </CheckboxGroup>
     );

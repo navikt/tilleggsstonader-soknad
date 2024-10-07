@@ -27,7 +27,6 @@ interface AktivitetInnhold {
 
 interface HvilkenAktivitet {
     spm: TekstElement<string>;
-    checkboks_annet_tekst: TekstElement<string>;
     les_mer: {
         header: TekstElement<string>;
         header_ingen_registrerte_aktiviteter: TekstElement<string>;
@@ -63,7 +62,6 @@ export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<stri
 
 const hvilkenAktivitet: HvilkenAktivitet = {
     spm: { nb: 'Hvilken aktivitet søker du om støtte i forbindelse med?' },
-    checkboks_annet_tekst: { nb: 'Annet' },
     les_mer: {
         header: {
             nb: 'Hva gjør jeg hvis noe mangler eller er feil?',
