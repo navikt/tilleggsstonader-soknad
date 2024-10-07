@@ -101,9 +101,9 @@ const hvilkenAktivitet: HvilkenAktivitet = {
         ],
         del3: {
             nb: [
-                'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut ',
+                'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du ',
                 {
-                    tekst: 'papirsøknad',
+                    tekst: 'fylle ut papirsøknad',
                     url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
                     variant: 'neutral',
                 },
