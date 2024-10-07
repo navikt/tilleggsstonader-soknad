@@ -1,3 +1,4 @@
+import { tekstArbeidsrettedeAktiviteter } from '../../tekster/aktivitet';
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { AnnenAktivitetType } from '../../typer/aktivitet';
 import { JaNei } from '../../typer/søknad';
@@ -63,12 +64,9 @@ export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<stri
 const hvilkenAktivitet: HvilkenAktivitet = {
     spm: { nb: 'Hvilken aktivitet søker du om støtte i forbindelse med?' },
     les_mer: {
-        header: {
-            nb: 'Hva gjør jeg hvis noe mangler eller er feil?',
-        },
-        header_ingen_registrerte_aktiviteter: {
-            nb: 'Hva gjør jeg hvis noe mangler?',
-        },
+        header: tekstArbeidsrettedeAktiviteter.lesMer.header,
+        header_ingen_registrerte_aktiviteter:
+            tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
         del1: {
             nb: [
                 'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du registrert arbeidssøker kan vi ikke hente det.',
