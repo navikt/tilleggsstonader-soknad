@@ -5,13 +5,10 @@ import { Alert, Heading, Label, List, VStack } from '@navikt/ds-react';
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { LønnetTiltak } from './LønnetTiltak';
-import {
-    skalTaStillingTilAnnenAktivitet,
-    skalTaStillingTilLønnetTiltak,
-    skalTaStillingTilRegisterAktiviteter,
-} from './utils';
+import { skalTaStillingTilLønnetTiltak, skalTaStillingTilRegisterAktiviteter } from './utils';
 import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './validering';
 import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
+import { skalTaStillingTilAnnenAktivitet } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';

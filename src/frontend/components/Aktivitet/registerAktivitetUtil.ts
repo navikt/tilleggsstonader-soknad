@@ -1,4 +1,5 @@
 import { RegisterAktivitet, RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
+import { EnumFlereValgFelt } from '../../typer/skjema';
 import { tilTekstligDato } from '../../utils/dato';
 
 export const mapTilRegisterAktiviteterObjektMedLabel = (
@@ -15,3 +16,7 @@ export const mapTilRegisterAktiviteterObjektMedLabel = (
         {} as Record<string, RegisterAktivitetMedLabel>
     );
 };
+
+export const skalTaStillingTilAnnenAktivitet = (
+    valgteAktiviteter: EnumFlereValgFelt<string> | undefined
+): boolean => valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ?? false;

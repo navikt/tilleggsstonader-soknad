@@ -2,10 +2,6 @@ import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 
-export const skalTaStillingTilAnnenAktivitet = (
-    valgteAktiviteter: EnumFlereValgFelt<string> | undefined
-): boolean => valgteAktiviteter?.verdier.some((verdi) => verdi.verdi === 'ANNET') ?? false;
-
 export const skalTaStillingTilLønnetTiltak = (
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined,
     annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined,
