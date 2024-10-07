@@ -154,6 +154,11 @@ const Aktivitet = () => {
             {skalViseArbeidsrettedeAktiviteter && (
                 <ArbeidsrettedeAktiviteter
                     spørsmål={aktivitetTekster.hvilken_aktivitet.spm}
+                    lesMer={
+                        <LesMerHvilkenAktivitet
+                            header={aktivitetTekster.hvilken_aktivitet.les_mer.header}
+                        />
+                    }
                     registerAktiviteter={registerAktiviteter}
                     oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
                     locale={locale}

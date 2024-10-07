@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 
 import { Checkbox, CheckboxGroup } from '@navikt/ds-react';
 
-import { LesMerHvilkenAktivitet } from '../../barnetilsyn/steg/3-aktivitet/LesMerHvilkenAktivitet';
 import { aktivitetTekster } from '../../barnetilsyn/tekster/aktivitet';
 import { RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
 import { EnumFlereValgFelt } from '../../typer/skjema';
@@ -11,6 +10,7 @@ import { Feilmelding } from '../../typer/validering';
 
 interface Props {
     spørsmål: TekstElement<string>;
+    lesMer: ReactNode;
     registerAktiviteter: Record<string, RegisterAktivitetMedLabel>;
     oppdaterValgteAktiviteter: (verdier: EnumFlereValgFelt<string>) => void;
     locale: Locale;
@@ -20,6 +20,7 @@ interface Props {
 
 const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
     spørsmål,
+    lesMer,
     registerAktiviteter,
     oppdaterValgteAktiviteter,
     locale,
@@ -60,7 +61,7 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
             value={valgteAktiviteter?.verdier?.map((verdi) => verdi.verdi) || []}
             error={feilmelding?.melding}
         >
-            <LesMerHvilkenAktivitet header={aktivitetTekster.hvilken_aktivitet.les_mer.header} />
+            {lesMer}
             {registerAktiviteterListe.map((aktivitet) => (
                 <Checkbox key={aktivitet.id} value={aktivitet.id}>
                     {aktivitet ? aktivitet.label : ''}
