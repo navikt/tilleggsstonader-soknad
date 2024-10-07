@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Alert, Heading, Label, List, VStack } from '@navikt/ds-react';
 
@@ -12,8 +12,6 @@ import {
     skalTaStillingTilRegisterAktiviteter,
 } from './utils';
 import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './validering';
-import { hentArbeidsrettedeAktiviteter } from '../../../api/api';
-import { mapTilRegisterAktiviteterObjektMedLabel } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
@@ -21,10 +19,10 @@ import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
+import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
-import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
@@ -34,13 +32,11 @@ const Aktivitet = () => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
     const { aktivitet, settAktivitet } = usePassAvBarnSøknad();
+    const { registerAktiviteter } = useRegisterAktiviteter();
 
     const [valgteAktiviteter, settValgteAktiviteter] = useState<
         EnumFlereValgFelt<string> | undefined
     >(aktivitet ? aktivitet.aktiviteter : undefined);
-
-    const [registerAktiviteter, settRegisterAktiviteter] =
-        useState<Record<string, RegisterAktivitetMedLabel>>();
 
     const [annenAktivitet, setAnnenAktivitet] = useState<EnumFelt<AnnenAktivitetType> | undefined>(
         aktivitet ? aktivitet.annenAktivitet : undefined
@@ -49,16 +45,6 @@ const Aktivitet = () => {
     const [lønnetAktivitet, setLønnetAktivitet] = useState<EnumFelt<JaNei> | undefined>(
         aktivitet ? aktivitet.lønnetAktivitet : undefined
     );
-    useEffect(() => {
-        hentArbeidsrettedeAktiviteter()
-            .then((arbeidsrettedeAktiviteter) =>
-                settRegisterAktiviteter(
-                    // {}
-                    mapTilRegisterAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
-                )
-            )
-            .catch(() => settRegisterAktiviteter({}));
-    }, []);
 
     const oppdaterAktivitetISøknad = () => {
         settAktivitet({
