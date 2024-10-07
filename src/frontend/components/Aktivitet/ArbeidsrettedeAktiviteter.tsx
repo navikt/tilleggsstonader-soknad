@@ -6,10 +6,11 @@ import { LesMerHvilkenAktivitet } from '../../barnetilsyn/steg/3-aktivitet/LesMe
 import { aktivitetTekster } from '../../barnetilsyn/tekster/aktivitet';
 import { RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
 import { EnumFlereValgFelt } from '../../typer/skjema';
-import { Locale } from '../../typer/tekst';
+import { Locale, TekstElement } from '../../typer/tekst';
 import { Feilmelding } from '../../typer/validering';
 
 interface Props {
+    spørsmål: TekstElement<string>;
     registerAktiviteter: Record<string, RegisterAktivitetMedLabel>;
     oppdaterValgteAktiviteter: (verdier: EnumFlereValgFelt<string>) => void;
     locale: Locale;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
+    spørsmål,
     registerAktiviteter,
     oppdaterValgteAktiviteter,
     locale,
@@ -43,7 +45,7 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
             return { label: valgtAktivitet.label, verdi: verdi };
         });
         const nyeValgteAktiviteter = {
-            label: aktivitetTekster.hvilken_aktivitet.spm[locale],
+            label: spørsmål[locale],
             verdier: valgteVerdier,
             alternativer: Object.values(registerAktiviteter).map((a) => a.label),
         };
@@ -53,7 +55,7 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
     return (
         <CheckboxGroup
             id={feilmelding?.id}
-            legend={aktivitetTekster.hvilken_aktivitet.spm[locale]}
+            legend={spørsmål[locale]}
             onChange={onChange}
             value={valgteAktiviteter?.verdier?.map((verdi) => verdi.verdi) || []}
             error={feilmelding?.melding}

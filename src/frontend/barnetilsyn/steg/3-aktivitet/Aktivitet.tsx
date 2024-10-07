@@ -153,6 +153,7 @@ const Aktivitet = () => {
             </PellePanel>
             {skalViseArbeidsrettedeAktiviteter && (
                 <ArbeidsrettedeAktiviteter
+                    spørsmål={aktivitetTekster.hvilken_aktivitet.spm}
                     registerAktiviteter={registerAktiviteter}
                     oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
                     locale={locale}
