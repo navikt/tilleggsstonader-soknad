@@ -1,15 +1,7 @@
-import { format } from 'date-fns';
-import { nb } from 'date-fns/locale';
-
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { RegisterAktivitetMedLabel, RegisterAktivitet } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { tilDato } from '../../../utils/dato';
-
-//TODO: Legge til støtte for flere Locales enn Norsk Bokmål (nb)
-const tilTekstligDato = (dato: string) => {
-    return format(tilDato(dato), 'd. MMMM yyyy', { locale: nb });
-};
+import { tilTekstligDato } from '../../../utils/dato';
 
 export const mapTilRegisterAktiviteterObjektMedLabel = (
     registerAktiviteter: RegisterAktivitet[]

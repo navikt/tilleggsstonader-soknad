@@ -1,4 +1,5 @@
-import { isAfter, isEqual, parseISO } from 'date-fns';
+import { format, isAfter, isEqual, parseISO } from 'date-fns';
+import { nb } from 'date-fns/locale';
 
 export const erSnartNyttSkoleår = () => {
     const nåværendeMåned = new Date().getMonth() + 1;
@@ -14,4 +15,9 @@ export const erDatoEtterEllerLik = (fra: string, til: string): boolean => {
     const datoTil = tilDato(til);
 
     return isEqual(datoFra, datoTil) || isAfter(datoTil, datoFra);
+};
+
+//TODO: Legge til støtte for flere Locales enn Norsk Bokmål (nb)
+export const tilTekstligDato = (dato: string) => {
+    return format(tilDato(dato), 'd. MMMM yyyy', { locale: nb });
 };
