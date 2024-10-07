@@ -2,12 +2,12 @@ import React, { useMemo } from 'react';
 
 import { Checkbox, CheckboxGroup } from '@navikt/ds-react';
 
-import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
-import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { Locale } from '../../../typer/tekst';
-import { Feilmelding } from '../../../typer/validering';
-import { aktivitetTekster } from '../../tekster/aktivitet';
+import { LesMerHvilkenAktivitet } from '../../barnetilsyn/steg/3-aktivitet/LesMerHvilkenAktivitet';
+import { aktivitetTekster } from '../../barnetilsyn/tekster/aktivitet';
+import { RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
+import { EnumFlereValgFelt } from '../../typer/skjema';
+import { Locale } from '../../typer/tekst';
+import { Feilmelding } from '../../typer/validering';
 
 interface Props {
     registerAktiviteter: Record<string, RegisterAktivitetMedLabel>;

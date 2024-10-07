@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Alert, Heading, Label, List, VStack } from '@navikt/ds-react';
 
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
-import ArbeidsrettedeAktiviteter from './ArbeidsrettedeAktiviteter';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { LønnetTiltak } from './LønnetTiltak';
 import {
@@ -12,6 +11,7 @@ import {
     skalTaStillingTilRegisterAktiviteter,
 } from './utils';
 import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './validering';
+import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
