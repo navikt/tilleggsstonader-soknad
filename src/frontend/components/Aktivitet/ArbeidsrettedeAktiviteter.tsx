@@ -2,10 +2,11 @@ import React, { ReactNode, useMemo } from 'react';
 
 import { Checkbox, CheckboxGroup } from '@navikt/ds-react';
 
+import { useSpråk } from '../../context/SpråkContext';
 import { tekstArbeidsrettedeAktiviteter } from '../../tekster/aktivitet';
 import { RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
 import { EnumFlereValgFelt } from '../../typer/skjema';
-import { Locale, TekstElement } from '../../typer/tekst';
+import { TekstElement } from '../../typer/tekst';
 import { Feilmelding } from '../../typer/validering';
 
 interface Props {
@@ -13,7 +14,6 @@ interface Props {
     lesMer: ReactNode;
     registerAktiviteter: Record<string, RegisterAktivitetMedLabel>;
     oppdaterValgteAktiviteter: (verdier: EnumFlereValgFelt<string>) => void;
-    locale: Locale;
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined;
     feilmelding: Feilmelding | undefined;
 }
@@ -23,10 +23,10 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
     lesMer,
     registerAktiviteter,
     oppdaterValgteAktiviteter,
-    locale,
     valgteAktiviteter,
     feilmelding,
 }) => {
+    const { locale } = useSpråk();
     const registerAktiviteterListe = useMemo(
         () => Object.values(registerAktiviteter),
         [registerAktiviteter]

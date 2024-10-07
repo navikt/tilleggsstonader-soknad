@@ -161,7 +161,6 @@ const Aktivitet = () => {
                     }
                     registerAktiviteter={registerAktiviteter}
                     oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
-                    locale={locale}
                     valgteAktiviteter={valgteAktiviteter}
                     feilmelding={valideringsfeil.valgteAktiviteter}
                 />
