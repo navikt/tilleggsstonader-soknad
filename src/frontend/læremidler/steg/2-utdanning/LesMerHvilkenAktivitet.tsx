@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { BodyLong } from '@navikt/ds-react';
+
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -13,8 +15,12 @@ interface Props {
 export const LesMerHvilkenAktivitet: React.FC<Props> = ({ header }) => {
     return (
         <LocaleReadMoreMedChildren header={header}>
-            <LocaleTekst tekst={utdanningTekster.hvilken_aktivitet.les_mer.del1} />
-            <LocaleTekst tekst={utdanningTekster.hvilken_aktivitet.les_mer.del2} />
+            <BodyLong spacing>
+                <LocaleTekst tekst={utdanningTekster.hvilken_aktivitet.les_mer.del1} />
+            </BodyLong>
+            <BodyLong spacing>
+                <LocaleTekst tekst={utdanningTekster.hvilken_aktivitet.les_mer.del2} />
+            </BodyLong>
             <LocaleInlineLenke tekst={utdanningTekster.hvilken_aktivitet.les_mer.del3} />
         </LocaleReadMoreMedChildren>
     );
