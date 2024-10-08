@@ -4,6 +4,7 @@ import Søknadsdialog from './Søknadsdialog';
 import { PersonRouting } from '../components/PersonRouting';
 import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
 import { LæremidlerSøknadProvider, useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
+import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
@@ -39,12 +40,13 @@ const LæremidlerApp = () => {
         document.title = teksterStønad.tittelHtml[Stønadstype.LÆREMIDLER][locale];
     }, [locale]);
 
-    // TODO: Implementer logikk for routing
     return (
         <PersonRouting stønadstype={Stønadstype.LÆREMIDLER}>
             <ValideringsfeilProvider>
                 <LæremidlerSøknadProvider>
-                    <LæremidlerInnhold />
+                    <RegisterAktiviteterProvider>
+                        <LæremidlerInnhold />
+                    </RegisterAktiviteterProvider>
                 </LæremidlerSøknadProvider>
             </ValideringsfeilProvider>
         </PersonRouting>

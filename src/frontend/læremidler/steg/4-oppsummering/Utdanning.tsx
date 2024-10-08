@@ -12,6 +12,7 @@ import { Utdanning } from '../../typer/søknad';
 
 const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }) => {
     const navigate = useNavigate();
+
     return (
         <FormSummary>
             <FormSummary.Header>
@@ -23,6 +24,16 @@ const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }
                 </FormSummary.EditLink>
             </FormSummary.Header>
             <FormSummary.Answers>
+                {utdanning.aktiviteter && (
+                    <FormSummary.Answer>
+                        <FormSummary.Label>{utdanning.aktiviteter.label}</FormSummary.Label>
+                        {utdanning.aktiviteter.verdier
+                            .filter((verdi) => verdi.verdi !== 'ANNET')
+                            .map((verdi) => (
+                                <FormSummary.Value>{verdi.label}</FormSummary.Value>
+                            ))}
+                    </FormSummary.Answer>
+                )}
                 {utdanning.annenUtdanning !== undefined && (
                     <FormSummary.Answer>
                         <FormSummary.Label>{utdanning.annenUtdanning.label}</FormSummary.Label>
