@@ -4,6 +4,7 @@ import Søknadsdialog from './Søknadsdialog';
 import { PersonRouting } from '../components/PersonRouting';
 import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
 import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
+import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
@@ -45,7 +46,9 @@ const BarnetilsynApp = () => {
         <PersonRouting stønadstype={Stønadstype.BARNETILSYN}>
             <ValideringsfeilProvider>
                 <PassAvBarnSøknadProvider>
-                    <BarnetilsynInnhold />
+                    <RegisterAktiviteterProvider>
+                        <BarnetilsynInnhold />
+                    </RegisterAktiviteterProvider>
                 </PassAvBarnSøknadProvider>
             </ValideringsfeilProvider>
         </PersonRouting>

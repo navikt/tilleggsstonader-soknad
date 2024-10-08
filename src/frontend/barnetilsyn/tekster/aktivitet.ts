@@ -1,3 +1,4 @@
+import { tekstArbeidsrettedeAktiviteter } from '../../tekster/aktivitet';
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { AnnenAktivitetType } from '../../typer/aktivitet';
 import { JaNei } from '../../typer/søknad';
@@ -27,7 +28,6 @@ interface AktivitetInnhold {
 
 interface HvilkenAktivitet {
     spm: TekstElement<string>;
-    checkboks_annet_tekst: TekstElement<string>;
     les_mer: {
         header: TekstElement<string>;
         header_ingen_registrerte_aktiviteter: TekstElement<string>;
@@ -63,14 +63,10 @@ export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<stri
 
 const hvilkenAktivitet: HvilkenAktivitet = {
     spm: { nb: 'Hvilken aktivitet søker du om støtte i forbindelse med?' },
-    checkboks_annet_tekst: { nb: 'Annet' },
     les_mer: {
-        header: {
-            nb: 'Hva gjør jeg hvis noe mangler eller er feil?',
-        },
-        header_ingen_registrerte_aktiviteter: {
-            nb: 'Hva gjør jeg hvis noe mangler?',
-        },
+        header: tekstArbeidsrettedeAktiviteter.lesMer.header,
+        header_ingen_registrerte_aktiviteter:
+            tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
         del1: {
             nb: [
                 'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du registrert arbeidssøker kan vi ikke hente det.',
@@ -105,9 +101,9 @@ const hvilkenAktivitet: HvilkenAktivitet = {
         ],
         del3: {
             nb: [
-                'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut ',
+                'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du ',
                 {
-                    tekst: 'papirsøknad',
+                    tekst: 'fylle ut papirsøknad',
                     url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
                     variant: 'neutral',
                 },
