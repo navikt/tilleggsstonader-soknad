@@ -110,7 +110,9 @@ export const utdanningTekster: AktivitetInnhold = {
             nb: 'Mottar du utstyrsstipend fra Statens lånekasse?',
         },
         beskrivelse: {
-            nb: 'Vi ser at du er under 21 år og går videregående. Da har du mest sannsynlig rett til utstyrstipend fra Lånekassen. ',
+            nb:
+                'Vi ser at du er under 21 år. ' +
+                'Hvis du tar videregående utdanning har du mest sannsynlig rett til utstyrsstipend fra Lånekassen. ',
         },
         alternativer: JaNeiTilTekst,
     },
