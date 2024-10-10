@@ -23,6 +23,7 @@ import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
+import { usePerson } from '../../../context/PersonContext';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -34,6 +35,7 @@ import { AnnenUtdanningType } from '../../typer/søknad';
 
 const Utdanning = () => {
     const { locale } = useSpråk();
+    const { person } = usePerson();
     const { utdanning, settUtdanning, settDokumentasjonsbehov } = useLæremidlerSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
     const { registerAktiviteter } = useRegisterAktiviteter();
@@ -116,6 +118,7 @@ const Utdanning = () => {
         skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
+    const skalViseMottarUtstyrsstipend = person.alder < 21;
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
@@ -127,7 +130,7 @@ const Utdanning = () => {
         if (skalViseAnnenAktivitet && annenUtdanning === undefined) {
             feil = feilAnnenUtdanning(feil, locale);
         }
-        if (mottarUtstyrsstipend === undefined) {
+        if (skalViseMottarUtstyrsstipend && mottarUtstyrsstipend === undefined) {
             feil = feilMottarUtstyrsstipend(feil, locale);
         }
         if (harFunksjonsnedsettelse === undefined) {
@@ -184,12 +187,13 @@ const Utdanning = () => {
                     feilmelding={valideringsfeil.annenUtdanning}
                 />
             )}
-            {/* TODO: Vis kun om person under 21 år */}
-            <MottarUtstyrsstipend
-                mottarUtstyrsstipend={mottarUtstyrsstipend}
-                oppdaterMottarUtstyrsstipend={oppdaterMottarUtstyrsstipend}
-                feilmelding={valideringsfeil.mottarUtstyrsstipend}
-            />
+            {skalViseMottarUtstyrsstipend && (
+                <MottarUtstyrsstipend
+                    mottarUtstyrsstipend={mottarUtstyrsstipend}
+                    oppdaterMottarUtstyrsstipend={oppdaterMottarUtstyrsstipend}
+                    feilmelding={valideringsfeil.mottarUtstyrsstipend}
+                />
+            )}
             <HarFunksjonsnedsettelse
                 harFunksjonsnedsettelse={harFunksjonsnedsettelse}
                 oppdaterHarFunksjonsnedsettelse={oppdaterHarFunksjonsnedsettelse}
