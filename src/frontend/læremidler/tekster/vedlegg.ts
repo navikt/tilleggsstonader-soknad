@@ -17,7 +17,7 @@ export const typerVedleggTeksterLæremidler: TekstTypeVedlegg = {
             nb: 'Legeerklæring eller annen uttalelse fra helsepersonell som beskriver din helsetilstand.',
         },
     },
-    [VedleggstypeLæremidler.UTGIFTER_FUNKSJONSNEDSETTELSE]: {
+    [VedleggstypeLæremidler.UTGIFTER_LÆREMIDLER]: {
         tittel: {
             nb: 'Dokumentasjon på utgifter',
         },
