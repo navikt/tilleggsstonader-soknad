@@ -15,7 +15,6 @@ const [LæremidlerSøknadProvider, useLæremidlerSøknad] = createUseContext(() 
 
     const [utdanning, settUtdanning] = useState<Utdanning>();
 
-    // TODO: Håndter dokumentasjon
     const [dokumentasjonsbehov, settDokumentasjonsbehov] = useState<Dokumentasjonsbehov[]>([]);
     const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
 

@@ -190,7 +190,6 @@ const Utdanning = () => {
                 oppdaterMottarUtstyrsstipend={oppdaterMottarUtstyrsstipend}
                 feilmelding={valideringsfeil.mottarUtstyrsstipend}
             />
-            {/* TODO: Håndter at dokumentasjon må oppgis */}
             <HarFunksjonsnedsettelse
                 harFunksjonsnedsettelse={harFunksjonsnedsettelse}
                 oppdaterHarFunksjonsnedsettelse={oppdaterHarFunksjonsnedsettelse}
