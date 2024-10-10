@@ -118,6 +118,7 @@ const Utdanning = () => {
         skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
+    const skalViseMottarUtstyrsstipend = person.alder < 21;
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
@@ -129,7 +130,7 @@ const Utdanning = () => {
         if (skalViseAnnenAktivitet && annenUtdanning === undefined) {
             feil = feilAnnenUtdanning(feil, locale);
         }
-        if (mottarUtstyrsstipend === undefined) {
+        if (skalViseMottarUtstyrsstipend && mottarUtstyrsstipend === undefined) {
             feil = feilMottarUtstyrsstipend(feil, locale);
         }
         if (harFunksjonsnedsettelse === undefined) {
@@ -186,7 +187,7 @@ const Utdanning = () => {
                     feilmelding={valideringsfeil.annenUtdanning}
                 />
             )}
-            {person.alder < 21 && (
+            {skalViseMottarUtstyrsstipend && (
                 <MottarUtstyrsstipend
                     mottarUtstyrsstipend={mottarUtstyrsstipend}
                     oppdaterMottarUtstyrsstipend={oppdaterMottarUtstyrsstipend}
