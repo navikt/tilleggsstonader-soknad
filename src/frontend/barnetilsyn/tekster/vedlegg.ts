@@ -14,12 +14,15 @@ export const typerVedleggTeksterPassAvBarn: TekstTypeVedlegg = {
             nb: 'Faktura fra SFO/AKS/barnehage for [0]',
         },
         beskrivelse: {
-            nb: 'Fakturaen må være spesifisert. Vi godkjenner ikke skjermbilde av kontoutskrift/vipps eller lignende. ',
+            nb:
+                'Hvis du har like utgifter hver måned, holder det å legge ved én faktura. ' +
+                'Fakturaen må være spesifisert. Vi godkjenner ikke skjermbilde av kontoutskrift/vipps eller lignende.',
         },
         krav_til_dokumentasjon: {
             nb: [
-                'Dokumentasjon på utgifter må inneholde barnets navn, beløp og perioden den gjelder for. ',
+                'Dokumentasjon på utgifter må inneholde barnets navn, beløp og perioden den gjelder for.',
                 'Vi godkjenner ikke bilde av kontoutskrift, vipps eller lignende fordi vi trenger å se hva som er utgifter til pass av barn og hva som er utgift til bleier eller mat.',
+                'Hvis du har ulike utgifter fra måned til måned, må du legge ved fakturaene som viser dette.',
             ],
         },
     },
