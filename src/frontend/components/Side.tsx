@@ -61,7 +61,9 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
 
     const harValideringsfeil = inneholderFeil(valideringsfeil);
     useEffect(() => {
-        errorRef.current && errorRef.current.focus();
+        if (errorRef.current) {
+            errorRef.current.focus();
+        }
     }, [harValideringsfeil]);
 
     const routes = hentRoutes(stønadstype);
@@ -78,7 +80,9 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
             return;
         }
 
-        oppdaterSøknad && oppdaterSøknad();
+        if (oppdaterSøknad) {
+            oppdaterSøknad();
+        }
         loggSkjemaStegFullført(stønadstype, aktivtSteg.label);
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
