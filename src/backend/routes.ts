@@ -61,7 +61,6 @@ const getDecoratedHtml = (path: string) => {
         filePath: path,
         params: {
             simple: true,
-            enforceLogin: false,
             redirectToApp: true,
             level: 'Level4',
         },
