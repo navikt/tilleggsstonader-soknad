@@ -12,9 +12,11 @@
   "dependencies": {
     "@navikt/nav-dekoratoren-moduler": "^3.1.1",
     "cookie-parser": "^1.4.7",
+    "csp-header": "^5.2.1",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-http-proxy": "^2.0.0",
+    "html-react-parser": "^5.1.18",
     "http-proxy-middleware": "^3.0.3",
     "jsdom": "^25.0.1",
     "jsonwebtoken": "9.0.2",
