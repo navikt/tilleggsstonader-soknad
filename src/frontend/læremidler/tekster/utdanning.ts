@@ -32,9 +32,9 @@ interface HvilkenAktivitet {
 }
 
 const AnnenUtdanningTypeTilTekst: Record<AnnenUtdanningType, TekstElement<string>> = {
-    VIDEREGÅENDE_FORKURS: { nb: 'Videregående utdanning, eller forkurs på universitett' },
+    VIDEREGÅENDE_FORKURS: { nb: 'Videregående utdanning eller forkurs' },
     FAGSKOLE_HØGSKOLE_UNIVERSITET: {
-        nb: 'Utdanning på fagskole, høgskole eller universitet',
+        nb: 'Høgskole, universitet eller fagskole',
     },
     KURS_LIKNENDE: {
         nb: 'Kurs eller lignende',
