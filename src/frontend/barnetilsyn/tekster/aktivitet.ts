@@ -51,7 +51,7 @@ interface IngenAktivitet {
 export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<string>> = {
     TILTAK: { nb: 'Tiltak / arbeidsrettet utredning' },
     UTDANNING: {
-        nb: 'Utdanning godkjent av NAV',
+        nb: 'Utdanning godkjent av Nav',
     },
     ARBEIDSSØKER: {
         nb: 'Jeg er arbeidssøker',
@@ -130,7 +130,7 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     guide_innhold: {
         nb: [
-            'For å få dekket pass av barn må du delta på tiltak, ta en utdannelse godkjent av NAV, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
+            'For å få dekket pass av barn må du delta på tiltak, ta en utdannelse godkjent av Nav, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
             'Vi viser aktivitetene som er registrert på deg de siste 3 månedene.',
         ],
     },
@@ -215,7 +215,7 @@ export const aktivitetTekster: AktivitetInnhold = {
                     'Tiltak og arbeidsrettet utredning er for deg som mottar arbeidsavklaringspenger, uføretrygd eller har nedsatt arbeidsevne. ',
                     'Et tiltak kan for eksempel være kurs eller arbeidstrening. Arbeidsrettet utredning er en prosess der dine ferdigheter og muligheter til å utføre arbeid blir vurdert og kartlagt.',
                     'Er du enslig forsørger/gjenlevende må en utdanning godkjennes av din veileder for å gi rett til støtte til pass. ',
-                    'For å få støtte til pass som arbeidssøker må du være enslig forsørger/gjenlevende, sende meldekort og være registrert som arbeidssøker hos NAV.',
+                    'For å få støtte til pass som arbeidssøker må du være enslig forsørger/gjenlevende, sende meldekort og være registrert som arbeidssøker hos Nav.',
                     'Er du i arbeid, skal du fylle ut en annen søknad avhengig av din situasjon:',
                 ],
             },
