@@ -71,7 +71,7 @@ export const vedleggTekster: VedleggInnhold = {
     guide_innhold: {
         nb: [
             'Vi kan ikke starte saksbehandlingen før vi har all dokumentasjon fra deg.',
-            'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, senest innen 14 dager. Trenger du mer tid, kan du be om lenger frist på Min side på NAV.no etter at søknaden er sendt inn.',
+            'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, senest innen 14 dager. Trenger du mer tid, kan du be om lenger frist på Min side på Nav.no etter at søknaden er sendt inn.',
         ],
     },
     dokumentasjonskrav_tittel: { nb: 'Ut fra det du har svart i søknaden, må du legge ved:' },
