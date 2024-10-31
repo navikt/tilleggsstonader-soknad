@@ -19,9 +19,12 @@ export const defaultConfig = () => ({
     withCredentials: true,
 });
 
-export const hentPersonData = (): Promise<Person> => {
+export const hentPersonData = (medBarn: boolean): Promise<Person> => {
     return axios
-        .get<Person>(`${Environment().apiProxyUrl}/person`, defaultConfig())
+        .get<Person>(
+            `${Environment().apiProxyUrl}/person${medBarn ? '/med-barn' : ''}`,
+            defaultConfig()
+        )
         .then((response) => response.data);
 };
 
@@ -35,9 +38,8 @@ const stønadstypeTilPath = (stønadstype: Stønadstype): string => {
     switch (stønadstype) {
         case Stønadstype.BARNETILSYN:
             return 'pass-av-barn';
-        // Todo: Oppdater endepunkt når api er klart til å ta i mot søknader
         case Stønadstype.LÆREMIDLER:
-            return 'laeremidler';
+            return 'laremidler';
     }
 };
 

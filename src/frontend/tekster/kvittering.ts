@@ -28,7 +28,7 @@ export const kvitteringTekster: KvitteringInnhold = {
     },
     søknad_innsendt_alert: { nb: 'Søknaden din er sendt' },
     søknad_mottatt_tidspunkt: {
-        nb: 'Mottatt av NAV: [0].',
+        nb: 'Mottatt av Nav: [0].',
     },
     mer_info_kontakt: {
         nb: 'Vi vil ta kontakt med deg på telefon eller via Min side på nav.no hvis vi trenger mer informasjon eller dokumentasjon fra deg.',
@@ -75,7 +75,7 @@ export const kvitteringTekster: KvitteringInnhold = {
     relevante_stønader_tittel: { nb: 'Du kan også ha rett til' },
     relevante_stønader_innhold: {
         nb: [
-            'Når du gjennomfører en utdanning eller opplæring godkjent av NAV, kan det hende du også har rett til andre tilleggsstønader. ',
+            'Når du gjennomfører en utdanning eller opplæring godkjent av Nav, kan det hende du også har rett til andre tilleggsstønader. ',
             {
                 tekst: 'Les mer om det her',
                 url: 'https://www.nav.no/tilleggsstonader',

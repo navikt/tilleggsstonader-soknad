@@ -1,11 +1,15 @@
+import { tekstArbeidsrettedeAktiviteter } from '../../tekster/aktivitet';
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { JaNei } from '../../typer/søknad';
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 import { AnnenUtdanningType } from '../typer/søknad';
 
 interface AktivitetInnhold {
     tittel: TekstElement<string>;
     guide_innhold: TekstElement<string[]>;
+    hvilken_aktivitet: HvilkenAktivitet;
+    ingen_registrerte_aktiviterer_overskrift: TekstElement<string>;
+    checkbox_velge_aktivitet_feilmelding: TekstElement<string>;
     radio_annen_utdanning: Radiogruppe<AnnenUtdanningType>;
     radio_annen_utdanning_feilmelding: TekstElement<string>;
     ingen_utdanning_alert_tittel: TekstElement<string>;
@@ -16,10 +20,21 @@ interface AktivitetInnhold {
     radio_mottar_har_funksjonsnedsettelse_feilmelding: TekstElement<string>;
 }
 
+interface HvilkenAktivitet {
+    spm: TekstElement<string>;
+    les_mer: {
+        header: TekstElement<string>;
+        header_ingen_registrerte_aktiviteter: TekstElement<string>;
+        del1: TekstElement<string>;
+        del2: TekstElement<string>;
+        del3: TekstElement<InlineLenke>;
+    };
+}
+
 const AnnenUtdanningTypeTilTekst: Record<AnnenUtdanningType, TekstElement<string>> = {
-    VIDEREGÅENDE_FORKURS: { nb: 'Videregående utdanning, eller forkurs på universitett' },
+    VIDEREGÅENDE_FORKURS: { nb: 'Videregående utdanning eller forkurs' },
     FAGSKOLE_HØGSKOLE_UNIVERSITET: {
-        nb: 'Utdanning på fagskole, høgskole eller universitet',
+        nb: 'Høgskole, universitet eller fagskole',
     },
     KURS_LIKNENDE: {
         nb: 'Kurs eller lignende',
@@ -29,13 +44,48 @@ const AnnenUtdanningTypeTilTekst: Record<AnnenUtdanningType, TekstElement<string
     },
 };
 
+const hvilkenAktivitet: HvilkenAktivitet = {
+    spm: {
+        nb: 'Hvilken utdanning eller opplæring søker du om støtte til læremidler for?',
+    },
+    les_mer: {
+        header: tekstArbeidsrettedeAktiviteter.lesMer.header,
+        header_ingen_registrerte_aktiviteter:
+            tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
+        del1: {
+            nb: 'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du enslig eller gjenlevende så er det ikke alltid dette er registert på en måte så vi klare å hente det.',
+        },
+        del2: {
+            nb: 'Går du på arbeidsavklaringspenger eller mottar uføretrygd, og utdanningen din mangler? Da anbefaler vi at du tar kontakt med veilederen din og ber om at den registreres. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
+        },
+        del3: {
+            nb: [
+                'Hvis du skal søke støtte i forbindelse med en utdanning som ble avsluttet for over 3 måneder siden, må du ',
+                {
+                    tekst: 'fylle ut papirsøknad',
+                    url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
+                    variant: 'neutral',
+                },
+                '.',
+            ],
+        },
+    },
+};
+
 export const utdanningTekster: AktivitetInnhold = {
     tittel: { nb: 'Utdanning eller opplæring' },
     guide_innhold: {
         nb: [
-            'For å få støtte til læremidler må du ta en utdannelse eller opplæring godkjent av NAV.',
+            'For å få støtte til læremidler må du ta en utdannelse eller opplæring godkjent av Nav.',
             'Vi viser utdanninger registrert på deg de siste 6 månedene.',
         ],
+    },
+    hvilken_aktivitet: hvilkenAktivitet,
+    ingen_registrerte_aktiviterer_overskrift: {
+        nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.',
+    },
+    checkbox_velge_aktivitet_feilmelding: {
+        nb: 'Du må svare på hvilken utdanning eller opplæring du søker om støtte i forbindelse med.',
     },
     radio_annen_utdanning: {
         header: {
@@ -60,7 +110,9 @@ export const utdanningTekster: AktivitetInnhold = {
             nb: 'Mottar du utstyrsstipend fra Statens lånekasse?',
         },
         beskrivelse: {
-            nb: 'Vi ser at du er under 21 år og går videregående. Da har du mest sannsynlig rett til utstyrstipend fra Lånekassen. ',
+            nb:
+                'Vi ser at du er under 21 år. ' +
+                'Hvis du tar videregående utdanning har du mest sannsynlig rett til utstyrsstipend fra Lånekassen. ',
         },
         alternativer: JaNeiTilTekst,
     },

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 
 import Søknadsdialog from './Søknadsdialog';
+import { PersonRouting } from '../components/PersonRouting';
 import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
 import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
+import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
@@ -41,11 +43,15 @@ const BarnetilsynApp = () => {
     }, [locale]);
 
     return (
-        <ValideringsfeilProvider>
-            <PassAvBarnSøknadProvider>
-                <BarnetilsynInnhold />
-            </PassAvBarnSøknadProvider>
-        </ValideringsfeilProvider>
+        <PersonRouting stønadstype={Stønadstype.BARNETILSYN}>
+            <ValideringsfeilProvider>
+                <PassAvBarnSøknadProvider>
+                    <RegisterAktiviteterProvider>
+                        <BarnetilsynInnhold />
+                    </RegisterAktiviteterProvider>
+                </PassAvBarnSøknadProvider>
+            </ValideringsfeilProvider>
+        </PersonRouting>
     );
 };
 

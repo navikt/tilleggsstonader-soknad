@@ -2,6 +2,14 @@ import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { utdanningTekster } from '../../tekster/utdanning';
 
+export const feilValgtAktivitet = (feil: Valideringsfeil, locale: Locale) => ({
+    ...feil,
+    valgteAktiviteter: {
+        id: '1',
+        melding: utdanningTekster.checkbox_velge_aktivitet_feilmelding[locale],
+    },
+});
+
 export const feilAnnenUtdanning = (feil: Valideringsfeil, locale: Locale) => ({
     ...feil,
     annenUtdanning: {

@@ -7,7 +7,7 @@ export const finnDokumentasjonsbehov = (
     if (harFunksjonsnedsettelse && harFunksjonsnedsettelse.verdi === 'JA') {
         return [
             { type: VedleggstypeLæremidler.DOKUMENTASJON_FUNKSJONSNEDSETTELSE },
-            { type: VedleggstypeLæremidler.UTGIFTER_FUNKSJONSNEDSETTELSE },
+            { type: VedleggstypeLæremidler.UTGIFTER_LÆREMIDLER },
         ];
     }
     return [];

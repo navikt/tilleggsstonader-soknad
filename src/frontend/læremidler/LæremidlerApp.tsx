@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 
 import Søknadsdialog from './Søknadsdialog';
+import { PersonRouting } from '../components/PersonRouting';
+import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
 import { LæremidlerSøknadProvider, useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
+import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
@@ -23,7 +26,9 @@ const LæremidlerInnhold = () => {
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}
         >
-            <Søknadsdialog />
+            <SøknadRouting stønadstype={Stønadstype.LÆREMIDLER}>
+                <Søknadsdialog />
+            </SøknadRouting>
         </SøknadProvider>
     );
 };
@@ -35,13 +40,16 @@ const LæremidlerApp = () => {
         document.title = teksterStønad.tittelHtml[Stønadstype.LÆREMIDLER][locale];
     }, [locale]);
 
-    // TODO: Implementer logikk for routing
     return (
-        <ValideringsfeilProvider>
-            <LæremidlerSøknadProvider>
-                <LæremidlerInnhold />
-            </LæremidlerSøknadProvider>
-        </ValideringsfeilProvider>
+        <PersonRouting stønadstype={Stønadstype.LÆREMIDLER}>
+            <ValideringsfeilProvider>
+                <LæremidlerSøknadProvider>
+                    <RegisterAktiviteterProvider>
+                        <LæremidlerInnhold />
+                    </RegisterAktiviteterProvider>
+                </LæremidlerSøknadProvider>
+            </ValideringsfeilProvider>
+        </PersonRouting>
     );
 };
 

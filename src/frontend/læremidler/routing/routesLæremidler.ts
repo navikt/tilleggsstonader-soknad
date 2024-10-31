@@ -9,7 +9,7 @@ export enum ERouteLæremidler {
     KVITTERING = 'KVITTERING',
 }
 
-export const læremidlerPath = '/laeremidler';
+export const læremidlerPath = '/laremidler';
 
 export const RouteTilPath: Record<ERouteLæremidler, string> = {
     FORSIDE: læremidlerPath,

@@ -22,7 +22,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     veileder_innhold: {
         nb: [
-            'Denne pengestøtten kan gis til deg som går på utdanning eller opplæring godkjent av NAV, og er enslig mor/far, gjenlevende, mottar AAP, uføretrygd, sykepenger eller har nedsatt arbeidsevne.',
+            'Denne pengestøtten kan gis til deg som går på utdanning eller opplæring godkjent av Nav, og er enslig mor/far, gjenlevende, mottar AAP, uføretrygd, sykepenger eller har nedsatt arbeidsevne.',
         ],
     },
     viktig_å_vite_tittel: {
@@ -31,7 +31,6 @@ export const forsideTekster: ForsideInnhold = {
     viktig_å_vite_innhold: {
         nb: [
             'Du må gi oss riktige opplysninger i søknaden.',
-            'Du må dokumentere utgiftene dine i søknaden.',
             'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
             'Hvis du får utgiftene dine dekket på annen måte (f.eks. utstyrsstipend fra Lånekassa) har du mest sannsynlig ikke rett til denne stønaden.',
         ],
@@ -62,8 +61,8 @@ export const forsideTekster: ForsideInnhold = {
     info_som_hentes_innhold2: {
         nb: [
             'adressen din og opplysninger om dine barn fra Folkeregisteret',
-            'informasjon om utdanning eller opplæring avtalt med veileder i NAV',
-            'hvilke andre andre ytelser du mottar fra NAV',
+            'informasjon om utdanning eller opplæring avtalt med veileder i Nav',
+            'hvilke andre andre ytelser du mottar fra Nav',
         ],
     },
     info_som_hentes_innhold3: {
@@ -74,7 +73,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     info_som_hentes_innhold5: {
         nb: [
-            'NAV er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre.  ',
+            'Nav er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre.  ',
             {
                 tekst: 'Personvernerklæringen på nav.no',
                 url: 'https://www.nav.no/personvernerklaering',

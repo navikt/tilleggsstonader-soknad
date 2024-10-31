@@ -69,7 +69,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: [
             'adressen din og opplysninger om dine barn fra Folkeregisteret',
             'informasjon om arbeidsrettet aktivitet',
-            'hvilke andre andre ytelser du mottar fra NAV',
+            'hvilke andre andre ytelser du mottar fra Nav',
         ],
     },
     info_som_hentes_innhold3: {
@@ -84,7 +84,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     info_som_hentes_innhold5: {
         nb: [
-            'NAV er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre.  ',
+            'Nav er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre.  ',
             {
                 tekst: 'Personvernerklæringen på nav.no (åpnes i ny fane)',
                 url: 'https://www.nav.no/personvernerklaering',

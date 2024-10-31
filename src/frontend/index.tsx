@@ -10,7 +10,6 @@ import { initSentry } from './api/Sentry';
 import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
 import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
 import ScrollToTop from './components/ScrollToTop';
-import { PersonProvider, usePerson } from './context/PersonContext';
 import { SpråkProvider } from './context/SpråkContext';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
@@ -25,21 +24,6 @@ const root = createRoot(rootElement!);
 initAmplitude();
 
 const AppRoutes = () => {
-    const { harLastetPerson, feilmelding } = usePerson();
-
-    if (feilmelding) {
-        return (
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
-                <Routes>
-                    <Route path={'*'} element={<div>{feilmelding}</div>} />
-                </Routes>
-            </BrowserRouter>
-        );
-    }
-    if (!harLastetPerson) {
-        return null;
-    }
-
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <ScrollToTop />
@@ -56,9 +40,7 @@ const AppRoutes = () => {
 root.render(
     <main id={'maincontent'} tabIndex={-1}>
         <SpråkProvider>
-            <PersonProvider>
-                <AppRoutes />
-            </PersonProvider>
+            <AppRoutes />
         </SpråkProvider>
     </main>
 );
