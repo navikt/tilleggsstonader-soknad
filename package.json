@@ -20,8 +20,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.25.9",
-    "@babel/preset-env": "^7.25.9",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@eslint/compat": "^1.2.1",
     "@eslint/eslintrc": "^3.1.0",
@@ -31,8 +31,8 @@
     "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.11.0",
-    "@typescript-eslint/parser": "^8.11.0",
+    "@typescript-eslint/eslint-plugin": "^8.12.2",
+    "@typescript-eslint/parser": "^8.12.2",
     "@typescript-eslint/typescript-estree": "^8.11.0",
     "babel-loader": "^9.2.1",
     "cookie-parser": "^1.4.7",
@@ -64,7 +64,7 @@
     "@navikt/ds-css": "^7.4.0",
     "@navikt/ds-react": "^7.4.0",
     "@navikt/ds-tokens": "^7.4.0",
-    "@sentry/react": "^8.35.0",
+    "@sentry/react": "^8.36.0",
     "@sentry/tracing": "^7.114.0",
     "axios": "^1.6.7",
     "constate": "^3.3.2",
@@ -74,7 +74,7 @@
     "react-dom": "^18.3.0",
     "react-router-dom": "^6.27.0",
     "styled-components": "^6.1.0",
-    "uuid": "^10.0.0"
+    "uuid": "^11.0.2"
   },
   "resolutions": {
     "styled-components": "^6"
