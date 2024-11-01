@@ -75,7 +75,7 @@ export const kvitteringTekster: KvitteringInnhold = {
     relevante_stønader_tittel: { nb: 'Du kan også ha rett til' },
     relevante_stønader_innhold: {
         nb: [
-            'Når du gjennomfører en utdanning eller opplæring godkjent av Nav, kan det hende du også har rett til andre tilleggsstønader. ',
+            'Når du gjennomfører en arbeidsrettet aktivitet godkjent av Nav, kan det hende du også har rett til andre tilleggsstønader. ',
             {
                 tekst: 'Les mer om det her',
                 url: 'https://www.nav.no/tilleggsstonader',
