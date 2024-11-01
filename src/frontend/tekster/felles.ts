@@ -21,7 +21,7 @@ export interface FellesInnhold {
 export const fellesTekster: FellesInnhold = {
     vi_stoler_tittel: { nb: 'Vi stoler på deg' },
     vi_stoler_innhold: {
-        nb: 'Jeg bekrefter at jeg vil svare så godt jeg kan på spørsmålene i søknaden.',
+        nb: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
     },
     vi_stoler_feilmelding: {
         nb: 'Du må bekrefte at du vil gi så riktige opplysninger som mulig.',
