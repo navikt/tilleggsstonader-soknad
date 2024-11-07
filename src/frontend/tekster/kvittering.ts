@@ -37,7 +37,7 @@ export const kvitteringTekster: KvitteringInnhold = {
         nb: 'Du får varsel på SMS eller e-post når saken er ferdig behandlet.',
     },
     se_søknad_knapp: {
-        nb: 'Du søknaden din på min side ',
+        nb: 'Se søknaden din på min side',
     },
     behandlingstid_tittel: { nb: 'Forventet behandlingstid' },
     behandlingstid_innhold: {
