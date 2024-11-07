@@ -31,6 +31,7 @@ export const forsideTekster: ForsideInnhold = {
     viktig_å_vite_innhold: {
         nb: [
             'Du må gi oss riktige opplysninger i søknaden.',
+            'Denne stønaden dekker ikke semesteravgift eller skolepenger. Du må fylle ut andre skjemaer for å søke om dette, avhengig om du har nedsatt arbeidsevne, er enslig mor/far eller gjenlevende.',
             'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
             'Hvis du får utgiftene dine dekket på annen måte (f.eks. utstyrsstipend fra Lånekassa) har du mest sannsynlig ikke rett til denne stønaden.',
         ],
