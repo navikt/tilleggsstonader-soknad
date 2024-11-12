@@ -2,6 +2,7 @@ import { IRoute } from '../../typer/routes';
 
 export enum ERouteBarnetilsyn {
     FORSIDE = 'FORSIDE',
+    SØKNADSIDE = 'SØKNADSIDE',
     HOVEDYTELSE = 'HOVEDYTELSE',
     AKTIVITET = 'AKTIVITET',
     DINE_BARN = 'DINE_BARN',
@@ -17,6 +18,7 @@ export const RouteTilPath: Record<ERouteBarnetilsyn, string> = {
     BARNEPASS: barnetilsynPath + '/barnepass',
     DINE_BARN: barnetilsynPath + '/dine-barn',
     FORSIDE: barnetilsynPath,
+    SØKNADSIDE: barnetilsynPath,
     HOVEDYTELSE: barnetilsynPath + '/hovedytelse',
     KVITTERING: barnetilsynPath + '/kvittering',
     OPPSUMMERING: barnetilsynPath + '/oppsummering',

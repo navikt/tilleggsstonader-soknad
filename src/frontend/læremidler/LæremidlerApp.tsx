@@ -27,7 +27,7 @@ const LæremidlerInnhold = () => {
             resetSøknad={resetSøknad}
         >
             <SøknadRouting stønadstype={Stønadstype.LÆREMIDLER}>
-                <Søknadsdialog />
+                <Søknadsdialog stønadstype={Stønadstype.LÆREMIDLER} />
             </SøknadRouting>
         </SøknadProvider>
     );

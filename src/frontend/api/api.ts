@@ -19,19 +19,26 @@ export const defaultConfig = () => ({
     withCredentials: true,
 });
 
-export const hentPersonData = (medBarn: boolean): Promise<Person> => {
-    return axios
-        .get<Person>(
-            `${Environment().apiProxyUrl}/person${medBarn ? '/med-barn' : ''}`,
-            defaultConfig()
-        )
-        .then((response) => response.data);
+export const hentPersonData = async (medBarn: boolean): Promise<Person> => {
+    const response = await axios.get<Person>(
+        `${Environment().apiProxyUrl}/person${medBarn ? '/med-barn' : ''}`,
+        defaultConfig()
+    );
+    return response.data;
 };
 
 export const hentArbeidsrettedeAktiviteter = (): Promise<RegisterAktivitet[]> => {
     return axios
         .get<RegisterAktiviteterResponse>(`${Environment().apiProxyUrl}/aktivitet`, defaultConfig())
         .then((response) => response.data.aktiviteter);
+};
+export const hentBehandlingStatus = (stonadstype: Stønadstype): Promise<boolean> => {
+    return axios
+        .get<boolean>(
+            `${Environment().apiProxyUrl}/person/behandlingStatus?stonadstype=${encodeURIComponent(stonadstype)}`,
+            defaultConfig()
+        )
+        .then((response) => response.data);
 };
 
 const stønadstypeTilPath = (stønadstype: Stønadstype): string => {

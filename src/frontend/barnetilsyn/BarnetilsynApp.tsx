@@ -29,7 +29,7 @@ const BarnetilsynInnhold = () => {
             resetSøknad={resetSøknad}
         >
             <SøknadRouting stønadstype={Stønadstype.BARNETILSYN}>
-                <Søknadsdialog />
+                <Søknadsdialog stønadstype={Stønadstype.BARNETILSYN} />
             </SøknadRouting>
         </SøknadProvider>
     );

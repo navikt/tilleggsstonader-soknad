@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react';
+
 import { Route, Routes } from 'react-router';
 
 import Forside from './Forside';
+import HarBehandlingSide from './HarBehandlingSide';
 import { Header } from '../components/Header';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
@@ -13,13 +16,49 @@ import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
 import VedleggPassAvBarn from './steg/6-vedlegg/VedleggPassAvBarn';
 import Oppsummering from './steg/7-oppsummering/Oppsummering';
 import Kvittering from '../components/Kvittering/Kvittering';
+import useSjekkBehandlingStatus from '../components/Søknadside/SjekkBehandlingStatus';
+import { Stønadstype } from '../typer/stønadstyper';
 
-const Søknadsdialog: React.FC = () => {
+interface SøknadsdialogProps {
+    stønadstype: Stønadstype;
+}
+
+const Søknadsdialog: React.FC<SøknadsdialogProps> = ({ stønadstype }) => {
+    const { harBehandling, loading, error } = useSjekkBehandlingStatus(stønadstype);
+
+    const [visHarBehandlingSide, settVisaHarBehandlingSide] = useState<boolean>(false);
+
+    useEffect(() => {
+        settVisaHarBehandlingSide(harBehandling);
+    }, [harBehandling]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
     return (
         <>
             <Header tittel={fellesTekster.banner_bt} />
             <Routes>
-                <Route path={'/'} element={<Forside />} />
+                <Route
+                    path={'/'}
+                    element={
+                        visHarBehandlingSide ? (
+                            <HarBehandlingSide
+                                startSøknad={() => {
+                                    settVisaHarBehandlingSide(false);
+                                }}
+                                stonadstype={Stønadstype.BARNETILSYN}
+                            />
+                        ) : (
+                            <Forside />
+                        )
+                    }
+                />
                 <Route path={'*'} element={<SøknadsdialogInnhold />} />
                 <Route
                     path={'/kvittering'}
