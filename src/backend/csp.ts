@@ -100,14 +100,14 @@ export const cspMap = (): Record<string, string[]> => {
         // Hvor bilder kan hentes fra
         'img-src': [
             "'self'",
-            'data:',
-            // ┌────────── Dekoratøren ──────────┐
-            '*.nav.no',
-            'uxsignals-frontend.uxsignals.app.iterate.no',
-            '*.psplugin.com',
-            '*.vimeocdn.com',
-            '*.hotjar.com',
-            'www.vergic.com',
+            // 'data:',
+            // // ┌────────── Dekoratøren ──────────┐
+            // '*.nav.no',
+            // 'uxsignals-frontend.uxsignals.app.iterate.no',
+            // '*.psplugin.com',
+            // '*.vimeocdn.com',
+            // '*.hotjar.com',
+            // 'www.vergic.com',
             // └────────────────────────────────┘
         ],
 
