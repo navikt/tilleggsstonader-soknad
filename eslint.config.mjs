@@ -121,10 +121,4 @@ export default [
             ],
         },
     },
-    {
-        files: ['src/backend/**/*.{js,ts}'],
-        rules: {
-            'no-console': 'off', // Det er greit å console-logge i frackend
-        },
-    },
 ];
