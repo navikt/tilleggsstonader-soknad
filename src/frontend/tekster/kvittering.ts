@@ -37,7 +37,7 @@ export const kvitteringTekster: KvitteringInnhold = {
         nb: 'Du får varsel på SMS eller e-post når saken er ferdig behandlet.',
     },
     se_søknad_knapp: {
-        nb: 'Du søknaden din på min side ',
+        nb: 'Se søknaden din på min side',
     },
     behandlingstid_tittel: { nb: 'Forventet behandlingstid' },
     behandlingstid_innhold: {
@@ -75,7 +75,7 @@ export const kvitteringTekster: KvitteringInnhold = {
     relevante_stønader_tittel: { nb: 'Du kan også ha rett til' },
     relevante_stønader_innhold: {
         nb: [
-            'Når du gjennomfører en utdanning eller opplæring godkjent av Nav, kan det hende du også har rett til andre tilleggsstønader. ',
+            'Når du gjennomfører en arbeidsrettet aktivitet godkjent av Nav, kan det hende du også har rett til andre tilleggsstønader. ',
             {
                 tekst: 'Les mer om det her',
                 url: 'https://www.nav.no/tilleggsstonader',

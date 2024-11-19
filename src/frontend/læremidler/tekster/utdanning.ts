@@ -124,7 +124,7 @@ export const utdanningTekster: AktivitetInnhold = {
             nb: 'Har du en funksjonsnedsettelse som gir deg særlig store utgifter til læremidler?',
         },
         beskrivelse: {
-            nb: 'Du må dokumentere din funskjonsnedsettelse med uttallelse fra helsepersonell.',
+            nb: 'Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell.',
         },
         alternativer: JaNeiTilTekst,
     },
