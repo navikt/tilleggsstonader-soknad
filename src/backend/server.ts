@@ -21,6 +21,8 @@ app.use((_req, res, next) => {
     next();
 });
 
+app.use(routes());
+
 app.use(bodyParser.json());
 app.post('/csp-violation-report', (req, res) => {
     const cspReport = req.body['csp-report'];
@@ -33,6 +35,6 @@ app.post('/csp-violation-report', (req, res) => {
     res.status(204).end();
 });
 
-app.use(routes());
+logger.info('Starter server på port 3000');
 
 app.listen(3000);
