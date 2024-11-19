@@ -118,7 +118,7 @@ export const cspMap = (): Record<string, string[]> => {
         'child-src': ['*.nav.no', 'blob:'],
 
         // Hvor manifest-filer kan hentes fra
-        'manifest-src': ["'self'", 'www.nav.no', 'oidc-ver2.difi.no', 'idporten-ver2.difi.no'],
+        'manifest-src': ["'self'", 'cdn.nav.no', 'oidc-ver2.difi.no', 'idporten-ver2.difi.no'],
 
         // Hvor denne siden kan integreres (f.eks. iFrames)
         'frame-ancestors': ["'self'", '*.psplugin.com'],
