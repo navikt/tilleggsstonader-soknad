@@ -16,7 +16,7 @@ app.use((_req, res, next) => {
     // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene etter en ukes tid
     res.header(
         'Content-Security-Policy-Report-Only',
-        cspString() + ' report-uri /csp-violation-report'
+        cspString() + '; report-uri /csp-violation-report'
     );
     next();
 });
