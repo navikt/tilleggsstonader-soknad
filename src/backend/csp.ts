@@ -8,9 +8,7 @@ const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
 export function cspDirective() {
     return async (req: Request, res: Response, next: NextFunction) => {
         // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene etter en ukes tid
-        logger.info(
-            `Legger til CSP-header på responsen til ${req.url} med report-to=${rapporteringsendepunkt}`
-        );
+        logger.info(`Legger til CSP-header på responsen til ${req.url}`);
         res.header(
             'Content-Security-Policy-Report-Only',
             cspString() + '; report-to csp-violation'
@@ -141,14 +139,18 @@ const cspMap = (): Record<string, string[]> => {
         'child-src': ['*.nav.no', 'blob:'],
 
         // Hvor manifest-filer kan hentes fra
-        // 'manifest-src': ["'self'", 'cdn.nav.no', 'oidc-ver2.difi.no', 'idporten-ver2.difi.no'],
+        'manifest-src': ["'self'", 'cdn.nav.no', 'oidc-ver2.difi.no', 'idporten-ver2.difi.no'],
 
         // Hvor denne siden kan integreres (f.eks. iFrames)
         'frame-ancestors': ["'self'", '*.psplugin.com'],
     };
 };
 
+const TESTER = true;
 const cspString = () => {
+    if (TESTER) {
+        return "default-src 'self';";
+    }
     return Object.entries(cspMap())
         .map((entry) => `${entry[0]} ${entry[1].join(' ')}`)
         .join('; ');
