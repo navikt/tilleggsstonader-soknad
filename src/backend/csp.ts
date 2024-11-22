@@ -8,7 +8,7 @@ const BASE_PATH = '/tilleggsstonader';
 const BASE_PATH_SOKNAD = `${BASE_PATH}/soknad`;
 
 export function applyCspDirectives(app: Express) {
-    const rapporteringsendepunkt = `${miljø.internalUrl}/csp-violation`;
+    const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
 
     app.use((_req, res, next) => {
         // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene etter en ukes tid
@@ -22,7 +22,7 @@ export function applyCspDirectives(app: Express) {
     });
 
     app.use(bodyParser.json());
-    app.post(`${BASE_PATH_SOKNAD}/internal/csp-violation`, (req, res) => {
+    app.post(`${BASE_PATH_SOKNAD}/csp-violation`, (req, res) => {
         const cspReport = req.body['csp-report'];
 
         if (cspReport) {
