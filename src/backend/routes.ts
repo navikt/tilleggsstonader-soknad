@@ -1,4 +1,3 @@
-import bodyParser from 'body-parser';
 import express from 'express';
 import { Request, Response, Router } from 'express';
 import path from 'path';
@@ -9,6 +8,7 @@ import logger from './logger';
 import { miljø } from './miljø';
 import { addRequestInfo, doProxy } from './proxy';
 import attachToken from './tokenProxy';
+import { ekskluderStier } from './utils';
 
 const buildPath = path.resolve(process.cwd(), '../../app/build');
 const BASE_PATH = '/tilleggsstonader';
@@ -22,16 +22,19 @@ const routes = () => {
 
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
-    expressRouter.use(/^(?!.*\/(internal|static|api)\/).*$/, (_req: Request, res: Response) => {
-        getDecoratedHtml(path.join(buildPath, 'index.html'))
-            .then((html) => {
-                res.send(html);
-            })
-            .catch((e) => {
-                logger.error(e);
-                res.status(500).send(e);
-            });
-    });
+    expressRouter.use(
+        ekskluderStier('internal', 'static', 'api'),
+        (_req: Request, res: Response) => {
+            getDecoratedHtml(path.join(buildPath, 'index.html'))
+                .then((html) => {
+                    res.send(html);
+                })
+                .catch((e) => {
+                    logger.error(e);
+                    res.status(500).send(e);
+                });
+        }
+    );
 
     expressRouter.use(
         `${BASE_PATH_SOKNAD}/api/vedlegg`,
@@ -47,7 +50,7 @@ const routes = () => {
         doProxy(miljø.apiUrl)
     );
 
-    expressRouter.use(bodyParser.json());
+    expressRouter.use(express.json());
     expressRouter.post(`${BASE_PATH_SOKNAD}/reporting/csp-violation`, (req, res) => {
         const cspReport = req.body['csp-report'];
 
