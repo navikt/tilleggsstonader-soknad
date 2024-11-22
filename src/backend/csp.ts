@@ -10,13 +10,14 @@ const BASE_PATH_SOKNAD = `${BASE_PATH}/soknad`;
 export function applyCspDirectives(app: Express) {
     const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
 
-    app.use((_req, res, next) => {
+    app.use((req, res, next) => {
         // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene etter en ukes tid
+        logger.info(`Legger til CSP-header på responsen til ${req.url}`);
         res.header(
             'Content-Security-Policy-Report-Only',
-            cspString() + '; report-to csp-violation-report'
+            cspString() + '; report-to csp-violation'
         );
-        res.header('Reporting-Endpoints', `csp-endpoint="${rapporteringsendepunkt}"`);
+        res.header('Reporting-Endpoints', `csp-violation="${rapporteringsendepunkt}"`);
 
         next();
     });
