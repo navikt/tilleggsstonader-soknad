@@ -149,7 +149,7 @@ const cspMap = (): Record<string, string[]> => {
 const TESTER = true;
 const cspString = () => {
     if (TESTER) {
-        return "default-src 'self';";
+        return "default-src 'self'";
     }
     return Object.entries(cspMap())
         .map((entry) => `${entry[0]} ${entry[1].join(' ')}`)
