@@ -22,7 +22,7 @@ export function applyCspDirectives(app: Express) {
     });
 
     app.use(bodyParser.json());
-    app.post(`${BASE_PATH_SOKNAD}/csp-violation`, (req, res) => {
+    app.post(`${BASE_PATH_SOKNAD}/reporting/csp-violation`, (req, res) => {
         const cspReport = req.body['csp-report'];
 
         if (cspReport) {
