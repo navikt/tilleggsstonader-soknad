@@ -1,5 +1,5 @@
 import bodyParser from 'body-parser';
-import express, { Express } from 'express';
+import { Express } from 'express';
 
 import logger from './logger';
 import { miljø } from './miljø';
@@ -7,9 +7,7 @@ import { miljø } from './miljø';
 const BASE_PATH = '/tilleggsstonader';
 const BASE_PATH_SOKNAD = `${BASE_PATH}/soknad`;
 
-export function csp(): Express {
-    const app = express();
-
+export function applyCspDirectives(app: Express) {
     const rapporteringsendepunkt = `${miljø.internalUrl}/csp-violation`;
 
     app.use((_req, res, next) => {
@@ -34,7 +32,6 @@ export function csp(): Express {
         }
         res.status(204).end();
     });
-    return app;
 }
 
 const cspMap = (): Record<string, string[]> => {

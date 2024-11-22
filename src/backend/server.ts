@@ -1,7 +1,7 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 
-import { csp } from './csp';
+import { applyCspDirectives } from './csp';
 import logger from './logger';
 import routes from './routes';
 
@@ -11,8 +11,8 @@ if (process.env.ENV === 'localhost') {
     app.use(cookieParser());
 }
 app.use(routes());
-app.use(csp());
+applyCspDirectives(app);
 
-logger.info('Starter server på port 3000');
-
-app.listen(3000);
+const PORT = 3000;
+logger.info(`Starter server på port ${PORT}`);
+app.listen(PORT);
