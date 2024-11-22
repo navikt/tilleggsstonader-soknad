@@ -1,16 +1,12 @@
-import bodyParser from 'body-parser';
-import { Express } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 import logger from './logger';
 import { miljø } from './miljø';
 
-const BASE_PATH = '/tilleggsstonader';
-const BASE_PATH_SOKNAD = `${BASE_PATH}/soknad`;
+const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
 
-export function applyCspDirectives(app: Express) {
-    const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
-
-    app.use((req, res, next) => {
+export function cspDirective() {
+    return async (req: Request, res: Response, next: NextFunction) => {
         // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene etter en ukes tid
         logger.info(`Legger til CSP-header på responsen til ${req.url}`);
         res.header(
@@ -20,19 +16,7 @@ export function applyCspDirectives(app: Express) {
         res.header('Reporting-Endpoints', `csp-violation="${rapporteringsendepunkt}"`);
 
         next();
-    });
-
-    app.use(bodyParser.json());
-    app.post(`${BASE_PATH_SOKNAD}/reporting/csp-violation`, (req, res) => {
-        const cspReport = req.body['csp-report'];
-
-        if (cspReport) {
-            logger.warning('CSP Violation:', cspReport);
-        } else {
-            logger.error('Received a malformed CSP violation report.');
-        }
-        res.status(204).end();
-    });
+    };
 }
 
 const cspMap = (): Record<string, string[]> => {

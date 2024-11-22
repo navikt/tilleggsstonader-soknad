@@ -1,3 +1,4 @@
+import bodyParser from 'body-parser';
 import express from 'express';
 import { Request, Response, Router } from 'express';
 import path from 'path';
@@ -45,6 +46,18 @@ const routes = () => {
         attachToken('tilleggsstonader-soknad-api'),
         doProxy(miljø.apiUrl)
     );
+
+    expressRouter.use(bodyParser.json());
+    expressRouter.post(`${BASE_PATH_SOKNAD}/reporting/csp-violation`, (req, res) => {
+        const cspReport = req.body['csp-report'];
+
+        if (cspReport) {
+            logger.warning('CSP Violation:', cspReport);
+        } else {
+            logger.error('Received a malformed CSP violation report.');
+        }
+        res.status(204).end();
+    });
 
     return expressRouter;
 };
