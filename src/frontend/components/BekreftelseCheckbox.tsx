@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CheckboxGroup, Checkbox } from '@navikt/ds-react';
 
+import LocaleInlineLenke from './Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 
@@ -20,7 +21,7 @@ const BekreftelseCheckbox: React.FC<Props> = ({
 }) => {
     return (
         <CheckboxGroup
-            legend={<LocaleTekst tekst={fellesTekster.vi_stoler_tittel} />}
+            legend={<LocaleInlineLenke tekst={fellesTekster.viktig_med_rett_opplysninger} />}
             error={
                 skalViseFeilmelding && <LocaleTekst tekst={fellesTekster.vi_stoler_feilmelding} />
             }
