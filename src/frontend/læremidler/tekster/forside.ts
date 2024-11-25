@@ -62,11 +62,11 @@ export const forsideTekster: ForsideInnhold = {
         nb: [
             'Det er ',
             {
-                tekst: 'faste satser ',
+                tekst: 'faste satser',
                 url: 'https://www.nav.no/satser#tilleggsstonader',
                 variant: 'neutral',
             },
-            'som bestemmer hvor mye du kan få i støtte. Satsene er ulike avhengig av om du studerer deltid eller heltid, og nivået på opplæringen din.',
+            ' som bestemmer hvor mye du kan få i støtte. Satsene er ulike avhengig av om du studerer deltid eller heltid, og nivået på opplæringen din.',
         ],
     },
     mengde_støtte_innhold2: {
