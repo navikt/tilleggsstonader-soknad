@@ -25,7 +25,7 @@ export const typerVedleggTeksterLæremidler: TekstTypeVedlegg = {
             nb: 'Dokumentasjon på utgifter til læremidler',
         },
         beskrivelse: {
-            nb: 'Fakturaene må være spesifisert. Vi godkjenner ikke skjermbilde av kontoutskrift/vipps eller lignende.',
+            nb: 'Kvitteringer og fakturaer må være spesifisert. ',
         },
     },
 };
