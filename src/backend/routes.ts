@@ -15,9 +15,10 @@ const BASE_PATH_SOKNAD = `${BASE_PATH}/soknad`;
 const routes = () => {
     const expressRouter = Router();
 
-    expressRouter.get(`${BASE_PATH_SOKNAD}/internal/isAlive|isReady`, (req, res) =>
-        res.sendStatus(200)
-    );
+    expressRouter.get(`${BASE_PATH_SOKNAD}/internal/isAlive|isReady`, (req, res) => {
+        res.sendStatus(200);
+        return;
+    });
 
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 

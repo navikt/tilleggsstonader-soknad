@@ -59,22 +59,22 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "@amplitude/analytics-browser": "^2.11.8",
+    "@amplitude/analytics-browser": "^2.11.9",
     "@navikt/aksel-icons": "7.4.0",
     "@navikt/ds-css": "^7.4.0",
     "@navikt/ds-react": "^7.4.0",
     "@navikt/ds-tokens": "^7.4.0",
-    "@sentry/react": "^8.35.0",
+    "@sentry/react": "^8.40.0",
     "@sentry/tracing": "^7.114.0",
     "axios": "^1.6.7",
     "constate": "^3.3.2",
     "date-fns": "^4.1.0",
-    "i18n-iso-countries": "^7.11.0",
+    "i18n-iso-countries": "^7.13.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-router-dom": "^6.27.0",
     "styled-components": "^6.1.0",
-    "uuid": "^10.0.0"
+    "uuid": "^11.0.3"
   },
   "resolutions": {
     "styled-components": "^6"
