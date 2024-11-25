@@ -63,7 +63,7 @@ export const forsideTekster: ForsideInnhold = {
             'Det er ',
             {
                 tekst: 'faste satser ',
-                url: 'https://www.nav.no/tilleggsstonader#hva',
+                url: 'https://www.nav.no/satser#tilleggsstonader',
                 variant: 'neutral',
             },
             'som bestemmer hvor mye du kan få i støtte. Satsene er ulike avhengig av om du studerer deltid eller heltid, og nivået på opplæringen din.',
@@ -80,7 +80,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     info_som_hentes_innhold2: {
         nb: [
-            'adressen din og opplysninger om dine barn fra Folkeregisteret',
+            'adressen din fra Folkeregisteret',
             'informasjon om utdanning eller opplæring avtalt med veileder i Nav',
             'hvilke andre andre ytelser du mottar fra Nav',
         ],
