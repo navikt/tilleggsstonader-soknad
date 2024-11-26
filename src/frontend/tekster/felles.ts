@@ -63,7 +63,7 @@ export const fellesTekster: FellesInnhold = {
         nb: 'Periode',
     },
     flere_vedlegg: {
-        nb: 'Vedlegg [0]',
+        nb: 'Vedlegg ([0])',
     },
     vedlegg_med_feil: {
         nb: 'Vedlegg med feil',
