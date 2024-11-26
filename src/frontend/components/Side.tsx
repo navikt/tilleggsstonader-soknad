@@ -143,7 +143,7 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
                     )}
                 </ErrorSummary>
             )}
-            <VStack gap={'6'}>{children}</VStack>
+            <VStack gap="8">{children}</VStack>
             <KnappeContainerMedFeilmelding>
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
                     <LocaleTekst tekst={fellesTekster.forrige} />
