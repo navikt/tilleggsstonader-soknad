@@ -19,14 +19,15 @@ import { Dokument } from '../../typer/skjema';
 import { TekstElement } from '../../typer/tekst';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-type AkseptertFil = FileObject & { dokumentId: string };
-type AvslåttFil = FileRejected & { feil: unknown };
+enum FilObjektType {
+    AKSEPTERT = 'AKSEPTERT',
+    AVSLÅTT = 'AVSLÅTT',
+}
+
+type AkseptertFil = FileObject & { dokumentId: string; type: FilObjektType.AKSEPTERT };
+type AvslåttFil = FileRejected & { feil: unknown; type: FilObjektType.AVSLÅTT };
 type FilObjekt = AkseptertFil | AvslåttFil;
 type FilAvslåttGrunn = FileRejectionReason | 'ukjent';
-
-const erFilObjektAkseptertFil = (fil: FilObjekt): fil is AkseptertFil => {
-    return (fil as AkseptertFil).dokumentId !== undefined;
-};
 
 export const Filopplaster: React.FC<{
     tittel: string;
@@ -41,7 +42,7 @@ export const Filopplaster: React.FC<{
     const avslåtteFiler = files.filter((f): f is AvslåttFil => f.error);
 
     const fjernFil = (filSomSkalFjernes: FilObjekt) => {
-        if (erFilObjektAkseptertFil(filSomSkalFjernes)) {
+        if (filSomSkalFjernes.type === FilObjektType.AKSEPTERT) {
             slettDokument({ id: filSomSkalFjernes.dokumentId, navn: filSomSkalFjernes.file.name });
         }
         setFiles(files.filter((fil) => fil !== filSomSkalFjernes));
@@ -66,7 +67,14 @@ export const Filopplaster: React.FC<{
             lastOppVedlegg(filObjekt.file)
                 .then((id) => {
                     leggTilDokument({ id: id, navn: filObjekt.file.name });
-                    setFiles((prevState) => [...prevState, { ...filObjekt, dokumentId: id }]);
+                    setFiles((prevState) => [
+                        ...prevState,
+                        {
+                            ...filObjekt,
+                            dokumentId: id,
+                            type: FilObjektType.AKSEPTERT,
+                        },
+                    ]);
                 })
                 .catch((err) => {
                     const avslåttFil: AvslåttFil = {
@@ -74,6 +82,7 @@ export const Filopplaster: React.FC<{
                         error: true,
                         feil: err,
                         reasons: ['ukjent'],
+                        type: FilObjektType.AVSLÅTT,
                     };
                     setFiles((prevState) => [...prevState, avslåttFil]);
                 });
