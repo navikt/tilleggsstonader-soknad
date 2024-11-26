@@ -36,3 +36,5 @@ export const filtypeTilFilendelse: Record<Filtyper, string> = {
 export const TILLATE_FILTYPER: string[] = Object.values(filtypeTilMime);
 
 export const TILLATE_FILENDELSER: string = Object.values(filtypeTilFilendelse).join(',');
+
+export const TILLATE_SAMTDIGE_OPPLASTINGER = 5;

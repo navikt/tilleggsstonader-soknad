@@ -5,12 +5,12 @@ import { styled } from 'styled-components';
 import { BodyShort, Heading } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
-import { opprettDokumentasjonsfelt, leggTilVedlegg, fjernVedlegg } from './utils';
+import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './utils';
 import VedleggManglerModal from './VedleggManglerModal';
 import { useSpråk } from '../../context/SpråkContext';
 import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
-import { DokumentasjonFelt, Dokument, Dokumentasjonsbehov } from '../../typer/skjema';
-import VedleggFelt from '../Filopplaster/VedleggFelt';
+import { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
+import { Filopplaster } from '../Filopplaster/Filopplaster';
 import { PellePanel } from '../PellePanel/PellePanel';
 import Side from '../Side';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
@@ -90,10 +90,9 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                     <VedleggContainer>
                         {dokumentasjon.map((dok, indeks) => (
                             <section key={indeks}>
-                                <VedleggFelt
-                                    tittel={dok.label}
-                                    vedlegg={typerVedleggTekster[dok.type]}
-                                    dokumentasjonFelt={dok}
+                                <Filopplaster
+                                    tittel={typerVedleggTekster[dok.type].liste_tittel![locale]}
+                                    beskrivelse={typerVedleggTekster[dok.type].beskrivelse}
                                     leggTilDokument={(dokument: Dokument) =>
                                         leggTilDokument(dok, dokument)
                                     }
