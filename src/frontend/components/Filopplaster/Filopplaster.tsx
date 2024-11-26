@@ -85,7 +85,7 @@ export const Filopplaster: React.FC<{
     };
 
     return (
-        <>
+        <VStack gap="6">
             <FileUpload.Dropzone
                 label={tittel}
                 description={<LocaleTekst tekst={beskrivelse} />}
@@ -143,6 +143,6 @@ export const Filopplaster: React.FC<{
                     </VStack>
                 </VStack>
             )}
-        </>
+        </VStack>
     );
 };
