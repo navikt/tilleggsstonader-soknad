@@ -19,13 +19,8 @@ import { Dokument } from '../../typer/skjema';
 import { TekstElement } from '../../typer/tekst';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-enum FilObjektType {
-    AKSEPTERT = 'AKSEPTERT',
-    AVSLÅTT = 'AVSLÅTT',
-}
-
-type AkseptertFil = FileObject & { dokumentId: string; type: FilObjektType.AKSEPTERT };
-type AvslåttFil = FileRejected & { feil: unknown; type: FilObjektType.AVSLÅTT };
+type AkseptertFil = FileObject & { dokumentId: string };
+type AvslåttFil = FileRejected & { feil: unknown };
 type FilObjekt = AkseptertFil | AvslåttFil;
 type FilAvslåttGrunn = FileRejectionReason | 'ukjent';
 
@@ -42,7 +37,7 @@ export const Filopplaster: React.FC<{
     const avslåtteFiler = files.filter((f): f is AvslåttFil => f.error);
 
     const fjernFil = (filSomSkalFjernes: FilObjekt) => {
-        if (filSomSkalFjernes.type === FilObjektType.AKSEPTERT) {
+        if (!filSomSkalFjernes.error) {
             slettDokument({ id: filSomSkalFjernes.dokumentId, navn: filSomSkalFjernes.file.name });
         }
         setFiles(files.filter((fil) => fil !== filSomSkalFjernes));
@@ -72,7 +67,6 @@ export const Filopplaster: React.FC<{
                         {
                             ...filObjekt,
                             dokumentId: id,
-                            type: FilObjektType.AKSEPTERT,
                         },
                     ]);
                 })
@@ -82,7 +76,6 @@ export const Filopplaster: React.FC<{
                         error: true,
                         feil: err,
                         reasons: ['ukjent'],
-                        type: FilObjektType.AVSLÅTT,
                     };
                     setFiles((prevState) => [...prevState, avslåttFil]);
                 });
