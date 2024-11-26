@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
-import { Accordion, BodyLong, BodyShort, Button, Label } from '@navikt/ds-react';
+import { Accordion, BodyLong, BodyShort, Button, Label, VStack } from '@navikt/ds-react';
 
 import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
@@ -17,6 +17,7 @@ import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { usePerson } from '../context/PersonContext';
+import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { hentNesteRoute } from '../utils/routes';
 
@@ -109,17 +110,22 @@ const Forside: React.FC = () => {
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
-            <BekreftelseCheckbox
-                skalViseFeilmelding={skalViseFeilmelding}
-                harBekreftet={harBekreftet}
-                oppdaterHarBekreftet={(harBekreftet) => settHarBekreftet(harBekreftet)}
-                fjernFeilmelding={() => settSkalViseFeilmelding(false)}
-            />
-            <KnappeContainer>
-                <Button onClick={startSøknad} variant="primary">
-                    Start søknad
-                </Button>
-            </KnappeContainer>
+            <VStack>
+                <BodyLong>
+                    <LocaleInlineLenke tekst={fellesTekster.viktig_med_rett_opplysninger} />
+                </BodyLong>
+                <BekreftelseCheckbox
+                    skalViseFeilmelding={skalViseFeilmelding}
+                    harBekreftet={harBekreftet}
+                    oppdaterHarBekreftet={(harBekreftet) => settHarBekreftet(harBekreftet)}
+                    fjernFeilmelding={() => settSkalViseFeilmelding(false)}
+                />
+                <KnappeContainer>
+                    <Button onClick={startSøknad} variant="primary">
+                        Start søknad
+                    </Button>
+                </KnappeContainer>
+            </VStack>
         </Container>
     );
 };
