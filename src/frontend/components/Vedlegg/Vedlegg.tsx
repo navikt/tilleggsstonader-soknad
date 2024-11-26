@@ -91,7 +91,7 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                         {dokumentasjon.map((dok, indeks) => (
                             <section key={indeks}>
                                 <Filopplaster
-                                    tittel={typerVedleggTekster[dok.type].liste_tittel![locale]}
+                                    tittel={typerVedleggTekster[dok.type].tittel[locale]}
                                     beskrivelse={typerVedleggTekster[dok.type].beskrivelse}
                                     leggTilDokument={(dokument: Dokument) =>
                                         leggTilDokument(dok, dokument)
