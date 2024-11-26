@@ -70,7 +70,7 @@ export const forsideTekster: ForsideInnhold = {
         ],
     },
     mengde_støtte_innhold2: {
-        nb: 'Hvis du har særlig store utgifter grunnet funksjonsnedsettelse kan du få dekket faktiske utgiftene dine. Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell og utgiftene dine med faktura eller kvittering.',
+        nb: 'Hvis du har særlig store utgifter grunnet funksjonsnedsettelse, kan du søke om å få dekket de faktiske utgiftene dine. Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell og utgiftene dine med faktura eller kvittering.',
     },
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',
