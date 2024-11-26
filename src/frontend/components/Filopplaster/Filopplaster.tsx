@@ -62,12 +62,11 @@ export const Filopplaster: React.FC<{
     };
 
     const lastOppValgteFiler = (filer: FileObject[]) => {
-        const nyeFiler: FilObjekt[] = [];
         filer.forEach((filObjekt) => {
             lastOppVedlegg(filObjekt.file)
                 .then((id) => {
                     leggTilDokument({ id: id, navn: filObjekt.file.name });
-                    nyeFiler.push({ ...filObjekt, dokumentId: id });
+                    setFiles((prevState) => [...prevState, { ...filObjekt, dokumentId: id }]);
                 })
                 .catch((err) => {
                     const avslåttFil: AvslåttFil = {
@@ -76,10 +75,7 @@ export const Filopplaster: React.FC<{
                         feil: err,
                         reasons: ['ukjent'],
                     };
-                    nyeFiler.push(avslåttFil);
-                })
-                .finally(() => {
-                    setFiles([...files, ...nyeFiler]);
+                    setFiles((prevState) => [...prevState, avslåttFil]);
                 });
         });
     };
