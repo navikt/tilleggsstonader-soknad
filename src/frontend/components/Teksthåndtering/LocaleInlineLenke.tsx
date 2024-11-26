@@ -3,7 +3,7 @@ import { Link } from '@navikt/ds-react';
 import { logNavigereEvent } from '../../api/amplitude';
 import { useSpråk } from '../../context/SpråkContext';
 import { Stønadstype } from '../../typer/stønadstyper';
-import { InlineLenke, TekstElement } from '../../typer/tekst';
+import { InlineLenke, Lenke, TekstElement } from '../../typer/tekst';
 
 const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tekst }) => {
     const { locale } = useSpråk();
@@ -11,29 +11,28 @@ const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tek
     return (
         <>
             {tekst[locale].map((tekstElement, indeks) =>
-                typeof tekstElement === 'string' ? (
-                    <span key={indeks}>{tekstElement}</span>
-                ) : (
-                    <Link
-                        inlineText
-                        href={tekstElement.url}
-                        key={indeks}
-                        variant={tekstElement.variant}
-                        target="_blank"
-                        onClick={() =>
-                            logNavigereEvent(
-                                Stønadstype.BARNETILSYN,
-                                tekstElement.url,
-                                tekstElement.tekst
-                            )
-                        }
-                    >
-                        {tekstElement.tekst}
-                    </Link>
-                )
+                tekstTilLenkeEllerTekst(tekstElement, indeks)
             )}
         </>
     );
 };
+
+export const tekstTilLenkeEllerTekst = (tekstElement: string | Lenke, indeks: number) =>
+    typeof tekstElement === 'string' ? (
+        <span key={indeks}>{tekstElement}</span>
+    ) : (
+        <Link
+            inlineText
+            href={tekstElement.url}
+            key={indeks}
+            variant={tekstElement.variant}
+            target="_blank"
+            onClick={() =>
+                logNavigereEvent(Stønadstype.BARNETILSYN, tekstElement.url, tekstElement.tekst)
+            }
+        >
+            {tekstElement.tekst}
+        </Link>
+    );
 
 export default LocaleInlineLenke;

@@ -9,7 +9,7 @@ export type LesMer<T> = {
     innhold: TekstElement<T>;
 };
 
-type Lenke = {
+export type Lenke = {
     tekst: string;
     url: string;
     variant?: 'action' | 'neutral' | 'subtle';
