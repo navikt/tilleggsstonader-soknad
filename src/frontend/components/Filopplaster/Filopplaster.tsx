@@ -24,21 +24,31 @@ type AvslåttFil = FileRejected & { feil: unknown };
 type FilObjekt = AkseptertFil | AvslåttFil;
 type FilAvslåttGrunn = FileRejectionReason | 'ukjent';
 
+const dokumenterTilAksepterteFiler = (dokumenter: Dokument[]): AkseptertFil[] =>
+    dokumenter.map((dokument) => ({
+        file: dokument.fil,
+        dokumentId: dokument.id,
+        error: false,
+    }));
+
 export const Filopplaster: React.FC<{
+    opplastedeVedlegg: Dokument[];
     tittel: string;
     beskrivelse: TekstElement<string>;
     leggTilDokument: (vedlegg: Dokument) => void;
-    slettDokument: (vedlegg: Dokument) => void;
-}> = ({ tittel, beskrivelse, leggTilDokument, slettDokument }) => {
+    slettDokument: (vedlegg: string) => void;
+}> = ({ opplastedeVedlegg, tittel, beskrivelse, leggTilDokument, slettDokument }) => {
     const { locale } = useSpråk();
-    const [files, setFiles] = useState<FilObjekt[]>([]);
+    const [files, setFiles] = useState<FilObjekt[]>(
+        dokumenterTilAksepterteFiler(opplastedeVedlegg)
+    );
 
     const aksepterteFiler = files.filter((file) => !file.error);
     const avslåtteFiler = files.filter((f): f is AvslåttFil => f.error);
 
     const fjernFil = (filSomSkalFjernes: FilObjekt) => {
         if (!filSomSkalFjernes.error) {
-            slettDokument({ id: filSomSkalFjernes.dokumentId, navn: filSomSkalFjernes.file.name });
+            slettDokument(filSomSkalFjernes.dokumentId);
         }
         setFiles(files.filter((fil) => fil !== filSomSkalFjernes));
     };
@@ -61,7 +71,7 @@ export const Filopplaster: React.FC<{
         filer.forEach((filObjekt) => {
             lastOppVedlegg(filObjekt.file)
                 .then((id) => {
-                    leggTilDokument({ id: id, navn: filObjekt.file.name });
+                    leggTilDokument({ id: id, navn: filObjekt.file.name, fil: filObjekt.file });
                     setFiles((prevState) => [
                         ...prevState,
                         {

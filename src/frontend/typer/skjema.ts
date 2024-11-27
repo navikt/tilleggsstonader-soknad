@@ -39,6 +39,7 @@ export interface Dokumentasjonsbehov {
 export interface Dokument {
     id: string;
     navn: string;
+    fil: File;
 }
 
 // OBS: Ikke ha duplikat av enum-typer.

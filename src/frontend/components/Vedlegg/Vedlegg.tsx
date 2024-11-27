@@ -49,10 +49,10 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
 
     const slettDokument = (
         dokumentasjonFelt: DokumentasjonFelt,
-        dokumentSomSkalSlettet: Dokument
+        dokumentSomSkalSlettesId: string
     ) => {
         settDokumentasjon((prevState) =>
-            fjernVedlegg(prevState, dokumentasjonFelt, dokumentSomSkalSlettet)
+            fjernVedlegg(prevState, dokumentasjonFelt, dokumentSomSkalSlettesId)
         );
     };
 
@@ -91,12 +91,13 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                         {dokumentasjon.map((dok, indeks) => (
                             <section key={indeks}>
                                 <Filopplaster
+                                    opplastedeVedlegg={dok.opplastedeVedlegg}
                                     tittel={typerVedleggTekster[dok.type].tittel[locale]}
                                     beskrivelse={typerVedleggTekster[dok.type].beskrivelse}
                                     leggTilDokument={(dokument: Dokument) =>
                                         leggTilDokument(dok, dokument)
                                     }
-                                    slettDokument={(dokument) => slettDokument(dok, dokument)}
+                                    slettDokument={(dokumentId) => slettDokument(dok, dokumentId)}
                                 />
                             </section>
                         ))}
