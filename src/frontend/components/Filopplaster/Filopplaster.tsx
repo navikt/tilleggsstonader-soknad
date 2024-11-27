@@ -19,17 +19,8 @@ import { Dokument } from '../../typer/skjema';
 import { TekstElement } from '../../typer/tekst';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-type AkseptertFil = FileObject & { dokumentId: string };
 type AvslåttFil = FileRejected & { feil: unknown };
-type FilObjekt = AkseptertFil | AvslåttFil;
 type FilAvslåttGrunn = FileRejectionReason | 'ukjent';
-
-const dokumenterTilAksepterteFiler = (dokumenter: Dokument[]): AkseptertFil[] =>
-    dokumenter.map((dokument) => ({
-        file: dokument.fil,
-        dokumentId: dokument.id,
-        error: false,
-    }));
 
 export const Filopplaster: React.FC<{
     opplastedeVedlegg: Dokument[];
@@ -39,18 +30,10 @@ export const Filopplaster: React.FC<{
     slettDokument: (vedlegg: string) => void;
 }> = ({ opplastedeVedlegg, tittel, beskrivelse, leggTilDokument, slettDokument }) => {
     const { locale } = useSpråk();
-    const [files, setFiles] = useState<FilObjekt[]>(
-        dokumenterTilAksepterteFiler(opplastedeVedlegg)
-    );
+    const [avslåtteFiler, setAvslåtteFiler] = useState<AvslåttFil[]>([]);
 
-    const aksepterteFiler = files.filter((file) => !file.error);
-    const avslåtteFiler = files.filter((f): f is AvslåttFil => f.error);
-
-    const fjernFil = (filSomSkalFjernes: FilObjekt) => {
-        if (!filSomSkalFjernes.error) {
-            slettDokument(filSomSkalFjernes.dokumentId);
-        }
-        setFiles(files.filter((fil) => fil !== filSomSkalFjernes));
+    const fjernFil = (filSomSkalFjernes: AvslåttFil) => {
+        setAvslåtteFiler((prevState) => prevState.filter((fil) => fil !== filSomSkalFjernes));
     };
 
     const finnFeilmelding = (
@@ -69,26 +52,23 @@ export const Filopplaster: React.FC<{
 
     const lastOppValgteFiler = (filer: FileObject[]) => {
         filer.forEach((filObjekt) => {
-            lastOppVedlegg(filObjekt.file)
-                .then((id) => {
-                    leggTilDokument({ id: id, navn: filObjekt.file.name, fil: filObjekt.file });
-                    setFiles((prevState) => [
-                        ...prevState,
-                        {
-                            ...filObjekt,
-                            dokumentId: id,
-                        },
-                    ]);
-                })
-                .catch((err) => {
-                    const avslåttFil: AvslåttFil = {
-                        file: filObjekt.file,
-                        error: true,
-                        feil: err,
-                        reasons: ['ukjent'],
-                    };
-                    setFiles((prevState) => [...prevState, avslåttFil]);
-                });
+            if (!filObjekt.error) {
+                lastOppVedlegg(filObjekt.file)
+                    .then((id) => {
+                        leggTilDokument({ id: id, navn: filObjekt.file.name });
+                    })
+                    .catch((err) => {
+                        const avslåttFil: AvslåttFil = {
+                            file: filObjekt.file,
+                            error: true,
+                            feil: err,
+                            reasons: ['ukjent'],
+                        };
+                        setAvslåtteFiler((prevState) => [...prevState, avslåttFil]);
+                    });
+            } else {
+                setAvslåtteFiler((prevState) => [...prevState, { ...filObjekt, feil: null }]);
+            }
         });
     };
 
@@ -99,27 +79,29 @@ export const Filopplaster: React.FC<{
                 description={<LocaleTekst tekst={beskrivelse} />}
                 accept={TILLATE_FILENDELSER}
                 maxSizeInBytes={MAX_FILSTØRRELSE}
-                fileLimit={{ max: TILLATE_SAMTDIGE_OPPLASTINGER, current: aksepterteFiler.length }}
+                fileLimit={{
+                    max: TILLATE_SAMTDIGE_OPPLASTINGER,
+                    current: opplastedeVedlegg.length,
+                }}
                 onSelect={(nyeFiler) => lastOppValgteFiler(nyeFiler)}
             />
-
-            {aksepterteFiler.length > 0 && (
+            {opplastedeVedlegg.length > 0 && (
                 <VStack gap="2">
                     <Heading level="3" size="xsmall">
                         <LocaleTekst
                             tekst={fellesTekster.flere_vedlegg}
-                            argument0={aksepterteFiler.length.toString()}
+                            argument0={opplastedeVedlegg.length.toString()}
                         />
                     </Heading>
                     <VStack as="ul" gap="3">
-                        {aksepterteFiler.map((file, index) => (
+                        {opplastedeVedlegg.map((dokument, index) => (
                             <FileUpload.Item
                                 as="li"
                                 key={index}
-                                file={file.file}
+                                file={{ name: dokument.navn }}
                                 button={{
                                     action: 'delete',
-                                    onClick: () => fjernFil(file),
+                                    onClick: () => slettDokument(dokument.id),
                                 }}
                             />
                         ))}
@@ -132,19 +114,19 @@ export const Filopplaster: React.FC<{
                         <LocaleTekst tekst={fellesTekster.vedlegg_med_feil} />
                     </Heading>
                     <VStack as="ul" gap="3">
-                        {avslåtteFiler.map((rejected, index) => (
+                        {avslåtteFiler.map((avslåttFil, index) => (
                             <FileUpload.Item
                                 as="li"
                                 key={index}
-                                file={rejected.file}
+                                file={{ name: avslåttFil.file.name }}
                                 error={finnFeilmelding(
-                                    rejected.reasons[0] as FilAvslåttGrunn,
-                                    rejected.feil,
-                                    rejected
+                                    avslåttFil.reasons[0] as FilAvslåttGrunn,
+                                    avslåttFil.feil,
+                                    avslåttFil
                                 )}
                                 button={{
                                     action: 'delete',
-                                    onClick: () => fjernFil(rejected),
+                                    onClick: () => fjernFil(avslåttFil),
                                 }}
                             />
                         ))}
