@@ -20,7 +20,7 @@ export function applyCspDirectives() {
 }
 
 export function logCspViolation(req: Request, res: Response) {
-    logger.warning('CSP violation:', req.body);
+    logger.warn('CSP violation:', req.body);
     res.status(204).end();
 }
 
