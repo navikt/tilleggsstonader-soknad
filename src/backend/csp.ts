@@ -20,13 +20,7 @@ export function applyCspDirectives() {
 }
 
 export function logCspViolation(req: Request, res: Response) {
-    const cspReport = req.body['csp-report'];
-
-    if (cspReport) {
-        logger.warning('CSP Violation:', cspReport);
-    } else {
-        logger.error('Received a malformed CSP violation report.');
-    }
+    logger.warning('CSP violation:', req.body);
     res.status(204).end();
 }
 
