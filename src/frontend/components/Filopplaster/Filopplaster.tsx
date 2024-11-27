@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 
+import styled from 'styled-components';
+
 import {
     FileObject,
     FileRejected,
     FileRejectionReason,
     FileUpload,
     Heading,
+    List,
     VStack,
 } from '@navikt/ds-react';
 
@@ -21,6 +24,11 @@ import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 type AvslåttFil = FileRejected & { feil: unknown };
 type FilAvslåttGrunn = FileRejectionReason | 'ukjent';
+
+const FilListe = styled(List).attrs({ as: 'ul' })`
+    list-style-type: none;
+    padding: 0;
+`;
 
 export const Filopplaster: React.FC<{
     opplastedeVedlegg: Dokument[];
@@ -93,19 +101,20 @@ export const Filopplaster: React.FC<{
                             argument0={opplastedeVedlegg.length.toString()}
                         />
                     </Heading>
-                    <VStack as="ul" gap="3">
+                    <FilListe>
                         {opplastedeVedlegg.map((dokument, index) => (
                             <FileUpload.Item
                                 as="li"
                                 key={index}
                                 file={{ name: dokument.navn }}
+                                style={{ marginBottom: '1rem' }}
                                 button={{
                                     action: 'delete',
                                     onClick: () => slettDokument(dokument.id),
                                 }}
                             />
                         ))}
-                    </VStack>
+                    </FilListe>
                 </VStack>
             )}
             {avslåtteFiler.length > 0 && (
@@ -113,12 +122,13 @@ export const Filopplaster: React.FC<{
                     <Heading level="3" size="xsmall">
                         <LocaleTekst tekst={fellesTekster.vedlegg_med_feil} />
                     </Heading>
-                    <VStack as="ul" gap="3">
+                    <FilListe>
                         {avslåtteFiler.map((avslåttFil, index) => (
                             <FileUpload.Item
                                 as="li"
                                 key={index}
                                 file={{ name: avslåttFil.file.name }}
+                                style={{ marginBottom: '1rem' }}
                                 error={finnFeilmelding(
                                     avslåttFil.reasons[0] as FilAvslåttGrunn,
                                     avslåttFil.feil,
@@ -130,7 +140,7 @@ export const Filopplaster: React.FC<{
                                 }}
                             />
                         ))}
-                    </VStack>
+                    </FilListe>
                 </VStack>
             )}
         </VStack>
