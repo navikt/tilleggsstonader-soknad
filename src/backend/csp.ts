@@ -5,7 +5,7 @@ import { miljø } from './miljø';
 
 const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
 
-export function cspDirective() {
+export function applyCspDirectives() {
     return async (req: Request, res: Response, next: NextFunction) => {
         // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene etter en ukes tid
         logger.info(`Legger til CSP-header på responsen til ${req.url}`);
@@ -17,6 +17,17 @@ export function cspDirective() {
 
         next();
     };
+}
+
+export function logCspViolation(req: Request, res: Response) {
+    const cspReport = req.body['csp-report'];
+
+    if (cspReport) {
+        logger.warning('CSP Violation:', cspReport);
+    } else {
+        logger.error('Received a malformed CSP violation report.');
+    }
+    res.status(204).end();
 }
 
 const cspMap = (): Record<string, string[]> => {
