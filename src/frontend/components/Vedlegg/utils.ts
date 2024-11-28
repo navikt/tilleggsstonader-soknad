@@ -30,14 +30,14 @@ export const leggTilVedlegg = (
 export const fjernVedlegg = (
     alleDokumentasjonFelter: DokumentasjonFelt[],
     dokumentasjonFeltSomSkalOppdateres: DokumentasjonFelt,
-    dokumentSomSkalSlettet: Dokument
+    dokumentSomSkalSlettesId: string
 ): DokumentasjonFelt[] => {
     return alleDokumentasjonFelter.map((dokumentasjon) => {
         if (dokumentajonFeltEquals(dokumentasjon, dokumentasjonFeltSomSkalOppdateres)) {
             return {
                 ...dokumentasjon,
                 opplastedeVedlegg: dokumentasjon.opplastedeVedlegg.filter(
-                    (vedlegg) => vedlegg.id !== dokumentSomSkalSlettet.id
+                    (vedlegg) => vedlegg.id !== dokumentSomSkalSlettesId
                 ),
             };
         } else {
