@@ -19,6 +19,8 @@ export function applyCspDirectives() {
 }
 
 export function logCspViolation(req: Request, res: Response) {
+    const contentType = req.headers['content-type'];
+    logger.info(`Content Type of CSP-violation request: ${contentType}`);
     logger.info('CSP violation', req.body);
     res.status(204).end();
 }
