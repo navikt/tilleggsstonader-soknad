@@ -13,6 +13,10 @@ interface OppsummeringInnhold {
         oppholdSiste12mnd: TekstElement<string>;
         oppholdNeste12mnd: TekstElement<string>;
     };
+    bekreft: {
+        tittel: TekstElement<string>;
+        feil: TekstElement<string>;
+    };
 }
 
 export const fellesOppsummeringTekster: OppsummeringInnhold = {
@@ -47,6 +51,15 @@ export const fellesOppsummeringTekster: OppsummeringInnhold = {
         },
         oppholdNeste12mnd: {
             nb: 'Opphold utenfor Norge neste 12 mnd',
+        },
+    },
+
+    bekreft: {
+        tittel: {
+            nb: 'Jeg bekrefter at jeg har lest og forstått informasjonen i søknaden og svart så godt jeg kan.',
+        },
+        feil: {
+            nb: 'Du må bekrefte for å sende inn søknaden',
         },
     },
 };
