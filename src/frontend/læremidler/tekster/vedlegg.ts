@@ -19,7 +19,7 @@ export const typerVedleggTeksterLæremidler: TekstTypeVedlegg = {
     },
     [VedleggstypeLæremidler.UTGIFTER_LÆREMIDLER]: {
         tittel: {
-            nb: 'Dokumentasjon på utgifter',
+            nb: 'Dokumentasjon på utgifter til læremidler',
         },
         liste_tittel: {
             nb: 'Dokumentasjon på utgifter til læremidler',

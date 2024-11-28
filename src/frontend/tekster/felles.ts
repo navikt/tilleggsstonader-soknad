@@ -16,6 +16,8 @@ export interface FellesInnhold {
     land: TekstElement<string>;
     årsak: TekstElement<string>;
     periode: TekstElement<string>;
+    flere_vedlegg: TekstElement<string>;
+    vedlegg_med_feil: TekstElement<string>;
     viktig_med_rett_opplysninger: TekstElement<InlineLenke>;
 }
 
@@ -59,6 +61,12 @@ export const fellesTekster: FellesInnhold = {
     },
     periode: {
         nb: 'Periode',
+    },
+    flere_vedlegg: {
+        nb: 'Vedlegg ([0])',
+    },
+    vedlegg_med_feil: {
+        nb: 'Vedlegg med feil',
     },
     viktig_med_rett_opplysninger: {
         nb: [
