@@ -6,7 +6,7 @@ import { miljø } from './miljø';
 const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
 
 export function applyCspDirectives() {
-    return async (req: Request, res: Response, next: NextFunction) => {
+    return async (_: Request, res: Response, next: NextFunction) => {
         // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene etter en ukes tid
         res.header(
             'Content-Security-Policy-Report-Only',
@@ -19,7 +19,7 @@ export function applyCspDirectives() {
 }
 
 export function logCspViolation(req: Request, res: Response) {
-    logger.info(`CSP violation ${JSON.stringify(req.body)}`);
+    logger.warn(`CSP violation \n ${JSON.stringify(req.body, null, 2)}`);
     res.status(204).end();
 }
 
@@ -150,11 +150,7 @@ const cspMap = (): Record<string, string[]> => {
     };
 };
 
-const TESTER = true;
 const cspString = () => {
-    if (TESTER) {
-        return "default-src 'self'";
-    }
     return Object.entries(cspMap())
         .map((entry) => `${entry[0]} ${entry[1].join(' ')}`)
         .join('; ');
