@@ -88,8 +88,8 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                     <Dokumentasjonskrav dokumentasjonsbehov={dokumentasjonsbehov} />
                     <VedleggGenerellInfo />
                     <VedleggContainer>
-                        {dokumentasjon.map((dok, indeks) => (
-                            <section key={indeks}>
+                        {dokumentasjon.map((dok) => (
+                            <section key={dok.label}>
                                 <Filopplaster
                                     opplastedeVedlegg={dok.opplastedeVedlegg}
                                     tittel={typerVedleggTekster[dok.type].tittel[locale]}
