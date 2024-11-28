@@ -8,7 +8,6 @@ const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
 export function applyCspDirectives() {
     return async (req: Request, res: Response, next: NextFunction) => {
         // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene etter en ukes tid
-        logger.info(`Legger til CSP-header på responsen til ${req.url}`);
         res.header(
             'Content-Security-Policy-Report-Only',
             cspString() + '; report-to csp-violation'
@@ -20,7 +19,7 @@ export function applyCspDirectives() {
 }
 
 export function logCspViolation(req: Request, res: Response) {
-    logger.error(`CSP violation: ${req.body}`);
+    logger.info(`CSP violation: ${req.body}`);
     res.status(204).end();
 }
 

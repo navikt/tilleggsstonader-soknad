@@ -7,7 +7,7 @@ import logger from './logger';
 import { miljø } from './miljø';
 import { addRequestInfo, doProxy } from './proxy';
 import attachToken from './tokenProxy';
-import { matchAlleStierEkskludert } from './utils';
+import { matchAllPathsExcluding } from './utils';
 
 const buildPath = path.resolve(process.cwd(), '../../app/build');
 const BASE_PATH = '/tilleggsstonader';
@@ -23,7 +23,7 @@ const routes = () => {
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
     expressRouter.use(
-        matchAlleStierEkskludert('internal', 'static', 'api', 'reporting'),
+        matchAllPathsExcluding('internal', 'static', 'api', 'reporting'),
         applyCspDirectives(),
         sendHtml()
     );
