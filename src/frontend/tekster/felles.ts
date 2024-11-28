@@ -1,5 +1,5 @@
 import { JaNei } from '../typer/søknad';
-import { TekstElement } from '../typer/tekst';
+import { InlineLenke, TekstElement } from '../typer/tekst';
 
 export interface FellesInnhold {
     vi_stoler_tittel: TekstElement<string>;
@@ -16,6 +16,7 @@ export interface FellesInnhold {
     land: TekstElement<string>;
     årsak: TekstElement<string>;
     periode: TekstElement<string>;
+    viktig_med_rett_opplysninger: TekstElement<InlineLenke>;
 }
 
 export const fellesTekster: FellesInnhold = {
@@ -58,6 +59,17 @@ export const fellesTekster: FellesInnhold = {
     },
     periode: {
         nb: 'Periode',
+    },
+    viktig_med_rett_opplysninger: {
+        nb: [
+            'Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din. ',
+            {
+                tekst: 'Les mer om viktigheten av å gi riktige opplysninger',
+                url: 'https://www.nav.no/endringer',
+                variant: 'neutral',
+            },
+            '.',
+        ],
     },
 };
 

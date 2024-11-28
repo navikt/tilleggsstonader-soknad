@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CheckboxGroup, Checkbox } from '@navikt/ds-react';
+import { Box, Checkbox, ErrorMessage } from '@navikt/ds-react';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
@@ -19,23 +19,23 @@ const BekreftelseCheckbox: React.FC<Props> = ({
     fjernFeilmelding,
 }) => {
     return (
-        <CheckboxGroup
-            legend={<LocaleTekst tekst={fellesTekster.vi_stoler_tittel} />}
-            error={
-                skalViseFeilmelding && <LocaleTekst tekst={fellesTekster.vi_stoler_feilmelding} />
-            }
-            value={[harBekreftet]}
-        >
+        <Box paddingBlock="4 8">
             <Checkbox
-                value={true}
+                checked={harBekreftet}
                 onChange={(e) => {
                     oppdaterHarBekreftet(e.target.checked);
                     fjernFeilmelding();
                 }}
+                error={skalViseFeilmelding}
             >
                 <LocaleTekst tekst={fellesTekster.vi_stoler_innhold} />
             </Checkbox>
-        </CheckboxGroup>
+            {skalViseFeilmelding && (
+                <ErrorMessage>
+                    <LocaleTekst tekst={fellesTekster.vi_stoler_feilmelding} />
+                </ErrorMessage>
+            )}
+        </Box>
     );
 };
 

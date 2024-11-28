@@ -130,7 +130,7 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     guide_innhold: {
         nb: [
-            'For å få dekket pass av barn må du delta på tiltak, ta en utdannelse godkjent av Nav, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
+            'For å få denne stønaden må du delta på tiltak, ta en utdannelse godkjent av Nav, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
             'Vi viser aktivitetene som er registrert på deg de siste 3 månedene.',
         ],
     },
