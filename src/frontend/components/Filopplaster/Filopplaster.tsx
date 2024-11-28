@@ -13,7 +13,7 @@ import {
 } from '@navikt/ds-react';
 
 import { utledFeilmelding } from './feilmeldingOpplasting';
-import { MAX_FILSTØRRELSE, TILLATE_FILENDELSER, TILLATE_SAMTDIGE_OPPLASTINGER } from './utils';
+import { MAX_FILSTØRRELSE, TILLATE_FILENDELSER, TILLATTE_SAMTIDIGE_OPPLASTINGER } from './utils';
 import { lastOppVedlegg } from '../../api/api';
 import { useSpråk } from '../../context/SpråkContext';
 import { fellesTekster } from '../../tekster/felles';
@@ -88,7 +88,7 @@ export const Filopplaster: React.FC<{
                 accept={TILLATE_FILENDELSER}
                 maxSizeInBytes={MAX_FILSTØRRELSE}
                 fileLimit={{
-                    max: TILLATE_SAMTDIGE_OPPLASTINGER,
+                    max: TILLATTE_SAMTIDIGE_OPPLASTINGER,
                     current: opplastedeVedlegg.length,
                 }}
                 onSelect={(nyeFiler) => lastOppValgteFiler(nyeFiler)}
