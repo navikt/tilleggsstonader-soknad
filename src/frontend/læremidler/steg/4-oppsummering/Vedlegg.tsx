@@ -27,19 +27,19 @@ const VedleggOppsummering: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({
             </FormSummary.Header>
             <FormSummary.Answers>
                 {dokumentasjon.map((dokument) => (
-                    <FormSummary.Answer>
-                        <div>
-                            <FormSummary.Label>{dokument.label}</FormSummary.Label>
-                            {dokument.opplastedeVedlegg.length > 0 ? (
-                                dokument.opplastedeVedlegg.map((vedlegg) => (
-                                    <FormSummary.Value>{vedlegg.navn}</FormSummary.Value>
-                                ))
-                            ) : (
-                                <FormSummary.Value>
-                                    <LocaleTekst tekst={oppsummeringTekster.ingen_vedlegg} />
+                    <FormSummary.Answer key={dokument.label}>
+                        <FormSummary.Label>{dokument.label}</FormSummary.Label>
+                        {dokument.opplastedeVedlegg.length > 0 ? (
+                            dokument.opplastedeVedlegg.map((vedlegg) => (
+                                <FormSummary.Value key={vedlegg.id}>
+                                    {vedlegg.navn}
                                 </FormSummary.Value>
-                            )}
-                        </div>
+                            ))
+                        ) : (
+                            <FormSummary.Value>
+                                <LocaleTekst tekst={oppsummeringTekster.ingen_vedlegg} />
+                            </FormSummary.Value>
+                        )}
                     </FormSummary.Answer>
                 ))}
             </FormSummary.Answers>
