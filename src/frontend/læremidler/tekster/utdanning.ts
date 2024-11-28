@@ -14,8 +14,6 @@ interface AktivitetInnhold {
     radio_annen_utdanning_feilmelding: TekstElement<string>;
     ingen_utdanning_alert_tittel: TekstElement<string>;
     ingen_utdanning_alert_innhold: TekstElement<string>;
-    radio_mottar_utstyrsstipend: Radiogruppe<JaNei>;
-    radio_mottar_utstyrsstipend_feilmelding: TekstElement<string>;
     radio_mottar_har_funksjonsnedsettelse: Radiogruppe<JaNei>;
     radio_mottar_har_funksjonsnedsettelse_feilmelding: TekstElement<string>;
 }
@@ -104,20 +102,6 @@ export const utdanningTekster: AktivitetInnhold = {
     },
     ingen_utdanning_alert_innhold: {
         nb: 'Du kan fortsatt søke, men du kan få avslag.',
-    },
-    radio_mottar_utstyrsstipend: {
-        header: {
-            nb: 'Mottar du utstyrsstipend fra Statens lånekasse?',
-        },
-        beskrivelse: {
-            nb:
-                'Vi ser at du er under 21 år. ' +
-                'Hvis du tar videregående utdanning har du mest sannsynlig rett til utstyrsstipend fra Lånekassen. ',
-        },
-        alternativer: JaNeiTilTekst,
-    },
-    radio_mottar_utstyrsstipend_feilmelding: {
-        nb: 'Du må svare på om du mottar utstyrsstipend.',
     },
     radio_mottar_har_funksjonsnedsettelse: {
         header: {

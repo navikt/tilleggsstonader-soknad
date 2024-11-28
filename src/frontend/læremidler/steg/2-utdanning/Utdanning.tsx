@@ -6,13 +6,7 @@ import { AnnenUtdanning } from './AnnenUtdanning';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
-import { MottarUtstyrsstipend } from './MottarUtstyrsstipend';
-import {
-    feilAnnenUtdanning,
-    feilHarFunksjonsnedsettelse,
-    feilMottarUtstyrsstipend,
-    feilValgtAktivitet,
-} from './validering';
+import { feilAnnenUtdanning, feilHarFunksjonsnedsettelse, feilValgtAktivitet } from './validering';
 import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import {
     skalTaStillingTilAnnenAktivitet,
@@ -23,7 +17,6 @@ import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
-import { usePerson } from '../../../context/PersonContext';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -35,7 +28,6 @@ import { AnnenUtdanningType } from '../../typer/søknad';
 
 const Utdanning = () => {
     const { locale } = useSpråk();
-    const { person } = usePerson();
     const { utdanning, settUtdanning, settDokumentasjonsbehov } = useLæremidlerSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
     const { registerAktiviteter } = useRegisterAktiviteter();
@@ -47,9 +39,6 @@ const Utdanning = () => {
     const [annenUtdanning, settAnnenUtdanning] = useState<EnumFelt<AnnenUtdanningType> | undefined>(
         utdanning ? utdanning.annenUtdanning : undefined
     );
-    const [mottarUtstyrsstipend, settMottarUtstyrsstipend] = useState<EnumFelt<JaNei> | undefined>(
-        utdanning ? utdanning.mottarUtstyrsstipend : undefined
-    );
     const [harFunksjonsnedsettelse, settHarFunksjonsnedsettelse] = useState<
         EnumFelt<JaNei> | undefined
     >(utdanning ? utdanning.harFunksjonsnedsettelse : undefined);
@@ -58,7 +47,6 @@ const Utdanning = () => {
         settUtdanning({
             aktiviteter: valgteAktiviteter,
             annenUtdanning: annenUtdanning,
-            mottarUtstyrsstipend: mottarUtstyrsstipend,
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
         settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
@@ -69,14 +57,6 @@ const Utdanning = () => {
         settValideringsfeil((prevState) => ({
             ...prevState,
             annenAktivitet: undefined,
-        }));
-    };
-
-    const oppdaterMottarUtstyrsstipend = (verdi: EnumFelt<JaNei>) => {
-        settMottarUtstyrsstipend(verdi);
-        settValideringsfeil((prevState) => ({
-            ...prevState,
-            mottarUtstyrsstipend: undefined,
         }));
     };
 
@@ -118,7 +98,6 @@ const Utdanning = () => {
         skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
-    const skalViseMottarUtstyrsstipend = person.alder < 21;
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
@@ -129,9 +108,6 @@ const Utdanning = () => {
         }
         if (skalViseAnnenAktivitet && annenUtdanning === undefined) {
             feil = feilAnnenUtdanning(feil, locale);
-        }
-        if (skalViseMottarUtstyrsstipend && mottarUtstyrsstipend === undefined) {
-            feil = feilMottarUtstyrsstipend(feil, locale);
         }
         if (harFunksjonsnedsettelse === undefined) {
             feil = feilHarFunksjonsnedsettelse(feil, locale);
@@ -185,13 +161,6 @@ const Utdanning = () => {
                     annenUtdanning={annenUtdanning}
                     oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
                     feilmelding={valideringsfeil.annenUtdanning}
-                />
-            )}
-            {skalViseMottarUtstyrsstipend && (
-                <MottarUtstyrsstipend
-                    mottarUtstyrsstipend={mottarUtstyrsstipend}
-                    oppdaterMottarUtstyrsstipend={oppdaterMottarUtstyrsstipend}
-                    feilmelding={valideringsfeil.mottarUtstyrsstipend}
                 />
             )}
             <HarFunksjonsnedsettelse
