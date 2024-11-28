@@ -10,16 +10,16 @@ import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 export const OppsummeringSide = ({ children }: { children: ReactNode }) => {
     const { locale } = useSpråk();
     const [harBekreftet, settHarBekreftet] = useState(false);
-    const [feilBekreftKnapp, settFeilBekreftKnapp] = useState<string>();
+    const [feilBekreftet, settFeilBekreftet] = useState<string>();
 
     return (
         <Side
             validerSteg={() => {
                 if (!harBekreftet) {
-                    settFeilBekreftKnapp(fellesOppsummeringTekster.bekreft.feil[locale]);
+                    settFeilBekreftet(fellesOppsummeringTekster.bekreft.feil[locale]);
                     return false;
                 }
-                settFeilBekreftKnapp('');
+                settFeilBekreftet('');
                 return true;
             }}
         >
@@ -28,13 +28,13 @@ export const OppsummeringSide = ({ children }: { children: ReactNode }) => {
                 value={[harBekreftet]}
                 onChange={(verdier) => {
                     settHarBekreftet(verdier.includes(true));
-                    settFeilBekreftKnapp('');
+                    settFeilBekreftet(undefined);
                 }}
                 legend={<LocaleTekst tekst={fellesOppsummeringTekster.bekreft.tittel} />}
                 hideLegend
-                error={feilBekreftKnapp}
+                error={feilBekreftet}
             >
-                <Checkbox value={true} error={!!feilBekreftKnapp}>
+                <Checkbox value={true} error={!!feilBekreftet}>
                     <LocaleTekst tekst={fellesOppsummeringTekster.bekreft.tittel} />
                 </Checkbox>
             </CheckboxGroup>
