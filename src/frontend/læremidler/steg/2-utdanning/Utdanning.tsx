@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Heading, Label } from '@navikt/ds-react';
 
 import { AnnenUtdanning } from './AnnenUtdanning';
+import { ErLærlingEllerLiknende } from './ErLærlingEllerLiknende';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
@@ -17,6 +18,7 @@ import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
+import { usePerson } from '../../../context/PersonContext';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -28,6 +30,7 @@ import { AnnenUtdanningType } from '../../typer/søknad';
 
 const Utdanning = () => {
     const { locale } = useSpråk();
+    const { person } = usePerson();
     const { utdanning, settUtdanning, settDokumentasjonsbehov } = useLæremidlerSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
     const { registerAktiviteter } = useRegisterAktiviteter();
@@ -42,11 +45,15 @@ const Utdanning = () => {
     const [harFunksjonsnedsettelse, settHarFunksjonsnedsettelse] = useState<
         EnumFelt<JaNei> | undefined
     >(utdanning ? utdanning.harFunksjonsnedsettelse : undefined);
+    const [erLærlingEllerLiknende, setterLærlingEllerLiknende] = useState<
+        EnumFelt<JaNei> | undefined
+    >();
 
     const oppdaterUtdanningISøknad = () => {
         settUtdanning({
             aktiviteter: valgteAktiviteter,
             annenUtdanning: annenUtdanning,
+            erLærlingEllerLiknende: erLærlingEllerLiknende,
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
         settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
@@ -65,6 +72,14 @@ const Utdanning = () => {
         settValideringsfeil((prevState) => ({
             ...prevState,
             harFunksjonsnedsettelse: undefined,
+        }));
+    };
+
+    const oppdatererLærlingEllerLiknende = (verdi: EnumFelt<JaNei>) => {
+        setterLærlingEllerLiknende(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            erLærlingEllerLiknende: undefined,
         }));
     };
 
@@ -98,6 +113,8 @@ const Utdanning = () => {
         skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
+    const skalViseErLærlingEllerLiknende =
+        person.alder < 21 && annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE_FORKURS;
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
@@ -161,6 +178,13 @@ const Utdanning = () => {
                     annenUtdanning={annenUtdanning}
                     oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
                     feilmelding={valideringsfeil.annenUtdanning}
+                />
+            )}
+            {skalViseErLærlingEllerLiknende && (
+                <ErLærlingEllerLiknende
+                    erLærlingEllerLiknende={erLærlingEllerLiknende}
+                    oppdatererLærlingEllerLiknende={oppdatererLærlingEllerLiknende}
+                    feilmelding={valideringsfeil.erLærlingEllerLiknende}
                 />
             )}
             <HarFunksjonsnedsettelse
