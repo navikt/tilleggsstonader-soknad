@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 import { BodyShort, List } from '@navikt/ds-react';
 
 import { useSpråk } from '../../context/SpråkContext';
@@ -7,6 +9,12 @@ import { Dokumentasjonsbehov } from '../../typer/skjema';
 import { Stønadstype } from '../../typer/stønadstyper';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
+const Dokumentasjonskravsliste = styled(List)`
+    ul {
+        margin-bottom: 0;
+    }
+`;
+
 const Dokumentasjonskrav: React.FC<{
     dokumentasjonsbehov: Dokumentasjonsbehov[];
 }> = ({ dokumentasjonsbehov }) => {
@@ -15,7 +23,7 @@ const Dokumentasjonskrav: React.FC<{
 
     return (
         <>
-            <List as="ul" title={vedleggTekster.dokumentasjonskrav_tittel[locale]}>
+            <Dokumentasjonskravsliste title={vedleggTekster.dokumentasjonskrav_tittel[locale]}>
                 {dokumentasjonsbehov.map((doc, indeks) => (
                     <List.Item key={indeks}>
                         <LocaleTekst
@@ -27,12 +35,15 @@ const Dokumentasjonskrav: React.FC<{
                         />
                     </List.Item>
                 ))}
-            </List>
+            </Dokumentasjonskravsliste>
             {stønadstype === Stønadstype.BARNETILSYN && (
                 <BodyShort>
                     <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />
                 </BodyShort>
             )}
+            <BodyShort>
+                <LocaleTekst tekst={vedleggTekster.informasjon_all_dokumentasjon} />
+            </BodyShort>
         </>
     );
 };

@@ -12,6 +12,7 @@ interface VedleggInnhold {
     guide_innhold: TekstElement<string[]>;
     dokumentasjonskrav_tittel: TekstElement<string>;
     dokumentasjonskrav_samlet_faktura: TekstElement<string>;
+    informasjon_all_dokumentasjon: TekstElement<string>;
 
     accordians: {
         har_ikke_vedlegg_digital: {
@@ -70,7 +71,6 @@ export const vedleggTekster: VedleggInnhold = {
     },
     guide_innhold: {
         nb: [
-            'Vi kan ikke starte saksbehandlingen før vi har all dokumentasjon fra deg.',
             'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, senest innen 14 dager. Trenger du mer tid, kan du be om lenger frist på Min side på Nav.no etter at søknaden er sendt inn.',
         ],
     },
@@ -79,6 +79,9 @@ export const vedleggTekster: VedleggInnhold = {
         nb: 'Har du samlet faktura for flere barn, trenger du bare å laste den opp en gang.',
     },
 
+    informasjon_all_dokumentasjon: {
+        nb: 'Vi kan ikke starte saksbehandlingen før vi har all dokumentasjon fra deg.',
+    },
     accordians: {
         har_ikke_vedlegg_digital: harIkkeVedleggDigitalAccordian,
         format_kvalitet: formatKvalitetAccordian,

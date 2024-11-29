@@ -31,7 +31,7 @@ export const forsideTekster: ForsideInnhold = {
     viktig_å_vite_innhold: {
         nb: [
             [
-                'Denne stønaden dekker ikke semesteravgift eller skolepenger. Du må fylle ut andre skjemaer for å søke om dette, avhengig om du har ',
+                'Denne pengestøtten dekker ikke semesteravgift eller skolepenger. Du må fylle ut andre skjemaer for å søke om dette, avhengig om du har ',
                 {
                     tekst: 'nedsatt arbeidsevne',
                     url: 'https://www.nav.no/fyllut/nav760710',
@@ -52,11 +52,11 @@ export const forsideTekster: ForsideInnhold = {
                 '.',
             ],
             'Du må gi beskjed til oss hvis situasjonen din endrer seg, f.eks. hvis du avbryter opplæringen eller utdanningen.',
-            'Hvis du får utgiftene dine dekket på annen måte (f.eks. utstyrsstipend fra Lånekassa) har du mest sannsynlig ikke rett til denne stønaden.',
+            'Hvis du får utgiftene til læremidler dekket på annen måte (f.eks. utstyrsstipend fra Lånekassa eller gjennom kursavgiften) har du mest sannsynlig ikke rett til denne pengestøtten.',
         ],
     },
     mengde_støtte_tittel: {
-        nb: 'Hvor mye kan du få i støtte?',
+        nb: 'Hvor mye kan du få i pengestøtte?',
     },
     mengde_støtte_innhold1: {
         nb: [
@@ -66,7 +66,7 @@ export const forsideTekster: ForsideInnhold = {
                 url: 'https://www.nav.no/satser#tilleggsstonader',
                 variant: 'neutral',
             },
-            ' som bestemmer hvor mye du kan få i støtte. Satsene er ulike avhengig av om du studerer deltid eller heltid, og nivået på opplæringen din.',
+            ' som bestemmer hvor mye du kan få i pengestøtte. Satsene er ulike avhengig av om du studerer deltid eller heltid, og nivået på opplæringen din.',
         ],
     },
     mengde_støtte_innhold2: {

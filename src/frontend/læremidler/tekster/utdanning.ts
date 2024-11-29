@@ -56,7 +56,7 @@ const hvilkenAktivitet: HvilkenAktivitet = {
             nb: 'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du enslig eller gjenlevende så er det ikke alltid dette er registert på en måte så vi klare å hente det.',
         },
         del2: {
-            nb: 'Går du på arbeidsavklaringspenger eller mottar uføretrygd, og utdanningen din mangler? Da anbefaler vi at du tar kontakt med veilederen din og ber om at den registreres. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
+            nb: 'Går du på arbeidsavklaringspenger eller mottar uføretrygd, og utdanningen din mangler? Da anbefaler vi at du tar kontakt med veilederen din via aktivitetsplanen og ber om at den registreres. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
         },
         del3: {
             nb: [
@@ -121,10 +121,10 @@ export const utdanningTekster: AktivitetInnhold = {
     },
     radio_mottar_har_funksjonsnedsettelse: {
         header: {
-            nb: 'Har du en funksjonsnedsettelse som gir deg særlig store utgifter til læremidler?',
+            nb: 'Har du særlig store utgifter til læremidler på grunn av en funksjonsnedsettelse?',
         },
         beskrivelse: {
-            nb: 'Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell.',
+            nb: 'Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell. Alle utgiftene du ønsker å få dekket, må dokumenteres.',
         },
         alternativer: JaNeiTilTekst,
     },
