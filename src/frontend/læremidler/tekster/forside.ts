@@ -52,7 +52,7 @@ export const forsideTekster: ForsideInnhold = {
                 '.',
             ],
             'Du må gi beskjed til oss hvis situasjonen din endrer seg, f.eks. hvis du avbryter opplæringen eller utdanningen.',
-            'Hvis du får utgiftene dine dekket på annen måte (f.eks. utstyrsstipend fra Lånekassa) har du mest sannsynlig ikke rett til denne stønaden.',
+            'Hvis du får utgiftene til læremidler dekket på annen måte (f.eks. utstyrsstipend fra Lånekassa eller gjennom kursavgiften) har du mest sannsynlig ikke rett til denne pengestøtten.',
         ],
     },
     mengde_støtte_tittel: {
