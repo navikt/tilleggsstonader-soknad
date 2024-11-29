@@ -56,7 +56,7 @@ export const forsideTekster: ForsideInnhold = {
         ],
     },
     mengde_støtte_tittel: {
-        nb: 'Hvor mye kan du få i støtte?',
+        nb: 'Hvor mye kan du få i pengestøtte?',
     },
     mengde_støtte_innhold1: {
         nb: [
@@ -66,7 +66,7 @@ export const forsideTekster: ForsideInnhold = {
                 url: 'https://www.nav.no/satser#tilleggsstonader',
                 variant: 'neutral',
             },
-            ' som bestemmer hvor mye du kan få i støtte. Satsene er ulike avhengig av om du studerer deltid eller heltid, og nivået på opplæringen din.',
+            ' som bestemmer hvor mye du kan få i pengestøtte. Satsene er ulike avhengig av om du studerer deltid eller heltid, og nivået på opplæringen din.',
         ],
     },
     mengde_støtte_innhold2: {
