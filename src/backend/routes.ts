@@ -28,8 +28,8 @@ const routes = () => {
 
     expressRouter.use(
         matchAllPathsExcluding('internal', 'static', 'api', 'reporting'),
-        applyCspDirectives(),
-        sendHtml()
+        applyCspDirectives,
+        sendHtml
     );
 
     expressRouter.use(
@@ -46,26 +46,20 @@ const routes = () => {
         doProxy(miljø.apiUrl)
     );
 
-    expressRouter.post(
-        `${BASE_PATH_SOKNAD}/reporting/csp-violation`,
-        express.json({ type: 'application/reports+json' }),
-        logCspViolation
-    );
+    expressRouter.post(`${BASE_PATH_SOKNAD}/reporting/csp-violation`, logCspViolation);
 
     return expressRouter;
 };
 
-function sendHtml() {
-    return (_req: Request, res: Response) => {
-        getDecoratedHtml(path.join(buildPath, 'index.html'))
-            .then((html) => {
-                res.send(html);
-            })
-            .catch((e) => {
-                logger.error(e);
-                res.status(500).send(e);
-            });
-    };
+async function sendHtml(_req: Request, res: Response) {
+    getDecoratedHtml(path.join(buildPath, 'index.html'))
+        .then((html) => {
+            res.send(html);
+        })
+        .catch((e) => {
+            logger.error(e);
+            res.status(500).send(e);
+        });
 }
 
 export default routes;

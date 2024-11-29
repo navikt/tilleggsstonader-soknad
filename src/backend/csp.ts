@@ -5,17 +5,11 @@ import { miljø } from './miljø';
 
 const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
 
-export function applyCspDirectives() {
-    return async (_: Request, res: Response, next: NextFunction) => {
-        // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene etter en ukes tid
-        res.header(
-            'Content-Security-Policy-Report-Only',
-            cspString() + '; report-to csp-violation'
-        );
-        res.header('Reporting-Endpoints', `csp-violation="${rapporteringsendepunkt}"`);
-
-        next();
-    };
+export async function applyCspDirectives(_: Request, res: Response, next: NextFunction) {
+    // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene i noen uker
+    res.header('Content-Security-Policy-Report-Only', cspString() + '; report-to csp-violation');
+    res.header('Reporting-Endpoints', `csp-violation="${rapporteringsendepunkt}"`);
+    next();
 }
 
 export function logCspViolation(req: Request, res: Response) {
@@ -38,8 +32,6 @@ const cspMap = (): Record<string, string[]> => {
             '*.taskanalytics.com',
             '*.hotjar.com',
             'nav.boost.ai',
-            "'unsafe-inline'",
-            "'unsafe-eval'",
             // └────────────────────────────────┘
         ],
 
@@ -53,7 +45,6 @@ const cspMap = (): Record<string, string[]> => {
             '*.hotjar.com',
             '*.taskanalytics.com',
             'nav.boost.ai',
-            "'unsafe-inline'",
             // └────────────────────────────────┘
         ],
 
@@ -63,7 +54,6 @@ const cspMap = (): Record<string, string[]> => {
             // ┌────────── Dekoratøren ──────────┐
             '*.nav.no',
             '*.psplugin.com',
-            "'unsafe-inline'",
             '*.googleapis.com',
             '*.gstatic.com',
             // └────────────────────────────────┘
@@ -74,7 +64,6 @@ const cspMap = (): Record<string, string[]> => {
             // ┌────────── Dekoratøren ──────────┐
             '*.nav.no',
             '*.psplugin.com',
-            "'unsafe-inline'",
             '*.googleapis.com',
             '*.gstatic.com',
             // └────────────────────────────────┘
