@@ -46,7 +46,11 @@ const routes = () => {
         doProxy(miljø.apiUrl)
     );
 
-    expressRouter.post(`${BASE_PATH_SOKNAD}/reporting/csp-violation`, logCspViolation);
+    expressRouter.post(
+        `${BASE_PATH_SOKNAD}/reporting/csp-violation`,
+        express.json({ type: 'application/reports+json' }),
+        logCspViolation
+    );
 
     return expressRouter;
 };
