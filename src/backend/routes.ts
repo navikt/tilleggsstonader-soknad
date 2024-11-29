@@ -1,17 +1,18 @@
-import express from 'express';
-import { Request, Response, Router } from 'express';
+import express, { Request, Response, Router } from 'express';
 import path from 'path';
 
-import { injectDecoratorServerSide } from '@navikt/nav-dekoratoren-moduler/ssr';
-
+import { applyCspDirectives, logCspViolation } from './csp';
+import { getDecoratedHtml } from './decorator';
 import logger from './logger';
 import { miljø } from './miljø';
 import { addRequestInfo, doProxy } from './proxy';
 import attachToken from './tokenProxy';
+import { matchAllPathsExcluding } from './utils';
 
 const buildPath = path.resolve(process.cwd(), '../../app/build');
 const BASE_PATH = '/tilleggsstonader';
 const BASE_PATH_SOKNAD = `${BASE_PATH}/soknad`;
+
 const routes = () => {
     const expressRouter = Router();
 
@@ -25,16 +26,11 @@ const routes = () => {
 
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
-    expressRouter.use(/^(?!.*\/(internal|static|api)\/).*$/, (_req: Request, res: Response) => {
-        getDecoratedHtml(path.join(buildPath, 'index.html'))
-            .then((html) => {
-                res.send(html);
-            })
-            .catch((e) => {
-                logger.error(e);
-                res.status(500).send(e);
-            });
-    });
+    expressRouter.use(
+        matchAllPathsExcluding('internal', 'static', 'api', 'reporting'),
+        applyCspDirectives,
+        sendHtml
+    );
 
     expressRouter.use(
         `${BASE_PATH_SOKNAD}/api/vedlegg`,
@@ -50,25 +46,24 @@ const routes = () => {
         doProxy(miljø.apiUrl)
     );
 
+    expressRouter.post(
+        `${BASE_PATH_SOKNAD}/reporting/csp-violation`,
+        express.json({ type: 'application/reports+json' }),
+        logCspViolation
+    );
+
     return expressRouter;
 };
 
-const getDecoratedHtml = (path: string) => {
-    const env = process.env.ENV;
-
-    if (env === undefined) {
-        logger.error('Mangler miljø for dekoratøren');
-    }
-
-    return injectDecoratorServerSide({
-        env: env as 'dev' | 'prod',
-        filePath: path,
-        params: {
-            simple: true,
-            redirectToApp: true,
-            level: 'Level4',
-        },
-    });
-};
+async function sendHtml(_req: Request, res: Response) {
+    getDecoratedHtml(path.join(buildPath, 'index.html'))
+        .then((html) => {
+            res.send(html);
+        })
+        .catch((e) => {
+            logger.error(e);
+            res.status(500).send(e);
+        });
+}
 
 export default routes;
