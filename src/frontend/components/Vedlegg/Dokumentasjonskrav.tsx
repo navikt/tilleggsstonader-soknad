@@ -33,6 +33,9 @@ const Dokumentasjonskrav: React.FC<{
                     <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />
                 </BodyShort>
             )}
+            <BodyShort>
+                <LocaleTekst tekst={vedleggTekster.informasjon_all_dokumentasjon} />
+            </BodyShort>
         </>
     );
 };
