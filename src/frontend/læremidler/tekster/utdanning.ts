@@ -121,10 +121,10 @@ export const utdanningTekster: AktivitetInnhold = {
     },
     radio_mottar_har_funksjonsnedsettelse: {
         header: {
-            nb: 'Har du en funksjonsnedsettelse som gir deg særlig store utgifter til læremidler?',
+            nb: 'Har du særlig store utgifter til læremidler på grunn av en funksjonsnedsettelse?',
         },
         beskrivelse: {
-            nb: 'Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell.',
+            nb: 'Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell. Alle utgiftene du ønsker å få dekket, må dokumenteres.',
         },
         alternativer: JaNeiTilTekst,
     },
