@@ -6,13 +6,13 @@ import UtdanningOppsummering from './Utdanning';
 import HovedytelseOppsummering from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import OmDeg from '../../../components/Oppsummering/OmDeg';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
+import VedleggOppsummering from '../../../components/Oppsummering/Vedlegg';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 const Oppsummering = () => {
-    const { hovedytelse, utdanning } = useLæremidlerSøknad();
-
+    const { hovedytelse, utdanning, dokumentasjonsbehov, dokumentasjon } = useLæremidlerSøknad();
     return (
         <OppsummeringSide>
             <Heading size="medium">
@@ -21,6 +21,9 @@ const Oppsummering = () => {
             <OmDeg />
             {hovedytelse && <HovedytelseOppsummering hovedytelse={hovedytelse} />}
             {utdanning && <UtdanningOppsummering utdanning={utdanning} />}
+            {dokumentasjonsbehov.length > 0 && (
+                <VedleggOppsummering dokumentasjon={dokumentasjon} />
+            )}
         </OppsummeringSide>
     );
 };
