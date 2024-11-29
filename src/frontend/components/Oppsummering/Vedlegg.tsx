@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { FormSummary } from '@navikt/ds-react';
 
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
-import { DokumentasjonFelt } from '../../../typer/skjema';
-import { RouteTilPath } from '../../routing/routesLæremidler';
-import { oppsummeringTekster } from '../../tekster/oppsummering';
+import { RouteTilPath } from '../../læremidler/routing/routesLæremidler';
+import { fellesOppsummeringTekster } from '../../tekster/oppsummering';
+import { DokumentasjonFelt } from '../../typer/skjema';
+import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 const VedleggOppsummering: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({
     dokumentasjon,
@@ -19,7 +18,7 @@ const VedleggOppsummering: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({
         <FormSummary>
             <FormSummary.Header>
                 <FormSummary.Heading level="2">
-                    <LocaleTekst tekst={oppsummeringTekster.vedlegg_tittel} />
+                    <LocaleTekst tekst={fellesOppsummeringTekster.vedlegg_tittel} />
                 </FormSummary.Heading>
                 <FormSummary.EditLink onClick={() => navigate(RouteTilPath.VEDLEGG)}>
                     <LocaleTekst tekst={fellesOppsummeringTekster.endre_knapp} />
@@ -37,7 +36,7 @@ const VedleggOppsummering: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({
                             ))
                         ) : (
                             <FormSummary.Value>
-                                <LocaleTekst tekst={oppsummeringTekster.ingen_vedlegg} />
+                                <LocaleTekst tekst={fellesOppsummeringTekster.ingen_vedlegg} />
                             </FormSummary.Value>
                         )}
                     </FormSummary.Answer>

@@ -13,6 +13,8 @@ interface OppsummeringInnhold {
         oppholdSiste12mnd: TekstElement<string>;
         oppholdNeste12mnd: TekstElement<string>;
     };
+    vedlegg_tittel: TekstElement<string>;
+    ingen_vedlegg: TekstElement<string>;
     bekreft: {
         tittel: TekstElement<string>;
         feil: TekstElement<string>;
@@ -53,6 +55,8 @@ export const fellesOppsummeringTekster: OppsummeringInnhold = {
             nb: 'Opphold utenfor Norge neste 12 mnd',
         },
     },
+    vedlegg_tittel: { nb: 'Vedlegg' },
+    ingen_vedlegg: { nb: 'Ingen vedlegg' },
 
     bekreft: {
         tittel: {

@@ -3,10 +3,10 @@ import React from 'react';
 import { Heading } from '@navikt/ds-react';
 
 import UtdanningOppsummering from './Utdanning';
-import VedleggOppsummering from './Vedlegg';
 import HovedytelseOppsummering from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import OmDeg from '../../../components/Oppsummering/OmDeg';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
+import VedleggOppsummering from '../../../components/Oppsummering/Vedlegg';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
