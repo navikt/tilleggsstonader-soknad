@@ -17,6 +17,7 @@ interface AktivitetInnhold {
     radio_mottar_har_funksjonsnedsettelse: Radiogruppe<JaNei>;
     radio_mottar_har_funksjonsnedsettelse_feilmelding: TekstElement<string>;
     radio_lærling_etc: Radiogruppe<JaNei>;
+    radio_lærling_feilmelding: TekstElement<string>;
     les_mer_lærling_etc: {
         header: TekstElement<string>;
         innhold_lærling: TekstElement<InlineLenke>;
@@ -125,6 +126,9 @@ export const utdanningTekster: AktivitetInnhold = {
             nb: 'Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?',
         },
         alternativer: JaNeiTilTekst,
+    },
+    radio_lærling_feilmelding: {
+        nb: 'Du må svare på om du er lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb.',
     },
     les_mer_lærling_etc: {
         header: {

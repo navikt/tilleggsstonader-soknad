@@ -7,7 +7,12 @@ import { ErLærlingEllerLiknende } from './ErLærlingEllerLiknende';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
-import { feilAnnenUtdanning, feilHarFunksjonsnedsettelse, feilValgtAktivitet } from './validering';
+import {
+    feilAnnenUtdanning,
+    feilErLærlingEllerLiknende,
+    feilHarFunksjonsnedsettelse,
+    feilValgtAktivitet,
+} from './validering';
 import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import {
     skalTaStillingTilAnnenAktivitet,
@@ -125,6 +130,9 @@ const Utdanning = () => {
         }
         if (skalViseAnnenAktivitet && annenUtdanning === undefined) {
             feil = feilAnnenUtdanning(feil, locale);
+        }
+        if (skalViseErLærlingEllerLiknende && erLærlingEllerLiknende === undefined) {
+            feil = feilErLærlingEllerLiknende(feil, locale);
         }
         if (harFunksjonsnedsettelse === undefined) {
             feil = feilHarFunksjonsnedsettelse(feil, locale);

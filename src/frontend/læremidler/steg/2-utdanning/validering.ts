@@ -18,6 +18,14 @@ export const feilAnnenUtdanning = (feil: Valideringsfeil, locale: Locale) => ({
     },
 });
 
+export const feilErLærlingEllerLiknende = (feil: Valideringsfeil, locale: Locale) => ({
+    ...feil,
+    erLærlingEllerLiknende: {
+        id: '3',
+        melding: utdanningTekster.radio_lærling_feilmelding[locale],
+    },
+});
+
 export const feilHarFunksjonsnedsettelse = (feil: Valideringsfeil, locale: Locale) => ({
     ...feil,
     harFunksjonsnedsettelse: {
