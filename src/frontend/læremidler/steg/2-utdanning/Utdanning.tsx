@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { Heading, Label } from '@navikt/ds-react';
 
 import { AnnenUtdanning } from './AnnenUtdanning';
+import { ErLærlingEllerLiknende } from './ErLærlingEllerLiknende';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
-import { MottarUtstyrsstipend } from './MottarUtstyrsstipend';
 import {
     feilAnnenUtdanning,
+    feilErLærlingEllerLiknende,
     feilHarFunksjonsnedsettelse,
-    feilMottarUtstyrsstipend,
     feilValgtAktivitet,
 } from './validering';
 import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
@@ -47,18 +47,18 @@ const Utdanning = () => {
     const [annenUtdanning, settAnnenUtdanning] = useState<EnumFelt<AnnenUtdanningType> | undefined>(
         utdanning ? utdanning.annenUtdanning : undefined
     );
-    const [mottarUtstyrsstipend, settMottarUtstyrsstipend] = useState<EnumFelt<JaNei> | undefined>(
-        utdanning ? utdanning.mottarUtstyrsstipend : undefined
-    );
     const [harFunksjonsnedsettelse, settHarFunksjonsnedsettelse] = useState<
         EnumFelt<JaNei> | undefined
     >(utdanning ? utdanning.harFunksjonsnedsettelse : undefined);
+    const [erLærlingEllerLiknende, setterLærlingEllerLiknende] = useState<
+        EnumFelt<JaNei> | undefined
+    >(utdanning ? utdanning.erLærlingEllerLiknende : undefined);
 
     const oppdaterUtdanningISøknad = () => {
         settUtdanning({
             aktiviteter: valgteAktiviteter,
             annenUtdanning: annenUtdanning,
-            mottarUtstyrsstipend: mottarUtstyrsstipend,
+            erLærlingEllerLiknende: erLærlingEllerLiknende,
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
         settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
@@ -72,19 +72,19 @@ const Utdanning = () => {
         }));
     };
 
-    const oppdaterMottarUtstyrsstipend = (verdi: EnumFelt<JaNei>) => {
-        settMottarUtstyrsstipend(verdi);
-        settValideringsfeil((prevState) => ({
-            ...prevState,
-            mottarUtstyrsstipend: undefined,
-        }));
-    };
-
     const oppdaterHarFunksjonsnedsettelse = (verdi: EnumFelt<JaNei>) => {
         settHarFunksjonsnedsettelse(verdi);
         settValideringsfeil((prevState) => ({
             ...prevState,
             harFunksjonsnedsettelse: undefined,
+        }));
+    };
+
+    const oppdatererLærlingEllerLiknende = (verdi: EnumFelt<JaNei>) => {
+        setterLærlingEllerLiknende(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            erLærlingEllerLiknende: undefined,
         }));
     };
 
@@ -118,7 +118,8 @@ const Utdanning = () => {
         skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
-    const skalViseMottarUtstyrsstipend = person.alder < 21;
+    const skalViseErLærlingEllerLiknende =
+        person.alder < 21 && annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE_FORKURS;
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
@@ -130,8 +131,8 @@ const Utdanning = () => {
         if (skalViseAnnenAktivitet && annenUtdanning === undefined) {
             feil = feilAnnenUtdanning(feil, locale);
         }
-        if (skalViseMottarUtstyrsstipend && mottarUtstyrsstipend === undefined) {
-            feil = feilMottarUtstyrsstipend(feil, locale);
+        if (skalViseErLærlingEllerLiknende && erLærlingEllerLiknende === undefined) {
+            feil = feilErLærlingEllerLiknende(feil, locale);
         }
         if (harFunksjonsnedsettelse === undefined) {
             feil = feilHarFunksjonsnedsettelse(feil, locale);
@@ -187,11 +188,11 @@ const Utdanning = () => {
                     feilmelding={valideringsfeil.annenUtdanning}
                 />
             )}
-            {skalViseMottarUtstyrsstipend && (
-                <MottarUtstyrsstipend
-                    mottarUtstyrsstipend={mottarUtstyrsstipend}
-                    oppdaterMottarUtstyrsstipend={oppdaterMottarUtstyrsstipend}
-                    feilmelding={valideringsfeil.mottarUtstyrsstipend}
+            {skalViseErLærlingEllerLiknende && (
+                <ErLærlingEllerLiknende
+                    erLærlingEllerLiknende={erLærlingEllerLiknende}
+                    oppdatererLærlingEllerLiknende={oppdatererLærlingEllerLiknende}
+                    feilmelding={valideringsfeil.erLærlingEllerLiknende}
                 />
             )}
             <HarFunksjonsnedsettelse

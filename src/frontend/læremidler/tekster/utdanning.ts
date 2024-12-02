@@ -14,10 +14,17 @@ interface AktivitetInnhold {
     radio_annen_utdanning_feilmelding: TekstElement<string>;
     ingen_utdanning_alert_tittel: TekstElement<string>;
     ingen_utdanning_alert_innhold: TekstElement<string>;
-    radio_mottar_utstyrsstipend: Radiogruppe<JaNei>;
-    radio_mottar_utstyrsstipend_feilmelding: TekstElement<string>;
     radio_mottar_har_funksjonsnedsettelse: Radiogruppe<JaNei>;
     radio_mottar_har_funksjonsnedsettelse_feilmelding: TekstElement<string>;
+    radio_lærling_etc: Radiogruppe<JaNei>;
+    radio_lærling_feilmelding: TekstElement<string>;
+    les_mer_lærling_etc: {
+        header: TekstElement<string>;
+        innhold_lærling: TekstElement<InlineLenke>;
+        innhold_lærekandidatordningen: TekstElement<InlineLenke>;
+        innhold_praksisbrevkandidater: TekstElement<InlineLenke>;
+        innhold_fagbrev_på_jobb: TekstElement<InlineLenke>;
+    };
 }
 
 interface HvilkenAktivitet {
@@ -105,20 +112,6 @@ export const utdanningTekster: AktivitetInnhold = {
     ingen_utdanning_alert_innhold: {
         nb: 'Du kan fortsatt søke, men du kan få avslag.',
     },
-    radio_mottar_utstyrsstipend: {
-        header: {
-            nb: 'Mottar du utstyrsstipend fra Statens lånekasse?',
-        },
-        beskrivelse: {
-            nb:
-                'Vi ser at du er under 21 år. ' +
-                'Hvis du tar videregående utdanning har du mest sannsynlig rett til utstyrsstipend fra Lånekassen. ',
-        },
-        alternativer: JaNeiTilTekst,
-    },
-    radio_mottar_utstyrsstipend_feilmelding: {
-        nb: 'Du må svare på om du mottar utstyrsstipend.',
-    },
     radio_mottar_har_funksjonsnedsettelse: {
         header: {
             nb: 'Har du særlig store utgifter til læremidler på grunn av en funksjonsnedsettelse?',
@@ -127,6 +120,64 @@ export const utdanningTekster: AktivitetInnhold = {
             nb: 'Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell. Alle utgiftene du ønsker å få dekket, må dokumenteres.',
         },
         alternativer: JaNeiTilTekst,
+    },
+    radio_lærling_etc: {
+        header: {
+            nb: 'Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?',
+        },
+        alternativer: JaNeiTilTekst,
+    },
+    radio_lærling_feilmelding: {
+        nb: 'Du må svare på om du er lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb.',
+    },
+    les_mer_lærling_etc: {
+        header: {
+            nb: 'Hva betyr alternativene?',
+        },
+        innhold_lærling: {
+            nb: [
+                'Å være lærling betyr at du utdanner deg til et yrke ved å jobbe i en bedrift, hvor du får både opplæring og praksis i ett fag. ',
+                {
+                    tekst: 'Les mer om lærlinger på Vilbli.no',
+                    url: 'https://www.vilbli.no/nb/no/a/laerling-6',
+                    variant: 'neutral',
+                },
+                '.',
+            ],
+        },
+        innhold_lærekandidatordningen: {
+            nb: [
+                'Lærekandidatordningen er et alternativ med færre kompetansemål for de som tror det kan bli vanskelig å fullføre et fag- eller svennebrev. ',
+                {
+                    tekst: 'Les mer om lærekandidatordningen på Vilbli.no',
+                    url: 'https://www.vilbli.no/nb/no/a/laerekandidat-6',
+                    variant: 'neutral',
+                },
+                '.',
+            ],
+        },
+        innhold_praksisbrevkandidater: {
+            nb: [
+                'Praksisbrevkandidater går et toårig opplæringsløp på de yrkesfaglige utdanningsprogrammene. Det er en mer praktisk opplæring, hovedsakelig i bedrift. ',
+                {
+                    tekst: 'Les mer om praksisbrevkandidater på Vilbli.no',
+                    url: 'https://www.vilbli.no/nb/no/a/praksisbrevkandidat-6',
+                    variant: 'neutral',
+                },
+                '.',
+            ],
+        },
+        innhold_fagbrev_på_jobb: {
+            nb: [
+                '«Fagbrev på jobb» er for de som er ufaglært og vil ta fagbrev samtidig som de er i lønnet arbeid. ',
+                {
+                    tekst: 'Les mer om fagbrev på jobb på Vilbli.no',
+                    url: 'https://www.vilbli.no/nb/no/a/laerling-6',
+                    variant: 'neutral',
+                },
+                '.',
+            ],
+        },
     },
     radio_mottar_har_funksjonsnedsettelse_feilmelding: {
         nb: 'Du må svare på om du har en funksjonsnedsettelse som fører til økte utgifter til læremidler.',

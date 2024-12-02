@@ -18,11 +18,11 @@ export const feilAnnenUtdanning = (feil: Valideringsfeil, locale: Locale) => ({
     },
 });
 
-export const feilMottarUtstyrsstipend = (feil: Valideringsfeil, locale: Locale) => ({
+export const feilErLærlingEllerLiknende = (feil: Valideringsfeil, locale: Locale) => ({
     ...feil,
-    mottarUtstyrsstipend: {
+    erLærlingEllerLiknende: {
         id: '3',
-        melding: utdanningTekster.radio_mottar_utstyrsstipend_feilmelding[locale],
+        melding: utdanningTekster.radio_lærling_feilmelding[locale],
     },
 });
 
