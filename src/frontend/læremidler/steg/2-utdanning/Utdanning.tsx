@@ -11,6 +11,7 @@ import {
     feilAnnenUtdanning,
     feilErLærlingEllerLiknende,
     feilHarFunksjonsnedsettelse,
+    feilHarTidligereFullførtVgs,
     feilValgtAktivitet,
 } from './validering';
 import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
@@ -53,12 +54,16 @@ const Utdanning = () => {
     const [erLærlingEllerLiknende, setterLærlingEllerLiknende] = useState<
         EnumFelt<JaNei> | undefined
     >(utdanning ? utdanning.erLærlingEllerLiknende : undefined);
+    const [harTidligereFullførtVgs, settHarTidligereFullførtVgs] = useState<
+        EnumFelt<JaNei> | undefined
+    >(utdanning ? utdanning.harTidligereFullførtVgs : undefined);
 
     const oppdaterUtdanningISøknad = () => {
         settUtdanning({
             aktiviteter: valgteAktiviteter,
             annenUtdanning: annenUtdanning,
             erLærlingEllerLiknende: erLærlingEllerLiknende,
+            harTidligereFullførtVgs: harTidligereFullførtVgs,
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
         settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
@@ -85,6 +90,14 @@ const Utdanning = () => {
         settValideringsfeil((prevState) => ({
             ...prevState,
             erLærlingEllerLiknende: undefined,
+        }));
+    };
+
+    const oppdaterHarTidligereFullførtVgs = (verdi: EnumFelt<JaNei>) => {
+        settHarTidligereFullførtVgs(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            harTidligereFullførtVgs: undefined,
         }));
     };
 
@@ -133,6 +146,13 @@ const Utdanning = () => {
         }
         if (skalViseErLærlingEllerLiknende && erLærlingEllerLiknende === undefined) {
             feil = feilErLærlingEllerLiknende(feil, locale);
+        }
+        if (
+            skalViseErLærlingEllerLiknende &&
+            erLærlingEllerLiknende?.verdi === 'NEI' &&
+            harTidligereFullførtVgs === undefined
+        ) {
+            feil = feilHarTidligereFullførtVgs(feil, locale);
         }
         if (harFunksjonsnedsettelse === undefined) {
             feil = feilHarFunksjonsnedsettelse(feil, locale);
@@ -192,7 +212,10 @@ const Utdanning = () => {
                 <ErLærlingEllerLiknende
                     erLærlingEllerLiknende={erLærlingEllerLiknende}
                     oppdatererLærlingEllerLiknende={oppdatererLærlingEllerLiknende}
-                    feilmelding={valideringsfeil.erLærlingEllerLiknende}
+                    feilmeldingErLærlingEllerLiknende={valideringsfeil.erLærlingEllerLiknende}
+                    harTidligereFullførtVgs={harTidligereFullførtVgs}
+                    oppdaterHarTidligereFullførtVgs={oppdaterHarTidligereFullførtVgs}
+                    feilmeldingHarTidligereFullførtVgs={valideringsfeil.harTidligereFullførtVgs}
                 />
             )}
             <HarFunksjonsnedsettelse

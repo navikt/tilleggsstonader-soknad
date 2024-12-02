@@ -2,6 +2,7 @@ import React from 'react';
 
 import { BodyLong, VStack } from '@navikt/ds-react';
 
+import { HarTidligereFullførtVgs } from './HarTidligereFullførtVgs';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
@@ -14,22 +15,28 @@ import { utdanningTekster } from '../../tekster/utdanning';
 interface Props {
     erLærlingEllerLiknende: EnumFelt<JaNei> | undefined;
     oppdatererLærlingEllerLiknende: (verdi: EnumFelt<JaNei>) => void;
-    feilmelding: Feilmelding | undefined;
+    feilmeldingErLærlingEllerLiknende: Feilmelding | undefined;
+    harTidligereFullførtVgs: EnumFelt<JaNei> | undefined;
+    oppdaterHarTidligereFullførtVgs: (verdi: EnumFelt<JaNei>) => void;
+    feilmeldingHarTidligereFullførtVgs: Feilmelding | undefined;
 }
 
 export const ErLærlingEllerLiknende: React.FC<Props> = ({
     erLærlingEllerLiknende,
     oppdatererLærlingEllerLiknende,
-    feilmelding,
+    feilmeldingErLærlingEllerLiknende,
+    harTidligereFullførtVgs,
+    oppdaterHarTidligereFullførtVgs,
+    feilmeldingHarTidligereFullførtVgs,
 }) => {
     return (
         <UnderspørsmålContainer>
             <LocaleRadioGroup
-                id={feilmelding?.id}
+                id={feilmeldingErLærlingEllerLiknende?.id}
                 tekst={utdanningTekster.radio_lærling_etc}
                 onChange={oppdatererLærlingEllerLiknende}
                 value={erLærlingEllerLiknende?.verdi || []}
-                error={feilmelding?.melding}
+                error={feilmeldingErLærlingEllerLiknende?.melding}
             >
                 <LocaleReadMoreMedChildren header={utdanningTekster.les_mer_lærling_etc.header}>
                     <VStack gap="5">
@@ -62,6 +69,13 @@ export const ErLærlingEllerLiknende: React.FC<Props> = ({
                     </VStack>
                 </LocaleReadMoreMedChildren>
             </LocaleRadioGroup>
+            {erLærlingEllerLiknende?.verdi === 'NEI' && (
+                <HarTidligereFullførtVgs
+                    harTidligereFullførtVgs={harTidligereFullførtVgs}
+                    oppdaterHarTidligereFullførtVgs={oppdaterHarTidligereFullførtVgs}
+                    feilmelding={feilmeldingHarTidligereFullførtVgs}
+                />
+            )}
         </UnderspørsmålContainer>
     );
 };
