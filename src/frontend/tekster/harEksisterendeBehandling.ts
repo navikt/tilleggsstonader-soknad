@@ -1,22 +1,22 @@
 import { InlineLenke, TekstElement } from '../typer/tekst';
 
 interface søknadsideInnhold {
-    spørsmål1: TekstElement<string>;
-    spørsmål1_innhold: TekstElement<InlineLenke>;
-    spørsmål2: TekstElement<string>;
-    spørsmål2_innhold: TekstElement<string>;
-    alertForBarnetilsyn: TekstElement<string>;
-    alertForLæremidler: TekstElement<string>;
+    spørsmål_om_søknaden: TekstElement<string>;
+    spørsmål_om_søknaden_innhold: TekstElement<InlineLenke>;
+    vil_forstatt_sende_søknad: TekstElement<string>;
+    vil_forstatt_sende_søknad_innhold: TekstElement<string>;
+    alert_for_barnetilsyn: TekstElement<string>;
+    alert_for_læremidler: TekstElement<string>;
     alert_innhold: TekstElement<InlineLenke>;
     minside: TekstElement<InlineLenke>;
 }
 
-export const søknadsideTekster: søknadsideInnhold = {
-    spørsmål1: {
+export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
+    spørsmål_om_søknaden: {
         nb: 'Spørsmål om søknaden eller saksbehandlingstid?',
     },
 
-    spørsmål1_innhold: {
+    spørsmål_om_søknaden_innhold: {
         nb: [
             'Du kan se forventet saksbehandlingstid på ',
             {
@@ -25,16 +25,16 @@ export const søknadsideTekster: søknadsideInnhold = {
             },
         ],
     },
-    spørsmål2: {
+    vil_forstatt_sende_søknad: {
         nb: 'Vil du likevel sende ny søknad?',
     },
-    spørsmål2_innhold: {
+    vil_forstatt_sende_søknad_innhold: {
         nb: 'Hvis du har begynt på en ny utdanning eller opplæring, kan du sende ny søknad. ',
     },
-    alertForBarnetilsyn: {
+    alert_for_barnetilsyn: {
         nb: 'Du har allerede sendt oss en søknad om støtte til pass av barn. ',
     },
-    alertForLæremidler: {
+    alert_for_læremidler: {
         nb: 'Du har allerede sendt oss en søknad om støtte til læremidler. ',
     },
     alert_innhold: {

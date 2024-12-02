@@ -10,8 +10,8 @@ import { loggBesøkBarnetilsyn } from '../api/amplitude';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
+import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBehandling';
 import { kvitteringTekster } from '../tekster/kvittering';
-import { søknadsideTekster } from '../tekster/søknadside';
 import { Stønadstype } from '../typer/stønadstyper';
 
 const KnappeContainer = styled(BodyShort)`
@@ -47,22 +47,26 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                         <LocaleTekst
                             tekst={
                                 stonadstype === Stønadstype.BARNETILSYN
-                                    ? søknadsideTekster.alertForBarnetilsyn
-                                    : søknadsideTekster.alertForLæremidler
+                                    ? harEksisterendeBehandlingTekster.alert_for_barnetilsyn
+                                    : harEksisterendeBehandlingTekster.alert_for_læremidler
                             }
                         />
                         <BodyLong>
-                            <LocaleInlineLenke tekst={søknadsideTekster.alert_innhold} />
+                            <LocaleInlineLenke
+                                tekst={harEksisterendeBehandlingTekster.alert_innhold}
+                            />
                         </BodyLong>
                     </Heading>
                 </Alert>
             </VStack>
             <VStack gap="4">
                 <Heading size="medium">
-                    <LocaleTekst tekst={søknadsideTekster.spørsmål1} />
+                    <LocaleTekst tekst={harEksisterendeBehandlingTekster.spørsmål_om_søknaden} />
                 </Heading>
                 <BodyLong>
-                    <LocaleInlineLenke tekst={søknadsideTekster.spørsmål1_innhold} />
+                    <LocaleInlineLenke
+                        tekst={harEksisterendeBehandlingTekster.spørsmål_om_søknaden_innhold}
+                    />
                 </BodyLong>
                 <BodyLong>
                     <LocaleInlineLenke tekst={kvitteringTekster.kontakt_oss_innhold} />
@@ -70,10 +74,14 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
             </VStack>
             <VStack gap="4">
                 <Heading size="medium">
-                    <LocaleTekst tekst={søknadsideTekster.spørsmål2} />
+                    <LocaleTekst
+                        tekst={harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad}
+                    />
                 </Heading>
                 <BodyLong>
-                    <LocaleTekst tekst={søknadsideTekster.spørsmål2_innhold} />
+                    <LocaleTekst
+                        tekst={harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold}
+                    />
                 </BodyLong>
             </VStack>
             <KnappeContainer>
@@ -94,7 +102,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     />
                 </Button>
             </KnappeContainer>
-            <LocaleInlineLenke tekst={søknadsideTekster.minside} />
+            <LocaleInlineLenke tekst={harEksisterendeBehandlingTekster.minside} />
         </Container>
     );
 };
