@@ -27,6 +27,8 @@ interface AktivitetInnhold {
     };
     radio_har_fullført_vgs: Radiogruppe<JaNei>;
     radio_har_fullført_vgs_feilmelding: TekstElement<string>;
+    har_fullført_vgs_info_boks_header: TekstElement<string>;
+    har_fullført_vgs_info_boks: TekstElement<string>;
 }
 
 interface HvilkenAktivitet {
@@ -195,5 +197,11 @@ export const utdanningTekster: AktivitetInnhold = {
     },
     radio_har_fullført_vgs_feilmelding: {
         nb: 'Du må svare på om du tidligere har fullført videregående skole.',
+    },
+    har_fullført_vgs_info_boks_header: {
+        nb: 'Du har mest sannsynlig rett til utstyrsstipend fra lånekassa, og da har du ikke rett til denne pengestøtten.',
+    },
+    har_fullført_vgs_info_boks: {
+        nb: 'Når du er under 21 år og tar videregående utdanning, har du vanligvis rett til utstyrsstipend fra lånekassen. Du kan søke om støtte til læremidler, men du vil mest sannsynligvis få avslag.',
     },
 };
