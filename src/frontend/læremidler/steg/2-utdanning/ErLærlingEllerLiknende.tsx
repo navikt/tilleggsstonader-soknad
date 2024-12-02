@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { BodyLong, Box, VStack } from '@navikt/ds-react';
+import { BodyLong, VStack } from '@navikt/ds-react';
 
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { Feilmelding } from '../../../typer/validering';
@@ -22,7 +23,7 @@ export const ErLærlingEllerLiknende: React.FC<Props> = ({
     feilmelding,
 }) => {
     return (
-        <Box padding="4" background="bg-subtle">
+        <UnderspørsmålContainer>
             <LocaleRadioGroup
                 id={feilmelding?.id}
                 tekst={utdanningTekster.radio_lærling_etc}
@@ -61,6 +62,6 @@ export const ErLærlingEllerLiknende: React.FC<Props> = ({
                     </VStack>
                 </LocaleReadMoreMedChildren>
             </LocaleRadioGroup>
-        </Box>
+        </UnderspørsmålContainer>
     );
 };
