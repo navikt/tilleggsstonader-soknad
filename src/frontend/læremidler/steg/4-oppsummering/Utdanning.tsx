@@ -40,6 +40,16 @@ const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }
                         <FormSummary.Value>{utdanning.annenUtdanning.svarTekst}</FormSummary.Value>
                     </FormSummary.Answer>
                 )}
+                {utdanning.erLærlingEllerLiknende !== undefined && (
+                    <FormSummary.Answer>
+                        <FormSummary.Label>
+                            {utdanning.erLærlingEllerLiknende.label}
+                        </FormSummary.Label>
+                        <FormSummary.Value>
+                            {utdanning.erLærlingEllerLiknende.svarTekst}
+                        </FormSummary.Value>
+                    </FormSummary.Answer>
+                )}
 
                 {utdanning.harFunksjonsnedsettelse !== undefined && (
                     <FormSummary.Answer>
