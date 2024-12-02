@@ -23,13 +23,14 @@ export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
                 tekst: ' nav.no/saksbehandlingstid',
                 url: 'https://www.nav.no/saksbehandlingstid',
             },
+            ' (åpnes i nytt vindu).',
         ],
     },
     vil_forstatt_sende_søknad: {
         nb: 'Vil du likevel sende ny søknad?',
     },
     vil_forstatt_sende_søknad_innhold: {
-        nb: 'Hvis du har begynt på en ny utdanning eller opplæring, kan du sende ny søknad. ',
+        nb: 'Hvis du har begynt på nytt tiltak eller ny utdanning, kan du sende ny søknad. ',
     },
     alert_for_barnetilsyn: {
         nb: 'Du har allerede sendt oss en søknad om støtte til pass av barn. ',
@@ -44,6 +45,7 @@ export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
                 tekst: ' Min side',
                 url: 'https://www.nav.no/min-side',
             },
+            ' (åpnes i ny fane) ',
         ],
     },
     minside: {

@@ -84,21 +84,33 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     />
                 </BodyLong>
             </VStack>
-            <KnappeContainer>
-                <Button variant="secondary">
+            <KnappeContainer
+                style={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    gap: '1rem',
+                }}
+            >
+                <Button
+                    variant="secondary"
+                    onClick={() => {
+                        window.location.href = 'https://www.ansatt.dev.nav.no/utlogget';
+                    }}
+                >
                     <MultiplyIcon
                         title="a11y-title"
                         fontSize="1.5rem"
-                        style={{ verticalAlign: 'middle' }}
+                        style={{ verticalAlign: 'middle', marginRight: '0.5rem' }}
                     />
-                    Avslutt
+                    Avslutt og logg ut
                 </Button>
                 <Button onClick={startSøknad} variant="primary">
                     Start ny søknad
                     <ChevronRightIcon
                         title="a11y-title"
                         fontSize="1.5rem"
-                        style={{ verticalAlign: 'middle' }}
+                        style={{ verticalAlign: 'middle', marginLeft: '0.5rem' }}
                     />
                 </Button>
             </KnappeContainer>
