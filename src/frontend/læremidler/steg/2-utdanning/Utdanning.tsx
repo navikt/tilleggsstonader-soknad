@@ -132,7 +132,7 @@ const Utdanning = () => {
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
     const skalViseHarRettTilUtstyrsstipend =
-        person.alder < 21 && annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE_FORKURS;
+        person.alder < 21 && annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE;
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
