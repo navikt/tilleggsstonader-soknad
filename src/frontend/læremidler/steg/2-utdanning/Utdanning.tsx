@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Heading, Label } from '@navikt/ds-react';
 
 import { AnnenUtdanning } from './AnnenUtdanning';
-import { ErLærlingEllerLiknende } from './ErLærlingEllerLiknende';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
+import { HarRettTilUtstyrsstipend } from './HarRettTilUtstyrsstipend';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
 import {
@@ -131,7 +131,7 @@ const Utdanning = () => {
         skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
-    const skalViseErLærlingEllerLiknende =
+    const skalViseHarRettTilUtstyrsstipend =
         person.alder < 21 && annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE_FORKURS;
 
     const kanFortsette = (): boolean => {
@@ -144,11 +144,11 @@ const Utdanning = () => {
         if (skalViseAnnenAktivitet && annenUtdanning === undefined) {
             feil = feilAnnenUtdanning(feil, locale);
         }
-        if (skalViseErLærlingEllerLiknende && erLærlingEllerLiknende === undefined) {
+        if (skalViseHarRettTilUtstyrsstipend && erLærlingEllerLiknende === undefined) {
             feil = feilErLærlingEllerLiknende(feil, locale);
         }
         if (
-            skalViseErLærlingEllerLiknende &&
+            skalViseHarRettTilUtstyrsstipend &&
             erLærlingEllerLiknende?.verdi === 'NEI' &&
             harTidligereFullførtVgs === undefined
         ) {
@@ -208,14 +208,13 @@ const Utdanning = () => {
                     feilmelding={valideringsfeil.annenUtdanning}
                 />
             )}
-            {skalViseErLærlingEllerLiknende && (
-                <ErLærlingEllerLiknende
+            {skalViseHarRettTilUtstyrsstipend && (
+                <HarRettTilUtstyrsstipend
                     erLærlingEllerLiknende={erLærlingEllerLiknende}
                     oppdatererLærlingEllerLiknende={oppdatererLærlingEllerLiknende}
-                    feilmeldingErLærlingEllerLiknende={valideringsfeil.erLærlingEllerLiknende}
                     harTidligereFullførtVgs={harTidligereFullførtVgs}
                     oppdaterHarTidligereFullførtVgs={oppdaterHarTidligereFullførtVgs}
-                    feilmeldingHarTidligereFullførtVgs={valideringsfeil.harTidligereFullførtVgs}
+                    valideringsfeil={valideringsfeil}
                 />
             )}
             <HarFunksjonsnedsettelse
