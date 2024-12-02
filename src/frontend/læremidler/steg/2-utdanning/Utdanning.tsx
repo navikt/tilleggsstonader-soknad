@@ -47,7 +47,7 @@ const Utdanning = () => {
     >(utdanning ? utdanning.harFunksjonsnedsettelse : undefined);
     const [erLærlingEllerLiknende, setterLærlingEllerLiknende] = useState<
         EnumFelt<JaNei> | undefined
-    >();
+    >(utdanning ? utdanning.erLærlingEllerLiknende : undefined);
 
     const oppdaterUtdanningISøknad = () => {
         settUtdanning({
