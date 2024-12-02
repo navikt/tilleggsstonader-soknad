@@ -25,6 +25,8 @@ interface AktivitetInnhold {
         innhold_praksisbrevkandidater: TekstElement<InlineLenke>;
         innhold_fagbrev_på_jobb: TekstElement<InlineLenke>;
     };
+    radio_har_fullført_vgs: Radiogruppe<JaNei>;
+    radio_har_fullført_vgs_feilmelding: TekstElement<string>;
 }
 
 interface HvilkenAktivitet {
@@ -181,5 +183,17 @@ export const utdanningTekster: AktivitetInnhold = {
     },
     radio_mottar_har_funksjonsnedsettelse_feilmelding: {
         nb: 'Du må svare på om du har en funksjonsnedsettelse som fører til økte utgifter til læremidler.',
+    },
+    radio_har_fullført_vgs: {
+        header: {
+            nb: 'Har du tidligere fullført videregående skole?',
+        },
+        beskrivelse: {
+            nb: 'Det betyr at du har bestått alle fag og har oppnådd studie- eller yrkeskompentanse.',
+        },
+        alternativer: JaNeiTilTekst,
+    },
+    radio_har_fullført_vgs_feilmelding: {
+        nb: 'Du må svare på om du tidligere har fullført videregående skole.',
     },
 };

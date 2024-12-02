@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import { Heading, Label } from '@navikt/ds-react';
 
 import { AnnenUtdanning } from './AnnenUtdanning';
-import { ErLærlingEllerLiknende } from './ErLærlingEllerLiknende';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
+import { HarRettTilUtstyrsstipend } from './HarRettTilUtstyrsstipend';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
 import {
     feilAnnenUtdanning,
     feilErLærlingEllerLiknende,
     feilHarFunksjonsnedsettelse,
+    feilHarTidligereFullførtVgs,
     feilValgtAktivitet,
 } from './validering';
 import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
@@ -53,12 +54,16 @@ const Utdanning = () => {
     const [erLærlingEllerLiknende, setterLærlingEllerLiknende] = useState<
         EnumFelt<JaNei> | undefined
     >(utdanning ? utdanning.erLærlingEllerLiknende : undefined);
+    const [harTidligereFullførtVgs, settHarTidligereFullførtVgs] = useState<
+        EnumFelt<JaNei> | undefined
+    >(utdanning ? utdanning.harTidligereFullførtVgs : undefined);
 
     const oppdaterUtdanningISøknad = () => {
         settUtdanning({
             aktiviteter: valgteAktiviteter,
             annenUtdanning: annenUtdanning,
             erLærlingEllerLiknende: erLærlingEllerLiknende,
+            harTidligereFullførtVgs: harTidligereFullførtVgs,
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
         settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
@@ -85,6 +90,14 @@ const Utdanning = () => {
         settValideringsfeil((prevState) => ({
             ...prevState,
             erLærlingEllerLiknende: undefined,
+        }));
+    };
+
+    const oppdaterHarTidligereFullførtVgs = (verdi: EnumFelt<JaNei>) => {
+        settHarTidligereFullførtVgs(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            harTidligereFullførtVgs: undefined,
         }));
     };
 
@@ -118,7 +131,7 @@ const Utdanning = () => {
         skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
-    const skalViseErLærlingEllerLiknende =
+    const skalViseHarRettTilUtstyrsstipend =
         person.alder < 21 && annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE_FORKURS;
 
     const kanFortsette = (): boolean => {
@@ -131,8 +144,15 @@ const Utdanning = () => {
         if (skalViseAnnenAktivitet && annenUtdanning === undefined) {
             feil = feilAnnenUtdanning(feil, locale);
         }
-        if (skalViseErLærlingEllerLiknende && erLærlingEllerLiknende === undefined) {
+        if (skalViseHarRettTilUtstyrsstipend && erLærlingEllerLiknende === undefined) {
             feil = feilErLærlingEllerLiknende(feil, locale);
+        }
+        if (
+            skalViseHarRettTilUtstyrsstipend &&
+            erLærlingEllerLiknende?.verdi === 'NEI' &&
+            harTidligereFullførtVgs === undefined
+        ) {
+            feil = feilHarTidligereFullførtVgs(feil, locale);
         }
         if (harFunksjonsnedsettelse === undefined) {
             feil = feilHarFunksjonsnedsettelse(feil, locale);
@@ -188,11 +208,13 @@ const Utdanning = () => {
                     feilmelding={valideringsfeil.annenUtdanning}
                 />
             )}
-            {skalViseErLærlingEllerLiknende && (
-                <ErLærlingEllerLiknende
+            {skalViseHarRettTilUtstyrsstipend && (
+                <HarRettTilUtstyrsstipend
                     erLærlingEllerLiknende={erLærlingEllerLiknende}
                     oppdatererLærlingEllerLiknende={oppdatererLærlingEllerLiknende}
-                    feilmelding={valideringsfeil.erLærlingEllerLiknende}
+                    harTidligereFullførtVgs={harTidligereFullførtVgs}
+                    oppdaterHarTidligereFullførtVgs={oppdaterHarTidligereFullførtVgs}
+                    valideringsfeil={valideringsfeil}
                 />
             )}
             <HarFunksjonsnedsettelse

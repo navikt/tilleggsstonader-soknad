@@ -26,10 +26,18 @@ export const feilErLærlingEllerLiknende = (feil: Valideringsfeil, locale: Local
     },
 });
 
+export const feilHarTidligereFullførtVgs = (feil: Valideringsfeil, locale: Locale) => ({
+    ...feil,
+    harTidligereFullførtVgs: {
+        id: '4',
+        melding: utdanningTekster.radio_har_fullført_vgs_feilmelding[locale],
+    },
+});
+
 export const feilHarFunksjonsnedsettelse = (feil: Valideringsfeil, locale: Locale) => ({
     ...feil,
     harFunksjonsnedsettelse: {
-        id: '4',
+        id: '5',
         melding: utdanningTekster.radio_mottar_har_funksjonsnedsettelse_feilmelding[locale],
     },
 });

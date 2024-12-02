@@ -5,6 +5,7 @@ export interface Utdanning {
     aktiviteter: EnumFlereValgFelt<string> | undefined;
     annenUtdanning: EnumFelt<AnnenUtdanningType> | undefined;
     erLærlingEllerLiknende: EnumFelt<JaNei> | undefined;
+    harTidligereFullførtVgs: EnumFelt<JaNei> | undefined;
     harFunksjonsnedsettelse: EnumFelt<JaNei> | undefined;
 }
 
