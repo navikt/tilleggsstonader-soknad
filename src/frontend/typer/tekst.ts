@@ -15,7 +15,12 @@ export type Lenke = {
     variant?: 'action' | 'neutral' | 'subtle';
 };
 
-export type InlineLenke = (string | Lenke)[];
+export type StyledTekst = {
+    tekst: string;
+    style: 'bold' | 'italic' | 'normal';
+};
+
+export type InlineLenke = (string | StyledTekst | Lenke)[];
 
 export type Punktliste = {
     tittel: TekstElement<string>;
