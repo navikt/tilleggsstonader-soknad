@@ -53,17 +53,19 @@ const Utdanning = () => {
     >(utdanning ? utdanning.harFunksjonsnedsettelse : undefined);
     const [erLærlingEllerLiknende, setterLærlingEllerLiknende] = useState<
         EnumFelt<JaNei> | undefined
-    >(utdanning ? utdanning.erLærlingEllerLiknende : undefined);
+    >(utdanning ? utdanning.harRettTilUtstyrsstipend.erLærlingEllerLiknende : undefined);
     const [harTidligereFullførtVgs, settHarTidligereFullførtVgs] = useState<
         EnumFelt<JaNei> | undefined
-    >(utdanning ? utdanning.harTidligereFullførtVgs : undefined);
+    >(utdanning ? utdanning.harRettTilUtstyrsstipend.harTidligereFullførtVgs : undefined);
 
     const oppdaterUtdanningISøknad = () => {
         settUtdanning({
             aktiviteter: valgteAktiviteter,
             annenUtdanning: annenUtdanning,
-            erLærlingEllerLiknende: erLærlingEllerLiknende,
-            harTidligereFullførtVgs: harTidligereFullførtVgs,
+            harRettTilUtstyrsstipend: {
+                erLærlingEllerLiknende: erLærlingEllerLiknende,
+                harTidligereFullførtVgs: harTidligereFullførtVgs,
+            },
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
         settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
