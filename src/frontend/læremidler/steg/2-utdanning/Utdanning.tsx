@@ -8,6 +8,10 @@ import { HarRettTilUtstyrsstipend } from './HarRettTilUtstyrsstipend';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
 import {
+    harValgtRegisterAktivitetPåVgsNivå,
+    harValgtRegisterAktivitetPåVgsNivåEllerAnnet,
+} from './UtdanningUtils';
+import {
     feilAnnenUtdanning,
     feilErLærlingEllerLiknende,
     feilHarFunksjonsnedsettelse,
@@ -113,6 +117,12 @@ const Utdanning = () => {
 
     const oppdaterValgteAktiviteter = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
         settValgteAktiviteter(nyeValgteAktiviteter);
+        if (
+            !harValgtRegisterAktivitetPåVgsNivåEllerAnnet(nyeValgteAktiviteter, registerAktiviteter)
+        ) {
+            setterLærlingEllerLiknende(undefined);
+            settHarTidligereFullførtVgs(undefined);
+        }
         if (nyeValgteAktiviteter.verdier.length > 0) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
@@ -120,17 +130,6 @@ const Utdanning = () => {
             }));
         }
         nullstillAnnenAktivitet(nyeValgteAktiviteter);
-    };
-
-    const harValgtRegisterAktivitetPåVgsNivå = () => {
-        if (!registerAktiviteter) {
-            return false;
-        }
-        return valgteAktiviteter?.verdier.some(
-            (aktivitet) =>
-                aktivitet.verdi !== 'ANNET' &&
-                registerAktiviteter[aktivitet.verdi].erUtdanningPåVgsNivå
-        );
     };
 
     if (!registerAktiviteter) {
@@ -145,7 +144,7 @@ const Utdanning = () => {
     const skalViseHarRettTilUtstyrsstipend =
         person.alder < 21 &&
         (annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE ||
-            harValgtRegisterAktivitetPåVgsNivå());
+            harValgtRegisterAktivitetPåVgsNivå(valgteAktiviteter, registerAktiviteter));
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
