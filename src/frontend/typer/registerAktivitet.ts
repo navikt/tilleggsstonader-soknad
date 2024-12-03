@@ -3,6 +3,7 @@ export interface RegisterAktivitet {
     fom: string;
     tom: string | null;
     erUtdanning: boolean;
+    erUtdanningPåVgsNivå: boolean;
     typeNavn: string;
 }
 

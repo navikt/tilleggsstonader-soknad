@@ -122,8 +122,16 @@ const Utdanning = () => {
         nullstillAnnenAktivitet(nyeValgteAktiviteter);
     };
 
-    const harValgtRegisterAktivitet = () =>
-        valgteAktiviteter?.verdier.some((aktivitet) => aktivitet.verdi !== 'ANNET');
+    const harValgtRegisterAktivitetPåVgsNivå = () => {
+        if (!registerAktiviteter) {
+            return false;
+        }
+        return valgteAktiviteter?.verdier.some(
+            (aktivitet) =>
+                aktivitet.verdi !== 'ANNET' &&
+                registerAktiviteter[aktivitet.verdi].erUtdanningPåVgsNivå
+        );
+    };
 
     if (!registerAktiviteter) {
         // ønsker ikke å vise siden før man har hentet aktivteter fra backend
@@ -136,7 +144,8 @@ const Utdanning = () => {
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
     const skalViseHarRettTilUtstyrsstipend =
         person.alder < 21 &&
-        (annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE || harValgtRegisterAktivitet());
+        (annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE ||
+            harValgtRegisterAktivitetPåVgsNivå());
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
