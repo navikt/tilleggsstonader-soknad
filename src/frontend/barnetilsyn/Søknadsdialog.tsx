@@ -24,21 +24,13 @@ interface SøknadsdialogProps {
 }
 
 const Søknadsdialog: React.FC<SøknadsdialogProps> = ({ stønadstype }) => {
-    const { harBehandling, loading, error } = useSjekkBehandlingStatus(stønadstype);
+    const { harBehandling } = useSjekkBehandlingStatus(stønadstype);
 
     const [visHarBehandlingSide, settVisaHarBehandlingSide] = useState<boolean>(false);
 
     useEffect(() => {
         settVisaHarBehandlingSide(harBehandling);
     }, [harBehandling]);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
 
     return (
         <>

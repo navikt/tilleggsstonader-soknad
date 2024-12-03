@@ -16,26 +16,19 @@ import useSjekkBehandlingStatus from '../components/Søknadside/SjekkBehandlingS
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
+
 interface SøknadsdialogProps {
     stønadstype: Stønadstype;
 }
 
 const Søknadsdialog: React.FC<SøknadsdialogProps> = ({ stønadstype }) => {
-    const { harBehandling, loading, error } = useSjekkBehandlingStatus(stønadstype);
+    const { harBehandling } = useSjekkBehandlingStatus(stønadstype);
 
     const [visHarBehandlingSide, settVisaHarBehandlingSide] = useState<boolean>(false);
 
     useEffect(() => {
         settVisaHarBehandlingSide(harBehandling);
     }, [harBehandling]);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
     return (
         <>
             <Header tittel={fellesTekster.banner_læremidler} />
