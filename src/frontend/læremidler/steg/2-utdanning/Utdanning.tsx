@@ -122,6 +122,9 @@ const Utdanning = () => {
         nullstillAnnenAktivitet(nyeValgteAktiviteter);
     };
 
+    const harValgtRegisterAktivitet = () =>
+        valgteAktiviteter?.verdier.some((aktivitet) => aktivitet.verdi !== 'ANNET');
+
     if (!registerAktiviteter) {
         // ønsker ikke å vise siden før man har hentet aktivteter fra backend
         return null;
@@ -132,7 +135,8 @@ const Utdanning = () => {
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
     const skalViseHarRettTilUtstyrsstipend =
-        person.alder < 21 && annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE;
+        person.alder < 21 &&
+        (annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE || harValgtRegisterAktivitet());
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
