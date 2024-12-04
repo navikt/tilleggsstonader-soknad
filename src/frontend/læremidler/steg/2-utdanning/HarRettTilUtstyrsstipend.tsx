@@ -34,7 +34,7 @@ export const HarRettTilUtstyrsstipend: React.FC<Props> = ({
                 <HarTidligereFullførtVgs
                     harTidligereFullførtVgs={harTidligereFullførtVgs}
                     oppdaterHarTidligereFullførtVgs={oppdaterHarTidligereFullførtVgs}
-                    feilmelding={valideringsfeil.feilmeldingHarTidligereFullførtVgs}
+                    feilmelding={valideringsfeil.harTidligereFullførtVgs}
                 />
             )}
         </UnderspørsmålContainer>
