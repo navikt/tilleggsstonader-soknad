@@ -8,6 +8,7 @@ import { PersonProvider } from '../context/PersonContext';
 import { initiellPerson } from '../mock/initiellPerson';
 import { Person } from '../typer/person';
 import { Stønadstype } from '../typer/stønadstyper';
+import useSjekkBehandlingStatus from './Søknadside/SjekkBehandlingStatus';
 
 const erFeilOgSkalRouteTilPapirsøknad = (req: AxiosError<{ detail?: string }, unknown>) => {
     return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
@@ -25,6 +26,8 @@ export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: Rea
     const [person, settPerson] = useState<Person>(initiellPerson);
     const [harLastetPerson, settHarLastetPerson] = useState<boolean>(false);
     const [feilmelding, settFeilmelding] = useState<string>();
+
+    const { harBehandling } = useSjekkBehandlingStatus(stønadstype);
 
     useEffect(() => {
         hentPersonData(skalHenteMedBarn(stønadstype))
@@ -50,5 +53,9 @@ export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: Rea
         return null;
     }
 
-    return <PersonProvider person={person}>{children}</PersonProvider>;
+    return (
+        <PersonProvider person={person} harBehandling={harBehandling}>
+            {children}
+        </PersonProvider>
+    );
 };

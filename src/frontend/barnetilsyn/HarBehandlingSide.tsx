@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
-
 import { styled } from 'styled-components';
 
 import { ChevronRightIcon, MultiplyIcon } from '@navikt/aksel-icons';
 import { Alert, BodyLong, BodyShort, Button, Heading, VStack } from '@navikt/ds-react';
 
-import { RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
-import { loggBesøkBarnetilsyn } from '../api/amplitude';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
@@ -29,16 +25,6 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
     startSøknad,
     stonadstype,
 }: SøknadsideProps) => {
-    useEffect(() => {
-        if (stonadstype === Stønadstype.BARNETILSYN) {
-            const route = RoutesBarnetilsyn[0];
-            loggBesøkBarnetilsyn(route.path, route.label);
-        } else if (stonadstype === Stønadstype.LÆREMIDLER) {
-            const route = RoutesBarnetilsyn[0];
-            loggBesøkBarnetilsyn(route.path, route.label);
-        }
-    }, [stonadstype]);
-
     return (
         <Container>
             <VStack gap="4">
@@ -86,10 +72,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
             </VStack>
             <KnappeContainer
                 style={{
-                    display: 'flex',
                     justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    gap: '1rem',
                 }}
             >
                 <Button

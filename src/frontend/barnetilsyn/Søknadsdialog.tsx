@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Route, Routes } from 'react-router';
 
 import Forside from './Forside';
-import HarBehandlingSide from './HarBehandlingSide';
 import { Header } from '../components/Header';
 import RedirectTilStart from '../components/RedirectTilStart';
+import { RootRoute } from '../components/RootRoute';
 import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { barnetilsynPath } from './routing/routesBarnetilsyn';
@@ -16,22 +16,9 @@ import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
 import VedleggPassAvBarn from './steg/6-vedlegg/VedleggPassAvBarn';
 import Oppsummering from './steg/7-oppsummering/Oppsummering';
 import Kvittering from '../components/Kvittering/Kvittering';
-import useSjekkBehandlingStatus from '../components/Søknadside/SjekkBehandlingStatus';
 import { Stønadstype } from '../typer/stønadstyper';
 
-interface SøknadsdialogProps {
-    stønadstype: Stønadstype;
-}
-
-const Søknadsdialog: React.FC<SøknadsdialogProps> = ({ stønadstype }) => {
-    const { harBehandling } = useSjekkBehandlingStatus(stønadstype);
-
-    const [visHarBehandlingSide, settVisaHarBehandlingSide] = useState<boolean>(false);
-
-    useEffect(() => {
-        settVisaHarBehandlingSide(harBehandling);
-    }, [harBehandling]);
-
+const Søknadsdialog: React.FC = () => {
     return (
         <>
             <Header tittel={fellesTekster.banner_bt} />
@@ -39,16 +26,7 @@ const Søknadsdialog: React.FC<SøknadsdialogProps> = ({ stønadstype }) => {
                 <Route
                     path={'/'}
                     element={
-                        visHarBehandlingSide ? (
-                            <HarBehandlingSide
-                                startSøknad={() => {
-                                    settVisaHarBehandlingSide(false);
-                                }}
-                                stonadstype={Stønadstype.BARNETILSYN}
-                            />
-                        ) : (
-                            <Forside />
-                        )
+                        <RootRoute stønadstype={Stønadstype.BARNETILSYN} forside={<Forside />} />
                     }
                 />
                 <Route path={'*'} element={<SøknadsdialogInnhold />} />

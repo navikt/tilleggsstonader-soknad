@@ -30,7 +30,7 @@ export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
         nb: 'Vil du likevel sende ny søknad?',
     },
     vil_forstatt_sende_søknad_innhold: {
-        nb: 'Hvis du har begynt på nytt tiltak eller ny utdanning, kan du sende ny søknad. ',
+        nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er ett nytt skole/barnehageår kan du sende ny søknad.',
     },
     alert_for_barnetilsyn: {
         nb: 'Du har allerede sendt oss en søknad om støtte til pass av barn. ',
