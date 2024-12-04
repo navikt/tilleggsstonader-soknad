@@ -13,7 +13,6 @@ import ScrollToTop from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
-import { erProd } from './utils/miljø';
 
 initSentry();
 autentiseringsInterceptor();
@@ -31,7 +30,7 @@ const AppRoutes = () => {
                 <Route path={`/${barnetilsynPath}/*`} element={<BarnetilsynApp />} />
                 {/* Fallback for gamle lenker */}
                 <Route path={'/barnetilsyn/*'} element={<Navigate to="/pass-av-barn" replace />} />
-                {!erProd() && <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />}
+                <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
                 <Route path={'*'} element={<Navigate to="/pass-av-barn" replace />} />
             </Routes>
         </BrowserRouter>
