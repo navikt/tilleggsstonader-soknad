@@ -7,6 +7,8 @@ import { AvsluttOgLoggUtKnapp } from '../components/AvsluttOgLoggUtKnapp';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
+import { useSpråk } from '../context/SpråkContext';
+import { fellesTekster } from '../tekster/felles';
 import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBehandling';
 import { kvitteringTekster } from '../tekster/kvittering';
 import { Stønadstype } from '../typer/stønadstyper';
@@ -26,6 +28,8 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
     startSøknad,
     stonadstype,
 }: SøknadsideProps) => {
+    const { locale } = useSpråk();
+
     return (
         <Container>
             <VStack gap="4">
@@ -77,13 +81,8 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                 }}
             >
                 <AvsluttOgLoggUtKnapp />
-                <Button onClick={startSøknad} variant="primary">
-                    Start ny søknad
-                    <ChevronRightIcon
-                        title="a11y-title"
-                        fontSize="1.5rem"
-                        style={{ verticalAlign: 'middle', marginLeft: '0.5rem' }}
-                    />
+                <Button onClick={startSøknad} variant="primary" icon={<ChevronRightIcon />}>
+                    {fellesTekster.startNySøknad[locale]}
                 </Button>
             </KnappeContainer>
             <LocaleInlineLenke tekst={harEksisterendeBehandlingTekster.minside} />

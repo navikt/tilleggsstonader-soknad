@@ -12,8 +12,7 @@ export function AvsluttOgLoggUtKnapp() {
     const { locale } = useSpråk();
 
     return (
-        <Button variant="secondary" onClick={loggUt}>
-            <MultiplyIcon />
+        <Button variant="secondary" onClick={loggUt} icon={<MultiplyIcon />}>
             {fellesTekster.avsluttOgLoggUt[locale]}
         </Button>
     );
