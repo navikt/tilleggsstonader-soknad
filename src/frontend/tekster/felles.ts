@@ -19,6 +19,7 @@ export interface FellesInnhold {
     flere_vedlegg: TekstElement<string>;
     vedlegg_med_feil: TekstElement<string>;
     viktig_med_rett_opplysninger: TekstElement<InlineLenke>;
+    avsluttOgLoggUt: TekstElement<string>;
 }
 
 export const fellesTekster: FellesInnhold = {
@@ -78,6 +79,9 @@ export const fellesTekster: FellesInnhold = {
             },
             '.',
         ],
+    },
+    avsluttOgLoggUt: {
+        nb: 'Avslutt og logg ut',
     },
 };
 

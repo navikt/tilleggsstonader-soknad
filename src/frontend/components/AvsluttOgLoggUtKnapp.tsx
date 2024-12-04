@@ -2,21 +2,19 @@ import { MultiplyIcon } from '@navikt/aksel-icons';
 import { Button } from '@navikt/ds-react';
 
 import Environment from '../api/Environment';
+import { useSpråk } from '../context/SpråkContext';
+import { fellesTekster } from '../tekster/felles';
 
 export function AvsluttOgLoggUtKnapp() {
     const loggUt = () => {
         window.location.href = Environment().logoutUrl;
     };
+    const { locale } = useSpråk();
+
     return (
-        <>
-            <Button variant="secondary" onClick={loggUt}>
-                <MultiplyIcon
-                    title="a11y-title"
-                    fontSize="1.5rem"
-                    style={{ verticalAlign: 'middle', marginRight: '0.5rem' }}
-                />
-                Avslutt og logg ut
-            </Button>
-        </>
+        <Button variant="secondary" onClick={loggUt}>
+            <MultiplyIcon />
+            {fellesTekster.avsluttOgLoggUt[locale]}
+        </Button>
     );
 }
