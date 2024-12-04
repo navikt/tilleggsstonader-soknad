@@ -33,6 +33,14 @@ export const hentArbeidsrettedeAktiviteter = (): Promise<RegisterAktivitet[]> =>
         .get<RegisterAktiviteterResponse>(`${Environment().apiProxyUrl}/aktivitet`, defaultConfig())
         .then((response) => response.data.aktiviteter);
 };
+export const hentBehandlingStatus = (stønadstype: Stønadstype): Promise<boolean> => {
+    return axios
+        .get<boolean>(
+            `${Environment().apiProxyUrl}/person/har-behandling?stonadstype=${encodeURIComponent(stønadstype)}`,
+            defaultConfig()
+        )
+        .then((response) => response.data);
+};
 
 const stønadstypeTilPath = (stønadstype: Stønadstype): string => {
     switch (stønadstype) {
@@ -53,6 +61,7 @@ interface VedleggResponse {
         dokumentId: string;
     };
 }
+
 export const lastOppVedlegg = (fil: File): Promise<string> => {
     const url = `${Environment().vedleggProxyUrl}`;
     const requestData = new FormData();
