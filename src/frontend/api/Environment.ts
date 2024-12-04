@@ -54,7 +54,7 @@ const Environment = (): EnvironmentProps => {
         return {
             apiProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api',
             vedleggProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api/vedlegg',
-            wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2',
+            wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             logoutUrl: 'https://login.nav.no/oauth2/logout',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlGammelSøknad: urlGammelSøknadProd,
