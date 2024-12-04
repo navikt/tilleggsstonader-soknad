@@ -1,9 +1,9 @@
 import { styled } from 'styled-components';
 
-import { ChevronRightIcon, MultiplyIcon } from '@navikt/aksel-icons';
+import { ChevronRightIcon } from '@navikt/aksel-icons';
 import { Alert, BodyLong, BodyShort, Button, Heading, VStack } from '@navikt/ds-react';
 
-import Environment from '../api/Environment';
+import { AvsluttOgLoggUtKnapp } from '../components/AvsluttOgLoggUtKnapp';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
@@ -21,10 +21,6 @@ interface SøknadsideProps {
     startSøknad: () => void;
     stonadstype: Stønadstype;
 }
-
-const loggUt = () => {
-    window.location.href = Environment().logoutUrl;
-};
 
 const HarBehandlingSide: React.FC<SøknadsideProps> = ({
     startSøknad,
@@ -80,14 +76,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     justifyContent: 'flex-start',
                 }}
             >
-                <Button variant="secondary" onClick={loggUt}>
-                    <MultiplyIcon
-                        title="a11y-title"
-                        fontSize="1.5rem"
-                        style={{ verticalAlign: 'middle', marginRight: '0.5rem' }}
-                    />
-                    Avslutt og logg ut
-                </Button>
+                <AvsluttOgLoggUtKnapp />
                 <Button onClick={startSøknad} variant="primary">
                     Start ny søknad
                     <ChevronRightIcon
