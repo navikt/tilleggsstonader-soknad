@@ -4,6 +4,7 @@ interface EnvironmentProps {
     apiProxyUrl: string;
     vedleggProxyUrl: string;
     wonderwallUrl: string;
+    logoutUrl: string;
     sentryUrl?: string;
     urlGammelSøknad: (stønadstype: Stønadstype) => string;
     urlPapirsøknad: (stønadstype: Stønadstype) => string;
@@ -42,6 +43,7 @@ const Environment = (): EnvironmentProps => {
                 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/api/vedlegg',
             wonderwallUrl:
                 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
+            logoutUrl: 'https://login.ekstern.dev.nav.no/oauth2/logout',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlGammelSøknad: urlGammelSøknadDev,
             urlPapirsøknad: urlPapirsøknadDev,
@@ -52,7 +54,8 @@ const Environment = (): EnvironmentProps => {
         return {
             apiProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api',
             vedleggProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api/vedlegg',
-            wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
+            wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2',
+            logoutUrl: 'https://login.nav.no/oauth2/logout',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlGammelSøknad: urlGammelSøknadProd,
             urlPapirsøknad: urlPapirsøknadProd,
@@ -64,6 +67,7 @@ const Environment = (): EnvironmentProps => {
             apiProxyUrl: 'http://localhost:8080/api',
             vedleggProxyUrl: 'http://localhost:8080/api/vedlegg/tillegg',
             wonderwallUrl: `http://localhost:8001/test/cookie?redirect=`,
+            logoutUrl: 'http://localhost:8000/oauth2/logout',
             urlGammelSøknad: urlGammelSøknadDev,
             urlPapirsøknad: urlPapirsøknadDev,
             miljø: 'local',
