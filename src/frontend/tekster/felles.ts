@@ -20,7 +20,6 @@ export interface FellesInnhold {
     vedlegg_med_feil: TekstElement<string>;
     viktig_med_rett_opplysninger: TekstElement<InlineLenke>;
     avsluttOgLoggUt: TekstElement<string>;
-    startNySøknad: TekstElement<string>;
 }
 
 export const fellesTekster: FellesInnhold = {
@@ -83,9 +82,6 @@ export const fellesTekster: FellesInnhold = {
     },
     avsluttOgLoggUt: {
         nb: 'Avslutt og logg ut',
-    },
-    startNySøknad: {
-        nb: 'Start ny søknad',
     },
 };
 

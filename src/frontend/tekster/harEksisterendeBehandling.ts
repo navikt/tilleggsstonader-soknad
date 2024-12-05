@@ -8,6 +8,7 @@ interface søknadsideInnhold {
     alert_for_stønadstype: TekstElement<string>;
     alert_innhold: TekstElement<InlineLenke>;
     minside: TekstElement<InlineLenke>;
+    startNySøknad: TekstElement<string>;
 }
 
 export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
@@ -51,5 +52,8 @@ export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
                 url: 'https://www.nav.no/saksbehandlingstid',
             },
         ],
+    },
+    startNySøknad: {
+        nb: 'Start ny søknad',
     },
 };

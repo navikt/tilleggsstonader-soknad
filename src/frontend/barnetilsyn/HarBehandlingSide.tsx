@@ -8,7 +8,6 @@ import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../context/SpråkContext';
-import { fellesTekster } from '../tekster/felles';
 import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBehandling';
 import { kvitteringTekster } from '../tekster/kvittering';
 import { stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
@@ -80,7 +79,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
             >
                 <AvsluttOgLoggUtKnapp />
                 <Button onClick={startSøknad} variant="primary" icon={<ChevronRightIcon />}>
-                    {fellesTekster.startNySøknad[locale]}
+                    {harEksisterendeBehandlingTekster.startNySøknad[locale]}
                 </Button>
             </KnappeContainer>
             <LocaleInlineLenke tekst={harEksisterendeBehandlingTekster.minside} />
