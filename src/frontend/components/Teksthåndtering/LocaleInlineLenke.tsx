@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Link } from '@navikt/ds-react';
 
 import { logNavigereEvent } from '../../api/amplitude';
@@ -8,28 +10,22 @@ import { InlineLenke, Lenke, StyledTekst, TekstElement } from '../../typer/tekst
 const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tekst }) => {
     const { locale } = useSpråk();
 
-    return (
-        <>
-            {tekst[locale].map((tekstElement, indeks) =>
-                tekstTilLenkeEllerTekst(tekstElement, indeks)
-            )}
-        </>
-    );
+    return tekst[locale].map((tekstElement, indeks) => (
+        <React.Fragment key={indeks}>{tekstTilLenkeEllerTekst(tekstElement)}</React.Fragment>
+    ));
 };
 
 export const tekstTilLenkeEllerTekst = (
     tekstElement: string | StyledTekst | Lenke,
-    indeks: number
 ) => {
     if (typeof tekstElement === 'string') {
-        return <span key={indeks}>{tekstElement}</span>;
+        return <span>{tekstElement}</span>;
     }
     if ('url' in tekstElement) {
         return (
             <Link
                 inlineText
                 href={tekstElement.url}
-                key={indeks}
                 variant={tekstElement.variant}
                 target="_blank"
                 onClick={() =>
@@ -41,7 +37,7 @@ export const tekstTilLenkeEllerTekst = (
         );
     }
     return (
-        <span key={indeks} style={{ fontWeight: tekstElement.style }}>
+        <span style={{ fontWeight: tekstElement.style }}>
             {tekstElement.tekst}
         </span>
     );

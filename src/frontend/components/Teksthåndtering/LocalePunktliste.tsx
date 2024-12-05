@@ -30,7 +30,11 @@ const lagPunktliste = (punkter: (string | InlineLenke)[]) =>
             <List.Item key={indeks}>{punkt}</List.Item>
         ) : (
             <List.Item key={indeks}>
-                {punkt.map((tekstElement, indeks) => tekstTilLenkeEllerTekst(tekstElement, indeks))}
+                {punkt.map((tekstElement, indeks) => (
+                    <React.Fragment key={indeks}>
+                        {tekstTilLenkeEllerTekst(tekstElement)}
+                    </React.Fragment>
+                ))}
             </List.Item>
         )
     );
