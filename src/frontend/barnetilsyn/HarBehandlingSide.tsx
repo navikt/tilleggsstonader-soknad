@@ -80,7 +80,6 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     {harEksisterendeBehandlingTekster.startNySøknad[locale]}
                 </Button>
             </KnappeContainer>
-            <LocaleInlineLenke tekst={harEksisterendeBehandlingTekster.minside} />
         </Container>
     );
 };

@@ -8,7 +8,6 @@ interface søknadsideInnhold {
     vil_forstatt_sende_søknad_innhold_læremidler: TekstElement<string>;
     alert_for_stønadstype: TekstElement<string>;
     alert_innhold: TekstElement<InlineLenke>;
-    minside: TekstElement<InlineLenke>;
     startNySøknad: TekstElement<string>;
 }
 
@@ -47,14 +46,6 @@ export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
                 url: 'https://www.nav.no/min-side',
             },
             ' (åpnes i ny fane) ',
-        ],
-    },
-    minside: {
-        nb: [
-            {
-                tekst: ' Gå til Min Side',
-                url: 'https://www.nav.no/saksbehandlingstid',
-            },
         ],
     },
     startNySøknad: {
