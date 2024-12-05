@@ -7,6 +7,7 @@ import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
 import { HarRettTilUtstyrsstipend } from './HarRettTilUtstyrsstipend';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
+import { harValgtAktivitetPåVgsNivå } from './UtdanningUtils';
 import {
     feilAnnenUtdanning,
     feilErLærlingEllerLiknende,
@@ -71,11 +72,20 @@ const Utdanning = () => {
         settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
     };
 
-    const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenUtdanningType>) => {
-        settAnnenUtdanning(verdi);
+    const oppdaterAnnenUtdanning = (nyAnnenUtdanning: EnumFelt<AnnenUtdanningType>) => {
+        settAnnenUtdanning(nyAnnenUtdanning);
+        if (!harValgtAktivitetPåVgsNivå(valgteAktiviteter, registerAktiviteter, nyAnnenUtdanning)) {
+            setterLærlingEllerLiknende(undefined);
+            settHarTidligereFullførtVgs(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                erLærlingEllerLiknende: undefined,
+                harTidligereFullførtVgs: undefined,
+            }));
+        }
         settValideringsfeil((prevState) => ({
             ...prevState,
-            annenAktivitet: undefined,
+            annenUtdanning: undefined,
         }));
     };
 
@@ -89,6 +99,13 @@ const Utdanning = () => {
 
     const oppdatererLærlingEllerLiknende = (verdi: EnumFelt<JaNei>) => {
         setterLærlingEllerLiknende(verdi);
+        if (verdi.verdi === 'JA') {
+            settHarTidligereFullførtVgs(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                harTidligereFullførtVgs: undefined,
+            }));
+        }
         settValideringsfeil((prevState) => ({
             ...prevState,
             erLærlingEllerLiknende: undefined,
@@ -115,6 +132,17 @@ const Utdanning = () => {
 
     const oppdaterValgteAktiviteter = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
         settValgteAktiviteter(nyeValgteAktiviteter);
+        if (
+            !harValgtAktivitetPåVgsNivå(nyeValgteAktiviteter, registerAktiviteter, annenUtdanning)
+        ) {
+            setterLærlingEllerLiknende(undefined);
+            settHarTidligereFullførtVgs(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                erLærlingEllerLiknende: undefined,
+                harTidligereFullførtVgs: undefined,
+            }));
+        }
         if (nyeValgteAktiviteter.verdier.length > 0) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
@@ -134,7 +162,8 @@ const Utdanning = () => {
     const skalViseAnnenAktivitet =
         !skalViseArbeidsrettedeAktiviteter || skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
     const skalViseHarRettTilUtstyrsstipend =
-        person.alder < 21 && annenUtdanning?.verdi === AnnenUtdanningType.VIDEREGÅENDE;
+        person.alder < 21 &&
+        harValgtAktivitetPåVgsNivå(valgteAktiviteter, registerAktiviteter, annenUtdanning);
 
     const kanFortsette = (): boolean => {
         let feil: Valideringsfeil = {};
@@ -206,7 +235,7 @@ const Utdanning = () => {
             {skalViseAnnenAktivitet && (
                 <AnnenUtdanning
                     annenUtdanning={annenUtdanning}
-                    oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                    oppdaterAnnenUtdanning={oppdaterAnnenUtdanning}
                     feilmelding={valideringsfeil.annenUtdanning}
                 />
             )}

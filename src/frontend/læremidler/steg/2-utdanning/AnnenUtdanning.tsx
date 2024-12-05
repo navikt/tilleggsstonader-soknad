@@ -11,13 +11,13 @@ import { AnnenUtdanningType } from '../../typer/søknad';
 
 interface Props {
     annenUtdanning: EnumFelt<AnnenUtdanningType> | undefined;
-    oppdaterAnnenAktivitet: (verdi: EnumFelt<AnnenUtdanningType>) => void;
+    oppdaterAnnenUtdanning: (verdi: EnumFelt<AnnenUtdanningType>) => void;
     feilmelding: Feilmelding | undefined;
 }
 
 export const AnnenUtdanning: React.FC<Props> = ({
     annenUtdanning,
-    oppdaterAnnenAktivitet,
+    oppdaterAnnenUtdanning,
     feilmelding,
 }) => {
     return (
@@ -25,7 +25,7 @@ export const AnnenUtdanning: React.FC<Props> = ({
             <LocaleRadioGroup
                 id={feilmelding?.id}
                 tekst={utdanningTekster.radio_annen_utdanning}
-                onChange={oppdaterAnnenAktivitet}
+                onChange={oppdaterAnnenUtdanning}
                 value={annenUtdanning?.verdi || []}
                 error={feilmelding?.melding}
             />
