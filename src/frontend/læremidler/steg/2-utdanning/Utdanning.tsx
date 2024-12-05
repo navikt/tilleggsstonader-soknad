@@ -83,7 +83,7 @@ const Utdanning = () => {
         }
         settValideringsfeil((prevState) => ({
             ...prevState,
-            annenAktivitet: undefined,
+            annenUtdanning: undefined,
         }));
     };
 
