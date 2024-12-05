@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Label, List } from '@navikt/ds-react';
 
-import { tekstTilLenkeEllerTekst } from './LocaleInlineLenke';
+import { LenkeEllerTekst } from './LocaleInlineLenke';
 import { useSpråk } from '../../context/SpråkContext';
 import { InlineLenke, TekstElement } from '../../typer/tekst';
 
@@ -30,7 +30,9 @@ const lagPunktliste = (punkter: (string | InlineLenke)[]) =>
             <List.Item key={indeks}>{punkt}</List.Item>
         ) : (
             <List.Item key={indeks}>
-                {punkt.map((tekstElement, indeks) => tekstTilLenkeEllerTekst(tekstElement, indeks))}
+                {punkt.map((tekstElement, indeks) => (
+                    <LenkeEllerTekst key={indeks} tekstElement={tekstElement} />
+                ))}
             </List.Item>
         )
     );
