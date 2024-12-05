@@ -11,6 +11,7 @@ import { useSpråk } from '../context/SpråkContext';
 import { fellesTekster } from '../tekster/felles';
 import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBehandling';
 import { kvitteringTekster } from '../tekster/kvittering';
+import { stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 
 const KnappeContainer = styled(BodyShort)`
@@ -36,11 +37,8 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                 <Alert variant="info">
                     <Heading size="medium">
                         <LocaleTekst
-                            tekst={
-                                stonadstype === Stønadstype.BARNETILSYN
-                                    ? harEksisterendeBehandlingTekster.alert_for_barnetilsyn
-                                    : harEksisterendeBehandlingTekster.alert_for_læremidler
-                            }
+                            tekst={harEksisterendeBehandlingTekster.alert_for_stønadstype}
+                            argument0={stønadstypeTilSkjemanavn[stonadstype].toLowerCase()}
                         />
                         <BodyLong>
                             <LocaleInlineLenke
