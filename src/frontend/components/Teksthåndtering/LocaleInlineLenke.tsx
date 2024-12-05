@@ -4,19 +4,25 @@ import { Link } from '@navikt/ds-react';
 
 import { logNavigereEvent } from '../../api/amplitude';
 import { useSpråk } from '../../context/SpråkContext';
+import { useSøknad } from '../../context/SøknadContext';
 import { Stønadstype } from '../../typer/stønadstyper';
 import { InlineLenke, Lenke, StyledTekst, TekstElement } from '../../typer/tekst';
 
 const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tekst }) => {
     const { locale } = useSpråk();
 
+    const { stønadstype } = useSøknad();
+
     return tekst[locale].map((tekstElement, indeks) => (
-        <React.Fragment key={indeks}>{tekstTilLenkeEllerTekst(tekstElement)}</React.Fragment>
+        <React.Fragment key={indeks}>
+            {tekstTilLenkeEllerTekst(tekstElement, stønadstype)}
+        </React.Fragment>
     ));
 };
 
 export const tekstTilLenkeEllerTekst = (
     tekstElement: string | StyledTekst | Lenke,
+    stønadstype: Stønadstype
 ) => {
     if (typeof tekstElement === 'string') {
         return <span>{tekstElement}</span>;
@@ -29,7 +35,7 @@ export const tekstTilLenkeEllerTekst = (
                 variant={tekstElement.variant}
                 target="_blank"
                 onClick={() =>
-                    logNavigereEvent(Stønadstype.BARNETILSYN, tekstElement.url, tekstElement.tekst)
+                    logNavigereEvent(stønadstype, tekstElement.url, tekstElement.tekst)
                 }
             >
                 {tekstElement.tekst}
