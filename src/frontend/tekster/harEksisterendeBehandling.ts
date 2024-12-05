@@ -4,7 +4,8 @@ interface søknadsideInnhold {
     spørsmål_om_søknaden: TekstElement<string>;
     spørsmål_om_søknaden_innhold: TekstElement<InlineLenke>;
     vil_forstatt_sende_søknad: TekstElement<string>;
-    vil_forstatt_sende_søknad_innhold: TekstElement<string>;
+    vil_forstatt_sende_søknad_innhold_tilsyn_barn: TekstElement<string>;
+    vil_forstatt_sende_søknad_innhold_læremidler: TekstElement<string>;
     alert_for_stønadstype: TekstElement<string>;
     alert_innhold: TekstElement<InlineLenke>;
     minside: TekstElement<InlineLenke>;
@@ -29,8 +30,11 @@ export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
     vil_forstatt_sende_søknad: {
         nb: 'Vil du likevel sende ny søknad?',
     },
-    vil_forstatt_sende_søknad_innhold: {
-        nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er ett nytt skole/barnehageår kan du sende ny søknad.',
+    vil_forstatt_sende_søknad_innhold_tilsyn_barn: {
+        nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er et nytt skole/barnehageår kan du sende ny søknad.',
+    },
+    vil_forstatt_sende_søknad_innhold_læremidler: {
+        nb: 'Hvis du har begynt på en ny utdanning eller opplæring, eller det gjelder et nytt skoleår, kan du sende ny søknad.',
     },
     alert_for_stønadstype: {
         nb: 'Du har allerede sendt oss en søknad om støtte til [0]. ',

@@ -17,7 +17,7 @@ export const RootRoute: React.FC<RootRouteProps> = ({ forside }) => {
     if (visHarBehandlingSide && (env.miljø === 'preprod' || env.miljø === 'local')) {
         return (
             <HarBehandlingSide
-                stonadstype={stønadstype}
+                stønadstype={stønadstype}
                 startSøknad={() => settVisHarBehandlingSide(false)}
             ></HarBehandlingSide>
         );

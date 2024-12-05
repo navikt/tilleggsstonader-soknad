@@ -21,12 +21,12 @@ const KnappeContainer = styled(BodyShort)`
 
 interface SøknadsideProps {
     startSøknad: () => void;
-    stonadstype: Stønadstype;
+    stønadstype: Stønadstype;
 }
 
 const HarBehandlingSide: React.FC<SøknadsideProps> = ({
     startSøknad,
-    stonadstype,
+    stønadstype,
 }: SøknadsideProps) => {
     const { locale } = useSpråk();
 
@@ -37,7 +37,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     <Heading size="medium">
                         <LocaleTekst
                             tekst={harEksisterendeBehandlingTekster.alert_for_stønadstype}
-                            argument0={stønadstypeTilSkjemanavn[stonadstype].toLowerCase()}
+                            argument0={stønadstypeTilSkjemanavn[stønadstype].toLowerCase()}
                         />
                         <BodyLong>
                             <LocaleInlineLenke
@@ -67,9 +67,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     />
                 </Heading>
                 <BodyLong>
-                    <LocaleTekst
-                        tekst={harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold}
-                    />
+                    <VilFortsattSendeSøknadTekst stønadstype={stønadstype} />
                 </BodyLong>
             </VStack>
             <KnappeContainer
@@ -86,5 +84,14 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
         </Container>
     );
 };
+
+function VilFortsattSendeSøknadTekst({ stønadstype }: { stønadstype: Stønadstype }) {
+    const tekst =
+        stønadstype === Stønadstype.BARNETILSYN
+            ? harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold_tilsyn_barn
+            : harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold_læremidler;
+
+    return <LocaleTekst tekst={tekst} />;
+}
 
 export default HarBehandlingSide;
