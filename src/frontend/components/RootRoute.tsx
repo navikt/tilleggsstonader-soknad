@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import Environment from '../api/Environment';
 import HarBehandlingSide from '../barnetilsyn/HarBehandlingSide';
 import { usePerson } from '../context/PersonContext';
-import { Stønadstype } from '../typer/stønadstyper';
+import { useSøknad } from '../context/SøknadContext';
 
 interface RootRouteProps {
-    stønadstype: Stønadstype;
     forside: React.ReactNode;
 }
 
-export const RootRoute: React.FC<RootRouteProps> = ({ stønadstype, forside }) => {
+export const RootRoute: React.FC<RootRouteProps> = ({ forside }) => {
     const { harBehandling } = usePerson();
+    const { stønadstype } = useSøknad();
     const env = Environment();
     const [visHarBehandlingSide, settVisHarBehandlingSide] = useState<boolean>(harBehandling);
     if (visHarBehandlingSide && (env.miljø === 'preprod' || env.miljø === 'local')) {

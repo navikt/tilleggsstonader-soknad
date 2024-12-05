@@ -16,19 +16,13 @@ import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
 import VedleggPassAvBarn from './steg/6-vedlegg/VedleggPassAvBarn';
 import Oppsummering from './steg/7-oppsummering/Oppsummering';
 import Kvittering from '../components/Kvittering/Kvittering';
-import { Stønadstype } from '../typer/stønadstyper';
 
 const Søknadsdialog: React.FC = () => {
     return (
         <>
             <Header tittel={fellesTekster.banner_bt} />
             <Routes>
-                <Route
-                    path={'/'}
-                    element={
-                        <RootRoute stønadstype={Stønadstype.BARNETILSYN} forside={<Forside />} />
-                    }
-                />
+                <Route path={'/'} element={<RootRoute forside={<Forside />} />} />
                 <Route path={'*'} element={<SøknadsdialogInnhold />} />
                 <Route
                     path={'/kvittering'}
