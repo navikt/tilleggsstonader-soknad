@@ -4,8 +4,8 @@ import { hentBehandlingStatus } from '../../api/api';
 import { Stønadstype } from '../../typer/stønadstyper';
 
 const useSjekkBehandlingStatus = (stonadstype: Stønadstype) => {
-    const [harBehandling, setHarBehandling] = useState<boolean | false>(false);
-    const [status, setStatus] = useState<boolean | false>(false);
+    const [harBehandling, setHarBehandling] = useState<boolean>(false);
+    const [harLastetBehandlingsstatus, setHarLastetBehandlingsstatus] = useState<boolean>(false);
 
     useEffect(() => {
         hentBehandlingStatus(stonadstype)
@@ -14,10 +14,10 @@ const useSjekkBehandlingStatus = (stonadstype: Stønadstype) => {
                 setHarBehandling(false);
             })
             .finally(() => {
-                setStatus(true);
+                setHarLastetBehandlingsstatus(true);
             });
     }, [stonadstype]);
-    return { harBehandling, status };
+    return { harBehandling, harLastetBehandlingsstatus };
 };
 
 export default useSjekkBehandlingStatus;
