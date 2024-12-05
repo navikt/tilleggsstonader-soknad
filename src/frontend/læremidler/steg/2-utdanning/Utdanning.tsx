@@ -97,6 +97,13 @@ const Utdanning = () => {
 
     const oppdatererLærlingEllerLiknende = (verdi: EnumFelt<JaNei>) => {
         setterLærlingEllerLiknende(verdi);
+        if (verdi.verdi === 'JA') {
+            settHarTidligereFullførtVgs(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                harTidligereFullførtVgs: undefined,
+            }));
+        }
         settValideringsfeil((prevState) => ({
             ...prevState,
             erLærlingEllerLiknende: undefined,
