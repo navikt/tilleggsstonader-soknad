@@ -27,7 +27,7 @@ export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: Rea
     const [harLastetPerson, settHarLastetPerson] = useState<boolean>(false);
     const [feilmelding, settFeilmelding] = useState<string>();
 
-    const { harBehandling } = useSjekkBehandlingStatus(stønadstype);
+    const { harBehandling, status } = useSjekkBehandlingStatus(stønadstype);
 
     useEffect(() => {
         hentPersonData(skalHenteMedBarn(stønadstype))
@@ -52,10 +52,11 @@ export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: Rea
     if (!harLastetPerson) {
         return null;
     }
-
-    return (
-        <PersonProvider person={person} harBehandling={harBehandling}>
-            {children}
-        </PersonProvider>
-    );
+    if (harLastetPerson && status) {
+        return (
+            <PersonProvider person={person} harBehandling={harBehandling}>
+                {children}
+            </PersonProvider>
+        );
+    }
 };
