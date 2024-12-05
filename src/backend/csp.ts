@@ -32,6 +32,7 @@ const cspMap = (): Record<string, string[]> => {
             '*.taskanalytics.com',
             '*.hotjar.com',
             'nav.boost.ai',
+            "'unsafe-inline'",
             // └────────────────────────────────┘
         ],
 
@@ -45,6 +46,7 @@ const cspMap = (): Record<string, string[]> => {
             '*.hotjar.com',
             '*.taskanalytics.com',
             'nav.boost.ai',
+            "'unsafe-inline'",
             // └────────────────────────────────┘
         ],
 
@@ -56,16 +58,19 @@ const cspMap = (): Record<string, string[]> => {
             '*.psplugin.com',
             '*.googleapis.com',
             '*.gstatic.com',
+            "'unsafe-inline'",
             // └────────────────────────────────┘
         ],
 
         // Hvor vi får hente <style>-elementer fra
         'style-src-elem': [
+            "'self'",
             // ┌────────── Dekoratøren ──────────┐
             '*.nav.no',
             '*.psplugin.com',
             '*.googleapis.com',
             '*.gstatic.com',
+            "'unsafe-inline'",
             // └────────────────────────────────┘
         ],
 
@@ -74,6 +79,7 @@ const cspMap = (): Record<string, string[]> => {
             "'self'",
             'm3pb011r.apicdn.sanity.io',
             'amplitude.nav.no',
+            'sentry.gc.nav.no',
             // ┌────────── Dekoratøren ──────────┐
             '*.nav.no',
             'api.uxsignals.com',
@@ -97,7 +103,7 @@ const cspMap = (): Record<string, string[]> => {
             'cdn.nav.no',
             '*.googleapis.com',
             '*.gstatic.com',
-            'data:',
+            'data:', // Tillater innebygde fonter
             // └────────────────────────────────┘
         ],
 
@@ -114,7 +120,7 @@ const cspMap = (): Record<string, string[]> => {
         // Hvor bilder kan hentes fra
         'img-src': [
             "'self'",
-            'data:',
+            'data:', // Tillater innebygde bilder
             // ┌────────── Dekoratøren ──────────┐
             '*.nav.no',
             'uxsignals-frontend.uxsignals.app.iterate.no',
