@@ -14,19 +14,13 @@ import Kvittering from '../components/Kvittering/Kvittering';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { fellesTekster } from '../tekster/felles';
-import { Stønadstype } from '../typer/stønadstyper';
 
 const Søknadsdialog: React.FC = () => {
     return (
         <>
             <Header tittel={fellesTekster.banner_læremidler} />
             <Routes>
-                <Route
-                    path={'/'}
-                    element={
-                        <RootRoute stønadstype={Stønadstype.LÆREMIDLER} forside={<Forside />} />
-                    }
-                />
+                <Route path={'/'} element={<RootRoute forside={<Forside />} />} />
                 <Route path={'*'} element={<SøknadsdialogInnhold />} />
                 <Route
                     path={'/kvittering'}

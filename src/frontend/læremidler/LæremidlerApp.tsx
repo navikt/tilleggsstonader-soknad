@@ -26,7 +26,7 @@ const LæremidlerInnhold = () => {
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}
         >
-            <SøknadRouting stønadstype={Stønadstype.LÆREMIDLER}>
+            <SøknadRouting>
                 <Søknadsdialog />
             </SøknadRouting>
         </SøknadProvider>

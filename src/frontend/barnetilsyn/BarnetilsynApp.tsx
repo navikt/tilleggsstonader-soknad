@@ -28,7 +28,7 @@ const BarnetilsynInnhold = () => {
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}
         >
-            <SøknadRouting stønadstype={Stønadstype.BARNETILSYN}>
+            <SøknadRouting>
                 <Søknadsdialog />
             </SøknadRouting>
         </SøknadProvider>
