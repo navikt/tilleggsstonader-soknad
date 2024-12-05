@@ -141,7 +141,9 @@ export const utdanningTekster: AktivitetInnhold = {
         },
         innhold_lærling: {
             nb: [
-                'Å være lærling betyr at du utdanner deg til et yrke ved å jobbe i en bedrift, hvor du får både opplæring og praksis i ett fag. ',
+                'Å være ',
+                { tekst: 'lærling', style: 'bold' },
+                ' betyr at du utdanner deg til et yrke ved å jobbe i en bedrift, hvor du får både opplæring og praksis i ett fag. ',
                 {
                     tekst: 'Les mer om lærlinger på Vilbli.no',
                     url: 'https://www.vilbli.no/nb/no/a/laerling-6',
@@ -152,7 +154,8 @@ export const utdanningTekster: AktivitetInnhold = {
         },
         innhold_lærekandidatordningen: {
             nb: [
-                'Lærekandidatordningen er et alternativ med færre kompetansemål for de som tror det kan bli vanskelig å fullføre et fag- eller svennebrev. ',
+                { tekst: 'Lærekandidatordningen', style: 'bold' },
+                ' er et alternativ med færre kompetansemål for de som tror det kan bli vanskelig å fullføre et fag- eller svennebrev. ',
                 {
                     tekst: 'Les mer om lærekandidatordningen på Vilbli.no',
                     url: 'https://www.vilbli.no/nb/no/a/laerekandidat-6',
@@ -163,7 +166,8 @@ export const utdanningTekster: AktivitetInnhold = {
         },
         innhold_praksisbrevkandidater: {
             nb: [
-                'Praksisbrevkandidater går et toårig opplæringsløp på de yrkesfaglige utdanningsprogrammene. Det er en mer praktisk opplæring, hovedsakelig i bedrift. ',
+                { tekst: 'Praksisbrevkandidater', style: 'bold' },
+                ' går et toårig opplæringsløp på de yrkesfaglige utdanningsprogrammene. Det er en mer praktisk opplæring, hovedsakelig i bedrift. ',
                 {
                     tekst: 'Les mer om praksisbrevkandidater på Vilbli.no',
                     url: 'https://www.vilbli.no/nb/no/a/praksisbrevkandidat-6',
@@ -174,7 +178,8 @@ export const utdanningTekster: AktivitetInnhold = {
         },
         innhold_fagbrev_på_jobb: {
             nb: [
-                '«Fagbrev på jobb» er for de som er ufaglært og vil ta fagbrev samtidig som de er i lønnet arbeid. ',
+                { tekst: '«Fagbrev på jobb»', style: 'bold' },
+                ' er for de som er ufaglært og vil ta fagbrev samtidig som de er i lønnet arbeid. ',
                 {
                     tekst: 'Les mer om fagbrev på jobb på Vilbli.no',
                     url: 'https://www.vilbli.no/nb/no/a/laerling-6',
