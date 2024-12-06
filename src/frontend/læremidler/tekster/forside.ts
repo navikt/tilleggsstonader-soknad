@@ -31,7 +31,7 @@ export const forsideTekster: ForsideInnhold = {
     viktig_å_vite_innhold: {
         nb: [
             [
-                'Denne pengestøtten dekker ikke semesteravgift eller skolepenger. Du må fylle ut andre skjemaer for å søke om dette, avhengig om du har ',
+                'Denne pengestøtten dekker ikke eksamensgebyr, semesteravgift eller skolepenger. Du må fylle ut andre skjemaer for å søke om dette, avhengig om du har ',
                 {
                     tekst: 'nedsatt arbeidsevne',
                     url: 'https://www.nav.no/fyllut/nav760710',
