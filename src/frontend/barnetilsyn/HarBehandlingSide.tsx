@@ -1,23 +1,16 @@
-import { styled } from 'styled-components';
+import React from 'react';
 
 import { ChevronRightIcon } from '@navikt/aksel-icons';
-import { Alert, BodyLong, BodyShort, Button, Heading, VStack } from '@navikt/ds-react';
+import { Alert, BodyLong, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 
 import { AvsluttOgLoggUtKnapp } from '../components/AvsluttOgLoggUtKnapp';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
-import { useSpråk } from '../context/SpråkContext';
 import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBehandling';
 import { kvitteringTekster } from '../tekster/kvittering';
 import { stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
-
-const KnappeContainer = styled(BodyShort)`
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-`;
 
 interface SøknadsideProps {
     startSøknad: () => void;
@@ -28,8 +21,6 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
     startSøknad,
     stønadstype,
 }: SøknadsideProps) => {
-    const { locale } = useSpråk();
-
     return (
         <Container>
             <VStack gap="4">
@@ -67,30 +58,23 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     />
                 </Heading>
                 <BodyLong>
-                    <VilFortsattSendeSøknadTekst stønadstype={stønadstype} />
+                    <LocaleTekst
+                        tekst={
+                            harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold[
+                                stønadstype
+                            ]
+                        }
+                    />
                 </BodyLong>
             </VStack>
-            <KnappeContainer
-                style={{
-                    justifyContent: 'flex-start',
-                }}
-            >
+            <HStack gap={'4'} justify="start">
                 <AvsluttOgLoggUtKnapp />
                 <Button onClick={startSøknad} variant="primary" icon={<ChevronRightIcon />}>
-                    {harEksisterendeBehandlingTekster.startNySøknad[locale]}
+                    <LocaleTekst tekst={harEksisterendeBehandlingTekster.startNySøknad} />
                 </Button>
-            </KnappeContainer>
+            </HStack>
         </Container>
     );
 };
-
-function VilFortsattSendeSøknadTekst({ stønadstype }: { stønadstype: Stønadstype }) {
-    const tekst =
-        stønadstype === Stønadstype.BARNETILSYN
-            ? harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold_tilsyn_barn
-            : harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold_læremidler;
-
-    return <LocaleTekst tekst={tekst} />;
-}
 
 export default HarBehandlingSide;

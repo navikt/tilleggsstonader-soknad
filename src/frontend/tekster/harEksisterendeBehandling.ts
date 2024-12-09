@@ -1,17 +1,19 @@
+import { Stønadstype } from '../typer/stønadstyper';
 import { InlineLenke, TekstElement } from '../typer/tekst';
 
-interface søknadsideInnhold {
+interface HarEksistendeBehandlingInnhold {
     spørsmål_om_søknaden: TekstElement<string>;
     spørsmål_om_søknaden_innhold: TekstElement<InlineLenke>;
     vil_forstatt_sende_søknad: TekstElement<string>;
-    vil_forstatt_sende_søknad_innhold_tilsyn_barn: TekstElement<string>;
-    vil_forstatt_sende_søknad_innhold_læremidler: TekstElement<string>;
+    vil_forstatt_sende_søknad_innhold: {
+        [key in Stønadstype]: TekstElement<string>;
+    };
     alert_for_stønadstype: TekstElement<string>;
     alert_innhold: TekstElement<InlineLenke>;
     startNySøknad: TekstElement<string>;
 }
 
-export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
+export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = {
     spørsmål_om_søknaden: {
         nb: 'Spørsmål om søknaden eller saksbehandlingstid?',
     },
@@ -29,11 +31,13 @@ export const harEksisterendeBehandlingTekster: søknadsideInnhold = {
     vil_forstatt_sende_søknad: {
         nb: 'Vil du likevel sende ny søknad?',
     },
-    vil_forstatt_sende_søknad_innhold_tilsyn_barn: {
-        nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er et nytt skole/barnehageår kan du sende ny søknad.',
-    },
-    vil_forstatt_sende_søknad_innhold_læremidler: {
-        nb: 'Hvis du har begynt på en ny utdanning eller opplæring, eller det gjelder et nytt skoleår, kan du sende ny søknad.',
+    vil_forstatt_sende_søknad_innhold: {
+        [Stønadstype.BARNETILSYN]: {
+            nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er et nytt skole/barnehageår kan du sende ny søknad.',
+        },
+        [Stønadstype.LÆREMIDLER]: {
+            nb: 'Hvis du har begynt på en ny utdanning eller opplæring, eller det gjelder et nytt skoleår, kan du sende ny søknad.',
+        },
     },
     alert_for_stønadstype: {
         nb: 'Du har allerede sendt oss en søknad om støtte til [0]. ',
