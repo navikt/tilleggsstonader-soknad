@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "ci": "yarn --prefer-offline --frozen-lockfile && yarn --cwd src/backend ci",
-    "build": "PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.production.js && yarn --cwd src/backend build",
+    "build": "yarn lint && PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.production.js && yarn --cwd src/backend build",
     "build:dev": "PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.development.js",
     "start:dev": "PUBLIC_URL=/tilleggsstonader/soknad webpack serve --config ./webpack/webpack.development.js",
     "postinstall": "husky",
