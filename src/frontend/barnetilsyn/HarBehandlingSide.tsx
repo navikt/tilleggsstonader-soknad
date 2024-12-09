@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { styled } from 'styled-components';
-
 import { ChevronRightIcon } from '@navikt/aksel-icons';
-import { Alert, BodyLong, BodyShort, Button, Heading, VStack } from '@navikt/ds-react';
+import { Alert, BodyLong, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 
 import { AvsluttOgLoggUtKnapp } from '../components/AvsluttOgLoggUtKnapp';
 import { Container } from '../components/Side';
@@ -13,12 +11,6 @@ import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBeha
 import { kvitteringTekster } from '../tekster/kvittering';
 import { stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
-
-const KnappeContainer = styled(BodyShort)`
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-`;
 
 interface SøknadsideProps {
     startSøknad: () => void;
@@ -75,16 +67,12 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     />
                 </BodyLong>
             </VStack>
-            <KnappeContainer
-                style={{
-                    justifyContent: 'flex-start',
-                }}
-            >
+            <HStack gap={'4'} justify="start">
                 <AvsluttOgLoggUtKnapp />
                 <Button onClick={startSøknad} variant="primary" icon={<ChevronRightIcon />}>
                     <LocaleTekst tekst={harEksisterendeBehandlingTekster.startNySøknad} />
                 </Button>
-            </KnappeContainer>
+            </HStack>
         </Container>
     );
 };
