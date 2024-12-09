@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { styled } from 'styled-components';
 
 import { ChevronRightIcon } from '@navikt/aksel-icons';
@@ -64,7 +66,13 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     />
                 </Heading>
                 <BodyLong>
-                    <VilFortsattSendeSøknadTekst stønadstype={stønadstype} />
+                    <LocaleTekst
+                        tekst={
+                            harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold[
+                                stønadstype
+                            ]
+                        }
+                    />
                 </BodyLong>
             </VStack>
             <KnappeContainer
@@ -80,14 +88,5 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
         </Container>
     );
 };
-
-function VilFortsattSendeSøknadTekst({ stønadstype }: { stønadstype: Stønadstype }) {
-    const tekst =
-        stønadstype === Stønadstype.BARNETILSYN
-            ? harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold_tilsyn_barn
-            : harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold_læremidler;
-
-    return <LocaleTekst tekst={tekst} />;
-}
 
 export default HarBehandlingSide;
