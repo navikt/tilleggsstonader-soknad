@@ -3,7 +3,6 @@ import { InlineLenke, LesMer, TekstElement } from '../../typer/tekst';
 interface OppsummeringInnhold {
     tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
-    bekreft_checkboks: TekstElement<string>;
 
     accordians: {
         om_deg: {
@@ -48,10 +47,6 @@ export const oppsummeringTekster: OppsummeringInnhold = {
     },
     guide_innhold: {
         nb: 'Se over søknaden din før du sender den inn. Alt du har fylt inn er lagret. Hvis noe er feil, så kan du gå tilbake og endre det.',
-    },
-
-    bekreft_checkboks: {
-        nb: 'Jeg bekrefter at jeg har lest og forstått informasjonen i søknaden og svart så godt jeg kan.',
     },
 
     accordians: {

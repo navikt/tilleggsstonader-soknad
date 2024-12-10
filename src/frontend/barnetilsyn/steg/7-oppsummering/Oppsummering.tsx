@@ -1,20 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import { ChevronLeftIcon, PaperclipIcon } from '@navikt/aksel-icons';
-import {
-    Accordion,
-    BodyLong,
-    BodyShort,
-    Button,
-    Checkbox,
-    CheckboxGroup,
-    Heading,
-    Label,
-    VStack,
-} from '@navikt/ds-react';
+import { Accordion, BodyLong, BodyShort, Button, Heading, Label, VStack } from '@navikt/ds-react';
 import { AccordionItemProps } from '@navikt/ds-react/esm/accordion/AccordionItem';
 
 import ArbeidOgOppholdOppsummering from './ArbeidOgOppholdOppsummering';
@@ -267,20 +257,9 @@ const Oppsummering = () => {
     const { hovedytelse, aktivitet, valgteBarnIdenter, barnMedBarnepass, dokumentasjon } =
         usePassAvBarnSøknad();
     const { person } = usePerson();
-    const [harBekreftet, settHarBekreftet] = useState(false);
-    const [feil, settFeil] = useState<string>('');
 
     return (
-        <Side
-            validerSteg={() => {
-                if (!harBekreftet) {
-                    settFeil('Du må bekrefte for å sende inn søknaden');
-                    return false;
-                }
-                settFeil('');
-                return true;
-            }}
-        >
+        <Side>
             <Heading size={'medium'}>
                 <LocaleTekst tekst={oppsummeringTekster.tittel} />
             </Heading>
@@ -295,21 +274,6 @@ const Oppsummering = () => {
                 <PassAvBarn person={person} barnMedBarnepass={barnMedBarnepass} />
                 <Vedlegg dokumentasjon={dokumentasjon} />
             </Accordion>
-
-            <CheckboxGroup
-                value={[harBekreftet]}
-                onChange={(verdier) => {
-                    settHarBekreftet(verdier.includes(true));
-                    settFeil('');
-                }}
-                legend={<LocaleTekst tekst={oppsummeringTekster.bekreft_checkboks} />}
-                hideLegend
-                error={feil}
-            >
-                <Checkbox value={true} error={!!feil}>
-                    <LocaleTekst tekst={oppsummeringTekster.bekreft_checkboks} />
-                </Checkbox>
-            </CheckboxGroup>
         </Side>
     );
 };
