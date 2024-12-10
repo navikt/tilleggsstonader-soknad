@@ -5,6 +5,7 @@ import { Stønadstype } from '../typer/stønadstyper';
 
 const APP_NAVN = 'tilleggsstonader-soknad';
 
+// Events fra https://github.com/navikt/analytics-taxonomy/tree/main/events
 type eventType =
     | 'skjema startet'
     | 'skjema steg fullført'
@@ -13,6 +14,7 @@ type eventType =
     | 'navigere'
     | 'alert vist'
     | 'besøk'
+    | 'skjema spørsmål besvart'
     | 'accordion åpnet'
     | 'accordion lukket';
 
@@ -97,5 +99,16 @@ export const loggAccordionEvent = (
     loggEventMedSkjema(event, stønadstype, {
         tekst: tekst,
         side: side,
+    });
+};
+
+export const loggSkjemaSpørsmålBesvart = (
+    stønadstype: Stønadstype,
+    spørsmål: string,
+    svar: string
+) => {
+    loggEventMedSkjema('skjema spørsmål besvart', stønadstype, {
+        spørsmål: spørsmål,
+        svar: svar,
     });
 };

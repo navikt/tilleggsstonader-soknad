@@ -3,6 +3,7 @@ import React from 'react';
 import { ChevronRightIcon, MultiplyIcon } from '@navikt/aksel-icons';
 import { Alert, BodyLong, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 
+import { loggSkjemaSpørsmålBesvart } from '../api/amplitude';
 import Environment from '../api/Environment';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
@@ -73,10 +74,32 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                 </BodyLong>
             </VStack>
             <HStack gap={'4'} justify="start">
-                <Button variant="secondary" onClick={loggUt} icon={<MultiplyIcon />}>
+                <Button
+                    variant="secondary"
+                    onClick={() => {
+                        loggSkjemaSpørsmålBesvart(
+                            stønadstype,
+                            'Vil du likevel sende ny søknad?',
+                            'Nei'
+                        );
+                        loggUt();
+                    }}
+                    icon={<MultiplyIcon />}
+                >
                     <LocaleTekst tekst={fellesTekster.avsluttOgLoggUt} />
                 </Button>
-                <Button onClick={startSøknad} variant="primary" icon={<ChevronRightIcon />}>
+                <Button
+                    onClick={() => {
+                        loggSkjemaSpørsmålBesvart(
+                            stønadstype,
+                            'Vil du likevel sende ny søknad?',
+                            'Ja'
+                        );
+                        startSøknad();
+                    }}
+                    variant="primary"
+                    icon={<ChevronRightIcon />}
+                >
                     <LocaleTekst tekst={harEksisterendeBehandlingTekster.startNySøknad} />
                 </Button>
             </HStack>
