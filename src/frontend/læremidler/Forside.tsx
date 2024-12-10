@@ -7,7 +7,7 @@ import { Accordion, BodyLong, BodyShort, Button, Label, VStack } from '@navikt/d
 
 import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
-import { loggAccordionEvent, loggBesøkLæremiddel, loggSkjemaStartet } from '../api/amplitude';
+import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/amplitude';
 import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
@@ -37,7 +37,7 @@ const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = routesLæremidler[0];
-        loggBesøkLæremiddel(route.path, route.label);
+        loggBesøk(Stønadstype.LÆREMIDLER, route.path, route.label);
     }, []);
 
     const startSøknad = () => {

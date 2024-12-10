@@ -16,7 +16,7 @@ import {
 
 import { ERouteBarnetilsyn, RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
-import { loggAccordionEvent, loggBesøkBarnetilsyn, loggSkjemaStartet } from '../api/amplitude';
+import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/amplitude';
 import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
@@ -47,7 +47,7 @@ const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = RoutesBarnetilsyn[0];
-        loggBesøkBarnetilsyn(route.path, route.label);
+        loggBesøk(Stønadstype.BARNETILSYN, route.path, route.label);
     }, []);
 
     const startSøknad = () => {

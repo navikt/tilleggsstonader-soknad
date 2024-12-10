@@ -72,8 +72,8 @@ export const logNavigereEvent = (
     });
 };
 
-export const loggAlertVist = (variant: string, tekst: string) => {
-    loggEventMedSkjema('alert vist', Stønadstype.BARNETILSYN, {
+export const loggAlertVist = (stønadstype: Stønadstype, variant: string, tekst: string) => {
+    loggEventMedSkjema('alert vist', stønadstype, {
         variant: variant,
         tekst: tekst,
     });
@@ -84,14 +84,6 @@ export const loggBesøk = (stønadstype: Stønadstype, url: string, sidetittel: 
         url: url,
         sidetittel: sidetittel,
     });
-};
-
-export const loggBesøkBarnetilsyn = (url: string, sidetittel: string) => {
-    loggBesøk(Stønadstype.BARNETILSYN, url, sidetittel);
-};
-
-export const loggBesøkLæremiddel = (url: string, sidetittel: string) => {
-    loggBesøk(Stønadstype.LÆREMIDLER, url, sidetittel);
 };
 
 export const loggAccordionEvent = (
