@@ -51,7 +51,7 @@ const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(skalÅpne, tittel, ERouteLæremidler.FORSIDE);
+        loggAccordionEvent(Stønadstype.LÆREMIDLER, skalÅpne, tittel, ERouteLæremidler.FORSIDE);
     };
 
     return (

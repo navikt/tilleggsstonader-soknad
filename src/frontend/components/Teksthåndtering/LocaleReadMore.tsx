@@ -3,6 +3,7 @@ import { BodyLong, List, ReadMore } from '@navikt/ds-react';
 import LocaleInlineLenke from './LocaleInlineLenke';
 import { loggAccordionEvent } from '../../api/amplitude';
 import { useSpråk } from '../../context/SpråkContext';
+import { useSøknad } from '../../context/SøknadContext';
 import { InlineLenke, LesMer, TekstElement } from '../../typer/tekst';
 
 export const LocaleReadMore: React.FC<{
@@ -10,6 +11,7 @@ export const LocaleReadMore: React.FC<{
     somPunktListe?: boolean;
 }> = ({ tekst, somPunktListe = false }) => {
     const { locale } = useSpråk();
+    const { stønadstype } = useSøknad();
 
     const header = tekst.header[locale];
     const innhold = tekst.innhold[locale];
@@ -17,7 +19,7 @@ export const LocaleReadMore: React.FC<{
     return (
         <ReadMore
             header={header}
-            onOpenChange={(skalÅpnes) => loggAccordionEvent(skalÅpnes, header)}
+            onOpenChange={(skalÅpnes) => loggAccordionEvent(stønadstype, skalÅpnes, header)}
         >
             {Array.isArray(innhold) ? (
                 somPunktListe ? (
@@ -42,13 +44,14 @@ export const LocaleReadMore: React.FC<{
 
 export const LocaleReadMoreMedLenke: React.FC<{ tekst: LesMer<InlineLenke> }> = ({ tekst }) => {
     const { locale } = useSpråk();
+    const { stønadstype } = useSøknad();
 
     const header = tekst.header[locale];
 
     return (
         <ReadMore
             header={header}
-            onOpenChange={(skalÅpnes) => loggAccordionEvent(skalÅpnes, header)}
+            onOpenChange={(skalÅpnes) => loggAccordionEvent(stønadstype, skalÅpnes, header)}
         >
             <LocaleInlineLenke tekst={tekst.innhold} />
         </ReadMore>
@@ -60,13 +63,14 @@ export const LocaleReadMoreMedChildren: React.FC<{
     children: React.ReactNode;
 }> = ({ header, children }) => {
     const { locale } = useSpråk();
+    const { stønadstype } = useSøknad();
 
     const headerTekst = header[locale];
 
     return (
         <ReadMore
             header={headerTekst}
-            onOpenChange={(skalÅpnes) => loggAccordionEvent(skalÅpnes, headerTekst)}
+            onOpenChange={(skalÅpnes) => loggAccordionEvent(stønadstype, skalÅpnes, headerTekst)}
         >
             {children}
         </ReadMore>

@@ -94,10 +94,15 @@ export const loggBesøkLæremiddel = (url: string, sidetittel: string) => {
     loggBesøk(Stønadstype.LÆREMIDLER, url, sidetittel);
 };
 
-export const loggAccordionEvent = (skalÅpnes: boolean, tekst: string, side?: string) => {
+export const loggAccordionEvent = (
+    stønadstype: Stønadstype,
+    skalÅpnes: boolean,
+    tekst: string,
+    side?: string
+) => {
     const event = skalÅpnes ? 'accordion åpnet' : 'accordion lukket';
 
-    loggEventMedSkjema(event, Stønadstype.BARNETILSYN, {
+    loggEventMedSkjema(event, stønadstype, {
         tekst: tekst,
         side: side,
     });
