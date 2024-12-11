@@ -15,10 +15,6 @@ interface OppsummeringInnhold {
     };
     vedlegg_tittel: TekstElement<string>;
     ingen_vedlegg: TekstElement<string>;
-    bekreft: {
-        tittel: TekstElement<string>;
-        feil: TekstElement<string>;
-    };
 }
 
 export const fellesOppsummeringTekster: OppsummeringInnhold = {
@@ -57,13 +53,4 @@ export const fellesOppsummeringTekster: OppsummeringInnhold = {
     },
     vedlegg_tittel: { nb: 'Vedlegg' },
     ingen_vedlegg: { nb: 'Ingen vedlegg' },
-
-    bekreft: {
-        tittel: {
-            nb: 'Jeg bekrefter at jeg har lest og forstått informasjonen i søknaden og svart så godt jeg kan.',
-        },
-        feil: {
-            nb: 'Du må bekrefte for å sende inn søknaden',
-        },
-    },
 };
