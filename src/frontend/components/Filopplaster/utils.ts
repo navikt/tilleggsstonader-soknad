@@ -37,4 +37,4 @@ export const TILLATE_FILTYPER: string[] = Object.values(filtypeTilMime);
 
 export const TILLATE_FILENDELSER: string = Object.values(filtypeTilFilendelse).join(',');
 
-export const TILLATTE_SAMTIDIGE_OPPLASTINGER = 5;
+export const TILLATTE_SAMTIDIGE_OPPLASTINGER = 20;
