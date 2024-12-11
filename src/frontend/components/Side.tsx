@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-import { Alert, Button, ErrorSummary, VStack } from '@navikt/ds-react';
+import { Alert, Button, ErrorSummary, HGrid, VStack } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import { StegIndikator } from './StegIndikator';
@@ -40,12 +40,6 @@ export const Container = styled.div`
         margin: auto;
         padding: 2rem 0;
     }
-`;
-
-const KnappeContainerMedFeilmelding = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
 `;
 
 const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
@@ -144,7 +138,7 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
                 </ErrorSummary>
             )}
             <VStack gap="8">{children}</VStack>
-            <KnappeContainerMedFeilmelding>
+            <HGrid gap={'4'} columns={'1fr 1fr'}>
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
                     <LocaleTekst tekst={fellesTekster.forrige} />
                 </Button>
@@ -157,7 +151,7 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
                         <LocaleTekst tekst={fellesTekster.neste} />
                     </Button>
                 )}
-            </KnappeContainerMedFeilmelding>
+            </HGrid>
             {sendInnFeil && (
                 <Alert variant={'error'}>
                     <LocaleTekst tekst={fellesTekster.send_inn_søknad_feil} />

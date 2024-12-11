@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router';
-import { styled } from 'styled-components';
 
 import {
     Accordion,
     Alert,
     BodyLong,
-    BodyShort,
     Button,
     Heading,
+    HStack,
     Label,
     VStack,
 } from '@navikt/ds-react';
@@ -30,12 +29,6 @@ import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { erSnartNyttSkoleår } from '../utils/dato';
 import { hentNesteRoute } from '../utils/routes';
-
-const KnappeContainer = styled(BodyShort)`
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-`;
 
 const Forside: React.FC = () => {
     const navigate = useNavigate();
@@ -152,11 +145,11 @@ const Forside: React.FC = () => {
                     oppdaterHarBekreftet={(harBekreftet) => settHarBekreftet(harBekreftet)}
                     fjernFeilmelding={() => settSkalViseFeilmelding(false)}
                 />
-                <KnappeContainer>
+                <HStack justify={'center'}>
                     <Button onClick={startSøknad} variant="primary">
                         Start søknad
                     </Button>
-                </KnappeContainer>
+                </HStack>
             </VStack>
         </Container>
     );
