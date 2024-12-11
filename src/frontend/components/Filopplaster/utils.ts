@@ -20,20 +20,12 @@ enum Filtyper {
     JPEG = 'JPEG',
 }
 
-export const filtypeTilMime: Record<Filtyper, string> = {
-    PDF: 'application/pdf',
-    PNG: 'image/png',
-    JPG: 'image/jpg',
-    JPEG: 'image/jpeg',
-};
-
 export const filtypeTilFilendelse: Record<Filtyper, string> = {
     PDF: '.pdf',
     PNG: '.png',
     JPG: '.jpg',
     JPEG: '.jpeg',
 };
-export const TILLATE_FILTYPER: string[] = Object.values(filtypeTilMime);
 
 export const TILLATE_FILENDELSER: string = Object.values(filtypeTilFilendelse).join(',');
 
