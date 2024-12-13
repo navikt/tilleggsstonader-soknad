@@ -39,9 +39,15 @@ export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: Rea
                 if (axios.isAxiosError(req) && erFeilOgSkalRouteTilPapirsøknad(req)) {
                     sendSøkerTilPapirsøknad(stønadstype);
                 } else {
-                    settFeilmelding(
-                        'Feilet henting av personopplysninger. Prøv å laste inn siden på nytt'
-                    );
+                    if (axios.isAxiosError(req) && req.response?.status === 503) {
+                        settFeilmelding(
+                            'Kunne ikke hente personopplysninger. Dette kan skyldes vedlikehold. Prøv å laste inn siden på nytt. Hvis problemet vedvarer, vennligst prøv igjen senere.'
+                        );
+                    } else {
+                        settFeilmelding(
+                            'Kunne ikke hente personopplysninger. Prøv å laste inn siden på nytt.'
+                        );
+                    }
                 }
             });
     }, [stønadstype]);
