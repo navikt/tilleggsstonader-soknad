@@ -10,7 +10,7 @@ import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
 import { Hovedytelse } from '../../../typer/søknad';
 import LocaleTekst from '../../Teksthåndtering/LocaleTekst';
 
-const HovedytelseOppsummering: React.FC<{ hovedytelse: Hovedytelse }> = ({ hovedytelse }) => {
+const HovedytelseOppsummering: React.FC<{ hovedytelse?: Hovedytelse }> = ({ hovedytelse }) => {
     const navigate = useNavigate();
 
     return (
@@ -24,7 +24,7 @@ const HovedytelseOppsummering: React.FC<{ hovedytelse: Hovedytelse }> = ({ hoved
                 </FormSummary.EditLink>
             </FormSummary.Header>
             <FormSummary.Answers>
-                {hovedytelse.ytelse && (
+                {hovedytelse?.ytelse && (
                     <FormSummary.Answer>
                         <FormSummary.Label>{hovedytelse.ytelse.label}</FormSummary.Label>
                         {hovedytelse.ytelse.verdier.map((ytelse) => (
@@ -32,7 +32,7 @@ const HovedytelseOppsummering: React.FC<{ hovedytelse: Hovedytelse }> = ({ hoved
                         ))}
                     </FormSummary.Answer>
                 )}
-                {hovedytelse.arbeidOgOpphold && (
+                {hovedytelse?.arbeidOgOpphold && (
                     <ArbeidOgOppholdOppsummering arbeidOgOpphold={hovedytelse.arbeidOgOpphold} />
                 )}
             </FormSummary.Answers>
