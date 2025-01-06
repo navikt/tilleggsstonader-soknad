@@ -1,19 +1,16 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import { FormSummary, VStack } from '@navikt/ds-react';
 
+import { OppsummeringPanelHeader } from '../../../components/Oppsummering/OppsummeringPanelHeader';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../../../context/SpråkContext';
-import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
 import { Aktivitet } from '../../../typer/søknad';
 import { verdiFelterTilTekstElement } from '../../../utils/tekster';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const ArbeidsrettetAktivitet: React.FC<{ aktivitet?: Aktivitet }> = ({ aktivitet }) => {
-    const navigate = useNavigate();
     const { locale } = useSpråk();
 
     const aktiviteterSomTekstfelt =
@@ -26,47 +23,38 @@ export const ArbeidsrettetAktivitet: React.FC<{ aktivitet?: Aktivitet }> = ({ ak
     const lønnetAktivitetLabel = aktivitet?.lønnetAktivitet?.label;
 
     return (
-        <FormSummary>
-            <FormSummary.Header>
-                <FormSummary.Heading level="2">
-                    <LocaleTekst tekst={oppsummeringTekster.arbeidsrettet_aktivitet} />
-                </FormSummary.Heading>
-                <FormSummary.EditLink onClick={() => navigate(RouteTilPath.AKTIVITET)}>
-                    <LocaleTekst tekst={fellesOppsummeringTekster.endre_knapp} />
-                </FormSummary.EditLink>
-            </FormSummary.Header>
-            <FormSummary.Answers>
-                <VStack gap={'2'}>
-                    {aktiviteterSomTekstfelt && (
-                        <FormSummary.Answer>
-                            <FormSummary.Label>
-                                <LocaleTekst tekst={{ nb: aktiviteterLabel || '' }} />
-                            </FormSummary.Label>
-                            {aktiviteterSomTekstfelt[locale].map((aktivitet) => (
-                                <FormSummary.Value key={aktivitet}>{aktivitet}</FormSummary.Value>
-                            ))}
-                        </FormSummary.Answer>
-                    )}
-                    {aktivitet?.annenAktivitet && (
-                        <FormSummary.Answer>
-                            <FormSummary.Label>
-                                <LocaleTekst tekst={{ nb: annenAktivitetLabel || '' }} />
-                            </FormSummary.Label>
-                            <FormSummary.Value>
-                                {aktivitet?.annenAktivitet?.svarTekst}
-                            </FormSummary.Value>
-                        </FormSummary.Answer>
-                    )}
+        <OppsummeringPanelHeader
+            tittel={oppsummeringTekster.arbeidsrettet_aktivitet}
+            lenke={RouteTilPath.AKTIVITET}
+        >
+            <VStack gap={'2'}>
+                {aktiviteterSomTekstfelt && (
                     <FormSummary.Answer>
                         <FormSummary.Label>
-                            <LocaleTekst tekst={{ nb: lønnetAktivitetLabel || '' }} />
+                            <LocaleTekst tekst={{ nb: aktiviteterLabel || '' }} />
+                        </FormSummary.Label>
+                        {aktiviteterSomTekstfelt[locale].map((aktivitet) => (
+                            <FormSummary.Value key={aktivitet}>{aktivitet}</FormSummary.Value>
+                        ))}
+                    </FormSummary.Answer>
+                )}
+                {aktivitet?.annenAktivitet && (
+                    <FormSummary.Answer>
+                        <FormSummary.Label>
+                            <LocaleTekst tekst={{ nb: annenAktivitetLabel || '' }} />
                         </FormSummary.Label>
                         <FormSummary.Value>
-                            {aktivitet?.lønnetAktivitet?.svarTekst}
+                            {aktivitet?.annenAktivitet?.svarTekst}
                         </FormSummary.Value>
                     </FormSummary.Answer>
-                </VStack>
-            </FormSummary.Answers>
-        </FormSummary>
+                )}
+                <FormSummary.Answer>
+                    <FormSummary.Label>
+                        <LocaleTekst tekst={{ nb: lønnetAktivitetLabel || '' }} />
+                    </FormSummary.Label>
+                    <FormSummary.Value>{aktivitet?.lønnetAktivitet?.svarTekst}</FormSummary.Value>
+                </FormSummary.Answer>
+            </VStack>
+        </OppsummeringPanelHeader>
     );
 };
