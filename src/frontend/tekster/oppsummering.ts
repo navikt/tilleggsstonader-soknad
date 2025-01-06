@@ -24,14 +24,15 @@ export const fellesOppsummeringTekster: OppsummeringInnhold = {
     om_deg_label_navn: { nb: 'Navn' },
     om_deg_label_adresse: { nb: 'Adresse' },
     om_deg_lesmer: {
-        header: { nb: 'Slik endrer du folkeregistrert adresse' },
+        header: { nb: 'Hva gjør jeg hvis adressen er feil' },
         innhold: {
             nb: [
-                'Vi henter adressen din fra folkeregisteret. Er noe feil, må du ',
+                'Hvis adressen er feil, må du ',
                 {
-                    tekst: 'melde adresseendring på Skattetatens sider.',
+                    tekst: 'melde fra til folkeregisteret',
                     url: 'https://www.skatteetaten.no/person/folkeregister/flytte/endre-postadresse/',
                 },
+                ' (åpnes i ny fane). Du trenger ikke gjøre det før du sender inn søknaden.',
             ],
         },
     },
