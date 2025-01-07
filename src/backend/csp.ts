@@ -33,6 +33,7 @@ const cspMap = (): Record<string, string[]> => {
             '*.hotjar.com',
             'nav.boost.ai',
             "'unsafe-inline'",
+            '"unsafe-eval"',
             // └────────────────────────────────┘
         ],
 
