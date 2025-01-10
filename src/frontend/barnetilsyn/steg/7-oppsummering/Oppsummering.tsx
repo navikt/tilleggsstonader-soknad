@@ -29,7 +29,7 @@ const Oppsummering = () => {
                 <LocaleTekst tekst={oppsummeringTekster.guide_innhold} />
             </PellePanel>
             <OmDeg />
-            <HovedytelseOppsummering hovedytelse={hovedytelse} />
+            {hovedytelse && <HovedytelseOppsummering hovedytelse={hovedytelse} />}
             <ArbeidsrettetAktivitet aktivitet={aktivitet} />
             <DineBarn person={person} valgteBarnIdenter={valgteBarnIdenter} />
             <PassAvBarn person={person} barnMedBarnepass={barnMedBarnepass} />

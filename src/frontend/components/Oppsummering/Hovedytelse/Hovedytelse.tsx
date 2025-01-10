@@ -8,12 +8,12 @@ import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
 import { Hovedytelse } from '../../../typer/søknad';
 import { OppsummeringPanelHeader } from '../OppsummeringPanelHeader';
 
-const HovedytelseOppsummering: React.FC<{ hovedytelse?: Hovedytelse }> = ({ hovedytelse }) => (
+const HovedytelseOppsummering: React.FC<{ hovedytelse: Hovedytelse }> = ({ hovedytelse }) => (
     <OppsummeringPanelHeader
         tittel={fellesOppsummeringTekster.hovedytelse_tittel}
         lenke={RouteTilPath.HOVEDYTELSE}
     >
-        {hovedytelse?.ytelse && (
+        {hovedytelse.ytelse && (
             <FormSummary.Answer>
                 <FormSummary.Label>{hovedytelse.ytelse.label}</FormSummary.Label>
                 {hovedytelse.ytelse.verdier.map((ytelse) => (
@@ -21,7 +21,7 @@ const HovedytelseOppsummering: React.FC<{ hovedytelse?: Hovedytelse }> = ({ hove
                 ))}
             </FormSummary.Answer>
         )}
-        {hovedytelse?.arbeidOgOpphold && (
+        {hovedytelse.arbeidOgOpphold && (
             <ArbeidOgOppholdOppsummering arbeidOgOpphold={hovedytelse.arbeidOgOpphold} />
         )}
     </OppsummeringPanelHeader>
