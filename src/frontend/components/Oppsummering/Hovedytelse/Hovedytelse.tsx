@@ -3,15 +3,17 @@ import React from 'react';
 import { FormSummary } from '@navikt/ds-react';
 
 import ArbeidOgOppholdOppsummering from './ArbeidOgOpphold';
-import { RouteTilPath } from '../../../læremidler/routing/routesLæremidler';
 import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
 import { Hovedytelse } from '../../../typer/søknad';
 import { OppsummeringPanelHeader } from '../OppsummeringPanelHeader';
 
-const HovedytelseOppsummering: React.FC<{ hovedytelse: Hovedytelse }> = ({ hovedytelse }) => (
+const HovedytelseOppsummering: React.FC<{ hovedytelse: Hovedytelse; redigerLenke: string }> = ({
+    hovedytelse,
+    redigerLenke,
+}) => (
     <OppsummeringPanelHeader
         tittel={fellesOppsummeringTekster.hovedytelse_tittel}
-        lenke={RouteTilPath.HOVEDYTELSE}
+        lenke={redigerLenke}
     >
         {hovedytelse.ytelse && (
             <FormSummary.Answer>

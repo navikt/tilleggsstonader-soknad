@@ -13,6 +13,7 @@ import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
+import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 const Oppsummering = () => {
@@ -29,11 +30,19 @@ const Oppsummering = () => {
                 <LocaleTekst tekst={oppsummeringTekster.guide_innhold} />
             </PellePanel>
             <OmDeg />
-            {hovedytelse && <HovedytelseOppsummering hovedytelse={hovedytelse} />}
+            {hovedytelse && (
+                <HovedytelseOppsummering
+                    hovedytelse={hovedytelse}
+                    redigerLenke={RouteTilPath.HOVEDYTELSE}
+                />
+            )}
             <ArbeidsrettetAktivitet aktivitet={aktivitet} />
             <DineBarn person={person} valgteBarnIdenter={valgteBarnIdenter} />
             <PassAvBarn person={person} barnMedBarnepass={barnMedBarnepass} />
-            <VedleggOppsummering dokumentasjon={dokumentasjon} />
+            <VedleggOppsummering
+                dokumentasjon={dokumentasjon}
+                redigerLenke={RouteTilPath.VEDLEGG}
+            />
         </OppsummeringSide>
     );
 };

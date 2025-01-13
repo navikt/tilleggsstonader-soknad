@@ -3,18 +3,15 @@ import React from 'react';
 import { FormSummary } from '@navikt/ds-react';
 
 import { OppsummeringPanelHeader } from './OppsummeringPanelHeader';
-import { RouteTilPath } from '../../læremidler/routing/routesLæremidler';
 import { fellesOppsummeringTekster } from '../../tekster/oppsummering';
 import { DokumentasjonFelt } from '../../typer/skjema';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-const VedleggOppsummering: React.FC<{ dokumentasjon: DokumentasjonFelt[] }> = ({
-    dokumentasjon,
-}) => (
-    <OppsummeringPanelHeader
-        tittel={fellesOppsummeringTekster.vedlegg_tittel}
-        lenke={RouteTilPath.VEDLEGG}
-    >
+const VedleggOppsummering: React.FC<{
+    dokumentasjon: DokumentasjonFelt[];
+    redigerLenke: string;
+}> = ({ dokumentasjon, redigerLenke }) => (
+    <OppsummeringPanelHeader tittel={fellesOppsummeringTekster.vedlegg_tittel} lenke={redigerLenke}>
         {dokumentasjon.map((dokument) => (
             <FormSummary.Answer key={dokument.label}>
                 <FormSummary.Label>{dokument.label}</FormSummary.Label>

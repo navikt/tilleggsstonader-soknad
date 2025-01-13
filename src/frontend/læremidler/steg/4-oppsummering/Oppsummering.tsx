@@ -9,6 +9,7 @@ import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringS
 import VedleggOppsummering from '../../../components/Oppsummering/Vedlegg';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
+import { RouteTilPath } from '../../routing/routesLæremidler';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 const Oppsummering = () => {
@@ -19,10 +20,18 @@ const Oppsummering = () => {
                 <LocaleTekst tekst={oppsummeringTekster.tittel} />
             </Heading>
             <OmDeg />
-            {hovedytelse && <HovedytelseOppsummering hovedytelse={hovedytelse} />}
+            {hovedytelse && (
+                <HovedytelseOppsummering
+                    hovedytelse={hovedytelse}
+                    redigerLenke={RouteTilPath.HOVEDYTELSE}
+                />
+            )}
             {utdanning && <UtdanningOppsummering utdanning={utdanning} />}
             {dokumentasjonsbehov.length > 0 && (
-                <VedleggOppsummering dokumentasjon={dokumentasjon} />
+                <VedleggOppsummering
+                    dokumentasjon={dokumentasjon}
+                    redigerLenke={RouteTilPath.VEDLEGG}
+                />
             )}
         </OppsummeringSide>
     );
