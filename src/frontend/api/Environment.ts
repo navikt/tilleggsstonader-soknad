@@ -8,7 +8,7 @@ interface EnvironmentProps {
     sentryUrl?: string;
     urlGammelSøknad: (stønadstype: Stønadstype) => string;
     urlPapirsøknad: (stønadstype: Stønadstype) => string;
-    miljø: string;
+    miljø: 'local' | 'preprod' | 'production';
     modellVersjon: IModellversjon;
 }
 
