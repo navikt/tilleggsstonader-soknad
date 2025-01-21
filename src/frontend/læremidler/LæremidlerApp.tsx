@@ -44,7 +44,7 @@ const LæremidlerApp = () => {
         <PersonRouting stønadstype={Stønadstype.LÆREMIDLER}>
             <ValideringsfeilProvider>
                 <LæremidlerSøknadProvider>
-                    <RegisterAktiviteterProvider>
+                    <RegisterAktiviteterProvider stønadstype={Stønadstype.LÆREMIDLER}>
                         <LæremidlerInnhold />
                     </RegisterAktiviteterProvider>
                 </LæremidlerSøknadProvider>

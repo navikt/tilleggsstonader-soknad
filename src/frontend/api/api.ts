@@ -28,11 +28,15 @@ export const hentPersonData = (medBarn: boolean): Promise<Person> => {
         .then((response) => response.data);
 };
 
-export const hentArbeidsrettedeAktiviteter = (): Promise<RegisterAktivitet[]> => {
+export const hentArbeidsrettedeAktiviteter = (
+    stønadstype: Stønadstype
+): Promise<RegisterAktivitet[]> => {
+    const url = `${Environment().apiProxyUrl}/aktivitet/v2`;
     return axios
-        .get<RegisterAktiviteterResponse>(`${Environment().apiProxyUrl}/aktivitet`, defaultConfig())
+        .post<RegisterAktiviteterResponse>(url, { stønadstype: stønadstype }, defaultConfig())
         .then((response) => response.data.aktiviteter);
 };
+
 export const hentBehandlingStatus = (stønadstype: Stønadstype): Promise<boolean> => {
     return axios
         .get<boolean>(
