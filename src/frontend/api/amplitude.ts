@@ -1,5 +1,6 @@
-import { init, track } from '@amplitude/analytics-browser';
+import { getAmplitudeInstance } from '@navikt/nav-dekoratoren-moduler';
 
+import Environment from './Environment';
 import { stønadstypeTilSkjemaId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 
@@ -18,16 +19,15 @@ type eventType =
     | 'accordion åpnet'
     | 'accordion lukket';
 
-export const initAmplitude = () => {
-    init('default', '', {
-        useBatch: true,
-        defaultTracking: false,
-        serverUrl: 'https://amplitude.nav.no/collect-auto',
-        ingestionMetadata: {
-            sourceName: window.location.toString(),
-        },
-    });
+const getLogger = () => {
+    if (Environment().miljø !== 'local') {
+        return getAmplitudeInstance('dekoratoren');
+    } else {
+        return null;
+    }
 };
+
+const logger = getLogger();
 
 export const loggEventMedSkjema = (
     event: eventType,
@@ -35,20 +35,24 @@ export const loggEventMedSkjema = (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     event_properties?: any
 ) => {
-    track(event, {
-        app: APP_NAVN,
-        skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
-        skjemaId: stønadstypeTilSkjemaId[stønadstype],
-        ...event_properties,
-    });
+    if (logger) {
+        logger(event, {
+            app: APP_NAVN,
+            skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
+            skjemaId: stønadstypeTilSkjemaId[stønadstype],
+            ...event_properties,
+        });
+    }
 };
 
 export const loggSkjemaStartet = (stønadstype: Stønadstype) => {
-    track('skjema startet', {
-        app: APP_NAVN,
-        skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
-        skjemaId: stønadstypeTilSkjemaId[stønadstype],
-    });
+    if (logger) {
+        logger('skjema startet', {
+            app: APP_NAVN,
+            skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
+            skjemaId: stønadstypeTilSkjemaId[stønadstype],
+        });
+    }
 };
 
 export const loggSkjemaStegFullført = (stønadstype: Stønadstype, steg: string) => {
