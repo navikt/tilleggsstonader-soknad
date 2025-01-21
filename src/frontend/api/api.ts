@@ -31,7 +31,7 @@ export const hentPersonData = (medBarn: boolean): Promise<Person> => {
 export const hentArbeidsrettedeAktiviteter = (
     stønadstype: Stønadstype
 ): Promise<RegisterAktivitet[]> => {
-    const url = `${Environment().apiProxyUrl}/aktivitet/v2`;
+    const url = `${Environment().apiProxyUrl}/aktivitet`;
     return axios
         .post<RegisterAktiviteterResponse>(url, { stønadstype: stønadstype }, defaultConfig())
         .then((response) => response.data.aktiviteter);
