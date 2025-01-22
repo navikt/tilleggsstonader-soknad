@@ -65,14 +65,14 @@ const hvilkenAktivitet: HvilkenAktivitet = {
         header_ingen_registrerte_aktiviteter:
             tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
         del1: {
-            nb: 'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du enslig eller gjenlevende så er det ikke alltid dette er registert på en måte så vi klare å hente det.',
+            nb: 'Vi henter tiltak og utdanning registrert på deg 6 måneder tilbake i tid. Er du enslig eller gjenlevende så er det ikke alltid dette er registert på en måte så vi klare å hente det.',
         },
         del2: {
             nb: 'Går du på arbeidsavklaringspenger eller mottar uføretrygd, og utdanningen din mangler? Da anbefaler vi at du tar kontakt med veilederen din via aktivitetsplanen og ber om at den registreres. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
         },
         del3: {
             nb: [
-                'Hvis du skal søke støtte i forbindelse med en utdanning som ble avsluttet for over 3 måneder siden, må du ',
+                'Hvis du skal søke støtte i forbindelse med en utdanning som ble avsluttet for over 6 måneder siden, må du ',
                 {
                     tekst: 'fylle ut papirsøknad',
                     url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',

@@ -46,7 +46,7 @@ const BarnetilsynApp = () => {
         <PersonRouting stønadstype={Stønadstype.BARNETILSYN}>
             <ValideringsfeilProvider>
                 <PassAvBarnSøknadProvider>
-                    <RegisterAktiviteterProvider>
+                    <RegisterAktiviteterProvider stønadstype={Stønadstype.BARNETILSYN}>
                         <BarnetilsynInnhold />
                     </RegisterAktiviteterProvider>
                 </PassAvBarnSøknadProvider>
