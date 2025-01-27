@@ -63,6 +63,7 @@ spec:
       value: otlp # Fanger opp logger og sender dem til OpenTelemetry Collector
   resources:
     limits:
-      memory: 1024Mi
+      memory: 256Mi # Lik requests som beste praksis
     requests:
-      memory: 512Mi
+      memory: 256Mi
+      cpu: 5m
