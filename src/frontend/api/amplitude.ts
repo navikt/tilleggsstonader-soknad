@@ -29,7 +29,7 @@ const getLogger = () => {
 
 const logger = getLogger();
 const amplitudeNotInstantiatedError =
-    'Amplitude not instantiated. Please check users consent for analytics';
+    'Amplitude is not instantiated. Please check users consent for analytics';
 
 export const loggEventMedSkjema = (
     event: eventType,
