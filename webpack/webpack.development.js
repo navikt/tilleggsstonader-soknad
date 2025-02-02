@@ -6,6 +6,7 @@ import { merge } from 'webpack-merge';
 import common from './webpack.common.js';
 
 const publicPath = process.env.PUBLIC_URL || '/';
+const openBrowser = process.env.OPEN_BROWSER === 'false' ? false : publicPath + '/tilsyn-barn';
 
 const developmentConfig = merge(common, {
     mode: 'development',
@@ -13,7 +14,7 @@ const developmentConfig = merge(common, {
     devServer: {
         static: '/dist_development',
         port: 8080,
-        open: publicPath + '/tilsyn-barn',
+        open: openBrowser,
         devMiddleware: { publicPath: publicPath },
         historyApiFallback: {
             index: publicPath,

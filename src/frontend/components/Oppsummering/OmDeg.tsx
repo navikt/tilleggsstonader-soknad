@@ -24,8 +24,10 @@ const OmDeg = () => {
                 <FormSummary.Label>
                     <LocaleTekst tekst={fellesOppsummeringTekster.om_deg_label_adresse} />
                 </FormSummary.Label>
-                <FormSummary.Value>{person.adresse}</FormSummary.Value>
-                <LocaleReadMoreMedLenke tekst={fellesOppsummeringTekster.om_deg_lesmer} />
+                <FormSummary.Value>
+                    {person.adresse}
+                    <LocaleReadMoreMedLenke tekst={fellesOppsummeringTekster.om_deg_lesmer} />
+                </FormSummary.Value>
             </FormSummary.Answer>
         </OppsummeringPanelHeader>
     );
