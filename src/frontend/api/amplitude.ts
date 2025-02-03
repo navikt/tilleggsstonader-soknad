@@ -28,8 +28,6 @@ const getLogger = () => {
 };
 
 const logger = getLogger();
-const amplitudeNotInstantiatedError =
-    'Amplitude is not instantiated. Please check users consent for analytics';
 
 export const loggEventMedSkjema = (
     event: eventType,
@@ -43,10 +41,6 @@ export const loggEventMedSkjema = (
             skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
             skjemaId: stønadstypeTilSkjemaId[stønadstype],
             ...event_properties,
-        }).catch((error) => {
-            if (error !== amplitudeNotInstantiatedError) {
-                throw new Error(error);
-            }
         });
     }
 };
@@ -57,10 +51,6 @@ export const loggSkjemaStartet = (stønadstype: Stønadstype) => {
             app: APP_NAVN,
             skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
             skjemaId: stønadstypeTilSkjemaId[stønadstype],
-        }).catch((error) => {
-            if (error !== amplitudeNotInstantiatedError) {
-                throw new Error(error);
-            }
         });
     }
 };
