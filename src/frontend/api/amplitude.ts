@@ -46,13 +46,7 @@ export const loggEventMedSkjema = (
 };
 
 export const loggSkjemaStartet = (stønadstype: Stønadstype) => {
-    if (logger) {
-        logger('skjema startet', {
-            app: APP_NAVN,
-            skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
-            skjemaId: stønadstypeTilSkjemaId[stønadstype],
-        });
-    }
+    loggEventMedSkjema('skjema startet', stønadstype);
 };
 
 export const loggSkjemaStegFullført = (stønadstype: Stønadstype, steg: string) => {
