@@ -12,6 +12,14 @@ Med api må du sette cookie første gang:
 http://localhost:8001/test/cookie?redirect=http://localhost:8080/tilleggsstonader/soknad/tilsyn-barn
 Kan sende med annet fnr med `&subject=<fnr>`
 
+##### Playwright-tester
+* Installer chromium-browser `npx playwright install chromium`
+* Kjør tester `PLAYWRIGHT_PARALLEL=false yarn playwright test`
+  * Debug, legg til `--debug`
+  * Kjør en enkel test, legg til `-g "Har ingen aktiviteter"`
+  * Manglende-vedlegg modalen er litt flaky, så den feiler når man kjør parallelle tester
+  * For mer info https://playwright.dev/docs/running-tests
+
 ## Universell utforming
 
 ### Huskeliste ✨
