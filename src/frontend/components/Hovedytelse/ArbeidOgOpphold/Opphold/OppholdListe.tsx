@@ -155,7 +155,11 @@ const OppholdListe: React.FC<{
                 />
             )}
             <HStack>
-                <Button variant={'tertiary'} onClick={leggTilOpphold} icon={<PlusIcon />}>
+                <Button
+                    variant={'tertiary'}
+                    onClick={leggTilOpphold}
+                    icon={<PlusIcon aria-hidden />}
+                >
                     {oppholdUtenforNorgeInnhold.knapp_legg_til[locale]}
                 </Button>
             </HStack>

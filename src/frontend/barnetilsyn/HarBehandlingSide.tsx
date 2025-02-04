@@ -84,7 +84,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                         );
                         loggUt();
                     }}
-                    icon={<MultiplyIcon />}
+                    icon={<MultiplyIcon aria-hidden />}
                 >
                     <LocaleTekst tekst={fellesTekster.avsluttOgLoggUt} />
                 </Button>
@@ -98,7 +98,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                         startSøknad();
                     }}
                     variant="primary"
-                    icon={<ChevronRightIcon />}
+                    icon={<ChevronRightIcon aria-hidden />}
                 >
                     <LocaleTekst tekst={harEksisterendeBehandlingTekster.startNySøknad} />
                 </Button>

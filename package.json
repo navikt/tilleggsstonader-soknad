@@ -17,16 +17,23 @@
     "src/**/*.{js,jsx,ts,tsx,json,css}": [
       "prettier --write",
       "eslint --fix --max-warnings=0 --no-warn-ignored"
+    ],
+    "tests/**/*.{js,jsx,ts,tsx,json,css}": [
+      "prettier --write",
+      "eslint --fix --max-warnings=0 --no-warn-ignored"
     ]
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@eslint/compat": "^1.2.3",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.15.0",
+    "@playwright/test": "^1.50.1",
     "@sentry/types": "^8.40.0",
+    "@types/node": "^22.13.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",
