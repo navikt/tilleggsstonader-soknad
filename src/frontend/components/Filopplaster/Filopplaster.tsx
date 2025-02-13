@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -32,7 +32,7 @@ const FilListe = styled(List).attrs({ as: 'ul' })`
 export const Filopplaster: React.FC<{
     opplastedeVedlegg: Dokument[];
     tittel: string;
-    beskrivelse: ReactNode;
+    beskrivelse: string;
     leggTilDokument: (vedlegg: Dokument) => void;
     slettDokument: (vedlegg: string) => void;
 }> = ({ opplastedeVedlegg, tittel, beskrivelse, leggTilDokument, slettDokument }) => {

@@ -7,11 +7,9 @@ import { BodyShort, Heading } from '@navikt/ds-react';
 import Dokumentasjonskrav from './Dokumentasjonskrav';
 import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './utils';
 import VedleggManglerModal from './VedleggManglerModal';
-import { usePerson } from '../../context/PersonContext';
 import { useSpråk } from '../../context/SpråkContext';
-import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
+import { vedleggTekster } from '../../tekster/vedlegg';
 import { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
-import { hentBeskjedMedEttParameter } from '../../utils/tekster';
 import { Filopplaster } from '../Filopplaster/Filopplaster';
 import { PellePanel } from '../PellePanel/PellePanel';
 import Side from '../Side';
@@ -26,15 +24,19 @@ const VedleggContainer = styled.div`
     margin: 1rem 0;
 `;
 
+export type DokumentasjonFeltMedVedleggstekst = DokumentasjonFelt & {
+    tittel: string;
+    beskrivelse: string;
+};
+
 interface Props {
-    dokumentasjon: DokumentasjonFelt[];
+    dokumentasjon: DokumentasjonFeltMedVedleggstekst[];
     settDokumentasjon: React.Dispatch<React.SetStateAction<DokumentasjonFelt[]>>;
     dokumentasjonsbehov: Dokumentasjonsbehov[];
 }
 
 const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentasjonsbehov }) => {
     const { locale } = useSpråk();
-    const { person } = usePerson();
 
     const ref = useRef<HTMLDialogElement>(null);
     const [ikkeOpplastedeDokumenter, settIkkeOpplastedeDokumenter] = React.useState<string[]>([]);
@@ -74,12 +76,6 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
         return true;
     };
 
-    const finnBarnSomVedleggGjelder = (dokumentasjonsfelt: DokumentasjonFelt) => {
-        return dokumentasjonsfelt?.barnId
-            ? person.barn.find((barn) => barn.ident === dokumentasjonsfelt?.barnId)
-            : undefined;
-    };
-
     return (
         <Side validerSteg={validerSteg}>
             <Heading size={'medium'}>
@@ -101,18 +97,8 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                             <section key={dok.label}>
                                 <Filopplaster
                                     opplastedeVedlegg={dok.opplastedeVedlegg}
-                                    tittel={hentBeskjedMedEttParameter(
-                                        finnBarnSomVedleggGjelder(dok)?.fornavn ?? '',
-                                        typerVedleggTekster[dok.type].tittel[locale]
-                                    )}
-                                    beskrivelse={
-                                        <LocaleTekst
-                                            tekst={typerVedleggTekster[dok.type].beskrivelse}
-                                            argument0={
-                                                finnBarnSomVedleggGjelder(dok)?.fornavn ?? ''
-                                            }
-                                        />
-                                    }
+                                    tittel={dok.tittel}
+                                    beskrivelse={dok.beskrivelse}
                                     leggTilDokument={(dokument: Dokument) =>
                                         leggTilDokument(dok, dokument)
                                     }
