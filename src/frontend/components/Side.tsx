@@ -21,7 +21,12 @@ import { useValideringsfeil } from '../context/ValideringsfeilContext';
 import { fellesTekster } from '../tekster/felles';
 import { IRoute } from '../typer/routes';
 import { inneholderFeil } from '../typer/validering';
-import { erOppsummeringsside, hentForrigeRoute, hentNesteRoute, hentRoutes } from '../utils/routes';
+import {
+    erOppsummeringsside,
+    hentForrigeRoute,
+    hentNesteRoute,
+    hentRoutes,
+} from '../utils/routeUtils';
 
 interface Props {
     children?: React.ReactNode;

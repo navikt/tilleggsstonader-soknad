@@ -7,7 +7,7 @@ import { BodyLong, Button, HStack, List, Modal } from '@navikt/ds-react';
 import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
 import { vedleggModalTekster } from '../../tekster/vedlegg';
-import { finnOppsummeringRoute } from '../../utils/routes';
+import { finnOppsummeringRoute } from '../../utils/routeUtils';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 interface Props {

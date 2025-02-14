@@ -42,11 +42,7 @@ export const hentStartRoute = (stønadstype: Stønadstype) => {
 };
 
 export const erOppsummeringsside = (route: RouteType): boolean => {
-    if (route === ERouteBarnetilsyn.OPPSUMMERING || route === ERouteLæremidler.OPPSUMMERING) {
-        return true;
-    }
-
-    return false;
+    return route === ERouteBarnetilsyn.OPPSUMMERING || route === ERouteLæremidler.OPPSUMMERING;
 };
 
 export const finnOppsummeringRoute = (stønadstype: Stønadstype): string => {

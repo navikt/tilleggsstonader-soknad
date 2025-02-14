@@ -28,7 +28,7 @@ import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { erSnartNyttSkoleår } from '../utils/datoUtils';
-import { hentNesteRoute } from '../utils/routes';
+import { hentNesteRoute } from '../utils/routeUtils';
 
 const Forside: React.FC = () => {
     const navigate = useNavigate();

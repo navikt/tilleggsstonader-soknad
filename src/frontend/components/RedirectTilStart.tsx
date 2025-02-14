@@ -3,7 +3,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { useSøknad } from '../context/SøknadContext';
-import { hentStartRoute } from '../utils/routes';
+import { hentStartRoute } from '../utils/routeUtils';
 
 interface Props {
     harBekreftet: boolean;
