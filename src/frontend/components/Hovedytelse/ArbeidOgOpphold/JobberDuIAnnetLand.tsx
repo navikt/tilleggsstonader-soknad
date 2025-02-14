@@ -5,7 +5,7 @@ import { jobberIAnnetLandInnhold } from '../../../barnetilsyn/tekster/opphold';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt, SelectFelt } from '../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei } from '../../../typer/søknad';
-import { harVerdi } from '../../../utils/typer';
+import { harVerdi } from '../../../utils/typeUtils';
 import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
 import Landvelger from '../../Landvelger/Landvelger';
 import LocaleRadioGroup from '../../Teksthåndtering/LocaleRadioGroup';

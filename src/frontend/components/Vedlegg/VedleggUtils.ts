@@ -8,7 +8,7 @@ import {
     Vedleggstype,
 } from '../../typer/skjema';
 import { Locale } from '../../typer/tekst';
-import { hentBeskjedMedEttParameter } from '../../utils/tekster';
+import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
 export const leggTilVedlegg = (
     alleDokumentasjonFelter: DokumentasjonFelt[],

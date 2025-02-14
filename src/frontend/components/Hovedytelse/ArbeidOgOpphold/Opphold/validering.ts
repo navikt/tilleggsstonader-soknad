@@ -6,8 +6,8 @@ import {
 import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
 import { Valideringsfeil } from '../../../../typer/validering';
-import { erDatoEtterEllerLik } from '../../../../utils/dato';
-import { harVerdi } from '../../../../utils/typer';
+import { erDatoEtterEllerLik } from '../../../../utils/datoUtils';
+import { harVerdi } from '../../../../utils/typeUtils';
 import { FeilIdDinSituasjon } from '../../validering';
 
 export const errorKeyLand = (

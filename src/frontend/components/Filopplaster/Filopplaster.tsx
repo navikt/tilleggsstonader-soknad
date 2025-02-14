@@ -13,7 +13,11 @@ import {
 } from '@navikt/ds-react';
 
 import { utledFeilmelding } from './feilmeldingOpplasting';
-import { MAX_FILSTØRRELSE, TILLATE_FILENDELSER, TILLATTE_SAMTIDIGE_OPPLASTINGER } from './utils';
+import {
+    MAX_FILSTØRRELSE,
+    TILLATE_FILENDELSER,
+    TILLATTE_SAMTIDIGE_OPPLASTINGER,
+} from './filopplasterUtils';
 import { lastOppVedlegg } from '../../api/api';
 import { useSpråk } from '../../context/SpråkContext';
 import { fellesTekster } from '../../tekster/felles';

@@ -1,7 +1,7 @@
 import { Alert, Heading } from '@navikt/ds-react';
 
+import { errorKeyStartetFemte, errorKeyÅrsak } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
-import { errorKeyStartetFemte, errorKeyÅrsak } from './utils';
 import LocalePunktliste from '../../../components/Teksthåndtering/LocalePunktliste';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';

@@ -5,7 +5,7 @@ import { mottarPengestøtteInnhold } from '../../../barnetilsyn/tekster/opphold'
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFlereValgFelt, SelectFelt } from '../../../typer/skjema';
 import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
-import { harVerdi } from '../../../utils/typer';
+import { harVerdi } from '../../../utils/typeUtils';
 import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
 import Landvelger from '../../Landvelger/Landvelger';
 import LocaleCheckboxGroup from '../../Teksthåndtering/LocaleCheckboxGroup';

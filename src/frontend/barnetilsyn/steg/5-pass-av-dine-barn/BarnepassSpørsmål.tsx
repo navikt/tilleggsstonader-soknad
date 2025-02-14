@@ -1,8 +1,8 @@
 import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import BarnOver9År from './BarnOver9År';
+import { er9ellerEldre, errorKeyHvemPasser } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
-import { er9ellerEldre, errorKeyHvemPasser } from './utils';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, PassType } from '../../../typer/barn';

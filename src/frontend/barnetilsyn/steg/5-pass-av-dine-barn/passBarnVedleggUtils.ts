@@ -2,7 +2,7 @@ import { BarnepassIntern } from './typer';
 import { Barn } from '../../../typer/barn';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
-import { hentBeskjedMedEttParameter } from '../../../utils/tekster';
+import { hentBeskjedMedEttParameter } from '../../../utils/tekstUtils';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 export const errorKeyHvemPasser = (barn: Barn) => `${barn.ident}_hvemPasser`;

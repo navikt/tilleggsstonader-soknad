@@ -27,7 +27,7 @@ import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
-import { erSnartNyttSkoleår } from '../utils/dato';
+import { erSnartNyttSkoleår } from '../utils/datoUtils';
 import { hentNesteRoute } from '../utils/routes';
 
 const Forside: React.FC = () => {

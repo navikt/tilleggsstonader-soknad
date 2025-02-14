@@ -9,7 +9,7 @@ import {
 import { useSpråk } from '../../context/SpråkContext';
 import { EnumFlereValgFelt, VerdiFelt } from '../../typer/skjema';
 import { CheckboxGruppe } from '../../typer/tekst';
-import { hentBeskjedMedEttParameter } from '../../utils/tekster';
+import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
 interface CheckboxGroupProps<T extends string>
     extends Omit<AkselCheckboxGroupProps, 'onChange' | 'legend' | 'children'> {

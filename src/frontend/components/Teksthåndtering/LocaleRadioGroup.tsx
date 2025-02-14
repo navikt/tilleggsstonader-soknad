@@ -5,7 +5,7 @@ import { Radio, RadioGroup, RadioGroupProps as AkselRadioGroupProps } from '@nav
 import { useSpråk } from '../../context/SpråkContext';
 import { EnumFelt } from '../../typer/skjema';
 import { Radiogruppe, TekstElement } from '../../typer/tekst';
-import { hentBeskjedMedEttParameter } from '../../utils/tekster';
+import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
 interface RadioGroupProps<T extends string>
     extends Omit<AkselRadioGroupProps, 'legend' | 'description' | 'children'> {

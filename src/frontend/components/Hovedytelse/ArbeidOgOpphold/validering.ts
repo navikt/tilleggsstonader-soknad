@@ -10,7 +10,7 @@ import {
 import { ArbeidOgOpphold } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
-import { harVerdi } from '../../../utils/typer';
+import { harVerdi } from '../../../utils/typeUtils';
 import { FeilIdDinSituasjon } from '../validering';
 
 export const validerArbeidOgOpphold = (

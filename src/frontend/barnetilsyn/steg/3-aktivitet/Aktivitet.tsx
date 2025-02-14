@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import { Alert, Heading, Label, List, VStack } from '@navikt/ds-react';
 
+import { skalTaStillingTilLønnetTiltak } from './AkivitetUtils';
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { LønnetTiltak } from './LønnetTiltak';
-import { skalTaStillingTilLønnetTiltak } from './utils';
 import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './validering';
 import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import {

@@ -6,7 +6,7 @@ import { OppsummeringPanelHeader } from '../../../components/Oppsummering/Oppsum
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../../../context/SpråkContext';
 import { Aktivitet } from '../../../typer/søknad';
-import { verdiFelterTilTekstElement } from '../../../utils/tekster';
+import { verdiFelterTilTekstElement } from '../../../utils/tekstUtils';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 

@@ -12,10 +12,10 @@ import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
-import { formaterIsoDato } from '../../../utils/formatering';
-import { harKunValgtEnsligSomHovedytelse } from '../../../utils/hovedytelse';
+import { formaterIsoDato } from '../../../utils/formateringUtils';
+import { harKunValgtEnsligSomHovedytelse } from '../../../utils/hovedytelseUtils';
 import { dineBarnTekster } from '../../tekster/dineBarn';
-import { harBarnUnder2år, harValgtBarnOver9år } from '../5-pass-av-dine-barn/utils';
+import { harBarnUnder2år, harValgtBarnOver9år } from '../5-pass-av-dine-barn/passBarnVedleggUtils';
 
 const DineBarn = () => {
     const { locale } = useSpråk();

@@ -13,8 +13,8 @@ import {
     ÅrsakOppholdUtenforNorge,
 } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
-import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formatering';
-import { harVerdi } from '../../../../utils/typer';
+import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formateringUtils';
+import { harVerdi } from '../../../../utils/typeUtils';
 import Landvelger from '../../../Landvelger/Landvelger';
 import LocaleCheckboxGroup from '../../../Teksthåndtering/LocaleCheckboxGroup';
 

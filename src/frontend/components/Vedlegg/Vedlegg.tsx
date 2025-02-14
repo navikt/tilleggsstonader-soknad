@@ -5,8 +5,8 @@ import { styled } from 'styled-components';
 import { BodyShort, Heading } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
-import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './utils';
 import VedleggManglerModal from './VedleggManglerModal';
+import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './VedleggUtils';
 import { useSpråk } from '../../context/SpråkContext';
 import { vedleggTekster } from '../../tekster/vedlegg';
 import { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';

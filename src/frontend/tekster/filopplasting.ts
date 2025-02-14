@@ -1,5 +1,5 @@
 import { FeilmeldingerFraDokument } from '../components/Filopplaster/feilmeldingOpplasting';
-import { MAKS_FILSTØRRELSE_FORMATTERT } from '../components/Filopplaster/utils';
+import { MAKS_FILSTØRRELSE_FORMATTERT } from '../components/Filopplaster/filopplasterUtils';
 import { TekstElement } from '../typer/tekst';
 
 export const teksterFeilmeldinger: {

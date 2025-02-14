@@ -4,8 +4,8 @@ import { Heading, VStack } from '@navikt/ds-react';
 
 import { oppdaterDokumentasjonsbehovForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
+import { valider } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
-import { valider } from './utils';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -15,7 +15,7 @@ import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Barnepass } from '../../../typer/barn';
 import { inneholderFeil } from '../../../typer/validering';
-import { valuerOrThrow } from '../../../utils/typer';
+import { valuerOrThrow } from '../../../utils/typeUtils';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 const PassAvDineBarn = () => {

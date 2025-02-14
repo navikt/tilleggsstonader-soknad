@@ -7,7 +7,7 @@ import { fellesTekster } from '../../../tekster/felles';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei, OppholdUtenforNorge } from '../../../typer/søknad';
 import { TekstElement } from '../../../typer/tekst';
-import { formaterIsoDato } from '../../../utils/formatering';
+import { formaterIsoDato } from '../../../utils/formateringUtils';
 import LocaleTekst from '../../Teksthåndtering/LocaleTekst';
 
 const OppholdOppsummering: React.FC<{

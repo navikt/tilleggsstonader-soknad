@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Alert, BodyLong, BodyShort, Button, Heading, VStack } from '@navikt/ds-react';
 
 import { kvitteringTekster } from '../../tekster/kvittering';
-import { formaterNullableIsoDatoTid } from '../../utils/formatering';
+import { formaterNullableIsoDatoTid } from '../../utils/formateringUtils';
 import { Container } from '../Side';
 import LocaleInlineLenke from '../Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';

@@ -5,7 +5,7 @@ import { FormSummary } from '@navikt/ds-react';
 import { OppsummeringPanelHeader } from '../../../components/Oppsummering/OppsummeringPanelHeader';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Person } from '../../../typer/person';
-import { formaterIsoDato } from '../../../utils/formatering';
+import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 

@@ -1,6 +1,6 @@
 import { RegisterAktivitet, RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
 import { EnumFlereValgFelt } from '../../typer/skjema';
-import { tilTekstligDato } from '../../utils/dato';
+import { tilTekstligDato } from '../../utils/datoUtils';
 
 export const mapTilRegisterAktiviteterObjektMedLabel = (
     registerAktiviteter: RegisterAktivitet[]
