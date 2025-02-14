@@ -3,8 +3,7 @@ import React from 'react';
 import Vedlegg, { DokumentasjonFeltMedVedleggstekst } from '../../../components/Vedlegg/Vedlegg';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
-import { VedleggstypeLæremidler } from '../../../typer/skjema';
-import { typerVedleggTeksterLæremidler } from '../../tekster/vedlegg';
+import { typerVedleggTekster } from '../../../tekster/vedlegg';
 
 const VedleggLæremidler = () => {
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = useLæremidlerSøknad();
@@ -12,8 +11,7 @@ const VedleggLæremidler = () => {
 
     const dokumentasjonMedTittelOgBeskrivelse: DokumentasjonFeltMedVedleggstekst[] =
         dokumentasjon.map((dokumentasjon) => {
-            const vedleggstekster =
-                typerVedleggTeksterLæremidler[dokumentasjon.type as VedleggstypeLæremidler];
+            const vedleggstekster = typerVedleggTekster[dokumentasjon.type];
             return {
                 ...dokumentasjon,
                 tittel: vedleggstekster.tittel[locale],

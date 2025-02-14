@@ -4,9 +4,9 @@ import Vedlegg, { DokumentasjonFeltMedVedleggstekst } from '../../../components/
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
-import { DokumentasjonFelt, VedleggstypePassAvBarn } from '../../../typer/skjema';
+import { typerVedleggTekster } from '../../../tekster/vedlegg';
+import { DokumentasjonFelt } from '../../../typer/skjema';
 import { hentBeskjedMedEttParameter } from '../../../utils/tekster';
-import { typerVedleggTeksterPassAvBarn } from '../../tekster/vedlegg';
 
 const VedleggPassAvBarn = () => {
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = usePassAvBarnSøknad();
@@ -22,8 +22,7 @@ const VedleggPassAvBarn = () => {
     const dokumentasjonMedTittelOgBeskrivelse: DokumentasjonFeltMedVedleggstekst[] =
         dokumentasjon.map((dokumentasjon) => {
             const barnetsFornavn = finnBarnSomVedleggGjelder(dokumentasjon)?.fornavn ?? 'barnet';
-            const vedleggstekster =
-                typerVedleggTeksterPassAvBarn[dokumentasjon.type as VedleggstypePassAvBarn];
+            const vedleggstekster = typerVedleggTekster[dokumentasjon.type];
             return {
                 ...dokumentasjon,
                 tittel: hentBeskjedMedEttParameter(barnetsFornavn, vedleggstekster.tittel[locale]),
