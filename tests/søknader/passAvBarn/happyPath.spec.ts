@@ -97,7 +97,7 @@ test('At enkel gjennomkjøring av tilsyn barn fungerer', async ({ page }) => {
 
     await expect(page).toHaveURL(PassAvBarnUrls.VEDLEGG);
     await lastOppFil(page, 'Faktura fra SFO/AKS/barnehage');
-    await lastOppFil(page, 'Skriftlig uttalelse fra helsepersonell for [0]');
+    await lastOppFil(page, 'Skriftlig uttalelse fra helsepersonell for Espen');
     await forventIngenWcagViolations(page);
     await klikkPåKnapp(page, 'Neste');
     // Modal om at det mangler vedlegg
