@@ -19,7 +19,6 @@ import { useSpråk } from '../../context/SpråkContext';
 import { fellesTekster } from '../../tekster/felles';
 import { teksterFeilmeldinger } from '../../tekster/filopplasting';
 import { Dokument } from '../../typer/skjema';
-import { TekstElement } from '../../typer/tekst';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 type AvslåttFil = FileRejected & { feil: unknown };
@@ -33,7 +32,7 @@ const FilListe = styled(List).attrs({ as: 'ul' })`
 export const Filopplaster: React.FC<{
     opplastedeVedlegg: Dokument[];
     tittel: string;
-    beskrivelse: TekstElement<string>;
+    beskrivelse: string;
     leggTilDokument: (vedlegg: Dokument) => void;
     slettDokument: (vedlegg: string) => void;
 }> = ({ opplastedeVedlegg, tittel, beskrivelse, leggTilDokument, slettDokument }) => {
@@ -84,7 +83,7 @@ export const Filopplaster: React.FC<{
         <VStack gap="6">
             <FileUpload.Dropzone
                 label={tittel}
-                description={<LocaleTekst tekst={beskrivelse} />}
+                description={beskrivelse}
                 accept={TILLATE_FILENDELSER}
                 maxSizeInBytes={MAX_FILSTØRRELSE}
                 fileLimit={{

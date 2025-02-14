@@ -8,7 +8,7 @@ import Dokumentasjonskrav from './Dokumentasjonskrav';
 import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './utils';
 import VedleggManglerModal from './VedleggManglerModal';
 import { useSpråk } from '../../context/SpråkContext';
-import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
+import { vedleggTekster } from '../../tekster/vedlegg';
 import { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
 import { Filopplaster } from '../Filopplaster/Filopplaster';
 import { PellePanel } from '../PellePanel/PellePanel';
@@ -24,8 +24,13 @@ const VedleggContainer = styled.div`
     margin: 1rem 0;
 `;
 
+export type DokumentasjonFeltMedVedleggstekst = DokumentasjonFelt & {
+    tittel: string;
+    beskrivelse: string;
+};
+
 interface Props {
-    dokumentasjon: DokumentasjonFelt[];
+    dokumentasjon: DokumentasjonFeltMedVedleggstekst[];
     settDokumentasjon: React.Dispatch<React.SetStateAction<DokumentasjonFelt[]>>;
     dokumentasjonsbehov: Dokumentasjonsbehov[];
 }
@@ -92,8 +97,8 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                             <section key={dok.label}>
                                 <Filopplaster
                                     opplastedeVedlegg={dok.opplastedeVedlegg}
-                                    tittel={typerVedleggTekster[dok.type].tittel[locale]}
-                                    beskrivelse={typerVedleggTekster[dok.type].beskrivelse}
+                                    tittel={dok.tittel}
+                                    beskrivelse={dok.beskrivelse}
                                     leggTilDokument={(dokument: Dokument) =>
                                         leggTilDokument(dok, dokument)
                                     }
@@ -102,6 +107,7 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                             </section>
                         ))}
                     </VedleggContainer>
+
                     <VedleggManglerModal
                         innerRef={ref}
                         dokumenterSomMangler={ikkeOpplastedeDokumenter}
