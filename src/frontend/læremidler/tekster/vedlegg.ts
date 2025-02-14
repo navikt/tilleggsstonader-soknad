@@ -1,8 +1,8 @@
 import { VedleggstypeLæremidler } from '../../typer/skjema';
-import { Vedlegg } from '../../typer/tekst';
+import { Vedleggstekst } from '../../typer/tekst';
 
 type TekstTypeVedlegg = {
-    [key in VedleggstypeLæremidler]: Vedlegg;
+    [key in VedleggstypeLæremidler]: Vedleggstekst;
 };
 
 export const typerVedleggTeksterLæremidler: TekstTypeVedlegg = {

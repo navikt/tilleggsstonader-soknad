@@ -1,8 +1,8 @@
 import { VedleggstypePassAvBarn } from '../../typer/skjema';
-import { Vedlegg } from '../../typer/tekst';
+import { Vedleggstekst } from '../../typer/tekst';
 
 export type TekstTypeVedlegg = {
-    [key in VedleggstypePassAvBarn]: Vedlegg;
+    [key in VedleggstypePassAvBarn]: Vedleggstekst;
 };
 
 export const typerVedleggTeksterPassAvBarn: TekstTypeVedlegg = {
