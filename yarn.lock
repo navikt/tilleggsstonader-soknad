@@ -1071,12 +1071,7 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.5.tgz#4fc56c15c580b9adb7dc3c333a134e540b44bfb1"
   integrity sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==
 
-"@navikt/aksel-icons@7.5.3":
-  version "7.5.3"
-  resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/7.5.3/8b07f7fd834d42300df49884d2c672f0b607ce90#8b07f7fd834d42300df49884d2c672f0b607ce90"
-  integrity sha512-N4uaddfmZMp4Xm6h/WprY+8O7io9KwDX167h+o2/97ySN0zbcPxDyskWKjwplOlZg/SjoVuY45M/xqlkUa6byg==
-
-"@navikt/aksel-icons@^7.12.2":
+"@navikt/aksel-icons@7.12.2", "@navikt/aksel-icons@^7.12.2":
   version "7.12.2"
   resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/7.12.2/a6ed5460e486ea663a6a0f0effb9d73e0031affc#a6ed5460e486ea663a6a0f0effb9d73e0031affc"
   integrity sha512-kWTWAi6XLpAFDikfhcdQMrqOdfgBj3Wn8xv4sQvJkRbsXVy1G6Fu8swB2+FHlbIVDpnWe3Hdx10q1MQRscQTjQ==
