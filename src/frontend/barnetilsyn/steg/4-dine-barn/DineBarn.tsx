@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Alert, BodyShort, BodyLong, Checkbox, CheckboxGroup, Heading } from '@navikt/ds-react';
 
+import { Ytelse } from '../../../components/Hovedytelse/typer';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
@@ -11,9 +12,9 @@ import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext'
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { EnumFlereValgFelt } from '../../../typer/skjema';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
-import { harKunValgtEnsligSomHovedytelse } from '../../../utils/hovedytelseUtils';
 import { dineBarnTekster } from '../../tekster/dineBarn';
 import { harBarnUnder2år, harValgtBarnOver9år } from '../5-pass-av-dine-barn/passBarnVedleggUtils';
 
@@ -111,4 +112,15 @@ const DineBarn = () => {
         </Side>
     );
 };
+
+const harKunValgtEnsligSomHovedytelse = (
+    valgteHovedytelser?: EnumFlereValgFelt<Ytelse>
+): boolean => {
+    return (
+        !!valgteHovedytelser &&
+        valgteHovedytelser.verdier.length === 1 &&
+        valgteHovedytelser.verdier[0].verdi === 'OVERGANGSSTØNAD'
+    );
+};
+
 export default DineBarn;
