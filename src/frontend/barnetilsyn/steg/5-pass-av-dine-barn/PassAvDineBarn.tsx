@@ -15,7 +15,7 @@ import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Barnepass } from '../../../typer/barn';
 import { inneholderFeil } from '../../../typer/validering';
-import { valuerOrThrow } from '../../../utils/typeUtils';
+import { valueOrThrow } from '../../../utils/typeUtils';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 const PassAvDineBarn = () => {
@@ -74,7 +74,7 @@ const PassAvDineBarn = () => {
                 {barnMedPass.map((barn) => (
                     <BarnepassSpørsmål
                         key={barn.ident}
-                        barn={valuerOrThrow(
+                        barn={valueOrThrow(
                             person.barn.find((barneInfo) => barn.ident === barneInfo.ident)
                         )}
                         barnepass={barn}

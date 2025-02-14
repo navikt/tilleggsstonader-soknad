@@ -1,15 +1,8 @@
-export function manglerVerdi<T>(verdi: T | undefined | null) {
-    return verdi === undefined || verdi === null;
-}
-
 export const harVerdi = (str: string | undefined | null): str is string =>
     !!str && str.trim() !== '';
 
-export function valuerOrThrow<T>(
-    verdi: T | undefined | null,
-    message: string = 'Mangler verdi'
-): T {
-    if (manglerVerdi<T>(verdi)) {
+export function valueOrThrow<T>(verdi: T | undefined | null, message: string = 'Mangler verdi'): T {
+    if (verdi === undefined || verdi === null) {
         throw new TypeError(message);
     }
 
