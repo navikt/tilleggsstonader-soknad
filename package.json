@@ -66,9 +66,9 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.12.2",
-    "@navikt/ds-css": "^7.5.3",
-    "@navikt/ds-react": "^7.5.3",
+    "@navikt/aksel-icons": "7.13.0",
+    "@navikt/ds-css": "^7.13.0",
+    "@navikt/ds-react": "^7.13.0",
     "@navikt/ds-tokens": "^7.5.3",
     "@navikt/nav-dekoratoren-moduler": "^3.2.2",
     "@sentry/react": "^8.40.0",
