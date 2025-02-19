@@ -28,6 +28,7 @@ interface VedleggInnhold {
         };
     };
     ingen_dokumentasjonsbehov: TekstElement<string>;
+    laster_opp: TekstElement<string>;
 }
 
 const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] = {
@@ -87,6 +88,9 @@ export const vedleggTekster: VedleggInnhold = {
         format_kvalitet: formatKvalitetAccordian,
     },
     ingen_dokumentasjonsbehov: { nb: 'Du trenger ikke å legge ved noen dokumentasjon' },
+    laster_opp: {
+        nb: 'Laster opp vedlegg...',
+    },
 };
 
 interface VedleggManglerModalInnhold {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { styled } from 'styled-components';
 
@@ -39,7 +39,7 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
     const { locale } = useSpråk();
 
     const ref = useRef<HTMLDialogElement>(null);
-    const [ikkeOpplastedeDokumenter, settIkkeOpplastedeDokumenter] = React.useState<string[]>([]);
+    const [ikkeOpplastedeDokumenter, settIkkeOpplastedeDokumenter] = useState<string[]>([]);
 
     useEffect(() => {
         settDokumentasjon((prevState) =>
