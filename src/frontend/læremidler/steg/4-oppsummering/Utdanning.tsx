@@ -29,8 +29,8 @@ const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }
                         <FormSummary.Label>{utdanning.aktiviteter.label}</FormSummary.Label>
                         {utdanning.aktiviteter.verdier
                             .filter((verdi) => verdi.verdi !== 'ANNET')
-                            .map((verdi) => (
-                                <FormSummary.Value>{verdi.label}</FormSummary.Value>
+                            .map((verdi, index) => (
+                                <FormSummary.Value key={index}>{verdi.label}</FormSummary.Value>
                             ))}
                     </FormSummary.Answer>
                 )}
