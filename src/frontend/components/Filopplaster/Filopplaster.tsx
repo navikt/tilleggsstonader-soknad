@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import {
+    FileAccepted,
     FileObject,
     FileRejected,
     FileRejectionReason,
@@ -22,6 +23,7 @@ import { lastOppVedlegg } from '../../api/api';
 import { useSpråk } from '../../context/SpråkContext';
 import { fellesTekster } from '../../tekster/felles';
 import { teksterFeilmeldinger } from '../../tekster/filopplasting';
+import { vedleggTekster } from '../../tekster/vedlegg';
 import { Dokument } from '../../typer/skjema';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
@@ -42,6 +44,7 @@ export const Filopplaster: React.FC<{
 }> = ({ opplastedeVedlegg, tittel, beskrivelse, leggTilDokument, slettDokument }) => {
     const { locale } = useSpråk();
     const [avslåtteFiler, setAvslåtteFiler] = useState<AvslåttFil[]>([]);
+    const [vedleggLastesOpp, settVedleggLastesOpp] = useState<FileAccepted[]>([]);
 
     const fjernFil = (filSomSkalFjernes: AvslåttFil) => {
         setAvslåtteFiler((prevState) => prevState.filter((fil) => fil !== filSomSkalFjernes));
@@ -62,6 +65,7 @@ export const Filopplaster: React.FC<{
     };
 
     const lastOppValgteFiler = (filer: FileObject[]) => {
+        settVedleggLastesOpp((prevState) => [...prevState, ...filer.filter((f) => !f.error)]);
         filer.forEach((filObjekt) => {
             if (!filObjekt.error) {
                 lastOppVedlegg(filObjekt.file)
@@ -76,6 +80,11 @@ export const Filopplaster: React.FC<{
                             reasons: ['ukjent'],
                         };
                         setAvslåtteFiler((prevState) => [...prevState, avslåttFil]);
+                    })
+                    .finally(() => {
+                        settVedleggLastesOpp((prevState) =>
+                            prevState.filter((o) => o !== filObjekt)
+                        );
                     });
             } else {
                 setAvslåtteFiler((prevState) => [...prevState, { ...filObjekt, feil: null }]);
@@ -96,7 +105,7 @@ export const Filopplaster: React.FC<{
                 }}
                 onSelect={(nyeFiler) => lastOppValgteFiler(nyeFiler)}
             />
-            {opplastedeVedlegg.length > 0 && (
+            {(opplastedeVedlegg.length > 0 || vedleggLastesOpp.length > 0) && (
                 <VStack gap="2">
                     <Heading level="3" size="xsmall">
                         <LocaleTekst
@@ -115,6 +124,23 @@ export const Filopplaster: React.FC<{
                                     action: 'delete',
                                     onClick: () => slettDokument(dokument.id),
                                 }}
+                            />
+                        ))}
+                        {vedleggLastesOpp.map((vedlegg, index) => (
+                            <FileUpload.Item
+                                as="li"
+                                key={index}
+                                file={{ name: vedlegg.file.name }}
+                                style={{ marginBottom: '1rem' }}
+                                button={{
+                                    action: 'delete',
+                                    onClick: () =>
+                                        settVedleggLastesOpp((prevState) =>
+                                            prevState.filter((v) => v !== vedlegg)
+                                        ),
+                                }}
+                                status="uploading"
+                                translations={{ uploading: vedleggTekster.laster_opp[locale] }}
                             />
                         ))}
                     </FilListe>
