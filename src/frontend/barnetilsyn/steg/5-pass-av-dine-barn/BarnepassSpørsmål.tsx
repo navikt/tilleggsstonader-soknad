@@ -37,6 +37,21 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                 }}
                 error={valideringsfeil[errorKeyHvemPasser(barn)]?.melding}
             />
+            <LocaleRadioGroup
+                id={valideringsfeil[errorKeyHvemPasser(barn)]?.id}
+                tekst={barnepassTekster.har_utgifter_til_pass_radio}
+                argument0={barn.fornavn}
+                value={barnepass.harUtgifterTilPass?.verdi || []}
+                onChange={(harUtgifterTilPass) => {
+                    oppdaterBarnMedBarnepass({
+                        ...barnepass,
+                        harUtgifterTilPass: harUtgifterTilPass,
+                    });
+                    nullstillValideringsfeil(errorKeyHvemPasser(barn));
+                }}
+                error={valideringsfeil[errorKeyHvemPasser(barn)]?.melding}
+            />
+
             {barnepass.type?.verdi === PassType.PRIVAT && (
                 <Alert variant="info">
                     <Heading size="small">

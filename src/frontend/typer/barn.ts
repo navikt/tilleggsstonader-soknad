@@ -12,6 +12,7 @@ export interface Barn {
 export interface Barnepass {
     ident: string;
     type: EnumFelt<PassType>;
+    harUtgifterTilPass: EnumFelt<JaNei>;
     startetIFemte: EnumFelt<JaNei>;
     årsak?: EnumFelt<ÅrsakBarnepass>;
 }

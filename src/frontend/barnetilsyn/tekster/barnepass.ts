@@ -7,6 +7,7 @@ interface BarnepassInnhold {
     tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
+    har_utgifter_til_pass_radio: Radiogruppe<JaNei>;
     hvem_passer_andre_alert: {
         tittel: TekstElement<string>;
         innhold: TekstElement<string>;
@@ -56,6 +57,12 @@ export const barnepassTekster: BarnepassInnhold = {
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
         alternativer: PassTypeTilTekst,
+    },
+    har_utgifter_til_pass_radio: {
+        header: {
+            nb: 'Har du utgifter til pass av [0] hele perioden du har arbeidsrettet aktivitet? ',
+        },
+        alternativer: JaNeiTilTekst,
     },
     hvem_passer_andre_alert: {
         tittel: {
