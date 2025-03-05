@@ -51,7 +51,7 @@ export const PassAvBarn: React.FC<{ person: Person; barnMedBarnepass: Barnepass[
     person,
     barnMedBarnepass,
 }) => (
-    <OppsummeringPanelHeader tittel={oppsummeringTekster.barnepass} lenke={RouteTilPath.BARNEPASS}>
+    <OppsummeringPanelHeader tittel={oppsummeringTekster.barnepass} lenke={RouteTilPath.VEDLEGG}>
         {barnMedBarnepass.map((barnepass) => {
             const barn = person.barn.find((barn) => barn.ident === barnepass.ident);
             return barn ? (
