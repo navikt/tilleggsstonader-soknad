@@ -12,13 +12,15 @@ export interface Barn {
 export interface Barnepass {
     ident: string;
     type: EnumFelt<PassType>;
-    harUtgifterTilPass: EnumFelt<JaNei>;
-    fom?: VerdiFelt<string>;
-    tom?: VerdiFelt<string>;
+    utgifter: Utgifter;
     startetIFemte: EnumFelt<JaNei>;
     årsak?: EnumFelt<ÅrsakBarnepass>;
 }
-
+export interface Utgifter {
+    harUtgifterTilPass: EnumFelt<JaNei>;
+    fom?: VerdiFelt<string>;
+    tom?: VerdiFelt<string>;
+}
 export enum PassType {
     BARNEHAGE_SFO_AKS = 'BARNEHAGE_SFO_AKS',
     PRIVAT = 'PRIVAT',

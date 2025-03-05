@@ -7,6 +7,7 @@ import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { JaNeiTilTekst } from '../../../tekster/felles';
 import { Barn, Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
+import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import {
     barnepassTekster,
@@ -66,6 +67,30 @@ export const PassAvBarn: React.FC<{ person: Person; barnMedBarnepass: Barnepass[
                             <LocaleTekst tekst={PassTypeTilTekst[barnepass.type.verdi]} />
                         </FormSummary.Value>
                     </FormSummary.Answer>
+                    <FormSummary.Answer>
+                        <FormSummary.Label>
+                            <LocaleTekst
+                                tekst={barnepassTekster.har_utgifter_til_pass_radio.header}
+                                argument0={barn.fornavn}
+                            />
+                        </FormSummary.Label>
+                        <FormSummary.Value>
+                            {barnepass.utgifter.harUtgifterTilPass?.svarTekst}
+                        </FormSummary.Value>
+                    </FormSummary.Answer>
+                    {barnepass.utgifter.harUtgifterTilPass?.verdi === 'NEI' && (
+                        <FormSummary.Answer>
+                            <FormSummary.Label>
+                                <LocaleTekst tekst={barnepassTekster.utgifter_dato.label} />
+                            </FormSummary.Label>
+                            {barnepass.utgifter.fom?.verdi && barnepass.utgifter.tom?.verdi && (
+                                <FormSummary.Value>
+                                    {formaterIsoDato(barnepass.utgifter.fom.verdi)}-{' '}
+                                    {formaterIsoDato(barnepass.utgifter.tom.verdi)}
+                                </FormSummary.Value>
+                            )}
+                        </FormSummary.Answer>
+                    )}
                     {barn.alder >= 9 && <BarnOver9År barn={barn} barnepass={barnepass} />}
                 </React.Fragment>
             ) : null;

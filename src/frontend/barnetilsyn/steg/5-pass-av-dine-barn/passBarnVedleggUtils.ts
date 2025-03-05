@@ -33,7 +33,7 @@ export const valider = (
                 },
             };
         }
-        if (!barn.harUtgifterTilPass) {
+        if (!barn.utgifter?.harUtgifterTilPass) {
             acc = {
                 ...acc,
                 [errorKeyHarUtgifter(barnPerson)]: {
@@ -45,7 +45,10 @@ export const valider = (
                 },
             };
         }
-        if (barn.harUtgifterTilPass?.verdi === 'NEI' && harVerdi(barn.fom?.verdi) === false) {
+        if (
+            barn.utgifter?.harUtgifterTilPass?.verdi === 'NEI' &&
+            harVerdi(barn.utgifter?.fom?.verdi) === false
+        ) {
             acc = {
                 ...acc,
                 [errorKeyUtgifterTidFom(barnPerson)]: {
@@ -57,7 +60,10 @@ export const valider = (
                 },
             };
         }
-        if (barn.harUtgifterTilPass?.verdi === 'NEI' && harVerdi(barn.tom?.verdi) === false) {
+        if (
+            barn.utgifter?.harUtgifterTilPass?.verdi === 'NEI' &&
+            harVerdi(barn.utgifter?.tom?.verdi) === false
+        ) {
             acc = {
                 ...acc,
                 [errorKeyUtgifterTidTom(barnPerson)]: {
@@ -69,8 +75,13 @@ export const valider = (
                 },
             };
         }
-        if (harVerdi(barn.fom?.verdi) && harVerdi(barn.tom?.verdi)) {
-            if (!erDatoEtterEllerLik(barn.fom?.verdi || '', barn.tom?.verdi || '')) {
+        if (harVerdi(barn.utgifter?.fom?.verdi) && harVerdi(barn.utgifter?.tom?.verdi)) {
+            if (
+                !erDatoEtterEllerLik(
+                    barn.utgifter?.fom?.verdi || '',
+                    barn.utgifter?.tom?.verdi || ''
+                )
+            ) {
                 acc = {
                     ...acc,
                     [errorKeyUtgifterTidTom(barnPerson)]: {

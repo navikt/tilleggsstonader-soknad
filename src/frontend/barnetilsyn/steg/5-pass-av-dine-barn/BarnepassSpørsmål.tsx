@@ -14,6 +14,8 @@ import { BarnepassIntern } from './typer';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, PassType } from '../../../typer/barn';
+import { EnumFelt } from '../../../typer/skjema';
+import { JaNei } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { nullableTilDato, tilLocaleDateString } from '../../../utils/formateringUtils';
@@ -36,19 +38,41 @@ const BarnepassSpørsmål: React.FC<Props> = ({
     nullstillValideringsfeil,
     locale,
 }) => {
+    const defaultHarUtgifterTilPass: EnumFelt<JaNei> = {
+        verdi: 'NEI',
+        label: 'Har utgifter til pass',
+        svarTekst: 'Nei',
+        alternativer: ['JA', 'NEI'],
+    };
     const { datepickerProps: datepickerPropsFom, inputProps: inputPropsFom } = useDatepicker({
-        defaultSelected: nullableTilDato(barnepass.fom?.verdi),
+        defaultSelected: nullableTilDato(barnepass.utgifter?.fom?.verdi),
         onDateChange: (val) => {
             const verdi = val ? { label: 'Fra', verdi: tilLocaleDateString(val) } : undefined;
-            oppdaterBarnMedBarnepass({ ...barnepass, fom: verdi });
+            oppdaterBarnMedBarnepass({
+                ...barnepass,
+                utgifter: {
+                    harUtgifterTilPass:
+                        barnepass.utgifter?.harUtgifterTilPass ?? defaultHarUtgifterTilPass,
+                    fom: verdi,
+                    tom: barnepass.utgifter?.tom,
+                },
+            });
             nullstillValideringsfeil(errorKeyUtgifterTidFom(barn));
         },
     });
     const { datepickerProps: datepickerPropsTom, inputProps: inputPropsTom } = useDatepicker({
-        defaultSelected: nullableTilDato(barnepass.tom?.verdi),
+        defaultSelected: nullableTilDato(barnepass.utgifter?.tom?.verdi),
         onDateChange: (val) => {
             const verdi = val ? { label: 'Til', verdi: tilLocaleDateString(val) } : undefined;
-            oppdaterBarnMedBarnepass({ ...barnepass, tom: verdi });
+            oppdaterBarnMedBarnepass({
+                ...barnepass,
+                utgifter: {
+                    harUtgifterTilPass:
+                        barnepass.utgifter?.harUtgifterTilPass ?? defaultHarUtgifterTilPass,
+                    fom: barnepass.utgifter?.fom,
+                    tom: verdi,
+                },
+            });
             nullstillValideringsfeil(errorKeyUtgifterTidTom(barn));
         },
     });
@@ -70,17 +94,20 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                     id={valideringsfeil[errorKeyHarUtgifter(barn)]?.id}
                     tekst={barnepassTekster.har_utgifter_til_pass_radio}
                     argument0={barn.fornavn}
-                    value={barnepass.harUtgifterTilPass?.verdi || []}
+                    value={barnepass.utgifter?.harUtgifterTilPass?.verdi || []}
                     onChange={(harUtgifterTilPass) => {
                         oppdaterBarnMedBarnepass({
                             ...barnepass,
-                            harUtgifterTilPass: harUtgifterTilPass,
+                            utgifter: {
+                                ...barnepass.utgifter,
+                                harUtgifterTilPass: harUtgifterTilPass,
+                            },
                         });
                         nullstillValideringsfeil(errorKeyHarUtgifter(barn));
                     }}
                     error={valideringsfeil[errorKeyHarUtgifter(barn)]?.melding}
                 />
-                {barnepass.harUtgifterTilPass?.verdi === 'NEI' && (
+                {barnepass.utgifter?.harUtgifterTilPass?.verdi === 'NEI' && (
                     <VStack gap={'4'}>
                         <Label>{barnepassTekster.utgifter_dato.label[locale]}</Label>
                         <HStack gap={'4'}>
