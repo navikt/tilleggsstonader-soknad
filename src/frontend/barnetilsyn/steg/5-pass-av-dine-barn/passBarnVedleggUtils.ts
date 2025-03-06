@@ -11,8 +11,8 @@ export const errorKeyHvemPasser = (barn: Barn) => `${barn.ident}_hvemPasser`;
 export const errorKeyStartetFemte = (barn: Barn) => `${barn.ident}_startetFemte`;
 export const errorKeyÅrsak = (barn: Barn) => `${barn.ident}_årsak`;
 export const errorKeyHarUtgifter = (barn: Barn) => `${barn.ident}_harUtgifter`;
-export const errorKeyUtgifterTidFom = (barn: Barn) => `${barn.ident}_fomUtgifterFom`;
-export const errorKeyUtgifterTidTom = (barn: Barn) => `${barn.ident}_fomUtgifterTom`;
+export const errorKeyUtgifterFom = (barn: Barn) => `${barn.ident}_fomUtgifterFom`;
+export const errorKeyUtgifterTom = (barn: Barn) => `${barn.ident}_fomUtgifterTom`;
 
 export const valider = (
     barnMedPass: BarnepassIntern[],
@@ -37,7 +37,7 @@ export const valider = (
             acc = {
                 ...acc,
                 [errorKeyHarUtgifter(barnPerson)]: {
-                    id: `${indeks}-0`,
+                    id: `${indeks}-3`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
                         barnepassTekster.har_utgifter_feilmelding[locale]
@@ -51,11 +51,11 @@ export const valider = (
         ) {
             acc = {
                 ...acc,
-                [errorKeyUtgifterTidFom(barnPerson)]: {
-                    id: `${indeks}-0`,
+                [errorKeyUtgifterFom(barnPerson)]: {
+                    id: `${indeks}-4`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.utgifter_tid_fom_feilmelding[locale]
+                        barnepassTekster.utgifter_fom_feilmelding[locale]
                     ),
                 },
             };
@@ -66,11 +66,11 @@ export const valider = (
         ) {
             acc = {
                 ...acc,
-                [errorKeyUtgifterTidTom(barnPerson)]: {
-                    id: `${indeks}-0`,
+                [errorKeyUtgifterTom(barnPerson)]: {
+                    id: `${indeks}-5`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.utgifter_tid_tom_feilmelding[locale]
+                        barnepassTekster.utgifter_tom_feilmelding[locale]
                     ),
                 },
             };
@@ -84,8 +84,8 @@ export const valider = (
             ) {
                 acc = {
                     ...acc,
-                    [errorKeyUtgifterTidTom(barnPerson)]: {
-                        id: `${indeks}-0`,
+                    [errorKeyUtgifterTom(barnPerson)]: {
+                        id: `${indeks}-6`,
                         melding: barnepassTekster.feilmelding_tom_før_fom[locale],
                     },
                 };

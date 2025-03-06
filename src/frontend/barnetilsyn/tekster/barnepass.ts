@@ -20,8 +20,8 @@ interface BarnepassInnhold {
     };
     hvem_passer_feilmelding: TekstElement<string>;
     har_utgifter_feilmelding: TekstElement<string>;
-    utgifter_tid_fom_feilmelding: TekstElement<string>;
-    utgifter_tid_tom_feilmelding: TekstElement<string>;
+    utgifter_fom_feilmelding: TekstElement<string>;
+    utgifter_tom_feilmelding: TekstElement<string>;
 
     startet_femte_radio: Radiogruppe<JaNei>;
     startet_femte_feilmelding: TekstElement<string>;
@@ -99,10 +99,10 @@ export const barnepassTekster: BarnepassInnhold = {
     har_utgifter_feilmelding: {
         nb: 'Du må svare på om du har utgifter til pass av [0].',
     },
-    utgifter_tid_fom_feilmelding: {
+    utgifter_fom_feilmelding: {
         nb: 'Mangler fra-dato',
     },
-    utgifter_tid_tom_feilmelding: {
+    utgifter_tom_feilmelding: {
         nb: 'Mangler til-dato.',
     },
     feilmelding_tom_før_fom: {

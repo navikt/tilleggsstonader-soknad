@@ -7,8 +7,8 @@ import {
     er9ellerEldre,
     errorKeyHarUtgifter,
     errorKeyHvemPasser,
-    errorKeyUtgifterTidFom,
-    errorKeyUtgifterTidTom,
+    errorKeyUtgifterFom,
+    errorKeyUtgifterTom,
 } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -57,7 +57,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                     tom: barnepass.utgifter?.tom,
                 },
             });
-            nullstillValideringsfeil(errorKeyUtgifterTidFom(barn));
+            nullstillValideringsfeil(errorKeyUtgifterFom(barn));
         },
     });
     const { datepickerProps: datepickerPropsTom, inputProps: inputPropsTom } = useDatepicker({
@@ -73,7 +73,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                     tom: verdi,
                 },
             });
-            nullstillValideringsfeil(errorKeyUtgifterTidTom(barn));
+            nullstillValideringsfeil(errorKeyUtgifterTom(barn));
         },
     });
     return (
@@ -89,48 +89,51 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                 }}
                 error={valideringsfeil[errorKeyHvemPasser(barn)]?.melding}
             />
-            <div>
-                <LocaleRadioGroup
-                    id={valideringsfeil[errorKeyHarUtgifter(barn)]?.id}
-                    tekst={barnepassTekster.har_utgifter_til_pass_radio}
-                    argument0={barn.fornavn}
-                    value={barnepass.utgifter?.harUtgifterTilPass?.verdi || []}
-                    onChange={(harUtgifterTilPass) => {
-                        oppdaterBarnMedBarnepass({
-                            ...barnepass,
-                            utgifter: {
-                                ...barnepass.utgifter,
-                                harUtgifterTilPass: harUtgifterTilPass,
-                            },
-                        });
-                        nullstillValideringsfeil(errorKeyHarUtgifter(barn));
-                    }}
-                    error={valideringsfeil[errorKeyHarUtgifter(barn)]?.melding}
-                />
-                {barnepass.utgifter?.harUtgifterTilPass?.verdi === 'NEI' && (
-                    <VStack gap={'4'}>
-                        <Label>{barnepassTekster.utgifter_dato.label[locale]}</Label>
-                        <HStack gap={'4'}>
-                            <DatePicker {...datepickerPropsFom}>
-                                <DatePicker.Input
-                                    id={valideringsfeil[errorKeyUtgifterTidFom(barn)]?.id}
-                                    label={barnepassTekster.utgifter_dato.fom[locale]}
-                                    error={valideringsfeil[errorKeyUtgifterTidFom(barn)]?.melding}
-                                    {...inputPropsFom}
-                                />
-                            </DatePicker>{' '}
-                            <DatePicker {...datepickerPropsTom}>
-                                <DatePicker.Input
-                                    id={valideringsfeil[errorKeyUtgifterTidTom(barn)]?.id}
-                                    label={barnepassTekster.utgifter_dato.tom[locale]}
-                                    error={valideringsfeil[errorKeyUtgifterTidTom(barn)]?.melding}
-                                    {...inputPropsTom}
-                                />
-                            </DatePicker>{' '}
-                        </HStack>{' '}
-                    </VStack>
-                )}
-            </div>
+
+            <LocaleRadioGroup
+                id={valideringsfeil[errorKeyHarUtgifter(barn)]?.id}
+                tekst={barnepassTekster.har_utgifter_til_pass_radio}
+                argument0={barn.fornavn}
+                value={barnepass.utgifter?.harUtgifterTilPass?.verdi || []}
+                onChange={(harUtgifterTilPass) => {
+                    oppdaterBarnMedBarnepass({
+                        ...barnepass,
+                        utgifter: {
+                            ...barnepass.utgifter,
+                            harUtgifterTilPass: harUtgifterTilPass,
+                        },
+                    });
+                    if (harUtgifterTilPass.verdi === 'JA') {
+                        nullstillValideringsfeil(errorKeyUtgifterFom(barn));
+                        nullstillValideringsfeil(errorKeyUtgifterTom(barn));
+                    }
+                    nullstillValideringsfeil(errorKeyHarUtgifter(barn));
+                }}
+                error={valideringsfeil[errorKeyHarUtgifter(barn)]?.melding}
+            />
+            {barnepass.utgifter?.harUtgifterTilPass?.verdi === 'NEI' && (
+                <>
+                    <Label>{barnepassTekster.utgifter_dato.label[locale]}</Label>
+                    <HStack gap={'4'}>
+                        <DatePicker {...datepickerPropsFom}>
+                            <DatePicker.Input
+                                id={valideringsfeil[errorKeyUtgifterFom(barn)]?.id}
+                                label={barnepassTekster.utgifter_dato.fom[locale]}
+                                error={valideringsfeil[errorKeyUtgifterFom(barn)]?.melding}
+                                {...inputPropsFom}
+                            />
+                        </DatePicker>
+                        <DatePicker {...datepickerPropsTom}>
+                            <DatePicker.Input
+                                id={valideringsfeil[errorKeyUtgifterTom(barn)]?.id}
+                                label={barnepassTekster.utgifter_dato.tom[locale]}
+                                error={valideringsfeil[errorKeyUtgifterTom(barn)]?.melding}
+                                {...inputPropsTom}
+                            />
+                        </DatePicker>
+                    </HStack>
+                </>
+            )}
 
             {barnepass.type?.verdi === PassType.PRIVAT && (
                 <Alert variant="info">
