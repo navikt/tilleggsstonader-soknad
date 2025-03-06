@@ -64,7 +64,7 @@ test('At enkel gjennomkjøring av tilsyn barn fungerer', async ({ page }) => {
 
     await expect(page).toHaveURL(PassAvBarnUrls.DINE_BARN);
     const spørsmålHvilkeBarn = page.getByRole('group', {
-        name: 'Hvilke barn søker du om støtte til pass fortest?',
+        name: 'Hvilke barn søker du om støtte til pass for?',
     });
     await spørsmålHvilkeBarn.getByLabel('Ronja Røverdatter').check();
     await spørsmålHvilkeBarn.getByLabel('Espen Askeladden').check();
