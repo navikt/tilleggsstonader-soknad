@@ -70,7 +70,7 @@ export const barnepassTekster: BarnepassInnhold = {
     },
     har_utgifter_til_pass_radio: {
         header: {
-            nb: 'Har du utgifter til pass av [0] hele perioden du har arbeidsrettet aktivitet? ',
+            nb: 'Har du utgifter til pass av [0] hele perioden du har arbeidsrettet aktivitet?',
         },
         alternativer: JaNeiTilTekst,
     },

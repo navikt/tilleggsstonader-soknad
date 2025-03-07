@@ -82,6 +82,24 @@ test('At enkel gjennomkjøring av tilsyn barn fungerer', async ({ page }) => {
         .getByLabel('Dagmamma,')
         .check();
     await page
+        .getByRole('group', {
+            name: 'Har du utgifter til pass av Ronja hele perioden du har arbeidsrettet aktivitet?',
+        })
+        .getByLabel('Ja')
+        .check();
+
+    await page
+        .getByRole('group', {
+            name: 'Har du utgifter til pass av Espen hele perioden du har arbeidsrettet aktivitet?',
+        })
+        .getByLabel('Nei')
+        .check();
+
+    const nårHarDuUtgifter = page.getByText('Når har du utgifter til pass?').locator('..');
+    await nårHarDuUtgifter.getByLabel('Fra', { exact: true }).fill('01.01.2025');
+    await nårHarDuUtgifter.getByLabel('Til', { exact: true }).fill('31.01.2025');
+
+    await page
         .getByRole('group', { name: 'Har Espen startet i 5. klasse når tiltaket ditt starter?' })
         .getByLabel('Ja')
         .check();
