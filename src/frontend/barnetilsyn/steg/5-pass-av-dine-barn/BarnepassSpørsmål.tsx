@@ -96,17 +96,20 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                 argument0={barn.fornavn}
                 value={barnepass.utgifter?.harUtgifterTilPass?.verdi || []}
                 onChange={(harUtgifterTilPass) => {
+                    const skalNullstilleDato = harUtgifterTilPass.verdi === 'JA';
+                    if (skalNullstilleDato) {
+                        nullstillValideringsfeil(errorKeyUtgifterFom(barn));
+                        nullstillValideringsfeil(errorKeyUtgifterTom(barn));
+                    }
                     oppdaterBarnMedBarnepass({
                         ...barnepass,
                         utgifter: {
                             ...barnepass.utgifter,
-                            harUtgifterTilPass: harUtgifterTilPass,
+                            harUtgifterTilPass,
+                            fom: skalNullstilleDato ? undefined : barnepass.utgifter?.fom,
+                            tom: skalNullstilleDato ? undefined : barnepass.utgifter?.tom,
                         },
                     });
-                    if (harUtgifterTilPass.verdi === 'JA') {
-                        nullstillValideringsfeil(errorKeyUtgifterFom(barn));
-                        nullstillValideringsfeil(errorKeyUtgifterTom(barn));
-                    }
                     nullstillValideringsfeil(errorKeyHarUtgifter(barn));
                 }}
                 error={valideringsfeil[errorKeyHarUtgifter(barn)]?.melding}
