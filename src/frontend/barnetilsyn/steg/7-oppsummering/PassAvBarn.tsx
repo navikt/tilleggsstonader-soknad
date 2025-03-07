@@ -7,7 +7,7 @@ import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { JaNeiTilTekst } from '../../../tekster/felles';
 import { Barn, Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
-import { formaterIsoDato } from '../../../utils/formateringUtils';
+import { formaterPeriode } from '../../../utils/formateringUtils';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import {
     barnepassTekster,
@@ -85,8 +85,10 @@ export const PassAvBarn: React.FC<{ person: Person; barnMedBarnepass: Barnepass[
                             </FormSummary.Label>
                             {barnepass.utgifter.fom?.verdi && barnepass.utgifter.tom?.verdi && (
                                 <FormSummary.Value>
-                                    {formaterIsoDato(barnepass.utgifter.fom.verdi)}-{' '}
-                                    {formaterIsoDato(barnepass.utgifter.tom.verdi)}
+                                    {formaterPeriode(
+                                        barnepass.utgifter.fom?.verdi,
+                                        barnepass.utgifter.tom?.verdi
+                                    )}
                                 </FormSummary.Value>
                             )}
                         </FormSummary.Answer>
