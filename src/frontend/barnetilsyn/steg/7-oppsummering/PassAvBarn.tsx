@@ -4,15 +4,10 @@ import { FormSummary } from '@navikt/ds-react';
 
 import { OppsummeringPanelHeader } from '../../../components/Oppsummering/OppsummeringPanelHeader';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import { JaNeiTilTekst } from '../../../tekster/felles';
 import { Barn, Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
-import {
-    barnepassTekster,
-    PassTypeTilTekst,
-    ÅrsakEkstraPassTilTekst,
-} from '../../tekster/barnepass';
+import { barnepassTekster } from '../../tekster/barnepass';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, barnepass }) => (
@@ -24,11 +19,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
                     argument0={barn.fornavn}
                 />
             </FormSummary.Label>
-            <FormSummary.Value>
-                <LocaleTekst
-                    tekst={barnepass.startetIFemte ? JaNeiTilTekst.JA : JaNeiTilTekst.NEI}
-                />
-            </FormSummary.Value>
+            <FormSummary.Value>{barnepass.startetIFemte.svarTekst}</FormSummary.Value>
         </FormSummary.Answer>
         {barnepass.årsak && (
             <FormSummary.Answer>
@@ -38,9 +29,7 @@ const BarnOver9År: React.FC<{ barn: Barn; barnepass: Barnepass }> = ({ barn, ba
                         argument0={barn.fornavn}
                     />
                 </FormSummary.Label>
-                <FormSummary.Value>
-                    <LocaleTekst tekst={ÅrsakEkstraPassTilTekst[barnepass.årsak.verdi]} />
-                </FormSummary.Value>
+                <FormSummary.Value>{barnepass.årsak.svarTekst}</FormSummary.Value>
             </FormSummary.Answer>
         )}
     </>
@@ -62,9 +51,7 @@ export const PassAvBarn: React.FC<{ person: Person; barnMedBarnepass: Barnepass[
                                 argument0={barn.fornavn}
                             />
                         </FormSummary.Label>
-                        <FormSummary.Value>
-                            <LocaleTekst tekst={PassTypeTilTekst[barnepass.type.verdi]} />
-                        </FormSummary.Value>
+                        <FormSummary.Value>{barnepass.type.svarTekst}</FormSummary.Value>
                     </FormSummary.Answer>
                     {barn.alder >= 9 && <BarnOver9År barn={barn} barnepass={barnepass} />}
                 </React.Fragment>
