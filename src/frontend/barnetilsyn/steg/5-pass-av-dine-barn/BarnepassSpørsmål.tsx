@@ -11,7 +11,7 @@ import {
     errorKeyUtgifterTom,
 } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
-import UtgifterDato from './utgifterDato';
+import UtgifterDato from './UtgifterDato';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, PassType } from '../../../typer/barn';
