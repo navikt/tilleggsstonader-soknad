@@ -17,7 +17,7 @@ export interface Barnepass {
     årsak?: EnumFelt<ÅrsakBarnepass>;
 }
 export interface Utgifter {
-    harUtgifterTilPass: EnumFelt<JaNei>;
+    harUtgifterTilPass?: EnumFelt<JaNei>;
     fom?: VerdiFelt<string>;
     tom?: VerdiFelt<string>;
 }

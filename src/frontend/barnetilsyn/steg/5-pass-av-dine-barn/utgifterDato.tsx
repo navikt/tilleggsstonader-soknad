@@ -5,8 +5,6 @@ import { DatePicker, HStack, useDatepicker } from '@navikt/ds-react';
 import { errorKeyUtgifterFom, errorKeyUtgifterTom } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
 import { Barn } from '../../../typer/barn';
-import { EnumFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { nullableTilDato, tilLocaleDateString } from '../../../utils/formateringUtils';
@@ -28,38 +26,39 @@ const UtgifterDato: React.FC<Props> = ({
     nullstillValideringsfeil,
     locale,
 }) => {
-    const defaultHarUtgifterTilPass: EnumFelt<JaNei> = {
-        verdi: 'NEI',
-        label: 'Har utgifter til pass',
-        svarTekst: 'Nei',
-        alternativer: ['JA', 'NEI'],
-    };
     const { datepickerProps: datepickerPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(barnepass.utgifter?.fom?.verdi),
         onDateChange: (val) => {
-            const verdi = val ? { label: 'Fra', verdi: tilLocaleDateString(val) } : undefined;
+            const verdi = val
+                ? {
+                      label: barnepassTekster.utgifter_dato.fom[locale],
+                      verdi: tilLocaleDateString(val),
+                  }
+                : undefined;
             oppdaterBarnMedBarnepass({
                 ...barnepass,
                 utgifter: {
-                    harUtgifterTilPass:
-                        barnepass.utgifter?.harUtgifterTilPass ?? defaultHarUtgifterTilPass,
+                    ...barnepass.utgifter,
                     fom: verdi,
-                    tom: barnepass.utgifter?.tom,
                 },
             });
             nullstillValideringsfeil(errorKeyUtgifterFom(barn));
         },
     });
+
     const { datepickerProps: datepickerPropsTom, inputProps: inputPropsTom } = useDatepicker({
         defaultSelected: nullableTilDato(barnepass.utgifter?.tom?.verdi),
         onDateChange: (val) => {
-            const verdi = val ? { label: 'Til', verdi: tilLocaleDateString(val) } : undefined;
+            const verdi = val
+                ? {
+                      label: barnepassTekster.utgifter_dato.tom[locale],
+                      verdi: tilLocaleDateString(val),
+                  }
+                : undefined;
             oppdaterBarnMedBarnepass({
                 ...barnepass,
                 utgifter: {
-                    harUtgifterTilPass:
-                        barnepass.utgifter?.harUtgifterTilPass ?? defaultHarUtgifterTilPass,
-                    fom: barnepass.utgifter?.fom,
+                    ...barnepass.utgifter,
                     tom: verdi,
                 },
             });
