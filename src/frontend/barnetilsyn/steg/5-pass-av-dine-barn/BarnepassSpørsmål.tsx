@@ -15,6 +15,8 @@ import UtgifterDato from './utgifterDato';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, PassType } from '../../../typer/barn';
+import { EnumFelt } from '../../../typer/skjema';
+import { JaNei } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { barnepassTekster } from '../../tekster/barnepass';
@@ -36,6 +38,26 @@ const BarnepassSpørsmål: React.FC<Props> = ({
     nullstillValideringsfeil,
     locale,
 }) => {
+    const oppdaterUtgifter = (harUtgifterTilPass: EnumFelt<JaNei>) => {
+        const skalNullstilleDato = harUtgifterTilPass.verdi === 'JA';
+
+        if (skalNullstilleDato) {
+            nullstillValideringsfeil(errorKeyUtgifterFom(barn));
+            nullstillValideringsfeil(errorKeyUtgifterTom(barn));
+        }
+
+        oppdaterBarnMedBarnepass({
+            ...barnepass,
+            utgifter: {
+                ...barnepass.utgifter,
+                harUtgifterTilPass,
+                fom: skalNullstilleDato ? undefined : barnepass.utgifter?.fom,
+                tom: skalNullstilleDato ? undefined : barnepass.utgifter?.tom,
+            },
+        });
+
+        nullstillValideringsfeil(errorKeyHarUtgifter(barn));
+    };
     return (
         <VStack gap={'6'}>
             <LocaleRadioGroup
@@ -55,23 +77,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                 tekst={barnepassTekster.har_utgifter_til_pass_radio}
                 argument0={barn.fornavn}
                 value={barnepass.utgifter?.harUtgifterTilPass?.verdi || []}
-                onChange={(harUtgifterTilPass) => {
-                    const skalNullstilleDato = harUtgifterTilPass.verdi === 'JA';
-                    if (skalNullstilleDato) {
-                        nullstillValideringsfeil(errorKeyUtgifterFom(barn));
-                        nullstillValideringsfeil(errorKeyUtgifterTom(barn));
-                    }
-                    oppdaterBarnMedBarnepass({
-                        ...barnepass,
-                        utgifter: {
-                            ...barnepass.utgifter,
-                            harUtgifterTilPass,
-                            fom: skalNullstilleDato ? undefined : barnepass.utgifter?.fom,
-                            tom: skalNullstilleDato ? undefined : barnepass.utgifter?.tom,
-                        },
-                    });
-                    nullstillValideringsfeil(errorKeyHarUtgifter(barn));
-                }}
+                onChange={oppdaterUtgifter}
                 error={valideringsfeil[errorKeyHarUtgifter(barn)]?.melding}
             />
             {barnepass.utgifter?.harUtgifterTilPass?.verdi === 'NEI' && (
