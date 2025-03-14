@@ -7,11 +7,22 @@ interface BarnepassInnhold {
     tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
     hvem_passer_radio: Radiogruppe<PassType>;
+    har_utgifter_til_pass_radio: Radiogruppe<JaNei>;
+    utgifter_dato: {
+        label: TekstElement<string>;
+        fom: TekstElement<string>;
+        tom: TekstElement<string>;
+    };
+    feilmelding_tom_før_fom: TekstElement<string>;
     hvem_passer_andre_alert: {
         tittel: TekstElement<string>;
         innhold: TekstElement<string>;
     };
     hvem_passer_feilmelding: TekstElement<string>;
+    har_utgifter_feilmelding: TekstElement<string>;
+    utgifter_fom_feilmelding: TekstElement<string>;
+    utgifter_tom_feilmelding: TekstElement<string>;
+
     startet_femte_radio: Radiogruppe<JaNei>;
     startet_femte_feilmelding: TekstElement<string>;
     startet_femte_readmore_header: TekstElement<string>;
@@ -57,6 +68,23 @@ export const barnepassTekster: BarnepassInnhold = {
         header: { nb: 'Hvem skal passe [0]?' },
         alternativer: PassTypeTilTekst,
     },
+    har_utgifter_til_pass_radio: {
+        header: {
+            nb: 'Har du utgifter til pass av [0] hele perioden du har arbeidsrettet aktivitet?',
+        },
+        alternativer: JaNeiTilTekst,
+    },
+    utgifter_dato: {
+        label: {
+            nb: 'Når har du utgifter til pass?',
+        },
+        fom: {
+            nb: 'Fra',
+        },
+        tom: {
+            nb: 'Til',
+        },
+    },
     hvem_passer_andre_alert: {
         tittel: {
             nb: 'Privat barnepass krever mer dokumentasjon',
@@ -68,6 +96,19 @@ export const barnepassTekster: BarnepassInnhold = {
     hvem_passer_feilmelding: {
         nb: 'Du må velge hva slags pass [0] har.',
     },
+    har_utgifter_feilmelding: {
+        nb: 'Du må svare på om du har utgifter til pass av [0].',
+    },
+    utgifter_fom_feilmelding: {
+        nb: 'Mangler fra-dato',
+    },
+    utgifter_tom_feilmelding: {
+        nb: 'Mangler til-dato.',
+    },
+    feilmelding_tom_før_fom: {
+        nb: 'Til-dato kan ikke være før fra-dato.',
+    },
+
     startet_femte_radio: {
         header: { nb: 'Har [0] startet i 5. klasse når tiltaket ditt starter?' },
         alternativer: JaNeiTilTekst,

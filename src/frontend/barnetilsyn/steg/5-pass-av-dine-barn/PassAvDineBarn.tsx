@@ -81,6 +81,7 @@ const PassAvDineBarn = () => {
                         oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
                         valideringsfeil={valideringsfeil}
                         nullstillValideringsfeil={nullstillValideringsfeil}
+                        locale={locale}
                     />
                 ))}
             </VStack>

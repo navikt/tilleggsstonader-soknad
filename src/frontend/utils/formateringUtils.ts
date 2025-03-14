@@ -9,7 +9,10 @@ export const datoFormat = {
 export const formaterIsoDato = (dato: string): string => {
     return parseISO(dato).toLocaleDateString('no-NO', datoFormat);
 };
-
+export const formaterPeriode = (fom?: string, tom?: string): string => {
+    if (!fom || !tom) return '';
+    return `${formaterIsoDato(fom)} - ${formaterIsoDato(tom)}`;
+};
 export const formaterNullableIsoDato = (dato: string | undefined): string | undefined =>
     dato && formaterIsoDato(dato);
 
