@@ -33,7 +33,7 @@ export const valider = (
                 },
             };
         }
-        if (!barn.utgifter?.harUtgifterTilPass) {
+        if (!barn.utgifter?.harUtgifterTilPassHelePerioden) {
             acc = {
                 ...acc,
                 [errorKeyHarUtgifter(barnPerson)]: {
@@ -46,7 +46,7 @@ export const valider = (
             };
         }
         if (
-            barn.utgifter?.harUtgifterTilPass?.verdi === 'NEI' &&
+            barn.utgifter?.harUtgifterTilPassHelePerioden?.verdi === 'NEI' &&
             harVerdi(barn.utgifter?.fom?.verdi) === false
         ) {
             acc = {
@@ -61,7 +61,7 @@ export const valider = (
             };
         }
         if (
-            barn.utgifter?.harUtgifterTilPass?.verdi === 'NEI' &&
+            barn.utgifter?.harUtgifterTilPassHelePerioden?.verdi === 'NEI' &&
             harVerdi(barn.utgifter?.tom?.verdi) === false
         ) {
             acc = {

@@ -38,8 +38,8 @@ const BarnepassSpørsmål: React.FC<Props> = ({
     nullstillValideringsfeil,
     locale,
 }) => {
-    const oppdaterUtgifter = (harUtgifterTilPass: EnumFelt<JaNei>) => {
-        const skalNullstilleDato = harUtgifterTilPass.verdi === 'JA';
+    const oppdaterUtgifter = (harUtgifterTilPassHelePerioden: EnumFelt<JaNei>) => {
+        const skalNullstilleDato = harUtgifterTilPassHelePerioden.verdi === 'JA';
 
         if (skalNullstilleDato) {
             nullstillValideringsfeil(errorKeyUtgifterFom(barn));
@@ -50,7 +50,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
             ...barnepass,
             utgifter: {
                 ...barnepass.utgifter,
-                harUtgifterTilPass,
+                harUtgifterTilPassHelePerioden,
                 fom: skalNullstilleDato ? undefined : barnepass.utgifter?.fom,
                 tom: skalNullstilleDato ? undefined : barnepass.utgifter?.tom,
             },
@@ -76,11 +76,11 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                 id={valideringsfeil[errorKeyHarUtgifter(barn)]?.id}
                 tekst={barnepassTekster.har_utgifter_til_pass_radio}
                 argument0={barn.fornavn}
-                value={barnepass.utgifter?.harUtgifterTilPass?.verdi || []}
+                value={barnepass.utgifter?.harUtgifterTilPassHelePerioden?.verdi || []}
                 onChange={oppdaterUtgifter}
                 error={valideringsfeil[errorKeyHarUtgifter(barn)]?.melding}
             />
-            {barnepass.utgifter?.harUtgifterTilPass?.verdi === 'NEI' && (
+            {barnepass.utgifter?.harUtgifterTilPassHelePerioden?.verdi === 'NEI' && (
                 <>
                     <Label>{barnepassTekster.utgifter_dato.label[locale]}</Label>
                     <UtgifterDato

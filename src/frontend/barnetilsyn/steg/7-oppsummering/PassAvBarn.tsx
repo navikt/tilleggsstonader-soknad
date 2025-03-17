@@ -75,10 +75,10 @@ export const PassAvBarn: React.FC<{ person: Person; barnMedBarnepass: Barnepass[
                             />
                         </FormSummary.Label>
                         <FormSummary.Value>
-                            {barnepass.utgifter.harUtgifterTilPass?.svarTekst}
+                            {barnepass.utgifter.harUtgifterTilPassHelePerioden?.svarTekst}
                         </FormSummary.Value>
                     </FormSummary.Answer>
-                    {barnepass.utgifter.harUtgifterTilPass?.verdi === 'NEI' && (
+                    {barnepass.utgifter.harUtgifterTilPassHelePerioden?.verdi === 'NEI' && (
                         <FormSummary.Answer>
                             <FormSummary.Label>
                                 <LocaleTekst tekst={barnepassTekster.utgifter_dato.label} />
