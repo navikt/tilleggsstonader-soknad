@@ -2,12 +2,17 @@ import { BarnepassIntern } from './typer';
 import { Barn } from '../../../typer/barn';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
+import { erDatoEtterEllerLik } from '../../../utils/datoUtils';
 import { hentBeskjedMedEttParameter } from '../../../utils/tekstUtils';
+import { harVerdi } from '../../../utils/typeUtils';
 import { barnepassTekster } from '../../tekster/barnepass';
 
 export const errorKeyHvemPasser = (barn: Barn) => `${barn.ident}_hvemPasser`;
 export const errorKeyStartetFemte = (barn: Barn) => `${barn.ident}_startetFemte`;
 export const errorKeyÅrsak = (barn: Barn) => `${barn.ident}_årsak`;
+export const errorKeyHarUtgifter = (barn: Barn) => `${barn.ident}_harUtgifter`;
+export const errorKeyUtgifterFom = (barn: Barn) => `${barn.ident}_fomUtgifterFom`;
+export const errorKeyUtgifterTom = (barn: Barn) => `${barn.ident}_fomUtgifterTom`;
 
 export const valider = (
     barnMedPass: BarnepassIntern[],
@@ -28,6 +33,65 @@ export const valider = (
                 },
             };
         }
+        if (!barn.utgifter?.harUtgifterTilPassHelePerioden) {
+            acc = {
+                ...acc,
+                [errorKeyHarUtgifter(barnPerson)]: {
+                    id: `${indeks}-3`,
+                    melding: hentBeskjedMedEttParameter(
+                        barnPerson.fornavn,
+                        barnepassTekster.har_utgifter_feilmelding[locale]
+                    ),
+                },
+            };
+        }
+        if (
+            barn.utgifter?.harUtgifterTilPassHelePerioden?.verdi === 'NEI' &&
+            harVerdi(barn.utgifter?.fom?.verdi) === false
+        ) {
+            acc = {
+                ...acc,
+                [errorKeyUtgifterFom(barnPerson)]: {
+                    id: `${indeks}-4`,
+                    melding: hentBeskjedMedEttParameter(
+                        barnPerson.fornavn,
+                        barnepassTekster.utgifter_fom_feilmelding[locale]
+                    ),
+                },
+            };
+        }
+        if (
+            barn.utgifter?.harUtgifterTilPassHelePerioden?.verdi === 'NEI' &&
+            harVerdi(barn.utgifter?.tom?.verdi) === false
+        ) {
+            acc = {
+                ...acc,
+                [errorKeyUtgifterTom(barnPerson)]: {
+                    id: `${indeks}-5`,
+                    melding: hentBeskjedMedEttParameter(
+                        barnPerson.fornavn,
+                        barnepassTekster.utgifter_tom_feilmelding[locale]
+                    ),
+                },
+            };
+        }
+        if (harVerdi(barn.utgifter?.fom?.verdi) && harVerdi(barn.utgifter?.tom?.verdi)) {
+            if (
+                !erDatoEtterEllerLik(
+                    barn.utgifter?.fom?.verdi || '',
+                    barn.utgifter?.tom?.verdi || ''
+                )
+            ) {
+                acc = {
+                    ...acc,
+                    [errorKeyUtgifterTom(barnPerson)]: {
+                        id: `${indeks}-6`,
+                        melding: barnepassTekster.feilmelding_tom_før_fom[locale],
+                    },
+                };
+            }
+        }
+
         if (er9ellerEldre(barnPerson) && barn.startetIFemte === undefined) {
             acc = {
                 ...acc,

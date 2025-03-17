@@ -1,11 +1,23 @@
-import { Alert, Heading, VStack } from '@navikt/ds-react';
+import React from 'react';
+
+import { Alert, Heading, Label, VStack } from '@navikt/ds-react';
 
 import BarnOver9År from './BarnOver9År';
-import { er9ellerEldre, errorKeyHvemPasser } from './passBarnVedleggUtils';
+import {
+    er9ellerEldre,
+    errorKeyHarUtgifter,
+    errorKeyHvemPasser,
+    errorKeyUtgifterFom,
+    errorKeyUtgifterTom,
+} from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
+import UtgifterDato from './UtgifterDato';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, PassType } from '../../../typer/barn';
+import { EnumFelt } from '../../../typer/skjema';
+import { JaNei } from '../../../typer/søknad';
+import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { barnepassTekster } from '../../tekster/barnepass';
 
@@ -15,6 +27,7 @@ interface Props {
     oppdaterBarnMedBarnepass: (oppdatertBarn: BarnepassIntern) => void;
     valideringsfeil: Valideringsfeil;
     nullstillValideringsfeil: (key: string) => void;
+    locale: Locale;
 }
 
 const BarnepassSpørsmål: React.FC<Props> = ({
@@ -23,7 +36,28 @@ const BarnepassSpørsmål: React.FC<Props> = ({
     oppdaterBarnMedBarnepass,
     valideringsfeil,
     nullstillValideringsfeil,
+    locale,
 }) => {
+    const oppdaterUtgifter = (harUtgifterTilPassHelePerioden: EnumFelt<JaNei>) => {
+        const skalNullstilleDato = harUtgifterTilPassHelePerioden.verdi === 'JA';
+
+        if (skalNullstilleDato) {
+            nullstillValideringsfeil(errorKeyUtgifterFom(barn));
+            nullstillValideringsfeil(errorKeyUtgifterTom(barn));
+        }
+
+        oppdaterBarnMedBarnepass({
+            ...barnepass,
+            utgifter: {
+                ...barnepass.utgifter,
+                harUtgifterTilPassHelePerioden,
+                fom: skalNullstilleDato ? undefined : barnepass.utgifter?.fom,
+                tom: skalNullstilleDato ? undefined : barnepass.utgifter?.tom,
+            },
+        });
+
+        nullstillValideringsfeil(errorKeyHarUtgifter(barn));
+    };
     return (
         <VStack gap={'6'}>
             <LocaleRadioGroup
@@ -37,6 +71,29 @@ const BarnepassSpørsmål: React.FC<Props> = ({
                 }}
                 error={valideringsfeil[errorKeyHvemPasser(barn)]?.melding}
             />
+
+            <LocaleRadioGroup
+                id={valideringsfeil[errorKeyHarUtgifter(barn)]?.id}
+                tekst={barnepassTekster.har_utgifter_til_pass_radio}
+                argument0={barn.fornavn}
+                value={barnepass.utgifter?.harUtgifterTilPassHelePerioden?.verdi || []}
+                onChange={oppdaterUtgifter}
+                error={valideringsfeil[errorKeyHarUtgifter(barn)]?.melding}
+            />
+            {barnepass.utgifter?.harUtgifterTilPassHelePerioden?.verdi === 'NEI' && (
+                <>
+                    <Label>{barnepassTekster.utgifter_dato.label[locale]}</Label>
+                    <UtgifterDato
+                        barn={barn}
+                        barnepass={barnepass}
+                        oppdaterBarnMedBarnepass={oppdaterBarnMedBarnepass}
+                        valideringsfeil={valideringsfeil}
+                        nullstillValideringsfeil={nullstillValideringsfeil}
+                        locale={locale}
+                    />
+                </>
+            )}
+
             {barnepass.type?.verdi === PassType.PRIVAT && (
                 <Alert variant="info">
                     <Heading size="small">

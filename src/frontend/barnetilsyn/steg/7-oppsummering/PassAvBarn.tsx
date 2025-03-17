@@ -6,6 +6,7 @@ import { OppsummeringPanelHeader } from '../../../components/Oppsummering/Oppsum
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
+import { formaterPeriode } from '../../../utils/formateringUtils';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import { barnepassTekster } from '../../tekster/barnepass';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
@@ -53,6 +54,32 @@ export const PassAvBarn: React.FC<{ person: Person; barnMedBarnepass: Barnepass[
                         </FormSummary.Label>
                         <FormSummary.Value>{barnepass.type.svarTekst}</FormSummary.Value>
                     </FormSummary.Answer>
+                    <FormSummary.Answer>
+                        <FormSummary.Label>
+                            <LocaleTekst
+                                tekst={barnepassTekster.har_utgifter_til_pass_radio.header}
+                                argument0={barn.fornavn}
+                            />
+                        </FormSummary.Label>
+                        <FormSummary.Value>
+                            {barnepass.utgifter.harUtgifterTilPassHelePerioden?.svarTekst}
+                        </FormSummary.Value>
+                    </FormSummary.Answer>
+                    {barnepass.utgifter.harUtgifterTilPassHelePerioden?.verdi === 'NEI' && (
+                        <FormSummary.Answer>
+                            <FormSummary.Label>
+                                <LocaleTekst tekst={barnepassTekster.utgifter_dato.label} />
+                            </FormSummary.Label>
+                            {barnepass.utgifter.fom?.verdi && barnepass.utgifter.tom?.verdi && (
+                                <FormSummary.Value>
+                                    {formaterPeriode(
+                                        barnepass.utgifter.fom?.verdi,
+                                        barnepass.utgifter.tom?.verdi
+                                    )}
+                                </FormSummary.Value>
+                            )}
+                        </FormSummary.Answer>
+                    )}
                     {barn.alder >= 9 && <BarnOver9År barn={barn} barnepass={barnepass} />}
                 </React.Fragment>
             ) : null;
