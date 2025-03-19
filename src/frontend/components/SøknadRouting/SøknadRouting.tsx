@@ -4,10 +4,12 @@ import { Alert } from '@navikt/ds-react';
 
 import { sendSøkerTilGammelSøknad } from './sendSøkerTilGammelSøknad';
 import { RoutingState, useRouting } from '../../api/useRouting';
-import { useSøknad } from '../../context/SøknadContext';
+import { StønadstypeRouting } from '../../typer/stønadstyper';
 
-const SøknadRouting: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const { stønadstype } = useSøknad();
+const SøknadRouting: React.FC<{ stønadstype: StønadstypeRouting; children: React.ReactNode }> = ({
+    stønadstype,
+    children,
+}) => {
     const { routingState } = useRouting(stønadstype);
 
     switch (routingState) {

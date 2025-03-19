@@ -9,7 +9,7 @@ import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { teksterStønad } from '../tekster/stønad';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Stønadstype, StønadstypeRouting } from '../typer/stønadstyper';
 
 const LæremidlerInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
@@ -26,7 +26,7 @@ const LæremidlerInnhold = () => {
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}
         >
-            <SøknadRouting>
+            <SøknadRouting stønadstype={StønadstypeRouting.LÆREMIDLER}>
                 <Søknadsdialog />
             </SøknadRouting>
         </SøknadProvider>

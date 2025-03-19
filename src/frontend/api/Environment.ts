@@ -1,4 +1,4 @@
-import { Stønadstype } from '../typer/stønadstyper';
+import { Stønadstype, StønadstypeRouting } from '../typer/stønadstyper';
 
 interface EnvironmentProps {
     apiProxyUrl: string;
@@ -6,8 +6,9 @@ interface EnvironmentProps {
     wonderwallUrl: string;
     logoutUrl: string;
     sentryUrl?: string;
-    urlGammelSøknad: (stønadstype: Stønadstype) => string;
     urlPapirsøknad: (stønadstype: Stønadstype) => string;
+    urlGammelSøknad: (stønadstype: StønadstypeRouting) => string;
+    urlNyFyllUtSøknad: (stønadstype: StønadstypeRouting) => string;
     miljø: 'local' | 'preprod' | 'production';
     modellVersjon: IModellversjon;
 }
@@ -16,22 +17,43 @@ interface IModellversjon {
     barnetilsyn: number;
 }
 
-const StønadstypeTilFyllutSkjema: Record<Stønadstype, string> = {
+const StønadstypeTilGammeltFyllUtSkjema: Record<StønadstypeRouting, string> = {
     BARNETILSYN: 'nav111215b',
     LÆREMIDLER: 'nav111216b',
+    BOUTGIFTER: 'nav111219b',
 };
 
-const urlGammelSøknadProd = (stønadstype: Stønadstype) =>
-    `https://www.nav.no/fyllut/${StønadstypeTilFyllutSkjema[stønadstype]}?sub=digital`;
+const StønadstypeTilNyttFyllUtSkjema: Record<StønadstypeRouting, string | undefined> = {
+    BARNETILSYN: undefined,
+    LÆREMIDLER: undefined,
+    BOUTGIFTER: 'nav111219',
+};
 
-const urlGammelSøknadDev = (stønadstype: Stønadstype) =>
-    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilFyllutSkjema[stønadstype]}?sub=digital`;
+const urlNyFyllUtSendInnSøknadProd = (stønadstype: StønadstypeRouting) => {
+    if (stønadstype in [StønadstypeRouting.BARNETILSYN, StønadstypeRouting.LÆREMIDLER]) {
+        return '#'; // Har ikke nytt Fyll Ut-skjema
+    }
+    return `https://www.nav.no/fyllut/${StønadstypeTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
+};
+
+const urlNyFyllUtSendInnSøknadDev = (stønadstype: StønadstypeRouting) => {
+    if (stønadstype in [StønadstypeRouting.BARNETILSYN, StønadstypeRouting.LÆREMIDLER]) {
+        return '#'; // Har ikke nytt Fyll Ut-skjema
+    }
+    return `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
+};
+
+const urlGammelSøknadProd = (stønadstype: StønadstypeRouting) =>
+    `https://www.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
+
+const urlGammelSøknadDev = (stønadstype: StønadstypeRouting) =>
+    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
 
 const urlPapirsøknadProd = (stønadstype: Stønadstype) =>
-    `https://www.nav.no/fyllut/${StønadstypeTilFyllutSkjema[stønadstype]}?sub=paper`;
+    `https://www.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=paper`;
 
 const urlPapirsøknadDev = (stønadstype: Stønadstype) =>
-    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilFyllutSkjema[stønadstype]}?sub=paper`;
+    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=paper`;
 
 const Environment = (): EnvironmentProps => {
     const modellVersjon = { overgangsstønad: 7, barnetilsyn: 2, skolepenger: 2 };
@@ -47,6 +69,7 @@ const Environment = (): EnvironmentProps => {
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlGammelSøknad: urlGammelSøknadDev,
             urlPapirsøknad: urlPapirsøknadDev,
+            urlNyFyllUtSøknad: urlNyFyllUtSendInnSøknadDev,
             miljø: 'preprod',
             modellVersjon: modellVersjon,
         };
@@ -59,6 +82,7 @@ const Environment = (): EnvironmentProps => {
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlGammelSøknad: urlGammelSøknadProd,
             urlPapirsøknad: urlPapirsøknadProd,
+            urlNyFyllUtSøknad: urlNyFyllUtSendInnSøknadProd,
             miljø: 'production',
             modellVersjon: modellVersjon,
         };
@@ -70,6 +94,7 @@ const Environment = (): EnvironmentProps => {
             logoutUrl: 'http://localhost:8000/oauth2/logout',
             urlGammelSøknad: urlGammelSøknadDev,
             urlPapirsøknad: urlPapirsøknadDev,
+            urlNyFyllUtSøknad: urlNyFyllUtSendInnSøknadDev,
             miljø: 'local',
             modellVersjon: modellVersjon,
         };

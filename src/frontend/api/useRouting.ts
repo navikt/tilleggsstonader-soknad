@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { defaultConfig } from './api';
 import Environment from './Environment';
-import { Stønadstype } from '../typer/stønadstyper';
+import { StønadstypeRouting } from '../typer/stønadstyper';
 
 interface SøknadRouting {
     skalBehandlesINyLøsning: boolean;
@@ -17,7 +17,7 @@ export enum RoutingState {
     HENTER = 'HENTER',
 }
 
-const sjekkRouting = (stønadstype: Stønadstype): Promise<SøknadRouting> => {
+const sjekkRouting = (stønadstype: StønadstypeRouting): Promise<SøknadRouting> => {
     const request = {
         stønadstype,
     };
@@ -30,7 +30,7 @@ const sjekkRouting = (stønadstype: Stønadstype): Promise<SøknadRouting> => {
         .then((response) => response.data);
 };
 
-export const useRouting = (stønadstype: Stønadstype) => {
+export const useRouting = (stønadstype: StønadstypeRouting) => {
     const [routingState, setRoutingState] = useState<RoutingState>(RoutingState.HENTER);
 
     useEffect(() => {

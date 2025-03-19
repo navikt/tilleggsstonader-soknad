@@ -8,6 +8,7 @@ import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
 import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
 import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
+import { BoutgifterApp } from './Boutgifter/BoutgifterApp';
 import ScrollToTop from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import LæremidlerApp from './læremidler/LæremidlerApp';
@@ -28,6 +29,7 @@ const AppRoutes = () => {
                 {/* Fallback for gamle lenker */}
                 <Route path={'/barnetilsyn/*'} element={<Navigate to="/pass-av-barn" replace />} />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
+                <Route path={`/boutgifter/*`} element={<BoutgifterApp />} />
                 <Route path={'*'} element={<Navigate to="/pass-av-barn" replace />} />
             </Routes>
         </BrowserRouter>
