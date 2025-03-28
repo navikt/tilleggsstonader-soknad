@@ -11,7 +11,7 @@ import { finnOppsummeringRoute } from '../../utils/routeUtils';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 interface Props {
-    innerRef: RefObject<HTMLDialogElement>;
+    innerRef: RefObject<HTMLDialogElement | null>;
     dokumenterSomMangler: string[];
 }
 

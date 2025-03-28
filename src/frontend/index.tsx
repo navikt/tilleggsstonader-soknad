@@ -25,12 +25,15 @@ const AppRoutes = () => {
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <ScrollToTop />
             <Routes>
-                <Route path={`/${barnetilsynPath}/*`} element={<BarnetilsynApp />} />
+                <Route path={`${barnetilsynPath}/*`} element={<BarnetilsynApp />} />
                 {/* Fallback for gamle lenker */}
-                <Route path={'/barnetilsyn/*'} element={<Navigate to="/pass-av-barn" replace />} />
+                <Route
+                    path={'/barnetilsyn/*'}
+                    element={<Navigate to={barnetilsynPath} replace />}
+                />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
                 <Route path={`/boutgifter/*`} element={<BoutgifterApp />} />
-                <Route path={'*'} element={<Navigate to="/pass-av-barn" replace />} />
+                <Route path={'*'} element={<Navigate to={barnetilsynPath} replace />} />
             </Routes>
         </BrowserRouter>
     );
