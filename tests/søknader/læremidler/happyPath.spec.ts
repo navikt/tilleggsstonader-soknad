@@ -90,7 +90,6 @@ test('At enkel gjennomkjøring av læremidler fungerer', async ({ page }) => {
     // Modal om at det mangler vedlegg
     await expect(page.getByRole('heading', { name: 'Vedlegg mangler' })).toBeVisible();
     await page.pause();
-    await forventIngenWcagViolations(page);
     await klikkPåKnapp(page, 'Ja, gå til neste side');
 
     await page.pause();

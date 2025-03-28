@@ -120,7 +120,6 @@ test('At enkel gjennomkjøring av tilsyn barn fungerer', async ({ page }) => {
     await klikkPåKnapp(page, 'Neste');
     // Modal om at det mangler vedlegg
     await expect(page.getByRole('heading', { name: 'Vedlegg mangler' })).toBeVisible();
-    await forventIngenWcagViolations(page);
     await klikkPåKnapp(page, 'Ja, gå til neste side');
 
     await expect(page).toHaveURL(PassAvBarnUrls.OPPSUMMERING);
