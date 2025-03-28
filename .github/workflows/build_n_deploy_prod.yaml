@@ -10,6 +10,8 @@ jobs:
     name: Tester app med Playwright
     uses: navikt/tilleggsstonader/.github/workflows/run-playwright.yml@main
     secrets: inherit
+    with:
+      node-version: "20"
   build_and_deploy:
     name: "Bygger app og deployer til prod og dev"
     needs: playwright

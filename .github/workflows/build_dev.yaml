@@ -9,6 +9,8 @@ jobs:
     name: "Bygger appen"
     uses: navikt/tilleggsstonader/.github/workflows/ts-build.yml@main
     secrets: inherit
+    with:
+      node-version: "20"
   playwright:
     name: Kjører Playwright-tester
     uses: navikt/tilleggsstonader/.github/workflows/run-playwright.yml@main
