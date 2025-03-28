@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Alert, BodyLong, BodyShort, Button, Heading, VStack } from '@navikt/ds-react';
 
+import { useSøknad } from '../../context/SøknadContext';
 import { kvitteringTekster } from '../../tekster/kvittering';
 import { formaterNullableIsoDatoTid } from '../../utils/formateringUtils';
 import { Container } from '../Side';
@@ -13,6 +14,13 @@ import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) => {
     const locationState = useLocation().state;
     const navigate = useNavigate();
+    const { resetSøknadOgValideringsfeil } = useSøknad();
+
+    useEffect(() => {
+        resetSøknadOgValideringsfeil();
+        // resetSøknadOgValideringsfeil initieres på nytt ved kall mot den
+        // eslint-disable-next-line
+    }, []);
 
     useEffect(() => {
         if (locationState === null) {
