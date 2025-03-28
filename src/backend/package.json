@@ -6,8 +6,8 @@
   "scripts": {
     "ci": "yarn --prefer-offline --frozen-lockfile",
     "build": "tsc --build --verbose",
-    "start": "NODE_ENV=production node --experimental-modules --es-module-specifier-resolution=node build/server.js",
-    "start:dev": "NODE_ENV=development ENV=localhost node --experimental-modules --es-module-specifier-resolution=node build/server.js"
+    "start": "NODE_ENV=production node --es-module-specifier-resolution=node build/server.js",
+    "start:dev": "NODE_ENV=development ENV=localhost node --es-module-specifier-resolution=node build/server.js"
   },
   "dependencies": {
     "@navikt/nav-dekoratoren-moduler": "^3.1.3",

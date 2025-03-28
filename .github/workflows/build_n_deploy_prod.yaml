@@ -22,3 +22,4 @@ jobs:
       prod-manifest: '.nais/naiserator/prod.yaml'
       dev-cluster: 'dev-gcp'
       dev-manifest: '.nais/naiserator/dev.yaml'
+      node-version: "20"

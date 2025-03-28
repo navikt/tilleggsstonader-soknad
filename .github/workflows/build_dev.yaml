@@ -13,3 +13,5 @@ jobs:
     name: Kjører Playwright-tester
     uses: navikt/tilleggsstonader/.github/workflows/run-playwright.yml@main
     secrets: inherit
+    with:
+      node-version: "20"
