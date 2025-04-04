@@ -2,14 +2,13 @@ import React, { useEffect } from 'react';
 
 import Søknadsdialog from './Søknadsdialog';
 import { PersonRouting } from '../components/PersonRouting';
-import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
 import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { teksterStønad } from '../tekster/stønad';
-import { Stønadstype, StønadstypeRouting } from '../typer/stønadstyper';
+import { Stønadstype } from '../typer/stønadstyper';
 
 const BarnetilsynInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
@@ -28,9 +27,7 @@ const BarnetilsynInnhold = () => {
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}
         >
-            <SøknadRouting stønadstype={StønadstypeRouting.BARNETILSYN}>
-                <Søknadsdialog />
-            </SøknadRouting>
+            <Søknadsdialog />
         </SøknadProvider>
     );
 };

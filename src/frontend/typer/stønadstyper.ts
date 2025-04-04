@@ -5,7 +5,5 @@ export enum Stønadstype {
 }
 
 export enum StønadstypeRouting {
-    BARNETILSYN = 'BARNETILSYN',
-    LÆREMIDLER = 'LÆREMIDLER',
     BOUTGIFTER = 'BOUTGIFTER',
 }

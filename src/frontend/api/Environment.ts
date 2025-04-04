@@ -18,28 +18,23 @@ interface IModellversjon {
 }
 
 const StønadstypeTilGammeltFyllUtSkjema: Record<StønadstypeRouting, string> = {
-    BARNETILSYN: 'nav111215b',
-    LÆREMIDLER: 'nav111216b',
     BOUTGIFTER: 'nav111219b',
 };
 
 const StønadstypeTilNyttFyllUtSkjema: Record<StønadstypeRouting, string | undefined> = {
-    BARNETILSYN: undefined,
-    LÆREMIDLER: undefined,
     BOUTGIFTER: 'nav111219',
 };
 
+const StønadstypeTilPapirskjema: Record<Stønadstype, string> = {
+    BARNETILSYN: 'nav111215b',
+    LÆREMIDLER: 'nav111216b',
+};
+
 const urlNyFyllUtSendInnSøknadProd = (stønadstype: StønadstypeRouting) => {
-    if (stønadstype in [StønadstypeRouting.BARNETILSYN, StønadstypeRouting.LÆREMIDLER]) {
-        return '#'; // Har ikke nytt Fyll Ut-skjema
-    }
     return `https://www.nav.no/fyllut/${StønadstypeTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
 };
 
 const urlNyFyllUtSendInnSøknadDev = (stønadstype: StønadstypeRouting) => {
-    if (stønadstype in [StønadstypeRouting.BARNETILSYN, StønadstypeRouting.LÆREMIDLER]) {
-        return '#'; // Har ikke nytt Fyll Ut-skjema
-    }
     return `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
 };
 
@@ -50,10 +45,10 @@ const urlGammelSøknadDev = (stønadstype: StønadstypeRouting) =>
     `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
 
 const urlPapirsøknadProd = (stønadstype: Stønadstype) =>
-    `https://www.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=paper`;
+    `https://www.nav.no/fyllut/${StønadstypeTilPapirskjema[stønadstype]}?sub=paper`;
 
 const urlPapirsøknadDev = (stønadstype: Stønadstype) =>
-    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=paper`;
+    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilPapirskjema[stønadstype]}?sub=paper`;
 
 const Environment = (): EnvironmentProps => {
     const modellVersjon = { overgangsstønad: 7, barnetilsyn: 2, skolepenger: 2 };
