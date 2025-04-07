@@ -51,7 +51,7 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { locale } = useSpråk();
-    const { stønadstype, søknad, resetSøknadOgValideringsfeil } = useSøknad();
+    const { stønadstype, søknad } = useSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const errorRef = useRef<HTMLDivElement>(null);
@@ -110,8 +110,6 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
             .then((res) => {
                 loggSkjemaFullført(stønadstype);
                 loggBesøk(stønadstype, nåværendePath, 'KVITTERING');
-
-                resetSøknadOgValideringsfeil();
 
                 navigate(nesteRoute.path, { state: { innsendtTidspunkt: res.mottattTidspunkt } });
             })
