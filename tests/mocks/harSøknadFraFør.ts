@@ -8,7 +8,7 @@ export const mockHarSøknadTilsynBarnFraFør = async (page: Page) => {
 };
 
 export const mockHarSøknadLæremidlerFraFør = async (page: Page) => {
-    await page.route('api/person/har-behandling?stonadstype=LÆREMIDLER', async (route) => {
+    await page.route('api/person/har-behandling?stonadstype=L%C3%86REMIDLER', async (route) => {
         const json = true;
         await route.fulfill({ json });
     });
