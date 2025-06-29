@@ -23,6 +23,9 @@ const BarnetilsynInnhold = () => {
                 aktivitet: aktivitet,
                 barnMedBarnepass: barnMedBarnepass,
                 dokumentasjon: dokumentasjon,
+                søknadMetadata: {
+                    søknadFrontendGitHash: process.env.COMMIT_HASH,
+                },
             }}
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}

@@ -21,6 +21,9 @@ const LæremidlerInnhold = () => {
                 hovedytelse: hovedytelse,
                 utdanning: utdanning,
                 dokumentasjon: dokumentasjon,
+                søknadMetadata: {
+                    søknadFrontendGitHash: process.env.COMMIT_HASH,
+                },
             }}
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}
