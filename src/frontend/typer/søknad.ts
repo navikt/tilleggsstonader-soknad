@@ -11,12 +11,14 @@ export interface SøknadPassAvBarn {
     aktivitet: Aktivitet | undefined;
     barnMedBarnepass: Barnepass[];
     dokumentasjon: DokumentasjonFelt[];
+    søknadMetadata: SøknadMetadata;
 }
 
 export interface SøknadLæremidler {
     hovedytelse: Hovedytelse | undefined;
     utdanning: Utdanning | undefined;
     dokumentasjon: DokumentasjonFelt[];
+    søknadMetadata: SøknadMetadata;
 }
 
 export interface Hovedytelse {
@@ -50,6 +52,10 @@ export interface Aktivitet {
     aktiviteter: EnumFlereValgFelt<string> | undefined;
     annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
     lønnetAktivitet: EnumFelt<JaNei> | undefined;
+}
+
+interface SøknadMetadata {
+    søknadFrontendGitHash: string | undefined;
 }
 
 export type JaNei = 'JA' | 'NEI';
