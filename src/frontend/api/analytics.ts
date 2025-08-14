@@ -9,13 +9,20 @@ const APP_NAVN = 'tilleggsstonader-soknad';
 // Events fra https://github.com/navikt/analytics-taxonomy/tree/main/events
 type eventType =
     | 'skjema startet'
+    | 'skjema spørsmål besvart'
     | 'skjema steg fullført'
+    | 'skjema validering feilet'
     | 'skjema innsending feilet'
     | 'skjema fullført'
     | 'navigere'
+    | 'filtervalg'
+    | 'guidepanel vist'
+    | 'last ned'
     | 'alert vist'
     | 'besøk'
-    | 'skjema spørsmål besvart'
+    | 'søk'
+    | 'modal åpnet'
+    | 'modal lukket'
     | 'accordion åpnet'
     | 'accordion lukket';
 
