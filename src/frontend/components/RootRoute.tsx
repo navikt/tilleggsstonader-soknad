@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { loggBesøk } from '../api/amplitude';
+import { loggBesøk } from '../api/analytics';
 import HarBehandlingSide from '../barnetilsyn/HarBehandlingSide';
 import { RoutesBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { usePerson } from '../context/PersonContext';

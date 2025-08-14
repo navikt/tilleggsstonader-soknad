@@ -6,7 +6,7 @@ import { Accordion, BodyLong, Button, HStack, Label, VStack } from '@navikt/ds-r
 
 import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
-import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/amplitude';
+import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';

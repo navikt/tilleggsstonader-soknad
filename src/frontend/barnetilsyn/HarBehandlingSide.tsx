@@ -3,7 +3,7 @@ import React from 'react';
 import { ChevronRightIcon, MultiplyIcon } from '@navikt/aksel-icons';
 import { Alert, BodyLong, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 
-import { loggSkjemaSpørsmålBesvart } from '../api/amplitude';
+import { loggSkjemaSpørsmålBesvart } from '../api/analytics';
 import Environment from '../api/Environment';
 import { Container } from '../components/Side';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';

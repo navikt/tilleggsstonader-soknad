@@ -9,7 +9,6 @@ import { initiellPerson } from '../mock/initiellPerson';
 import { Person } from '../typer/person';
 import { Stønadstype } from '../typer/stønadstyper';
 import useSjekkBehandlingStatus from './Søknadside/SjekkBehandlingStatus';
-
 const erFeilOgSkalRouteTilPapirsøknad = (req: AxiosError<{ detail?: string }, unknown>) => {
     return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
 };
