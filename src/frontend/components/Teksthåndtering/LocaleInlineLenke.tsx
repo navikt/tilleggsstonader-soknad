@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from '@navikt/ds-react';
 
-import { logNavigereEvent } from '../../api/amplitude';
+import { logNavigereEvent } from '../../api/analytics';
 import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
 import { InlineLenke, Lenke, StyledTekst, TekstElement } from '../../typer/tekst';

@@ -15,7 +15,7 @@ import {
 
 import { ERouteBarnetilsyn, RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
-import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/amplitude';
+import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';

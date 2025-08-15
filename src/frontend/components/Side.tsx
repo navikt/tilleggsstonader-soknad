@@ -13,7 +13,7 @@ import {
     loggSkjemaFullført,
     loggSkjemaInnsendtFeilet,
     loggSkjemaStegFullført,
-} from '../api/amplitude';
+} from '../api/analytics';
 import { sendInnSøknad } from '../api/api';
 import { useSpråk } from '../context/SpråkContext';
 import { useSøknad } from '../context/SøknadContext';

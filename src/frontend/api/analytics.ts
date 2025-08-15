@@ -1,4 +1,4 @@
-import { getAmplitudeInstance } from '@navikt/nav-dekoratoren-moduler';
+import { getAmplitudeInstance, getAnalyticsInstance } from '@navikt/nav-dekoratoren-moduler';
 
 import Environment from './Environment';
 import { stønadstypeTilSkjemaId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
@@ -9,17 +9,24 @@ const APP_NAVN = 'tilleggsstonader-soknad';
 // Events fra https://github.com/navikt/analytics-taxonomy/tree/main/events
 type eventType =
     | 'skjema startet'
+    | 'skjema spørsmål besvart'
     | 'skjema steg fullført'
+    | 'skjema validering feilet'
     | 'skjema innsending feilet'
     | 'skjema fullført'
     | 'navigere'
+    | 'filtervalg'
+    | 'guidepanel vist'
+    | 'last ned'
     | 'alert vist'
     | 'besøk'
-    | 'skjema spørsmål besvart'
+    | 'søk'
+    | 'modal åpnet'
+    | 'modal lukket'
     | 'accordion åpnet'
     | 'accordion lukket';
 
-const getLogger = () => {
+const getAmplitudeLogger = () => {
     if (Environment().miljø !== 'local') {
         return getAmplitudeInstance('dekoratoren');
     } else {
@@ -27,22 +34,39 @@ const getLogger = () => {
     }
 };
 
-const logger = getLogger();
+const sendUmamiEvent = (event: eventType, eventData: Record<string, unknown>) => {
+    getAnalyticsInstance(APP_NAVN)(event, eventData).catch(() => {
+        // ignorer; enten er det en feil med lastingen av Umami, eller så har brukeren ikke samtykket
+    });
+};
+
+const amplitudeLogger = getAmplitudeLogger();
 
 export const loggEventMedSkjema = (
     event: eventType,
     stønadstype: Stønadstype,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    event_properties?: any
+    eventProperties?: Record<string, unknown>
 ) => {
-    if (logger) {
-        logger(event, {
+    if (amplitudeLogger) {
+        amplitudeLogger(event, {
             app: APP_NAVN,
             skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
             skjemaId: stønadstypeTilSkjemaId[stønadstype],
-            ...event_properties,
+            ...eventProperties,
         });
     }
+    if (Environment().miljø === 'local') {
+        // eslint-disable-next-line no-console
+        console.log(
+            `[BARE LOKALT] Sender umami-event med eventType=${event} og eventProperties=${JSON.stringify(eventProperties)}`
+        );
+    }
+    sendUmamiEvent(event, {
+        app: APP_NAVN,
+        skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
+        skjemaId: stønadstypeTilSkjemaId[stønadstype],
+        ...eventProperties,
+    });
 };
 
 export const loggSkjemaStartet = (stønadstype: Stønadstype) => {
