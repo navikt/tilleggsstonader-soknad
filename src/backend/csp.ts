@@ -6,7 +6,6 @@ import { miljø } from './miljø';
 const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;
 
 export async function applyCspDirectives(_: Request, res: Response, next: NextFunction) {
-    // TODO: Fjern '-Report-Only' etter at vi har undersøkt loggene i noen uker
     res.header('Content-Security-Policy-Report-Only', cspString() + '; report-to csp-violation');
     res.header('Reporting-Endpoints', `csp-violation="${rapporteringsendepunkt}"`);
     next();
