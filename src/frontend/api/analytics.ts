@@ -45,21 +45,27 @@ const amplitudeLogger = getAmplitudeLogger();
 export const loggEventMedSkjema = (
     event: eventType,
     stønadstype: Stønadstype,
-    event_properties?: Record<string, unknown>
+    eventProperties?: Record<string, unknown>
 ) => {
     if (amplitudeLogger) {
         amplitudeLogger(event, {
             app: APP_NAVN,
             skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
             skjemaId: stønadstypeTilSkjemaId[stønadstype],
-            ...event_properties,
+            ...eventProperties,
         });
+    }
+    if (Environment().miljø === 'local') {
+        // eslint-disable-next-line no-console
+        console.log(
+            `[BARE LOKALT] Sender umami-event med eventType=${event} og eventProperties=${JSON.stringify(eventProperties)}`
+        );
     }
     sendUmamiEvent(event, {
         app: APP_NAVN,
         skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
         skjemaId: stønadstypeTilSkjemaId[stønadstype],
-        ...event_properties,
+        ...eventProperties,
     });
 };
 
