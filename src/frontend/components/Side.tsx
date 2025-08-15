@@ -113,7 +113,6 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
 
                 navigate(nesteRoute.path, { state: { innsendtTidspunkt: res.mottattTidspunkt } });
             })
-            // TODO håndtering av 401?
             .catch(() => {
                 settSendInnFeil(true);
                 loggSkjemaInnsendtFeilet(stønadstype);

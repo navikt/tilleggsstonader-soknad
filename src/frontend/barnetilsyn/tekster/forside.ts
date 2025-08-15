@@ -50,7 +50,6 @@ export const forsideTekster: ForsideInnhold = {
     utgifter_som_dekkes_tittel: {
         nb: 'Hvilke utgifter dekker vi?',
     },
-    //TODO: Fiks med lenke og mellomrom
     utgifter_som_dekkes_innhold: {
         nb: [
             'Vi dekker opp til 64 prosent av utgiftene du har til pass av barn.',

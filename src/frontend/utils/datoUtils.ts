@@ -17,7 +17,6 @@ export const erDatoEtterEllerLik = (fra: string, til: string): boolean => {
     return isEqual(datoFra, datoTil) || isAfter(datoTil, datoFra);
 };
 
-//TODO: Legge til støtte for flere Locales enn Norsk Bokmål (nb)
 export const tilTekstligDato = (dato: string) => {
     return format(tilDato(dato), 'd. MMMM yyyy', { locale: nb });
 };
