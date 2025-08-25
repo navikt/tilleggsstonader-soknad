@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import nodeJose from 'node-jose';
-import { Issuer } from 'openid-client';
+import { discovery, genericGrantRequest, None } from 'openid-client';
 import { v4 as uuid } from 'uuid';
 
 import logger from './logger';
@@ -30,16 +30,17 @@ class TokenXClient {
     exchangeToken = async (idportenToken: any, applicationName: ApplicationName) => {
         const clientAssertion = await this.createClientAssertion();
 
-        return this.tokenxClient
-            .grant({
-                grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+        return genericGrantRequest(
+            this.tokenxClient,
+            'urn:ietf:params:oauth:grant-type:token-exchange',
+            {
                 client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-                token_endpoint_auth_method: 'private_key_jwt',
                 client_assertion: clientAssertion,
                 subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
                 subject_token: idportenToken,
                 audience: `${tokenxConfig.clusterName}:${namespace[applicationName]}:${applicationName}`,
-            })
+            }
+        )
             .then((tokenSet: any) => {
                 return Promise.resolve(tokenSet.access_token);
             })
@@ -92,21 +93,19 @@ class TokenXClient {
             logger.error('Mangler miljøvariabel TOKEN_X_WELL_KNOWN_URL');
             throw new TypeError('Miljøvariabelen "TOKEN_X_WELL_KNOWN_URL må være satt');
         }
-        const tokenx = await Issuer.discover(tokenxConfig.discoveryUrl);
-        this.audience = tokenx.token_endpoint;
+        const config = await discovery(
+            new URL(tokenxConfig.discoveryUrl),
+            tokenxConfig.clientId as string,
+            { redirect_uris: [tokenxConfig.redirectUri] },
+            None()
+        );
+        this.audience = config.serverMetadata().token_endpoint;
 
-        logger.info(`Discovered TokenX @ ${tokenx.issuer}`);
+        logger.info(`Discovered TokenX @ ${config.serverMetadata().issuer}`);
 
         try {
-            const client = new tokenx.Client({
-                client_id: tokenxConfig.clientId as string,
-                redirect_uris: [tokenxConfig.redirectUri],
-                token_endpoint_auth_method: 'none',
-            });
-
             logger.info('Opprettet TokenX client');
-
-            return Promise.resolve(client);
+            return Promise.resolve(config);
         } catch (err) {
             logger.error(
                 'Feil oppstod under parsing av jwt eller opprettelse av TokenX client',
