@@ -21,13 +21,15 @@ export const OppsummeringPanelHeader: React.FC<{
                 <FormSummary.Heading level="2">
                     <LocaleTekst tekst={tittel} />
                 </FormSummary.Heading>
-                {lenke && (
+            </FormSummary.Header>
+            <FormSummary.Answers>{children}</FormSummary.Answers>
+            {lenke && (
+                <FormSummary.Footer>
                     <FormSummary.EditLink onClick={() => navigate(lenke)}>
                         <LocaleTekst tekst={fellesOppsummeringTekster.endre_knapp} />
                     </FormSummary.EditLink>
-                )}
-            </FormSummary.Header>
-            <FormSummary.Answers>{children}</FormSummary.Answers>
+                </FormSummary.Footer>
+            )}
         </FormSummary>
     );
 };

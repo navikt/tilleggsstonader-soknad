@@ -19,9 +19,6 @@ const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }
                 <FormSummary.Heading level="2">
                     <LocaleTekst tekst={oppsummeringTekster.utdanning_tittel} />
                 </FormSummary.Heading>
-                <FormSummary.EditLink onClick={() => navigate(RouteTilPath.UTDANNING)}>
-                    <LocaleTekst tekst={fellesOppsummeringTekster.endre_knapp} />
-                </FormSummary.EditLink>
             </FormSummary.Header>
             <FormSummary.Answers>
                 {utdanning.aktiviteter && (
@@ -72,6 +69,11 @@ const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }
                     </FormSummary.Answer>
                 )}
             </FormSummary.Answers>
+            <FormSummary.Footer>
+                <FormSummary.EditLink onClick={() => navigate(RouteTilPath.UTDANNING)}>
+                    <LocaleTekst tekst={fellesOppsummeringTekster.endre_knapp} />
+                </FormSummary.EditLink>
+            </FormSummary.Footer>
         </FormSummary>
     );
 };
