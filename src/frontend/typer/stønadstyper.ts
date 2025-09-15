@@ -6,4 +6,5 @@ export enum Stønadstype {
 
 export enum StønadstypeRouting {
     BOUTGIFTER = 'BOUTGIFTER',
+    DAGLIG_REISE = 'DAGLIG_REISE',
 }

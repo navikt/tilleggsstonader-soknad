@@ -11,6 +11,7 @@ import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
 import { BoutgifterApp } from './Boutgifter/BoutgifterApp';
 import ScrollToTop from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
+import { DagligReiseApp } from './dagligReise/DagligReiseApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 
@@ -33,6 +34,7 @@ const AppRoutes = () => {
                 />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
                 <Route path={`/boutgifter/*`} element={<BoutgifterApp />} />
+                <Route path={`/daglig-reise/*`} element={<DagligReiseApp />} />
                 <Route path={'*'} element={<Navigate to={barnetilsynPath} replace />} />
             </Routes>
         </BrowserRouter>
