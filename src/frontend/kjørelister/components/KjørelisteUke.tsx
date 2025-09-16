@@ -2,10 +2,11 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { Accordion, BodyShort, HStack, Tag, VStack } from '@navikt/ds-react';
+import { Accordion, Alert, BodyShort, HStack, Tag, VStack } from '@navikt/ds-react';
 
 import KjørelisteDag from './KjørelisteDag';
-import { finnDagerMellomFomOgTomInklusiv, tilDagMåned } from '../../utils/datoUtils';
+import { erHelg, finnDagerMellomFomOgTomInklusiv, tilDagMåned } from '../../utils/datoUtils';
+import { useKjøreliste } from '../KjørelisteContext';
 import { RammevedtakUke } from '../types/Rammevedtak';
 
 const StyledHeader = styled(Accordion.Header)`
@@ -13,8 +14,16 @@ const StyledHeader = styled(Accordion.Header)`
         width: 100%;
     }
 `;
+
 const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
-    const dager = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
+    const dagerIUka = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
+
+    const { kjøreliste } = useKjøreliste();
+
+    function harValgtHelgedag(dagerIUka: Date[]) {
+        const helgedagerDenneUka = dagerIUka.filter((dag) => erHelg(dag));
+        return helgedagerDenneUka.some((dag) => kjøreliste.reisedager[dag.toISOString()].harReist);
+    }
 
     return (
         <Accordion.Item>
@@ -33,10 +42,16 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
             </StyledHeader>
             <Accordion.Content>
                 <VStack gap={'2'}>
-                    <BodyShort weight={'semibold'}>Hvilke dager kørte du?</BodyShort>
-                    {dager.map((dato) => (
+                    <BodyShort weight={'semibold'}>Hvilke dager kjørte du?</BodyShort>
+                    {dagerIUka.map((dato) => (
                         <KjørelisteDag dato={dato} />
                     ))}
+                    {harValgtHelgedag(dagerIUka) && (
+                        <Alert variant="warning">
+                            Du har fylt inn at du har kjørt på en helgedag. Hvis det stemmer at du
+                            har kjørt denne dagen vil en saksbehandler manuelt behandle saken din.
+                        </Alert>
+                    )}
                 </VStack>
             </Accordion.Content>
         </Accordion.Item>

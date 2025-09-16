@@ -10,44 +10,50 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(() => {
     KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
 
     const rammevedtak = RammevedtakMock;
-    const [kjøreliste, setKjøreliste] = useState(rammevedtakTilKjøreliste(rammevedtak));
+    const [kjøreliste, setKjøreliste] = useState(initialiserKjøreliste(rammevedtak));
 
-    const oppdaterSkalReise = (dag: Date, skalReise: boolean) => {
-        setKjøreliste((prevState) => {
-            prevState.reisedager[dag.toISOString()] = {
-                skalReise: skalReise,
-                parkeringsutgift: prevState.reisedager[dag.toISOString()].parkeringsutgift,
-            };
-            return prevState;
-        });
+    const oppdaterHarReist = (dag: Date, harReist: boolean) => {
+        const dagIsoString = dag.toISOString();
+        setKjøreliste((prev) => ({
+            reisedager: {
+                ...prev.reisedager,
+                [dagIsoString]: {
+                    ...prev.reisedager[dagIsoString],
+                    harReist,
+                },
+            },
+        }));
     };
 
     const oppdaterParkeringsutgift = (dag: Date, parkeringsutgift: number) => {
-        setKjøreliste((prevState) => {
-            prevState.reisedager[dag.toISOString()] = {
-                skalReise: prevState.reisedager[dag.toISOString()].skalReise,
-                parkeringsutgift: parkeringsutgift,
-            };
-            return prevState;
-        });
+        const dagIsoString = dag.toISOString();
+        setKjøreliste((prev) => ({
+            reisedager: {
+                ...prev.reisedager,
+                [dagIsoString]: {
+                    ...prev.reisedager[dagIsoString],
+                    parkeringsutgift,
+                },
+            },
+        }));
     };
 
     return {
         rammevedtak,
         kjøreliste,
-        oppdaterSkalReise,
+        oppdaterHarReist,
         oppdaterParkeringsutgift,
     };
 });
 
 export { KjørelisteProvider, useKjøreliste };
 
-const rammevedtakTilKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
+const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
     const dager = finnDagerMellomFomOgTomInklusiv(rammevedtak.fom, rammevedtak.tom);
     const reisedager = {} as { [dato: string]: Reisedag };
     dager.forEach((dag) => {
         reisedager[dag.toISOString()] = {
-            skalReise: false,
+            harReist: false,
             parkeringsutgift: undefined,
         };
     });

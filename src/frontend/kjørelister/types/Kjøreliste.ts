@@ -3,6 +3,6 @@ export interface Kjøreliste {
 }
 
 export interface Reisedag {
-    skalReise: boolean;
+    harReist: boolean;
     parkeringsutgift: number | undefined;
 }
