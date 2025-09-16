@@ -20,21 +20,19 @@ const StyledTextField = styled(TextField)`
 `;
 
 const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
-    const { kjøreliste, oppdaterSkalReise, oppdaterParkeringsutgift } = useKjøreliste();
+    const { kjøreliste, oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
 
-    const [skalKjøre, settSkalKjøre] = useState(
-        kjøreliste.reisedager[dato.toISOString()].skalReise
-    );
+    const [harReist, settHarReist] = useState(kjøreliste.reisedager[dato.toISOString()].harReist);
     return (
         <Card graybackground={erHelg(dato).toString()}>
             <Checkbox
-                checked={skalKjøre}
+                checked={harReist}
                 onChange={(e) => {
-                    settSkalKjøre(e.target.checked);
-                    oppdaterSkalReise(dato, e.target.checked);
+                    settHarReist(e.target.checked);
+                    oppdaterHarReist(dato, e.target.checked);
                 }}
             >{`${tilUkedag(dato)} ${tilDagMåned(dato.toISOString())}`}</Checkbox>
-            {skalKjøre && (
+            {harReist && (
                 <StyledTextField
                     label={'Parkeringsutgifter (kr)'}
                     inputMode={'numeric'}
