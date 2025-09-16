@@ -5,12 +5,13 @@ import styled from 'styled-components';
 import { Checkbox, TextField, VStack } from '@navikt/ds-react';
 
 import { erHelg, tilDagMåned, tilUkedag } from '../../utils/datoUtils';
+import { useKjøreliste } from '../KjørelisteContext';
 
-const Card = styled(VStack)<{ grayBackground: boolean }>`
+const Card = styled(VStack)<{ graybackground: string }>`
     border: 1px solid black;
     border-radius: 5px;
     padding: 0 1rem;
-    background-color: ${({ grayBackground }) => (grayBackground ? 'lightgray' : 'white')};
+    background-color: ${({ graybackground }) => (graybackground == 'true' ? 'lightgray' : 'white')};
 `;
 
 const StyledTextField = styled(TextField)`
@@ -19,15 +20,27 @@ const StyledTextField = styled(TextField)`
 `;
 
 const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
-    const [skalKjøre, settSkalKjøre] = useState(false);
+    const { kjøreliste, oppdaterSkalReise, oppdaterParkeringsutgift } = useKjøreliste();
+
+    const [skalKjøre, settSkalKjøre] = useState(
+        kjøreliste.reisedager[dato.toISOString()].skalReise
+    );
     return (
-        <Card grayBackground={erHelg(dato)}>
+        <Card graybackground={erHelg(dato).toString()}>
             <Checkbox
-                value={skalKjøre}
-                onChange={(e) => settSkalKjøre(e.target.checked)}
+                checked={skalKjøre}
+                onChange={(e) => {
+                    settSkalKjøre(e.target.checked);
+                    oppdaterSkalReise(dato, e.target.checked);
+                }}
             >{`${tilUkedag(dato)} ${tilDagMåned(dato.toISOString())}`}</Checkbox>
             {skalKjøre && (
-                <StyledTextField label={'Parkeringsutgifter (kr)'} inputMode={'numeric'} />
+                <StyledTextField
+                    label={'Parkeringsutgifter (kr)'}
+                    inputMode={'numeric'}
+                    type={'number'}
+                    onChange={(e) => oppdaterParkeringsutgift(dato, Number(e.target.value))}
+                />
             )}
         </Card>
     );

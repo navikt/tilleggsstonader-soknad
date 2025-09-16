@@ -12,8 +12,8 @@ export interface RammevedtakUke {
 }
 
 export const RammevedtakMock: Rammevedtak = {
-    fom: '01-01-2025',
-    tom: '06-01-2025',
+    fom: '2025-01-01',
+    tom: '2025-02-06',
     reisedagerPerUke: 5,
     uker: [
         {

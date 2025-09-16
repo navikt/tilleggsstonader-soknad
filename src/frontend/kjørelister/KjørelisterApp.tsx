@@ -10,6 +10,7 @@ import KjørelisteHeader from './components/KjørelisteHeader';
 import KjørelisteMetadata from './components/KjørelisteMetadata';
 import KjørelisteNavigasjonsKnapper from './components/KjørelisteNavigasjonsKnapper';
 import SlikFyllerDuUtKjørelister from './components/SlikFyllerDuUtKjørelister';
+import { KjørelisteProvider } from './KjørelisteContext';
 
 const Container = styled.div`
     padding: 2rem 1rem 0.5rem 1rem;
@@ -25,15 +26,17 @@ const Container = styled.div`
 //TODO legg til dekoratøren
 const KjørelisterApp = () => {
     return (
-        <Container>
-            <VStack gap="8">
-                <KjørelisteHeader />
-                <KjørelisteMetadata />
-                <SlikFyllerDuUtKjørelister />
-                <Kjøreliste />
-                <KjørelisteNavigasjonsKnapper />
-            </VStack>
-        </Container>
+        <KjørelisteProvider>
+            <Container>
+                <VStack gap="8">
+                    <KjørelisteHeader />
+                    <KjørelisteMetadata />
+                    <SlikFyllerDuUtKjørelister />
+                    <Kjøreliste />
+                    <KjørelisteNavigasjonsKnapper />
+                </VStack>
+            </Container>
+        </KjørelisteProvider>
     );
 };
 
