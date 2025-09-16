@@ -1,1 +1,1 @@
-export const erProd = (): boolean => window.location.host === 'tilleggsstonader.intern.nav.no';
+export const erProd = (): boolean => window.location.host === 'www.nav.no';
