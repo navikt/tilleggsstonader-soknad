@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import { Checkbox, TextField, VStack } from '@navikt/ds-react';
 
-import { erHelg, tilDagMåned, tilUkedag } from '../../utils/datoUtils';
-import { useKjøreliste } from '../KjørelisteContext';
+import { erHelg, tilDagMåned, tilUkedag } from '../../../utils/datoUtils';
+import { useKjøreliste } from '../../KjørelisteContext';
 
 const Card = styled(VStack)<{ graybackground: string }>`
     border: 1px solid black;

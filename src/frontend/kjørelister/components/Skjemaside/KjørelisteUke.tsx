@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { Accordion, Alert, BodyShort, HStack, Tag, VStack } from '@navikt/ds-react';
 
 import KjørelisteDag from './KjørelisteDag';
-import { erHelg, finnDagerMellomFomOgTomInklusiv, tilDagMåned } from '../../utils/datoUtils';
-import { useKjøreliste } from '../KjørelisteContext';
-import { RammevedtakUke } from '../types/Rammevedtak';
+import { erHelg, finnDagerMellomFomOgTomInklusiv, tilDagMåned } from '../../../utils/datoUtils';
+import { useKjøreliste } from '../../KjørelisteContext';
+import { RammevedtakUke } from '../../types/Rammevedtak';
 
 const StyledHeader = styled(Accordion.Header)`
     .navds-accordion__header-content {

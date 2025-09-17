@@ -4,11 +4,13 @@ import { Routes } from 'react-router';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { VStack } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
+import KjørelisteHeader from './components/KjørelisteHeader';
+import { Landingsside } from './components/Landingsside/Landingsside';
+import { KjørelisteSkjema } from './components/Skjemaside/KjørelisteSkjema';
 import { KjørelisteProvider } from './KjørelisteContext';
-import { KjørelisteSkjema } from './KjørelisteSkjema';
-import { Landingsside } from './Landingsside';
 
 const Container = styled.div`
     padding: 2rem 1rem 0.5rem 1rem;
@@ -25,10 +27,13 @@ const KjørelisterApp = () => {
     return (
         <Container>
             <KjørelisteProvider>
-                <Routes>
-                    <Route path="/" element={<Landingsside />} />
-                    <Route path={'/skjema'} element={<KjørelisteSkjema />} />
-                </Routes>
+                <VStack gap="16">
+                    <KjørelisteHeader />
+                    <Routes>
+                        <Route path="/" element={<Landingsside />} />
+                        <Route path={'/skjema'} element={<KjørelisteSkjema />} />
+                    </Routes>
+                </VStack>
             </KjørelisteProvider>
         </Container>
     );

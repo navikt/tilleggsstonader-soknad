@@ -2,7 +2,10 @@ export interface Rammevedtak {
     fom: string;
     tom: string;
     reisedagerPerUke: number;
+    aktivitetsadresse: string;
+    aktivitetsnavn: string;
     uker: RammevedtakUke[];
+    rammevedtak?: Rammevedtak;
 }
 
 export interface RammevedtakUke {
@@ -15,6 +18,8 @@ export const RammevedtakMock: Rammevedtak = {
     fom: '2025-01-01',
     tom: '2025-02-06',
     reisedagerPerUke: 5,
+    aktivitetsadresse: 'Tiurveien 34, 0356 Oslo',
+    aktivitetsnavn: 'Arbeidstrening',
     uker: [
         {
             ukeNummer: 1,
