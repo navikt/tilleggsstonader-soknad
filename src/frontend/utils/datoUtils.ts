@@ -20,3 +20,30 @@ export const erDatoEtterEllerLik = (fra: string, til: string): boolean => {
 export const tilTekstligDato = (dato: string) => {
     return format(tilDato(dato), 'd. MMMM yyyy', { locale: nb });
 };
+
+export const tilDagMåned = (dato: string) => {
+    return format(tilDato(dato), 'd. MMMM', { locale: nb });
+};
+
+export const finnDagerMellomFomOgTomInklusiv = (fom: string, tom: string): Date[] => {
+    const dager = [];
+    for (
+        let current = tilDato(fom);
+        current <= tilDato(tom);
+        current.setDate(current.getDate() + 1)
+    ) {
+        dager.push(new Date(current));
+    }
+    return dager;
+};
+
+export const tilUkedag = (dato: Date): string => {
+    const ukedag = format(dato, 'EEEE', { locale: nb });
+    return ukedag.charAt(0).toUpperCase() + ukedag.slice(1);
+};
+
+export const erHelg = (dato: string | Date): boolean => {
+    const dateObj = tilDato(dato);
+    const day = dateObj.getDay();
+    return day === 0 || day === 6;
+};

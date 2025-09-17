@@ -1,5 +1,7 @@
 import { format, formatISO, parseISO } from 'date-fns';
 
+import { tilTekstligDato } from './datoUtils';
+
 export const datoFormat = {
     day: '2-digit',
     month: '2-digit',
@@ -12,6 +14,11 @@ export const formaterIsoDato = (dato: string): string => {
 export const formaterPeriode = (fom?: string, tom?: string): string => {
     if (!fom || !tom) return '';
     return `${formaterIsoDato(fom)} - ${formaterIsoDato(tom)}`;
+};
+
+export const formaterPeriodeTekstlig = (fom?: string, tom?: string): string => {
+    if (!fom || !tom) return '';
+    return `${tilTekstligDato(fom)} - ${tilTekstligDato(tom)}`;
 };
 export const formaterNullableIsoDato = (dato: string | undefined): string | undefined =>
     dato && formaterIsoDato(dato);

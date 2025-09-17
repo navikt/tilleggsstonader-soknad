@@ -12,8 +12,10 @@ import { BoutgifterApp } from './Boutgifter/BoutgifterApp';
 import ScrollToTop from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import { DagligReiseApp } from './dagligReise/DagligReiseApp';
+import KjørelisterApp from './kjørelister/KjørelisterApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
+import { erProd } from './utils/miljø';
 
 initSentry();
 autentiseringsInterceptor();
@@ -22,6 +24,7 @@ const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
+    const kanBrukeKjøreliste = !erProd();
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <ScrollToTop />
@@ -35,6 +38,9 @@ const AppRoutes = () => {
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
                 <Route path={`/boutgifter/*`} element={<BoutgifterApp />} />
                 <Route path={`/daglig-reise/*`} element={<DagligReiseApp />} />
+                {kanBrukeKjøreliste && (
+                    <Route path={`/kjoreliste/*`} element={<KjørelisterApp />} />
+                )}
                 <Route path={'*'} element={<Navigate to={barnetilsynPath} replace />} />
             </Routes>
         </BrowserRouter>
