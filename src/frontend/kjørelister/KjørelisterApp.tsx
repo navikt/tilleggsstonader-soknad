@@ -1,16 +1,14 @@
 import React from 'react';
 
+import { Routes } from 'react-router';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { VStack } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
-import Kjøreliste from './components/Kjøreliste';
-import KjørelisteHeader from './components/KjørelisteHeader';
-import KjørelisteMetadata from './components/KjørelisteMetadata';
-import KjørelisteNavigasjonsKnapper from './components/KjørelisteNavigasjonsKnapper';
-import SlikFyllerDuUtKjørelister from './components/SlikFyllerDuUtKjørelister';
 import { KjørelisteProvider } from './KjørelisteContext';
+import { KjørelisteSkjema } from './KjørelisteSkjema';
+import { Landingsside } from './Landingsside';
 
 const Container = styled.div`
     padding: 2rem 1rem 0.5rem 1rem;
@@ -22,21 +20,17 @@ const Container = styled.div`
     }
 `;
 
-//TODO alle tekster skal være mulig å oversette
 //TODO legg til dekoratøren
 const KjørelisterApp = () => {
     return (
-        <KjørelisteProvider>
-            <Container>
-                <VStack gap="8">
-                    <KjørelisteHeader />
-                    <KjørelisteMetadata />
-                    <SlikFyllerDuUtKjørelister />
-                    <Kjøreliste />
-                    <KjørelisteNavigasjonsKnapper />
-                </VStack>
-            </Container>
-        </KjørelisteProvider>
+        <Container>
+            <KjørelisteProvider>
+                <Routes>
+                    <Route path="/" element={<Landingsside />} />
+                    <Route path={'/skjema'} element={<KjørelisteSkjema />} />
+                </Routes>
+            </KjørelisteProvider>
+        </Container>
     );
 };
 
