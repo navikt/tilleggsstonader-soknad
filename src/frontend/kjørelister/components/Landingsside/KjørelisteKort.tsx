@@ -3,13 +3,16 @@ import React from 'react';
 import { BodyShort, LinkCard, Tag } from '@navikt/ds-react';
 
 import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
+import { RouteKjørelste, RouteTilPath } from '../../routesKjørelistes';
 import { Rammevedtak } from '../../types/Rammevedtak';
 
 export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammevedtak }) => {
     return (
         <LinkCard>
             <LinkCard.Title as="h3">
-                <LinkCard.Anchor href="kjoreliste/skjema">
+                <LinkCard.Anchor
+                    href={`/tilleggsstonader/soknad${RouteTilPath[RouteKjørelste.SKJEMA]}`}
+                >
                     {rammevedtak.aktivitetsnavn}
                 </LinkCard.Anchor>
             </LinkCard.Title>

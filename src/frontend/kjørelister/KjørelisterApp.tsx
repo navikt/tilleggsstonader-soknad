@@ -8,8 +8,10 @@ import { VStack } from '@navikt/ds-react';
 import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 
 import KjørelisteHeader from './components/KjørelisteHeader';
+import Kvitteringsside from './components/Kvitteringsside/Kvitteringsside';
 import { Landingsside } from './components/Landingsside/Landingsside';
 import { KjørelisteSkjema } from './components/Skjemaside/KjørelisteSkjema';
+import Vedleggside from './components/Vedleggside/Vedleggside';
 import { KjørelisteProvider } from './KjørelisteContext';
 
 const Container = styled.div`
@@ -22,7 +24,6 @@ const Container = styled.div`
     }
 `;
 
-//TODO legg til dekoratøren
 const KjørelisterApp = () => {
     return (
         <Container>
@@ -32,6 +33,8 @@ const KjørelisterApp = () => {
                     <Routes>
                         <Route path="/" element={<Landingsside />} />
                         <Route path={'/skjema'} element={<KjørelisteSkjema />} />
+                        <Route path={'/vedlegg'} element={<Vedleggside />} />
+                        <Route path={'/kvittering'} element={<Kvitteringsside />} />
                     </Routes>
                 </VStack>
             </KjørelisteProvider>

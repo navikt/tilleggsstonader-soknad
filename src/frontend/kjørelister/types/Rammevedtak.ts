@@ -5,7 +5,6 @@ export interface Rammevedtak {
     aktivitetsadresse: string;
     aktivitetsnavn: string;
     uker: RammevedtakUke[];
-    rammevedtak?: Rammevedtak;
 }
 
 export interface RammevedtakUke {

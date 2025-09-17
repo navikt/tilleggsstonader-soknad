@@ -6,6 +6,7 @@ import Kjøreliste from './Kjøreliste';
 import KjørelisteMetadata from './KjørelisteMetadata';
 import KjørelisteNavigasjonsKnapper from '../KjørelisteNavigasjonsKnapper';
 import SlikFyllerDuUtKjørelister from './SlikFyllerDuUtKjørelister';
+import { RouteKjørelste } from '../../routesKjørelistes';
 
 export function KjørelisteSkjema() {
     return (
@@ -13,7 +14,10 @@ export function KjørelisteSkjema() {
             <KjørelisteMetadata />
             <SlikFyllerDuUtKjørelister />
             <Kjøreliste />
-            <KjørelisteNavigasjonsKnapper />
+            <KjørelisteNavigasjonsKnapper
+                nesteRoute={RouteKjørelste.VEDLEGG}
+                forrigeRoute={RouteKjørelste.LANDINGSSIDE}
+            />
         </VStack>
     );
 }
