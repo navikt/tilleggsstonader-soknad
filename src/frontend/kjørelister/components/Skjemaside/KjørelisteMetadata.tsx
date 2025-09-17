@@ -2,14 +2,18 @@ import React from 'react';
 
 import { BodyShort, Heading, VStack } from '@navikt/ds-react';
 
+import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
+import { useKjøreliste } from '../../KjørelisteContext';
+
 const KjørelisteMetadata = () => {
+    const { rammevedtak } = useKjøreliste();
     return (
         <VStack gap={'2'}>
             <Heading size={'medium'}>Denne kjørelisten gjelder</Heading>
-            <BodyShort weight={'semibold'}>Dummy tiltak</BodyShort>
-            <BodyShort>01. januar 2025 - 01. juni 2025</BodyShort>
-            <BodyShort>Addresse: Osloveien 1, 1234 Oslo</BodyShort>
-            <BodyShort>3 dager per uke</BodyShort>
+            <BodyShort weight={'semibold'}>{rammevedtak.aktivitetsnavn}</BodyShort>
+            <BodyShort>{formaterPeriodeTekstlig(rammevedtak.fom, rammevedtak.tom)}</BodyShort>
+            <BodyShort>{`Adresse: ${rammevedtak.aktivitetsadresse}`}</BodyShort>
+            <BodyShort>{`${rammevedtak.reisedagerPerUke} dager per uke`}</BodyShort>
         </VStack>
     );
 };
