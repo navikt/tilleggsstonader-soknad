@@ -21,10 +21,6 @@ export const tilTekstligDato = (dato: string) => {
     return format(tilDato(dato), 'd. MMMM yyyy', { locale: nb });
 };
 
-export const tilDagMåned = (dato: string) => {
-    return format(tilDato(dato), 'd. MMMM', { locale: nb });
-};
-
 export const finnDagerMellomFomOgTomInklusiv = (fom: string, tom: string): Date[] => {
     const dager = [];
     for (

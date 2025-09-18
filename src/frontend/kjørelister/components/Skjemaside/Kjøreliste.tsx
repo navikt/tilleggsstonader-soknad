@@ -10,7 +10,6 @@ const Kjøreliste = () => {
     return (
         <VStack gap={'2'}>
             <Heading size={'medium'}>Klart til innsending</Heading>
-            <Heading size={'medium'}>2025</Heading>
             <Accordion>
                 {rammevedtak.uker.map((uke) => (
                     <KjørelisteUke key={uke.ukeNummer} uke={uke} />

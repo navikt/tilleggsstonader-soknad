@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Accordion, Alert, BodyShort, HStack, Tag, VStack } from '@navikt/ds-react';
 
 import KjørelisteDag from './KjørelisteDag';
-import { erHelg, finnDagerMellomFomOgTomInklusiv, tilDagMåned } from '../../../utils/datoUtils';
+import { erHelg, finnDagerMellomFomOgTomInklusiv, tilTekstligDato } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { harRegistertDataForUke } from '../../kjørelisteUtils';
 import { RammevedtakUke } from '../../types/Rammevedtak';
@@ -34,7 +34,7 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
                         <BodyShort size={'large'} weight={'semibold'}>
                             {`Uke ${uke.ukeNummer}`}
                         </BodyShort>
-                        <BodyShort>{`(${tilDagMåned(uke.fom)} - ${tilDagMåned(uke.tom)})`}</BodyShort>
+                        <BodyShort>{`(${tilTekstligDato(uke.fom)} - ${tilTekstligDato(uke.tom)})`}</BodyShort>
                     </HStack>
                     {harRegistertDataForUke(dagerIUka, kjøreliste) ? (
                         <Tag variant={'warning'} size={'small'}>
