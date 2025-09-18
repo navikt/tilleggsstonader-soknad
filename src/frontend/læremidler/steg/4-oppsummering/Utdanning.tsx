@@ -16,7 +16,7 @@ const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }
     return (
         <FormSummary>
             <FormSummary.Header>
-                <FormSummary.Heading level="2">
+                <FormSummary.Heading level="3">
                     <LocaleTekst tekst={oppsummeringTekster.utdanning_tittel} />
                 </FormSummary.Heading>
             </FormSummary.Header>

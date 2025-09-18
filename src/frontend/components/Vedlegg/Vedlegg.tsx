@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { styled } from 'styled-components';
 
-import { BodyShort, Heading } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
 import VedleggManglerModal from './VedleggManglerModal';
@@ -13,6 +13,7 @@ import { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/sk
 import { Filopplaster } from '../Filopplaster/Filopplaster';
 import { PellePanel } from '../PellePanel/PellePanel';
 import Side from '../Side';
+import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../Teksthåndtering/LocaleTekstAvsnitt';
 import VedleggGenerellInfo from '../VedleggGenerellInfo';
@@ -78,9 +79,7 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
 
     return (
         <Side validerSteg={validerSteg}>
-            <Heading size={'medium'}>
-                <LocaleTekst tekst={vedleggTekster.tittel} />
-            </Heading>
+            <LocaleHeading tekst={vedleggTekster.tittel} level="2" size={'medium'} />
             {dokumentasjonsbehov.length === 0 ? (
                 <BodyShort>
                     <LocaleTekst tekst={vedleggTekster.ingen_dokumentasjonsbehov} />

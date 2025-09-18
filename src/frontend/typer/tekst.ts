@@ -34,7 +34,7 @@ export type Radiogruppe<T extends string> = {
 };
 
 export type CheckboxGruppe<T extends string> = {
-    header: TekstElement<string>;
+    legend: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
     alternativer: Alternativer<T>;
 };

@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { Heading } from '@navikt/ds-react';
-
 import ArbeidOgOppholdUtenforNorge from './ArbeidOgOpphold/ArbeidOgOppholdUtenforNorge';
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
@@ -15,6 +13,7 @@ import { inneholderFeil } from '../../typer/validering';
 import { PellePanel } from '../PellePanel/PellePanel';
 import Side from '../Side';
 import LocaleCheckboxGroup from '../Teksthåndtering/LocaleCheckboxGroup';
+import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 const defaultArbeidOgOpphold: ArbeidOgOpphold = {
@@ -68,9 +67,7 @@ const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) 
                 }
             }}
         >
-            <Heading size="medium">
-                <LocaleTekst tekst={hovedytelseInnhold.tittel} />
-            </Heading>
+            <LocaleHeading tekst={hovedytelseInnhold.tittel} size="medium" level="2" />
             <PellePanel>
                 <LocaleTekst tekst={hovedytelseInnhold.guide_innhold} />
             </PellePanel>

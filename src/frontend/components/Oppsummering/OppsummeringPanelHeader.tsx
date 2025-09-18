@@ -18,7 +18,7 @@ export const OppsummeringPanelHeader: React.FC<{
     return (
         <FormSummary>
             <FormSummary.Header>
-                <FormSummary.Heading level="2">
+                <FormSummary.Heading level="3">
                     <LocaleTekst tekst={tittel} />
                 </FormSummary.Heading>
             </FormSummary.Header>

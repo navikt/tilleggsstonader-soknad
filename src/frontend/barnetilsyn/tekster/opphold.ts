@@ -91,7 +91,7 @@ export const jobberIAnnetLandInnhold: JobberIAnnetLandInnhold = {
 
 export const mottarPengestøtteInnhold: MottarDuPengestøtteInnhold = {
     checkbox_mottar_du_pengestøtte: {
-        header: {
+        legend: {
             nb: 'Mottar du pengestøtte fra et annet land enn Norge?',
         },
         alternativer: {
@@ -132,7 +132,7 @@ const siste12mndInnhold: OppholdInnhold = {
     },
 
     checkbox_årsak: {
-        header: {
+        legend: {
             nb: 'Hva gjorde du i dette landet?',
         },
         alternativer: {
@@ -189,7 +189,7 @@ const neste12mndInnhold: OppholdInnhold = {
     },
 
     checkbox_årsak: {
-        header: {
+        legend: {
             nb: 'Hva skal du gjøre i dette landet?',
         },
         alternativer: {

@@ -27,7 +27,7 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
         nb: 'Vi spør om dette for å vite hvilke rettigheter du har og hvilke spørsmål vi må stille deg i søknadsskjemaet.',
     },
     checkbox_hovedytelse: {
-        header: {
+        legend: {
             nb: 'Mottar du eller har du nylig søkt om noe av dette?',
         },
         beskrivelse: {

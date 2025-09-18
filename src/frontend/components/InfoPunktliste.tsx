@@ -7,7 +7,7 @@ import { LocalePunktliste } from './Teksthåndtering/LocalePunktliste';
 export const InfoPunktliste: React.FC<{ liste: Punktliste[] }> = ({ liste }) => {
     return liste.map((tekst, indeks) => (
         <React.Fragment key={indeks}>
-            <LocaleHeading tekst={tekst.tittel} level="2" size="xsmall" />
+            <LocaleHeading tekst={tekst.tittel} level="3" size="xsmall" />
             <LocalePunktliste innhold={tekst.innhold} />
         </React.Fragment>
     ));

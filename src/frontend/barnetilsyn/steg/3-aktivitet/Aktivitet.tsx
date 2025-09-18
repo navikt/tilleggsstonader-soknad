@@ -14,6 +14,7 @@ import {
 } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
+import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
@@ -145,9 +146,7 @@ const Aktivitet = () => {
 
     return (
         <Side validerSteg={kanFortsette} oppdaterSøknad={oppdaterAktivitetISøknad}>
-            <Heading size={'medium'}>
-                <LocaleTekst tekst={aktivitetTekster.tittel} />
-            </Heading>
+            <LocaleHeading tekst={aktivitetTekster.tittel} level="2" size="medium" />
             <PellePanel>
                 <LocaleTekstAvsnitt tekst={aktivitetTekster.guide_innhold} />
             </PellePanel>

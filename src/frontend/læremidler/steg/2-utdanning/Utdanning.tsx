@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Heading, Label } from '@navikt/ds-react';
+import { Label } from '@navikt/ds-react';
 
 import { AnnenUtdanning } from './AnnenUtdanning';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
@@ -22,6 +22,7 @@ import {
 } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
+import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
@@ -195,9 +196,7 @@ const Utdanning = () => {
 
     return (
         <Side validerSteg={kanFortsette} oppdaterSøknad={oppdaterUtdanningISøknad}>
-            <Heading size={'medium'}>
-                <LocaleTekst tekst={utdanningTekster.tittel} />
-            </Heading>
+            <LocaleHeading tekst={utdanningTekster.tittel} size="medium" level="2" />
             <PellePanel poster>
                 <LocaleTekstAvsnitt tekst={utdanningTekster.guide_innhold} />
             </PellePanel>
