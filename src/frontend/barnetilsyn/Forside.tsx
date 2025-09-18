@@ -116,7 +116,10 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <InfoPunktliste liste={forsideTekster.info_som_hentes_punktlister} />
+                        <InfoPunktliste
+                            liste={forsideTekster.info_som_hentes_punktlister}
+                            spacingBottom
+                        />
                         <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_personvern} />
                     </Accordion.Content>
                 </Accordion.Item>
