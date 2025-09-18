@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
-import { Alert, BodyShort, Checkbox, Heading, VStack } from '@navikt/ds-react';
+import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import { RouteKjørelste } from '../../routesKjørelistes';
 import KjørelisteNavigasjonsKnapper from '../KjørelisteNavigasjonsKnapper';
-import Oppsummering from './Oppsummering';
 import { harUtgiftOver100kr } from './VedleggUtils';
 import { Filopplaster } from '../../../components/Filopplaster/Filopplaster';
 import { Dokument } from '../../../typer/skjema';
@@ -30,18 +29,12 @@ const Vedleggside = () => {
         <VStack gap={'8'}>
             <VStack gap={'2'}>
                 <Heading size={'medium'} level={'2'}>
-                    Oppsummering
+                    Vedlegg
                 </Heading>
-                <BodyShort>
-                    Vennligst sjekk at du har markert riktige dager og fylt inn pris på parkeringen
-                    der det er relevant. Du kan gå tilbake og rette opp hvis noe ikke stemmer.
-                </BodyShort>
-                <Alert variant={'info'}>Kjørelisten er ikke sendt inn.</Alert>
             </VStack>
-            <Oppsummering />
             <Filopplaster
                 opplastedeVedlegg={opplastedeFiler}
-                tittel={'Vedlegg parkeringsutgift (obligatorisk)'}
+                tittel={`Vedlegg parkeringsutgift (${harUtgiftOver100kr(kjøreliste) ? 'obligatorisk' : 'valgfri'})`}
                 leggTilDokument={leggTilDokuement}
                 slettDokument={slettDokument}
             />
@@ -52,14 +45,9 @@ const Vedleggside = () => {
                     ikke får refundert utgiften.
                 </Alert>
             )}
-            <Checkbox>
-                Jeg er kjent med at jeg kan miste retten til stønad hvis jeg oppgir feilaktige
-                opplysninger, og jeg er klar over at jeg må betale tilbake hvis jeg får utbetalt mer
-                enn jeg har krav på. Jeg aksepterer også at NAV kan innhente opplysninger som er
-                nødvendige for å behandle søknaden min.
-            </Checkbox>
+
             <KjørelisteNavigasjonsKnapper
-                nesteRoute={RouteKjørelste.KVITTERING}
+                nesteRoute={RouteKjørelste.OPPSUMMERING}
                 forrigeRoute={RouteKjørelste.SKJEMA}
             />
         </VStack>
