@@ -7,6 +7,7 @@ import { Accordion, Alert, BodyShort, HStack, Tag, VStack } from '@navikt/ds-rea
 import KjørelisteDag from './KjørelisteDag';
 import { erHelg, finnDagerMellomFomOgTomInklusiv, tilDagMåned } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
+import { harRegistertDataForUke } from '../../kjørelisteUtils';
 import { RammevedtakUke } from '../../types/Rammevedtak';
 
 const StyledHeader = styled(Accordion.Header)`
@@ -35,9 +36,15 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
                         </BodyShort>
                         <BodyShort>{`(${tilDagMåned(uke.fom)} - ${tilDagMåned(uke.tom)})`}</BodyShort>
                     </HStack>
-                    <Tag variant={'neutral'} size={'small'}>
-                        Ikke utfylt
-                    </Tag>
+                    {harRegistertDataForUke(dagerIUka, kjøreliste) ? (
+                        <Tag variant={'warning'} size={'small'}>
+                            Påbegynt
+                        </Tag>
+                    ) : (
+                        <Tag variant={'neutral'} size={'small'}>
+                            Ikke utfylt
+                        </Tag>
+                    )}
                 </HStack>
             </StyledHeader>
             <Accordion.Content>

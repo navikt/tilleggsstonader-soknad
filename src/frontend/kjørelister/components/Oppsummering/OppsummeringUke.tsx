@@ -5,7 +5,7 @@ import { FormSummary } from '@navikt/ds-react';
 import OppsummeringDag from './OppsummeringDag';
 import { finnDagerMellomFomOgTomInklusiv } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
-import { Kjøreliste } from '../../types/Kjøreliste';
+import { harRegistertDataForUke } from '../../kjørelisteUtils';
 import { RammevedtakUke } from '../../types/Rammevedtak';
 
 const OppsummeringUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
@@ -31,6 +31,3 @@ const OppsummeringUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
 };
 
 export default OppsummeringUke;
-
-const harRegistertDataForUke = (dagerIUka: Date[], kjøreliste: Kjøreliste): boolean =>
-    dagerIUka.some((dag) => kjøreliste.reisedager[dag.toISOString()].harReist);
