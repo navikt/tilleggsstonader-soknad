@@ -44,7 +44,7 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
                 <VStack gap={'2'}>
                     <BodyShort weight={'semibold'}>Hvilke dager kjørte du?</BodyShort>
                     {dagerIUka.map((dato) => (
-                        <KjørelisteDag dato={dato} />
+                        <KjørelisteDag key={dato.toISOString()} dato={dato} />
                     ))}
                     {harValgtHelgedag(dagerIUka) && (
                         <Alert variant="warning">
