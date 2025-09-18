@@ -10,6 +10,7 @@ import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
 import KjørelisteHeader from './components/KjørelisteHeader';
 import Kvitteringsside from './components/Kvitteringsside/Kvitteringsside';
 import { Landingsside } from './components/Landingsside/Landingsside';
+import Oppsummeringsside from './components/Oppsummering/Oppsummeringsside';
 import { KjørelisteSkjema } from './components/Skjemaside/KjørelisteSkjema';
 import Vedleggside from './components/Vedleggside/Vedleggside';
 import { KjørelisteProvider } from './KjørelisteContext';
@@ -34,6 +35,7 @@ const KjørelisterApp = () => {
                         <Route path="/" element={<Landingsside />} />
                         <Route path={'/skjema'} element={<KjørelisteSkjema />} />
                         <Route path={'/vedlegg'} element={<Vedleggside />} />
+                        <Route path={'/oppsummering'} element={<Oppsummeringsside />} />
                         <Route path={'/kvittering'} element={<Kvitteringsside />} />
                     </Routes>
                 </VStack>

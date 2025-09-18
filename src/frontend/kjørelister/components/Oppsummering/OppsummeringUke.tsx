@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BodyShort, List, VStack } from '@navikt/ds-react';
+import { FormSummary } from '@navikt/ds-react';
 
 import OppsummeringDag from './OppsummeringDag';
 import { finnDagerMellomFomOgTomInklusiv } from '../../../utils/datoUtils';
@@ -10,22 +10,23 @@ import { RammevedtakUke } from '../../types/Rammevedtak';
 
 const OppsummeringUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
     const { kjøreliste } = useKjøreliste();
+    const dagerIUke = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
 
-    const dagerIUka = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
-
-    if (!harRegistertDataForUke(dagerIUka, kjøreliste)) {
+    if (!harRegistertDataForUke(dagerIUke, kjøreliste)) {
         return null;
     }
 
     return (
-        <VStack>
-            <BodyShort>{`Uke ${uke.ukeNummer}:`}</BodyShort>
-            <List as={'ul'}>
-                {dagerIUka.map((dag) => (
-                    <OppsummeringDag key={dag.toISOString()} dag={dag} />
+        <FormSummary>
+            <FormSummary.Header>
+                <FormSummary.Heading level={'3'}>{`Uke ${uke.ukeNummer}`}</FormSummary.Heading>
+            </FormSummary.Header>
+            <FormSummary.Answers>
+                {finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom).map((dag) => (
+                    <OppsummeringDag dag={dag} />
                 ))}
-            </List>
-        </VStack>
+            </FormSummary.Answers>
+        </FormSummary>
     );
 };
 
