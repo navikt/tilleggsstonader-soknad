@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { AGray800 } from '@navikt/ds-tokens/dist/tokens';
+import { BorderAccent } from '@navikt/ds-tokens/darkside-js';
 
 import { oppholdUtenforNorgeInnhold } from '../../../../barnetilsyn/tekster/opphold';
 import { OppholdUtenforNorge } from '../../../../typer/søknad';
@@ -9,7 +9,7 @@ import { Locale } from '../../../../typer/tekst';
 import { formaterNullableIsoDato } from '../../../../utils/formateringUtils';
 
 const VisningAvOpphold = styled(VStack)`
-    border: 1px solid ${AGray800};
+    border: 2px solid ${BorderAccent};
     border-radius: 4px;
     padding: 1rem 1rem 0 1rem;
 `;

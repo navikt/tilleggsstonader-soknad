@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import { Alert, Button, ErrorSummary, HGrid, VStack } from '@navikt/ds-react';
-import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
+import { BreakpointMd } from '@navikt/ds-tokens/darkside-js';
 
 import { StegIndikator } from './StegIndikator';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
@@ -40,7 +40,7 @@ export const Container = styled.div`
     flex-direction: column;
     gap: 2.5rem;
 
-    @media (min-width: ${ABreakpointMd}) {
+    @media (min-width: ${BreakpointMd}) {
         max-width: 35rem;
         margin: auto;
         padding: 2rem 0;

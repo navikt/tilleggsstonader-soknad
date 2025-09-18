@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { createRoot } from 'react-dom/client';
-import '@navikt/ds-css';
+import '@navikt/ds-css/darkside';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+import { Theme } from '@navikt/ds-react';
 
 import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
@@ -47,7 +49,9 @@ const AppRoutes = () => {
 root.render(
     <main id={'maincontent'} tabIndex={-1}>
         <SpråkProvider>
-            <AppRoutes />
+            <Theme theme="light">
+                <AppRoutes />
+            </Theme>
         </SpråkProvider>
     </main>
 );

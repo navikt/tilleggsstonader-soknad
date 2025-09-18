@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { AGray50 } from '@navikt/ds-tokens/dist/tokens';
+import { BgSunken } from '@navikt/ds-tokens/darkside-js';
 
 export const UnderspørsmålContainer = styled.div`
-    background: ${AGray50};
+    background: ${BgSunken};
     padding: 1rem;
 `;
