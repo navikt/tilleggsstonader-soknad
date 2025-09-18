@@ -5,18 +5,15 @@ interface ForsideInnhold {
     veileder_innhold: TekstElement<string[]>;
     mottatt_faktura_alert_tittel: TekstElement<string>;
     mottatt_faktura_alert_innhold: TekstElement<string[]>;
-    dine_plikter_tittel: TekstElement<string>;
-    dine_plikter_innhold: TekstElement<string[]>;
+    viktig_å_vite_tittel: TekstElement<string>;
+    viktig_å_vite_innhold: TekstElement<string[]>;
     utgifter_som_dekkes_tittel: TekstElement<string>;
     utgifter_som_dekkes_innhold: TekstElement<string[]>;
     info_som_hentes_tittel: TekstElement<string>;
-    info_som_hentes_innhold1: TekstElement<string>;
-    info_som_hentes_innhold2: TekstElement<string[]>;
-    info_som_hentes_innhold3: TekstElement<string>;
-    info_som_hentes_innhold4: TekstElement<string[]>;
-    info_som_hentes_innhold5: TekstElement<InlineLenke>;
+    info_som_hentes_punktlister: Punktliste[];
+    info_som_hentes_personvern: TekstElement<InlineLenke>;
     dokumentasjon_utgifter_tittel: TekstElement<string>;
-    dokumentasjon_utgifter_innhold: Punktliste[];
+    dokumentasjon_utgifter_punktlister: Punktliste[];
 }
 
 export const forsideTekster: ForsideInnhold = {
@@ -37,10 +34,10 @@ export const forsideTekster: ForsideInnhold = {
             'Hvis du ikke har mottatt fakturaen ennå, anbefaler vi at du venter med å søke til du får den.',
         ],
     },
-    dine_plikter_tittel: {
+    viktig_å_vite_tittel: {
         nb: 'Viktig å vite før du søker',
     },
-    dine_plikter_innhold: {
+    viktig_å_vite_innhold: {
         nb: [
             'Du må dokumentere utgiftene dine i søknaden.',
             'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
@@ -60,27 +57,33 @@ export const forsideTekster: ForsideInnhold = {
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',
     },
-    info_som_hentes_innhold1: {
-        nb: 'I tillegg til den informasjonen du oppgir i søknaden, henter vi:',
-    },
-    info_som_hentes_innhold2: {
-        nb: [
-            'adressen din og opplysninger om dine barn fra Folkeregisteret',
-            'informasjon om arbeidsrettet aktivitet',
-            'hvilke andre andre ytelser du mottar fra Nav',
-        ],
-    },
-    info_som_hentes_innhold3: {
-        nb: 'Ved behov sjekker vi:',
-    },
-    info_som_hentes_innhold4: {
-        nb: [
-            'om du har barn det utbetales kontantstøtte for',
-            'om du sender meldekort',
-            'om du er medlem i folketrygden',
-        ],
-    },
-    info_som_hentes_innhold5: {
+    info_som_hentes_punktlister: [
+        {
+            tittel: {
+                nb: 'I tillegg til den informasjonen du oppgir i søknaden, henter vi:',
+            },
+            innhold: {
+                nb: [
+                    'adressen din og opplysninger om dine barn fra Folkeregisteret',
+                    'informasjon om arbeidsrettet aktivitet',
+                    'hvilke andre andre ytelser du mottar fra Nav',
+                ],
+            },
+        },
+        {
+            tittel: {
+                nb: 'Ved behov sjekker vi:',
+            },
+            innhold: {
+                nb: [
+                    'om du har barn det utbetales kontantstøtte for',
+                    'om du sender meldekort',
+                    'om du er medlem i folketrygden',
+                ],
+            },
+        },
+    ],
+    info_som_hentes_personvern: {
         nb: [
             'Nav er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre.  ',
             {
@@ -94,7 +97,7 @@ export const forsideTekster: ForsideInnhold = {
     dokumentasjon_utgifter_tittel: {
         nb: 'Dokumentasjon av utgifter',
     },
-    dokumentasjon_utgifter_innhold: [
+    dokumentasjon_utgifter_punktlister: [
         {
             tittel: {
                 nb: 'For barn i barnehage, SFO eller AKS legger du ved faktura som inneholder:',

@@ -17,10 +17,12 @@ import { ERouteBarnetilsyn, RoutesBarnetilsyn } from './routing/routesBarnetilsy
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
+import { InfoPunktliste } from '../components/InfoPunktliste';
 import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
+import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
-import LocalePunktliste from '../components/Teksthåndtering/LocalePunktliste';
+import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
@@ -76,10 +78,10 @@ const Forside: React.FC = () => {
                     <LocaleTekstAvsnitt tekst={forsideTekster.mottatt_faktura_alert_innhold} />
                 </Alert>
             )}
-            <LocalePunktliste
-                tittel={forsideTekster.dine_plikter_tittel}
-                innhold={forsideTekster.dine_plikter_innhold}
-            />
+            <div>
+                <LocaleHeading tekst={forsideTekster.viktig_å_vite_tittel} level="2" size="small" />
+                <LocalePunktliste innhold={forsideTekster.viktig_å_vite_innhold} />
+            </div>
             <Accordion>
                 <Accordion.Item
                     onOpenChange={(skalÅpne) =>
@@ -102,14 +104,7 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.dokumentasjon_utgifter_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        {forsideTekster.dokumentasjon_utgifter_innhold.map((tekst, indeks) => (
-                            <LocalePunktliste
-                                key={indeks}
-                                tittel={tekst.tittel}
-                                innhold={tekst.innhold}
-                                tittelSomLabel
-                            />
-                        ))}
+                        <InfoPunktliste liste={forsideTekster.dokumentasjon_utgifter_punktlister} />
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item
@@ -121,17 +116,8 @@ const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_tittel} />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <LocalePunktliste
-                            tittel={forsideTekster.info_som_hentes_innhold1}
-                            innhold={forsideTekster.info_som_hentes_innhold2}
-                            tittelSomLabel
-                        />
-                        <LocalePunktliste
-                            tittel={forsideTekster.info_som_hentes_innhold3}
-                            innhold={forsideTekster.info_som_hentes_innhold4}
-                            tittelSomLabel
-                        />
-                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_innhold5} />
+                        <InfoPunktliste liste={forsideTekster.info_som_hentes_punktlister} />
+                        <LocaleInlineLenke tekst={forsideTekster.info_som_hentes_personvern} />
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
