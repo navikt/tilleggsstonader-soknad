@@ -19,12 +19,14 @@ interface IModellversjon {
 
 const StønadstypeTilGammeltFyllUtSkjema: Record<StønadstypeRouting, string> = {
     BOUTGIFTER: 'nav111219b',
-    DAGLIG_REISE: 'nav111221b',
+    DAGLIG_REISE_TSO: 'nav111221b',
+    DAGLIG_REISE_TSR: 'nav111221b',
 };
 
 const StønadstypeTilNyttFyllUtSkjema: Record<StønadstypeRouting, string | undefined> = {
     BOUTGIFTER: 'nav111219',
-    DAGLIG_REISE: 'nav111221',
+    DAGLIG_REISE_TSO: 'nav111221',
+    DAGLIG_REISE_TSR: 'nav111221',
 };
 
 const StønadstypeTilPapirskjema: Record<Stønadstype, string> = {
