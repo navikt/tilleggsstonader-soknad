@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { GuidePanel } from '@navikt/ds-react';
+
 import { ArbeidsrettetAktivitet } from './ArbeidsrettetAktivitet';
 import { DineBarn } from './DineBarn';
 import { PassAvBarn } from './PassAvBarn';
@@ -7,7 +9,6 @@ import HovedytelseOppsummering from '../../../components/Oppsummering/Hovedytels
 import OmDeg from '../../../components/Oppsummering/OmDeg';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
 import VedleggOppsummering from '../../../components/Oppsummering/Vedlegg';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
@@ -23,9 +24,9 @@ const Oppsummering = () => {
     return (
         <OppsummeringSide>
             <LocaleHeading tekst={oppsummeringTekster.tittel} level="2" size="medium" />
-            <PellePanel>
+            <GuidePanel>
                 <LocaleTekst tekst={oppsummeringTekster.guide_innhold} />
-            </PellePanel>
+            </GuidePanel>
             <OmDeg />
             {hovedytelse && (
                 <HovedytelseOppsummering

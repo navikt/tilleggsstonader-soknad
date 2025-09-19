@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { styled } from 'styled-components';
 
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, GuidePanel } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
 import VedleggManglerModal from './VedleggManglerModal';
@@ -11,7 +11,6 @@ import { useSpråk } from '../../context/SpråkContext';
 import { vedleggTekster } from '../../tekster/vedlegg';
 import { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
 import { Filopplaster } from '../Filopplaster/Filopplaster';
-import { PellePanel } from '../PellePanel/PellePanel';
 import Side from '../Side';
 import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
@@ -86,9 +85,9 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                 </BodyShort>
             ) : (
                 <>
-                    <PellePanel>
+                    <GuidePanel>
                         <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
-                    </PellePanel>
+                    </GuidePanel>
                     <Dokumentasjonskrav dokumentasjonsbehov={dokumentasjonsbehov} />
                     <VedleggGenerellInfo />
                     <VedleggContainer>

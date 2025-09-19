@@ -7,6 +7,7 @@ import {
     Alert,
     BodyLong,
     Button,
+    GuidePanel,
     Heading,
     HStack,
     Label,
@@ -18,7 +19,6 @@ import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
-import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
@@ -61,7 +61,7 @@ const Forside: React.FC = () => {
 
     return (
         <Container>
-            <PellePanel poster>
+            <GuidePanel poster>
                 <Label>
                     <LocaleTekst
                         tekst={forsideTekster.veileder_tittel}
@@ -69,7 +69,7 @@ const Forside: React.FC = () => {
                     />
                 </Label>
                 <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
-            </PellePanel>
+            </GuidePanel>
             {erSnartNyttSkoleår() && (
                 <Alert variant="info">
                     <Heading size="small" spacing>

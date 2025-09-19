@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Alert, Heading, Label, List, VStack } from '@navikt/ds-react';
+import { Alert, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
 
 import { skalTaStillingTilLønnetTiltak } from './AkivitetUtils';
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
@@ -12,7 +12,6 @@ import {
     skalTaStillingTilAnnenAktivitet,
     skalTaStillingTilRegisterAktiviteter,
 } from '../../../components/Aktivitet/registerAktivitetUtil';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
@@ -147,9 +146,9 @@ const Aktivitet = () => {
     return (
         <Side validerSteg={kanFortsette} oppdaterSøknad={oppdaterAktivitetISøknad}>
             <LocaleHeading tekst={aktivitetTekster.tittel} level="2" size="medium" />
-            <PellePanel>
+            <GuidePanel>
                 <LocaleTekstAvsnitt tekst={aktivitetTekster.guide_innhold} />
-            </PellePanel>
+            </GuidePanel>
             {skalViseArbeidsrettedeAktiviteter && (
                 <ArbeidsrettedeAktiviteter
                     spørsmål={aktivitetTekster.hvilken_aktivitet.spm}

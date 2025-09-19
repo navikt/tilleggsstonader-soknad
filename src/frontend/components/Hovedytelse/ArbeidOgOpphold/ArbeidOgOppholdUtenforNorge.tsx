@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { Heading, VStack } from '@navikt/ds-react';
+import { GuidePanel, Heading, VStack } from '@navikt/ds-react';
 
 import JobberDuIAnnetLand from './JobberDuIAnnetLand';
 import OppholdUtenforNorgeSiste12Mnd from './Opphold/OppholdUtenforNorgeSiste12Mnd';
 import Pengestøtte from './Pengestøtte';
 import { arbeidOgOppholdInnhold } from '../../../barnetilsyn/tekster/opphold';
 import { ArbeidOgOpphold } from '../../../typer/søknad';
-import { PellePanel } from '../../PellePanel/PellePanel';
 import LocaleInlineLenke from '../../Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../../Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../UnderspørsmålContainer';
@@ -24,9 +23,9 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
                 <Heading size="medium">
                     <LocaleTekst tekst={arbeidOgOppholdInnhold.tittel} />
                 </Heading>
-                <PellePanel>
+                <GuidePanel>
                     <LocaleInlineLenke tekst={arbeidOgOppholdInnhold.guide_innhold} />
-                </PellePanel>
+                </GuidePanel>
 
                 <JobberDuIAnnetLand
                     arbeidOgOpphold={arbeidOgOpphold}

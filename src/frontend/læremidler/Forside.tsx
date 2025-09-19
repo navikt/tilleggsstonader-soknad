@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router';
 
-import { Accordion, BodyLong, Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { Accordion, BodyLong, Button, GuidePanel, HStack, Label, VStack } from '@navikt/ds-react';
 
 import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
-import { PellePanel } from '../components/PellePanel/PellePanel';
 import { Container } from '../components/Side';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
@@ -51,7 +50,7 @@ const Forside: React.FC = () => {
 
     return (
         <Container>
-            <PellePanel poster>
+            <GuidePanel poster>
                 <Label>
                     <LocaleTekst
                         tekst={forsideTekster.veileder_tittel}
@@ -59,7 +58,7 @@ const Forside: React.FC = () => {
                     />
                 </Label>
                 <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
-            </PellePanel>
+            </GuidePanel>
             <div>
                 <LocaleHeading tekst={forsideTekster.viktig_å_vite_tittel} level="2" size="small" />
                 <LocalePunktliste innhold={forsideTekster.viktig_å_vite_innhold} />
