@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { PlusIcon } from '@navikt/aksel-icons';
+import { ArrowUndoIcon, PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { BorderAccent } from '@navikt/ds-tokens/darkside-js';
 
@@ -138,6 +138,7 @@ const OppholdListe: React.FC<{
                         <Button
                             variant={'tertiary'}
                             onClick={() => slettOpphold(ulagretOpphold._id)}
+                            icon={<ArrowUndoIcon />}
                         >
                             {oppholdUtenforNorgeInnhold.knapp_angre_legg_til[locale]}
                         </Button>

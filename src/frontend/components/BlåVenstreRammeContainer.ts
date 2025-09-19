@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { BorderInfoSubtle } from '@navikt/ds-tokens/darkside-js';
+import { BorderAccent } from '@navikt/ds-tokens/darkside-js';
 
 export const BlåVenstreRammeContainer = styled.div`
-    border-left: 5px solid ${BorderInfoSubtle};
+    border-left: 5px solid ${BorderAccent};
     padding: 0.5rem;
 `;
