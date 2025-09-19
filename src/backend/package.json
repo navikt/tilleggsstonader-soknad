@@ -18,13 +18,13 @@
     "express-http-proxy": "^2.0.0",
     "html-react-parser": "^5.2.5",
     "http-proxy-middleware": "^3.0.5",
-    "jsdom": "^26.1.0",
+    "jsdom": "^27.0.0",
     "jsonwebtoken": "9.0.2",
     "node-jose": "2.2.0",
     "openid-client": "6.7.1",
     "react": "^19.1.0",
     "typescript": "^5.9.2",
-    "uuid": "^11.1.0",
+    "uuid": "^13.0.0",
     "winston": "^3.17.0"
   },
   "devDependencies": {
