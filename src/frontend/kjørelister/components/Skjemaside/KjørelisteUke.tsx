@@ -11,7 +11,7 @@ import { harRegistertDataForUke } from '../../kjørelisteUtils';
 import { RammevedtakUke } from '../../types/Rammevedtak';
 
 const StyledHeader = styled(Accordion.Header)`
-    .navds-accordion__header-content {
+    .aksel-accordion__header-content {
         width: 100%;
     }
 `;
