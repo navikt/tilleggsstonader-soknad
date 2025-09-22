@@ -19,12 +19,18 @@ const StyledHeader = styled(Accordion.Header)`
 const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
     const dagerIUka = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
 
-    const { kjøreliste } = useKjøreliste();
+    const { kjøreliste, rammevedtak } = useKjøreliste();
 
     function harValgtHelgedag(dagerIUka: Date[]) {
         const helgedagerDenneUka = dagerIUka.filter((dag) => erHelg(dag));
         return helgedagerDenneUka.some((dag) => kjøreliste.reisedager[dag.toISOString()].harReist);
     }
+
+    const finnAntallDagerReistIUke = (dagerIUka: Date[]) =>
+        dagerIUka.filter((dag) => kjøreliste.reisedager[dag.toISOString()].harReist).length;
+
+    const harValgtFlereDagerEnnRammevedtak = (dagerIUka: Date[]) =>
+        rammevedtak.reisedagerPerUke < finnAntallDagerReistIUke(dagerIUka);
 
     return (
         <Accordion.Item>
@@ -57,6 +63,11 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
                         <Alert variant="warning">
                             Du har fylt inn at du har kjørt på en helgedag. Hvis det stemmer at du
                             har kjørt denne dagen vil en saksbehandler manuelt behandle saken din.
+                        </Alert>
+                    )}
+                    {harValgtFlereDagerEnnRammevedtak(dagerIUka) && (
+                        <Alert variant="warning">
+                            {`Du har fått innvilget stønad for daglig reise med egen bil for ${rammevedtak.reisedagerPerUke} dager i uken, men du har registrert ${finnAntallDagerReistIUke(dagerIUka)} dager. Sjekk at du har fylt inn alt riktig. Hvis det stemmer at du har kjørt flere dager denne uken vil en saksbehandler manuelt behandle saken din.`}
                         </Alert>
                     )}
                 </VStack>
