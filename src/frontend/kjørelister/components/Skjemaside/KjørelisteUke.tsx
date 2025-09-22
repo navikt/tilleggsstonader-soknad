@@ -21,10 +21,10 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
 
     const { kjøreliste, rammevedtak } = useKjøreliste();
 
-    function harValgtHelgedag(dagerIUka: Date[]) {
+    const harValgtHelgedag = (dagerIUka: Date[]) => {
         const helgedagerDenneUka = dagerIUka.filter((dag) => erHelg(dag));
         return helgedagerDenneUka.some((dag) => kjøreliste.reisedager[dag.toISOString()].harReist);
-    }
+    };
 
     const finnAntallDagerReistIUke = (dagerIUka: Date[]) =>
         dagerIUka.filter((dag) => kjøreliste.reisedager[dag.toISOString()].harReist).length;
