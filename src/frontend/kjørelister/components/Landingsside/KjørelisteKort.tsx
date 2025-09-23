@@ -3,7 +3,7 @@ import React from 'react';
 import { BodyShort, LinkCard, Tag } from '@navikt/ds-react';
 
 import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
-import { RouteKjørelste, RouteTilPath } from '../../routesKjørelistes';
+import { KjørelisteSider, SideTilPath } from '../../kjørelisteSider';
 import { Rammevedtak } from '../../types/Rammevedtak';
 
 export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammevedtak }) => {
@@ -11,7 +11,7 @@ export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammev
         <LinkCard>
             <LinkCard.Title as="h3">
                 <LinkCard.Anchor
-                    href={`/tilleggsstonader/soknad${RouteTilPath[RouteKjørelste.SKJEMA]}`}
+                    href={`/tilleggsstonader/soknad${SideTilPath[KjørelisteSider.SKJEMA]}`}
                 >
                     {rammevedtak.aktivitetsnavn}
                 </LinkCard.Anchor>

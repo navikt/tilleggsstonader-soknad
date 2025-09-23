@@ -1,4 +1,4 @@
-export enum RouteKjørelste {
+export enum KjørelisteSider {
     LANDINGSSIDE = 'LANDINGSSIDE',
     SKJEMA = 'SKJEMA',
     VEDLEGG = 'VEDLEGG',
@@ -8,7 +8,7 @@ export enum RouteKjørelste {
 
 export const kjørelistePath = '/kjoreliste';
 
-export const RouteTilPath: Record<RouteKjørelste, string> = {
+export const SideTilPath: Record<KjørelisteSider, string> = {
     LANDINGSSIDE: kjørelistePath + '/',
     SKJEMA: kjørelistePath + '/skjema',
     VEDLEGG: kjørelistePath + '/vedlegg',
