@@ -38,7 +38,7 @@ interface Props {
 const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentasjonsbehov }) => {
     const { locale } = useSpråk();
 
-    const ref = useRef<HTMLDialogElement>(null);
+    const vedleggManglerModalRef = useRef<HTMLDialogElement>(null);
     const [ikkeOpplastedeDokumenter, settIkkeOpplastedeDokumenter] = useState<string[]>([]);
 
     useEffect(() => {
@@ -69,7 +69,7 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
         settIkkeOpplastedeDokumenter(manglerOpplasting);
 
         if (manglerOpplasting.length > 0) {
-            ref.current?.showModal();
+            vedleggManglerModalRef.current?.showModal();
             return false;
         }
 
@@ -107,7 +107,7 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                     </VedleggContainer>
 
                     <VedleggManglerModal
-                        innerRef={ref}
+                        innerRef={vedleggManglerModalRef}
                         dokumenterSomMangler={ikkeOpplastedeDokumenter}
                     />
                 </>
