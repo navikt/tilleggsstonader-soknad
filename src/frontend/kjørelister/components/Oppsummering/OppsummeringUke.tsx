@@ -8,7 +8,7 @@ import { useKjøreliste } from '../../KjørelisteContext';
 import { harRegistertDataForUke } from '../../kjørelisteUtils';
 import { RammevedtakUke } from '../../types/Rammevedtak';
 
-const OppsummeringUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
+export const OppsummeringUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
     const { kjøreliste } = useKjøreliste();
     const dagerIUke = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
 
@@ -29,5 +29,3 @@ const OppsummeringUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
         </FormSummary>
     );
 };
-
-export default OppsummeringUke;

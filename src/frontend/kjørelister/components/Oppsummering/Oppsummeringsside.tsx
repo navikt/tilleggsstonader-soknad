@@ -2,13 +2,15 @@ import React from 'react';
 
 import { BodyLong, Checkbox, GuidePanel, Heading } from '@navikt/ds-react';
 
-import OppsummeringUke from './OppsummeringUke';
+import { OppsummeringUke } from './OppsummeringUke';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { KjørelisteSider } from '../../kjørelisteSider';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
+import { VedleggOppsummering } from './VedleggOppsummering';
 
 export const Oppsummeringsside = () => {
     const { rammevedtak } = useKjøreliste();
+
     return (
         <>
             <Heading size={'medium'} level={'2'}>
@@ -29,6 +31,8 @@ export const Oppsummeringsside = () => {
             {rammevedtak.uker.map((uke) => (
                 <OppsummeringUke key={uke.ukeNummer} uke={uke} />
             ))}
+
+            <VedleggOppsummering />
 
             <Checkbox>
                 Jeg er kjent med at jeg kan miste retten til stønad hvis jeg oppgir feilaktige

@@ -25,7 +25,7 @@ const Container = styled.div`
     }
 `;
 
-const KjørelisterApp = () => {
+export const KjørelisterApp = () => {
     return (
         <Container>
             <KjørelisteProvider>
@@ -43,5 +43,3 @@ const KjørelisterApp = () => {
         </Container>
     );
 };
-
-export default KjørelisterApp;

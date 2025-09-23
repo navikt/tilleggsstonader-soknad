@@ -13,7 +13,7 @@ import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
 import { BoutgifterApp } from './Boutgifter/BoutgifterApp';
 import ScrollToTop from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
-import KjørelisterApp from './kjørelister/KjørelisterApp';
+import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { erProd } from './utils/miljø';
