@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Alert, Heading, VStack } from '@navikt/ds-react';
 
@@ -9,19 +9,16 @@ import { Filopplaster } from '../../../components/Filopplaster/Filopplaster';
 import { Dokument } from '../../../typer/skjema';
 import { useKjøreliste } from '../../KjørelisteContext';
 
-const Vedleggside = () => {
-    const { kjøreliste } = useKjøreliste();
-    const [opplastedeFiler, setOpplastedeFiler] = useState<Dokument[]>([]);
+export const Vedleggside = () => {
+    const { kjøreliste, dokumentasjon, setDokumentasjon } = useKjøreliste();
 
-    const leggTilDokuement = (dokument: Dokument) => {
-        //TODO legg til logikk for å laste opp vedlegg
-        setOpplastedeFiler((prevState) => [...prevState, dokument]);
+    const leggTilDokument = (dokument: Dokument) => {
+        setDokumentasjon((prevState) => [...prevState, dokument]);
     };
 
-    const slettDokument = (dokuemntId: string) => {
-        //TODO legg til logikk for å slette vedlegg
-        setOpplastedeFiler((prevState) =>
-            prevState.filter((dokuemnt) => dokuemnt.id !== dokuemntId)
+    const slettDokument = (dokumentId: string) => {
+        setDokumentasjon((prevState) =>
+            prevState.filter((opplastetDokument) => opplastetDokument.id !== dokumentId)
         );
     };
 
@@ -33,9 +30,9 @@ const Vedleggside = () => {
                 </Heading>
             </VStack>
             <Filopplaster
-                opplastedeVedlegg={opplastedeFiler}
+                opplastedeVedlegg={dokumentasjon}
                 tittel={`Vedlegg parkeringsutgift (${harUtgiftOver100kr(kjøreliste) ? 'obligatorisk' : 'valgfri'})`}
-                leggTilDokument={leggTilDokuement}
+                leggTilDokument={leggTilDokument}
                 slettDokument={slettDokument}
             />
             {harUtgiftOver100kr(kjøreliste) && (
@@ -53,5 +50,3 @@ const Vedleggside = () => {
         </VStack>
     );
 };
-
-export default Vedleggside;

@@ -12,7 +12,7 @@ import Kvitteringsside from './components/Kvitteringsside/Kvitteringsside';
 import { Landingsside } from './components/Landingsside/Landingsside';
 import Oppsummeringsside from './components/Oppsummering/Oppsummeringsside';
 import { KjørelisteSkjema } from './components/Skjemaside/KjørelisteSkjema';
-import Vedleggside from './components/Vedleggside/Vedleggside';
+import { Vedleggside } from './components/Vedleggside/Vedleggside';
 import { KjørelisteProvider } from './KjørelisteContext';
 
 const Container = styled.div`
