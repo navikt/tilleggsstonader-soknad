@@ -2,9 +2,9 @@ import React from 'react';
 
 import UtdanningOppsummering from './Utdanning';
 import HovedytelseOppsummering from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
-import OmDeg from '../../../components/Oppsummering/OmDeg';
+import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
-import VedleggOppsummering from '../../../components/Oppsummering/Vedlegg';
+import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { RouteTilPath } from '../../routing/routesLæremidler';
@@ -15,7 +15,7 @@ const Oppsummering = () => {
     return (
         <OppsummeringSide>
             <LocaleHeading tekst={oppsummeringTekster.tittel} size="medium" level="2" />
-            <OmDeg />
+            <OmDegOppsummering />
             {hovedytelse && (
                 <HovedytelseOppsummering
                     hovedytelse={hovedytelse}

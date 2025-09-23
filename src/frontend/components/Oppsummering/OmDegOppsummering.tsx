@@ -8,7 +8,7 @@ import { fellesOppsummeringTekster } from '../../tekster/oppsummering';
 import { LocaleReadMoreMedLenke } from '../Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-const OmDeg = () => {
+export const OmDegOppsummering = () => {
     const { person } = usePerson();
 
     return (
@@ -32,5 +32,3 @@ const OmDeg = () => {
         </OppsummeringPanelHeader>
     );
 };
-
-export default OmDeg;

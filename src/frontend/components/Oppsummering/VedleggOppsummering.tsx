@@ -7,7 +7,7 @@ import { fellesOppsummeringTekster } from '../../tekster/oppsummering';
 import { DokumentasjonFelt } from '../../typer/skjema';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
-const VedleggOppsummering: React.FC<{
+export const VedleggOppsummering: React.FC<{
     dokumentasjon: DokumentasjonFelt[];
     redigerLenke: string;
 }> = ({ dokumentasjon, redigerLenke }) => (
@@ -28,5 +28,3 @@ const VedleggOppsummering: React.FC<{
         ))}
     </OppsummeringPanelHeader>
 );
-
-export default VedleggOppsummering;

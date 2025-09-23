@@ -6,9 +6,9 @@ import { ArbeidsrettetAktivitet } from './ArbeidsrettetAktivitet';
 import { DineBarn } from './DineBarn';
 import { PassAvBarn } from './PassAvBarn';
 import HovedytelseOppsummering from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
-import OmDeg from '../../../components/Oppsummering/OmDeg';
+import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
-import VedleggOppsummering from '../../../components/Oppsummering/Vedlegg';
+import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
@@ -27,7 +27,7 @@ const Oppsummering = () => {
             <GuidePanel>
                 <LocaleTekst tekst={oppsummeringTekster.guide_innhold} />
             </GuidePanel>
-            <OmDeg />
+            <OmDegOppsummering />
             {hovedytelse && (
                 <HovedytelseOppsummering
                     hovedytelse={hovedytelse}
