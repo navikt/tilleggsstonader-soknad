@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Accordion, Heading, VStack } from '@navikt/ds-react';
 
-import KjørelisteUke from './KjørelisteUke';
+import { KjørelisteUke } from './KjørelisteUke';
 import { useKjøreliste } from '../../KjørelisteContext';
 
 export const Kjøreliste = () => {

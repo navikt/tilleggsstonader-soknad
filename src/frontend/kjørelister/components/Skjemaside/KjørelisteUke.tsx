@@ -1,7 +1,5 @@
 import React from 'react';
 
-import styled from 'styled-components';
-
 import { Accordion, Alert, BodyShort, HStack, Tag, VStack } from '@navikt/ds-react';
 
 import { KjørelisteDag } from './KjørelisteDag';
@@ -9,14 +7,9 @@ import { erHelg, finnDagerMellomFomOgTomInklusiv, tilTekstligDato } from '../../
 import { useKjøreliste } from '../../KjørelisteContext';
 import { harRegistertDataForUke } from '../../kjørelisteUtils';
 import { RammevedtakUke } from '../../types/Rammevedtak';
+import { WideAccordionHeader } from '../WideAccordionHeader';
 
-const StyledHeader = styled(Accordion.Header)`
-    .aksel-accordion__header-content {
-        width: 100%;
-    }
-`;
-
-const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
+export const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
     const dagerIUka = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
 
     const { kjøreliste, rammevedtak } = useKjøreliste();
@@ -34,7 +27,7 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
 
     return (
         <Accordion.Item>
-            <StyledHeader>
+            <WideAccordionHeader>
                 <HStack justify={'space-between'}>
                     <HStack gap={'2'}>
                         <BodyShort size={'large'} weight={'semibold'}>
@@ -52,7 +45,7 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
                         </Tag>
                     )}
                 </HStack>
-            </StyledHeader>
+            </WideAccordionHeader>
             <Accordion.Content>
                 <VStack gap={'2'}>
                     <BodyShort weight={'semibold'}>Hvilke dager kjørte du?</BodyShort>
@@ -75,5 +68,3 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
         </Accordion.Item>
     );
 };
-
-export default KjørelisteUke;
