@@ -12,7 +12,7 @@ interface KjørelisteNavigasonsKnapperProps {
     forrigeRoute: RouteKjørelste;
 }
 
-const KjørelisteNavigasjonsKnapper = ({
+export const KjørelisteNavigasjonsKnapper = ({
     nesteRoute,
     forrigeRoute,
 }: KjørelisteNavigasonsKnapperProps) => {
@@ -44,5 +44,3 @@ const KjørelisteNavigasjonsKnapper = ({
         </VStack>
     );
 };
-
-export default KjørelisteNavigasjonsKnapper;

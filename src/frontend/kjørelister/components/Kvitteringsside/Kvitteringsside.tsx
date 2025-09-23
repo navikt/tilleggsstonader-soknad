@@ -4,9 +4,9 @@ import { Alert, BodyShort, Button, Heading, Link, VStack } from '@navikt/ds-reac
 
 import { tilTekstligDato } from '../../../utils/datoUtils';
 import { RouteKjørelste } from '../../routesKjørelistes';
-import KjørelisteNavigasjonsKnapper from '../KjørelisteNavigasjonsKnapper';
+import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 
-const Kvitteringsside = () => {
+export const Kvitteringsside = () => {
     //TODO mottatTidspunkt bør være når vi lagrer ned søknaden
     const mottatTidspunkt = new Date();
     //TODO få faktisk saksnummer fra backend
@@ -76,5 +76,3 @@ const Kvitteringsside = () => {
         </VStack>
     );
 };
-
-export default Kvitteringsside;

@@ -3,7 +3,7 @@ import React from 'react';
 import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import { RouteKjørelste } from '../../routesKjørelistes';
-import KjørelisteNavigasjonsKnapper from '../KjørelisteNavigasjonsKnapper';
+import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 import { harUtgiftOver100kr } from './VedleggUtils';
 import { Filopplaster } from '../../../components/Filopplaster/Filopplaster';
 import { Dokument } from '../../../typer/skjema';

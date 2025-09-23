@@ -5,9 +5,9 @@ import { BodyLong, Checkbox, GuidePanel, Heading } from '@navikt/ds-react';
 import OppsummeringUke from './OppsummeringUke';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { RouteKjørelste } from '../../routesKjørelistes';
-import KjørelisteNavigasjonsKnapper from '../KjørelisteNavigasjonsKnapper';
+import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 
-const Oppsummeringsside = () => {
+export const Oppsummeringsside = () => {
     const { rammevedtak } = useKjøreliste();
     return (
         <>
@@ -44,5 +44,3 @@ const Oppsummeringsside = () => {
         </>
     );
 };
-
-export default Oppsummeringsside;

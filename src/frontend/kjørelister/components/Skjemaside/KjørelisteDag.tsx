@@ -19,7 +19,7 @@ const StyledTextField = styled(TextField)`
     max-width: 12rem;
 `;
 
-const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
+export const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
     const { kjøreliste, oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
 
     const [harReist, settHarReist] = useState(kjøreliste.reisedager[dato.toISOString()].harReist);
@@ -43,5 +43,3 @@ const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
         </Card>
     );
 };
-
-export default KjørelisteDag;

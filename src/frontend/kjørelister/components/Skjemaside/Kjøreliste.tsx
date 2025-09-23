@@ -5,7 +5,7 @@ import { Accordion, Heading, VStack } from '@navikt/ds-react';
 import KjørelisteUke from './KjørelisteUke';
 import { useKjøreliste } from '../../KjørelisteContext';
 
-const Kjøreliste = () => {
+export const Kjøreliste = () => {
     const { rammevedtak } = useKjøreliste();
     return (
         <VStack gap={'2'}>
@@ -18,5 +18,3 @@ const Kjøreliste = () => {
         </VStack>
     );
 };
-
-export default Kjøreliste;

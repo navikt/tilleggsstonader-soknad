@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FormSummary } from '@navikt/ds-react';
 
-import OppsummeringDag from './OppsummeringDag';
+import { OppsummeringDag } from './OppsummeringDag';
 import { finnDagerMellomFomOgTomInklusiv } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { harRegistertDataForUke } from '../../kjørelisteUtils';

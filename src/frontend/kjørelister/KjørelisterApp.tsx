@@ -7,10 +7,10 @@ import styled from 'styled-components';
 import { VStack } from '@navikt/ds-react';
 import { BreakpointMd } from '@navikt/ds-tokens/darkside-js';
 
-import KjørelisteHeader from './components/KjørelisteHeader';
-import Kvitteringsside from './components/Kvitteringsside/Kvitteringsside';
+import { KjørelisteHeader } from './components/KjørelisteHeader';
+import { Kvitteringsside } from './components/Kvitteringsside/Kvitteringsside';
 import { Landingsside } from './components/Landingsside/Landingsside';
-import Oppsummeringsside from './components/Oppsummering/Oppsummeringsside';
+import { Oppsummeringsside } from './components/Oppsummering/Oppsummeringsside';
 import { KjørelisteSkjema } from './components/Skjemaside/KjørelisteSkjema';
 import { Vedleggside } from './components/Vedleggside/Vedleggside';
 import { KjørelisteProvider } from './KjørelisteContext';

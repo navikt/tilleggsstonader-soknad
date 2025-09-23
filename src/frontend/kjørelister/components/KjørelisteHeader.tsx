@@ -2,7 +2,7 @@ import React from 'react';
 
 import { BodyShort, Heading, VStack } from '@navikt/ds-react';
 
-const KjørelisteHeader = () => {
+export const KjørelisteHeader = () => {
     return (
         <VStack gap="2">
             {/*TODO kan erstattes av components/Header.tsx med litt refaktorering*/}
@@ -14,5 +14,3 @@ const KjørelisteHeader = () => {
         </VStack>
     );
 };
-
-export default KjørelisteHeader;

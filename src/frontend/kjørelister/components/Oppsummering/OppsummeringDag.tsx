@@ -5,7 +5,7 @@ import { FormSummary } from '@navikt/ds-react';
 import { tilTekstligDato, tilUkedag } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
 
-const OppsummeringDag: React.FC<{ dag: Date }> = ({ dag }) => {
+export const OppsummeringDag: React.FC<{ dag: Date }> = ({ dag }) => {
     const { kjøreliste } = useKjøreliste();
 
     const reisedag = kjøreliste.reisedager[dag.toISOString()];
@@ -28,5 +28,3 @@ const OppsummeringDag: React.FC<{ dag: Date }> = ({ dag }) => {
         </FormSummary.Answer>
     );
 };
-
-export default OppsummeringDag;

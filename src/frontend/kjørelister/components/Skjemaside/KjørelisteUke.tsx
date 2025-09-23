@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { Accordion, Alert, BodyShort, HStack, Tag, VStack } from '@navikt/ds-react';
 
-import KjørelisteDag from './KjørelisteDag';
+import { KjørelisteDag } from './KjørelisteDag';
 import { erHelg, finnDagerMellomFomOgTomInklusiv, tilTekstligDato } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { harRegistertDataForUke } from '../../kjørelisteUtils';
