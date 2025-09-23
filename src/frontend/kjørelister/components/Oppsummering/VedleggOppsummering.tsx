@@ -4,6 +4,7 @@ import { FileCheckmarkIcon } from '@navikt/aksel-icons';
 import { FormSummary, List } from '@navikt/ds-react';
 
 import { useKjøreliste } from '../../KjørelisteContext';
+import { KjørelisteSider } from '../../kjørelisteSider';
 
 export function VedleggOppsummering() {
     const { dokumentasjon } = useKjøreliste();
@@ -35,6 +36,9 @@ export function VedleggOppsummering() {
                     </FormSummary.Value>
                 </FormSummary.Answer>
             </FormSummary.Answers>
+            <FormSummary.Footer>
+                <FormSummary.EditLink href={KjørelisteSider.VEDLEGG} />
+            </FormSummary.Footer>
         </FormSummary>
     );
 }

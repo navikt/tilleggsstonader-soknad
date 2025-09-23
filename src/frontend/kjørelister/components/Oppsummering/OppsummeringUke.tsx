@@ -5,6 +5,7 @@ import { FormSummary } from '@navikt/ds-react';
 import { OppsummeringDag } from './OppsummeringDag';
 import { finnDagerMellomFomOgTomInklusiv } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
+import { KjørelisteSider } from '../../kjørelisteSider';
 import { harRegistertDataForUke } from '../../kjørelisteUtils';
 import { RammevedtakUke } from '../../types/Rammevedtak';
 
@@ -26,6 +27,9 @@ export const OppsummeringUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
                     <OppsummeringDag dag={dag} />
                 ))}
             </FormSummary.Answers>
+            <FormSummary.Footer>
+                <FormSummary.EditLink href={KjørelisteSider.SKJEMA} />
+            </FormSummary.Footer>
         </FormSummary>
     );
 };
