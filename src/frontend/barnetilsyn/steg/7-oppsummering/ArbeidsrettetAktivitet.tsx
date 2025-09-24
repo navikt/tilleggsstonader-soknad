@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FormSummary } from '@navikt/ds-react';
 
-import { OppsummeringPanelHeader } from '../../../components/Oppsummering/OppsummeringPanelHeader';
+import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../../../context/SpråkContext';
 import { Aktivitet } from '../../../typer/søknad';
@@ -23,34 +23,41 @@ export const ArbeidsrettetAktivitet: React.FC<{ aktivitet?: Aktivitet }> = ({ ak
     const lønnetAktivitetLabel = aktivitet?.lønnetAktivitet?.label;
 
     return (
-        <OppsummeringPanelHeader
-            tittel={oppsummeringTekster.arbeidsrettet_aktivitet}
-            lenke={RouteTilPath.AKTIVITET}
-        >
-            {aktiviteterSomTekstfelt && (
+        <FormSummary>
+            <FormSummary.Header>
+                <FormSummary.Heading level="3">
+                    <LocaleTekst tekst={oppsummeringTekster.arbeidsrettet_aktivitet} />
+                </FormSummary.Heading>
+            </FormSummary.Header>
+            <FormSummary.Answers>
+                {aktiviteterSomTekstfelt && (
+                    <FormSummary.Answer>
+                        <FormSummary.Label>
+                            <LocaleTekst tekst={{ nb: aktiviteterLabel || '' }} />
+                        </FormSummary.Label>
+                        {aktiviteterSomTekstfelt[locale].map((aktivitet) => (
+                            <FormSummary.Value key={aktivitet}>{aktivitet}</FormSummary.Value>
+                        ))}
+                    </FormSummary.Answer>
+                )}
+                {aktivitet?.annenAktivitet && (
+                    <FormSummary.Answer>
+                        <FormSummary.Label>
+                            <LocaleTekst tekst={{ nb: annenAktivitetLabel || '' }} />
+                        </FormSummary.Label>
+                        <FormSummary.Value>
+                            {aktivitet?.annenAktivitet?.svarTekst}
+                        </FormSummary.Value>
+                    </FormSummary.Answer>
+                )}
                 <FormSummary.Answer>
                     <FormSummary.Label>
-                        <LocaleTekst tekst={{ nb: aktiviteterLabel || '' }} />
+                        <LocaleTekst tekst={{ nb: lønnetAktivitetLabel || '' }} />
                     </FormSummary.Label>
-                    {aktiviteterSomTekstfelt[locale].map((aktivitet) => (
-                        <FormSummary.Value key={aktivitet}>{aktivitet}</FormSummary.Value>
-                    ))}
+                    <FormSummary.Value>{aktivitet?.lønnetAktivitet?.svarTekst}</FormSummary.Value>
                 </FormSummary.Answer>
-            )}
-            {aktivitet?.annenAktivitet && (
-                <FormSummary.Answer>
-                    <FormSummary.Label>
-                        <LocaleTekst tekst={{ nb: annenAktivitetLabel || '' }} />
-                    </FormSummary.Label>
-                    <FormSummary.Value>{aktivitet?.annenAktivitet?.svarTekst}</FormSummary.Value>
-                </FormSummary.Answer>
-            )}
-            <FormSummary.Answer>
-                <FormSummary.Label>
-                    <LocaleTekst tekst={{ nb: lønnetAktivitetLabel || '' }} />
-                </FormSummary.Label>
-                <FormSummary.Value>{aktivitet?.lønnetAktivitet?.svarTekst}</FormSummary.Value>
-            </FormSummary.Answer>
-        </OppsummeringPanelHeader>
+            </FormSummary.Answers>
+            <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.AKTIVITET} />
+        </FormSummary>
     );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import UtdanningOppsummering from './Utdanning';
-import HovedytelseOppsummering from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
+import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
 import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
