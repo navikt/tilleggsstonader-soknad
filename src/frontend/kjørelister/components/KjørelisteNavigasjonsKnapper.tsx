@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { ArrowLeftIcon, ArrowRightIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
+import { finnPath, KjørelisteSider } from '../kjørelisteSider';
 
-import { KjørelisteSider, SideTilPath } from '../kjørelisteSider';
 
 interface KjørelisteNavigasonsKnapperProps {
     nesteSide: KjørelisteSider;
@@ -17,13 +17,14 @@ export const KjørelisteNavigasjonsKnapper = ({
     forrigeSide,
 }: KjørelisteNavigasonsKnapperProps) => {
     const navigate = useNavigate();
+    const kjørelisteId = useParams<{ kjorelisteId: string }>().kjorelisteId as string;
     return (
         <VStack gap={'2'}>
             <HStack gap={'2'}>
                 <Button
                     variant={'secondary'}
                     icon={<ArrowLeftIcon />}
-                    onClick={() => navigate(SideTilPath[forrigeSide])}
+                    onClick={() => navigate(finnPath(kjørelisteId, forrigeSide))}
                 >
                     Forrige steg
                 </Button>
@@ -31,7 +32,7 @@ export const KjørelisteNavigasjonsKnapper = ({
                     variant={'primary'}
                     icon={<ArrowRightIcon />}
                     iconPosition={'right'}
-                    onClick={() => navigate(SideTilPath[nesteSide])}
+                    onClick={() => navigate(finnPath(kjørelisteId, nesteSide))}
                 >
                     Neste steg
                 </Button>

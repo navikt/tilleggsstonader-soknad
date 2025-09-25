@@ -2,15 +2,18 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
-import { Rammevedtak, RammevedtakMock } from './types/Rammevedtak';
+import { Rammevedtak } from './types/Rammevedtak';
 import { finnDagerMellomFomOgTomInklusiv } from '../utils/datoUtils';
 import { Kjøreliste, Reisedag } from './types/Kjøreliste';
 import { Dokument } from '../typer/skjema';
 
-const [KjørelisteProvider, useKjøreliste] = createUseContext(() => {
+interface Props {
+    rammevedtak: Rammevedtak;
+}
+
+const [KjørelisteProvider, useKjøreliste] = createUseContext(({ rammevedtak }: Props) => {
     KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
 
-    const rammevedtak = RammevedtakMock;
     const [kjøreliste, setKjøreliste] = useState(initialiserKjøreliste(rammevedtak));
     const [dokumentasjon, setDokumentasjon] = useState<Dokument[]>([]);
 
