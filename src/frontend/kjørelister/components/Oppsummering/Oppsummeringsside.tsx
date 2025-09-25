@@ -1,15 +1,38 @@
 import React from 'react';
 
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import { BodyLong, Checkbox, GuidePanel, Heading } from '@navikt/ds-react';
 
 import { OppsummeringUke } from './OppsummeringUke';
 import { useKjøreliste } from '../../KjørelisteContext';
-import { KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 import { VedleggOppsummering } from './VedleggOppsummering';
+import { sendInnKjøreliste } from '../../../api/api';
+import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';
 
 export const Oppsummeringsside = () => {
-    const { rammevedtak } = useKjøreliste();
+    const navigate = useNavigate();
+    const kjørelisteId = useParams<{ kjorelisteId: string }>().kjorelisteId as string;
+
+    const { rammevedtak, kjøreliste } = useKjøreliste();
+
+    const {
+        mutate: håndterSendInnKjøreliste,
+        isPending: laster,
+        error,
+    } = useMutation({
+        mutationFn: () => sendInnKjøreliste(kjøreliste),
+        onSuccess: (res) => {
+            navigate(finnPath(kjørelisteId, KjørelisteRoutes.KVITTERING), {
+                state: {
+                    mottattTidspunkt: res.mottattTidspunkt,
+                    saksnummer: res.saksnummer,
+                },
+            });
+        },
+    });
 
     return (
         <>
@@ -44,6 +67,9 @@ export const Oppsummeringsside = () => {
             <KjørelisteNavigasjonsKnapper
                 nesteSide={KjørelisteRoutes.KVITTERING}
                 forrigeSide={KjørelisteRoutes.VEDLEGG}
+                laster={laster}
+                sendInnKjøreliste={håndterSendInnKjøreliste}
+                innsendingFeilet={!!error}
             />
         </>
     );
