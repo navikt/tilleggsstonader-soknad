@@ -2,19 +2,25 @@ import React from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { ArrowLeftIcon, ArrowRightIcon } from '@navikt/aksel-icons';
-import { Button, HStack, VStack } from '@navikt/ds-react';
-import { finnPath, KjørelisteSider } from '../kjørelisteSider';
+import { ArrowLeftIcon, ArrowRightIcon, PaperplaneIcon } from '@navikt/aksel-icons';
+import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 
+import { finnPath, KjørelisteSider } from '../kjørelisteSider';
 
 interface KjørelisteNavigasonsKnapperProps {
     nesteSide: KjørelisteSider;
     forrigeSide: KjørelisteSider;
+    laster?: boolean;
+    sendInnKjøreliste?: () => void;
+    innsendingFeilet?: boolean;
 }
 
 export const KjørelisteNavigasjonsKnapper = ({
     nesteSide,
     forrigeSide,
+    laster,
+    sendInnKjøreliste,
+    innsendingFeilet,
 }: KjørelisteNavigasonsKnapperProps) => {
     const navigate = useNavigate();
     const kjørelisteId = useParams<{ kjorelisteId: string }>().kjorelisteId as string;
@@ -28,20 +34,37 @@ export const KjørelisteNavigasjonsKnapper = ({
                 >
                     Forrige steg
                 </Button>
-                <Button
-                    variant={'primary'}
-                    icon={<ArrowRightIcon />}
-                    iconPosition={'right'}
-                    onClick={() => navigate(finnPath(kjørelisteId, nesteSide))}
-                >
-                    Neste steg
-                </Button>
+                {sendInnKjøreliste ? (
+                    <Button
+                        variant={'primary'}
+                        icon={<PaperplaneIcon />}
+                        iconPosition={'right'}
+                        onClick={() => {
+                            sendInnKjøreliste();
+                        }}
+                        loading={laster}
+                    >
+                        Send inn
+                    </Button>
+                ) : (
+                    <Button
+                        variant={'primary'}
+                        icon={<ArrowRightIcon />}
+                        iconPosition={'right'}
+                        onClick={() => navigate(finnPath(kjørelisteId, nesteSide))}
+                    >
+                        Neste steg
+                    </Button>
+                )}
             </HStack>
             <HStack>
                 <Button variant={'tertiary'} onClick={() => navigate('/kjoreliste')}>
                     Avbryt utfylling
                 </Button>
             </HStack>
+            {innsendingFeilet && (
+                <Alert variant={'error'}>Innsending feilet. Prøv igjen senere.</Alert>
+            )}
         </VStack>
     );
 };
