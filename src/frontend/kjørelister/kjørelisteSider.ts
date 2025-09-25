@@ -1,17 +1,21 @@
 export enum KjørelisteSider {
-    LANDINGSSIDE = 'LANDINGSSIDE',
-    SKJEMA = 'SKJEMA',
-    VEDLEGG = 'VEDLEGG',
-    OPPSUMMERING = 'OPPSUMMERING',
-    KVITTERING = 'KVITTERING',
+    LANDINGSSIDE = '',
+    SKJEMA = 'skjema',
+    VEDLEGG = 'vedlegg',
+    OPPSUMMERING = 'oppsummering',
+    KVITTERING = 'kvittering',
 }
 
 export const kjørelistePath = '/kjoreliste';
 
-export const SideTilPath: Record<KjørelisteSider, string> = {
-    LANDINGSSIDE: kjørelistePath + '/',
-    SKJEMA: kjørelistePath + '/skjema',
-    VEDLEGG: kjørelistePath + '/vedlegg',
-    OPPSUMMERING: kjørelistePath + '/oppsummering',
-    KVITTERING: kjørelistePath + '/kvittering',
-};
+export function finnPath(id: string, route: KjørelisteSider): string {
+    switch (route) {
+        case KjørelisteSider.LANDINGSSIDE:
+            return `${kjørelistePath}/`;
+        case KjørelisteSider.SKJEMA:
+        case KjørelisteSider.VEDLEGG:
+        case KjørelisteSider.OPPSUMMERING:
+        case KjørelisteSider.KVITTERING:
+            return `${kjørelistePath}/${id}/${route}`;
+    }
+}
