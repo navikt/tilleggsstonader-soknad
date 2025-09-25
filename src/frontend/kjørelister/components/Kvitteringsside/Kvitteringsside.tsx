@@ -6,7 +6,6 @@ import { Alert, BodyShort, Button, Heading, Link, VStack } from '@navikt/ds-reac
 
 import { formaterNullableIsoDatoTid } from '../../../utils/formateringUtils';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
-import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 
 export const Kvitteringsside = () => {
     const locationState = useLocation().state;
@@ -78,11 +77,6 @@ export const Kvitteringsside = () => {
                     .
                 </BodyShort>
             </VStack>
-
-            <KjørelisteNavigasjonsKnapper
-                nesteSide={KjørelisteRoutes.LANDINGSSIDE}
-                forrigeSide={KjørelisteRoutes.OPPSUMMERING}
-            />
         </VStack>
     );
 };
