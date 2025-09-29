@@ -7,16 +7,20 @@ import { Route, useParams } from 'react-router-dom';
 import { Alert, Loader, VStack } from '@navikt/ds-react';
 
 import { hentRammevedtak } from '../api/api';
-import { KjørelisteSkjema } from './components/Skjemaside/KjørelisteSkjema';
-import { KjørelisteProvider } from './KjørelisteContext';
 import { Kvitteringsside } from './components/Kvitteringsside/Kvitteringsside';
-import { Vedleggside } from './components/Vedleggside/Vedleggside';
 import { Oppsummeringsside } from './components/Oppsummering/Oppsummeringsside';
+import { KjørelisteSkjema } from './components/Skjemaside/KjørelisteSkjema';
+import { Vedleggside } from './components/Vedleggside/Vedleggside';
+import { KjørelisteProvider } from './KjørelisteContext';
 
 export const KjørelisteInnhold = () => {
     const kjørelisteId = useParams<{ kjorelisteId: string }>().kjorelisteId as string;
 
-    const { isPending, error, data } = useQuery({
+    const {
+        isPending,
+        error,
+        data: rammevedtak,
+    } = useQuery({
         queryKey: [`rammevedtakDetaljer:${kjørelisteId}`],
         queryFn: () => hentRammevedtak(kjørelisteId),
     });
@@ -34,7 +38,7 @@ export const KjørelisteInnhold = () => {
     }
 
     return (
-        <KjørelisteProvider rammevedtak={data}>
+        <KjørelisteProvider rammevedtak={rammevedtak}>
             <Routes>
                 <Route path={'/skjema'} element={<KjørelisteSkjema />} />
                 <Route path={'/vedlegg'} element={<Vedleggside />} />
