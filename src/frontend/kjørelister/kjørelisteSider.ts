@@ -8,7 +8,7 @@ export enum KjørelisteSider {
 
 export const kjørelistePath = '/kjoreliste';
 
-export function finnPath(id: string, route: KjørelisteSider): string {
+export function finnPath(kjørelisteId: string, route: KjørelisteSider): string {
     switch (route) {
         case KjørelisteSider.LANDINGSSIDE:
             return `${kjørelistePath}/`;
@@ -16,6 +16,6 @@ export function finnPath(id: string, route: KjørelisteSider): string {
         case KjørelisteSider.VEDLEGG:
         case KjørelisteSider.OPPSUMMERING:
         case KjørelisteSider.KVITTERING:
-            return `${kjørelistePath}/${id}/${route}`;
+            return `${kjørelistePath}/${kjørelisteId}/${route}`;
     }
 }
