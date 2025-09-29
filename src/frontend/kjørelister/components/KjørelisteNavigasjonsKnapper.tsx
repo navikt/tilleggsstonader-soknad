@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ArrowLeftIcon, ArrowRightIcon, PaperplaneIcon } from '@navikt/aksel-icons';
-import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
+import { Alert,Button, HStack, VStack } from '@navikt/ds-react';
 
 
 import { finnPath, KjørelisteRoutes } from '../kjørelisteRoutes';
