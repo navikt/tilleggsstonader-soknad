@@ -4,12 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { ArrowLeftIcon, ArrowRightIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
-import { finnPath, KjørelisteSider } from '../kjørelisteSider';
 
+import { finnPath, KjørelisteRoutes } from '../kjørelisteRoutes';
 
 interface KjørelisteNavigasonsKnapperProps {
-    nesteSide: KjørelisteSider;
-    forrigeSide: KjørelisteSider;
+    nesteSide: KjørelisteRoutes;
+    forrigeSide: KjørelisteRoutes;
 }
 
 export const KjørelisteNavigasjonsKnapper = ({

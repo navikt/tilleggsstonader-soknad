@@ -3,15 +3,15 @@ import React from 'react';
 import { BodyShort, LinkCard, Tag } from '@navikt/ds-react';
 
 import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
+import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { Rammevedtak } from '../../types/Rammevedtak';
-import { finnPath, KjørelisteSider } from '../../kjørelisteSider';
 
 export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammevedtak }) => {
     return (
         <LinkCard>
             <LinkCard.Title as="h3">
                 <LinkCard.Anchor
-                    href={`/tilleggsstonader/soknad${finnPath(rammevedtak.id, KjørelisteSider.SKJEMA)}/`}
+                    href={`/tilleggsstonader/soknad${finnPath(rammevedtak.id, KjørelisteRoutes.SKJEMA)}/`}
                 >
                     {rammevedtak.aktivitetsnavn}
                 </LinkCard.Anchor>
