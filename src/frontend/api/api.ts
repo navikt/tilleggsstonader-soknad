@@ -2,8 +2,9 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import Environment from './Environment';
+import { Rammevedtak } from '../kjørelister/types/Rammevedtak';
 import { Person } from '../typer/person';
-import { RegisterAktiviteterResponse, RegisterAktivitet } from '../typer/registerAktivitet';
+import { RegisterAktivitet, RegisterAktiviteterResponse } from '../typer/registerAktivitet';
 import { Stønadstype } from '../typer/stønadstyper';
 import { Kvittering } from '../typer/søknad';
 
@@ -81,4 +82,21 @@ export const lastOppVedlegg = (fil: File): Promise<string> => {
             transformRequest: () => requestData,
         })
         .then((response: VedleggResponse) => response.data.dokumentId);
+};
+
+export const hentAlleRammevedtak = (): Promise<Rammevedtak[]> => {
+    return axios
+        .get<
+            Rammevedtak[]
+        >(`${Environment().apiProxyUrl}/kjorelister/alle-rammevedtak`, defaultConfig())
+        .then((response) => response.data);
+};
+
+export const hentRammevedtak = (rammevedtakId: string): Promise<Rammevedtak> => {
+    return axios
+        .get<Rammevedtak>(
+            `${Environment().apiProxyUrl}/kjorelister/rammevedtak/${rammevedtakId}`,
+            defaultConfig()
+        )
+        .then((response) => response.data);
 };

@@ -3,7 +3,7 @@ import React from 'react';
 import { Alert, BodyShort, Button, Heading, Link, VStack } from '@navikt/ds-react';
 
 import { tilTekstligDato } from '../../../utils/datoUtils';
-import { KjørelisteSider } from '../../kjørelisteSider';
+import { KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 
 export const Kvitteringsside = () => {
@@ -70,8 +70,8 @@ export const Kvitteringsside = () => {
             </VStack>
 
             <KjørelisteNavigasjonsKnapper
-                nesteSide={KjørelisteSider.LANDINGSSIDE}
-                forrigeSide={KjørelisteSider.OPPSUMMERING}
+                nesteSide={KjørelisteRoutes.LANDINGSSIDE}
+                forrigeSide={KjørelisteRoutes.OPPSUMMERING}
             />
         </VStack>
     );

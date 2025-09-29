@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Alert, Heading, VStack } from '@navikt/ds-react';
 
-import { KjørelisteSider } from '../../kjørelisteSider';
+import { KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 import { harUtgiftOver100kr } from './VedleggUtils';
 import { Filopplaster } from '../../../components/Filopplaster/Filopplaster';
@@ -44,8 +44,8 @@ export const Vedleggside = () => {
             )}
 
             <KjørelisteNavigasjonsKnapper
-                nesteSide={KjørelisteSider.OPPSUMMERING}
-                forrigeSide={KjørelisteSider.SKJEMA}
+                nesteSide={KjørelisteRoutes.OPPSUMMERING}
+                forrigeSide={KjørelisteRoutes.SKJEMA}
             />
         </VStack>
     );

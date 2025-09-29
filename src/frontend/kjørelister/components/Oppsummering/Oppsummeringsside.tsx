@@ -4,7 +4,7 @@ import { BodyLong, Checkbox, GuidePanel, Heading } from '@navikt/ds-react';
 
 import { OppsummeringUke } from './OppsummeringUke';
 import { useKjøreliste } from '../../KjørelisteContext';
-import { KjørelisteSider } from '../../kjørelisteSider';
+import { KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 import { VedleggOppsummering } from './VedleggOppsummering';
 
@@ -42,8 +42,8 @@ export const Oppsummeringsside = () => {
             </Checkbox>
 
             <KjørelisteNavigasjonsKnapper
-                nesteSide={KjørelisteSider.KVITTERING}
-                forrigeSide={KjørelisteSider.VEDLEGG}
+                nesteSide={KjørelisteRoutes.KVITTERING}
+                forrigeSide={KjørelisteRoutes.VEDLEGG}
             />
         </>
     );
