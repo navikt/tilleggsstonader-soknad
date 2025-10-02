@@ -1,8 +1,8 @@
 import Environment from '../../api/Environment';
-import { StønadstypeRouting } from '../../typer/stønadstyper';
+import { SkjematypeFyllUt } from '../../typer/stønadstyper';
 
 interface RedirectTilNyFyllUtSendInnAppProps {
-    stønadstype: StønadstypeRouting;
+    stønadstype: SkjematypeFyllUt;
 }
 
 export function RedirectTilNyFyllUtSendInnApp({ stønadstype }: RedirectTilNyFyllUtSendInnAppProps) {

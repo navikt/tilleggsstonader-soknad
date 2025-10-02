@@ -1,7 +1,7 @@
 import Environment from '../../api/Environment';
-import { Stønadstype, StønadstypeRouting } from '../../typer/stønadstyper';
+import { Stønadstype, SkjematypeFyllUt } from '../../typer/stønadstyper';
 
-export const sendSøkerTilGammelSøknad = (stønadstype: StønadstypeRouting) => {
+export const sendSøkerTilGammelSøknad = (stønadstype: SkjematypeFyllUt) => {
     window.location.href = Environment().urlGammelSøknad(stønadstype);
 };
 

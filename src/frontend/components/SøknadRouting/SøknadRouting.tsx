@@ -4,9 +4,9 @@ import { Alert } from '@navikt/ds-react';
 
 import { sendSøkerTilGammelSøknad } from './sendSøkerTilGammelSøknad';
 import { RoutingState, useRouting } from '../../api/useRouting';
-import { StønadstypeRouting } from '../../typer/stønadstyper';
+import { SkjematypeFyllUt } from '../../typer/stønadstyper';
 
-const SøknadRouting: React.FC<{ stønadstype: StønadstypeRouting; children: React.ReactNode }> = ({
+const SøknadRouting: React.FC<{ stønadstype: SkjematypeFyllUt; children: React.ReactNode }> = ({
     stønadstype,
     children,
 }) => {

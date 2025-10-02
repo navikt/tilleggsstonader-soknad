@@ -4,7 +4,7 @@ export enum Stønadstype {
     LÆREMIDLER = 'LÆREMIDLER',
 }
 
-export enum StønadstypeRouting {
+export enum SkjematypeFyllUt {
     BOUTGIFTER = 'BOUTGIFTER',
     DAGLIG_REISE = 'DAGLIG_REISE',
 }
