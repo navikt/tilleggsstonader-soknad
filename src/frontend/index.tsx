@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { createRoot } from 'react-dom/client';
-import '@navikt/ds-css';
+import '@navikt/ds-css/darkside';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+import { Theme } from '@navikt/ds-react';
 
 import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
@@ -12,7 +14,7 @@ import { BoutgifterApp } from './Boutgifter/BoutgifterApp';
 import ScrollToTop from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import { DagligReiseApp } from './dagligReise/DagligReiseApp';
-import KjørelisterApp from './kjørelister/KjørelisterApp';
+import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { erProd } from './utils/miljø';
@@ -49,7 +51,9 @@ const AppRoutes = () => {
 root.render(
     <main id={'maincontent'} tabIndex={-1}>
         <SpråkProvider>
-            <AppRoutes />
+            <Theme theme="light">
+                <AppRoutes />
+            </Theme>
         </SpråkProvider>
     </main>
 );

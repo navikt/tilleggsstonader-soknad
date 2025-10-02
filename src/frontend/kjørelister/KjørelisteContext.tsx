@@ -5,12 +5,14 @@ import createUseContext from 'constate';
 import { Rammevedtak, RammevedtakMock } from './types/Rammevedtak';
 import { finnDagerMellomFomOgTomInklusiv } from '../utils/datoUtils';
 import { Kjøreliste, Reisedag } from './types/Kjøreliste';
+import { Dokument } from '../typer/skjema';
 
 const [KjørelisteProvider, useKjøreliste] = createUseContext(() => {
     KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
 
     const rammevedtak = RammevedtakMock;
     const [kjøreliste, setKjøreliste] = useState(initialiserKjøreliste(rammevedtak));
+    const [dokumentasjon, setDokumentasjon] = useState<Dokument[]>([]);
 
     const oppdaterHarReist = (dag: Date, harReist: boolean) => {
         const dagIsoString = dag.toISOString();
@@ -43,6 +45,8 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(() => {
         kjøreliste,
         oppdaterHarReist,
         oppdaterParkeringsutgift,
+        dokumentasjon,
+        setDokumentasjon,
     };
 });
 

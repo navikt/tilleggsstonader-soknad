@@ -31,8 +31,8 @@ function LocaleCheckboxGroup<T extends string>({
     const { locale } = useSpråk();
 
     const legend = argument0
-        ? hentBeskjedMedEttParameter(argument0, tekst.header[locale])
-        : tekst.header[locale];
+        ? hentBeskjedMedEttParameter(argument0, tekst.legend[locale])
+        : tekst.legend[locale];
 
     const oppdaterValgteVerdier = (values: T[]) => {
         const verdier: VerdiFelt<T>[] = values.map((verdi) => ({

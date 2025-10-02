@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { BodyShort, Heading, VStack } from '@navikt/ds-react';
-import { ABreakpointMd } from '@navikt/ds-tokens/dist/tokens';
+import { BreakpointMdDown } from '@navikt/ds-tokens/darkside-js';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { useSøknad } from '../context/SøknadContext';
@@ -11,7 +11,7 @@ import { TekstElement } from '../typer/tekst';
 const Container = styled.div`
     padding: 2rem 1rem 0.5rem 1rem;
 
-    @media (min-width: ${ABreakpointMd}) {
+    @media (min-width: ${BreakpointMdDown}) {
         max-width: 35rem;
         margin: auto;
         padding: 2rem 0 0.5rem 0;

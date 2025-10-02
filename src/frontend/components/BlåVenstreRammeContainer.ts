@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { ABlue500 } from '@navikt/ds-tokens/dist/tokens';
+import { BorderAccent } from '@navikt/ds-tokens/darkside-js';
 
 export const BlåVenstreRammeContainer = styled.div`
-    border-left: 5px solid ${ABlue500};
+    border-left: 5px solid ${BorderAccent};
     padding: 0.5rem;
 `;

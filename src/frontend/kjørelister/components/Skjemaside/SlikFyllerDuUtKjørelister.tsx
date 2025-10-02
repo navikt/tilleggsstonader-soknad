@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Heading, List, VStack } from '@navikt/ds-react';
 
-const SlikFyllerDuUtKjørelister = () => {
+export const SlikFyllerDuUtKjørelister = () => {
     return (
         <VStack gap="2">
             <Heading size={'medium'}>Slik fyller du ut kjørelister</Heading>
@@ -19,5 +19,3 @@ const SlikFyllerDuUtKjørelister = () => {
         </VStack>
     );
 };
-
-export default SlikFyllerDuUtKjørelister;

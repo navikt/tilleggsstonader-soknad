@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Accordion, Label } from '@navikt/ds-react';
 
-import LocalePunktliste from './Teksthåndtering/LocalePunktliste';
+import { LocalePunktliste } from './Teksthåndtering/LocalePunktliste';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { vedleggTekster } from '../tekster/vedlegg';
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Heading } from '@navikt/ds-react';
+import { GuidePanel } from '@navikt/ds-react';
 
 import ArbeidOgOppholdUtenforNorge from './ArbeidOgOpphold/ArbeidOgOppholdUtenforNorge';
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
@@ -12,9 +12,9 @@ import { useValideringsfeil } from '../../context/ValideringsfeilContext';
 import { EnumFlereValgFelt } from '../../typer/skjema';
 import { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
 import { inneholderFeil } from '../../typer/validering';
-import { PellePanel } from '../PellePanel/PellePanel';
 import Side from '../Side';
 import LocaleCheckboxGroup from '../Teksthåndtering/LocaleCheckboxGroup';
+import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
 const defaultArbeidOgOpphold: ArbeidOgOpphold = {
@@ -68,12 +68,10 @@ const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) 
                 }
             }}
         >
-            <Heading size="medium">
-                <LocaleTekst tekst={hovedytelseInnhold.tittel} />
-            </Heading>
-            <PellePanel>
+            <LocaleHeading tekst={hovedytelseInnhold.tittel} size="medium" level="2" />
+            <GuidePanel>
                 <LocaleTekst tekst={hovedytelseInnhold.guide_innhold} />
-            </PellePanel>
+            </GuidePanel>
             <LocaleCheckboxGroup
                 id={valideringsfeil.ytelse?.id}
                 tekst={hovedytelseInnhold.checkbox_hovedytelse}

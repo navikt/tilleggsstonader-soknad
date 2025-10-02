@@ -1,50 +1,56 @@
 import React from 'react';
 
-import styled from 'styled-components';
-
 import { Accordion, Alert, BodyShort, HStack, Tag, VStack } from '@navikt/ds-react';
 
-import KjørelisteDag from './KjørelisteDag';
-import { erHelg, finnDagerMellomFomOgTomInklusiv, tilDagMåned } from '../../../utils/datoUtils';
+import { KjørelisteDag } from './KjørelisteDag';
+import { erHelg, finnDagerMellomFomOgTomInklusiv, tilTekstligDato } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
+import { harRegistertDataForUke } from '../../kjørelisteUtils';
 import { RammevedtakUke } from '../../types/Rammevedtak';
+import { WideAccordionHeader } from '../WideAccordionHeader';
 
-const StyledHeader = styled(Accordion.Header)`
-    .navds-accordion__header-content {
-        width: 100%;
-    }
-`;
-
-const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
+export const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
     const dagerIUka = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
 
-    const { kjøreliste } = useKjøreliste();
+    const { kjøreliste, rammevedtak } = useKjøreliste();
 
-    function harValgtHelgedag(dagerIUka: Date[]) {
+    const harValgtHelgedag = (dagerIUka: Date[]) => {
         const helgedagerDenneUka = dagerIUka.filter((dag) => erHelg(dag));
         return helgedagerDenneUka.some((dag) => kjøreliste.reisedager[dag.toISOString()].harReist);
-    }
+    };
+
+    const finnAntallDagerReistIUke = (dagerIUka: Date[]) =>
+        dagerIUka.filter((dag) => kjøreliste.reisedager[dag.toISOString()].harReist).length;
+
+    const harValgtFlereDagerEnnRammevedtak = (dagerIUka: Date[]) =>
+        rammevedtak.reisedagerPerUke < finnAntallDagerReistIUke(dagerIUka);
 
     return (
         <Accordion.Item>
-            <StyledHeader>
+            <WideAccordionHeader>
                 <HStack justify={'space-between'}>
                     <HStack gap={'2'}>
                         <BodyShort size={'large'} weight={'semibold'}>
                             {`Uke ${uke.ukeNummer}`}
                         </BodyShort>
-                        <BodyShort>{`(${tilDagMåned(uke.fom)} - ${tilDagMåned(uke.tom)})`}</BodyShort>
+                        <BodyShort>{`(${tilTekstligDato(uke.fom)} - ${tilTekstligDato(uke.tom)})`}</BodyShort>
                     </HStack>
-                    <Tag variant={'neutral'} size={'small'}>
-                        Ikke utfylt
-                    </Tag>
+                    {harRegistertDataForUke(dagerIUka, kjøreliste) ? (
+                        <Tag variant={'warning'} size={'small'}>
+                            Påbegynt
+                        </Tag>
+                    ) : (
+                        <Tag variant={'neutral'} size={'small'}>
+                            Ikke utfylt
+                        </Tag>
+                    )}
                 </HStack>
-            </StyledHeader>
+            </WideAccordionHeader>
             <Accordion.Content>
                 <VStack gap={'2'}>
                     <BodyShort weight={'semibold'}>Hvilke dager kjørte du?</BodyShort>
                     {dagerIUka.map((dato) => (
-                        <KjørelisteDag dato={dato} />
+                        <KjørelisteDag key={dato.toISOString()} dato={dato} />
                     ))}
                     {harValgtHelgedag(dagerIUka) && (
                         <Alert variant="warning">
@@ -52,10 +58,13 @@ const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
                             har kjørt denne dagen vil en saksbehandler manuelt behandle saken din.
                         </Alert>
                     )}
+                    {harValgtFlereDagerEnnRammevedtak(dagerIUka) && (
+                        <Alert variant="warning">
+                            {`Du har fått innvilget stønad for daglig reise med egen bil for ${rammevedtak.reisedagerPerUke} dager i uken, men du har registrert ${finnAntallDagerReistIUke(dagerIUka)} dager. Sjekk at du har fylt inn alt riktig. Hvis det stemmer at du har kjørt flere dager denne uken vil en saksbehandler manuelt behandle saken din.`}
+                        </Alert>
+                    )}
                 </VStack>
             </Accordion.Content>
         </Accordion.Item>
     );
 };
-
-export default KjørelisteUke;

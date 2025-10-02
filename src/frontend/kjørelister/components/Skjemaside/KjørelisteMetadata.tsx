@@ -5,7 +5,7 @@ import { BodyShort, Heading, VStack } from '@navikt/ds-react';
 import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
 
-const KjørelisteMetadata = () => {
+export const KjørelisteMetadata = () => {
     const { rammevedtak } = useKjøreliste();
     return (
         <VStack gap={'2'}>
@@ -17,5 +17,3 @@ const KjørelisteMetadata = () => {
         </VStack>
     );
 };
-
-export default KjørelisteMetadata;

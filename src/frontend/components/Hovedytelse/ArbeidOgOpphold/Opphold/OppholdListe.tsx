@@ -2,9 +2,9 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { PlusIcon } from '@navikt/aksel-icons';
+import { ArrowUndoIcon, PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { ABlue500 } from '@navikt/ds-tokens/dist/tokens';
+import { BorderAccent } from '@navikt/ds-tokens/darkside-js';
 
 import LagredeOpphold from './LagredeOpphold';
 import NyttOpphold from './NyttOpphold';
@@ -25,7 +25,7 @@ import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { inneholderFeil } from '../../../../typer/validering';
 
 const BlåVenstreRammeContainer = styled(VStack)`
-    border-left: 5px solid ${ABlue500};
+    border-left: 5px solid ${BorderAccent};
     padding: 0.5rem;
 `;
 
@@ -138,6 +138,7 @@ const OppholdListe: React.FC<{
                         <Button
                             variant={'tertiary'}
                             onClick={() => slettOpphold(ulagretOpphold._id)}
+                            icon={<ArrowUndoIcon />}
                         >
                             {oppholdUtenforNorgeInnhold.knapp_angre_legg_til[locale]}
                         </Button>

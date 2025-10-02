@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { styled } from 'styled-components';
 
-import { BodyShort, Heading } from '@navikt/ds-react';
+import { BodyShort, GuidePanel } from '@navikt/ds-react';
 
 import Dokumentasjonskrav from './Dokumentasjonskrav';
 import VedleggManglerModal from './VedleggManglerModal';
@@ -11,8 +11,8 @@ import { useSpråk } from '../../context/SpråkContext';
 import { vedleggTekster } from '../../tekster/vedlegg';
 import { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
 import { Filopplaster } from '../Filopplaster/Filopplaster';
-import { PellePanel } from '../PellePanel/PellePanel';
 import Side from '../Side';
+import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../Teksthåndtering/LocaleTekstAvsnitt';
 import VedleggGenerellInfo from '../VedleggGenerellInfo';
@@ -38,7 +38,7 @@ interface Props {
 const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentasjonsbehov }) => {
     const { locale } = useSpråk();
 
-    const ref = useRef<HTMLDialogElement>(null);
+    const vedleggManglerModalRef = useRef<HTMLDialogElement>(null);
     const [ikkeOpplastedeDokumenter, settIkkeOpplastedeDokumenter] = useState<string[]>([]);
 
     useEffect(() => {
@@ -69,7 +69,7 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
         settIkkeOpplastedeDokumenter(manglerOpplasting);
 
         if (manglerOpplasting.length > 0) {
-            ref.current?.showModal();
+            vedleggManglerModalRef.current?.showModal();
             return false;
         }
 
@@ -78,18 +78,16 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
 
     return (
         <Side validerSteg={validerSteg}>
-            <Heading size={'medium'}>
-                <LocaleTekst tekst={vedleggTekster.tittel} />
-            </Heading>
+            <LocaleHeading tekst={vedleggTekster.tittel} level="2" size={'medium'} />
             {dokumentasjonsbehov.length === 0 ? (
                 <BodyShort>
                     <LocaleTekst tekst={vedleggTekster.ingen_dokumentasjonsbehov} />
                 </BodyShort>
             ) : (
                 <>
-                    <PellePanel>
+                    <GuidePanel>
                         <LocaleTekstAvsnitt tekst={vedleggTekster.guide_innhold} />
-                    </PellePanel>
+                    </GuidePanel>
                     <Dokumentasjonskrav dokumentasjonsbehov={dokumentasjonsbehov} />
                     <VedleggGenerellInfo />
                     <VedleggContainer>
@@ -109,7 +107,7 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
                     </VedleggContainer>
 
                     <VedleggManglerModal
-                        innerRef={ref}
+                        innerRef={vedleggManglerModalRef}
                         dokumenterSomMangler={ikkeOpplastedeDokumenter}
                     />
                 </>

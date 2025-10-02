@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { Heading, VStack } from '@navikt/ds-react';
+import { GuidePanel, VStack } from '@navikt/ds-react';
 
 import { oppdaterDokumentasjonsbehovForBarnMedPass } from './barnepassDokumentUtil';
 import BarnepassSpørsmål from './BarnepassSpørsmål';
 import { valider } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
+import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
@@ -64,12 +64,10 @@ const PassAvDineBarn = () => {
 
     return (
         <Side oppdaterSøknad={oppdaterSøknad} validerSteg={kanGåVidere}>
-            <Heading size="medium">
-                <LocaleTekst tekst={barnepassTekster.tittel} />
-            </Heading>
-            <PellePanel>
+            <LocaleHeading tekst={barnepassTekster.tittel} level="2" size="medium" />
+            <GuidePanel>
                 <LocaleTekst tekst={barnepassTekster.guide_innhold} />
-            </PellePanel>
+            </GuidePanel>
             <VStack gap={'10'}>
                 {barnMedPass.map((barn) => (
                     <BarnepassSpørsmål

@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { Alert, BodyLong, BodyShort, Button, Heading, VStack } from '@navikt/ds-react';
+import { Alert, BodyLong, BodyShort, Button, VStack } from '@navikt/ds-react';
 
 import { useSøknad } from '../../context/SøknadContext';
 import { kvitteringTekster } from '../../tekster/kvittering';
 import { formaterNullableIsoDatoTid } from '../../utils/formateringUtils';
 import { Container } from '../Side';
+import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
 import LocaleInlineLenke from '../Teksthåndtering/LocaleInlineLenke';
 import LocaleTekst from '../Teksthåndtering/LocaleTekst';
 
@@ -36,9 +37,7 @@ const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) =>
     return (
         <Container>
             <VStack gap="4">
-                <Heading size="large">
-                    <LocaleTekst tekst={kvitteringTekster.tittel} />
-                </Heading>
+                <LocaleHeading tekst={kvitteringTekster.tittel} size="large" level="2" />
                 <Alert variant="success">
                     <LocaleTekst tekst={kvitteringTekster.søknad_innsendt_alert} />
                 </Alert>
@@ -55,7 +54,6 @@ const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) =>
                     <LocaleTekst tekst={kvitteringTekster.varsel_info} />
                 </BodyLong>
             </VStack>
-
             <Button
                 as="a"
                 href="https://www.nav.no/min-side"
@@ -64,38 +62,38 @@ const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) =>
             >
                 <LocaleTekst tekst={kvitteringTekster.se_søknad_knapp} />
             </Button>
-
             <VStack gap="4">
-                <Heading size="medium">
-                    <LocaleTekst tekst={kvitteringTekster.behandlingstid_tittel} />
-                </Heading>
+                <LocaleHeading
+                    tekst={kvitteringTekster.behandlingstid_tittel}
+                    size="medium"
+                    level="3"
+                />
                 <BodyLong>
                     <LocaleInlineLenke tekst={kvitteringTekster.behandlingstid_innhold} />
                 </BodyLong>
             </VStack>
-
             <VStack gap="4">
-                <Heading size="medium">
-                    <LocaleTekst tekst={kvitteringTekster.kontakt_oss_tittel} />
-                </Heading>
+                <LocaleHeading
+                    tekst={kvitteringTekster.kontakt_oss_tittel}
+                    size="medium"
+                    level="3"
+                />
                 <BodyLong>
                     <LocaleInlineLenke tekst={kvitteringTekster.kontakt_oss_innhold} />
                 </BodyLong>
             </VStack>
-
             <VStack gap="4">
-                <Heading size="medium">
-                    <LocaleTekst tekst={kvitteringTekster.vilkår_tittel} />
-                </Heading>
+                <LocaleHeading tekst={kvitteringTekster.vilkår_tittel} size="medium" level="3" />
                 <BodyLong>
                     <LocaleInlineLenke tekst={kvitteringTekster.vilkår_innhold} />
                 </BodyLong>
             </VStack>
-
             <VStack gap="4">
-                <Heading size="medium">
-                    <LocaleTekst tekst={kvitteringTekster.relevante_stønader_tittel} />
-                </Heading>
+                <LocaleHeading
+                    tekst={kvitteringTekster.relevante_stønader_tittel}
+                    level="3"
+                    size="medium"
+                />
                 <BodyLong>
                     <LocaleInlineLenke tekst={kvitteringTekster.relevante_stønader_innhold} />
                 </BodyLong>

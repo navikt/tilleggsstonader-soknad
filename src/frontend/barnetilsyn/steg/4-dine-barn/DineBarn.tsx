@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
 
-import { Alert, BodyShort, BodyLong, Checkbox, CheckboxGroup, Heading } from '@navikt/ds-react';
+import {
+    Alert,
+    BodyShort,
+    BodyLong,
+    Checkbox,
+    CheckboxGroup,
+    Heading,
+    GuidePanel,
+} from '@navikt/ds-react';
 
 import { Ytelse } from '../../../components/Hovedytelse/typer';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
 import Side from '../../../components/Side';
+import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -61,12 +69,10 @@ const DineBarn = () => {
 
     return (
         <Side validerSteg={() => kanFortsette(barnIdenter)} oppdaterSøknad={oppdaterSøknad}>
-            <Heading size="medium">
-                <LocaleTekst tekst={dineBarnTekster.tittel} />
-            </Heading>
-            <PellePanel>
+            <LocaleHeading tekst={dineBarnTekster.tittel} size="medium" level="2" />
+            <GuidePanel>
                 <LocaleInlineLenke tekst={dineBarnTekster.guide_innhold} />
-            </PellePanel>
+            </GuidePanel>
             <div>
                 <CheckboxGroup
                     id={valideringsfeil.hvilkeBarn?.id}

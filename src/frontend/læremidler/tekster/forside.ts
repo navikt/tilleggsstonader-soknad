@@ -1,4 +1,4 @@
-import { TekstElement, InlineLenke } from '../../typer/tekst';
+import { TekstElement, InlineLenke, Punktliste } from '../../typer/tekst';
 
 interface ForsideInnhold {
     veileder_tittel: TekstElement<string>;
@@ -9,11 +9,8 @@ interface ForsideInnhold {
     mengde_støtte_innhold1: TekstElement<InlineLenke>;
     mengde_støtte_innhold2: TekstElement<string>;
     info_som_hentes_tittel: TekstElement<string>;
-    info_som_hentes_innhold1: TekstElement<string>;
-    info_som_hentes_innhold2: TekstElement<string[]>;
-    info_som_hentes_innhold3: TekstElement<string>;
-    info_som_hentes_innhold4: TekstElement<string[]>;
-    info_som_hentes_innhold5: TekstElement<InlineLenke>;
+    info_som_hentes_punktlister: Punktliste[];
+    info_som_hentes_personvern: TekstElement<InlineLenke>;
 }
 
 export const forsideTekster: ForsideInnhold = {
@@ -75,23 +72,29 @@ export const forsideTekster: ForsideInnhold = {
     info_som_hentes_tittel: {
         nb: 'Informasjon vi henter om deg',
     },
-    info_som_hentes_innhold1: {
-        nb: 'I tillegg til den informasjonen du oppgir i søknaden, henter vi:',
-    },
-    info_som_hentes_innhold2: {
-        nb: [
-            'adressen din fra Folkeregisteret',
-            'informasjon om utdanning eller opplæring avtalt med veileder i Nav',
-            'hvilke andre andre ytelser du mottar fra Nav',
-        ],
-    },
-    info_som_hentes_innhold3: {
-        nb: 'Ved behov sjekker vi:',
-    },
-    info_som_hentes_innhold4: {
-        nb: ['om du er medlem i folketrygden'],
-    },
-    info_som_hentes_innhold5: {
+    info_som_hentes_punktlister: [
+        {
+            tittel: {
+                nb: 'I tillegg til den informasjonen du oppgir i søknaden, henter vi:',
+            },
+            innhold: {
+                nb: [
+                    'adressen din fra Folkeregisteret',
+                    'informasjon om utdanning eller opplæring avtalt med veileder i Nav',
+                    'hvilke andre andre ytelser du mottar fra Nav',
+                ],
+            },
+        },
+        {
+            tittel: {
+                nb: 'Ved behov sjekker vi:',
+            },
+            innhold: {
+                nb: ['om du er medlem i folketrygden'],
+            },
+        },
+    ],
+    info_som_hentes_personvern: {
         nb: [
             'Nav er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre.  ',
             {

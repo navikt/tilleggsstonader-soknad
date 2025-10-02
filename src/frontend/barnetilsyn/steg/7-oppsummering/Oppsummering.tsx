@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Heading } from '@navikt/ds-react';
+import { GuidePanel } from '@navikt/ds-react';
 
 import { ArbeidsrettetAktivitet } from './ArbeidsrettetAktivitet';
 import { DineBarn } from './DineBarn';
 import { PassAvBarn } from './PassAvBarn';
-import HovedytelseOppsummering from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
-import OmDeg from '../../../components/Oppsummering/OmDeg';
+import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
+import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
-import VedleggOppsummering from '../../../components/Oppsummering/Vedlegg';
-import { PellePanel } from '../../../components/PellePanel/PellePanel';
+import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
+import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
@@ -23,13 +23,11 @@ const Oppsummering = () => {
 
     return (
         <OppsummeringSide>
-            <Heading size={'medium'}>
-                <LocaleTekst tekst={oppsummeringTekster.tittel} />
-            </Heading>
-            <PellePanel>
+            <LocaleHeading tekst={oppsummeringTekster.tittel} level="2" size="medium" />
+            <GuidePanel>
                 <LocaleTekst tekst={oppsummeringTekster.guide_innhold} />
-            </PellePanel>
-            <OmDeg />
+            </GuidePanel>
+            <OmDegOppsummering />
             {hovedytelse && (
                 <HovedytelseOppsummering
                     hovedytelse={hovedytelse}

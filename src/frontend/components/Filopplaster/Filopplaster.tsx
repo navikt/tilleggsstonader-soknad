@@ -38,7 +38,7 @@ const FilListe = styled(List).attrs({ as: 'ul' })`
 export const Filopplaster: React.FC<{
     opplastedeVedlegg: Dokument[];
     tittel: string;
-    beskrivelse: string;
+    beskrivelse?: string;
     leggTilDokument: (vedlegg: Dokument) => void;
     slettDokument: (vedlegg: string) => void;
 }> = ({ opplastedeVedlegg, tittel, beskrivelse, leggTilDokument, slettDokument }) => {
