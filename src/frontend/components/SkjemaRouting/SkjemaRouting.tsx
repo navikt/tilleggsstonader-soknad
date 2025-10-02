@@ -6,7 +6,7 @@ import { sendSøkerTilGammelSøknad } from './sendSøkerTilGammelSøknad';
 import { RoutingState, useRouting } from '../../api/useRouting';
 import { SkjematypeFyllUt } from '../../typer/stønadstyper';
 
-const SøknadRouting: React.FC<{ stønadstype: SkjematypeFyllUt; children: React.ReactNode }> = ({
+const SkjemaRouting: React.FC<{ stønadstype: SkjematypeFyllUt; children: React.ReactNode }> = ({
     stønadstype,
     children,
 }) => {
@@ -25,4 +25,4 @@ const SøknadRouting: React.FC<{ stønadstype: SkjematypeFyllUt; children: React
     }
 };
 
-export default SøknadRouting;
+export default SkjemaRouting;

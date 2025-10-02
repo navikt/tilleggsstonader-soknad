@@ -1,11 +1,11 @@
-import { RedirectTilNyFyllUtSendInnApp } from '../components/SøknadRouting/SendBrukerTilNyFyllUtSøknad';
-import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
+import { RedirectTilNyFyllUtSendInnApp } from '../components/SkjemaRouting/SendBrukerTilNyFyllUtSøknad';
+import SkjemaRouting from '../components/SkjemaRouting/SkjemaRouting';
 import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
 export function BoutgifterApp() {
     return (
-        <SøknadRouting stønadstype={SkjematypeFyllUt.BOUTGIFTER}>
+        <SkjemaRouting stønadstype={SkjematypeFyllUt.BOUTGIFTER}>
             <RedirectTilNyFyllUtSendInnApp stønadstype={SkjematypeFyllUt.BOUTGIFTER} />
-        </SøknadRouting>
+        </SkjemaRouting>
     );
 }

@@ -1,11 +1,11 @@
-import { RedirectTilNyFyllUtSendInnApp } from '../components/SøknadRouting/SendBrukerTilNyFyllUtSøknad';
-import SøknadRouting from '../components/SøknadRouting/SøknadRouting';
+import { RedirectTilNyFyllUtSendInnApp } from '../components/SkjemaRouting/SendBrukerTilNyFyllUtSøknad';
+import SkjemaRouting from '../components/SkjemaRouting/SkjemaRouting';
 import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
 export function DagligReiseApp() {
     return (
-        <SøknadRouting stønadstype={SkjematypeFyllUt.DAGLIG_REISE}>
+        <SkjemaRouting stønadstype={SkjematypeFyllUt.DAGLIG_REISE}>
             <RedirectTilNyFyllUtSendInnApp stønadstype={SkjematypeFyllUt.DAGLIG_REISE} />
-        </SøknadRouting>
+        </SkjemaRouting>
     );
 }
