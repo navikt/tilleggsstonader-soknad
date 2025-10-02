@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import axios, { AxiosError } from 'axios';
 
-import { sendSøkerTilPapirsøknad } from './SøknadRouting/sendSøkerTilGammelSøknad';
+import { sendSøkerTilPapirsøknad } from './SkjemaRouting/sendSøkerTilGammelSøknad';
 import { hentPersonData } from '../api/api';
 import { PersonProvider } from '../context/PersonContext';
 import { initiellPerson } from '../mock/initiellPerson';

@@ -4,9 +4,9 @@ import axios from 'axios';
 
 import { defaultConfig } from './api';
 import Environment from './Environment';
-import { StønadstypeRouting } from '../typer/stønadstyper';
+import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
-interface SøknadRouting {
+interface SkjemaRoutingResponse {
     skalBehandlesINyLøsning: boolean;
 }
 
@@ -17,29 +17,28 @@ export enum RoutingState {
     HENTER = 'HENTER',
 }
 
-const sjekkRouting = (stønadstype: StønadstypeRouting): Promise<SøknadRouting> => {
+const sjekkRouting = async (skjematype: SkjematypeFyllUt): Promise<SkjemaRoutingResponse> => {
     const request = {
-        stønadstype,
+        skjematype,
     };
-    return axios
-        .post<SøknadRouting>(
-            `${Environment().apiProxyUrl}/soknad-routing`,
-            request,
-            defaultConfig()
-        )
-        .then((response) => response.data);
+    const response = await axios.post<SkjemaRoutingResponse>(
+        `${Environment().apiProxyUrl}/skjema-routing`,
+        request,
+        defaultConfig()
+    );
+    return response.data;
 };
 
-export const useRouting = (stønadstype: StønadstypeRouting) => {
+export const useRouting = (skjematype: SkjematypeFyllUt) => {
     const [routingState, setRoutingState] = useState<RoutingState>(RoutingState.HENTER);
 
     useEffect(() => {
-        sjekkRouting(stønadstype)
+        sjekkRouting(skjematype)
             .then((res) =>
                 setRoutingState(res.skalBehandlesINyLøsning ? RoutingState.NY : RoutingState.GAMMEL)
             )
             .catch(() => setRoutingState(RoutingState.FEILET));
-    }, [stønadstype]);
+    }, [skjematype]);
     return {
         routingState,
     };

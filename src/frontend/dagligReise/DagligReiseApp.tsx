@@ -2,10 +2,10 @@ import { RedirectTilNyFyllUtSendInnApp } from '../components/SkjemaRouting/SendB
 import SkjemaRouting from '../components/SkjemaRouting/SkjemaRouting';
 import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
-export function BoutgifterApp() {
+export function DagligReiseApp() {
     return (
-        <SkjemaRouting stønadstype={SkjematypeFyllUt.BOUTGIFTER}>
-            <RedirectTilNyFyllUtSendInnApp stønadstype={SkjematypeFyllUt.BOUTGIFTER} />
+        <SkjemaRouting stønadstype={SkjematypeFyllUt.DAGLIG_REISE}>
+            <RedirectTilNyFyllUtSendInnApp stønadstype={SkjematypeFyllUt.DAGLIG_REISE} />
         </SkjemaRouting>
     );
 }

@@ -1,4 +1,4 @@
-import { Stønadstype, StønadstypeRouting } from '../typer/stønadstyper';
+import { Stønadstype, SkjematypeFyllUt } from '../typer/stønadstyper';
 
 interface EnvironmentProps {
     apiProxyUrl: string;
@@ -7,8 +7,8 @@ interface EnvironmentProps {
     logoutUrl: string;
     sentryUrl?: string;
     urlPapirsøknad: (stønadstype: Stønadstype) => string;
-    urlGammelSøknad: (stønadstype: StønadstypeRouting) => string;
-    urlNyFyllUtSøknad: (stønadstype: StønadstypeRouting) => string;
+    urlGammelSøknad: (stønadstype: SkjematypeFyllUt) => string;
+    urlNyFyllUtSøknad: (stønadstype: SkjematypeFyllUt) => string;
     miljø: 'local' | 'preprod' | 'production';
     modellVersjon: IModellversjon;
 }
@@ -17,12 +17,14 @@ interface IModellversjon {
     barnetilsyn: number;
 }
 
-const StønadstypeTilGammeltFyllUtSkjema: Record<StønadstypeRouting, string> = {
+const StønadstypeTilGammeltFyllUtSkjema: Record<SkjematypeFyllUt, string> = {
     BOUTGIFTER: 'nav111219b',
+    DAGLIG_REISE: 'nav111221b',
 };
 
-const StønadstypeTilNyttFyllUtSkjema: Record<StønadstypeRouting, string | undefined> = {
+const StønadstypeTilNyttFyllUtSkjema: Record<SkjematypeFyllUt, string | undefined> = {
     BOUTGIFTER: 'nav111219',
+    DAGLIG_REISE: 'nav111221',
 };
 
 const StønadstypeTilPapirskjema: Record<Stønadstype, string> = {
@@ -30,18 +32,18 @@ const StønadstypeTilPapirskjema: Record<Stønadstype, string> = {
     LÆREMIDLER: 'nav111216b',
 };
 
-const urlNyFyllUtSendInnSøknadProd = (stønadstype: StønadstypeRouting) => {
+const urlNyFyllUtSendInnSøknadProd = (stønadstype: SkjematypeFyllUt) => {
     return `https://www.nav.no/fyllut/${StønadstypeTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
 };
 
-const urlNyFyllUtSendInnSøknadDev = (stønadstype: StønadstypeRouting) => {
+const urlNyFyllUtSendInnSøknadDev = (stønadstype: SkjematypeFyllUt) => {
     return `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
 };
 
-const urlGammelSøknadProd = (stønadstype: StønadstypeRouting) =>
+const urlGammelSøknadProd = (stønadstype: SkjematypeFyllUt) =>
     `https://www.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
 
-const urlGammelSøknadDev = (stønadstype: StønadstypeRouting) =>
+const urlGammelSøknadDev = (stønadstype: SkjematypeFyllUt) =>
     `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
 
 const urlPapirsøknadProd = (stønadstype: Stønadstype) =>
