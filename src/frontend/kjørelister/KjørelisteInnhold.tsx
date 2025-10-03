@@ -12,6 +12,7 @@ import { Oppsummeringsside } from './components/Oppsummering/Oppsummeringsside';
 import { KjørelisteSkjema } from './components/Skjemaside/KjørelisteSkjema';
 import { Vedleggside } from './components/Vedleggside/Vedleggside';
 import { KjørelisteProvider } from './KjørelisteContext';
+import { ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 
 export const KjørelisteInnhold = () => {
     const kjørelisteId = useParams<{ kjorelisteId: string }>().kjorelisteId as string;
@@ -39,13 +40,15 @@ export const KjørelisteInnhold = () => {
 
     return (
         <KjørelisteProvider rammevedtak={rammevedtak}>
-            <Routes>
-                <Route path={'/skjema'} element={<KjørelisteSkjema />} />
-                <Route path={'/vedlegg'} element={<Vedleggside />} />
-                <Route path={'/oppsummering'} element={<Oppsummeringsside />} />
-                <Route path={'/kvittering'} element={<Kvitteringsside />} />
-                <Route path={'/*'} element={<KjørelisteSkjema />} />
-            </Routes>
+            <ValideringsfeilProvider>
+                <Routes>
+                    <Route path={'/skjema'} element={<KjørelisteSkjema />} />
+                    <Route path={'/vedlegg'} element={<Vedleggside />} />
+                    <Route path={'/oppsummering'} element={<Oppsummeringsside />} />
+                    <Route path={'/kvittering'} element={<Kvitteringsside />} />
+                    <Route path={'/*'} element={<KjørelisteSkjema />} />
+                </Routes>
+            </ValideringsfeilProvider>
         </KjørelisteProvider>
     );
 };

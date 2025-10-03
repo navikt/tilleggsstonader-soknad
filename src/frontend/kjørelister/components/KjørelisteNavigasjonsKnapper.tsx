@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ArrowLeftIcon, ArrowRightIcon, PaperplaneIcon } from '@navikt/aksel-icons';
-import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
+import { Alert, Button, ErrorSummary, HStack, VStack } from '@navikt/ds-react';
 
-
+import { useValideringsfeil } from '../../context/ValideringsfeilContext';
+import { inneholderFeil } from '../../typer/validering';
 import { finnPath, KjørelisteRoutes } from '../kjørelisteRoutes';
 
 interface KjørelisteNavigasonsKnapperProps {
@@ -14,6 +15,7 @@ interface KjørelisteNavigasonsKnapperProps {
     laster?: boolean;
     sendInnKjøreliste?: () => void;
     innsendingFeilet?: boolean;
+    validerKanGåVidere?: () => boolean;
 }
 
 export const KjørelisteNavigasjonsKnapper = ({
@@ -22,11 +24,37 @@ export const KjørelisteNavigasjonsKnapper = ({
     laster,
     sendInnKjøreliste,
     innsendingFeilet,
+    validerKanGåVidere,
 }: KjørelisteNavigasonsKnapperProps) => {
     const navigate = useNavigate();
+    const { valideringsfeil } = useValideringsfeil();
     const kjørelisteId = useParams<{ kjorelisteId: string }>().kjorelisteId as string;
+    const errorRef = useRef<HTMLDivElement>(null);
+
+    const harValideringsfeil = inneholderFeil(valideringsfeil);
+
+    const navigerTilNesteSide = () => {
+        if (validerKanGåVidere && !validerKanGåVidere()) {
+            return;
+        }
+
+        navigate(finnPath(kjørelisteId, nesteSide));
+    };
+
     return (
         <VStack gap={'2'}>
+            {harValideringsfeil && (
+                <ErrorSummary heading={'For å gå videre må du rette opp følgende:'} ref={errorRef}>
+                    {Object.entries(valideringsfeil).map(
+                        ([id, error]) =>
+                            error && (
+                                <ErrorSummary.Item key={`${id}`} href={`#${error.id}`}>
+                                    {error.melding}
+                                </ErrorSummary.Item>
+                            )
+                    )}
+                </ErrorSummary>
+            )}
             <HStack gap={'2'}>
                 <Button
                     variant={'secondary'}
@@ -52,7 +80,7 @@ export const KjørelisteNavigasjonsKnapper = ({
                         variant={'primary'}
                         icon={<ArrowRightIcon />}
                         iconPosition={'right'}
-                        onClick={() => navigate(finnPath(kjørelisteId, nesteSide))}
+                        onClick={navigerTilNesteSide}
                     >
                         Neste steg
                     </Button>
