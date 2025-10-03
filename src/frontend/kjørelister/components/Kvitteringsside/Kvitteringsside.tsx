@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Alert, BodyShort, Button, Heading, Link, VStack } from '@navikt/ds-react';
 
-import { tilTekstligDato } from '../../../utils/datoUtils';
+import { formaterNullableIsoDatoTid } from '../../../utils/formateringUtils';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
-import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 
 export const Kvitteringsside = () => {
-    //TODO mottatTidspunkt bør være når vi lagrer ned søknaden
-    const mottatTidspunkt = new Date();
-    //TODO få faktisk saksnummer fra backend
-    const saksnummer = '1234567';
+    const locationState = useLocation().state;
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (locationState === null) {
+            navigate(KjørelisteRoutes.LANDINGSSIDE);
+        }
+    }, [locationState, navigate]);
+
+    if (locationState == null) {
+        return null;
+    }
 
     return (
         <VStack gap={'8'}>
@@ -21,8 +30,8 @@ export const Kvitteringsside = () => {
                 <BodyShort>Kjøreliste er sendt inn</BodyShort>
             </Alert>
             <VStack>
-                <BodyShort>{`Motatt av Nav: ${tilTekstligDato(mottatTidspunkt.toISOString())}`}</BodyShort>
-                <BodyShort>{`Saksnummer: ${saksnummer}`}</BodyShort>
+                <BodyShort>{`Motatt av Nav: ${formaterNullableIsoDatoTid(locationState.mottattTidspunkt)}`}</BodyShort>
+                <BodyShort>{`Saksnummer: ${locationState.saksnummer}`}</BodyShort>
             </VStack>
             <BodyShort>
                 Vi vil ta kontakt med deg på telefon eller via Min side på nav.no hvis vi trenger
@@ -68,11 +77,6 @@ export const Kvitteringsside = () => {
                     .
                 </BodyShort>
             </VStack>
-
-            <KjørelisteNavigasjonsKnapper
-                nesteSide={KjørelisteRoutes.LANDINGSSIDE}
-                forrigeSide={KjørelisteRoutes.OPPSUMMERING}
-            />
         </VStack>
     );
 };

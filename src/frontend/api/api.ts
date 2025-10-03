@@ -2,6 +2,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import Environment from './Environment';
+import { Kjøreliste, KjørelisteKvittering } from '../kjørelister/types/Kjøreliste';
 import { Rammevedtak } from '../kjørelister/types/Rammevedtak';
 import { Person } from '../typer/person';
 import { RegisterAktivitet, RegisterAktiviteterResponse } from '../typer/registerAktivitet';
@@ -99,4 +100,8 @@ export const hentRammevedtak = (rammevedtakId: string): Promise<Rammevedtak> => 
             defaultConfig()
         )
         .then((response) => response.data);
+};
+export const sendInnKjøreliste = (kjøreliste: Kjøreliste): Promise<KjørelisteKvittering> => {
+    const url = `${Environment().apiProxyUrl}/kjorelister`;
+    return axios.post(url, kjøreliste, defaultConfig()).then((response) => response.data);
 };
