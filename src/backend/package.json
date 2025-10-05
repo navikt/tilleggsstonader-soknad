@@ -21,11 +21,11 @@
     "jsdom": "^26.1.0",
     "jsonwebtoken": "9.0.2",
     "node-jose": "2.2.0",
-    "openid-client": "6.7.1",
-    "react": "^19.1.0",
+    "openid-client": "6.8.1",
+    "react": "^19.2.0",
     "typescript": "^5.9.2",
     "uuid": "^11.1.0",
-    "winston": "^3.17.0"
+    "winston": "^3.18.3"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.9",
