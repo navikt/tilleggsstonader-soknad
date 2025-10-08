@@ -43,7 +43,7 @@ export const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
                     inputMode={'numeric'}
                     type={'number'}
                     min={0}
-                    error={erNegativUtgift() && 'Utgiften må være et positivt tall'}
+                    error={erNegativUtgift() && 'Utgiften må være større enn 0'}
                     onChange={(e) => oppdaterParkeringsutgift(dato, Number(e.target.value))}
                 />
             )}

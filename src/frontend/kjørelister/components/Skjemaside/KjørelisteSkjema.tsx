@@ -18,7 +18,7 @@ export function KjørelisteSkjema() {
         const feil = Object.fromEntries(
             Object.entries(kjøreliste.reisedager)
                 .filter(([, reisedag]) => (reisedag.parkeringsutgift ?? 0) < 0)
-                .map(([dato]) => [dato, { id: dato, melding: 'Utgiften må være et positivt tall' }])
+                .map(([dato]) => [dato, { id: dato, melding: 'Utgiften må være større enn 0' }])
         );
 
         settValideringsfeil(feil);
