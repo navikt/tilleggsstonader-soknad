@@ -5,6 +5,6 @@ export enum Stønadstype {
 }
 
 export enum SkjematypeFyllUt {
-    BOUTGIFTER = 'BOUTGIFTER',
-    DAGLIG_REISE = 'DAGLIG_REISE',
+    SØKNAD_BOUTGIFTER = 'SØKNAD_BOUTGIFTER',
+    SØKNAD_DAGLIG_REISE = 'SØKNAD_DAGLIG_REISE',
 }

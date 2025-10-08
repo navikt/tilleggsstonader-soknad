@@ -6,11 +6,11 @@ import { sendSøkerTilGammelSøknad } from './sendSøkerTilGammelSøknad';
 import { RoutingState, useRouting } from '../../api/useRouting';
 import { SkjematypeFyllUt } from '../../typer/stønadstyper';
 
-const SkjemaRouting: React.FC<{ stønadstype: SkjematypeFyllUt; children: React.ReactNode }> = ({
-    stønadstype,
+const SkjemaRouting: React.FC<{ skjmatypeFyllUt: SkjematypeFyllUt; children: React.ReactNode }> = ({
+    skjmatypeFyllUt,
     children,
 }) => {
-    const { routingState } = useRouting(stønadstype);
+    const { routingState } = useRouting(skjmatypeFyllUt);
 
     switch (routingState) {
         case RoutingState.NY:
@@ -20,7 +20,7 @@ const SkjemaRouting: React.FC<{ stønadstype: SkjematypeFyllUt; children: React.
         case RoutingState.FEILET:
             return <Alert variant="error">Noe gikk galt! Prøv å laste siden på nytt.</Alert>;
         case RoutingState.GAMMEL:
-            sendSøkerTilGammelSøknad(stønadstype);
+            sendSøkerTilGammelSøknad(skjmatypeFyllUt);
             return null;
     }
 };

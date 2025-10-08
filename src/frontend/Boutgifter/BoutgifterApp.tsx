@@ -4,8 +4,8 @@ import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
 export function BoutgifterApp() {
     return (
-        <SkjemaRouting stønadstype={SkjematypeFyllUt.BOUTGIFTER}>
-            <RedirectTilNyFyllUtSendInnApp stønadstype={SkjematypeFyllUt.BOUTGIFTER} />
+        <SkjemaRouting skjmatypeFyllUt={SkjematypeFyllUt.SØKNAD_BOUTGIFTER}>
+            <RedirectTilNyFyllUtSendInnApp stønadstype={SkjematypeFyllUt.SØKNAD_BOUTGIFTER} />
         </SkjemaRouting>
     );
 }

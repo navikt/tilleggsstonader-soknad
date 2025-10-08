@@ -4,8 +4,8 @@ import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
 export function DagligReiseApp() {
     return (
-        <SkjemaRouting stønadstype={SkjematypeFyllUt.DAGLIG_REISE}>
-            <RedirectTilNyFyllUtSendInnApp stønadstype={SkjematypeFyllUt.DAGLIG_REISE} />
+        <SkjemaRouting skjmatypeFyllUt={SkjematypeFyllUt.SØKNAD_DAGLIG_REISE}>
+            <RedirectTilNyFyllUtSendInnApp stønadstype={SkjematypeFyllUt.SØKNAD_DAGLIG_REISE} />
         </SkjemaRouting>
     );
 }

@@ -17,14 +17,14 @@ interface IModellversjon {
     barnetilsyn: number;
 }
 
-const StønadstypeTilGammeltFyllUtSkjema: Record<SkjematypeFyllUt, string> = {
-    BOUTGIFTER: 'nav111219b',
-    DAGLIG_REISE: 'nav111221b',
+const SkjematypeFyllUtTilGammeltFyllUtSkjema: Record<SkjematypeFyllUt, string> = {
+    SØKNAD_BOUTGIFTER: 'nav111219b',
+    SØKNAD_DAGLIG_REISE: 'nav111221b',
 };
 
-const StønadstypeTilNyttFyllUtSkjema: Record<SkjematypeFyllUt, string | undefined> = {
-    BOUTGIFTER: 'nav111219',
-    DAGLIG_REISE: 'nav111221',
+const SkjematypeFyllUtTilNyttFyllUtSkjema: Record<SkjematypeFyllUt, string | undefined> = {
+    SØKNAD_BOUTGIFTER: 'nav111219',
+    SØKNAD_DAGLIG_REISE: 'nav111221',
 };
 
 const StønadstypeTilPapirskjema: Record<Stønadstype, string> = {
@@ -33,18 +33,18 @@ const StønadstypeTilPapirskjema: Record<Stønadstype, string> = {
 };
 
 const urlNyFyllUtSendInnSøknadProd = (stønadstype: SkjematypeFyllUt) => {
-    return `https://www.nav.no/fyllut/${StønadstypeTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
+    return `https://www.nav.no/fyllut/${SkjematypeFyllUtTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
 };
 
 const urlNyFyllUtSendInnSøknadDev = (stønadstype: SkjematypeFyllUt) => {
-    return `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
+    return `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${SkjematypeFyllUtTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
 };
 
 const urlGammelSøknadProd = (stønadstype: SkjematypeFyllUt) =>
-    `https://www.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
+    `https://www.nav.no/fyllut/${SkjematypeFyllUtTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
 
 const urlGammelSøknadDev = (stønadstype: SkjematypeFyllUt) =>
-    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
+    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${SkjematypeFyllUtTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
 
 const urlPapirsøknadProd = (stønadstype: Stønadstype) =>
     `https://www.nav.no/fyllut/${StønadstypeTilPapirskjema[stønadstype]}?sub=paper`;
