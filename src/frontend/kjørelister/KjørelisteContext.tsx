@@ -6,7 +6,7 @@ import { isEqual } from 'date-fns';
 import { Rammevedtak } from './types/Rammevedtak';
 import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
 import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
-import { Dokument } from '../typer/skjema';
+import { Dokument, VedleggstypeKjøreliste } from '../typer/skjema';
 
 interface Props {
     rammevedtak: Rammevedtak;
@@ -16,7 +16,6 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(({ rammevedtak }:
     KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
 
     const [kjøreliste, setKjøreliste] = useState(initialiserKjøreliste(rammevedtak));
-    const [dokumentasjon, setDokumentasjon] = useState<Dokument[]>([]);
 
     const oppdaterHarReist = (dag: Date, harKjørt: boolean) => {
         setKjøreliste((kjøreliste) => ({
@@ -51,13 +50,23 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(({ rammevedtak }:
         }));
     };
 
+    const oppdaterDokumentasjon = (dokumenter: Dokument[]) => {
+        setKjøreliste((kjøreliste) => ({
+            ...kjøreliste,
+            dokumentasjon: kjøreliste.dokumentasjon.map((dokumentasjonFelt) =>
+                dokumentasjonFelt.type === VedleggstypeKjøreliste.PARKERINGSUTGIFT
+                    ? { ...dokumentasjonFelt, opplastedeVedlegg: dokumenter }
+                    : dokumentasjonFelt
+            ),
+        }));
+    };
+
     return {
         rammevedtak,
         kjøreliste,
         oppdaterHarReist,
         oppdaterParkeringsutgift,
-        dokumentasjon,
-        setDokumentasjon,
+        oppdaterDokumentasjon,
     };
 });
 
@@ -85,7 +94,13 @@ const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
     });
     return {
         reisedagerPerUkeAvsnitt: reisedagerPerUkeAvsnitt,
-        dokumentasjon: [],
+        dokumentasjon: [
+            {
+                type: VedleggstypeKjøreliste.PARKERINGSUTGIFT,
+                label: 'Vedlegg parkeringsutgift',
+                opplastedeVedlegg: [],
+            },
+        ],
         søknadMetadata: {
             søknadFrontendGitHash: process.env.COMMIT_HASH,
         },

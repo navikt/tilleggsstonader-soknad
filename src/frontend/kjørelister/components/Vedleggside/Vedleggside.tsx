@@ -4,21 +4,23 @@ import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
-import { harUtgiftOver100kr } from './VedleggUtils';
+import { finnVedleggMedParkeringsutgifter, harUtgiftOver100kr } from './VedleggUtils';
 import { Filopplaster } from '../../../components/Filopplaster/Filopplaster';
 import { Dokument } from '../../../typer/skjema';
 import { useKjøreliste } from '../../KjørelisteContext';
 
 export const Vedleggside = () => {
-    const { kjøreliste, dokumentasjon, setDokumentasjon } = useKjøreliste();
+    const { kjøreliste, oppdaterDokumentasjon } = useKjøreliste();
 
     const leggTilDokument = (dokument: Dokument) => {
-        setDokumentasjon((prevState) => [...prevState, dokument]);
+        const opplastedeVedlegg = finnVedleggMedParkeringsutgifter(kjøreliste);
+        oppdaterDokumentasjon([...opplastedeVedlegg, dokument]);
     };
 
     const slettDokument = (dokumentId: string) => {
-        setDokumentasjon((prevState) =>
-            prevState.filter((opplastetDokument) => opplastetDokument.id !== dokumentId)
+        const opplastedeVedlegg = finnVedleggMedParkeringsutgifter(kjøreliste);
+        oppdaterDokumentasjon(
+            opplastedeVedlegg.filter((opplastetVedlegg) => opplastetVedlegg.id !== dokumentId)
         );
     };
 
@@ -30,7 +32,7 @@ export const Vedleggside = () => {
                 </Heading>
             </VStack>
             <Filopplaster
-                opplastedeVedlegg={dokumentasjon}
+                opplastedeVedlegg={finnVedleggMedParkeringsutgifter(kjøreliste)}
                 tittel={`Vedlegg parkeringsutgift (${harUtgiftOver100kr(kjøreliste) ? 'obligatorisk' : 'valgfri'})`}
                 leggTilDokument={leggTilDokument}
                 slettDokument={slettDokument}
