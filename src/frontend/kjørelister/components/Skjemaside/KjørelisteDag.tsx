@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 
 import { Checkbox, TextField, VStack } from '@navikt/ds-react';
 
-import { erHelg, tilTekstligDato, tilUkedag } from '../../../utils/datoUtils';
+import { erHelg } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
-import { finnReisedag } from '../../kjørelisteUtils';
+import { Reisedag } from '../../types/Kjøreliste';
 
 const Card = styled(VStack)<{ graybackground: string }>`
     border: 1px solid black;
@@ -20,31 +20,32 @@ const StyledTextField = styled(TextField)`
     max-width: 12rem;
 `;
 
-export const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
-    const { kjøreliste, oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
+export const KjørelisteDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) => {
+    const { oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
 
-    const [harReist, settHarReist] = useState(finnReisedag(kjøreliste, dato)?.harKjørt ?? false);
-
-    const erNegativUtgift = (): boolean => (finnReisedag(kjøreliste, dato)?.parkeringsutgift?.verdi ?? 0) < 0;
+    const erNegativUtgift = (): boolean => (reisedag?.parkeringsutgift?.verdi ?? 0) < 0;
 
     return (
-        <Card graybackground={erHelg(dato).toString()}>
+        <Card graybackground={erHelg(reisedag.dato.verdi).toString()}>
             <Checkbox
-                checked={harReist}
+                checked={reisedag.harKjørt}
                 onChange={(e) => {
-                    settHarReist(e.target.checked);
-                    oppdaterHarReist(dato, e.target.checked);
+                    oppdaterHarReist(reisedag.dato.verdi, e.target.checked);
                 }}
-            >{`${tilUkedag(dato)} ${tilTekstligDato(dato.toISOString())}`}</Checkbox>
-            {harReist && (
+            >
+                {reisedag.dato.label}
+            </Checkbox>
+            {reisedag.harKjørt && (
                 <StyledTextField
-                    id={dato.toISOString()}
-                    label={'Parkeringsutgifter (kr)'}
+                    id={reisedag.dato.verdi.toISOString()}
+                    label={reisedag.parkeringsutgift.label}
                     inputMode={'numeric'}
                     type={'number'}
                     min={0}
                     error={erNegativUtgift() && 'Utgiften må være større enn 0'}
-                    onChange={(e) => oppdaterParkeringsutgift(dato, Number(e.target.value))}
+                    onChange={(e) =>
+                        oppdaterParkeringsutgift(reisedag.dato.verdi, Number(e.target.value))
+                    }
                 />
             )}
         </Card>

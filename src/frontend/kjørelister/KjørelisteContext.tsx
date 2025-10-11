@@ -87,7 +87,7 @@ const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
             },
         }));
         return {
-            ukeLabel: `(${tilTekstligDato(rammevedtakUke.fom)} - ${tilTekstligDato(rammevedtakUke.tom)})`,
+            ukeLabel: `Uke ${rammevedtakUke.ukeNummer} (${tilTekstligDato(rammevedtakUke.fom)} - ${tilTekstligDato(rammevedtakUke.tom)})`,
             spørsmål: 'Hvilke dager kjørte du?',
             reisedager: reisedager,
         };

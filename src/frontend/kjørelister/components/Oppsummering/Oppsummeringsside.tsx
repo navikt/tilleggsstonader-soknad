@@ -19,7 +19,7 @@ export const Oppsummeringsside = () => {
     const [brukerAkseptererVilkår, settBrukerAkseptererVilkår] = useState(false);
     const [brukerAkseptererIkkeVilkårFeil, settBrukerAkseptererIkkeVilkårfeil] = useState(false);
 
-    const { rammevedtak, kjøreliste } = useKjøreliste();
+    const { kjøreliste } = useKjøreliste();
 
     const {
         mutate: sendInnKjørelisteMutation,
@@ -67,8 +67,8 @@ export const Oppsummeringsside = () => {
                 </BodyLong>
             </GuidePanel>
 
-            {rammevedtak.uker.map((uke) => (
-                <OppsummeringUke key={uke.ukeNummer} uke={uke} />
+            {kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => (
+                <OppsummeringUke key={uke.ukeLabel} ukeMedReisedager={uke} />
             ))}
 
             <VedleggOppsummering />

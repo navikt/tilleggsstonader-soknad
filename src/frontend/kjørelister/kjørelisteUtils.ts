@@ -1,11 +1,17 @@
-import { isEqual } from 'date-fns';
+import { Reisedag } from './types/Kjøreliste';
+import { erHelg } from '../utils/datoUtils';
+import { Rammevedtak } from './types/Rammevedtak';
 
-import { Kjøreliste, Reisedag } from './types/Kjøreliste';
+export const harReist = (reisedager: Reisedag[]): boolean =>
+    reisedager.some((reisedag) => reisedag.harKjørt);
 
-export const harRegistertDataForUke = (dagerIUka: Date[], kjøreliste: Kjøreliste): boolean =>
-    dagerIUka.some((dag) => finnReisedag(kjøreliste, dag)?.harKjørt ?? false);
+export const harValgtHelgedag = (reisedager: Reisedag[]) =>
+    reisedager.some((reisedag) => erHelg(reisedag.dato.verdi) && reisedag.harKjørt);
 
-export const finnReisedag = (kjøreliste: Kjøreliste, dato: Date): Reisedag | undefined =>
-    kjøreliste.reisedagerPerUkeAvsnitt
-        .flatMap((uke) => uke.reisedager)
-        .find((reisedag) => isEqual(reisedag.dato.verdi, dato));
+export const finnAntallDagerReist = (reisedager: Reisedag[]) =>
+    reisedager.filter((reisedag) => reisedag.harKjørt).length;
+
+export const harValgtFlereDagerEnnRammevedtak = (
+    rammevedtak: Rammevedtak,
+    reisedager: Reisedag[]
+) => rammevedtak.reisedagerPerUke < finnAntallDagerReist(reisedager);
