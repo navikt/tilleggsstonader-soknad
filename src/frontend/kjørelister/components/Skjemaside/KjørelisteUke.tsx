@@ -5,7 +5,7 @@ import { Accordion, Alert, BodyShort, HStack, Tag, VStack } from '@navikt/ds-rea
 import { KjørelisteDag } from './KjørelisteDag';
 import { erHelg, finnDagerMellomFomOgTomInklusiv, tilTekstligDato } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
-import { harRegistertDataForUke } from '../../kjørelisteUtils';
+import { finnReisedag, harRegistertDataForUke } from '../../kjørelisteUtils';
 import { RammevedtakUke } from '../../types/Rammevedtak';
 import { WideAccordionHeader } from '../WideAccordionHeader';
 
@@ -16,11 +16,11 @@ export const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
 
     const harValgtHelgedag = (dagerIUka: Date[]) => {
         const helgedagerDenneUka = dagerIUka.filter((dag) => erHelg(dag));
-        return helgedagerDenneUka.some((dag) => kjøreliste.reisedager[dag.toISOString()].harReist);
+        return helgedagerDenneUka.some((dag) => finnReisedag(kjøreliste, dag)?.harKjørt ?? false);
     };
 
     const finnAntallDagerReistIUke = (dagerIUka: Date[]) =>
-        dagerIUka.filter((dag) => kjøreliste.reisedager[dag.toISOString()].harReist).length;
+        dagerIUka.filter((dag) => finnReisedag(kjøreliste, dag)?.harKjørt ?? false).length;
 
     const harValgtFlereDagerEnnRammevedtak = (dagerIUka: Date[]) =>
         rammevedtak.reisedagerPerUke < finnAntallDagerReistIUke(dagerIUka);

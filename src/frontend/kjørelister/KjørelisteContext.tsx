@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 import createUseContext from 'constate';
+import { isEqual } from 'date-fns';
 
 import { Rammevedtak } from './types/Rammevedtak';
-import { finnDagerMellomFomOgTomInklusiv } from '../utils/datoUtils';
-import { Kjøreliste, Reisedag } from './types/Kjøreliste';
+import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
+import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import { Dokument } from '../typer/skjema';
 
 interface Props {
@@ -17,29 +18,36 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(({ rammevedtak }:
     const [kjøreliste, setKjøreliste] = useState(initialiserKjøreliste(rammevedtak));
     const [dokumentasjon, setDokumentasjon] = useState<Dokument[]>([]);
 
-    const oppdaterHarReist = (dag: Date, harReist: boolean) => {
-        const dagIsoString = dag.toISOString();
-        setKjøreliste((prev) => ({
-            reisedager: {
-                ...prev.reisedager,
-                [dagIsoString]: {
-                    ...prev.reisedager[dagIsoString],
-                    harReist,
-                },
-            },
+    const oppdaterHarReist = (dag: Date, harKjørt: boolean) => {
+        setKjøreliste((kjøreliste) => ({
+            ...kjøreliste,
+            reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
+                ...uke,
+                reisedager: uke.reisedager.map((reisedag) =>
+                    isEqual(reisedag.dato.verdi, dag) ? { ...reisedag, harKjørt } : reisedag
+                ),
+            })),
         }));
     };
 
     const oppdaterParkeringsutgift = (dag: Date, parkeringsutgift: number) => {
-        const dagIsoString = dag.toISOString();
-        setKjøreliste((prev) => ({
-            reisedager: {
-                ...prev.reisedager,
-                [dagIsoString]: {
-                    ...prev.reisedager[dagIsoString],
-                    parkeringsutgift,
-                },
-            },
+        setKjøreliste((kjøreliste) => ({
+            ...kjøreliste,
+            reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
+                ...uke,
+                reisedager: uke.reisedager.map((reisedag) => {
+                    if (isEqual(reisedag.dato.verdi, dag)) {
+                        return {
+                            ...reisedag,
+                            parkeringsutgift: {
+                                verdi: parkeringsutgift,
+                                label: reisedag.parkeringsutgift.label,
+                            },
+                        };
+                    }
+                    return reisedag;
+                }),
+            })),
         }));
     };
 
@@ -56,13 +64,30 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(({ rammevedtak }:
 export { KjørelisteProvider, useKjøreliste };
 
 const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
-    const dager = finnDagerMellomFomOgTomInklusiv(rammevedtak.fom, rammevedtak.tom);
-    const reisedager = {} as { [dato: string]: Reisedag };
-    dager.forEach((dag) => {
-        reisedager[dag.toISOString()] = {
-            harReist: false,
-            parkeringsutgift: undefined,
+    const reisedagerPerUkeAvsnitt: UkeMedReisedager[] = rammevedtak.uker.map((rammevedtakUke) => {
+        const dager = finnDagerMellomFomOgTomInklusiv(rammevedtakUke.fom, rammevedtakUke.tom);
+        const reisedager: Reisedag[] = dager.map((rammevedtakDag) => ({
+            dato: {
+                verdi: rammevedtakDag,
+                label: `${tilUkedag(rammevedtakDag)} ${tilTekstligDato(rammevedtakDag.toISOString())}`,
+            },
+            harKjørt: false,
+            parkeringsutgift: {
+                verdi: 0,
+                label: 'Parkeringsutgifter (kr)',
+            },
+        }));
+        return {
+            ukeLabel: `(${tilTekstligDato(rammevedtakUke.fom)} - ${tilTekstligDato(rammevedtakUke.tom)})`,
+            spørsmål: 'Hvilke dager kjørte du?',
+            reisedager: reisedager,
         };
     });
-    return { reisedager: reisedager };
+    return {
+        reisedagerPerUkeAvsnitt: reisedagerPerUkeAvsnitt,
+        dokumentasjon: [],
+        søknadMetadata: {
+            søknadFrontendGitHash: process.env.COMMIT_HASH,
+        },
+    };
 };

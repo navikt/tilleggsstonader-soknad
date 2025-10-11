@@ -4,13 +4,14 @@ import { FormSummary } from '@navikt/ds-react';
 
 import { tilTekstligDato, tilUkedag } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
+import { finnReisedag } from '../../kjørelisteUtils';
 
 export const OppsummeringDag: React.FC<{ dag: Date }> = ({ dag }) => {
     const { kjøreliste } = useKjøreliste();
 
-    const reisedag = kjøreliste.reisedager[dag.toISOString()];
+    const reisedag = finnReisedag(kjøreliste, dag);
 
-    if (!reisedag.harReist) {
+    if (!reisedag || !reisedag.harKjørt) {
         return null;
     }
 

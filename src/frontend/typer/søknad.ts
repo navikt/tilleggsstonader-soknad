@@ -54,7 +54,7 @@ export interface Aktivitet {
     lønnetAktivitet: EnumFelt<JaNei> | undefined;
 }
 
-interface SøknadMetadata {
+export interface SøknadMetadata {
     søknadFrontendGitHash: string | undefined;
 }
 

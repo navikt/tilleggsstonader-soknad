@@ -6,6 +6,7 @@ import { Checkbox, TextField, VStack } from '@navikt/ds-react';
 
 import { erHelg, tilTekstligDato, tilUkedag } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
+import { finnReisedag } from '../../kjørelisteUtils';
 
 const Card = styled(VStack)<{ graybackground: string }>`
     border: 1px solid black;
@@ -22,10 +23,9 @@ const StyledTextField = styled(TextField)`
 export const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
     const { kjøreliste, oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
 
-    const [harReist, settHarReist] = useState(kjøreliste.reisedager[dato.toISOString()].harReist);
+    const [harReist, settHarReist] = useState(finnReisedag(kjøreliste, dato)?.harKjørt ?? false);
 
-    const erNegativUtgift = (): boolean =>
-        (kjøreliste.reisedager[dato.toISOString()].parkeringsutgift ?? 0) < 0;
+    const erNegativUtgift = (): boolean => (finnReisedag(kjøreliste, dato)?.parkeringsutgift?.verdi ?? 0) < 0;
 
     return (
         <Card graybackground={erHelg(dato).toString()}>
