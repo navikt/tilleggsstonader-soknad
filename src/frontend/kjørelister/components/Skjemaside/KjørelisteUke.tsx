@@ -38,10 +38,7 @@ export const KjørelisteUke: React.FC<{ ukeMedReisedag: UkeMedReisedager }> = ({
                 <VStack gap={'2'}>
                     <BodyShort weight={'semibold'}>{ukeMedReisedag.spørsmål}</BodyShort>
                     {ukeMedReisedag.reisedager.map((reisedag) => (
-                        <KjørelisteDag
-                            key={reisedag.dato.verdi.toISOString()}
-                            reisedag={reisedag}
-                        />
+                        <KjørelisteDag key={reisedag.dato.verdi} reisedag={reisedag} />
                     ))}
                     {harValgtHelgedag(ukeMedReisedag.reisedager) && (
                         <Alert variant="warning">

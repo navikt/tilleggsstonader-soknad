@@ -14,7 +14,7 @@ export interface UkeMedReisedager {
 }
 
 export interface Reisedag {
-    dato: VerdiFelt<Date>;
+    dato: VerdiFelt<string>;
     harKjørt: boolean;
     parkeringsutgift: VerdiFelt<number>;
 }

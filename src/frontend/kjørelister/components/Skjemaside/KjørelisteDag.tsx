@@ -37,7 +37,7 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) =
             </Checkbox>
             {reisedag.harKjørt && (
                 <StyledTextField
-                    id={reisedag.dato.verdi.toISOString()}
+                    id={reisedag.dato.verdi}
                     label={reisedag.parkeringsutgift.label}
                     inputMode={'numeric'}
                     type={'number'}

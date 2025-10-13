@@ -20,9 +20,9 @@ export function KjørelisteSkjema() {
                 ukeMedReisedager.reisedager
                     .filter((reisedag) => reisedag.parkeringsutgift.verdi < 0)
                     .map((reisdag) => [
-                        reisdag.dato.verdi.toISOString(),
+                        reisdag.dato.verdi,
                         {
-                            id: reisdag.dato.verdi.toISOString(),
+                            id: reisdag.dato.verdi,
                             melding: 'Utgiften må være større enn 0',
                         },
                     ])

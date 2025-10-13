@@ -7,6 +7,7 @@ import { Rammevedtak } from './types/Rammevedtak';
 import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
 import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import { Dokument, VedleggstypeKjøreliste } from '../typer/skjema';
+import { tilLocaleDateString } from '../utils/formateringUtils';
 
 interface Props {
     rammevedtak: Rammevedtak;
@@ -17,25 +18,25 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(({ rammevedtak }:
 
     const [kjøreliste, setKjøreliste] = useState(initialiserKjøreliste(rammevedtak));
 
-    const oppdaterHarReist = (dag: Date, harKjørt: boolean) => {
+    const oppdaterHarReist = (dato: string, harKjørt: boolean) => {
         setKjøreliste((kjøreliste) => ({
             ...kjøreliste,
             reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
                 ...uke,
                 reisedager: uke.reisedager.map((reisedag) =>
-                    isEqual(reisedag.dato.verdi, dag) ? { ...reisedag, harKjørt } : reisedag
+                    isEqual(reisedag.dato.verdi, dato) ? { ...reisedag, harKjørt } : reisedag
                 ),
             })),
         }));
     };
 
-    const oppdaterParkeringsutgift = (dag: Date, parkeringsutgift: number) => {
+    const oppdaterParkeringsutgift = (dato: string, parkeringsutgift: number) => {
         setKjøreliste((kjøreliste) => ({
             ...kjøreliste,
             reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
                 ...uke,
                 reisedager: uke.reisedager.map((reisedag) => {
-                    if (isEqual(reisedag.dato.verdi, dag)) {
+                    if (isEqual(reisedag.dato.verdi, dato)) {
                         return {
                             ...reisedag,
                             parkeringsutgift: {
@@ -77,7 +78,7 @@ const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
         const dager = finnDagerMellomFomOgTomInklusiv(rammevedtakUke.fom, rammevedtakUke.tom);
         const reisedager: Reisedag[] = dager.map((rammevedtakDag) => ({
             dato: {
-                verdi: rammevedtakDag,
+                verdi: tilLocaleDateString(rammevedtakDag),
                 label: `${tilUkedag(rammevedtakDag)} ${tilTekstligDato(rammevedtakDag.toISOString())}`,
             },
             harKjørt: false,
