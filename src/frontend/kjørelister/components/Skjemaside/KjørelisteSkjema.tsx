@@ -16,9 +16,17 @@ export function KjørelisteSkjema() {
 
     const validerKanGåVidere = () => {
         const feil = Object.fromEntries(
-            Object.entries(kjøreliste.reisedager)
-                .filter(([, reisedag]) => (reisedag.parkeringsutgift ?? 0) < 0)
-                .map(([dato]) => [dato, { id: dato, melding: 'Utgiften må være større enn 0' }])
+            kjøreliste.reisedagerPerUkeAvsnitt.flatMap((ukeMedReisedager) =>
+                ukeMedReisedager.reisedager
+                    .filter((reisedag) => reisedag.parkeringsutgift.verdi < 0)
+                    .map((reisdag) => [
+                        reisdag.dato.verdi.toISOString(),
+                        {
+                            id: reisdag.dato.verdi.toISOString(),
+                            melding: 'Utgiften må være større enn 0',
+                        },
+                    ])
+            )
         );
 
         settValideringsfeil(feil);
