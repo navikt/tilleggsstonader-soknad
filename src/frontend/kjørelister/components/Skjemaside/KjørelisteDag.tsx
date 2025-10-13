@@ -23,6 +23,10 @@ export const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
     const { kjøreliste, oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
 
     const [harReist, settHarReist] = useState(kjøreliste.reisedager[dato.toISOString()].harReist);
+
+    const erNegativUtgift = (): boolean =>
+        (kjøreliste.reisedager[dato.toISOString()].parkeringsutgift ?? 0) < 0;
+
     return (
         <Card graybackground={erHelg(dato).toString()}>
             <Checkbox
@@ -34,9 +38,12 @@ export const KjørelisteDag: React.FC<{ dato: Date }> = ({ dato }) => {
             >{`${tilUkedag(dato)} ${tilTekstligDato(dato.toISOString())}`}</Checkbox>
             {harReist && (
                 <StyledTextField
+                    id={dato.toISOString()}
                     label={'Parkeringsutgifter (kr)'}
                     inputMode={'numeric'}
                     type={'number'}
+                    min={0}
+                    error={erNegativUtgift() && 'Utgiften må være større enn 0'}
                     onChange={(e) => oppdaterParkeringsutgift(dato, Number(e.target.value))}
                 />
             )}
