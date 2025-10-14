@@ -18,7 +18,7 @@ export function KjørelisteSkjema() {
         const feil = Object.fromEntries(
             kjøreliste.reisedagerPerUkeAvsnitt.flatMap((ukeMedReisedager) =>
                 ukeMedReisedager.reisedager
-                    .filter((reisedag) => reisedag.parkeringsutgift.verdi < 0)
+                    .filter((reisedag) => (reisedag.parkeringsutgift.verdi ?? 0) < 0)
                     .map((reisdag) => [
                         reisdag.dato.verdi,
                         {

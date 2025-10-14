@@ -83,7 +83,7 @@ const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
             },
             harKjørt: false,
             parkeringsutgift: {
-                verdi: 0,
+                verdi: null,
                 label: 'Parkeringsutgifter (kr)',
             },
         }));
