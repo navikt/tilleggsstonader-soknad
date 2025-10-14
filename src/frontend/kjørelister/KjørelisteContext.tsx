@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
 import createUseContext from 'constate';
+import { isEqual } from 'date-fns';
 
 import { Rammevedtak } from './types/Rammevedtak';
-import { finnDagerMellomFomOgTomInklusiv } from '../utils/datoUtils';
-import { Kjøreliste, Reisedag } from './types/Kjøreliste';
-import { Dokument } from '../typer/skjema';
+import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
+import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
+import { Dokument, VedleggstypeKjøreliste } from '../typer/skjema';
+import { tilLocaleDateString } from '../utils/formateringUtils';
 
 interface Props {
     rammevedtak: Rammevedtak;
@@ -15,31 +17,48 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(({ rammevedtak }:
     KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
 
     const [kjøreliste, setKjøreliste] = useState(initialiserKjøreliste(rammevedtak));
-    const [dokumentasjon, setDokumentasjon] = useState<Dokument[]>([]);
 
-    const oppdaterHarReist = (dag: Date, harReist: boolean) => {
-        const dagIsoString = dag.toISOString();
-        setKjøreliste((prev) => ({
-            reisedager: {
-                ...prev.reisedager,
-                [dagIsoString]: {
-                    ...prev.reisedager[dagIsoString],
-                    harReist,
-                },
-            },
+    const oppdaterHarReist = (dato: string, harKjørt: boolean) => {
+        setKjøreliste((kjøreliste) => ({
+            ...kjøreliste,
+            reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
+                ...uke,
+                reisedager: uke.reisedager.map((reisedag) =>
+                    isEqual(reisedag.dato.verdi, dato) ? { ...reisedag, harKjørt } : reisedag
+                ),
+            })),
         }));
     };
 
-    const oppdaterParkeringsutgift = (dag: Date, parkeringsutgift: number) => {
-        const dagIsoString = dag.toISOString();
-        setKjøreliste((prev) => ({
-            reisedager: {
-                ...prev.reisedager,
-                [dagIsoString]: {
-                    ...prev.reisedager[dagIsoString],
-                    parkeringsutgift,
-                },
-            },
+    const oppdaterParkeringsutgift = (dato: string, parkeringsutgift: number) => {
+        setKjøreliste((kjøreliste) => ({
+            ...kjøreliste,
+            reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
+                ...uke,
+                reisedager: uke.reisedager.map((reisedag) => {
+                    if (isEqual(reisedag.dato.verdi, dato)) {
+                        return {
+                            ...reisedag,
+                            parkeringsutgift: {
+                                verdi: parkeringsutgift,
+                                label: reisedag.parkeringsutgift.label,
+                            },
+                        };
+                    }
+                    return reisedag;
+                }),
+            })),
+        }));
+    };
+
+    const oppdaterDokumentasjon = (dokumenter: Dokument[]) => {
+        setKjøreliste((kjøreliste) => ({
+            ...kjøreliste,
+            dokumentasjon: kjøreliste.dokumentasjon.map((dokumentasjonFelt) =>
+                dokumentasjonFelt.type === VedleggstypeKjøreliste.PARKERINGSUTGIFT
+                    ? { ...dokumentasjonFelt, opplastedeVedlegg: dokumenter }
+                    : dokumentasjonFelt
+            ),
         }));
     };
 
@@ -48,21 +67,43 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(({ rammevedtak }:
         kjøreliste,
         oppdaterHarReist,
         oppdaterParkeringsutgift,
-        dokumentasjon,
-        setDokumentasjon,
+        oppdaterDokumentasjon,
     };
 });
 
 export { KjørelisteProvider, useKjøreliste };
 
 const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
-    const dager = finnDagerMellomFomOgTomInklusiv(rammevedtak.fom, rammevedtak.tom);
-    const reisedager = {} as { [dato: string]: Reisedag };
-    dager.forEach((dag) => {
-        reisedager[dag.toISOString()] = {
-            harReist: false,
-            parkeringsutgift: undefined,
+    const reisedagerPerUkeAvsnitt: UkeMedReisedager[] = rammevedtak.uker.map((rammevedtakUke) => {
+        const dager = finnDagerMellomFomOgTomInklusiv(rammevedtakUke.fom, rammevedtakUke.tom);
+        const reisedager: Reisedag[] = dager.map((rammevedtakDag) => ({
+            dato: {
+                verdi: tilLocaleDateString(rammevedtakDag),
+                label: `${tilUkedag(rammevedtakDag)} ${tilTekstligDato(rammevedtakDag.toISOString())}`,
+            },
+            harKjørt: false,
+            parkeringsutgift: {
+                verdi: null,
+                label: 'Parkeringsutgifter (kr)',
+            },
+        }));
+        return {
+            ukeLabel: `Uke ${rammevedtakUke.ukeNummer} (${tilTekstligDato(rammevedtakUke.fom)} - ${tilTekstligDato(rammevedtakUke.tom)})`,
+            spørsmål: 'Hvilke dager kjørte du?',
+            reisedager: reisedager,
         };
     });
-    return { reisedager: reisedager };
+    return {
+        reisedagerPerUkeAvsnitt: reisedagerPerUkeAvsnitt,
+        dokumentasjon: [
+            {
+                type: VedleggstypeKjøreliste.PARKERINGSUTGIFT,
+                label: 'Vedlegg parkeringsutgift',
+                opplastedeVedlegg: [],
+            },
+        ],
+        søknadMetadata: {
+            søknadFrontendGitHash: process.env.COMMIT_HASH,
+        },
+    };
 };

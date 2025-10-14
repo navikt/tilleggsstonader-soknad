@@ -5,17 +5,18 @@ import { FormSummary, List } from '@navikt/ds-react';
 
 import { useKjøreliste } from '../../KjørelisteContext';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
+import { finnVedleggMedParkeringsutgifter } from '../Vedleggside/VedleggUtils';
 
 export function VedleggOppsummering() {
-    const { dokumentasjon } = useKjøreliste();
+    const { kjøreliste } = useKjøreliste();
 
-    if (dokumentasjon.length === 0) {
+    if (finnVedleggMedParkeringsutgifter(kjøreliste).length === 0) {
         return null;
     }
 
     const VedleggListe = () => (
         <List>
-            {dokumentasjon.map((vedlegg) => (
+            {finnVedleggMedParkeringsutgifter(kjøreliste).map((vedlegg) => (
                 <List.Item key={vedlegg.id} icon={<FileCheckmarkIcon />}>
                     {vedlegg.navn}
                 </List.Item>

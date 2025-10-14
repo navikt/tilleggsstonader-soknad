@@ -3,39 +3,27 @@ import React from 'react';
 import { Accordion, Alert, BodyShort, HStack, Tag, VStack } from '@navikt/ds-react';
 
 import { KjørelisteDag } from './KjørelisteDag';
-import { erHelg, finnDagerMellomFomOgTomInklusiv, tilTekstligDato } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
-import { harRegistertDataForUke } from '../../kjørelisteUtils';
-import { RammevedtakUke } from '../../types/Rammevedtak';
+import {
+    finnAntallDagerReist,
+    harReist,
+    harValgtFlereDagerEnnRammevedtak,
+    harValgtHelgedag,
+} from '../../kjørelisteUtils';
+import { UkeMedReisedager } from '../../types/Kjøreliste';
 import { WideAccordionHeader } from '../WideAccordionHeader';
 
-export const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
-    const dagerIUka = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
-
-    const { kjøreliste, rammevedtak } = useKjøreliste();
-
-    const harValgtHelgedag = (dagerIUka: Date[]) => {
-        const helgedagerDenneUka = dagerIUka.filter((dag) => erHelg(dag));
-        return helgedagerDenneUka.some((dag) => kjøreliste.reisedager[dag.toISOString()].harReist);
-    };
-
-    const finnAntallDagerReistIUke = (dagerIUka: Date[]) =>
-        dagerIUka.filter((dag) => kjøreliste.reisedager[dag.toISOString()].harReist).length;
-
-    const harValgtFlereDagerEnnRammevedtak = (dagerIUka: Date[]) =>
-        rammevedtak.reisedagerPerUke < finnAntallDagerReistIUke(dagerIUka);
+export const KjørelisteUke: React.FC<{ ukeMedReisedag: UkeMedReisedager }> = ({
+    ukeMedReisedag,
+}) => {
+    const { rammevedtak } = useKjøreliste();
 
     return (
         <Accordion.Item>
             <WideAccordionHeader>
                 <HStack justify={'space-between'}>
-                    <HStack gap={'2'}>
-                        <BodyShort size={'large'} weight={'semibold'}>
-                            {`Uke ${uke.ukeNummer}`}
-                        </BodyShort>
-                        <BodyShort>{`(${tilTekstligDato(uke.fom)} - ${tilTekstligDato(uke.tom)})`}</BodyShort>
-                    </HStack>
-                    {harRegistertDataForUke(dagerIUka, kjøreliste) ? (
+                    <HStack gap={'2'}>{ukeMedReisedag.ukeLabel}</HStack>
+                    {harReist(ukeMedReisedag.reisedager) ? (
                         <Tag variant={'warning'} size={'small'}>
                             Påbegynt
                         </Tag>
@@ -48,19 +36,19 @@ export const KjørelisteUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
             </WideAccordionHeader>
             <Accordion.Content>
                 <VStack gap={'2'}>
-                    <BodyShort weight={'semibold'}>Hvilke dager kjørte du?</BodyShort>
-                    {dagerIUka.map((dato) => (
-                        <KjørelisteDag key={dato.toISOString()} dato={dato} />
+                    <BodyShort weight={'semibold'}>{ukeMedReisedag.spørsmål}</BodyShort>
+                    {ukeMedReisedag.reisedager.map((reisedag) => (
+                        <KjørelisteDag key={reisedag.dato.verdi} reisedag={reisedag} />
                     ))}
-                    {harValgtHelgedag(dagerIUka) && (
+                    {harValgtHelgedag(ukeMedReisedag.reisedager) && (
                         <Alert variant="warning">
                             Du har fylt inn at du har kjørt på en helgedag. Hvis det stemmer at du
                             har kjørt denne dagen vil en saksbehandler manuelt behandle saken din.
                         </Alert>
                     )}
-                    {harValgtFlereDagerEnnRammevedtak(dagerIUka) && (
+                    {harValgtFlereDagerEnnRammevedtak(rammevedtak, ukeMedReisedag.reisedager) && (
                         <Alert variant="warning">
-                            {`Du har fått innvilget stønad for daglig reise med egen bil for ${rammevedtak.reisedagerPerUke} dager i uken, men du har registrert ${finnAntallDagerReistIUke(dagerIUka)} dager. Sjekk at du har fylt inn alt riktig. Hvis det stemmer at du har kjørt flere dager denne uken vil en saksbehandler manuelt behandle saken din.`}
+                            {`Du har fått innvilget stønad for daglig reise med egen bil for ${rammevedtak.reisedagerPerUke} dager i uken, men du har registrert ${finnAntallDagerReist(ukeMedReisedag.reisedager)} dager. Sjekk at du har fylt inn alt riktig. Hvis det stemmer at du har kjørt flere dager denne uken vil en saksbehandler manuelt behandle saken din.`}
                         </Alert>
                     )}
                 </VStack>

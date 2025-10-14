@@ -42,7 +42,7 @@ export interface Dokument {
 }
 
 // OBS: Ikke ha duplikat av enum-typer.
-export type Vedleggstype = VedleggstypePassAvBarn | VedleggstypeLæremidler;
+export type Vedleggstype = VedleggstypePassAvBarn | VedleggstypeLæremidler | VedleggstypeKjøreliste;
 
 export enum VedleggstypePassAvBarn {
     UTGIFTER_PASS_SFO_AKS_BARNEHAGE = 'UTGIFTER_PASS_SFO_AKS_BARNEHAGE',
@@ -54,4 +54,8 @@ export enum VedleggstypePassAvBarn {
 export enum VedleggstypeLæremidler {
     DOKUMENTASJON_FUNKSJONSNEDSETTELSE = 'DOKUMENTASJON_FUNKSJONSNEDSETTELSE',
     UTGIFTER_LÆREMIDLER = 'UTGIFTER_LÆREMIDLER',
+}
+
+export enum VedleggstypeKjøreliste {
+    PARKERINGSUTGIFT = 'PARKERINGSUTGIFT',
 }

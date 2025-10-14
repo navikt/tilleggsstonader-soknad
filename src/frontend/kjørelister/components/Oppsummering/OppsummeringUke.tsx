@@ -3,28 +3,25 @@ import React from 'react';
 import { FormSummary } from '@navikt/ds-react';
 
 import { OppsummeringDag } from './OppsummeringDag';
-import { finnDagerMellomFomOgTomInklusiv } from '../../../utils/datoUtils';
-import { useKjøreliste } from '../../KjørelisteContext';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
-import { harRegistertDataForUke } from '../../kjørelisteUtils';
-import { RammevedtakUke } from '../../types/Rammevedtak';
+import { harReist } from '../../kjørelisteUtils';
+import { UkeMedReisedager } from '../../types/Kjøreliste';
 
-export const OppsummeringUke: React.FC<{ uke: RammevedtakUke }> = ({ uke }) => {
-    const { kjøreliste } = useKjøreliste();
-    const dagerIUke = finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom);
-
-    if (!harRegistertDataForUke(dagerIUke, kjøreliste)) {
+export const OppsummeringUke: React.FC<{ ukeMedReisedager: UkeMedReisedager }> = ({
+    ukeMedReisedager,
+}) => {
+    if (!harReist(ukeMedReisedager.reisedager)) {
         return null;
     }
 
     return (
         <FormSummary>
             <FormSummary.Header>
-                <FormSummary.Heading level={'3'}>{`Uke ${uke.ukeNummer}`}</FormSummary.Heading>
+                <FormSummary.Heading level={'3'}>{ukeMedReisedager.ukeLabel}</FormSummary.Heading>
             </FormSummary.Header>
             <FormSummary.Answers>
-                {finnDagerMellomFomOgTomInklusiv(uke.fom, uke.tom).map((dag) => (
-                    <OppsummeringDag dag={dag} />
+                {ukeMedReisedager.reisedager.map((reisedag) => (
+                    <OppsummeringDag key={reisedag.dato.label} reisedag={reisedag} />
                 ))}
             </FormSummary.Answers>
             <FormSummary.Footer>

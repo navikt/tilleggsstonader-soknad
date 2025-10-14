@@ -1,12 +1,23 @@
+import { DokumentasjonFelt, VerdiFelt } from '../../typer/skjema';
+import { SøknadMetadata } from '../../typer/søknad';
+
 export interface Kjøreliste {
-    reisedager: { [dato: string]: Reisedag };
+    reisedagerPerUkeAvsnitt: UkeMedReisedager[];
+    dokumentasjon: DokumentasjonFelt[];
+    søknadMetadata: SøknadMetadata;
+}
+
+export interface UkeMedReisedager {
+    ukeLabel: string;
+    spørsmål: string;
+    reisedager: Reisedag[];
 }
 
 export interface Reisedag {
-    harReist: boolean;
-    parkeringsutgift: number | undefined;
+    dato: VerdiFelt<string>;
+    harKjørt: boolean;
+    parkeringsutgift: VerdiFelt<number | null>;
 }
-
 export interface KjørelisteKvittering {
     mottattTidspunkt: string;
     saksnummer: number;
