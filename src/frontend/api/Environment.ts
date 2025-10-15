@@ -1,4 +1,4 @@
-import { Stønadstype, SkjematypeFyllUt } from '../typer/stønadstyper';
+import { SkjematypeFyllUt, Stønadstype } from '../typer/stønadstyper';
 
 interface EnvironmentProps {
     apiProxyUrl: string;
