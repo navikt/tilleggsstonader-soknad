@@ -3,17 +3,14 @@ import React, { useState } from 'react';
 import { Button, GuidePanel, Label, Radio, RadioGroup } from '@navikt/ds-react';
 
 import { dagligReiseTekster } from './tekster';
-import { loggSkjemaStartet } from '../api/analytics';
 import Environment from '../api/Environment';
 import { Container } from '../components/Side';
 import { LocaleReadMore } from '../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { SkjematypeFyllUt, Stønadstype } from '../typer/stønadstyper';
+import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
-type RadioButtonValg = {
-    valg: 'JA' | 'NEI' | 'KOMBO';
-};
+type RadioButtonValg = 'JA' | 'NEI' | 'KOMBO';
 
 const Forside: React.FC = () => {
     const env = Environment();
@@ -30,8 +27,7 @@ const Forside: React.FC = () => {
             settFeilmeldingRadio('Du må velge et av alternativene');
             return;
         }
-        loggSkjemaStartet(Stønadstype.BARNETILSYN);
-        if (svar.valg === 'JA') {
+        if (svar === 'JA') {
             window.location.replace(env.urlNyFyllUtSøknad(SkjematypeFyllUt.SØKNAD_DAGLIG_REISE));
         } else {
             window.location.replace(env.urlGammelSøknad(SkjematypeFyllUt.SØKNAD_DAGLIG_REISE));

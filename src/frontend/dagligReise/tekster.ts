@@ -22,7 +22,7 @@ export const dagligReiseTekster: DagligReiseInnhold = {
     },
     veileder_innhold: {
         nb: [
-            'Denne pengestøtten kan gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar AAP, uføretrygd eller har nedsatt arbeidsevne.',
+            'Denne pengestøtten kan gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar arbeidsavklaringspenger (AAP), uføretrygd, har nedsatt arbeidsevne, tiltakspenger, dagpenger, kvalifiseringsstønad eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
         ],
     },
 };
