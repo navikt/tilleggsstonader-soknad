@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 export function DagligReiseApp() {
     return (
-        <SkjemaRouting skjmatypeFyllUt={SkjematypeFyllUt.SØKNAD_DAGLIG_REISE}>
+        <SkjemaRouting skjematypeFyllUt={SkjematypeFyllUt.SØKNAD_DAGLIG_REISE}>
             <Container>
                 <VStack gap="2">
                     <Heading size="xlarge" as="h1">
