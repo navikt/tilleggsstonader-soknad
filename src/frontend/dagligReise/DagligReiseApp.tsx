@@ -7,7 +7,7 @@ import { BreakpointMdDown } from '@navikt/ds-tokens/darkside-js';
 
 import Forside from './Forside';
 import { dagligReiseTekster } from './tekster';
-import SkjemaRouting from '../components/SkjemaRouting/SkjemaRouting';
+import { SkjemaRouting } from '../components/SkjemaRouting/SkjemaRouting';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
