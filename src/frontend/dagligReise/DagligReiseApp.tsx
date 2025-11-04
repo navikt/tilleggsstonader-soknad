@@ -7,7 +7,7 @@ import { BreakpointMdDown } from '@navikt/ds-tokens/darkside-js';
 
 import Forside from './Forside';
 import { dagligReiseTekster } from './tekster';
-import SkjemaRouting from '../components/SkjemaRouting/SkjemaRouting';
+import { SkjemaRouting } from '../components/SkjemaRouting/SkjemaRouting';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 export function DagligReiseApp() {
     return (
-        <SkjemaRouting skjmatypeFyllUt={SkjematypeFyllUt.SØKNAD_DAGLIG_REISE}>
+        <SkjemaRouting skjematypeFyllUt={SkjematypeFyllUt.SØKNAD_DAGLIG_REISE}>
             <Container>
                 <VStack gap="2">
                     <Heading size="xlarge" as="h1">

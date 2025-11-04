@@ -2,7 +2,7 @@ import Environment from '../../api/Environment';
 import { Stønadstype, SkjematypeFyllUt } from '../../typer/stønadstyper';
 
 export const sendSøkerTilGammelSøknad = (stønadstype: SkjematypeFyllUt) => {
-    window.location.href = Environment().urlGammelSøknad(stønadstype);
+    window.location.replace(Environment().urlGammelSøknad(stønadstype));
 };
 
 export const sendSøkerTilPapirsøknad = (stønadstype: Stønadstype) => {
