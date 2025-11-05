@@ -41,6 +41,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: [
             'Du må dokumentere utgiftene dine i søknaden.',
             'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
+            'Hvis den andre forelderen har søkt om eller mottar stønad til pass av barn, har du ikke rett til samme stønad. Nav gir kun stønad til én forelder.',
             'Hvis du får penger du ikke har rett på, kan vi kreve at du betaler de tilbake.',
         ],
     },
