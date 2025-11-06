@@ -10,7 +10,7 @@ import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
-type RadioButtonValg = 'JA' | 'NEI' | 'KOMBO';
+type RadioButtonValg = 'JA' | 'NEI';
 
 const Forside: React.FC = () => {
     const env = Environment();
@@ -44,7 +44,7 @@ const Forside: React.FC = () => {
             </GuidePanel>
             <div>
                 <RadioGroup
-                    legend={'Kan du reise med offentlig transport?'}
+                    legend={'Kan du reise med offentlig transport hele veien?'}
                     description={
                         'Med offentlig transport menes buss, tog, trikk, t-bane, ferge og lignende.'
                     }
@@ -56,9 +56,6 @@ const Forside: React.FC = () => {
                     </Radio>
                     <Radio value={'NEI'} key={'NEI'}>
                         Nei
-                    </Radio>
-                    <Radio value={'KOMBO'} key={'KOMBO'}>
-                        Jeg må kombinere offentlig transport med kjøring av egen bil
                     </Radio>
                 </RadioGroup>
                 <LocaleReadMore tekst={dagligReiseTekster.hvorfor_spør_vi} />
