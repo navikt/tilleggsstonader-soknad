@@ -215,7 +215,7 @@ export const utdanningTekster: AktivitetInnhold = {
         header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
         innhold: {
             nb: [
-                'Hvis du skal søke i forbindelse med en aktivitet som ble avsluttet for over 6 måneder siden, må du fylle ut ',
+                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden. ',
                 {
                     tekst: 'papirsøknad',
                     url: 'https://tjenester.nav.no/soknadtilleggsstonader/app/start',
