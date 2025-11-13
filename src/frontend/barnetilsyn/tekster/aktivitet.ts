@@ -194,7 +194,7 @@ export const aktivitetTekster: AktivitetInnhold = {
         alternativer: JaNeiTilTekst,
     },
     radio_annet_lesmer: {
-        header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
+        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
         innhold: {
             nb: [
                 'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 3 måneder siden. ',

@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 
-import { aktivitetTekster } from '../../../barnetilsyn/tekster/aktivitet';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
@@ -41,7 +40,7 @@ export const AnnenUtdanning: React.FC<Props> = ({
                     </BodyShort>
                 </Alert>
             )}
-            <LocaleReadMoreMedLenke tekst={aktivitetTekster.radio_annet_lesmer} />
+            <LocaleReadMoreMedLenke tekst={utdanningTekster.radio_annet_lesmer} />
         </div>
     );
 };
