@@ -212,10 +212,10 @@ export const utdanningTekster: AktivitetInnhold = {
         nb: 'Når du er under 21 år og tar videregående utdanning, har du vanligvis rett til utstyrsstipend fra lånekassen. Du kan søke om støtte til læremidler, men du vil mest sannsynligvis få avslag.',
     },
     radio_annet_lesmer: {
-        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
+        header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
         innhold: {
             nb: [
-                'Hvis du skal søke i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut ',
+                'Hvis du skal søke i forbindelse med en aktivitet som ble avsluttet for over 6 måneder siden, må du fylle ut ',
                 {
                     tekst: 'papirsøknad',
                     url: 'https://tjenester.nav.no/soknadtilleggsstonader/app/start',
