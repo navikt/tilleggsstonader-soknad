@@ -194,10 +194,10 @@ export const aktivitetTekster: AktivitetInnhold = {
         alternativer: JaNeiTilTekst,
     },
     radio_annet_lesmer: {
-        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
+        header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
         innhold: {
             nb: [
-                'Hvis du skal søke i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut ',
+                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden. ',
                 {
                     tekst: 'papirsøknad',
                     url: 'https://tjenester.nav.no/soknadtilleggsstonader/app/start',
