@@ -197,13 +197,13 @@ export const aktivitetTekster: AktivitetInnhold = {
         header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
         innhold: {
             nb: [
-                'Hvis du skal søke i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du fylle ut ',
+                'Du må sende inn ',
                 {
-                    tekst: 'papirsøknad',
-                    url: 'https://tjenester.nav.no/soknadtilleggsstonader/app/start',
+                    tekst: 'søknad på papir',
+                    url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
                     variant: 'neutral',
                 },
-                '.',
+                ' hvis du skal søke om en aktivitet som ble avsluttet for mer enn 3 måneder siden.',
             ],
         },
     },

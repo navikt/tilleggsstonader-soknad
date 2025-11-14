@@ -3,6 +3,7 @@ import React from 'react';
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
 import { EnumFelt } from '../../../typer/skjema';
 import { Feilmelding } from '../../../typer/validering';
@@ -21,7 +22,7 @@ export const AnnenUtdanning: React.FC<Props> = ({
     feilmelding,
 }) => {
     return (
-        <>
+        <div>
             <LocaleRadioGroup
                 id={feilmelding?.id}
                 tekst={utdanningTekster.radio_annen_utdanning}
@@ -39,6 +40,7 @@ export const AnnenUtdanning: React.FC<Props> = ({
                     </BodyShort>
                 </Alert>
             )}
-        </>
+            <LocaleReadMoreMedLenke tekst={utdanningTekster.radio_annet_lesmer} />
+        </div>
     );
 };
