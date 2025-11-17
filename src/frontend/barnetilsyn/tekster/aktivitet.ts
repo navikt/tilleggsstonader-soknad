@@ -199,7 +199,7 @@ export const aktivitetTekster: AktivitetInnhold = {
             nb: [
                 'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 3 måneder siden. ',
                 {
-                    tekst: 'søknad på papir',
+                    tekst: 'Søknad på papir',
                     url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
                     variant: 'neutral',
                 },
