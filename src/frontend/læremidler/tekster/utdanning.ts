@@ -215,13 +215,13 @@ export const utdanningTekster: AktivitetInnhold = {
         header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
         innhold: {
             nb: [
-                'Du må sende inn ',
+                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden. ',
                 {
                     tekst: 'søknad på papir',
                     url: 'https://www.nav.no/fyllut/nav111216b?sub=paper',
                     variant: 'neutral',
                 },
-                ' hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden.',
+                '.',
             ],
         },
     },
