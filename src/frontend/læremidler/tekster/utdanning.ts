@@ -1,7 +1,7 @@
 import { tekstArbeidsrettedeAktiviteter } from '../../tekster/aktivitet';
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { JaNei } from '../../typer/søknad';
-import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
 import { AnnenUtdanningType } from '../typer/søknad';
 
 interface AktivitetInnhold {
@@ -29,6 +29,7 @@ interface AktivitetInnhold {
     radio_har_fullført_vgs_feilmelding: TekstElement<string>;
     har_fullført_vgs_info_boks_header: TekstElement<string>;
     har_fullført_vgs_info_boks: TekstElement<string>;
+    radio_annet_lesmer: LesMer<InlineLenke>;
 }
 
 interface HvilkenAktivitet {
@@ -209,5 +210,19 @@ export const utdanningTekster: AktivitetInnhold = {
     },
     har_fullført_vgs_info_boks: {
         nb: 'Når du er under 21 år og tar videregående utdanning, har du vanligvis rett til utstyrsstipend fra lånekassen. Du kan søke om støtte til læremidler, men du vil mest sannsynligvis få avslag.',
+    },
+    radio_annet_lesmer: {
+        header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
+        innhold: {
+            nb: [
+                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden. ',
+                {
+                    tekst: 'Søknad på papir',
+                    url: 'https://www.nav.no/fyllut/nav111216b?sub=paper',
+                    variant: 'neutral',
+                },
+                '.',
+            ],
+        },
     },
 };
