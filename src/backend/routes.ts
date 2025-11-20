@@ -26,10 +26,20 @@ const routes = () => {
 
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
+    // Routes for sider som kun gjør redirect, uten nav-dekoratør
+    // Dette unngår at vi sender unødvendig javascript til brukerne våre, og vi slipper Skyra/dekoratør-støy i Sentry
+    const udekorerteRuter = [
+        `${BASE_PATH_SOKNAD}/daglig-reise`,
+        `${BASE_PATH_SOKNAD}/daglig-reise/*`,
+        `${BASE_PATH_SOKNAD}/boutgifter`,
+        `${BASE_PATH_SOKNAD}/boutgifter/*`,
+    ];
+    expressRouter.get(udekorerteRuter, applyCspDirectives, sendUdekorertHtml);
+
     expressRouter.use(
         matchAllPathsExcluding('internal', 'static', 'api', 'reporting'),
         applyCspDirectives,
-        sendHtml
+        sendHtmlMedDekoratør
     );
 
     expressRouter.use(
@@ -55,7 +65,7 @@ const routes = () => {
     return expressRouter;
 };
 
-async function sendHtml(_req: Request, res: Response) {
+async function sendHtmlMedDekoratør(_req: Request, res: Response) {
     getDecoratedHtml(path.join(buildPath, 'index.html'))
         .then((html) => {
             res.send(html);
@@ -64,6 +74,15 @@ async function sendHtml(_req: Request, res: Response) {
             logger.error(e);
             res.status(500).send(e);
         });
+}
+
+/**
+ * Sender ren index.html uten nav-dekoratør.
+ * Brukes for routes som kun skal videresende/redirecte (f.eks. daglig-reise, boutgifter),
+ * for å unngå Skyra/dekoratør-støy i Sentry.
+ */
+function sendUdekorertHtml(_req: Request, res: Response) {
+    res.sendFile(path.join(buildPath, 'index.html'));
 }
 
 export default routes;
