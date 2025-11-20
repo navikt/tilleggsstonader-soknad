@@ -10,10 +10,9 @@ import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
 import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
 import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
-import { BoutgifterApp } from './Boutgifter/BoutgifterApp';
 import ScrollToTop from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
-import { DagligReiseApp } from './dagligReise/DagligReiseApp';
+import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentligTransportAvsjekk';
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
@@ -38,8 +37,10 @@ const AppRoutes = () => {
                     element={<Navigate to={barnetilsynPath} replace />}
                 />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
-                <Route path={`/boutgifter/*`} element={<BoutgifterApp />} />
-                <Route path={`/daglig-reise/*`} element={<DagligReiseApp />} />
+                <Route
+                    path="/daglig-reise/skjema"
+                    element={<KanBrukeOffentligTransportAvsjekk />}
+                />
                 {kanBrukeKjøreliste && (
                     <Route path={`/kjoreliste/*`} element={<KjørelisterApp />} />
                 )}
