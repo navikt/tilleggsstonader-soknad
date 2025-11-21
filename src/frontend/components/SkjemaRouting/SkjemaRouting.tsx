@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Navigate } from 'react-router-dom';
-
 import { Alert } from '@navikt/ds-react';
 
 import { sendBrukerTilFyllUtSøknad } from './sendSøkerTilFyllUtSøknad';
@@ -27,7 +25,9 @@ export const SkjemaRouting: React.FC<RoutingHandlerProps> = ({
             return null;
         case RoutingState.NY:
             if (internRouteHvisNyLøsning) {
-                return <Navigate to={internRouteHvisNyLøsning} replace />;
+                // Bruker window.location for å tvinge full page reload, som sikrer at dekoratøren lastes når vi navigerer fra en udekorert route
+                window.location.replace(internRouteHvisNyLøsning);
+                return null;
             } else {
                 sendBrukerTilFyllUtSøknad(skjematypeFyllUt, 'NY');
                 return null;

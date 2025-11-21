@@ -17,7 +17,7 @@ export const DagligReiseApp = () => {
                 element={
                     <SkjemaRouting
                         skjematypeFyllUt={SkjematypeFyllUt.SØKNAD_DAGLIG_REISE}
-                        internRouteHvisNyLøsning="skjema"
+                        internRouteHvisNyLøsning="daglig-reise/skjema"
                     />
                 }
             />
