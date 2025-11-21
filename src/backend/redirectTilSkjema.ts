@@ -9,10 +9,10 @@ export const redirectTilSkjema = (
     skjematype: SkjematypeFyllUt,
     internRouteForNyLøsning?: string
 ) => {
-    return async (_: Request, res: Response) => {
+    return async (req: Request, res: Response) => {
         try {
             const finnRedirectUrl = async () => {
-                const skalBehandlesINyLøsning = await skalBrukerTilNyLøsning(skjematype);
+                const skalBehandlesINyLøsning = await skalBrukerTilNyLøsning(skjematype, req);
 
                 if (skalBehandlesINyLøsning && internRouteForNyLøsning) {
                     // For daglig reise ønsker vi å redirekte internt
