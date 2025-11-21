@@ -8,9 +8,6 @@ interface SkjemaRoutingResponse {
     skalBehandlesINyLøsning: boolean;
 }
 
-/**
- * Sjekker hos routing-API-et om skjematypen skal behandles i ny eller gammel løsning
- */
 export async function skalBrukerTilNyLøsning(
     skjematype: SkjematypeFyllUt,
     req: Request

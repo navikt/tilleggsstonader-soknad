@@ -5,6 +5,12 @@ import logger from './logger';
 import { skalBrukerTilNyLøsning } from './skjemaRouting';
 import { BASE_PATH_SOKNAD } from './url';
 
+/**
+ * Redirecter brukeren til enten nytt eller gammelt FyllUt-skjema.
+ *
+ * Hvis [internRouteForNyLøsning] er angitt vil brukeren routes til en intern route i stedet for nytt FyllUt-skjema, noe
+ * som er nyttig for eksempelvis daglig reise.
+ */
 export const redirectTilSkjema = (
     skjematype: SkjematypeFyllUt,
     internRouteForNyLøsning?: string
@@ -15,7 +21,6 @@ export const redirectTilSkjema = (
                 const skalBehandlesINyLøsning = await skalBrukerTilNyLøsning(skjematype, req);
 
                 if (skalBehandlesINyLøsning && internRouteForNyLøsning) {
-                    // For daglig reise ønsker vi å redirekte internt
                     return `${BASE_PATH_SOKNAD}/${internRouteForNyLøsning}`;
                 }
 
