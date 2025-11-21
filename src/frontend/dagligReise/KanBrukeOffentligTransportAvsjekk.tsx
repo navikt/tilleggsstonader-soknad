@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Button, GuidePanel, Heading, Label, Radio, RadioGroup, VStack } from '@navikt/ds-react';
 
 import { dagligReiseTekster } from './tekster';
+import { omdirigerTilFyllut } from '../api/useFyllutRedirect';
 import { Container } from '../components/Side';
-import { sendBrukerTilFyllUtSøknad } from '../components/SkjemaRouting/sendSøkerTilFyllUtSøknad';
 import { LocaleReadMore } from '../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
 import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
@@ -21,12 +21,12 @@ export const KanBrukeOffentligTransportAvsjekk: React.FC = () => {
         settFeilmeldingRadio('');
     };
 
-    function startSøknad() {
+    async function startSøknad() {
         if (!svar) {
             settFeilmeldingRadio('Du må velge et av alternativene');
             return;
         }
-        sendBrukerTilFyllUtSøknad(
+        await omdirigerTilFyllut(
             SkjematypeFyllUt.SØKNAD_DAGLIG_REISE,
             svar === 'JA' ? 'NY' : 'GAMMEL'
         );
