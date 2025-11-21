@@ -29,10 +29,8 @@ const routes = () => {
     // Ruter for sider som kun gjør umiddelbar redirect, uten nav-dekoratør
     // Dette unngår at vi sender unødvendig javascript til brukerne våre, og vi slipper Skyra/dekoratør-støy i Sentry
     const udekorerteRuter = [
-        `${BASE_PATH_SOKNAD}/boutgifter`,
-        `${BASE_PATH_SOKNAD}/boutgifter/`,
-        `${BASE_PATH_SOKNAD}/daglig-reise`,
-        `${BASE_PATH_SOKNAD}/daglig-reise/`,
+        new RegExp(`^${BASE_PATH_SOKNAD}/boutgifter/?$`),
+        new RegExp(`^${BASE_PATH_SOKNAD}/daglig-reise/?$`),
     ];
     expressRouter.get(udekorerteRuter, applyCspDirectives, sendUdekorertHtml);
 
