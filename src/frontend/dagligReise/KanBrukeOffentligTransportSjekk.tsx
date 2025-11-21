@@ -12,7 +12,7 @@ import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
 type RadioButtonValg = 'JA' | 'NEI';
 
-const Forside: React.FC = () => {
+const KanBrukeOffentligTransportSjekk: React.FC = () => {
     const env = Environment();
     const [svar, setSvar] = useState<RadioButtonValg | undefined>(undefined);
     const [feilmeldingRadio, settFeilmeldingRadio] = useState('');
@@ -67,4 +67,4 @@ const Forside: React.FC = () => {
     );
 };
 
-export default Forside;
+export default KanBrukeOffentligTransportSjekk;
