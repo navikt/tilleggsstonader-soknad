@@ -11,7 +11,7 @@ export const redirectTilSkjema = (
 ) => {
     return async (_: Request, res: Response) => {
         try {
-            const targetUrl = async () => {
+            const finnRedirectUrl = async () => {
                 const skalBehandlesINyLøsning = await skalBrukerTilNyLøsning(skjematype);
 
                 if (skalBehandlesINyLøsning && internRouteForNyLøsning) {
@@ -21,7 +21,7 @@ export const redirectTilSkjema = (
 
                 return getFyllutUrl(skjematype, skalBehandlesINyLøsning ? 'NY' : 'GAMMEL');
             };
-            res.redirect(302, await targetUrl());
+            res.redirect(302, await finnRedirectUrl());
         } catch (error) {
             logger.error('Feil ved omdirigering:', error);
             res.status(500).send('Feil ved omdirigering');
