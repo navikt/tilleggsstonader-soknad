@@ -54,6 +54,7 @@ const routes = () => {
         doProxy(miljø.vedleggUrl, true)
     );
 
+    // Endepunkt for å hente ut URL-ene til Fyll Ut-skjemaene, slik at vi slippe å definere dem i både frontend og backend
     expressRouter.post(
         `${BASE_PATH_SOKNAD}/api/fyllut-redirect`,
         express.json(),
