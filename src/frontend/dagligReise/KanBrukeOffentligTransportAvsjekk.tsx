@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { Button, GuidePanel, Label, Radio, RadioGroup } from '@navikt/ds-react';
+import { Button, GuidePanel, Heading, Label, Radio, RadioGroup, VStack } from '@navikt/ds-react';
 
 import { dagligReiseTekster } from './tekster';
-import Environment from '../api/Environment';
+import { omdirigerTilFyllut } from '../api/useFyllutRedirect';
 import { Container } from '../components/Side';
 import { LocaleReadMore } from '../components/Teksthåndtering/LocaleReadMore';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
@@ -12,8 +12,7 @@ import { SkjematypeFyllUt } from '../typer/stønadstyper';
 
 type RadioButtonValg = 'JA' | 'NEI';
 
-const Forside: React.FC = () => {
-    const env = Environment();
+export const KanBrukeOffentligTransportAvsjekk: React.FC = () => {
     const [svar, setSvar] = useState<RadioButtonValg | undefined>(undefined);
     const [feilmeldingRadio, settFeilmeldingRadio] = useState('');
 
@@ -22,20 +21,24 @@ const Forside: React.FC = () => {
         settFeilmeldingRadio('');
     };
 
-    const startSøknad = () => {
+    async function startSøknad() {
         if (!svar) {
             settFeilmeldingRadio('Du må velge et av alternativene');
             return;
         }
-        if (svar === 'JA') {
-            window.location.replace(env.urlNyFyllUtSøknad(SkjematypeFyllUt.SØKNAD_DAGLIG_REISE));
-        } else {
-            window.location.replace(env.urlGammelSøknad(SkjematypeFyllUt.SØKNAD_DAGLIG_REISE));
-        }
-    };
+        await omdirigerTilFyllut(
+            SkjematypeFyllUt.SØKNAD_DAGLIG_REISE,
+            svar === 'JA' ? 'NY' : 'GAMMEL'
+        );
+    }
 
     return (
         <Container>
+            <VStack gap="2">
+                <Heading size="xlarge" as="h1">
+                    <LocaleTekst tekst={dagligReiseTekster.banner_daglig_reise} />
+                </Heading>
+            </VStack>
             <GuidePanel poster>
                 <Label>
                     <LocaleTekst tekst={dagligReiseTekster.veileder_tittel} />
@@ -66,5 +69,3 @@ const Forside: React.FC = () => {
         </Container>
     );
 };
-
-export default Forside;

@@ -1,4 +1,4 @@
-import { SkjematypeFyllUt, Stønadstype } from '../typer/stønadstyper';
+import { Stønadstype } from '../typer/stønadstyper';
 
 interface EnvironmentProps {
     apiProxyUrl: string;
@@ -7,8 +7,6 @@ interface EnvironmentProps {
     logoutUrl: string;
     sentryUrl?: string;
     urlPapirsøknad: (stønadstype: Stønadstype) => string;
-    urlGammelSøknad: (stønadstype: SkjematypeFyllUt) => string;
-    urlNyFyllUtSøknad: (stønadstype: SkjematypeFyllUt) => string;
     miljø: 'local' | 'preprod' | 'production';
     modellVersjon: IModellversjon;
 }
@@ -17,34 +15,10 @@ interface IModellversjon {
     barnetilsyn: number;
 }
 
-const SkjematypeFyllUtTilGammeltFyllUtSkjema: Record<SkjematypeFyllUt, string> = {
-    SØKNAD_BOUTGIFTER: 'nav111219b',
-    SØKNAD_DAGLIG_REISE: 'nav111221b',
-};
-
-const SkjematypeFyllUtTilNyttFyllUtSkjema: Record<SkjematypeFyllUt, string | undefined> = {
-    SØKNAD_BOUTGIFTER: 'nav111219',
-    SØKNAD_DAGLIG_REISE: 'nav111221',
-};
-
 const StønadstypeTilPapirskjema: Record<Stønadstype, string> = {
     BARNETILSYN: 'nav111215b',
     LÆREMIDLER: 'nav111216b',
 };
-
-const urlNyFyllUtSendInnSøknadProd = (stønadstype: SkjematypeFyllUt) => {
-    return `https://www.nav.no/fyllut/${SkjematypeFyllUtTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
-};
-
-const urlNyFyllUtSendInnSøknadDev = (stønadstype: SkjematypeFyllUt) => {
-    return `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${SkjematypeFyllUtTilNyttFyllUtSkjema[stønadstype]}?sub=digital`;
-};
-
-const urlGammelSøknadProd = (stønadstype: SkjematypeFyllUt) =>
-    `https://www.nav.no/fyllut/${SkjematypeFyllUtTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
-
-const urlGammelSøknadDev = (stønadstype: SkjematypeFyllUt) =>
-    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${SkjematypeFyllUtTilGammeltFyllUtSkjema[stønadstype]}?sub=digital`;
 
 const urlPapirsøknadProd = (stønadstype: Stønadstype) =>
     `https://www.nav.no/fyllut/${StønadstypeTilPapirskjema[stønadstype]}?sub=paper`;
@@ -64,9 +38,7 @@ const Environment = (): EnvironmentProps => {
                 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             logoutUrl: 'https://login.ekstern.dev.nav.no/oauth2/logout',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
-            urlGammelSøknad: urlGammelSøknadDev,
             urlPapirsøknad: urlPapirsøknadDev,
-            urlNyFyllUtSøknad: urlNyFyllUtSendInnSøknadDev,
             miljø: 'preprod',
             modellVersjon: modellVersjon,
         };
@@ -77,9 +49,7 @@ const Environment = (): EnvironmentProps => {
             wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
             logoutUrl: 'https://login.nav.no/oauth2/logout',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
-            urlGammelSøknad: urlGammelSøknadProd,
             urlPapirsøknad: urlPapirsøknadProd,
-            urlNyFyllUtSøknad: urlNyFyllUtSendInnSøknadProd,
             miljø: 'production',
             modellVersjon: modellVersjon,
         };
@@ -89,9 +59,7 @@ const Environment = (): EnvironmentProps => {
             vedleggProxyUrl: 'http://localhost:8080/api/vedlegg/tillegg',
             wonderwallUrl: `http://localhost:8001/test/cookie?redirect=`,
             logoutUrl: 'http://localhost:8000/oauth2/logout',
-            urlGammelSøknad: urlGammelSøknadDev,
             urlPapirsøknad: urlPapirsøknadDev,
-            urlNyFyllUtSøknad: urlNyFyllUtSendInnSøknadDev,
             miljø: 'local',
             modellVersjon: modellVersjon,
         };
