@@ -20,7 +20,7 @@ const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArb
     return (
         <UnderspørsmålContainer>
             <VStack gap="6">
-                <Heading size="medium">
+                <Heading size="medium" level={'2'}>
                     <LocaleTekst tekst={arbeidOgOppholdInnhold.tittel} />
                 </Heading>
                 <GuidePanel>
