@@ -138,7 +138,7 @@ const OppholdListe: React.FC<{
                         <Button
                             variant={'tertiary'}
                             onClick={() => slettOpphold(ulagretOpphold._id)}
-                            icon={<ArrowUndoIcon />}
+                            icon={<ArrowUndoIcon aria-hidden />}
                         >
                             {oppholdUtenforNorgeInnhold.knapp_angre_legg_til[locale]}
                         </Button>
