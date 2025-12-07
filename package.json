@@ -80,7 +80,7 @@
     "i18n-iso-countries": "^7.14.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.4",
+    "react-router-dom": "^7.10.1",
     "styled-components": "^6.1.19",
     "uuid": "^13.0.0"
   },
