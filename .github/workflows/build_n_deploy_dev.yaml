@@ -9,7 +9,7 @@ jobs:
     uses: navikt/tilleggsstonader/.github/workflows/ts-build-and-deploy.yml@main
     with:
       cluster: "dev-gcp"
-      manifest: ".nais/naiserator/dev.yaml"
+      manifest: ".nais/dev.yaml"
       node-version: "20"
     secrets: inherit
     permissions:

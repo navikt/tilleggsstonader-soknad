@@ -4,6 +4,18 @@ on:
   push:
     branches:
       - 'main'
+    paths:
+      - 'src/**'
+      - '.nais/prod.yaml'
+      - '.nais/dev.yaml'
+      - 'webpack/**'
+      - '.dockerignore'
+      - '.npmrc'
+      - '.nvmrc'
+      - 'Dockerfile'
+      - 'package.json'
+      - 'tsconfig.json'
+      - 'yarn.lock'
 
 jobs:
   playwright:
@@ -21,7 +33,7 @@ jobs:
       id-token: write  # Trengs for deploy til GCP
     with:
       prod-cluster: 'prod-gcp'
-      prod-manifest: '.nais/naiserator/prod.yaml'
+      prod-manifest: '.nais/prod.yaml'
       dev-cluster: 'dev-gcp'
-      dev-manifest: '.nais/naiserator/dev.yaml'
+      dev-manifest: '.nais/dev.yaml'
       node-version: "20"
