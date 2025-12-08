@@ -43,6 +43,7 @@ export const forsideTekster: ForsideInnhold = {
             'Du må gi beskjed til oss hvis situasjonen din endrer seg.',
             'Hvis den andre forelderen har søkt om eller mottar stønad til pass av barn, har du ikke rett til samme stønad. Nav gir kun stønad til én forelder.',
             'Hvis du får penger du ikke har rett på, kan vi kreve at du betaler de tilbake.',
+            'De fleste feltene i skjemaet er obligatoriske å fylle ut. Felt som ikke er obligatoriske er merket med: (valgfritt).',
         ],
     },
     utgifter_som_dekkes_tittel: {
