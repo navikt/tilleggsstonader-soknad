@@ -19,5 +19,5 @@ const SKJEMAKODER: Record<SkjematypeFyllUt, { ny: string; gammel: string }> = {
 export const getFyllutUrl = (skjematype: SkjematypeFyllUt, versjon: 'NY' | 'GAMMEL'): string => {
     const skjema = versjon === 'NY' ? SKJEMAKODER[skjematype].ny : SKJEMAKODER[skjematype].gammel;
 
-    return `${miljø.fyllUtUrl}/${skjema}?sub=digital`;
+    return miljø.fyllUtUrl(skjema);
 };
