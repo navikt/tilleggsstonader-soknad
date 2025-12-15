@@ -7,8 +7,10 @@ import { EnumFelt } from '../../typer/skjema';
 import { Radiogruppe, TekstElement } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
-interface RadioGroupProps<T extends string>
-    extends Omit<AkselRadioGroupProps, 'legend' | 'description' | 'children'> {
+interface RadioGroupProps<T extends string> extends Omit<
+    AkselRadioGroupProps,
+    'legend' | 'description' | 'children'
+> {
     tekst: Radiogruppe<T>;
     onChange: (enumFelt: EnumFelt<T>) => void;
     children?: React.ReactNode;

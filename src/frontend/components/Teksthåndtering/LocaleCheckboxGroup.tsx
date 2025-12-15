@@ -11,8 +11,10 @@ import { EnumFlereValgFelt, VerdiFelt } from '../../typer/skjema';
 import { CheckboxGruppe } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
-interface CheckboxGroupProps<T extends string>
-    extends Omit<AkselCheckboxGroupProps, 'onChange' | 'legend' | 'children'> {
+interface CheckboxGroupProps<T extends string> extends Omit<
+    AkselCheckboxGroupProps,
+    'onChange' | 'legend' | 'children'
+> {
     tekst: CheckboxGruppe<T>;
     onChange: (enumFelt: EnumFlereValgFelt<T>) => void;
     children?: React.ReactNode;
