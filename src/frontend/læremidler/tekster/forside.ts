@@ -50,6 +50,7 @@ export const forsideTekster: ForsideInnhold = {
             ],
             'Du må gi beskjed til oss hvis situasjonen din endrer seg, f.eks. hvis du avbryter opplæringen eller utdanningen.',
             'Hvis du får utgiftene til læremidler dekket på annen måte (f.eks. utstyrsstipend fra Lånekassa eller gjennom kursavgiften) har du mest sannsynlig ikke rett til denne pengestøtten.',
+            'De fleste feltene i skjemaet er obligatoriske å fylle ut. Felt som ikke er obligatoriske er merket med: (valgfritt).',
         ],
     },
     mengde_støtte_tittel: {
