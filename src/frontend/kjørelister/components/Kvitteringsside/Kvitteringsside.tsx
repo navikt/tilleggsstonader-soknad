@@ -72,7 +72,7 @@ export const Kvitteringsside = () => {
                 </Heading>
                 <BodyShort>
                     Hvis du ønsker informasjon om hvordan vi behandler kjørelistene din eller
-                    informasjon om vilkårene for støtte til daglig reise, kan du{' '}
+                    informasjon om vilkårene for støtte til daglige reiser, kan du{' '}
                     <Link href={'https://www.nav.no/tilleggsstonader#stotte'}>lese om det her</Link>
                     .
                 </BodyShort>
