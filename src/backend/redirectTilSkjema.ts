@@ -9,7 +9,7 @@ import { BASE_PATH_SOKNAD } from './url';
  * Redirecter brukeren til enten nytt eller gammelt FyllUt-skjema.
  *
  * Hvis [internRouteForNyLøsning] er angitt vil brukeren routes til en intern route i stedet for nytt FyllUt-skjema, noe
- * som er nyttig for eksempelvis daglig reise.
+ * som er nyttig for eksempelvis daglige reiser.
  */
 export const redirectTilSkjema = (
     skjematype: SkjematypeFyllUt,

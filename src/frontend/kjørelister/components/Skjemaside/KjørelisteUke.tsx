@@ -48,7 +48,7 @@ export const KjørelisteUke: React.FC<{ ukeMedReisedag: UkeMedReisedager }> = ({
                     )}
                     {harValgtFlereDagerEnnRammevedtak(rammevedtak, ukeMedReisedag.reisedager) && (
                         <Alert variant="warning">
-                            {`Du har fått innvilget stønad for daglig reise med egen bil for ${rammevedtak.reisedagerPerUke} dager i uken, men du har registrert ${finnAntallDagerReist(ukeMedReisedag.reisedager)} dager. Sjekk at du har fylt inn alt riktig. Hvis det stemmer at du har kjørt flere dager denne uken vil en saksbehandler manuelt behandle saken din.`}
+                            {`Du har fått innvilget stønad for daglige reiser med egen bil for ${rammevedtak.reisedagerPerUke} dager i uken, men du har registrert ${finnAntallDagerReist(ukeMedReisedag.reisedager)} dager. Sjekk at du har fylt inn alt riktig. Hvis det stemmer at du har kjørt flere dager denne uken vil en saksbehandler manuelt behandle saken din.`}
                         </Alert>
                     )}
                 </VStack>

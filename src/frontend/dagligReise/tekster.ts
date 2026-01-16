@@ -9,7 +9,7 @@ export interface DagligReiseInnhold {
 
 export const dagligReiseTekster: DagligReiseInnhold = {
     banner_daglig_reise: {
-        nb: 'Søknad om støtte til daglig reise',
+        nb: 'Søknad om støtte til daglige reiser',
     },
     hvorfor_spør_vi: {
         header: { nb: 'Hvorfor spør vi om dette?' },
