@@ -72,7 +72,7 @@ const cspMap = (): Record<string, string[]> => {
             'nav.boost.ai',
             'survey.skyra.no',
             "'unsafe-inline'",
-            '"unsafe-eval"',
+            "'unsafe-eval'",
             // └────────────────────────────────┘
         ],
 
