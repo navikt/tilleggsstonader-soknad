@@ -12,22 +12,20 @@ export async function applyCspDirectives(_: Request, res: Response, next: NextFu
 }
 
 export function logCspViolation(req: Request, res: Response) {
-    const violationReport = extractCspReport(req.body);
+    const violationReport = Array.isArray(req.body) ? req.body[0] : req.body;
     if (!violationReport) {
         logger.warn('CSP violation with empty payload');
         res.status(204).end();
         return;
     }
 
-    const { body, type } = violationReport;
-    const blockedURL = body?.blockedURL ?? body?.['csp-report']?.blockedURI ?? 'unknown';
-    const documentURL = body?.documentURL ?? body?.['csp-report']?.documentURI ?? 'unknown';
-    const violatedDirective =
-        body?.violatedDirective ?? body?.['csp-report']?.violatedDirective ?? 'unknown';
-    const sourceFile = body?.sourceFile ?? body?.['csp-report']?.sourceFile ?? 'unknown';
+    const { body } = violationReport;
+    const blockedURL = body?.blockedURL ?? 'unknown';
+    const documentURL = body?.documentURL ?? 'unknown';
+    const violatedDirective = body?.violatedDirective ?? 'unknown';
+    const sourceFile = body?.sourceFile ?? 'unknown';
 
     const message = {
-        format: type === 'csp-violation' ? 'modern' : 'legacy',
         blockedURL,
         documentURL,
         violatedDirective,
@@ -37,22 +35,6 @@ export function logCspViolation(req: Request, res: Response) {
     logger.warn('CSP violation', message);
 
     res.status(204).end();
-}
-
-function extractCspReport(payload: Request['body']) {
-    if (!payload) {
-        return undefined;
-    }
-
-    if (Array.isArray(payload) && payload.length > 0) {
-        return payload[0];
-    }
-
-    if ('csp-report' in payload) {
-        return { body: payload['csp-report'], type: 'legacy' };
-    }
-
-    return undefined;
 }
 
 const cspMap = (): Record<string, string[]> => {
