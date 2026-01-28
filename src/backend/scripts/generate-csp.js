@@ -9,7 +9,14 @@ const __dirname = path.dirname(__filename);
 
 // App-spesifikke CSP-direktiver (ikke fra dekoratøren)
 const appDirectives = {
-    'connect-src': ['m3pb011r.apicdn.sanity.io', 'sentry.gc.nav.no'],
+    'default-src': ["'self'"],
+    'script-src': ["'self'"],
+    'script-src-elem': ["'self'"],
+    'style-src': ["'self'"],
+    'style-src-elem': ["'self'"],
+    'img-src': ["'self'", 'data:'],
+    'connect-src': ["'self'", 'm3pb011r.apicdn.sanity.io', 'sentry.gc.nav.no'],
+    'font-src': ["'self'"],
 };
 
 /**
@@ -21,8 +28,8 @@ function escapeForSingleQuotedTsString(value) {
         switch (ch) {
             case '\\':
                 return '\\\\';
-            case '\'':
-                return '\\\'';
+            case "'":
+                return "\\'";
             case '\n':
                 return '\\n';
             case '\r':
@@ -57,7 +64,7 @@ async function generateCspHeaders() {
 
         // Generer TypeScript-filinnhold
         const fileContent = `
-        // Denne filen er auto-generert av scripts/generate-csp.ts
+        // Denne filen er auto-generert av scripts/generate-csp.js
         // Ikke rediger manuelt - endringer vil bli overskrevet ved neste bygg
 
         export const DEV_CSP = '${escapeForSingleQuotedTsString(devCsp)}';
