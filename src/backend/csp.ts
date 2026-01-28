@@ -110,6 +110,7 @@ const cspMap = (): Record<string, string[]> => {
             '*.hotjar.com',
             '*.hotjar.io',
             '*.taskanalytics.com',
+            '*.skyra.no',
             // └────────────────────────────────┘
         ],
 
