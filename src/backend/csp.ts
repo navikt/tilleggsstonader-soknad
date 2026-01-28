@@ -34,7 +34,7 @@ export function logCspViolation(req: Request, res: Response) {
         sourceFile,
     };
 
-    logger.warn('CSP violation', JSON.stringify(message, null, 2));
+    logger.warn('CSP violation', message);
 
     res.status(204).end();
 }
