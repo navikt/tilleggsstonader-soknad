@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "ci": "yarn --prefer-offline --frozen-lockfile",
+    "prebuild": "node scripts/generate-csp.js",
     "build": "tsc --build --verbose",
     "start": "NODE_ENV=production node --import=./build/register.js --es-module-specifier-resolution=node build/server.js",
     "start:dev": "NODE_ENV=development ENV=localhost node --import=./build/register.js --es-module-specifier-resolution=node build/server.js"
