@@ -79,7 +79,7 @@ const routes = () => {
 
     expressRouter.post(
         `${BASE_PATH_SOKNAD}/reporting/csp-violation`,
-        express.json({ type: 'application/reports+json' }),
+        express.json({ type: ['application/reports+json', 'application/csp-report'] }),
         logCspViolation
     );
 
