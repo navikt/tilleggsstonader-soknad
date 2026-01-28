@@ -80,7 +80,7 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@navikt/nav-dekoratoren-moduler@^3.4.0":
+"@navikt/nav-dekoratoren-moduler@^3.6.1":
   version "3.6.1"
   resolved "https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/3.6.1/b0dfb47266ce90ffacd1905cd4feb53d8194dbcb#b0dfb47266ce90ffacd1905cd4feb53d8194dbcb"
   integrity sha512-vfq24tA2eKEsZ9/qRzobRlrKV5NUbSuI9FA60AUhH+BX+61WE/ZsvHhNbFiO9NlXg/yYLmVZCg1uJB5V4QnU7A==
