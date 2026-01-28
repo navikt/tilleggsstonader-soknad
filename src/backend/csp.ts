@@ -70,6 +70,7 @@ const cspMap = (): Record<string, string[]> => {
             '*.taskanalytics.com',
             '*.hotjar.com',
             'nav.boost.ai',
+            'survey.skyra.no',
             "'unsafe-inline'",
             '"unsafe-eval"',
             // └────────────────────────────────┘
@@ -85,6 +86,7 @@ const cspMap = (): Record<string, string[]> => {
             '*.hotjar.com',
             '*.taskanalytics.com',
             'nav.boost.ai',
+            'survey.skyra.no',
             "'unsafe-inline'",
             // └────────────────────────────────┘
         ],
@@ -117,7 +119,6 @@ const cspMap = (): Record<string, string[]> => {
         'connect-src': [
             "'self'",
             'm3pb011r.apicdn.sanity.io',
-            'amplitude.nav.no',
             'sentry.gc.nav.no',
             // ┌────────── Dekoratøren ──────────┐
             '*.nav.no',
