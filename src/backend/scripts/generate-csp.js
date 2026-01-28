@@ -12,6 +12,29 @@ const appDirectives = {
     'connect-src': ['m3pb011r.apicdn.sanity.io', 'sentry.gc.nav.no'],
 };
 
+/**
+ * Escape a string so it can be safely embedded inside a single-quoted
+ * TypeScript/JavaScript string literal.
+ */
+function escapeForSingleQuotedTsString(value) {
+    return String(value).replace(/['\\\n\r\t]/g, (ch) => {
+        switch (ch) {
+            case '\\':
+                return '\\\\';
+            case '\'':
+                return '\\\'';
+            case '\n':
+                return '\\n';
+            case '\r':
+                return '\\r';
+            case '\t':
+                return '\\t';
+            default:
+                return ch;
+        }
+    });
+}
+
 async function generateCspHeaders() {
     try {
         // Hent CSP for begge miljøer med timeout
@@ -37,8 +60,8 @@ async function generateCspHeaders() {
         // Denne filen er auto-generert av scripts/generate-csp.ts
         // Ikke rediger manuelt - endringer vil bli overskrevet ved neste bygg
 
-        export const DEV_CSP = '${devCsp.replace(/'/g, "\\'")}';
-        export const PROD_CSP = '${prodCsp.replace(/'/g, "\\'")}';
+        export const DEV_CSP = '${escapeForSingleQuotedTsString(devCsp)}';
+        export const PROD_CSP = '${escapeForSingleQuotedTsString(prodCsp)}';
         `;
 
         const outputPath = path.resolve(__dirname, '../generated/csp-headers.ts');
