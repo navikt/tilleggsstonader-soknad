@@ -12,27 +12,27 @@
   "dependencies": {
     "@navikt/nav-dekoratoren-moduler": "^3.6.1",
     "cookie-parser": "^1.4.7",
-    "csp-header": "^6.1.0",
+    "csp-header": "^6.3.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "express-http-proxy": "^2.0.0",
-    "html-react-parser": "^5.2.5",
+    "html-react-parser": "^5.2.14",
     "http-proxy-middleware": "^3.0.5",
-    "jsdom": "^26.1.0",
-    "jsonwebtoken": "9.0.2",
+    "jsdom": "^27.4.0",
+    "jsonwebtoken": "9.0.3",
     "node-jose": "2.2.0",
-    "openid-client": "6.7.1",
-    "react": "^19.1.0",
+    "openid-client": "6.8.1",
+    "react": "^19.2.4",
     "typescript": "^5.9.2",
-    "uuid": "^11.1.0",
+    "uuid": "^13.0.0",
     "winston": "^3.17.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^25.1.0",
     "@types/node-jose": "^1.1.10",
-    "@types/uuid": "^10.0.0",
     "ts-node": "^10.9.2"
   }
 }
