@@ -1,4 +1,4 @@
-name: Bygg og deploy app til dev
+name: Manuell deploy av app til dev
 
 on:
   workflow_dispatch:

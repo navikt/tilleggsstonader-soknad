@@ -1,4 +1,4 @@
-name: Bygg app
+name: Bygg app og kjør Playwright-tester
 
 on:
   pull_request:
@@ -7,12 +7,16 @@ on:
 jobs:
   build:
     name: "Bygger appen"
+    permissions:
+      contents: read
     uses: navikt/tilleggsstonader/.github/workflows/ts-build.yml@main
     secrets: inherit
     with:
       node-version: "20"
   playwright:
     name: Kjører Playwright-tester
+    permissions:
+      contents: read
     uses: navikt/tilleggsstonader/.github/workflows/run-playwright.yml@main
     secrets: inherit
     with:

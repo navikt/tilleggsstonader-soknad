@@ -1,4 +1,4 @@
-name: Bygg og deploy til prod og dev
+name: Bygg og deploy til dev og prod
 
 on:
   push:
@@ -20,6 +20,8 @@ on:
 jobs:
   playwright:
     name: Tester app med Playwright
+    permissions:
+      contents: read
     uses: navikt/tilleggsstonader/.github/workflows/run-playwright.yml@main
     secrets: inherit
     with:
