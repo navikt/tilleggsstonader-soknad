@@ -22,7 +22,7 @@ const compat = new FlatCompat({
 
 export default [
     {
-        ignores: ['src/backend/build/*'],
+        ignores: ['src/backend/build/*', 'node_modules/*', 'dist_*/*', '.nais/*'],
     },
     ...fixupConfigRules(
         compat.extends(
