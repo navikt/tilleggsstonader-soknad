@@ -94,6 +94,7 @@ const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
         };
     });
     return {
+        reiseId: rammevedtak.reiseId,
         reisedagerPerUkeAvsnitt: reisedagerPerUkeAvsnitt,
         dokumentasjon: [
             {

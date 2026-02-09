@@ -1,5 +1,5 @@
 export interface Rammevedtak {
-    id: string;
+    reiseId: string;
     fom: string;
     tom: string;
     reisedagerPerUke: number;

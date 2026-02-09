@@ -15,15 +15,15 @@ import { KjørelisteProvider } from './KjørelisteContext';
 import { ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 
 export const KjørelisteInnhold = () => {
-    const kjørelisteId = useParams<{ kjorelisteId: string }>().kjorelisteId as string;
+    const reiseId = useParams<{ reiseId: string }>().reiseId as string;
 
     const {
         isPending,
         error,
         data: rammevedtak,
     } = useQuery({
-        queryKey: [`rammevedtakDetaljer:${kjørelisteId}`],
-        queryFn: () => hentRammevedtak(kjørelisteId),
+        queryKey: [`rammevedtakDetaljer:${reiseId}`],
+        queryFn: () => hentRammevedtak(reiseId),
     });
 
     if (isPending) {

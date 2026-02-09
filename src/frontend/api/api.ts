@@ -93,10 +93,10 @@ export const hentAlleRammevedtak = (): Promise<Rammevedtak[]> => {
         .then((response) => response.data);
 };
 
-export const hentRammevedtak = (rammevedtakId: string): Promise<Rammevedtak> => {
+export const hentRammevedtak = (reiseId: string): Promise<Rammevedtak> => {
     return axios
         .get<Rammevedtak>(
-            `${Environment().apiProxyUrl}/kjorelister/rammevedtak/${rammevedtakId}`,
+            `${Environment().apiProxyUrl}/kjorelister/rammevedtak/${reiseId}`,
             defaultConfig()
         )
         .then((response) => response.data);

@@ -2,6 +2,7 @@ import { DokumentasjonFelt, VerdiFelt } from '../../typer/skjema';
 import { SøknadMetadata } from '../../typer/søknad';
 
 export interface Kjøreliste {
+    reiseId: string;
     reisedagerPerUkeAvsnitt: UkeMedReisedager[];
     dokumentasjon: DokumentasjonFelt[];
     søknadMetadata: SøknadMetadata;

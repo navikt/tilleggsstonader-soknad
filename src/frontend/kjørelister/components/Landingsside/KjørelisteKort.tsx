@@ -11,7 +11,7 @@ export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammev
         <LinkCard>
             <LinkCard.Title as="h3">
                 <LinkCard.Anchor
-                    href={`/tilleggsstonader/soknad${finnPath(rammevedtak.id, KjørelisteRoutes.SKJEMA)}/`}
+                    href={`/tilleggsstonader/soknad${finnPath(rammevedtak.reiseId, KjørelisteRoutes.SKJEMA)}/`}
                 >
                     {rammevedtak.aktivitetsnavn}
                 </LinkCard.Anchor>
