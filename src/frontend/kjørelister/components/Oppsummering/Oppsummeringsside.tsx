@@ -14,7 +14,7 @@ import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';
 
 export const Oppsummeringsside = () => {
     const navigate = useNavigate();
-    const kjørelisteId = useParams<{ reiseId: string }>().reiseId as string;
+    const reiseId = useParams<{ reiseId: string }>().reiseId as string;
 
     const [brukerAkseptererVilkår, settBrukerAkseptererVilkår] = useState(false);
     const [brukerAkseptererIkkeVilkårFeil, settBrukerAkseptererIkkeVilkårfeil] = useState(false);
@@ -28,7 +28,7 @@ export const Oppsummeringsside = () => {
     } = useMutation({
         mutationFn: () => sendInnKjøreliste(kjøreliste),
         onSuccess: (res) => {
-            navigate(finnPath(kjørelisteId, KjørelisteRoutes.KVITTERING), {
+            navigate(finnPath(reiseId, KjørelisteRoutes.KVITTERING), {
                 state: {
                     mottattTidspunkt: res.mottattTidspunkt,
                     saksnummer: res.saksnummer,

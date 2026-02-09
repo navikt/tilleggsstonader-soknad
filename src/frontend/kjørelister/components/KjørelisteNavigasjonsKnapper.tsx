@@ -28,7 +28,7 @@ export const KjørelisteNavigasjonsKnapper = ({
 }: KjørelisteNavigasonsKnapperProps) => {
     const navigate = useNavigate();
     const { valideringsfeil } = useValideringsfeil();
-    const kjørelisteId = useParams<{ kjorelisteId: string }>().kjorelisteId as string;
+    const reiseId = useParams<{ reiseId: string }>().reiseId as string;
     const errorRef = useRef<HTMLDivElement>(null);
 
     const harValideringsfeil = inneholderFeil(valideringsfeil);
@@ -38,7 +38,7 @@ export const KjørelisteNavigasjonsKnapper = ({
             return;
         }
 
-        navigate(finnPath(kjørelisteId, nesteSide));
+        navigate(finnPath(reiseId, nesteSide));
     };
 
     return (
@@ -59,7 +59,7 @@ export const KjørelisteNavigasjonsKnapper = ({
                 <Button
                     variant={'secondary'}
                     icon={<ArrowLeftIcon />}
-                    onClick={() => navigate(finnPath(kjørelisteId, forrigeSide))}
+                    onClick={() => navigate(finnPath(reiseId, forrigeSide))}
                 >
                     Forrige steg
                 </Button>
