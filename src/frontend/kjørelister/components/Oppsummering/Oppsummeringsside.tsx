@@ -14,7 +14,7 @@ import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';
 
 export const Oppsummeringsside = () => {
     const navigate = useNavigate();
-    const kjørelisteId = useParams<{ kjorelisteId: string }>().kjorelisteId as string;
+    const kjørelisteId = useParams<{ reiseId: string }>().reiseId as string;
 
     const [brukerAkseptererVilkår, settBrukerAkseptererVilkår] = useState(false);
     const [brukerAkseptererIkkeVilkårFeil, settBrukerAkseptererIkkeVilkårfeil] = useState(false);

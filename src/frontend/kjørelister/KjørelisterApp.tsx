@@ -31,7 +31,7 @@ export const KjørelisterApp = () => {
                     <KjørelisteHeader />
                     <Routes>
                         <Route path="/" element={<Landingsside />} />
-                        <Route path={'/:kjorelisteId/*'} element={<KjørelisteInnhold />} />
+                        <Route path={'/:reiseId/*'} element={<KjørelisteInnhold />} />
                     </Routes>
                 </VStack>
             </Container>
