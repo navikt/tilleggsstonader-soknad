@@ -46,6 +46,18 @@ export async function applyCspDirectives(_: Request, res: Response, next: NextFu
     next();
 }
 
+// Domener vi eksplisitt har bestemt oss for at skal blokkeres av CSP. Ignorerer dem for ikke å
+// spammed ned CSP-reportloggene.
+const IGNORERTE_CSP_DOMENER = [
+    'translate.google.com',
+    'translate.googleapis.com',
+    'fonts.gstatic.com', // Google Translate-ikon
+];
+
+function shouldReportViolation(blockedURL: string): boolean {
+    return !IGNORERTE_CSP_DOMENER.some((domain) => blockedURL.includes(domain));
+}
+
 export function logCspViolation(req: Request, res: Response) {
     const violationReport = Array.isArray(req.body) ? req.body[0] : req.body;
     if (!violationReport) {
@@ -62,14 +74,14 @@ export function logCspViolation(req: Request, res: Response) {
     const violatedDirective = body?.violatedDirective ?? 'unknown';
     const sourceFile = body?.sourceFile ?? 'unknown';
 
-    const message = {
-        blockedURL,
-        documentURL,
-        violatedDirective,
-        sourceFile,
-    };
-
-    logger.warn('CSP violation', message);
+    if (shouldReportViolation(blockedURL)) {
+        logger.warn('CSP violation', {
+            blockedURL,
+            documentURL,
+            violatedDirective,
+            sourceFile,
+        });
+    }
 
     res.status(204).end();
 }
