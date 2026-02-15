@@ -30,7 +30,7 @@
     "@babel/preset-react": "^7.28.5",
     "@eslint/compat": "^2.0.1",
     "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.39.1",
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.58.0",
     "@sentry/types": "^10.36.0",
     "@types/node": "^25.0.10",
