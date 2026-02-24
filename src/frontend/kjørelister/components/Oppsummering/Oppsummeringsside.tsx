@@ -6,11 +6,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { BodyLong, Checkbox, ErrorMessage, GuidePanel, Heading, HStack } from '@navikt/ds-react';
 
 import { OppsummeringUke } from './OppsummeringUke';
-import { useKjøreliste } from '../../KjørelisteContext';
-import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 import { VedleggOppsummering } from './VedleggOppsummering';
 import { sendInnKjøreliste } from '../../../api/api';
+import { useKjøreliste } from '../../KjørelisteContext';
 import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';
+import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 
 export const Oppsummeringsside = () => {
     const navigate = useNavigate();
@@ -26,7 +26,15 @@ export const Oppsummeringsside = () => {
         isPending: laster,
         error,
     } = useMutation({
-        mutationFn: () => sendInnKjøreliste(kjøreliste),
+        mutationFn: () => {
+            const kjørelisteMedKjørteDager = {
+                ...kjøreliste,
+                reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.filter((uke) =>
+                    uke.reisedager.some((reisedag) => reisedag.harKjørt)
+                ),
+            };
+            return sendInnKjøreliste(kjørelisteMedKjørteDager);
+        },
         onSuccess: (res) => {
             navigate(finnPath(reiseId, KjørelisteRoutes.KVITTERING), {
                 state: {
