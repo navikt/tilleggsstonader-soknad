@@ -8,16 +8,16 @@ export const OppsummeringDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) 
     if (!reisedag || !reisedag.harKjørt) {
         return null;
     }
-
     return (
         <FormSummary.Answer>
             <FormSummary.Label>{reisedag.dato.label}</FormSummary.Label>
-            <FormSummary.Value>
-                Har reist
-                {reisedag.parkeringsutgift.verdi !== 0
-                    ? `, med parkeringsutgift ${reisedag.parkeringsutgift.verdi}kr.`
-                    : '.'}
-            </FormSummary.Value>
+            {reisedag.parkeringsutgift.verdi != null ? (
+                <FormSummary.Value>
+                    Har reist{`, med parkeringsutgift ${reisedag.parkeringsutgift.verdi} kr.`}
+                </FormSummary.Value>
+            ) : (
+                <FormSummary.Value>Har reist uten parkeringsutgift.</FormSummary.Value>
+            )}
         </FormSummary.Answer>
     );
 };
