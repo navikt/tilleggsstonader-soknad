@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useNavigate } from 'react-router';
+
 import { FormSummary } from '@navikt/ds-react';
 
 import { OppsummeringDag } from './OppsummeringDag';
@@ -10,9 +12,15 @@ import { UkeMedReisedager } from '../../types/Kjøreliste';
 export const OppsummeringUke: React.FC<{ ukeMedReisedager: UkeMedReisedager }> = ({
     ukeMedReisedager,
 }) => {
+    const navigate = useNavigate();
+
     if (!harReist(ukeMedReisedager.reisedager)) {
         return null;
     }
+
+    const handleNavigate = () => {
+        navigate(KjørelisteRoutes.SKJEMA);
+    };
 
     return (
         <FormSummary>
@@ -25,7 +33,7 @@ export const OppsummeringUke: React.FC<{ ukeMedReisedager: UkeMedReisedager }> =
                 ))}
             </FormSummary.Answers>
             <FormSummary.Footer>
-                <FormSummary.EditLink href={KjørelisteRoutes.SKJEMA} />
+                <FormSummary.EditLink onClick={handleNavigate} style={{ cursor: 'pointer' }} />
             </FormSummary.Footer>
         </FormSummary>
     );

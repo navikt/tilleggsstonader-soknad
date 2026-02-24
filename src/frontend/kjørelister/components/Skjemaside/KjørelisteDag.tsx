@@ -42,6 +42,12 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) =
                     inputMode={'numeric'}
                     type={'number'}
                     min={0}
+                    value={
+                        reisedag.parkeringsutgift.verdi !== null &&
+                        reisedag.parkeringsutgift.verdi !== undefined
+                            ? reisedag.parkeringsutgift.verdi
+                            : ''
+                    }
                     error={erNegativUtgift() && 'Utgiften må være større enn 0'}
                     onChange={(e) =>
                         oppdaterParkeringsutgift(reisedag.dato.verdi, Number(e.target.value))
