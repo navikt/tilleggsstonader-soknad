@@ -16,17 +16,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
     baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all,
 });
 
 export default [
     {
         ignores: ['src/backend/build/*', 'node_modules/*', 'dist_*/*', '.nais/*'],
     },
+    js.configs.recommended,
     ...fixupConfigRules(
         compat.extends(
-            'eslint:recommended',
             'plugin:jsx-a11y/recommended',
             'plugin:@typescript-eslint/recommended',
             'plugin:prettier/recommended',
