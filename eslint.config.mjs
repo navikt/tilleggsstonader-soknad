@@ -24,9 +24,9 @@ export default [
     {
         ignores: ['src/backend/build/*', 'node_modules/*', 'dist_*/*', '.nais/*'],
     },
+    js.configs.recommended,
     ...fixupConfigRules(
         compat.extends(
-            'eslint:recommended',
             'plugin:jsx-a11y/recommended',
             'plugin:@typescript-eslint/recommended',
             'plugin:prettier/recommended',
