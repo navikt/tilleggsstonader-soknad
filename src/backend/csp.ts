@@ -37,7 +37,7 @@ export async function applyCspDirectives(_: Request, res: Response, next: NextFu
             timeoutPromise,
         ]);
 
-        res.header('Content-Security-Policy-Report-Only', cspHeader + '; report-to csp-violation');
+        res.header('Content-Security-Policy', cspHeader + '; report-to csp-violation');
         res.header('Reporting-Endpoints', `csp-violation="${rapporteringsendepunkt}"`);
     } catch (error) {
         logger.warn('Kunne ikke hente CSP-headere fra dekoratøren. Fortsetter uten CSP.', error);
