@@ -85,6 +85,7 @@
     "uuid": "^13.0.0"
   },
   "resolutions": {
-    "styled-components": "^6"
+    "styled-components": "^6",
+    "qs": "^6.15.0"
   }
 }
