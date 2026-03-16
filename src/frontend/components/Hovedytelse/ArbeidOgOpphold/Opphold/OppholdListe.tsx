@@ -125,7 +125,7 @@ const OppholdListe: React.FC<{
 
     const harLagredeOgUlagretOpphold = lagredeOpphold.length > 0 && ulagretOpphold;
     return (
-        <BlåVenstreRammeContainer gap="6">
+        <BlåVenstreRammeContainer gap="space-24">
             <LagredeOpphold
                 lagredeOpphold={oppholdUtenforNorge.filter((opphold) => opphold.lagret)}
                 slettOpphold={slettOpphold}

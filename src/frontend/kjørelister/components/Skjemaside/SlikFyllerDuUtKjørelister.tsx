@@ -4,7 +4,7 @@ import { Box, Heading, List, VStack } from '@navikt/ds-react';
 
 export const SlikFyllerDuUtKjørelister = () => {
     return (
-        <VStack gap="2">
+        <VStack gap="space-8">
             <Heading size={'medium'}>Slik fyller du ut kjørelister</Heading>
             <Box marginBlock="space-16" asChild>
                 <List data-aksel-migrated-v8 as="ul">

@@ -29,7 +29,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
 
     return (
         <Container>
-            <VStack gap="4">
+            <VStack gap="space-16">
                 <Alert variant="info">
                     <Heading size="medium">
                         <LocaleTekst
@@ -44,7 +44,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     </Heading>
                 </Alert>
             </VStack>
-            <VStack gap="4">
+            <VStack gap="space-16">
                 <Heading size="medium">
                     <LocaleTekst tekst={harEksisterendeBehandlingTekster.spørsmål_om_søknaden} />
                 </Heading>
@@ -57,7 +57,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     <LocaleInlineLenke tekst={kvitteringTekster.kontakt_oss_innhold} />
                 </BodyLong>
             </VStack>
-            <VStack gap="4">
+            <VStack gap="space-16">
                 <Heading size="medium">
                     <LocaleTekst
                         tekst={harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad}
@@ -73,7 +73,7 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     />
                 </BodyLong>
             </VStack>
-            <HStack gap={'4'} justify="start">
+            <HStack gap="space-16" justify="start">
                 <Button
                     variant="secondary"
                     onClick={() => {

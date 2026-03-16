@@ -8,7 +8,7 @@ import { useKjøreliste } from '../../KjørelisteContext';
 export const KjørelisteMetadata = () => {
     const { rammevedtak } = useKjøreliste();
     return (
-        <VStack gap={'2'}>
+        <VStack gap="space-8">
             <Heading size={'medium'}>Denne kjørelisten gjelder</Heading>
             <BodyShort weight={'semibold'}>{rammevedtak.aktivitetsnavn}</BodyShort>
             <BodyShort>{formaterPeriodeTekstlig(rammevedtak.fom, rammevedtak.tom)}</BodyShort>

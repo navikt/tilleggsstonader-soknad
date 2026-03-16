@@ -188,7 +188,7 @@ const Aktivitet = () => {
             )}
             {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
                 <UnderspørsmålContainer>
-                    <VStack gap={'6'}>
+                    <VStack gap="space-24">
                         {skalViseAnnenAktivitet && (
                             <AnnenArbeidsrettetAktivitet
                                 tekst={aktivitetTekster.radio_annet}

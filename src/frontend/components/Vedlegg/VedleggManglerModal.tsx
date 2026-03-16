@@ -23,7 +23,7 @@ const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }
     return (
         <Modal ref={innerRef} header={{ heading: vedleggModalTekster.heading[locale] }}>
             <Modal.Body>
-                <HStack gap="6">
+                <HStack gap="space-24">
                     <div>
                         <Heading as="h3" size="small">
                             {vedleggModalTekster.punktliste_tittel[locale]}

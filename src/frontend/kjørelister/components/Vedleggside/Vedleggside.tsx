@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Alert, Heading, VStack } from '@navikt/ds-react';
 
-import { KjørelisteRoutes } from '../../kjørelisteRoutes';
-import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 import { finnVedleggMedParkeringsutgifter, harUtgiftOver100kr } from './VedleggUtils';
 import { Filopplaster } from '../../../components/Filopplaster/Filopplaster';
 import { Dokument } from '../../../typer/skjema';
 import { useKjøreliste } from '../../KjørelisteContext';
+import { KjørelisteRoutes } from '../../kjørelisteRoutes';
+import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 
 export const Vedleggside = () => {
     const { kjøreliste, oppdaterDokumentasjon } = useKjøreliste();
@@ -25,8 +25,8 @@ export const Vedleggside = () => {
     };
 
     return (
-        <VStack gap={'8'}>
-            <VStack gap={'2'}>
+        <VStack gap="space-32">
+            <VStack gap="space-8">
                 <Heading size={'medium'} level={'2'}>
                     Vedlegg
                 </Heading>

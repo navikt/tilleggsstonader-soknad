@@ -30,7 +30,7 @@ export const ErLærlingEllerLiknende: React.FC<Props> = ({
             error={feilmelding?.melding}
         >
             <LocaleReadMoreMedChildren header={utdanningTekster.les_mer_lærling_etc.header}>
-                <VStack gap="5">
+                <VStack gap="space-20">
                     <BodyLong>
                         <LocaleInlineLenke
                             tekst={utdanningTekster.les_mer_lærling_etc.innhold_lærling}

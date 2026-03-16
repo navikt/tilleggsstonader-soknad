@@ -23,7 +23,7 @@ export const Header: React.FC<{ tittel: TekstElement<string> }> = ({ tittel }) =
 
     return (
         <Container>
-            <VStack gap="2">
+            <VStack gap="space-8">
                 <BodyShort>{stønadstypeTilSkjemaId[stønadstype]}</BodyShort>
                 <Heading size="xlarge" as="h1">
                     <LocaleTekst tekst={tittel} />

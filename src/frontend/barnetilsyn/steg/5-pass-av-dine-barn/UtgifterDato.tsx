@@ -68,7 +68,7 @@ const UtgifterDato: React.FC<Props> = ({
 
     return (
         <>
-            <HStack gap={'4'}>
+            <HStack gap="space-16">
                 <DatePicker {...datepickerPropsFom}>
                     <DatePicker.Input
                         id={valideringsfeil[errorKeyUtgifterFom(barn)]?.id}

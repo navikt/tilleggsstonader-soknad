@@ -59,7 +59,7 @@ const BarnepassSpørsmål: React.FC<Props> = ({
         nullstillValideringsfeil(errorKeyHarUtgifter(barn));
     };
     return (
-        <VStack gap={'6'}>
+        <VStack gap="space-24">
             <LocaleRadioGroup
                 id={valideringsfeil[errorKeyHvemPasser(barn)]?.id}
                 tekst={barnepassTekster.hvem_passer_radio}

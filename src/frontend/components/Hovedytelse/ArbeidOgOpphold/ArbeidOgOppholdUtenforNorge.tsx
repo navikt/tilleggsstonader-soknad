@@ -19,7 +19,7 @@ interface Props {
 const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
     return (
         <UnderspørsmålContainer>
-            <VStack gap="6">
+            <VStack gap="space-24">
                 <Heading size="medium" level={'2'}>
                     <LocaleTekst tekst={arbeidOgOppholdInnhold.tittel} />
                 </Heading>

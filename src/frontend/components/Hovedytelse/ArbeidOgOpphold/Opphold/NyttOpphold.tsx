@@ -95,7 +95,7 @@ const NyttOpphold: React.FC<{
             />
             <VStack>
                 <Label>{tekster.dato.label[locale]}</Label>
-                <HStack gap={'4'}>
+                <HStack gap="space-16">
                     <DatePicker {...datepickerPropsFom}>
                         <DatePicker.Input
                             id={valideringsfeil[errorKeyFom(keyOpphold)]?.id}

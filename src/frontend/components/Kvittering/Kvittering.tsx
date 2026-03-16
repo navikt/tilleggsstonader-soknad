@@ -36,7 +36,7 @@ const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) =>
 
     return (
         <Container>
-            <VStack gap="4">
+            <VStack gap="space-16">
                 <LocaleHeading tekst={kvitteringTekster.tittel} size="large" level="2" />
                 <Alert variant="success">
                     <LocaleTekst tekst={kvitteringTekster.søknad_innsendt_alert} />
@@ -62,7 +62,7 @@ const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) =>
             >
                 <LocaleTekst tekst={kvitteringTekster.se_søknad_knapp} />
             </Button>
-            <VStack gap="4">
+            <VStack gap="space-16">
                 <LocaleHeading
                     tekst={kvitteringTekster.behandlingstid_tittel}
                     size="medium"
@@ -72,7 +72,7 @@ const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) =>
                     <LocaleInlineLenke tekst={kvitteringTekster.behandlingstid_innhold} />
                 </BodyLong>
             </VStack>
-            <VStack gap="4">
+            <VStack gap="space-16">
                 <LocaleHeading
                     tekst={kvitteringTekster.kontakt_oss_tittel}
                     size="medium"
@@ -82,13 +82,13 @@ const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) =>
                     <LocaleInlineLenke tekst={kvitteringTekster.kontakt_oss_innhold} />
                 </BodyLong>
             </VStack>
-            <VStack gap="4">
+            <VStack gap="space-16">
                 <LocaleHeading tekst={kvitteringTekster.vilkår_tittel} size="medium" level="3" />
                 <BodyLong>
                     <LocaleInlineLenke tekst={kvitteringTekster.vilkår_innhold} />
                 </BodyLong>
             </VStack>
-            <VStack gap="4">
+            <VStack gap="space-16">
                 <LocaleHeading
                     tekst={kvitteringTekster.relevante_stønader_tittel}
                     level="3"

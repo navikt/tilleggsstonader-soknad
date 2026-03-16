@@ -22,7 +22,7 @@ export const KjørelisteUke: React.FC<{ ukeMedReisedag: UkeMedReisedager }> = ({
         <Accordion.Item>
             <WideAccordionHeader>
                 <HStack justify={'space-between'}>
-                    <HStack gap={'2'}>{ukeMedReisedag.ukeLabel}</HStack>
+                    <HStack gap="space-8">{ukeMedReisedag.ukeLabel}</HStack>
                     {harReist(ukeMedReisedag.reisedager) ? (
                         <Tag variant={'warning'} size={'small'}>
                             Påbegynt
@@ -35,7 +35,7 @@ export const KjørelisteUke: React.FC<{ ukeMedReisedag: UkeMedReisedager }> = ({
                 </HStack>
             </WideAccordionHeader>
             <Accordion.Content>
-                <VStack gap={'2'}>
+                <VStack gap="space-8">
                     <BodyShort weight={'semibold'}>{ukeMedReisedag.spørsmål}</BodyShort>
                     {ukeMedReisedag.reisedager.map((reisedag) => (
                         <KjørelisteDag key={reisedag.dato.verdi} reisedag={reisedag} />

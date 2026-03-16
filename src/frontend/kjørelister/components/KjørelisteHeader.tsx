@@ -4,7 +4,7 @@ import { BodyShort, Heading, VStack } from '@navikt/ds-react';
 
 export const KjørelisteHeader = () => {
     return (
-        <VStack gap="2">
+        <VStack gap="space-8">
             {/*TODO kan erstattes av components/Header.tsx med litt refaktorering*/}
             <BodyShort>NAV 11-12.16</BodyShort>
             <Heading size="xlarge" as="h1">

@@ -25,7 +25,7 @@ const LagredeOpphold: React.FC<{
                 <Label>{oppholdUtenforNorgeInnhold.dineOpphold[locale]}</Label>
             )}
             {lagredeOpphold.map((opphold) => (
-                <VisningAvOpphold key={opphold._id} gap={'1'}>
+                <VisningAvOpphold key={opphold._id} gap="space-4">
                     <BodyShort weight={'semibold'}>{opphold.land?.svarTekst}</BodyShort>
                     {(opphold.årsak?.verdier || []).map((årsak) => (
                         <BodyShort key={årsak.verdi}>{årsak.label}</BodyShort>

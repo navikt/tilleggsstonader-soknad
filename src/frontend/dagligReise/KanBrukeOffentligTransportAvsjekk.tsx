@@ -34,7 +34,7 @@ export const KanBrukeOffentligTransportAvsjekk: React.FC = () => {
 
     return (
         <Container>
-            <VStack gap="2">
+            <VStack gap="space-8">
                 <Heading size="xlarge" as="h1">
                     <LocaleTekst tekst={dagligReiseTekster.banner_daglig_reise} />
                 </Heading>

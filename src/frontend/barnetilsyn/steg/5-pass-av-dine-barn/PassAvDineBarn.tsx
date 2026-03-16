@@ -68,7 +68,7 @@ const PassAvDineBarn = () => {
             <GuidePanel>
                 <LocaleTekst tekst={barnepassTekster.guide_innhold} />
             </GuidePanel>
-            <VStack gap={'10'}>
+            <VStack gap="space-40">
                 {barnMedPass.map((barn) => (
                     <BarnepassSpørsmål
                         key={barn.ident}

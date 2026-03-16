@@ -27,7 +27,7 @@ export const KjørelisterApp = () => {
     return (
         <QueryClientProvider client={queryClient}>
             <Container>
-                <VStack gap="16">
+                <VStack gap="space-64">
                     <KjørelisteHeader />
                     <Routes>
                         <Route path="/" element={<Landingsside />} />
