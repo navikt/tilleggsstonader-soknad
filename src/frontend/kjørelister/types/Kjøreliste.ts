@@ -12,6 +12,7 @@ export interface UkeMedReisedager {
     ukeLabel: string;
     spørsmål: string;
     reisedager: Reisedag[];
+    sendtInnTidligere: boolean;
 }
 
 export interface Reisedag {

@@ -20,7 +20,10 @@ const StyledTextField = styled(TextField)`
     max-width: 12rem;
 `;
 
-export const KjørelisteDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) => {
+export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boolean }> = ({
+    reisedag,
+    erLesevisning,
+}) => {
     const { oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
 
     const erNegativUtgift = (): boolean => (reisedag?.parkeringsutgift?.verdi ?? 0) < 0;
@@ -29,6 +32,7 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) =
         <Card graybackground={erHelg(reisedag.dato.verdi).toString()}>
             <Checkbox
                 checked={reisedag.harKjørt}
+                disabled={erLesevisning}
                 onChange={(e) => {
                     oppdaterHarReist(reisedag.dato.verdi, e.target.checked);
                 }}
@@ -42,6 +46,7 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) =
                     inputMode={'numeric'}
                     type={'number'}
                     min={0}
+                    readOnly={erLesevisning}
                     value={
                         reisedag.parkeringsutgift.verdi !== null &&
                         reisedag.parkeringsutgift.verdi !== undefined

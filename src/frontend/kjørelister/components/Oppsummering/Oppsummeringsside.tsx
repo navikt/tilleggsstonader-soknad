@@ -29,8 +29,10 @@ export const Oppsummeringsside = () => {
         mutationFn: () => {
             const kjørelisteMedKjørteDager = {
                 ...kjøreliste,
-                reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.filter((uke) =>
-                    uke.reisedager.some((reisedag) => reisedag.harKjørt)
+                reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.filter(
+                    (uke) =>
+                        !uke.sendtInnTidligere &&
+                        uke.reisedager.some((reisedag) => reisedag.harKjørt)
                 ),
             };
             return sendInnKjøreliste(kjørelisteMedKjørteDager);

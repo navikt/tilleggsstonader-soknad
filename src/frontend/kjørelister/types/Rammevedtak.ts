@@ -12,4 +12,5 @@ export interface RammevedtakUke {
     ukeNummer: number;
     fom: string;
     tom: string;
+    innsendtDato: string | null;
 }
