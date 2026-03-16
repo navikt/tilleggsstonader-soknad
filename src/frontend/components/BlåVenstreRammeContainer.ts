@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BorderAccent } from '@navikt/ds-tokens/darkside-js';
+import { BorderAccent } from '@navikt/ds-tokens/js';
 
 export const BlåVenstreRammeContainer = styled.div`
     border-left: 5px solid ${BorderAccent};

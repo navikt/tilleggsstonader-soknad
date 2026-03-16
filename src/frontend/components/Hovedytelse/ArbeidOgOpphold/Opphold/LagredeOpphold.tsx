@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { BorderAccent } from '@navikt/ds-tokens/darkside-js';
+import { BorderAccent } from '@navikt/ds-tokens/js';
 
 import { oppholdUtenforNorgeInnhold } from '../../../../barnetilsyn/tekster/opphold';
 import { OppholdUtenforNorge } from '../../../../typer/søknad';

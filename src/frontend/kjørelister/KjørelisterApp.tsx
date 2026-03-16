@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { VStack } from '@navikt/ds-react';
-import { BreakpointMd } from '@navikt/ds-tokens/darkside-js';
+import { BreakpointMd } from '@navikt/ds-tokens/js';
 
 import { KjørelisteHeader } from './components/KjørelisteHeader';
 import { Landingsside } from './components/Landingsside/Landingsside';

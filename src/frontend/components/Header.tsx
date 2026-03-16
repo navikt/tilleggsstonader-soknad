@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { BodyShort, Heading, VStack } from '@navikt/ds-react';
-import { BreakpointMdDown } from '@navikt/ds-tokens/darkside-js';
+import { BreakpointMdDown } from '@navikt/ds-tokens/js';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { useSøknad } from '../context/SøknadContext';

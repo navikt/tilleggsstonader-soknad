@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import { Alert, Button, ErrorSummary, HGrid, VStack } from '@navikt/ds-react';
-import { BreakpointMd } from '@navikt/ds-tokens/darkside-js';
+import { BreakpointMd } from '@navikt/ds-tokens/js';
 
 import { StegIndikator } from './StegIndikator';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';

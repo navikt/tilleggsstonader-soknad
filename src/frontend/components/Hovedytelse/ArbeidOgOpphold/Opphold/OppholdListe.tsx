@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { ArrowUndoIcon, PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { BorderAccent } from '@navikt/ds-tokens/darkside-js';
+import { BorderAccent } from '@navikt/ds-tokens/js';
 
 import LagredeOpphold from './LagredeOpphold';
 import NyttOpphold from './NyttOpphold';

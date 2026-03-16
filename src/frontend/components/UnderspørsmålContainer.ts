@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BgSunken } from '@navikt/ds-tokens/darkside-js';
+import { BgSunken } from '@navikt/ds-tokens/js';
 
 export const UnderspørsmålContainer = styled.div`
     background: ${BgSunken};
