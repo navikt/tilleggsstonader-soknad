@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FileCheckmarkIcon } from '@navikt/aksel-icons';
-import { FormSummary, List } from '@navikt/ds-react';
+import { Box, FormSummary, List } from '@navikt/ds-react';
 
 import { useKjøreliste } from '../../KjørelisteContext';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
@@ -15,13 +15,15 @@ export function VedleggOppsummering() {
     }
 
     const VedleggListe = () => (
-        <List>
-            {finnVedleggMedParkeringsutgifter(kjøreliste).map((vedlegg) => (
-                <List.Item key={vedlegg.id} icon={<FileCheckmarkIcon />}>
-                    {vedlegg.navn}
-                </List.Item>
-            ))}
-        </List>
+        <Box marginBlock="space-16" asChild>
+            <List data-aksel-migrated-v8>
+                {finnVedleggMedParkeringsutgifter(kjøreliste).map((vedlegg) => (
+                    <List.Item key={vedlegg.id} icon={<FileCheckmarkIcon />}>
+                        {vedlegg.navn}
+                    </List.Item>
+                ))}
+            </List>
+        </Box>
     );
 
     return (

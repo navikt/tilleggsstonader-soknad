@@ -1,4 +1,4 @@
-import { BodyLong, List, ReadMore } from '@navikt/ds-react';
+import { BodyLong, Box, List, ReadMore } from '@navikt/ds-react';
 
 import LocaleInlineLenke from './LocaleInlineLenke';
 import { loggAccordionEvent } from '../../api/analytics';
@@ -23,11 +23,13 @@ export const LocaleReadMore: React.FC<{
         >
             {Array.isArray(innhold) ? (
                 somPunktListe ? (
-                    <List>
-                        {innhold.map((punkt, indeks) => (
-                            <List.Item key={indeks}>{punkt}</List.Item>
-                        ))}
-                    </List>
+                    <Box marginBlock="space-16" asChild>
+                        <List data-aksel-migrated-v8>
+                            {innhold.map((punkt, indeks) => (
+                                <List.Item key={indeks}>{punkt}</List.Item>
+                            ))}
+                        </List>
+                    </Box>
                 ) : (
                     innhold.map((avsnitt, indeks) => (
                         <BodyLong key={indeks} spacing>

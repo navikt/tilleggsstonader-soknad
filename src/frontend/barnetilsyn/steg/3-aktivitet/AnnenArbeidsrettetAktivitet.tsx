@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { List } from '@navikt/ds-react';
+import { Box, List } from '@navikt/ds-react';
 
 import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -45,15 +45,17 @@ export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
                             aktivitetTekster.radio_annet_lesmer_hva_betyr_alternativene.innhold.del1
                         }
                     />
-                    <List>
-                        {aktivitetTekster.radio_annet_lesmer_hva_betyr_alternativene.innhold.del2_lenker.map(
-                            (lenke, indeks) => (
-                                <List.Item key={indeks}>
-                                    <LocaleInlineLenke tekst={lenke} />
-                                </List.Item>
-                            )
-                        )}
-                    </List>
+                    <Box marginBlock="space-16" asChild>
+                        <List data-aksel-migrated-v8>
+                            {aktivitetTekster.radio_annet_lesmer_hva_betyr_alternativene.innhold.del2_lenker.map(
+                                (lenke, indeks) => (
+                                    <List.Item key={indeks}>
+                                        <LocaleInlineLenke tekst={lenke} />
+                                    </List.Item>
+                                )
+                            )}
+                        </List>
+                    </Box>
                 </LocaleReadMoreMedChildren>
             </LocaleRadioGroup>
             <LocaleReadMoreMedLenke tekst={aktivitetTekster.radio_annet_lesmer} />

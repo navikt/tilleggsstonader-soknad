@@ -2,7 +2,7 @@ import React, { RefObject } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { BodyLong, Button, HStack, List, Modal } from '@navikt/ds-react';
+import { BodyLong, Box, Button, Heading, HStack, List, Modal } from '@navikt/ds-react';
 
 import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
@@ -24,11 +24,18 @@ const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }
         <Modal ref={innerRef} header={{ heading: vedleggModalTekster.heading[locale] }}>
             <Modal.Body>
                 <HStack gap="6">
-                    <List title={vedleggModalTekster.punktliste_tittel[locale]}>
-                        {dokumenterSomMangler.map((dokument, indeks) => (
-                            <List.Item key={indeks}>{dokument}</List.Item>
-                        ))}
-                    </List>
+                    <div>
+                        <Heading as="h3" size="small">
+                            {vedleggModalTekster.punktliste_tittel[locale]}
+                        </Heading>
+                        <Box marginBlock="space-16" asChild>
+                            <List data-aksel-migrated-v8>
+                                {dokumenterSomMangler.map((dokument, indeks) => (
+                                    <List.Item key={indeks}>{dokument}</List.Item>
+                                ))}
+                            </List>
+                        </Box>
+                    </div>
                     <BodyLong>
                         <LocaleTekst tekst={vedleggModalTekster.ekstra_info1} />
                     </BodyLong>
