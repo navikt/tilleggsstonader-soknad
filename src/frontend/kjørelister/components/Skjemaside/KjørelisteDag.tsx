@@ -32,7 +32,7 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boole
         <Card graybackground={erHelg(reisedag.dato.verdi).toString()}>
             <Checkbox
                 checked={reisedag.harKjørt}
-                disabled={erLesevisning}
+                readOnly={erLesevisning}
                 onChange={(e) => {
                     oppdaterHarReist(reisedag.dato.verdi, e.target.checked);
                 }}
