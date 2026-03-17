@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BodyShort, List } from '@navikt/ds-react';
+import { BodyShort, Box, List } from '@navikt/ds-react';
 
 import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
@@ -23,19 +23,25 @@ const Dokumentasjonskrav: React.FC<{
 
     return (
         <>
-            <Dokumentasjonskravsliste title={vedleggTekster.dokumentasjonskrav_tittel[locale]}>
-                {dokumentasjonsbehov.map((doc, indeks) => (
-                    <List.Item key={indeks}>
-                        <LocaleTekst
-                            tekst={
-                                typerVedleggTekster[doc.type].liste_tittel ||
-                                typerVedleggTekster[doc.type].tittel
-                            }
-                            argument0={doc.barn?.visningsnavn}
-                        />
-                    </List.Item>
-                ))}
-            </Dokumentasjonskravsliste>
+            <Box
+                title={vedleggTekster.dokumentasjonskrav_tittel[locale]}
+                marginBlock="space-16"
+                asChild
+            >
+                <Dokumentasjonskravsliste>
+                    {dokumentasjonsbehov.map((doc, indeks) => (
+                        <List.Item key={indeks}>
+                            <LocaleTekst
+                                tekst={
+                                    typerVedleggTekster[doc.type].liste_tittel ||
+                                    typerVedleggTekster[doc.type].tittel
+                                }
+                                argument0={doc.barn?.visningsnavn}
+                            />
+                        </List.Item>
+                    ))}
+                </Dokumentasjonskravsliste>
+            </Box>
             {stønadstype === Stønadstype.BARNETILSYN && (
                 <BodyShort>
                     <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />

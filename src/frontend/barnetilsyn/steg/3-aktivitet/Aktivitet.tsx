@@ -216,7 +216,7 @@ const Aktivitet = () => {
                         tekst={aktivitetTekster.ingen_aktivitet_infoalert_innhold.del1}
                     />
                     <Box marginBlock="space-16" asChild>
-                        <List data-aksel-migrated-v8>
+                        <List>
                             {aktivitetTekster.ingen_aktivitet_infoalert_innhold.del2_lenker.map(
                                 (lenke, indeks) => (
                                     <List.Item key={indeks}>

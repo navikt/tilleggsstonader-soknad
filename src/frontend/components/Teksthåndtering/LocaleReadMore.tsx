@@ -24,7 +24,7 @@ export const LocaleReadMore: React.FC<{
             {Array.isArray(innhold) ? (
                 somPunktListe ? (
                     <Box marginBlock="space-16" asChild>
-                        <List data-aksel-migrated-v8>
+                        <List>
                             {innhold.map((punkt, indeks) => (
                                 <List.Item key={indeks}>{punkt}</List.Item>
                             ))}

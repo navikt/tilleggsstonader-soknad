@@ -7,12 +7,12 @@ import { Route, useParams } from 'react-router-dom';
 import { Alert, Loader, VStack } from '@navikt/ds-react';
 
 import { hentRammevedtak } from '../api/api';
+import { ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { Kvitteringsside } from './components/Kvitteringsside/Kvitteringsside';
 import { Oppsummeringsside } from './components/Oppsummering/Oppsummeringsside';
 import { KjørelisteSkjema } from './components/Skjemaside/KjørelisteSkjema';
 import { Vedleggside } from './components/Vedleggside/Vedleggside';
 import { KjørelisteProvider } from './KjørelisteContext';
-import { ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 
 export const KjørelisteInnhold = () => {
     const reiseId = useParams<{ reiseId: string }>().reiseId as string;

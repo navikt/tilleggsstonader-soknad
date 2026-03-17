@@ -16,7 +16,7 @@ export function VedleggOppsummering() {
 
     const VedleggListe = () => (
         <Box marginBlock="space-16" asChild>
-            <List data-aksel-migrated-v8>
+            <List>
                 {finnVedleggMedParkeringsutgifter(kjøreliste).map((vedlegg) => (
                     <List.Item key={vedlegg.id} icon={<FileCheckmarkIcon />}>
                         {vedlegg.navn}

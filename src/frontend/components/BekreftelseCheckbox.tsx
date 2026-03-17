@@ -19,7 +19,7 @@ const BekreftelseCheckbox: React.FC<Props> = ({
     fjernFeilmelding,
 }) => {
     return (
-        <Box paddingBlock="4 8">
+        <Box paddingBlock="space-16 space-32">
             <Checkbox
                 checked={harBekreftet}
                 onChange={(e) => {

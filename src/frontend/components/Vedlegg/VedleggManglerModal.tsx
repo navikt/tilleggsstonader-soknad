@@ -29,7 +29,7 @@ const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }
                             {vedleggModalTekster.punktliste_tittel[locale]}
                         </Heading>
                         <Box marginBlock="space-16" asChild>
-                            <List data-aksel-migrated-v8>
+                            <List>
                                 {dokumenterSomMangler.map((dokument, indeks) => (
                                     <List.Item key={indeks}>{dokument}</List.Item>
                                 ))}

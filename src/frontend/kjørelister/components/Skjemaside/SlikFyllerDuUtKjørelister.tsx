@@ -7,7 +7,7 @@ export const SlikFyllerDuUtKjørelister = () => {
         <VStack gap="space-8">
             <Heading size={'medium'}>Slik fyller du ut kjørelister</Heading>
             <Box marginBlock="space-16" asChild>
-                <List data-aksel-migrated-v8 as="ul">
+                <List as="ul">
                     <List.Item>
                         Du kan bare fylle inn for de dagene du har kjørt til tiltaket eller
                         utdanningen din.{' '}

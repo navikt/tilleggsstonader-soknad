@@ -17,7 +17,7 @@ export const LocalePunktliste: React.FC<LocalePuntlisteProps> = ({ innhold, ...l
     return (
         <div {...listProps}>
             <Box marginBlock="space-16" asChild>
-                <List data-aksel-migrated-v8>{lagPunktliste(punkter)}</List>
+                <List>{lagPunktliste(punkter)}</List>
             </Box>
         </div>
     );

@@ -17,7 +17,7 @@ export const LesMerHvilkenAktivitet: React.FC<Props> = ({ header }) => {
         <LocaleReadMoreMedChildren header={header}>
             <LocaleTekstAvsnitt tekst={aktivitetTekster.hvilken_aktivitet.les_mer.del1} />
             <Box marginBlock="space-16" asChild>
-                <List data-aksel-migrated-v8>
+                <List>
                     {aktivitetTekster.hvilken_aktivitet.les_mer.del2_lenker.map((lenke, indeks) => (
                         <List.Item key={indeks}>
                             <LocaleInlineLenke tekst={lenke} />

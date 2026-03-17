@@ -46,7 +46,7 @@ export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
                         }
                     />
                     <Box marginBlock="space-16" asChild>
-                        <List data-aksel-migrated-v8>
+                        <List>
                             {aktivitetTekster.radio_annet_lesmer_hva_betyr_alternativene.innhold.del2_lenker.map(
                                 (lenke, indeks) => (
                                     <List.Item key={indeks}>

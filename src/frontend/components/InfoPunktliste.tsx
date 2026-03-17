@@ -11,7 +11,7 @@ export const InfoPunktliste: React.FC<{ liste: Punktliste[]; spacingBottom?: boo
     spacingBottom = false,
 }) => {
     return (
-        <VStack gap="space-24" marginBlock={`0 ${spacingBottom ? 'space-24' : '0'}`}>
+        <VStack gap="space-24" marginBlock={`space-0 ${spacingBottom ? 'space-24' : 'space-0'}`}>
             {liste.map((tekst, indeks) => (
                 <div key={indeks}>
                     <LocaleHeading tekst={tekst.tittel} level="3" size="xsmall" spacing />
