@@ -15,11 +15,9 @@ export const LocalePunktliste: React.FC<LocalePuntlisteProps> = ({ innhold, ...l
     const punkter = innhold[locale];
 
     return (
-        <div {...listProps}>
-            <Box marginBlock="space-16" asChild>
-                <List>{lagPunktliste(punkter)}</List>
-            </Box>
-        </div>
+        <Box marginBlock="space-16" asChild>
+            <List {...listProps}>{lagPunktliste(punkter)}</List>
+        </Box>
     );
 };
 

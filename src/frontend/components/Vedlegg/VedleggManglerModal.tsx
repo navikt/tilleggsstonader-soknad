@@ -25,7 +25,7 @@ const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }
             <Modal.Body>
                 <HStack gap="space-24">
                     <div>
-                        <Heading as="h3" size="small">
+                        <Heading level="3" size="small">
                             {vedleggModalTekster.punktliste_tittel[locale]}
                         </Heading>
                         <Box marginBlock="space-16" asChild>
