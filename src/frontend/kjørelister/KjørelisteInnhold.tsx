@@ -6,7 +6,7 @@ import { Route, useParams } from 'react-router-dom';
 
 import { Alert, Loader, VStack } from '@navikt/ds-react';
 
-import { hentRammevedtak } from '../api/api';
+import { hentRammevedtak, hentTidligereInnsendt } from '../api/api';
 import { ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { Kvitteringsside } from './components/Kvitteringsside/Kvitteringsside';
 import { Oppsummeringsside } from './components/Oppsummering/Oppsummeringsside';
@@ -18,15 +18,24 @@ export const KjørelisteInnhold = () => {
     const reiseId = useParams<{ reiseId: string }>().reiseId as string;
 
     const {
-        isPending,
-        error,
+        isPending: rammevedtakPending,
+        error: rammevedtakError,
         data: rammevedtak,
     } = useQuery({
         queryKey: [`rammevedtakDetaljer:${reiseId}`],
         queryFn: () => hentRammevedtak(reiseId),
     });
 
-    if (isPending) {
+    const {
+        isPending: tidligereInnsendtPending,
+        error: tidligereInnsendtError,
+        data: tidligereInnsendt,
+    } = useQuery({
+        queryKey: [`tidligereInnsendt:${reiseId}`],
+        queryFn: () => hentTidligereInnsendt(reiseId),
+    });
+
+    if (rammevedtakPending || tidligereInnsendtPending) {
         return (
             <VStack align={'center'}>
                 <Loader size={'3xlarge'} title={'Laster inn siden'} />
@@ -34,12 +43,12 @@ export const KjørelisteInnhold = () => {
         );
     }
 
-    if (error) {
+    if (rammevedtakError || tidligereInnsendtError) {
         return <Alert variant={'error'}>Kunne ikke hente kjøreliste. Prøv igjen senere.</Alert>;
     }
 
     return (
-        <KjørelisteProvider rammevedtak={rammevedtak}>
+        <KjørelisteProvider rammevedtak={rammevedtak} tidligereInnsendt={tidligereInnsendt ?? null}>
             <ValideringsfeilProvider>
                 <Routes>
                     <Route path={'/skjema'} element={<KjørelisteSkjema />} />

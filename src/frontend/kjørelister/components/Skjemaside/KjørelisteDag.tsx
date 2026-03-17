@@ -17,7 +17,7 @@ const Card = styled(VStack)<{ graybackground: string }>`
 
 const StyledTextField = styled(TextField)`
     margin-bottom: 1rem;
-    max-width: 12rem;
+    max-width: 13rem;
 `;
 
 export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boolean }> = ({
