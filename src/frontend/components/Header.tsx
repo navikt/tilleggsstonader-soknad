@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { BodyShort, Heading, VStack } from '@navikt/ds-react';
-import { BreakpointMdDown } from '@navikt/ds-tokens/darkside-js';
+import { BreakpointMdDown } from '@navikt/ds-tokens/js';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
 import { useSøknad } from '../context/SøknadContext';
@@ -23,7 +23,7 @@ export const Header: React.FC<{ tittel: TekstElement<string> }> = ({ tittel }) =
 
     return (
         <Container>
-            <VStack gap="2">
+            <VStack gap="space-8">
                 <BodyShort>{stønadstypeTilSkjemaId[stønadstype]}</BodyShort>
                 <Heading size="xlarge" as="h1">
                     <LocaleTekst tekst={tittel} />

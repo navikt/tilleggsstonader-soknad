@@ -22,12 +22,12 @@ export function Landingsside() {
     }
 
     return (
-        <VStack gap="4">
+        <VStack gap="space-16">
             <Heading level="2" size="large">
                 Velg vedtak du vil levere kjøreliste for
             </Heading>
             <BodyShort>Du kan bare levere kjøreliste for ett vedtak om gangen.</BodyShort>
-            <VStack gap="2">
+            <VStack gap="space-8">
                 {data.map((rammevedtak) => (
                     <KjørelisteKort key={rammevedtak.fom} rammevedtak={rammevedtak} />
                 ))}

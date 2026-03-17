@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Alert, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
+import { Alert, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
 
 import { skalTaStillingTilLønnetTiltak } from './AkivitetUtils';
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
@@ -188,7 +188,7 @@ const Aktivitet = () => {
             )}
             {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
                 <UnderspørsmålContainer>
-                    <VStack gap={'6'}>
+                    <VStack gap="space-24">
                         {skalViseAnnenAktivitet && (
                             <AnnenArbeidsrettetAktivitet
                                 tekst={aktivitetTekster.radio_annet}
@@ -215,15 +215,17 @@ const Aktivitet = () => {
                     <LocaleTekstAvsnitt
                         tekst={aktivitetTekster.ingen_aktivitet_infoalert_innhold.del1}
                     />
-                    <List>
-                        {aktivitetTekster.ingen_aktivitet_infoalert_innhold.del2_lenker.map(
-                            (lenke, indeks) => (
-                                <List.Item key={indeks}>
-                                    <LocaleInlineLenke tekst={lenke} />
-                                </List.Item>
-                            )
-                        )}
-                    </List>
+                    <Box marginBlock="space-16" asChild>
+                        <List>
+                            {aktivitetTekster.ingen_aktivitet_infoalert_innhold.del2_lenker.map(
+                                (lenke, indeks) => (
+                                    <List.Item key={indeks}>
+                                        <LocaleInlineLenke tekst={lenke} />
+                                    </List.Item>
+                                )
+                            )}
+                        </List>
+                    </Box>
                 </Alert>
             )}
         </Side>

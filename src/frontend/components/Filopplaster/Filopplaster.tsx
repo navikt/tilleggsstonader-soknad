@@ -93,7 +93,7 @@ export const Filopplaster: React.FC<{
     };
 
     return (
-        <VStack gap="6">
+        <VStack gap="space-24">
             <FileUpload.Dropzone
                 label={tittel}
                 description={beskrivelse}
@@ -106,7 +106,7 @@ export const Filopplaster: React.FC<{
                 onSelect={(nyeFiler) => lastOppValgteFiler(nyeFiler)}
             />
             {(opplastedeVedlegg.length > 0 || vedleggLastesOpp.length > 0) && (
-                <VStack gap="2">
+                <VStack gap="space-8">
                     <Heading level="3" size="xsmall">
                         <LocaleTekst
                             tekst={fellesTekster.flere_vedlegg}
@@ -147,7 +147,7 @@ export const Filopplaster: React.FC<{
                 </VStack>
             )}
             {avslåtteFiler.length > 0 && (
-                <VStack gap="2">
+                <VStack gap="space-8">
                     <Heading level="3" size="xsmall">
                         <LocaleTekst tekst={fellesTekster.vedlegg_med_feil} />
                     </Heading>

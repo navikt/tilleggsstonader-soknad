@@ -4,11 +4,11 @@ import { VStack } from '@navikt/ds-react';
 
 import { Kjøreliste } from './Kjøreliste';
 import { KjørelisteMetadata } from './KjørelisteMetadata';
+import { SlikFyllerDuUtKjørelister } from './SlikFyllerDuUtKjørelister';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { useKjøreliste } from '../../KjørelisteContext';
-import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
-import { SlikFyllerDuUtKjørelister } from './SlikFyllerDuUtKjørelister';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
+import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 
 export function KjørelisteSkjema() {
     const { kjøreliste } = useKjøreliste();
@@ -35,7 +35,7 @@ export function KjørelisteSkjema() {
     };
 
     return (
-        <VStack gap="8">
+        <VStack gap="space-32">
             <KjørelisteMetadata />
             <SlikFyllerDuUtKjørelister />
             <Kjøreliste />

@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { VStack } from '@navikt/ds-react';
-import { BreakpointMd } from '@navikt/ds-tokens/darkside-js';
+import { BreakpointMd } from '@navikt/ds-tokens/js';
 
 import { KjørelisteHeader } from './components/KjørelisteHeader';
 import { Landingsside } from './components/Landingsside/Landingsside';
@@ -27,7 +27,7 @@ export const KjørelisterApp = () => {
     return (
         <QueryClientProvider client={queryClient}>
             <Container>
-                <VStack gap="16">
+                <VStack gap="space-64">
                     <KjørelisteHeader />
                     <Routes>
                         <Route path="/" element={<Landingsside />} />

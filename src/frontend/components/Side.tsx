@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import { Alert, Button, ErrorSummary, HGrid, VStack } from '@navikt/ds-react';
-import { BreakpointMd } from '@navikt/ds-tokens/darkside-js';
+import { BreakpointMd } from '@navikt/ds-tokens/js';
 
 import { StegIndikator } from './StegIndikator';
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
@@ -139,8 +139,8 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
                     )}
                 </ErrorSummary>
             )}
-            <VStack gap="8">{children}</VStack>
-            <HGrid gap={'4'} columns={'1fr 1fr'}>
+            <VStack gap="space-32">{children}</VStack>
+            <HGrid gap="space-16" columns={'1fr 1fr'}>
                 <Button variant="secondary" onClick={navigerTilForrigeSide}>
                     <LocaleTekst tekst={fellesTekster.forrige} />
                 </Button>

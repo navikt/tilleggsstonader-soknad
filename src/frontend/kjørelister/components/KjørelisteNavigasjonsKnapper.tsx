@@ -42,7 +42,7 @@ export const KjørelisteNavigasjonsKnapper = ({
     };
 
     return (
-        <VStack gap={'2'}>
+        <VStack gap="space-8">
             {harValideringsfeil && (
                 <ErrorSummary heading={'For å gå videre må du rette opp følgende:'} ref={errorRef}>
                     {Object.entries(valideringsfeil).map(
@@ -55,7 +55,7 @@ export const KjørelisteNavigasjonsKnapper = ({
                     )}
                 </ErrorSummary>
             )}
-            <HStack gap={'2'}>
+            <HStack gap="space-8">
                 <Button
                     variant={'secondary'}
                     icon={<ArrowLeftIcon />}

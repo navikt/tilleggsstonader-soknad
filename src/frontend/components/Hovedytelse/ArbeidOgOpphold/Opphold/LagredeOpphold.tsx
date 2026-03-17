@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { BorderAccent } from '@navikt/ds-tokens/darkside-js';
+import { BorderAccent } from '@navikt/ds-tokens/js';
 
 import { oppholdUtenforNorgeInnhold } from '../../../../barnetilsyn/tekster/opphold';
 import { OppholdUtenforNorge } from '../../../../typer/søknad';
@@ -25,7 +25,7 @@ const LagredeOpphold: React.FC<{
                 <Label>{oppholdUtenforNorgeInnhold.dineOpphold[locale]}</Label>
             )}
             {lagredeOpphold.map((opphold) => (
-                <VisningAvOpphold key={opphold._id} gap={'1'}>
+                <VisningAvOpphold key={opphold._id} gap="space-4">
                     <BodyShort weight={'semibold'}>{opphold.land?.svarTekst}</BodyShort>
                     {(opphold.årsak?.verdier || []).map((årsak) => (
                         <BodyShort key={årsak.verdi}>{årsak.label}</BodyShort>

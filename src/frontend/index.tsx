@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createRoot } from 'react-dom/client';
-import '@navikt/ds-css/darkside';
+import '@navikt/ds-css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';

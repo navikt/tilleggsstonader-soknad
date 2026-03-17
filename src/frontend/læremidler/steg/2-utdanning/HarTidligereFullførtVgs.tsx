@@ -22,7 +22,7 @@ export const HarTidligereFullførtVgs: React.FC<Props> = ({
     feilmelding,
 }) => {
     return (
-        <VStack gap={'4'}>
+        <VStack gap="space-16">
             <BlåVenstreRammeContainer>
                 <LocaleRadioGroup
                     id={feilmelding?.id}

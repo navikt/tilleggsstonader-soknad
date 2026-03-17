@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { List, ListProps } from '@navikt/ds-react';
+import { Box, List, ListProps } from '@navikt/ds-react';
 
 import { LenkeEllerTekst } from './LocaleInlineLenke';
 import { useSpråk } from '../../context/SpråkContext';
@@ -14,7 +14,11 @@ export const LocalePunktliste: React.FC<LocalePuntlisteProps> = ({ innhold, ...l
     const { locale } = useSpråk();
     const punkter = innhold[locale];
 
-    return <List {...listProps}>{lagPunktliste(punkter)}</List>;
+    return (
+        <Box marginBlock="space-16" asChild>
+            <List {...listProps}>{lagPunktliste(punkter)}</List>
+        </Box>
+    );
 };
 
 const lagPunktliste = (punkter: (string | InlineLenke)[]) =>

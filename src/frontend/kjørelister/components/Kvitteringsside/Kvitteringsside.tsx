@@ -22,7 +22,7 @@ export const Kvitteringsside = () => {
     }
 
     return (
-        <VStack gap={'8'}>
+        <VStack gap="space-32">
             <Heading size={'medium'} level={'2'}>
                 Kvittering
             </Heading>

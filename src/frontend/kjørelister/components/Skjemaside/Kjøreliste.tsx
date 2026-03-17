@@ -8,7 +8,7 @@ import { useKjøreliste } from '../../KjørelisteContext';
 export const Kjøreliste = () => {
     const { kjøreliste } = useKjøreliste();
     return (
-        <VStack gap={'2'}>
+        <VStack gap="space-8">
             <Heading size={'medium'}>Klart til innsending</Heading>
             <Accordion>
                 {kjøreliste.reisedagerPerUkeAvsnitt.map((ukeMedReisedager) => (
