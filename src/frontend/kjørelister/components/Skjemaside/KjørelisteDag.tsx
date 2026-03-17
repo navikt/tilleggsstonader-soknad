@@ -18,6 +18,11 @@ const Card = styled(VStack)<{ graybackground: string }>`
 const StyledTextField = styled(TextField)`
     margin-bottom: 1rem;
     max-width: 13rem;
+
+    //Skuler låsesymbol som ellers vises dobbelt i både tekstfelt og checkbox
+    svg {
+        display: none;
+    }
 `;
 
 export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boolean }> = ({
