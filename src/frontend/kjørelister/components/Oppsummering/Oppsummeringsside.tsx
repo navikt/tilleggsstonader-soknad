@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { BodyLong, Checkbox, ErrorMessage, GuidePanel, Heading, HStack } from '@navikt/ds-react';
@@ -20,6 +21,13 @@ export const Oppsummeringsside = () => {
     const [brukerAkseptererIkkeVilkårFeil, settBrukerAkseptererIkkeVilkårfeil] = useState(false);
 
     const { kjøreliste } = useKjøreliste();
+
+    const hentFeilmelding = (error: Error | null): string | undefined => {
+        if (axios.isAxiosError(error)) {
+            return error.response?.data?.detail;
+        }
+        return undefined;
+    };
 
     const {
         mutate: sendInnKjørelisteMutation,
@@ -108,7 +116,11 @@ export const Oppsummeringsside = () => {
                 forrigeSide={KjørelisteRoutes.VEDLEGG}
                 laster={laster}
                 sendInnKjøreliste={håndterSendInnKjøreliste}
-                innsendingFeilet={!!error}
+                innsendingFeilmelding={
+                    error
+                        ? (hentFeilmelding(error) ?? 'Innsending feilet. Prøv igjen senere.')
+                        : undefined
+                }
             />
         </>
     );

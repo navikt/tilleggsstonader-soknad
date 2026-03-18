@@ -14,7 +14,7 @@ interface KjørelisteNavigasonsKnapperProps {
     forrigeSide: KjørelisteRoutes;
     laster?: boolean;
     sendInnKjøreliste?: () => void;
-    innsendingFeilet?: boolean;
+    innsendingFeilmelding?: string;
     validerKanGåVidere?: () => boolean;
 }
 
@@ -23,7 +23,7 @@ export const KjørelisteNavigasjonsKnapper = ({
     forrigeSide,
     laster,
     sendInnKjøreliste,
-    innsendingFeilet,
+    innsendingFeilmelding,
     validerKanGåVidere,
 }: KjørelisteNavigasonsKnapperProps) => {
     const navigate = useNavigate();
@@ -55,6 +55,7 @@ export const KjørelisteNavigasjonsKnapper = ({
                     )}
                 </ErrorSummary>
             )}
+            {innsendingFeilmelding && <Alert variant={'error'}>{innsendingFeilmelding}</Alert>}
             <HStack gap="space-8">
                 <Button
                     variant={'secondary'}
@@ -91,9 +92,6 @@ export const KjørelisteNavigasjonsKnapper = ({
                     Avbryt utfylling
                 </Button>
             </HStack>
-            {innsendingFeilet && (
-                <Alert variant={'error'}>Innsending feilet. Prøv igjen senere.</Alert>
-            )}
         </VStack>
     );
 };
