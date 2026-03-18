@@ -11,86 +11,102 @@ import { tilLocaleDateString } from '../utils/formateringUtils';
 
 interface Props {
     rammevedtak: Rammevedtak;
+    tidligereInnsendt: Kjøreliste | null;
 }
 
-const [KjørelisteProvider, useKjøreliste] = createUseContext(({ rammevedtak }: Props) => {
-    KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
+const [KjørelisteProvider, useKjøreliste] = createUseContext(
+    ({ rammevedtak, tidligereInnsendt }: Props) => {
+        KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
 
-    const [kjøreliste, setKjøreliste] = useState(initialiserKjøreliste(rammevedtak));
+        const [kjøreliste, setKjøreliste] = useState(
+            initialiserKjøreliste(rammevedtak, tidligereInnsendt)
+        );
 
-    const oppdaterHarReist = (dato: string, harKjørt: boolean) => {
-        setKjøreliste((kjøreliste) => ({
-            ...kjøreliste,
-            reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
-                ...uke,
-                reisedager: uke.reisedager.map((reisedag) =>
-                    isEqual(reisedag.dato.verdi, dato) ? { ...reisedag, harKjørt } : reisedag
+        const oppdaterHarReist = (dato: string, harKjørt: boolean) => {
+            setKjøreliste((kjøreliste) => ({
+                ...kjøreliste,
+                reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
+                    ...uke,
+                    reisedager: uke.reisedager.map((reisedag) =>
+                        isEqual(reisedag.dato.verdi, dato) ? { ...reisedag, harKjørt } : reisedag
+                    ),
+                })),
+            }));
+        };
+
+        const oppdaterParkeringsutgift = (dato: string, parkeringsutgift: number) => {
+            setKjøreliste((kjøreliste) => ({
+                ...kjøreliste,
+                reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
+                    ...uke,
+                    reisedager: uke.reisedager.map((reisedag) => {
+                        if (isEqual(reisedag.dato.verdi, dato)) {
+                            return {
+                                ...reisedag,
+                                parkeringsutgift: {
+                                    verdi: parkeringsutgift,
+                                    label: reisedag.parkeringsutgift.label,
+                                },
+                            };
+                        }
+                        return reisedag;
+                    }),
+                })),
+            }));
+        };
+
+        const oppdaterDokumentasjon = (dokumenter: Dokument[]) => {
+            setKjøreliste((kjøreliste) => ({
+                ...kjøreliste,
+                dokumentasjon: kjøreliste.dokumentasjon.map((dokumentasjonFelt) =>
+                    dokumentasjonFelt.type === VedleggstypeKjøreliste.PARKERINGSUTGIFT
+                        ? { ...dokumentasjonFelt, opplastedeVedlegg: dokumenter }
+                        : dokumentasjonFelt
                 ),
-            })),
-        }));
-    };
+            }));
+        };
 
-    const oppdaterParkeringsutgift = (dato: string, parkeringsutgift: number) => {
-        setKjøreliste((kjøreliste) => ({
-            ...kjøreliste,
-            reisedagerPerUkeAvsnitt: kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => ({
-                ...uke,
-                reisedager: uke.reisedager.map((reisedag) => {
-                    if (isEqual(reisedag.dato.verdi, dato)) {
-                        return {
-                            ...reisedag,
-                            parkeringsutgift: {
-                                verdi: parkeringsutgift,
-                                label: reisedag.parkeringsutgift.label,
-                            },
-                        };
-                    }
-                    return reisedag;
-                }),
-            })),
-        }));
-    };
-
-    const oppdaterDokumentasjon = (dokumenter: Dokument[]) => {
-        setKjøreliste((kjøreliste) => ({
-            ...kjøreliste,
-            dokumentasjon: kjøreliste.dokumentasjon.map((dokumentasjonFelt) =>
-                dokumentasjonFelt.type === VedleggstypeKjøreliste.PARKERINGSUTGIFT
-                    ? { ...dokumentasjonFelt, opplastedeVedlegg: dokumenter }
-                    : dokumentasjonFelt
-            ),
-        }));
-    };
-
-    return {
-        rammevedtak,
-        kjøreliste,
-        oppdaterHarReist,
-        oppdaterParkeringsutgift,
-        oppdaterDokumentasjon,
-    };
-});
+        return {
+            rammevedtak,
+            kjøreliste,
+            oppdaterHarReist,
+            oppdaterParkeringsutgift,
+            oppdaterDokumentasjon,
+        };
+    }
+);
 
 export { KjørelisteProvider, useKjøreliste };
 
-const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
+const initialiserKjøreliste = (
+    rammevedtak: Rammevedtak,
+    tidligereInnsendt: Kjøreliste | null
+): Kjøreliste => {
+    const tidligereReisedagerMap = lagTidligereReisedagerMap(tidligereInnsendt);
+
     const reisedagerPerUkeAvsnitt: UkeMedReisedager[] = rammevedtak.uker.map((rammevedtakUke) => {
         const dager = finnDagerMellomFomOgTomInklusiv(rammevedtakUke.fom, rammevedtakUke.tom);
-        const reisedager: Reisedag[] = dager.map((rammevedtakDag) => ({
-            dato: {
-                verdi: tilLocaleDateString(rammevedtakDag),
-                label: `${tilUkedag(rammevedtakDag)} ${tilTekstligDato(rammevedtakDag.toISOString())}`,
-            },
-            harKjørt: false,
-            parkeringsutgift: {
-                verdi: null,
-                label: 'Parkeringsutgifter (kr)',
-            },
-        }));
+        const reisedager: Reisedag[] = dager.map((rammevedtakDag) => {
+            const dato = tilLocaleDateString(rammevedtakDag);
+            const tidligereReisedag = tidligereReisedagerMap.get(dato);
+
+            return {
+                dato: {
+                    verdi: dato,
+                    label: `${tilUkedag(rammevedtakDag)} ${tilTekstligDato(rammevedtakDag.toISOString())}`,
+                },
+                harKjørt: tidligereReisedag?.harKjørt ?? false,
+                parkeringsutgift: {
+                    verdi: tidligereReisedag?.parkeringsutgift?.verdi ?? null,
+                    label: 'Parkeringsutgifter (kr)',
+                },
+            };
+        });
         return {
             ukeLabel: `Uke ${rammevedtakUke.ukeNummer} (${tilTekstligDato(rammevedtakUke.fom)} - ${tilTekstligDato(rammevedtakUke.tom)})`,
             spørsmål: 'Hvilke dager kjørte du?',
             reisedager: reisedager,
+            sendtInnTidligere: rammevedtakUke.innsendtDato != null,
         };
     });
     return {
@@ -107,4 +123,16 @@ const initialiserKjøreliste = (rammevedtak: Rammevedtak): Kjøreliste => {
             søknadFrontendGitHash: process.env.COMMIT_HASH,
         },
     };
+};
+
+const lagTidligereReisedagerMap = (tidligereInnsendt: Kjøreliste | null): Map<string, Reisedag> => {
+    const map = new Map<string, Reisedag>();
+    if (!tidligereInnsendt) return map;
+
+    tidligereInnsendt.reisedagerPerUkeAvsnitt.forEach((uke) => {
+        uke.reisedager.forEach((reisedag) => {
+            map.set(reisedag.dato.verdi, reisedag);
+        });
+    });
+    return map;
 };

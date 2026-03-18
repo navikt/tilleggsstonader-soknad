@@ -17,10 +17,18 @@ const Card = styled(VStack)<{ graybackground: string }>`
 
 const StyledTextField = styled(TextField)`
     margin-bottom: 1rem;
-    max-width: 12rem;
+    max-width: 13rem;
+
+    //Skuler låsesymbol som ellers vises dobbelt i både tekstfelt og checkbox
+    svg {
+        display: none;
+    }
 `;
 
-export const KjørelisteDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) => {
+export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boolean }> = ({
+    reisedag,
+    erLesevisning,
+}) => {
     const { oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
 
     const erNegativUtgift = (): boolean => (reisedag?.parkeringsutgift?.verdi ?? 0) < 0;
@@ -29,6 +37,7 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) =
         <Card graybackground={erHelg(reisedag.dato.verdi).toString()}>
             <Checkbox
                 checked={reisedag.harKjørt}
+                readOnly={erLesevisning}
                 onChange={(e) => {
                     oppdaterHarReist(reisedag.dato.verdi, e.target.checked);
                 }}
@@ -42,6 +51,7 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) =
                     inputMode={'numeric'}
                     type={'number'}
                     min={0}
+                    readOnly={erLesevisning}
                     value={
                         reisedag.parkeringsutgift.verdi !== null &&
                         reisedag.parkeringsutgift.verdi !== undefined

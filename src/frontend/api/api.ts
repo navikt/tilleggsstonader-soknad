@@ -101,6 +101,16 @@ export const hentRammevedtak = (reiseId: string): Promise<Rammevedtak> => {
         )
         .then((response) => response.data);
 };
+
+export const hentTidligereInnsendt = (reiseId: string): Promise<Kjøreliste | null> => {
+    return axios
+        .get<Kjøreliste | null>(
+            `${Environment().apiProxyUrl}/kjorelister/${reiseId}`,
+            defaultConfig()
+        )
+        .then((response) => response.data);
+};
+
 export const sendInnKjøreliste = (kjøreliste: Kjøreliste): Promise<KjørelisteKvittering> => {
     const url = `${Environment().apiProxyUrl}/kjorelister`;
     return axios.post(url, kjøreliste, defaultConfig()).then((response) => response.data);

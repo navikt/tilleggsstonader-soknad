@@ -13,17 +13,22 @@ import {
 import { UkeMedReisedager } from '../../types/Kjøreliste';
 import { WideAccordionHeader } from '../WideAccordionHeader';
 
-export const KjørelisteUke: React.FC<{ ukeMedReisedag: UkeMedReisedager }> = ({
-    ukeMedReisedag,
-}) => {
+export const KjørelisteUke: React.FC<{
+    ukeMedReisedag: UkeMedReisedager;
+}> = ({ ukeMedReisedag }) => {
     const { rammevedtak } = useKjøreliste();
+    const { sendtInnTidligere } = ukeMedReisedag;
 
     return (
         <Accordion.Item>
             <WideAccordionHeader>
                 <HStack justify={'space-between'}>
                     <HStack gap="space-8">{ukeMedReisedag.ukeLabel}</HStack>
-                    {harReist(ukeMedReisedag.reisedager) ? (
+                    {sendtInnTidligere ? (
+                        <Tag variant={'success'} size={'small'}>
+                            Sendt inn
+                        </Tag>
+                    ) : harReist(ukeMedReisedag.reisedager) ? (
                         <Tag variant={'warning'} size={'small'}>
                             Påbegynt
                         </Tag>
@@ -38,19 +43,27 @@ export const KjørelisteUke: React.FC<{ ukeMedReisedag: UkeMedReisedager }> = ({
                 <VStack gap="space-8">
                     <BodyShort weight={'semibold'}>{ukeMedReisedag.spørsmål}</BodyShort>
                     {ukeMedReisedag.reisedager.map((reisedag) => (
-                        <KjørelisteDag key={reisedag.dato.verdi} reisedag={reisedag} />
+                        <KjørelisteDag
+                            key={reisedag.dato.verdi}
+                            reisedag={reisedag}
+                            erLesevisning={sendtInnTidligere}
+                        />
                     ))}
-                    {harValgtHelgedag(ukeMedReisedag.reisedager) && (
+                    {!sendtInnTidligere && harValgtHelgedag(ukeMedReisedag.reisedager) && (
                         <Alert variant="warning">
                             Du har fylt inn at du har kjørt på en helgedag. Hvis det stemmer at du
                             har kjørt denne dagen vil en saksbehandler manuelt behandle saken din.
                         </Alert>
                     )}
-                    {harValgtFlereDagerEnnRammevedtak(rammevedtak, ukeMedReisedag.reisedager) && (
-                        <Alert variant="warning">
-                            {`Du har fått innvilget stønad for daglige reiser med egen bil for ${rammevedtak.reisedagerPerUke} dager i uken, men du har registrert ${finnAntallDagerReist(ukeMedReisedag.reisedager)} dager. Sjekk at du har fylt inn alt riktig. Hvis det stemmer at du har kjørt flere dager denne uken vil en saksbehandler manuelt behandle saken din.`}
-                        </Alert>
-                    )}
+                    {!sendtInnTidligere &&
+                        harValgtFlereDagerEnnRammevedtak(
+                            rammevedtak,
+                            ukeMedReisedag.reisedager
+                        ) && (
+                            <Alert variant="warning">
+                                {`Du har fått innvilget stønad for daglige reiser med egen bil for ${rammevedtak.reisedagerPerUke} dager i uken, men du har registrert ${finnAntallDagerReist(ukeMedReisedag.reisedager)} dager. Sjekk at du har fylt inn alt riktig. Hvis det stemmer at du har kjørt flere dager denne uken vil en saksbehandler manuelt behandle saken din.`}
+                            </Alert>
+                        )}
                 </VStack>
             </Accordion.Content>
         </Accordion.Item>
