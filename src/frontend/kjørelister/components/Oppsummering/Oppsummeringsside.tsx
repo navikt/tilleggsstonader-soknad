@@ -85,9 +85,11 @@ export const Oppsummeringsside = () => {
                 </BodyLong>
             </GuidePanel>
 
-            {kjøreliste.reisedagerPerUkeAvsnitt.map((uke) => (
-                <OppsummeringUke key={uke.ukeLabel} ukeMedReisedager={uke} />
-            ))}
+            {kjøreliste.reisedagerPerUkeAvsnitt
+                .filter((uke) => !uke.sendtInnTidligere)
+                .map((uke) => (
+                    <OppsummeringUke key={uke.ukeLabel} ukeMedReisedager={uke} />
+                ))}
 
             <VedleggOppsummering />
 
