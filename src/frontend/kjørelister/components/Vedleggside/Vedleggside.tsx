@@ -4,25 +4,12 @@ import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import { finnVedleggMedParkeringsutgifter, harUtgiftOver100kr } from './VedleggUtils';
 import { Filopplaster } from '../../../components/Filopplaster/Filopplaster';
-import { Dokument } from '../../../typer/skjema';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
 
 export const Vedleggside = () => {
-    const { kjøreliste, oppdaterDokumentasjon } = useKjøreliste();
-
-    const leggTilDokument = (dokument: Dokument) => {
-        const opplastedeVedlegg = finnVedleggMedParkeringsutgifter(kjøreliste);
-        oppdaterDokumentasjon([...opplastedeVedlegg, dokument]);
-    };
-
-    const slettDokument = (dokumentId: string) => {
-        const opplastedeVedlegg = finnVedleggMedParkeringsutgifter(kjøreliste);
-        oppdaterDokumentasjon(
-            opplastedeVedlegg.filter((opplastetVedlegg) => opplastetVedlegg.id !== dokumentId)
-        );
-    };
+    const { kjøreliste, leggTilDokument, slettDokument } = useKjøreliste();
 
     return (
         <VStack gap="space-32">

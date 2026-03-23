@@ -55,15 +55,25 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
             }));
         };
 
-        const oppdaterDokumentasjon = (dokumenter: Dokument[]) => {
+        const oppdaterDokumentasjon = (oppdater: (vedlegg: Dokument[]) => Dokument[]) => {
             setKjøreliste((kjøreliste) => ({
                 ...kjøreliste,
-                dokumentasjon: kjøreliste.dokumentasjon.map((dokumentasjonFelt) =>
-                    dokumentasjonFelt.type === VedleggstypeKjøreliste.PARKERINGSUTGIFT
-                        ? { ...dokumentasjonFelt, opplastedeVedlegg: dokumenter }
-                        : dokumentasjonFelt
+                dokumentasjon: kjøreliste.dokumentasjon.map((felt) =>
+                    felt.type === VedleggstypeKjøreliste.PARKERINGSUTGIFT
+                        ? { ...felt, opplastedeVedlegg: oppdater(felt.opplastedeVedlegg) }
+                        : felt
                 ),
             }));
+        };
+
+        const leggTilDokument = (dokument: Dokument) => {
+            oppdaterDokumentasjon((vedlegg) => [...vedlegg, dokument]);
+        };
+
+        const slettDokument = (dokumentId: string) => {
+            oppdaterDokumentasjon((vedlegg) =>
+                vedlegg.filter((dokument) => dokument.id !== dokumentId)
+            );
         };
 
         return {
@@ -71,7 +81,8 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
             kjøreliste,
             oppdaterHarReist,
             oppdaterParkeringsutgift,
-            oppdaterDokumentasjon,
+            leggTilDokument,
+            slettDokument,
         };
     }
 );
