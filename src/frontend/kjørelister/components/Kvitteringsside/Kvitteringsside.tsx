@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { Alert, BodyShort, Button, Heading, Link, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, Link, VStack } from '@navikt/ds-react';
 
 import { formaterNullableIsoDatoTid } from '../../../utils/formateringUtils';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
@@ -37,9 +37,6 @@ export const Kvitteringsside = () => {
                 mer informasjon eller dokumentasjon fra deg.
             </BodyShort>
             <BodyShort>Du får varsel på SMS eller e-post når saken er ferdig behandlet.</BodyShort>
-            <Button as="a" href="https://www.nav.no/min-side" target="_blank">
-                Se kjørelistene dine på Min side
-            </Button>
 
             <VStack>
                 <Heading size={'medium'} level={'3'}>
