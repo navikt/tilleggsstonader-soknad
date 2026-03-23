@@ -31,7 +31,6 @@ export const Kvitteringsside = () => {
             </Alert>
             <VStack>
                 <BodyShort>{`Motatt av Nav: ${formaterNullableIsoDatoTid(locationState.mottattTidspunkt)}`}</BodyShort>
-                <BodyShort>{`Saksnummer: ${locationState.saksnummer}`}</BodyShort>
             </VStack>
             <BodyShort>
                 Vi vil ta kontakt med deg på telefon eller via Min side på nav.no hvis vi trenger
