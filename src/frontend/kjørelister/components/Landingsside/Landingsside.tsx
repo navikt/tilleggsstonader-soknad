@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { Alert, BodyShort, Heading, Skeleton, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, Link, Skeleton, VStack } from '@navikt/ds-react';
 
 import { KjørelisteKort } from './KjørelisteKort';
 import { hentAlleRammevedtak } from '../../../api/api';
@@ -19,6 +19,21 @@ export function Landingsside() {
 
     if (isPending) {
         return <Skeleton variant={'rounded'} height={180} />;
+    }
+
+    if (data.length === 0) {
+        return (
+            <Alert variant="info">
+                <VStack gap="space-8">
+                    <BodyShort>
+                        Det finnes ingen tilgjenglige kjørelister knyttet til deg.
+                    </BodyShort>
+                    <Link href="https://www.nav.no/tilleggsstonader">
+                        Les om tilleggsstønader og søk om støtte.
+                    </Link>
+                </VStack>
+            </Alert>
+        );
     }
 
     return (
