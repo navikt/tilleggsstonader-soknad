@@ -84,31 +84,33 @@ const initialiserKjøreliste = (
 ): Kjøreliste => {
     const tidligereReisedagerMap = lagTidligereReisedagerMap(tidligereInnsendt);
 
-    const reisedagerPerUkeAvsnitt: UkeMedReisedager[] = rammevedtak.uker.map((rammevedtakUke) => {
-        const dager = finnDagerMellomFomOgTomInklusiv(rammevedtakUke.fom, rammevedtakUke.tom);
-        const reisedager: Reisedag[] = dager.map((rammevedtakDag) => {
-            const dato = tilLocaleDateString(rammevedtakDag);
-            const tidligereReisedag = tidligereReisedagerMap.get(dato);
+    const reisedagerPerUkeAvsnitt: UkeMedReisedager[] = rammevedtak.uker
+        .filter((rammevedtakUke) => rammevedtakUke.kanSendeInnKjøreliste)
+        .map((rammevedtakUke) => {
+            const dager = finnDagerMellomFomOgTomInklusiv(rammevedtakUke.fom, rammevedtakUke.tom);
+            const reisedager: Reisedag[] = dager.map((rammevedtakDag) => {
+                const dato = tilLocaleDateString(rammevedtakDag);
+                const tidligereReisedag = tidligereReisedagerMap.get(dato);
 
+                return {
+                    dato: {
+                        verdi: dato,
+                        label: `${tilUkedag(rammevedtakDag)} ${tilTekstligDato(rammevedtakDag.toISOString())}`,
+                    },
+                    harKjørt: tidligereReisedag?.harKjørt ?? false,
+                    parkeringsutgift: {
+                        verdi: tidligereReisedag?.parkeringsutgift?.verdi ?? null,
+                        label: 'Parkeringsutgifter (kr)',
+                    },
+                };
+            });
             return {
-                dato: {
-                    verdi: dato,
-                    label: `${tilUkedag(rammevedtakDag)} ${tilTekstligDato(rammevedtakDag.toISOString())}`,
-                },
-                harKjørt: tidligereReisedag?.harKjørt ?? false,
-                parkeringsutgift: {
-                    verdi: tidligereReisedag?.parkeringsutgift?.verdi ?? null,
-                    label: 'Parkeringsutgifter (kr)',
-                },
+                ukeLabel: `Uke ${rammevedtakUke.ukeNummer} (${tilTekstligDato(rammevedtakUke.fom)} - ${tilTekstligDato(rammevedtakUke.tom)})`,
+                spørsmål: 'Hvilke dager kjørte du?',
+                reisedager: reisedager,
+                sendtInnTidligere: rammevedtakUke.innsendtDato != null,
             };
         });
-        return {
-            ukeLabel: `Uke ${rammevedtakUke.ukeNummer} (${tilTekstligDato(rammevedtakUke.fom)} - ${tilTekstligDato(rammevedtakUke.tom)})`,
-            spørsmål: 'Hvilke dager kjørte du?',
-            reisedager: reisedager,
-            sendtInnTidligere: rammevedtakUke.innsendtDato != null,
-        };
-    });
     return {
         reiseId: rammevedtak.reiseId,
         reisedagerPerUkeAvsnitt: reisedagerPerUkeAvsnitt,
