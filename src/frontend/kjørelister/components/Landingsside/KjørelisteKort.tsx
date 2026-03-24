@@ -27,7 +27,7 @@ export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammev
                 <Tag
                     variant={'info'}
                     size={'small'}
-                >{`${rammevedtak.uker.filter((uke) => !uke.innsendtDato).length} uker klar for utfylling`}</Tag>
+                >{`${rammevedtak.uker.filter((uke) => uke.kanSendeInnKjøreliste && !uke.innsendtDato).length} uker klar for utfylling`}</Tag>
             </LinkCard.Footer>
         </LinkCard>
     );

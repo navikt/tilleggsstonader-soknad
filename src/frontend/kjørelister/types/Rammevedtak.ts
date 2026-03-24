@@ -13,4 +13,5 @@ export interface RammevedtakUke {
     fom: string;
     tom: string;
     innsendtDato: string | null;
+    kanSendeInnKjøreliste: boolean;
 }
