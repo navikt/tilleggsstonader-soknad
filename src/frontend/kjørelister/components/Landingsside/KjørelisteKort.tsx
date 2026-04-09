@@ -4,7 +4,7 @@ import { BodyShort, LinkCard, Tag } from '@navikt/ds-react';
 
 import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
 import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';
-import { Rammevedtak } from '../../types/Rammevedtak';
+import { formaterAktivitetsnavn, Rammevedtak } from '../../types/Rammevedtak';
 
 export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammevedtak }) => {
     return (
@@ -13,7 +13,7 @@ export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammev
                 <LinkCard.Anchor
                     href={`/tilleggsstonader/soknad${finnPath(rammevedtak.reiseId, KjørelisteRoutes.SKJEMA)}/`}
                 >
-                    {rammevedtak.aktivitetsnavn}
+                    {formaterAktivitetsnavn(rammevedtak.aktivitetsnavn)}
                 </LinkCard.Anchor>
             </LinkCard.Title>
             <LinkCard.Description>
