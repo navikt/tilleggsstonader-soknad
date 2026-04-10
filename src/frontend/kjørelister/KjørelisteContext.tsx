@@ -116,8 +116,10 @@ const initialiserKjøreliste = (
                 };
             });
             return {
-                ukeLabel: `Uke ${rammevedtakUke.ukeNummer} (${tilTekstligDato(rammevedtakUke.fom)} - ${tilTekstligDato(rammevedtakUke.tom)})`,
+                ukeLabel: `Uke ${rammevedtakUke.ukeNummer}`,
                 spørsmål: 'Hvilke dager kjørte du?',
+                reisedagerLabel: `Ukentlige reisedager: ${rammevedtakUke.reisedagerPerUke}`,
+                antallReisedagerIUke: rammevedtakUke.reisedagerPerUke,
                 reisedager: reisedager,
                 sendtInnTidligere: rammevedtakUke.innsendtDato != null,
             };
