@@ -21,7 +21,7 @@ const appDirectives = {
 const CSP_TIMEOUT_MS = 2000;
 
 function getEnv(): 'dev' | 'prod' {
-    return process.env.ENV === 'localhost' ? 'dev' : 'prod';
+    return process.env.ENV === 'prod' ? 'prod' : 'dev';
 }
 
 export async function applyCspDirectives(_: Request, res: Response, next: NextFunction) {
