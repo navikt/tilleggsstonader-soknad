@@ -66,8 +66,6 @@ export function logCspViolation(req: Request, res: Response) {
         return;
     }
 
-    logger.info('Raw CSP violation report', violationReport);
-
     const { body } = violationReport;
     const blockedURL = body?.blockedURL ?? 'unknown';
     const documentURL = body?.documentURL ?? 'unknown';
