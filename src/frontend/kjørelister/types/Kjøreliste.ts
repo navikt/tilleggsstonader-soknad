@@ -10,6 +10,8 @@ export interface Kjøreliste {
 
 export interface UkeMedReisedager {
     ukeLabel: string;
+    reisedagerLabel: string;
+    antallReisedagerIUke: number;
     spørsmål: string;
     reisedager: Reisedag[];
     sendtInnTidligere: boolean;

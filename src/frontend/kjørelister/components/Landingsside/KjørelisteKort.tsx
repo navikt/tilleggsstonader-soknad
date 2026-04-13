@@ -21,7 +21,6 @@ export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammev
                     Periode med kjøring: {formaterPeriodeTekstlig(rammevedtak.fom, rammevedtak.tom)}
                 </BodyShort>
                 <BodyShort>Adresse: {rammevedtak.aktivitetsadresse}</BodyShort>
-                <BodyShort>{rammevedtak.reisedagerPerUke} dager per uke</BodyShort>
             </LinkCard.Description>
             <LinkCard.Footer>
                 <Tag
