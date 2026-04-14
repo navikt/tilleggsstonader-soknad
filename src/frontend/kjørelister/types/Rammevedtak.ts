@@ -15,3 +15,13 @@ export interface RammevedtakUke {
     innsendtDato: string | null;
     kanSendeInnKjøreliste: boolean;
 }
+
+export const aktivitetTypeTilTekst: Record<string, string> = {
+    TILTAK: 'Tiltak',
+    UTDANNING: 'Utdanning',
+    REELL_ARBEIDSSØKER: 'Reell arbeidssøker',
+    INGEN_AKTIVITET: 'Ingen relevant aktivitet',
+};
+
+export const formaterAktivitetsnavn = (aktivitetsnavn: string): string =>
+    aktivitetTypeTilTekst[aktivitetsnavn] ?? aktivitetsnavn;
