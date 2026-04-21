@@ -18,6 +18,7 @@ interface IModellversjon {
 const StønadstypeTilPapirskjema: Record<Stønadstype, string> = {
     BARNETILSYN: 'nav111215b',
     LÆREMIDLER: 'nav111216b',
+    REISE_TIL_SAMLING: 'nav111217b',
 };
 
 const urlPapirsøknadProd = (stønadstype: Stønadstype) =>

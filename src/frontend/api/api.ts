@@ -54,6 +54,8 @@ const stønadstypeTilPath = (stønadstype: Stønadstype): string => {
             return 'pass-av-barn';
         case Stønadstype.LÆREMIDLER:
             return 'laremidler';
+        case Stønadstype.REISE_TIL_SAMLING:
+            return 'reise-til-samling';
     }
 };
 

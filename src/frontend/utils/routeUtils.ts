@@ -10,6 +10,11 @@ import {
     routesLæremidler,
     RouteTilPath as RouteToPathLæremidler,
 } from '../læremidler/routing/routesLæremidler';
+import {
+    reiseTilSamlingPath,
+    RouteTilPath as RouteToPathReiseTilSamling,
+    routesReiseTilSamling,
+} from '../reiseTilSamling/routing/routesReiseTilSamling';
 import { IRoute, RouteType } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
 
@@ -19,6 +24,8 @@ export const hentRoutes = (stønadstype: Stønadstype): IRoute[] => {
             return RoutesBarnetilsyn;
         case Stønadstype.LÆREMIDLER:
             return routesLæremidler;
+        case Stønadstype.REISE_TIL_SAMLING:
+            return routesReiseTilSamling;
     }
 };
 
@@ -38,6 +45,8 @@ export const hentStartRoute = (stønadstype: Stønadstype) => {
             return barnetilsynPath;
         case Stønadstype.LÆREMIDLER:
             return læremidlerPath;
+        case Stønadstype.REISE_TIL_SAMLING:
+            return reiseTilSamlingPath;
     }
 };
 
@@ -51,5 +60,7 @@ export const finnOppsummeringRoute = (stønadstype: Stønadstype): string => {
             return RouteToPathPassAvBarn.OPPSUMMERING;
         case Stønadstype.LÆREMIDLER:
             return RouteToPathLæremidler.OPPSUMMERING;
+        case Stønadstype.REISE_TIL_SAMLING:
+            return RouteToPathReiseTilSamling.PLACEHOLDER;
     }
 };

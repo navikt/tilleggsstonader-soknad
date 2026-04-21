@@ -2,6 +2,7 @@
 export enum Stønadstype {
     BARNETILSYN = 'BARNETILSYN',
     LÆREMIDLER = 'LÆREMIDLER',
+    REISE_TIL_SAMLING = 'REISE_TIL_SAMLING',
 }
 
 export enum SkjematypeFyllUt {

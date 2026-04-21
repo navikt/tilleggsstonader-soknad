@@ -16,6 +16,8 @@ import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentl
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
+import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
+import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
 import { erProd } from './utils/miljø';
 
 initSentry();
@@ -26,6 +28,7 @@ const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
     const kanBrukeKjøreliste = !erProd();
+    const kanBrukeReiseTilSamling = !erProd();
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <ScrollToTop />
@@ -37,6 +40,9 @@ const AppRoutes = () => {
                     element={<Navigate to={barnetilsynPath} replace />}
                 />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
+                {kanBrukeReiseTilSamling && (
+                    <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
+                )}
                 <Route
                     path="/daglig-reise/skjema"
                     element={<KanBrukeOffentligTransportAvsjekk />}

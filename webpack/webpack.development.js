@@ -15,6 +15,9 @@ const developmentConfig = merge(common, {
         static: '/dist_development',
         port: 8080,
         open: openBrowser,
+        client: {
+            overlay: false,
+        },
         devMiddleware: { publicPath: publicPath },
         historyApiFallback: {
             index: publicPath,

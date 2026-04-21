@@ -38,6 +38,9 @@ export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = 
         [Stønadstype.LÆREMIDLER]: {
             nb: 'Hvis du har begynt på en ny utdanning eller opplæring, eller det gjelder et nytt skoleår, kan du sende ny søknad.',
         },
+        [Stønadstype.REISE_TIL_SAMLING]: {
+            nb: 'Hvis du har deltatt på en ny samling, kan du sende ny søknad.',
+        },
     },
     alert_for_stønadstype: {
         nb: 'Du har allerede sendt oss en søknad om støtte til [0]. ',
