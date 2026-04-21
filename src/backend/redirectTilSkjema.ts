@@ -39,3 +39,32 @@ export const redirectTilSkjema = (
         }
     };
 };
+
+export const redirectTilDagligReiseSkjema = () => {
+    return async (req: Request, res: Response) => {
+        try {
+            const skjematype = SkjematypeFyllUt.SØKNAD_DAGLIG_REISE;
+            const harAAP = await skalBrukerTilNyLøsning(skjematype, req);
+
+            if (harAAP) {
+                const fyllutUrl = getFyllutUrl(skjematype, 'NY');
+                if (fyllutUrl) {
+                    res.redirect(302, fyllutUrl);
+                } else {
+                    logger.error(
+                        'Feil ved omdirigering til daglig reise skjema: klarte ikke å finne fyll-ut url'
+                    );
+                    res.status(500).send(
+                        'Feil ved omdirigering til daglig reise skjema: klarte ikke å finne fyll-ut url'
+                    );
+                }
+            } else {
+                res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema`);
+                return;
+            }
+        } catch (error) {
+            logger.error('Feil ved omdirigering til daglig reise skjema:', error);
+            res.status(500).send('Feil ved omdirigering til daglig reise skjema');
+        }
+    };
+};

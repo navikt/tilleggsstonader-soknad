@@ -7,7 +7,7 @@ import { getFyllutUrl, SkjematypeFyllUt } from './fyllutUrls';
 import logger from './logger';
 import { miljø } from './miljø';
 import { addRequestInfo, doProxy } from './proxy';
-import { redirectTilSkjema } from './redirectTilSkjema';
+import { redirectTilDagligReiseSkjema, redirectTilSkjema } from './redirectTilSkjema';
 import attachToken from './tokenProxy';
 import { BASE_PATH_SOKNAD } from './url';
 import { matchAllPathsExcluding } from './utils';
@@ -36,7 +36,7 @@ const routes = () => {
         new RegExp(`^${BASE_PATH_SOKNAD}/daglig-reise/?$`),
         addRequestInfo(),
         attachToken('tilleggsstonader-soknad-api'),
-        redirectTilSkjema(SkjematypeFyllUt.SØKNAD_DAGLIG_REISE, 'daglig-reise/skjema')
+        redirectTilDagligReiseSkjema()
     );
 
     expressRouter.get(
