@@ -76,12 +76,13 @@ export const Oppsummeringsside = () => {
 
             <GuidePanel poster>
                 <BodyLong spacing>
-                    Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du
-                    endre opplysningene.
+                    Nå kan du se over at alt er riktig før du sender inn kjørelisten. Ved behov kan
+                    du endre opplysningene.
                 </BodyLong>
                 <BodyLong>
-                    Når du har sendt inn søknaden kommer du til en kvitteringsside med informasjon
-                    om veien videre. Der kan du også ettersende dokumentasjon som mangler.
+                    Når du har sendt inn kjørelisten kommer du til en kvitteringsside med
+                    informasjon om veien videre. Der kan du også ettersende dokumentasjon som
+                    mangler.
                 </BodyLong>
             </GuidePanel>
 
@@ -100,15 +101,15 @@ export const Oppsummeringsside = () => {
                 >
                     Jeg er kjent med at jeg kan miste retten til stønad hvis jeg oppgir feilaktige
                     opplysninger, og jeg er klar over at jeg må betale tilbake hvis jeg får utbetalt
-                    mer enn jeg har krav på. Jeg aksepterer også at NAV kan innhente opplysninger
-                    som er nødvendige for å behandle søknaden min.
+                    mer enn jeg har krav på. Jeg aksepterer også at Nav kan innhente opplysninger
+                    som er nødvendige for å behandle kjørelisten min.
                 </Checkbox>
                 {brukerAkseptererIkkeVilkårFeil && (
                     <ErrorMessage showIcon={true}>
                         Du må fylle ut: Jeg er kjent med at jeg kan miste retten til stønad hvis jeg
                         oppgir feilaktige opplysninger, og jeg er klar over at jeg må betale tilbake
-                        hvis jeg får utbetalt mer enn jeg har krav på. Jeg aksepterer også at NAV
-                        kan innhente opplysninger som er nødvendige for å behandle søknaden min.
+                        hvis jeg får utbetalt mer enn jeg har krav på. Jeg aksepterer også at Nav
+                        kan innhente opplysninger som er nødvendige for å behandle kjørelisten min.
                     </ErrorMessage>
                 )}
             </HStack>

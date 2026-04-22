@@ -17,7 +17,6 @@ import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import appConfig from './utils/appConfig';
-import { erProd } from './utils/miljø';
 
 initSentry();
 autentiseringsInterceptor();
@@ -26,7 +25,6 @@ const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
-    const kanBrukeKjøreliste = !erProd();
     return (
         <BrowserRouter basename={appConfig.publicUrl}>
             <ScrollToTop />
@@ -42,9 +40,7 @@ const AppRoutes = () => {
                     path="/daglig-reise/skjema"
                     element={<KanBrukeOffentligTransportAvsjekk />}
                 />
-                {kanBrukeKjøreliste && (
-                    <Route path={`/kjoreliste/*`} element={<KjørelisterApp />} />
-                )}
+                <Route path={`/kjoreliste/*`} element={<KjørelisterApp />} />
                 <Route path={'*'} element={<Navigate to={barnetilsynPath} replace />} />
             </Routes>
         </BrowserRouter>
