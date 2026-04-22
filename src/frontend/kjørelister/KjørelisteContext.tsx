@@ -7,6 +7,7 @@ import { Rammevedtak } from './types/Rammevedtak';
 import { Dokument, VedleggstypeKjøreliste } from '../typer/skjema';
 import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
 import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
+import appConfig from '../utils/appConfig';
 import { tilLocaleDateString } from '../utils/formateringUtils';
 
 interface Props {
@@ -135,7 +136,7 @@ const initialiserKjøreliste = (
             },
         ],
         søknadMetadata: {
-            søknadFrontendGitHash: process.env.COMMIT_HASH,
+            søknadFrontendGitHash: appConfig.commitHash,
         },
     };
 };

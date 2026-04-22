@@ -42,8 +42,8 @@ const common = {
             template: path.join(process.cwd(), 'src/frontend/index.html'),
         }),
         new webpack.DefinePlugin({
-            'process.env.PUBLIC_URL': JSON.stringify(publicPath),
-            'process.env.COMMIT_HASH': JSON.stringify(commitHash),
+            __PUBLIC_URL__: JSON.stringify(publicPath),
+            __COMMIT_HASH__: JSON.stringify(commitHash),
         }),
     ],
     resolve: {

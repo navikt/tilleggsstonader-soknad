@@ -50,7 +50,7 @@ const developmentConfig = merge(common, {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development'),
+            __NODE_ENV__: JSON.stringify('development'),
         }),
     ],
 });
