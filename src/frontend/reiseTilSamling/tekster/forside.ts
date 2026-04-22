@@ -28,34 +28,44 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Hei!',
     },
     veileder_innhold_tittel: {
-        nb: 'Denne pengestøtten kan gis til deg som:',
+        nb: 'Du kan få denne støtten hvis du:',
     },
     veileder_innhold_punkter: {
-        nb: ['deltar på et arbeidsrettet tiltak eller utdanning godkjent av Nav'],
+        nb: ['deltar i et arbeidsrettet tiltak eller tar utdanning som Nav har godkjent'],
     },
     veileder_innhold_mellomtekst: {
-        nb: 'og samtidig er',
+        nb: 'og i tillegg er du',
     },
     veileder_innhold_fortsettelse_punkter: {
         nb: [
-            'enslig mor/far, gjenlevende, mottar arbeidsavklaringspenger (AAP), uføretrygd, har nedsatt arbeidsevne, tiltakspenger, dagpenger, kvalifiseringsstønad eller sitter i fengsel mens du deltar i arbeidsrettet tiltak.',
+            'enslig mor eller far',
+            'gjenlevende',
+            'mottaker av arbeidsavklaringspenger (AAP)',
+            'mottaker av uføretrygd',
+            'person med nedsatt arbeidsevne',
+            'mottaker av tiltakspenger',
+            'mottaker av dagpenger',
+            'mottaker av kvalifiseringsstønad',
+            'innsatt i fengsel og deltar i et arbeidsrettet tiltak',
         ],
     },
     kan_soke_tittel: {
-        nb: 'Her kan du søke om',
+        nb: 'Du kan søke om',
     },
     kan_soke_innhold: {
         nb: [
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-            'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
+            'å få dekket nødvendige reiseutgifter til og fra en samling i forbindelse med et arbeidsrettet tiltak.',
+            'Samlingen må være obligatorisk.',
+            'Reiseavstanden må være minst 30 km.',
+            'Vi dekker den billigste reisemåten.',
         ],
     },
     kan_ikke_soke_tittel: {
-        nb: 'Dette kan du ikke søke om her',
+        nb: 'Du kan ikke bruke denne søknaden hvis',
     },
     kan_ikke_soke_tekst: {
         nb: [
-            'Hvis du er under 18 år, skal søke på vegne av andre og/eller skal søke pengestøtte for en aktivitet som ble avsluttet for mer enn 3 måneder siden, må du sende inn søknad på papir og fylle ut ',
+            'du er under 18 år, søker på vegne av andre eller søker støtte for en aktivitet som ble avsluttet for mer enn 3 måneder siden. Da må du fylle ut ',
             {
                 tekst: 'dette skjemaet i stedet',
                 url: 'https://www.nav.no/fyllut/nav111217b?sub=paper',
@@ -68,19 +78,23 @@ export const forsideTekster: ForsideInnhold = {
     },
     for_du_soker_innhold: {
         nb: [
-            'Du må vite adressen du skal møte opp på, da du må skrive den inn i søknaden.',
-            'Hvis du søker om å få dekket reiseutgifter under 6 km av helsemessige årsaker, må du dokumentere dette med legeerklæring eller annen uttalelse fra helsepersonell.',
-            'Du må gi beskjed til oss hvis situasjonen din endrer seg, for eksempel hvis du avbryter tiltaket eller utdanningen.',
-            'Hvis du får penger du ikke har rett på, kan vi kreve at du betaler de tilbake.',
+            'Du må vite adressen til samlingen. Du skal oppgi hvor du reiser til i søknaden.',
+            'Du må dokumentere at samlingen er obligatorisk.',
+            'Du må legge ved dokumentasjon på reisen, for eksempel tog- eller flybilletter og andre kvitteringer. Bruker du egen bil, kan du dokumentere utgifter til bom og ferge.',
+            'Hvis du søker om å få dekket reiseutgifter under 6 km av helsemessige årsaker, må du dokumentere det med legeerklæring eller en uttalelse fra helsepersonell.',
+            'Du må gi oss beskjed hvis situasjonen din endrer seg, for eksempel hvis du avbryter tiltaket eller utdanningen.',
+            'Hvis du får penger du ikke har rett på, kan vi kreve dem tilbake.',
         ],
     },
     var_klar_over_tittel: {
-        nb: 'Vær klar over',
+        nb: 'Dette er viktig å vite',
     },
     var_klar_over_innhold: {
         nb: [
-            'De fleste feltene i skjemaet er obligatoriske å fylle ut. Felt som ikke er obligatoriske er merket med: (valgfritt).',
-            'Bruk av offentlig PC: Hvis du fyller ut skjemaet på en offentlig PC, for eksempel på et bibliotek, er det viktig at du lukker nettleseren når du er ferdig. Dette vil forhindre at uvedkommende får tak i opplysningene du har fylt ut i skjemaet.',
+            'Du får støtten utbetalt i etterkant, basert på kvitteringene du sender inn.',
+            'Hvis tiltaket varer i flere år, må du sende en ny søknad for hvert år.',
+            'De fleste feltene i skjemaet må du fylle ut. Felt som ikke er påkrevde, er merket med (valgfritt).',
+            'Bruker du en offentlig PC, for eksempel på biblioteket, må du lukke nettleseren når du er ferdig. Da hindrer du at andre får tilgang til opplysningene du har skrevet inn.',
         ],
     },
     info_som_hentes_tittel: {
@@ -89,13 +103,13 @@ export const forsideTekster: ForsideInnhold = {
     info_som_hentes_punktlister: [
         {
             tittel: {
-                nb: 'I tillegg til den informasjonen du oppgir i søknaden, henter vi:',
+                nb: 'I tillegg til opplysningene du gir i søknaden, henter vi:',
             },
             innhold: {
                 nb: [
-                    'Person- og adresseinformasjon fra Folkeregisteret',
-                    'Informasjon om utdanning eller tiltak avtalt med veileder i Nav',
-                    'Hvilke andre ytelser du mottar fra Nav',
+                    'person- og adresseopplysninger fra Folkeregisteret',
+                    'opplysninger om utdanning eller tiltak du har avtalt med veilederen din i Nav',
+                    'opplysninger om andre ytelser du får fra Nav',
                 ],
             },
         },
@@ -110,12 +124,12 @@ export const forsideTekster: ForsideInnhold = {
     ],
     info_som_hentes_personvern: {
         nb: [
-            'Nav er ansvarlig for å behandle personopplysningene dine. Vi deler ikke informasjonen du gir oss i søknaden med noen andre. ',
+            'Nav har ansvar for å behandle personopplysningene dine. Vi deler ikke opplysningene i søknaden med andre. ',
             {
-                tekst: 'Personvernerklæringen på nav.no',
+                tekst: 'Les personvernerklæringen på nav.no',
                 url: 'https://www.nav.no/personvernerklaering',
             },
-            ' gir mer informasjon om hvordan vi behandler personopplysningene dine.',
+            ' for å få mer informasjon om hvordan vi behandler personopplysningene dine.',
         ],
     },
 };

@@ -18,6 +18,12 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await expect(
         page.getByRole('heading', { name: 'Søknad om støtte ved reise til samling' })
     ).toBeVisible();
+    await expect(page.getByText('Vi dekker den billigste reisemåten.')).toBeVisible();
+    await expect(
+        page.getByText(
+            'Du får støtten utbetalt i etterkant, basert på kvitteringene du sender inn.'
+        )
+    ).toBeVisible();
     await expect(page.getByRole('button', { name: 'Start søknad' })).toBeVisible();
 
     await forventIngenWcagViolations(page);
