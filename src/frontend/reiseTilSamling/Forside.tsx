@@ -47,9 +47,7 @@ export const Forside: React.FC = () => {
                     </strong>
                 </BodyShort>
                 <BodyShort spacing>
-                    <strong>
-                        <LocaleTekst tekst={forsideTekster.veileder_innhold_tittel} />
-                    </strong>
+                    <LocaleTekst tekst={forsideTekster.veileder_innhold_tittel} />
                 </BodyShort>
                 <LocalePunktliste innhold={forsideTekster.veileder_innhold_punkter} />
                 <BodyShort spacing>
