@@ -27,7 +27,6 @@ const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
-    const kanBrukeKjøreliste = !erProd();
     const kanBrukeReiseTilSamling = !erProd();
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -47,9 +46,7 @@ const AppRoutes = () => {
                     path="/daglig-reise/skjema"
                     element={<KanBrukeOffentligTransportAvsjekk />}
                 />
-                {kanBrukeKjøreliste && (
-                    <Route path={`/kjoreliste/*`} element={<KjørelisterApp />} />
-                )}
+                <Route path={`/kjoreliste/*`} element={<KjørelisterApp />} />
                 <Route path={'*'} element={<Navigate to={barnetilsynPath} replace />} />
             </Routes>
         </BrowserRouter>
