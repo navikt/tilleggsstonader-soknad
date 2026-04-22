@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router';
 
 import Forside from './Forside';
 import { læremidlerPath } from './routing/routesLæremidler';
-import { Header } from '../components/Header';
 import { RootRoute } from '../components/RootRoute';
+import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
 import HovedytelseLæremidler from './steg/1-hovedytelse/HovedytelseLæremidler';
 import Utdanning from './steg/2-utdanning/Utdanning';
 import VedleggLæremidler from './steg/3-vedlegg/VedleggLæremidler';
@@ -14,11 +14,16 @@ import Kvittering from '../components/Kvittering/Kvittering';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { fellesTekster } from '../tekster/felles';
+import { stønadstypeTilSkjemaId } from '../typer/skjemanavn';
+import { Stønadstype } from '../typer/stønadstyper';
 
 const Søknadsdialog: React.FC = () => {
     return (
         <>
-            <Header tittel={fellesTekster.banner_læremidler} />
+            <SøknadsskjemaHeader
+                tittel={fellesTekster.banner_læremidler}
+                skjemaId={stønadstypeTilSkjemaId[Stønadstype.LÆREMIDLER]}
+            />
             <Routes>
                 <Route path={'/'} element={<RootRoute forside={<Forside />} />} />
                 <Route path={'*'} element={<SøknadsdialogInnhold />} />

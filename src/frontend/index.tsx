@@ -16,7 +16,10 @@ import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentl
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
+import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
+import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
 import appConfig from './utils/appConfig';
+import { erProd } from './utils/miljø';
 
 initSentry();
 autentiseringsInterceptor();
@@ -25,6 +28,7 @@ const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
+    const kanBrukeReiseTilSamling = !erProd();
     return (
         <BrowserRouter basename={appConfig.publicUrl}>
             <ScrollToTop />
@@ -36,6 +40,9 @@ const AppRoutes = () => {
                     element={<Navigate to={barnetilsynPath} replace />}
                 />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
+                {kanBrukeReiseTilSamling && (
+                    <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
+                )}
                 <Route
                     path="/daglig-reise/skjema"
                     element={<KanBrukeOffentligTransportAvsjekk />}

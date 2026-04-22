@@ -6,6 +6,7 @@ import { RoutesBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
 import { routesLæremidler } from '../læremidler/routing/routesLæremidler';
+import { routesReiseTilSamling } from '../reiseTilSamling/routing/routesReiseTilSamling';
 import { IRoute } from '../typer/routes';
 import { Stønadstype } from '../typer/stønadstyper';
 
@@ -16,6 +17,7 @@ interface RootRouteProps {
 const route: Record<Stønadstype, IRoute> = {
     [Stønadstype.BARNETILSYN]: RoutesBarnetilsyn[0],
     [Stønadstype.LÆREMIDLER]: routesLæremidler[0],
+    [Stønadstype.REISE_TIL_SAMLING]: routesReiseTilSamling[0],
 };
 
 export const RootRoute: React.FC<RootRouteProps> = ({ forside }) => {

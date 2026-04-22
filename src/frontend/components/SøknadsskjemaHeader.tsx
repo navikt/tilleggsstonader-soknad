@@ -4,8 +4,6 @@ import { BodyShort, Heading, VStack } from '@navikt/ds-react';
 import { BreakpointMdDown } from '@navikt/ds-tokens/js';
 
 import LocaleTekst from './Teksthåndtering/LocaleTekst';
-import { useSøknad } from '../context/SøknadContext';
-import { stønadstypeTilSkjemaId } from '../typer/skjemanavn';
 import { TekstElement } from '../typer/tekst';
 
 const Container = styled.div`
@@ -18,13 +16,14 @@ const Container = styled.div`
     }
 `;
 
-export const Header: React.FC<{ tittel: TekstElement<string> }> = ({ tittel }) => {
-    const { stønadstype } = useSøknad();
-
+export const SøknadsskjemaHeader: React.FC<{ tittel: TekstElement<string>; skjemaId: string }> = ({
+    tittel,
+    skjemaId,
+}) => {
     return (
         <Container>
             <VStack gap="space-8">
-                <BodyShort>{stønadstypeTilSkjemaId[stønadstype]}</BodyShort>
+                <BodyShort>{skjemaId}</BodyShort>
                 <Heading size="xlarge" as="h1">
                     <LocaleTekst tekst={tittel} />
                 </Heading>
