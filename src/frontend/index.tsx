@@ -18,6 +18,7 @@ import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
 import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
+import appConfig from './utils/appConfig';
 import { erProd } from './utils/miljø';
 
 initSentry();
@@ -29,7 +30,7 @@ const root = createRoot(rootElement!);
 const AppRoutes = () => {
     const kanBrukeReiseTilSamling = !erProd();
     return (
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter basename={appConfig.publicUrl}>
             <ScrollToTop />
             <Routes>
                 <Route path={`${barnetilsynPath}/*`} element={<BarnetilsynApp />} />
