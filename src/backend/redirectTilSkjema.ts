@@ -31,15 +31,21 @@ function routeTilNyLøsning(
         return;
     }
 
-    if (!routeTilFyllUt(skjematype, 'NY', res)) {
+    const bleRutetTilFyllUt = routeTilFyllUt(skjematype, 'NY', res);
+
+    if (!bleRutetTilFyllUt) {
         next();
     }
 }
 
 function routeTilGammelLøsning(skjematype: SkjematypeFyllUt, res: Response) {
-    if (!routeTilFyllUt(skjematype, 'GAMMEL', res)) {
+    const bleRutetTilFyllUt = routeTilFyllUt(skjematype, 'GAMMEL', res);
+
+    if (!bleRutetTilFyllUt) {
         logger.error(`Fant ikke FyllUt-URL for ${skjematype} med versjon GAMMEL`);
-        res.status(500).send('Feil ved omdirigering');
+        res.status(500).send(
+            `Feil ved omdirigering, Fant ikke FyllUt-URL for ${skjematype} med versjon GAMMEL`
+        );
     }
 }
 
@@ -67,7 +73,9 @@ export const redirectTilSkjema = (
                     return;
                 default:
                     logger.error(`Ukjent aksjon fra skjema-routing: ${aksjon}`);
-                    res.status(500).send('Feil ved omdirigering');
+                    res.status(500).send(
+                        `Feil ved omdirigering. Ukjent aksjon fra skjema-routing: ${aksjon}`
+                    );
             }
         } catch (error) {
             logger.error('Feil ved omdirigering:', error);
