@@ -11,7 +11,7 @@ const fjernWebpackOverlay = async (page: Page) => {
     });
 };
 
-test('At reise til samling viser førstesiden og går til neste steg', async ({ page }) => {
+test('At reise til samling viser førstesiden og går videre fra din situasjon', async ({ page }) => {
     await page.goto(urlSøknad);
     await fjernWebpackOverlay(page);
 
@@ -26,8 +26,22 @@ test('At reise til samling viser førstesiden og går til neste steg', async ({ 
     await page.getByRole('button', { name: 'Start søknad' }).click();
     await fjernWebpackOverlay(page);
 
-    await expect(page).toHaveURL(`${urlSøknad}/placeholder`);
-    await expect(page.getByRole('heading', { name: 'Dette er neste steg' })).toBeVisible();
+    await expect(page).toHaveURL(`${urlSøknad}/hovedytelse`);
+    await expect(page.getByRole('heading', { name: 'Din situasjon' })).toBeVisible();
+    await expect(
+        page.getByRole('group', { name: 'Mottar du eller har du nylig søkt om noe av dette?' })
+    ).toBeVisible();
+
+    await forventIngenWcagViolations(page);
+
+    await page.getByRole('checkbox', { name: 'Arbeidsavklaringspenger (AAP)' }).check();
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await expect(page).toHaveURL(`${urlSøknad}/neste-steg`);
+    await expect(
+        page.getByRole('heading', { name: 'Neste steg er ikke klart ennå' })
+    ).toBeVisible();
 
     await forventIngenWcagViolations(page);
 });

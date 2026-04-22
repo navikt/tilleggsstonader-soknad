@@ -4,7 +4,7 @@ import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt }
 import { Ytelse } from '../components/Hovedytelse/typer';
 import { Utdanning } from '../læremidler/typer/søknad';
 
-export type Søknad = SøknadPassAvBarn | SøknadLæremidler;
+export type Søknad = SøknadPassAvBarn | SøknadLæremidler | SøknadReiseTilSamling;
 
 export interface SøknadPassAvBarn {
     hovedytelse: Hovedytelse | undefined;
@@ -18,6 +18,11 @@ export interface SøknadLæremidler {
     hovedytelse: Hovedytelse | undefined;
     utdanning: Utdanning | undefined;
     dokumentasjon: DokumentasjonFelt[];
+    søknadMetadata: SøknadMetadata;
+}
+
+export interface SøknadReiseTilSamling {
+    hovedytelse: Hovedytelse | undefined;
     søknadMetadata: SøknadMetadata;
 }
 
