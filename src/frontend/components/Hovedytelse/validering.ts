@@ -1,7 +1,7 @@
 import { validerArbeidOgOpphold } from './ArbeidOgOpphold/validering';
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
-import { hovedytelseInnhold } from '../../barnetilsyn/tekster/hovedytelse';
+import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 import { EnumFlereValgFelt } from '../../typer/skjema';
 import { ArbeidOgOpphold } from '../../typer/søknad';
 import { Locale } from '../../typer/tekst';

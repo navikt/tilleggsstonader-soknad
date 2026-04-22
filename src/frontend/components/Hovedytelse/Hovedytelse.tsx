@@ -6,9 +6,9 @@ import ArbeidOgOppholdUtenforNorge from './ArbeidOgOpphold/ArbeidOgOppholdUtenfo
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { validerHovedytelse } from './validering';
-import { hovedytelseInnhold } from '../../barnetilsyn/tekster/hovedytelse';
 import { useSpråk } from '../../context/SpråkContext';
 import { useValideringsfeil } from '../../context/ValideringsfeilContext';
+import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 import { EnumFlereValgFelt } from '../../typer/skjema';
 import { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
 import { inneholderFeil } from '../../typer/validering';
