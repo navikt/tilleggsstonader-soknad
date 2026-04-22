@@ -16,6 +16,7 @@ import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentl
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
+import appConfig from './utils/appConfig';
 
 initSentry();
 autentiseringsInterceptor();
@@ -25,7 +26,7 @@ const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
     return (
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter basename={appConfig.publicUrl}>
             <ScrollToTop />
             <Routes>
                 <Route path={`${barnetilsynPath}/*`} element={<BarnetilsynApp />} />

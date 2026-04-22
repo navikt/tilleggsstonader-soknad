@@ -17,7 +17,7 @@ const productionConfig = merge(common, {
     devtool: 'source-map',
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production'),
+            __NODE_ENV__: JSON.stringify('production'),
         }),
     ],
 });

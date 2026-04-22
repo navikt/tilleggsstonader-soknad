@@ -9,6 +9,7 @@ import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { teksterStønad } from '../tekster/stønad';
 import { Stønadstype } from '../typer/stønadstyper';
+import appConfig from '../utils/appConfig';
 
 const LæremidlerInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
@@ -22,7 +23,7 @@ const LæremidlerInnhold = () => {
                 utdanning: utdanning,
                 dokumentasjon: dokumentasjon,
                 søknadMetadata: {
-                    søknadFrontendGitHash: process.env.COMMIT_HASH,
+                    søknadFrontendGitHash: appConfig.commitHash,
                 },
             }}
             resetValideringsfeil={resetValideringsfeil}
