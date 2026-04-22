@@ -61,6 +61,6 @@ export const finnOppsummeringRoute = (stønadstype: Stønadstype): string => {
         case Stønadstype.LÆREMIDLER:
             return RouteToPathLæremidler.OPPSUMMERING;
         case Stønadstype.REISE_TIL_SAMLING:
-            return RouteToPathReiseTilSamling.PLACEHOLDER;
+            return RouteToPathReiseTilSamling.NESTE_STEG;
     }
 };

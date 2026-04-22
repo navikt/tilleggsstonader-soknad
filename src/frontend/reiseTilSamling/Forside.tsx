@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
     Accordion,
@@ -13,8 +13,9 @@ import {
     VStack,
 } from '@navikt/ds-react';
 
-import { RouteTilPath } from './routing/routesReiseTilSamling';
+import { routesReiseTilSamling } from './routing/routesReiseTilSamling';
 import { forsideTekster } from './tekster/forside';
+import { loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
@@ -22,12 +23,21 @@ import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
 import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
+import { useReiseTilSamlingSøknad } from '../context/ReiseTilSamlingSøknadContext';
 import { fellesTekster } from '../tekster/felles';
+import { Stønadstype } from '../typer/stønadstyper';
+import { hentNesteRoute } from '../utils/routeUtils';
 
 export const Forside: React.FC = () => {
     const navigate = useNavigate();
-    const [harBekreftet, settHarBekreftet] = useState(false);
+    const location = useLocation();
+    const { harBekreftet, settHarBekreftet } = useReiseTilSamlingSøknad();
     const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
+
+    useEffect(() => {
+        const route = routesReiseTilSamling[0];
+        loggBesøk(Stønadstype.REISE_TIL_SAMLING, route.path, route.label);
+    }, []);
 
     const startSøknad = () => {
         if (!harBekreftet) {
@@ -35,7 +45,9 @@ export const Forside: React.FC = () => {
             return;
         }
 
-        navigate(RouteTilPath.PLACEHOLDER);
+        loggSkjemaStartet(Stønadstype.REISE_TIL_SAMLING);
+        const nesteRoute = hentNesteRoute(routesReiseTilSamling, location.pathname);
+        navigate(nesteRoute.path);
     };
 
     return (
