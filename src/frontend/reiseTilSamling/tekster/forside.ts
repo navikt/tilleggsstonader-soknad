@@ -59,7 +59,6 @@ export const forsideTekster: ForsideInnhold = {
             {
                 tekst: 'dette skjemaet i stedet',
                 url: 'https://www.nav.no/fyllut/nav111217b?sub=paper',
-                variant: 'neutral',
             },
             ' (åpnes i ny fane).',
         ],
@@ -115,7 +114,6 @@ export const forsideTekster: ForsideInnhold = {
             {
                 tekst: 'Personvernerklæringen på nav.no',
                 url: 'https://www.nav.no/personvernerklaering',
-                variant: 'neutral',
             },
             ' gir mer informasjon om hvordan vi behandler personopplysningene dine.',
         ],
