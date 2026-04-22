@@ -24,7 +24,6 @@ export const dineBarnTekster: DineBarnInnhold = {
             {
                 tekst: 'melde fra til folkeregisteret',
                 url: 'https://www.skatteetaten.no/person/folkeregister/',
-                variant: 'neutral',
             },
             ' (åpnes i ny fane).',
         ],
@@ -51,7 +50,6 @@ export const dineBarnTekster: DineBarnInnhold = {
             {
                 tekst: 'papirsøknad',
                 url: 'https://tjenester.nav.no/soknadtilleggsstonader/app/start',
-                variant: 'neutral',
             },
             ' (åpnes i ny fane).',
         ],

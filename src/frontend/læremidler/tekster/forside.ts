@@ -32,19 +32,16 @@ export const forsideTekster: ForsideInnhold = {
                 {
                     tekst: 'nedsatt arbeidsevne',
                     url: 'https://www.nav.no/fyllut/nav760710',
-                    variant: 'neutral',
                 },
                 ', er ',
                 {
                     tekst: 'enslig mor/far',
                     url: 'https://www.nav.no/start/soknad-skolepenger-enslig',
-                    variant: 'neutral',
                 },
                 ', eller ',
                 {
                     tekst: 'gjenlevende',
                     url: 'https://www.nav.no/fyllut/nav170901?sub=paper',
-                    variant: 'neutral',
                 },
                 '.',
             ],
@@ -62,7 +59,6 @@ export const forsideTekster: ForsideInnhold = {
             {
                 tekst: 'faste satser',
                 url: 'https://www.nav.no/satser#tilleggsstonader',
-                variant: 'neutral',
             },
             ' som bestemmer hvor mye du kan få i pengestøtte. Satsene er ulike avhengig av om du studerer deltid eller heltid, og nivået på opplæringen din.',
         ],
@@ -101,7 +97,6 @@ export const forsideTekster: ForsideInnhold = {
             {
                 tekst: 'Personvernerklæringen på nav.no',
                 url: 'https://www.nav.no/personvernerklaering',
-                variant: 'neutral',
             },
             ' (åpnes i ny fane) gir mer informasjon om hvordan vi behandler dine personopplysninger.',
         ],

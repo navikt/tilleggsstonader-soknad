@@ -12,7 +12,6 @@ export type LesMer<T> = {
 export type Lenke = {
     tekst: string;
     url: string;
-    variant?: 'action' | 'neutral' | 'subtle';
 };
 
 export type StyledTekst = {

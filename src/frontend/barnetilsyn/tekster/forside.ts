@@ -91,7 +91,6 @@ export const forsideTekster: ForsideInnhold = {
             {
                 tekst: 'Personvernerklæringen på nav.no (åpnes i ny fane)',
                 url: 'https://www.nav.no/personvernerklaering',
-                variant: 'neutral',
             },
             ' gir mer informasjon om hvordan vi behandler dine personopplysninger.',
         ],

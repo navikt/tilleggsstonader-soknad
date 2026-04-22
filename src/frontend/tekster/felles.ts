@@ -73,11 +73,9 @@ export const fellesTekster: FellesInnhold = {
         nb: [
             'Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din. ',
             {
-                tekst: 'Les mer om viktigheten av å gi riktige opplysninger',
+                tekst: 'Les mer om viktigheten av å gi riktige opplysninger (åpnes i ny fane).',
                 url: 'https://www.nav.no/endringer',
-                variant: 'neutral',
             },
-            '.',
         ],
     },
     avsluttOgLoggUt: {

@@ -77,7 +77,6 @@ const hvilkenAktivitet: HvilkenAktivitet = {
                 {
                     tekst: 'fylle ut papirsøknad',
                     url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
-                    variant: 'neutral',
                 },
                 '.',
             ],
@@ -148,7 +147,6 @@ export const utdanningTekster: AktivitetInnhold = {
                 {
                     tekst: 'Les mer om lærlinger på Vilbli.no',
                     url: 'https://www.vilbli.no/nb/no/a/laerling-6',
-                    variant: 'neutral',
                 },
                 '.',
             ],
@@ -160,7 +158,6 @@ export const utdanningTekster: AktivitetInnhold = {
                 {
                     tekst: 'Les mer om lærekandidatordningen på Vilbli.no',
                     url: 'https://www.vilbli.no/nb/no/a/laerekandidat-6',
-                    variant: 'neutral',
                 },
                 '.',
             ],
@@ -172,7 +169,6 @@ export const utdanningTekster: AktivitetInnhold = {
                 {
                     tekst: 'Les mer om praksisbrevkandidater på Vilbli.no',
                     url: 'https://www.vilbli.no/nb/no/a/praksisbrevkandidat-6',
-                    variant: 'neutral',
                 },
                 '.',
             ],
@@ -184,7 +180,6 @@ export const utdanningTekster: AktivitetInnhold = {
                 {
                     tekst: 'Les mer om fagbrev på jobb på Vilbli.no',
                     url: 'https://www.vilbli.no/nb/no/a/laerling-6',
-                    variant: 'neutral',
                 },
                 '.',
             ],
@@ -219,7 +214,6 @@ export const utdanningTekster: AktivitetInnhold = {
                 {
                     tekst: 'Søknad på papir',
                     url: 'https://www.nav.no/fyllut/nav111216b?sub=paper',
-                    variant: 'neutral',
                 },
                 '.',
             ],

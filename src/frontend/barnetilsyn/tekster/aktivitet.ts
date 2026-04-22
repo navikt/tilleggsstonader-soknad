@@ -82,7 +82,6 @@ const hvilkenAktivitet: HvilkenAktivitet = {
                     {
                         tekst: 'enslig mor/far',
                         url: 'https://www.nav.no/barnetilsyn-enslig',
-                        variant: 'neutral',
                     },
                     ' (åpnes i ny fane)',
                 ],
@@ -93,7 +92,6 @@ const hvilkenAktivitet: HvilkenAktivitet = {
                     {
                         tekst: 'gjenlevende',
                         url: 'https://www.nav.no/barnetilsyn-gjenlevende',
-                        variant: 'neutral',
                     },
                     ' (åpnes i ny fane)',
                 ],
@@ -105,7 +103,6 @@ const hvilkenAktivitet: HvilkenAktivitet = {
                 {
                     tekst: 'fylle ut papirsøknad',
                     url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
-                    variant: 'neutral',
                 },
                 '.',
             ],
@@ -169,7 +166,6 @@ export const aktivitetTekster: AktivitetInnhold = {
                     {
                         tekst: 'enslig mor/far',
                         url: 'https://www.nav.no/barnetilsyn-enslig',
-                        variant: 'neutral',
                     },
                     ' (åpnes i ny fane)',
                 ],
@@ -180,7 +176,6 @@ export const aktivitetTekster: AktivitetInnhold = {
                     {
                         tekst: 'gjenlevende',
                         url: 'https://www.nav.no/barnetilsyn-gjenlevende',
-                        variant: 'neutral',
                     },
                     ' (åpnes i ny fane)',
                 ],
@@ -201,7 +196,6 @@ export const aktivitetTekster: AktivitetInnhold = {
                 {
                     tekst: 'Søknad på papir',
                     url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
-                    variant: 'neutral',
                 },
                 '.',
             ],
@@ -226,7 +220,6 @@ export const aktivitetTekster: AktivitetInnhold = {
                         {
                             tekst: 'enslig mor/far',
                             url: 'https://www.nav.no/barnetilsyn-enslig',
-                            variant: 'neutral',
                         },
                         ' (åpnes i ny fane)',
                     ],
@@ -237,7 +230,6 @@ export const aktivitetTekster: AktivitetInnhold = {
                         {
                             tekst: 'gjenlevende',
                             url: 'https://www.nav.no/barnetilsyn-gjenlevende',
-                            variant: 'neutral',
                         },
                         ' (åpnes i ny fane)',
                     ],

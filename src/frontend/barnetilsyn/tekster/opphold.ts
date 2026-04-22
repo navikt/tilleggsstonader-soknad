@@ -64,7 +64,6 @@ export const arbeidOgOppholdInnhold: ArbeidOgOppholdInnhold = {
             {
                 tekst: 'medlemskap i folketrygden',
                 url: 'https://www.nav.no/no/person/flere-tema/arbeid-og-opphold-i-norge/relatert-informasjon/medlemskap-i-folketrygden',
-                variant: 'neutral',
             },
             ' (åpnes i ny fane), trenger vi å vite om du har bodd eller jobbet i utlandet.',
         ],

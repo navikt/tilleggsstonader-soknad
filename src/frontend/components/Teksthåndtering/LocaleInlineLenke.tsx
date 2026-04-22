@@ -28,7 +28,6 @@ export const LenkeEllerTekst: React.FC<{ tekstElement: string | StyledTekst | Le
             <Link
                 inlineText
                 href={tekstElement.url}
-                variant={tekstElement.variant}
                 target="_blank"
                 onClick={() => logNavigereEvent(stønadstype, tekstElement.url, tekstElement.tekst)}
             >
