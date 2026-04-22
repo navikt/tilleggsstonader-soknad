@@ -28,6 +28,10 @@ export async function hentSkjemaRoutingAksjon(
             body: JSON.stringify({ skjematype }),
         });
 
+        if (!response.ok) {
+            throw new Error(`Skjema-routing svarte med ${response.status}`);
+        }
+
         const data: SkjemaRoutingResponse = await response.json();
         return data.aksjon;
     } catch (error) {

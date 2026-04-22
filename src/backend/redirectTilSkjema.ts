@@ -20,17 +20,7 @@ function routeTilFyllUt(
     return false;
 }
 
-function routeTilNyLøsning(
-    skjematype: SkjematypeFyllUt,
-    res: Response,
-    next: NextFunction,
-    internRouteForNyLøsning?: string
-) {
-    if (internRouteForNyLøsning) {
-        res.redirect(302, `${BASE_PATH_SOKNAD}/${internRouteForNyLøsning}`);
-        return;
-    }
-
+function routeTilNyLøsning(skjematype: SkjematypeFyllUt, res: Response, next: NextFunction) {
     const bleRutetTilFyllUt = routeTilFyllUt(skjematype, 'NY', res);
 
     if (!bleRutetTilFyllUt) {
@@ -43,39 +33,32 @@ function routeTilGammelLøsning(skjematype: SkjematypeFyllUt, res: Response) {
 
     if (!bleRutetTilFyllUt) {
         logger.error(`Fant ikke FyllUt-URL for ${skjematype} med versjon GAMMEL`);
-        res.status(500).send(
-            `Feil ved omdirigering, Fant ikke FyllUt-URL for ${skjematype} med versjon GAMMEL`
-        );
+        res.status(500).send('Feil ved omdirigering');
     }
 }
 
-function routeTilAvsjekk(res: Response) {
+function routeTilDagligReiseAvsjekk(res: Response) {
     res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema`);
 }
 
-export const redirectTilSkjema = (
-    skjematype: SkjematypeFyllUt,
-    internRouteForNyLøsning?: string
-) => {
+export const redirectTilSkjema = (skjematype: SkjematypeFyllUt) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
             const aksjon = await hentSkjemaRoutingAksjon(skjematype, req);
 
             switch (aksjon) {
                 case SkjemaRoutingAksjon.NY_LØSNING:
-                    routeTilNyLøsning(skjematype, res, next, internRouteForNyLøsning);
+                    routeTilNyLøsning(skjematype, res, next);
                     return;
                 case SkjemaRoutingAksjon.GAMMEL_LØSNING:
                     routeTilGammelLøsning(skjematype, res);
                     return;
                 case SkjemaRoutingAksjon.AVSJEKK:
-                    routeTilAvsjekk(res);
+                    routeTilDagligReiseAvsjekk(res);
                     return;
                 default:
                     logger.error(`Ukjent aksjon fra skjema-routing: ${aksjon}`);
-                    res.status(500).send(
-                        `Feil ved omdirigering. Ukjent aksjon fra skjema-routing: ${aksjon}`
-                    );
+                    res.status(500).send('Feil ved omdirigering');
             }
         } catch (error) {
             logger.error('Feil ved omdirigering:', error);
