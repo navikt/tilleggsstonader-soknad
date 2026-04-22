@@ -2,69 +2,76 @@ import { NextFunction, Request, Response } from 'express';
 
 import { getFyllutUrl, SkjematypeFyllUt } from './fyllutUrls';
 import logger from './logger';
-import { skalBrukerTilNyLøsning } from './skjemaRouting';
+import { hentSkjemaRoutingAksjon, SkjemaRoutingAksjon } from './skjemaRouting';
 import { BASE_PATH_SOKNAD } from './url';
 
-/**
- * Redirecter brukeren til enten nytt eller gammelt FyllUt-skjema.
- *
- * Hvis [internRouteForNyLøsning] er angitt vil brukeren routes til en intern route i stedet for nytt FyllUt-skjema, noe
- * som er nyttig for eksempelvis daglige reiser.
- *
- * Hvis ny løsning ikke har en FyllUt-URL, kalles next() slik at requesten faller gjennom til SPA-handleren.
- */
+function routeTilFyllUt(
+    skjematype: SkjematypeFyllUt,
+    versjon: 'NY' | 'GAMMEL',
+    res: Response
+): boolean {
+    const fyllutUrl = getFyllutUrl(skjematype, versjon);
+
+    if (fyllutUrl) {
+        res.redirect(302, fyllutUrl);
+        return true;
+    }
+
+    return false;
+}
+
+function routeTilNyLøsning(
+    skjematype: SkjematypeFyllUt,
+    res: Response,
+    next: NextFunction,
+    internRouteForNyLøsning?: string
+) {
+    if (internRouteForNyLøsning) {
+        res.redirect(302, `${BASE_PATH_SOKNAD}/${internRouteForNyLøsning}`);
+        return;
+    }
+
+    if (!routeTilFyllUt(skjematype, 'NY', res)) {
+        next();
+    }
+}
+
+function routeTilGammelLøsning(skjematype: SkjematypeFyllUt, res: Response) {
+    if (!routeTilFyllUt(skjematype, 'GAMMEL', res)) {
+        logger.error(`Fant ikke FyllUt-URL for ${skjematype} med versjon GAMMEL`);
+        res.status(500).send('Feil ved omdirigering');
+    }
+}
+
+function routeTilAvsjekk(res: Response) {
+    res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema`);
+}
+
 export const redirectTilSkjema = (
     skjematype: SkjematypeFyllUt,
     internRouteForNyLøsning?: string
 ) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const skalBehandlesINyLøsning = await skalBrukerTilNyLøsning(skjematype, req);
+            const aksjon = await hentSkjemaRoutingAksjon(skjematype, req);
 
-            if (skalBehandlesINyLøsning && internRouteForNyLøsning) {
-                res.redirect(302, `${BASE_PATH_SOKNAD}/${internRouteForNyLøsning}`);
-                return;
-            }
-
-            const fyllutUrl = getFyllutUrl(skjematype, skalBehandlesINyLøsning ? 'NY' : 'GAMMEL');
-
-            if (fyllutUrl) {
-                res.redirect(302, fyllutUrl);
-            } else {
-                next();
+            switch (aksjon) {
+                case SkjemaRoutingAksjon.NY_LØSNING:
+                    routeTilNyLøsning(skjematype, res, next, internRouteForNyLøsning);
+                    return;
+                case SkjemaRoutingAksjon.GAMMEL_LØSNING:
+                    routeTilGammelLøsning(skjematype, res);
+                    return;
+                case SkjemaRoutingAksjon.AVSJEKK:
+                    routeTilAvsjekk(res);
+                    return;
+                default:
+                    logger.error(`Ukjent aksjon fra skjema-routing: ${aksjon}`);
+                    res.status(500).send('Feil ved omdirigering');
             }
         } catch (error) {
             logger.error('Feil ved omdirigering:', error);
             res.status(500).send('Feil ved omdirigering');
-        }
-    };
-};
-
-export const redirectTilDagligReiseSkjema = () => {
-    return async (req: Request, res: Response) => {
-        try {
-            const skjematype = SkjematypeFyllUt.SØKNAD_DAGLIG_REISE;
-            const harAAP = await skalBrukerTilNyLøsning(skjematype, req);
-
-            if (harAAP) {
-                const fyllutUrl = getFyllutUrl(skjematype, 'NY');
-                if (fyllutUrl) {
-                    res.redirect(302, fyllutUrl);
-                } else {
-                    logger.error(
-                        'Feil ved omdirigering til daglig reise skjema: klarte ikke å finne fyll-ut url'
-                    );
-                    res.status(500).send(
-                        'Feil ved omdirigering til daglig reise skjema: klarte ikke å finne fyll-ut url'
-                    );
-                }
-            } else {
-                res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema`);
-                return;
-            }
-        } catch (error) {
-            logger.error('Feil ved omdirigering til daglig reise skjema:', error);
-            res.status(500).send('Feil ved omdirigering til daglig reise skjema');
         }
     };
 };
