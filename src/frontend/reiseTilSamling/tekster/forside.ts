@@ -81,13 +81,12 @@ export const forsideTekster: ForsideInnhold = {
             'Du må vite adressen til samlingen. Du skal oppgi hvor du reiser til i søknaden.',
             'Du må dokumentere at samlingen er obligatorisk.',
             'Du må legge ved dokumentasjon på reisen, for eksempel tog- eller flybilletter og andre kvitteringer. Bruker du egen bil, kan du dokumentere utgifter til bom og ferge.',
-            'Hvis du søker om å få dekket reiseutgifter under 6 km av helsemessige årsaker, må du dokumentere det med legeerklæring eller en uttalelse fra helsepersonell.',
             'Du må gi oss beskjed hvis situasjonen din endrer seg, for eksempel hvis du avbryter tiltaket eller utdanningen.',
             'Hvis du får penger du ikke har rett på, kan vi kreve dem tilbake.',
         ],
     },
     var_klar_over_tittel: {
-        nb: 'Dette er viktig å vite',
+        nb: 'Vær klar over',
     },
     var_klar_over_innhold: {
         nb: [
