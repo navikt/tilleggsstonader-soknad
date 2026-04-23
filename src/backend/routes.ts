@@ -36,7 +36,7 @@ const routes = () => {
         new RegExp(`^${BASE_PATH_SOKNAD}/daglig-reise/?$`),
         addRequestInfo(),
         attachToken('tilleggsstonader-soknad-api'),
-        redirectTilSkjema(SkjematypeFyllUt.SØKNAD_DAGLIG_REISE, 'daglig-reise/skjema')
+        redirectTilSkjema(SkjematypeFyllUt.SØKNAD_DAGLIG_REISE)
     );
 
     expressRouter.get(

@@ -4,16 +4,22 @@ import { SkjematypeFyllUt } from './fyllutUrls';
 import logger from './logger';
 import { miljø } from './miljø';
 
-interface SkjemaRoutingResponse {
-    skalBehandlesINyLøsning: boolean;
+export enum SkjemaRoutingAksjon {
+    NY_LØSNING = 'NY_LØSNING',
+    GAMMEL_LØSNING = 'GAMMEL_LØSNING',
+    AVSJEKK = 'AVSJEKK',
 }
 
-export async function skalBrukerTilNyLøsning(
+interface SkjemaRoutingResponse {
+    aksjon: SkjemaRoutingAksjon;
+}
+
+export async function hentSkjemaRoutingAksjon(
     skjematype: SkjematypeFyllUt,
     req: Request
-): Promise<boolean> {
+): Promise<SkjemaRoutingAksjon> {
     try {
-        const response = await fetch(`${miljø.apiUrl}/skjema-routing`, {
+        const response = await fetch(`${miljø.apiUrl}/skjema-routing/v2`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,8 +28,12 @@ export async function skalBrukerTilNyLøsning(
             body: JSON.stringify({ skjematype }),
         });
 
+        if (!response.ok) {
+            throw new Error(`Skjema-routing svarte med ${response.status}`);
+        }
+
         const data: SkjemaRoutingResponse = await response.json();
-        return data.skalBehandlesINyLøsning;
+        return data.aksjon;
     } catch (error) {
         logger.error(`Feil ved sjekk av routing for ${skjematype}:`, error);
         throw error;
