@@ -19,7 +19,7 @@ export async function hentSkjemaRoutingAksjon(
     req: Request
 ): Promise<SkjemaRoutingAksjon> {
     try {
-        const response = await fetch(`${miljø.apiUrl}/skjema-routing/v2`, {
+        const response = await fetch(`${miljø.apiUrl}/skjema-routing`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
