@@ -1,14 +1,19 @@
 import React from 'react';
 
+import { useNavigate } from 'react-router';
+import { useParams } from 'react-router-dom';
+
 import { FileCheckmarkIcon } from '@navikt/aksel-icons';
 import { Box, FormSummary, List } from '@navikt/ds-react';
 
 import { useKjøreliste } from '../../KjørelisteContext';
-import { KjørelisteRoutes } from '../../kjørelisteRoutes';
+import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { finnVedleggMedParkeringsutgifter } from '../Vedleggside/VedleggUtils';
 
 export function VedleggOppsummering() {
     const { kjøreliste } = useKjøreliste();
+    const navigate = useNavigate();
+    const { reiseId } = useParams<{ reiseId: string }>();
 
     if (finnVedleggMedParkeringsutgifter(kjøreliste).length === 0) {
         return null;
@@ -40,7 +45,10 @@ export function VedleggOppsummering() {
                 </FormSummary.Answer>
             </FormSummary.Answers>
             <FormSummary.Footer>
-                <FormSummary.EditLink href={KjørelisteRoutes.VEDLEGG} />
+                <FormSummary.EditLink
+                    onClick={() => navigate(finnPath(reiseId!, KjørelisteRoutes.VEDLEGG))}
+                    style={{ cursor: 'pointer' }}
+                />
             </FormSummary.Footer>
         </FormSummary>
     );
