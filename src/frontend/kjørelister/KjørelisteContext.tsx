@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import createUseContext from 'constate';
 import { isEqual } from 'date-fns';
@@ -19,9 +19,21 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
     ({ rammevedtak, tidligereInnsendt }: Props) => {
         KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
 
-        const [kjøreliste, setKjøreliste] = useState(
-            initialiserKjøreliste(rammevedtak, tidligereInnsendt)
+        const storageKey = `kjøreliste-${rammevedtak.reiseId}`;
+
+        const stored = sessionStorage.getItem(storageKey);
+
+        const parsedStored: Kjøreliste | null = stored ? (JSON.parse(stored) as Kjøreliste) : null;
+
+        const [kjøreliste, setKjøreliste] = useState<Kjøreliste>(
+            parsedStored ?? initialiserKjøreliste(rammevedtak, tidligereInnsendt)
         );
+
+        useEffect(() => {
+            const storageKey = `kjøreliste-${rammevedtak.reiseId}`;
+
+            sessionStorage.setItem(storageKey, JSON.stringify(kjøreliste));
+        }, [kjøreliste, rammevedtak.reiseId]);
 
         const oppdaterHarReist = (dato: string, harKjørt: boolean) => {
             setKjøreliste((kjøreliste) => ({
