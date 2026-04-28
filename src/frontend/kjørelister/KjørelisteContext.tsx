@@ -19,21 +19,18 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
     ({ rammevedtak, tidligereInnsendt }: Props) => {
         KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
 
-        const lagretKjøreliste = sessionStorage.getItem(`kjøreliste-${rammevedtak.reiseId}`);
-
-        const lagretKjørelisteParset: Kjøreliste | null = lagretKjøreliste
-            ? (JSON.parse(lagretKjøreliste) as Kjøreliste)
+        const kjørelisteNøkkel = `kjøreliste-${rammevedtak.reiseId}`;
+        const kjørelisteFraLagring: Kjøreliste | null = sessionStorage.getItem(kjørelisteNøkkel)
+            ? (JSON.parse(sessionStorage.getItem(kjørelisteNøkkel)!) as Kjøreliste)
             : null;
 
         const [kjøreliste, setKjøreliste] = useState<Kjøreliste>(
-            lagretKjørelisteParset ?? initialiserKjøreliste(rammevedtak, tidligereInnsendt)
+            kjørelisteFraLagring ?? initialiserKjøreliste(rammevedtak, tidligereInnsendt)
         );
 
         useEffect(() => {
-            const storageKey = `kjøreliste-${rammevedtak.reiseId}`;
-
-            sessionStorage.setItem(storageKey, JSON.stringify(kjøreliste));
-        }, [kjøreliste, rammevedtak.reiseId]);
+            sessionStorage.setItem(kjørelisteNøkkel, JSON.stringify(kjøreliste));
+        }, [kjøreliste, kjørelisteNøkkel]);
 
         const oppdaterHarReist = (dato: string, harKjørt: boolean) => {
             setKjøreliste((kjøreliste) => ({
