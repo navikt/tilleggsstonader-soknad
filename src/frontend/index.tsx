@@ -13,6 +13,7 @@ import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
 import ScrollToTop from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentligTransportAvsjekk';
+import { SkalBrukeTaxiAvsjekk } from './dagligReise/SkalBrukeTaxiAvsjekk';
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import LæremidlerApp from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
@@ -44,9 +45,10 @@ const AppRoutes = () => {
                     <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
                 )}
                 <Route
-                    path="/daglig-reise/skjema"
+                    path="/daglig-reise/skjema-offentlig-transport"
                     element={<KanBrukeOffentligTransportAvsjekk />}
                 />
+                <Route path="/daglig-reise/skjema-taxi" element={<SkalBrukeTaxiAvsjekk />} />
                 <Route path={`/kjoreliste/*`} element={<KjørelisterApp />} />
                 <Route path={'*'} element={<Navigate to={barnetilsynPath} replace />} />
             </Routes>

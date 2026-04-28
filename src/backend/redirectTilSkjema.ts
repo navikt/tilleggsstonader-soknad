@@ -38,13 +38,21 @@ function routeTilGammelLøsning(skjematype: SkjematypeFyllUt, res: Response) {
 }
 
 function dagligReiseAvsjekk(res: Response) {
-    res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema`);
+    res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema-offentlig-transport`);
 }
 
-function routeTilAvsjekk(skjematype: SkjematypeFyllUt, res: Response) {
+function dagligReiseAvsjekkTaxi(res: Response) {
+    res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema-taxi`);
+}
+
+function routeTilAvsjekk(skjematype: SkjematypeFyllUt, aksjon: SkjemaRoutingAksjon, res: Response) {
     switch (skjematype) {
         case SkjematypeFyllUt.SØKNAD_DAGLIG_REISE:
-            dagligReiseAvsjekk(res);
+            if (aksjon === SkjemaRoutingAksjon.AVSJEKK_TAXI) {
+                dagligReiseAvsjekkTaxi(res);
+            } else {
+                dagligReiseAvsjekk(res);
+            }
             return;
         default:
             throw new Error(`Ingen avsjekk definert for skjematype: ${skjematype}`);
@@ -64,7 +72,9 @@ export const redirectTilSkjema = (skjematype: SkjematypeFyllUt) => {
                     routeTilGammelLøsning(skjematype, res);
                     return;
                 case SkjemaRoutingAksjon.AVSJEKK:
-                    routeTilAvsjekk(skjematype, res);
+                case SkjemaRoutingAksjon.AVSJEKK_OFFENTLIG_TRANSPORT:
+                case SkjemaRoutingAksjon.AVSJEKK_TAXI:
+                    routeTilAvsjekk(skjematype, aksjon, res);
                     return;
                 default:
                     logger.error(`Ukjent aksjon fra skjema-routing: ${aksjon}`);

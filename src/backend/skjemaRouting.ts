@@ -8,6 +8,8 @@ export enum SkjemaRoutingAksjon {
     NY_LØSNING = 'NY_LØSNING',
     GAMMEL_LØSNING = 'GAMMEL_LØSNING',
     AVSJEKK = 'AVSJEKK',
+    AVSJEKK_OFFENTLIG_TRANSPORT = 'AVSJEKK_OFFENTLIG_TRANSPORT',
+    AVSJEKK_TAXI = 'AVSJEKK_TAXI',
 }
 
 interface SkjemaRoutingResponse {
