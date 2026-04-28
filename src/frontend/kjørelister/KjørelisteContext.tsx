@@ -19,14 +19,14 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
     ({ rammevedtak, tidligereInnsendt }: Props) => {
         KjørelisteProvider.displayName = 'KJØRELISTE_PROVIDER';
 
-        const storageKey = `kjøreliste-${rammevedtak.reiseId}`;
+        const lagretKjøreliste = sessionStorage.getItem(`kjøreliste-${rammevedtak.reiseId}`);
 
-        const stored = sessionStorage.getItem(storageKey);
-
-        const parsedStored: Kjøreliste | null = stored ? (JSON.parse(stored) as Kjøreliste) : null;
+        const lagretKjørelisteParset: Kjøreliste | null = lagretKjøreliste
+            ? (JSON.parse(lagretKjøreliste) as Kjøreliste)
+            : null;
 
         const [kjøreliste, setKjøreliste] = useState<Kjøreliste>(
-            parsedStored ?? initialiserKjøreliste(rammevedtak, tidligereInnsendt)
+            lagretKjørelisteParset ?? initialiserKjøreliste(rammevedtak, tidligereInnsendt)
         );
 
         useEffect(() => {
