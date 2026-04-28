@@ -21,6 +21,11 @@ function routeTilFyllUt(
 }
 
 function routeTilNyLøsning(skjematype: SkjematypeFyllUt, res: Response, next: NextFunction) {
+    if (skjematype === SkjematypeFyllUt.SØKNAD_DAGLIG_REISE) {
+        res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema-taxi`);
+        return;
+    }
+
     const bleRutetTilFyllUt = routeTilFyllUt(skjematype, 'NY', res);
 
     if (!bleRutetTilFyllUt) {
@@ -37,22 +42,10 @@ function routeTilGammelLøsning(skjematype: SkjematypeFyllUt, res: Response) {
     }
 }
 
-function dagligReiseAvsjekk(res: Response) {
-    res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema-offentlig-transport`);
-}
-
-function dagligReiseAvsjekkTaxi(res: Response) {
-    res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema-taxi`);
-}
-
-function routeTilAvsjekk(skjematype: SkjematypeFyllUt, aksjon: SkjemaRoutingAksjon, res: Response) {
+function routeTilAvsjekk(skjematype: SkjematypeFyllUt, res: Response) {
     switch (skjematype) {
         case SkjematypeFyllUt.SØKNAD_DAGLIG_REISE:
-            if (aksjon === SkjemaRoutingAksjon.AVSJEKK_TAXI) {
-                dagligReiseAvsjekkTaxi(res);
-            } else {
-                dagligReiseAvsjekk(res);
-            }
+            res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema-offentlig-transport`);
             return;
         default:
             throw new Error(`Ingen avsjekk definert for skjematype: ${skjematype}`);
@@ -72,9 +65,7 @@ export const redirectTilSkjema = (skjematype: SkjematypeFyllUt) => {
                     routeTilGammelLøsning(skjematype, res);
                     return;
                 case SkjemaRoutingAksjon.AVSJEKK:
-                case SkjemaRoutingAksjon.AVSJEKK_OFFENTLIG_TRANSPORT:
-                case SkjemaRoutingAksjon.AVSJEKK_TAXI:
-                    routeTilAvsjekk(skjematype, aksjon, res);
+                    routeTilAvsjekk(skjematype, res);
                     return;
                 default:
                     logger.error(`Ukjent aksjon fra skjema-routing: ${aksjon}`);
