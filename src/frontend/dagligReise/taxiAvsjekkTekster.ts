@@ -1,20 +1,13 @@
-import { LesMer, TekstElement } from '../typer/tekst';
+import { AvsjekkTekster } from './DagligReiseAvsjekk';
 
-export interface DagligReiseInnhold {
-    banner_daglig_reise: TekstElement<string>;
-    hvorfor_spør_vi: LesMer<string>;
-    veileder_tittel: TekstElement<string>;
-    veileder_innhold: TekstElement<string[]>;
-}
-
-export const dagligReiseTekster: DagligReiseInnhold = {
+export const taxiAvsjekkTekster: AvsjekkTekster = {
     banner_daglig_reise: {
         nb: 'Søknad om støtte til daglige reiser',
     },
     hvorfor_spør_vi: {
         header: { nb: 'Hvorfor spør vi om dette?' },
         innhold: {
-            nb: 'Vi trenger å vite om du skal reise med offentlig transport for å kunne sende deg til riktig søknad.',
+            nb: 'Vi trenger å vite om du skal reise med taxi for å kunne sende deg til riktig søknad.',
         },
     },
     veileder_tittel: {
