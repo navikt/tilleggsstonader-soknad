@@ -30,7 +30,7 @@ export const Kvitteringsside = () => {
                 <BodyShort>Kjøreliste er sendt inn</BodyShort>
             </Alert>
             <VStack>
-                <BodyShort>{`Motatt av Nav: ${formaterNullableIsoDatoTid(locationState.mottattTidspunkt)}`}</BodyShort>
+                <BodyShort>{`Mottatt av Nav: ${formaterNullableIsoDatoTid(locationState.mottattTidspunkt)}`}</BodyShort>
             </VStack>
             <BodyShort>
                 Vi vil ta kontakt med deg på telefon eller via Min side på nav.no hvis vi trenger
