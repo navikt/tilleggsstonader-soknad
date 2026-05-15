@@ -59,13 +59,8 @@ export const Forside: React.FC = () => {
                     </strong>
                 </BodyShort>
                 <BodyShort spacing>
-                    <LocaleTekst tekst={forsideTekster.veileder_innhold_tittel} />
+                    <LocaleTekst tekst={forsideTekster.veileder_innhold} />
                 </BodyShort>
-                <LocalePunktliste innhold={forsideTekster.veileder_innhold_punkter} />
-                <BodyShort spacing>
-                    <LocaleTekst tekst={forsideTekster.veileder_innhold_mellomtekst} />
-                </BodyShort>
-                <LocalePunktliste innhold={forsideTekster.veileder_innhold_fortsettelse_punkter} />
             </GuidePanel>
             <div>
                 <LocaleHeading

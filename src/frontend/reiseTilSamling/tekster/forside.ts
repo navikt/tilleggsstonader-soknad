@@ -3,10 +3,7 @@ import { InlineLenke, Punktliste, TekstElement } from '../../typer/tekst';
 interface ForsideInnhold {
     banner_tittel: TekstElement<string>;
     veileder_tittel: TekstElement<string>;
-    veileder_innhold_tittel: TekstElement<string>;
-    veileder_innhold_punkter: TekstElement<string[]>;
-    veileder_innhold_mellomtekst: TekstElement<string>;
-    veileder_innhold_fortsettelse_punkter: TekstElement<string[]>;
+    veileder_innhold: TekstElement<string>;
     kan_soke_tittel: TekstElement<string>;
     kan_soke_innhold: TekstElement<string[]>;
     kan_ikke_soke_tittel: TekstElement<string>;
@@ -27,27 +24,8 @@ export const forsideTekster: ForsideInnhold = {
     veileder_tittel: {
         nb: 'Hei!',
     },
-    veileder_innhold_tittel: {
-        nb: 'Du kan få denne støtten hvis du:',
-    },
-    veileder_innhold_punkter: {
-        nb: ['deltar i et arbeidsrettet tiltak eller tar utdanning som Nav har godkjent'],
-    },
-    veileder_innhold_mellomtekst: {
-        nb: 'og i tillegg er du',
-    },
-    veileder_innhold_fortsettelse_punkter: {
-        nb: [
-            'enslig mor eller far',
-            'gjenlevende',
-            'mottaker av arbeidsavklaringspenger (AAP)',
-            'mottaker av uføretrygd',
-            'person med nedsatt arbeidsevne',
-            'mottaker av tiltakspenger',
-            'mottaker av dagpenger',
-            'mottaker av kvalifiseringsstønad',
-            'innsatt i fengsel og deltar i et arbeidsrettet tiltak',
-        ],
+    veileder_innhold: {
+        nb: 'Denne pengestøtten kan gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar arbeidsavklaringspenger (AAP), uføretrygd, har nedsatt arbeidsevne, tiltakspenger, dagpenger, kvalifiseringsstønad eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
     },
     kan_soke_tittel: {
         nb: 'Du kan søke om',
