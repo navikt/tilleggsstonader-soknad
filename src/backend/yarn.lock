@@ -727,10 +727,10 @@ hasown@^2.0.2:
   dependencies:
     function-bind "^1.1.2"
 
-html-dom-parser@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/html-dom-parser/-/html-dom-parser-7.0.0.tgz#4586df7683ea241f83f666e10fe05f961f0db7f2"
-  integrity sha512-c4AKY7Gj1N9smtzo0Kasw5TjCWPHn/iBPH2+ToP+VoRoX0kSEoEDnGaSBw1YFaWyBFT6wlykVArBgDhZ026OCQ==
+html-dom-parser@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/html-dom-parser/-/html-dom-parser-7.1.0.tgz#40b96b212b019e9295928dd5dacac6346f997c81"
+  integrity sha512-83BgaFSW/Sj6QTotGenvPvKfGxFzpFfrJNYes77mzqnq+YjVm12d4qeG0+108w4ejnam/+nCnnLuyyJlXkuPtA==
   dependencies:
     domhandler "6.0.1"
     htmlparser2 "12.0.0"
@@ -742,13 +742,13 @@ html-encoding-sniffer@^6.0.0:
   dependencies:
     "@exodus/bytes" "^1.6.0"
 
-html-react-parser@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/html-react-parser/-/html-react-parser-6.0.0.tgz#78eb60582b3449a7fc5a797d4984eeb486caa406"
-  integrity sha512-TAILFmR1elcN/rIHHquX4+D5pPm85icqN8Adj7dHBev1WPkH9tT/zNDGs09pwPaNFBHPM4JUN6BiOoaJoC1XeQ==
+html-react-parser@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/html-react-parser/-/html-react-parser-6.1.0.tgz#0a9c1fac32fb2780595277a6aad37f2c627621d2"
+  integrity sha512-FoFY2aZrSAMcPPhUmb4R87gwfhwvYT6luJIQ++Xl9qm2x/4IDGjf+B2F+wcdrhMVOe/o44Nq7IEbvsKfq6fq+Q==
   dependencies:
     domhandler "6.0.1"
-    html-dom-parser "7.0.0"
+    html-dom-parser "7.1.0"
     react-property "2.0.2"
     style-to-js "1.1.21"
 
