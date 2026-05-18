@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { VStack } from '@navikt/ds-react';
 import { BreakpointMd } from '@navikt/ds-tokens/js';
 
+import { KjørelisteArenaLenke } from './components/KjørelisteArenaLenke';
 import { KjørelisteHeader } from './components/KjørelisteHeader';
 import { Landingsside } from './components/Landingsside/Landingsside';
 import { KjørelisteInnhold } from './KjørelisteInnhold';
@@ -33,6 +34,7 @@ export const KjørelisterApp = () => {
                         <Route path="/" element={<Landingsside />} />
                         <Route path={'/:reiseId/*'} element={<KjørelisteInnhold />} />
                     </Routes>
+                    <KjørelisteArenaLenke />
                 </VStack>
             </Container>
         </QueryClientProvider>
