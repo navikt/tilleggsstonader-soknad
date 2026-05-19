@@ -1,6 +1,6 @@
-import { AnnenAktivitetType } from '../../../typer/aktivitet';
-import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
-import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
+import { AnnenAktivitetType } from '../../typer/aktivitet';
+import { RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
+import { EnumFelt, EnumFlereValgFelt } from '../../typer/skjema';
 
 export const skalTaStillingTilLønnetTiltak = (
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined,

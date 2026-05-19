@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 
 import { Alert, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
 
-import { skalTaStillingTilLønnetTiltak } from './AkivitetUtils';
 import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
-import { LønnetTiltak } from './LønnetTiltak';
-import { feilAnnenAktivitet, feilLønnetAktivitet, feilValgtAktivitet } from './validering';
+import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
+import {
+    feilAnnenAktivitet,
+    feilLønnetAktivitet,
+    feilValgtAktivitet,
+} from '../../../components/Aktivitet/aktivitetValidering';
 import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
+import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
 import {
     skalTaStillingTilAnnenAktivitet,
     skalTaStillingTilRegisterAktiviteter,
@@ -129,16 +133,22 @@ export const AktivitetReiseTilSamling = () => {
         let feil: Valideringsfeil = {};
         const verdierValgteAktiviteter = valgteAktiviteter?.verdier ?? [];
         if (skalViseArbeidsrettedeAktiviteter && verdierValgteAktiviteter.length === 0) {
-            feil = feilValgtAktivitet(feil, locale);
+            feil = feilValgtAktivitet(
+                feil,
+                aktivitetTekster.checkbox_velge_aktivitet_feilmelding[locale]
+            );
         }
         if (skalViseLønnetTiltak && lønnetAktivitet?.verdi === undefined) {
-            feil = feilLønnetAktivitet(feil, locale);
+            feil = feilLønnetAktivitet(
+                feil,
+                aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale]
+            );
         }
         if (
             (skalViseAnnenAktivitet || !skalViseArbeidsrettedeAktiviteter) &&
             annenAktivitet === undefined
         ) {
-            feil = feilAnnenAktivitet(feil, locale);
+            feil = feilAnnenAktivitet(feil, aktivitetTekster.radio_annet_feilmelding[locale]);
         }
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
@@ -203,6 +213,8 @@ export const AktivitetReiseTilSamling = () => {
                                 lønnetAktivitet={lønnetAktivitet}
                                 oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
                                 feilmelding={valideringsfeil.lønnetAktivitet}
+                                radioTekst={aktivitetTekster.radio_lønnet_tiltak}
+                                infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
                             />
                         )}
                     </VStack>
