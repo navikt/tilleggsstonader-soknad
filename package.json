@@ -32,7 +32,6 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
-    "@navikt/aksel": "^8.10.2",
     "@sentry/types": "^10.52.0",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.2",
