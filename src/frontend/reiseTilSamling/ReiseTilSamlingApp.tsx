@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { Søknadsdialog } from './Søknadsdialog';
+import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import {
     ReiseTilSamlingSøknadProvider,
     useReiseTilSamlingSøknad,
@@ -14,13 +15,14 @@ import appConfig from '../utils/appConfig';
 
 const ReiseTilSamlingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, hovedytelse } = useReiseTilSamlingSøknad();
+    const { resetSøknad, hovedytelse, aktivitet } = useReiseTilSamlingSøknad();
 
     return (
         <SøknadProvider
             stønadstype={Stønadstype.REISE_TIL_SAMLING}
             søknad={{
                 hovedytelse: hovedytelse,
+                aktivitet: aktivitet,
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,
                 },
@@ -43,7 +45,9 @@ export const ReiseTilSamlingApp = () => {
     return (
         <ValideringsfeilProvider>
             <ReiseTilSamlingSøknadProvider>
-                <ReiseTilSamlingInnhold />
+                <RegisterAktiviteterProvider stønadstype={Stønadstype.REISE_TIL_SAMLING}>
+                    <ReiseTilSamlingInnhold />
+                </RegisterAktiviteterProvider>
             </ReiseTilSamlingSøknadProvider>
         </ValideringsfeilProvider>
     );

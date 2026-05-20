@@ -1,5 +1,6 @@
 import { expect, Page, test } from '@playwright/test';
 
+import { mockAktivitet } from '../../mocks/aktivitet';
 import { søknadBaseUrl } from '../../utils/utils';
 import { forventIngenWcagViolations } from '../../utils/wcag';
 
@@ -12,6 +13,7 @@ const fjernWebpackOverlay = async (page: Page) => {
 };
 
 test('At reise til samling viser førstesiden og går videre fra din situasjon', async ({ page }) => {
+    await mockAktivitet(page);
     await page.goto(urlSøknad);
     await fjernWebpackOverlay(page);
 
@@ -41,6 +43,22 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await forventIngenWcagViolations(page);
 
     await page.getByRole('checkbox', { name: 'Arbeidsavklaringspenger (AAP)' }).check();
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await expect(page).toHaveURL(`${urlSøknad}/aktivitet`);
+    await expect(page.getByRole('heading', { name: 'Arbeidsrettet aktivitet' })).toBeVisible();
+    await expect(
+        page.getByText('Vi viser aktivitetene som er registrert på deg de siste 3 månedene.')
+    ).toBeVisible();
+
+    await forventIngenWcagViolations(page);
+
+    await page.getByLabel('Type navn: 2. februar 2025 - 2. februar 2025').check();
+    await page
+        .getByRole('group', { name: 'Mottar du lønn gjennom et tiltak?' })
+        .getByLabel('Nei')
+        .check();
     await page.getByRole('button', { name: 'Neste' }).click();
     await fjernWebpackOverlay(page);
 

@@ -23,6 +23,7 @@ export interface SøknadLæremidler {
 
 export interface SøknadReiseTilSamling {
     hovedytelse: Hovedytelse | undefined;
+    aktivitet: Aktivitet | undefined;
     søknadMetadata: SøknadMetadata;
 }
 

@@ -13,7 +13,7 @@ import { stønadstypeTilSkjemaId } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 import { barnetilsynPath } from './routing/routesBarnetilsyn';
 import HovedytelsePassBarn from './steg/2-hovedytelse/HovedytelsePassBarn';
-import Aktivitet from './steg/3-aktivitet/Aktivitet';
+import AktivitetPassAvBarn from './steg/3-aktivitet/AktivitetPassAvBarn';
 import DineBarn from './steg/4-dine-barn/DineBarn';
 import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
 import VedleggPassAvBarn from './steg/6-vedlegg/VedleggPassAvBarn';
@@ -44,7 +44,7 @@ const SøknadsdialogInnhold = () => {
         <RedirectTilStart harBekreftet={harBekreftet}>
             <Routes>
                 <Route path={'/hovedytelse'} element={<HovedytelsePassBarn />} />
-                <Route path={'/aktivitet'} element={<Aktivitet />} />
+                <Route path={'/aktivitet'} element={<AktivitetPassAvBarn />} />
                 <Route path={'/dine-barn'} element={<DineBarn />} />
                 <Route path={'/barnepass'} element={<PassAvDineBarn />} />
                 <Route path={'/vedlegg'} element={<VedleggPassAvBarn />} />

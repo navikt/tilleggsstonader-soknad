@@ -2,36 +2,40 @@ import React from 'react';
 
 import { Alert } from '@navikt/ds-react';
 
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { EnumFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
-import { Feilmelding } from '../../../typer/validering';
-import { aktivitetTekster } from '../../tekster/aktivitet';
+import { EnumFelt } from '../../typer/skjema';
+import { JaNei } from '../../typer/søknad';
+import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { Feilmelding } from '../../typer/validering';
+import LocaleRadioGroup from '../Teksthåndtering/LocaleRadioGroup';
+import LocaleTekstAvsnitt from '../Teksthåndtering/LocaleTekstAvsnitt';
 
 interface Props {
     lønnetAktivitet: EnumFelt<JaNei> | undefined;
     oppdaterLønnetAktivitet: (verdier: EnumFelt<JaNei>) => void;
     feilmelding: Feilmelding | undefined;
+    radioTekst: Radiogruppe<JaNei>;
+    infoalertInnhold: TekstElement<string[]>;
 }
 
 export const LønnetTiltak: React.FC<Props> = ({
     lønnetAktivitet,
     oppdaterLønnetAktivitet,
     feilmelding,
+    radioTekst,
+    infoalertInnhold,
 }) => {
     return (
         <div>
             <LocaleRadioGroup
                 id={feilmelding?.id}
-                tekst={aktivitetTekster.radio_lønnet_tiltak}
+                tekst={radioTekst}
                 value={lønnetAktivitet?.verdi || []}
                 onChange={oppdaterLønnetAktivitet}
                 error={feilmelding?.melding}
             ></LocaleRadioGroup>
             {lønnetAktivitet?.verdi === 'JA' && (
                 <Alert variant={'info'}>
-                    <LocaleTekstAvsnitt tekst={aktivitetTekster.lønnet_tiltak_infoalert_innhold} />
+                    <LocaleTekstAvsnitt tekst={infoalertInnhold} />
                 </Alert>
             )}
         </div>

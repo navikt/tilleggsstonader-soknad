@@ -21,7 +21,7 @@ export const NesteStegReiseTilSamling = () => {
                 <BodyLong>
                     <LocaleTekst tekst={nesteStegTekster.innhold} />
                 </BodyLong>
-                <Button variant="secondary" onClick={() => navigate(RouteTilPath.HOVEDYTELSE)}>
+                <Button variant="secondary" onClick={() => navigate(RouteTilPath.AKTIVITET)}>
                     <LocaleTekst tekst={fellesTekster.forrige} />
                 </Button>
             </VStack>

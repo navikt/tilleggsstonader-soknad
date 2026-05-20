@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router';
 
 import { Forside } from './Forside';
 import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
+import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
 import { NesteStegReiseTilSamling } from './steg/2-neste-steg/NesteStegReiseTilSamling';
 import { forsideTekster } from './tekster/forside';
 import RedirectTilStart from '../components/RedirectTilStart';
@@ -27,6 +28,14 @@ export const Søknadsdialog: React.FC = () => {
                     element={
                         <SøknadsdialogInnhold>
                             <HovedytelseReiseTilSamling />
+                        </SøknadsdialogInnhold>
+                    }
+                />
+                <Route
+                    path={'/aktivitet'}
+                    element={
+                        <SøknadsdialogInnhold>
+                            <AktivitetReiseTilSamling />
                         </SøknadsdialogInnhold>
                     }
                 />
