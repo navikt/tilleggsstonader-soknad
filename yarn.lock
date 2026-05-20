@@ -1286,6 +1286,11 @@
   resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/8.10.6/3903bc63ecdf7c98f3819fca43cb52fcd8384cb8#3903bc63ecdf7c98f3819fca43cb52fcd8384cb8"
   integrity sha512-aECYww6+luwBfV8tPDDGG++395/dvhUusx9rWB7sSFbAj2rPi9ULMe8Gg9TE42tKqZMz8riXyQoRsQsz2xW45A==
 
+"@navikt/analytics-types@0.0.9":
+  version "0.0.9"
+  resolved "https://npm.pkg.github.com/download/@navikt/analytics-types/0.0.9/5919241a6dbb782eb101fff3234ce5c36d16e942#5919241a6dbb782eb101fff3234ce5c36d16e942"
+  integrity sha512-bopCvqEogyFcmrJiBxK/Mr25d6yPKF7GR36MGrJqiHCPJYf1rDu6lK4cpooTG4Q//D/1xTkHRom8ZH5BI6dTew==
+
 "@navikt/ds-css@^8.10.2":
   version "8.10.6"
   resolved "https://npm.pkg.github.com/download/@navikt/ds-css/8.10.6/5a49d9b7c2bf0326289ff0a69505df89f36a3e68#5a49d9b7c2bf0326289ff0a69505df89f36a3e68"
@@ -1308,11 +1313,12 @@
   resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/8.10.6/3070167a2ab8445b7f04935d47175c87cc0167a3#3070167a2ab8445b7f04935d47175c87cc0167a3"
   integrity sha512-tsYS9Wy5/t6fryllnQfbzNkjD8lTA4b+enkbDj0SLTYfB4naCeXO4cog1jl3u/y3IhqqVTIMnyO7ujv1mLbYTg==
 
-"@navikt/nav-dekoratoren-moduler@^3.7.1":
-  version "3.7.1"
-  resolved "https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/3.7.1/09490a131cedd7779e35d413d20c36bd01ef57a0#09490a131cedd7779e35d413d20c36bd01ef57a0"
-  integrity sha512-MQLxR4uoADCd6i0hFnWHN/XLPevEfxkBK9yEgbtcY0v2gsj69nALH/7DvTKqSxqRovxOHibVa7mZKZEBAMRBvg==
+"@navikt/nav-dekoratoren-moduler@^4.0.0":
+  version "4.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/4.0.0/65595610e69365df6008576d13e7f24511715683#65595610e69365df6008576d13e7f24511715683"
+  integrity sha512-jsZmmEnXT63gwy0Or6skvdrxVG+acFmK55SURFah9LuPn8KAmrQa3EHhUhRZNsdt+tP5UgsnPA8HVoyurwLPXA==
   dependencies:
+    "@navikt/analytics-types" "0.0.9"
     csp-header "6.3.1"
     js-cookie "3.0.5"
 
