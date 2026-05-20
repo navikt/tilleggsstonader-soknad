@@ -1,13 +1,13 @@
 {
   "collection": "nextjs-frontend",
-  "version": "2026.05.15-102310-d655529",
+  "version": "2026.05.19-124507-b57b838",
   "scope": "repo",
-  "source_sha": "d655529",
+  "source_sha": "b57b838",
   "installed_at": "2026-04-21T11:17:24Z",
   "files": [
     {
       "path": ".github/agents/accessibility.agent.md",
-      "hash": "6bf2a7cb4b069120"
+      "hash": "243143499e16befb"
     },
     {
       "path": ".github/agents/accessibility.metadata.json",
