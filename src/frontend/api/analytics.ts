@@ -37,8 +37,7 @@ export const sendUmamiEvent = (
             `[BARE LOKALT] Sender umami-event med eventType=${event} og eventProperties=${JSON.stringify(eventProperties)}`
         );
     }
-    getAnalyticsInstance('tilleggsstonader-soknad')(event, {
-        app: APP_NAVN,
+    getAnalyticsInstance(APP_NAVN).custom(event, {
         skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
         skjemaId: stønadstypeTilSkjemaId[stønadstype],
         ...eventProperties,
