@@ -236,7 +236,6 @@ test('Har ingen aktiviteter', async ({ page }) => {
     await klikkPåKnapp(page, 'Neste');
 
     await expect(page).toHaveURL(PassAvBarnUrls.AKTIVITET);
-    await page.pause();
     await expect(
         page.getByText(
             'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.'
