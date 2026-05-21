@@ -2,14 +2,12 @@ import { TekstElement } from '../../typer/tekst';
 
 interface ReiseavstandInnhold {
     tittel: TekstElement<string>;
-    minimumskrav_info: TekstElement<string>;
     advarsel_under_30_km: TekstElement<string>;
     antall_km_label: TekstElement<string>;
     antall_km_beskrivelse: TekstElement<string>;
     folkeregistrert_adresse_info: TekstElement<string>;
     folkeregistrert_adresse_lenke_tekst: TekstElement<string>;
     folkeregistrert_adresse_lenke_url: string;
-    aktivitetsadresse_info: TekstElement<string>;
     aktivitetsadresse_tittel: TekstElement<string>;
     velg_land_label: TekstElement<string>;
     gateadresse_label: TekstElement<string>;
@@ -27,9 +25,6 @@ export const reiseavstandTekster: ReiseavstandInnhold = {
     tittel: {
         nb: 'Reiseavstand',
     },
-    minimumskrav_info: {
-        nb: 'Det er et minimumskrav om 30 kilometer avstand mellom hjemmet ditt og aktivitetsadressen.',
-    },
     advarsel_under_30_km: {
         nb: 'Reiseveien din er under 30 km. Du kan gjerne søke, men vil mest sannsynligvis få avslag.',
     },
@@ -46,9 +41,6 @@ export const reiseavstandTekster: ReiseavstandInnhold = {
         nb: 'se og endre adressen på Skatteetatens nettsider (åpnes i ny fane)',
     },
     folkeregistrert_adresse_lenke_url: 'https://www.skatteetaten.no/person/folkeregister/endre/',
-    aktivitetsadresse_info: {
-        nb: 'For å beregne avstanden mellom hjemmet ditt og aktivitetsstedet, behøver vi også adressen til aktivitetsstedet ditt.',
-    },
     aktivitetsadresse_tittel: {
         nb: 'Oppgi adressen du skal reise til',
     },

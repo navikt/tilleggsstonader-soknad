@@ -28,10 +28,6 @@ const AdresseBoks = styled.div`
     border-radius: 4px;
 `;
 
-const KmFelt = styled(TextField)`
-    max-width: 12rem;
-`;
-
 const PostnummerFelt = styled(TextField)`
     max-width: 8rem;
 `;
@@ -60,9 +56,9 @@ export const ReiseavstandReiseTilSamling = () => {
     return (
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={reiseavstandTekster.tittel} level="2" size="medium" />
-            <BodyShort>{reiseavstandTekster.minimumskrav_info[locale]}</BodyShort>
             <VStack gap="space-4">
-                <KmFelt
+                <TextField
+                    style={{ maxWidth: '6rem' }}
                     id={valideringsfeil[errorKeyAntallKm]?.id}
                     label={reiseavstandTekster.antall_km_label[locale]}
                     description={reiseavstandTekster.antall_km_beskrivelse[locale]}
@@ -98,7 +94,6 @@ export const ReiseavstandReiseTilSamling = () => {
                 </Link>
                 .
             </BodyShort>
-            <BodyShort>{reiseavstandTekster.aktivitetsadresse_info[locale]}</BodyShort>
             <VStack gap="space-4">
                 <BodyShort weight="semibold">
                     {reiseavstandTekster.aktivitetsadresse_tittel[locale]}
