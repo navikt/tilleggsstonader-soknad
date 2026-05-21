@@ -14,6 +14,7 @@ import { RouteTilPath } from './routing/routesReiseTilSamling';
 import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
 import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
 import { SamlingerReiseTilSamling } from './steg/3-samlinger/SamlingerReiseTilSamling';
+import { ReiseavstandReiseTilSamling } from './steg/4-reiseavstand/ReiseavstandReiseTilSamling';
 
 export const Søknadsdialog: React.FC = () => {
     return (
@@ -45,6 +46,14 @@ export const Søknadsdialog: React.FC = () => {
                     element={
                         <SøknadsdialogInnhold>
                             <SamlingerReiseTilSamling />
+                        </SøknadsdialogInnhold>
+                    }
+                />
+                <Route
+                    path={'/reiseavstand'}
+                    element={
+                        <SøknadsdialogInnhold>
+                            <ReiseavstandReiseTilSamling />
                         </SøknadsdialogInnhold>
                     }
                 />

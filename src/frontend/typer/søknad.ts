@@ -25,7 +25,20 @@ export interface SøknadReiseTilSamling {
     hovedytelse: Hovedytelse | undefined;
     aktivitet: Aktivitet | undefined;
     samlinger: Samling[];
+    reiseavstand?: Reiseavstand;
     søknadMetadata: SøknadMetadata;
+}
+
+export interface Aktivitetsadresse {
+    land?: SelectFelt;
+    gateadresse?: VerdiFelt<string>;
+    postnummer?: VerdiFelt<string>;
+    poststed?: VerdiFelt<string>;
+}
+
+export interface Reiseavstand {
+    antallKilometerEnVei?: VerdiFelt<string>;
+    aktivitetsadresse: Aktivitetsadresse;
 }
 
 export interface Samling {
