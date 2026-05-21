@@ -2,7 +2,7 @@ import { TekstElement } from '../../typer/tekst';
 
 interface ReiseavstandInnhold {
     tittel: TekstElement<string>;
-    advarsel_under_30_km: TekstElement<string>;
+    info_minsteavstand: TekstElement<string>;
     antall_km_label: TekstElement<string>;
     antall_km_beskrivelse: TekstElement<string>;
     folkeregistrert_adresse_info: TekstElement<string>;
@@ -25,8 +25,8 @@ export const reiseavstandTekster: ReiseavstandInnhold = {
     tittel: {
         nb: 'Reiseavstand',
     },
-    advarsel_under_30_km: {
-        nb: 'Reiseveien din er under 30 km. Du kan gjerne søke, men vil mest sannsynligvis få avslag.',
+    info_minsteavstand: {
+        nb: 'For at du skal få støtte, må det være minst 30 kilometer mellom hjemmet ditt og aktivitetsadressen.',
     },
     antall_km_label: {
         nb: 'Hvor lang reisevei har du?',

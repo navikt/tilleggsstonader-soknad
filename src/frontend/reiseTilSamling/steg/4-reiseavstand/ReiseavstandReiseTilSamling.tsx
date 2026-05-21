@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { Alert, BodyShort, Link, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, Link, TextField, VStack } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
 import {
@@ -13,7 +13,7 @@ import {
     errorKeyPoststed,
     validerReiseavstand,
 } from './validering';
-import Landvelger from '../../../components/Landvelger/Landvelger';
+import { Landvelger } from '../../../components/Landvelger/Landvelger';
 import Side from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
@@ -49,14 +49,11 @@ export const ReiseavstandReiseTilSamling = () => {
         return !inneholderFeil(feil);
     };
 
-    const kmVerdi = reiseavstand.antallKilometerEnVei?.verdi;
-    const visUnder30Advarsel =
-        kmVerdi !== undefined && kmVerdi !== '' && Number(kmVerdi) < 30 && Number(kmVerdi) > 0;
-
     return (
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={reiseavstandTekster.tittel} level="2" size="medium" />
             <VStack gap="space-4">
+                <BodyShort>{reiseavstandTekster.info_minsteavstand[locale]}</BodyShort>
                 <TextField
                     style={{ maxWidth: '6rem' }}
                     id={valideringsfeil[errorKeyAntallKm]?.id}
@@ -77,11 +74,6 @@ export const ReiseavstandReiseTilSamling = () => {
                         nullstillFeil(verdi, errorKeyAntallKm);
                     }}
                 />
-                {visUnder30Advarsel && (
-                    <Alert variant="warning" size="small">
-                        {reiseavstandTekster.advarsel_under_30_km[locale]}
-                    </Alert>
-                )}
             </VStack>
             <BodyShort>
                 {reiseavstandTekster.folkeregistrert_adresse_info[locale]}
