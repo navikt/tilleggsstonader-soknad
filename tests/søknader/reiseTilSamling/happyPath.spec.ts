@@ -56,7 +56,7 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
 
     await page.getByLabel('Type navn: 2. februar 2025 - 2. februar 2025').check();
     await page
-        .getByRole('group', { name: 'Mottar du lønn gjennom et tiltak?' })
+        .getByRole('radiogroup', { name: 'Mottar du lønn gjennom et tiltak?' })
         .getByLabel('Nei')
         .check();
     await page.getByRole('button', { name: 'Neste' }).click();
