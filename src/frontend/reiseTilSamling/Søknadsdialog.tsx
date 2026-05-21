@@ -3,8 +3,6 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 
 import { Forside } from './Forside';
-import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
-import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
 import { NesteStegReiseTilSamling } from './steg/2-neste-steg/NesteStegReiseTilSamling';
 import { forsideTekster } from './tekster/forside';
 import RedirectTilStart from '../components/RedirectTilStart';
@@ -13,6 +11,9 @@ import { useReiseTilSamlingSøknad } from '../context/ReiseTilSamlingSøknadCont
 import { stønadstypeTilSkjemaId } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 import { RouteTilPath } from './routing/routesReiseTilSamling';
+import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
+import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
+import { SamlingerReiseTilSamling } from './steg/3-samlinger/SamlingerReiseTilSamling';
 
 export const Søknadsdialog: React.FC = () => {
     return (
@@ -36,6 +37,14 @@ export const Søknadsdialog: React.FC = () => {
                     element={
                         <SøknadsdialogInnhold>
                             <AktivitetReiseTilSamling />
+                        </SøknadsdialogInnhold>
+                    }
+                />
+                <Route
+                    path={'/samlinger'}
+                    element={
+                        <SøknadsdialogInnhold>
+                            <SamlingerReiseTilSamling />
                         </SøknadsdialogInnhold>
                     }
                 />

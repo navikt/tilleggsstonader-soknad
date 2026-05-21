@@ -24,7 +24,15 @@ export interface SøknadLæremidler {
 export interface SøknadReiseTilSamling {
     hovedytelse: Hovedytelse | undefined;
     aktivitet: Aktivitet | undefined;
+    samlinger: Samling[];
     søknadMetadata: SøknadMetadata;
+}
+
+export interface Samling {
+    _id: number; // for å kunne lenke og vise riktig feilmelding - lagres ikke i backend
+    lagret: boolean;
+    fom?: VerdiFelt<string>;
+    tom?: VerdiFelt<string>;
 }
 
 export interface Hovedytelse {
