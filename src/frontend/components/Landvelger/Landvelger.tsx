@@ -82,8 +82,7 @@ export const Landvelger: React.FC<Props> = ({
                 svarTekst: landkodeTilNavn[NORGE_KODE],
             });
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [defaultNorge, value, label, locale, onChange]);
 
     const handleToggleSelected = (option: string, isSelected: boolean) => {
         if (isSelected) {
