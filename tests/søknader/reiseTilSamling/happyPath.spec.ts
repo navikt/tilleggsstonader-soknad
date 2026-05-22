@@ -101,6 +101,12 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await page.getByRole('button', { name: 'Neste' }).click();
     await fjernWebpackOverlay(page);
 
+    await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page.getByRole('heading', { name: 'Vedlegg mangler' })).toBeVisible();
+    await page.getByRole('button', { name: 'Ja, gå til neste side' }).click();
+    await fjernWebpackOverlay(page);
+
     await expect(page).toHaveURL(`${urlSøknad}/neste-steg`);
     await expect(
         page.getByRole('heading', { name: 'Neste steg er ikke klart ennå' })
