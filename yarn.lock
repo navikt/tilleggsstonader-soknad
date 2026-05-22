@@ -1313,10 +1313,10 @@
   resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/8.10.6/3070167a2ab8445b7f04935d47175c87cc0167a3#3070167a2ab8445b7f04935d47175c87cc0167a3"
   integrity sha512-tsYS9Wy5/t6fryllnQfbzNkjD8lTA4b+enkbDj0SLTYfB4naCeXO4cog1jl3u/y3IhqqVTIMnyO7ujv1mLbYTg==
 
-"@navikt/nav-dekoratoren-moduler@^4.0.0":
-  version "4.0.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/4.0.0/65595610e69365df6008576d13e7f24511715683#65595610e69365df6008576d13e7f24511715683"
-  integrity sha512-jsZmmEnXT63gwy0Or6skvdrxVG+acFmK55SURFah9LuPn8KAmrQa3EHhUhRZNsdt+tP5UgsnPA8HVoyurwLPXA==
+"@navikt/nav-dekoratoren-moduler@^4.1.1":
+  version "4.1.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/4.1.1/14a1ab3742f4564e5fd921553b5cce65f534edf1#14a1ab3742f4564e5fd921553b5cce65f534edf1"
+  integrity sha512-OyCVWavseiyGQwk8xHb6vShJtL+kOO/HIJe65QIsWrk85JV/ZeirB1/B4seA9klor1Zi9IvqyJkzl+nsJVZq9g==
   dependencies:
     "@navikt/analytics-types" "0.0.9"
     csp-header "6.3.1"
