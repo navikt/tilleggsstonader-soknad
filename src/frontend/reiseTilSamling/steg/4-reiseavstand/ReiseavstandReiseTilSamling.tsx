@@ -29,7 +29,13 @@ const AdresseBoks = styled.div`
 `;
 
 const PostnummerFelt = styled(TextField)`
-    max-width: 8rem;
+    max-width: 6rem;
+`;
+
+const KmFelt = styled(TextField)`
+    input {
+        width: 4rem;
+    }
 `;
 
 export const ReiseavstandReiseTilSamling = () => {
@@ -53,9 +59,8 @@ export const ReiseavstandReiseTilSamling = () => {
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={reiseavstandTekster.tittel} level="2" size="medium" />
             <VStack gap="space-4">
-                <BodyShort>{reiseavstandTekster.info_minsteavstand[locale]}</BodyShort>
-                <TextField
-                    style={{ maxWidth: '6rem' }}
+                <BodyShort spacing>{reiseavstandTekster.info_minsteavstand[locale]}</BodyShort>
+                <KmFelt
                     id={valideringsfeil[errorKeyAntallKm]?.id}
                     label={reiseavstandTekster.antall_km_label[locale]}
                     description={reiseavstandTekster.antall_km_beskrivelse[locale]}
@@ -102,6 +107,7 @@ export const ReiseavstandReiseTilSamling = () => {
                             }}
                             medNorskeOmråder={true}
                             error={valideringsfeil[errorKeyLand]?.melding}
+                            defaultNorge
                         />
                         <TextField
                             id={valideringsfeil[errorKeyGateadresse]?.id}
