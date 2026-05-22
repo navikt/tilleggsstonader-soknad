@@ -86,6 +86,21 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await page.getByRole('button', { name: 'Neste' }).click();
     await fjernWebpackOverlay(page);
 
+    await expect(page).toHaveURL(`${urlSøknad}/reisemate`);
+    await expect(page.getByRole('heading', { name: 'Reisemåte' })).toBeVisible();
+
+    await forventIngenWcagViolations(page);
+
+    await page
+        .getByRole('radiogroup', { name: 'Kan du reise kollektivt?' })
+        .getByLabel('Ja')
+        .check();
+    await page
+        .getByLabel('Hva er totalutgiftene til kollektivtransport til og fra samlingene?')
+        .fill('500');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
     await expect(page).toHaveURL(`${urlSøknad}/neste-steg`);
     await expect(
         page.getByRole('heading', { name: 'Neste steg er ikke klart ennå' })

@@ -26,7 +26,15 @@ export interface SøknadReiseTilSamling {
     aktivitet: Aktivitet | undefined;
     samlinger: Samling[];
     reiseavstand?: Reiseavstand;
+    reisemåte?: Reisemåte;
     søknadMetadata: SøknadMetadata;
+}
+
+export interface Reisemåte {
+    kanReiseKollektivt?: EnumFelt<JaNei>;
+    totalutgifterKollektivt?: VerdiFelt<string>;
+    kanBenytteEgenBil?: EnumFelt<JaNei>;
+    kanBenytteDrosje?: EnumFelt<JaNei>;
 }
 
 export interface Aktivitetsadresse {

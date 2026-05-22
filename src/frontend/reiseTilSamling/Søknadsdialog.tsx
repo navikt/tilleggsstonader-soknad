@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router';
 
 import { Forside } from './Forside';
 import { NesteStegReiseTilSamling } from './steg/5-neste-steg/NesteStegReiseTilSamling';
+import { ReisemåteReiseTilSamling } from './steg/5-reisemåte/ReisemåteReiseTilSamling';
 import { forsideTekster } from './tekster/forside';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
@@ -54,6 +55,14 @@ export const Søknadsdialog: React.FC = () => {
                     element={
                         <SøknadsdialogInnhold>
                             <ReiseavstandReiseTilSamling />
+                        </SøknadsdialogInnhold>
+                    }
+                />
+                <Route
+                    path={'/reisemate'}
+                    element={
+                        <SøknadsdialogInnhold>
+                            <ReisemåteReiseTilSamling />
                         </SøknadsdialogInnhold>
                     }
                 />

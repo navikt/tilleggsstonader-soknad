@@ -2,7 +2,14 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
-import { Aktivitet, Aktivitetsadresse, Hovedytelse, Reiseavstand, Samling } from '../typer/søknad';
+import {
+    Aktivitet,
+    Aktivitetsadresse,
+    Hovedytelse,
+    Reiseavstand,
+    Reisemåte,
+    Samling,
+} from '../typer/søknad';
 
 const initialSamlinger = (): Samling[] => [{ _id: 1, lagret: false }];
 const initialReiseavstand = (): Reiseavstand => ({ aktivitetsadresse: {} });
@@ -15,6 +22,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const [aktivitet, settAktivitet] = useState<Aktivitet>();
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
     const [reiseavstand, settReiseavstand] = useState<Reiseavstand>(initialReiseavstand());
+    const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(undefined);
 
     const resetSøknad = () => {
         settHarBekreftet(false);
@@ -22,6 +30,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         settAktivitet(undefined);
         settSamlinger(initialSamlinger());
         settReiseavstand(initialReiseavstand());
+        settReisemåte(undefined);
     };
 
     const settAktivitetsadresse = (oppdatering: Partial<Aktivitetsadresse>) => {
@@ -43,6 +52,8 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         reiseavstand,
         settReiseavstand,
         settAktivitetsadresse,
+        reisemåte,
+        settReisemåte,
         resetSøknad,
     };
 });
