@@ -6,6 +6,7 @@ export enum ERouteReiseTilSamling {
     AKTIVITET = 'AKTIVITET',
     REISEAVSTAND = 'REISEAVSTAND',
     SAMLINGER = 'SAMLINGER',
+    REISEMÅTE = 'REISEMÅTE',
     NESTE_STEG = 'NESTE_STEG',
 }
 
@@ -17,6 +18,7 @@ export const RouteTilPath: Record<ERouteReiseTilSamling, string> = {
     AKTIVITET: reiseTilSamlingPath + '/aktivitet',
     REISEAVSTAND: reiseTilSamlingPath + '/reiseavstand',
     SAMLINGER: reiseTilSamlingPath + '/samlinger',
+    REISEMÅTE: reiseTilSamlingPath + '/reisemate',
     NESTE_STEG: reiseTilSamlingPath + '/neste-steg',
 };
 
@@ -41,6 +43,11 @@ export const routesReiseTilSamling: IRoute[] = [
         path: RouteTilPath.SAMLINGER,
         label: 'Samlinger',
         route: ERouteReiseTilSamling.SAMLINGER,
+    },
+    {
+        path: RouteTilPath.REISEMÅTE,
+        label: 'Reisemåte',
+        route: ERouteReiseTilSamling.REISEMÅTE,
     },
     {
         path: RouteTilPath.NESTE_STEG,
