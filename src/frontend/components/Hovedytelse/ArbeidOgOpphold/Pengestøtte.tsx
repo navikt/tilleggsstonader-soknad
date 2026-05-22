@@ -7,7 +7,7 @@ import { EnumFlereValgFelt, SelectFelt } from '../../../typer/skjema';
 import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typeUtils';
 import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
-import Landvelger from '../../Landvelger/Landvelger';
+import { Landvelger } from '../../Landvelger/Landvelger';
 import LocaleCheckboxGroup from '../../Teksthåndtering/LocaleCheckboxGroup';
 
 interface Props {

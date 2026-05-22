@@ -5,6 +5,7 @@ import { mockHarSøknadTilsynBarnFraFør } from '../../mocks/harSøknadFraFør';
 import { mockPersonMedBarnApi } from '../../mocks/person';
 import { mockSendSøknadPassAvBarn } from '../../mocks/sendSøknad';
 import { mockSøknadRoutingApi } from '../../mocks/søknadRouting';
+import { velgLand } from '../../utils/combobox';
 import { lastOppFil } from '../../utils/filoppladding/uploadFile';
 import { klikkPåKnapp } from '../../utils/knapp';
 import { søknadBaseUrl } from '../../utils/utils';
@@ -50,12 +51,12 @@ test('At enkel gjennomkjøring av tilsyn barn fungerer', async ({ page }) => {
     await page.getByLabel('Type navn: 2. februar 2025 - 2. februar 2025').check();
     await page.getByLabel('Annet').check();
     await page
-        .getByRole('group', { name: 'Hvilken annen type arbeidsrettet aktivitet har du?' })
+        .getByRole('radiogroup', { name: 'Hvilken annen type arbeidsrettet aktivitet har du?' })
         .getByLabel('Utdanning godkjent av Nav')
         .check();
 
     await page
-        .getByRole('group', { name: 'Mottar du lønn gjennom et tiltak?' })
+        .getByRole('radiogroup', { name: 'Mottar du lønn gjennom et tiltak?' })
         .getByLabel('Nei')
         .check();
 
@@ -73,23 +74,23 @@ test('At enkel gjennomkjøring av tilsyn barn fungerer', async ({ page }) => {
 
     await expect(page).toHaveURL(PassAvBarnUrls.BARNEPASS);
     await page
-        .getByRole('group', { name: 'Hvem skal passe Ronja?' })
+        .getByRole('radiogroup', { name: 'Hvem skal passe Ronja?' })
         .getByLabel('Barnehage,')
         .check();
 
     await page
-        .getByRole('group', { name: 'Hvem skal passe Espen?' })
+        .getByRole('radiogroup', { name: 'Hvem skal passe Espen?' })
         .getByLabel('Dagmamma,')
         .check();
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Har du utgifter til pass av Ronja hele perioden du har arbeidsrettet aktivitet?',
         })
         .getByLabel('Ja')
         .check();
 
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Har du utgifter til pass av Espen hele perioden du har arbeidsrettet aktivitet?',
         })
         .getByLabel('Nei')
@@ -100,12 +101,14 @@ test('At enkel gjennomkjøring av tilsyn barn fungerer', async ({ page }) => {
     await nårHarDuUtgifter.getByLabel('Til', { exact: true }).fill('31.01.2025');
 
     await page
-        .getByRole('group', { name: 'Har Espen startet i 5. klasse når tiltaket ditt starter?' })
+        .getByRole('radiogroup', {
+            name: 'Har Espen startet i 5. klasse når tiltaket ditt starter?',
+        })
         .getByLabel('Ja')
         .check();
 
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Hva er årsaken til at Espen trenger pass etter at han har begynt i 5. klasse?',
         })
         .getByLabel('Trenger mer pleie')
@@ -145,23 +148,23 @@ test('Velger hovedytelse Tiltakspenger som trigger ekstra spørsmål koblet til 
     await expect(page).toHaveURL(PassAvBarnUrls.DIN_SITUASJON);
     await page.getByLabel('Tiltakspenger').check();
     await page
-        .getByRole('group', { name: 'Jobber du i et annet land enn Norge?' })
+        .getByRole('radiogroup', { name: 'Jobber du i et annet land enn Norge?' })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvilket land jobber du i?').selectOption('Sverige');
+    await velgLand(page, 'Hvilket land jobber du i?', 'Sverige');
     await page
         .getByRole('group', { name: 'Mottar du pengestøtte fra et annet land enn Norge?' })
         .getByLabel('Sykepenger')
         .check();
 
-    await page.getByLabel('Hvilket land mottar du pengestøtte fra?').selectOption('Finland');
+    await velgLand(page, 'Hvilket land mottar du pengestøtte fra?', 'Finland');
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?',
         })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvilket land har du oppholdt deg i?').selectOption('Tyskland');
+    await velgLand(page, 'Hvilket land har du oppholdt deg i?', 'Tyskland');
     await page
         .getByRole('group', {
             name: 'Hva gjorde du i dette landet?',
@@ -174,12 +177,12 @@ test('Velger hovedytelse Tiltakspenger som trigger ekstra spørsmål koblet til 
     await nårVarDuIDetteLander.getByLabel('Til', { exact: true }).fill('31.01.2025');
 
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Planlegger du å oppholde deg utenfor Norge de neste 12 månedene?',
         })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvilket land skal du oppholde deg i?').selectOption('Spania');
+    await velgLand(page, 'Hvilket land skal du oppholde deg i?', 'Spania');
 
     await page
         .getByRole('group', {
@@ -236,14 +239,13 @@ test('Har ingen aktiviteter', async ({ page }) => {
     await klikkPåKnapp(page, 'Neste');
 
     await expect(page).toHaveURL(PassAvBarnUrls.AKTIVITET);
-    await page.pause();
     await expect(
         page.getByText(
             'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.'
         )
     ).toBeVisible();
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Hvilken arbeidsrettet aktivitet har du?',
         })
         .getByLabel('Utdanning godkjent av Nav')

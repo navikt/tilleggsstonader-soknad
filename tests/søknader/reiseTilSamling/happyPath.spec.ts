@@ -56,9 +56,33 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
 
     await page.getByLabel('Type navn: 2. februar 2025 - 2. februar 2025').check();
     await page
-        .getByRole('group', { name: 'Mottar du lønn gjennom et tiltak?' })
+        .getByRole('radiogroup', { name: 'Mottar du lønn gjennom et tiltak?' })
         .getByLabel('Nei')
         .check();
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await expect(page).toHaveURL(`${urlSøknad}/reiseavstand`);
+    await expect(page.getByRole('heading', { name: 'Reiseavstand' })).toBeVisible();
+
+    await forventIngenWcagViolations(page);
+
+    await page.getByLabel('Hvor lang reisevei har du?').fill('45');
+    await page.getByLabel('Gateadresse').fill('Testveien 1');
+    await page.getByLabel('Postnummer').fill('0123');
+    await page.getByLabel('Poststed').fill('Oslo');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await expect(page).toHaveURL(`${urlSøknad}/samlinger`);
+    await expect(
+        page.getByRole('heading', { name: 'Start- og sluttdato for samling' })
+    ).toBeVisible();
+
+    await forventIngenWcagViolations(page);
+
+    await page.getByLabel('Startdato (dd.mm.åååå)').fill('01.06.2025');
+    await page.getByLabel('Sluttdato (dd.mm.åååå)').fill('05.06.2025');
     await page.getByRole('button', { name: 'Neste' }).click();
     await fjernWebpackOverlay(page);
 
