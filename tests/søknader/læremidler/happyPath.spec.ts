@@ -55,26 +55,26 @@ test('At enkel gjennomkjøring av læremidler fungerer', async ({ page }) => {
         .getByLabel('Annet')
         .check();
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Hva slags utdanning eller opplæring skal du ta?',
         })
         .getByLabel('Videregående utdanning')
         .check();
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?',
         })
         .getByLabel('Nei')
         .check();
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Har du tidligere fullført videregående skole?',
         })
         .getByLabel('Nei')
         .check();
 
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Har du særlig store utgifter til læremidler på grunn av en funksjonsnedsettelse?',
         })
         .getByLabel('Ja')
@@ -136,13 +136,13 @@ test('Har ingen aktiviteter', async ({ page }) => {
 
     await expect(page).toHaveURL(LæremidlerUrls.UTDANNING);
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Hva slags utdanning eller opplæring skal du ta?',
         })
         .getByLabel('Høgskole, universitet eller fagskole')
         .check();
     await page
-        .getByRole('group', {
+        .getByRole('radiogroup', {
             name: 'Har du særlig store utgifter til læremidler på grunn av en funksjonsnedsettelse?',
         })
         .getByLabel('Ja')

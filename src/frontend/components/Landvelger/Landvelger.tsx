@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import countries from 'i18n-iso-countries';
 import nbLocale from 'i18n-iso-countries/langs/nb.json';
 
-import { Select } from '@navikt/ds-react';
+import { UNSAFE_Combobox } from '@navikt/ds-react';
 
 import { useSpr책k } from '../../context/Spr책kContext';
 import { fellesTekster } from '../../tekster/felles';
@@ -19,6 +19,7 @@ interface Props {
     onChange: (verdi: SelectFelt) => void;
     medNorskeOmr책der: boolean;
     error?: string;
+    defaultNorge?: boolean;
 }
 
 /**
@@ -42,7 +43,17 @@ const sorterteLand = Object.entries(landkodeTilNavn).sort(
     (a, b) => (a[1] > b[1] ? 1 : -1) // Sorterer alfabetisk p책 navn i stedet for landkode
 );
 
-const Landvelger: React.FC<Props> = ({ id, label, value, onChange, medNorskeOmr책der, error }) => {
+const NORGE_KODE = 'NOR';
+
+export const Landvelger: React.FC<Props> = ({
+    id,
+    label,
+    value,
+    onChange,
+    medNorskeOmr책der,
+    error,
+    defaultNorge = false,
+}) => {
     const { locale } = useSpr책k();
 
     const landliste = useMemo(() => {
@@ -53,30 +64,52 @@ const Landvelger: React.FC<Props> = ({ id, label, value, onChange, medNorskeOmr�
         }
     }, [medNorskeOmr책der]);
 
-    const oppdaterLand = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        onChange({
-            label: label[locale],
-            verdi: e.target.value || '',
-            svarTekst: landkodeTilNavn[e.target.value] || '',
-        });
+    const options = useMemo(
+        () => landliste.map(([kode, tekst]) => ({ value: kode, label: tekst })),
+        [landliste]
+    );
+
+    const selectedOptions = useMemo(
+        () => (value ? [{ value, label: landkodeTilNavn[value] || '' }] : []),
+        [value]
+    );
+
+    useEffect(() => {
+        if (defaultNorge && !value) {
+            onChange({
+                label: label[locale],
+                verdi: NORGE_KODE,
+                svarTekst: landkodeTilNavn[NORGE_KODE],
+            });
+        }
+    }, [defaultNorge, value, label, locale, onChange]);
+
+    const handleToggleSelected = (option: string, isSelected: boolean) => {
+        if (isSelected) {
+            onChange({
+                label: label[locale],
+                verdi: option,
+                svarTekst: landkodeTilNavn[option] || '',
+            });
+        } else {
+            onChange({
+                label: label[locale],
+                verdi: '',
+                svarTekst: '',
+            });
+        }
     };
 
     return (
-        <Select
+        <UNSAFE_Combobox
             id={id}
             label={label[locale]}
-            onChange={oppdaterLand}
-            value={value || ''}
+            options={options}
+            selectedOptions={selectedOptions}
+            onToggleSelected={handleToggleSelected}
             error={error}
-        >
-            <option value="">{fellesTekster.velg_land[locale]}</option>
-            {landliste.map(([kode, tekst]) => (
-                <option key={kode} value={kode}>
-                    {tekst}
-                </option>
-            ))}
-        </Select>
+            placeholder={fellesTekster.velg_land[locale]}
+            shouldAutocomplete
+        />
     );
 };
-
-export default Landvelger;
