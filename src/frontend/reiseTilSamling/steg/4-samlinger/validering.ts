@@ -5,25 +5,34 @@ import { erDatoEtterEllerLik } from '../../../utils/datoUtils';
 import { harVerdi } from '../../../utils/typeUtils';
 import { samlingerTekster } from '../../tekster/samlinger';
 
-export const errorKeyFom = 'samling_fom';
-export const errorKeyTom = 'samling_tom';
+export const errorKeyFom = (samlingId: number) => `samling_${samlingId}_fom`;
+export const errorKeyTom = (samlingId: number) => `samling_${samlingId}_tom`;
 
-export const nullstillteSamlingsfeil: Valideringsfeil = {
-    [errorKeyFom]: undefined,
-    [errorKeyTom]: undefined,
-};
+export const nullstillteSamlingsfeil = (samlinger: Samling[]): Valideringsfeil =>
+    samlinger.reduce((acc, samling) => {
+        const keyFom = errorKeyFom(samling._id);
+        const keyTom = errorKeyTom(samling._id);
+
+        return {
+            ...acc,
+            [keyFom]: undefined,
+            [keyTom]: undefined,
+        };
+    }, {});
 
 export const validerSamlingUnderRedigering = (
     samling: Samling,
     locale: Locale
 ): Valideringsfeil => {
+    const keyFom = errorKeyFom(samling._id);
+    const keyTom = errorKeyTom(samling._id);
     let feil: Valideringsfeil = {};
 
     if (!harVerdi(samling.fom?.verdi)) {
         feil = {
             ...feil,
-            [errorKeyFom]: {
-                id: errorKeyFom,
+            [keyFom]: {
+                id: keyFom,
                 melding: samlingerTekster.feilmelding_startdato[locale],
             },
         };
@@ -32,8 +41,8 @@ export const validerSamlingUnderRedigering = (
     if (!harVerdi(samling.tom?.verdi)) {
         feil = {
             ...feil,
-            [errorKeyTom]: {
-                id: errorKeyTom,
+            [keyTom]: {
+                id: keyTom,
                 melding: samlingerTekster.feilmelding_sluttdato[locale],
             },
         };
@@ -43,8 +52,8 @@ export const validerSamlingUnderRedigering = (
         if (!erDatoEtterEllerLik(samling.fom!.verdi, samling.tom!.verdi)) {
             feil = {
                 ...feil,
-                [errorKeyTom]: {
-                    id: errorKeyTom,
+                [keyTom]: {
+                    id: keyTom,
                     melding: samlingerTekster.feilmelding_sluttdato_før_startdato[locale],
                 },
             };
@@ -54,10 +63,10 @@ export const validerSamlingUnderRedigering = (
     return feil;
 };
 
-export const validerSamlinger = (samlinger: Samling[], locale: Locale): Valideringsfeil => {
-    const ulagretSamling = samlinger.find((s) => !s.lagret);
-    if (ulagretSamling) {
-        return validerSamlingUnderRedigering(ulagretSamling, locale);
-    }
-    return {};
-};
+export const validerSamlinger = (samlinger: Samling[], locale: Locale): Valideringsfeil =>
+    samlinger.reduce((acc, samling) => {
+        return {
+            ...acc,
+            ...validerSamlingUnderRedigering(samling, locale),
+        };
+    }, {});

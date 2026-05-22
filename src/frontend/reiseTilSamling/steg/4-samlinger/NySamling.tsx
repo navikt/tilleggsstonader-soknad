@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import { MinusIcon } from '@navikt/aksel-icons';
 import {
     BodyShort,
     Button,
@@ -35,6 +36,8 @@ export const NySamling: React.FC<{
 }> = ({ samling, oppdater, onSlett, visValideringsfeil = true }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
+    const keyFom = errorKeyFom(samling._id);
+    const keyTom = errorKeyTom(samling._id);
 
     const nullstillFeil = (verdi: string | undefined, errorKey: string) => {
         if (visValideringsfeil && harVerdi(verdi)) {
@@ -42,8 +45,8 @@ export const NySamling: React.FC<{
         }
     };
 
-    const feilFom = visValideringsfeil ? valideringsfeil[errorKeyFom] : undefined;
-    const feilTom = visValideringsfeil ? valideringsfeil[errorKeyTom] : undefined;
+    const feilFom = visValideringsfeil ? valideringsfeil[keyFom] : undefined;
+    const feilTom = visValideringsfeil ? valideringsfeil[keyTom] : undefined;
 
     const { datepickerProps: dpPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(samling.fom?.verdi),
@@ -55,7 +58,7 @@ export const NySamling: React.FC<{
                   }
                 : undefined;
             oppdater(samling._id, 'fom', verdi);
-            nullstillFeil(verdi?.verdi, errorKeyFom);
+            nullstillFeil(verdi?.verdi, keyFom);
         },
     });
 
@@ -69,7 +72,7 @@ export const NySamling: React.FC<{
                   }
                 : undefined;
             oppdater(samling._id, 'tom', verdi);
-            nullstillFeil(verdi?.verdi, errorKeyTom);
+            nullstillFeil(verdi?.verdi, keyTom);
         },
     });
 
@@ -97,7 +100,7 @@ export const NySamling: React.FC<{
                 </InlineMessage>
                 {onSlett && (
                     <HStack>
-                        <Button variant="tertiary" onClick={onSlett}>
+                        <Button variant="tertiary" onClick={onSlett} icon={<MinusIcon />}>
                             {samlingerTekster.knapp_slett[locale]}
                         </Button>
                     </HStack>

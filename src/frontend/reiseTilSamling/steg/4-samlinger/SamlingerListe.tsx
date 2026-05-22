@@ -21,6 +21,8 @@ export const SamlingerListe: React.FC<{
 
     const ulagretSamling = samlinger.find((s) => !s.lagret);
     const lagredeSamlinger = samlinger.filter((s) => s.lagret);
+    const førsteSamlingId = Math.min(...samlinger.map((s) => s._id));
+    const kanSletteSamling = (id: number) => id !== førsteSamlingId;
 
     const oppdaterSamlingFelt = (id: number, key: keyof Samling, verdi: unknown) => {
         settSamlinger((prev) => oppdaterSamling(prev, id, key as keyof Samling, verdi as never));
@@ -35,7 +37,10 @@ export const SamlingerListe: React.FC<{
             }
         }
 
-        settValideringsfeil((prevState) => ({ ...prevState, ...nullstillteSamlingsfeil }));
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            ...nullstillteSamlingsfeil(samlinger),
+        }));
         settSamlinger((prev) => [
             ...prev.map((s) => ({ ...s, lagret: true })),
             opprettSamlingForNesteId(prev),
@@ -43,8 +48,14 @@ export const SamlingerListe: React.FC<{
     };
 
     const slettSamling = (id: number) => {
+        if (!kanSletteSamling(id)) {
+            return;
+        }
         if (ulagretSamling?._id === id) {
-            settValideringsfeil((prevState) => ({ ...prevState, ...nullstillteSamlingsfeil }));
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                ...nullstillteSamlingsfeil(samlinger),
+            }));
         }
         settSamlinger((prev) => prev.filter((s) => s._id !== id));
     };
@@ -56,8 +67,9 @@ export const SamlingerListe: React.FC<{
                     key={samling._id}
                     samling={samling}
                     oppdater={oppdaterSamlingFelt}
-                    onSlett={() => slettSamling(samling._id)}
-                    visValideringsfeil={false}
+                    onSlett={
+                        kanSletteSamling(samling._id) ? () => slettSamling(samling._id) : undefined
+                    }
                 />
             ))}
             {ulagretSamling && (
@@ -65,6 +77,11 @@ export const SamlingerListe: React.FC<{
                     key={ulagretSamling._id}
                     samling={ulagretSamling}
                     oppdater={oppdaterSamlingFelt}
+                    onSlett={
+                        kanSletteSamling(ulagretSamling._id)
+                            ? () => slettSamling(ulagretSamling._id)
+                            : undefined
+                    }
                 />
             )}
             <HStack>
