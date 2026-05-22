@@ -5,7 +5,6 @@ interface SamlingerInnhold {
     guide_tekst: TekstElement<string>;
     startdato_label: TekstElement<string>;
     sluttdato_label: TekstElement<string>;
-    vedlegg_alert_tittel: TekstElement<string>;
     vedlegg_alert_innhold: TekstElement<string>;
     knapp_legg_til: TekstElement<string>;
     knapp_slett: TekstElement<string>;
@@ -27,17 +26,14 @@ export const samlingerTekster: SamlingerInnhold = {
     sluttdato_label: {
         nb: 'Sluttdato (dd.mm.åååå)',
     },
-    vedlegg_alert_tittel: {
-        nb: 'Du må legge ved bekreftelse på samlingen.',
-    },
     vedlegg_alert_innhold: {
-        nb: 'Du får instruksjoner om innsending av vedlegg senere i søknaden.',
+        nb: 'Du må legge ved bekreftelse på samlingen. Du får instruksjoner om innsending av vedlegg senere i søknaden.',
     },
     knapp_legg_til: {
         nb: 'Legg til samling',
     },
     knapp_slett: {
-        nb: 'Slett',
+        nb: 'Fjern samling',
     },
     feilmelding_startdato: {
         nb: 'Du må fylle inn startdato.',

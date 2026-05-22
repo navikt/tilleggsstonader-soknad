@@ -2,7 +2,15 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { Alert, BodyShort, DatePicker, useDatepicker, VStack } from '@navikt/ds-react';
+import {
+    BodyShort,
+    Button,
+    DatePicker,
+    HStack,
+    InlineMessage,
+    useDatepicker,
+    VStack,
+} from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
 import { errorKeyFom, errorKeyTom } from './validering';
@@ -19,18 +27,23 @@ const SamlingBoks = styled.div`
     border-radius: 4px;
 `;
 
-const NySamling: React.FC<{
+export const NySamling: React.FC<{
     samling: Samling;
     oppdater: (id: number, key: keyof Samling, verdi: unknown) => void;
-}> = ({ samling, oppdater }) => {
+    onSlett?: () => void;
+    visValideringsfeil?: boolean;
+}> = ({ samling, oppdater, onSlett, visValideringsfeil = true }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const nullstillFeil = (verdi: string | undefined, errorKey: string) => {
-        if (harVerdi(verdi)) {
+        if (visValideringsfeil && harVerdi(verdi)) {
             settValideringsfeil((prevState) => ({ ...prevState, [errorKey]: undefined }));
         }
     };
+
+    const feilFom = visValideringsfeil ? valideringsfeil[errorKeyFom] : undefined;
+    const feilTom = visValideringsfeil ? valideringsfeil[errorKeyTom] : undefined;
 
     const { datepickerProps: dpPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(samling.fom?.verdi),
@@ -65,29 +78,31 @@ const NySamling: React.FC<{
             <VStack gap="space-16">
                 <DatePicker {...dpPropsFom}>
                     <DatePicker.Input
-                        id={valideringsfeil[errorKeyFom]?.id}
+                        id={feilFom?.id}
                         label={samlingerTekster.startdato_label[locale]}
-                        error={valideringsfeil[errorKeyFom]?.melding}
+                        error={feilFom?.melding}
                         {...inputPropsFom}
                     />
                 </DatePicker>
                 <DatePicker {...dpPropsTom}>
                     <DatePicker.Input
-                        id={valideringsfeil[errorKeyTom]?.id}
+                        id={feilTom?.id}
                         label={samlingerTekster.sluttdato_label[locale]}
-                        error={valideringsfeil[errorKeyTom]?.melding}
+                        error={feilTom?.melding}
                         {...inputPropsTom}
                     />
                 </DatePicker>
-                <Alert variant="info">
-                    <BodyShort weight="semibold">
-                        {samlingerTekster.vedlegg_alert_tittel[locale]}
-                    </BodyShort>
+                <InlineMessage status="info">
                     <BodyShort>{samlingerTekster.vedlegg_alert_innhold[locale]}</BodyShort>
-                </Alert>
+                </InlineMessage>
+                {onSlett && (
+                    <HStack>
+                        <Button variant="tertiary" onClick={onSlett}>
+                            {samlingerTekster.knapp_slett[locale]}
+                        </Button>
+                    </HStack>
+                )}
             </VStack>
         </SamlingBoks>
     );
 };
-
-export default NySamling;

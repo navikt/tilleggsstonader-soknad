@@ -3,8 +3,7 @@ import React from 'react';
 import { PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
 
-import LagredeSamlinger from './LagredeSamlinger';
-import NySamling from './NySamling';
+import { NySamling } from './NySamling';
 import { oppdaterSamling, opprettSamlingForNesteId } from './util';
 import { nullstillteSamlingsfeil, validerSamlingUnderRedigering } from './validering';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -13,7 +12,7 @@ import { Samling } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { samlingerTekster } from '../../tekster/samlinger';
 
-const SamlingerListe: React.FC<{
+export const SamlingerListe: React.FC<{
     samlinger: Samling[];
     settSamlinger: React.Dispatch<React.SetStateAction<Samling[]>>;
 }> = ({ samlinger, settSamlinger }) => {
@@ -52,7 +51,15 @@ const SamlingerListe: React.FC<{
 
     return (
         <VStack gap="space-16">
-            <LagredeSamlinger lagedeSamlinger={lagredeSamlinger} slettSamling={slettSamling} />
+            {lagredeSamlinger.map((samling) => (
+                <NySamling
+                    key={samling._id}
+                    samling={samling}
+                    oppdater={oppdaterSamlingFelt}
+                    onSlett={() => slettSamling(samling._id)}
+                    visValideringsfeil={false}
+                />
+            ))}
             {ulagretSamling && (
                 <NySamling
                     key={ulagretSamling._id}
@@ -68,5 +75,3 @@ const SamlingerListe: React.FC<{
         </VStack>
     );
 };
-
-export default SamlingerListe;

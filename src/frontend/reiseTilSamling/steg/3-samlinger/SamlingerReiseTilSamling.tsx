@@ -2,7 +2,7 @@ import React from 'react';
 
 import { BodyShort } from '@navikt/ds-react';
 
-import SamlingerListe from './SamlingerListe';
+import { SamlingerListe } from './SamlingerListe';
 import { validerSamlinger } from './validering';
 import Side from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
