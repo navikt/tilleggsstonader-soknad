@@ -14,7 +14,7 @@ export const teksterStønad: StønadInnhold = {
             nb: 'Søknad om støtte til læremidler',
         },
         REISE_TIL_SAMLING: {
-            nb: 'Søknad om støtte ved reise til samling',
+            nb: 'Søknad om støtte til reise til samling',
         },
     },
 };

@@ -15,7 +15,8 @@ import appConfig from '../utils/appConfig';
 
 const ReiseTilSamlingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, hovedytelse, aktivitet } = useReiseTilSamlingSøknad();
+    const { resetSøknad, hovedytelse, aktivitet, samlinger, reiseavstand } =
+        useReiseTilSamlingSøknad();
 
     return (
         <SøknadProvider
@@ -23,6 +24,8 @@ const ReiseTilSamlingInnhold = () => {
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
+                samlinger: samlinger,
+                reiseavstand: reiseavstand,
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,
                 },

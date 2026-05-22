@@ -24,7 +24,28 @@ export interface SøknadLæremidler {
 export interface SøknadReiseTilSamling {
     hovedytelse: Hovedytelse | undefined;
     aktivitet: Aktivitet | undefined;
+    samlinger: Samling[];
+    reiseavstand?: Reiseavstand;
     søknadMetadata: SøknadMetadata;
+}
+
+export interface Aktivitetsadresse {
+    land?: SelectFelt;
+    gateadresse?: VerdiFelt<string>;
+    postnummer?: VerdiFelt<string>;
+    poststed?: VerdiFelt<string>;
+}
+
+export interface Reiseavstand {
+    antallKilometerEnVei?: VerdiFelt<string>;
+    aktivitetsadresse: Aktivitetsadresse;
+}
+
+export interface Samling {
+    _id: number; // for å kunne lenke og vise riktig feilmelding - lagres ikke i backend
+    lagret: boolean;
+    fom?: VerdiFelt<string>;
+    tom?: VerdiFelt<string>;
 }
 
 export interface Hovedytelse {
