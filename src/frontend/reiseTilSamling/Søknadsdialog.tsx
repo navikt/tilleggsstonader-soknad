@@ -3,7 +3,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 
 import { Forside } from './Forside';
-import { NesteStegReiseTilSamling } from './steg/2-neste-steg/NesteStegReiseTilSamling';
+import { NesteStegReiseTilSamling } from './steg/5-neste-steg/NesteStegReiseTilSamling';
 import { forsideTekster } from './tekster/forside';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
@@ -13,8 +13,8 @@ import { Stønadstype } from '../typer/stønadstyper';
 import { RouteTilPath } from './routing/routesReiseTilSamling';
 import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
 import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
-import { SamlingerReiseTilSamling } from './steg/3-samlinger/SamlingerReiseTilSamling';
-import { ReiseavstandReiseTilSamling } from './steg/4-reiseavstand/ReiseavstandReiseTilSamling';
+import { ReiseavstandReiseTilSamling } from './steg/3-reiseavstand/ReiseavstandReiseTilSamling';
+import { SamlingerReiseTilSamling } from './steg/4-samlinger/SamlingerReiseTilSamling';
 
 export const Søknadsdialog: React.FC = () => {
     return (

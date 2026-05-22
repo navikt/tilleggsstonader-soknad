@@ -3,7 +3,6 @@ import React from 'react';
 import { PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
 
-import { LagredeSamlinger } from './LagredeSamlinger';
 import { NySamling } from './NySamling';
 import { oppdaterSamling, opprettSamlingForNesteId } from './util';
 import { nullstillteSamlingsfeil, validerSamlingUnderRedigering } from './validering';
@@ -52,7 +51,15 @@ export const SamlingerListe: React.FC<{
 
     return (
         <VStack gap="space-16">
-            <LagredeSamlinger lagredeSamlinger={lagredeSamlinger} slettSamling={slettSamling} />
+            {lagredeSamlinger.map((samling) => (
+                <NySamling
+                    key={samling._id}
+                    samling={samling}
+                    oppdater={oppdaterSamlingFelt}
+                    onSlett={() => slettSamling(samling._id)}
+                    visValideringsfeil={false}
+                />
+            ))}
             {ulagretSamling && (
                 <NySamling
                     key={ulagretSamling._id}
