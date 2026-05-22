@@ -5,6 +5,7 @@ import { mockHarSøknadTilsynBarnFraFør } from '../../mocks/harSøknadFraFør';
 import { mockPersonMedBarnApi } from '../../mocks/person';
 import { mockSendSøknadPassAvBarn } from '../../mocks/sendSøknad';
 import { mockSøknadRoutingApi } from '../../mocks/søknadRouting';
+import { velgLand } from '../../utils/combobox';
 import { lastOppFil } from '../../utils/filoppladding/uploadFile';
 import { klikkPåKnapp } from '../../utils/knapp';
 import { søknadBaseUrl } from '../../utils/utils';
@@ -150,20 +151,20 @@ test('Velger hovedytelse Tiltakspenger som trigger ekstra spørsmål koblet til 
         .getByRole('radiogroup', { name: 'Jobber du i et annet land enn Norge?' })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvilket land jobber du i?').selectOption('Sverige');
+    await velgLand(page, 'Hvilket land jobber du i?', 'Sverige');
     await page
         .getByRole('group', { name: 'Mottar du pengestøtte fra et annet land enn Norge?' })
         .getByLabel('Sykepenger')
         .check();
 
-    await page.getByLabel('Hvilket land mottar du pengestøtte fra?').selectOption('Finland');
+    await velgLand(page, 'Hvilket land mottar du pengestøtte fra?', 'Finland');
     await page
         .getByRole('radiogroup', {
             name: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?',
         })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvilket land har du oppholdt deg i?').selectOption('Tyskland');
+    await velgLand(page, 'Hvilket land har du oppholdt deg i?', 'Tyskland');
     await page
         .getByRole('group', {
             name: 'Hva gjorde du i dette landet?',
@@ -181,7 +182,7 @@ test('Velger hovedytelse Tiltakspenger som trigger ekstra spørsmål koblet til 
         })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvilket land skal du oppholde deg i?').selectOption('Spania');
+    await velgLand(page, 'Hvilket land skal du oppholde deg i?', 'Spania');
 
     await page
         .getByRole('group', {
