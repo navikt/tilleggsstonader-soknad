@@ -3,6 +3,11 @@ import { useState } from 'react';
 import createUseContext from 'constate';
 
 import {
+    DokumentasjonFelt,
+    Dokumentasjonsbehov,
+    VedleggstypeReiseTilSamling,
+} from '../typer/skjema';
+import {
     Aktivitet,
     Aktivitetsadresse,
     Hovedytelse,
@@ -13,6 +18,9 @@ import {
 
 const initialSamlinger = (): Samling[] => [{ _id: 1, lagret: false }];
 const initialReiseavstand = (): Reiseavstand => ({ aktivitetsadresse: {} });
+const initialDokumentasjonsbehov = (): Dokumentasjonsbehov[] => [
+    { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
+];
 
 const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseContext(() => {
     ReiseTilSamlingSøknadProvider.displayName = 'SØKNAD_REISE_TIL_SAMLING_PROVIDER';
@@ -23,6 +31,8 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
     const [reiseavstand, settReiseavstand] = useState<Reiseavstand>(initialReiseavstand());
     const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(undefined);
+    const [dokumentasjonsbehov] = useState<Dokumentasjonsbehov[]>(initialDokumentasjonsbehov());
+    const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
 
     const resetSøknad = () => {
         settHarBekreftet(false);
@@ -31,6 +41,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         settSamlinger(initialSamlinger());
         settReiseavstand(initialReiseavstand());
         settReisemåte(undefined);
+        settDokumentasjon([]);
     };
 
     const settAktivitetsadresse = (oppdatering: Partial<Aktivitetsadresse>) => {
@@ -54,6 +65,9 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         settAktivitetsadresse,
         reisemåte,
         settReisemåte,
+        dokumentasjonsbehov,
+        dokumentasjon,
+        settDokumentasjon,
         resetSøknad,
     };
 });

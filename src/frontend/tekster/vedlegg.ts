@@ -1,12 +1,14 @@
 import { typerVedleggTeksterPassAvBarn } from '../barnetilsyn/tekster/vedlegg';
 import { typerVedleggTeksterKjørelister } from '../kjørelister/tekster/vedlegg';
 import { typerVedleggTeksterLæremidler } from '../læremidler/tekster/vedlegg';
+import { typerVedleggTeksterReiseTilSamling } from '../reiseTilSamling/tekster/vedlegg';
 import { TekstElement } from '../typer/tekst';
 
 export const typerVedleggTekster = {
     ...typerVedleggTeksterLæremidler,
     ...typerVedleggTeksterPassAvBarn,
     ...typerVedleggTeksterKjørelister,
+    ...typerVedleggTeksterReiseTilSamling,
 };
 
 interface VedleggInnhold {
