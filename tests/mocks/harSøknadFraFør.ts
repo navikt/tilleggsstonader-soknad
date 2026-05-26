@@ -23,3 +23,9 @@ export const mockHarIngenSøknadLæremidlerFraFør = async (page: Page) => {
         await route.fulfill({ json: false });
     });
 };
+
+export const mockHarIngenSøknadReiseTilSamlingFraFør = async (page: Page) => {
+    await page.route('api/person/har-behandling?stonadstype=REISE_TIL_SAMLING', async (route) => {
+        await route.fulfill({ json: false });
+    });
+};

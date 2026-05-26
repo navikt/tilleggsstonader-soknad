@@ -11,6 +11,7 @@ import {
     RouteTilPath as RouteToPathLæremidler,
 } from '../læremidler/routing/routesLæremidler';
 import {
+    ERouteReiseTilSamling,
     reiseTilSamlingPath,
     RouteTilPath as RouteToPathReiseTilSamling,
     routesReiseTilSamling,
@@ -51,7 +52,11 @@ export const hentStartRoute = (stønadstype: Stønadstype) => {
 };
 
 export const erOppsummeringsside = (route: RouteType): boolean => {
-    return route === ERouteBarnetilsyn.OPPSUMMERING || route === ERouteLæremidler.OPPSUMMERING;
+    return (
+        route === ERouteBarnetilsyn.OPPSUMMERING ||
+        route === ERouteLæremidler.OPPSUMMERING ||
+        route === ERouteReiseTilSamling.OPPSUMMERING
+    );
 };
 
 export const finnOppsummeringRoute = (stønadstype: Stønadstype): string => {
@@ -61,6 +66,6 @@ export const finnOppsummeringRoute = (stønadstype: Stønadstype): string => {
         case Stønadstype.LÆREMIDLER:
             return RouteToPathLæremidler.OPPSUMMERING;
         case Stønadstype.REISE_TIL_SAMLING:
-            return RouteToPathReiseTilSamling.NESTE_STEG;
+            return RouteToPathReiseTilSamling.OPPSUMMERING;
     }
 };

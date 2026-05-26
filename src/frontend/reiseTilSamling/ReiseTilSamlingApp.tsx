@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { Søknadsdialog } from './Søknadsdialog';
+import { PersonRouting } from '../components/PersonRouting';
 import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import {
     ReiseTilSamlingSøknadProvider,
@@ -15,8 +16,15 @@ import appConfig from '../utils/appConfig';
 
 const ReiseTilSamlingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, hovedytelse, aktivitet, samlinger, reiseavstand } =
-        useReiseTilSamlingSøknad();
+    const {
+        resetSøknad,
+        hovedytelse,
+        aktivitet,
+        samlinger,
+        reiseavstand,
+        reisemåte,
+        dokumentasjon,
+    } = useReiseTilSamlingSøknad();
 
     return (
         <SøknadProvider
@@ -26,6 +34,8 @@ const ReiseTilSamlingInnhold = () => {
                 aktivitet: aktivitet,
                 samlinger: samlinger,
                 reiseavstand: reiseavstand,
+                reisemåte: reisemåte,
+                dokumentasjon: dokumentasjon,
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,
                 },
@@ -46,12 +56,14 @@ export const ReiseTilSamlingApp = () => {
     }, [locale]);
 
     return (
-        <ValideringsfeilProvider>
-            <ReiseTilSamlingSøknadProvider>
-                <RegisterAktiviteterProvider stønadstype={Stønadstype.REISE_TIL_SAMLING}>
-                    <ReiseTilSamlingInnhold />
-                </RegisterAktiviteterProvider>
-            </ReiseTilSamlingSøknadProvider>
-        </ValideringsfeilProvider>
+        <PersonRouting stønadstype={Stønadstype.REISE_TIL_SAMLING}>
+            <ValideringsfeilProvider>
+                <ReiseTilSamlingSøknadProvider>
+                    <RegisterAktiviteterProvider stønadstype={Stønadstype.REISE_TIL_SAMLING}>
+                        <ReiseTilSamlingInnhold />
+                    </RegisterAktiviteterProvider>
+                </ReiseTilSamlingSøknadProvider>
+            </ValideringsfeilProvider>
+        </PersonRouting>
     );
 };
