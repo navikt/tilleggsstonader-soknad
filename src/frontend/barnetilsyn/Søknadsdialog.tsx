@@ -17,7 +17,7 @@ import AktivitetPassAvBarn from './steg/3-aktivitet/AktivitetPassAvBarn';
 import DineBarn from './steg/4-dine-barn/DineBarn';
 import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
 import VedleggPassAvBarn from './steg/6-vedlegg/VedleggPassAvBarn';
-import Oppsummering from './steg/7-oppsummering/Oppsummering';
+import { Oppsummering } from './steg/7-oppsummering/Oppsummering';
 
 const Søknadsdialog: React.FC = () => {
     return (

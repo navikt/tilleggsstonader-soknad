@@ -27,6 +27,7 @@ export interface SøknadReiseTilSamling {
     samlinger: Samling[];
     reiseavstand?: Reiseavstand;
     reisemåte?: Reisemåte;
+    dokumentasjon: DokumentasjonFelt[];
     søknadMetadata: SøknadMetadata;
 }
 
