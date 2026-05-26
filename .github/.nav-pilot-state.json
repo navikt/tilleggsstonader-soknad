@@ -1,8 +1,8 @@
 {
   "collection": "nextjs-frontend",
-  "version": "2026.05.21-074240-3f5dac0",
+  "version": "2026.05.22-103454-7acbe01",
   "scope": "repo",
-  "source_sha": "3f5dac0",
+  "source_sha": "b59a0e8",
   "installed_at": "2026-04-21T11:17:24Z",
   "files": [
     {
@@ -96,6 +96,10 @@
     {
       "path": ".github/prompts/nais-manifest.prompt.md",
       "hash": "8576571223ffef8a"
+    },
+    {
+      "path": ".github/skills/observability-debugging/",
+      "hash": "b01ef3cd48eca1aa"
     }
   ]
 }

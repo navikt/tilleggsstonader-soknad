@@ -1,10 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 import { mockAktivitet, mockIngenAktivitet } from '../../mocks/aktivitet';
-import { mockHarSøknadTilsynBarnFraFør } from '../../mocks/harSøknadFraFør';
+import {
+    mockHarIngenSøknadTilsynBarnFraFør,
+    mockHarSøknadTilsynBarnFraFør,
+} from '../../mocks/harSøknadFraFør';
 import { mockPersonMedBarnApi } from '../../mocks/person';
 import { mockSendSøknadPassAvBarn } from '../../mocks/sendSøknad';
 import { mockSøknadRoutingApi } from '../../mocks/søknadRouting';
+import { mockLastOppVedlegg } from '../../mocks/vedlegg';
 import { velgLand } from '../../utils/combobox';
 import { lastOppFil } from '../../utils/filoppladding/uploadFile';
 import { klikkPåKnapp } from '../../utils/knapp';
@@ -16,6 +20,8 @@ test.beforeEach(async ({ page }) => {
     await mockPersonMedBarnApi(page);
     await mockAktivitet(page);
     await mockSendSøknadPassAvBarn(page);
+    await mockHarIngenSøknadTilsynBarnFraFør(page);
+    await mockLastOppVedlegg(page);
 });
 
 const urlSøknad = `${søknadBaseUrl}/pass-av-barn`;
