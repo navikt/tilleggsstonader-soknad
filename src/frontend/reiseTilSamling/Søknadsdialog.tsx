@@ -3,8 +3,8 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 
 import { Forside } from './Forside';
-import { NesteStegReiseTilSamling } from './steg/5-neste-steg/NesteStegReiseTilSamling';
 import { ReisemåteReiseTilSamling } from './steg/5-reisemåte/ReisemåteReiseTilSamling';
+import VedleggReiseTilSamling from './steg/6-vedlegg/VedleggReiseTilSamling';
 import { forsideTekster } from './tekster/forside';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
@@ -16,6 +16,7 @@ import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReis
 import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
 import { ReiseavstandReiseTilSamling } from './steg/3-reiseavstand/ReiseavstandReiseTilSamling';
 import { SamlingerReiseTilSamling } from './steg/4-samlinger/SamlingerReiseTilSamling';
+import { NesteStegReiseTilSamling } from './steg/7-neste-steg/NesteStegReiseTilSamling';
 
 export const Søknadsdialog: React.FC = () => {
     return (
@@ -63,6 +64,14 @@ export const Søknadsdialog: React.FC = () => {
                     element={
                         <SøknadsdialogInnhold>
                             <ReisemåteReiseTilSamling />
+                        </SøknadsdialogInnhold>
+                    }
+                />
+                <Route
+                    path={'/vedlegg'}
+                    element={
+                        <SøknadsdialogInnhold>
+                            <VedleggReiseTilSamling />
                         </SøknadsdialogInnhold>
                     }
                 />
