@@ -31,7 +31,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
         nb: 'Hva er totalutgiftene til kollektivtransport til og fra samlingene?',
     },
     totalutgifter_kollektivt_beskrivelse: {
-        nb: 'Oppgi totalbeløpet for alle samlingene du søker for.',
+        nb: 'Oppgi totalbeløpet i kroner for alle samlingene du søker for.',
     },
     radio_kan_benytte_egen_bil: {
         header: {

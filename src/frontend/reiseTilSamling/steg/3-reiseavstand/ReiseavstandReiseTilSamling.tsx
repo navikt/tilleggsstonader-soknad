@@ -34,7 +34,7 @@ const PostnummerFelt = styled(TextField)`
 
 const KmFelt = styled(TextField)`
     input {
-        width: 4rem;
+        width: 6rem;
     }
 `;
 

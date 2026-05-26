@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styled from 'styled-components';
+
 import { Alert, TextField, VStack } from '@navikt/ds-react';
 
 import {
@@ -19,6 +21,12 @@ import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { reisemåteTekster } from '../../tekster/reisemåte';
+
+const TotalutgifterFelt = styled(TextField)`
+    input {
+        width: 6rem;
+    }
+`;
 
 export const ReisemåteReiseTilSamling = () => {
     const { locale } = useSpråk();
@@ -74,7 +82,7 @@ export const ReisemåteReiseTilSamling = () => {
                     error={valideringsfeil[errorKeyKanReiseKollektivt]?.melding}
                 />
                 {kollektivtJa && (
-                    <TextField
+                    <TotalutgifterFelt
                         id={valideringsfeil[errorKeyTotalutgifterKollektivt]?.id}
                         label={reisemåteTekster.totalutgifter_kollektivt_label[locale]}
                         description={reisemåteTekster.totalutgifter_kollektivt_beskrivelse[locale]}
