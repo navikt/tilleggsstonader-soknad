@@ -107,10 +107,8 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await page.getByRole('button', { name: 'Ja, gå til neste side' }).click();
     await fjernWebpackOverlay(page);
 
-    await expect(page).toHaveURL(`${urlSøknad}/neste-steg`);
-    await expect(
-        page.getByRole('heading', { name: 'Neste steg er ikke klart ennå' })
-    ).toBeVisible();
+    await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
+    await expect(page.getByRole('heading', { name: 'Oppsummering' })).toBeVisible();
 
     await forventIngenWcagViolations(page);
 });
