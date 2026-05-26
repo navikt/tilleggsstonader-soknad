@@ -1,4 +1,4 @@
-import logger from './logger';
+import { logger } from './logger';
 
 const lokaltMiljø = {
     apiUrl: 'http://localhost:8001/api',

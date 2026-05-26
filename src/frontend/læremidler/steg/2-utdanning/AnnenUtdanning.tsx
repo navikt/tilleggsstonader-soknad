@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { EnumFelt } from '../../../typer/skjema';
 import { Feilmelding } from '../../../typer/validering';
 import { utdanningTekster } from '../../tekster/utdanning';

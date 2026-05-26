@@ -17,14 +17,14 @@ import {
 import { ERouteBarnetilsyn, RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
-import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
+import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
-import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
-import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
-import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
@@ -32,7 +32,7 @@ import { Stønadstype } from '../typer/stønadstyper';
 import { erSnartNyttSkoleår } from '../utils/datoUtils';
 import { hentNesteRoute } from '../utils/routeUtils';
 
-const Forside: React.FC = () => {
+export const Forside: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { harBekreftet, settHarBekreftet } = usePassAvBarnSøknad();
@@ -143,5 +143,3 @@ const Forside: React.FC = () => {
         </Container>
     );
 };
-
-export default Forside;

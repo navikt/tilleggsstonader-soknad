@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Vedlegg, { DokumentasjonFeltMedVedleggstekst } from '../../../components/Vedlegg/Vedlegg';
+import { DokumentasjonFeltMedVedleggstekst, Vedlegg } from '../../../components/Vedlegg/Vedlegg';
 import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { typerVedleggTekster } from '../../../tekster/vedlegg';

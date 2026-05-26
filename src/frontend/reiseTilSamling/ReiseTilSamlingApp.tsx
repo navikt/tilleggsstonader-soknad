@@ -12,7 +12,7 @@ import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { teksterStønad } from '../tekster/stønad';
 import { Stønadstype } from '../typer/stønadstyper';
-import appConfig from '../utils/appConfig';
+import { appConfig } from '../utils/appConfig';
 
 const ReiseTilSamlingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();

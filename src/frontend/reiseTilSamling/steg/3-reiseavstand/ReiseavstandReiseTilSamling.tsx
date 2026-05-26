@@ -14,7 +14,7 @@ import {
     validerReiseavstand,
 } from './validering';
 import { Landvelger } from '../../../components/Landvelger/Landvelger';
-import Side from '../../../components/Side';
+import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';

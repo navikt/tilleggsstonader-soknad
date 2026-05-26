@@ -5,7 +5,7 @@ import { FormSummary } from '@navikt/ds-react';
 import { usePerson } from '../../context/PersonContext';
 import { fellesOppsummeringTekster } from '../../tekster/oppsummering';
 import { LocaleReadMoreMedLenke } from '../Teksthåndtering/LocaleReadMore';
-import LocaleTekst from '../Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 
 export const OmDegOppsummering = () => {
     const { person } = usePerson();

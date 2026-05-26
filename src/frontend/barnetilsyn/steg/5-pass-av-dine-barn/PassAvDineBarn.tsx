@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { GuidePanel, VStack } from '@navikt/ds-react';
 
 import { oppdaterDokumentasjonsbehovForBarnMedPass } from './barnepassDokumentUtil';
-import BarnepassSpørsmål from './BarnepassSpørsmål';
+import { BarnepassSpørsmål } from './BarnepassSpørsmål';
 import { valider } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
-import Side from '../../../components/Side';
+import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -18,7 +18,7 @@ import { inneholderFeil } from '../../../typer/validering';
 import { valueOrThrow } from '../../../utils/typeUtils';
 import { barnepassTekster } from '../../tekster/barnepass';
 
-const PassAvDineBarn = () => {
+export const PassAvDineBarn = () => {
     const { person } = usePerson();
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
@@ -86,4 +86,3 @@ const PassAvDineBarn = () => {
         </Side>
     );
 };
-export default PassAvDineBarn;

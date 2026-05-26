@@ -7,7 +7,7 @@ import { Alert, Button, ErrorSummary, HGrid, VStack } from '@navikt/ds-react';
 import { BreakpointMd } from '@navikt/ds-tokens/js';
 
 import { StegIndikator } from './StegIndikator';
-import LocaleTekst from './Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
 import {
     loggBesøk,
     loggSkjemaFullført,
@@ -47,7 +47,7 @@ export const Container = styled.div`
     }
 `;
 
-const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
+export const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { locale } = useSpråk();
@@ -162,5 +162,3 @@ const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }) => {
         </Container>
     );
 };
-
-export default Side;

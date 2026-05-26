@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Alert, Heading, Label, VStack } from '@navikt/ds-react';
 
-import BarnOver9År from './BarnOver9År';
+import { BarnOver9År } from './BarnOver9År';
 import {
     er9ellerEldre,
     errorKeyHarUtgifter,
@@ -11,9 +11,9 @@ import {
     errorKeyUtgifterTom,
 } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
-import UtgifterDato from './UtgifterDato';
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { UtgifterDato } from './UtgifterDato';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barn, PassType } from '../../../typer/barn';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
@@ -30,7 +30,7 @@ interface Props {
     locale: Locale;
 }
 
-const BarnepassSpørsmål: React.FC<Props> = ({
+export const BarnepassSpørsmål: React.FC<Props> = ({
     barn,
     barnepass,
     oppdaterBarnMedBarnepass,
@@ -114,4 +114,3 @@ const BarnepassSpørsmål: React.FC<Props> = ({
         </VStack>
     );
 };
-export default BarnepassSpørsmål;

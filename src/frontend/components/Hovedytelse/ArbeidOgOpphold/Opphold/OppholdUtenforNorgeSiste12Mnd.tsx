@@ -1,6 +1,6 @@
 import React from 'react';
 
-import OppholdListe from './OppholdListe';
+import { OppholdListe } from './OppholdListe';
 import {
     opprettOppholdForNesteId,
     skalTaStillingTilOppholdNeste12mnd,
@@ -11,14 +11,14 @@ import { oppholdUtenforNorgeInnhold } from '../../../../barnetilsyn/tekster/opph
 import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
 import { EnumFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
-import LocaleRadioGroup from '../../../Teksthåndtering/LocaleRadioGroup';
+import { LocaleRadioGroup } from '../../../Teksthåndtering/LocaleRadioGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
 }
 
-const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
+export const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
     arbeidOgOpphold,
     settArbeidOgOpphold,
 }) => {
@@ -103,5 +103,3 @@ const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
         </>
     );
 };
-
-export default OppholdUtenforNorgeSiste12Mnd;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, Checkbox, ErrorMessage } from '@navikt/ds-react';
 
-import LocaleTekst from './Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
     fjernFeilmelding: () => void;
 }
 
-const BekreftelseCheckbox: React.FC<Props> = ({
+export const BekreftelseCheckbox: React.FC<Props> = ({
     skalViseFeilmelding,
     harBekreftet,
     oppdaterHarBekreftet,
@@ -38,5 +38,3 @@ const BekreftelseCheckbox: React.FC<Props> = ({
         </Box>
     );
 };
-
-export default BekreftelseCheckbox;

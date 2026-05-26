@@ -22,7 +22,7 @@ interface CheckboxGroupProps<T extends string> extends Omit<
     value: VerdiFelt<T>[];
 }
 
-function LocaleCheckboxGroup<T extends string>({
+export function LocaleCheckboxGroup<T extends string>({
     children,
     tekst,
     argument0,
@@ -73,5 +73,3 @@ function LocaleCheckboxGroup<T extends string>({
         </CheckboxGroup>
     );
 }
-
-export default LocaleCheckboxGroup;

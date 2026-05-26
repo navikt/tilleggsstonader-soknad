@@ -4,7 +4,7 @@ import { BodyShort } from '@navikt/ds-react';
 
 import { SamlingerListe } from './SamlingerListe';
 import { validerSamlinger } from './validering';
-import Side from '../../../components/Side';
+import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';

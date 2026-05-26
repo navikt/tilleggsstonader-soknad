@@ -1,6 +1,6 @@
 import { injectDecoratorServerSide } from '@navikt/nav-dekoratoren-moduler/ssr';
 
-import logger from './logger';
+import { logger } from './logger';
 
 export function getDecoratedHtml(path: string) {
     const env = process.env.ENV;

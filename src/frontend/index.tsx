@@ -8,18 +8,18 @@ import { Theme } from '@navikt/ds-react';
 
 import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
-import BarnetilsynApp from './barnetilsyn/BarnetilsynApp';
+import { BarnetilsynApp } from './barnetilsyn/BarnetilsynApp';
 import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
-import ScrollToTop from './components/ScrollToTop';
+import { ScrollToTop } from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentligTransportAvsjekk';
 import { SkalBrukeTaxiAvsjekk } from './dagligReise/SkalBrukeTaxiAvsjekk';
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
-import LæremidlerApp from './læremidler/LæremidlerApp';
+import { LæremidlerApp } from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
 import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
-import appConfig from './utils/appConfig';
+import { appConfig } from './utils/appConfig';
 import { erProd } from './utils/miljø';
 
 initSentry();

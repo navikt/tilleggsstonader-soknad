@@ -6,8 +6,8 @@ import { ArrowUndoIcon, PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { BorderAccent } from '@navikt/ds-tokens/js';
 
-import LagredeOpphold from './LagredeOpphold';
-import NyttOpphold from './NyttOpphold';
+import { LagredeOpphold } from './LagredeOpphold';
+import { NyttOpphold } from './NyttOpphold';
 import { OppdatertOppholdFelt } from './typer';
 import { oppdaterOpphold, opprettOppholdForNesteId } from './util';
 import {
@@ -34,7 +34,7 @@ const BlåVenstreRammeContainer = styled(VStack)`
  * Når man legger til et nytt opphold så validerer man den man har under redigering
  * Man markerer det som lagret og viser det oppholdet i visningsmodus
  */
-const OppholdListe: React.FC<{
+export const OppholdListe: React.FC<{
     keyOpphold: keyof Pick<
         ArbeidOgOpphold,
         'oppholdUtenforNorgeSiste12mnd' | 'oppholdUtenforNorgeNeste12mnd'
@@ -167,4 +167,3 @@ const OppholdListe: React.FC<{
         </BlåVenstreRammeContainer>
     );
 };
-export default OppholdListe;

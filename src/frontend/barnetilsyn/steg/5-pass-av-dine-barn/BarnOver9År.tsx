@@ -3,9 +3,9 @@ import { Alert, Heading } from '@navikt/ds-react';
 import { errorKeyStartetFemte, errorKeyÅrsak } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
 import { LocalePunktliste } from '../../../components/Teksthåndtering/LocalePunktliste';
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
 import { EnumFelt } from '../../../typer/skjema';
@@ -20,7 +20,7 @@ interface Props {
     valideringsfeil: Valideringsfeil;
     nullstillValideringsfeil: (key: string) => void;
 }
-const BarnOver9År: React.FC<Props> = ({
+export const BarnOver9År: React.FC<Props> = ({
     barn,
     passInfo,
     oppdaterBarnMedBarnepass,
@@ -90,4 +90,3 @@ const BarnOver9År: React.FC<Props> = ({
         </>
     );
 };
-export default BarnOver9År;

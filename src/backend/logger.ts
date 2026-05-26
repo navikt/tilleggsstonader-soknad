@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import winston from 'winston';
 
-const logger = winston.createLogger({
+export const logger = winston.createLogger({
     format: winston.format.combine(winston.format.splat(), winston.format.simple()),
     transports: [
         new winston.transports.Console({
@@ -40,5 +40,3 @@ export const logWarn = (message: string, req: Request, error?: any) => {
 
     logger.warn(melding, meta);
 };
-
-export default logger;

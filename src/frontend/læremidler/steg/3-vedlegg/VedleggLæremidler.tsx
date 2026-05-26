@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Vedlegg, { DokumentasjonFeltMedVedleggstekst } from '../../../components/Vedlegg/Vedlegg';
+import { DokumentasjonFeltMedVedleggstekst, Vedlegg } from '../../../components/Vedlegg/Vedlegg';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { typerVedleggTekster } from '../../../tekster/vedlegg';
 
-const VedleggLæremidler = () => {
+export const VedleggLæremidler = () => {
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = useLæremidlerSøknad();
     const { locale } = useSpråk();
 
@@ -27,5 +27,3 @@ const VedleggLæremidler = () => {
         />
     );
 };
-
-export default VedleggLæremidler;

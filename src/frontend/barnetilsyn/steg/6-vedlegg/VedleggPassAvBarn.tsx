@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Vedlegg, { DokumentasjonFeltMedVedleggstekst } from '../../../components/Vedlegg/Vedlegg';
+import { DokumentasjonFeltMedVedleggstekst, Vedlegg } from '../../../components/Vedlegg/Vedlegg';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -8,7 +8,7 @@ import { typerVedleggTekster } from '../../../tekster/vedlegg';
 import { DokumentasjonFelt } from '../../../typer/skjema';
 import { hentBeskjedMedEttParameter } from '../../../utils/tekstUtils';
 
-const VedleggPassAvBarn = () => {
+export const VedleggPassAvBarn = () => {
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = usePassAvBarnSøknad();
     const { person } = usePerson();
     const { locale } = useSpråk();
@@ -41,5 +41,3 @@ const VedleggPassAvBarn = () => {
         />
     );
 };
-
-export default VedleggPassAvBarn;

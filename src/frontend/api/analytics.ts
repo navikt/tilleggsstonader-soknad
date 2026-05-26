@@ -1,6 +1,6 @@
 import { logAnalyticsCustomEvent } from '@navikt/nav-dekoratoren-moduler';
 
-import Environment from './Environment';
+import { Environment } from './Environment';
 import { stønadstypeTilSkjemaId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 

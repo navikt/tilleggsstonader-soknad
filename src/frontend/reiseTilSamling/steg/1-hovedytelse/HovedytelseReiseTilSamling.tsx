@@ -1,4 +1,4 @@
-import HovedytelseSide from '../../../components/Hovedytelse/Hovedytelse';
+import { HovedytelseSide } from '../../../components/Hovedytelse/Hovedytelse';
 import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { Hovedytelse } from '../../../typer/søknad';
 

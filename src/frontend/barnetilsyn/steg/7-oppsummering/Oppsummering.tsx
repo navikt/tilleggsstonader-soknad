@@ -10,13 +10,13 @@ import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsumm
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
 import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
-const Oppsummering = () => {
+export const Oppsummering = () => {
     const { hovedytelse, aktivitet, valgteBarnIdenter, barnMedBarnepass, dokumentasjon } =
         usePassAvBarnSøknad();
     const { person } = usePerson();
@@ -44,5 +44,3 @@ const Oppsummering = () => {
         </OppsummeringSide>
     );
 };
-
-export default Oppsummering;

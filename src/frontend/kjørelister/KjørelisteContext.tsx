@@ -5,7 +5,7 @@ import { isEqual } from 'date-fns';
 
 import { Rammevedtak } from './types/Rammevedtak';
 import { Dokument, VedleggstypeKjøreliste } from '../typer/skjema';
-import appConfig from '../utils/appConfig';
+import { appConfig } from '../utils/appConfig';
 import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
 import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import { tilLocaleDateString } from '../utils/formateringUtils';

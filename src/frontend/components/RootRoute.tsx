@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { loggBesøk } from '../api/analytics';
-import HarBehandlingSide from '../barnetilsyn/HarBehandlingSide';
+import { HarBehandlingSide } from '../barnetilsyn/HarBehandlingSide';
 import { RoutesBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';

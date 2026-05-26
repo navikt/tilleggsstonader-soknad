@@ -3,7 +3,7 @@ import { BodyLong } from '@navikt/ds-react';
 import { useSpråk } from '../../context/SpråkContext';
 import { TekstElement } from '../../typer/tekst';
 
-const LocaleTekstAvsnitt: React.FC<{ tekst: TekstElement<string[]> }> = ({ tekst }) => {
+export const LocaleTekstAvsnitt: React.FC<{ tekst: TekstElement<string[]> }> = ({ tekst }) => {
     const { locale } = useSpråk();
     const tekstElement = tekst[locale];
 
@@ -17,5 +17,3 @@ const LocaleTekstAvsnitt: React.FC<{ tekst: TekstElement<string[]> }> = ({ tekst
         </>
     );
 };
-
-export default LocaleTekstAvsnitt;

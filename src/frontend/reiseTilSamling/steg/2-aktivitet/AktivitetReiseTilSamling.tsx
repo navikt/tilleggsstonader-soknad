@@ -10,17 +10,17 @@ import {
     feilLønnetAktivitet,
     feilValgtAktivitet,
 } from '../../../components/Aktivitet/aktivitetValidering';
-import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
+import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
 import {
     skalTaStillingTilAnnenAktivitet,
     skalTaStillingTilRegisterAktiviteter,
 } from '../../../components/Aktivitet/registerAktivitetUtil';
-import Side from '../../../components/Side';
+import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';

@@ -7,21 +7,21 @@ import { Accordion, BodyLong, Button, GuidePanel, HStack, Label, VStack } from '
 import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
-import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
+import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
-import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
-import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
-import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';
 import { hentNesteRoute } from '../utils/routeUtils';
 
-const Forside: React.FC = () => {
+export const Forside: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { harBekreftet, settHarBekreftet } = useLæremidlerSøknad();
@@ -117,5 +117,3 @@ const Forside: React.FC = () => {
         </Container>
     );
 };
-
-export default Forside;

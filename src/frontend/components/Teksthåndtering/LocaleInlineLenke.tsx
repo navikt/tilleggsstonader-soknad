@@ -7,7 +7,7 @@ import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
 import { InlineLenke, Lenke, StyledTekst, TekstElement } from '../../typer/tekst';
 
-const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tekst }) => {
+export const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tekst }) => {
     const { locale } = useSpråk();
 
     return tekst[locale].map((tekstElement, indeks) => (
@@ -37,5 +37,3 @@ export const LenkeEllerTekst: React.FC<{ tekstElement: string | StyledTekst | Le
     }
     return <span style={{ fontWeight: tekstElement.style }}>{tekstElement.tekst}</span>;
 };
-
-export default LocaleInlineLenke;

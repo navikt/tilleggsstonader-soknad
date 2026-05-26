@@ -9,10 +9,10 @@ import { kvitteringTekster } from '../../tekster/kvittering';
 import { formaterNullableIsoDatoTid } from '../../utils/formateringUtils';
 import { Container } from '../Side';
 import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
-import LocaleInlineLenke from '../Teksthåndtering/LocaleInlineLenke';
-import LocaleTekst from '../Teksthåndtering/LocaleTekst';
+import { LocaleInlineLenke } from '../Teksthåndtering/LocaleInlineLenke';
+import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 
-const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) => {
+export const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) => {
     const locationState = useLocation().state;
     const navigate = useNavigate();
     const { resetSøknadOgValideringsfeil } = useSøknad();
@@ -101,5 +101,3 @@ const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForside }) =>
         </Container>
     );
 };
-
-export default Kvittering;

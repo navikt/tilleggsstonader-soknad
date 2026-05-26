@@ -7,8 +7,8 @@ import { ReisemåteReiseTilSamling } from './steg/5-reisemåte/ReisemåteReiseTi
 import { VedleggReiseTilSamling } from './steg/6-vedlegg/VedleggReiseTilSamling';
 import { Oppsummering } from './steg/7-oppsummering/Oppsummering';
 import { forsideTekster } from './tekster/forside';
-import Kvittering from '../components/Kvittering/Kvittering';
-import RedirectTilStart from '../components/RedirectTilStart';
+import { Kvittering } from '../components/Kvittering/Kvittering';
+import { RedirectTilStart } from '../components/RedirectTilStart';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
 import { useReiseTilSamlingSøknad } from '../context/ReiseTilSamlingSøknadContext';
 import { stønadstypeTilSkjemaId } from '../typer/skjemanavn';

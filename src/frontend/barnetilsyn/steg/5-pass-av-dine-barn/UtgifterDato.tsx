@@ -18,7 +18,7 @@ interface Props {
     nullstillValideringsfeil: (key: string) => void;
     locale: Locale;
 }
-const UtgifterDato: React.FC<Props> = ({
+export const UtgifterDato: React.FC<Props> = ({
     barn,
     barnepass,
     oppdaterBarnMedBarnepass,
@@ -89,4 +89,3 @@ const UtgifterDato: React.FC<Props> = ({
         </>
     );
 };
-export default UtgifterDato;

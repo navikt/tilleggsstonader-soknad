@@ -1,8 +1,8 @@
-import HovedytelseSide from '../../../components/Hovedytelse/Hovedytelse';
+import { HovedytelseSide } from '../../../components/Hovedytelse/Hovedytelse';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { Hovedytelse } from '../../../typer/søknad';
 
-const HovedytelseLæremidler = () => {
+export const HovedytelseLæremidler = () => {
     const { hovedytelse, settHovedytelse } = useLæremidlerSøknad();
 
     return (
@@ -12,5 +12,3 @@ const HovedytelseLæremidler = () => {
         />
     );
 };
-
-export default HovedytelseLæremidler;

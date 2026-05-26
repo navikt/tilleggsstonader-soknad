@@ -4,17 +4,17 @@ import path from 'path';
 import { applyCspDirectives, logCspViolation } from './csp';
 import { getDecoratedHtml } from './decorator';
 import { getFyllutUrl, SkjematypeFyllUt } from './fyllutUrls';
-import logger from './logger';
+import { logger } from './logger';
 import { miljø } from './miljø';
 import { addRequestInfo, doProxy } from './proxy';
 import { redirectTilSkjema } from './redirectTilSkjema';
-import attachToken from './tokenProxy';
+import { attachToken } from './tokenProxy';
 import { BASE_PATH_SOKNAD } from './url';
 import { matchAllPathsExcluding } from './utils';
 
 const buildPath = path.resolve(process.cwd(), '../../app/build');
 
-const routes = () => {
+export const routes = () => {
     const expressRouter = Router();
 
     expressRouter.get(
@@ -103,5 +103,3 @@ async function sendHtmlMedDekoratør(_req: Request, res: Response) {
             res.status(500).send(e);
         });
 }
-
-export default routes;

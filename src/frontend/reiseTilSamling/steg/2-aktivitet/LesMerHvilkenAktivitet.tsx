@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Box, List } from '@navikt/ds-react';
 
-import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
-import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { TekstElement } from '../../../typer/tekst';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 

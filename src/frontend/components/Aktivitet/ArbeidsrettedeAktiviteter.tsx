@@ -18,7 +18,7 @@ interface Props {
     feilmelding: Feilmelding | undefined;
 }
 
-const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
+export const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
     spørsmål,
     lesMer,
     registerAktiviteter,
@@ -73,5 +73,3 @@ const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
         </CheckboxGroup>
     );
 };
-
-export default ArbeidsrettedeAktiviteter;

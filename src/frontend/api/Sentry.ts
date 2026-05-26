@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react';
 
-import Environment from './Environment';
-import appConfig from '../utils/appConfig';
+import { Environment } from './Environment';
+import { appConfig } from '../utils/appConfig';
 
 export const initSentry = () => {
     const env = Environment();
