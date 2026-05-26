@@ -5,7 +5,7 @@ import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøkn
 import { useSpråk } from '../../../context/SpråkContext';
 import { typerVedleggTekster } from '../../../tekster/vedlegg';
 
-const VedleggReiseTilSamling = () => {
+export const VedleggReiseTilSamling = () => {
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = useReiseTilSamlingSøknad();
     const { locale } = useSpråk();
 
@@ -27,5 +27,3 @@ const VedleggReiseTilSamling = () => {
         />
     );
 };
-
-export default VedleggReiseTilSamling;

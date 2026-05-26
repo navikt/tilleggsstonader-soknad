@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router';
 
 import { Forside } from './Forside';
 import { ReisemåteReiseTilSamling } from './steg/5-reisemåte/ReisemåteReiseTilSamling';
-import VedleggReiseTilSamling from './steg/6-vedlegg/VedleggReiseTilSamling';
+import { VedleggReiseTilSamling } from './steg/6-vedlegg/VedleggReiseTilSamling';
 import { forsideTekster } from './tekster/forside';
 import RedirectTilStart from '../components/RedirectTilStart';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
