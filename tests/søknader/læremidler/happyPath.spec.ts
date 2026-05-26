@@ -1,7 +1,10 @@
 import { test, expect, Page } from '@playwright/test';
 
 import { mockAktivitet, mockIngenAktivitet } from '../../mocks/aktivitet';
-import { mockHarSøknadLæremidlerFraFør } from '../../mocks/harSøknadFraFør';
+import {
+    mockHarIngenSøknadLæremidlerFraFør,
+    mockHarSøknadLæremidlerFraFør,
+} from '../../mocks/harSøknadFraFør';
 import { mockPersonApi } from '../../mocks/person';
 import { mockSendSøknadLæremilder } from '../../mocks/sendSøknad';
 import { mockSøknadRoutingApi } from '../../mocks/søknadRouting';
@@ -13,6 +16,7 @@ test.beforeEach(async ({ page }) => {
     await mockPersonApi(page);
     await mockAktivitet(page);
     await mockSendSøknadLæremilder(page);
+    await mockHarIngenSøknadLæremidlerFraFør(page);
 });
 
 const urlSøknad = `${søknadBaseUrl}/laremidler`;
