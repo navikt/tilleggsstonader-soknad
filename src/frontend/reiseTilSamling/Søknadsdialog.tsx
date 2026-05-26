@@ -5,7 +5,7 @@ import { Navigate, Route, Routes } from 'react-router';
 import { Forside } from './Forside';
 import { ReisemåteReiseTilSamling } from './steg/5-reisemåte/ReisemåteReiseTilSamling';
 import { VedleggReiseTilSamling } from './steg/6-vedlegg/VedleggReiseTilSamling';
-import Oppsummering from './steg/7-oppsummering/Oppsummering';
+import { Oppsummering } from './steg/7-oppsummering/Oppsummering';
 import { forsideTekster } from './tekster/forside';
 import Kvittering from '../components/Kvittering/Kvittering';
 import RedirectTilStart from '../components/RedirectTilStart';

@@ -12,7 +12,7 @@ import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøkn
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
-const Oppsummering = () => {
+export const Oppsummering = () => {
     const { hovedytelse, reiseavstand, samlinger, reisemåte, dokumentasjonsbehov, dokumentasjon } =
         useReiseTilSamlingSøknad();
 
@@ -38,5 +38,3 @@ const Oppsummering = () => {
         </OppsummeringSide>
     );
 };
-
-export default Oppsummering;

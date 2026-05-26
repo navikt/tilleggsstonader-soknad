@@ -16,7 +16,7 @@ import { usePerson } from '../../../context/PersonContext';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
-export const Oppsummering = () => {
+const Oppsummering = () => {
     const { hovedytelse, aktivitet, valgteBarnIdenter, barnMedBarnepass, dokumentasjon } =
         usePassAvBarnSøknad();
     const { person } = usePerson();
@@ -44,3 +44,5 @@ export const Oppsummering = () => {
         </OppsummeringSide>
     );
 };
+
+export default Oppsummering;
