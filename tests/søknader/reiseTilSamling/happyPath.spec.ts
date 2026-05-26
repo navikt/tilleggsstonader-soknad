@@ -1,6 +1,9 @@
 import { expect, Page, test } from '@playwright/test';
 
 import { mockAktivitet } from '../../mocks/aktivitet';
+import { mockHarIngenSøknadReiseTilSamlingFraFør } from '../../mocks/harSøknadFraFør';
+import { mockPersonApi } from '../../mocks/person';
+import { mockSøknadRoutingApi } from '../../mocks/søknadRouting';
 import { søknadBaseUrl } from '../../utils/utils';
 import { forventIngenWcagViolations } from '../../utils/wcag';
 
@@ -13,7 +16,10 @@ const fjernWebpackOverlay = async (page: Page) => {
 };
 
 test('At reise til samling viser førstesiden og går videre fra din situasjon', async ({ page }) => {
+    await mockSøknadRoutingApi(page);
+    await mockPersonApi(page);
     await mockAktivitet(page);
+    await mockHarIngenSøknadReiseTilSamlingFraFør(page);
     await page.goto(urlSøknad);
     await fjernWebpackOverlay(page);
 
