@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import Søknadsdialog from './Søknadsdialog';
+import { Søknadsdialog } from './Søknadsdialog';
 import { PersonRouting } from '../components/PersonRouting';
 import { LæremidlerSøknadProvider, useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
@@ -9,7 +9,7 @@ import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { teksterStønad } from '../tekster/stønad';
 import { Stønadstype } from '../typer/stønadstyper';
-import appConfig from '../utils/appConfig';
+import { appConfig } from '../utils/appConfig';
 
 const LæremidlerInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
@@ -34,7 +34,7 @@ const LæremidlerInnhold = () => {
     );
 };
 
-const LæremidlerApp = () => {
+export const LæremidlerApp = () => {
     const { locale } = useSpråk();
 
     useEffect(() => {
@@ -53,5 +53,3 @@ const LæremidlerApp = () => {
         </PersonRouting>
     );
 };
-
-export default LæremidlerApp;

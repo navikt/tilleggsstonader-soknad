@@ -2,9 +2,9 @@ import React from 'react';
 
 import { BodyLong } from '@navikt/ds-react';
 
-import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { TekstElement } from '../../../typer/tekst';
 import { utdanningTekster } from '../../tekster/utdanning';
 

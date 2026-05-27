@@ -1,7 +1,7 @@
 import { Request } from 'express';
 
 import { SkjematypeFyllUt } from './fyllutUrls';
-import logger from './logger';
+import { logger } from './logger';
 import { miljø } from './miljø';
 
 export enum SkjemaRoutingAksjon {

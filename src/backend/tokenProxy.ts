@@ -1,7 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 
 import { logWarn, logInfo } from './logger';
-import TokenXClient from './tokenx';
+import { TokenXClient } from './tokenx';
 
 const { exchangeToken } = new TokenXClient();
 
@@ -10,7 +10,7 @@ export type ApplicationName = 'tilleggsstonader-soknad-api' | 'familie-dokument'
 const AUTHORIZATION_HEADER = 'authorization';
 const WONDERWALL_ID_TOKEN_HEADER = 'x-wonderwall-id-token';
 
-const attachToken = (applicationName: ApplicationName): RequestHandler => {
+export const attachToken = (applicationName: ApplicationName): RequestHandler => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
             const authenticationHeader = await prepareSecuredRequest(req, applicationName);
@@ -60,5 +60,3 @@ const prepareSecuredRequest = async (req: Request, applicationName: ApplicationN
         authorization: `Bearer ${accessToken}`,
     };
 };
-
-export default attachToken;

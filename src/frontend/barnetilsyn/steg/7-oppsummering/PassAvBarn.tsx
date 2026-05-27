@@ -4,7 +4,7 @@ import { FormSummary } from '@navikt/ds-react';
 
 import { OppsummeringEnkeltbarn } from './OppsummerEnkeltbarn';
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';

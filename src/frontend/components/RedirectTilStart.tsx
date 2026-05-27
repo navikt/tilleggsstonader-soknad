@@ -10,10 +10,8 @@ interface Props {
     children: React.ReactElement;
 }
 
-const RedirectTilStart: React.FC<Props> = ({ harBekreftet, children }) => {
+export const RedirectTilStart: React.FC<Props> = ({ harBekreftet, children }) => {
     const { stønadstype } = useSøknad();
 
     return !harBekreftet ? <Navigate to={hentStartRoute(stønadstype)} /> : children;
 };
-
-export default RedirectTilStart;

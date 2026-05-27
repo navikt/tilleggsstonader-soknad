@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 
-import Environment from './Environment';
+import { Environment } from './Environment';
 
 const getLoginUrl = () => Environment().wonderwallUrl + getRedirectUrl();
 

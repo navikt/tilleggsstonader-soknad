@@ -14,7 +14,7 @@ const VisningAvOpphold = styled(VStack)`
     padding: 1rem 1rem 0 1rem;
 `;
 
-const LagredeOpphold: React.FC<{
+export const LagredeOpphold: React.FC<{
     lagredeOpphold: OppholdUtenforNorge[];
     slettOpphold: (id: number) => void;
     locale: Locale;
@@ -44,5 +44,3 @@ const LagredeOpphold: React.FC<{
         </>
     );
 };
-
-export default LagredeOpphold;

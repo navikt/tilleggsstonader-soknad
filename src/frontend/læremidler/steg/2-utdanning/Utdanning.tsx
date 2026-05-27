@@ -15,15 +15,15 @@ import {
     feilHarTidligereFullførtVgs,
     feilValgtAktivitet,
 } from './validering';
-import ArbeidsrettedeAktiviteter from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
+import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import {
     skalTaStillingTilAnnenAktivitet,
     skalTaStillingTilRegisterAktiviteter,
 } from '../../../components/Aktivitet/registerAktivitetUtil';
-import Side from '../../../components/Side';
+import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
-import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
@@ -35,7 +35,7 @@ import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { utdanningTekster } from '../../tekster/utdanning';
 import { AnnenUtdanningType } from '../../typer/søknad';
 
-const Utdanning = () => {
+export const Utdanning = () => {
     const { locale } = useSpråk();
     const { person } = usePerson();
     const { utdanning, settUtdanning, settDokumentasjonsbehov } = useLæremidlerSøknad();
@@ -254,4 +254,3 @@ const Utdanning = () => {
         </Side>
     );
 };
-export default Utdanning;

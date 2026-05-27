@@ -4,10 +4,8 @@ interface AppConfig {
     nodeEnv: 'development' | 'production';
 }
 
-const appConfig: AppConfig = {
+export const appConfig: AppConfig = {
     publicUrl: __PUBLIC_URL__,
     commitHash: __COMMIT_HASH__,
     nodeEnv: __NODE_ENV__,
 };
-
-export default appConfig;

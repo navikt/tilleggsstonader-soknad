@@ -27,7 +27,7 @@ const urlPapirsøknadProd = (stønadstype: Stønadstype) =>
 const urlPapirsøknadDev = (stønadstype: Stønadstype) =>
     `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilPapirskjema[stønadstype]}?sub=paper`;
 
-const Environment = (): EnvironmentProps => {
+export const Environment = (): EnvironmentProps => {
     const modellVersjon = { overgangsstønad: 7, barnetilsyn: 2, skolepenger: 2 };
 
     if (window.location.hostname.indexOf('dev.nav.no') > -1) {
@@ -66,5 +66,3 @@ const Environment = (): EnvironmentProps => {
         };
     }
 };
-
-export default Environment;

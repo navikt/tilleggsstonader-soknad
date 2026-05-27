@@ -4,7 +4,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import * as querystring from 'querystring';
 import { v4 as uuid } from 'uuid';
 
-import logger from './logger';
+import { logger } from './logger';
 
 const restream = (proxyReq: ClientRequest, req: IncomingMessage) => {
     const requestBody = (req as Request).body;

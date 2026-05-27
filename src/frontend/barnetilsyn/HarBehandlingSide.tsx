@@ -4,10 +4,10 @@ import { ChevronRightIcon, MultiplyIcon } from '@navikt/aksel-icons';
 import { Alert, BodyLong, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 
 import { loggSkjemaSpørsmålBesvart } from '../api/analytics';
-import Environment from '../api/Environment';
+import { Environment } from '../api/Environment';
 import { Container } from '../components/Side';
-import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
-import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
+import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBehandling';
 import { kvitteringTekster } from '../tekster/kvittering';
@@ -19,7 +19,7 @@ interface SøknadsideProps {
     stønadstype: Stønadstype;
 }
 
-const HarBehandlingSide: React.FC<SøknadsideProps> = ({
+export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
     startSøknad,
     stønadstype,
 }: SøknadsideProps) => {
@@ -106,5 +106,3 @@ const HarBehandlingSide: React.FC<SøknadsideProps> = ({
         </Container>
     );
 };
-
-export default HarBehandlingSide;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import Søknadsdialog from './Søknadsdialog';
+import { Søknadsdialog } from './Søknadsdialog';
 import { PersonRouting } from '../components/PersonRouting';
 import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
@@ -9,7 +9,7 @@ import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { teksterStønad } from '../tekster/stønad';
 import { Stønadstype } from '../typer/stønadstyper';
-import appConfig from '../utils/appConfig';
+import { appConfig } from '../utils/appConfig';
 
 const BarnetilsynInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
@@ -36,7 +36,7 @@ const BarnetilsynInnhold = () => {
     );
 };
 
-const BarnetilsynApp = () => {
+export const BarnetilsynApp = () => {
     const { locale } = useSpråk();
 
     useEffect(() => {
@@ -55,5 +55,3 @@ const BarnetilsynApp = () => {
         </PersonRouting>
     );
 };
-
-export default BarnetilsynApp;

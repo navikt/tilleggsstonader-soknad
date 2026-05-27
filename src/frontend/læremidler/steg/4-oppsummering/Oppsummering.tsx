@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UtdanningOppsummering from './Utdanning';
+import { UtdanningOppsummering } from './Utdanning';
 import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
@@ -10,7 +10,7 @@ import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContex
 import { RouteTilPath } from '../../routing/routesLæremidler';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
-const Oppsummering = () => {
+export const Oppsummering = () => {
     const { hovedytelse, utdanning, dokumentasjonsbehov, dokumentasjon } = useLæremidlerSøknad();
     return (
         <OppsummeringSide>
@@ -32,5 +32,3 @@ const Oppsummering = () => {
         </OppsummeringSide>
     );
 };
-
-export default Oppsummering;

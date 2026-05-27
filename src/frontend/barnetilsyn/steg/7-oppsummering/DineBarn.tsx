@@ -3,7 +3,7 @@ import React from 'react';
 import { FormSummary } from '@navikt/ds-react';
 
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { Person } from '../../../typer/person';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';

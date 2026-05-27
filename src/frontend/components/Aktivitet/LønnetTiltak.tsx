@@ -6,8 +6,8 @@ import { EnumFelt } from '../../typer/skjema';
 import { JaNei } from '../../typer/søknad';
 import { Radiogruppe, TekstElement } from '../../typer/tekst';
 import { Feilmelding } from '../../typer/validering';
-import LocaleRadioGroup from '../Teksthåndtering/LocaleRadioGroup';
-import LocaleTekstAvsnitt from '../Teksthåndtering/LocaleTekstAvsnitt';
+import { LocaleRadioGroup } from '../Teksthåndtering/LocaleRadioGroup';
+import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
 
 interface Props {
     lønnetAktivitet: EnumFelt<JaNei> | undefined;

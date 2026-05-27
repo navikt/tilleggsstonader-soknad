@@ -1,6 +1,6 @@
-import { getAnalyticsInstance } from '@navikt/nav-dekoratoren-moduler';
+import { logAnalyticsCustomEvent } from '@navikt/nav-dekoratoren-moduler';
 
-import Environment from './Environment';
+import { Environment } from './Environment';
 import { stønadstypeTilSkjemaId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 
@@ -37,11 +37,14 @@ export const sendUmamiEvent = (
             `[BARE LOKALT] Sender umami-event med eventType=${event} og eventProperties=${JSON.stringify(eventProperties)}`
         );
     }
-    getAnalyticsInstance('tilleggsstonader-soknad')(event, {
-        app: APP_NAVN,
-        skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
-        skjemaId: stønadstypeTilSkjemaId[stønadstype],
-        ...eventProperties,
+    logAnalyticsCustomEvent({
+        origin: APP_NAVN,
+        eventName: event,
+        eventData: {
+            skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
+            skjemaId: stønadstypeTilSkjemaId[stønadstype],
+            ...eventProperties,
+        },
     }).catch(() => {
         // enten feil med lastingen av Umami, eller så har brukeren ikke samtykket.
     });

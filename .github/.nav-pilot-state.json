@@ -1,8 +1,8 @@
 {
   "collection": "nextjs-frontend",
-  "version": "2026.05.19-124507-b57b838",
+  "version": "2026.05.22-103454-7acbe01",
   "scope": "repo",
-  "source_sha": "b57b838",
+  "source_sha": "b59a0e8",
   "installed_at": "2026-04-21T11:17:24Z",
   "files": [
     {
@@ -43,7 +43,7 @@
     },
     {
       "path": ".github/skills/nav-plan/",
-      "hash": "0849265460ea23e2"
+      "hash": "0a160744cf2b4e82"
     },
     {
       "path": ".github/skills/nav-deep-interview/",
@@ -55,7 +55,7 @@
     },
     {
       "path": ".github/skills/nav-troubleshoot/",
-      "hash": "ce043cf29ce427b1"
+      "hash": "e9900d58d91ee0ee"
     },
     {
       "path": ".github/instructions/nextjs-aksel.instructions.md",
@@ -96,6 +96,10 @@
     {
       "path": ".github/prompts/nais-manifest.prompt.md",
       "hash": "8576571223ffef8a"
+    },
+    {
+      "path": ".github/skills/observability-debugging/",
+      "hash": "b01ef3cd48eca1aa"
     }
   ]
 }

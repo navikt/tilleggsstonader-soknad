@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { getFyllutUrl, SkjematypeFyllUt } from './fyllutUrls';
-import logger from './logger';
+import { logger } from './logger';
 import { hentSkjemaRoutingAksjon, SkjemaRoutingAksjon } from './skjemaRouting';
 import { BASE_PATH_SOKNAD } from './url';
 

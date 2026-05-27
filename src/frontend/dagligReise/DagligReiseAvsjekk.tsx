@@ -5,8 +5,8 @@ import { Button, GuidePanel, Heading, Label, Radio, RadioGroup, VStack } from '@
 import { omdirigerTilFyllut } from '../api/useFyllutRedirect';
 import { Container } from '../components/Side';
 import { LocaleReadMore } from '../components/Teksthåndtering/LocaleReadMore';
-import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
-import LocaleTekstAvsnitt from '../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { SkjematypeFyllUt } from '../typer/stønadstyper';
 import { LesMer, TekstElement } from '../typer/tekst';
 

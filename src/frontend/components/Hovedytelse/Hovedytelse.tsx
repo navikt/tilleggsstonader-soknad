@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { GuidePanel } from '@navikt/ds-react';
 
-import ArbeidOgOppholdUtenforNorge from './ArbeidOgOpphold/ArbeidOgOppholdUtenforNorge';
+import { ArbeidOgOppholdUtenforNorge } from './ArbeidOgOpphold/ArbeidOgOppholdUtenforNorge';
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
 import { Ytelse } from './typer';
 import { validerHovedytelse } from './validering';
@@ -12,10 +12,10 @@ import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 import { EnumFlereValgFelt } from '../../typer/skjema';
 import { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
 import { inneholderFeil } from '../../typer/validering';
-import Side from '../Side';
-import LocaleCheckboxGroup from '../Teksthåndtering/LocaleCheckboxGroup';
+import { Side } from '../Side';
+import { LocaleCheckboxGroup } from '../Teksthåndtering/LocaleCheckboxGroup';
 import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
-import LocaleTekst from '../Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 
 const defaultArbeidOgOpphold: ArbeidOgOpphold = {
     oppholdUtenforNorgeSiste12mnd: [],
@@ -27,7 +27,7 @@ interface Props {
     oppdaterHovedytelse: (hovedytelse: Hovedytelse) => void;
 }
 
-const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) => {
+export const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -91,5 +91,3 @@ const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) 
         </Side>
     );
 };
-
-export default HovedytelseSide;

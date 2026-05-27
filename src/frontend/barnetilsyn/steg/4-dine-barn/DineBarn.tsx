@@ -11,11 +11,11 @@ import {
 } from '@navikt/ds-react';
 
 import { Ytelse } from '../../../components/Hovedytelse/typer';
-import Side from '../../../components/Side';
+import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -26,7 +26,7 @@ import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { dineBarnTekster } from '../../tekster/dineBarn';
 import { harBarnUnder2år, harValgtBarnOver9år } from '../5-pass-av-dine-barn/passBarnVedleggUtils';
 
-const DineBarn = () => {
+export const DineBarn = () => {
     const { locale } = useSpråk();
     const { person } = usePerson();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
@@ -128,5 +128,3 @@ const harKunValgtEnsligSomHovedytelse = (
         valgteHovedytelser.verdier[0].verdi === 'OVERGANGSSTØNAD'
     );
 };
-
-export default DineBarn;

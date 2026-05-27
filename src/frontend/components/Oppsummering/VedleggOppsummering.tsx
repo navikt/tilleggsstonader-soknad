@@ -5,7 +5,7 @@ import { FormSummary } from '@navikt/ds-react';
 import { FormSummaryFooterMedEndreKnapp } from './FormSummaryFooterMedEndreKnapp';
 import { fellesOppsummeringTekster } from '../../tekster/oppsummering';
 import { DokumentasjonFelt } from '../../typer/skjema';
-import LocaleTekst from '../Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 
 export const VedleggOppsummering: React.FC<{
     dokumentasjon: DokumentasjonFelt[];

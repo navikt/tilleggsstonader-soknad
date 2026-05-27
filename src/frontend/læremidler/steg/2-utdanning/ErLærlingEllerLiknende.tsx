@@ -2,8 +2,8 @@ import React from 'react';
 
 import { BodyLong, VStack } from '@navikt/ds-react';
 
-import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';

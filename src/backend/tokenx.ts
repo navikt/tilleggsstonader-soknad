@@ -3,7 +3,7 @@ import nodeJose from 'node-jose';
 import { discovery, genericGrantRequest, None } from 'openid-client';
 import { v4 as uuid } from 'uuid';
 
-import logger from './logger';
+import { logger } from './logger';
 import { miljø } from './miljø';
 import { ApplicationName } from './tokenProxy';
 
@@ -13,7 +13,7 @@ const namespace: { [key in ApplicationName]: string } = {
 };
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-class TokenXClient {
+export class TokenXClient {
     private tokenxClient: any = null;
     private audience: any = null;
 
@@ -123,5 +123,3 @@ const tokenxConfig = {
     redirectUri: miljø.oauthCallbackUri,
     clusterName: process.env.NAIS_CLUSTER_NAME,
 };
-
-export default TokenXClient;

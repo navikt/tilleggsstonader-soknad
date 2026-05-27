@@ -1,6 +1,6 @@
 import { BodyLong, Box, List, ReadMore } from '@navikt/ds-react';
 
-import LocaleInlineLenke from './LocaleInlineLenke';
+import { LocaleInlineLenke } from './LocaleInlineLenke';
 import { loggAccordionEvent } from '../../api/analytics';
 import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';

@@ -4,18 +4,18 @@ import { styled } from 'styled-components';
 
 import { BodyShort, GuidePanel } from '@navikt/ds-react';
 
-import Dokumentasjonskrav from './Dokumentasjonskrav';
-import VedleggManglerModal from './VedleggManglerModal';
+import { Dokumentasjonskrav } from './Dokumentasjonskrav';
+import { VedleggManglerModal } from './VedleggManglerModal';
 import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './VedleggUtils';
 import { useSpråk } from '../../context/SpråkContext';
 import { vedleggTekster } from '../../tekster/vedlegg';
 import { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
 import { Filopplaster } from '../Filopplaster/Filopplaster';
-import Side from '../Side';
+import { Side } from '../Side';
 import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
-import LocaleTekst from '../Teksthåndtering/LocaleTekst';
-import LocaleTekstAvsnitt from '../Teksthåndtering/LocaleTekstAvsnitt';
-import VedleggGenerellInfo from '../VedleggGenerellInfo';
+import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
+import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
+import { VedleggGenerellInfo } from '../VedleggGenerellInfo';
 
 const VedleggContainer = styled.div`
     display: flex;
@@ -35,7 +35,11 @@ interface Props {
     dokumentasjonsbehov: Dokumentasjonsbehov[];
 }
 
-const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentasjonsbehov }) => {
+export const Vedlegg: React.FC<Props> = ({
+    dokumentasjon,
+    settDokumentasjon,
+    dokumentasjonsbehov,
+}) => {
     const { locale } = useSpråk();
 
     const vedleggManglerModalRef = useRef<HTMLDialogElement>(null);
@@ -115,5 +119,3 @@ const Vedlegg: React.FC<Props> = ({ dokumentasjon, settDokumentasjon, dokumentas
         </Side>
     );
 };
-
-export default Vedlegg;

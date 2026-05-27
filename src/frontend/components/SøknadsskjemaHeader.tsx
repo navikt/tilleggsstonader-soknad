@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { BodyShort, Heading, VStack } from '@navikt/ds-react';
 import { BreakpointMdDown } from '@navikt/ds-tokens/js';
 
-import LocaleTekst from './Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
 import { TekstElement } from '../typer/tekst';
 
 const Container = styled.div`

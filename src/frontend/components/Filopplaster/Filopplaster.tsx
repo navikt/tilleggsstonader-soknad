@@ -25,7 +25,7 @@ import { fellesTekster } from '../../tekster/felles';
 import { teksterFeilmeldinger } from '../../tekster/filopplasting';
 import { vedleggTekster } from '../../tekster/vedlegg';
 import { Dokument } from '../../typer/skjema';
-import LocaleTekst from '../Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 
 type AvslåttFil = FileRejected & { feil: unknown };
 type FilAvslåttGrunn = FileRejectionReason | 'ukjent';

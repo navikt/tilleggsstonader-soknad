@@ -8,14 +8,14 @@ import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
 import { vedleggModalTekster } from '../../tekster/vedlegg';
 import { finnOppsummeringRoute } from '../../utils/routeUtils';
-import LocaleTekst from '../Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 
 interface Props {
     innerRef: RefObject<HTMLDialogElement | null>;
     dokumenterSomMangler: string[];
 }
 
-const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }) => {
+export const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }) => {
     const { locale } = useSpråk();
     const { stønadstype } = useSøknad();
     const navigate = useNavigate();
@@ -58,5 +58,3 @@ const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }
         </Modal>
     );
 };
-
-export default VedleggManglerModal;

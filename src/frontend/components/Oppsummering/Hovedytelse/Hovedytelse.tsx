@@ -2,10 +2,10 @@ import React from 'react';
 
 import { FormSummary } from '@navikt/ds-react';
 
-import ArbeidOgOppholdOppsummering from './ArbeidOgOpphold';
+import { ArbeidOgOppholdOppsummering } from './ArbeidOgOpphold';
 import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
 import { Hovedytelse } from '../../../typer/søknad';
-import LocaleTekst from '../../Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';
 import { FormSummaryFooterMedEndreKnapp } from '../FormSummaryFooterMedEndreKnapp';
 
 export const HovedytelseOppsummering: React.FC<{

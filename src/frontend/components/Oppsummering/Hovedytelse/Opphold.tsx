@@ -8,9 +8,9 @@ import { EnumFelt } from '../../../typer/skjema';
 import { JaNei, OppholdUtenforNorge } from '../../../typer/søknad';
 import { TekstElement } from '../../../typer/tekst';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
-import LocaleTekst from '../../Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';
 
-const OppholdOppsummering: React.FC<{
+export const OppholdOppsummering: React.FC<{
     tittel: TekstElement<string>;
     harOppholdSvar?: EnumFelt<JaNei>;
     opphold: OppholdUtenforNorge[];
@@ -71,5 +71,3 @@ const OppholdOppsummering: React.FC<{
         </FormSummary.Answer>
     );
 };
-
-export default OppholdOppsummering;

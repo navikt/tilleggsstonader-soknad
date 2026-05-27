@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { Feilmelding } from '../../../typer/validering';

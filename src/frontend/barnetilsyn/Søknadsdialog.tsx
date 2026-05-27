@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router';
 
-import Forside from './Forside';
-import Kvittering from '../components/Kvittering/Kvittering';
-import RedirectTilStart from '../components/RedirectTilStart';
+import { Forside } from './Forside';
+import { Kvittering } from '../components/Kvittering/Kvittering';
+import { RedirectTilStart } from '../components/RedirectTilStart';
 import { RootRoute } from '../components/RootRoute';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
 import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
@@ -12,14 +12,14 @@ import { fellesTekster } from '../tekster/felles';
 import { stønadstypeTilSkjemaId } from '../typer/skjemanavn';
 import { Stønadstype } from '../typer/stønadstyper';
 import { barnetilsynPath } from './routing/routesBarnetilsyn';
-import HovedytelsePassBarn from './steg/2-hovedytelse/HovedytelsePassBarn';
-import AktivitetPassAvBarn from './steg/3-aktivitet/AktivitetPassAvBarn';
-import DineBarn from './steg/4-dine-barn/DineBarn';
-import PassAvDineBarn from './steg/5-pass-av-dine-barn/PassAvDineBarn';
-import VedleggPassAvBarn from './steg/6-vedlegg/VedleggPassAvBarn';
-import Oppsummering from './steg/7-oppsummering/Oppsummering';
+import { HovedytelsePassBarn } from './steg/2-hovedytelse/HovedytelsePassBarn';
+import { AktivitetPassAvBarn } from './steg/3-aktivitet/AktivitetPassAvBarn';
+import { DineBarn } from './steg/4-dine-barn/DineBarn';
+import { PassAvDineBarn } from './steg/5-pass-av-dine-barn/PassAvDineBarn';
+import { VedleggPassAvBarn } from './steg/6-vedlegg/VedleggPassAvBarn';
+import { Oppsummering } from './steg/7-oppsummering/Oppsummering';
 
-const Søknadsdialog: React.FC = () => {
+export const Søknadsdialog: React.FC = () => {
     return (
         <>
             <SøknadsskjemaHeader
@@ -53,5 +53,3 @@ const SøknadsdialogInnhold = () => {
         </RedirectTilStart>
     );
 };
-
-export default Søknadsdialog;

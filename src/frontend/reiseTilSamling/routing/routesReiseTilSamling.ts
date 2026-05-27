@@ -4,7 +4,12 @@ export enum ERouteReiseTilSamling {
     FORSIDE = 'FORSIDE',
     HOVEDYTELSE = 'HOVEDYTELSE',
     AKTIVITET = 'AKTIVITET',
-    NESTE_STEG = 'NESTE_STEG',
+    REISEAVSTAND = 'REISEAVSTAND',
+    SAMLINGER = 'SAMLINGER',
+    REISEMÅTE = 'REISEMÅTE',
+    VEDLEGG = 'VEDLEGG',
+    OPPSUMMERING = 'OPPSUMMERING',
+    KVITTERING = 'KVITTERING',
 }
 
 export const reiseTilSamlingPath = '/reise-til-samling';
@@ -13,7 +18,12 @@ export const RouteTilPath: Record<ERouteReiseTilSamling, string> = {
     FORSIDE: reiseTilSamlingPath,
     HOVEDYTELSE: reiseTilSamlingPath + '/hovedytelse',
     AKTIVITET: reiseTilSamlingPath + '/aktivitet',
-    NESTE_STEG: reiseTilSamlingPath + '/neste-steg',
+    REISEAVSTAND: reiseTilSamlingPath + '/reiseavstand',
+    SAMLINGER: reiseTilSamlingPath + '/samlinger',
+    REISEMÅTE: reiseTilSamlingPath + '/reisemate',
+    VEDLEGG: reiseTilSamlingPath + '/vedlegg',
+    OPPSUMMERING: reiseTilSamlingPath + '/oppsummering',
+    KVITTERING: reiseTilSamlingPath + '/kvittering',
 };
 
 export const routesReiseTilSamling: IRoute[] = [
@@ -29,8 +39,33 @@ export const routesReiseTilSamling: IRoute[] = [
         route: ERouteReiseTilSamling.AKTIVITET,
     },
     {
-        path: RouteTilPath.NESTE_STEG,
-        label: 'Neste steg',
-        route: ERouteReiseTilSamling.NESTE_STEG,
+        path: RouteTilPath.REISEAVSTAND,
+        label: 'Reiseavstand',
+        route: ERouteReiseTilSamling.REISEAVSTAND,
+    },
+    {
+        path: RouteTilPath.SAMLINGER,
+        label: 'Samlinger',
+        route: ERouteReiseTilSamling.SAMLINGER,
+    },
+    {
+        path: RouteTilPath.REISEMÅTE,
+        label: 'Reisemåte',
+        route: ERouteReiseTilSamling.REISEMÅTE,
+    },
+    {
+        path: RouteTilPath.VEDLEGG,
+        label: 'Vedlegg',
+        route: ERouteReiseTilSamling.VEDLEGG,
+    },
+    {
+        path: RouteTilPath.OPPSUMMERING,
+        label: 'Oppsummering',
+        route: ERouteReiseTilSamling.OPPSUMMERING,
+    },
+    {
+        path: RouteTilPath.KVITTERING,
+        label: 'Kvittering',
+        route: ERouteReiseTilSamling.KVITTERING,
     },
 ];

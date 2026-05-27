@@ -2,13 +2,13 @@ import React from 'react';
 
 import { Box, List } from '@navikt/ds-react';
 
-import LocaleInlineLenke from '../../../components/Teksthåndtering/LocaleInlineLenke';
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import {
     LocaleReadMoreMedChildren,
     LocaleReadMoreMedLenke,
 } from '../../../components/Teksthåndtering/LocaleReadMore';
-import LocaleTekstAvsnitt from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { EnumFelt } from '../../../typer/skjema';
 import { Radiogruppe } from '../../../typer/tekst';

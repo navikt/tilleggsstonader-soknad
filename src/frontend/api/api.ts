@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-import Environment from './Environment';
+import { Environment } from './Environment';
 import { Kjøreliste, KjørelisteKvittering } from '../kjørelister/types/Kjøreliste';
 import { Rammevedtak } from '../kjørelister/types/Rammevedtak';
 import { Person } from '../typer/person';

@@ -44,5 +44,6 @@ export default defineConfig({
     webServer: {
         command: 'OPEN_BROWSER=false yarn start:dev',
         port: 8080,
+        reuseExistingServer: !process.env.CI,
     },
 });

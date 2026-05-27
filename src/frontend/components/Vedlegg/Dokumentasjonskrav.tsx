@@ -7,7 +7,7 @@ import { useSøknad } from '../../context/SøknadContext';
 import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
 import { Dokumentasjonsbehov } from '../../typer/skjema';
 import { Stønadstype } from '../../typer/stønadstyper';
-import LocaleTekst from '../Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 
 const Dokumentasjonskravsliste = styled(List)`
     ul {
@@ -15,7 +15,7 @@ const Dokumentasjonskravsliste = styled(List)`
     }
 `;
 
-const Dokumentasjonskrav: React.FC<{
+export const Dokumentasjonskrav: React.FC<{
     dokumentasjonsbehov: Dokumentasjonsbehov[];
 }> = ({ dokumentasjonsbehov }) => {
     const { locale } = useSpråk();
@@ -54,5 +54,3 @@ const Dokumentasjonskrav: React.FC<{
         </>
     );
 };
-
-export default Dokumentasjonskrav;

@@ -16,13 +16,13 @@ import {
 import { routesReiseTilSamling } from './routing/routesReiseTilSamling';
 import { forsideTekster } from './tekster/forside';
 import { loggBesøk, loggSkjemaStartet } from '../api/analytics';
-import BekreftelseCheckbox from '../components/BekreftelseCheckbox';
+import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
-import LocaleInlineLenke from '../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
-import LocaleTekst from '../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { useReiseTilSamlingSøknad } from '../context/ReiseTilSamlingSøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { Stønadstype } from '../typer/stønadstyper';

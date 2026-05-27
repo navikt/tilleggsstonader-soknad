@@ -16,9 +16,9 @@ import { Locale } from '../../../../typer/tekst';
 import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formateringUtils';
 import { harVerdi } from '../../../../utils/typeUtils';
 import { Landvelger } from '../../../Landvelger/Landvelger';
-import LocaleCheckboxGroup from '../../../Teksthåndtering/LocaleCheckboxGroup';
+import { LocaleCheckboxGroup } from '../../../Teksthåndtering/LocaleCheckboxGroup';
 
-const NyttOpphold: React.FC<{
+export const NyttOpphold: React.FC<{
     keyOpphold: keyof Pick<
         ArbeidOgOpphold,
         'oppholdUtenforNorgeSiste12mnd' | 'oppholdUtenforNorgeNeste12mnd'
@@ -117,5 +117,3 @@ const NyttOpphold: React.FC<{
         </>
     );
 };
-
-export default NyttOpphold;

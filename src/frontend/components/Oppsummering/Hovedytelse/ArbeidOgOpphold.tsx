@@ -2,13 +2,13 @@ import React from 'react';
 
 import { FormSummary } from '@navikt/ds-react';
 
-import OppholdOppsummering from './Opphold';
+import { OppholdOppsummering } from './Opphold';
 import { flervalgTilKommaStreng } from './utils';
 import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
 import { ArbeidOgOpphold } from '../../../typer/søknad';
-import LocaleTekst from '../../Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';
 
-const ArbeidOgOppholdOppsummering: React.FC<{ arbeidOgOpphold: ArbeidOgOpphold }> = ({
+export const ArbeidOgOppholdOppsummering: React.FC<{ arbeidOgOpphold: ArbeidOgOpphold }> = ({
     arbeidOgOpphold,
 }) => {
     const tekster = fellesOppsummeringTekster.arbeid_og_opphold;
@@ -66,5 +66,3 @@ const ArbeidOgOppholdOppsummering: React.FC<{ arbeidOgOpphold: ArbeidOgOpphold }
         </>
     );
 };
-
-export default ArbeidOgOppholdOppsummering;

@@ -3,11 +3,11 @@ import { useState } from 'react';
 import createUseContext from 'constate';
 import { isEqual } from 'date-fns';
 
-import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import { Rammevedtak } from './types/Rammevedtak';
 import { Dokument, VedleggstypeKjøreliste } from '../typer/skjema';
-import appConfig from '../utils/appConfig';
+import { appConfig } from '../utils/appConfig';
 import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
+import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import { tilLocaleDateString } from '../utils/formateringUtils';
 
 interface Props {

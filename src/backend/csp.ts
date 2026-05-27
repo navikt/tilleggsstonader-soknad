@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { buildCspHeader } from '@navikt/nav-dekoratoren-moduler/ssr/index.js';
 
-import logger from './logger';
+import { logger } from './logger';
 import { miljø } from './miljø';
 
 const rapporteringsendepunkt = `${miljø.reportingUrl}/csp-violation`;

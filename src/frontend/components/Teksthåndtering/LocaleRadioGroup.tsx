@@ -16,7 +16,7 @@ interface RadioGroupProps<T extends string> extends Omit<
     children?: React.ReactNode;
     argument0?: string;
 }
-function LocaleRadioGroup<T extends string>({
+export function LocaleRadioGroup<T extends string>({
     children,
     tekst,
     argument0,
@@ -62,5 +62,3 @@ function LocaleRadioGroup<T extends string>({
         </RadioGroup>
     );
 }
-
-export default LocaleRadioGroup;

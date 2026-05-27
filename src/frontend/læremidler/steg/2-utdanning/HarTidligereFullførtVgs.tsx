@@ -3,8 +3,8 @@ import React from 'react';
 import { Alert, Heading, VStack } from '@navikt/ds-react';
 
 import { BlåVenstreRammeContainer } from '../../../components/BlåVenstreRammeContainer';
-import LocaleRadioGroup from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { Feilmelding } from '../../../typer/validering';

@@ -8,14 +8,14 @@ import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad
 import { harVerdi } from '../../../utils/typeUtils';
 import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
 import { Landvelger } from '../../Landvelger/Landvelger';
-import LocaleCheckboxGroup from '../../Teksthåndtering/LocaleCheckboxGroup';
+import { LocaleCheckboxGroup } from '../../Teksthåndtering/LocaleCheckboxGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
 }
 
-const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
+export const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const oppdaterMottarDuPengestøtte = (verdi: EnumFlereValgFelt<MottarPengestøtteTyper>) => {
@@ -70,5 +70,3 @@ const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold })
         </>
     );
 };
-
-export default Pengestøtte;

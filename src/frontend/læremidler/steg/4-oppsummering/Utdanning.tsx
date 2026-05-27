@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { FormSummary } from '@navikt/ds-react';
 
-import LocaleTekst from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
 import { RouteTilPath } from '../../routing/routesLæremidler';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 import { Utdanning } from '../../typer/søknad';
 
-const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }) => {
+export const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }) => {
     const navigate = useNavigate();
 
     return (
@@ -77,5 +77,3 @@ const UtdanningOppsummering: React.FC<{ utdanning: Utdanning }> = ({ utdanning }
         </FormSummary>
     );
 };
-
-export default UtdanningOppsummering;

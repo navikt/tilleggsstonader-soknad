@@ -8,13 +8,13 @@ import { ArbeidOgOpphold, JaNei } from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typeUtils';
 import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
 import { Landvelger } from '../../Landvelger/Landvelger';
-import LocaleRadioGroup from '../../Teksthåndtering/LocaleRadioGroup';
+import { LocaleRadioGroup } from '../../Teksthåndtering/LocaleRadioGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
     settArbeidOgOpphold: React.Dispatch<React.SetStateAction<ArbeidOgOpphold>>;
 }
-const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
+export const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpphold }) => {
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
     const oppdaterJobberIAnnetLandEnnNorge = (verdi: EnumFelt<JaNei>) => {
         settArbeidOgOpphold((prevState) => ({
@@ -66,5 +66,3 @@ const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpph
         </>
     );
 };
-
-export default JobberDuIAnnetLand;
