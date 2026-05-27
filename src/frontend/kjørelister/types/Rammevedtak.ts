@@ -5,6 +5,12 @@ export interface Rammevedtak {
     aktivitetsadresse: string;
     aktivitetsnavn: string;
     uker: RammevedtakUke[];
+    helligdager: Helligdag[];
+}
+
+export interface Helligdag {
+    dato: string;
+    navn: string;
 }
 
 export interface RammevedtakUke {

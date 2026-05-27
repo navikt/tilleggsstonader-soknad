@@ -8,11 +8,12 @@ import { erHelg } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { Reisedag } from '../../types/Kjøreliste';
 
-const Card = styled(VStack)<{ graybackground: string }>`
+const Card = styled(VStack)<{ $erHelligdag: boolean; $erHelg: boolean }>`
     border: 1px solid black;
     border-radius: 5px;
     padding: 0 1rem;
-    background-color: ${({ graybackground }) => (graybackground == 'true' ? 'lightgray' : 'white')};
+    background-color: ${({ $erHelligdag, $erHelg }) =>
+        $erHelligdag || $erHelg ? 'lightGray' : 'white'};
 `;
 
 const StyledTextField = styled(TextField)`
@@ -34,7 +35,7 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boole
     const erNegativUtgift = (): boolean => (reisedag?.parkeringsutgift?.verdi ?? 0) < 0;
 
     return (
-        <Card graybackground={erHelg(reisedag.dato.verdi).toString()}>
+        <Card $erHelligdag={reisedag.erHelligdag} $erHelg={erHelg(reisedag.dato.verdi)}>
             <Checkbox
                 checked={reisedag.harKjørt}
                 readOnly={erLesevisning}
@@ -43,6 +44,7 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boole
                 }}
             >
                 {reisedag.dato.label}
+                {reisedag.erHelligdag && reisedag.helligdagnavn && <> — {reisedag.helligdagnavn}</>}
             </Checkbox>
             {reisedag.harKjørt && (
                 <StyledTextField

@@ -10,7 +10,10 @@ export const OppsummeringDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) 
     }
     return (
         <FormSummary.Answer>
-            <FormSummary.Label>{reisedag.dato.label}</FormSummary.Label>
+            <FormSummary.Label>
+                {reisedag.dato.label}
+                {reisedag.erHelligdag && reisedag.helligdagnavn && <> — {reisedag.helligdagnavn}</>}
+            </FormSummary.Label>
             {reisedag.parkeringsutgift.verdi != null ? (
                 <FormSummary.Value>
                     Har reist{`, med parkeringsutgift ${reisedag.parkeringsutgift.verdi} kr.`}

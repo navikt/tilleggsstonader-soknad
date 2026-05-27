@@ -21,6 +21,8 @@ export interface Reisedag {
     dato: VerdiFelt<string>;
     harKjørt: boolean;
     parkeringsutgift: VerdiFelt<number | null>;
+    erHelligdag: boolean;
+    helligdagnavn: string | null;
 }
 export interface KjørelisteKvittering {
     mottattTidspunkt: string;

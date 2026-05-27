@@ -3,11 +3,11 @@ import { useState } from 'react';
 import createUseContext from 'constate';
 import { isEqual } from 'date-fns';
 
+import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import { Rammevedtak } from './types/Rammevedtak';
 import { Dokument, VedleggstypeKjøreliste } from '../typer/skjema';
-import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
-import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import appConfig from '../utils/appConfig';
+import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
 import { tilLocaleDateString } from '../utils/formateringUtils';
 
 interface Props {
@@ -103,6 +103,7 @@ const initialiserKjøreliste = (
             const reisedager: Reisedag[] = dager.map((rammevedtakDag) => {
                 const dato = tilLocaleDateString(rammevedtakDag);
                 const tidligereReisedag = tidligereReisedagerMap.get(dato);
+                const helligdag = (rammevedtak.helligdager ?? []).find((h) => h.dato === dato);
 
                 return {
                     dato: {
@@ -114,6 +115,8 @@ const initialiserKjøreliste = (
                         verdi: tidligereReisedag?.parkeringsutgift?.verdi ?? null,
                         label: 'Parkeringsutgifter (kr)',
                     },
+                    erHelligdag: helligdag !== undefined,
+                    helligdagnavn: helligdag?.navn ?? null,
                 };
             });
             return {
