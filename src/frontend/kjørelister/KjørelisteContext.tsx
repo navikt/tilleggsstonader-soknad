@@ -103,6 +103,7 @@ const initialiserKjøreliste = (
             const reisedager: Reisedag[] = dager.map((rammevedtakDag) => {
                 const dato = tilLocaleDateString(rammevedtakDag);
                 const tidligereReisedag = tidligereReisedagerMap.get(dato);
+                const helligdag = (rammevedtak.helligdager ?? []).find((h) => h.dato === dato);
 
                 return {
                     dato: {
@@ -114,6 +115,8 @@ const initialiserKjøreliste = (
                         verdi: tidligereReisedag?.parkeringsutgift?.verdi ?? null,
                         label: 'Parkeringsutgifter (kr)',
                     },
+                    erHelligdag: helligdag !== undefined,
+                    helligdagnavn: helligdag?.navn ?? null,
                 };
             });
             return {

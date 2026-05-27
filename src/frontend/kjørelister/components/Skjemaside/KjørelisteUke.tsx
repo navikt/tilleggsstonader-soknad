@@ -8,6 +8,8 @@ import {
     harReist,
     harValgtFlereDagerEnnRammevedtak,
     harValgtHelgedag,
+    harValgtHelligdag,
+    hentValgteHelligdagnavn,
 } from '../../kjørelisteUtils';
 import { UkeMedReisedager } from '../../types/Kjøreliste';
 import { WideAccordionHeader } from '../WideAccordionHeader';
@@ -52,6 +54,11 @@ export const KjørelisteUke: React.FC<{
                             erLesevisning={sendtInnTidligere}
                         />
                     ))}
+                    {!sendtInnTidligere && harValgtHelligdag(ukeMedReisedag.reisedager) && (
+                        <Alert variant="warning">
+                            {`Du har fylt inn at du har kjørt på en helligdag (${hentValgteHelligdagnavn(ukeMedReisedag.reisedager).join(', ')}). Hvis det stemmer, vil en saksbehandler manuelt behandle saken din.`}
+                        </Alert>
+                    )}
                     {!sendtInnTidligere && harValgtHelgedag(ukeMedReisedag.reisedager) && (
                         <Alert variant="warning">
                             Du har fylt inn at du har kjørt på en helgedag. Hvis det stemmer at du

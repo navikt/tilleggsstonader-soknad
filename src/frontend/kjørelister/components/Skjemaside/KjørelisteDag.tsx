@@ -8,11 +8,10 @@ import { erHelg } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { Reisedag } from '../../types/Kjøreliste';
 
-const Card = styled(VStack)<{ graybackground: string }>`
+const Card = styled(VStack)`
     border: 1px solid black;
     border-radius: 5px;
     padding: 0 1rem;
-    background-color: ${({ graybackground }) => (graybackground == 'true' ? 'lightgray' : 'white')};
 `;
 
 const StyledTextField = styled(TextField)`
@@ -32,9 +31,10 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boole
     const { oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
 
     const erNegativUtgift = (): boolean => (reisedag?.parkeringsutgift?.verdi ?? 0) < 0;
+    const erGrå = reisedag.erHelligdag || erHelg(reisedag.dato.verdi);
 
     return (
-        <Card graybackground={erHelg(reisedag.dato.verdi).toString()}>
+        <Card style={{ backgroundColor: erGrå ? 'lightGray' : 'white' }}>
             <Checkbox
                 checked={reisedag.harKjørt}
                 readOnly={erLesevisning}
@@ -43,6 +43,7 @@ export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boole
                 }}
             >
                 {reisedag.dato.label}
+                {reisedag.erHelligdag && reisedag.helligdagnavn && <> — {reisedag.helligdagnavn}</>}
             </Checkbox>
             {reisedag.harKjørt && (
                 <StyledTextField

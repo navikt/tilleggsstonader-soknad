@@ -7,6 +7,14 @@ export const harReist = (reisedager: Reisedag[]): boolean =>
 export const harValgtHelgedag = (reisedager: Reisedag[]) =>
     reisedager.some((reisedag) => erHelg(reisedag.dato.verdi) && reisedag.harKjørt);
 
+export const harValgtHelligdag = (reisedager: Reisedag[]) =>
+    reisedager.some((reisedag) => reisedag.erHelligdag && reisedag.harKjørt);
+
+export const hentValgteHelligdagnavn = (reisedager: Reisedag[]): string[] =>
+    reisedager
+        .filter((reisedag) => reisedag.erHelligdag && reisedag.harKjørt && reisedag.helligdagnavn)
+        .map((reisedag) => reisedag.helligdagnavn!);
+
 export const finnAntallDagerReist = (reisedager: Reisedag[]) =>
     reisedager.filter((reisedag) => reisedag.harKjørt).length;
 
