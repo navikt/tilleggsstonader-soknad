@@ -13,7 +13,7 @@
     "start:dev": "NODE_ENV=development ENV=localhost node --import=./build/register.js --es-module-specifier-resolution=node build/server.js"
   },
   "dependencies": {
-    "@navikt/nav-dekoratoren-moduler": "^4.0.0",
+    "@navikt/nav-dekoratoren-moduler": "^4.1.1",
     "cookie-parser": "^1.4.7",
     "csp-header": "^6.3.0",
     "dotenv": "^17.4.1",
@@ -35,7 +35,7 @@
     "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^25.8.0",
+    "@types/node": "^25.9.1",
     "@types/node-jose": "^1.1.10",
     "ts-node": "^10.9.2"
   },
