@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import createUseContext from 'constate';
 
@@ -18,9 +18,6 @@ import {
 
 const initialSamlinger = (): Samling[] => [{ _id: 1, lagret: false }];
 const initialReiseavstand = (): Reiseavstand => ({ aktivitetsadresse: {} });
-const initialDokumentasjonsbehov = (): Dokumentasjonsbehov[] => [
-    { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
-];
 
 const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseContext(() => {
     ReiseTilSamlingSøknadProvider.displayName = 'SØKNAD_REISE_TIL_SAMLING_PROVIDER';
@@ -31,7 +28,15 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
     const [reiseavstand, settReiseavstand] = useState<Reiseavstand>(initialReiseavstand());
     const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(undefined);
-    const [dokumentasjonsbehov] = useState<Dokumentasjonsbehov[]>(initialDokumentasjonsbehov());
+    const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
+        const behov: Dokumentasjonsbehov[] = [
+            { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
+        ];
+        if (reisemåte?.kanReiseKollektivt?.verdi === 'JA') {
+            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_KOLLEKTIV_TRANSPORT });
+        }
+        return behov;
+    }, [reisemåte?.kanReiseKollektivt?.verdi]);
     const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
 
     const resetSøknad = () => {
