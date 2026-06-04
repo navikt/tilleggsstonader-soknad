@@ -1,4 +1,4 @@
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { InlineLenke, TekstElement } from '../typer/tekst';
 
 interface HarEksistendeBehandlingInnhold {
@@ -6,7 +6,7 @@ interface HarEksistendeBehandlingInnhold {
     spørsmål_om_søknaden_innhold: TekstElement<InlineLenke>;
     vil_forstatt_sende_søknad: TekstElement<string>;
     vil_forstatt_sende_søknad_innhold: {
-        [key in Stønadstype]: TekstElement<string>;
+        [key in Skjematype]: TekstElement<string>;
     };
     alert_for_stønadstype: TekstElement<string>;
     alert_innhold: TekstElement<InlineLenke>;
@@ -32,13 +32,13 @@ export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = 
         nb: 'Vil du likevel sende ny søknad?',
     },
     vil_forstatt_sende_søknad_innhold: {
-        [Stønadstype.BARNETILSYN]: {
+        [Skjematype.BARNETILSYN]: {
             nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er et nytt skole/barnehageår kan du sende ny søknad.',
         },
-        [Stønadstype.LÆREMIDLER]: {
+        [Skjematype.LÆREMIDLER]: {
             nb: 'Hvis du har begynt på en ny utdanning eller opplæring, eller det gjelder et nytt skoleår, kan du sende ny søknad.',
         },
-        [Stønadstype.REISE_TIL_SAMLING]: {
+        [Skjematype.REISE_TIL_SAMLING]: {
             nb: 'Hvis du har deltatt på en ny samling, kan du sende ny søknad.',
         },
     },

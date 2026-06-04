@@ -1,8 +1,8 @@
 import { logAnalyticsCustomEvent } from '@navikt/nav-dekoratoren-moduler';
 
 import { Environment } from './Environment';
-import { stønadstypeTilSkjemaId, stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
-import { Stønadstype } from '../typer/stønadstyper';
+import { skjematypeTilSkjemaId, skjematypeTilSkjemanavn } from '../typer/skjemanavn';
+import { Skjematype } from '../typer/skjematyper';
 
 const APP_NAVN = 'tilleggsstonader-soknad';
 
@@ -28,7 +28,7 @@ type eventType =
 
 export const sendUmamiEvent = (
     event: eventType,
-    stønadstype: Stønadstype,
+    stønadstype: Skjematype,
     eventProperties?: Record<string, unknown>
 ) => {
     if (Environment().miljø === 'local') {
@@ -41,8 +41,8 @@ export const sendUmamiEvent = (
         origin: APP_NAVN,
         eventName: event,
         eventData: {
-            skjemanavn: stønadstypeTilSkjemanavn[stønadstype],
-            skjemaId: stønadstypeTilSkjemaId[stønadstype],
+            skjemanavn: skjematypeTilSkjemanavn[stønadstype],
+            skjemaId: skjematypeTilSkjemaId[stønadstype],
             ...eventProperties,
         },
     }).catch(() => {
@@ -50,24 +50,24 @@ export const sendUmamiEvent = (
     });
 };
 
-export const loggSkjemaStartet = (stønadstype: Stønadstype) => {
+export const loggSkjemaStartet = (stønadstype: Skjematype) => {
     sendUmamiEvent('skjema startet', stønadstype);
 };
 
-export const loggSkjemaStegFullført = (stønadstype: Stønadstype, steg: string) => {
+export const loggSkjemaStegFullført = (stønadstype: Skjematype, steg: string) => {
     sendUmamiEvent('skjema steg fullført', stønadstype, { steg: steg });
 };
 
-export const loggSkjemaInnsendtFeilet = (stønadstype: Stønadstype) => {
+export const loggSkjemaInnsendtFeilet = (stønadstype: Skjematype) => {
     sendUmamiEvent('skjema innsending feilet', stønadstype);
 };
 
-export const loggSkjemaFullført = (stønadstype: Stønadstype) => {
+export const loggSkjemaFullført = (stønadstype: Skjematype) => {
     sendUmamiEvent('skjema fullført', stønadstype);
 };
 
 export const logNavigereEvent = (
-    stønadstype: Stønadstype,
+    stønadstype: Skjematype,
     destinasjon: string,
     lenketekst: string
 ) => {
@@ -77,14 +77,14 @@ export const logNavigereEvent = (
     });
 };
 
-export const loggAlertVist = (stønadstype: Stønadstype, variant: string, tekst: string) => {
+export const loggAlertVist = (stønadstype: Skjematype, variant: string, tekst: string) => {
     sendUmamiEvent('alert vist', stønadstype, {
         variant: variant,
         tekst: tekst,
     });
 };
 
-export const loggBesøk = (stønadstype: Stønadstype, url: string, sidetittel: string) => {
+export const loggBesøk = (stønadstype: Skjematype, url: string, sidetittel: string) => {
     sendUmamiEvent('besøk', stønadstype, {
         url: url,
         sidetittel: sidetittel,
@@ -92,7 +92,7 @@ export const loggBesøk = (stønadstype: Stønadstype, url: string, sidetittel: 
 };
 
 export const loggAccordionEvent = (
-    stønadstype: Stønadstype,
+    stønadstype: Skjematype,
     skalÅpnes: boolean,
     tekst: string,
     side?: string
@@ -106,7 +106,7 @@ export const loggAccordionEvent = (
 };
 
 export const loggSkjemaSpørsmålBesvart = (
-    stønadstype: Stønadstype,
+    stønadstype: Skjematype,
     spørsmål: string,
     svar: string
 ) => {

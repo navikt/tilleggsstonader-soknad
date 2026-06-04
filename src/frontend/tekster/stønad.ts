@@ -1,8 +1,8 @@
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { TekstElement } from '../typer/tekst';
 
 interface StønadInnhold {
-    tittelHtml: Record<Stønadstype, TekstElement<string>>;
+    tittelHtml: Record<Skjematype, TekstElement<string>>;
 }
 
 export const teksterStønad: StønadInnhold = {

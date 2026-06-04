@@ -17,15 +17,15 @@ import {
     routesReiseTilSamling,
 } from '../reiseTilSamling/routing/routesReiseTilSamling';
 import { IRoute, RouteType } from '../typer/routes';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 
-export const hentRoutes = (stønadstype: Stønadstype): IRoute[] => {
+export const hentRoutes = (stønadstype: Skjematype): IRoute[] => {
     switch (stønadstype) {
-        case Stønadstype.BARNETILSYN:
+        case Skjematype.BARNETILSYN:
             return RoutesBarnetilsyn;
-        case Stønadstype.LÆREMIDLER:
+        case Skjematype.LÆREMIDLER:
             return routesLæremidler;
-        case Stønadstype.REISE_TIL_SAMLING:
+        case Skjematype.REISE_TIL_SAMLING:
             return routesReiseTilSamling;
     }
 };
@@ -40,13 +40,13 @@ export const hentForrigeRoute = (routes: IRoute[], nåværendePath: string) => {
     return routes[routeIndex - 1];
 };
 
-export const hentStartRoute = (stønadstype: Stønadstype) => {
+export const hentStartRoute = (stønadstype: Skjematype) => {
     switch (stønadstype) {
-        case Stønadstype.BARNETILSYN:
+        case Skjematype.BARNETILSYN:
             return barnetilsynPath;
-        case Stønadstype.LÆREMIDLER:
+        case Skjematype.LÆREMIDLER:
             return læremidlerPath;
-        case Stønadstype.REISE_TIL_SAMLING:
+        case Skjematype.REISE_TIL_SAMLING:
             return reiseTilSamlingPath;
     }
 };
@@ -59,13 +59,13 @@ export const erOppsummeringsside = (route: RouteType): boolean => {
     );
 };
 
-export const finnOppsummeringRoute = (stønadstype: Stønadstype): string => {
+export const finnOppsummeringRoute = (stønadstype: Skjematype): string => {
     switch (stønadstype) {
-        case Stønadstype.BARNETILSYN:
+        case Skjematype.BARNETILSYN:
             return RouteToPathPassAvBarn.OPPSUMMERING;
-        case Stønadstype.LÆREMIDLER:
+        case Skjematype.LÆREMIDLER:
             return RouteToPathLæremidler.OPPSUMMERING;
-        case Stønadstype.REISE_TIL_SAMLING:
+        case Skjematype.REISE_TIL_SAMLING:
             return RouteToPathReiseTilSamling.OPPSUMMERING;
     }
 };

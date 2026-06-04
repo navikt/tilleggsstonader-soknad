@@ -1,10 +1,10 @@
 import constate from 'constate';
 
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { Søknad } from '../typer/søknad';
 
 interface Props {
-    stønadstype: Stønadstype;
+    stønadstype: Skjematype;
     søknad: Søknad;
     resetSøknad: () => void;
     resetValideringsfeil: () => void;

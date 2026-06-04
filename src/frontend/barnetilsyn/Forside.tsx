@@ -28,7 +28,7 @@ import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAv
 import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { erSnartNyttSkoleår } from '../utils/datoUtils';
 import { hentNesteRoute } from '../utils/routeUtils';
 
@@ -42,12 +42,12 @@ export const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = RoutesBarnetilsyn[0];
-        loggBesøk(Stønadstype.BARNETILSYN, route.path, route.label);
+        loggBesøk(Skjematype.BARNETILSYN, route.path, route.label);
     }, []);
 
     const startSøknad = () => {
         if (harBekreftet) {
-            loggSkjemaStartet(Stønadstype.BARNETILSYN);
+            loggSkjemaStartet(Skjematype.BARNETILSYN);
             const nesteRoute = hentNesteRoute(RoutesBarnetilsyn, location.pathname);
             navigate(nesteRoute.path);
         } else {
@@ -56,7 +56,7 @@ export const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(Stønadstype.BARNETILSYN, skalÅpne, tittel, ERouteBarnetilsyn.FORSIDE);
+        loggAccordionEvent(Skjematype.BARNETILSYN, skalÅpne, tittel, ERouteBarnetilsyn.FORSIDE);
     };
 
     return (

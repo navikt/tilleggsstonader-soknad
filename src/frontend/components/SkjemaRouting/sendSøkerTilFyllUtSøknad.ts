@@ -1,6 +1,6 @@
 import { Environment } from '../../api/Environment';
-import { Stønadstype } from '../../typer/stønadstyper';
+import { Skjematype } from '../../typer/skjematyper';
 
-export function sendSøkerTilPapirsøknad(stønadstype: Stønadstype) {
+export function sendSøkerTilPapirsøknad(stønadstype: Skjematype) {
     window.location.replace(Environment().urlPapirsøknad(stønadstype));
 }

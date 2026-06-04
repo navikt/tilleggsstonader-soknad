@@ -8,7 +8,7 @@ import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { teksterStønad } from '../tekster/stønad';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { appConfig } from '../utils/appConfig';
 
 const LæremidlerInnhold = () => {
@@ -17,7 +17,7 @@ const LæremidlerInnhold = () => {
 
     return (
         <SøknadProvider
-            stønadstype={Stønadstype.LÆREMIDLER}
+            stønadstype={Skjematype.LÆREMIDLER}
             søknad={{
                 hovedytelse: hovedytelse,
                 utdanning: utdanning,
@@ -38,14 +38,14 @@ export const LæremidlerApp = () => {
     const { locale } = useSpråk();
 
     useEffect(() => {
-        document.title = teksterStønad.tittelHtml[Stønadstype.LÆREMIDLER][locale];
+        document.title = teksterStønad.tittelHtml[Skjematype.LÆREMIDLER][locale];
     }, [locale]);
 
     return (
-        <PersonRouting stønadstype={Stønadstype.LÆREMIDLER}>
+        <PersonRouting stønadstype={Skjematype.LÆREMIDLER}>
             <ValideringsfeilProvider>
                 <LæremidlerSøknadProvider>
-                    <RegisterAktiviteterProvider stønadstype={Stønadstype.LÆREMIDLER}>
+                    <RegisterAktiviteterProvider stønadstype={Skjematype.LÆREMIDLER}>
                         <LæremidlerInnhold />
                     </RegisterAktiviteterProvider>
                 </LæremidlerSøknadProvider>

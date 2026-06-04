@@ -5,10 +5,10 @@ import constate from 'constate';
 import { hentArbeidsrettedeAktiviteter } from '../api/api';
 import { mapTilRegisterAktiviteterObjektMedLabel } from '../components/Aktivitet/registerAktivitetUtil';
 import { RegisterAktivitetMedLabel } from '../typer/registerAktivitet';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 
 interface Props {
-    stønadstype: Stønadstype;
+    stønadstype: Skjematype;
 }
 
 const [RegisterAktiviteterProvider, useRegisterAktiviteter] = constate(({ stønadstype }: Props) => {

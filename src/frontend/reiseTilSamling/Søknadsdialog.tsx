@@ -11,9 +11,9 @@ import { Kvittering } from '../components/Kvittering/Kvittering';
 import { RedirectTilStart } from '../components/RedirectTilStart';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
 import { useReiseTilSamlingSøknad } from '../context/ReiseTilSamlingSøknadContext';
-import { stønadstypeTilSkjemaId } from '../typer/skjemanavn';
-import { Stønadstype } from '../typer/stønadstyper';
+import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
 import { reiseTilSamlingPath, RouteTilPath } from './routing/routesReiseTilSamling';
+import { Skjematype } from '../typer/skjematyper';
 import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
 import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
 import { ReiseavstandReiseTilSamling } from './steg/3-reiseavstand/ReiseavstandReiseTilSamling';
@@ -24,7 +24,7 @@ export const Søknadsdialog: React.FC = () => {
         <>
             <SøknadsskjemaHeader
                 tittel={forsideTekster.banner_tittel}
-                skjemaId={stønadstypeTilSkjemaId[Stønadstype.REISE_TIL_SAMLING]}
+                skjemaId={skjematypeTilSkjemaId[Skjematype.REISE_TIL_SAMLING]}
             />
             <Routes>
                 <Route path={'/'} element={<Forside />} />

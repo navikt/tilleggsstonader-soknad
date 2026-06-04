@@ -7,7 +7,7 @@ import { Container } from '../components/Side';
 import { LocaleReadMore } from '../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { SkjematypeFyllUt } from '../typer/stønadstyper';
+import { SkjematypeFyllUt } from '../typer/skjematype';
 import { LesMer, TekstElement } from '../typer/tekst';
 
 export interface AvsjekkTekster {

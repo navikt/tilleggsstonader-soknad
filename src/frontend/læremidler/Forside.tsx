@@ -18,7 +18,7 @@ import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAv
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { hentNesteRoute } from '../utils/routeUtils';
 
 export const Forside: React.FC = () => {
@@ -31,12 +31,12 @@ export const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = routesLæremidler[0];
-        loggBesøk(Stønadstype.LÆREMIDLER, route.path, route.label);
+        loggBesøk(Skjematype.LÆREMIDLER, route.path, route.label);
     }, []);
 
     const startSøknad = () => {
         if (harBekreftet) {
-            loggSkjemaStartet(Stønadstype.LÆREMIDLER);
+            loggSkjemaStartet(Skjematype.LÆREMIDLER);
             const nesteRoute = hentNesteRoute(routesLæremidler, location.pathname);
             navigate(nesteRoute.path);
         } else {
@@ -45,7 +45,7 @@ export const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(Stønadstype.LÆREMIDLER, skalÅpne, tittel, ERouteLæremidler.FORSIDE);
+        loggAccordionEvent(Skjematype.LÆREMIDLER, skalÅpne, tittel, ERouteLæremidler.FORSIDE);
     };
 
     return (

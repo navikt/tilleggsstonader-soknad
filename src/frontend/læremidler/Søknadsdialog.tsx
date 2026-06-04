@@ -14,15 +14,15 @@ import { Kvittering } from '../components/Kvittering/Kvittering';
 import { RedirectTilStart } from '../components/RedirectTilStart';
 import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { fellesTekster } from '../tekster/felles';
-import { stønadstypeTilSkjemaId } from '../typer/skjemanavn';
-import { Stønadstype } from '../typer/stønadstyper';
+import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
+import { Skjematype } from '../typer/skjematyper';
 
 export const Søknadsdialog: React.FC = () => {
     return (
         <>
             <SøknadsskjemaHeader
                 tittel={fellesTekster.banner_læremidler}
-                skjemaId={stønadstypeTilSkjemaId[Stønadstype.LÆREMIDLER]}
+                skjemaId={skjematypeTilSkjemaId[Skjematype.LÆREMIDLER]}
             />
             <Routes>
                 <Route path={'/'} element={<RootRoute forside={<Forside />} />} />

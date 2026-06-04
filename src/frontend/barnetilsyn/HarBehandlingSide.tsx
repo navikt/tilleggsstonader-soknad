@@ -11,12 +11,12 @@ import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBehandling';
 import { kvitteringTekster } from '../tekster/kvittering';
-import { stønadstypeTilSkjemanavn } from '../typer/skjemanavn';
-import { Stønadstype } from '../typer/stønadstyper';
+import { skjematypeTilSkjemanavn } from '../typer/skjemanavn';
+import { Skjematype } from '../typer/skjematyper';
 
 interface SøknadsideProps {
     startSøknad: () => void;
-    stønadstype: Stønadstype;
+    stønadstype: Skjematype;
 }
 
 export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
@@ -34,7 +34,7 @@ export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     <Heading size="medium">
                         <LocaleTekst
                             tekst={harEksisterendeBehandlingTekster.alert_for_stønadstype}
-                            argument0={stønadstypeTilSkjemanavn[stønadstype].toLowerCase()}
+                            argument0={skjematypeTilSkjemanavn[stønadstype].toLowerCase()}
                         />
                         <BodyLong>
                             <LocaleInlineLenke

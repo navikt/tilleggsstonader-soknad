@@ -6,7 +6,7 @@ import { Kjøreliste, KjørelisteKvittering } from '../kjørelister/types/Kjøre
 import { Rammevedtak } from '../kjørelister/types/Rammevedtak';
 import { Person } from '../typer/person';
 import { RegisterAktivitet, RegisterAktiviteterResponse } from '../typer/registerAktivitet';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { Kvittering } from '../typer/søknad';
 
 const requestId = () => uuidv4().replaceAll('-', '');
@@ -31,7 +31,7 @@ export const hentPersonData = (medBarn: boolean): Promise<Person> => {
 };
 
 export const hentArbeidsrettedeAktiviteter = (
-    stønadstype: Stønadstype
+    stønadstype: Skjematype
 ): Promise<RegisterAktivitet[]> => {
     const url = `${Environment().apiProxyUrl}/aktivitet`;
     return axios
@@ -39,7 +39,7 @@ export const hentArbeidsrettedeAktiviteter = (
         .then((response) => response.data.aktiviteter);
 };
 
-export const hentBehandlingStatus = (stønadstype: Stønadstype): Promise<boolean> => {
+export const hentBehandlingStatus = (stønadstype: Skjematype): Promise<boolean> => {
     return axios
         .get<boolean>(
             `${Environment().apiProxyUrl}/person/har-behandling?stonadstype=${encodeURIComponent(stønadstype)}`,
@@ -48,18 +48,18 @@ export const hentBehandlingStatus = (stønadstype: Stønadstype): Promise<boolea
         .then((response) => response.data);
 };
 
-const stønadstypeTilPath = (stønadstype: Stønadstype): string => {
+const stønadstypeTilPath = (stønadstype: Skjematype): string => {
     switch (stønadstype) {
-        case Stønadstype.BARNETILSYN:
+        case Skjematype.BARNETILSYN:
             return 'pass-av-barn';
-        case Stønadstype.LÆREMIDLER:
+        case Skjematype.LÆREMIDLER:
             return 'laremidler';
-        case Stønadstype.REISE_TIL_SAMLING:
+        case Skjematype.REISE_TIL_SAMLING:
             return 'reise-til-samling';
     }
 };
 
-export const sendInnSøknad = (stønadstype: Stønadstype, søknad: object): Promise<Kvittering> => {
+export const sendInnSøknad = (stønadstype: Skjematype, søknad: object): Promise<Kvittering> => {
     const url = `${Environment().apiProxyUrl}/soknad/${stønadstypeTilPath(stønadstype)}`;
     return axios.post(url, søknad, defaultConfig()).then((response) => response.data);
 };

@@ -9,9 +9,9 @@ import { RootRoute } from '../components/RootRoute';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
 import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { fellesTekster } from '../tekster/felles';
-import { stønadstypeTilSkjemaId } from '../typer/skjemanavn';
-import { Stønadstype } from '../typer/stønadstyper';
+import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
 import { barnetilsynPath } from './routing/routesBarnetilsyn';
+import { Skjematype } from '../typer/skjematyper';
 import { HovedytelsePassBarn } from './steg/2-hovedytelse/HovedytelsePassBarn';
 import { AktivitetPassAvBarn } from './steg/3-aktivitet/AktivitetPassAvBarn';
 import { DineBarn } from './steg/4-dine-barn/DineBarn';
@@ -24,7 +24,7 @@ export const Søknadsdialog: React.FC = () => {
         <>
             <SøknadsskjemaHeader
                 tittel={fellesTekster.banner_bt}
-                skjemaId={stønadstypeTilSkjemaId[Stønadstype.BARNETILSYN]}
+                skjemaId={skjematypeTilSkjemaId[Skjematype.BARNETILSYN]}
             />
             <Routes>
                 <Route path={'/'} element={<RootRoute forside={<Forside />} />} />

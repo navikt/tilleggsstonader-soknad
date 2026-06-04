@@ -1,4 +1,4 @@
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 
 interface EnvironmentProps {
     apiProxyUrl: string;
@@ -6,7 +6,7 @@ interface EnvironmentProps {
     wonderwallUrl: string;
     logoutUrl: string;
     sentryUrl?: string;
-    urlPapirsøknad: (stønadstype: Stønadstype) => string;
+    urlPapirsøknad: (stønadstype: Skjematype) => string;
     miljø: 'local' | 'preprod' | 'production';
     modellVersjon: IModellversjon;
 }
@@ -15,16 +15,16 @@ interface IModellversjon {
     barnetilsyn: number;
 }
 
-const StønadstypeTilPapirskjema: Record<Stønadstype, string> = {
+const StønadstypeTilPapirskjema: Record<Skjematype, string> = {
     BARNETILSYN: 'nav111215b',
     LÆREMIDLER: 'nav111216b',
     REISE_TIL_SAMLING: 'nav111217b',
 };
 
-const urlPapirsøknadProd = (stønadstype: Stønadstype) =>
+const urlPapirsøknadProd = (stønadstype: Skjematype) =>
     `https://www.nav.no/fyllut/${StønadstypeTilPapirskjema[stønadstype]}?sub=paper`;
 
-const urlPapirsøknadDev = (stønadstype: Stønadstype) =>
+const urlPapirsøknadDev = (stønadstype: Skjematype) =>
     `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilPapirskjema[stønadstype]}?sub=paper`;
 
 export const Environment = (): EnvironmentProps => {

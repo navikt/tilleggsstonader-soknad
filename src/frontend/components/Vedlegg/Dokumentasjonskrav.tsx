@@ -6,7 +6,7 @@ import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
 import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
 import { Dokumentasjonsbehov } from '../../typer/skjema';
-import { Stønadstype } from '../../typer/stønadstyper';
+import { Skjematype } from '../../typer/skjematyper';
 import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 
 const Dokumentasjonskravsliste = styled(List)`
@@ -43,7 +43,7 @@ export const Dokumentasjonskrav: React.FC<{
                     </Dokumentasjonskravsliste>
                 </Box>
             </div>
-            {stønadstype === Stønadstype.BARNETILSYN && (
+            {stønadstype === Skjematype.BARNETILSYN && (
                 <BodyShort>
                     <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />
                 </BodyShort>

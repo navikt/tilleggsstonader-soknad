@@ -8,7 +8,7 @@ import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { teksterStønad } from '../tekster/stønad';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { appConfig } from '../utils/appConfig';
 
 const BarnetilsynInnhold = () => {
@@ -18,7 +18,7 @@ const BarnetilsynInnhold = () => {
 
     return (
         <SøknadProvider
-            stønadstype={Stønadstype.BARNETILSYN}
+            stønadstype={Skjematype.BARNETILSYN}
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
@@ -40,14 +40,14 @@ export const BarnetilsynApp = () => {
     const { locale } = useSpråk();
 
     useEffect(() => {
-        document.title = teksterStønad.tittelHtml[Stønadstype.BARNETILSYN][locale];
+        document.title = teksterStønad.tittelHtml[Skjematype.BARNETILSYN][locale];
     }, [locale]);
 
     return (
-        <PersonRouting stønadstype={Stønadstype.BARNETILSYN}>
+        <PersonRouting stønadstype={Skjematype.BARNETILSYN}>
             <ValideringsfeilProvider>
                 <PassAvBarnSøknadProvider>
-                    <RegisterAktiviteterProvider stønadstype={Stønadstype.BARNETILSYN}>
+                    <RegisterAktiviteterProvider stønadstype={Skjematype.BARNETILSYN}>
                         <BarnetilsynInnhold />
                     </RegisterAktiviteterProvider>
                 </PassAvBarnSøknadProvider>

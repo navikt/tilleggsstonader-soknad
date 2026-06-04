@@ -6,19 +6,18 @@ import { hentPersonData } from '../api/api';
 import { PersonProvider } from '../context/PersonContext';
 import { initiellPerson } from '../mock/initiellPerson';
 import { Person } from '../typer/person';
-import { Stønadstype } from '../typer/stønadstyper';
 import { sendSøkerTilPapirsøknad } from './SkjemaRouting/sendSøkerTilFyllUtSøknad';
 import { useSjekkBehandlingStatus } from './Søknadside/SjekkBehandlingStatus';
+import { Skjematype } from '../typer/skjematyper';
 const erFeilOgSkalRouteTilPapirsøknad = (req: AxiosError<{ detail?: string }, unknown>) => {
     return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
 };
 
-const stønadstyperMedBarn = [Stønadstype.BARNETILSYN];
+const stønadstyperMedBarn = [Skjematype.BARNETILSYN];
 
-const skalHenteMedBarn = (stønadstype: Stønadstype) =>
-    stønadstyperMedBarn.indexOf(stønadstype) > -1;
+const skalHenteMedBarn = (stønadstype: Skjematype) => stønadstyperMedBarn.indexOf(stønadstype) > -1;
 
-export const PersonRouting: React.FC<{ stønadstype: Stønadstype; children: React.ReactNode }> = ({
+export const PersonRouting: React.FC<{ stønadstype: Skjematype; children: React.ReactNode }> = ({
     stønadstype,
     children,
 }) => {

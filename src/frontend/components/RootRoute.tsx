@@ -8,16 +8,16 @@ import { useSøknad } from '../context/SøknadContext';
 import { routesLæremidler } from '../læremidler/routing/routesLæremidler';
 import { routesReiseTilSamling } from '../reiseTilSamling/routing/routesReiseTilSamling';
 import { IRoute } from '../typer/routes';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 
 interface RootRouteProps {
     forside: React.ReactNode;
 }
 
-const route: Record<Stønadstype, IRoute> = {
-    [Stønadstype.BARNETILSYN]: RoutesBarnetilsyn[0],
-    [Stønadstype.LÆREMIDLER]: routesLæremidler[0],
-    [Stønadstype.REISE_TIL_SAMLING]: routesReiseTilSamling[0],
+const route: Record<Skjematype, IRoute> = {
+    [Skjematype.BARNETILSYN]: RoutesBarnetilsyn[0],
+    [Skjematype.LÆREMIDLER]: routesLæremidler[0],
+    [Skjematype.REISE_TIL_SAMLING]: routesReiseTilSamling[0],
 };
 
 export const RootRoute: React.FC<RootRouteProps> = ({ forside }) => {

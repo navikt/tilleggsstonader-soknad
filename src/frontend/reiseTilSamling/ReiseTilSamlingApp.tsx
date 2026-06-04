@@ -11,7 +11,7 @@ import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
 import { teksterStønad } from '../tekster/stønad';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { appConfig } from '../utils/appConfig';
 
 const ReiseTilSamlingInnhold = () => {
@@ -28,7 +28,7 @@ const ReiseTilSamlingInnhold = () => {
 
     return (
         <SøknadProvider
-            stønadstype={Stønadstype.REISE_TIL_SAMLING}
+            stønadstype={Skjematype.REISE_TIL_SAMLING}
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
@@ -52,14 +52,14 @@ export const ReiseTilSamlingApp = () => {
     const { locale } = useSpråk();
 
     useEffect(() => {
-        document.title = teksterStønad.tittelHtml[Stønadstype.REISE_TIL_SAMLING][locale];
+        document.title = teksterStønad.tittelHtml[Skjematype.REISE_TIL_SAMLING][locale];
     }, [locale]);
 
     return (
-        <PersonRouting stønadstype={Stønadstype.REISE_TIL_SAMLING}>
+        <PersonRouting stønadstype={Skjematype.REISE_TIL_SAMLING}>
             <ValideringsfeilProvider>
                 <ReiseTilSamlingSøknadProvider>
-                    <RegisterAktiviteterProvider stønadstype={Stønadstype.REISE_TIL_SAMLING}>
+                    <RegisterAktiviteterProvider stønadstype={Skjematype.REISE_TIL_SAMLING}>
                         <ReiseTilSamlingInnhold />
                     </RegisterAktiviteterProvider>
                 </ReiseTilSamlingSøknadProvider>

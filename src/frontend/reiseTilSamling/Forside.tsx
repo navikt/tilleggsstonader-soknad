@@ -25,7 +25,7 @@ import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktlist
 import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { useReiseTilSamlingSøknad } from '../context/ReiseTilSamlingSøknadContext';
 import { fellesTekster } from '../tekster/felles';
-import { Stønadstype } from '../typer/stønadstyper';
+import { Skjematype } from '../typer/skjematyper';
 import { hentNesteRoute } from '../utils/routeUtils';
 
 export const Forside: React.FC = () => {
@@ -36,7 +36,7 @@ export const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = routesReiseTilSamling[0];
-        loggBesøk(Stønadstype.REISE_TIL_SAMLING, route.path, route.label);
+        loggBesøk(Skjematype.REISE_TIL_SAMLING, route.path, route.label);
     }, []);
 
     const startSøknad = () => {
@@ -45,7 +45,7 @@ export const Forside: React.FC = () => {
             return;
         }
 
-        loggSkjemaStartet(Stønadstype.REISE_TIL_SAMLING);
+        loggSkjemaStartet(Skjematype.REISE_TIL_SAMLING);
         const nesteRoute = hentNesteRoute(routesReiseTilSamling, location.pathname);
         navigate(nesteRoute.path);
     };

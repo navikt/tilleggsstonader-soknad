@@ -1,0 +1,4 @@
+export enum SkjematypeFyllUt {
+    SØKNAD_BOUTGIFTER = 'SØKNAD_BOUTGIFTER',
+    SØKNAD_DAGLIG_REISE = 'SØKNAD_DAGLIG_REISE',
+}

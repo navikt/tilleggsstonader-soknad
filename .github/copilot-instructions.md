@@ -139,4 +139,4 @@ For å legge til en ny stønadstype, følg mønsteret fra `barnetilsyn/` eller `
 2. Definer route-enum og path-mapping
 3. Lag context med constate for skjemadata
 4. Legg til route i `index.tsx`
-5. Legg til stønadstype i `Stønadstype`-enum
+5. Legg til stønadstype i `Skjematype`-enum

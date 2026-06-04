@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { Environment } from './Environment';
-import { SkjematypeFyllUt } from '../typer/stønadstyper';
+import { SkjematypeFyllUt } from '../typer/skjematype';
 
 export const omdirigerTilFyllut = async (
     skjematype: SkjematypeFyllUt,
