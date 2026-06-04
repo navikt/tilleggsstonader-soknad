@@ -33,7 +33,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
             { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
         ];
         if (reisemåte?.kanReiseKollektivt?.verdi === 'JA') {
-            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_KOLLEKTIV_TRANSPORT });
+            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
         }
         return behov;
     }, [reisemåte?.kanReiseKollektivt?.verdi]);

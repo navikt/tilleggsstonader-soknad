@@ -17,12 +17,12 @@ export const typerVedleggTeksterReiseTilSamling: TekstTypeVedlegg = {
             nb: 'Last opp bekreftelse fra arrangøren som viser hvilke samlinger du skal delta på.',
         },
     },
-    [VedleggstypeReiseTilSamling.UTGIFTER_KOLLEKTIV_TRANSPORT]: {
+    [VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT]: {
         tittel: {
-            nb: 'Dokumentasjon på utgifter til kollektiv transport.',
+            nb: 'Dokumentasjon på utgifter til offentlig transport.',
         },
         liste_tittel: {
-            nb: 'Dokumentasjon på utgifter til kollektiv transport.',
+            nb: 'Dokumentasjon på utgifter til offentlig transport.',
         },
         beskrivelse: {
             nb: 'Last opp kvitteringer eller billetter som dokumenterer reiseutgiftene dine.',
