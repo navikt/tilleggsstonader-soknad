@@ -22,13 +22,13 @@ Backend har eget prosjekt under `src/backend/` med egen `package.json`. Installe
 
 ### Frontend (`src/frontend/`)
 
-Appen støtter flere stønadstyper, hver med sin egen app-komponent og mappestruktur:
+Appen støtter flere skjematyper, hver med sin egen app-komponent og mappestruktur:
 
 - **`barnetilsyn/`** – Pass av barn (`/pass-av-barn`) – 8 steg
 - **`læremidler/`** – Læremidler (`/laremidler`) – 6 steg
 - **`kjørelister/`** – Kjørelister (`/kjoreliste`) – kun i dev
 
-Hver stønadstype følger samme mønster:
+Hver skjematype følger samme mønster:
 - `routing/` – enum-baserte routes (`ERouteBarnetilsyn`, `ERouteLæremidler`) med `RouteTilPath`-mapping
 - `steg/` – én komponent per side/steg i søknaden
 - `tekster/` – alle brukervendte tekster som TypeScript-objekter
@@ -68,11 +68,11 @@ export type TekstElement<T> = Record<Locale, T>;
 
 Tekster rendres med `LocaleTekst`-komponenten og relaterte Locale-komponenter (`LocaleRadioGroup`, `LocaleCheckboxGroup`, `LocaleReadMore`, etc.) fra `components/Teksthåndtering/`.
 
-Felles tekster ligger i `src/frontend/tekster/`, stønadstype-spesifikke i f.eks. `barnetilsyn/tekster/`.
+Felles tekster ligger i `src/frontend/tekster/`, skjematype-spesifikke i f.eks. `barnetilsyn/tekster/`.
 
 ### State management
 
-State håndteres med **constate** – ett context per stønadstype:
+State håndteres med **constate** – ett context per skjematype:
 - `PassAvBarnSøknadContext` – all skjemadata for pass av barn
 - `LæremiddelSøknadContext` – all skjemadata for læremidler
 - `ValideringsfeilContext` – valideringsfeil på tvers av steg
@@ -132,11 +132,11 @@ ESLint håndhever sortert import-rekkefølge:
 
 Med blanke linjer mellom gruppene.
 
-### Ny stønadstype
+### Ny skjematype
 
-For å legge til en ny stønadstype, følg mønsteret fra `barnetilsyn/` eller `læremidler/`:
+For å legge til en ny skjematype, følg mønsteret fra `barnetilsyn/` eller `læremidler/`:
 1. Opprett mappe med `routing/`, `steg/`, `tekster/`
 2. Definer route-enum og path-mapping
 3. Lag context med constate for skjemadata
 4. Legg til route i `index.tsx`
-5. Legg til stønadstype i `Skjematype`-enum
+5. Legg til skjematype i `Skjematype`-enum

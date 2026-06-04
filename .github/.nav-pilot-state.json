@@ -1,8 +1,8 @@
 {
   "collection": "nextjs-frontend",
-  "version": "2026.05.30-092315-0d88c99",
+  "version": "2026.06.03-174942-badb737",
   "scope": "repo",
-  "source_sha": "0d88c99",
+  "source_sha": "badb737",
   "installed_at": "2026-04-21T11:17:24Z",
   "files": [
     {
@@ -23,7 +23,7 @@
     },
     {
       "path": ".github/agents/nav-pilot.agent.md",
-      "hash": "d04fd3fc8eef124b"
+      "hash": "c04c7831376e7c56"
     },
     {
       "path": ".github/agents/nav-pilot.metadata.json",
