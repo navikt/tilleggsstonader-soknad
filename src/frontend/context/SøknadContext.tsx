@@ -4,14 +4,14 @@ import { Skjematype } from '../typer/skjematyper';
 import { Søknad } from '../typer/søknad';
 
 interface Props {
-    stønadstype: Skjematype;
+    skjematype: Skjematype;
     søknad: Søknad;
     resetSøknad: () => void;
     resetValideringsfeil: () => void;
 }
 
 const [SøknadProvider, useSøknad] = constate(
-    ({ stønadstype, søknad, resetSøknad, resetValideringsfeil }: Props) => {
+    ({ skjematype, søknad, resetSøknad, resetValideringsfeil }: Props) => {
         SøknadProvider.displayName = 'SØKNAD_PROVIDER';
 
         const resetSøknadOgValideringsfeil = () => {
@@ -20,7 +20,7 @@ const [SøknadProvider, useSøknad] = constate(
         };
 
         return {
-            stønadstype,
+            skjematype,
             søknad,
             resetSøknadOgValideringsfeil,
         };

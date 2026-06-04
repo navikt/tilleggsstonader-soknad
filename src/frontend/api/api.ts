@@ -31,25 +31,31 @@ export const hentPersonData = (medBarn: boolean): Promise<Person> => {
 };
 
 export const hentArbeidsrettedeAktiviteter = (
-    stønadstype: Skjematype
+    skjematype: Skjematype
 ): Promise<RegisterAktivitet[]> => {
     const url = `${Environment().apiProxyUrl}/aktivitet`;
-    return axios
-        .post<RegisterAktiviteterResponse>(url, { stønadstype: stønadstype }, defaultConfig())
-        .then((response) => response.data.aktiviteter);
+    return (
+        axios
+            // TODO: For at dette kallet skal fungere for reise til samling, må endepunktet tilpasses slik at det tar i mot skjematype i stedet for stønadstype
+            // https://favro.com/organization/98c34fb974ce445eac854de0/4d617346d79341c7fbd9a40a?card=Nav-29433
+            .post<RegisterAktiviteterResponse>(url, { stønadstype: skjematype }, defaultConfig())
+            .then((response) => response.data.aktiviteter)
+    );
 };
 
-export const hentBehandlingStatus = (stønadstype: Skjematype): Promise<boolean> => {
+export const hentBehandlingStatus = (skjematype: Skjematype): Promise<boolean> => {
     return axios
         .get<boolean>(
-            `${Environment().apiProxyUrl}/person/har-behandling?stonadstype=${encodeURIComponent(stønadstype)}`,
+            // TODO: For at dette kallet skal fungere for reise til samling, må endepunktet tilpasses slik at det tar i mot skjematype i stedet for stønadstype
+            // https://favro.com/organization/98c34fb974ce445eac854de0/4d617346d79341c7fbd9a40a?card=Nav-29436
+            `${Environment().apiProxyUrl}/person/har-behandling?stonadstype=${encodeURIComponent(skjematype)}`,
             defaultConfig()
         )
         .then((response) => response.data);
 };
 
-const stønadstypeTilPath = (stønadstype: Skjematype): string => {
-    switch (stønadstype) {
+const skjematypeTilPath = (skjematype: Skjematype): string => {
+    switch (skjematype) {
         case Skjematype.BARNETILSYN:
             return 'pass-av-barn';
         case Skjematype.LÆREMIDLER:
@@ -59,8 +65,8 @@ const stønadstypeTilPath = (stønadstype: Skjematype): string => {
     }
 };
 
-export const sendInnSøknad = (stønadstype: Skjematype, søknad: object): Promise<Kvittering> => {
-    const url = `${Environment().apiProxyUrl}/soknad/${stønadstypeTilPath(stønadstype)}`;
+export const sendInnSøknad = (skjematype: Skjematype, søknad: object): Promise<Kvittering> => {
+    const url = `${Environment().apiProxyUrl}/soknad/${skjematypeTilPath(skjematype)}`;
     return axios.post(url, søknad, defaultConfig()).then((response) => response.data);
 };
 

@@ -17,7 +17,7 @@ interface Props {
 
 export const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMangler }) => {
     const { locale } = useSpråk();
-    const { stønadstype } = useSøknad();
+    const { skjematype } = useSøknad();
     const navigate = useNavigate();
 
     return (
@@ -48,7 +48,7 @@ export const VedleggManglerModal: React.FC<Props> = ({ innerRef, dokumenterSomMa
                 </HStack>
             </Modal.Body>
             <Modal.Footer>
-                <Button type="button" onClick={() => navigate(finnOppsummeringRoute(stønadstype))}>
+                <Button type="button" onClick={() => navigate(finnOppsummeringRoute(skjematype))}>
                     <LocaleTekst tekst={vedleggModalTekster.fortsettKnapp} />
                 </Button>
                 <Button type="button" variant="secondary" onClick={() => innerRef.current?.close()}>

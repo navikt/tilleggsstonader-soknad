@@ -8,24 +8,24 @@ import { RegisterAktivitetMedLabel } from '../typer/registerAktivitet';
 import { Skjematype } from '../typer/skjematyper';
 
 interface Props {
-    stønadstype: Skjematype;
+    skjematype: Skjematype;
 }
 
-const [RegisterAktiviteterProvider, useRegisterAktiviteter] = constate(({ stønadstype }: Props) => {
+const [RegisterAktiviteterProvider, useRegisterAktiviteter] = constate(({ skjematype }: Props) => {
     RegisterAktiviteterProvider.displayName = 'AKTIVITETER_PROVIDER';
 
     const [registerAktiviteter, settRegisterAktiviteter] =
         useState<Record<string, RegisterAktivitetMedLabel>>();
 
     useEffect(() => {
-        hentArbeidsrettedeAktiviteter(stønadstype)
+        hentArbeidsrettedeAktiviteter(skjematype)
             .then((arbeidsrettedeAktiviteter) =>
                 settRegisterAktiviteter(
                     mapTilRegisterAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
                 )
             )
             .catch(() => settRegisterAktiviteter({}));
-    }, [stønadstype]);
+    }, [skjematype]);
 
     return {
         registerAktiviteter,

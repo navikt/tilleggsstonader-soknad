@@ -16,12 +16,12 @@ import { Skjematype } from '../typer/skjematyper';
 
 interface SøknadsideProps {
     startSøknad: () => void;
-    stønadstype: Skjematype;
+    skjematype: Skjematype;
 }
 
 export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
     startSøknad,
-    stønadstype,
+    skjematype,
 }: SøknadsideProps) => {
     const loggUt = () => {
         window.location.href = Environment().logoutUrl;
@@ -33,8 +33,8 @@ export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                 <Alert variant="info">
                     <Heading size="medium">
                         <LocaleTekst
-                            tekst={harEksisterendeBehandlingTekster.alert_for_stønadstype}
-                            argument0={skjematypeTilSkjemanavn[stønadstype].toLowerCase()}
+                            tekst={harEksisterendeBehandlingTekster.alert_for_skjematype}
+                            argument0={skjematypeTilSkjemanavn[skjematype].toLowerCase()}
                         />
                         <BodyLong>
                             <LocaleInlineLenke
@@ -67,7 +67,7 @@ export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     <LocaleTekst
                         tekst={
                             harEksisterendeBehandlingTekster.vil_forstatt_sende_søknad_innhold[
-                                stønadstype
+                                skjematype
                             ]
                         }
                     />
@@ -78,7 +78,7 @@ export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     variant="secondary"
                     onClick={() => {
                         loggSkjemaSpørsmålBesvart(
-                            stønadstype,
+                            skjematype,
                             'Vil du likevel sende ny søknad?',
                             'Nei'
                         );
@@ -91,7 +91,7 @@ export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                 <Button
                     onClick={() => {
                         loggSkjemaSpørsmålBesvart(
-                            stønadstype,
+                            skjematype,
                             'Vil du likevel sende ny søknad?',
                             'Ja'
                         );

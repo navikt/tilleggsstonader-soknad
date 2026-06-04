@@ -6,7 +6,7 @@ interface EnvironmentProps {
     wonderwallUrl: string;
     logoutUrl: string;
     sentryUrl?: string;
-    urlPapirsøknad: (stønadstype: Skjematype) => string;
+    urlPapirsøknad: (skjematype: Skjematype) => string;
     miljø: 'local' | 'preprod' | 'production';
     modellVersjon: IModellversjon;
 }
@@ -21,11 +21,11 @@ const StønadstypeTilPapirskjema: Record<Skjematype, string> = {
     REISE_TIL_SAMLING: 'nav111217b',
 };
 
-const urlPapirsøknadProd = (stønadstype: Skjematype) =>
-    `https://www.nav.no/fyllut/${StønadstypeTilPapirskjema[stønadstype]}?sub=paper`;
+const urlPapirsøknadProd = (skjematype: Skjematype) =>
+    `https://www.nav.no/fyllut/${StønadstypeTilPapirskjema[skjematype]}?sub=paper`;
 
-const urlPapirsøknadDev = (stønadstype: Skjematype) =>
-    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilPapirskjema[stønadstype]}?sub=paper`;
+const urlPapirsøknadDev = (skjematype: Skjematype) =>
+    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilPapirskjema[skjematype]}?sub=paper`;
 
 export const Environment = (): EnvironmentProps => {
     const modellVersjon = { overgangsstønad: 7, barnetilsyn: 2, skolepenger: 2 };

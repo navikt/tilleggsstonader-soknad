@@ -17,7 +17,7 @@ const LæremidlerInnhold = () => {
 
     return (
         <SøknadProvider
-            stønadstype={Skjematype.LÆREMIDLER}
+            skjematype={Skjematype.LÆREMIDLER}
             søknad={{
                 hovedytelse: hovedytelse,
                 utdanning: utdanning,
@@ -42,10 +42,10 @@ export const LæremidlerApp = () => {
     }, [locale]);
 
     return (
-        <PersonRouting stønadstype={Skjematype.LÆREMIDLER}>
+        <PersonRouting skjematype={Skjematype.LÆREMIDLER}>
             <ValideringsfeilProvider>
                 <LæremidlerSøknadProvider>
-                    <RegisterAktiviteterProvider stønadstype={Skjematype.LÆREMIDLER}>
+                    <RegisterAktiviteterProvider skjematype={Skjematype.LÆREMIDLER}>
                         <LæremidlerInnhold />
                     </RegisterAktiviteterProvider>
                 </LæremidlerSøknadProvider>

@@ -8,7 +8,7 @@ interface HarEksistendeBehandlingInnhold {
     vil_forstatt_sende_søknad_innhold: {
         [key in Skjematype]: TekstElement<string>;
     };
-    alert_for_stønadstype: TekstElement<string>;
+    alert_for_skjematype: TekstElement<string>;
     alert_innhold: TekstElement<InlineLenke>;
     startNySøknad: TekstElement<string>;
 }
@@ -42,7 +42,7 @@ export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = 
             nb: 'Hvis du har deltatt på en ny samling, kan du sende ny søknad.',
         },
     },
-    alert_for_stønadstype: {
+    alert_for_skjematype: {
         nb: 'Du har allerede sendt oss en søknad om støtte til [0]. ',
     },
     alert_innhold: {

@@ -19,8 +19,8 @@ import {
 import { IRoute, RouteType } from '../typer/routes';
 import { Skjematype } from '../typer/skjematyper';
 
-export const hentRoutes = (stønadstype: Skjematype): IRoute[] => {
-    switch (stønadstype) {
+export const hentRoutes = (skjematype: Skjematype): IRoute[] => {
+    switch (skjematype) {
         case Skjematype.BARNETILSYN:
             return RoutesBarnetilsyn;
         case Skjematype.LÆREMIDLER:
@@ -40,8 +40,8 @@ export const hentForrigeRoute = (routes: IRoute[], nåværendePath: string) => {
     return routes[routeIndex - 1];
 };
 
-export const hentStartRoute = (stønadstype: Skjematype) => {
-    switch (stønadstype) {
+export const hentStartRoute = (skjematype: Skjematype) => {
+    switch (skjematype) {
         case Skjematype.BARNETILSYN:
             return barnetilsynPath;
         case Skjematype.LÆREMIDLER:
@@ -59,8 +59,8 @@ export const erOppsummeringsside = (route: RouteType): boolean => {
     );
 };
 
-export const finnOppsummeringRoute = (stønadstype: Skjematype): string => {
-    switch (stønadstype) {
+export const finnOppsummeringRoute = (skjematype: Skjematype): string => {
+    switch (skjematype) {
         case Skjematype.BARNETILSYN:
             return RouteToPathPassAvBarn.OPPSUMMERING;
         case Skjematype.LÆREMIDLER:

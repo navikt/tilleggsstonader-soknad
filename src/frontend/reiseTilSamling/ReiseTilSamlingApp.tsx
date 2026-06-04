@@ -28,7 +28,7 @@ const ReiseTilSamlingInnhold = () => {
 
     return (
         <SøknadProvider
-            stønadstype={Skjematype.REISE_TIL_SAMLING}
+            skjematype={Skjematype.REISE_TIL_SAMLING}
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
@@ -56,10 +56,10 @@ export const ReiseTilSamlingApp = () => {
     }, [locale]);
 
     return (
-        <PersonRouting stønadstype={Skjematype.REISE_TIL_SAMLING}>
+        <PersonRouting skjematype={Skjematype.REISE_TIL_SAMLING}>
             <ValideringsfeilProvider>
                 <ReiseTilSamlingSøknadProvider>
-                    <RegisterAktiviteterProvider stønadstype={Skjematype.REISE_TIL_SAMLING}>
+                    <RegisterAktiviteterProvider skjematype={Skjematype.REISE_TIL_SAMLING}>
                         <ReiseTilSamlingInnhold />
                     </RegisterAktiviteterProvider>
                 </ReiseTilSamlingSøknadProvider>

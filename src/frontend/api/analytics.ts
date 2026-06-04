@@ -28,7 +28,7 @@ type eventType =
 
 export const sendUmamiEvent = (
     event: eventType,
-    stønadstype: Skjematype,
+    skjematype: Skjematype,
     eventProperties?: Record<string, unknown>
 ) => {
     if (Environment().miljø === 'local') {
@@ -41,8 +41,8 @@ export const sendUmamiEvent = (
         origin: APP_NAVN,
         eventName: event,
         eventData: {
-            skjemanavn: skjematypeTilSkjemanavn[stønadstype],
-            skjemaId: skjematypeTilSkjemaId[stønadstype],
+            skjemanavn: skjematypeTilSkjemanavn[skjematype],
+            skjemaId: skjematypeTilSkjemaId[skjematype],
             ...eventProperties,
         },
     }).catch(() => {
@@ -50,67 +50,67 @@ export const sendUmamiEvent = (
     });
 };
 
-export const loggSkjemaStartet = (stønadstype: Skjematype) => {
-    sendUmamiEvent('skjema startet', stønadstype);
+export const loggSkjemaStartet = (skjematype: Skjematype) => {
+    sendUmamiEvent('skjema startet', skjematype);
 };
 
-export const loggSkjemaStegFullført = (stønadstype: Skjematype, steg: string) => {
-    sendUmamiEvent('skjema steg fullført', stønadstype, { steg: steg });
+export const loggSkjemaStegFullført = (skjematype: Skjematype, steg: string) => {
+    sendUmamiEvent('skjema steg fullført', skjematype, { steg: steg });
 };
 
-export const loggSkjemaInnsendtFeilet = (stønadstype: Skjematype) => {
-    sendUmamiEvent('skjema innsending feilet', stønadstype);
+export const loggSkjemaInnsendtFeilet = (skjematype: Skjematype) => {
+    sendUmamiEvent('skjema innsending feilet', skjematype);
 };
 
-export const loggSkjemaFullført = (stønadstype: Skjematype) => {
-    sendUmamiEvent('skjema fullført', stønadstype);
+export const loggSkjemaFullført = (skjematype: Skjematype) => {
+    sendUmamiEvent('skjema fullført', skjematype);
 };
 
 export const logNavigereEvent = (
-    stønadstype: Skjematype,
+    skjematype: Skjematype,
     destinasjon: string,
     lenketekst: string
 ) => {
-    sendUmamiEvent('navigere', stønadstype, {
+    sendUmamiEvent('navigere', skjematype, {
         destinasjon: destinasjon,
         lenketekst: lenketekst,
     });
 };
 
-export const loggAlertVist = (stønadstype: Skjematype, variant: string, tekst: string) => {
-    sendUmamiEvent('alert vist', stønadstype, {
+export const loggAlertVist = (skjematype: Skjematype, variant: string, tekst: string) => {
+    sendUmamiEvent('alert vist', skjematype, {
         variant: variant,
         tekst: tekst,
     });
 };
 
-export const loggBesøk = (stønadstype: Skjematype, url: string, sidetittel: string) => {
-    sendUmamiEvent('besøk', stønadstype, {
+export const loggBesøk = (skjematype: Skjematype, url: string, sidetittel: string) => {
+    sendUmamiEvent('besøk', skjematype, {
         url: url,
         sidetittel: sidetittel,
     });
 };
 
 export const loggAccordionEvent = (
-    stønadstype: Skjematype,
+    skjematype: Skjematype,
     skalÅpnes: boolean,
     tekst: string,
     side?: string
 ) => {
     const event = skalÅpnes ? 'accordion åpnet' : 'accordion lukket';
 
-    sendUmamiEvent(event, stønadstype, {
+    sendUmamiEvent(event, skjematype, {
         tekst: tekst,
         side: side,
     });
 };
 
 export const loggSkjemaSpørsmålBesvart = (
-    stønadstype: Skjematype,
+    skjematype: Skjematype,
     spørsmål: string,
     svar: string
 ) => {
-    sendUmamiEvent('skjema spørsmål besvart', stønadstype, {
+    sendUmamiEvent('skjema spørsmål besvart', skjematype, {
         spørsmål: spørsmål,
         svar: svar,
     });

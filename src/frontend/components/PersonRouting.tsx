@@ -13,29 +13,29 @@ const erFeilOgSkalRouteTilPapirsøknad = (req: AxiosError<{ detail?: string }, u
     return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
 };
 
-const stønadstyperMedBarn = [Skjematype.BARNETILSYN];
+const skjematyperMedBarn = [Skjematype.BARNETILSYN];
 
-const skalHenteMedBarn = (stønadstype: Skjematype) => stønadstyperMedBarn.indexOf(stønadstype) > -1;
+const skalHenteMedBarn = (skjematype: Skjematype) => skjematyperMedBarn.indexOf(skjematype) > -1;
 
-export const PersonRouting: React.FC<{ stønadstype: Skjematype; children: React.ReactNode }> = ({
-    stønadstype,
+export const PersonRouting: React.FC<{ skjematype: Skjematype; children: React.ReactNode }> = ({
+    skjematype,
     children,
 }) => {
     const [person, settPerson] = useState<Person>(initiellPerson);
     const [harLastetPerson, settHarLastetPerson] = useState<boolean>(false);
     const [feilmelding, settFeilmelding] = useState<string>();
 
-    const { harBehandling, harLastetBehandlingsstatus } = useSjekkBehandlingStatus(stønadstype);
+    const { harBehandling, harLastetBehandlingsstatus } = useSjekkBehandlingStatus(skjematype);
 
     useEffect(() => {
-        hentPersonData(skalHenteMedBarn(stønadstype))
+        hentPersonData(skalHenteMedBarn(skjematype))
             .then((resp) => {
                 settPerson(resp);
                 settHarLastetPerson(true);
             })
             .catch((req) => {
                 if (axios.isAxiosError(req) && erFeilOgSkalRouteTilPapirsøknad(req)) {
-                    sendSøkerTilPapirsøknad(stønadstype);
+                    sendSøkerTilPapirsøknad(skjematype);
                 } else {
                     if (axios.isAxiosError(req) && req.response?.status === 503) {
                         settFeilmelding(
@@ -48,7 +48,7 @@ export const PersonRouting: React.FC<{ stønadstype: Skjematype; children: React
                     }
                 }
             });
-    }, [stønadstype]);
+    }, [skjematype]);
 
     if (feilmelding) {
         return <div>{feilmelding}</div>;

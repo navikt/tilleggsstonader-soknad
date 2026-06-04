@@ -18,7 +18,7 @@ export const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> =
 export const LenkeEllerTekst: React.FC<{ tekstElement: string | StyledTekst | Lenke }> = ({
     tekstElement,
 }) => {
-    const { stønadstype } = useSøknad();
+    const { skjematype } = useSøknad();
 
     if (typeof tekstElement === 'string') {
         return <span>{tekstElement}</span>;
@@ -29,7 +29,7 @@ export const LenkeEllerTekst: React.FC<{ tekstElement: string | StyledTekst | Le
                 inlineText
                 href={tekstElement.url}
                 target="_blank"
-                onClick={() => logNavigereEvent(stønadstype, tekstElement.url, tekstElement.tekst)}
+                onClick={() => logNavigereEvent(skjematype, tekstElement.url, tekstElement.tekst)}
             >
                 {tekstElement.tekst}
             </Link>

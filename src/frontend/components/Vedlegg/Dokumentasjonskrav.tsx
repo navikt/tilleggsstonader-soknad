@@ -19,7 +19,7 @@ export const Dokumentasjonskrav: React.FC<{
     dokumentasjonsbehov: Dokumentasjonsbehov[];
 }> = ({ dokumentasjonsbehov }) => {
     const { locale } = useSpråk();
-    const { stønadstype } = useSøknad();
+    const { skjematype } = useSøknad();
 
     return (
         <>
@@ -43,7 +43,7 @@ export const Dokumentasjonskrav: React.FC<{
                     </Dokumentasjonskravsliste>
                 </Box>
             </div>
-            {stønadstype === Skjematype.BARNETILSYN && (
+            {skjematype === Skjematype.BARNETILSYN && (
                 <BodyShort>
                     <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />
                 </BodyShort>

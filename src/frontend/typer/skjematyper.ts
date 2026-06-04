@@ -1,4 +1,4 @@
-// Gjelder de stønadstypene som håndteres av vår søknad-app (altså ikke videresendes til Fyll ut-søknaden)
+// Gjelder de skjematypene som håndteres av vår søknad-app (altså ikke videresendes til Fyll ut-søknaden)
 export enum Skjematype {
     BARNETILSYN = 'BARNETILSYN',
     LÆREMIDLER = 'LÆREMIDLER',

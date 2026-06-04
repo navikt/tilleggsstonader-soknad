@@ -51,7 +51,7 @@ export const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }
     const location = useLocation();
     const navigate = useNavigate();
     const { locale } = useSpråk();
-    const { stønadstype, søknad } = useSøknad();
+    const { skjematype, søknad } = useSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const errorRef = useRef<HTMLDivElement>(null);
@@ -65,14 +65,14 @@ export const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }
         }
     }, [harValideringsfeil]);
 
-    const routes = hentRoutes(stønadstype);
+    const routes = hentRoutes(skjematype);
     const nåværendePath = location.pathname;
     const aktivtStegIndex = routes.findIndex((steg) => steg.path === nåværendePath);
     const aktivtSteg: IRoute | undefined = routes[aktivtStegIndex];
 
     useEffect(() => {
-        loggBesøk(stønadstype, aktivtSteg.path, aktivtSteg.label);
-    }, [aktivtSteg, stønadstype]);
+        loggBesøk(skjematype, aktivtSteg.path, aktivtSteg.label);
+    }, [aktivtSteg, skjematype]);
 
     const navigerTilNesteSide = () => {
         if (validerSteg && !validerSteg()) {
@@ -82,7 +82,7 @@ export const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }
         if (oppdaterSøknad) {
             oppdaterSøknad();
         }
-        loggSkjemaStegFullført(stønadstype, aktivtSteg.label);
+        loggSkjemaStegFullført(skjematype, aktivtSteg.label);
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
         navigate(nesteRoute.path);
@@ -106,16 +106,16 @@ export const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }
 
         const nesteRoute = hentNesteRoute(routes, nåværendePath);
 
-        sendInnSøknad(stønadstype, søknad)
+        sendInnSøknad(skjematype, søknad)
             .then((res) => {
-                loggSkjemaFullført(stønadstype);
-                loggBesøk(stønadstype, nåværendePath, 'KVITTERING');
+                loggSkjemaFullført(skjematype);
+                loggBesøk(skjematype, nåværendePath, 'KVITTERING');
 
                 navigate(nesteRoute.path, { state: { innsendtTidspunkt: res.mottattTidspunkt } });
             })
             .catch(() => {
                 settSendInnFeil(true);
-                loggSkjemaInnsendtFeilet(stønadstype);
+                loggSkjemaInnsendtFeilet(skjematype);
             })
             .finally(() => settSenderInn(false));
     };

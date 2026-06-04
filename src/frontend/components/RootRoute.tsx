@@ -22,13 +22,13 @@ const route: Record<Skjematype, IRoute> = {
 
 export const RootRoute: React.FC<RootRouteProps> = ({ forside }) => {
     const { harBehandling } = usePerson();
-    const { stønadstype } = useSøknad();
+    const { skjematype } = useSøknad();
     const [visHarBehandlingSide, settVisHarBehandlingSide] = useState<boolean>(harBehandling);
 
     useEffect(() => {
         loggBesøk(
-            stønadstype,
-            route[stønadstype].path,
+            skjematype,
+            route[skjematype].path,
             `Forside - harBehandling=${harBehandling ? 'Ja' : 'Nei'}`
         );
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,7 +37,7 @@ export const RootRoute: React.FC<RootRouteProps> = ({ forside }) => {
     if (visHarBehandlingSide) {
         return (
             <HarBehandlingSide
-                stønadstype={stønadstype}
+                skjematype={skjematype}
                 startSøknad={() => settVisHarBehandlingSide(false)}
             ></HarBehandlingSide>
         );

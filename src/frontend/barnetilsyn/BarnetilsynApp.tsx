@@ -18,7 +18,7 @@ const BarnetilsynInnhold = () => {
 
     return (
         <SøknadProvider
-            stønadstype={Skjematype.BARNETILSYN}
+            skjematype={Skjematype.BARNETILSYN}
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
@@ -44,10 +44,10 @@ export const BarnetilsynApp = () => {
     }, [locale]);
 
     return (
-        <PersonRouting stønadstype={Skjematype.BARNETILSYN}>
+        <PersonRouting skjematype={Skjematype.BARNETILSYN}>
             <ValideringsfeilProvider>
                 <PassAvBarnSøknadProvider>
-                    <RegisterAktiviteterProvider stønadstype={Skjematype.BARNETILSYN}>
+                    <RegisterAktiviteterProvider skjematype={Skjematype.BARNETILSYN}>
                         <BarnetilsynInnhold />
                     </RegisterAktiviteterProvider>
                 </PassAvBarnSøknadProvider>
