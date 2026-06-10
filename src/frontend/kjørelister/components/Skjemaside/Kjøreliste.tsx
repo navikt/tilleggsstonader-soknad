@@ -10,7 +10,9 @@ export const Kjøreliste = () => {
     const uker = kjøreliste.reisedagerPerUkeAvsnitt;
     return (
         <VStack gap="space-8">
-            <Heading size={'medium'}>Klart til innsending</Heading>
+            <Heading id="klart-til-innsending" size={'medium'}>
+                Klart til innsending
+            </Heading>
             {uker.length === 0 ? (
                 <BodyShort>Ingen uker klare for utfylling</BodyShort>
             ) : (
