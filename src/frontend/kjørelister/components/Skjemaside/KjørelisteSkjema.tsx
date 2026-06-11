@@ -23,9 +23,7 @@ export function KjørelisteSkjema() {
         );
 
         const harMinstEnUtfyltReisedag = ukerKlarForUtfylling.some((ukeMedReisedager) =>
-            ukeMedReisedager.reisedager.some(
-                (reisedag) => reisedag.harKjørt || reisedag.parkeringsutgift.verdi != null
-            )
+            ukeMedReisedager.reisedager.some((reisedag) => reisedag.harKjørt)
         );
 
         if (ukerKlarForUtfylling.length > 0 && !harMinstEnUtfyltReisedag) {
