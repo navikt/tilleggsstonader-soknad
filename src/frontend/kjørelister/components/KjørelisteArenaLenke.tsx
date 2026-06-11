@@ -5,7 +5,12 @@ import { BodyShort, Heading, Link, VStack } from '@navikt/ds-react';
 
 export const KjørelisteArenaLenke = () => {
     return (
-        <VStack gap="space-8">
+        <VStack
+            gap="space-8"
+            style={{
+                paddingBottom: '2rem',
+            }}
+        >
             <Heading level="2" size="medium">
                 Fant du ikke det du lette etter?
             </Heading>
