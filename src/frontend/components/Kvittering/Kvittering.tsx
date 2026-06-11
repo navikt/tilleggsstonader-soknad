@@ -35,7 +35,11 @@ export const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForsid
     }
 
     return (
-        <Container>
+        <Container
+            style={{
+                paddingBottom: '2rem',
+            }}
+        >
             <VStack gap="space-16">
                 <LocaleHeading tekst={kvitteringTekster.tittel} size="large" level="2" />
                 <Alert variant="success">
