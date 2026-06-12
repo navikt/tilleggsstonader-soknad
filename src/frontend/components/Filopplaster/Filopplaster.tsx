@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -105,12 +105,6 @@ export const Filopplaster: React.FC<{
         if (!url) return;
         window.open(url, '_blank');
     };
-    useEffect(() => {
-        return () => {
-            Object.values(previewMap).forEach((url) => URL.revokeObjectURL(url));
-        };
-    }, [previewMap]);
-
     return (
         <VStack gap="space-24">
             <FileUpload.Dropzone
