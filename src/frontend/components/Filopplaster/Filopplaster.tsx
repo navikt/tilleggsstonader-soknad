@@ -45,7 +45,6 @@ export const Filopplaster: React.FC<{
     const { locale } = useSpråk();
     const [avslåtteFiler, setAvslåtteFiler] = useState<AvslåttFil[]>([]);
     const [vedleggLastesOpp, settVedleggLastesOpp] = useState<FileAccepted[]>([]);
-    const [previewMap, setPreviewMap] = useState<Record<string, string>>({});
 
     const fjernFil = (filSomSkalFjernes: AvslåttFil) => {
         setAvslåtteFiler((prevState) => prevState.filter((fil) => fil !== filSomSkalFjernes));
@@ -66,44 +65,43 @@ export const Filopplaster: React.FC<{
     };
 
     const lastOppValgteFiler = (filer: FileObject[]) => {
-        settVedleggLastesOpp((prevState) => [...prevState, ...filer.filter((f) => !f.error)]);
-        filer.forEach((filObjekt) => {
-            if (!filObjekt.error) {
-                const file = filObjekt.file;
-                const previewUrl = URL.createObjectURL(file);
+        settVedleggLastesOpp((prev) => [...prev, ...filer.filter((f) => !f.error)]);
 
-                lastOppVedlegg(file)
-                    .then((id) => {
-                        leggTilDokument({ id, navn: file.name });
-                        setPreviewMap((prev) => ({
-                            ...prev,
-                            [id]: previewUrl,
-                        }));
-                    })
-                    .catch((err) => {
-                        URL.revokeObjectURL(previewUrl);
-                        const avslåttFil: AvslåttFil = {
-                            file,
-                            error: true,
-                            feil: err,
-                            reasons: ['ukjent'],
-                        };
-                        setAvslåtteFiler((prevState) => [...prevState, avslåttFil]);
-                    })
-                    .finally(() => {
-                        settVedleggLastesOpp((prevState) =>
-                            prevState.filter((o) => o !== filObjekt)
-                        );
-                    });
-            } else {
-                setAvslåtteFiler((prevState) => [...prevState, { ...filObjekt, feil: null }]);
+        filer.forEach((filObjekt) => {
+            if (filObjekt.error) {
+                setAvslåtteFiler((prev) => [...prev, { ...filObjekt, feil: null }]);
+                return;
             }
+
+            const file = filObjekt.file;
+            const previewUrl = URL.createObjectURL(file);
+
+            lastOppVedlegg(file)
+                .then((id) => {
+                    leggTilDokument({
+                        id,
+                        navn: file.name,
+                        previewUrl,
+                    });
+                })
+                .catch((err) => {
+                    URL.revokeObjectURL(previewUrl);
+                    const avslåttFil: AvslåttFil = {
+                        file,
+                        error: true,
+                        feil: err,
+                        reasons: ['ukjent'],
+                    };
+                    setAvslåtteFiler((prev) => [...prev, avslåttFil]);
+                })
+                .finally(() => {
+                    settVedleggLastesOpp((prev) => prev.filter((o) => o !== filObjekt));
+                });
         });
     };
-    const åpneFil = (id: string) => {
-        const url = previewMap[id];
-        if (!url) return;
-        window.open(url, '_blank');
+    const åpneFil = (dokument: Dokument) => {
+        if (!dokument.previewUrl) return;
+        window.open(dokument.previewUrl, '_blank', 'noopener,noreferrer');
     };
     return (
         <VStack gap="space-24">
@@ -116,7 +114,7 @@ export const Filopplaster: React.FC<{
                     max: TILLATTE_SAMTIDIGE_OPPLASTINGER,
                     current: opplastedeVedlegg.length,
                 }}
-                onSelect={(nyeFiler) => lastOppValgteFiler(nyeFiler)}
+                onSelect={lastOppValgteFiler}
             />
             {(opplastedeVedlegg.length > 0 || vedleggLastesOpp.length > 0) && (
                 <VStack gap="space-8">
@@ -129,11 +127,10 @@ export const Filopplaster: React.FC<{
                     <FilListe>
                         {opplastedeVedlegg.map((dokument, index) => (
                             <FileUpload.Item
-                                as="li"
                                 key={index}
                                 file={{ name: dokument.navn }}
                                 style={{ marginBottom: '1rem', cursor: 'pointer' }}
-                                onClick={() => åpneFil(dokument.id)}
+                                onClick={() => åpneFil(dokument)}
                                 button={{
                                     action: 'delete',
                                     onClick: () => slettDokument(dokument.id),
@@ -142,19 +139,20 @@ export const Filopplaster: React.FC<{
                         ))}
                         {vedleggLastesOpp.map((vedlegg, index) => (
                             <FileUpload.Item
-                                as="li"
                                 key={index}
                                 file={{ name: vedlegg.file.name }}
                                 style={{ marginBottom: '1rem' }}
+                                status="uploading"
+                                translations={{
+                                    uploading: vedleggTekster.laster_opp[locale],
+                                }}
                                 button={{
                                     action: 'delete',
                                     onClick: () =>
-                                        settVedleggLastesOpp((prevState) =>
-                                            prevState.filter((v) => v !== vedlegg)
+                                        settVedleggLastesOpp((prev) =>
+                                            prev.filter((v) => v !== vedlegg)
                                         ),
                                 }}
-                                status="uploading"
-                                translations={{ uploading: vedleggTekster.laster_opp[locale] }}
                             />
                         ))}
                     </FilListe>
@@ -168,7 +166,6 @@ export const Filopplaster: React.FC<{
                     <FilListe>
                         {avslåtteFiler.map((avslåttFil, index) => (
                             <FileUpload.Item
-                                as="li"
                                 key={index}
                                 file={{ name: avslåttFil.file.name }}
                                 style={{ marginBottom: '1rem' }}
