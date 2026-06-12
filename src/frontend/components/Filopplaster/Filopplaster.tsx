@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
@@ -45,6 +45,7 @@ export const Filopplaster: React.FC<{
     const { locale } = useSpråk();
     const [avslåtteFiler, setAvslåtteFiler] = useState<AvslåttFil[]>([]);
     const [vedleggLastesOpp, settVedleggLastesOpp] = useState<FileAccepted[]>([]);
+    const [previewMap, setPreviewMap] = useState<Record<string, string>>({});
 
     const fjernFil = (filSomSkalFjernes: AvslåttFil) => {
         setAvslåtteFiler((prevState) => prevState.filter((fil) => fil !== filSomSkalFjernes));
@@ -68,13 +69,21 @@ export const Filopplaster: React.FC<{
         settVedleggLastesOpp((prevState) => [...prevState, ...filer.filter((f) => !f.error)]);
         filer.forEach((filObjekt) => {
             if (!filObjekt.error) {
-                lastOppVedlegg(filObjekt.file)
+                const file = filObjekt.file;
+                const previewUrl = URL.createObjectURL(file);
+
+                lastOppVedlegg(file)
                     .then((id) => {
-                        leggTilDokument({ id: id, navn: filObjekt.file.name });
+                        leggTilDokument({ id, navn: file.name });
+                        setPreviewMap((prev) => ({
+                            ...prev,
+                            [id]: previewUrl,
+                        }));
                     })
                     .catch((err) => {
+                        URL.revokeObjectURL(previewUrl);
                         const avslåttFil: AvslåttFil = {
-                            file: filObjekt.file,
+                            file,
                             error: true,
                             feil: err,
                             reasons: ['ukjent'],
@@ -91,6 +100,16 @@ export const Filopplaster: React.FC<{
             }
         });
     };
+    const åpneFil = (id: string) => {
+        const url = previewMap[id];
+        if (!url) return;
+        window.open(url, '_blank');
+    };
+    useEffect(() => {
+        return () => {
+            Object.values(previewMap).forEach((url) => URL.revokeObjectURL(url));
+        };
+    }, [previewMap]);
 
     return (
         <VStack gap="space-24">
@@ -119,7 +138,8 @@ export const Filopplaster: React.FC<{
                                 as="li"
                                 key={index}
                                 file={{ name: dokument.navn }}
-                                style={{ marginBottom: '1rem' }}
+                                style={{ marginBottom: '1rem', cursor: 'pointer' }}
+                                onClick={() => åpneFil(dokument.id)}
                                 button={{
                                     action: 'delete',
                                     onClick: () => slettDokument(dokument.id),
