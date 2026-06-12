@@ -125,15 +125,18 @@ export const Filopplaster: React.FC<{
                         />
                     </Heading>
                     <FilListe>
-                        {opplastedeVedlegg.map((dokument, index) => (
+                        {opplastedeVedlegg.map((dokument) => (
                             <FileUpload.Item
-                                key={index}
+                                key={dokument.id}
                                 file={{ name: dokument.navn }}
                                 style={{ marginBottom: '1rem', cursor: 'pointer' }}
                                 onClick={() => åpneFil(dokument)}
                                 button={{
                                     action: 'delete',
-                                    onClick: () => slettDokument(dokument.id),
+                                    onClick: (e) => {
+                                        e.stopPropagation();
+                                        slettDokument(dokument.id);
+                                    },
                                 }}
                             />
                         ))}
