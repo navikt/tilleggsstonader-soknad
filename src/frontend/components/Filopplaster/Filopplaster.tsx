@@ -86,13 +86,15 @@ export const Filopplaster: React.FC<{
                 })
                 .catch((err) => {
                     URL.revokeObjectURL(previewUrl);
-                    const avslåttFil: AvslåttFil = {
-                        file,
-                        error: true,
-                        feil: err,
-                        reasons: ['ukjent'],
-                    };
-                    setAvslåtteFiler((prev) => [...prev, avslåttFil]);
+                    setAvslåtteFiler((prev) => [
+                        ...prev,
+                        {
+                            file,
+                            error: true,
+                            feil: err,
+                            reasons: ['ukjent'],
+                        },
+                    ]);
                 })
                 .finally(() => {
                     settVedleggLastesOpp((prev) => prev.filter((o) => o !== filObjekt));
@@ -129,7 +131,10 @@ export const Filopplaster: React.FC<{
                             <FileUpload.Item
                                 key={dokument.id}
                                 file={{ name: dokument.navn }}
-                                style={{ marginBottom: '1rem', cursor: 'pointer' }}
+                                style={{
+                                    marginBottom: '1rem',
+                                    cursor: 'pointer',
+                                }}
                                 onClick={() => åpneFil(dokument)}
                                 button={{
                                     action: 'delete',
@@ -140,9 +145,9 @@ export const Filopplaster: React.FC<{
                                 }}
                             />
                         ))}
-                        {vedleggLastesOpp.map((vedlegg, index) => (
+                        {vedleggLastesOpp.map((vedlegg) => (
                             <FileUpload.Item
-                                key={index}
+                                key={vedlegg.file.name}
                                 file={{ name: vedlegg.file.name }}
                                 style={{ marginBottom: '1rem' }}
                                 status="uploading"
@@ -167,9 +172,9 @@ export const Filopplaster: React.FC<{
                         <LocaleTekst tekst={fellesTekster.vedlegg_med_feil} />
                     </Heading>
                     <FilListe>
-                        {avslåtteFiler.map((avslåttFil, index) => (
+                        {avslåtteFiler.map((avslåttFil) => (
                             <FileUpload.Item
-                                key={index}
+                                key={avslåttFil.file.name}
                                 file={{ name: avslåttFil.file.name }}
                                 style={{ marginBottom: '1rem' }}
                                 error={finnFeilmelding(
