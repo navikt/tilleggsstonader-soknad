@@ -9,7 +9,6 @@ import {
     FileRejectionReason,
     FileUpload,
     Heading,
-    List,
     VStack,
 } from '@navikt/ds-react';
 
@@ -30,9 +29,10 @@ import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 type AvslåttFil = FileRejected & { feil: unknown };
 type FilAvslåttGrunn = FileRejectionReason | 'ukjent';
 
-const FilListe = styled(List).attrs({ as: 'ul' })`
-    list-style-type: none;
-    padding: 0;
+const FilListe = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 `;
 
 export const Filopplaster: React.FC<{
