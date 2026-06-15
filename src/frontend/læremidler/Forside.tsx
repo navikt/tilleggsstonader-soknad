@@ -31,12 +31,12 @@ export const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = routesLæremidler[0];
-        loggBesøk(Skjematype.LÆREMIDLER, route.path, route.label);
+        loggBesøk(Skjematype.SØKNAD_LÆREMIDLER, route.path, route.label);
     }, []);
 
     const startSøknad = () => {
         if (harBekreftet) {
-            loggSkjemaStartet(Skjematype.LÆREMIDLER);
+            loggSkjemaStartet(Skjematype.SØKNAD_LÆREMIDLER);
             const nesteRoute = hentNesteRoute(routesLæremidler, location.pathname);
             navigate(nesteRoute.path);
         } else {
@@ -45,7 +45,12 @@ export const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(Skjematype.LÆREMIDLER, skalÅpne, tittel, ERouteLæremidler.FORSIDE);
+        loggAccordionEvent(
+            Skjematype.SØKNAD_LÆREMIDLER,
+            skalÅpne,
+            tittel,
+            ERouteLæremidler.FORSIDE
+        );
     };
 
     return (

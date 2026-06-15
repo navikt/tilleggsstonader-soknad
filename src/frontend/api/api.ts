@@ -38,7 +38,7 @@ export const hentArbeidsrettedeAktiviteter = (
         axios
             // TODO: For at dette kallet skal fungere for reise til samling, må endepunktet tilpasses slik at det tar i mot skjematype i stedet for stønadstype
             // https://favro.com/organization/98c34fb974ce445eac854de0/4d617346d79341c7fbd9a40a?card=Nav-29433
-            .post<RegisterAktiviteterResponse>(url, { stønadstype: skjematype }, defaultConfig())
+            .post<RegisterAktiviteterResponse>(url, { skjematype: skjematype }, defaultConfig())
             .then((response) => response.data.aktiviteter)
     );
 };
@@ -48,7 +48,7 @@ export const hentBehandlingStatus = (skjematype: Skjematype): Promise<boolean> =
         .get<boolean>(
             // TODO: For at dette kallet skal fungere for reise til samling, må endepunktet tilpasses slik at det tar i mot skjematype i stedet for stønadstype
             // https://favro.com/organization/98c34fb974ce445eac854de0/4d617346d79341c7fbd9a40a?card=Nav-29436
-            `${Environment().apiProxyUrl}/person/har-behandling?stonadstype=${encodeURIComponent(skjematype)}`,
+            `${Environment().apiProxyUrl}/person/har-behandling?skjematype=${encodeURIComponent(skjematype)}`,
             defaultConfig()
         )
         .then((response) => response.data);
@@ -56,11 +56,11 @@ export const hentBehandlingStatus = (skjematype: Skjematype): Promise<boolean> =
 
 const skjematypeTilPath = (skjematype: Skjematype): string => {
     switch (skjematype) {
-        case Skjematype.BARNETILSYN:
+        case Skjematype.SØKNAD_BARNETILSYN:
             return 'pass-av-barn';
-        case Skjematype.LÆREMIDLER:
+        case Skjematype.SØKNAD_LÆREMIDLER:
             return 'laremidler';
-        case Skjematype.REISE_TIL_SAMLING:
+        case Skjematype.SØKNAD_REISE_TIL_SAMLING:
             return 'reise-til-samling';
     }
 };

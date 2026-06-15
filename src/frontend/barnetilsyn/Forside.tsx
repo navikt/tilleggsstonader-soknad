@@ -42,12 +42,12 @@ export const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = RoutesBarnetilsyn[0];
-        loggBesøk(Skjematype.BARNETILSYN, route.path, route.label);
+        loggBesøk(Skjematype.SØKNAD_BARNETILSYN, route.path, route.label);
     }, []);
 
     const startSøknad = () => {
         if (harBekreftet) {
-            loggSkjemaStartet(Skjematype.BARNETILSYN);
+            loggSkjemaStartet(Skjematype.SØKNAD_BARNETILSYN);
             const nesteRoute = hentNesteRoute(RoutesBarnetilsyn, location.pathname);
             navigate(nesteRoute.path);
         } else {
@@ -56,7 +56,12 @@ export const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(Skjematype.BARNETILSYN, skalÅpne, tittel, ERouteBarnetilsyn.FORSIDE);
+        loggAccordionEvent(
+            Skjematype.SØKNAD_BARNETILSYN,
+            skalÅpne,
+            tittel,
+            ERouteBarnetilsyn.FORSIDE
+        );
     };
 
     return (
