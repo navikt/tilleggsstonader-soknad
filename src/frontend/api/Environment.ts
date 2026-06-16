@@ -16,9 +16,9 @@ interface IModellversjon {
 }
 
 const SkjematypeTilPapirskjema: Record<Skjematype, string> = {
-    SØKNAD_BARNETILSYN: 'nav111215b',
-    SØKNAD_LÆREMIDLER: 'nav111216b',
-    SØKNAD_REISE_TIL_SAMLING: 'nav111217b',
+    [Skjematype.SØKNAD_BARNETILSYN]: 'nav111215b',
+    [Skjematype.SØKNAD_LÆREMIDLER]: 'nav111216b',
+    [Skjematype.SØKNAD_REISE_TIL_SAMLING]: 'nav111217b',
 };
 
 const urlPapirsøknadProd = (skjematype: Skjematype) =>
