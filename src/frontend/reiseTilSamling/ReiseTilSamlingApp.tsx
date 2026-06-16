@@ -28,7 +28,7 @@ const ReiseTilSamlingInnhold = () => {
 
     return (
         <SøknadProvider
-            skjematype={Skjematype.REISE_TIL_SAMLING}
+            skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
@@ -52,14 +52,14 @@ export const ReiseTilSamlingApp = () => {
     const { locale } = useSpråk();
 
     useEffect(() => {
-        document.title = teksterStønad.tittelHtml[Skjematype.REISE_TIL_SAMLING][locale];
+        document.title = teksterStønad.tittelHtml[Skjematype.SØKNAD_REISE_TIL_SAMLING][locale];
     }, [locale]);
 
     return (
-        <PersonRouting skjematype={Skjematype.REISE_TIL_SAMLING}>
+        <PersonRouting skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}>
             <ValideringsfeilProvider>
                 <ReiseTilSamlingSøknadProvider>
-                    <RegisterAktiviteterProvider skjematype={Skjematype.REISE_TIL_SAMLING}>
+                    <RegisterAktiviteterProvider skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}>
                         <ReiseTilSamlingInnhold />
                     </RegisterAktiviteterProvider>
                 </ReiseTilSamlingSøknadProvider>

@@ -21,46 +21,41 @@ export const defaultConfig = () => ({
     withCredentials: true,
 });
 
-export const hentPersonData = (medBarn: boolean): Promise<Person> => {
-    return axios
-        .get<Person>(
-            `${Environment().apiProxyUrl}/person${medBarn ? '/med-barn' : ''}`,
-            defaultConfig()
-        )
-        .then((response) => response.data);
+export const hentPersonData = async (medBarn: boolean): Promise<Person> => {
+    const response = await axios.get<Person>(
+        `${Environment().apiProxyUrl}/person${medBarn ? '/med-barn' : ''}`,
+        defaultConfig()
+    );
+    return response.data;
 };
 
-export const hentArbeidsrettedeAktiviteter = (
+export const hentArbeidsrettedeAktiviteter = async (
     skjematype: Skjematype
 ): Promise<RegisterAktivitet[]> => {
     const url = `${Environment().apiProxyUrl}/aktivitet`;
-    return (
-        axios
-            // TODO: For at dette kallet skal fungere for reise til samling, må endepunktet tilpasses slik at det tar i mot skjematype i stedet for stønadstype
-            // https://favro.com/organization/98c34fb974ce445eac854de0/4d617346d79341c7fbd9a40a?card=Nav-29433
-            .post<RegisterAktiviteterResponse>(url, { stønadstype: skjematype }, defaultConfig())
-            .then((response) => response.data.aktiviteter)
+    const response = await axios.post<RegisterAktiviteterResponse>(
+        url,
+        { skjematype },
+        defaultConfig()
     );
+    return response.data.aktiviteter;
 };
 
-export const hentBehandlingStatus = (skjematype: Skjematype): Promise<boolean> => {
-    return axios
-        .get<boolean>(
-            // TODO: For at dette kallet skal fungere for reise til samling, må endepunktet tilpasses slik at det tar i mot skjematype i stedet for stønadstype
-            // https://favro.com/organization/98c34fb974ce445eac854de0/4d617346d79341c7fbd9a40a?card=Nav-29436
-            `${Environment().apiProxyUrl}/person/har-behandling?stonadstype=${encodeURIComponent(skjematype)}`,
-            defaultConfig()
-        )
-        .then((response) => response.data);
+export const hentBehandlingStatus = async (skjematype: Skjematype): Promise<boolean> => {
+    const response = await axios.get<boolean>(
+        `${Environment().apiProxyUrl}/person/har-behandling?skjematype=${encodeURIComponent(skjematype)}`,
+        defaultConfig()
+    );
+    return response.data;
 };
 
 const skjematypeTilPath = (skjematype: Skjematype): string => {
     switch (skjematype) {
-        case Skjematype.BARNETILSYN:
+        case Skjematype.SØKNAD_BARNETILSYN:
             return 'pass-av-barn';
-        case Skjematype.LÆREMIDLER:
+        case Skjematype.SØKNAD_LÆREMIDLER:
             return 'laremidler';
-        case Skjematype.REISE_TIL_SAMLING:
+        case Skjematype.SØKNAD_REISE_TIL_SAMLING:
             return 'reise-til-samling';
     }
 };

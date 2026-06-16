@@ -22,7 +22,7 @@ export const Søknadsdialog: React.FC = () => {
         <>
             <SøknadsskjemaHeader
                 tittel={fellesTekster.banner_læremidler}
-                skjemaId={skjematypeTilSkjemaId[Skjematype.LÆREMIDLER]}
+                skjemaId={skjematypeTilSkjemaId[Skjematype.SØKNAD_LÆREMIDLER]}
             />
             <Routes>
                 <Route path={'/'} element={<RootRoute forside={<Forside />} />} />

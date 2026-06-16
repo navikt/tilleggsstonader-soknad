@@ -17,7 +17,7 @@ const LæremidlerInnhold = () => {
 
     return (
         <SøknadProvider
-            skjematype={Skjematype.LÆREMIDLER}
+            skjematype={Skjematype.SØKNAD_LÆREMIDLER}
             søknad={{
                 hovedytelse: hovedytelse,
                 utdanning: utdanning,
@@ -38,14 +38,14 @@ export const LæremidlerApp = () => {
     const { locale } = useSpråk();
 
     useEffect(() => {
-        document.title = teksterStønad.tittelHtml[Skjematype.LÆREMIDLER][locale];
+        document.title = teksterStønad.tittelHtml[Skjematype.SØKNAD_LÆREMIDLER][locale];
     }, [locale]);
 
     return (
-        <PersonRouting skjematype={Skjematype.LÆREMIDLER}>
+        <PersonRouting skjematype={Skjematype.SØKNAD_LÆREMIDLER}>
             <ValideringsfeilProvider>
                 <LæremidlerSøknadProvider>
-                    <RegisterAktiviteterProvider skjematype={Skjematype.LÆREMIDLER}>
+                    <RegisterAktiviteterProvider skjematype={Skjematype.SØKNAD_LÆREMIDLER}>
                         <LæremidlerInnhold />
                     </RegisterAktiviteterProvider>
                 </LæremidlerSøknadProvider>

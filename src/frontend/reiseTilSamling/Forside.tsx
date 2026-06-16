@@ -36,7 +36,7 @@ export const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = routesReiseTilSamling[0];
-        loggBesøk(Skjematype.REISE_TIL_SAMLING, route.path, route.label);
+        loggBesøk(Skjematype.SØKNAD_REISE_TIL_SAMLING, route.path, route.label);
     }, []);
 
     const startSøknad = () => {
@@ -45,7 +45,7 @@ export const Forside: React.FC = () => {
             return;
         }
 
-        loggSkjemaStartet(Skjematype.REISE_TIL_SAMLING);
+        loggSkjemaStartet(Skjematype.SØKNAD_REISE_TIL_SAMLING);
         const nesteRoute = hentNesteRoute(routesReiseTilSamling, location.pathname);
         navigate(nesteRoute.path);
     };

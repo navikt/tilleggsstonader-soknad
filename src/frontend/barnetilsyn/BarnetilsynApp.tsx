@@ -18,7 +18,7 @@ const BarnetilsynInnhold = () => {
 
     return (
         <SøknadProvider
-            skjematype={Skjematype.BARNETILSYN}
+            skjematype={Skjematype.SØKNAD_BARNETILSYN}
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
@@ -40,14 +40,14 @@ export const BarnetilsynApp = () => {
     const { locale } = useSpråk();
 
     useEffect(() => {
-        document.title = teksterStønad.tittelHtml[Skjematype.BARNETILSYN][locale];
+        document.title = teksterStønad.tittelHtml[Skjematype.SØKNAD_BARNETILSYN][locale];
     }, [locale]);
 
     return (
-        <PersonRouting skjematype={Skjematype.BARNETILSYN}>
+        <PersonRouting skjematype={Skjematype.SØKNAD_BARNETILSYN}>
             <ValideringsfeilProvider>
                 <PassAvBarnSøknadProvider>
-                    <RegisterAktiviteterProvider skjematype={Skjematype.BARNETILSYN}>
+                    <RegisterAktiviteterProvider skjematype={Skjematype.SØKNAD_BARNETILSYN}>
                         <BarnetilsynInnhold />
                     </RegisterAktiviteterProvider>
                 </PassAvBarnSøknadProvider>

@@ -15,17 +15,17 @@ interface IModellversjon {
     barnetilsyn: number;
 }
 
-const StønadstypeTilPapirskjema: Record<Skjematype, string> = {
-    BARNETILSYN: 'nav111215b',
-    LÆREMIDLER: 'nav111216b',
-    REISE_TIL_SAMLING: 'nav111217b',
+const SkjematypeTilPapirskjema: Record<Skjematype, string> = {
+    [Skjematype.SØKNAD_BARNETILSYN]: 'nav111215b',
+    [Skjematype.SØKNAD_LÆREMIDLER]: 'nav111216b',
+    [Skjematype.SØKNAD_REISE_TIL_SAMLING]: 'nav111217b',
 };
 
 const urlPapirsøknadProd = (skjematype: Skjematype) =>
-    `https://www.nav.no/fyllut/${StønadstypeTilPapirskjema[skjematype]}?sub=paper`;
+    `https://www.nav.no/fyllut/${SkjematypeTilPapirskjema[skjematype]}?sub=paper`;
 
 const urlPapirsøknadDev = (skjematype: Skjematype) =>
-    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${StønadstypeTilPapirskjema[skjematype]}?sub=paper`;
+    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${SkjematypeTilPapirskjema[skjematype]}?sub=paper`;
 
 export const Environment = (): EnvironmentProps => {
     const modellVersjon = { overgangsstønad: 7, barnetilsyn: 2, skolepenger: 2 };
