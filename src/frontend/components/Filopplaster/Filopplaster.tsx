@@ -74,10 +74,9 @@ export const Filopplaster: React.FC<{
             }
 
             const file = filObjekt.file;
-            const previewUrl = URL.createObjectURL(file);
-
             lastOppVedlegg(file)
                 .then((id) => {
+                    const previewUrl = URL.createObjectURL(file);
                     leggTilDokument({
                         id,
                         navn: file.name,
@@ -85,7 +84,6 @@ export const Filopplaster: React.FC<{
                     });
                 })
                 .catch((err) => {
-                    URL.revokeObjectURL(previewUrl);
                     setAvslåtteFiler((prev) => [
                         ...prev,
                         {
