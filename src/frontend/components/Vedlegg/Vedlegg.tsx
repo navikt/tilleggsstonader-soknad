@@ -55,14 +55,12 @@ export const Vedlegg: React.FC<Props> = ({
     const leggTilDokument = (dokumentasjonFelt: DokumentasjonFelt, vedlegg: Dokument) => {
         settDokumentasjon((prevState) => leggTilVedlegg(prevState, dokumentasjonFelt, vedlegg));
     };
+    const slettDokument = (dokumentasjonFelt: DokumentasjonFelt, dokument: Dokument) => {
+        if (dokument.previewUrl) {
+            URL.revokeObjectURL(dokument.previewUrl);
+        }
 
-    const slettDokument = (
-        dokumentasjonFelt: DokumentasjonFelt,
-        dokumentSomSkalSlettesId: string
-    ) => {
-        settDokumentasjon((prevState) =>
-            fjernVedlegg(prevState, dokumentasjonFelt, dokumentSomSkalSlettesId)
-        );
+        settDokumentasjon((prevState) => fjernVedlegg(prevState, dokumentasjonFelt, dokument.id));
     };
 
     const validerSteg = () => {

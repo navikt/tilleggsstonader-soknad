@@ -40,7 +40,7 @@ export const Filopplaster: React.FC<{
     tittel: string;
     beskrivelse?: string;
     leggTilDokument: (vedlegg: Dokument) => void;
-    slettDokument: (vedlegg: string) => void;
+    slettDokument: (vedlegg: Dokument) => void;
 }> = ({ opplastedeVedlegg, tittel, beskrivelse, leggTilDokument, slettDokument }) => {
     const { locale } = useSpråk();
     const [avslåtteFiler, setAvslåtteFiler] = useState<AvslåttFil[]>([]);
@@ -138,7 +138,7 @@ export const Filopplaster: React.FC<{
                                     action: 'delete',
                                     onClick: (e) => {
                                         e.stopPropagation();
-                                        slettDokument(dokument.id);
+                                        slettDokument(dokument);
                                     },
                                 }}
                             />
