@@ -32,13 +32,13 @@ export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = 
         nb: 'Vil du likevel sende ny søknad?',
     },
     vil_forstatt_sende_søknad_innhold: {
-        [Skjematype.BARNETILSYN]: {
+        [Skjematype.SØKNAD_BARNETILSYN]: {
             nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er et nytt skole/barnehageår kan du sende ny søknad.',
         },
-        [Skjematype.LÆREMIDLER]: {
+        [Skjematype.SØKNAD_LÆREMIDLER]: {
             nb: 'Hvis du har begynt på en ny utdanning eller opplæring, eller det gjelder et nytt skoleår, kan du sende ny søknad.',
         },
-        [Skjematype.REISE_TIL_SAMLING]: {
+        [Skjematype.SØKNAD_REISE_TIL_SAMLING]: {
             nb: 'Hvis du har deltatt på en ny samling, kan du sende ny søknad.',
         },
     },

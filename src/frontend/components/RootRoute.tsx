@@ -15,9 +15,9 @@ interface RootRouteProps {
 }
 
 const route: Record<Skjematype, IRoute> = {
-    [Skjematype.BARNETILSYN]: RoutesBarnetilsyn[0],
-    [Skjematype.LÆREMIDLER]: routesLæremidler[0],
-    [Skjematype.REISE_TIL_SAMLING]: routesReiseTilSamling[0],
+    [Skjematype.SØKNAD_BARNETILSYN]: RoutesBarnetilsyn[0],
+    [Skjematype.SØKNAD_LÆREMIDLER]: routesLæremidler[0],
+    [Skjematype.SØKNAD_REISE_TIL_SAMLING]: routesReiseTilSamling[0],
 };
 
 export const RootRoute: React.FC<RootRouteProps> = ({ forside }) => {

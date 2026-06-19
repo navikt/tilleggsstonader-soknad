@@ -49,7 +49,7 @@ export const dineBarnTekster: DineBarnInnhold = {
             'Hvis du ønsker å søke om støtte til pass av fosterbarn eller andre barn som ikke kan registreres i folkeregisteret, må du fylle ut ',
             {
                 tekst: 'papirsøknad',
-                url: 'https://tjenester.nav.no/soknadtilleggsstonader/app/start',
+                url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
             },
             ' (åpnes i ny fane).',
         ],
