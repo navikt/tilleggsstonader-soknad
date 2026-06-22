@@ -71,9 +71,9 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
             oppdaterDokumentasjon((vedlegg) => [...vedlegg, dokument]);
         };
 
-        const slettDokument = (dokumentId: string) => {
+        const slettDokument = (dokumentSomSkalSlettes: Dokument) => {
             oppdaterDokumentasjon((vedlegg) =>
-                vedlegg.filter((dokument) => dokument.id !== dokumentId)
+                vedlegg.filter((dokument) => dokument.id !== dokumentSomSkalSlettes.id)
             );
         };
 
