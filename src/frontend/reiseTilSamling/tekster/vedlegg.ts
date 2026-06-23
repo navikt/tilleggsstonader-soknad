@@ -8,13 +8,13 @@ type TekstTypeVedlegg = {
 export const typerVedleggTeksterReiseTilSamling: TekstTypeVedlegg = {
     [VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER]: {
         tittel: {
-            nb: 'Bekreftelse for alle samlingene du skal delta på',
+            nb: 'Bekreftelse fra arrangøren som viser hvilke samlinger du skal delta på.',
         },
         liste_tittel: {
-            nb: 'Bekreftelse for alle samlingene du skal delta på',
+            nb: 'Bekreftelse på samlingene du skal delta på.',
         },
         beskrivelse: {
-            nb: 'Last opp bekreftelse fra arrangøren som viser hvilke samlinger du skal delta på.',
+            nb: 'Last opp bekreftelse fra arrangøren som viser hvilke samlinger du skal delta på. Det må også komme frem at samlingene er obligatoriske.',
         },
     },
     [VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT]: {
