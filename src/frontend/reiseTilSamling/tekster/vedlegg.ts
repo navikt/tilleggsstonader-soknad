@@ -19,10 +19,10 @@ export const typerVedleggTeksterReiseTilSamling: TekstTypeVedlegg = {
     },
     [VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT]: {
         tittel: {
-            nb: 'Dokumentasjon på utgifter til offentlig transport.',
+            nb: 'Dokumentasjon på reiseutgifter.',
         },
         liste_tittel: {
-            nb: 'Dokumentasjon på utgifter til offentlig transport.',
+            nb: 'Dokumentasjon på reiseutgifter.',
         },
         beskrivelse: {
             nb: 'Last opp kvitteringer eller billetter som dokumenterer reiseutgiftene dine.',
