@@ -1,8 +1,8 @@
 {
   "collection": "nextjs-frontend",
-  "version": "2026.06.16-091529-95c7081",
+  "version": "2026.06.23-095021-9ea073a",
   "scope": "repo",
-  "source_sha": "95c7081",
+  "source_sha": "9ea073a",
   "installed_at": "2026-04-21T11:17:24Z",
   "files": [
     {
@@ -59,7 +59,7 @@
     },
     {
       "path": ".github/instructions/nextjs-aksel.instructions.md",
-      "hash": "9283252e55829ca2"
+      "hash": "75e0932dfe465508"
     },
     {
       "path": ".github/instructions/performance.instructions.md",
@@ -87,7 +87,7 @@
     },
     {
       "path": ".github/prompts/aksel-component.prompt.md",
-      "hash": "8f6e07fff457bc3d"
+      "hash": "68c1da8a387cdffe"
     },
     {
       "path": ".github/prompts/nextjs-api-route.prompt.md",
