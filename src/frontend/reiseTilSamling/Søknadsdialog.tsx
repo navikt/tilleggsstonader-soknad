@@ -27,7 +27,7 @@ export const Søknadsdialog: React.FC = () => {
                 skjemaId={skjematypeTilSkjemaId[Skjematype.SØKNAD_REISE_TIL_SAMLING]}
             />
             <Routes>
-                <Route path={'/'} element={<Forside />} />
+                <Route path={'/intro'} element={<Forside />} />
                 <Route
                     path={'/hovedytelse'}
                     element={
@@ -88,7 +88,7 @@ export const Søknadsdialog: React.FC = () => {
                     path={'/kvittering'}
                     element={<Kvittering pathTilForside={reiseTilSamlingPath} />}
                 />
-                <Route path={'*'} element={<Navigate to={RouteTilPath.FORSIDE} replace />} />
+                <Route path={'*'} element={<Navigate to={RouteTilPath.INTRO} replace />} />
             </Routes>
         </>
     );

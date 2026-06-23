@@ -1,7 +1,7 @@
 import { IRoute } from '../../typer/routes';
 
 export enum ERouteReiseTilSamling {
-    FORSIDE = 'FORSIDE',
+    INTRO = 'INTRO',
     HOVEDYTELSE = 'HOVEDYTELSE',
     AKTIVITET = 'AKTIVITET',
     REISEAVSTAND = 'REISEAVSTAND',
@@ -15,7 +15,7 @@ export enum ERouteReiseTilSamling {
 export const reiseTilSamlingPath = '/reise-til-samling';
 
 export const RouteTilPath: Record<ERouteReiseTilSamling, string> = {
-    FORSIDE: reiseTilSamlingPath,
+    INTRO: reiseTilSamlingPath + '/intro',
     HOVEDYTELSE: reiseTilSamlingPath + '/hovedytelse',
     AKTIVITET: reiseTilSamlingPath + '/aktivitet',
     REISEAVSTAND: reiseTilSamlingPath + '/reiseavstand',
@@ -27,7 +27,7 @@ export const RouteTilPath: Record<ERouteReiseTilSamling, string> = {
 };
 
 export const routesReiseTilSamling: IRoute[] = [
-    { path: reiseTilSamlingPath, label: 'Forside', route: ERouteReiseTilSamling.FORSIDE },
+    { path: reiseTilSamlingPath + '/intro', label: 'Forside', route: ERouteReiseTilSamling.INTRO },
     {
         path: RouteTilPath.HOVEDYTELSE,
         label: 'Din situasjon',
