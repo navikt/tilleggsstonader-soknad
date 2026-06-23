@@ -19,6 +19,7 @@ import { LæremidlerApp } from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
 import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
+import { SkalBrukeTaxiReiseTilSamlingAvsjekk } from './reiseTilSamling/SkalBrukeTaxiReiseTilSamlingAvsjekk';
 import { appConfig } from './utils/appConfig';
 import { erProd } from './utils/miljø';
 
@@ -41,6 +42,12 @@ const AppRoutes = () => {
                     element={<Navigate to={barnetilsynPath} replace />}
                 />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
+                {kanBrukeReiseTilSamling && (
+                    <Route
+                        path={reiseTilSamlingPath}
+                        element={<SkalBrukeTaxiReiseTilSamlingAvsjekk />}
+                    />
+                )}
                 {kanBrukeReiseTilSamling && (
                     <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
                 )}

@@ -4,6 +4,7 @@ export enum SkjematypeFyllUt {
     SØKNAD_BOUTGIFTER = 'SØKNAD_BOUTGIFTER',
     SØKNAD_DAGLIG_REISE = 'SØKNAD_DAGLIG_REISE',
     DAGLIG_REISE_KJØRELISTE = 'DAGLIG_REISE_KJØRELISTE',
+    SØKNAD_REISE_TIL_SAMLING = 'SØKNAD_REISE_TIL_SAMLING',
 }
 
 const SKJEMAKODER: Record<SkjematypeFyllUt, { ny?: string; gammel: string }> = {
@@ -17,6 +18,9 @@ const SKJEMAKODER: Record<SkjematypeFyllUt, { ny?: string; gammel: string }> = {
     },
     [SkjematypeFyllUt.DAGLIG_REISE_KJØRELISTE]: {
         gammel: 'nav111224b',
+    },
+    [SkjematypeFyllUt.SØKNAD_REISE_TIL_SAMLING]: {
+        gammel: 'nav111217b',
     },
 };
 
