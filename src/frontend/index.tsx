@@ -10,6 +10,7 @@ import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
 import { BarnetilsynApp } from './barnetilsyn/BarnetilsynApp';
 import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
+import { NotFound } from './components/NotFound';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentligTransportAvsjekk';
@@ -57,7 +58,7 @@ const AppRoutes = () => {
                 />
                 <Route path="/daglig-reise/skjema-taxi" element={<SkalBrukeTaxiAvsjekk />} />
                 <Route path={`/kjoreliste/*`} element={<KjørelisterApp />} />
-                <Route path={'*'} element={<Navigate to={barnetilsynPath} replace />} />
+                <Route path={'*'} element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );
