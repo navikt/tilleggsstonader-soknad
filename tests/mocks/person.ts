@@ -7,6 +7,12 @@ export const mockPersonMedBarnApi = async (page: Page) => {
             alder: 20,
             visningsnavn: 'fornavn etternavn',
             adresse: 'Hildes vei 3 a, 0100 Oslo',
+            strukturertAdresse: {
+                land: 'NOR',
+                gateadresse: 'Hildes vei',
+                postnummer: '0100',
+                poststed: 'Oslo',
+            },
             barn: [
                 {
                     ident: '08921997974',

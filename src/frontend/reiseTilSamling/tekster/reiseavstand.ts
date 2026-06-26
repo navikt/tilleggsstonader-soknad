@@ -1,18 +1,31 @@
-import { TekstElement } from '../../typer/tekst';
+import { JaNeiTilTekst } from '../../tekster/felles';
+import { JaNei } from '../../typer/søknad';
+import { Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface ReiseavstandInnhold {
     tittel: TekstElement<string>;
     info_minsteavstand: TekstElement<string>;
+    folkereg_adresse: TekstElement<string>;
+    radio_skalReiseFraFolkeregAdr: Radiogruppe<JaNei>;
+    avreiseadresse_fra_folkereg_info: TekstElement<string>;
+    avreiseadresse_fra_folkereg_lenke_tekst: TekstElement<string>;
+    avreiseadresse_fra_folkereg_lenke_url: string;
+    avreiseadresse_tittel: TekstElement<string>;
+    avreiseadresse_vegadresse_label: TekstElement<string>;
+    avreiseadresse_postnummer_label: TekstElement<string>;
+    avreiseadresse_poststed_label: TekstElement<string>;
     antall_km_label: TekstElement<string>;
     antall_km_beskrivelse: TekstElement<string>;
-    folkeregistrert_adresse_info: TekstElement<string>;
-    folkeregistrert_adresse_lenke_tekst: TekstElement<string>;
-    folkeregistrert_adresse_lenke_url: string;
     aktivitetsadresse_tittel: TekstElement<string>;
     velg_land_label: TekstElement<string>;
     gateadresse_label: TekstElement<string>;
     postnummer_label: TekstElement<string>;
     poststed_label: TekstElement<string>;
+    feilmelding_skalReiseFraFolkeregAdr: TekstElement<string>;
+    feilmelding_avreise_land: TekstElement<string>;
+    feilmelding_avreise_gateadresse: TekstElement<string>;
+    feilmelding_avreise_postnummer: TekstElement<string>;
+    feilmelding_avreise_poststed: TekstElement<string>;
     feilmelding_antall_km: TekstElement<string>;
     feilmelding_antall_km_ugyldig: TekstElement<string>;
     feilmelding_land: TekstElement<string>;
@@ -28,19 +41,41 @@ export const reiseavstandTekster: ReiseavstandInnhold = {
     info_minsteavstand: {
         nb: 'For at du skal få støtte, må det være minst 30 kilometer mellom hjemmet ditt og aktivitetsadressen.',
     },
+    folkereg_adresse: {
+        nb: 'Din folkeregistrerte adresse er [0].',
+    },
+    radio_skalReiseFraFolkeregAdr: {
+        header: {
+            nb: 'Skal du reise fra din folkeregistrerte adresse?',
+        },
+        alternativer: JaNeiTilTekst,
+    },
+    avreiseadresse_fra_folkereg_info: {
+        nb: 'Adressen er hentet fra Folkeregisteret. Det er viktig at denne adressen er korrekt. Du kan ',
+    },
+    avreiseadresse_fra_folkereg_lenke_tekst: {
+        nb: 'endre adressen på Skatteetatens nettsider (åpnes i ny fane)',
+    },
+    avreiseadresse_fra_folkereg_lenke_url:
+        'https://www.skatteetaten.no/person/folkeregister/endre/',
+    avreiseadresse_tittel: {
+        nb: 'Oppgi adressen du skal reise fra',
+    },
+    avreiseadresse_vegadresse_label: {
+        nb: 'Gateadresse',
+    },
+    avreiseadresse_postnummer_label: {
+        nb: 'Postnummer',
+    },
+    avreiseadresse_poststed_label: {
+        nb: 'Poststed',
+    },
     antall_km_label: {
         nb: 'Hvor lang reisevei har du?',
     },
     antall_km_beskrivelse: {
         nb: 'Oppgi antall kilometer én vei.',
     },
-    folkeregistrert_adresse_info: {
-        nb: 'Vi tar utgangspunkt i den folkeregisterte adressen din som hjemmeadresse. Du kan ',
-    },
-    folkeregistrert_adresse_lenke_tekst: {
-        nb: 'se og endre adressen på Skatteetatens nettsider (åpnes i ny fane)',
-    },
-    folkeregistrert_adresse_lenke_url: 'https://www.skatteetaten.no/person/folkeregister/endre/',
     aktivitetsadresse_tittel: {
         nb: 'Oppgi adressen du skal reise til',
     },
@@ -55,6 +90,21 @@ export const reiseavstandTekster: ReiseavstandInnhold = {
     },
     poststed_label: {
         nb: 'Poststed',
+    },
+    feilmelding_skalReiseFraFolkeregAdr: {
+        nb: 'Du må svare på om du skal reise fra din folkeregistrerte adresse.',
+    },
+    feilmelding_avreise_land: {
+        nb: 'Du må velge land.',
+    },
+    feilmelding_avreise_gateadresse: {
+        nb: 'Du må fylle inn gateadresse.',
+    },
+    feilmelding_avreise_postnummer: {
+        nb: 'Du må fylle inn postnummer.',
+    },
+    feilmelding_avreise_poststed: {
+        nb: 'Du må fylle inn poststed.',
     },
     feilmelding_antall_km: {
         nb: 'Du må fylle inn antall kilometer.',
