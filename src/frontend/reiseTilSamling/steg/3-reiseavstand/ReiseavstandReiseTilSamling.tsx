@@ -58,9 +58,10 @@ export const ReiseavstandReiseTilSamling = () => {
     const [visAdvarsel, setVisAdvarsel] = useState(false);
 
     const advarselForLavAvstand =
-        reiseavstand.antallKilometerEnVei?.verdi && visAdvarsel
-            ? Number(reiseavstand.antallKilometerEnVei.verdi) < 30
-            : false;
+        visAdvarsel &&
+        reiseavstand.antallKilometerEnVei?.verdi !== undefined &&
+        reiseavstand.antallKilometerEnVei.verdi !== '' &&
+        Number(reiseavstand.antallKilometerEnVei.verdi) < 30;
 
     return (
         <Side validerSteg={kanFortsette}>
