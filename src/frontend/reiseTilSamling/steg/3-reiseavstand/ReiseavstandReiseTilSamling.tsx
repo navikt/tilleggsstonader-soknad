@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-import { BodyShort, Link, TextField, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Link, TextField, VStack } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
 import {
@@ -55,6 +55,13 @@ export const ReiseavstandReiseTilSamling = () => {
         return !inneholderFeil(feil);
     };
 
+    const [visAdvarsel, setVisAdvarsel] = useState(false);
+
+    const advarselForLavAvstand =
+        reiseavstand.antallKilometerEnVei?.verdi && visAdvarsel
+            ? Number(reiseavstand.antallKilometerEnVei.verdi) < 30
+            : false;
+
     return (
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={reiseavstandTekster.tittel} level="2" size="medium" />
@@ -78,8 +85,16 @@ export const ReiseavstandReiseTilSamling = () => {
                         }));
                         nullstillFeil(verdi, errorKeyAntallKm);
                     }}
+                    onBlur={() => {
+                        setVisAdvarsel(true);
+                    }}
                 />
             </VStack>
+            {advarselForLavAvstand && (
+                <Alert variant="warning">
+                    {reiseavstandTekster.advarsel_antall_km_for_lav[locale]}
+                </Alert>
+            )}
             <BodyShort>
                 {reiseavstandTekster.folkeregistrert_adresse_info[locale]}
                 <Link

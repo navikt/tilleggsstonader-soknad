@@ -15,6 +15,7 @@ interface ReiseavstandInnhold {
     poststed_label: TekstElement<string>;
     feilmelding_antall_km: TekstElement<string>;
     feilmelding_antall_km_ugyldig: TekstElement<string>;
+    advarsel_antall_km_for_lav: TekstElement<string>;
     feilmelding_land: TekstElement<string>;
     feilmelding_gateadresse: TekstElement<string>;
     feilmelding_postnummer: TekstElement<string>;
@@ -73,5 +74,8 @@ export const reiseavstandTekster: ReiseavstandInnhold = {
     },
     feilmelding_poststed: {
         nb: 'Du må fylle inn poststed.',
+    },
+    advarsel_antall_km_for_lav: {
+        nb: 'Dersom avstanden er under 30 kilometer, er sannsynligheten for å få støtte svært lav. Du kan likevel sende inn søknaden.',
     },
 };
