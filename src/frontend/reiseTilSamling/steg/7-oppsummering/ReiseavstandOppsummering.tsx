@@ -45,7 +45,7 @@ export const ReiseavstandOppsummering: React.FC<{ reiseavstand: Reiseavstand }> 
                 </FormSummary.Heading>
             </FormSummary.Header>
             <FormSummary.Answers>
-                {avreiseAdresseVisning && (
+                {avreiseAdresseVisning() !== '' && (
                     <FormSummary.Answer>
                         <FormSummary.Label>
                             <LocaleTekst tekst={oppsummeringTekster.adressen_du_skal_reise_fra} />
@@ -63,7 +63,7 @@ export const ReiseavstandOppsummering: React.FC<{ reiseavstand: Reiseavstand }> 
                         </FormSummary.Value>
                     </FormSummary.Answer>
                 )}
-                {aktivitetsAdresseVisning && (
+                {aktivitetsAdresseVisning !== '' && (
                     <FormSummary.Answer>
                         <FormSummary.Label>
                             <LocaleTekst tekst={oppsummeringTekster.adressen_du_skal_reise_til} />
