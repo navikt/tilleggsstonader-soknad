@@ -57,16 +57,15 @@ export const ReiseavstandReiseTilSamling = () => {
 
     const [visAdvarsel, setVisAdvarsel] = useState(false);
 
-    const advarselForLavAvstand =
-        visAdvarsel &&
-        reiseavstand.antallKilometerEnVei?.verdi !== undefined &&
-        reiseavstand.antallKilometerEnVei.verdi !== '' &&
-        Number(reiseavstand.antallKilometerEnVei.verdi) < 30;
+    const km = reiseavstand.antallKilometerEnVei?.verdi;
+
+    const visAdvarselForLavAvstand =
+        visAdvarsel && !isNaN(Number(km)) && Number(km) > 0 && Number(km) < 30;
 
     return (
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={reiseavstandTekster.tittel} level="2" size="medium" />
-            <VStack gap="space-4">
+            <VStack gap="space-8">
                 <BodyShort spacing>{reiseavstandTekster.info_minsteavstand[locale]}</BodyShort>
                 <KmFelt
                     id={valideringsfeil[errorKeyAntallKm]?.id}
@@ -90,12 +89,12 @@ export const ReiseavstandReiseTilSamling = () => {
                         setVisAdvarsel(true);
                     }}
                 />
+                {visAdvarselForLavAvstand && (
+                    <Alert variant="warning">
+                        {reiseavstandTekster.advarsel_antall_km_for_lav[locale]}
+                    </Alert>
+                )}
             </VStack>
-            {advarselForLavAvstand && (
-                <Alert variant="warning">
-                    {reiseavstandTekster.advarsel_antall_km_for_lav[locale]}
-                </Alert>
-            )}
             <BodyShort>
                 {reiseavstandTekster.folkeregistrert_adresse_info[locale]}
                 <Link
