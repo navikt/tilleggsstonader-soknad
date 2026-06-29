@@ -7,7 +7,7 @@ export const initiellPerson: Person = {
     adresse: '',
     strukturertAdresse: {
         land: 'NOR',
-        adressenavn: '',
+        gateadresse: '',
         postnummer: '',
         poststed: '',
     },

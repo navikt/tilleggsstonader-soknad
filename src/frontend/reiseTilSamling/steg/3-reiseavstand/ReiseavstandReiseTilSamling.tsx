@@ -96,6 +96,7 @@ export const ReiseavstandReiseTilSamling = () => {
                             href={reiseavstandTekster.avreiseadresse_fra_folkereg_lenke_url}
                             target="_blank"
                             inlineText
+                            rel="noopener noreferrer"
                         >
                             {reiseavstandTekster.avreiseadresse_fra_folkereg_lenke_tekst[locale]}
                         </Link>

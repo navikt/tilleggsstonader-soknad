@@ -2,7 +2,7 @@ import { Barn } from './barn';
 
 export interface Adresse {
     land: string;
-    adressenavn: string;
+    gateadresse: string;
     postnummer: string;
     poststed: string;
 }

@@ -6,6 +6,7 @@ import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { Reiseavstand } from '../../../typer/søknad';
+import { adressefelterTilVisning } from '../../../utils/adresseUtils';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
@@ -14,40 +15,27 @@ export const ReiseavstandOppsummering: React.FC<{ reiseavstand: Reiseavstand }> 
 }) => {
     const { person } = usePerson();
 
-    const avreiseAdresseVisning =
-        reiseavstand.skalReiseFraFolkeregAdr?.verdi === 'JA' && person.strukturertAdresse
-            ? [
-                  person.strukturertAdresse.adressenavn,
-                  [person.strukturertAdresse.postnummer, person.strukturertAdresse.poststed]
-                      .filter(Boolean)
-                      .join(' '),
-              ]
-                  .filter(Boolean)
-                  .join(', ')
-            : [
-                  reiseavstand.adresseDuSkalReiseFra?.gateadresse?.verdi,
-                  [
-                      reiseavstand.adresseDuSkalReiseFra?.postnummer?.verdi,
-                      reiseavstand.adresseDuSkalReiseFra?.poststed?.verdi,
-                  ]
-                      .filter(Boolean)
-                      .join(' '),
-              ]
-                  .filter(Boolean)
-                  .join(', ');
+    const avreiseAdresseVisning = () => {
+        if (reiseavstand.skalReiseFraFolkeregAdr?.verdi === 'JA') {
+            return person.strukturertAdresse
+                ? adressefelterTilVisning(person.strukturertAdresse)
+                : person.adresse;
+        }
 
-    const aktivitetsAdresseVisning = [
-        reiseavstand.aktivitetsadresse.gateadresse?.verdi,
-        [
-            reiseavstand.aktivitetsadresse.postnummer?.verdi,
-            reiseavstand.aktivitetsadresse.poststed?.verdi,
-        ]
-            .filter((del) => !!del)
-            .join(' '),
-        reiseavstand.aktivitetsadresse.land?.svarTekst,
-    ]
-        .filter((del) => !!del)
-        .join(', ');
+        return adressefelterTilVisning({
+            gateadresse: reiseavstand.adresseDuSkalReiseFra?.gateadresse?.verdi,
+            postnummer: reiseavstand.adresseDuSkalReiseFra?.postnummer?.verdi,
+            poststed: reiseavstand.adresseDuSkalReiseFra?.poststed?.verdi,
+            land: reiseavstand.adresseDuSkalReiseFra?.land?.verdi,
+        });
+    };
+
+    const aktivitetsAdresseVisning = adressefelterTilVisning({
+        gateadresse: reiseavstand.aktivitetsadresse.gateadresse?.verdi,
+        postnummer: reiseavstand.aktivitetsadresse.postnummer?.verdi,
+        poststed: reiseavstand.aktivitetsadresse.poststed?.verdi,
+        land: reiseavstand.aktivitetsadresse.land?.verdi,
+    });
 
     return (
         <FormSummary>
@@ -62,7 +50,7 @@ export const ReiseavstandOppsummering: React.FC<{ reiseavstand: Reiseavstand }> 
                         <FormSummary.Label>
                             <LocaleTekst tekst={oppsummeringTekster.adressen_du_skal_reise_fra} />
                         </FormSummary.Label>
-                        <FormSummary.Value>{avreiseAdresseVisning}</FormSummary.Value>
+                        <FormSummary.Value>{avreiseAdresseVisning()}</FormSummary.Value>
                     </FormSummary.Answer>
                 )}
                 {reiseavstand.antallKilometerEnVei && (
