@@ -1,4 +1,3 @@
-import { Environment } from '../api/Environment';
 import {
     mockAktivitet,
     mockHovedytelse,
@@ -8,8 +7,7 @@ import {
 } from '../mock/reiseTilSamlingMock';
 import { DokumentasjonFelt } from '../typer/skjema';
 import { Aktivitet, Hovedytelse, Reiseavstand, Reisemåte, Samling } from '../typer/søknad';
-
-const erLokal = () => Environment().miljø === 'local';
+import { erLokal } from '../utils/miljø';
 
 export const initialHarBekreftet = (): boolean => erLokal();
 
