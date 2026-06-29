@@ -3,6 +3,15 @@ import { useMemo, useState } from 'react';
 import createUseContext from 'constate';
 
 import {
+    initialAktivitet,
+    initialDokumentasjon,
+    initialHarBekreftet,
+    initialHovedytelse,
+    initialReiseavstand,
+    initialReisemåte,
+    initialSamlinger,
+} from './reiseTilSamlingInitialState';
+import {
     DokumentasjonFelt,
     Dokumentasjonsbehov,
     VedleggstypeReiseTilSamling,
@@ -16,18 +25,15 @@ import {
     Samling,
 } from '../typer/søknad';
 
-const initialSamlinger = (): Samling[] => [{ _id: 1, lagret: false }];
-const initialReiseavstand = (): Reiseavstand => ({ aktivitetsadresse: {} });
-
 const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseContext(() => {
     ReiseTilSamlingSøknadProvider.displayName = 'SØKNAD_REISE_TIL_SAMLING_PROVIDER';
 
-    const [harBekreftet, settHarBekreftet] = useState<boolean>(false);
-    const [hovedytelse, settHovedytelse] = useState<Hovedytelse>();
-    const [aktivitet, settAktivitet] = useState<Aktivitet>();
+    const [harBekreftet, settHarBekreftet] = useState<boolean>(initialHarBekreftet());
+    const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(initialHovedytelse());
+    const [aktivitet, settAktivitet] = useState<Aktivitet | undefined>(initialAktivitet());
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
     const [reiseavstand, settReiseavstand] = useState<Reiseavstand>(initialReiseavstand());
-    const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(undefined);
+    const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(initialReisemåte());
     const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
         const behov: Dokumentasjonsbehov[] = [
             { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
@@ -37,16 +43,17 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         }
         return behov;
     }, [reisemåte?.kanReiseKollektivt?.verdi]);
-    const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>([]);
+    const [dokumentasjon, settDokumentasjon] =
+        useState<DokumentasjonFelt[]>(initialDokumentasjon());
 
     const resetSøknad = () => {
-        settHarBekreftet(false);
-        settHovedytelse(undefined);
-        settAktivitet(undefined);
+        settHarBekreftet(initialHarBekreftet());
+        settHovedytelse(initialHovedytelse());
+        settAktivitet(initialAktivitet());
         settSamlinger(initialSamlinger());
         settReiseavstand(initialReiseavstand());
-        settReisemåte(undefined);
-        settDokumentasjon([]);
+        settReisemåte(initialReisemåte());
+        settDokumentasjon(initialDokumentasjon());
     };
 
     const settAktivitetsadresse = (oppdatering: Partial<Aktivitetsadresse>) => {
