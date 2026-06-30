@@ -54,7 +54,7 @@ export const samlingerTekster: SamlingerInnhold = {
         },
         alternativer: JaNeiTilTekst,
         beskrivelse: {
-            nb: 'Dersom samlingen ikke er obligatorisk er det usannsynlig at du får utbetalt stønad.',
+            nb: 'Dersom samlingen ikke er obligatorisk har du ikke rett til støtte ved reise til samling. Du kan fortsatt søke, men du kan få avslag.',
         },
     },
     feilmelding_radio_samling_obligatorisk: {
