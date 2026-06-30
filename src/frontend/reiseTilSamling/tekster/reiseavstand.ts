@@ -28,6 +28,8 @@ interface ReiseavstandInnhold {
     feilmelding_avreise_poststed: TekstElement<string>;
     feilmelding_antall_km: TekstElement<string>;
     feilmelding_antall_km_ugyldig: TekstElement<string>;
+    advarsel_antall_km_for_lav_tittel: TekstElement<string>;
+    advarsel_antall_km_for_lav: TekstElement<string>;
     feilmelding_land: TekstElement<string>;
     feilmelding_gateadresse: TekstElement<string>;
     feilmelding_postnummer: TekstElement<string>;
@@ -123,5 +125,11 @@ export const reiseavstandTekster: ReiseavstandInnhold = {
     },
     feilmelding_poststed: {
         nb: 'Du må fylle inn poststed.',
+    },
+    advarsel_antall_km_for_lav: {
+        nb: 'Du kan fortsatt søke, men du kan få avslag.',
+    },
+    advarsel_antall_km_for_lav_tittel: {
+        nb: 'Dersom avstanden er under 30 kilometer har du ikke rett på pengestøtte til reise til samling.',
     },
 };

@@ -64,6 +64,7 @@ export interface Samling {
     lagret: boolean;
     fom?: VerdiFelt<string>;
     tom?: VerdiFelt<string>;
+    erObligatorisk?: EnumFelt<JaNei>;
 }
 
 export interface Hovedytelse {

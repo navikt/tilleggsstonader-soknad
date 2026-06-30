@@ -7,16 +7,19 @@ import { samlingerTekster } from '../../tekster/samlinger';
 
 export const errorKeyFom = (samlingId: number) => `samling_${samlingId}_fom`;
 export const errorKeyTom = (samlingId: number) => `samling_${samlingId}_tom`;
+export const errorKeyErObligatorisk = (samlingId: number) => `samling_${samlingId}_erObligatorisk`;
 
 export const nullstillteSamlingsfeil = (samlinger: Samling[]): Valideringsfeil =>
     samlinger.reduce((acc, samling) => {
         const keyFom = errorKeyFom(samling._id);
         const keyTom = errorKeyTom(samling._id);
+        const keyErObligatorisk = errorKeyErObligatorisk(samling._id);
 
         return {
             ...acc,
             [keyFom]: undefined,
             [keyTom]: undefined,
+            [keyErObligatorisk]: undefined,
         };
     }, {});
 
@@ -26,6 +29,7 @@ export const validerSamlingUnderRedigering = (
 ): Valideringsfeil => {
     const keyFom = errorKeyFom(samling._id);
     const keyTom = errorKeyTom(samling._id);
+    const keyErObligatorisk = errorKeyErObligatorisk(samling._id);
     let feil: Valideringsfeil = {};
 
     if (!harVerdi(samling.fom?.verdi)) {
@@ -58,6 +62,16 @@ export const validerSamlingUnderRedigering = (
                 },
             };
         }
+    }
+
+    if (!harVerdi(samling.erObligatorisk?.verdi)) {
+        feil = {
+            ...feil,
+            [keyErObligatorisk]: {
+                id: keyErObligatorisk,
+                melding: samlingerTekster.feilmelding_radio_samling_obligatorisk[locale],
+            },
+        };
     }
 
     return feil;

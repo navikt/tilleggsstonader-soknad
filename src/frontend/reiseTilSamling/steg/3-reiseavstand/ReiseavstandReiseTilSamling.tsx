@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-import { BodyShort, InlineMessage, Link, TextField, VStack } from '@navikt/ds-react';
+import {
+    Alert,
+    BodyShort,
+    Heading,
+    InlineMessage,
+    Link,
+    TextField,
+    VStack,
+} from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
 import {
@@ -79,10 +87,17 @@ export const ReiseavstandReiseTilSamling = () => {
 
     const skalReiseFraFolkeregAdr = reiseavstand.skalReiseFraFolkeregistrertAdresse?.verdi;
 
+    const [visAdvarsel, setVisAdvarsel] = useState(false);
+
+    const km = reiseavstand.antallKilometerEnVei?.verdi;
+
+    const visAdvarselForLavAvstand =
+        visAdvarsel && !isNaN(Number(km)) && Number(km) > 0 && Number(km) < 30;
+
     return (
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={reiseavstandTekster.tittel} level="2" size="medium" />
-            <VStack gap="space-4">
+            <VStack gap="space-8">
                 <BodyShort spacing>{reiseavstandTekster.info_minsteavstand[locale]}</BodyShort>
                 <BodyShort spacing>
                     <LocaleTekst
@@ -218,7 +233,18 @@ export const ReiseavstandReiseTilSamling = () => {
                         }));
                         nullstillFeil(verdi, errorKeyAntallKm);
                     }}
+                    onBlur={() => {
+                        setVisAdvarsel(true);
+                    }}
                 />
+                {visAdvarselForLavAvstand && (
+                    <Alert variant="info">
+                        <Heading size="small">
+                            {reiseavstandTekster.advarsel_antall_km_for_lav_tittel[locale]}
+                        </Heading>
+                        {reiseavstandTekster.advarsel_antall_km_for_lav[locale]}
+                    </Alert>
+                )}
             </VStack>
             <VStack gap="space-4">
                 <BodyShort weight="semibold">
