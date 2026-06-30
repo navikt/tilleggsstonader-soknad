@@ -21,7 +21,7 @@ export const validerReiseavstand = (
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
-    if (!harVerdi(reiseavstand.skalReiseFraFolkeregAdr?.verdi)) {
+    if (!harVerdi(reiseavstand.skalReiseFraFolkeregistrertAdresse?.verdi)) {
         feil = {
             ...feil,
             [errorKeySkalReiseFraFolkeregAdr]: {
@@ -29,8 +29,8 @@ export const validerReiseavstand = (
                 melding: reiseavstandTekster.feilmelding_skalReiseFraFolkeregAdr[locale],
             },
         };
-    } else if (reiseavstand.skalReiseFraFolkeregAdr?.verdi === 'NEI') {
-        if (!harVerdi(reiseavstand.adresseDuSkalReiseFra?.land?.verdi)) {
+    } else if (reiseavstand.skalReiseFraFolkeregistrertAdresse?.verdi === 'NEI') {
+        if (!harVerdi(reiseavstand.adresseDetSkalReisesFra?.land?.verdi)) {
             feil = {
                 ...feil,
                 [errorKeyAvreiseLand]: {
@@ -39,7 +39,7 @@ export const validerReiseavstand = (
                 },
             };
         }
-        if (!harVerdi(reiseavstand.adresseDuSkalReiseFra?.gateadresse?.verdi)) {
+        if (!harVerdi(reiseavstand.adresseDetSkalReisesFra?.gateadresse?.verdi)) {
             feil = {
                 ...feil,
                 [errorKeyAvreiseGateadresse]: {
@@ -48,7 +48,7 @@ export const validerReiseavstand = (
                 },
             };
         }
-        if (!harVerdi(reiseavstand.adresseDuSkalReiseFra?.postnummer?.verdi)) {
+        if (!harVerdi(reiseavstand.adresseDetSkalReisesFra?.postnummer?.verdi)) {
             feil = {
                 ...feil,
                 [errorKeyAvreisePostnummer]: {
@@ -57,7 +57,7 @@ export const validerReiseavstand = (
                 },
             };
         }
-        if (!harVerdi(reiseavstand.adresseDuSkalReiseFra?.poststed?.verdi)) {
+        if (!harVerdi(reiseavstand.adresseDetSkalReisesFra?.poststed?.verdi)) {
             feil = {
                 ...feil,
                 [errorKeyAvreisePoststed]: {

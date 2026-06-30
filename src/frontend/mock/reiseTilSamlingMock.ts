@@ -45,6 +45,12 @@ export const mockReiseavstand: Reiseavstand = {
         postnummer: { verdi: '0123', label: 'Postnummer' },
         poststed: { verdi: 'Oslo', label: 'Poststed' },
     },
+    skalReiseFraFolkeregistrertAdresse: {
+        label: 'Skal du reise fra din folkeregistrerte adresse?',
+        verdi: 'JA',
+        svarTekst: 'Ja',
+        alternativer: ['Ja', 'Nei'],
+    },
 };
 
 export const mockReisemåte: Reisemåte = {

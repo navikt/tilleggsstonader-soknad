@@ -64,10 +64,10 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         }));
     };
 
-    const settAdresseDuSkalReiseFra = (oppdatering: Partial<Avreiseadresse>) => {
+    const settAdresseDetSkalReisesFra = (oppdatering: Partial<Avreiseadresse>) => {
         settReiseavstand((prev) => ({
             ...prev,
-            adresseDuSkalReiseFra: { ...prev.adresseDuSkalReiseFra, ...oppdatering },
+            adresseDetSkalReisesFra: { ...prev.adresseDetSkalReisesFra, ...oppdatering },
         }));
     };
 
@@ -83,7 +83,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         reiseavstand,
         settReiseavstand,
         settAktivitetsadresse,
-        settAdresseDuSkalReiseFra,
+        settAdresseDetSkalReisesFra,
         reisemåte,
         settReisemåte,
         dokumentasjonsbehov,
