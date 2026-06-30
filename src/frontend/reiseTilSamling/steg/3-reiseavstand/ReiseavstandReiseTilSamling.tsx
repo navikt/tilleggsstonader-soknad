@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-import { Alert, BodyShort, InlineMessage, Link, TextField, VStack } from '@navikt/ds-react';
+import {
+    Alert,
+    BodyShort,
+    Heading,
+    InlineMessage,
+    Link,
+    TextField,
+    VStack,
+} from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
 import {
@@ -227,7 +235,10 @@ export const ReiseavstandReiseTilSamling = () => {
                     }}
                 />
                 {visAdvarselForLavAvstand && (
-                    <Alert variant="warning">
+                    <Alert variant="info">
+                        <Heading size="small">
+                            {reiseavstandTekster.advarsel_antall_km_for_lav_tittel[locale]}
+                        </Heading>
                         {reiseavstandTekster.advarsel_antall_km_for_lav[locale]}
                     </Alert>
                 )}
