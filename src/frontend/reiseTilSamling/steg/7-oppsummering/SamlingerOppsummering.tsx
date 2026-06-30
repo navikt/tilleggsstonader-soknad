@@ -4,7 +4,7 @@ import { FormSummary } from '@navikt/ds-react';
 
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { VerdiFelt } from '../../../typer/skjema';
+import { EnumFelt, VerdiFelt } from '../../../typer/skjema';
 import { Samling } from '../../../typer/søknad';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { harVerdi } from '../../../utils/typeUtils';
@@ -14,7 +14,7 @@ import { oppsummeringTekster } from '../../tekster/oppsummering';
 type ValidertSamling = Samling & {
     fom: VerdiFelt<string>;
     tom: VerdiFelt<string>;
-    erObligatorisk: VerdiFelt<string>;
+    erObligatorisk: EnumFelt<string>;
 };
 
 const erValidertSamling = (samling: Samling): samling is ValidertSamling =>

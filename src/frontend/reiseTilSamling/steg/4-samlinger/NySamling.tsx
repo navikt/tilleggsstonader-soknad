@@ -49,6 +49,7 @@ export const NySamling: React.FC<{
 
     const feilFom = visValideringsfeil ? valideringsfeil[keyFom] : undefined;
     const feilTom = visValideringsfeil ? valideringsfeil[keyTom] : undefined;
+    const feilErObligatorisk = visValideringsfeil ? valideringsfeil[keyErObligatorisk] : undefined;
 
     const { datepickerProps: dpPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(samling.fom?.verdi),
@@ -100,8 +101,11 @@ export const NySamling: React.FC<{
                 <LocaleRadioGroup
                     tekst={samlingerTekster.radio_samling_obligatorisk}
                     value={samling.erObligatorisk?.verdi || ''}
-                    onChange={(verdi) => oppdater(samling._id, 'erObligatorisk', verdi)}
-                    error={valideringsfeil[keyErObligatorisk]?.melding}
+                    onChange={(verdi) => {
+                        oppdater(samling._id, 'erObligatorisk', verdi);
+                        nullstillFeil(verdi?.verdi, keyErObligatorisk);
+                    }}
+                    error={feilErObligatorisk?.melding}
                 ></LocaleRadioGroup>
                 <InlineMessage status="info">
                     <BodyShort>{samlingerTekster.vedlegg_alert_innhold[locale]}</BodyShort>
