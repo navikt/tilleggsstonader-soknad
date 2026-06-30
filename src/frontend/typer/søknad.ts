@@ -53,8 +53,8 @@ export interface Avreiseadresse {
 }
 
 export interface Reiseavstand {
-    skalReiseFraFolkeregAdr?: EnumFelt<JaNei>;
-    adresseDuSkalReiseFra?: Avreiseadresse;
+    skalReiseFraFolkeregistrertAdresse?: EnumFelt<JaNei>;
+    adresseDetSkalReisesFra?: Avreiseadresse;
     antallKilometerEnVei?: VerdiFelt<string>;
     aktivitetsadresse: Aktivitetsadresse;
 }

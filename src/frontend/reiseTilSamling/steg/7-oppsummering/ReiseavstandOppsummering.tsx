@@ -16,17 +16,17 @@ export const ReiseavstandOppsummering: React.FC<{ reiseavstand: Reiseavstand }> 
     const { person } = usePerson();
 
     const avreiseAdresseVisning = () => {
-        if (reiseavstand.skalReiseFraFolkeregAdr?.verdi === 'JA') {
+        if (reiseavstand.skalReiseFraFolkeregistrertAdresse?.verdi === 'JA') {
             return person.strukturertAdresse
                 ? adressefelterTilVisning(person.strukturertAdresse)
                 : person.adresse;
         }
 
         return adressefelterTilVisning({
-            gateadresse: reiseavstand.adresseDuSkalReiseFra?.gateadresse?.verdi,
-            postnummer: reiseavstand.adresseDuSkalReiseFra?.postnummer?.verdi,
-            poststed: reiseavstand.adresseDuSkalReiseFra?.poststed?.verdi,
-            land: reiseavstand.adresseDuSkalReiseFra?.land?.verdi,
+            gateadresse: reiseavstand.adresseDetSkalReisesFra?.gateadresse?.verdi,
+            postnummer: reiseavstand.adresseDetSkalReisesFra?.postnummer?.verdi,
+            poststed: reiseavstand.adresseDetSkalReisesFra?.poststed?.verdi,
+            land: reiseavstand.adresseDetSkalReisesFra?.land?.verdi,
         });
     };
 

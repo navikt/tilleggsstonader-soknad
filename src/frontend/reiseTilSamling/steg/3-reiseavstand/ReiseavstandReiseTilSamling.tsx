@@ -59,7 +59,7 @@ const KmFelt = styled(TextField)`
 export const ReiseavstandReiseTilSamling = () => {
     const { locale } = useSpråk();
     const { person } = usePerson();
-    const { reiseavstand, settReiseavstand, settAktivitetsadresse, settAdresseDuSkalReiseFra } =
+    const { reiseavstand, settReiseavstand, settAktivitetsadresse, settAdresseDetSkalReisesFra } =
         useReiseTilSamlingSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -75,16 +75,17 @@ export const ReiseavstandReiseTilSamling = () => {
         return !inneholderFeil(feil);
     };
 
-    const oppdaterSkalReiseFraFolkeregAdr = (verdi: EnumFelt<JaNei>) => {
+    const oppdaterSkalReiseFraFolkeregAdr = (felt: EnumFelt<JaNei>) => {
         settReiseavstand((prev) => ({
             ...prev,
-            skalReiseFraFolkeregAdr: verdi,
-            adresseDuSkalReiseFra: verdi.verdi === 'JA' ? undefined : prev.adresseDuSkalReiseFra,
+            skalReiseFraFolkeregistrertAdresse: felt,
+            adresseDetSkalReisesFra:
+                felt.verdi === 'NEI' ? prev.adresseDetSkalReisesFra : undefined,
         }));
         settValideringsfeil((prev) => ({ ...prev, [errorKeySkalReiseFraFolkeregAdr]: undefined }));
     };
 
-    const skalReiseFraFolkeregAdr = reiseavstand.skalReiseFraFolkeregAdr?.verdi;
+    const skalReiseFraFolkeregAdr = reiseavstand.skalReiseFraFolkeregistrertAdresse?.verdi;
 
     const [visAdvarsel, setVisAdvarsel] = useState(false);
 
@@ -121,7 +122,7 @@ export const ReiseavstandReiseTilSamling = () => {
                 <LocaleRadioGroup
                     id={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.id}
                     tekst={reiseavstandTekster.radio_skalReiseFraFolkeregAdr}
-                    value={reiseavstand.skalReiseFraFolkeregAdr?.verdi ?? ''}
+                    value={reiseavstand.skalReiseFraFolkeregistrertAdresse?.verdi ?? ''}
                     onChange={oppdaterSkalReiseFraFolkeregAdr}
                     error={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.melding}
                 />
@@ -135,9 +136,9 @@ export const ReiseavstandReiseTilSamling = () => {
                                 <Landvelger
                                     id={valideringsfeil[errorKeyAvreiseLand]?.id}
                                     label={reiseavstandTekster.velg_land_label}
-                                    value={reiseavstand.adresseDuSkalReiseFra?.land?.verdi}
+                                    value={reiseavstand.adresseDetSkalReisesFra?.land?.verdi}
                                     onChange={(verdi) => {
-                                        settAdresseDuSkalReiseFra({ land: verdi });
+                                        settAdresseDetSkalReisesFra({ land: verdi });
                                         nullstillFeil(verdi.verdi, errorKeyAvreiseLand);
                                     }}
                                     medNorskeOmråder={true}
@@ -150,12 +151,13 @@ export const ReiseavstandReiseTilSamling = () => {
                                         reiseavstandTekster.avreiseadresse_vegadresse_label[locale]
                                     }
                                     value={
-                                        reiseavstand.adresseDuSkalReiseFra?.gateadresse?.verdi ?? ''
+                                        reiseavstand.adresseDetSkalReisesFra?.gateadresse?.verdi ??
+                                        ''
                                     }
                                     error={valideringsfeil[errorKeyAvreiseGateadresse]?.melding}
                                     onChange={(e) => {
                                         const verdi = e.target.value;
-                                        settAdresseDuSkalReiseFra({
+                                        settAdresseDetSkalReisesFra({
                                             gateadresse: {
                                                 label: reiseavstandTekster
                                                     .avreiseadresse_vegadresse_label[locale],
@@ -171,13 +173,14 @@ export const ReiseavstandReiseTilSamling = () => {
                                         reiseavstandTekster.avreiseadresse_postnummer_label[locale]
                                     }
                                     value={
-                                        reiseavstand.adresseDuSkalReiseFra?.postnummer?.verdi ?? ''
+                                        reiseavstand.adresseDetSkalReisesFra?.postnummer?.verdi ??
+                                        ''
                                     }
                                     error={valideringsfeil[errorKeyAvreisePostnummer]?.melding}
                                     inputMode="numeric"
                                     onChange={(e) => {
                                         const verdi = e.target.value;
-                                        settAdresseDuSkalReiseFra({
+                                        settAdresseDetSkalReisesFra({
                                             postnummer: {
                                                 label: reiseavstandTekster
                                                     .avreiseadresse_postnummer_label[locale],
@@ -193,12 +196,12 @@ export const ReiseavstandReiseTilSamling = () => {
                                         reiseavstandTekster.avreiseadresse_poststed_label[locale]
                                     }
                                     value={
-                                        reiseavstand.adresseDuSkalReiseFra?.poststed?.verdi ?? ''
+                                        reiseavstand.adresseDetSkalReisesFra?.poststed?.verdi ?? ''
                                     }
                                     error={valideringsfeil[errorKeyAvreisePoststed]?.melding}
                                     onChange={(e) => {
                                         const verdi = e.target.value;
-                                        settAdresseDuSkalReiseFra({
+                                        settAdresseDetSkalReisesFra({
                                             poststed: {
                                                 label: reiseavstandTekster
                                                     .avreiseadresse_poststed_label[locale],
