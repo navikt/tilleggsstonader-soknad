@@ -17,6 +17,7 @@ import {
 import { ERouteBarnetilsyn, RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
+import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
@@ -83,6 +84,7 @@ export const Forside: React.FC = () => {
                     <LocaleTekstAvsnitt tekst={forsideTekster.mottatt_faktura_alert_innhold} />
                 </Alert>
             )}
+            <AdvarselEndringOvergangsstønad />
             <div>
                 <LocaleHeading tekst={forsideTekster.viktig_å_vite_tittel} level="2" size="small" />
                 <LocalePunktliste innhold={forsideTekster.viktig_å_vite_innhold} />
