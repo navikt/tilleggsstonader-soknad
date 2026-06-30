@@ -74,6 +74,10 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
 
     await forventIngenWcagViolations(page);
 
+    await page
+        .getByRole('radiogroup', { name: 'Skal du reise fra din folkeregistrerte adresse?' })
+        .getByLabel('Ja')
+        .check();
     await page.getByLabel('Hvor lang reisevei har du?').fill('45');
     await page.getByLabel('Gateadresse').fill('Testveien 1');
     await page.getByLabel('Postnummer').fill('0123');
