@@ -1,4 +1,6 @@
-import { TekstElement } from '../../typer/tekst';
+import { JaNeiTilTekst } from '../../tekster/felles';
+import { JaNei } from '../../typer/søknad';
+import { Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface SamlingerInnhold {
     tittel: TekstElement<string>;
@@ -11,6 +13,8 @@ interface SamlingerInnhold {
     feilmelding_startdato: TekstElement<string>;
     feilmelding_sluttdato: TekstElement<string>;
     feilmelding_sluttdato_før_startdato: TekstElement<string>;
+    radio_samling_obligatorisk: Radiogruppe<JaNei>;
+    feilmelding_radio_samling_obligatorisk: TekstElement<string>;
 }
 
 export const samlingerTekster: SamlingerInnhold = {
@@ -43,5 +47,17 @@ export const samlingerTekster: SamlingerInnhold = {
     },
     feilmelding_sluttdato_før_startdato: {
         nb: 'Sluttdato kan ikke være før startdato.',
+    },
+    radio_samling_obligatorisk: {
+        header: {
+            nb: 'Er samlingen obligatorisk?',
+        },
+        alternativer: JaNeiTilTekst,
+        beskrivelse: {
+            nb: 'Dersom samlingen ikke er obligatorisk har du ikke rett til støtte ved reise til samling. Du kan fortsatt søke, men du kan få avslag.',
+        },
+    },
+    feilmelding_radio_samling_obligatorisk: {
+        nb: 'Du må velge om samlingen er obligatorisk eller ikke.',
     },
 };
