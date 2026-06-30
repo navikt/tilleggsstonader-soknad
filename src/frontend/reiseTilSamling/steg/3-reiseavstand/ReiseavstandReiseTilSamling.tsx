@@ -2,23 +2,33 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { BodyShort, Link, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, InlineMessage, Link, TextField, VStack } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
 import {
     errorKeyAntallKm,
+    errorKeyAvreiseGateadresse,
+    errorKeyAvreiseLand,
+    errorKeyAvreisePostnummer,
+    errorKeyAvreisePoststed,
     errorKeyGateadresse,
     errorKeyLand,
     errorKeyPostnummer,
     errorKeyPoststed,
+    errorKeySkalReiseFraFolkeregAdr,
     validerReiseavstand,
 } from './validering';
 import { Landvelger } from '../../../components/Landvelger/Landvelger';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
+import { usePerson } from '../../../context/PersonContext';
 import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { EnumFelt } from '../../../typer/skjema';
+import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { reiseavstandTekster } from '../../tekster/reiseavstand';
 
@@ -40,7 +50,9 @@ const KmFelt = styled(TextField)`
 
 export const ReiseavstandReiseTilSamling = () => {
     const { locale } = useSpråk();
-    const { reiseavstand, settReiseavstand, settAktivitetsadresse } = useReiseTilSamlingSøknad();
+    const { person } = usePerson();
+    const { reiseavstand, settReiseavstand, settAktivitetsadresse, settAdresseDuSkalReiseFra } =
+        useReiseTilSamlingSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const nullstillFeil = (verdi: string | undefined, errorKey: string) => {
@@ -55,11 +67,136 @@ export const ReiseavstandReiseTilSamling = () => {
         return !inneholderFeil(feil);
     };
 
+    const oppdaterSkalReiseFraFolkeregAdr = (verdi: EnumFelt<JaNei>) => {
+        settReiseavstand((prev) => ({
+            ...prev,
+            skalReiseFraFolkeregAdr: verdi,
+            adresseDuSkalReiseFra: verdi.verdi === 'JA' ? undefined : prev.adresseDuSkalReiseFra,
+        }));
+        settValideringsfeil((prev) => ({ ...prev, [errorKeySkalReiseFraFolkeregAdr]: undefined }));
+    };
+
+    const skalReiseFraFolkeregAdr = reiseavstand.skalReiseFraFolkeregAdr?.verdi;
+
     return (
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={reiseavstandTekster.tittel} level="2" size="medium" />
             <VStack gap="space-4">
                 <BodyShort spacing>{reiseavstandTekster.info_minsteavstand[locale]}</BodyShort>
+                <BodyShort spacing>
+                    <LocaleTekst
+                        tekst={reiseavstandTekster.folkereg_adresse}
+                        argument0={person.adresse}
+                    />
+                </BodyShort>
+                <InlineMessage status="info">
+                    <BodyShort spacing>
+                        {reiseavstandTekster.avreiseadresse_fra_folkereg_info[locale]}
+                        <Link
+                            href={reiseavstandTekster.avreiseadresse_fra_folkereg_lenke_url}
+                            target="_blank"
+                            inlineText
+                            rel="noopener noreferrer"
+                        >
+                            {reiseavstandTekster.avreiseadresse_fra_folkereg_lenke_tekst[locale]}
+                        </Link>
+                        .
+                    </BodyShort>
+                </InlineMessage>
+                <LocaleRadioGroup
+                    id={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.id}
+                    tekst={reiseavstandTekster.radio_skalReiseFraFolkeregAdr}
+                    value={reiseavstand.skalReiseFraFolkeregAdr?.verdi ?? ''}
+                    onChange={oppdaterSkalReiseFraFolkeregAdr}
+                    error={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.melding}
+                />
+                {skalReiseFraFolkeregAdr === 'NEI' && (
+                    <VStack gap="space-4" style={{ marginBottom: 'var(--a-spacing-2)' }}>
+                        <BodyShort weight="semibold">
+                            {reiseavstandTekster.avreiseadresse_tittel[locale]}
+                        </BodyShort>
+                        <AdresseBoks>
+                            <VStack gap="space-16">
+                                <Landvelger
+                                    id={valideringsfeil[errorKeyAvreiseLand]?.id}
+                                    label={reiseavstandTekster.velg_land_label}
+                                    value={reiseavstand.adresseDuSkalReiseFra?.land?.verdi}
+                                    onChange={(verdi) => {
+                                        settAdresseDuSkalReiseFra({ land: verdi });
+                                        nullstillFeil(verdi.verdi, errorKeyAvreiseLand);
+                                    }}
+                                    medNorskeOmråder={true}
+                                    error={valideringsfeil[errorKeyAvreiseLand]?.melding}
+                                    defaultNorge
+                                />
+                                <TextField
+                                    id={valideringsfeil[errorKeyAvreiseGateadresse]?.id}
+                                    label={
+                                        reiseavstandTekster.avreiseadresse_vegadresse_label[locale]
+                                    }
+                                    value={
+                                        reiseavstand.adresseDuSkalReiseFra?.gateadresse?.verdi ?? ''
+                                    }
+                                    error={valideringsfeil[errorKeyAvreiseGateadresse]?.melding}
+                                    onChange={(e) => {
+                                        const verdi = e.target.value;
+                                        settAdresseDuSkalReiseFra({
+                                            gateadresse: {
+                                                label: reiseavstandTekster
+                                                    .avreiseadresse_vegadresse_label[locale],
+                                                verdi,
+                                            },
+                                        });
+                                        nullstillFeil(verdi, errorKeyAvreiseGateadresse);
+                                    }}
+                                />
+                                <PostnummerFelt
+                                    id={valideringsfeil[errorKeyAvreisePostnummer]?.id}
+                                    label={
+                                        reiseavstandTekster.avreiseadresse_postnummer_label[locale]
+                                    }
+                                    value={
+                                        reiseavstand.adresseDuSkalReiseFra?.postnummer?.verdi ?? ''
+                                    }
+                                    error={valideringsfeil[errorKeyAvreisePostnummer]?.melding}
+                                    inputMode="numeric"
+                                    onChange={(e) => {
+                                        const verdi = e.target.value;
+                                        settAdresseDuSkalReiseFra({
+                                            postnummer: {
+                                                label: reiseavstandTekster
+                                                    .avreiseadresse_postnummer_label[locale],
+                                                verdi,
+                                            },
+                                        });
+                                        nullstillFeil(verdi, errorKeyAvreisePostnummer);
+                                    }}
+                                />
+                                <TextField
+                                    id={valideringsfeil[errorKeyAvreisePoststed]?.id}
+                                    label={
+                                        reiseavstandTekster.avreiseadresse_poststed_label[locale]
+                                    }
+                                    value={
+                                        reiseavstand.adresseDuSkalReiseFra?.poststed?.verdi ?? ''
+                                    }
+                                    error={valideringsfeil[errorKeyAvreisePoststed]?.melding}
+                                    onChange={(e) => {
+                                        const verdi = e.target.value;
+                                        settAdresseDuSkalReiseFra({
+                                            poststed: {
+                                                label: reiseavstandTekster
+                                                    .avreiseadresse_poststed_label[locale],
+                                                verdi,
+                                            },
+                                        });
+                                        nullstillFeil(verdi, errorKeyAvreisePoststed);
+                                    }}
+                                />
+                            </VStack>
+                        </AdresseBoks>
+                    </VStack>
+                )}
                 <KmFelt
                     id={valideringsfeil[errorKeyAntallKm]?.id}
                     label={reiseavstandTekster.antall_km_label[locale]}
@@ -80,22 +217,11 @@ export const ReiseavstandReiseTilSamling = () => {
                     }}
                 />
             </VStack>
-            <BodyShort>
-                {reiseavstandTekster.folkeregistrert_adresse_info[locale]}
-                <Link
-                    href={reiseavstandTekster.folkeregistrert_adresse_lenke_url}
-                    target="_blank"
-                    inlineText
-                >
-                    {reiseavstandTekster.folkeregistrert_adresse_lenke_tekst[locale]}
-                </Link>
-                .
-            </BodyShort>
             <VStack gap="space-4">
                 <BodyShort weight="semibold">
                     {reiseavstandTekster.aktivitetsadresse_tittel[locale]}
                 </BodyShort>
-                <AdresseBoks>
+                <AdresseBoks style={{ paddingBottom: '2rem' }}>
                     <VStack gap="space-16">
                         <Landvelger
                             id={valideringsfeil[errorKeyLand]?.id}

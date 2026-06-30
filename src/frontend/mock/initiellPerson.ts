@@ -5,5 +5,11 @@ export const initiellPerson: Person = {
     visningsnavn: '',
     alder: 0,
     adresse: '',
+    strukturertAdresse: {
+        land: 'NOR',
+        gateadresse: '',
+        postnummer: '',
+        poststed: '',
+    },
     barn: [],
 };

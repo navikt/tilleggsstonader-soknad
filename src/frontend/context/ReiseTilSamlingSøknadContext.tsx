@@ -19,6 +19,7 @@ import {
 import {
     Aktivitet,
     Aktivitetsadresse,
+    Avreiseadresse,
     Hovedytelse,
     Reiseavstand,
     Reisemåte,
@@ -63,6 +64,13 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         }));
     };
 
+    const settAdresseDuSkalReiseFra = (oppdatering: Partial<Avreiseadresse>) => {
+        settReiseavstand((prev) => ({
+            ...prev,
+            adresseDuSkalReiseFra: { ...prev.adresseDuSkalReiseFra, ...oppdatering },
+        }));
+    };
+
     return {
         harBekreftet,
         settHarBekreftet,
@@ -75,6 +83,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         reiseavstand,
         settReiseavstand,
         settAktivitetsadresse,
+        settAdresseDuSkalReiseFra,
         reisemåte,
         settReisemåte,
         dokumentasjonsbehov,

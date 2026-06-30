@@ -45,7 +45,16 @@ export interface Aktivitetsadresse {
     poststed?: VerdiFelt<string>;
 }
 
+export interface Avreiseadresse {
+    land?: SelectFelt;
+    gateadresse?: VerdiFelt<string>;
+    postnummer?: VerdiFelt<string>;
+    poststed?: VerdiFelt<string>;
+}
+
 export interface Reiseavstand {
+    skalReiseFraFolkeregAdr?: EnumFelt<JaNei>;
+    adresseDuSkalReiseFra?: Avreiseadresse;
     antallKilometerEnVei?: VerdiFelt<string>;
     aktivitetsadresse: Aktivitetsadresse;
 }
