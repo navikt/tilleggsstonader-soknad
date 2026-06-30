@@ -14,7 +14,8 @@ import {
 } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
-import { errorKeyFom, errorKeyTom } from './validering';
+import { errorKeyErObligatorisk, errorKeyFom, errorKeyTom } from './validering';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Samling } from '../../../typer/søknad';
@@ -38,6 +39,7 @@ export const NySamling: React.FC<{
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
     const keyFom = errorKeyFom(samling._id);
     const keyTom = errorKeyTom(samling._id);
+    const keyErObligatorisk = errorKeyErObligatorisk(samling._id);
 
     const nullstillFeil = (verdi: string | undefined, errorKey: string) => {
         if (visValideringsfeil && harVerdi(verdi)) {
@@ -95,6 +97,12 @@ export const NySamling: React.FC<{
                         {...inputPropsTom}
                     />
                 </DatePicker>
+                <LocaleRadioGroup
+                    tekst={samlingerTekster.radio_samling_obligatorisk}
+                    value={samling.erObligatorisk?.verdi || ''}
+                    onChange={(verdi) => oppdater(samling._id, 'erObligatorisk', verdi)}
+                    error={valideringsfeil[keyErObligatorisk]?.melding}
+                ></LocaleRadioGroup>
                 <InlineMessage status="info">
                     <BodyShort>{samlingerTekster.vedlegg_alert_innhold[locale]}</BodyShort>
                 </InlineMessage>

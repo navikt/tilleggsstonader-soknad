@@ -35,6 +35,12 @@ export const mockSamlinger: Samling[] = [
         lagret: true,
         fom: { verdi: '2025-06-01', label: 'Startdato' },
         tom: { verdi: '2025-06-05', label: 'Sluttdato' },
+        erObligatorisk: {
+            verdi: 'JA',
+            label: 'Er samlingen obligatorisk?',
+            svarTekst: 'Ja',
+            alternativer: ['Ja', 'Nei'],
+        },
     },
 ];
 
