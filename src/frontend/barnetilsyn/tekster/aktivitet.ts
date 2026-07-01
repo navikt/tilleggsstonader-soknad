@@ -66,6 +66,12 @@ const hvilkenAktivitet: HvilkenAktivitet = {
 export const aktivitetTekster: AktivitetInnhold = {
     ...aktivitetTeksterFelles,
     hvilken_aktivitet: hvilkenAktivitet,
+    lønnet_tiltak_infoalert_innhold: {
+        nb: [
+            'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',
+            'Som lærling kan du ha rett til støtte til pass av barn selv om du mottar lønn.',
+        ],
+    },
     ingen_aktivitet_infoalert_innhold: {
         del1: {
             nb: [
@@ -96,6 +102,19 @@ export const aktivitetTekster: AktivitetInnhold = {
                 ],
             },
         ],
+    },
+    radio_annet_lesmer: {
+        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
+        innhold: {
+            nb: [
+                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 3 måneder siden. ',
+                {
+                    tekst: 'Søknad på papir',
+                    url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
+                },
+                '.',
+            ],
+        },
     },
     radio_annet_lesmer_hva_betyr_alternativene: {
         header: { nb: 'Hva betyr alternativene?' },

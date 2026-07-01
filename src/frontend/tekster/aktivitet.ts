@@ -33,12 +33,10 @@ interface AktivitetInnholdFelles {
     guide_innhold: TekstElement<string[]>;
     radio_lønnet_tiltak: Radiogruppe<JaNei>;
     checkbox_velge_aktivitet_feilmelding: TekstElement<string>;
-    radio_annet_lesmer: LesMer<InlineLenke>;
     radio_annet_feilmelding: TekstElement<string>;
     ingen_registrerte_aktiviterer_overskrift: TekstElement<string>;
     tittel: TekstElement<string>;
     ingen_aktivitet_infoalert_title: TekstElement<string>;
-    lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
     radio_lønnet_tiltak_feilmelding: TekstElement<string>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
     søker_fra_label: TekstElement<string>;
@@ -49,9 +47,11 @@ interface AktivitetInnholdFelles {
 export interface AktivitetInnhold extends AktivitetInnholdFelles {
     radio_annet: RadiogruppeMedUtvalg<AnnenAktivitetType>;
     radio_annet_uten_registeraktivitet: RadiogruppeMedUtvalg<AnnenAktivitetType>;
+    radio_annet_lesmer: LesMer<InlineLenke>;
     radio_annet_lesmer_hva_betyr_alternativene: HvaBetyrAlternativene;
     hvilken_aktivitet: HvilkenAktivitet;
     ingen_aktivitet_infoalert_innhold: IngenAktivitet;
+    lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
 }
 
 export interface HvilkenAktivitet {
@@ -121,12 +121,6 @@ export const aktivitetTeksterFelles: AktivitetInnholdFelles = {
     checkbox_velge_aktivitet_feilmelding: {
         nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
     },
-    lønnet_tiltak_infoalert_innhold: {
-        nb: [
-            'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',
-            'Som lærling kan du ha rett til støtte ved reise til samling selv om du mottar lønn.',
-        ],
-    },
     radio_lønnet_tiltak_feilmelding: {
         nb: 'Du må svare på om du mottar lønn gjennom et tiltak.',
     },
@@ -136,19 +130,6 @@ export const aktivitetTeksterFelles: AktivitetInnholdFelles = {
             nb: 'Vil du fortsatt søke nå?',
         },
         alternativer: JaNeiTilTekst,
-    },
-    radio_annet_lesmer: {
-        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
-        innhold: {
-            nb: [
-                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 3 måneder siden. ',
-                {
-                    tekst: 'Søknad på papir',
-                    url: 'https://www.nav.no/fyllut/nav111217b?sub=paper',
-                },
-                '.',
-            ],
-        },
     },
     radio_annet_feilmelding: {
         nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
