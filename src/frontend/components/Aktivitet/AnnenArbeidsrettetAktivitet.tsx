@@ -2,21 +2,21 @@ import React from 'react';
 
 import { Box, List } from '@navikt/ds-react';
 
-import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
-import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { aktivitetTekster } from '../../barnetilsyn/tekster/aktivitet';
+import { AnnenAktivitetType } from '../../typer/aktivitet';
+import { EnumFelt } from '../../typer/skjema';
+import { RadiogruppeMedUtvalg } from '../../typer/tekst';
+import { Feilmelding } from '../../typer/validering';
+import { LocaleInlineLenke } from '../Teksthåndtering/LocaleInlineLenke';
+import { LocaleRadioGroup } from '../Teksthåndtering/LocaleRadioGroup';
 import {
     LocaleReadMoreMedChildren,
     LocaleReadMoreMedLenke,
-} from '../../../components/Teksthåndtering/LocaleReadMore';
-import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { AnnenAktivitetType } from '../../../typer/aktivitet';
-import { EnumFelt } from '../../../typer/skjema';
-import { Radiogruppe } from '../../../typer/tekst';
-import { Feilmelding } from '../../../typer/validering';
-import { aktivitetTekster } from '../../tekster/aktivitet';
+} from '../Teksthåndtering/LocaleReadMore';
+import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
 
 interface Props {
-    tekst: Radiogruppe<AnnenAktivitetType>;
+    tekst: RadiogruppeMedUtvalg<AnnenAktivitetType>;
     annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
     oppdaterAnnenAktivitet: (verdi: EnumFelt<AnnenAktivitetType>) => void;
     feilmelding: Feilmelding | undefined;

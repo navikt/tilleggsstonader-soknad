@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Alert, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
 
-import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
 import {
@@ -10,6 +9,7 @@ import {
     feilLønnetAktivitet,
     feilValgtAktivitet,
 } from '../../../components/Aktivitet/aktivitetValidering';
+import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/AnnenArbeidsrettetAktivitet';
 import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
 import {
