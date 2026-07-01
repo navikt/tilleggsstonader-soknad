@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Alert, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
 
-import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
 import {
@@ -10,6 +9,7 @@ import {
     feilLønnetAktivitet,
     feilValgtAktivitet,
 } from '../../../components/Aktivitet/aktivitetValidering';
+import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/AnnenArbeidsrettetAktivitet';
 import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
 import {
@@ -190,7 +190,8 @@ export const AktivitetPassAvBarn = () => {
                         />
                     </div>
                     <AnnenArbeidsrettetAktivitet
-                        tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
+                        aktivitetTekster={aktivitetTekster}
+                        radioTekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
                         oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
                         annenAktivitet={annenAktivitet}
                         feilmelding={valideringsfeil.annenAktivitet}
@@ -202,7 +203,8 @@ export const AktivitetPassAvBarn = () => {
                     <VStack gap="space-24">
                         {skalViseAnnenAktivitet && (
                             <AnnenArbeidsrettetAktivitet
-                                tekst={aktivitetTekster.radio_annet}
+                                aktivitetTekster={aktivitetTekster}
+                                radioTekst={aktivitetTekster.radio_annet}
                                 oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
                                 annenAktivitet={annenAktivitet}
                                 feilmelding={valideringsfeil.annenAktivitet}

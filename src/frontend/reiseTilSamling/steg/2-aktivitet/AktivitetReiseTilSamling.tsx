@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Alert, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
 
-import { AnnenArbeidsrettetAktivitet } from './AnnenArbeidsrettetAktivitet';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
 import {
@@ -10,6 +9,7 @@ import {
     feilLønnetAktivitet,
     feilValgtAktivitet,
 } from '../../../components/Aktivitet/aktivitetValidering';
+import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/AnnenArbeidsrettetAktivitet';
 import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
 import {
@@ -27,11 +27,11 @@ import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterCont
 import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { AnnenAktivitetType } from '../../../typer/aktivitet';
+import { AktivitetTypeUtdanning, AnnenAktivitetType } from '../../../typer/aktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
-import { aktivitetTekster, AktivitetTypeUtdanning } from '../../tekster/aktivitet';
+import { aktivitetTekster } from '../../tekster/aktivitet';
 
 export const AktivitetReiseTilSamling = () => {
     const { locale } = useSpråk();
@@ -202,7 +202,8 @@ export const AktivitetReiseTilSamling = () => {
                         />
                     </div>
                     <AnnenArbeidsrettetAktivitet
-                        tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
+                        aktivitetTekster={aktivitetTekster}
+                        radioTekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
                         oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
                         annenAktivitet={annenAktivitet}
                         feilmelding={valideringsfeil.annenAktivitet}
@@ -227,7 +228,8 @@ export const AktivitetReiseTilSamling = () => {
                     <VStack gap="space-24">
                         {skalViseAnnenAktivitet && (
                             <AnnenArbeidsrettetAktivitet
-                                tekst={aktivitetTekster.radio_annet}
+                                aktivitetTekster={aktivitetTekster}
+                                radioTekst={aktivitetTekster.radio_annet}
                                 oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
                                 annenAktivitet={annenAktivitet}
                                 feilmelding={valideringsfeil.annenAktivitet}

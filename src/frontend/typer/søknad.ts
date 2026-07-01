@@ -1,9 +1,8 @@
-import { AnnenAktivitetType } from './aktivitet';
+import { AktivitetTypeUtdanning, AnnenAktivitetType } from './aktivitet';
 import { Barnepass } from './barn';
 import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
 import { Ytelse } from '../components/Hovedytelse/typer';
 import { Utdanning } from '../læremidler/typer/søknad';
-import { AktivitetTypeUtdanning } from '../reiseTilSamling/tekster/aktivitet';
 
 export type Søknad = SøknadPassAvBarn | SøknadLæremidler | SøknadReiseTilSamling;
 

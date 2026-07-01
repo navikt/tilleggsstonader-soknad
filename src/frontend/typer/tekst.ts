@@ -32,6 +32,12 @@ export type Radiogruppe<T extends string> = {
     alternativer: Alternativer<T>;
 };
 
+export type RadiogruppeMedUtvalg<T extends string> = {
+    header: TekstElement<string>;
+    beskrivelse?: TekstElement<string>;
+    alternativer: Partial<Alternativer<T>>;
+};
+
 export type CheckboxGruppe<T extends string> = {
     legend: TekstElement<string>;
     beskrivelse?: TekstElement<string>;

@@ -4,14 +4,14 @@ import { Radio, RadioGroup, RadioGroupProps as AkselRadioGroupProps } from '@nav
 
 import { useSpråk } from '../../context/SpråkContext';
 import { EnumFelt } from '../../typer/skjema';
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { RadiogruppeMedUtvalg, TekstElement } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
 interface RadioGroupProps<T extends string> extends Omit<
     AkselRadioGroupProps,
     'legend' | 'description' | 'children'
 > {
-    tekst: Radiogruppe<T>;
+    tekst: RadiogruppeMedUtvalg<T>;
     onChange: (enumFelt: EnumFelt<T>) => void;
     children?: React.ReactNode;
     argument0?: string;
@@ -37,7 +37,7 @@ export function LocaleRadioGroup<T extends string>({
             alternativer: Object.values(tekst.alternativer).map(
                 (alternativ) => (alternativ as TekstElement<string>)[locale]
             ),
-            svarTekst: svarTekst[locale] || '',
+            svarTekst: svarTekst?.[locale] || '',
         });
     };
 
