@@ -19,6 +19,7 @@ import {
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
@@ -30,7 +31,7 @@ import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
-import { aktivitetTekster } from '../../tekster/aktivitet';
+import { aktivitetTekster, AktivitetTypeUtdanning } from '../../tekster/aktivitet';
 
 export const AktivitetReiseTilSamling = () => {
     const { locale } = useSpråk();
@@ -38,23 +39,31 @@ export const AktivitetReiseTilSamling = () => {
     const { aktivitet, settAktivitet } = useReiseTilSamlingSøknad();
     const { registerAktiviteter } = useRegisterAktiviteter();
 
+    // De du velger hvis du har aktiviteter
     const [valgteAktiviteter, settValgteAktiviteter] = useState<
         EnumFlereValgFelt<string> | undefined
     >(aktivitet ? aktivitet.aktiviteter : undefined);
 
+    // De du velger hvis du ikke har aktiviteter
     const [annenAktivitet, setAnnenAktivitet] = useState<EnumFelt<AnnenAktivitetType> | undefined>(
         aktivitet ? aktivitet.annenAktivitet : undefined
     );
 
+    // Hvis du trykker på om du mottar lønn gjennom et tiltak
     const [lønnetAktivitet, setLønnetAktivitet] = useState<EnumFelt<JaNei> | undefined>(
         aktivitet ? aktivitet.lønnetAktivitet : undefined
     );
+
+    const [annenAktivitetTypeUtdanning, setAnnenAktivitetTypeUtdanning] = useState<
+        EnumFelt<AktivitetTypeUtdanning> | undefined
+    >(aktivitet ? aktivitet.annenAktivitetTypeUtdanning : undefined);
 
     const oppdaterAktivitetISøknad = () => {
         settAktivitet({
             aktiviteter: valgteAktiviteter,
             annenAktivitet: annenAktivitet,
             lønnetAktivitet: lønnetAktivitet,
+            annenAktivitetTypeUtdanning: annenAktivitetTypeUtdanning,
         });
     };
 
@@ -154,6 +163,9 @@ export const AktivitetReiseTilSamling = () => {
         return !inneholderFeil(feil);
     };
 
+    const skalViseTypeArbeidsrettedeAktiviteter =
+        annenAktivitet?.verdi !== AnnenAktivitetType.INGEN_AKTIVITET;
+
     return (
         <Side validerSteg={kanFortsette} oppdaterSøknad={oppdaterAktivitetISøknad}>
             <LocaleHeading tekst={aktivitetTekster.tittel} level="2" size="medium" />
@@ -195,6 +207,19 @@ export const AktivitetReiseTilSamling = () => {
                         annenAktivitet={annenAktivitet}
                         feilmelding={valideringsfeil.annenAktivitet}
                     />
+                </>
+            )}
+            {skalViseTypeArbeidsrettedeAktiviteter && (
+                <>
+                    <LocaleRadioGroup
+                        tekst={aktivitetTekster.radio_type_arbeidsrettede_aktiviteter}
+                        onChange={setAnnenAktivitetTypeUtdanning}
+                        id={valideringsfeil.annenAktivitetTypeUtdanning?.id}
+                        error={valideringsfeil.annenAktivitetTypeUtdanning?.melding}
+                        value={annenAktivitetTypeUtdanning?.verdi || []}
+                    >
+                        HELLO
+                    </LocaleRadioGroup>
                 </>
             )}
             {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (

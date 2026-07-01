@@ -27,6 +27,7 @@ export const mockAktivitet: Aktivitet = {
         svarTekst: 'Nei',
         alternativer: ['Ja', 'Nei'],
     },
+    annenAktivitetTypeUtdanning: undefined,
 };
 
 export const mockSamlinger: Samling[] = [

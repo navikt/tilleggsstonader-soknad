@@ -24,6 +24,7 @@ interface AktivitetInnhold {
     søker_fra_lesmer: LesMer<string[]>;
     søker_fra_dato_feilmelding: TekstElement<string>;
     hvilken_aktivitet: HvilkenAktivitet;
+    radio_type_arbeidsrettede_aktiviteter: Radiogruppe<AktivitetTypeUtdanning>;
 }
 
 interface HvilkenAktivitet {
@@ -47,6 +48,25 @@ interface IngenAktivitet {
     del1: TekstElement<string[]>;
     del2_lenker: TekstElement<InlineLenke>[];
 }
+
+export enum AktivitetTypeUtdanning {
+    VIDEREGÅENDE = 'VIDEREGÅENDE',
+    OPPLÆRING_FOR_VOKSNE = 'OPPLÆRING_FOR_VOKSNE',
+    ANNET_TILTAK = 'ANNET_TILTAK',
+}
+
+export const AktivitetTypeUtdanningTilTekst: Record<
+    AktivitetTypeUtdanning,
+    TekstElement<string>
+> = {
+    VIDEREGÅENDE: { nb: 'Videregående skole' },
+    OPPLÆRING_FOR_VOKSNE: {
+        nb: 'Forberedende opplæring for voksne (Tidl. grunnskole for voksne)',
+    },
+    ANNET_TILTAK: {
+        nb: 'Annen aktivitet med mål om arbeid eller utdanning',
+    },
+};
 
 export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<string>> = {
     TILTAK: { nb: 'Tiltak / arbeidsrettet utredning' },
@@ -183,5 +203,10 @@ export const aktivitetTekster: AktivitetInnhold = {
     },
     ingen_registrerte_aktiviterer_overskrift: {
         nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.',
+    },
+
+    radio_type_arbeidsrettede_aktiviteter: {
+        header: { nb: 'Hva slags type arbeidsrettet aktivitet går du du på?' },
+        alternativer: AktivitetTypeUtdanningTilTekst,
     },
 };

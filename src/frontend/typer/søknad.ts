@@ -3,6 +3,7 @@ import { Barnepass } from './barn';
 import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
 import { Ytelse } from '../components/Hovedytelse/typer';
 import { Utdanning } from '../læremidler/typer/søknad';
+import { AktivitetTypeUtdanning } from '../reiseTilSamling/tekster/aktivitet';
 
 export type Søknad = SøknadPassAvBarn | SøknadLæremidler | SøknadReiseTilSamling;
 
@@ -97,6 +98,7 @@ export interface OppholdUtenforNorge {
 export interface Aktivitet {
     aktiviteter: EnumFlereValgFelt<string> | undefined;
     annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
+    annenAktivitetTypeUtdanning: EnumFelt<AktivitetTypeUtdanning> | undefined;
     lønnetAktivitet: EnumFelt<JaNei> | undefined;
 }
 

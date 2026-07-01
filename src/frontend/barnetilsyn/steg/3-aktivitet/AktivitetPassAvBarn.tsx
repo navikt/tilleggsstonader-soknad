@@ -55,6 +55,7 @@ export const AktivitetPassAvBarn = () => {
             aktiviteter: valgteAktiviteter,
             annenAktivitet: annenAktivitet,
             lønnetAktivitet: lønnetAktivitet,
+            annenAktivitetTypeUtdanning: undefined,
         });
     };
 
