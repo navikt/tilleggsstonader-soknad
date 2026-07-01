@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, List } from '@navikt/ds-react';
 
-import { aktivitetTekster } from '../../barnetilsyn/tekster/aktivitet';
+import { AktivitetInnhold } from '../../tekster/aktivitet';
 import { AnnenAktivitetType } from '../../typer/aktivitet';
 import { EnumFelt } from '../../typer/skjema';
 import { RadiogruppeMedUtvalg } from '../../typer/tekst';
@@ -16,14 +16,16 @@ import {
 import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
 
 interface Props {
-    tekst: RadiogruppeMedUtvalg<AnnenAktivitetType>;
+    aktivitetTekster: AktivitetInnhold;
+    radioTekst: RadiogruppeMedUtvalg<AnnenAktivitetType>;
     annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined;
     oppdaterAnnenAktivitet: (verdi: EnumFelt<AnnenAktivitetType>) => void;
     feilmelding: Feilmelding | undefined;
 }
 
 export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
-    tekst,
+    aktivitetTekster,
+    radioTekst,
     annenAktivitet,
     oppdaterAnnenAktivitet,
     feilmelding,
@@ -32,7 +34,7 @@ export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
         <div>
             <LocaleRadioGroup
                 id={feilmelding?.id}
-                tekst={tekst}
+                tekst={radioTekst}
                 onChange={oppdaterAnnenAktivitet}
                 value={annenAktivitet?.verdi || []}
                 error={feilmelding?.melding}

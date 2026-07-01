@@ -189,7 +189,8 @@ export const AktivitetPassAvBarn = () => {
                         />
                     </div>
                     <AnnenArbeidsrettetAktivitet
-                        tekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
+                        aktivitetTekster={aktivitetTekster}
+                        radioTekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
                         oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
                         annenAktivitet={annenAktivitet}
                         feilmelding={valideringsfeil.annenAktivitet}
@@ -201,7 +202,8 @@ export const AktivitetPassAvBarn = () => {
                     <VStack gap="space-24">
                         {skalViseAnnenAktivitet && (
                             <AnnenArbeidsrettetAktivitet
-                                tekst={aktivitetTekster.radio_annet}
+                                aktivitetTekster={aktivitetTekster}
+                                radioTekst={aktivitetTekster.radio_annet}
                                 oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
                                 annenAktivitet={annenAktivitet}
                                 feilmelding={valideringsfeil.annenAktivitet}
