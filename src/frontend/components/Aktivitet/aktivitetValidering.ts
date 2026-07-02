@@ -23,14 +23,3 @@ export const feilAnnenAktivitet = (feil: Valideringsfeil, feilmelding: string) =
         melding: feilmelding,
     },
 });
-
-export const feilTilleggsopplysningerAnnenAktivitet = (
-    feil: Valideringsfeil,
-    feilmelding: string
-) => ({
-    ...feil,
-    tilleggsopplysningerAnnenAktivitet: {
-        id: '4',
-        melding: feilmelding,
-    },
-});
