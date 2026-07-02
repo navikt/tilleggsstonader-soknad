@@ -1,5 +1,5 @@
 import { JaNeiTilTekst } from './felles';
-import { AnnenAktivitetType } from '../typer/aktivitet';
+import { AktivitetTypeUtdanning, AnnenAktivitetType } from '../typer/aktivitet';
 import { JaNei } from '../typer/søknad';
 import {
     InlineLenke,
@@ -38,23 +38,14 @@ interface AktivitetInnholdFelles {
     tittel: TekstElement<string>;
     ingen_aktivitet_infoalert_title: TekstElement<string>;
     radio_lønnet_tiltak_feilmelding: TekstElement<string>;
+    radio_annet_uten_registeraktivitet_feilmelding: TekstElement<string>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
     søker_fra_label: TekstElement<string>;
     søker_fra_lesmer: LesMer<string[]>;
     søker_fra_dato_feilmelding: TekstElement<string>;
 }
 
-export interface AktivitetInnhold extends AktivitetInnholdFelles {
-    radio_annet: RadiogruppeMedUtvalg<AnnenAktivitetType>;
-    radio_annet_uten_registeraktivitet: RadiogruppeMedUtvalg<AnnenAktivitetType>;
-    radio_annet_lesmer: LesMer<InlineLenke>;
-    radio_annet_lesmer_hva_betyr_alternativene: HvaBetyrAlternativene;
-    hvilken_aktivitet: HvilkenAktivitet;
-    ingen_aktivitet_infoalert_innhold: IngenAktivitet;
-    lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
-}
-
-export interface HvilkenAktivitet {
+interface HvilkenAktivitet {
     spm: TekstElement<string>;
     les_mer: {
         header: TekstElement<string>;
@@ -81,6 +72,29 @@ const aktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<string>> = 
     UTDANNING: { nb: 'Utdanning godkjent av Nav' },
     ARBEIDSSØKER: { nb: 'Jeg er arbeidssøker' },
     INGEN_AKTIVITET: { nb: 'Har ingen arbeidsrettet aktivitet' },
+};
+
+export interface AktivitetInnhold extends AktivitetInnholdFelles {
+    radio_annet: RadiogruppeMedUtvalg<AnnenAktivitetType>;
+    radio_annet_uten_registeraktivitet: RadiogruppeMedUtvalg<AnnenAktivitetType>;
+    radio_annet_lesmer: LesMer<InlineLenke>;
+    radio_annet_lesmer_hva_betyr_alternativene: HvaBetyrAlternativene;
+    hvilken_aktivitet: HvilkenAktivitet;
+    ingen_aktivitet_infoalert_innhold: IngenAktivitet;
+    lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
+}
+
+export const AktivitetTypeUtdanningTilTekst: Record<
+    AktivitetTypeUtdanning,
+    TekstElement<string>
+> = {
+    VIDEREGÅENDE: { nb: 'Videregående skole' },
+    OPPLÆRING_FOR_VOKSNE: {
+        nb: 'Forberedende opplæring for voksne (Tidl. grunnskole for voksne)',
+    },
+    ANNET_TILTAK: {
+        nb: 'Annen aktivitet med mål om arbeid eller utdanning',
+    },
 };
 
 export const plukkAktivitetTekster = <K extends AnnenAktivitetType>(
@@ -133,6 +147,9 @@ export const aktivitetTeksterFelles: AktivitetInnholdFelles = {
     },
     radio_annet_feilmelding: {
         nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
+    },
+    radio_annet_uten_registeraktivitet_feilmelding: {
+        nb: 'Du må velge en aktivitet',
     },
     ingen_registrerte_aktiviterer_overskrift: {
         nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.',

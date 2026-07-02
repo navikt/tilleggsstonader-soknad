@@ -1,7 +1,6 @@
 import {
     AktivitetInnhold,
     aktivitetTeksterFelles,
-    HvilkenAktivitet,
     plukkAktivitetTekster,
     tekstArbeidsrettedeAktiviteter,
 } from '../../tekster/aktivitet';
@@ -14,58 +13,56 @@ export const AktivitetTypeTilTekstPassAvBarn = plukkAktivitetTekster(
     AnnenAktivitetType.INGEN_AKTIVITET
 );
 
-const hvilkenAktivitet: HvilkenAktivitet = {
-    spm: tekstArbeidsrettedeAktiviteter.spm,
-    les_mer: {
-        header: tekstArbeidsrettedeAktiviteter.lesMer.header,
-        header_ingen_registrerte_aktiviteter:
-            tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
-        del1: {
-            nb: [
-                'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du registrert arbeidssøker kan vi ikke hente det.',
-                'Hvis aktiviteten din mangler eller det er noe feil anbefaler vi deg å ta kontakt med veilederen din. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
-                'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
-                'Er du enslig forsørger/gjenlevende og i arbeid, er det andre søknader du skal fylle ut: ',
-            ],
-        },
-        del2_lenker: [
-            {
-                nb: [
-                    'for ',
-                    {
-                        tekst: 'enslig mor/far',
-                        url: 'https://www.nav.no/barnetilsyn-enslig',
-                    },
-                    ' (åpnes i ny fane)',
-                ],
-            },
-            {
-                nb: [
-                    'for ',
-                    {
-                        tekst: 'gjenlevende',
-                        url: 'https://www.nav.no/barnetilsyn-gjenlevende',
-                    },
-                    ' (åpnes i ny fane)',
-                ],
-            },
-        ],
-        del3: {
-            nb: [
-                'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du ',
-                {
-                    tekst: 'fylle ut papirsøknad',
-                    url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
-                },
-                '.',
-            ],
-        },
-    },
-};
-
 export const aktivitetTekster: AktivitetInnhold = {
     ...aktivitetTeksterFelles,
-    hvilken_aktivitet: hvilkenAktivitet,
+    hvilken_aktivitet: {
+        spm: tekstArbeidsrettedeAktiviteter.spm,
+        les_mer: {
+            header: tekstArbeidsrettedeAktiviteter.lesMer.header,
+            header_ingen_registrerte_aktiviteter:
+                tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
+            del1: {
+                nb: [
+                    'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du registrert arbeidssøker kan vi ikke hente det.',
+                    'Hvis aktiviteten din mangler eller det er noe feil anbefaler vi deg å ta kontakt med veilederen din. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
+                    'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
+                    'Er du enslig forsørger/gjenlevende og i arbeid, er det andre søknader du skal fylle ut: ',
+                ],
+            },
+            del2_lenker: [
+                {
+                    nb: [
+                        'for ',
+                        {
+                            tekst: 'enslig mor/far',
+                            url: 'https://www.nav.no/barnetilsyn-enslig',
+                        },
+                        ' (åpnes i ny fane)',
+                    ],
+                },
+                {
+                    nb: [
+                        'for ',
+                        {
+                            tekst: 'gjenlevende',
+                            url: 'https://www.nav.no/barnetilsyn-gjenlevende',
+                        },
+                        ' (åpnes i ny fane)',
+                    ],
+                },
+            ],
+            del3: {
+                nb: [
+                    'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du ',
+                    {
+                        tekst: 'fylle ut papirsøknad',
+                        url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
+                    },
+                    '.',
+                ],
+            },
+        },
+    },
     lønnet_tiltak_infoalert_innhold: {
         nb: [
             'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',

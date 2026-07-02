@@ -1,62 +1,60 @@
-import { useState } from 'react';
-
-import { Alert, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
+import { Alert, BodyLong, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
 
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
-import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
 import {
-    feilAnnenAktivitet,
-    feilLønnetAktivitet,
-    feilValgtAktivitet,
-} from '../../../components/Aktivitet/aktivitetValidering';
+    skalViseAktivitetTypeUtdanningValg,
+    skalViseArbeidsrettedeAktiviteter,
+    skalViseErLærlingEllerLiknende,
+    skalViseErUnder25År,
+    skalViseFårDekketReise,
+    skalViseLønnetTiltak,
+    skalViseMåBetaleForReiseTilSkole,
+} from './synlighet';
+import {
+    errorKeyAnnenAktivitet,
+    errorKeyAnnenAktivitetTypeUtdanning,
+    errorKeyErLærlingEllerLiknende,
+    errorKeyErUnder25År,
+    errorKeyFårDekketReise,
+    errorKeyLønnetAktivitet,
+    errorKeyMåBetaleForReiseTilSkole,
+    errorKeyValgteAktiviteter,
+    validerAktivitetReiseTilSamling,
+} from './validering';
+import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
 import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/AnnenArbeidsrettetAktivitet';
 import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
+import { ErLærlingEllerLiknende } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
 import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
-import {
-    skalTaStillingTilAnnenAktivitet,
-    skalTaStillingTilRegisterAktiviteter,
-} from '../../../components/Aktivitet/registerAktivitetUtil';
+import { skalTaStillingTilAnnenAktivitet } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { AnnenAktivitetType } from '../../../typer/aktivitet';
+import { AktivitetTypeUtdanning, AnnenAktivitetType } from '../../../typer/aktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
-import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
+import { inneholderFeil } from '../../../typer/validering';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 export const AktivitetReiseTilSamling = () => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
-    const { aktivitet, settAktivitet } = useReiseTilSamlingSøknad();
+    const {
+        aktivitet,
+        oppdaterAktivitet,
+        tilleggsopplysninger,
+        settTilleggsopplysninger,
+        oppdaterTilleggsopplysninger,
+    } = useReiseTilSamlingSøknad();
     const { registerAktiviteter } = useRegisterAktiviteter();
-
-    const [valgteAktiviteter, settValgteAktiviteter] = useState<
-        EnumFlereValgFelt<string> | undefined
-    >(aktivitet ? aktivitet.aktiviteter : undefined);
-
-    const [annenAktivitet, setAnnenAktivitet] = useState<EnumFelt<AnnenAktivitetType> | undefined>(
-        aktivitet ? aktivitet.annenAktivitet : undefined
-    );
-
-    const [lønnetAktivitet, setLønnetAktivitet] = useState<EnumFelt<JaNei> | undefined>(
-        aktivitet ? aktivitet.lønnetAktivitet : undefined
-    );
-
-    const oppdaterAktivitetISøknad = () => {
-        settAktivitet({
-            aktiviteter: valgteAktiviteter,
-            annenAktivitet: annenAktivitet,
-            lønnetAktivitet: lønnetAktivitet,
-        });
-    };
 
     const nullstillLønnetAktivitet = (
         nyeValgteAktiviteter: EnumFlereValgFelt<string> | undefined,
@@ -67,8 +65,8 @@ export const AktivitetReiseTilSamling = () => {
             nyAnnenAktivitet,
             registerAktiviteter
         );
-        if (lønnetAktivitet && skalIkkeTaStilling) {
-            setLønnetAktivitet(undefined);
+        if (aktivitet?.lønnetAktivitet && skalIkkeTaStilling) {
+            oppdaterAktivitet({ lønnetAktivitet: undefined });
             settValideringsfeil((prevState) => ({
                 ...prevState,
                 lønnetAktivitet: undefined,
@@ -78,89 +76,128 @@ export const AktivitetReiseTilSamling = () => {
 
     const nullstillAnnenAktivitet = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
         if (!skalTaStillingTilAnnenAktivitet(nyeValgteAktiviteter)) {
-            setAnnenAktivitet(undefined);
+            oppdaterAktivitet({ annenAktivitet: undefined });
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                annenAktivitet: undefined,
+                [errorKeyAnnenAktivitet]: undefined,
             }));
         }
     };
 
     const oppdaterValgteAktiviteter = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
-        settValgteAktiviteter(nyeValgteAktiviteter);
+        oppdaterAktivitet({ aktiviteter: nyeValgteAktiviteter });
         if (nyeValgteAktiviteter.verdier.length > 0) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                valgteAktiviteter: undefined,
+                [errorKeyValgteAktiviteter]: undefined,
             }));
         }
         nullstillAnnenAktivitet(nyeValgteAktiviteter);
-        nullstillLønnetAktivitet(nyeValgteAktiviteter, annenAktivitet);
+        nullstillLønnetAktivitet(nyeValgteAktiviteter, aktivitet?.annenAktivitet);
     };
 
     const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenAktivitetType>) => {
-        setAnnenAktivitet(verdi);
+        oppdaterAktivitet({ annenAktivitet: verdi });
         settValideringsfeil((prevState) => ({
             ...prevState,
-            annenAktivitet: undefined,
+            [errorKeyAnnenAktivitet]: undefined,
         }));
-        nullstillLønnetAktivitet(valgteAktiviteter, verdi);
+        nullstillLønnetAktivitet(aktivitet?.aktiviteter, verdi);
     };
 
     const oppdaterLønnetAktivitet = (verdi: EnumFelt<JaNei>) => {
-        setLønnetAktivitet(verdi);
+        oppdaterAktivitet({ lønnetAktivitet: verdi });
         settValideringsfeil((prevState) => ({
             ...prevState,
-            lønnetAktivitet: undefined,
+            [errorKeyLønnetAktivitet]: undefined,
         }));
     };
 
-    const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
-    const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak(
-        valgteAktiviteter,
-        annenAktivitet,
-        registerAktiviteter
-    );
+    const oppdaterAnnenAktivitetTypeUtdanning = (verdi: EnumFelt<AktivitetTypeUtdanning>) => {
+        oppdaterAktivitet({ annenAktivitetTypeUtdanning: verdi });
+        settTilleggsopplysninger(undefined);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            [errorKeyAnnenAktivitetTypeUtdanning]: undefined,
+            [errorKeyErLærlingEllerLiknende]: undefined,
+            [errorKeyFårDekketReise]: undefined,
+            [errorKeyErUnder25År]: undefined,
+            [errorKeyMåBetaleForReiseTilSkole]: undefined,
+        }));
+    };
+
+    const oppdaterErLærlingEllerLiknende = (verdi: EnumFelt<JaNei>) => {
+        settTilleggsopplysninger({
+            erLærlingEllerLiknende: verdi,
+            fårDekketReise: undefined,
+            erUnder25År: undefined,
+            måBetaleForReiseTilSkole: undefined,
+        });
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            [errorKeyErLærlingEllerLiknende]: undefined,
+            [errorKeyFårDekketReise]: undefined,
+            [errorKeyErUnder25År]: undefined,
+            [errorKeyMåBetaleForReiseTilSkole]: undefined,
+        }));
+    };
+
+    const oppdaterFårDekketReise = (verdi: EnumFelt<JaNei>) => {
+        oppdaterTilleggsopplysninger({ fårDekketReise: verdi });
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            [errorKeyFårDekketReise]: undefined,
+        }));
+    };
+
+    const oppdaterErUnder25År = (verdi: EnumFelt<JaNei>) => {
+        oppdaterTilleggsopplysninger({ erUnder25År: verdi, måBetaleForReiseTilSkole: undefined });
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            [errorKeyErUnder25År]: undefined,
+            [errorKeyMåBetaleForReiseTilSkole]: undefined,
+        }));
+    };
+
+    const oppdaterMåBetaleForReiseTilSkole = (verdi: EnumFelt<JaNei>) => {
+        oppdaterTilleggsopplysninger({ måBetaleForReiseTilSkole: verdi });
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            [errorKeyMåBetaleForReiseTilSkole]: undefined,
+        }));
+    };
 
     if (!registerAktiviteter) {
         return null;
     }
 
-    const skalViseArbeidsrettedeAktiviteter =
-        skalTaStillingTilRegisterAktiviteter(registerAktiviteter);
-
     const kanFortsette = (): boolean => {
-        let feil: Valideringsfeil = {};
-        const verdierValgteAktiviteter = valgteAktiviteter?.verdier ?? [];
-        if (skalViseArbeidsrettedeAktiviteter && verdierValgteAktiviteter.length === 0) {
-            feil = feilValgtAktivitet(
-                feil,
-                aktivitetTekster.checkbox_velge_aktivitet_feilmelding[locale]
-            );
-        }
-        if (skalViseLønnetTiltak && lønnetAktivitet?.verdi === undefined) {
-            feil = feilLønnetAktivitet(
-                feil,
-                aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale]
-            );
-        }
-        if (
-            (skalViseAnnenAktivitet || !skalViseArbeidsrettedeAktiviteter) &&
-            annenAktivitet === undefined
-        ) {
-            feil = feilAnnenAktivitet(feil, aktivitetTekster.radio_annet_feilmelding[locale]);
-        }
+        const feil = validerAktivitetReiseTilSamling(
+            { ...aktivitet, tilleggsopplysningerAnnenAktivitet: tilleggsopplysninger },
+            registerAktiviteter,
+            locale
+        );
+
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
 
+    const valgteAktiviteter = aktivitet?.aktiviteter;
+    const annenAktivitet = aktivitet?.annenAktivitet;
+    const lønnetAktivitet = aktivitet?.lønnetAktivitet;
+    const annenAktivitetTypeUtdanning = aktivitet?.annenAktivitetTypeUtdanning;
+    const erLærlingEllerLiknende = tilleggsopplysninger?.erLærlingEllerLiknende;
+    const fårDekketReise = tilleggsopplysninger?.fårDekketReise;
+    const erUnder25År = tilleggsopplysninger?.erUnder25År;
+    const måBetaleForReiseTilSkole = tilleggsopplysninger?.måBetaleForReiseTilSkole;
+
     return (
-        <Side validerSteg={kanFortsette} oppdaterSøknad={oppdaterAktivitetISøknad}>
+        <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={aktivitetTekster.tittel} level="2" size="medium" />
             <GuidePanel>
                 <LocaleTekstAvsnitt tekst={aktivitetTekster.guide_innhold} />
             </GuidePanel>
-            {skalViseArbeidsrettedeAktiviteter && (
+            {skalViseArbeidsrettedeAktiviteter(registerAktiviteter) && (
                 <ArbeidsrettedeAktiviteter
                     spørsmål={aktivitetTekster.hvilken_aktivitet.spm}
                     lesMer={
@@ -171,10 +208,10 @@ export const AktivitetReiseTilSamling = () => {
                     registerAktiviteter={registerAktiviteter}
                     oppdaterValgteAktiviteter={oppdaterValgteAktiviteter}
                     valgteAktiviteter={valgteAktiviteter}
-                    feilmelding={valideringsfeil.valgteAktiviteter}
+                    feilmelding={valideringsfeil[errorKeyValgteAktiviteter]}
                 />
             )}
-            {!skalViseArbeidsrettedeAktiviteter && (
+            {!skalViseArbeidsrettedeAktiviteter(registerAktiviteter) && (
                 <>
                     <div>
                         <Label>
@@ -194,33 +231,177 @@ export const AktivitetReiseTilSamling = () => {
                         radioTekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
                         oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
                         annenAktivitet={annenAktivitet}
-                        feilmelding={valideringsfeil.annenAktivitet}
+                        feilmelding={valideringsfeil[errorKeyAnnenAktivitet]}
                     />
                 </>
             )}
-            {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
-                <UnderspørsmålContainer>
-                    <VStack gap="space-24">
-                        {skalViseAnnenAktivitet && (
-                            <AnnenArbeidsrettetAktivitet
-                                aktivitetTekster={aktivitetTekster}
-                                radioTekst={aktivitetTekster.radio_annet}
-                                oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
-                                annenAktivitet={annenAktivitet}
-                                feilmelding={valideringsfeil.annenAktivitet}
+            {skalViseAktivitetTypeUtdanningValg(annenAktivitet, valgteAktiviteter) && (
+                <>
+                    <LocaleRadioGroup
+                        tekst={aktivitetTekster.radio_type_arbeidsrettede_aktiviteter}
+                        onChange={oppdaterAnnenAktivitetTypeUtdanning}
+                        id={valideringsfeil[errorKeyAnnenAktivitetTypeUtdanning]?.id}
+                        error={valideringsfeil[errorKeyAnnenAktivitetTypeUtdanning]?.melding}
+                        value={annenAktivitetTypeUtdanning?.verdi || ''}
+                    >
+                        <LocaleReadMoreMedChildren
+                            header={
+                                aktivitetTekster.radio_type_arbeidsrettede_aktiviteter_lesmer.header
+                            }
+                        >
+                            <VStack gap="space-20">
+                                <BodyLong>
+                                    <LocaleTekst
+                                        tekst={
+                                            aktivitetTekster
+                                                .radio_type_arbeidsrettede_aktiviteter_lesmer
+                                                .innhold[0]
+                                        }
+                                    />
+                                </BodyLong>
+                                <BodyLong>
+                                    <LocaleTekst
+                                        tekst={
+                                            aktivitetTekster
+                                                .radio_type_arbeidsrettede_aktiviteter_lesmer
+                                                .innhold[1]
+                                        }
+                                    />
+                                </BodyLong>
+                                <BodyLong>
+                                    <LocaleTekst
+                                        tekst={
+                                            aktivitetTekster
+                                                .radio_type_arbeidsrettede_aktiviteter_lesmer
+                                                .innhold[2]
+                                        }
+                                    />
+                                </BodyLong>
+                            </VStack>
+                        </LocaleReadMoreMedChildren>
+                    </LocaleRadioGroup>
+
+                    {skalViseErLærlingEllerLiknende(annenAktivitetTypeUtdanning) && (
+                        <>
+                            <ErLærlingEllerLiknende
+                                erLærlingEllerLiknende={erLærlingEllerLiknende}
+                                oppdatererLærlingEllerLiknende={oppdaterErLærlingEllerLiknende}
+                                feilmelding={valideringsfeil[errorKeyErLærlingEllerLiknende]}
                             />
-                        )}
-                        {skalViseLønnetTiltak && (
-                            <LønnetTiltak
-                                lønnetAktivitet={lønnetAktivitet}
-                                oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
-                                feilmelding={valideringsfeil.lønnetAktivitet}
-                                radioTekst={aktivitetTekster.radio_lønnet_tiltak}
-                                infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
+                            {skalViseFårDekketReise(erLærlingEllerLiknende) && (
+                                <>
+                                    <LocaleRadioGroup
+                                        tekst={aktivitetTekster.radio_dekket_reise}
+                                        onChange={oppdaterFårDekketReise}
+                                        id={valideringsfeil[errorKeyFårDekketReise]?.id}
+                                        error={valideringsfeil[errorKeyFårDekketReise]?.melding}
+                                        value={fårDekketReise?.verdi || ''}
+                                    />
+                                    {fårDekketReise?.verdi === 'JA' && (
+                                        <Alert variant={'info'}>
+                                            <Heading size="small">
+                                                <LocaleTekst
+                                                    tekst={
+                                                        aktivitetTekster.radio_ikke_kvalifisert_tittel
+                                                    }
+                                                />
+                                            </Heading>
+                                            <LocaleTekst
+                                                tekst={
+                                                    aktivitetTekster.radio_dekket_reise_alert_content
+                                                }
+                                            />
+                                        </Alert>
+                                    )}
+                                </>
+                            )}
+                            {skalViseErUnder25År(erLærlingEllerLiknende) && (
+                                <>
+                                    <LocaleRadioGroup
+                                        tekst={aktivitetTekster.radio_under_25_år}
+                                        id={valideringsfeil[errorKeyErUnder25År]?.id}
+                                        error={valideringsfeil[errorKeyErUnder25År]?.melding}
+                                        value={erUnder25År?.verdi || ''}
+                                        onChange={oppdaterErUnder25År}
+                                    />
+                                    {skalViseMåBetaleForReiseTilSkole(erUnder25År) && (
+                                        <>
+                                            <Alert variant={'info'}>
+                                                <Heading size="small">
+                                                    <LocaleTekst
+                                                        tekst={
+                                                            aktivitetTekster.radio_ikke_kvalifisert_tittel
+                                                        }
+                                                    />
+                                                </Heading>
+                                                <LocaleTekst
+                                                    tekst={
+                                                        aktivitetTekster.radio_under_25_år_alert_content
+                                                    }
+                                                />
+                                            </Alert>
+                                            <LocaleRadioGroup
+                                                tekst={
+                                                    aktivitetTekster.radio_må_betale_for_reise_til_skole
+                                                }
+                                                id={
+                                                    valideringsfeil[
+                                                        errorKeyMåBetaleForReiseTilSkole
+                                                    ]?.id
+                                                }
+                                                error={
+                                                    valideringsfeil[
+                                                        errorKeyMåBetaleForReiseTilSkole
+                                                    ]?.melding
+                                                }
+                                                value={måBetaleForReiseTilSkole?.verdi || ''}
+                                                onChange={oppdaterMåBetaleForReiseTilSkole}
+                                            />
+                                            {måBetaleForReiseTilSkole?.verdi === 'NEI' && (
+                                                <Alert variant={'info'}>
+                                                    <Heading size="small">
+                                                        <LocaleTekst
+                                                            tekst={
+                                                                aktivitetTekster.radio_ikke_kvalifisert_tittel
+                                                            }
+                                                        />
+                                                    </Heading>
+                                                    <LocaleTekst
+                                                        tekst={
+                                                            aktivitetTekster.radio_må_betale_for_reise_til_skole_alert_content
+                                                        }
+                                                    />
+                                                </Alert>
+                                            )}
+                                        </>
+                                    )}
+                                </>
+                            )}
+                        </>
+                    )}
+                    {annenAktivitetTypeUtdanning?.verdi ===
+                        AktivitetTypeUtdanning.OPPLÆRING_FOR_VOKSNE && (
+                        <Alert variant={'info'}>
+                            <Heading size="small">
+                                <LocaleTekst
+                                    tekst={aktivitetTekster.radio_ikke_kvalifisert_tittel}
+                                />
+                            </Heading>
+                            <LocaleTekst
+                                tekst={aktivitetTekster.radio_opplæring_for_voksne_alert_content}
                             />
-                        )}
-                    </VStack>
-                </UnderspørsmålContainer>
+                        </Alert>
+                    )}
+                </>
+            )}
+            {skalViseLønnetTiltak(annenAktivitetTypeUtdanning) && (
+                <LønnetTiltak
+                    lønnetAktivitet={lønnetAktivitet}
+                    oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
+                    feilmelding={valideringsfeil[errorKeyLønnetAktivitet]}
+                    radioTekst={aktivitetTekster.radio_lønnet_tiltak}
+                    infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
+                />
             )}
             {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
                 <Alert variant={'info'}>
