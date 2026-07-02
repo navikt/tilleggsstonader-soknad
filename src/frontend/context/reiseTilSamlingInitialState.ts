@@ -18,9 +18,18 @@ export const initialHarBekreftet = (): boolean => erLokal();
 export const initialHovedytelse = (): Hovedytelse | undefined =>
     erLokal() ? mockHovedytelse : undefined;
 
-export const initialAktivitet = ():
-    | Omit<AktivitetReiseTilSamling, 'tilleggsopplysningerAnnenAktivitet'>
-    | undefined => (erLokal() ? mockAktivitet : undefined);
+export const initialAktivitet = (): Omit<
+    AktivitetReiseTilSamling,
+    'tilleggsopplysningerAnnenAktivitet'
+> =>
+    erLokal()
+        ? mockAktivitet
+        : {
+              annenAktivitetTypeUtdanning: undefined,
+              aktiviteter: undefined,
+              annenAktivitet: undefined,
+              lønnetAktivitet: undefined,
+          };
 
 export const initialTilleggsopplysninger = (): TilleggsopplysningerAnnenAktivitet | undefined =>
     erLokal() ? mockAktivitet.tilleggsopplysningerAnnenAktivitet : undefined;

@@ -35,9 +35,10 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
 
     const [harBekreftet, settHarBekreftet] = useState<boolean>(initialHarBekreftet());
     const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(initialHovedytelse());
-    const [aktivitet, settAktivitet] = useState<
-        Omit<AktivitetReiseTilSamling, 'tilleggsopplysningerAnnenAktivitet'> | undefined
-    >(initialAktivitet());
+    const [aktivitet, settAktivitet] =
+        useState<Omit<AktivitetReiseTilSamling, 'tilleggsopplysningerAnnenAktivitet'>>(
+            initialAktivitet()
+        );
     const [tilleggsopplysninger, settTilleggsopplysninger] = useState<
         TilleggsopplysningerAnnenAktivitet | undefined
     >(initialTilleggsopplysninger());
@@ -71,10 +72,6 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         oppdatering: Partial<Omit<AktivitetReiseTilSamling, 'tilleggsopplysningerAnnenAktivitet'>>
     ) => {
         settAktivitet((prev) => ({
-            aktiviteter: undefined,
-            annenAktivitet: undefined,
-            lønnetAktivitet: undefined,
-            annenAktivitetTypeUtdanning: undefined,
             ...prev,
             ...oppdatering,
         }));

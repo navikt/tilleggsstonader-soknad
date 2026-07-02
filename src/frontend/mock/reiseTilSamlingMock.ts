@@ -15,18 +15,6 @@ export const mockHovedytelse: Hovedytelse = {
 
 export const mockAktivitet: AktivitetReiseTilSamling = {
     aktiviteter: undefined,
-    // annenAktivitet: {
-    //     label: 'Aktivitet',
-    //     verdi: AnnenAktivitetType.TILTAK,
-    //     svarTekst: 'Tiltak',
-    //     alternativer: ['Tiltak'],
-    // },
-    // lønnetAktivitet: {
-    //     label: 'Mottar du lønn gjennom et tiltak?',
-    //     verdi: 'NEI',
-    //     svarTekst: 'Nei',
-    //     alternativer: ['Ja', 'Nei'],
-    // },
     annenAktivitetTypeUtdanning: undefined,
     tilleggsopplysningerAnnenAktivitet: undefined,
     lønnetAktivitet: undefined,

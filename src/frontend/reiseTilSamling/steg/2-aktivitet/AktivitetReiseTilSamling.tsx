@@ -172,14 +172,12 @@ export const AktivitetReiseTilSamling = () => {
     }
 
     const kanFortsette = (): boolean => {
-        if (!aktivitet) {
-            return false;
-        }
         const feil = validerAktivitetReiseTilSamling(
             { ...aktivitet, tilleggsopplysningerAnnenAktivitet: tilleggsopplysninger },
             registerAktiviteter,
             locale
         );
+
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
@@ -244,7 +242,7 @@ export const AktivitetReiseTilSamling = () => {
                         onChange={oppdaterAnnenAktivitetTypeUtdanning}
                         id={valideringsfeil[errorKeyAnnenAktivitetTypeUtdanning]?.id}
                         error={valideringsfeil[errorKeyAnnenAktivitetTypeUtdanning]?.melding}
-                        value={annenAktivitetTypeUtdanning?.verdi || []}
+                        value={annenAktivitetTypeUtdanning?.verdi || ''}
                     >
                         <LocaleReadMoreMedChildren
                             header={
@@ -297,7 +295,7 @@ export const AktivitetReiseTilSamling = () => {
                                         onChange={oppdaterFårDekketReise}
                                         id={valideringsfeil[errorKeyFårDekketReise]?.id}
                                         error={valideringsfeil[errorKeyFårDekketReise]?.melding}
-                                        value={fårDekketReise?.verdi || []}
+                                        value={fårDekketReise?.verdi || ''}
                                     />
                                     {fårDekketReise?.verdi === 'JA' && (
                                         <Alert variant={'info'}>
@@ -323,7 +321,7 @@ export const AktivitetReiseTilSamling = () => {
                                         tekst={aktivitetTekster.radio_under_25_år}
                                         id={valideringsfeil[errorKeyErUnder25År]?.id}
                                         error={valideringsfeil[errorKeyErUnder25År]?.melding}
-                                        value={erUnder25År?.verdi || []}
+                                        value={erUnder25År?.verdi || ''}
                                         onChange={oppdaterErUnder25År}
                                     />
                                     {skalViseMåBetaleForReiseTilSkole(erUnder25År) && (
@@ -356,7 +354,7 @@ export const AktivitetReiseTilSamling = () => {
                                                         errorKeyMåBetaleForReiseTilSkole
                                                     ]?.melding
                                                 }
-                                                value={måBetaleForReiseTilSkole?.verdi || []}
+                                                value={måBetaleForReiseTilSkole?.verdi || ''}
                                                 onChange={oppdaterMåBetaleForReiseTilSkole}
                                             />
                                             {måBetaleForReiseTilSkole?.verdi === 'NEI' && (

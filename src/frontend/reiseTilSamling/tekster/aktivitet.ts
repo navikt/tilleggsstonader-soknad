@@ -131,7 +131,7 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         nb: 'Du må velge en aktivitet',
     },
     radio_type_arbeidsrettede_aktiviteter: {
-        header: { nb: 'Hva slags type arbeidsrettet aktivitet går du du på?' },
+        header: { nb: 'Hva slags type arbeidsrettet aktivitet går du på?' },
         alternativer: AktivitetTypeUtdanningTilTekst,
     },
     radio_type_arbeidsrettede_aktiviteter_lesmer: {
@@ -185,6 +185,6 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         nb: 'Siden du ikke må betale for reisen til skolen selv, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynlig få avslag.',
     },
     radio_opplæring_for_voksne_alert_content: {
-        nb: 'Siden du går på forberedende for opplæring voksne, skal kommunen dekke dine utgifter til skoleskyss hvis reiseavstanden er over 4 km. Du kan søke om pengestøtte til daglige reiser, men du vil mest sannsynlig få avslag.',
+        nb: 'Siden du går på forberedende opplæring for voksne, skal kommunen dekke dine utgifter til skoleskyss hvis reiseavstanden er over 4 km. Du kan søke om pengestøtte til daglige reiser, men du vil mest sannsynlig få avslag.',
     },
 };

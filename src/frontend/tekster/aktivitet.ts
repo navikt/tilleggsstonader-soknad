@@ -77,7 +77,6 @@ const aktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<string>> = 
 export interface AktivitetInnhold extends AktivitetInnholdFelles {
     radio_annet: RadiogruppeMedUtvalg<AnnenAktivitetType>;
     radio_annet_uten_registeraktivitet: RadiogruppeMedUtvalg<AnnenAktivitetType>;
-    radio_annet_uten_registeraktivitet_feilmelding: TekstElement<string>;
     radio_annet_lesmer: LesMer<InlineLenke>;
     radio_annet_lesmer_hva_betyr_alternativene: HvaBetyrAlternativene;
     hvilken_aktivitet: HvilkenAktivitet;
