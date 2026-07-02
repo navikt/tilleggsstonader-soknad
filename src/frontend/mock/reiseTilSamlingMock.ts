@@ -1,5 +1,5 @@
-import { AnnenAktivitetType } from '../typer/aktivitet';
-import { Aktivitet, Hovedytelse, Reiseavstand, Reisemåte, Samling } from '../typer/søknad';
+import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
+import { Hovedytelse, Reiseavstand, Reisemåte, Samling } from '../typer/søknad';
 
 export const mockHovedytelse: Hovedytelse = {
     ytelse: {
@@ -13,21 +13,24 @@ export const mockHovedytelse: Hovedytelse = {
     },
 };
 
-export const mockAktivitet: Aktivitet = {
+export const mockAktivitet: AktivitetReiseTilSamling = {
     aktiviteter: undefined,
-    annenAktivitet: {
-        label: 'Aktivitet',
-        verdi: AnnenAktivitetType.TILTAK,
-        svarTekst: 'Tiltak',
-        alternativer: ['Tiltak'],
-    },
-    lønnetAktivitet: {
-        label: 'Mottar du lønn gjennom et tiltak?',
-        verdi: 'NEI',
-        svarTekst: 'Nei',
-        alternativer: ['Ja', 'Nei'],
-    },
+    // annenAktivitet: {
+    //     label: 'Aktivitet',
+    //     verdi: AnnenAktivitetType.TILTAK,
+    //     svarTekst: 'Tiltak',
+    //     alternativer: ['Tiltak'],
+    // },
+    // lønnetAktivitet: {
+    //     label: 'Mottar du lønn gjennom et tiltak?',
+    //     verdi: 'NEI',
+    //     svarTekst: 'Nei',
+    //     alternativer: ['Ja', 'Nei'],
+    // },
     annenAktivitetTypeUtdanning: undefined,
+    tilleggsopplysningerAnnenAktivitet: undefined,
+    lønnetAktivitet: undefined,
+    annenAktivitet: undefined,
 };
 
 export const mockSamlinger: Samling[] = [

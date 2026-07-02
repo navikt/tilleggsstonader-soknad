@@ -15,6 +15,8 @@ export const mapTilRegisterAktiviteterObjektMedLabel = (
         }),
         {} as Record<string, RegisterAktivitetMedLabel>
     );
+
+    return {};
 };
 
 export const skalTaStillingTilAnnenAktivitet = (

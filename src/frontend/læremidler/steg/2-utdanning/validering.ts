@@ -1,3 +1,4 @@
+import { erLærlingEllerLiknendeTekster } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { utdanningTekster } from '../../tekster/utdanning';
@@ -22,7 +23,7 @@ export const feilErLærlingEllerLiknende = (feil: Valideringsfeil, locale: Local
     ...feil,
     erLærlingEllerLiknende: {
         id: '3',
-        melding: utdanningTekster.radio_lærling_feilmelding[locale],
+        melding: erLærlingEllerLiknendeTekster.radio_lærling_feilmelding[locale],
     },
 });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ErLærlingEllerLiknende } from './ErLærlingEllerLiknende';
 import { HarTidligereFullførtVgs } from './HarTidligereFullførtVgs';
+import { ErLærlingEllerLiknende } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
