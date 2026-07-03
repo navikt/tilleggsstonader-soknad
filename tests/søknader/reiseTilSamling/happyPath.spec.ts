@@ -61,7 +61,24 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
 
     await forventIngenWcagViolations(page);
 
-    await page.getByLabel('Annet').check();
+    await page.getByLabel('Type navn: 2. februar 2025 - 2. februar 2025').check();
+    await page
+        .getByRole('radiogroup', { name: 'Hva slags type arbeidsrettet aktivitet går du på?' })
+        .getByLabel('Videregående skole')
+        .check();
+    await page
+        .getByRole('radiogroup', {
+            name: 'Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?',
+        })
+        .getByLabel('Ja')
+        .check();
+    await page
+        .getByRole('radiogroup', {
+            name: 'Får du dekket reisen til aktivitetsstedet av arbeidsgiveren din?',
+        })
+        .getByLabel('Nei')
+        .check();
+
     await page.getByRole('button', { name: 'Neste' }).click();
     await fjernWebpackOverlay(page);
 

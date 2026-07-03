@@ -47,13 +47,8 @@ import { aktivitetTekster } from '../../tekster/aktivitet';
 export const AktivitetReiseTilSamling = () => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
-    const {
-        aktivitet,
-        oppdaterAktivitet,
-        tilleggsopplysninger,
-        settTilleggsopplysninger,
-        oppdaterTilleggsopplysninger,
-    } = useReiseTilSamlingSøknad();
+    const { aktivitet, oppdaterAktivitet, oppdaterTilleggsopplysninger } =
+        useReiseTilSamlingSøknad();
     const { registerAktiviteter } = useRegisterAktiviteter();
 
     const nullstillLønnetAktivitet = (
@@ -114,8 +109,8 @@ export const AktivitetReiseTilSamling = () => {
     };
 
     const oppdaterAnnenAktivitetTypeUtdanning = (verdi: EnumFelt<AktivitetTypeUtdanning>) => {
-        oppdaterAktivitet({ annenAktivitetTypeUtdanning: verdi });
-        settTilleggsopplysninger(undefined);
+        oppdaterAktivitet({ annenAktivitetTypeUtdanning: verdi, lønnetAktivitet: undefined });
+        oppdaterTilleggsopplysninger({});
         settValideringsfeil((prevState) => ({
             ...prevState,
             [errorKeyAnnenAktivitetTypeUtdanning]: undefined,
@@ -123,11 +118,12 @@ export const AktivitetReiseTilSamling = () => {
             [errorKeyFårDekketReise]: undefined,
             [errorKeyErUnder25År]: undefined,
             [errorKeyMåBetaleForReiseTilSkole]: undefined,
+            [errorKeyLønnetAktivitet]: undefined,
         }));
     };
 
     const oppdaterErLærlingEllerLiknende = (verdi: EnumFelt<JaNei>) => {
-        settTilleggsopplysninger({
+        oppdaterTilleggsopplysninger({
             erLærlingEllerLiknende: verdi,
             fårDekketReise: undefined,
             erUnder25År: undefined,
@@ -172,11 +168,7 @@ export const AktivitetReiseTilSamling = () => {
     }
 
     const kanFortsette = (): boolean => {
-        const feil = validerAktivitetReiseTilSamling(
-            { ...aktivitet, tilleggsopplysningerAnnenAktivitet: tilleggsopplysninger },
-            registerAktiviteter,
-            locale
-        );
+        const feil = validerAktivitetReiseTilSamling(aktivitet, registerAktiviteter, locale);
 
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
@@ -186,10 +178,12 @@ export const AktivitetReiseTilSamling = () => {
     const annenAktivitet = aktivitet?.annenAktivitet;
     const lønnetAktivitet = aktivitet?.lønnetAktivitet;
     const annenAktivitetTypeUtdanning = aktivitet?.annenAktivitetTypeUtdanning;
-    const erLærlingEllerLiknende = tilleggsopplysninger?.erLærlingEllerLiknende;
-    const fårDekketReise = tilleggsopplysninger?.fårDekketReise;
-    const erUnder25År = tilleggsopplysninger?.erUnder25År;
-    const måBetaleForReiseTilSkole = tilleggsopplysninger?.måBetaleForReiseTilSkole;
+    const erLærlingEllerLiknende =
+        aktivitet?.tilleggsopplysningerAnnenAktivitet?.erLærlingEllerLiknende;
+    const fårDekketReise = aktivitet?.tilleggsopplysningerAnnenAktivitet?.fårDekketReise;
+    const erUnder25År = aktivitet?.tilleggsopplysningerAnnenAktivitet?.erUnder25År;
+    const måBetaleForReiseTilSkole =
+        aktivitet?.tilleggsopplysningerAnnenAktivitet?.måBetaleForReiseTilSkole;
 
     return (
         <Side validerSteg={kanFortsette}>

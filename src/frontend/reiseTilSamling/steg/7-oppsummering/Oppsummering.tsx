@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AktivitetOppsummering } from './AktivitetOppsummering';
 import { ReiseavstandOppsummering } from './ReiseavstandOppsummering';
 import { ReisemåteOppsummering } from './ReisemåteOppsummering';
@@ -17,7 +15,6 @@ export const Oppsummering = () => {
     const {
         hovedytelse,
         aktivitet,
-        tilleggsopplysninger,
         reiseavstand,
         samlinger,
         reisemåte,
@@ -35,12 +32,7 @@ export const Oppsummering = () => {
                     redigerLenke={RouteTilPath.HOVEDYTELSE}
                 />
             )}
-            {aktivitet && (
-                <AktivitetOppsummering
-                    aktivitet={aktivitet}
-                    tilleggsopplysninger={tilleggsopplysninger}
-                />
-            )}
+            {aktivitet && <AktivitetOppsummering aktivitet={aktivitet} />}
             {reiseavstand && <ReiseavstandOppsummering reiseavstand={reiseavstand} />}
             <SamlingerOppsummering samlinger={samlinger} />
             {reisemåte && <ReisemåteOppsummering reisemåte={reisemåte} />}

@@ -10,7 +10,6 @@ import {
     initialReiseavstand,
     initialReisemåte,
     initialSamlinger,
-    initialTilleggsopplysninger,
 } from './reiseTilSamlingInitialState';
 import {
     AktivitetReiseTilSamling,
@@ -35,13 +34,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
 
     const [harBekreftet, settHarBekreftet] = useState<boolean>(initialHarBekreftet());
     const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(initialHovedytelse());
-    const [aktivitet, settAktivitet] =
-        useState<Omit<AktivitetReiseTilSamling, 'tilleggsopplysningerAnnenAktivitet'>>(
-            initialAktivitet()
-        );
-    const [tilleggsopplysninger, settTilleggsopplysninger] = useState<
-        TilleggsopplysningerAnnenAktivitet | undefined
-    >(initialTilleggsopplysninger());
+    const [aktivitet, settAktivitet] = useState<AktivitetReiseTilSamling>(initialAktivitet());
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
     const [reiseavstand, settReiseavstand] = useState<Reiseavstand>(initialReiseavstand());
     const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(initialReisemåte());
@@ -61,16 +54,13 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         settHarBekreftet(initialHarBekreftet());
         settHovedytelse(initialHovedytelse());
         settAktivitet(initialAktivitet());
-        settTilleggsopplysninger(initialTilleggsopplysninger());
         settSamlinger(initialSamlinger());
         settReiseavstand(initialReiseavstand());
         settReisemåte(initialReisemåte());
         settDokumentasjon(initialDokumentasjon());
     };
 
-    const oppdaterAktivitet = (
-        oppdatering: Partial<Omit<AktivitetReiseTilSamling, 'tilleggsopplysningerAnnenAktivitet'>>
-    ) => {
+    const oppdaterAktivitet = (oppdatering: Partial<AktivitetReiseTilSamling>) => {
         settAktivitet((prev) => ({
             ...prev,
             ...oppdatering,
@@ -80,13 +70,17 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const oppdaterTilleggsopplysninger = (
         oppdatering: Partial<TilleggsopplysningerAnnenAktivitet>
     ) => {
-        settTilleggsopplysninger((prev) => ({
-            erLærlingEllerLiknende: undefined,
-            fårDekketReise: undefined,
-            erUnder25År: undefined,
-            måBetaleForReiseTilSkole: undefined,
+        settAktivitet((prev) => ({
             ...prev,
-            ...oppdatering,
+            tilleggsopplysningerAnnenAktivitet: {
+                erLærlingEllerLiknende:
+                    prev.tilleggsopplysningerAnnenAktivitet?.erLærlingEllerLiknende,
+                fårDekketReise: prev.tilleggsopplysningerAnnenAktivitet?.fårDekketReise,
+                erUnder25År: prev.tilleggsopplysningerAnnenAktivitet?.erUnder25År,
+                måBetaleForReiseTilSkole:
+                    prev.tilleggsopplysningerAnnenAktivitet?.måBetaleForReiseTilSkole,
+                ...oppdatering,
+            },
         }));
     };
 
@@ -112,8 +106,6 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         aktivitet,
         settAktivitet,
         oppdaterAktivitet,
-        tilleggsopplysninger,
-        settTilleggsopplysninger,
         oppdaterTilleggsopplysninger,
         samlinger,
         settSamlinger,

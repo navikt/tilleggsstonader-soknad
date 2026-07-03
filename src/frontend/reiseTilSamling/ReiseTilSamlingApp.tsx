@@ -20,7 +20,6 @@ const ReiseTilSamlingInnhold = () => {
         resetSøknad,
         hovedytelse,
         aktivitet,
-        tilleggsopplysninger,
         samlinger,
         reiseavstand,
         reisemåte,
@@ -32,9 +31,7 @@ const ReiseTilSamlingInnhold = () => {
             skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}
             søknad={{
                 hovedytelse: hovedytelse,
-                aktivitet: aktivitet
-                    ? { ...aktivitet, tilleggsopplysningerAnnenAktivitet: tilleggsopplysninger }
-                    : undefined,
+                aktivitet: aktivitet,
                 samlinger: samlinger,
                 reiseavstand: reiseavstand,
                 reisemåte: reisemåte,
