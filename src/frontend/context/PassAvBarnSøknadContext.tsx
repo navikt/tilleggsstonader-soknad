@@ -4,7 +4,7 @@ import createUseContext from 'constate';
 
 import { Barnepass } from '../typer/barn';
 import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
-import { Aktivitet, Hovedytelse } from '../typer/søknad';
+import { AktivitetFelles, Hovedytelse } from '../typer/søknad';
 
 const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() => {
     PassAvBarnSøknadProvider.displayName = 'SØKNAD_PASS_AV_BARN_PROVIDER';
@@ -13,7 +13,7 @@ const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() =>
 
     const [hovedytelse, settHovedytelse] = useState<Hovedytelse>();
 
-    const [aktivitet, settAktivitet] = useState<Aktivitet>();
+    const [aktivitet, settAktivitet] = useState<AktivitetFelles>();
 
     const [valgteBarnIdenter, settValgteBarnIdenter] = useState<string[]>([]);
     const [barnMedBarnepass, settBarnMedBarnepass] = useState<Barnepass[]>([]);

@@ -12,12 +12,15 @@ import {
     initialSamlinger,
 } from './reiseTilSamlingInitialState';
 import {
+    AktivitetReiseTilSamling,
+    TilleggsopplysningerAnnenAktivitet,
+} from '../reiseTilSamling/typer/aktivitet';
+import {
     DokumentasjonFelt,
     Dokumentasjonsbehov,
     VedleggstypeReiseTilSamling,
 } from '../typer/skjema';
 import {
-    Aktivitet,
     Aktivitetsadresse,
     Avreiseadresse,
     Hovedytelse,
@@ -31,7 +34,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
 
     const [harBekreftet, settHarBekreftet] = useState<boolean>(initialHarBekreftet());
     const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(initialHovedytelse());
-    const [aktivitet, settAktivitet] = useState<Aktivitet | undefined>(initialAktivitet());
+    const [aktivitet, settAktivitet] = useState<AktivitetReiseTilSamling>(initialAktivitet());
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
     const [reiseavstand, settReiseavstand] = useState<Reiseavstand>(initialReiseavstand());
     const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(initialReisemåte());
@@ -57,6 +60,30 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         settDokumentasjon(initialDokumentasjon());
     };
 
+    const oppdaterAktivitet = (oppdatering: Partial<AktivitetReiseTilSamling>) => {
+        settAktivitet((prev) => ({
+            ...prev,
+            ...oppdatering,
+        }));
+    };
+
+    const oppdaterTilleggsopplysninger = (
+        oppdatering: Partial<TilleggsopplysningerAnnenAktivitet>
+    ) => {
+        settAktivitet((prev) => ({
+            ...prev,
+            tilleggsopplysningerAnnenAktivitet: {
+                erLærlingEllerLiknende:
+                    prev.tilleggsopplysningerAnnenAktivitet?.erLærlingEllerLiknende,
+                fårDekketReise: prev.tilleggsopplysningerAnnenAktivitet?.fårDekketReise,
+                erUnder25År: prev.tilleggsopplysningerAnnenAktivitet?.erUnder25År,
+                måBetaleForReiseTilSkole:
+                    prev.tilleggsopplysningerAnnenAktivitet?.måBetaleForReiseTilSkole,
+                ...oppdatering,
+            },
+        }));
+    };
+
     const settAktivitetsadresse = (oppdatering: Partial<Aktivitetsadresse>) => {
         settReiseavstand((prev) => ({
             ...prev,
@@ -78,6 +105,8 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         settHovedytelse,
         aktivitet,
         settAktivitet,
+        oppdaterAktivitet,
+        oppdaterTilleggsopplysninger,
         samlinger,
         settSamlinger,
         reiseavstand,

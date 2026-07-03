@@ -2,6 +2,7 @@ import { TekstElement } from '../../typer/tekst';
 
 interface OppsummeringInnhold {
     tittel: TekstElement<string>;
+    aktivitet_tittel: TekstElement<string>;
     reiseavstand_tittel: TekstElement<string>;
     adressen_du_skal_reise_fra: TekstElement<string>;
     adressen_du_skal_reise_til: TekstElement<string>;
@@ -11,6 +12,7 @@ interface OppsummeringInnhold {
 
 export const oppsummeringTekster: OppsummeringInnhold = {
     tittel: { nb: 'Oppsummering' },
+    aktivitet_tittel: { nb: 'Aktivitet' },
     reiseavstand_tittel: { nb: 'Reiseavstand' },
     adressen_du_skal_reise_fra: { nb: 'Adressen du skal reise fra' },
     adressen_du_skal_reise_til: { nb: 'Adressen du skal reise til' },

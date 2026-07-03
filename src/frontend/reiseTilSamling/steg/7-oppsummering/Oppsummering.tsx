@@ -1,5 +1,4 @@
-import React from 'react';
-
+import { AktivitetOppsummering } from './AktivitetOppsummering';
 import { ReiseavstandOppsummering } from './ReiseavstandOppsummering';
 import { ReisemåteOppsummering } from './ReisemåteOppsummering';
 import { SamlingerOppsummering } from './SamlingerOppsummering';
@@ -13,8 +12,15 @@ import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const Oppsummering = () => {
-    const { hovedytelse, reiseavstand, samlinger, reisemåte, dokumentasjonsbehov, dokumentasjon } =
-        useReiseTilSamlingSøknad();
+    const {
+        hovedytelse,
+        aktivitet,
+        reiseavstand,
+        samlinger,
+        reisemåte,
+        dokumentasjonsbehov,
+        dokumentasjon,
+    } = useReiseTilSamlingSøknad();
 
     return (
         <OppsummeringSide>
@@ -26,6 +32,7 @@ export const Oppsummering = () => {
                     redigerLenke={RouteTilPath.HOVEDYTELSE}
                 />
             )}
+            {aktivitet && <AktivitetOppsummering aktivitet={aktivitet} />}
             {reiseavstand && <ReiseavstandOppsummering reiseavstand={reiseavstand} />}
             <SamlingerOppsummering samlinger={samlinger} />
             {reisemåte && <ReisemåteOppsummering reisemåte={reisemåte} />}

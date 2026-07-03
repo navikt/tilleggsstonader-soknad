@@ -4,3 +4,9 @@ export enum AnnenAktivitetType {
     ARBEIDSSØKER = 'ARBEIDSSØKER',
     INGEN_AKTIVITET = 'INGEN_AKTIVITET',
 }
+
+export enum AktivitetTypeUtdanning {
+    VIDEREGÅENDE = 'VIDEREGÅENDE',
+    OPPLÆRING_FOR_VOKSNE = 'OPPLÆRING_FOR_VOKSNE',
+    ANNET_TILTAK = 'ANNET_TILTAK',
+}
