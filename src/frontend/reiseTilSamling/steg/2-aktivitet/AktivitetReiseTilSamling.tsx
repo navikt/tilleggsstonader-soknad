@@ -64,7 +64,7 @@ export const AktivitetReiseTilSamling = () => {
             oppdaterAktivitet({ lønnetAktivitet: undefined });
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                lønnetAktivitet: undefined,
+                [errorKeyLønnetAktivitet]: undefined,
             }));
         }
     };
@@ -109,8 +109,11 @@ export const AktivitetReiseTilSamling = () => {
     };
 
     const oppdaterAnnenAktivitetTypeUtdanning = (verdi: EnumFelt<AktivitetTypeUtdanning>) => {
-        oppdaterAktivitet({ annenAktivitetTypeUtdanning: verdi, lønnetAktivitet: undefined });
-        oppdaterTilleggsopplysninger({});
+        oppdaterAktivitet({
+            annenAktivitetTypeUtdanning: verdi,
+            lønnetAktivitet: undefined,
+            tilleggsopplysningerAnnenAktivitet: undefined,
+        });
         settValideringsfeil((prevState) => ({
             ...prevState,
             [errorKeyAnnenAktivitetTypeUtdanning]: undefined,
