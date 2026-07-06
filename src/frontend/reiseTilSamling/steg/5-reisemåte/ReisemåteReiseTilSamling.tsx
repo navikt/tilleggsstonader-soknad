@@ -175,8 +175,10 @@ export const ReisemåteReiseTilSamling = () => {
                 {offentligTransportJa && (
                     <TotalutgifterFelt
                         id={valideringsfeil[errorKeyTotalutgifterKollektivt]?.id}
-                        label={reisemåteTekster.totalutgifter_kollektivt_label[locale]}
-                        description={reisemåteTekster.totalutgifter_kollektivt_beskrivelse[locale]}
+                        label={reisemåteTekster.totalutgifter_offentlig_transport_label[locale]}
+                        description={
+                            reisemåteTekster.totalutgifter_offentlig_transport_beskrivelse[locale]
+                        }
                         inputMode="numeric"
                         value={reisemåte?.totalUtgifterOffentligTransport?.verdi ?? ''}
                         error={valideringsfeil[errorKeyTotalutgifterKollektivt]?.melding}
@@ -185,7 +187,9 @@ export const ReisemåteReiseTilSamling = () => {
                             settReisemåte((prev) => ({
                                 ...prev,
                                 totalUtgifterOffentligTransport: {
-                                    label: reisemåteTekster.totalutgifter_kollektivt_label[locale],
+                                    label: reisemåteTekster.totalutgifter_offentlig_transport_label[
+                                        locale
+                                    ],
                                     verdi,
                                 },
                             }));

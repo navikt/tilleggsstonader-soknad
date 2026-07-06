@@ -6,8 +6,8 @@ interface ReisemåteInnhold {
     tittel: TekstElement<string>;
     radio_kan_reise_offentlig: Radiogruppe<JaNei>;
     check_kan_ikke_reise_offentlig_begrunnelse: CheckboxGruppe<string>;
-    totalutgifter_kollektivt_label: TekstElement<string>;
-    totalutgifter_kollektivt_beskrivelse: TekstElement<string>;
+    totalutgifter_offentlig_transport_label: TekstElement<string>;
+    totalutgifter_offentlig_transport_beskrivelse: TekstElement<string>;
     radio_kan_benytte_egen_bil: Radiogruppe<JaNei>;
     check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppe<string>;
     egen_bil_utgifter_tittel: TekstElement<string>;
@@ -71,10 +71,10 @@ export const reisemåteTekster: ReisemåteInnhold = {
     feilmelding_kan_ikke_reise_offentlig_begrunnelse: {
         nb: 'Du må oppgi hvorfor du ikke kan reise med offentlig transport.',
     },
-    totalutgifter_kollektivt_label: {
-        nb: 'Hva er totalutgiftene til kollektivtransport til og fra samlingene?',
+    totalutgifter_offentlig_transport_label: {
+        nb: 'Hva er totalutgiftene til offentlig transport til og fra samlingene?',
     },
-    totalutgifter_kollektivt_beskrivelse: {
+    totalutgifter_offentlig_transport_beskrivelse: {
         nb: 'Oppgi totalbeløpet i kroner for alle samlingene du søker for.',
     },
     radio_kan_benytte_egen_bil: {
