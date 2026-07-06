@@ -3,6 +3,7 @@ import React from 'react';
 import { FormSummary } from '@navikt/ds-react';
 
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
+import { OppsummeringSvar } from '../../../components/Oppsummering/OppsummeringSvar';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { Reisemåte } from '../../../typer/søknad';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
@@ -17,40 +18,22 @@ export const ReisemåteOppsummering: React.FC<{ reisemåte: Reisemåte }> = ({ r
                 </FormSummary.Heading>
             </FormSummary.Header>
             <FormSummary.Answers>
-                {reisemåte.kanReiseKollektivt && (
-                    <FormSummary.Answer>
-                        <FormSummary.Label>{reisemåte.kanReiseKollektivt.label}</FormSummary.Label>
-                        <FormSummary.Value>
-                            {reisemåte.kanReiseKollektivt.svarTekst}
-                        </FormSummary.Value>
-                    </FormSummary.Answer>
-                )}
-                {reisemåte.totalutgifterKollektivt && (
-                    <FormSummary.Answer>
-                        <FormSummary.Label>
-                            {reisemåte.totalutgifterKollektivt.label}
-                        </FormSummary.Label>
-                        <FormSummary.Value>
-                            {reisemåte.totalutgifterKollektivt.verdi} kr
-                        </FormSummary.Value>
-                    </FormSummary.Answer>
-                )}
-                {reisemåte.kanBenytteEgenBil && (
-                    <FormSummary.Answer>
-                        <FormSummary.Label>{reisemåte.kanBenytteEgenBil.label}</FormSummary.Label>
-                        <FormSummary.Value>
-                            {reisemåte.kanBenytteEgenBil.svarTekst}
-                        </FormSummary.Value>
-                    </FormSummary.Answer>
-                )}
-                {reisemåte.kanBenytteDrosje && (
-                    <FormSummary.Answer>
-                        <FormSummary.Label>{reisemåte.kanBenytteDrosje.label}</FormSummary.Label>
-                        <FormSummary.Value>
-                            {reisemåte.kanBenytteDrosje.svarTekst}
-                        </FormSummary.Value>
-                    </FormSummary.Answer>
-                )}
+                <OppsummeringSvar felt={reisemåte.kanReiseMedOffentligTransport} />
+                <OppsummeringSvar
+                    felt={reisemåte.totalUtgifterOffentligTransport}
+                    valuePostfix="kr"
+                />
+                <OppsummeringSvar felt={reisemåte.kanIkkeReiseMedOffentligTransportBegrunnelser} />
+                <OppsummeringSvar felt={reisemåte.kanBenytteEgenBil} />
+                <OppsummeringSvar felt={reisemåte.kanIkkeBenytteEgenBilBegrunnelser} />
+                <OppsummeringSvar felt={reisemåte.egenBilUtgifter?.drivstoffType} />
+                <OppsummeringSvar felt={reisemåte.egenBilUtgifter?.bompenger} valuePostfix="kr" />
+                <OppsummeringSvar felt={reisemåte.egenBilUtgifter?.ferge} valuePostfix="kr" />
+                <OppsummeringSvar
+                    felt={reisemåte.egenBilUtgifter?.piggdekkavgift}
+                    valuePostfix="kr"
+                />
+                <OppsummeringSvar felt={reisemåte.kanBenytteDrosje} />
             </FormSummary.Answers>
             <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.REISEMÅTE} />
         </FormSummary>

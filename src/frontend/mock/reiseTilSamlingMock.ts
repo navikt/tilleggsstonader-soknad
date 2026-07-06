@@ -52,13 +52,13 @@ export const mockReiseavstand: Reiseavstand = {
 };
 
 export const mockReisemåte: Reisemåte = {
-    kanReiseKollektivt: {
+    kanReiseMedOffentligTransport: {
         label: 'Kan du reise kollektivt?',
         verdi: 'JA',
         svarTekst: 'Ja',
         alternativer: ['Ja', 'Nei'],
     },
-    totalutgifterKollektivt: {
+    totalUtgifterOffentligTransport: {
         verdi: '500',
         label: 'Hva er totalutgiftene til kollektivtransport til og fra samlingene?',
     },
