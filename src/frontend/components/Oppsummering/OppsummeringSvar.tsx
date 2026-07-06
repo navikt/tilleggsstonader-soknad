@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { FormSummary } from '@navikt/ds-react';
 
 import { EnumFelt, EnumFlereValgFelt, VerdiFelt } from '../../typer/skjema';
