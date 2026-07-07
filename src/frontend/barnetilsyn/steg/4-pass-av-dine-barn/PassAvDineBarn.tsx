@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { GuidePanel, VStack } from '@navikt/ds-react';
 
-import { oppdaterDokumentasjonsbehovForBarnMedPass } from './barnepassDokumentUtil';
 import { BarnepassSpørsmål } from './BarnepassSpørsmål';
 import { valider } from './passBarnVedleggUtils';
 import { BarnepassIntern } from './typer';
@@ -22,8 +21,7 @@ export const PassAvDineBarn = () => {
     const { person } = usePerson();
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
-    const { valgteBarnIdenter, barnMedBarnepass, settBarnMedBarnepass, settDokumentasjonsbehov } =
-        usePassAvBarnSøknad();
+    const { valgteBarnIdenter, barnMedBarnepass, settBarnMedBarnepass } = usePassAvBarnSøknad();
 
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
         valgteBarnIdenter.map(
@@ -56,10 +54,6 @@ export const PassAvDineBarn = () => {
     const oppdaterSøknad = () => {
         const barnepasses = barnMedPass as Barnepass[];
         settBarnMedBarnepass(barnepasses);
-
-        settDokumentasjonsbehov((prevState) =>
-            oppdaterDokumentasjonsbehovForBarnMedPass(barnepasses, person.barn, prevState)
-        );
     };
 
     return (

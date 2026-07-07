@@ -6,7 +6,6 @@ import { AnnenUtdanning } from './AnnenUtdanning';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
 import { HarRettTilUtstyrsstipend } from './HarRettTilUtstyrsstipend';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
-import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
 import { harValgtAktivitetPåVgsNivå } from './UtdanningUtils';
 import {
     feilAnnenUtdanning,
@@ -38,7 +37,7 @@ import { AnnenUtdanningType } from '../../typer/søknad';
 export const Utdanning = () => {
     const { locale } = useSpråk();
     const { person } = usePerson();
-    const { utdanning, settUtdanning, settDokumentasjonsbehov } = useLæremidlerSøknad();
+    const { utdanning, settUtdanning } = useLæremidlerSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
     const { registerAktiviteter } = useRegisterAktiviteter();
 
@@ -69,7 +68,6 @@ export const Utdanning = () => {
             },
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
-        settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
     };
 
     const oppdaterAnnenUtdanning = (nyAnnenUtdanning: EnumFelt<AnnenUtdanningType>) => {

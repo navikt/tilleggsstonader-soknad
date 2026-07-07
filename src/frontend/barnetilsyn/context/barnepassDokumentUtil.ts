@@ -1,6 +1,6 @@
-import { Barn } from '../../../typer/barn';
-import { Dokumentasjonsbehov, VedleggstypePassAvBarn } from '../../../typer/skjema';
-import { Barnepass, PassType, ÅrsakBarnepass } from '../../typer/barnepass';
+import { Barn } from '../../typer/barn';
+import { Dokumentasjonsbehov, VedleggstypePassAvBarn } from '../../typer/skjema';
+import { Barnepass, PassType, ÅrsakBarnepass } from '../typer/barnepass';
 
 export const oppdaterDokumentasjonsbehovForBarnMedPass = (
     barnMedPass: Barnepass[],
