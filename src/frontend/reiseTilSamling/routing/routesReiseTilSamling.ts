@@ -1,21 +1,11 @@
-import { IRoute } from '../../typer/routes';
+import { IRoute, Steg } from '../../typer/routes';
 
-export enum ERouteReiseTilSamling {
-    INTRO = 'INTRO',
-    HOVEDYTELSE = 'HOVEDYTELSE',
-    AKTIVITET = 'AKTIVITET',
-    REISEAVSTAND = 'REISEAVSTAND',
-    SAMLINGER = 'SAMLINGER',
-    REISEMÅTE = 'REISEMÅTE',
-    VEDLEGG = 'VEDLEGG',
-    OPPSUMMERING = 'OPPSUMMERING',
-    KVITTERING = 'KVITTERING',
-}
+export type ReiseTilSamlingSteg = Steg | 'AKTIVITET' | 'REISEAVSTAND' | 'SAMLINGER' | 'REISEMÅTE';
 
 export const reiseTilSamlingPath = '/reise-til-samling';
 
-export const RouteTilPath: Record<ERouteReiseTilSamling, string> = {
-    INTRO: reiseTilSamlingPath + '/intro',
+export const RouteTilPath: Record<ReiseTilSamlingSteg, string> = {
+    FORSIDE: reiseTilSamlingPath + '/intro',
     HOVEDYTELSE: reiseTilSamlingPath + '/hovedytelse',
     AKTIVITET: reiseTilSamlingPath + '/aktivitet',
     REISEAVSTAND: reiseTilSamlingPath + '/reiseavstand',
@@ -26,46 +16,46 @@ export const RouteTilPath: Record<ERouteReiseTilSamling, string> = {
     KVITTERING: reiseTilSamlingPath + '/kvittering',
 };
 
-export const routesReiseTilSamling: IRoute[] = [
-    { path: reiseTilSamlingPath + '/intro', label: 'Forside', route: ERouteReiseTilSamling.INTRO },
+export const routesReiseTilSamling: IRoute<ReiseTilSamlingSteg>[] = [
+    { path: RouteTilPath.FORSIDE, label: 'Forside', route: 'FORSIDE' },
     {
         path: RouteTilPath.HOVEDYTELSE,
         label: 'Din situasjon',
-        route: ERouteReiseTilSamling.HOVEDYTELSE,
+        route: 'HOVEDYTELSE',
     },
     {
         path: RouteTilPath.AKTIVITET,
         label: 'Aktivitet',
-        route: ERouteReiseTilSamling.AKTIVITET,
+        route: 'AKTIVITET',
     },
     {
         path: RouteTilPath.REISEAVSTAND,
         label: 'Reiseavstand',
-        route: ERouteReiseTilSamling.REISEAVSTAND,
+        route: 'REISEAVSTAND',
     },
     {
         path: RouteTilPath.SAMLINGER,
         label: 'Samlinger',
-        route: ERouteReiseTilSamling.SAMLINGER,
+        route: 'SAMLINGER',
     },
     {
         path: RouteTilPath.REISEMÅTE,
         label: 'Reisemåte',
-        route: ERouteReiseTilSamling.REISEMÅTE,
+        route: 'REISEMÅTE',
     },
     {
         path: RouteTilPath.VEDLEGG,
         label: 'Vedlegg',
-        route: ERouteReiseTilSamling.VEDLEGG,
+        route: 'VEDLEGG',
     },
     {
         path: RouteTilPath.OPPSUMMERING,
         label: 'Oppsummering',
-        route: ERouteReiseTilSamling.OPPSUMMERING,
+        route: 'OPPSUMMERING',
     },
     {
         path: RouteTilPath.KVITTERING,
         label: 'Kvittering',
-        route: ERouteReiseTilSamling.KVITTERING,
+        route: 'KVITTERING',
     },
 ];

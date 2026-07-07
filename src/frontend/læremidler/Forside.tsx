@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { Accordion, BodyLong, Button, GuidePanel, HStack, Label, VStack } from '@navikt/ds-react';
 
-import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
+import { routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
@@ -46,12 +46,7 @@ export const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(
-            Skjematype.SØKNAD_LÆREMIDLER,
-            skalÅpne,
-            tittel,
-            ERouteLæremidler.FORSIDE
-        );
+        loggAccordionEvent(Skjematype.SØKNAD_LÆREMIDLER, skalÅpne, tittel, 'FORSIDE');
     };
 
     return (

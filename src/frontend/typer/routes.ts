@@ -1,11 +1,7 @@
-import { ERouteBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
-import { ERouteLæremidler } from '../læremidler/routing/routesLæremidler';
-import { ERouteReiseTilSamling } from '../reiseTilSamling/routing/routesReiseTilSamling';
+export type Steg = 'FORSIDE' | 'HOVEDYTELSE' | 'VEDLEGG' | 'OPPSUMMERING' | 'KVITTERING';
 
-export type RouteType = ERouteBarnetilsyn | ERouteLæremidler | ERouteReiseTilSamling;
-
-export interface IRoute {
-    route: RouteType;
+export interface IRoute<TSteg extends string = Steg> {
+    route: TSteg;
     path: string;
     label: string;
 }

@@ -14,7 +14,7 @@ import {
     VStack,
 } from '@navikt/ds-react';
 
-import { ERouteBarnetilsyn, routesBarnetilsyn } from './routing/routesBarnetilsyn';
+import { routesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
@@ -57,12 +57,7 @@ export const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(
-            Skjematype.SØKNAD_BARNETILSYN,
-            skalÅpne,
-            tittel,
-            ERouteBarnetilsyn.FORSIDE
-        );
+        loggAccordionEvent(Skjematype.SØKNAD_BARNETILSYN, skalÅpne, tittel, 'FORSIDE');
     };
 
     return (

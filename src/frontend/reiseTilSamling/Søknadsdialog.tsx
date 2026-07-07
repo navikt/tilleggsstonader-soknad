@@ -88,7 +88,7 @@ export const Søknadsdialog: React.FC = () => {
                     path={'/kvittering'}
                     element={<Kvittering pathTilForside={reiseTilSamlingPath} />}
                 />
-                <Route path={'*'} element={<Navigate to={RouteTilPath.INTRO} replace />} />
+                <Route path={'*'} element={<Navigate to={RouteTilPath.FORSIDE} replace />} />
             </Routes>
         </>
     );
