@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { Søknadsdialog } from './Søknadsdialog';
 import { PersonRouting } from '../components/PersonRouting';
-import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
+import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
 import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';

@@ -35,13 +35,13 @@ import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
-import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { AktivitetTypeUtdanning, AnnenAktivitetType } from '../../../typer/aktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
+import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 export const AktivitetReiseTilSamling = () => {

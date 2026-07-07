@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { loggBesøk } from '../api/analytics';
 import { HarBehandlingSide } from '../barnetilsyn/HarBehandlingSide';
-import { RoutesBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
+import { routesBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
 import { routesLæremidler } from '../læremidler/routing/routesLæremidler';
@@ -15,7 +15,7 @@ interface RootRouteProps {
 }
 
 const route: Record<Skjematype, IRoute> = {
-    [Skjematype.SØKNAD_BARNETILSYN]: RoutesBarnetilsyn[0],
+    [Skjematype.SØKNAD_BARNETILSYN]: routesBarnetilsyn[0],
     [Skjematype.SØKNAD_LÆREMIDLER]: routesLæremidler[0],
     [Skjematype.SØKNAD_REISE_TIL_SAMLING]: routesReiseTilSamling[0],
 };

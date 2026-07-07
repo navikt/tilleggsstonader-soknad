@@ -6,10 +6,10 @@ import { SamlingerListe } from './SamlingerListe';
 import { validerSamlinger } from './validering';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { inneholderFeil } from '../../../typer/validering';
+import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { samlingerTekster } from '../../tekster/samlinger';
 
 export const SamlingerReiseTilSamling = () => {

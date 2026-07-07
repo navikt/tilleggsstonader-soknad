@@ -10,7 +10,7 @@ import { forsideTekster } from './tekster/forside';
 import { Kvittering } from '../components/Kvittering/Kvittering';
 import { RedirectTilStart } from '../components/RedirectTilStart';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
-import { useReiseTilSamlingSøknad } from '../context/ReiseTilSamlingSøknadContext';
+import { useReiseTilSamlingSøknad } from './context/ReiseTilSamlingSøknadContext';
 import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
 import { reiseTilSamlingPath, RouteTilPath } from './routing/routesReiseTilSamling';
 import { Skjematype } from '../typer/skjematyper';

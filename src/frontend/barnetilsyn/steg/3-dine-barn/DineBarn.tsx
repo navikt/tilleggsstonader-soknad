@@ -16,15 +16,15 @@ import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeadin
 import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFlereValgFelt } from '../../../typer/skjema';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
+import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { dineBarnTekster } from '../../tekster/dineBarn';
-import { harBarnUnder2år, harValgtBarnOver9år } from '../5-pass-av-dine-barn/passBarnVedleggUtils';
+import { harBarnUnder2år, harValgtBarnOver9år } from '../4-pass-av-dine-barn/passBarnVedleggUtils';
 
 export const DineBarn = () => {
     const { locale } = useSpråk();

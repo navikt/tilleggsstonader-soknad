@@ -9,14 +9,14 @@ import { BarnepassIntern } from './typer';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { Barnepass } from '../../../typer/barn';
 import { inneholderFeil } from '../../../typer/validering';
 import { valueOrThrow } from '../../../utils/typeUtils';
+import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { barnepassTekster } from '../../tekster/barnepass';
+import { Barnepass } from '../../typer/barnepass';
 
 export const PassAvDineBarn = () => {
     const { person } = usePerson();

@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { DokumentasjonFeltMedVedleggstekst, Vedlegg } from '../../../components/Vedlegg/Vedlegg';
-import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { typerVedleggTekster } from '../../../tekster/vedlegg';
 import { DokumentasjonFelt } from '../../../typer/skjema';
 import { hentBeskjedMedEttParameter } from '../../../utils/tekstUtils';
+import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 
 export const VedleggPassAvBarn = () => {
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = usePassAvBarnSøknad();

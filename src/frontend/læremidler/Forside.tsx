@@ -11,12 +11,12 @@ import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOv
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
+import { useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
 import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
 import { Skjematype } from '../typer/skjematyper';

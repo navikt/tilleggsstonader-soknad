@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
-import { Utdanning } from '../læremidler/typer/søknad';
-import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
-import { Hovedytelse } from '../typer/søknad';
+import { DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
+import { Hovedytelse } from '../../typer/søknad';
+import { Utdanning } from '../typer/søknad';
 
 const [LæremidlerSøknadProvider, useLæremidlerSøknad] = createUseContext(() => {
     LæremidlerSøknadProvider.displayName = 'SØKNAD_LÆREMIDLER_PROVIDER';

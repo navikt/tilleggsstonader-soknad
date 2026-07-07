@@ -7,17 +7,17 @@ import { Kvittering } from '../components/Kvittering/Kvittering';
 import { RedirectTilStart } from '../components/RedirectTilStart';
 import { RootRoute } from '../components/RootRoute';
 import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
-import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
+import { usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
 import { barnetilsynPath } from './routing/routesBarnetilsyn';
 import { Skjematype } from '../typer/skjematyper';
-import { HovedytelsePassBarn } from './steg/2-hovedytelse/HovedytelsePassBarn';
-import { AktivitetPassAvBarn } from './steg/3-aktivitet/AktivitetPassAvBarn';
-import { DineBarn } from './steg/4-dine-barn/DineBarn';
-import { PassAvDineBarn } from './steg/5-pass-av-dine-barn/PassAvDineBarn';
-import { VedleggPassAvBarn } from './steg/6-vedlegg/VedleggPassAvBarn';
-import { Oppsummering } from './steg/7-oppsummering/Oppsummering';
+import { HovedytelsePassBarn } from './steg/1-hovedytelse/HovedytelsePassBarn';
+import { AktivitetPassAvBarn } from './steg/2-aktivitet/AktivitetPassAvBarn';
+import { DineBarn } from './steg/3-dine-barn/DineBarn';
+import { PassAvDineBarn } from './steg/4-pass-av-dine-barn/PassAvDineBarn';
+import { VedleggPassAvBarn } from './steg/5-vedlegg/VedleggPassAvBarn';
+import { Oppsummering } from './steg/6-oppsummering/Oppsummering';
 
 export const Søknadsdialog: React.FC = () => {
     return (

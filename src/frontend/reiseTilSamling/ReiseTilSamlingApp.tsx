@@ -6,7 +6,7 @@ import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterConte
 import {
     ReiseTilSamlingSøknadProvider,
     useReiseTilSamlingSøknad,
-} from '../context/ReiseTilSamlingSøknadContext';
+} from './context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../context/SpråkContext';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';

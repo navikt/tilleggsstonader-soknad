@@ -32,12 +32,12 @@ import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeadin
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
-import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
+import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { reiseavstandTekster } from '../../tekster/reiseavstand';
 
 const AdresseBoks = styled.div`

@@ -12,7 +12,7 @@ import { VedleggLæremidler } from './steg/3-vedlegg/VedleggLæremidler';
 import { Oppsummering } from './steg/4-oppsummering/Oppsummering';
 import { Kvittering } from '../components/Kvittering/Kvittering';
 import { RedirectTilStart } from '../components/RedirectTilStart';
-import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
+import { useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
 import { fellesTekster } from '../tekster/felles';
 import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
 import { Skjematype } from '../typer/skjematyper';

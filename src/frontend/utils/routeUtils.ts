@@ -1,6 +1,6 @@
 import {
     ERouteBarnetilsyn,
-    RoutesBarnetilsyn,
+    routesBarnetilsyn,
     barnetilsynPath,
     RouteTilPath as RouteToPathPassAvBarn,
 } from '../barnetilsyn/routing/routesBarnetilsyn';
@@ -22,7 +22,7 @@ import { Skjematype } from '../typer/skjematyper';
 export const hentRoutes = (skjematype: Skjematype): IRoute[] => {
     switch (skjematype) {
         case Skjematype.SØKNAD_BARNETILSYN:
-            return RoutesBarnetilsyn;
+            return routesBarnetilsyn;
         case Skjematype.SØKNAD_LÆREMIDLER:
             return routesLæremidler;
         case Skjematype.SØKNAD_REISE_TIL_SAMLING:

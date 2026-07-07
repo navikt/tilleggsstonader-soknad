@@ -12,14 +12,10 @@ import {
     initialSamlinger,
 } from './reiseTilSamlingInitialState';
 import {
-    AktivitetReiseTilSamling,
-    TilleggsopplysningerAnnenAktivitet,
-} from '../reiseTilSamling/typer/aktivitet';
-import {
     DokumentasjonFelt,
     Dokumentasjonsbehov,
     VedleggstypeReiseTilSamling,
-} from '../typer/skjema';
+} from '../../typer/skjema';
 import {
     Aktivitetsadresse,
     Avreiseadresse,
@@ -27,7 +23,8 @@ import {
     Reiseavstand,
     Reisemåte,
     Samling,
-} from '../typer/søknad';
+} from '../../typer/søknad';
+import { AktivitetReiseTilSamling, TilleggsopplysningerAnnenAktivitet } from '../typer/aktivitet';
 
 const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseContext(() => {
     ReiseTilSamlingSøknadProvider.displayName = 'SØKNAD_REISE_TIL_SAMLING_PROVIDER';

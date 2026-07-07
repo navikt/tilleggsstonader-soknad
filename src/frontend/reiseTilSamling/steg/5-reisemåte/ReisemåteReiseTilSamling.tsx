@@ -14,12 +14,12 @@ import {
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
+import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { reisemåteTekster } from '../../tekster/reisemåte';
 
 const TotalutgifterFelt = styled(TextField)`

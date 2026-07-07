@@ -1,6 +1,6 @@
 import { HovedytelseSide } from '../../../components/Hovedytelse/Hovedytelse';
-import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 import { Hovedytelse } from '../../../typer/søknad';
+import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 
 export const HovedytelseReiseTilSamling = () => {
     const { hovedytelse, settHovedytelse } = useReiseTilSamlingSøknad();

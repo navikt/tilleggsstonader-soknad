@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import createUseContext from 'constate';
 
-import { Barnepass } from '../typer/barn';
-import { DokumentasjonFelt, Dokumentasjonsbehov } from '../typer/skjema';
-import { AktivitetFelles, Hovedytelse } from '../typer/søknad';
+import { DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
+import { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
+import { Barnepass } from '../typer/barnepass';
 
 const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() => {
     PassAvBarnSøknadProvider.displayName = 'SØKNAD_PASS_AV_BARN_PROVIDER';

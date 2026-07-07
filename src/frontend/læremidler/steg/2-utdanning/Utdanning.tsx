@@ -24,7 +24,6 @@ import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -32,6 +31,7 @@ import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
+import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
 import { utdanningTekster } from '../../tekster/utdanning';
 import { AnnenUtdanningType } from '../../typer/søknad';
 

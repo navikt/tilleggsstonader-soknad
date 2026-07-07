@@ -3,9 +3,10 @@ import React from 'react';
 import { FormSummary } from '@navikt/ds-react';
 
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { Barn, Barnepass } from '../../../typer/barn';
+import { Barn } from '../../../typer/barn';
 import { formaterPeriode } from '../../../utils/formateringUtils';
 import { barnepassTekster } from '../../tekster/barnepass';
+import { Barnepass } from '../../typer/barnepass';
 
 export function OppsummeringEnkeltbarn({ barn, barnepass }: { barn?: Barn; barnepass: Barnepass }) {
     if (!barn) {

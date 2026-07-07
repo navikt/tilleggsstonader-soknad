@@ -23,7 +23,7 @@ export const RouteTilPath: Record<ERouteBarnetilsyn, string> = {
     VEDLEGG: barnetilsynPath + '/vedlegg',
 };
 
-export const RoutesBarnetilsyn: IRoute[] = [
+export const routesBarnetilsyn: IRoute[] = [
     { path: barnetilsynPath, label: 'Forside', route: ERouteBarnetilsyn.FORSIDE },
     {
         path: RouteTilPath.HOVEDYTELSE,

@@ -5,10 +5,10 @@ import { FormSummary } from '@navikt/ds-react';
 import { OppsummeringEnkeltbarn } from './OppsummerEnkeltbarn';
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { Barnepass } from '../../../typer/barn';
 import { Person } from '../../../typer/person';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
+import { Barnepass } from '../../typer/barnepass';
 
 export const PassAvBarn: React.FC<{ person: Person; barnMedBarnepass: Barnepass[] }> = ({
     person,

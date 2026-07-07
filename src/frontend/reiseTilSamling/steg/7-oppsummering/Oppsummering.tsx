@@ -7,7 +7,7 @@ import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsumm
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
 import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
+import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
