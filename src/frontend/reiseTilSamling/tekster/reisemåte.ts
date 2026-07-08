@@ -43,7 +43,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
         },
         alternativer: JaNeiTilTekst,
         beskrivelse: {
-            nb: 'Med offentlig transport menes buss, tog, trikk, t-bane, ferge og lignende.',
+            nb: 'Med offentlig transport menes fly, buss, tog, trikk, t-bane, ferge og lignende.',
         },
     },
     check_kan_ikke_reise_offentlig_begrunnelse: {
