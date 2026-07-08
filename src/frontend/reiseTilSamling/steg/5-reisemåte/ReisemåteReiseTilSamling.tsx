@@ -10,9 +10,9 @@ import {
     errorKeyKanBenytteDrosje,
     errorKeyKanBenytteEgenBil,
     errorKeyKanIkkeBenytteEgenBilBegrunnelse,
-    errorKeyKanIkkeReiseKollektivtBegrunnelse,
-    errorKeyKanReiseKollektivt,
-    errorKeyTotalutgifterKollektivt,
+    errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse,
+    errorKeyKanReiseMedOffentligTransport,
+    errorKeyTotalutgifterOffentligTransport,
     validerReisemåte,
 } from './validering';
 import { Side } from '../../../components/Side';
@@ -51,7 +51,7 @@ export const ReisemåteReiseTilSamling = () => {
 
     const oppdaterKanReiseMedOffentligTransport = (verdi: EnumFelt<JaNei>) => {
         settReisemåte({ kanReiseMedOffentligTransport: verdi });
-        nullstillFeil(errorKeyKanReiseKollektivt);
+        nullstillFeil(errorKeyKanReiseMedOffentligTransport);
     };
 
     const oppdaterKanIkkeReiseOffentligBegrunnelse = (verdier: EnumFlereValgFelt<string>) => {
@@ -59,7 +59,7 @@ export const ReisemåteReiseTilSamling = () => {
             ...prev,
             kanIkkeReiseMedOffentligTransportBegrunnelser: verdier,
         }));
-        nullstillFeil(errorKeyKanIkkeReiseKollektivtBegrunnelse);
+        nullstillFeil(errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse);
     };
 
     const oppdaterKanBenytteEgenBil = (verdi: EnumFelt<JaNei>) => {
@@ -166,22 +166,22 @@ export const ReisemåteReiseTilSamling = () => {
             <LocaleHeading tekst={reisemåteTekster.tittel} level="2" size="medium" />
             <VStack gap="space-8">
                 <LocaleRadioGroup
-                    id={valideringsfeil[errorKeyKanReiseKollektivt]?.id}
+                    id={valideringsfeil[errorKeyKanReiseMedOffentligTransport]?.id}
                     tekst={reisemåteTekster.radio_kan_reise_offentlig}
                     value={reisemåte?.kanReiseMedOffentligTransport?.verdi ?? ''}
                     onChange={oppdaterKanReiseMedOffentligTransport}
-                    error={valideringsfeil[errorKeyKanReiseKollektivt]?.melding}
+                    error={valideringsfeil[errorKeyKanReiseMedOffentligTransport]?.melding}
                 />
                 {offentligTransportJa && (
                     <TotalutgifterFelt
-                        id={valideringsfeil[errorKeyTotalutgifterKollektivt]?.id}
+                        id={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.id}
                         label={reisemåteTekster.totalutgifter_offentlig_transport_label[locale]}
                         description={
                             reisemåteTekster.totalutgifter_offentlig_transport_beskrivelse[locale]
                         }
                         inputMode="numeric"
                         value={reisemåte?.totalUtgifterOffentligTransport?.verdi ?? ''}
-                        error={valideringsfeil[errorKeyTotalutgifterKollektivt]?.melding}
+                        error={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.melding}
                         onChange={(e) => {
                             const verdi = e.target.value;
                             settReisemåte((prev) => ({
@@ -193,14 +193,18 @@ export const ReisemåteReiseTilSamling = () => {
                                     verdi,
                                 },
                             }));
-                            nullstillFeil(errorKeyTotalutgifterKollektivt);
+                            nullstillFeil(errorKeyTotalutgifterOffentligTransport);
                         }}
                     />
                 )}
                 {offentligTransportNei && (
                     <>
                         <LocaleCheckboxGroup
-                            id={valideringsfeil[errorKeyKanIkkeReiseKollektivtBegrunnelse]?.id}
+                            id={
+                                valideringsfeil[
+                                    errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse
+                                ]?.id
+                            }
                             tekst={reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse}
                             onChange={oppdaterKanIkkeReiseOffentligBegrunnelse}
                             value={
@@ -208,7 +212,9 @@ export const ReisemåteReiseTilSamling = () => {
                                 []
                             }
                             error={
-                                valideringsfeil[errorKeyKanIkkeReiseKollektivtBegrunnelse]?.melding
+                                valideringsfeil[
+                                    errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse
+                                ]?.melding
                             }
                         />
                         {dårligTransporttilbudValgt && (

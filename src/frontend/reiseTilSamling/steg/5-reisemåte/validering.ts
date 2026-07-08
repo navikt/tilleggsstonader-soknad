@@ -1,13 +1,15 @@
 import { Reisemåte } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
+import { erGyldigKostnad } from '../../../utils/tall';
 import { harVerdi } from '../../../utils/typeUtils';
 import { reisemåteTekster } from '../../tekster/reisemåte';
 
-export const errorKeyKanReiseKollektivt = 'reisemåte_kan_reise_kollektivt';
-export const errorKeyKanIkkeReiseKollektivtBegrunnelse =
-    'reisemåte_kan_ikke_reise_kollektivt_begrunnelse';
-export const errorKeyTotalutgifterKollektivt = 'reisemåte_totalutgifter_kollektivt';
+export const errorKeyKanReiseMedOffentligTransport = 'reisemåte_kan_reise_med_offentlig_transport';
+export const errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse =
+    'reisemåte_kan_ikke_reise_med_offentlig_transport_begrunnelse';
+export const errorKeyTotalutgifterOffentligTransport =
+    'reisemåte_totalutgifter_offentlig_transport';
 export const errorKeyKanBenytteEgenBil = 'reisemåte_kan_benytte_egen_bil';
 export const errorKeyKanBenytteDrosje = 'reisemåte_kan_benytte_drosje';
 export const errorKeyKanIkkeBenytteEgenBilBegrunnelse =
@@ -26,8 +28,8 @@ export const validerReisemåte = (
 
     if (!harVerdi(reisemåte?.kanReiseMedOffentligTransport?.verdi)) {
         return {
-            [errorKeyKanReiseKollektivt]: {
-                id: errorKeyKanReiseKollektivt,
+            [errorKeyKanReiseMedOffentligTransport]: {
+                id: errorKeyKanReiseMedOffentligTransport,
                 melding: reisemåteTekster.feilmelding_offentlig_mangler[locale],
             },
         };
@@ -38,16 +40,16 @@ export const validerReisemåte = (
         if (!harVerdi(utgifter)) {
             feil = {
                 ...feil,
-                [errorKeyTotalutgifterKollektivt]: {
-                    id: errorKeyTotalutgifterKollektivt,
+                [errorKeyTotalutgifterOffentligTransport]: {
+                    id: errorKeyTotalutgifterOffentligTransport,
                     melding: reisemåteTekster.feilmelding_totalutgifter_mangler[locale],
                 },
             };
-        } else if (isNaN(Number(utgifter)) || Number(utgifter) <= 0) {
+        } else if (!erGyldigKostnad(utgifter)) {
             feil = {
                 ...feil,
-                [errorKeyTotalutgifterKollektivt]: {
-                    id: errorKeyTotalutgifterKollektivt,
+                [errorKeyTotalutgifterOffentligTransport]: {
+                    id: errorKeyTotalutgifterOffentligTransport,
                     melding: reisemåteTekster.feilmelding_totalutgifter_ugyldig[locale],
                 },
             };
@@ -62,8 +64,8 @@ export const validerReisemåte = (
         ) {
             feil = {
                 ...feil,
-                [errorKeyKanIkkeReiseKollektivtBegrunnelse]: {
-                    id: errorKeyKanIkkeReiseKollektivtBegrunnelse,
+                [errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse]: {
+                    id: errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse,
                     melding:
                         reisemåteTekster.feilmelding_kan_ikke_reise_offentlig_begrunnelse[locale],
                 },
@@ -116,9 +118,7 @@ export const validerReisemåte = (
                 };
             }
 
-            const bompenger = reisemåte?.egenBilUtgifter?.bompenger?.verdi;
-
-            if (bompenger && (isNaN(Number(bompenger)) || Number(bompenger) <= 0)) {
+            if (!erGyldigKostnad(reisemåte?.egenBilUtgifter?.bompenger?.verdi)) {
                 feil = {
                     ...feil,
                     [errorKeyEgenbilUtgifterBompenger]: {
@@ -128,9 +128,7 @@ export const validerReisemåte = (
                 };
             }
 
-            const ferge = reisemåte?.egenBilUtgifter?.ferge?.verdi;
-
-            if (ferge && (isNaN(Number(ferge)) || Number(ferge) <= 0)) {
+            if (!erGyldigKostnad(reisemåte?.egenBilUtgifter?.ferge?.verdi)) {
                 feil = {
                     ...feil,
                     [errorKeyEgenbilUtgifterFerge]: {
@@ -140,9 +138,7 @@ export const validerReisemåte = (
                 };
             }
 
-            const piggdekkavgift = reisemåte?.egenBilUtgifter?.piggdekkavgift?.verdi;
-
-            if (piggdekkavgift && (isNaN(Number(piggdekkavgift)) || Number(piggdekkavgift) <= 0)) {
+            if (!erGyldigKostnad(reisemåte?.egenBilUtgifter?.piggdekkavgift?.verdi)) {
                 feil = {
                     ...feil,
                     [errorKeyEgenbilUtgifterPiggdekkavgift]: {
