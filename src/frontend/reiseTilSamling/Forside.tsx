@@ -16,6 +16,7 @@ import {
 import { routesReiseTilSamling } from './routing/routesReiseTilSamling';
 import { forsideTekster } from './tekster/forside';
 import { loggBesøk, loggSkjemaStartet } from '../api/analytics';
+import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
@@ -62,6 +63,7 @@ export const Forside: React.FC = () => {
                     <LocaleTekst tekst={forsideTekster.veileder_innhold} />
                 </BodyShort>
             </GuidePanel>
+            <AdvarselEndringOvergangsstønad />
             <div>
                 <LocaleHeading
                     tekst={forsideTekster.kan_soke_tittel}
