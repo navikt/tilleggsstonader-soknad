@@ -4,19 +4,19 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { Accordion, BodyLong, Button, GuidePanel, HStack, Label, VStack } from '@navikt/ds-react';
 
-import { ERouteLæremidler, routesLæremidler } from './routing/routesLæremidler';
+import { routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
+import { useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
 import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
 import { Skjematype } from '../typer/skjematyper';
@@ -46,12 +46,7 @@ export const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(
-            Skjematype.SØKNAD_LÆREMIDLER,
-            skalÅpne,
-            tittel,
-            ERouteLæremidler.FORSIDE
-        );
+        loggAccordionEvent(Skjematype.SØKNAD_LÆREMIDLER, skalÅpne, tittel, 'FORSIDE');
     };
 
     return (

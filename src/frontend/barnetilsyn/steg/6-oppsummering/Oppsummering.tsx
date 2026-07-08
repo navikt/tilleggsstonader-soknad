@@ -11,8 +11,8 @@ import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringS
 import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
+import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { RouteTilPath } from '../../routing/routesBarnetilsyn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 

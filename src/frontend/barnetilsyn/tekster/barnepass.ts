@@ -1,7 +1,7 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { PassType, ÅrsakBarnepass } from '../../typer/barn';
 import { JaNei } from '../../typer/søknad';
 import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { PassType, ÅrsakBarnepass } from '../typer/barnepass';
 
 interface BarnepassInnhold {
     tittel: TekstElement<string>;

@@ -14,19 +14,19 @@ import {
     VStack,
 } from '@navikt/ds-react';
 
-import { ERouteBarnetilsyn, RoutesBarnetilsyn } from './routing/routesBarnetilsyn';
+import { routesBarnetilsyn } from './routing/routesBarnetilsyn';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
+import { usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
 import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
 import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
 import { Skjematype } from '../typer/skjematyper';
@@ -42,14 +42,14 @@ export const Forside: React.FC = () => {
     const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
 
     useEffect(() => {
-        const route = RoutesBarnetilsyn[0];
+        const route = routesBarnetilsyn[0];
         loggBesøk(Skjematype.SØKNAD_BARNETILSYN, route.path, route.label);
     }, []);
 
     const startSøknad = () => {
         if (harBekreftet) {
             loggSkjemaStartet(Skjematype.SØKNAD_BARNETILSYN);
-            const nesteRoute = hentNesteRoute(RoutesBarnetilsyn, location.pathname);
+            const nesteRoute = hentNesteRoute(routesBarnetilsyn, location.pathname);
             navigate(nesteRoute.path);
         } else {
             settSkalViseFeilmelding(true);
@@ -57,12 +57,7 @@ export const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(
-            Skjematype.SØKNAD_BARNETILSYN,
-            skalÅpne,
-            tittel,
-            ERouteBarnetilsyn.FORSIDE
-        );
+        loggAccordionEvent(Skjematype.SØKNAD_BARNETILSYN, skalÅpne, tittel, 'FORSIDE');
     };
 
     return (

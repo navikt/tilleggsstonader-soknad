@@ -22,7 +22,6 @@ import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleIn
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
-import { usePassAvBarnSøknad } from '../../../context/PassAvBarnSøknadContext';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -30,6 +29,7 @@ import { AnnenAktivitetType } from '../../../typer/aktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
+import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 export const AktivitetPassAvBarn = () => {

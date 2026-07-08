@@ -1,51 +1,32 @@
 import React from 'react';
 
-import { Route, Routes } from 'react-router';
-
+import { useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
 import { Forside } from './Forside';
-import { læremidlerPath } from './routing/routesLæremidler';
-import { RootRoute } from '../components/RootRoute';
-import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
+import { StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
+import { fellesTekster } from '../tekster/felles';
+import { Skjematype } from '../typer/skjematyper';
 import { HovedytelseLæremidler } from './steg/1-hovedytelse/HovedytelseLæremidler';
 import { Utdanning } from './steg/2-utdanning/Utdanning';
 import { VedleggLæremidler } from './steg/3-vedlegg/VedleggLæremidler';
 import { Oppsummering } from './steg/4-oppsummering/Oppsummering';
-import { Kvittering } from '../components/Kvittering/Kvittering';
-import { RedirectTilStart } from '../components/RedirectTilStart';
-import { useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
-import { fellesTekster } from '../tekster/felles';
-import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
-import { Skjematype } from '../typer/skjematyper';
+
+const steg: StegRoute[] = [
+    { path: '/hovedytelse', element: <HovedytelseLæremidler /> },
+    { path: '/utdanning', element: <Utdanning /> },
+    { path: '/vedlegg', element: <VedleggLæremidler /> },
+    { path: '/oppsummering', element: <Oppsummering /> },
+];
 
 export const Søknadsdialog: React.FC = () => {
-    return (
-        <>
-            <SøknadsskjemaHeader
-                tittel={fellesTekster.banner_læremidler}
-                skjemaId={skjematypeTilSkjemaId[Skjematype.SØKNAD_LÆREMIDLER]}
-            />
-            <Routes>
-                <Route path={'/'} element={<RootRoute forside={<Forside />} />} />
-                <Route path={'*'} element={<SøknadsdialogInnhold />} />
-                <Route
-                    path={'/kvittering'}
-                    element={<Kvittering pathTilForside={læremidlerPath} />}
-                />
-            </Routes>
-        </>
-    );
-};
-
-const SøknadsdialogInnhold = () => {
     const { harBekreftet } = useLæremidlerSøknad();
+
     return (
-        <RedirectTilStart harBekreftet={harBekreftet}>
-            <Routes>
-                <Route path={'/hovedytelse'} element={<HovedytelseLæremidler />} />
-                <Route path={'/utdanning'} element={<Utdanning />} />
-                <Route path={'/vedlegg'} element={<VedleggLæremidler />} />
-                <Route path={'/oppsummering'} element={<Oppsummering />} />
-            </Routes>
-        </RedirectTilStart>
+        <SøknadsdialogShell
+            tittel={fellesTekster.banner_læremidler}
+            skjematype={Skjematype.SØKNAD_LÆREMIDLER}
+            harBekreftet={harBekreftet}
+            forside={<Forside />}
+            steg={steg}
+        />
     );
 };

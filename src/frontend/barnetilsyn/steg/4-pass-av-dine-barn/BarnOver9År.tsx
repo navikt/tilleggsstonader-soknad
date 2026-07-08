@@ -7,11 +7,12 @@ import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRad
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
-import { Barn, ÅrsakBarnepass } from '../../../typer/barn';
+import { Barn } from '../../../typer/barn';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { Valideringsfeil } from '../../../typer/validering';
 import { barnepassTekster } from '../../tekster/barnepass';
+import { ÅrsakBarnepass } from '../../typer/barnepass';
 
 interface Props {
     barn: Barn;

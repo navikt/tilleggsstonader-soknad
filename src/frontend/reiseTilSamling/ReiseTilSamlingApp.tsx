@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { Søknadsdialog } from './Søknadsdialog';
-import { PersonRouting } from '../components/PersonRouting';
-import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import {
     ReiseTilSamlingSøknadProvider,
     useReiseTilSamlingSøknad,
-} from '../context/ReiseTilSamlingSøknadContext';
-import { useSpråk } from '../context/SpråkContext';
+} from './context/ReiseTilSamlingSøknadContext';
+import { Søknadsdialog } from './Søknadsdialog';
+import { SøknadAppShell } from '../components/SøknadAppShell';
 import { SøknadProvider } from '../context/SøknadContext';
-import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
-import { teksterStønad } from '../tekster/stønad';
+import { useValideringsfeil } from '../context/ValideringsfeilContext';
 import { Skjematype } from '../typer/skjematyper';
 import { appConfig } from '../utils/appConfig';
+import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const ReiseTilSamlingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
@@ -49,21 +47,13 @@ const ReiseTilSamlingInnhold = () => {
 };
 
 export const ReiseTilSamlingApp = () => {
-    const { locale } = useSpråk();
-
-    useEffect(() => {
-        document.title = teksterStønad.tittelHtml[Skjematype.SØKNAD_REISE_TIL_SAMLING][locale];
-    }, [locale]);
+    useDokumentTittel(Skjematype.SØKNAD_REISE_TIL_SAMLING);
 
     return (
-        <PersonRouting skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}>
-            <ValideringsfeilProvider>
-                <ReiseTilSamlingSøknadProvider>
-                    <RegisterAktiviteterProvider skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}>
-                        <ReiseTilSamlingInnhold />
-                    </RegisterAktiviteterProvider>
-                </ReiseTilSamlingSøknadProvider>
-            </ValideringsfeilProvider>
-        </PersonRouting>
+        <SøknadAppShell skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}>
+            <ReiseTilSamlingSøknadProvider>
+                <ReiseTilSamlingInnhold />
+            </ReiseTilSamlingSøknadProvider>
+        </SøknadAppShell>
     );
 };

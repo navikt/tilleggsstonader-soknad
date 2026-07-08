@@ -6,7 +6,6 @@ import { AnnenUtdanning } from './AnnenUtdanning';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
 import { HarRettTilUtstyrsstipend } from './HarRettTilUtstyrsstipend';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
-import { finnDokumentasjonsbehov } from './læremidlerDokumentUtils';
 import { harValgtAktivitetPåVgsNivå } from './UtdanningUtils';
 import {
     feilAnnenUtdanning,
@@ -24,7 +23,6 @@ import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { usePerson } from '../../../context/PersonContext';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -32,13 +30,14 @@ import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
+import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
 import { utdanningTekster } from '../../tekster/utdanning';
 import { AnnenUtdanningType } from '../../typer/søknad';
 
 export const Utdanning = () => {
     const { locale } = useSpråk();
     const { person } = usePerson();
-    const { utdanning, settUtdanning, settDokumentasjonsbehov } = useLæremidlerSøknad();
+    const { utdanning, settUtdanning } = useLæremidlerSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
     const { registerAktiviteter } = useRegisterAktiviteter();
 
@@ -69,7 +68,6 @@ export const Utdanning = () => {
             },
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
-        settDokumentasjonsbehov(finnDokumentasjonsbehov(harFunksjonsnedsettelse));
     };
 
     const oppdaterAnnenUtdanning = (nyAnnenUtdanning: EnumFelt<AnnenUtdanningType>) => {

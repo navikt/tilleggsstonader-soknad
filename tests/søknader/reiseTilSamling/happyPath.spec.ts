@@ -7,7 +7,6 @@ import { mockSøknadRoutingApi } from '../../mocks/søknadRouting';
 import { søknadBaseUrl } from '../../utils/utils';
 import { forventIngenWcagViolations } from '../../utils/wcag';
 
-const urlIntro = `${søknadBaseUrl}/reise-til-samling/intro`;
 const urlSøknad = `${søknadBaseUrl}/reise-til-samling`;
 
 const fjernWebpackOverlay = async (page: Page) => {
@@ -21,7 +20,7 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await mockPersonApi(page);
     await mockAktivitet(page);
     await mockHarIngenSøknadReiseTilSamlingFraFør(page);
-    await page.goto(urlIntro);
+    await page.goto(`${urlSøknad}/intro`);
     await fjernWebpackOverlay(page);
 
     await expect(

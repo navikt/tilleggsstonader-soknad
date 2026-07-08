@@ -1,6 +1,6 @@
 import { AnnenAktivitetType } from './aktivitet';
-import { Barnepass } from './barn';
 import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
+import { Barnepass } from '../barnetilsyn/typer/barnepass';
 import { Ytelse } from '../components/Hovedytelse/typer';
 import { Utdanning } from '../læremidler/typer/søknad';
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';

@@ -1,101 +1,42 @@
 import React from 'react';
 
-import { Navigate, Route, Routes } from 'react-router';
-
+import { useReiseTilSamlingSøknad } from './context/ReiseTilSamlingSøknadContext';
 import { Forside } from './Forside';
-import { ReisemåteReiseTilSamling } from './steg/5-reisemåte/ReisemåteReiseTilSamling';
-import { VedleggReiseTilSamling } from './steg/6-vedlegg/VedleggReiseTilSamling';
-import { Oppsummering } from './steg/7-oppsummering/Oppsummering';
-import { forsideTekster } from './tekster/forside';
-import { Kvittering } from '../components/Kvittering/Kvittering';
-import { RedirectTilStart } from '../components/RedirectTilStart';
-import { SøknadsskjemaHeader } from '../components/SøknadsskjemaHeader';
-import { useReiseTilSamlingSøknad } from '../context/ReiseTilSamlingSøknadContext';
-import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
-import { reiseTilSamlingPath, RouteTilPath } from './routing/routesReiseTilSamling';
-import { Skjematype } from '../typer/skjematyper';
+import { SkalBrukeTaxiReiseTilSamlingAvsjekk } from './SkalBrukeTaxiReiseTilSamlingAvsjekk';
 import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
 import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
 import { ReiseavstandReiseTilSamling } from './steg/3-reiseavstand/ReiseavstandReiseTilSamling';
 import { SamlingerReiseTilSamling } from './steg/4-samlinger/SamlingerReiseTilSamling';
+import { ReisemåteReiseTilSamling } from './steg/5-reisemåte/ReisemåteReiseTilSamling';
+import { VedleggReiseTilSamling } from './steg/6-vedlegg/VedleggReiseTilSamling';
+import { Oppsummering } from './steg/7-oppsummering/Oppsummering';
+import { forsideTekster } from './tekster/forside';
+import { StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
+import { Skjematype } from '../typer/skjematyper';
+
+const offentligeSteg: StegRoute[] = [{ path: '/intro', element: <Forside /> }];
+
+const steg: StegRoute[] = [
+    { path: '/hovedytelse', element: <HovedytelseReiseTilSamling /> },
+    { path: '/aktivitet', element: <AktivitetReiseTilSamling /> },
+    { path: '/reiseavstand', element: <ReiseavstandReiseTilSamling /> },
+    { path: '/samlinger', element: <SamlingerReiseTilSamling /> },
+    { path: '/reisemate', element: <ReisemåteReiseTilSamling /> },
+    { path: '/vedlegg', element: <VedleggReiseTilSamling /> },
+    { path: '/oppsummering', element: <Oppsummering /> },
+];
 
 export const Søknadsdialog: React.FC = () => {
-    return (
-        <>
-            <SøknadsskjemaHeader
-                tittel={forsideTekster.banner_tittel}
-                skjemaId={skjematypeTilSkjemaId[Skjematype.SØKNAD_REISE_TIL_SAMLING]}
-            />
-            <Routes>
-                <Route path={'/intro'} element={<Forside />} />
-                <Route
-                    path={'/hovedytelse'}
-                    element={
-                        <SøknadsdialogInnhold>
-                            <HovedytelseReiseTilSamling />
-                        </SøknadsdialogInnhold>
-                    }
-                />
-                <Route
-                    path={'/aktivitet'}
-                    element={
-                        <SøknadsdialogInnhold>
-                            <AktivitetReiseTilSamling />
-                        </SøknadsdialogInnhold>
-                    }
-                />
-                <Route
-                    path={'/samlinger'}
-                    element={
-                        <SøknadsdialogInnhold>
-                            <SamlingerReiseTilSamling />
-                        </SøknadsdialogInnhold>
-                    }
-                />
-                <Route
-                    path={'/reiseavstand'}
-                    element={
-                        <SøknadsdialogInnhold>
-                            <ReiseavstandReiseTilSamling />
-                        </SøknadsdialogInnhold>
-                    }
-                />
-                <Route
-                    path={'/reisemate'}
-                    element={
-                        <SøknadsdialogInnhold>
-                            <ReisemåteReiseTilSamling />
-                        </SøknadsdialogInnhold>
-                    }
-                />
-                <Route
-                    path={'/vedlegg'}
-                    element={
-                        <SøknadsdialogInnhold>
-                            <VedleggReiseTilSamling />
-                        </SøknadsdialogInnhold>
-                    }
-                />
-                <Route
-                    path={'/oppsummering'}
-                    element={
-                        <SøknadsdialogInnhold>
-                            <Oppsummering />
-                        </SøknadsdialogInnhold>
-                    }
-                />
-                <Route
-                    path={'/kvittering'}
-                    element={<Kvittering pathTilForside={reiseTilSamlingPath} />}
-                />
-                <Route path={'*'} element={<Navigate to={RouteTilPath.INTRO} replace />} />
-            </Routes>
-        </>
-    );
-};
-
-const SøknadsdialogInnhold: React.FC<{ children: React.ReactElement }> = ({ children }) => {
     const { harBekreftet } = useReiseTilSamlingSøknad();
 
-    return <RedirectTilStart harBekreftet={harBekreftet}>{children}</RedirectTilStart>;
+    return (
+        <SøknadsdialogShell
+            tittel={forsideTekster.banner_tittel}
+            skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}
+            harBekreftet={harBekreftet}
+            forside={<SkalBrukeTaxiReiseTilSamlingAvsjekk />}
+            offentligeSteg={offentligeSteg}
+            steg={steg}
+        />
+    );
 };

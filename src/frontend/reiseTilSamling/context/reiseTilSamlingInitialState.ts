@@ -4,11 +4,11 @@ import {
     mockReiseavstand,
     mockReisemåte,
     mockSamlinger,
-} from '../mock/reiseTilSamlingMock';
-import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
-import { DokumentasjonFelt } from '../typer/skjema';
-import { Hovedytelse, Reiseavstand, Reisemåte, Samling } from '../typer/søknad';
-import { erLokal } from '../utils/miljø';
+} from '../../mock/reiseTilSamlingMock';
+import { DokumentasjonFelt } from '../../typer/skjema';
+import { Hovedytelse, Reiseavstand, Reisemåte, Samling } from '../../typer/søknad';
+import { erLokal } from '../../utils/miljø';
+import { AktivitetReiseTilSamling } from '../typer/aktivitet';
 
 export const initialHarBekreftet = (): boolean => erLokal();
 

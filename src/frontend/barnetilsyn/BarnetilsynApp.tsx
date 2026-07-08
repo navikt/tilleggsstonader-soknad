@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
+import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
 import { Søknadsdialog } from './Søknadsdialog';
-import { PersonRouting } from '../components/PersonRouting';
-import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from '../context/PassAvBarnSøknadContext';
-import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
-import { useSpråk } from '../context/SpråkContext';
+import { SøknadAppShell } from '../components/SøknadAppShell';
 import { SøknadProvider } from '../context/SøknadContext';
-import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
-import { teksterStønad } from '../tekster/stønad';
+import { useValideringsfeil } from '../context/ValideringsfeilContext';
 import { Skjematype } from '../typer/skjematyper';
 import { appConfig } from '../utils/appConfig';
+import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const BarnetilsynInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
@@ -37,21 +35,13 @@ const BarnetilsynInnhold = () => {
 };
 
 export const BarnetilsynApp = () => {
-    const { locale } = useSpråk();
-
-    useEffect(() => {
-        document.title = teksterStønad.tittelHtml[Skjematype.SØKNAD_BARNETILSYN][locale];
-    }, [locale]);
+    useDokumentTittel(Skjematype.SØKNAD_BARNETILSYN);
 
     return (
-        <PersonRouting skjematype={Skjematype.SØKNAD_BARNETILSYN}>
-            <ValideringsfeilProvider>
-                <PassAvBarnSøknadProvider>
-                    <RegisterAktiviteterProvider skjematype={Skjematype.SØKNAD_BARNETILSYN}>
-                        <BarnetilsynInnhold />
-                    </RegisterAktiviteterProvider>
-                </PassAvBarnSøknadProvider>
-            </ValideringsfeilProvider>
-        </PersonRouting>
+        <SøknadAppShell skjematype={Skjematype.SØKNAD_BARNETILSYN}>
+            <PassAvBarnSøknadProvider>
+                <BarnetilsynInnhold />
+            </PassAvBarnSøknadProvider>
+        </SøknadAppShell>
     );
 };

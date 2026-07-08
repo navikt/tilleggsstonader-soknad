@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { DokumentasjonFeltMedVedleggstekst, Vedlegg } from '../../../components/Vedlegg/Vedlegg';
-import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { typerVedleggTekster } from '../../../tekster/vedlegg';
+import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
 
 export const VedleggLæremidler = () => {
     const { dokumentasjon, settDokumentasjon, dokumentasjonsbehov } = useLæremidlerSøknad();

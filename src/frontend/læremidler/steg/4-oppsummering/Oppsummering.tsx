@@ -6,7 +6,7 @@ import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsumm
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
 import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import { useLæremidlerSøknad } from '../../../context/LæremiddelSøknadContext';
+import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
 import { RouteTilPath } from '../../routing/routesLæremidler';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 

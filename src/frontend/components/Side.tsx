@@ -26,6 +26,7 @@ import {
     hentForrigeRoute,
     hentNesteRoute,
     hentRoutes,
+    Skjemasteg,
 } from '../utils/routeUtils';
 
 interface Props {
@@ -68,7 +69,7 @@ export const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }
     const routes = hentRoutes(skjematype);
     const nåværendePath = location.pathname;
     const aktivtStegIndex = routes.findIndex((steg) => steg.path === nåværendePath);
-    const aktivtSteg: IRoute | undefined = routes[aktivtStegIndex];
+    const aktivtSteg: IRoute<Skjemasteg> | undefined = routes[aktivtStegIndex];
 
     useEffect(() => {
         loggBesøk(skjematype, aktivtSteg.path, aktivtSteg.label);

@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
+import { LæremidlerSøknadProvider, useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
 import { Søknadsdialog } from './Søknadsdialog';
-import { PersonRouting } from '../components/PersonRouting';
-import { LæremidlerSøknadProvider, useLæremidlerSøknad } from '../context/LæremiddelSøknadContext';
-import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
-import { useSpråk } from '../context/SpråkContext';
+import { SøknadAppShell } from '../components/SøknadAppShell';
 import { SøknadProvider } from '../context/SøknadContext';
-import { useValideringsfeil, ValideringsfeilProvider } from '../context/ValideringsfeilContext';
-import { teksterStønad } from '../tekster/stønad';
+import { useValideringsfeil } from '../context/ValideringsfeilContext';
 import { Skjematype } from '../typer/skjematyper';
 import { appConfig } from '../utils/appConfig';
+import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const LæremidlerInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
@@ -35,21 +33,13 @@ const LæremidlerInnhold = () => {
 };
 
 export const LæremidlerApp = () => {
-    const { locale } = useSpråk();
-
-    useEffect(() => {
-        document.title = teksterStønad.tittelHtml[Skjematype.SØKNAD_LÆREMIDLER][locale];
-    }, [locale]);
+    useDokumentTittel(Skjematype.SØKNAD_LÆREMIDLER);
 
     return (
-        <PersonRouting skjematype={Skjematype.SØKNAD_LÆREMIDLER}>
-            <ValideringsfeilProvider>
-                <LæremidlerSøknadProvider>
-                    <RegisterAktiviteterProvider skjematype={Skjematype.SØKNAD_LÆREMIDLER}>
-                        <LæremidlerInnhold />
-                    </RegisterAktiviteterProvider>
-                </LæremidlerSøknadProvider>
-            </ValideringsfeilProvider>
-        </PersonRouting>
+        <SøknadAppShell skjematype={Skjematype.SØKNAD_LÆREMIDLER}>
+            <LæremidlerSøknadProvider>
+                <LæremidlerInnhold />
+            </LæremidlerSøknadProvider>
+        </SøknadAppShell>
     );
 };

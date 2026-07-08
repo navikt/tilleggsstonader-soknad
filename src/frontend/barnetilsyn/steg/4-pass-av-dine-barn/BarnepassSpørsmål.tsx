@@ -14,12 +14,13 @@ import { BarnepassIntern } from './typer';
 import { UtgifterDato } from './UtgifterDato';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { Barn, PassType } from '../../../typer/barn';
+import { Barn } from '../../../typer/barn';
 import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { barnepassTekster } from '../../tekster/barnepass';
+import { PassType } from '../../typer/barnepass';
 
 interface Props {
     barn: Barn;

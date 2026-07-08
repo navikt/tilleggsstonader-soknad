@@ -33,7 +33,7 @@ export const SkalBrukeTaxiReiseTilSamlingAvsjekk: React.FC = () => {
         if (svar === 'JA') {
             await omdirigerTilFyllut(SkjematypeFyllUt.SØKNAD_REISE_TIL_SAMLING, 'GAMMEL');
         } else {
-            navigate(RouteTilPath.INTRO);
+            navigate(RouteTilPath.FORSIDE);
         }
     }
 
