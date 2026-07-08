@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useReiseTilSamlingSøknad } from './context/ReiseTilSamlingSøknadContext';
 import { Forside } from './Forside';
-import { SkalBrukeTaxiReiseTilSamlingAvsjekk } from './SkalBrukeTaxiReiseTilSamlingAvsjekk';
 import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
 import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
 import { ReiseavstandReiseTilSamling } from './steg/3-reiseavstand/ReiseavstandReiseTilSamling';
@@ -34,7 +33,7 @@ export const Søknadsdialog: React.FC = () => {
             tittel={forsideTekster.banner_tittel}
             skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}
             harBekreftet={harBekreftet}
-            forside={<SkalBrukeTaxiReiseTilSamlingAvsjekk />}
+            forside={<Forside />}
             offentligeSteg={offentligeSteg}
             steg={steg}
         />
