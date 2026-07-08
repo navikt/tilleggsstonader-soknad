@@ -58,7 +58,7 @@ export const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedyte
     };
 
     const skalViseVarselOmRegelendring =
-        ytelse?.verdier.some((ytelse) => ytelse.verdi === 'OVERGANGSSTØNAD') || false;
+        ytelse?.verdier.some((ytelseFelt) => ytelseFelt.verdi === 'OVERGANGSSTØNAD') ?? false;
 
     return (
         <Side
