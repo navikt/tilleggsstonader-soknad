@@ -156,10 +156,9 @@ export const ReisemåteReiseTilSamling = () => {
     const dårligTransporttilbudValgt =
         kanIkkeReiseOffentligBegrunnelser.includes('dårligTransportTilbud');
 
-    const helsemessigeÅrsakerBilValgt =
-        reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier
-            .map((v) => v.verdi)
-            .includes('helsemessigeÅrsaker');
+    const helsemessigeÅrsakerBilValgt = reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier
+        .map((v) => v.verdi)
+        .includes('helsemessigeÅrsaker');
 
     return (
         <Side validerSteg={kanFortsette}>
@@ -173,29 +172,37 @@ export const ReisemåteReiseTilSamling = () => {
                     error={valideringsfeil[errorKeyKanReiseMedOffentligTransport]?.melding}
                 />
                 {offentligTransportJa && (
-                    <TotalutgifterFelt
-                        id={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.id}
-                        label={reisemåteTekster.totalutgifter_offentlig_transport_label[locale]}
-                        description={
-                            reisemåteTekster.totalutgifter_offentlig_transport_beskrivelse[locale]
-                        }
-                        inputMode="numeric"
-                        value={reisemåte?.totalUtgifterOffentligTransport?.verdi ?? ''}
-                        error={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.melding}
-                        onChange={(e) => {
-                            const verdi = e.target.value;
-                            settReisemåte((prev) => ({
-                                ...prev,
-                                totalUtgifterOffentligTransport: {
-                                    label: reisemåteTekster.totalutgifter_offentlig_transport_label[
-                                        locale
-                                    ],
-                                    verdi,
-                                },
-                            }));
-                            nullstillFeil(errorKeyTotalutgifterOffentligTransport);
-                        }}
-                    />
+                    <>
+                        <TotalutgifterFelt
+                            id={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.id}
+                            label={reisemåteTekster.totalutgifter_offentlig_transport_label[locale]}
+                            description={
+                                reisemåteTekster.totalutgifter_offentlig_transport_beskrivelse[
+                                    locale
+                                ]
+                            }
+                            inputMode="numeric"
+                            value={reisemåte?.totalUtgifterOffentligTransport?.verdi ?? ''}
+                            error={
+                                valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.melding
+                            }
+                            onChange={(e) => {
+                                const verdi = e.target.value;
+                                settReisemåte((prev) => ({
+                                    ...prev,
+                                    totalUtgifterOffentligTransport: {
+                                        label: reisemåteTekster
+                                            .totalutgifter_offentlig_transport_label[locale],
+                                        verdi,
+                                    },
+                                }));
+                                nullstillFeil(errorKeyTotalutgifterOffentligTransport);
+                            }}
+                        />
+                        <Alert variant="info">
+                            {reisemåteTekster.kan_reise_offentlig_info[locale]}
+                        </Alert>
+                    </>
                 )}
                 {offentligTransportNei && (
                     <>

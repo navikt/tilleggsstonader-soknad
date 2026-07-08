@@ -35,15 +35,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
     const [reiseavstand, settReiseavstand] = useState<Reiseavstand>(initialReiseavstand());
     const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(initialReisemåte());
-    const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
-        const behov: Dokumentasjonsbehov[] = [
-            { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
-        ];
-        if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA') {
-            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
-        }
-        return behov;
-    }, [reisemåte?.kanReiseMedOffentligTransport?.verdi]);
+
     const [dokumentasjon, settDokumentasjon] =
         useState<DokumentasjonFelt[]>(initialDokumentasjon());
 
@@ -63,6 +55,33 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
             ...oppdatering,
         }));
     };
+
+    const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
+        const behov: Dokumentasjonsbehov[] = [
+            { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
+        ];
+
+        if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA') {
+            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
+        }
+
+        if (
+            reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier.some(
+                (v) => v.verdi === 'helsemessigeÅrsaker'
+            ) ||
+            reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier.some(
+                (v) => v.verdi === 'helsemessigeÅrsaker'
+            )
+        ) {
+            behov.push({ type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL });
+        }
+
+        return behov;
+    }, [
+        reisemåte?.kanReiseMedOffentligTransport?.verdi,
+        reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier,
+        reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier,
+    ]);
 
     const oppdaterTilleggsopplysninger = (
         oppdatering: Partial<TilleggsopplysningerAnnenAktivitet>

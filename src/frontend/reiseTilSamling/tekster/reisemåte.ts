@@ -5,6 +5,7 @@ import { CheckboxGruppe, Radiogruppe, TekstElement } from '../../typer/tekst';
 interface ReisemåteInnhold {
     tittel: TekstElement<string>;
     radio_kan_reise_offentlig: Radiogruppe<JaNei>;
+    kan_reise_offentlig_info: TekstElement<string>;
     check_kan_ikke_reise_offentlig_begrunnelse: CheckboxGruppe<string>;
     totalutgifter_offentlig_transport_label: TekstElement<string>;
     totalutgifter_offentlig_transport_beskrivelse: TekstElement<string>;
@@ -46,6 +47,9 @@ export const reisemåteTekster: ReisemåteInnhold = {
             nb: 'Med offentlig transport menes fly, buss, tog, trikk, t-bane, ferge og lignende.',
         },
     },
+    kan_reise_offentlig_info: {
+        nb: 'Du må dokumentere beløpet med kvitteringer eller annen dokumentasjon. Dette kan legges ved i et senere steg.',
+    },
     check_kan_ikke_reise_offentlig_begrunnelse: {
         legend: {
             nb: 'Hvorfor kan du ikke reise med offentlig transport?',
@@ -63,7 +67,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
         },
     },
     info_helsemessige_årsaker_valg: {
-        nb: 'Du må dokumentere din helsetilstand med legeerklæring eller annen uttalelse fra helsepersonell.',
+        nb: 'Du må dokumentere din helsetilstand med legeerklæring eller annen uttalelse fra helsepersonell. Dette kan legges ved i et senere steg.',
     },
     info_dårlig_transporttilbud_valg: {
         nb: 'Siden du valgte at du ikke kan reise med offentlig transport grunnet dårlig transporttilbud, kommer vi til å gjøre en vurdering av dette.',

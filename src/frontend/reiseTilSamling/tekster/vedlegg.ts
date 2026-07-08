@@ -28,4 +28,15 @@ export const typerVedleggTeksterReiseTilSamling: TekstTypeVedlegg = {
             nb: 'Last opp kvitteringer eller billetter som dokumenterer reiseutgiftene dine.',
         },
     },
+    [VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL]: {
+        tittel: {
+            nb: 'Skriftlig uttalelse fra helsepersonell.',
+        },
+        liste_tittel: {
+            nb: 'Legeerklæring eller uttalelse fra helsepersonell.',
+        },
+        beskrivelse: {
+            nb: 'Last opp legeerklæring eller annen uttalelse fra helsepersonell som beskriver helsetilstanden din.',
+        },
+    },
 };
