@@ -115,11 +115,11 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await forventIngenWcagViolations(page);
 
     await page
-        .getByRole('radiogroup', { name: 'Kan du reise kollektivt?' })
+        .getByRole('radiogroup', { name: 'Kan du reise med offentlig transport?' })
         .getByLabel('Ja')
         .check();
     await page
-        .getByLabel('Hva er totalutgiftene til kollektivtransport til og fra samlingene?')
+        .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingene?')
         .fill('500');
     await page.getByRole('button', { name: 'Neste' }).click();
     await fjernWebpackOverlay(page);

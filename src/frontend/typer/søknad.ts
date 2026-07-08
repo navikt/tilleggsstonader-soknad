@@ -33,10 +33,18 @@ export interface SøknadReiseTilSamling {
 }
 
 export interface Reisemåte {
-    kanReiseKollektivt?: EnumFelt<JaNei>;
-    totalutgifterKollektivt?: VerdiFelt<string>;
+    kanReiseMedOffentligTransport?: EnumFelt<JaNei>;
+    kanIkkeReiseMedOffentligTransportBegrunnelser?: EnumFlereValgFelt<string>;
+    totalUtgifterOffentligTransport?: VerdiFelt<string>;
     kanBenytteEgenBil?: EnumFelt<JaNei>;
+    kanIkkeBenytteEgenBilBegrunnelser?: EnumFlereValgFelt<string>;
     kanBenytteDrosje?: EnumFelt<JaNei>;
+    egenBilUtgifter?: {
+        drivstoffType?: EnumFelt<string>;
+        bompenger?: VerdiFelt<string>;
+        ferge?: VerdiFelt<string>;
+        piggdekkavgift?: VerdiFelt<string>;
+    };
 }
 
 export interface Aktivitetsadresse {

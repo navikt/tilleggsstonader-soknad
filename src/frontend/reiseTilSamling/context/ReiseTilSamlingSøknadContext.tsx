@@ -39,11 +39,11 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         const behov: Dokumentasjonsbehov[] = [
             { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
         ];
-        if (reisemåte?.kanReiseKollektivt?.verdi === 'JA') {
+        if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA') {
             behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
         }
         return behov;
-    }, [reisemåte?.kanReiseKollektivt?.verdi]);
+    }, [reisemåte?.kanReiseMedOffentligTransport?.verdi]);
     const [dokumentasjon, settDokumentasjon] =
         useState<DokumentasjonFelt[]>(initialDokumentasjon());
 
