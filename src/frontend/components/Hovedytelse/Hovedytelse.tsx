@@ -12,6 +12,7 @@ import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 import { EnumFlereValgFelt } from '../../typer/skjema';
 import { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
 import { inneholderFeil } from '../../typer/validering';
+import { AdvarselEndringOvergangsstønad } from '../AdvarselEndringOvergangsstønad';
 import { Side } from '../Side';
 import { LocaleCheckboxGroup } from '../Teksthåndtering/LocaleCheckboxGroup';
 import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
@@ -56,6 +57,9 @@ export const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedyte
         }
     };
 
+    const skalViseVarselOmRegelendring =
+        ytelse?.verdier.some((ytelseFelt) => ytelseFelt.verdi === 'OVERGANGSSTØNAD') ?? false;
+
     return (
         <Side
             validerSteg={() => kanFortsette(ytelse)}
@@ -88,6 +92,7 @@ export const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedyte
                     settArbeidOgOpphold={settArbeidOgOpphold}
                 />
             )}
+            {skalViseVarselOmRegelendring && <AdvarselEndringOvergangsstønad />}
         </Side>
     );
 };
