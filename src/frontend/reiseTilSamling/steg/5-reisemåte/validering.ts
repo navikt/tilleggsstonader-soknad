@@ -15,6 +15,8 @@ export const errorKeyKanBenytteDrosje = 'reisemåte_kan_benytte_drosje';
 export const errorKeyKanIkkeBenytteEgenBilBegrunnelse =
     'reisemåte_kan_ikke_benytte_egen_bil_begrunnelse';
 
+export const errorKeyBetalerForReiseSelv = 'reisemåte_betaler_for_reise_selv';
+
 export const errorKeyEgenbilUtgifterDrivstoffType = 'reisemåte_egenbil_utgifter_drivstoff_type';
 export const errorKeyEgenbilUtgifterBompenger = 'reisemåte_egenbil_utgifter_bompenger';
 export const errorKeyEgenbilUtgifterFerge = 'reisemåte_egenbil_utgifter_ferge';
@@ -106,8 +108,12 @@ export const validerReisemåte = (
                     },
                 };
             }
-        } else if (reisemåte?.kanBenytteEgenBil?.verdi === 'JA') {
-            if (!harVerdi(reisemåte?.egenBilUtgifter?.drivstoffType?.verdi)) {
+        } else if (
+            reisemåte?.kanBenytteEgenBil?.verdi === 'JA' ||
+            (reisemåte?.kanBenytteEgenBil?.verdi === 'NEI_SITTER_PÅ_MED_ANDRE' &&
+                reisemåte?.betalerForReiseSelv?.verdi === 'JA')
+        ) {
+            if (!harVerdi(reisemåte?.reiseMedBilUtgifter?.drivstoffType?.verdi)) {
                 feil = {
                     ...feil,
                     [errorKeyEgenbilUtgifterDrivstoffType]: {
@@ -118,7 +124,8 @@ export const validerReisemåte = (
                 };
             }
 
-            if (!erGyldigKostnad(reisemåte?.egenBilUtgifter?.bompenger?.verdi)) {
+            const bompenger = reisemåte?.reiseMedBilUtgifter?.bompenger?.verdi;
+            if (harVerdi(bompenger) && !erGyldigKostnad(bompenger)) {
                 feil = {
                     ...feil,
                     [errorKeyEgenbilUtgifterBompenger]: {
@@ -128,7 +135,8 @@ export const validerReisemåte = (
                 };
             }
 
-            if (!erGyldigKostnad(reisemåte?.egenBilUtgifter?.ferge?.verdi)) {
+            const ferge = reisemåte?.reiseMedBilUtgifter?.ferge?.verdi;
+            if (harVerdi(ferge) && !erGyldigKostnad(ferge)) {
                 feil = {
                     ...feil,
                     [errorKeyEgenbilUtgifterFerge]: {
@@ -138,13 +146,24 @@ export const validerReisemåte = (
                 };
             }
 
-            if (!erGyldigKostnad(reisemåte?.egenBilUtgifter?.piggdekkavgift?.verdi)) {
+            const piggdekkavgift = reisemåte?.reiseMedBilUtgifter?.piggdekkavgift?.verdi;
+            if (harVerdi(piggdekkavgift) && !erGyldigKostnad(piggdekkavgift)) {
                 feil = {
                     ...feil,
                     [errorKeyEgenbilUtgifterPiggdekkavgift]: {
                         id: errorKeyEgenbilUtgifterPiggdekkavgift,
                         melding:
                             reisemåteTekster.feilmelding_egenbil_utgifter_piggdekkavgift[locale],
+                    },
+                };
+            }
+        } else if (reisemåte?.kanBenytteEgenBil?.verdi === 'NEI_SITTER_PÅ_MED_ANDRE') {
+            if (!harVerdi(reisemåte?.betalerForReiseSelv?.verdi)) {
+                feil = {
+                    ...feil,
+                    [errorKeyBetalerForReiseSelv]: {
+                        id: errorKeyBetalerForReiseSelv,
+                        melding: reisemåteTekster.feilmelding_betaler_for_reise_selv[locale],
                     },
                 };
             }

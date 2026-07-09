@@ -39,9 +39,10 @@ export interface Reisemåte {
     kanIkkeReiseMedOffentligTransportBegrunnelser?: EnumFlereValgFelt<string>;
     totalUtgifterOffentligTransport?: VerdiFelt<string>;
     kanBenytteEgenBil?: EnumFelt<KanBenytteEgenBil>;
+    betalerForReiseSelv?: EnumFelt<JaNei>;
     kanIkkeBenytteEgenBilBegrunnelser?: EnumFlereValgFelt<string>;
     kanBenytteDrosje?: EnumFelt<JaNei>;
-    egenBilUtgifter?: {
+    reiseMedBilUtgifter?: {
         drivstoffType?: EnumFelt<string>;
         bompenger?: VerdiFelt<string>;
         ferge?: VerdiFelt<string>;

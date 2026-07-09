@@ -16,8 +16,10 @@ interface ReisemåteInnhold {
     egen_bil_utgifter_bompenger_tittel: TekstElement<string>;
     egen_bil_utgifter_ferge_tittel: TekstElement<string>;
     egen_bil_utgifter_piggdekkavgift_tittel: TekstElement<string>;
+    radio_betaler_for_reise_selv: Radiogruppe<JaNei>;
     radio_kan_benytte_drosje: Radiogruppe<JaNei>;
     advarsel_ingen_reisemåte: TekstElement<string>;
+    advarsel_skal_ikke_betale_selv: TekstElement<string>;
     info_helsemessige_årsaker_valg: TekstElement<string>;
     info_dårlig_transporttilbud_valg: TekstElement<string>;
     feilmelding_offentlig_mangler: TekstElement<string>;
@@ -31,6 +33,7 @@ interface ReisemåteInnhold {
     feilmelding_egenbil_utgifter_bompenger: TekstElement<string>;
     feilmelding_egenbil_utgifter_ferge: TekstElement<string>;
     feilmelding_egenbil_utgifter_piggdekkavgift: TekstElement<string>;
+    feilmelding_betaler_for_reise_selv: TekstElement<string>;
 }
 
 export const reisemåteTekster: ReisemåteInnhold = {
@@ -145,8 +148,17 @@ export const reisemåteTekster: ReisemåteInnhold = {
         },
         alternativer: JaNeiTilTekst,
     },
+    radio_betaler_for_reise_selv: {
+        header: {
+            nb: 'Skal du betale for reisen selv?',
+        },
+        alternativer: JaNeiTilTekst,
+    },
     advarsel_ingen_reisemåte: {
         nb: 'Du har oppgitt at du ikke kan reise med offentlig transport, benytte egen bil eller drosje. Du vil derfor sannsynligvis få avslag på søknaden om stønad til reiser.',
+    },
+    advarsel_skal_ikke_betale_selv: {
+        nb: 'Siden du ikke må betale for reisen til aktivitetsstedet selv, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynlig få avslag.',
     },
     feilmelding_offentlig_mangler: {
         nb: 'Du må svare på om du kan reise med offentlig transport.',
@@ -177,5 +189,8 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     feilmelding_egenbil_utgifter_piggdekkavgift: {
         nb: 'Piggdekkavgift må være et positivt tall.',
+    },
+    feilmelding_betaler_for_reise_selv: {
+        nb: 'Du må svare på om du betaler for reisen selv.',
     },
 };

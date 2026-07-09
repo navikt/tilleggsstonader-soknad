@@ -2,10 +2,10 @@ export const tilHeltall = (verdi: number | string | undefined): number | undefin
     if (!verdi) {
         return undefined;
     }
-    if (typeof verdi === 'string') {
-        return isNaN(parseInt(verdi)) ? undefined : parseInt(verdi);
-    }
-    return verdi;
+
+    const verdiNumber = Number(verdi);
+
+    return isNaN(verdiNumber) ? undefined : verdiNumber;
 };
 
 export const erGyldigKostnad = (verdi: string | undefined): boolean => {

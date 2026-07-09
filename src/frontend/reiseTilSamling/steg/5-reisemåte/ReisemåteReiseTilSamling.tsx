@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Alert, TextField, VStack } from '@navikt/ds-react';
 
 import {
+    errorKeyBetalerForReiseSelv,
     errorKeyEgenbilUtgifterBompenger,
     errorKeyEgenbilUtgifterDrivstoffType,
     errorKeyEgenbilUtgifterFerge,
@@ -39,8 +40,14 @@ export const ReisemåteReiseTilSamling = () => {
     const { reisemåte, settReisemåte } = useReiseTilSamlingSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
-    const nullstillFeil = (errorKey: string) => {
-        settValideringsfeil((prev) => ({ ...prev, [errorKey]: undefined }));
+    const nullstillFeil = (errorKey: string | string[]) => {
+        if (Array.isArray(errorKey)) {
+            errorKey.forEach((key) =>
+                settValideringsfeil((prev) => ({ ...prev, [key]: undefined }))
+            );
+        } else {
+            settValideringsfeil((prev) => ({ ...prev, [errorKey]: undefined }));
+        }
     };
 
     const kanFortsette = (): boolean => {
@@ -51,7 +58,19 @@ export const ReisemåteReiseTilSamling = () => {
 
     const oppdaterKanReiseMedOffentligTransport = (verdi: EnumFelt<JaNei>) => {
         settReisemåte({ kanReiseMedOffentligTransport: verdi });
-        nullstillFeil(errorKeyKanReiseMedOffentligTransport);
+        nullstillFeil([
+            errorKeyKanReiseMedOffentligTransport,
+            errorKeyTotalutgifterOffentligTransport,
+            errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse,
+            errorKeyKanBenytteEgenBil,
+            errorKeyKanIkkeBenytteEgenBilBegrunnelse,
+            errorKeyKanBenytteDrosje,
+            errorKeyBetalerForReiseSelv,
+            errorKeyEgenbilUtgifterDrivstoffType,
+            errorKeyEgenbilUtgifterBompenger,
+            errorKeyEgenbilUtgifterFerge,
+            errorKeyEgenbilUtgifterPiggdekkavgift,
+        ]);
     };
 
     const oppdaterKanIkkeReiseOffentligBegrunnelse = (verdier: EnumFlereValgFelt<string>) => {
@@ -69,7 +88,16 @@ export const ReisemåteReiseTilSamling = () => {
                 prev?.kanIkkeReiseMedOffentligTransportBegrunnelser,
             kanBenytteEgenBil: verdi,
         }));
-        nullstillFeil(errorKeyKanBenytteEgenBil);
+        nullstillFeil([
+            errorKeyKanBenytteEgenBil,
+            errorKeyKanIkkeBenytteEgenBilBegrunnelse,
+            errorKeyKanBenytteDrosje,
+            errorKeyBetalerForReiseSelv,
+            errorKeyEgenbilUtgifterDrivstoffType,
+            errorKeyEgenbilUtgifterBompenger,
+            errorKeyEgenbilUtgifterFerge,
+            errorKeyEgenbilUtgifterPiggdekkavgift,
+        ]);
     };
 
     const oppdaterKanIkkeBenytteEgenBilBegrunnelse = (verdier: EnumFlereValgFelt<string>) => {
@@ -93,8 +121,8 @@ export const ReisemåteReiseTilSamling = () => {
     const oppdaterEgenBilUtgifterDrivstoffType: (verdi: EnumFelt<string>) => void = (verdi) => {
         settReisemåte((prev) => ({
             ...prev,
-            egenBilUtgifter: {
-                ...prev?.egenBilUtgifter,
+            reiseMedBilUtgifter: {
+                ...prev?.reiseMedBilUtgifter,
                 drivstoffType: verdi,
             },
         }));
@@ -105,8 +133,8 @@ export const ReisemåteReiseTilSamling = () => {
         const verdi = e.target.value;
         settReisemåte((prev) => ({
             ...prev,
-            egenBilUtgifter: {
-                ...prev?.egenBilUtgifter,
+            reiseMedBilUtgifter: {
+                ...prev?.reiseMedBilUtgifter,
                 bompenger: {
                     label: reisemåteTekster.egen_bil_utgifter_bompenger_tittel[locale],
                     verdi,
@@ -120,8 +148,8 @@ export const ReisemåteReiseTilSamling = () => {
         const verdi = e.target.value;
         settReisemåte((prev) => ({
             ...prev,
-            egenBilUtgifter: {
-                ...prev?.egenBilUtgifter,
+            reiseMedBilUtgifter: {
+                ...prev?.reiseMedBilUtgifter,
                 ferge: { label: reisemåteTekster.egen_bil_utgifter_ferge_tittel[locale], verdi },
             },
         }));
@@ -132,8 +160,8 @@ export const ReisemåteReiseTilSamling = () => {
         const verdi = e.target.value;
         settReisemåte((prev) => ({
             ...prev,
-            egenBilUtgifter: {
-                ...prev?.egenBilUtgifter,
+            reiseMedBilUtgifter: {
+                ...prev?.reiseMedBilUtgifter,
                 piggdekkavgift: {
                     label: reisemåteTekster.egen_bil_utgifter_piggdekkavgift_tittel[locale],
                     verdi,
@@ -143,10 +171,26 @@ export const ReisemåteReiseTilSamling = () => {
         nullstillFeil(errorKeyEgenbilUtgifterPiggdekkavgift);
     };
 
+    const oppdaterBetalerForReiseSelv = (verdi: EnumFelt<JaNei>) => {
+        settReisemåte((prev) => ({
+            ...prev,
+            betalerForReiseSelv: verdi,
+            reiseMedBilUtgifter: undefined,
+        }));
+        nullstillFeil([
+            errorKeyBetalerForReiseSelv,
+            errorKeyEgenbilUtgifterDrivstoffType,
+            errorKeyEgenbilUtgifterBompenger,
+            errorKeyEgenbilUtgifterFerge,
+            errorKeyEgenbilUtgifterPiggdekkavgift,
+        ]);
+    };
+
     const offentligTransportJa = reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA';
     const offentligTransportNei = reisemåte?.kanReiseMedOffentligTransport?.verdi === 'NEI';
     const bilNei = reisemåte?.kanBenytteEgenBil?.verdi === 'NEI';
     const bilJa = reisemåte?.kanBenytteEgenBil?.verdi === 'JA';
+    const bilMedAndre = reisemåte?.kanBenytteEgenBil?.verdi === 'NEI_SITTER_PÅ_MED_ANDRE';
     const drosjeNei = reisemåte?.kanBenytteDrosje?.verdi === 'NEI';
 
     const kanIkkeReiseOffentligBegrunnelser =
@@ -272,7 +316,24 @@ export const ReisemåteReiseTilSamling = () => {
                                 )}
                             </>
                         )}
-                        {bilJa && (
+                        {bilMedAndre && (
+                            <>
+                                <LocaleRadioGroup
+                                    id={valideringsfeil[errorKeyBetalerForReiseSelv]?.id}
+                                    tekst={reisemåteTekster.radio_betaler_for_reise_selv}
+                                    value={reisemåte?.betalerForReiseSelv?.verdi ?? ''}
+                                    onChange={oppdaterBetalerForReiseSelv}
+                                    error={valideringsfeil[errorKeyBetalerForReiseSelv]?.melding}
+                                />
+                                {reisemåte?.betalerForReiseSelv?.verdi === 'NEI' && (
+                                    <Alert variant="info">
+                                        {reisemåteTekster.advarsel_skal_ikke_betale_selv[locale]}
+                                    </Alert>
+                                )}
+                            </>
+                        )}
+                        {(bilJa ||
+                            (bilMedAndre && reisemåte?.betalerForReiseSelv?.verdi === 'JA')) && (
                             <VStack gap="space-12">
                                 <div>
                                     <LocaleHeading
@@ -287,7 +348,9 @@ export const ReisemåteReiseTilSamling = () => {
                                 <LocaleRadioGroup
                                     id={valideringsfeil[errorKeyEgenbilUtgifterDrivstoffType]?.id}
                                     tekst={reisemåteTekster.egen_bil_utgifter_drivstoff_type}
-                                    value={reisemåte?.egenBilUtgifter?.drivstoffType?.verdi ?? ''}
+                                    value={
+                                        reisemåte?.reiseMedBilUtgifter?.drivstoffType?.verdi ?? ''
+                                    }
                                     onChange={oppdaterEgenBilUtgifterDrivstoffType}
                                     error={
                                         valideringsfeil[errorKeyEgenbilUtgifterDrivstoffType]
@@ -300,7 +363,7 @@ export const ReisemåteReiseTilSamling = () => {
                                         reisemåteTekster.egen_bil_utgifter_bompenger_tittel[locale]
                                     }
                                     inputMode="numeric"
-                                    value={reisemåte?.egenBilUtgifter?.bompenger?.verdi ?? ''}
+                                    value={reisemåte?.reiseMedBilUtgifter?.bompenger?.verdi ?? ''}
                                     onChange={oppdaterEgenBilUtgifterBompenger}
                                     error={
                                         valideringsfeil[errorKeyEgenbilUtgifterBompenger]?.melding
@@ -310,7 +373,7 @@ export const ReisemåteReiseTilSamling = () => {
                                     id={valideringsfeil[errorKeyEgenbilUtgifterFerge]?.id}
                                     label={reisemåteTekster.egen_bil_utgifter_ferge_tittel[locale]}
                                     inputMode="numeric"
-                                    value={reisemåte?.egenBilUtgifter?.ferge?.verdi ?? ''}
+                                    value={reisemåte?.reiseMedBilUtgifter?.ferge?.verdi ?? ''}
                                     onChange={oppdaterEgenBilUtgifterFerge}
                                     error={valideringsfeil[errorKeyEgenbilUtgifterFerge]?.melding}
                                 />
@@ -322,7 +385,9 @@ export const ReisemåteReiseTilSamling = () => {
                                         ]
                                     }
                                     inputMode="numeric"
-                                    value={reisemåte?.egenBilUtgifter?.piggdekkavgift?.verdi ?? ''}
+                                    value={
+                                        reisemåte?.reiseMedBilUtgifter?.piggdekkavgift?.verdi ?? ''
+                                    }
                                     onChange={oppdaterEgenBilUtgifterPiggdekkavgift}
                                     error={
                                         valideringsfeil[errorKeyEgenbilUtgifterPiggdekkavgift]
