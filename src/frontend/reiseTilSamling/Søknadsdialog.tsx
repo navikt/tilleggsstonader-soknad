@@ -13,8 +13,6 @@ import { forsideTekster } from './tekster/forside';
 import { StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
 import { Skjematype } from '../typer/skjematyper';
 
-const offentligeSteg: StegRoute[] = [{ path: '/intro', element: <Forside /> }];
-
 const steg: StegRoute[] = [
     { path: '/hovedytelse', element: <HovedytelseReiseTilSamling /> },
     { path: '/aktivitet', element: <AktivitetReiseTilSamling /> },
@@ -34,7 +32,6 @@ export const Søknadsdialog: React.FC = () => {
             skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}
             harBekreftet={harBekreftet}
             forside={<Forside />}
-            offentligeSteg={offentligeSteg}
             steg={steg}
         />
     );

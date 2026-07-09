@@ -109,6 +109,7 @@ export const AktivitetReiseTilSamling = () => {
     const oppdaterAnnenAktivitetTypeUtdanning = (verdi: EnumFelt<AktivitetTypeUtdanning>) => {
         oppdaterAktivitet({
             annenAktivitetTypeUtdanning: verdi,
+            lønnetAktivitet: undefined,
         });
         settValideringsfeil((prevState) => ({
             ...prevState,
