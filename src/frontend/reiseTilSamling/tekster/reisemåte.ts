@@ -140,7 +140,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
         alternativer: JaNeiTilTekst,
     },
     advarsel_ingen_reisemåte: {
-        nb: 'Du har oppgitt at du ikke kan reise med offentlig transport, benytte egen bil eller drosje. Du vil derfor sannsynligvis få avslag på søknaden om stønad til reiser.',
+        nb: 'Du har oppgitt at du ikke kan reise med offentlig transport, benytte egen bil eller drosje, og oppfyller dermed ikke kravene for å få støtte. Du kan fortsatt søke, men du kan få avslag.',
     },
     feilmelding_offentlig_mangler: {
         nb: 'Du må svare på om du kan reise med offentlig transport.',
