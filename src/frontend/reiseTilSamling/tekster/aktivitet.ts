@@ -172,7 +172,7 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         nb: 'Du må svare på om du var under 25 år det kalenderåret skoleåret startet.',
     },
     radio_under_25_år_alert_content: {
-        nb: 'Vi tror du har rett til gratis skoleskyss fordi du går på videregående skole og ikke fyller 25 år i kalenderåret skoleåret starter. Da har du ikke rett til pengestøtte til daglige reiser. Hvis du likevel må betale for reisen til skolen selv, må du bekrefte dette i spørsmålet under.',
+        nb: 'Vi tror du har rett til gratis skoleskyss fordi du går på videregående skole og ikke fyller 25 år i kalenderåret skoleåret starter. Da har du ikke rett til pengestøtte til reise til samling. Hvis du likevel må betale for reisen til skolen selv, må du bekrefte dette i spørsmålet under.',
     },
     radio_må_betale_for_reise_til_skole: {
         header: { nb: 'Må du betale for reisen til skolen selv?' },
@@ -185,6 +185,6 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         nb: 'Siden du ikke må betale for reisen til skolen selv, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynlig få avslag.',
     },
     radio_opplæring_for_voksne_alert_content: {
-        nb: 'Siden du går på forberedende opplæring for voksne, skal kommunen dekke dine utgifter til skoleskyss hvis reiseavstanden er over 4 km. Du kan søke om pengestøtte til daglige reiser, men du vil mest sannsynlig få avslag.',
+        nb: 'Siden du går på forberedende opplæring for voksne, skal kommunen dekke dine utgifter til skoleskyss hvis reiseavstanden er over 4 km. Du kan søke om pengestøtte til reise til samling, men du vil mest sannsynlig få avslag.',
     },
 };
