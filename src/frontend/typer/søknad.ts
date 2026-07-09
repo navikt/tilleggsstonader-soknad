@@ -32,11 +32,13 @@ export interface SøknadReiseTilSamling {
     søknadMetadata: SøknadMetadata;
 }
 
+export type KanBenytteEgenBil = 'JA' | 'NEI' | 'NEI_SITTER_PÅ_MED_ANDRE';
+
 export interface Reisemåte {
     kanReiseMedOffentligTransport?: EnumFelt<JaNei>;
     kanIkkeReiseMedOffentligTransportBegrunnelser?: EnumFlereValgFelt<string>;
     totalUtgifterOffentligTransport?: VerdiFelt<string>;
-    kanBenytteEgenBil?: EnumFelt<JaNei>;
+    kanBenytteEgenBil?: EnumFelt<KanBenytteEgenBil>;
     kanIkkeBenytteEgenBilBegrunnelser?: EnumFlereValgFelt<string>;
     kanBenytteDrosje?: EnumFelt<JaNei>;
     egenBilUtgifter?: {

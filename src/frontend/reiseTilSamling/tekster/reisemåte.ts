@@ -1,5 +1,5 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { JaNei } from '../../typer/søknad';
+import { JaNei, KanBenytteEgenBil } from '../../typer/søknad';
 import { CheckboxGruppe, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface ReisemåteInnhold {
@@ -8,7 +8,7 @@ interface ReisemåteInnhold {
     check_kan_ikke_reise_offentlig_begrunnelse: CheckboxGruppe<string>;
     totalutgifter_offentlig_transport_label: TekstElement<string>;
     totalutgifter_offentlig_transport_beskrivelse: TekstElement<string>;
-    radio_kan_benytte_egen_bil: Radiogruppe<JaNei>;
+    radio_kan_benytte_egen_bil: Radiogruppe<KanBenytteEgenBil>;
     check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppe<string>;
     egen_bil_utgifter_tittel: TekstElement<string>;
     egen_bil_utgifter_beskrivelse: TekstElement<string>;
@@ -81,7 +81,17 @@ export const reisemåteTekster: ReisemåteInnhold = {
         header: {
             nb: 'Skal du kjøre bil til aktivitetsstedet?',
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: {
+            JA: {
+                nb: 'Ja',
+            },
+            NEI: {
+                nb: 'Nei',
+            },
+            NEI_SITTER_PÅ_MED_ANDRE: {
+                nb: 'Nei, jeg sitter på med andre',
+            },
+        },
     },
     check_kan_ikke_benytte_egen_bil_begrunnelse: {
         legend: {
