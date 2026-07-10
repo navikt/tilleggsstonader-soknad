@@ -34,17 +34,31 @@ export interface SøknadReiseTilSamling {
 
 export type KanBenytteEgenBil = 'JA' | 'NEI' | 'NEI_SITTER_PÅ_MED_ANDRE';
 
+export type KanIkkeReiseMedOffentligTransportBegrunnelser =
+    | 'DÅRLIG_TRANSPORTTILBUD'
+    | 'HELSEMESSIGE_ÅRSAKER'
+    | 'LEVERING_HENTING_I_BARNEHAGE';
+
+export type KanIkkeBenytteEgenBilBegrunnelser =
+    | 'HAR_IKKE_BIL_ELLER_FØRERKORT'
+    | 'HELSEMESSIGE_ÅRSAKER'
+    | 'ANNET';
+
+export type DrivstoffType = 'BENSIN' | 'DIESEL' | 'ELBIL' | 'HYBRID' | 'HYDROGEN';
+
 export interface Reisemåte {
     kanReiseMedOffentligTransport?: EnumFelt<JaNei>;
-    kanIkkeReiseMedOffentligTransportBegrunnelser?: EnumFlereValgFelt<string>;
+    kanIkkeReiseMedOffentligTransportBegrunnelser?: EnumFlereValgFelt<KanIkkeReiseMedOffentligTransportBegrunnelser>;
+    barnehageGateadresse?: VerdiFelt<string>;
+    barnehagePostnummer?: VerdiFelt<string>;
     totalUtgifterOffentligTransport?: VerdiFelt<string>;
     kanBenytteEgenBil?: EnumFelt<KanBenytteEgenBil>;
     betalerForReiseSelv?: EnumFelt<JaNei>;
-    kanIkkeBenytteEgenBilBegrunnelser?: EnumFlereValgFelt<string>;
+    kanIkkeBenytteEgenBilBegrunnelser?: EnumFlereValgFelt<KanIkkeBenytteEgenBilBegrunnelser>;
     ønskerDekketUtgifterForDrosje?: EnumFelt<JaNei>;
     harTTKort?: EnumFelt<JaNei>;
     reiseMedBilUtgifter?: {
-        drivstoffType?: EnumFelt<string>;
+        drivstoffType?: EnumFelt<DrivstoffType>;
         bompenger?: VerdiFelt<string>;
         ferge?: VerdiFelt<string>;
         piggdekkavgift?: VerdiFelt<string>;

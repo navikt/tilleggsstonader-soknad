@@ -1,18 +1,26 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { JaNei, KanBenytteEgenBil } from '../../typer/søknad';
+import {
+    DrivstoffType,
+    JaNei,
+    KanBenytteEgenBil,
+    KanIkkeBenytteEgenBilBegrunnelser,
+    KanIkkeReiseMedOffentligTransportBegrunnelser,
+} from '../../typer/søknad';
 import { CheckboxGruppe, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface ReisemåteInnhold {
     tittel: TekstElement<string>;
     radio_kan_reise_offentlig: Radiogruppe<JaNei>;
-    check_kan_ikke_reise_offentlig_begrunnelse: CheckboxGruppe<string>;
+    check_kan_ikke_reise_offentlig_begrunnelse: CheckboxGruppe<KanIkkeReiseMedOffentligTransportBegrunnelser>;
     totalutgifter_offentlig_transport_label: TekstElement<string>;
     totalutgifter_offentlig_transport_beskrivelse: TekstElement<string>;
+    info_barnehage_adresse: TekstElement<string>;
+    info_barnehage_postnummer: TekstElement<string>;
     radio_kan_benytte_egen_bil: Radiogruppe<KanBenytteEgenBil>;
-    check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppe<string>;
+    check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppe<KanIkkeBenytteEgenBilBegrunnelser>;
     egen_bil_utgifter_tittel: TekstElement<string>;
     egen_bil_utgifter_beskrivelse: TekstElement<string>;
-    egen_bil_utgifter_drivstoff_type: Radiogruppe<string>;
+    egen_bil_utgifter_drivstoff_type: Radiogruppe<DrivstoffType>;
     egen_bil_utgifter_bompenger_tittel: TekstElement<string>;
     egen_bil_utgifter_ferge_tittel: TekstElement<string>;
     egen_bil_utgifter_piggdekkavgift_tittel: TekstElement<string>;
@@ -34,6 +42,9 @@ interface ReisemåteInnhold {
     feilmelding_egenbil_utgifter_ferge: TekstElement<string>;
     feilmelding_egenbil_utgifter_piggdekkavgift: TekstElement<string>;
     feilmelding_betaler_for_reise_selv: TekstElement<string>;
+    feilmelding_har_tt_kort: TekstElement<string>;
+    feilmelding_barnehage_adresse: TekstElement<string>;
+    feilmelding_barnehage_postnummer: TekstElement<string>;
     info_drosje_dokumentasjon: TekstElement<string>;
     radio_har_du_tt_kort: Radiogruppe<JaNei>;
     info_tt_kort: TekstElement<string[]>;
@@ -57,13 +68,13 @@ export const reisemåteTekster: ReisemåteInnhold = {
             nb: 'Hvorfor kan du ikke reise med offentlig transport?',
         },
         alternativer: {
-            dårligTransportTilbud: {
+            DÅRLIG_TRANSPORTTILBUD: {
                 nb: 'Dårlig transporttilbud',
             },
-            helsemessigeÅrsaker: {
+            HELSEMESSIGE_ÅRSAKER: {
                 nb: 'Helsemessige årsaker',
             },
-            leveringHentingIBarnehage: {
+            LEVERING_HENTING_I_BARNEHAGE: {
                 nb: 'Levering/henting i barnehage eller skolefritidsordning (SFO/AKS)',
             },
         },
@@ -82,6 +93,12 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     totalutgifter_offentlig_transport_beskrivelse: {
         nb: 'Oppgi totalbeløpet i kroner for alle samlingene du søker for.',
+    },
+    info_barnehage_adresse: {
+        nb: 'Gateadressen hvor du henter eller leverer barn',
+    },
+    info_barnehage_postnummer: {
+        nb: 'Postnummeret hvor du henter eller leverer barn',
     },
     radio_kan_benytte_egen_bil: {
         header: {
@@ -104,13 +121,13 @@ export const reisemåteTekster: ReisemåteInnhold = {
             nb: 'Hvorfor kan du ikke kjøre bil til aktivitetsstedet?',
         },
         alternativer: {
-            manglendeFørerkortEllerBil: {
+            HAR_IKKE_BIL_ELLER_FØRERKORT: {
                 nb: 'Har ikke bil eller førerkort',
             },
-            helsemessigeÅrsaker: {
+            HELSEMESSIGE_ÅRSAKER: {
                 nb: 'Helsemessige årsaker',
             },
-            annet: {
+            ANNET: {
                 nb: 'Annet',
             },
         },
@@ -126,11 +143,11 @@ export const reisemåteTekster: ReisemåteInnhold = {
             nb: 'Bilens drivstofftype?',
         },
         alternativer: {
-            Elbil: { nb: 'Elbil' },
-            Hydrogen: { nb: 'Hydrogen' },
-            Bensin: { nb: 'Bensin' },
-            Hybrid: { nb: 'Hybrid' },
-            Diesel: { nb: 'Diesel' },
+            ELBIL: { nb: 'Elbil' },
+            HYDROGEN: { nb: 'Hydrogen' },
+            BENSIN: { nb: 'Bensin' },
+            HYBRID: { nb: 'Hybrid' },
+            DIESEL: { nb: 'Diesel' },
         },
         beskrivelse: {
             nb: 'Bompenger og fergepriser beregnes ut fra bilens offisielle miljøklasse, derfor må du velge drivstofftype.',
@@ -210,5 +227,14 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     feilmelding_betaler_for_reise_selv: {
         nb: 'Du må svare på om du betaler for reisen selv.',
+    },
+    feilmelding_barnehage_adresse: {
+        nb: 'Du må fylle inn adressen til barnehagen.',
+    },
+    feilmelding_barnehage_postnummer: {
+        nb: 'Du må fylle inn postnummeret til barnehagen.',
+    },
+    feilmelding_har_tt_kort: {
+        nb: 'Du må svare på om du har TT-kort.',
     },
 };

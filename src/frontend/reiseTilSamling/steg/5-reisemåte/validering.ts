@@ -24,6 +24,9 @@ export const errorKeyEgenbilUtgifterBompenger = 'reisemåte_egenbil_utgifter_bom
 export const errorKeyEgenbilUtgifterFerge = 'reisemåte_egenbil_utgifter_ferge';
 export const errorKeyEgenbilUtgifterPiggdekkavgift = 'reisemåte_egenbil_utgifter_piggdekkavgift';
 
+export const errorKeyBarnehageAdresse = 'reisemåte_barnehage_adresse';
+export const errorKeyBarnehagePostnummer = 'reisemåte_barnehage_postnummer';
+
 export const validerReisemåte = (
     reisemåte: Reisemåte | undefined,
     locale: Locale
@@ -75,6 +78,33 @@ export const validerReisemåte = (
                 },
             };
         }
+
+        if (
+            reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier.some(
+                (felt) => felt.verdi === 'LEVERING_HENTING_I_BARNEHAGE'
+            )
+        ) {
+            if (!harVerdi(reisemåte?.barnehageGateadresse?.verdi)) {
+                feil = {
+                    ...feil,
+                    [errorKeyBarnehageAdresse]: {
+                        id: errorKeyBarnehageAdresse,
+                        melding: reisemåteTekster.feilmelding_barnehage_adresse[locale],
+                    },
+                };
+            }
+
+            if (!harVerdi(reisemåte?.barnehagePostnummer?.verdi)) {
+                feil = {
+                    ...feil,
+                    [errorKeyBarnehagePostnummer]: {
+                        id: errorKeyBarnehagePostnummer,
+                        melding: reisemåteTekster.feilmelding_barnehage_postnummer[locale],
+                    },
+                };
+            }
+        }
+
         if (!harVerdi(reisemåte?.kanBenytteEgenBil?.verdi)) {
             feil = {
                 ...feil,
@@ -109,6 +139,23 @@ export const validerReisemåte = (
                         melding: reisemåteTekster.feilmelding_utgifter_drosje_mangler[locale],
                     },
                 };
+            }
+
+            if (
+                reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'JA' &&
+                reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier.some(
+                    (felt) => felt.verdi === 'HELSEMESSIGE_ÅRSAKER'
+                )
+            ) {
+                if (!harVerdi(reisemåte?.harTTKort?.verdi)) {
+                    feil = {
+                        ...feil,
+                        [errorKeyHarTTKort]: {
+                            id: errorKeyHarTTKort,
+                            melding: reisemåteTekster.feilmelding_har_tt_kort[locale],
+                        },
+                    };
+                }
             }
         } else if (
             reisemåte?.kanBenytteEgenBil?.verdi === 'JA' ||

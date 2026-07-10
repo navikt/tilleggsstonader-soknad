@@ -16,6 +16,8 @@ import {
     errorKeyTotalutgifterOffentligTransport,
     validerReisemåte,
     errorKeyHarTTKort,
+    errorKeyBarnehageAdresse,
+    errorKeyBarnehagePostnummer,
 } from './validering';
 import { Side } from '../../../components/Side';
 import { LocaleCheckboxGroup } from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
@@ -26,7 +28,12 @@ import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleT
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
+import {
+    DrivstoffType,
+    JaNei,
+    KanIkkeBenytteEgenBilBegrunnelser,
+    KanIkkeReiseMedOffentligTransportBegrunnelser,
+} from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { reisemåteTekster } from '../../tekster/reisemåte';
@@ -73,15 +80,53 @@ export const ReisemåteReiseTilSamling = () => {
             errorKeyEgenbilUtgifterBompenger,
             errorKeyEgenbilUtgifterFerge,
             errorKeyEgenbilUtgifterPiggdekkavgift,
+            errorKeyBarnehageAdresse,
+            errorKeyBarnehagePostnummer,
         ]);
     };
 
-    const oppdaterKanIkkeReiseOffentligBegrunnelse = (verdier: EnumFlereValgFelt<string>) => {
+    const oppdaterKanIkkeReiseOffentligBegrunnelse = (
+        felter: EnumFlereValgFelt<KanIkkeReiseMedOffentligTransportBegrunnelser>
+    ) => {
+        const skalNullstilleBarnehage =
+            felter.verdier.find((v) => v.verdi === 'LEVERING_HENTING_I_BARNEHAGE') === undefined;
+
         settReisemåte((prev) => ({
             ...prev,
-            kanIkkeReiseMedOffentligTransportBegrunnelser: verdier,
+            kanIkkeReiseMedOffentligTransportBegrunnelser: felter,
+            barnehageGateadresse: skalNullstilleBarnehage ? undefined : prev?.barnehageGateadresse,
+            barnehagePostnummer: skalNullstilleBarnehage ? undefined : prev?.barnehagePostnummer,
         }));
-        nullstillFeil(errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse);
+
+        nullstillFeil([errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse]);
+
+        if (skalNullstilleBarnehage) {
+            nullstillFeil([errorKeyBarnehageAdresse, errorKeyBarnehagePostnummer]);
+        }
+    };
+
+    const oppdaterBarnehageAdresse = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const verdi = e.target.value;
+
+        settReisemåte((prev) => ({
+            ...prev,
+            barnehageGateadresse: { verdi, label: reisemåteTekster.info_barnehage_adresse[locale] },
+        }));
+        nullstillFeil(errorKeyBarnehageAdresse);
+    };
+
+    const oppdaterBarnehagePostnummer = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const verdi = e.target.value;
+
+        settReisemåte((prev) => ({
+            ...prev,
+            barnehagePostnummer: {
+                verdi,
+                label: reisemåteTekster.info_barnehage_postnummer[locale],
+            },
+        }));
+
+        nullstillFeil(errorKeyBarnehagePostnummer);
     };
 
     const oppdaterKanBenytteEgenBil = (verdi: EnumFelt<JaNei>) => {
@@ -104,7 +149,9 @@ export const ReisemåteReiseTilSamling = () => {
         ]);
     };
 
-    const oppdaterKanIkkeBenytteEgenBilBegrunnelse = (verdier: EnumFlereValgFelt<string>) => {
+    const oppdaterKanIkkeBenytteEgenBilBegrunnelse = (
+        verdier: EnumFlereValgFelt<KanIkkeBenytteEgenBilBegrunnelser>
+    ) => {
         settReisemåte((prev) => ({
             ...prev,
             kanIkkeBenytteEgenBilBegrunnelser: verdier,
@@ -122,7 +169,9 @@ export const ReisemåteReiseTilSamling = () => {
         nullstillFeil(errorKeyØnskerDekketUtgifterForDrosje);
     };
 
-    const oppdaterEgenBilUtgifterDrivstoffType: (verdi: EnumFelt<string>) => void = (verdi) => {
+    const oppdaterEgenBilUtgifterDrivstoffType: (verdi: EnumFelt<DrivstoffType>) => void = (
+        verdi
+    ) => {
         settReisemåte((prev) => ({
             ...prev,
             reiseMedBilUtgifter: {
@@ -209,13 +258,18 @@ export const ReisemåteReiseTilSamling = () => {
     const kanIkkeReiseOffentligBegrunnelser =
         reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier.map((v) => v.verdi) ?? [];
     const helsemessigeÅrsakerOffentligValgt =
-        kanIkkeReiseOffentligBegrunnelser.includes('helsemessigeÅrsaker');
+        kanIkkeReiseOffentligBegrunnelser.includes('HELSEMESSIGE_ÅRSAKER');
     const dårligTransporttilbudValgt =
-        kanIkkeReiseOffentligBegrunnelser.includes('dårligTransportTilbud');
+        kanIkkeReiseOffentligBegrunnelser.includes('DÅRLIG_TRANSPORTTILBUD');
 
     const helsemessigeÅrsakerBilValgt = reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier
         .map((v) => v.verdi)
-        .includes('helsemessigeÅrsaker');
+        .includes('HELSEMESSIGE_ÅRSAKER');
+
+    const leveringHentingIBarnehageValgt =
+        reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier
+            .map((v) => v.verdi)
+            .includes('LEVERING_HENTING_I_BARNEHAGE');
 
     return (
         <Side validerSteg={kanFortsette}>
@@ -283,6 +337,25 @@ export const ReisemåteReiseTilSamling = () => {
                                 {reisemåteTekster.info_helsemessige_årsaker_valg[locale]}
                             </Alert>
                         )}
+                        {leveringHentingIBarnehageValgt && (
+                            <>
+                                <TextField
+                                    id={valideringsfeil[errorKeyBarnehageAdresse]?.id}
+                                    error={valideringsfeil[errorKeyBarnehageAdresse]?.melding}
+                                    label={reisemåteTekster.info_barnehage_adresse[locale]}
+                                    value={reisemåte?.barnehageGateadresse?.verdi ?? ''}
+                                    onChange={oppdaterBarnehageAdresse}
+                                />
+                                <TextField
+                                    id={valideringsfeil[errorKeyBarnehagePostnummer]?.id}
+                                    error={valideringsfeil[errorKeyBarnehagePostnummer]?.melding}
+                                    label={reisemåteTekster.info_barnehage_postnummer[locale]}
+                                    value={reisemåte?.barnehagePostnummer?.verdi ?? ''}
+                                    onChange={oppdaterBarnehagePostnummer}
+                                />
+                            </>
+                        )}
+
                         <LocaleRadioGroup
                             id={valideringsfeil[errorKeyKanBenytteEgenBil]?.id}
                             tekst={reisemåteTekster.radio_kan_benytte_egen_bil}
