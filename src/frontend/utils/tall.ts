@@ -1,5 +1,5 @@
-export const tilHeltall = (verdi: number | string | undefined): number | undefined => {
-    if (!verdi) {
+export const tilTall = (verdi: number | string | undefined): number | undefined => {
+    if (verdi === undefined || verdi === '') {
         return undefined;
     }
 
@@ -9,7 +9,7 @@ export const tilHeltall = (verdi: number | string | undefined): number | undefin
 };
 
 export const erGyldigKostnad = (verdi: string | undefined): boolean => {
-    const tall = tilHeltall(verdi);
+    const tall = tilTall(verdi);
 
     return tall !== undefined && tall > 0;
 };
