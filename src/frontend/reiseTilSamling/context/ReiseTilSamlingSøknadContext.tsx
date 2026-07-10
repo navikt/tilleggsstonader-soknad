@@ -67,13 +67,20 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
 
         if (
             reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier.some(
-                (v) => v.verdi === 'helsemessigeÅrsaker'
+                (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
             ) ||
             reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier.some(
-                (v) => v.verdi === 'helsemessigeÅrsaker'
+                (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
             )
         ) {
             behov.push({ type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL });
+        }
+
+        if (reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'JA') {
+            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_TAXI });
+        }
+        if (reisemåte?.harTTKort?.verdi === 'JA') {
+            behov.push({ type: VedleggstypeReiseTilSamling.TT_KORT });
         }
 
         return behov;
@@ -81,6 +88,8 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         reisemåte?.kanReiseMedOffentligTransport?.verdi,
         reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier,
         reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier,
+        reisemåte?.ønskerDekketUtgifterForDrosje?.verdi,
+        reisemåte?.harTTKort?.verdi,
     ]);
 
     const oppdaterTilleggsopplysninger = (

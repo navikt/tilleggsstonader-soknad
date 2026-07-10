@@ -39,4 +39,26 @@ export const typerVedleggTeksterReiseTilSamling: TekstTypeVedlegg = {
             nb: 'Last opp legeerklæring eller annen uttalelse fra helsepersonell som beskriver helsetilstanden din.',
         },
     },
+    [VedleggstypeReiseTilSamling.UTGIFTER_TAXI]: {
+        tittel: {
+            nb: 'Dokumentasjon på reiseutgifter.',
+        },
+        liste_tittel: {
+            nb: 'Dokumentasjon på reiseutgifter.',
+        },
+        beskrivelse: {
+            nb: 'Last opp kvitteringer eller billetter som dokumenterer reiseutgiftene dine.',
+        },
+    },
+    [VedleggstypeReiseTilSamling.TT_KORT]: {
+        tittel: {
+            nb: 'Dokumentasjon på TT-kort.',
+        },
+        liste_tittel: {
+            nb: 'Dokumentasjon på TT-kort.',
+        },
+        beskrivelse: {
+            nb: 'Du må sende inn dokumentasjon som viser hvilke type reiser TT-kortet ditt kan brukes til og hva du eventuelt må betale i egenandel.',
+        },
+    },
 };

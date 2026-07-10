@@ -1,15 +1,15 @@
-export const tilHeltall = (verdi: number | string | undefined): number | undefined => {
-    if (!verdi) {
+export const tilTall = (verdi: number | string | undefined): number | undefined => {
+    if (verdi === undefined || verdi === '') {
         return undefined;
     }
-    if (typeof verdi === 'string') {
-        return isNaN(parseInt(verdi)) ? undefined : parseInt(verdi);
-    }
-    return verdi;
+
+    const verdiNumber = Number(verdi);
+
+    return isNaN(verdiNumber) ? undefined : verdiNumber;
 };
 
 export const erGyldigKostnad = (verdi: string | undefined): boolean => {
-    const tall = tilHeltall(verdi);
+    const tall = tilTall(verdi);
 
     return tall !== undefined && tall > 0;
 };
