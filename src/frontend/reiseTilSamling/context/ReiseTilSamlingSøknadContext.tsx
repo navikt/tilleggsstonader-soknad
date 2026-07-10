@@ -7,7 +7,7 @@ import {
     initialDokumentasjon,
     initialHarBekreftet,
     initialHovedytelse,
-    initialReiseavstand,
+    initialAvreiseadresse,
     initialReisemåte,
     initialSamlinger,
 } from './reiseTilSamlingInitialState';
@@ -16,14 +16,7 @@ import {
     Dokumentasjonsbehov,
     VedleggstypeReiseTilSamling,
 } from '../../typer/skjema';
-import {
-    Aktivitetsadresse,
-    Avreiseadresse,
-    Hovedytelse,
-    Reiseavstand,
-    Reisemåte,
-    Samling,
-} from '../../typer/søknad';
+import { Adresse, Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../../typer/søknad';
 import { AktivitetReiseTilSamling, TilleggsopplysningerAnnenAktivitet } from '../typer/aktivitet';
 
 const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseContext(() => {
@@ -33,7 +26,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(initialHovedytelse());
     const [aktivitet, settAktivitet] = useState<AktivitetReiseTilSamling>(initialAktivitet());
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
-    const [reiseavstand, settReiseavstand] = useState<Reiseavstand>(initialReiseavstand());
+    const [avreiseadresse, settAvreiseadresse] = useState<Avreiseadresse>(initialAvreiseadresse());
     const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(initialReisemåte());
     const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
         const behov: Dokumentasjonsbehov[] = [
@@ -63,7 +56,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         settHovedytelse(initialHovedytelse());
         settAktivitet(initialAktivitet());
         settSamlinger(initialSamlinger());
-        settReiseavstand(initialReiseavstand());
+        settAvreiseadresse(initialAvreiseadresse());
         settReisemåte(initialReisemåte());
         settDokumentasjon(initialDokumentasjon());
     };
@@ -92,15 +85,8 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         }));
     };
 
-    const settAktivitetsadresse = (oppdatering: Partial<Aktivitetsadresse>) => {
-        settReiseavstand((prev) => ({
-            ...prev,
-            aktivitetsadresse: { ...prev.aktivitetsadresse, ...oppdatering },
-        }));
-    };
-
-    const settAdresseDetSkalReisesFra = (oppdatering: Partial<Avreiseadresse>) => {
-        settReiseavstand((prev) => ({
+    const settAdresseDetSkalReisesFra = (oppdatering: Partial<Adresse>) => {
+        settAvreiseadresse((prev) => ({
             ...prev,
             adresseDetSkalReisesFra: { ...prev.adresseDetSkalReisesFra, ...oppdatering },
         }));
@@ -117,9 +103,8 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         oppdaterTilleggsopplysninger,
         samlinger,
         settSamlinger,
-        reiseavstand,
-        settReiseavstand,
-        settAktivitetsadresse,
+        avreiseadresse,
+        settAvreiseadresse,
         settAdresseDetSkalReisesFra,
         reisemåte,
         settReisemåte,

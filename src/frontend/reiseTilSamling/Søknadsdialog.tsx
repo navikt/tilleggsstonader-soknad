@@ -5,7 +5,7 @@ import { Forside } from './Forside';
 import { SkalBrukeTaxiReiseTilSamlingAvsjekk } from './SkalBrukeTaxiReiseTilSamlingAvsjekk';
 import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
 import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
-import { ReiseavstandReiseTilSamling } from './steg/3-reiseavstand/ReiseavstandReiseTilSamling';
+import { AvreiseadresseReiseTilSamling } from './steg/3-avreiseadresse/AvreiseadresseReiseTilSamling';
 import { SamlingerReiseTilSamling } from './steg/4-samlinger/SamlingerReiseTilSamling';
 import { ReisemåteReiseTilSamling } from './steg/5-reisemåte/ReisemåteReiseTilSamling';
 import { VedleggReiseTilSamling } from './steg/6-vedlegg/VedleggReiseTilSamling';
@@ -19,7 +19,7 @@ const offentligeSteg: StegRoute[] = [{ path: '/intro', element: <Forside /> }];
 const steg: StegRoute[] = [
     { path: '/hovedytelse', element: <HovedytelseReiseTilSamling /> },
     { path: '/aktivitet', element: <AktivitetReiseTilSamling /> },
-    { path: '/reiseavstand', element: <ReiseavstandReiseTilSamling /> },
+    { path: '/avreiseadresse', element: <AvreiseadresseReiseTilSamling /> },
     { path: '/samlinger', element: <SamlingerReiseTilSamling /> },
     { path: '/reisemate', element: <ReisemåteReiseTilSamling /> },
     { path: '/vedlegg', element: <VedleggReiseTilSamling /> },
