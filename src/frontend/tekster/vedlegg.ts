@@ -85,7 +85,7 @@ export const vedleggTekster: VedleggInnhold = {
     },
 
     informasjon_all_dokumentasjon: {
-        nb: 'Vi kan ikke starte saksbehandlingen før vi har all dokumentasjon fra deg.',
+        nb: 'For at vi skal kunne behandle saken din så raskt som mulig, anbefaler vi at du sender inn all nødvendig dokumentasjon sammen med søknaden. Hvis du ikke har dokumentasjonen klar, kan du sende den inn senere.',
     },
     accordians: {
         har_ikke_vedlegg_digital: harIkkeVedleggDigitalAccordian,
@@ -111,7 +111,7 @@ export const vedleggModalTekster: VedleggManglerModalInnhold = {
     heading: { nb: 'Vedlegg mangler' },
     punktliste_tittel: { nb: 'Vi kan ikke se at du har lagt ved:' },
     ekstra_info1: {
-        nb: 'Vi kan ikke starte saksbehandlingen før vi har all dokumentasjon fra deg.',
+        nb: 'For at vi skal kunne behandle saken din så raskt som mulig, anbefaler vi at du sender inn all nødvendig dokumentasjon sammen med søknaden. Hvis du ikke har dokumentasjonen klar, kan du sende den inn senere.',
     },
     ekstra_info2: {
         nb: 'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, innen 14 dager.',

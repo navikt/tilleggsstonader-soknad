@@ -35,26 +35,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
     const [reiseavstand, settReiseavstand] = useState<Reiseavstand>(initialReiseavstand());
     const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(initialReisemåte());
-    const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
-        const behov: Dokumentasjonsbehov[] = [
-            { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
-        ];
-        if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA') {
-            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
-        }
-        if (reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'JA') {
-            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_TAXI });
-        }
-        if (reisemåte?.harTTKort?.verdi === 'JA') {
-            behov.push({ type: VedleggstypeReiseTilSamling.TT_KORT });
-        }
 
-        return behov;
-    }, [
-        reisemåte?.kanReiseMedOffentligTransport?.verdi,
-        reisemåte?.ønskerDekketUtgifterForDrosje?.verdi,
-        reisemåte?.harTTKort?.verdi,
-    ]);
     const [dokumentasjon, settDokumentasjon] =
         useState<DokumentasjonFelt[]>(initialDokumentasjon());
 
@@ -74,6 +55,42 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
             ...oppdatering,
         }));
     };
+
+    const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
+        const behov: Dokumentasjonsbehov[] = [
+            { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
+        ];
+
+        if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA') {
+            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
+        }
+
+        if (
+            reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier.some(
+                (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
+            ) ||
+            reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier.some(
+                (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
+            )
+        ) {
+            behov.push({ type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL });
+        }
+
+        if (reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'JA') {
+            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_TAXI });
+        }
+        if (reisemåte?.harTTKort?.verdi === 'JA') {
+            behov.push({ type: VedleggstypeReiseTilSamling.TT_KORT });
+        }
+
+        return behov;
+    }, [
+        reisemåte?.kanReiseMedOffentligTransport?.verdi,
+        reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier,
+        reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier,
+        reisemåte?.ønskerDekketUtgifterForDrosje?.verdi,
+        reisemåte?.harTTKort?.verdi,
+    ]);
 
     const oppdaterTilleggsopplysninger = (
         oppdatering: Partial<TilleggsopplysningerAnnenAktivitet>

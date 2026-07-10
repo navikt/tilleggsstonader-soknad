@@ -5,7 +5,7 @@ export type ReiseTilSamlingSteg = Steg | 'AKTIVITET' | 'REISEAVSTAND' | 'SAMLING
 export const reiseTilSamlingPath = '/reise-til-samling';
 
 export const RouteTilPath: Record<ReiseTilSamlingSteg, string> = {
-    FORSIDE: reiseTilSamlingPath + '/intro',
+    FORSIDE: reiseTilSamlingPath,
     HOVEDYTELSE: reiseTilSamlingPath + '/hovedytelse',
     AKTIVITET: reiseTilSamlingPath + '/aktivitet',
     REISEAVSTAND: reiseTilSamlingPath + '/reiseavstand',

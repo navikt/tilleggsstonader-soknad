@@ -20,7 +20,7 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await mockPersonApi(page);
     await mockAktivitet(page);
     await mockHarIngenSøknadReiseTilSamlingFraFør(page);
-    await page.goto(`${urlSøknad}/intro`);
+    await page.goto(`${urlSøknad}`);
     await fjernWebpackOverlay(page);
 
     await expect(

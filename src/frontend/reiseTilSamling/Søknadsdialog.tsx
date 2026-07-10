@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useReiseTilSamlingSøknad } from './context/ReiseTilSamlingSøknadContext';
 import { Forside } from './Forside';
-import { SkalBrukeTaxiReiseTilSamlingAvsjekk } from './SkalBrukeTaxiReiseTilSamlingAvsjekk';
 import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
 import { AktivitetReiseTilSamling } from './steg/2-aktivitet/AktivitetReiseTilSamling';
 import { ReiseavstandReiseTilSamling } from './steg/3-reiseavstand/ReiseavstandReiseTilSamling';
@@ -13,8 +12,6 @@ import { Oppsummering } from './steg/7-oppsummering/Oppsummering';
 import { forsideTekster } from './tekster/forside';
 import { StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
 import { Skjematype } from '../typer/skjematyper';
-
-const offentligeSteg: StegRoute[] = [{ path: '/intro', element: <Forside /> }];
 
 const steg: StegRoute[] = [
     { path: '/hovedytelse', element: <HovedytelseReiseTilSamling /> },
@@ -34,8 +31,7 @@ export const Søknadsdialog: React.FC = () => {
             tittel={forsideTekster.banner_tittel}
             skjematype={Skjematype.SØKNAD_REISE_TIL_SAMLING}
             harBekreftet={harBekreftet}
-            forside={<SkalBrukeTaxiReiseTilSamlingAvsjekk />}
-            offentligeSteg={offentligeSteg}
+            forside={<Forside />}
             steg={steg}
         />
     );

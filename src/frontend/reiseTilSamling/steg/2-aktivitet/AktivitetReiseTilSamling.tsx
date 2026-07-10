@@ -21,12 +21,10 @@ import {
     errorKeyValgteAktiviteter,
     validerAktivitetReiseTilSamling,
 } from './validering';
-import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
 import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/AnnenArbeidsrettetAktivitet';
 import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { ErLærlingEllerLiknende } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
 import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
-import { skalTaStillingTilAnnenAktivitet } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
@@ -51,53 +49,53 @@ export const AktivitetReiseTilSamling = () => {
         useReiseTilSamlingSøknad();
     const { registerAktiviteter } = useRegisterAktiviteter();
 
-    const nullstillLønnetAktivitet = (
-        nyeValgteAktiviteter: EnumFlereValgFelt<string> | undefined,
-        nyAnnenAktivitet: EnumFelt<AnnenAktivitetType> | undefined
-    ) => {
-        const skalIkkeTaStilling = !skalTaStillingTilLønnetTiltak(
-            nyeValgteAktiviteter,
-            nyAnnenAktivitet,
-            registerAktiviteter
-        );
-        if (aktivitet?.lønnetAktivitet && skalIkkeTaStilling) {
-            oppdaterAktivitet({ lønnetAktivitet: undefined });
-            settValideringsfeil((prevState) => ({
-                ...prevState,
-                [errorKeyLønnetAktivitet]: undefined,
-            }));
-        }
-    };
+    const nullstillTilleggsopplysninger = () => {
+        oppdaterAktivitet({
+            tilleggsopplysningerAnnenAktivitet: undefined,
+        });
 
-    const nullstillAnnenAktivitet = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
-        if (!skalTaStillingTilAnnenAktivitet(nyeValgteAktiviteter)) {
-            oppdaterAktivitet({ annenAktivitet: undefined });
-            settValideringsfeil((prevState) => ({
-                ...prevState,
-                [errorKeyAnnenAktivitet]: undefined,
-            }));
-        }
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            [errorKeyErLærlingEllerLiknende]: undefined,
+            [errorKeyFårDekketReise]: undefined,
+            [errorKeyErUnder25År]: undefined,
+            [errorKeyMåBetaleForReiseTilSkole]: undefined,
+            [errorKeyAnnenAktivitetTypeUtdanning]: undefined,
+        }));
     };
 
     const oppdaterValgteAktiviteter = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
-        oppdaterAktivitet({ aktiviteter: nyeValgteAktiviteter });
-        if (nyeValgteAktiviteter.verdier.length > 0) {
-            settValideringsfeil((prevState) => ({
-                ...prevState,
-                [errorKeyValgteAktiviteter]: undefined,
-            }));
-        }
-        nullstillAnnenAktivitet(nyeValgteAktiviteter);
-        nullstillLønnetAktivitet(nyeValgteAktiviteter, aktivitet?.annenAktivitet);
+        oppdaterAktivitet({
+            aktiviteter: nyeValgteAktiviteter,
+            annenAktivitet: undefined,
+            lønnetAktivitet: undefined,
+            annenAktivitetTypeUtdanning: undefined,
+        });
+
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            [errorKeyValgteAktiviteter]: undefined,
+            [errorKeyAnnenAktivitet]: undefined,
+            [errorKeyLønnetAktivitet]: undefined,
+        }));
+
+        nullstillTilleggsopplysninger();
     };
 
     const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenAktivitetType>) => {
-        oppdaterAktivitet({ annenAktivitet: verdi });
+        oppdaterAktivitet({
+            annenAktivitet: verdi,
+            aktiviteter: undefined,
+            lønnetAktivitet: undefined,
+            annenAktivitetTypeUtdanning: undefined,
+        });
         settValideringsfeil((prevState) => ({
             ...prevState,
+            [errorKeyValgteAktiviteter]: undefined,
             [errorKeyAnnenAktivitet]: undefined,
+            [errorKeyLønnetAktivitet]: undefined,
         }));
-        nullstillLønnetAktivitet(aktivitet?.aktiviteter, verdi);
+        nullstillTilleggsopplysninger();
     };
 
     const oppdaterLønnetAktivitet = (verdi: EnumFelt<JaNei>) => {
@@ -112,17 +110,12 @@ export const AktivitetReiseTilSamling = () => {
         oppdaterAktivitet({
             annenAktivitetTypeUtdanning: verdi,
             lønnetAktivitet: undefined,
-            tilleggsopplysningerAnnenAktivitet: undefined,
         });
         settValideringsfeil((prevState) => ({
             ...prevState,
-            [errorKeyAnnenAktivitetTypeUtdanning]: undefined,
-            [errorKeyErLærlingEllerLiknende]: undefined,
-            [errorKeyFårDekketReise]: undefined,
-            [errorKeyErUnder25År]: undefined,
-            [errorKeyMåBetaleForReiseTilSkole]: undefined,
             [errorKeyLønnetAktivitet]: undefined,
         }));
+        nullstillTilleggsopplysninger();
     };
 
     const oppdaterErLærlingEllerLiknende = (verdi: EnumFelt<JaNei>) => {
@@ -389,16 +382,16 @@ export const AktivitetReiseTilSamling = () => {
                             />
                         </Alert>
                     )}
+                    {skalViseLønnetTiltak(annenAktivitetTypeUtdanning) && (
+                        <LønnetTiltak
+                            lønnetAktivitet={lønnetAktivitet}
+                            oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
+                            feilmelding={valideringsfeil[errorKeyLønnetAktivitet]}
+                            radioTekst={aktivitetTekster.radio_lønnet_tiltak}
+                            infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
+                        />
+                    )}
                 </>
-            )}
-            {skalViseLønnetTiltak(annenAktivitetTypeUtdanning) && (
-                <LønnetTiltak
-                    lønnetAktivitet={lønnetAktivitet}
-                    oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
-                    feilmelding={valideringsfeil[errorKeyLønnetAktivitet]}
-                    radioTekst={aktivitetTekster.radio_lønnet_tiltak}
-                    infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
-                />
             )}
             {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
                 <Alert variant={'info'}>
