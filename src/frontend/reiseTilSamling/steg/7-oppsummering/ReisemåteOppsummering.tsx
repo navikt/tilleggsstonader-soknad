@@ -26,14 +26,17 @@ export const ReisemåteOppsummering: React.FC<{ reisemåte: Reisemåte }> = ({ r
                 <OppsummeringSvar felt={reisemåte.kanIkkeReiseMedOffentligTransportBegrunnelser} />
                 <OppsummeringSvar felt={reisemåte.kanBenytteEgenBil} />
                 <OppsummeringSvar felt={reisemåte.kanIkkeBenytteEgenBilBegrunnelser} />
-                <OppsummeringSvar felt={reisemåte.egenBilUtgifter?.drivstoffType} />
-                <OppsummeringSvar felt={reisemåte.egenBilUtgifter?.bompenger} valuePostfix="kr" />
-                <OppsummeringSvar felt={reisemåte.egenBilUtgifter?.ferge} valuePostfix="kr" />
+                <OppsummeringSvar felt={reisemåte.reiseMedBilUtgifter?.drivstoffType} />
                 <OppsummeringSvar
-                    felt={reisemåte.egenBilUtgifter?.piggdekkavgift}
+                    felt={reisemåte.reiseMedBilUtgifter?.bompenger}
                     valuePostfix="kr"
                 />
-                <OppsummeringSvar felt={reisemåte.kanBenytteDrosje} />
+                <OppsummeringSvar felt={reisemåte.reiseMedBilUtgifter?.ferge} valuePostfix="kr" />
+                <OppsummeringSvar
+                    felt={reisemåte.reiseMedBilUtgifter?.piggdekkavgift}
+                    valuePostfix="kr"
+                />
+                <OppsummeringSvar felt={reisemåte.ønskerDekketUtgifterForDrosje} />
             </FormSummary.Answers>
             <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.REISEMÅTE} />
         </FormSummary>

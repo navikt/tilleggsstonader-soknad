@@ -42,8 +42,19 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA') {
             behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
         }
+        if (reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'JA') {
+            behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_TAXI });
+        }
+        if (reisemåte?.harTTKort?.verdi === 'JA') {
+            behov.push({ type: VedleggstypeReiseTilSamling.TT_KORT });
+        }
+
         return behov;
-    }, [reisemåte?.kanReiseMedOffentligTransport?.verdi]);
+    }, [
+        reisemåte?.kanReiseMedOffentligTransport?.verdi,
+        reisemåte?.ønskerDekketUtgifterForDrosje?.verdi,
+        reisemåte?.harTTKort?.verdi,
+    ]);
     const [dokumentasjon, settDokumentasjon] =
         useState<DokumentasjonFelt[]>(initialDokumentasjon());
 
