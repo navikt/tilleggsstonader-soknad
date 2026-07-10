@@ -17,7 +17,7 @@ interface ReisemåteInnhold {
     egen_bil_utgifter_ferge_tittel: TekstElement<string>;
     egen_bil_utgifter_piggdekkavgift_tittel: TekstElement<string>;
     radio_betaler_for_reise_selv: Radiogruppe<JaNei>;
-    radio_kan_benytte_drosje: Radiogruppe<JaNei>;
+    radio_ønsker_dekket_utgifter_for_drosje: Radiogruppe<JaNei>;
     advarsel_ingen_reisemåte: TekstElement<string>;
     advarsel_skal_ikke_betale_selv: TekstElement<string>;
     info_helsemessige_årsaker_valg: TekstElement<string>;
@@ -28,12 +28,15 @@ interface ReisemåteInnhold {
     feilmelding_totalutgifter_ugyldig: TekstElement<string>;
     feilmelding_bil_mangler: TekstElement<string>;
     feilmelding_kan_ikke_benytte_egen_bil_begrunnelse: TekstElement<string>;
-    feilmelding_drosje_mangler: TekstElement<string>;
+    feilmelding_utgifter_drosje_mangler: TekstElement<string>;
     feilmelding_egenbil_utgifter_drivstoff_type: TekstElement<string>;
     feilmelding_egenbil_utgifter_bompenger: TekstElement<string>;
     feilmelding_egenbil_utgifter_ferge: TekstElement<string>;
     feilmelding_egenbil_utgifter_piggdekkavgift: TekstElement<string>;
     feilmelding_betaler_for_reise_selv: TekstElement<string>;
+    info_drosje_dokumentasjon: TekstElement<string>;
+    radio_har_du_tt_kort: Radiogruppe<JaNei>;
+    info_tt_kort: TekstElement<string[]>;
 }
 
 export const reisemåteTekster: ReisemåteInnhold = {
@@ -142,11 +145,26 @@ export const reisemåteTekster: ReisemåteInnhold = {
     egen_bil_utgifter_piggdekkavgift_tittel: {
         nb: 'Piggdekkavgift per dag (valgfritt)',
     },
-    radio_kan_benytte_drosje: {
+    radio_ønsker_dekket_utgifter_for_drosje: {
         header: {
-            nb: 'Kan du benytte drosje?',
+            nb: 'Ønsker du å søke om få dekket utgifter til reise med taxi?',
         },
         alternativer: JaNeiTilTekst,
+    },
+    info_drosje_dokumentasjon: {
+        nb: 'Vi kan dekke utgifter til taxi hvis du oppfyller kravene til dette. Hvis du har hatt utgifter til taxi og ønsker å få disse dekket, må du legge ved kvitteringene i søknaden.',
+    },
+    radio_har_du_tt_kort: {
+        header: {
+            nb: 'Har du TT-kort?',
+        },
+        alternativer: JaNeiTilTekst,
+    },
+    info_tt_kort: {
+        nb: [
+            'Hvis du har et TT-kort, må vi vite om du kan benytte TT-kortet til å reise til/ fra aktivitetsstedet. Du må sende inn dokumentasjon som viser hvilke type reiser TT-kortet ditt kan brukes til og hva du eventuelt må betale i egenandel. ',
+            'Hvis du betaler egenandel, kan du få pengestøtte til å dekke denne utgiften.',
+        ],
     },
     radio_betaler_for_reise_selv: {
         header: {
@@ -172,7 +190,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
     feilmelding_bil_mangler: {
         nb: 'Du må svare på om du kan benytte egen bil.',
     },
-    feilmelding_drosje_mangler: {
+    feilmelding_utgifter_drosje_mangler: {
         nb: 'Du må svare på om du kan benytte drosje.',
     },
     feilmelding_kan_ikke_benytte_egen_bil_begrunnelse: {

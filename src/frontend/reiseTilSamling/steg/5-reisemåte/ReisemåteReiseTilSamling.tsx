@@ -8,19 +8,21 @@ import {
     errorKeyEgenbilUtgifterDrivstoffType,
     errorKeyEgenbilUtgifterFerge,
     errorKeyEgenbilUtgifterPiggdekkavgift,
-    errorKeyKanBenytteDrosje,
+    errorKeyØnskerDekketUtgifterForDrosje as errorKeyØnskerDekketUtgifterForDrosje,
     errorKeyKanBenytteEgenBil,
     errorKeyKanIkkeBenytteEgenBilBegrunnelse,
     errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse,
     errorKeyKanReiseMedOffentligTransport,
     errorKeyTotalutgifterOffentligTransport,
     validerReisemåte,
+    errorKeyHarTTKort,
 } from './validering';
 import { Side } from '../../../components/Side';
 import { LocaleCheckboxGroup } from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
@@ -64,7 +66,8 @@ export const ReisemåteReiseTilSamling = () => {
             errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse,
             errorKeyKanBenytteEgenBil,
             errorKeyKanIkkeBenytteEgenBilBegrunnelse,
-            errorKeyKanBenytteDrosje,
+            errorKeyØnskerDekketUtgifterForDrosje,
+            errorKeyHarTTKort,
             errorKeyBetalerForReiseSelv,
             errorKeyEgenbilUtgifterDrivstoffType,
             errorKeyEgenbilUtgifterBompenger,
@@ -91,7 +94,8 @@ export const ReisemåteReiseTilSamling = () => {
         nullstillFeil([
             errorKeyKanBenytteEgenBil,
             errorKeyKanIkkeBenytteEgenBilBegrunnelse,
-            errorKeyKanBenytteDrosje,
+            errorKeyØnskerDekketUtgifterForDrosje,
+            errorKeyHarTTKort,
             errorKeyBetalerForReiseSelv,
             errorKeyEgenbilUtgifterDrivstoffType,
             errorKeyEgenbilUtgifterBompenger,
@@ -108,14 +112,14 @@ export const ReisemåteReiseTilSamling = () => {
         nullstillFeil(errorKeyKanIkkeBenytteEgenBilBegrunnelse);
     };
 
-    const oppdaterKanBenytteDrosje = (verdi: EnumFelt<JaNei>) => {
+    const oppdaterØnskerDekketUtgifterForDrosje = (verdi: EnumFelt<JaNei>) => {
         settReisemåte((prev) => ({
             ...prev,
             kanReiseMedOffentligTransport: prev?.kanReiseMedOffentligTransport,
             kanBenytteEgenBil: prev?.kanBenytteEgenBil,
-            kanBenytteDrosje: verdi,
+            ønskerDekketUtgifterForDrosje: verdi,
         }));
-        nullstillFeil(errorKeyKanBenytteDrosje);
+        nullstillFeil(errorKeyØnskerDekketUtgifterForDrosje);
     };
 
     const oppdaterEgenBilUtgifterDrivstoffType: (verdi: EnumFelt<string>) => void = (verdi) => {
@@ -186,12 +190,21 @@ export const ReisemåteReiseTilSamling = () => {
         ]);
     };
 
+    const oppdaterHarTTKort = (verdi: EnumFelt<JaNei>) => {
+        settReisemåte((prev) => ({
+            ...prev,
+            harTTKort: verdi,
+        }));
+        nullstillFeil(errorKeyHarTTKort);
+    };
+
     const offentligTransportJa = reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA';
     const offentligTransportNei = reisemåte?.kanReiseMedOffentligTransport?.verdi === 'NEI';
     const bilNei = reisemåte?.kanBenytteEgenBil?.verdi === 'NEI';
     const bilJa = reisemåte?.kanBenytteEgenBil?.verdi === 'JA';
     const bilMedAndre = reisemåte?.kanBenytteEgenBil?.verdi === 'NEI_SITTER_PÅ_MED_ANDRE';
-    const drosjeNei = reisemåte?.kanBenytteDrosje?.verdi === 'NEI';
+    const drosjeJa = reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'JA';
+    const drosjeNei = reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'NEI';
 
     const kanIkkeReiseOffentligBegrunnelser =
         reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier.map((v) => v.verdi) ?? [];
@@ -200,10 +213,9 @@ export const ReisemåteReiseTilSamling = () => {
     const dårligTransporttilbudValgt =
         kanIkkeReiseOffentligBegrunnelser.includes('dårligTransportTilbud');
 
-    const helsemessigeÅrsakerBilValgt =
-        reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier
-            .map((v) => v.verdi)
-            .includes('helsemessigeÅrsaker');
+    const helsemessigeÅrsakerBilValgt = reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier
+        .map((v) => v.verdi)
+        .includes('helsemessigeÅrsaker');
 
     return (
         <Side validerSteg={kanFortsette}>
@@ -303,12 +315,42 @@ export const ReisemåteReiseTilSamling = () => {
                                     </Alert>
                                 )}
                                 <LocaleRadioGroup
-                                    id={valideringsfeil[errorKeyKanBenytteDrosje]?.id}
-                                    tekst={reisemåteTekster.radio_kan_benytte_drosje}
-                                    value={reisemåte?.kanBenytteDrosje?.verdi ?? ''}
-                                    onChange={oppdaterKanBenytteDrosje}
-                                    error={valideringsfeil[errorKeyKanBenytteDrosje]?.melding}
+                                    id={valideringsfeil[errorKeyØnskerDekketUtgifterForDrosje]?.id}
+                                    tekst={reisemåteTekster.radio_ønsker_dekket_utgifter_for_drosje}
+                                    value={reisemåte?.ønskerDekketUtgifterForDrosje?.verdi ?? ''}
+                                    onChange={oppdaterØnskerDekketUtgifterForDrosje}
+                                    error={
+                                        valideringsfeil[errorKeyØnskerDekketUtgifterForDrosje]
+                                            ?.melding
+                                    }
                                 />
+                                {drosjeJa && (
+                                    <>
+                                        <Alert variant="info">
+                                            {reisemåteTekster.info_drosje_dokumentasjon[locale]}
+                                        </Alert>
+                                        {helsemessigeÅrsakerBilValgt && (
+                                            <>
+                                                <LocaleRadioGroup
+                                                    id={valideringsfeil[errorKeyHarTTKort]?.id}
+                                                    tekst={reisemåteTekster.radio_har_du_tt_kort}
+                                                    value={reisemåte?.harTTKort?.verdi ?? ''}
+                                                    onChange={oppdaterHarTTKort}
+                                                    error={
+                                                        valideringsfeil[errorKeyHarTTKort]?.melding
+                                                    }
+                                                />
+                                                {reisemåte?.harTTKort?.verdi === 'JA' && (
+                                                    <Alert variant="info">
+                                                        <LocaleTekstAvsnitt
+                                                            tekst={reisemåteTekster.info_tt_kort}
+                                                        />
+                                                    </Alert>
+                                                )}
+                                            </>
+                                        )}
+                                    </>
+                                )}
                                 {drosjeNei && (
                                     <Alert variant="info">
                                         {reisemåteTekster.advarsel_ingen_reisemåte[locale]}

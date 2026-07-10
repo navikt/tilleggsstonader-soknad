@@ -67,4 +67,6 @@ export enum VedleggstypeKjøreliste {
 export enum VedleggstypeReiseTilSamling {
     BEKREFTELSE_SAMLINGER = 'BEKREFTELSE_SAMLINGER',
     UTGIFTER_OFFENTLIG_TRANSPORT = 'UTGIFTER_OFFENTLIG_TRANSPORT',
+    UTGIFTER_TAXI = 'UTGIFTER_TAXI',
+    TT_KORT = 'TT_KORT',
 }

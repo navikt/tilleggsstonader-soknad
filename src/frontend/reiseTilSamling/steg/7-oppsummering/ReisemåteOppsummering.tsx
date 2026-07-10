@@ -36,7 +36,7 @@ export const ReisemåteOppsummering: React.FC<{ reisemåte: Reisemåte }> = ({ r
                     felt={reisemåte.reiseMedBilUtgifter?.piggdekkavgift}
                     valuePostfix="kr"
                 />
-                <OppsummeringSvar felt={reisemåte.kanBenytteDrosje} />
+                <OppsummeringSvar felt={reisemåte.ønskerDekketUtgifterForDrosje} />
             </FormSummary.Answers>
             <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.REISEMÅTE} />
         </FormSummary>

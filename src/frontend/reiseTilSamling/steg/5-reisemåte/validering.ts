@@ -11,7 +11,9 @@ export const errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse =
 export const errorKeyTotalutgifterOffentligTransport =
     'reisemåte_totalutgifter_offentlig_transport';
 export const errorKeyKanBenytteEgenBil = 'reisemåte_kan_benytte_egen_bil';
-export const errorKeyKanBenytteDrosje = 'reisemåte_kan_benytte_drosje';
+export const errorKeyØnskerDekketUtgifterForDrosje = 'reisemåte_ønsker_dekket_utgifter_for_drosje';
+export const errorKeyHarTTKort = 'reisemåte_har_tt_kort';
+
 export const errorKeyKanIkkeBenytteEgenBilBegrunnelse =
     'reisemåte_kan_ikke_benytte_egen_bil_begrunnelse';
 
@@ -99,12 +101,12 @@ export const validerReisemåte = (
                 };
             }
 
-            if (!harVerdi(reisemåte?.kanBenytteDrosje?.verdi)) {
+            if (!harVerdi(reisemåte?.ønskerDekketUtgifterForDrosje?.verdi)) {
                 feil = {
                     ...feil,
-                    [errorKeyKanBenytteDrosje]: {
-                        id: errorKeyKanBenytteDrosje,
-                        melding: reisemåteTekster.feilmelding_drosje_mangler[locale],
+                    [errorKeyØnskerDekketUtgifterForDrosje]: {
+                        id: errorKeyØnskerDekketUtgifterForDrosje,
+                        melding: reisemåteTekster.feilmelding_utgifter_drosje_mangler[locale],
                     },
                 };
             }
