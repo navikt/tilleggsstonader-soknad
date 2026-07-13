@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 
-export const mockHarSøknadTilsynBarnFraFør = async (page: Page) => {
+export const mockHarSøknadPassAvBarnFraFør = async (page: Page) => {
     await page.route(
         'api/person/har-behandling?skjematype=S%C3%98KNAD_BARNETILSYN',
         async (route) => {
@@ -9,7 +9,7 @@ export const mockHarSøknadTilsynBarnFraFør = async (page: Page) => {
     );
 };
 
-export const mockHarIngenSøknadTilsynBarnFraFør = async (page: Page) => {
+export const mockHarIngenSøknadPassAvBarnFraFør = async (page: Page) => {
     await page.route(
         'api/person/har-behandling?skjematype=S%C3%98KNAD_BARNETILSYN',
         async (route) => {

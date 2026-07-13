@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 
 import { mockAktivitet, mockIngenAktivitet } from '../../mocks/aktivitet';
 import {
-    mockHarIngenSøknadTilsynBarnFraFør,
-    mockHarSøknadTilsynBarnFraFør,
+    mockHarIngenSøknadPassAvBarnFraFør,
+    mockHarSøknadPassAvBarnFraFør,
 } from '../../mocks/harSøknadFraFør';
 import { mockPersonMedBarnApi } from '../../mocks/person';
 import { mockSendSøknadPassAvBarn } from '../../mocks/sendSøknad';
@@ -20,7 +20,7 @@ test.beforeEach(async ({ page }) => {
     await mockPersonMedBarnApi(page);
     await mockAktivitet(page);
     await mockSendSøknadPassAvBarn(page);
-    await mockHarIngenSøknadTilsynBarnFraFør(page);
+    await mockHarIngenSøknadPassAvBarnFraFør(page);
     await mockLastOppVedlegg(page);
 });
 
@@ -209,7 +209,7 @@ test('Velger hovedytelse Tiltakspenger som trigger ekstra spørsmål koblet til 
 });
 
 test('Har søknad fra før', async ({ page }) => {
-    await mockHarSøknadTilsynBarnFraFør(page);
+    await mockHarSøknadPassAvBarnFraFør(page);
 
     await page.goto(PassAvBarnUrls.START);
     await expect(page).toHaveURL(PassAvBarnUrls.START);
