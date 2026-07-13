@@ -13,7 +13,7 @@ import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeadin
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
-import { RouteTilPath } from '../../routing/routesBarnetilsyn';
+import { RouteTilPath } from '../../routing/routesPassAvBarn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const Oppsummering = () => {

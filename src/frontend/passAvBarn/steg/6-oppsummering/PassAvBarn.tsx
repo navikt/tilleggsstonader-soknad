@@ -6,7 +6,7 @@ import { OppsummeringEnkeltbarn } from './OppsummerEnkeltbarn';
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { Person } from '../../../typer/person';
-import { RouteTilPath } from '../../routing/routesBarnetilsyn';
+import { RouteTilPath } from '../../routing/routesPassAvBarn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 import { Barnepass } from '../../typer/barnepass';
 

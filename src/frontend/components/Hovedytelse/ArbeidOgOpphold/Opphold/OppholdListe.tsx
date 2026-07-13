@@ -15,12 +15,9 @@ import {
     nullstillteOppholsfeilSiste12mnd,
     validerOppholdUtenforNorgeUnderRedigering,
 } from './validering';
-import {
-    OppholdInnhold,
-    oppholdUtenforNorgeInnhold,
-} from '../../../../barnetilsyn/tekster/opphold';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
+import { OppholdInnhold, oppholdUtenforNorgeInnhold } from '../../../../passAvBarn/tekster/opphold';
 import { ArbeidOgOpphold } from '../../../../typer/søknad';
 import { inneholderFeil } from '../../../../typer/validering';
 

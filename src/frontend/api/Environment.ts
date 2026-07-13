@@ -12,11 +12,11 @@ interface EnvironmentProps {
 }
 
 interface IModellversjon {
-    barnetilsyn: number;
+    pass_av_barn: number;
 }
 
 const SkjematypeTilPapirskjema: Record<Skjematype, string> = {
-    [Skjematype.SØKNAD_BARNETILSYN]: 'nav111215b',
+    [Skjematype.SØKNAD_PASS_AV_BARN]: 'nav111215b',
     [Skjematype.SØKNAD_LÆREMIDLER]: 'nav111216b',
     [Skjematype.SØKNAD_REISE_TIL_SAMLING]: 'nav111217b',
 };
@@ -28,7 +28,7 @@ const urlPapirsøknadDev = (skjematype: Skjematype) =>
     `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${SkjematypeTilPapirskjema[skjematype]}?sub=paper`;
 
 export const Environment = (): EnvironmentProps => {
-    const modellVersjon = { overgangsstønad: 7, barnetilsyn: 2, skolepenger: 2 };
+    const modellVersjon = { overgangsstønad: 7, pass_av_barn: 2, skolepenger: 2 };
 
     if (window.location.hostname.indexOf('dev.nav.no') > -1) {
         return {

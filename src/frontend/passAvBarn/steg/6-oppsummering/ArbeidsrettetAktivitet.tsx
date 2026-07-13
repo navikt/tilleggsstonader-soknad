@@ -7,7 +7,7 @@ import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../../../context/SpråkContext';
 import { AktivitetFelles } from '../../../typer/søknad';
 import { verdiFelterTilTekstElement } from '../../../utils/tekstUtils';
-import { RouteTilPath } from '../../routing/routesBarnetilsyn';
+import { RouteTilPath } from '../../routing/routesPassAvBarn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const ArbeidsrettetAktivitet: React.FC<{ aktivitet?: AktivitetFelles }> = ({

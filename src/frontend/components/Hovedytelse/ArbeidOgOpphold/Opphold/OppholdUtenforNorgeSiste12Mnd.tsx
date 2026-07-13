@@ -7,8 +7,8 @@ import {
     skalTaStillingTilOppholdSiste12mnd,
 } from './util';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
-import { oppholdUtenforNorgeInnhold } from '../../../../barnetilsyn/tekster/opphold';
 import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
+import { oppholdUtenforNorgeInnhold } from '../../../../passAvBarn/tekster/opphold';
 import { EnumFelt } from '../../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
 import { LocaleRadioGroup } from '../../../Teksthåndtering/LocaleRadioGroup';

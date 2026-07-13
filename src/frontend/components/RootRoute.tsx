@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { loggBesøk } from '../api/analytics';
-import { HarBehandlingSide } from '../barnetilsyn/HarBehandlingSide';
 import { usePerson } from '../context/PersonContext';
 import { useSøknad } from '../context/SøknadContext';
+import { HarBehandlingSide } from '../passAvBarn/HarBehandlingSide';
 import { hentRoutes } from '../utils/routeUtils';
 
 interface RootRouteProps {

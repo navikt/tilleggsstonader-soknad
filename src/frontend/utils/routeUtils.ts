@@ -1,5 +1,5 @@
-import { BarnetilsynSteg, routesBarnetilsyn } from '../barnetilsyn/routing/routesBarnetilsyn';
 import { LæremidlerSteg, routesLæremidler } from '../læremidler/routing/routesLæremidler';
+import { PassAvBarnSteg, routesPassAvBarn } from '../passAvBarn/routing/routesPassAvBarn';
 import {
     ReiseTilSamlingSteg,
     routesReiseTilSamling,
@@ -7,10 +7,10 @@ import {
 import { IRoute } from '../typer/routes';
 import { Skjematype } from '../typer/skjematyper';
 
-export type Skjemasteg = BarnetilsynSteg | LæremidlerSteg | ReiseTilSamlingSteg;
+export type Skjemasteg = PassAvBarnSteg | LæremidlerSteg | ReiseTilSamlingSteg;
 
 const routesPerSkjematype: Record<Skjematype, IRoute<Skjemasteg>[]> = {
-    [Skjematype.SØKNAD_BARNETILSYN]: routesBarnetilsyn,
+    [Skjematype.SØKNAD_PASS_AV_BARN]: routesPassAvBarn,
     [Skjematype.SØKNAD_LÆREMIDLER]: routesLæremidler,
     [Skjematype.SØKNAD_REISE_TIL_SAMLING]: routesReiseTilSamling,
 };

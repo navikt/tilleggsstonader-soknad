@@ -43,7 +43,7 @@ export const Dokumentasjonskrav: React.FC<{
                     </Dokumentasjonskravsliste>
                 </Box>
             </div>
-            {skjematype === Skjematype.SØKNAD_BARNETILSYN && (
+            {skjematype === Skjematype.SØKNAD_PASS_AV_BARN && (
                 <BodyShort>
                     <LocaleTekst tekst={vedleggTekster.dokumentasjonskrav_samlet_faktura} />
                 </BodyShort>

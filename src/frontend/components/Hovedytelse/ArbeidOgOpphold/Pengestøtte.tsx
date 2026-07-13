@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { skalTaStillingTilLandForPengestøtte } from './util';
-import { mottarPengestøtteInnhold } from '../../../barnetilsyn/tekster/opphold';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { mottarPengestøtteInnhold } from '../../../passAvBarn/tekster/opphold';
 import { EnumFlereValgFelt, SelectFelt } from '../../../typer/skjema';
 import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typeUtils';

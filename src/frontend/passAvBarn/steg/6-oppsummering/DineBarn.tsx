@@ -6,7 +6,7 @@ import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { Person } from '../../../typer/person';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
-import { RouteTilPath } from '../../routing/routesBarnetilsyn';
+import { RouteTilPath } from '../../routing/routesPassAvBarn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const DineBarn: React.FC<{ person: Person; valgteBarnIdenter: string[] }> = ({

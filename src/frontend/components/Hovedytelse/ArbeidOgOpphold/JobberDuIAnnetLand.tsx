@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { skalTaStillingTilLandForJobberIAnnetLand } from './util';
-import { jobberIAnnetLandInnhold } from '../../../barnetilsyn/tekster/opphold';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { jobberIAnnetLandInnhold } from '../../../passAvBarn/tekster/opphold';
 import { EnumFelt, SelectFelt } from '../../../typer/skjema';
 import { ArbeidOgOpphold, JaNei } from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typeUtils';

@@ -7,7 +7,7 @@ interface StønadInnhold {
 
 export const teksterStønad: StønadInnhold = {
     tittelHtml: {
-        SØKNAD_BARNETILSYN: {
+        SØKNAD_PASS_AV_BARN: {
             nb: 'Søknad om støtte til pass av barn',
         },
         SØKNAD_LÆREMIDLER: {

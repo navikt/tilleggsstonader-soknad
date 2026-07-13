@@ -1,21 +1,21 @@
 import { IRoute, Steg } from '../../typer/routes';
 
-export type BarnetilsynSteg = Steg | 'AKTIVITET' | 'DINE_BARN' | 'BARNEPASS';
+export type PassAvBarnSteg = Steg | 'AKTIVITET' | 'DINE_BARN' | 'BARNEPASS';
 
-export const barnetilsynPath = '/pass-av-barn';
-export const RouteTilPath: Record<BarnetilsynSteg, string> = {
-    AKTIVITET: barnetilsynPath + '/aktivitet',
-    BARNEPASS: barnetilsynPath + '/barnepass',
-    DINE_BARN: barnetilsynPath + '/dine-barn',
-    FORSIDE: barnetilsynPath,
-    HOVEDYTELSE: barnetilsynPath + '/hovedytelse',
-    KVITTERING: barnetilsynPath + '/kvittering',
-    OPPSUMMERING: barnetilsynPath + '/oppsummering',
-    VEDLEGG: barnetilsynPath + '/vedlegg',
+export const passAvBarnPath = '/pass-av-barn';
+export const RouteTilPath: Record<PassAvBarnSteg, string> = {
+    AKTIVITET: passAvBarnPath + '/aktivitet',
+    BARNEPASS: passAvBarnPath + '/barnepass',
+    DINE_BARN: passAvBarnPath + '/dine-barn',
+    FORSIDE: passAvBarnPath,
+    HOVEDYTELSE: passAvBarnPath + '/hovedytelse',
+    KVITTERING: passAvBarnPath + '/kvittering',
+    OPPSUMMERING: passAvBarnPath + '/oppsummering',
+    VEDLEGG: passAvBarnPath + '/vedlegg',
 };
 
-export const routesBarnetilsyn: IRoute<BarnetilsynSteg>[] = [
-    { path: barnetilsynPath, label: 'Forside', route: 'FORSIDE' },
+export const routesPassAvBarn: IRoute<PassAvBarnSteg>[] = [
+    { path: passAvBarnPath, label: 'Forside', route: 'FORSIDE' },
     {
         path: RouteTilPath.HOVEDYTELSE,
         label: 'Hovedytelse',
