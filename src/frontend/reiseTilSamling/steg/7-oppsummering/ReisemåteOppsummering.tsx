@@ -24,8 +24,13 @@ export const ReisemåteOppsummering: React.FC<{ reisemåte: Reisemåte }> = ({ r
                     valuePostfix="kr"
                 />
                 <OppsummeringSvar felt={reisemåte.kanIkkeReiseMedOffentligTransportBegrunnelser} />
+                <OppsummeringSvar felt={reisemåte.barnehageGateadresse} />
+                <OppsummeringSvar felt={reisemåte.barnehagePostnummer} />
                 <OppsummeringSvar felt={reisemåte.kanBenytteEgenBil} />
                 <OppsummeringSvar felt={reisemåte.kanIkkeBenytteEgenBilBegrunnelser} />
+                <OppsummeringSvar felt={reisemåte.betalerForReiseSelv} />
+                <OppsummeringSvar felt={reisemåte.ønskerDekketUtgifterForDrosje} />
+                <OppsummeringSvar felt={reisemåte.harTTKort} />
                 <OppsummeringSvar felt={reisemåte.reiseMedBilUtgifter?.drivstoffType} />
                 <OppsummeringSvar
                     felt={reisemåte.reiseMedBilUtgifter?.bompenger}
@@ -36,7 +41,6 @@ export const ReisemåteOppsummering: React.FC<{ reisemåte: Reisemåte }> = ({ r
                     felt={reisemåte.reiseMedBilUtgifter?.piggdekkavgift}
                     valuePostfix="kr"
                 />
-                <OppsummeringSvar felt={reisemåte.ønskerDekketUtgifterForDrosje} />
             </FormSummary.Answers>
             <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.REISEMÅTE} />
         </FormSummary>
