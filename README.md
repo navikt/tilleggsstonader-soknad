@@ -39,7 +39,7 @@ For å kunne redigere tekstene i søknaden må du ha en github-konto og være me
 #### 1. Finn riktig mappe.
    
 Det finnes en mappe per stønad. Direktelenke til hver mappe finner du under: 
-- Rediger tekster for søknad om pass av barn [HER](https://github.com/navikt/tilleggsstonader-soknad/tree/main/src/frontend/pass-av-barn/tekster)
+- Rediger tekster for søknad om pass av barn [HER](https://github.com/navikt/tilleggsstonader-soknad/tree/main/src/frontend/passAvBarn/tekster)
 
 #### 2. Finn filen du ønsker å redigere
 I hver mappe er det en fil per side eller steg i søknaden. Dersom man ønsker å redigere innholdet på forsiden finner man dette i `forside.ts`
