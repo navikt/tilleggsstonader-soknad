@@ -27,6 +27,7 @@ export const SamlingerReiseTilSamling = () => {
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={samlingerTekster.tittel} level="2" size="medium" />
             <BodyShort>{samlingerTekster.guide_tekst[locale]}</BodyShort>
+            <BodyShort spacing>{samlingerTekster.info_minsteavstand[locale]}</BodyShort>
             <SamlingerListe samlinger={samlinger} settSamlinger={settSamlinger} />
         </Side>
     );

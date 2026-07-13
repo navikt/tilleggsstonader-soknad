@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { FormSummary } from '@navikt/ds-react';
+import { BodyShort, FormSummary } from '@navikt/ds-react';
 
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { EnumFelt, VerdiFelt } from '../../../typer/skjema';
 import { Samling } from '../../../typer/søknad';
+import { adressefelterTilVisning } from '../../../utils/adresseUtils';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { harVerdi } from '../../../utils/typeUtils';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
@@ -36,12 +37,39 @@ export const SamlingerOppsummering: React.FC<{ samlinger: Samling[] }> = ({ saml
                 </FormSummary.Heading>
             </FormSummary.Header>
             <FormSummary.Answers>
-                {validerteSamlinger.map((samling, index) => (
-                    <FormSummary.Answer key={samling._id}>
-                        <FormSummary.Label>Samling {index + 1}</FormSummary.Label>
-                        <FormSummary.Value>{samlingTilOppsummering(samling)}</FormSummary.Value>
-                    </FormSummary.Answer>
-                ))}
+                {validerteSamlinger.map((samling, index) => {
+                    const adresseVisning = adressefelterTilVisning({
+                        gateadresse: samling.adresse?.gateadresse?.verdi,
+                        postnummer: samling.adresse?.postnummer?.verdi,
+                        poststed: samling.adresse?.poststed?.verdi,
+                        land: samling.adresse?.land?.verdi,
+                    });
+
+                    return (
+                        <FormSummary.Answer key={samling._id}>
+                            <FormSummary.Label>Samling {index + 1}</FormSummary.Label>
+                            <FormSummary.Value>
+                                <BodyShort>{samlingTilOppsummering(samling)}</BodyShort>
+                                {adresseVisning !== '' && (
+                                    <BodyShort>
+                                        <LocaleTekst
+                                            tekst={oppsummeringTekster.adressen_du_skal_reise_til}
+                                        />
+                                        : {adresseVisning}
+                                    </BodyShort>
+                                )}
+                                {harVerdi(samling.antallKilometerEnVei?.verdi) && (
+                                    <BodyShort>
+                                        <LocaleTekst
+                                            tekst={oppsummeringTekster.reiseavstand_label}
+                                        />
+                                        : {samling.antallKilometerEnVei?.verdi} km
+                                    </BodyShort>
+                                )}
+                            </FormSummary.Value>
+                        </FormSummary.Answer>
+                    );
+                })}
             </FormSummary.Answers>
             <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.SAMLINGER} />
         </FormSummary>

@@ -4,7 +4,7 @@ import { PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
 
 import { NySamling } from './NySamling';
-import { oppdaterSamling, opprettSamlingForNesteId } from './util';
+import { oppdaterSamling, opprettSamlingForNesteId, synkroniserGjenbrukAdresser } from './util';
 import { nullstillteSamlingsfeil, validerSamlingUnderRedigering } from './validering';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -25,12 +25,20 @@ export const SamlingerListe: React.FC<{
     const kanSletteSamling = (id: number) => id !== førsteSamlingId;
 
     const oppdaterSamlingFelt = (id: number, key: keyof Samling, verdi: unknown) => {
-        settSamlinger((prev) => oppdaterSamling(prev, id, key as keyof Samling, verdi as never));
+        settSamlinger((prev) =>
+            synkroniserGjenbrukAdresser(
+                oppdaterSamling(prev, id, key as keyof Samling, verdi as never)
+            )
+        );
     };
 
     const leggTilSamling = () => {
         if (ulagretSamling) {
-            const feil = validerSamlingUnderRedigering(ulagretSamling, locale);
+            const feil = validerSamlingUnderRedigering(
+                ulagretSamling,
+                locale,
+                ulagretSamling._id === førsteSamlingId
+            );
             if (inneholderFeil(feil)) {
                 settValideringsfeil((prevState) => ({ ...prevState, ...feil }));
                 return;
@@ -41,10 +49,12 @@ export const SamlingerListe: React.FC<{
             ...prevState,
             ...nullstillteSamlingsfeil(samlinger),
         }));
-        settSamlinger((prev) => [
-            ...prev.map((s) => ({ ...s, lagret: true })),
-            opprettSamlingForNesteId(prev),
-        ]);
+        settSamlinger((prev) =>
+            synkroniserGjenbrukAdresser([
+                ...prev.map((s) => ({ ...s, lagret: true })),
+                opprettSamlingForNesteId(prev),
+            ])
+        );
     };
 
     const slettSamling = (id: number) => {
@@ -57,7 +67,7 @@ export const SamlingerListe: React.FC<{
                 ...nullstillteSamlingsfeil(samlinger),
             }));
         }
-        settSamlinger((prev) => prev.filter((s) => s._id !== id));
+        settSamlinger((prev) => synkroniserGjenbrukAdresser(prev.filter((s) => s._id !== id)));
     };
 
     return (
@@ -66,6 +76,7 @@ export const SamlingerListe: React.FC<{
                 <NySamling
                     key={samling._id}
                     samling={samling}
+                    erFørste={samling._id === førsteSamlingId}
                     oppdater={oppdaterSamlingFelt}
                     onSlett={
                         kanSletteSamling(samling._id) ? () => slettSamling(samling._id) : undefined
@@ -76,6 +87,7 @@ export const SamlingerListe: React.FC<{
                 <NySamling
                     key={ulagretSamling._id}
                     samling={ulagretSamling}
+                    erFørste={ulagretSamling._id === førsteSamlingId}
                     oppdater={oppdaterSamlingFelt}
                     onSlett={
                         kanSletteSamling(ulagretSamling._id)

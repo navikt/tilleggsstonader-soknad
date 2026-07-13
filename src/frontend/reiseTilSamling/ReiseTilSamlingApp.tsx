@@ -19,7 +19,7 @@ const ReiseTilSamlingInnhold = () => {
         hovedytelse,
         aktivitet,
         samlinger,
-        reiseavstand,
+        avreiseadresse,
         reisemåte,
         dokumentasjon,
     } = useReiseTilSamlingSøknad();
@@ -31,7 +31,7 @@ const ReiseTilSamlingInnhold = () => {
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
                 samlinger: samlinger,
-                reiseavstand: reiseavstand,
+                avreiseadresse: avreiseadresse,
                 reisemåte: reisemåte,
                 dokumentasjon: dokumentasjon,
                 søknadMetadata: {

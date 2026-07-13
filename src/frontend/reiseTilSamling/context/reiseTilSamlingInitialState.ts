@@ -1,12 +1,12 @@
 import {
     mockAktivitet,
     mockHovedytelse,
-    mockReiseavstand,
+    mockAvreiseadresse,
     mockReisemåte,
     mockSamlinger,
 } from '../../mock/reiseTilSamlingMock';
 import { DokumentasjonFelt } from '../../typer/skjema';
-import { Hovedytelse, Reiseavstand, Reisemåte, Samling } from '../../typer/søknad';
+import { Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../../typer/søknad';
 import { erLokal } from '../../utils/miljø';
 import { AktivitetReiseTilSamling } from '../typer/aktivitet';
 
@@ -29,8 +29,7 @@ export const initialAktivitet = (): AktivitetReiseTilSamling =>
 export const initialSamlinger = (): Samling[] =>
     erLokal() ? mockSamlinger : [{ _id: 1, lagret: false }];
 
-export const initialReiseavstand = (): Reiseavstand =>
-    erLokal() ? mockReiseavstand : { aktivitetsadresse: {} };
+export const initialAvreiseadresse = (): Avreiseadresse => (erLokal() ? mockAvreiseadresse : {});
 
 export const initialReisemåte = (): Reisemåte | undefined =>
     erLokal() ? mockReisemåte : undefined;
