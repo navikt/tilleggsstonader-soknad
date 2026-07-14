@@ -66,7 +66,9 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
                 (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
             )
         ) {
-            behov.push({ type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL });
+            behov.push({
+                type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING,
+            });
         }
 
         if (reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'JA') {
