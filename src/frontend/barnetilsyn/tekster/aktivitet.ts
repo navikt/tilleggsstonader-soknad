@@ -15,6 +15,15 @@ export const AktivitetTypeTilTekstPassAvBarn = plukkAktivitetTekster(
 
 export const aktivitetTekster: AktivitetInnhold = {
     ...aktivitetTeksterFelles,
+    søker_fra_lesmer: {
+        header: { nb: 'Hvilken dato velger jeg?' },
+        innhold: {
+            nb: [
+                'Det vanligste er å velge datoen aktiviteten din starter, eller fra da du ble registrert som arbeidssøker. Du får bare dekket utgifter så lenge du har en arbeidsrettet aktivitet.',
+                'Du kan søke tilbake i tid, men som hovedregel kan vi bare innvilge inntil 3 måneder fra datoen du søker.',
+            ],
+        },
+    },
     hvilken_aktivitet: {
         spm: tekstArbeidsrettedeAktiviteter.spm,
         les_mer: {

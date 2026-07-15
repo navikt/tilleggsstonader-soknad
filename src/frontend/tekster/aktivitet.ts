@@ -41,7 +41,7 @@ interface AktivitetInnholdFelles {
     radio_annet_uten_registeraktivitet_feilmelding: TekstElement<string>;
     radio_fortsatt_søke: Radiogruppe<JaNei>;
     søker_fra_label: TekstElement<string>;
-    søker_fra_lesmer: LesMer<string[]>;
+
     søker_fra_dato_feilmelding: TekstElement<string>;
 }
 
@@ -82,6 +82,7 @@ export interface AktivitetInnhold extends AktivitetInnholdFelles {
     hvilken_aktivitet: HvilkenAktivitet;
     ingen_aktivitet_infoalert_innhold: IngenAktivitet;
     lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
+    søker_fra_lesmer: LesMer<string[]>;
 }
 
 export const AktivitetTypeUtdanningTilTekst: Record<
@@ -106,15 +107,6 @@ export const plukkAktivitetTekster = <K extends AnnenAktivitetType>(
     >;
 
 export const aktivitetTeksterFelles: AktivitetInnholdFelles = {
-    søker_fra_lesmer: {
-        header: { nb: 'Hvilken dato velger jeg?' },
-        innhold: {
-            nb: [
-                'Det vanligste er å velge datoen aktiviteten din starter, eller fra da du ble registrert som arbeidssøker. Du får bare dekket utgifter så lenge du har en arbeidsrettet aktivitet.',
-                'Du kan søke tilbake i tid, men som hovedregel kan vi bare innvilge inntil 3 måneder fra datoen du søker.',
-            ],
-        },
-    },
     søker_fra_label: { nb: 'Fra hvilken dato søker du om støtte?' },
     søker_fra_dato_feilmelding: { nb: 'Du må fylle inn en gyldig dato' },
     tittel: {
