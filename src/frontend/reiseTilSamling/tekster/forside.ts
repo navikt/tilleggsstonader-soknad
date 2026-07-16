@@ -43,7 +43,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     kan_ikke_soke_tekst: {
         nb: [
-            'du er under 18 år, søker på vegne av andre eller søker støtte for en aktivitet som ble avsluttet for mer enn 3 måneder siden. Da må du fylle ut ',
+            'du er under 18 år, søker på vegne av andre eller søker støtte for en aktivitet som ble avsluttet for mer enn 6 måneder siden. Da må du fylle ut ',
             {
                 tekst: 'dette skjemaet i stedet',
                 url: 'https://www.nav.no/fyllut/nav111217b?sub=paper',
