@@ -34,6 +34,17 @@ const FilListe = styled.div`
     flex-direction: column;
     gap: 1rem;
 `;
+const StyledFileUploadItem = styled(FileUpload.Item)`
+    cursor: pointer;
+
+    &:hover {
+        border: 1px solid var(--ax-border-accent);
+    }
+
+    & > div {
+        align-items: center;
+    }
+`;
 
 export const Filopplaster: React.FC<{
     opplastedeVedlegg: Dokument[];
@@ -126,7 +137,7 @@ export const Filopplaster: React.FC<{
                     </Heading>
                     <FilListe>
                         {opplastedeVedlegg.map((dokument) => (
-                            <FileUpload.Item
+                            <StyledFileUploadItem
                                 key={dokument.id}
                                 file={{ name: dokument.navn }}
                                 style={{
@@ -136,7 +147,7 @@ export const Filopplaster: React.FC<{
                                 onClick={() => åpneFil(dokument)}
                                 button={{
                                     action: 'delete',
-                                    onClick: (e) => {
+                                    onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
                                         e.stopPropagation();
                                         slettDokument(dokument);
                                     },
@@ -144,7 +155,7 @@ export const Filopplaster: React.FC<{
                             />
                         ))}
                         {vedleggLastesOpp.map((vedlegg) => (
-                            <FileUpload.Item
+                            <StyledFileUploadItem
                                 key={vedlegg.file.name}
                                 file={{ name: vedlegg.file.name }}
                                 style={{ marginBottom: '1rem' }}
