@@ -1,6 +1,6 @@
 import { IRoute, Steg } from '../../typer/routes';
 
-export type ReiseTilSamlingSteg = Steg | 'AKTIVITET' | 'REISEAVSTAND' | 'SAMLINGER' | 'REISEMÅTE';
+export type ReiseTilSamlingSteg = Steg | 'AKTIVITET' | 'AVREISEADRESSE' | 'SAMLINGER' | 'REISEMÅTE';
 
 export const reiseTilSamlingPath = '/reise-til-samling';
 
@@ -8,7 +8,7 @@ export const RouteTilPath: Record<ReiseTilSamlingSteg, string> = {
     FORSIDE: reiseTilSamlingPath,
     HOVEDYTELSE: reiseTilSamlingPath + '/hovedytelse',
     AKTIVITET: reiseTilSamlingPath + '/aktivitet',
-    REISEAVSTAND: reiseTilSamlingPath + '/reiseavstand',
+    AVREISEADRESSE: reiseTilSamlingPath + '/avreiseadresse',
     SAMLINGER: reiseTilSamlingPath + '/samlinger',
     REISEMÅTE: reiseTilSamlingPath + '/reisemate',
     VEDLEGG: reiseTilSamlingPath + '/vedlegg',
@@ -29,9 +29,9 @@ export const routesReiseTilSamling: IRoute<ReiseTilSamlingSteg>[] = [
         route: 'AKTIVITET',
     },
     {
-        path: RouteTilPath.REISEAVSTAND,
-        label: 'Reiseavstand',
-        route: 'REISEAVSTAND',
+        path: RouteTilPath.AVREISEADRESSE,
+        label: 'Avreiseadresse',
+        route: 'AVREISEADRESSE',
     },
     {
         path: RouteTilPath.SAMLINGER,

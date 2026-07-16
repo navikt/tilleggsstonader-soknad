@@ -1,5 +1,5 @@
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
-import { Hovedytelse, Reiseavstand, Reisemåte, Samling } from '../typer/søknad';
+import { Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../typer/søknad';
 
 export const mockHovedytelse: Hovedytelse = {
     ytelse: {
@@ -33,16 +33,16 @@ export const mockSamlinger: Samling[] = [
             svarTekst: 'Ja',
             alternativer: ['Ja', 'Nei'],
         },
+        antallKilometerEnVei: { verdi: '45', label: 'Hvor lang reisevei har du?' },
+        adresse: {
+            gateadresse: { verdi: 'Testveien 1', label: 'Gateadresse' },
+            postnummer: { verdi: '0123', label: 'Postnummer' },
+            poststed: { verdi: 'Oslo', label: 'Poststed' },
+        },
     },
 ];
 
-export const mockReiseavstand: Reiseavstand = {
-    antallKilometerEnVei: { verdi: '45', label: 'Hvor lang reisevei har du?' },
-    aktivitetsadresse: {
-        gateadresse: { verdi: 'Testveien 1', label: 'Gateadresse' },
-        postnummer: { verdi: '0123', label: 'Postnummer' },
-        poststed: { verdi: 'Oslo', label: 'Poststed' },
-    },
+export const mockAvreiseadresse: Avreiseadresse = {
     skalReiseFraFolkeregistrertAdresse: {
         label: 'Skal du reise fra din folkeregistrerte adresse?',
         verdi: 'JA',

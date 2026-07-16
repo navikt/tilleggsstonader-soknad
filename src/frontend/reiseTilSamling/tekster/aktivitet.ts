@@ -51,6 +51,15 @@ export const AktivitetTypeTilTekstReiseTilSamling = plukkAktivitetTekster(
 
 export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
     ...aktivitetTeksterFelles,
+    søker_fra_lesmer: {
+        header: { nb: 'Hvilken dato velger jeg?' },
+        innhold: {
+            nb: [
+                'Det vanligste er å velge datoen aktiviteten din starter, eller fra da du ble registrert som arbeidssøker. Du får bare dekket utgifter så lenge du har en arbeidsrettet aktivitet.',
+                'Du kan søke tilbake i tid, men som hovedregel kan vi bare innvilge inntil 6 måneder fra datoen du søker.',
+            ],
+        },
+    },
     hvilken_aktivitet: {
         spm: tekstArbeidsrettedeAktiviteter.spm,
         les_mer: {
@@ -59,14 +68,14 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
                 tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
             del1: {
                 nb: [
-                    'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du registrert som arbeidssøker, kan vi ikke hente det.',
+                    'Vi henter tiltak og utdanning registrert på deg 6 måneder tilbake i tid. Er du registrert som arbeidssøker, kan vi ikke hente det.',
                     'Hvis aktiviteten din mangler eller det er noe feil, anbefaler vi at du tar kontakt med veilederen din. Du kan fortsatt søke nå, men det kan ta lengre tid å behandle søknaden hvis vi må kontakte veilederen din for deg.',
                 ],
             },
             del2_lenker: [],
             del3: {
                 nb: [
-                    'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for over 3 måneder siden, må du ',
+                    'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for over 6 måneder siden, må du ',
                     {
                         tekst: 'fylle ut papirsøknad',
                         url: 'https://www.nav.no/fyllut/nav111217b?sub=paper',
@@ -93,10 +102,10 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         del2_lenker: [],
     },
     radio_annet_lesmer: {
-        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
+        header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
         innhold: {
             nb: [
-                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 3 måneder siden. ',
+                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden. ',
                 {
                     tekst: 'Søknad på papir',
                     url: 'https://www.nav.no/fyllut/nav111217b?sub=paper',

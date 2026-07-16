@@ -105,35 +105,13 @@ export const ReisemåteReiseTilSamling = () => {
         }
     };
 
-    const oppdaterBarnehageAdresse = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const verdi = e.target.value;
-
-        settReisemåte((prev) => ({
-            ...prev,
-            barnehageGateadresse: { verdi, label: reisemåteTekster.info_barnehage_adresse[locale] },
-        }));
-        nullstillFeil(errorKeyBarnehageAdresse);
-    };
-
-    const oppdaterBarnehagePostnummer = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const verdi = e.target.value;
-
-        settReisemåte((prev) => ({
-            ...prev,
-            barnehagePostnummer: {
-                verdi,
-                label: reisemåteTekster.info_barnehage_postnummer[locale],
-            },
-        }));
-
-        nullstillFeil(errorKeyBarnehagePostnummer);
-    };
-
     const oppdaterKanBenytteEgenBil = (verdi: EnumFelt<JaNei>) => {
         settReisemåte((prev) => ({
             kanReiseMedOffentligTransport: prev?.kanReiseMedOffentligTransport,
             kanIkkeReiseMedOffentligTransportBegrunnelser:
                 prev?.kanIkkeReiseMedOffentligTransportBegrunnelser,
+            barnehageGateadresse: prev?.barnehageGateadresse,
+            barnehagePostnummer: prev?.barnehagePostnummer,
             kanBenytteEgenBil: verdi,
         }));
         nullstillFeil([
@@ -180,48 +158,6 @@ export const ReisemåteReiseTilSamling = () => {
             },
         }));
         nullstillFeil(errorKeyEgenbilUtgifterDrivstoffType);
-    };
-
-    const oppdaterEgenBilUtgifterBompenger = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const verdi = e.target.value;
-        settReisemåte((prev) => ({
-            ...prev,
-            reiseMedBilUtgifter: {
-                ...prev?.reiseMedBilUtgifter,
-                bompenger: {
-                    label: reisemåteTekster.egen_bil_utgifter_bompenger_tittel[locale],
-                    verdi,
-                },
-            },
-        }));
-        nullstillFeil(errorKeyEgenbilUtgifterBompenger);
-    };
-
-    const oppdaterEgenBilUtgifterFerge = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const verdi = e.target.value;
-        settReisemåte((prev) => ({
-            ...prev,
-            reiseMedBilUtgifter: {
-                ...prev?.reiseMedBilUtgifter,
-                ferge: { label: reisemåteTekster.egen_bil_utgifter_ferge_tittel[locale], verdi },
-            },
-        }));
-        nullstillFeil(errorKeyEgenbilUtgifterFerge);
-    };
-
-    const oppdaterEgenBilUtgifterPiggdekkavgift = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const verdi = e.target.value;
-        settReisemåte((prev) => ({
-            ...prev,
-            reiseMedBilUtgifter: {
-                ...prev?.reiseMedBilUtgifter,
-                piggdekkavgift: {
-                    label: reisemåteTekster.egen_bil_utgifter_piggdekkavgift_tittel[locale],
-                    verdi,
-                },
-            },
-        }));
-        nullstillFeil(errorKeyEgenbilUtgifterPiggdekkavgift);
     };
 
     const oppdaterBetalerForReiseSelv = (verdi: EnumFelt<JaNei>) => {
@@ -352,14 +288,36 @@ export const ReisemåteReiseTilSamling = () => {
                                     error={valideringsfeil[errorKeyBarnehageAdresse]?.melding}
                                     label={reisemåteTekster.info_barnehage_adresse[locale]}
                                     value={reisemåte?.barnehageGateadresse?.verdi ?? ''}
-                                    onChange={oppdaterBarnehageAdresse}
+                                    onChange={(e) => {
+                                        settReisemåte((prev) => ({
+                                            ...prev,
+                                            barnehageGateadresse: {
+                                                verdi: e.target.value,
+                                                label: reisemåteTekster.info_barnehage_adresse[
+                                                    locale
+                                                ],
+                                            },
+                                        }));
+                                        nullstillFeil(errorKeyBarnehageAdresse);
+                                    }}
                                 />
                                 <TextField
                                     id={valideringsfeil[errorKeyBarnehagePostnummer]?.id}
                                     error={valideringsfeil[errorKeyBarnehagePostnummer]?.melding}
                                     label={reisemåteTekster.info_barnehage_postnummer[locale]}
                                     value={reisemåte?.barnehagePostnummer?.verdi ?? ''}
-                                    onChange={oppdaterBarnehagePostnummer}
+                                    onChange={(e) => {
+                                        settReisemåte((prev) => ({
+                                            ...prev,
+                                            barnehagePostnummer: {
+                                                verdi: e.target.value,
+                                                label: reisemåteTekster.info_barnehage_postnummer[
+                                                    locale
+                                                ],
+                                            },
+                                        }));
+                                        nullstillFeil(errorKeyBarnehagePostnummer);
+                                    }}
                                 />
                             </>
                         )}
@@ -487,7 +445,20 @@ export const ReisemåteReiseTilSamling = () => {
                                     }
                                     inputMode="numeric"
                                     value={reisemåte?.reiseMedBilUtgifter?.bompenger?.verdi ?? ''}
-                                    onChange={oppdaterEgenBilUtgifterBompenger}
+                                    onChange={(e) => {
+                                        settReisemåte((prev) => ({
+                                            ...prev,
+                                            reiseMedBilUtgifter: {
+                                                ...prev?.reiseMedBilUtgifter,
+                                                bompenger: {
+                                                    verdi: e.target.value,
+                                                    label: reisemåteTekster
+                                                        .egen_bil_utgifter_bompenger_tittel[locale],
+                                                },
+                                            },
+                                        }));
+                                        nullstillFeil(errorKeyEgenbilUtgifterBompenger);
+                                    }}
                                     error={
                                         valideringsfeil[errorKeyEgenbilUtgifterBompenger]?.melding
                                     }
@@ -497,7 +468,20 @@ export const ReisemåteReiseTilSamling = () => {
                                     label={reisemåteTekster.egen_bil_utgifter_ferge_tittel[locale]}
                                     inputMode="numeric"
                                     value={reisemåte?.reiseMedBilUtgifter?.ferge?.verdi ?? ''}
-                                    onChange={oppdaterEgenBilUtgifterFerge}
+                                    onChange={(e) => {
+                                        settReisemåte((prev) => ({
+                                            ...prev,
+                                            reiseMedBilUtgifter: {
+                                                ...prev?.reiseMedBilUtgifter,
+                                                ferge: {
+                                                    verdi: e.target.value,
+                                                    label: reisemåteTekster
+                                                        .egen_bil_utgifter_ferge_tittel[locale],
+                                                },
+                                            },
+                                        }));
+                                        nullstillFeil(errorKeyEgenbilUtgifterFerge);
+                                    }}
                                     error={valideringsfeil[errorKeyEgenbilUtgifterFerge]?.melding}
                                 />
                                 <TextField
@@ -511,7 +495,22 @@ export const ReisemåteReiseTilSamling = () => {
                                     value={
                                         reisemåte?.reiseMedBilUtgifter?.piggdekkavgift?.verdi ?? ''
                                     }
-                                    onChange={oppdaterEgenBilUtgifterPiggdekkavgift}
+                                    onChange={(e) => {
+                                        settReisemåte((prev) => ({
+                                            ...prev,
+                                            reiseMedBilUtgifter: {
+                                                ...prev?.reiseMedBilUtgifter,
+                                                piggdekkavgift: {
+                                                    verdi: e.target.value,
+                                                    label: reisemåteTekster
+                                                        .egen_bil_utgifter_piggdekkavgift_tittel[
+                                                        locale
+                                                    ],
+                                                },
+                                            },
+                                        }));
+                                        nullstillFeil(errorKeyEgenbilUtgifterPiggdekkavgift);
+                                    }}
                                     error={
                                         valideringsfeil[errorKeyEgenbilUtgifterPiggdekkavgift]
                                             ?.melding

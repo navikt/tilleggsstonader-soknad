@@ -26,7 +26,7 @@ export interface SøknadReiseTilSamling {
     hovedytelse: Hovedytelse | undefined;
     aktivitet: AktivitetReiseTilSamling | undefined;
     samlinger: Samling[];
-    reiseavstand?: Reiseavstand;
+    avreiseadresse?: Avreiseadresse;
     reisemåte?: Reisemåte;
     dokumentasjon: DokumentasjonFelt[];
     søknadMetadata: SøknadMetadata;
@@ -65,7 +65,7 @@ export interface Reisemåte {
     };
 }
 
-export interface Aktivitetsadresse {
+export interface Adresse {
     land?: SelectFelt;
     gateadresse?: VerdiFelt<string>;
     postnummer?: VerdiFelt<string>;
@@ -73,25 +73,20 @@ export interface Aktivitetsadresse {
 }
 
 export interface Avreiseadresse {
-    land?: SelectFelt;
-    gateadresse?: VerdiFelt<string>;
-    postnummer?: VerdiFelt<string>;
-    poststed?: VerdiFelt<string>;
-}
-
-export interface Reiseavstand {
     skalReiseFraFolkeregistrertAdresse?: EnumFelt<JaNei>;
-    adresseDetSkalReisesFra?: Avreiseadresse;
-    antallKilometerEnVei?: VerdiFelt<string>;
-    aktivitetsadresse: Aktivitetsadresse;
+    adresseDetSkalReisesFra?: Adresse;
 }
 
 export interface Samling {
     _id: number; // for å kunne lenke og vise riktig feilmelding - lagres ikke i backend
+    _brukSammeAdresseSomForrige?: EnumFelt<JaNei>; // for å kunne støtte å bruke samme adresse som forrige samling - lagres ikke i backend
     lagret: boolean;
     fom?: VerdiFelt<string>;
     tom?: VerdiFelt<string>;
     erObligatorisk?: EnumFelt<JaNei>;
+    harBruktEkstraReiseDager?: EnumFelt<JaNei>;
+    adresse?: Adresse;
+    antallKilometerEnVei?: VerdiFelt<string>;
 }
 
 export interface Hovedytelse {

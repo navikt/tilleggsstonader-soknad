@@ -1,5 +1,5 @@
 import { AktivitetOppsummering } from './AktivitetOppsummering';
-import { ReiseavstandOppsummering } from './ReiseavstandOppsummering';
+import { AvreiseadresseOppsummering } from './AvreiseadresseOppsummering';
 import { ReisemåteOppsummering } from './ReisemåteOppsummering';
 import { SamlingerOppsummering } from './SamlingerOppsummering';
 import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
@@ -15,7 +15,7 @@ export const Oppsummering = () => {
     const {
         hovedytelse,
         aktivitet,
-        reiseavstand,
+        avreiseadresse,
         samlinger,
         reisemåte,
         dokumentasjonsbehov,
@@ -33,7 +33,7 @@ export const Oppsummering = () => {
                 />
             )}
             {aktivitet && <AktivitetOppsummering aktivitet={aktivitet} />}
-            {reiseavstand && <ReiseavstandOppsummering reiseavstand={reiseavstand} />}
+            {avreiseadresse && <AvreiseadresseOppsummering avreiseadresse={avreiseadresse} />}
             <SamlingerOppsummering samlinger={samlinger} />
             {reisemåte && <ReisemåteOppsummering reisemåte={reisemåte} />}
             {dokumentasjonsbehov.length > 0 && (
