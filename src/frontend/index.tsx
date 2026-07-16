@@ -8,8 +8,6 @@ import { Theme } from '@navikt/ds-react';
 
 import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
-import { BarnetilsynApp } from './barnetilsyn/BarnetilsynApp';
-import { barnetilsynPath } from './barnetilsyn/routing/routesBarnetilsyn';
 import { NotFound } from './components/NotFound';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
@@ -18,6 +16,8 @@ import { SkalBrukeTaxiAvsjekk } from './dagligReise/SkalBrukeTaxiAvsjekk';
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import { LæremidlerApp } from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
+import { PassAvBarnApp } from './passAvBarn/PassAvBarnApp';
+import { passAvBarnPath } from './passAvBarn/routing/routesPassAvBarn';
 import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
 import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
 import { appConfig } from './utils/appConfig';
@@ -35,12 +35,9 @@ const AppRoutes = () => {
         <BrowserRouter basename={appConfig.publicUrl}>
             <ScrollToTop />
             <Routes>
-                <Route path={`${barnetilsynPath}/*`} element={<BarnetilsynApp />} />
+                <Route path={`${passAvBarnPath}/*`} element={<PassAvBarnApp />} />
                 {/* Fallback for gamle lenker */}
-                <Route
-                    path={'/barnetilsyn/*'}
-                    element={<Navigate to={barnetilsynPath} replace />}
-                />
+                <Route path={'/barnetilsyn/*'} element={<Navigate to={passAvBarnPath} replace />} />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
                 {kanBrukeReiseTilSamling && (
                     <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />

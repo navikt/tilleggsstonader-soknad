@@ -9,14 +9,14 @@ import { Skjematype } from '../typer/skjematyper';
 import { appConfig } from '../utils/appConfig';
 import { useDokumentTittel } from '../utils/useDokumentTittel';
 
-const BarnetilsynInnhold = () => {
+const PassAvBarnInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
     const { resetSøknad, hovedytelse, aktivitet, barnMedBarnepass, dokumentasjon } =
         usePassAvBarnSøknad();
 
     return (
         <SøknadProvider
-            skjematype={Skjematype.SØKNAD_BARNETILSYN}
+            skjematype={Skjematype.SØKNAD_PASS_AV_BARN}
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
@@ -34,13 +34,13 @@ const BarnetilsynInnhold = () => {
     );
 };
 
-export const BarnetilsynApp = () => {
-    useDokumentTittel(Skjematype.SØKNAD_BARNETILSYN);
+export const PassAvBarnApp = () => {
+    useDokumentTittel(Skjematype.SØKNAD_PASS_AV_BARN);
 
     return (
-        <SøknadAppShell skjematype={Skjematype.SØKNAD_BARNETILSYN}>
+        <SøknadAppShell skjematype={Skjematype.SØKNAD_PASS_AV_BARN}>
             <PassAvBarnSøknadProvider>
-                <BarnetilsynInnhold />
+                <PassAvBarnInnhold />
             </PassAvBarnSøknadProvider>
         </SøknadAppShell>
     );

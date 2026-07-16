@@ -51,7 +51,7 @@ export const hentBehandlingStatus = async (skjematype: Skjematype): Promise<bool
 
 const skjematypeTilPath = (skjematype: Skjematype): string => {
     switch (skjematype) {
-        case Skjematype.SØKNAD_BARNETILSYN:
+        case Skjematype.SØKNAD_PASS_AV_BARN:
             return 'pass-av-barn';
         case Skjematype.SØKNAD_LÆREMIDLER:
             return 'laremidler';

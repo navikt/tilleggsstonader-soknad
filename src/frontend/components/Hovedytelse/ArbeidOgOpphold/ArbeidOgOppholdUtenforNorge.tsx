@@ -5,7 +5,7 @@ import { GuidePanel, Heading, VStack } from '@navikt/ds-react';
 import { JobberDuIAnnetLand } from './JobberDuIAnnetLand';
 import { OppholdUtenforNorgeSiste12Mnd } from './Opphold/OppholdUtenforNorgeSiste12Mnd';
 import { Pengestøtte } from './Pengestøtte';
-import { arbeidOgOppholdInnhold } from '../../../barnetilsyn/tekster/opphold';
+import { arbeidOgOppholdInnhold } from '../../../passAvBarn/tekster/opphold';
 import { ArbeidOgOpphold } from '../../../typer/søknad';
 import { LocaleInlineLenke } from '../../Teksthåndtering/LocaleInlineLenke';
 import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';

@@ -27,7 +27,7 @@ export const Søknadsdialog: React.FC = () => {
     return (
         <SøknadsdialogShell
             tittel={fellesTekster.banner_bt}
-            skjematype={Skjematype.SØKNAD_BARNETILSYN}
+            skjematype={Skjematype.SØKNAD_PASS_AV_BARN}
             harBekreftet={harBekreftet}
             forside={<Forside />}
             steg={steg}

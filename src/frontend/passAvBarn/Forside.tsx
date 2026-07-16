@@ -14,7 +14,7 @@ import {
     VStack,
 } from '@navikt/ds-react';
 
-import { routesBarnetilsyn } from './routing/routesBarnetilsyn';
+import { routesPassAvBarn } from './routing/routesPassAvBarn';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
@@ -42,14 +42,14 @@ export const Forside: React.FC = () => {
     const [skalViseFeilmelding, settSkalViseFeilmelding] = useState(false);
 
     useEffect(() => {
-        const route = routesBarnetilsyn[0];
-        loggBesøk(Skjematype.SØKNAD_BARNETILSYN, route.path, route.label);
+        const route = routesPassAvBarn[0];
+        loggBesøk(Skjematype.SØKNAD_PASS_AV_BARN, route.path, route.label);
     }, []);
 
     const startSøknad = () => {
         if (harBekreftet) {
-            loggSkjemaStartet(Skjematype.SØKNAD_BARNETILSYN);
-            const nesteRoute = hentNesteRoute(routesBarnetilsyn, location.pathname);
+            loggSkjemaStartet(Skjematype.SØKNAD_PASS_AV_BARN);
+            const nesteRoute = hentNesteRoute(routesPassAvBarn, location.pathname);
             navigate(nesteRoute.path);
         } else {
             settSkalViseFeilmelding(true);
@@ -57,7 +57,7 @@ export const Forside: React.FC = () => {
     };
 
     const loggAccordionÅpning = (skalÅpne: boolean, tittel: string) => {
-        loggAccordionEvent(Skjematype.SØKNAD_BARNETILSYN, skalÅpne, tittel, 'FORSIDE');
+        loggAccordionEvent(Skjematype.SØKNAD_PASS_AV_BARN, skalÅpne, tittel, 'FORSIDE');
     };
 
     return (

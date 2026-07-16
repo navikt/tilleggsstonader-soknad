@@ -6,7 +6,7 @@ import { merge } from 'webpack-merge';
 import common from './webpack.common.js';
 
 const publicPath = process.env.PUBLIC_URL || '/';
-const openBrowser = process.env.OPEN_BROWSER === 'false' ? false : publicPath + '/tilsyn-barn';
+const openBrowser = process.env.OPEN_BROWSER === 'false' ? false : publicPath + '/pass-av-barn';
 
 const developmentConfig = merge(common, {
     mode: 'development',

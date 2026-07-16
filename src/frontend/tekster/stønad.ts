@@ -7,13 +7,13 @@ interface StønadInnhold {
 
 export const teksterStønad: StønadInnhold = {
     tittelHtml: {
-        SØKNAD_BARNETILSYN: {
+        [Skjematype.SØKNAD_PASS_AV_BARN]: {
             nb: 'Søknad om støtte til pass av barn',
         },
-        SØKNAD_LÆREMIDLER: {
+        [Skjematype.SØKNAD_LÆREMIDLER]: {
             nb: 'Søknad om støtte til læremidler',
         },
-        SØKNAD_REISE_TIL_SAMLING: {
+        [Skjematype.SØKNAD_REISE_TIL_SAMLING]: {
             nb: 'Søknad om støtte til reise til samling',
         },
     },

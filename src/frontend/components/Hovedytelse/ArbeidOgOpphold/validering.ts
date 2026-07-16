@@ -6,7 +6,7 @@ import {
 import {
     jobberIAnnetLandInnhold,
     mottarPengestøtteInnhold,
-} from '../../../barnetilsyn/tekster/opphold';
+} from '../../../passAvBarn/tekster/opphold';
 import { ArbeidOgOpphold } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';

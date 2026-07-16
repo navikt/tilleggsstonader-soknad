@@ -32,7 +32,7 @@ export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = 
         nb: 'Vil du likevel sende ny søknad?',
     },
     vil_forstatt_sende_søknad_innhold: {
-        [Skjematype.SØKNAD_BARNETILSYN]: {
+        [Skjematype.SØKNAD_PASS_AV_BARN]: {
             nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er et nytt skole/barnehageår kan du sende ny søknad.',
         },
         [Skjematype.SØKNAD_LÆREMIDLER]: {

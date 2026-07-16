@@ -4,8 +4,8 @@ import { DatePicker, HStack, Label, useDatepicker, VStack } from '@navikt/ds-rea
 
 import { OppdatertOppholdFelt } from './typer';
 import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from './validering';
-import { OppholdInnhold } from '../../../../barnetilsyn/tekster/opphold';
 import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
+import { OppholdInnhold } from '../../../../passAvBarn/tekster/opphold';
 import { SelectFelt, EnumFlereValgFelt } from '../../../../typer/skjema';
 import {
     ArbeidOgOpphold,

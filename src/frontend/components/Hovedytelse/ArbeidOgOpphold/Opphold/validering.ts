@@ -1,8 +1,5 @@
 import { skalTaStillingTilOppholdSiste12mnd } from './util';
-import {
-    oppholdUtenforNorgeInnhold,
-    OppholdInnhold,
-} from '../../../../barnetilsyn/tekster/opphold';
+import { oppholdUtenforNorgeInnhold, OppholdInnhold } from '../../../../passAvBarn/tekster/opphold';
 import { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
 import { Valideringsfeil } from '../../../../typer/validering';
