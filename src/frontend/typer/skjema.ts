@@ -39,6 +39,7 @@ export interface Dokumentasjonsbehov {
 export interface Dokument {
     id: string;
     navn: string;
+    previewUrl?: string;
 }
 
 // OBS: Ikke ha duplikat av enum-typer.
