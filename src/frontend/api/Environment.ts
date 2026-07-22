@@ -31,12 +31,11 @@ export const Environment = (): EnvironmentProps => {
     const modellVersjon = { overgangsstønad: 7, pass_av_barn: 2, skolepenger: 2 };
 
     if (window.location.hostname.indexOf('dev.nav.no') > -1) {
+        const baseUrl = 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad';
         return {
-            apiProxyUrl: 'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/api',
-            vedleggProxyUrl:
-                'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/api/vedlegg',
-            wonderwallUrl:
-                'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
+            apiProxyUrl: `${baseUrl}/api`,
+            vedleggProxyUrl: `${baseUrl}/api/vedlegg`,
+            wonderwallUrl: `${baseUrl}/oauth2/login?redirect=`,
             logoutUrl: 'https://login.ekstern.dev.nav.no/oauth2/logout',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlPapirsøknad: urlPapirsøknadDev,
@@ -44,10 +43,11 @@ export const Environment = (): EnvironmentProps => {
             modellVersjon: modellVersjon,
         };
     } else if (window.location.hostname.indexOf('nav.no') > -1) {
+        const baseUrl = 'https://www.nav.no/tilleggsstonader/soknad';
         return {
-            apiProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api',
-            vedleggProxyUrl: 'https://www.nav.no/tilleggsstonader/soknad/api/vedlegg',
-            wonderwallUrl: 'https://www.nav.no/tilleggsstonader/soknad/oauth2/login?redirect=',
+            apiProxyUrl: `${baseUrl}/api`,
+            vedleggProxyUrl: `${baseUrl}/api/vedlegg`,
+            wonderwallUrl: `${baseUrl}/oauth2/login?redirect=`,
             logoutUrl: 'https://login.nav.no/oauth2/logout',
             sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlPapirsøknad: urlPapirsøknadProd,
@@ -55,9 +55,10 @@ export const Environment = (): EnvironmentProps => {
             modellVersjon: modellVersjon,
         };
     } else {
+        const baseUrl = 'http://localhost:8080';
         return {
-            apiProxyUrl: 'http://localhost:8080/api',
-            vedleggProxyUrl: 'http://localhost:8080/api/vedlegg/tillegg',
+            apiProxyUrl: `${baseUrl}/api`,
+            vedleggProxyUrl: `${baseUrl}/api/vedlegg/tillegg`,
             wonderwallUrl: `http://localhost:8001/test/cookie?redirect=`,
             logoutUrl: 'http://localhost:8000/oauth2/logout',
             urlPapirsøknad: urlPapirsøknadDev,

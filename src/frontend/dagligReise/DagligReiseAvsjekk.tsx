@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Button, GuidePanel, Heading, Label, Radio, RadioGroup, VStack } from '@navikt/ds-react';
 
-import { omdirigerTilFyllut } from '../api/useFyllutRedirect';
+import { omdirigerTilFyllut } from '../api/api';
 import { Container } from '../components/Side';
 import { LocaleReadMore } from '../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';

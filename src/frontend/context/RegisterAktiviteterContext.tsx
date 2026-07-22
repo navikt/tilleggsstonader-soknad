@@ -24,7 +24,9 @@ const [RegisterAktiviteterProvider, useRegisterAktiviteter] = constate(({ skjema
                     mapTilRegisterAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
                 )
             )
-            .catch(() => settRegisterAktiviteter({}));
+            .catch(() => {
+                settRegisterAktiviteter({});
+            });
     }, [skjematype]);
 
     return {

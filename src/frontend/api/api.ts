@@ -2,10 +2,12 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Environment } from './Environment';
+import { triggGlobalFeil } from './globalFeil';
 import { Kjøreliste, KjørelisteKvittering } from '../kjørelister/types/Kjøreliste';
 import { Rammevedtak } from '../kjørelister/types/Rammevedtak';
 import { Person } from '../typer/person';
 import { RegisterAktivitet, RegisterAktiviteterResponse } from '../typer/registerAktivitet';
+import { SkjematypeFyllUt } from '../typer/skjematype';
 import { Skjematype } from '../typer/skjematyper';
 import { Kvittering } from '../typer/søknad';
 
@@ -21,33 +23,60 @@ export const defaultConfig = () => ({
     withCredentials: true,
 });
 
-export const hentPersonData = async (medBarn: boolean): Promise<Person> => {
-    const response = await axios.get<Person>(
-        `${Environment().apiProxyUrl}/person${medBarn ? '/med-barn' : ''}`,
-        defaultConfig()
-    );
-    return response.data;
+const er401Feil = (error: unknown): boolean =>
+    axios.isAxiosError(error) && error.response?.status === 401;
+
+const redirectTilInnlogging = () => {
+    window.location.href = Environment().wonderwallUrl + window.location.href;
 };
 
-export const hentArbeidsrettedeAktiviteter = async (
+const erServerfeilEllerNede = (error: unknown): boolean => {
+    if (!axios.isAxiosError(error) || axios.isCancel(error)) {
+        return false;
+    }
+
+    return error.response ? error.response.status >= 500 : true;
+};
+
+export const utførApiKall = async <T>(kall: () => Promise<T>): Promise<T> => {
+    try {
+        return await kall();
+    } catch (error) {
+        if (er401Feil(error)) {
+            redirectTilInnlogging();
+        } else if (erServerfeilEllerNede(error)) {
+            triggGlobalFeil();
+        }
+        throw error;
+    }
+};
+
+export const hentPersonData = (medBarn: boolean): Promise<Person> =>
+    utførApiKall(async () => {
+        const url = `${Environment().apiProxyUrl}/person${medBarn ? '/med-barn' : ''}`;
+        const response = await axios.get<Person>(url, defaultConfig());
+        return response.data;
+    });
+
+export const hentArbeidsrettedeAktiviteter = (
     skjematype: Skjematype
-): Promise<RegisterAktivitet[]> => {
-    const url = `${Environment().apiProxyUrl}/aktivitet`;
-    const response = await axios.post<RegisterAktiviteterResponse>(
-        url,
-        { skjematype },
-        defaultConfig()
-    );
-    return response.data.aktiviteter;
-};
+): Promise<RegisterAktivitet[]> =>
+    utførApiKall(async () => {
+        const url = `${Environment().apiProxyUrl}/aktivitet`;
+        const response = await axios.post<RegisterAktiviteterResponse>(
+            url,
+            { skjematype },
+            defaultConfig()
+        );
+        return response.data.aktiviteter;
+    });
 
-export const hentBehandlingStatus = async (skjematype: Skjematype): Promise<boolean> => {
-    const response = await axios.get<boolean>(
-        `${Environment().apiProxyUrl}/person/har-behandling?skjematype=${encodeURIComponent(skjematype)}`,
-        defaultConfig()
-    );
-    return response.data;
-};
+export const hentBehandlingStatus = (skjematype: Skjematype): Promise<boolean> =>
+    utførApiKall(async () => {
+        const url = `${Environment().apiProxyUrl}/person/har-behandling?skjematype=${encodeURIComponent(skjematype)}`;
+        const response = await axios.get<boolean>(url, defaultConfig());
+        return response.data;
+    });
 
 const skjematypeTilPath = (skjematype: Skjematype): string => {
     switch (skjematype) {
@@ -60,10 +89,12 @@ const skjematypeTilPath = (skjematype: Skjematype): string => {
     }
 };
 
-export const sendInnSøknad = (skjematype: Skjematype, søknad: object): Promise<Kvittering> => {
-    const url = `${Environment().apiProxyUrl}/soknad/${skjematypeTilPath(skjematype)}`;
-    return axios.post(url, søknad, defaultConfig()).then((response) => response.data);
-};
+export const sendInnSøknad = (skjematype: Skjematype, søknad: object): Promise<Kvittering> =>
+    utførApiKall(async () => {
+        const url = `${Environment().apiProxyUrl}/soknad/${skjematypeTilPath(skjematype)}`;
+        const response = await axios.post(url, søknad, defaultConfig());
+        return response.data;
+    });
 
 interface VedleggResponse {
     data: {
@@ -71,12 +102,12 @@ interface VedleggResponse {
     };
 }
 
-export const lastOppVedlegg = (fil: File): Promise<string> => {
-    const url = `${Environment().vedleggProxyUrl}`;
-    const requestData = new FormData();
-    requestData.append('file', fil);
-    return axios
-        .post<FormData, VedleggResponse>(url, requestData, {
+export const lastOppVedlegg = (fil: File): Promise<string> =>
+    utførApiKall(async () => {
+        const url = `${Environment().vedleggProxyUrl}`;
+        const requestData = new FormData();
+        requestData.append('file', fil);
+        const response = await axios.post<FormData, VedleggResponse>(url, requestData, {
             withCredentials: true,
             headers: {
                 'x-request-id': requestId(),
@@ -84,37 +115,45 @@ export const lastOppVedlegg = (fil: File): Promise<string> => {
                 accept: 'application/json',
             },
             transformRequest: () => requestData,
-        })
-        .then((response: VedleggResponse) => response.data.dokumentId);
-};
+        });
+        return response.data.dokumentId;
+    });
 
-export const hentAlleRammevedtak = (): Promise<Rammevedtak[]> => {
-    return axios
-        .get<
-            Rammevedtak[]
-        >(`${Environment().apiProxyUrl}/kjorelister/alle-rammevedtak`, defaultConfig())
-        .then((response) => response.data);
-};
+export const hentAlleRammevedtak = (): Promise<Rammevedtak[]> =>
+    utførApiKall(async () => {
+        const url = `${Environment().apiProxyUrl}/kjorelister/alle-rammevedtak`;
+        const response = await axios.get<Rammevedtak[]>(url, defaultConfig());
+        return response.data;
+    });
 
-export const hentRammevedtak = (reiseId: string): Promise<Rammevedtak> => {
-    return axios
-        .get<Rammevedtak>(
-            `${Environment().apiProxyUrl}/kjorelister/rammevedtak/${reiseId}`,
+export const hentRammevedtak = (reiseId: string): Promise<Rammevedtak> =>
+    utførApiKall(async () => {
+        const url = `${Environment().apiProxyUrl}/kjorelister/rammevedtak/${reiseId}`;
+        const response = await axios.get<Rammevedtak>(url, defaultConfig());
+        return response.data;
+    });
+
+export const hentTidligereInnsendt = (reiseId: string): Promise<Kjøreliste | null> =>
+    utførApiKall(async () => {
+        const url = `${Environment().apiProxyUrl}/kjorelister/${reiseId}`;
+        const response = await axios.get<Kjøreliste | null>(url, defaultConfig());
+        return response.data;
+    });
+
+export const sendInnKjøreliste = (kjøreliste: Kjøreliste): Promise<KjørelisteKvittering> =>
+    utførApiKall(async () => {
+        const url = `${Environment().apiProxyUrl}/kjorelister`;
+        const response = await axios.post(url, kjøreliste, defaultConfig());
+        return response.data;
+    });
+
+export const omdirigerTilFyllut = async (skjematype: SkjematypeFyllUt, versjon?: 'NY' | 'GAMMEL') =>
+    utførApiKall(async () => {
+        const url = `${Environment().apiProxyUrl}/fyllut-redirect`;
+        const response = await axios.post<{ redirectUrl: string }>(
+            url,
+            { skjematype, versjon },
             defaultConfig()
-        )
-        .then((response) => response.data);
-};
-
-export const hentTidligereInnsendt = (reiseId: string): Promise<Kjøreliste | null> => {
-    return axios
-        .get<Kjøreliste | null>(
-            `${Environment().apiProxyUrl}/kjorelister/${reiseId}`,
-            defaultConfig()
-        )
-        .then((response) => response.data);
-};
-
-export const sendInnKjøreliste = (kjøreliste: Kjøreliste): Promise<KjørelisteKvittering> => {
-    const url = `${Environment().apiProxyUrl}/kjorelister`;
-    return axios.post(url, kjøreliste, defaultConfig()).then((response) => response.data);
-};
+        );
+        window.location.replace(response.data.redirectUrl);
+    });
