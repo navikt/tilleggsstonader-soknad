@@ -18,11 +18,15 @@ const [RegisterAktiviteterProvider, useRegisterAktiviteter] = constate(({ skjema
         useState<Record<string, RegisterAktivitetMedLabel>>();
 
     useEffect(() => {
-        hentArbeidsrettedeAktiviteter(skjematype).then((arbeidsrettedeAktiviteter) =>
-            settRegisterAktiviteter(
-                mapTilRegisterAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
+        hentArbeidsrettedeAktiviteter(skjematype)
+            .then((arbeidsrettedeAktiviteter) =>
+                settRegisterAktiviteter(
+                    mapTilRegisterAktiviteterObjektMedLabel(arbeidsrettedeAktiviteter)
+                )
             )
-        );
+            .catch(() => {
+                settRegisterAktiviteter({});
+            });
     }, [skjematype]);
 
     return {

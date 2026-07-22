@@ -150,6 +150,10 @@ export const sendInnKjøreliste = (kjøreliste: Kjøreliste): Promise<Kjørelist
 export const omdirigerTilFyllut = async (skjematype: SkjematypeFyllUt, versjon?: 'NY' | 'GAMMEL') =>
     utførApiKall(async () => {
         const url = `${Environment().apiProxyUrl}/fyllut-redirect`;
-        const response = await axios.post<{ redirectUrl: string }>(url, { skjematype, versjon });
+        const response = await axios.post<{ redirectUrl: string }>(
+            url,
+            { skjematype, versjon },
+            defaultConfig()
+        );
         window.location.replace(response.data.redirectUrl);
     });
