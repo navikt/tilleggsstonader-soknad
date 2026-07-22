@@ -6,8 +6,8 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
 
-import { autentiseringsInterceptor } from './api/autentisering';
 import { initSentry } from './api/Sentry';
+import { FeilProvider } from './components/FeilProvider';
 import { NotFound } from './components/NotFound';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
@@ -24,7 +24,6 @@ import { appConfig } from './utils/appConfig';
 import { erProd } from './utils/miljø';
 
 initSentry();
-autentiseringsInterceptor();
 
 const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
@@ -57,7 +56,9 @@ root.render(
     <main id={'maincontent'} tabIndex={-1}>
         <SpråkProvider>
             <Theme theme="light">
-                <AppRoutes />
+                <FeilProvider>
+                    <AppRoutes />
+                </FeilProvider>
             </Theme>
         </SpråkProvider>
     </main>
