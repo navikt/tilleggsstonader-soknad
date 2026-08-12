@@ -26,11 +26,17 @@ const developmentConfig = merge(common, {
             {
                 context: ['/api'],
                 target: 'http://localhost:8001',
-                onProxyReq: (proxyReq, req) => {
-                    const cookieValue = req.cookies['localhost-idtoken'];
-                    if (cookieValue) {
-                        proxyReq.setHeader('Authorization', `Bearer ${cookieValue}`);
-                    }
+                on: {
+                    proxyReq: (proxyReq, req) => {
+                        const rawCookie = req.headers.cookie;
+                        const match = rawCookie
+                            ?.split(';')
+                            .find((c) => c.trim().startsWith('localhost-idtoken='));
+                        const cookieValue = match?.split('=').slice(1).join('=').trim();
+                        if (cookieValue) {
+                            proxyReq.setHeader('Authorization', `Bearer ${cookieValue}`);
+                        }
+                    },
                 },
             },
         ],
