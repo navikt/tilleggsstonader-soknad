@@ -5,7 +5,6 @@ interface EnvironmentProps {
     vedleggProxyUrl: string;
     wonderwallUrl: string;
     logoutUrl: string;
-    sentryUrl?: string;
     urlPapirsøknad: (skjematype: Skjematype) => string;
     miljø: 'local' | 'preprod' | 'production';
     modellVersjon: IModellversjon;
@@ -37,7 +36,6 @@ export const Environment = (): EnvironmentProps => {
             vedleggProxyUrl: `${baseUrl}/api/vedlegg`,
             wonderwallUrl: `${baseUrl}/oauth2/login?redirect=`,
             logoutUrl: 'https://login.ekstern.dev.nav.no/oauth2/logout',
-            sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlPapirsøknad: urlPapirsøknadDev,
             miljø: 'preprod',
             modellVersjon: modellVersjon,
@@ -49,7 +47,6 @@ export const Environment = (): EnvironmentProps => {
             vedleggProxyUrl: `${baseUrl}/api/vedlegg`,
             wonderwallUrl: `${baseUrl}/oauth2/login?redirect=`,
             logoutUrl: 'https://login.nav.no/oauth2/logout',
-            sentryUrl: 'https://06b839ad5487467cb88097c5a27bbbb5@sentry.gc.nav.no/167',
             urlPapirsøknad: urlPapirsøknadProd,
             miljø: 'production',
             modellVersjon: modellVersjon,

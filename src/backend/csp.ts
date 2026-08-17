@@ -14,7 +14,7 @@ const appDirectives = {
     'style-src': ["'self'"],
     'style-src-elem': ["'self'"],
     'img-src': ["'self'", 'data:'],
-    'connect-src': ["'self'", 'm3pb011r.apicdn.sanity.io', 'sentry.gc.nav.no'],
+    'connect-src': ["'self'", 'm3pb011r.apicdn.sanity.io'],
     'font-src': ["'self'"],
 };
 
