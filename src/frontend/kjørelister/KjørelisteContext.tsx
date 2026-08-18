@@ -9,10 +9,11 @@ import { appConfig } from '../utils/appConfig';
 import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
 import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import { tilLocaleDateString } from '../utils/formateringUtils';
+import { KjørelisteVisningDto, ReisedagVisningDto } from './types/KjørelisteVisningDto';
 
 interface Props {
     rammevedtak: Rammevedtak;
-    tidligereInnsendt: Kjøreliste | null;
+    tidligereInnsendt: KjørelisteVisningDto | null;
 }
 
 const [KjørelisteProvider, useKjøreliste] = createUseContext(
@@ -92,7 +93,7 @@ export { KjørelisteProvider, useKjøreliste };
 
 const initialiserKjøreliste = (
     rammevedtak: Rammevedtak,
-    tidligereInnsendt: Kjøreliste | null
+    tidligereInnsendt: KjørelisteVisningDto | null
 ): Kjøreliste => {
     const tidligereReisedagerMap = lagTidligereReisedagerMap(tidligereInnsendt);
 
@@ -112,7 +113,7 @@ const initialiserKjøreliste = (
                     },
                     harKjørt: tidligereReisedag?.harKjørt ?? false,
                     parkeringsutgift: {
-                        verdi: tidligereReisedag?.parkeringsutgift?.verdi ?? null,
+                        verdi: tidligereReisedag?.parkeringsutgift ?? null,
                         label: 'Parkeringsutgifter (kr)',
                     },
                     erHelligdag: helligdag !== undefined,
@@ -144,14 +145,14 @@ const initialiserKjøreliste = (
     };
 };
 
-const lagTidligereReisedagerMap = (tidligereInnsendt: Kjøreliste | null): Map<string, Reisedag> => {
-    const map = new Map<string, Reisedag>();
+const lagTidligereReisedagerMap = (
+    tidligereInnsendt: KjørelisteVisningDto | null
+): Map<string, ReisedagVisningDto> => {
+    const map = new Map<string, ReisedagVisningDto>();
     if (!tidligereInnsendt) return map;
 
-    tidligereInnsendt.reisedagerPerUkeAvsnitt.forEach((uke) => {
-        uke.reisedager.forEach((reisedag) => {
-            map.set(reisedag.dato.verdi, reisedag);
-        });
+    tidligereInnsendt.reisedager.forEach((reisedag) => {
+        map.set(reisedag.dato, reisedag);
     });
     return map;
 };
