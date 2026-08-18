@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Environment } from './Environment';
 import { triggGlobalFeil } from './globalFeil';
 import { Kjøreliste, KjørelisteKvittering } from '../kjørelister/types/Kjøreliste';
+import { KjørelisteVisningDto } from '../kjørelister/types/KjørelisteVisningDto';
 import { Rammevedtak } from '../kjørelister/types/Rammevedtak';
 import { Person } from '../typer/person';
 import { RegisterAktivitet, RegisterAktiviteterResponse } from '../typer/registerAktivitet';
@@ -133,10 +134,10 @@ export const hentRammevedtak = (reiseId: string): Promise<Rammevedtak> =>
         return response.data;
     });
 
-export const hentTidligereInnsendt = (reiseId: string): Promise<Kjøreliste | null> =>
+export const hentTidligereInnsendt = (reiseId: string): Promise<KjørelisteVisningDto | null> =>
     utførApiKall(async () => {
         const url = `${Environment().apiProxyUrl}/kjorelister/${reiseId}`;
-        const response = await axios.get<Kjøreliste | null>(url, defaultConfig());
+        const response = await axios.get<KjørelisteVisningDto | null>(url, defaultConfig());
         return response.data;
     });
 
