@@ -1,13 +1,15 @@
 import React from 'react';
 
+import { ApmErrorBoundary } from '@nais/apm/react';
 import { createRoot } from 'react-dom/client';
 import '@navikt/ds-css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
 
-import { initSentry } from './api/Sentry';
+import { initApm } from './api/apm';
 import { FeilProvider } from './components/FeilProvider';
+import { Feilside } from './components/Feilside';
 import { NotFound } from './components/NotFound';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
@@ -23,7 +25,7 @@ import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSam
 import { appConfig } from './utils/appConfig';
 import { erProd } from './utils/miljø';
 
-initSentry();
+initApm();
 
 const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
@@ -56,9 +58,11 @@ root.render(
     <main id={'maincontent'} tabIndex={-1}>
         <SpråkProvider>
             <Theme theme="light">
-                <FeilProvider>
-                    <AppRoutes />
-                </FeilProvider>
+                <ApmErrorBoundary fallback={<Feilside />}>
+                    <FeilProvider>
+                        <AppRoutes />
+                    </FeilProvider>
+                </ApmErrorBoundary>
             </Theme>
         </SpråkProvider>
     </main>
