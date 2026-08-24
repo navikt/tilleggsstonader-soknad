@@ -6,6 +6,7 @@ import { getDecoratedHtml } from './decorator';
 import { getFyllutUrl, SkjematypeFyllUt } from './fyllutUrls';
 import { logger } from './logger';
 import { miljø } from './miljø';
+import { injectNaisMetaTags } from './naisMetaTags';
 import { addRequestInfo, doProxy } from './proxy';
 import { redirectTilSkjema } from './redirectTilSkjema';
 import { attachToken } from './tokenProxy';
@@ -51,6 +52,7 @@ export const routes = () => {
     expressRouter.use(
         matchAllPathsExcluding('internal', 'static', 'api', 'reporting'),
         applyCspDirectives,
+        injectNaisMetaTags,
         sendHtmlMedDekoratør
     );
 
