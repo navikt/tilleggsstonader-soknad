@@ -15,6 +15,7 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentligTransportAvsjekk';
 import { SkalBrukeTaxiAvsjekk } from './dagligReise/SkalBrukeTaxiAvsjekk';
+import KastFeil from './KastFeil';
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import { LæremidlerApp } from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
@@ -49,6 +50,7 @@ const AppRoutes = () => {
                 />
                 <Route path="/daglig-reise/skjema-taxi" element={<SkalBrukeTaxiAvsjekk />} />
                 <Route path={`/kjoreliste/*`} element={<KjørelisterApp />} />
+                <Route path={`/kast-feil`} element={<KastFeil />} />
                 <Route path={'*'} element={<NotFound />} />
             </Routes>
         </BrowserRouter>
