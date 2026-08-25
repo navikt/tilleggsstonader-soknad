@@ -42,3 +42,11 @@ export const feilHarFunksjonsnedsettelse = (feil: Valideringsfeil, locale: Local
         melding: utdanningTekster.radio_mottar_har_funksjonsnedsettelse_feilmelding[locale],
     },
 });
+
+export const feilTarOpplæringVgsSamtidig = (feil: Valideringsfeil, locale: Locale) => ({
+    ...feil,
+    tarOpplæringVgsSamtidig: {
+        id: '6',
+        melding: utdanningTekster.radio_tar_opplæring_vgs_samtidig_feilmelding[locale],
+    },
+});

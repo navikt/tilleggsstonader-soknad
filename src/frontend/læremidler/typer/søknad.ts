@@ -7,6 +7,7 @@ export interface Utdanning {
     harRettTilUtstyrsstipend: {
         erLærlingEllerLiknende: EnumFelt<JaNei> | undefined;
         harTidligereFullførtVgs: EnumFelt<JaNei> | undefined;
+        tarOpplæringVgsSamtidig: EnumFelt<JaNei> | undefined;
     };
     harFunksjonsnedsettelse: EnumFelt<JaNei> | undefined;
 }

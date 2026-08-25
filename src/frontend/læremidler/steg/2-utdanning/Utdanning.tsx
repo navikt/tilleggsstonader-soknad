@@ -4,17 +4,20 @@ import { GuidePanel, Label } from '@navikt/ds-react';
 
 import { AnnenUtdanning } from './AnnenUtdanning';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
-import { HarRettTilUtstyrsstipend } from './HarRettTilUtstyrsstipend';
+import { HarTidligereFullførtVgs } from './HarTidligereFullførtVgs';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
+import { TarOpplæringVgsSamtidig } from './TarOpplæringVgsSamtidig';
 import { harValgtAktivitetPåVgsNivå } from './UtdanningUtils';
 import {
     feilAnnenUtdanning,
     feilErLærlingEllerLiknende,
     feilHarFunksjonsnedsettelse,
     feilHarTidligereFullførtVgs,
+    feilTarOpplæringVgsSamtidig,
     feilValgtAktivitet,
 } from './validering';
 import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
+import { ErLærlingEllerLiknende } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
 import {
     skalTaStillingTilAnnenAktivitet,
     skalTaStillingTilRegisterAktiviteter,
@@ -23,6 +26,7 @@ import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { usePerson } from '../../../context/PersonContext';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -57,6 +61,9 @@ export const Utdanning = () => {
     const [harTidligereFullførtVgs, settHarTidligereFullførtVgs] = useState<
         EnumFelt<JaNei> | undefined
     >(utdanning ? utdanning.harRettTilUtstyrsstipend.harTidligereFullførtVgs : undefined);
+    const [tarOpplæringVgsSamtidig, settTarOpplæringVgsSamtidig] = useState<
+        EnumFelt<JaNei> | undefined
+    >(utdanning ? utdanning.harRettTilUtstyrsstipend.tarOpplæringVgsSamtidig : undefined);
 
     const oppdaterUtdanningISøknad = () => {
         settUtdanning({
@@ -65,6 +72,7 @@ export const Utdanning = () => {
             harRettTilUtstyrsstipend: {
                 erLærlingEllerLiknende: erLærlingEllerLiknende,
                 harTidligereFullførtVgs: harTidligereFullførtVgs,
+                tarOpplæringVgsSamtidig: tarOpplæringVgsSamtidig,
             },
             harFunksjonsnedsettelse: harFunksjonsnedsettelse,
         });
@@ -75,10 +83,12 @@ export const Utdanning = () => {
         if (!harValgtAktivitetPåVgsNivå(valgteAktiviteter, registerAktiviteter, nyAnnenUtdanning)) {
             setterLærlingEllerLiknende(undefined);
             settHarTidligereFullførtVgs(undefined);
+            settTarOpplæringVgsSamtidig(undefined);
             settValideringsfeil((prevState) => ({
                 ...prevState,
                 erLærlingEllerLiknende: undefined,
                 harTidligereFullførtVgs: undefined,
+                tarOpplæringVgsSamtidig: undefined,
             }));
         }
         settValideringsfeil((prevState) => ({
@@ -103,6 +113,12 @@ export const Utdanning = () => {
                 ...prevState,
                 harTidligereFullførtVgs: undefined,
             }));
+        } else {
+            settTarOpplæringVgsSamtidig(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                tarOpplæringVgsSamtidig: undefined,
+            }));
         }
         settValideringsfeil((prevState) => ({
             ...prevState,
@@ -115,6 +131,14 @@ export const Utdanning = () => {
         settValideringsfeil((prevState) => ({
             ...prevState,
             harTidligereFullførtVgs: undefined,
+        }));
+    };
+
+    const oppdaterTarOpplæringVgsSamtidig = (verdi: EnumFelt<JaNei>) => {
+        settTarOpplæringVgsSamtidig(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            tarOpplæringVgsSamtidig: undefined,
         }));
     };
 
@@ -135,10 +159,12 @@ export const Utdanning = () => {
         ) {
             setterLærlingEllerLiknende(undefined);
             settHarTidligereFullførtVgs(undefined);
+            settTarOpplæringVgsSamtidig(undefined);
             settValideringsfeil((prevState) => ({
                 ...prevState,
                 erLærlingEllerLiknende: undefined,
                 harTidligereFullførtVgs: undefined,
+                tarOpplæringVgsSamtidig: undefined,
             }));
         }
         if (nyeValgteAktiviteter.verdier.length > 0) {
@@ -182,6 +208,13 @@ export const Utdanning = () => {
             harTidligereFullførtVgs === undefined
         ) {
             feil = feilHarTidligereFullførtVgs(feil, locale);
+        }
+        if (
+            skalViseHarRettTilUtstyrsstipend &&
+            erLærlingEllerLiknende?.verdi === 'JA' &&
+            tarOpplæringVgsSamtidig === undefined
+        ) {
+            feil = feilTarOpplæringVgsSamtidig(feil, locale);
         }
         if (harFunksjonsnedsettelse === undefined) {
             feil = feilHarFunksjonsnedsettelse(feil, locale);
@@ -236,13 +269,29 @@ export const Utdanning = () => {
                 />
             )}
             {skalViseHarRettTilUtstyrsstipend && (
-                <HarRettTilUtstyrsstipend
-                    erLærlingEllerLiknende={erLærlingEllerLiknende}
-                    oppdatererLærlingEllerLiknende={oppdatererLærlingEllerLiknende}
-                    harTidligereFullførtVgs={harTidligereFullførtVgs}
-                    oppdaterHarTidligereFullførtVgs={oppdaterHarTidligereFullførtVgs}
-                    valideringsfeil={valideringsfeil}
-                />
+                <UnderspørsmålContainer>
+                    <ErLærlingEllerLiknende
+                        erLærlingEllerLiknende={erLærlingEllerLiknende}
+                        oppdatererLærlingEllerLiknende={oppdatererLærlingEllerLiknende}
+                        feilmelding={valideringsfeil.erLærlingEllerLiknende}
+                    />
+
+                    {erLærlingEllerLiknende?.verdi === 'NEI' && (
+                        <HarTidligereFullførtVgs
+                            harTidligereFullførtVgs={harTidligereFullførtVgs}
+                            oppdaterHarTidligereFullførtVgs={oppdaterHarTidligereFullførtVgs}
+                            feilmelding={valideringsfeil.harTidligereFullførtVgs}
+                        />
+                    )}
+
+                    {erLærlingEllerLiknende?.verdi === 'JA' && (
+                        <TarOpplæringVgsSamtidig
+                            tarOpplæringVgsSamtidig={tarOpplæringVgsSamtidig}
+                            oppdaterTarOpplæringVgsSamtidig={oppdaterTarOpplæringVgsSamtidig}
+                            feilmelding={valideringsfeil.tarOpplæringVgsSamtidig}
+                        />
+                    )}
+                </UnderspørsmålContainer>
             )}
             <HarFunksjonsnedsettelse
                 harFunksjonsnedsettelse={harFunksjonsnedsettelse}
