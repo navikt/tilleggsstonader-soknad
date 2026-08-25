@@ -20,6 +20,8 @@ interface AktivitetInnhold {
     radio_har_fullført_vgs_feilmelding: TekstElement<string>;
     har_fullført_vgs_info_boks_header: TekstElement<string>;
     har_fullført_vgs_info_boks: TekstElement<string>;
+    radio_tar_opplæring_vgs_samtidig: Radiogruppe<JaNei>;
+    radio_tar_opplæring_vgs_samtidig_feilmelding: TekstElement<string>;
     radio_annet_lesmer: LesMer<InlineLenke>;
 }
 
@@ -137,6 +139,15 @@ export const utdanningTekster: AktivitetInnhold = {
     },
     har_fullført_vgs_info_boks: {
         nb: 'Når du er under 21 år og tar videregående utdanning, har du vanligvis rett til utstyrsstipend fra lånekassen. Du kan søke om støtte til læremidler, men du vil mest sannsynligvis få avslag.',
+    },
+    radio_tar_opplæring_vgs_samtidig: {
+        header: {
+            nb: 'Tar du opplæring i videregående skole (fellesfag og/eller programfag) samtidig som du er lærling, lærekandidat, praksisbrevkandidat eller tar fagbrev på jobb?',
+        },
+        alternativer: JaNeiTilTekst,
+    },
+    radio_tar_opplæring_vgs_samtidig_feilmelding: {
+        nb: 'Du må svare på om du tar opplæring i videregående skole samtidig som du er lærling, lærekandidat, praksisbrevkandidat eller tar fagbrev på jobb.',
     },
     radio_annet_lesmer: {
         header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
