@@ -15,21 +15,21 @@ on:
       - 'Dockerfile'
       - 'package.json'
       - 'tsconfig.json'
-      - 'yarn.lock'
+      - 'pnpm-lock.yaml'
 
 jobs:
   playwright:
     name: Tester app med Playwright
     permissions:
       contents: read
-    uses: navikt/tilleggsstonader/.github/workflows/run-playwright.yml@main
+    uses: navikt/tilleggsstonader/.github/workflows/run-playwright-pnpm.yml@pnpm-workflows
     secrets: inherit
     with:
       node-version: "24"
   build_and_deploy:
     name: "Bygger app og deployer til prod og dev"
     needs: playwright
-    uses: navikt/tilleggsstonader/.github/workflows/ts-build-and-deploy-prod-and-dev.yml@main
+    uses: navikt/tilleggsstonader/.github/workflows/ts-build-and-deploy-prod-and-dev-pnpm.yml@pnpm-workflows
     secrets: inherit
     permissions:
       id-token: write  # Trengs for deploy til GCP

@@ -1,11 +1,12 @@
 {
   "name": "tilleggsstonader-soknad",
   "version": "0.1.0",
+  "packageManager": "pnpm@11.24.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "ci": "yarn --prefer-offline --frozen-lockfile && yarn --cwd src/backend ci",
-    "build": "yarn lint && PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.production.js && yarn --cwd src/backend build",
+    "ci": "pnpm install --frozen-lockfile && pnpm --dir src/backend install --frozen-lockfile",
+    "build": "pnpm lint && PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.production.js && pnpm --dir src/backend install --frozen-lockfile && pnpm --dir src/backend build",
     "build:dev": "PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.development.js",
     "start:dev": "PUBLIC_URL=/tilleggsstonader/soknad webpack serve --config ./webpack/webpack.development.js",
     "postinstall": "husky",
@@ -36,7 +37,6 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
     "@types/react-router-dom": "^5.3.3",
-    "@types/uuid": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "^8.67.0",
     "@typescript-eslint/parser": "^8.67.0",
     "@typescript-eslint/typescript-estree": "^8.34.0",
@@ -83,7 +83,7 @@
     "styled-components": "^6.5.1",
     "uuid": "^14.0.2"
   },
-  "resolutions": {
+  "overrides": {
     "styled-components": "^6",
     "qs": "^6.15.2"
   }

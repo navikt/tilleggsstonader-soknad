@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { FileCheckmarkIcon } from '@navikt/aksel-icons';
 import { Box, FormSummary, List } from '@navikt/ds-react';
