@@ -81,10 +81,10 @@
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.18.0",
     "styled-components": "^6.5.1",
-    "uuid": "^14.0.0"
+    "uuid": "^14.0.2"
   },
   "resolutions": {
     "styled-components": "^6",
-    "qs": "^6.15.0"
+    "qs": "^6.15.2"
   }
 }
