@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     name: "Bygger app og deployer til dev-gcp"
-    uses: navikt/tilleggsstonader/.github/workflows/ts-build-and-deploy.yml@main
+    uses: navikt/tilleggsstonader/.github/workflows/ts-build-and-deploy-pnpm.yml@pnpm-workflows
     with:
       cluster: "dev-gcp"
       manifest: ".nais/dev.yaml"

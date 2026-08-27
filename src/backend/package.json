@@ -7,7 +7,7 @@
         "node": ">=24.0.0"
     },
   "scripts": {
-    "ci": "yarn --prefer-offline --frozen-lockfile",
+    "ci": "pnpm install --frozen-lockfile",
     "build": "tsc --build --verbose",
     "start": "NODE_ENV=production node --import=./build/register.js --es-module-specifier-resolution=node build/server.js",
     "start:dev": "NODE_ENV=development ENV=localhost node --import=./build/register.js --es-module-specifier-resolution=node build/server.js"
@@ -39,8 +39,10 @@
     "@types/node-jose": "^1.1.10",
     "ts-node": "^10.9.2"
   },
-  "resolutions": {
-    "node-forge": "1.4.0",
-    "qs": "^6.15.2"
+  "pnpm": {
+    "overrides": {
+      "node-forge": "1.4.0",
+      "qs": "^6.15.2"
+    }
   }
 }

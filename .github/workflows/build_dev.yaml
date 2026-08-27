@@ -9,7 +9,7 @@ jobs:
     name: "Bygger appen"
     permissions:
       contents: read
-    uses: navikt/tilleggsstonader/.github/workflows/ts-build.yml@main
+    uses: navikt/tilleggsstonader/.github/workflows/ts-build-pnpm.yml@pnpm-workflows
     secrets: inherit
     with:
       node-version: "24"
@@ -17,7 +17,7 @@ jobs:
     name: Kjører Playwright-tester
     permissions:
       contents: read
-    uses: navikt/tilleggsstonader/.github/workflows/run-playwright.yml@main
+    uses: navikt/tilleggsstonader/.github/workflows/run-playwright-pnpm.yml@pnpm-workflows
     secrets: inherit
     with:
       node-version: "24"
