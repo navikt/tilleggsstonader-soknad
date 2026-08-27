@@ -31,7 +31,7 @@ const validerJobberIAnnetLand = (opphold: ArbeidOgOpphold, locale: Locale): Vali
             ...feil,
             jobberIAnnetLand: {
                 id: FeilIdDinSituasjon.JOBBER_I_ANNET_LAND,
-                melding: jobberIAnnetLandInnhold.feilmnelding_jobber_annet_land[locale],
+                melding: jobberIAnnetLandInnhold.radio_jobber_annet_land.feilmelding[locale],
             },
         };
     }
@@ -43,7 +43,7 @@ const validerJobberIAnnetLand = (opphold: ArbeidOgOpphold, locale: Locale): Vali
             ...feil,
             jobbAnnetLand: {
                 id: FeilIdDinSituasjon.JOBBER_I_ANNET_LAND_HVILKET_LAND,
-                melding: jobberIAnnetLandInnhold.feilmelding_select_hvilket_land[locale],
+                melding: jobberIAnnetLandInnhold.select_hvilket_land.feilmelding[locale],
             },
         };
     }
@@ -61,7 +61,8 @@ const validerMottarPengestøtte = (opphold: ArbeidOgOpphold, locale: Locale): Va
             ...feil,
             harPengestøtteAnnetLand: {
                 id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE,
-                melding: mottarPengestøtteInnhold.feilmnelding_mottar_du_pengestøtte[locale],
+                melding:
+                    mottarPengestøtteInnhold.checkbox_mottar_du_pengestøtte.feilmelding[locale],
             },
         };
     } else if (harValgtMottarIkkeOgAnnetValg) {
@@ -70,7 +71,7 @@ const validerMottarPengestøtte = (opphold: ArbeidOgOpphold, locale: Locale): Va
             harPengestøtteAnnetLand: {
                 id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE,
                 melding:
-                    mottarPengestøtteInnhold.feilmnelding_mottar_ikke_pengestøtte_med_andre_valg[
+                    mottarPengestøtteInnhold.feilmelding_mottar_ikke_pengestøtte_med_andre_valg[
                         locale
                     ],
             },
@@ -85,7 +86,7 @@ const validerMottarPengestøtte = (opphold: ArbeidOgOpphold, locale: Locale): Va
             ...feil,
             pengestøtteAnnetLand: {
                 id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE_HVILKET_LAND,
-                melding: mottarPengestøtteInnhold.feilmelding_select_hvilket_land[locale],
+                melding: mottarPengestøtteInnhold.select_hvilket_land.feilmelding[locale],
             },
         };
     }

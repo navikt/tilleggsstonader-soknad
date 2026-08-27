@@ -222,9 +222,9 @@ export const ReisemåteReiseTilSamling = () => {
                     <>
                         <TotalutgifterFelt
                             id={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.id}
-                            label={reisemåteTekster.totalutgifter_offentlig_transport_label[locale]}
+                            label={reisemåteTekster.totalutgifter_offentlig_transport.label[locale]}
                             description={
-                                reisemåteTekster.totalutgifter_offentlig_transport_beskrivelse[
+                                reisemåteTekster.totalutgifter_offentlig_transport.beskrivelse[
                                     locale
                                 ]
                             }
@@ -238,8 +238,8 @@ export const ReisemåteReiseTilSamling = () => {
                                 settReisemåte((prev) => ({
                                     ...prev,
                                     totalUtgifterOffentligTransport: {
-                                        label: reisemåteTekster
-                                            .totalutgifter_offentlig_transport_label[locale],
+                                        label: reisemåteTekster.totalutgifter_offentlig_transport
+                                            .label[locale],
                                         verdi,
                                     },
                                 }));
@@ -286,14 +286,14 @@ export const ReisemåteReiseTilSamling = () => {
                                 <TextField
                                     id={valideringsfeil[errorKeyBarnehageAdresse]?.id}
                                     error={valideringsfeil[errorKeyBarnehageAdresse]?.melding}
-                                    label={reisemåteTekster.info_barnehage_adresse[locale]}
+                                    label={reisemåteTekster.barnehage_adresse.label[locale]}
                                     value={reisemåte?.barnehageGateadresse?.verdi ?? ''}
                                     onChange={(e) => {
                                         settReisemåte((prev) => ({
                                             ...prev,
                                             barnehageGateadresse: {
                                                 verdi: e.target.value,
-                                                label: reisemåteTekster.info_barnehage_adresse[
+                                                label: reisemåteTekster.barnehage_adresse.label[
                                                     locale
                                                 ],
                                             },
@@ -304,14 +304,14 @@ export const ReisemåteReiseTilSamling = () => {
                                 <TextField
                                     id={valideringsfeil[errorKeyBarnehagePostnummer]?.id}
                                     error={valideringsfeil[errorKeyBarnehagePostnummer]?.melding}
-                                    label={reisemåteTekster.info_barnehage_postnummer[locale]}
+                                    label={reisemåteTekster.barnehage_postnummer.label[locale]}
                                     value={reisemåte?.barnehagePostnummer?.verdi ?? ''}
                                     onChange={(e) => {
                                         settReisemåte((prev) => ({
                                             ...prev,
                                             barnehagePostnummer: {
                                                 verdi: e.target.value,
-                                                label: reisemåteTekster.info_barnehage_postnummer[
+                                                label: reisemåteTekster.barnehage_postnummer.label[
                                                     locale
                                                 ],
                                             },
@@ -441,7 +441,7 @@ export const ReisemåteReiseTilSamling = () => {
                                 <TextField
                                     id={valideringsfeil[errorKeyEgenbilUtgifterBompenger]?.id}
                                     label={
-                                        reisemåteTekster.egen_bil_utgifter_bompenger_tittel[locale]
+                                        reisemåteTekster.egen_bil_utgifter_bompenger.label[locale]
                                     }
                                     inputMode="numeric"
                                     value={reisemåte?.reiseMedBilUtgifter?.bompenger?.verdi ?? ''}
@@ -453,7 +453,7 @@ export const ReisemåteReiseTilSamling = () => {
                                                 bompenger: {
                                                     verdi: e.target.value,
                                                     label: reisemåteTekster
-                                                        .egen_bil_utgifter_bompenger_tittel[locale],
+                                                        .egen_bil_utgifter_bompenger.label[locale],
                                                 },
                                             },
                                         }));
@@ -465,7 +465,7 @@ export const ReisemåteReiseTilSamling = () => {
                                 />
                                 <TextField
                                     id={valideringsfeil[errorKeyEgenbilUtgifterFerge]?.id}
-                                    label={reisemåteTekster.egen_bil_utgifter_ferge_tittel[locale]}
+                                    label={reisemåteTekster.egen_bil_utgifter_ferge.label[locale]}
                                     inputMode="numeric"
                                     value={reisemåte?.reiseMedBilUtgifter?.ferge?.verdi ?? ''}
                                     onChange={(e) => {
@@ -475,8 +475,8 @@ export const ReisemåteReiseTilSamling = () => {
                                                 ...prev?.reiseMedBilUtgifter,
                                                 ferge: {
                                                     verdi: e.target.value,
-                                                    label: reisemåteTekster
-                                                        .egen_bil_utgifter_ferge_tittel[locale],
+                                                    label: reisemåteTekster.egen_bil_utgifter_ferge
+                                                        .label[locale],
                                                 },
                                             },
                                         }));
@@ -487,7 +487,7 @@ export const ReisemåteReiseTilSamling = () => {
                                 <TextField
                                     id={valideringsfeil[errorKeyEgenbilUtgifterPiggdekkavgift]?.id}
                                     label={
-                                        reisemåteTekster.egen_bil_utgifter_piggdekkavgift_tittel[
+                                        reisemåteTekster.egen_bil_utgifter_piggdekkavgift.label[
                                             locale
                                         ]
                                     }
@@ -503,7 +503,7 @@ export const ReisemåteReiseTilSamling = () => {
                                                 piggdekkavgift: {
                                                     verdi: e.target.value,
                                                     label: reisemåteTekster
-                                                        .egen_bil_utgifter_piggdekkavgift_tittel[
+                                                        .egen_bil_utgifter_piggdekkavgift.label[
                                                         locale
                                                     ],
                                                 },

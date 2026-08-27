@@ -1,11 +1,10 @@
 import { Ytelse } from '../components/Hovedytelse/typer';
-import { CheckboxGruppe, TekstElement } from '../typer/tekst';
+import { CheckboxGruppePåkrevd, TekstElement } from '../typer/tekst';
 
 interface HovedytelseInnhold {
     tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
-    checkbox_hovedytelse: CheckboxGruppe<Ytelse>;
-    hovedytelse_feilmelding: TekstElement<string>;
+    checkbox_hovedytelse: CheckboxGruppePåkrevd<Ytelse>;
 }
 
 export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
@@ -34,8 +33,8 @@ export const hovedytelseInnhold: HovedytelseInnhold = {
             nb: 'Du kan velge flere.',
         },
         alternativer: YtelseTilTekst,
-    },
-    hovedytelse_feilmelding: {
-        nb: 'Du må huke av for minst én ytelse eller situasjon som passer for deg',
+        feilmelding: {
+            nb: 'Du må huke av for minst én ytelse eller situasjon som passer for deg',
+        },
     },
 };

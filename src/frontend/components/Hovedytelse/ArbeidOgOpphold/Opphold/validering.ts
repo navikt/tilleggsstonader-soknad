@@ -62,7 +62,7 @@ const validerOppholdSiste12Mnd = (opphold: ArbeidOgOpphold, locale: Locale): Val
             ...feil,
             harOppholdUtenforNorgeSiste12mnd: {
                 id: FeilIdDinSituasjon.HAR_OPPHOLD_SISTE_12_MND,
-                melding: oppholdUtenforNorgeInnhold.feilmelding_radioSiste12mnd[locale],
+                melding: oppholdUtenforNorgeInnhold.radioSiste12mnd.feilmelding[locale],
             },
         };
     }
@@ -94,7 +94,7 @@ const validerOppholdNeste12Mnd = (opphold: ArbeidOgOpphold, locale: Locale): Val
             ...feil,
             harOppholdUtenforNorgeNeste12mnd: {
                 id: FeilIdDinSituasjon.HAR_OPPHOLD_NESTE_12_MND,
-                melding: oppholdUtenforNorgeInnhold.feilmelding_radioNeste12mnd[locale],
+                melding: oppholdUtenforNorgeInnhold.radioNeste12mnd.feilmelding[locale],
             },
         };
     }
@@ -135,7 +135,7 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
             ...feil,
             [errorKeyLand(keyOpphold)]: {
                 id: `${feilId}-1`,
-                melding: tekster.feilmelding_hvilket_land[locale],
+                melding: tekster.select_hvilket_land.feilmelding[locale],
             },
         };
     }
@@ -144,7 +144,7 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
             ...feil,
             [errorKeyÅrsak(keyOpphold)]: {
                 id: `${feilId}-2`,
-                melding: tekster.feilmelding_årsak[locale],
+                melding: tekster.checkbox_årsak.feilmelding[locale],
             },
         };
     }
@@ -153,7 +153,7 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
             ...feil,
             [errorKeyFom(keyOpphold)]: {
                 id: `${feilId}-3`,
-                melding: tekster.dato.feilmelding_fom[locale],
+                melding: tekster.dato.feilmelding_fom![locale],
             },
         };
     }
@@ -162,7 +162,7 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
             ...feil,
             [errorKeyTom(keyOpphold)]: {
                 id: `${feilId}-4`,
-                melding: tekster.dato.feilmelding_tom[locale],
+                melding: tekster.dato.feilmelding_tom![locale],
             },
         };
     }
@@ -172,7 +172,7 @@ export const validerOppholdUtenforNorgeUnderRedigering = (
                 ...feil,
                 [errorKeyTom(keyOpphold)]: {
                     id: `${feilId}-4`,
-                    melding: tekster.dato.feilmelding_tom_før_fom[locale],
+                    melding: tekster.dato.feilmelding_tom_før_fom![locale],
                 },
             };
         }

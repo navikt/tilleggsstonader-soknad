@@ -1,35 +1,24 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { JaNei } from '../../typer/søknad';
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { Datoperiode, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
 import { PassType, ÅrsakBarnepass } from '../typer/barnepass';
 
 interface BarnepassInnhold {
     tittel: TekstElement<string>;
     guide_innhold: TekstElement<string>;
-    hvem_passer_radio: Radiogruppe<PassType>;
-    har_utgifter_til_pass_radio: Radiogruppe<JaNei>;
-    utgifter_dato: {
-        label: TekstElement<string>;
-        fom: TekstElement<string>;
-        tom: TekstElement<string>;
-    };
+    hvem_passer_radio: RadiogruppePåkrevd<PassType>;
+    har_utgifter_til_pass_radio: RadiogruppePåkrevd<JaNei>;
+    utgifter_dato: Datoperiode;
     feilmelding_tom_før_fom: TekstElement<string>;
     hvem_passer_andre_alert: {
         tittel: TekstElement<string>;
         innhold: TekstElement<string>;
     };
-    hvem_passer_feilmelding: TekstElement<string>;
-    har_utgifter_feilmelding: TekstElement<string>;
-    utgifter_fom_feilmelding: TekstElement<string>;
-    utgifter_tom_feilmelding: TekstElement<string>;
-
-    startet_femte_radio: Radiogruppe<JaNei>;
-    startet_femte_feilmelding: TekstElement<string>;
+    startet_femte_radio: RadiogruppePåkrevd<JaNei>;
     startet_femte_readmore_header: TekstElement<string>;
     startet_femte_readmore_innhold: TekstElement<string>;
     startet_femte_readmore_punktliste: TekstElement<string[]>;
-    årsak_ekstra_pass_radio: Radiogruppe<ÅrsakBarnepass>;
-    årsak_ekstra_pass_feilmelding: TekstElement<string>;
+    årsak_ekstra_pass_radio: RadiogruppePåkrevd<ÅrsakBarnepass>;
     mer_pleie_alert: {
         tittel: TekstElement<string>;
         innhold: TekstElement<string>;
@@ -67,12 +56,14 @@ export const barnepassTekster: BarnepassInnhold = {
     hvem_passer_radio: {
         header: { nb: 'Hvem skal passe [0]?' },
         alternativer: PassTypeTilTekst,
+        feilmelding: { nb: 'Du må velge hva slags pass [0] har.' },
     },
     har_utgifter_til_pass_radio: {
         header: {
             nb: 'Har du utgifter til pass av [0] hele perioden du har arbeidsrettet aktivitet?',
         },
         alternativer: JaNeiTilTekst,
+        feilmelding: { nb: 'Du må svare på om du har utgifter til pass av [0].' },
     },
     utgifter_dato: {
         label: {
@@ -84,6 +75,12 @@ export const barnepassTekster: BarnepassInnhold = {
         tom: {
             nb: 'Til',
         },
+        feilmelding_fom: { nb: 'Mangler fra-dato' },
+        feilmelding_tom: { nb: 'Mangler til-dato.' },
+        feilmelding_tom_før_fom: { nb: 'Til-dato kan ikke være før fra-dato.' },
+    },
+    feilmelding_tom_før_fom: {
+        nb: 'Til-dato kan ikke være før fra-dato.',
     },
     hvem_passer_andre_alert: {
         tittel: {
@@ -93,28 +90,10 @@ export const barnepassTekster: BarnepassInnhold = {
             nb: 'Ved privat barnepass regnes du som arbeidsgiver. Vi kommer til å be deg om å legge ved avtalen du har med barnepasseren og kvittering for betaling.',
         },
     },
-    hvem_passer_feilmelding: {
-        nb: 'Du må velge hva slags pass [0] har.',
-    },
-    har_utgifter_feilmelding: {
-        nb: 'Du må svare på om du har utgifter til pass av [0].',
-    },
-    utgifter_fom_feilmelding: {
-        nb: 'Mangler fra-dato',
-    },
-    utgifter_tom_feilmelding: {
-        nb: 'Mangler til-dato.',
-    },
-    feilmelding_tom_før_fom: {
-        nb: 'Til-dato kan ikke være før fra-dato.',
-    },
-
     startet_femte_radio: {
         header: { nb: 'Har [0] startet i 5. klasse når tiltaket ditt starter?' },
         alternativer: JaNeiTilTekst,
-    },
-    startet_femte_feilmelding: {
-        nb: 'Du må svare på om [0] har begynt i 5. klasse.',
+        feilmelding: { nb: 'Du må svare på om [0] har begynt i 5. klasse.' },
     },
     startet_femte_readmore_header: {
         nb: 'Som hovedregel gis det bare støtte for pass av barn til og med 4. klasse.',
@@ -132,9 +111,7 @@ export const barnepassTekster: BarnepassInnhold = {
             nb: 'Hva er årsaken til at [0] trenger pass etter at han har begynt i 5. klasse?',
         },
         alternativer: ÅrsakEkstraPassTilTekst,
-    },
-    årsak_ekstra_pass_feilmelding: {
-        nb: 'Du må velge en årsak til at [0] trenger pass etter 5. klasse.',
+        feilmelding: { nb: 'Du må velge en årsak til at [0] trenger pass etter 5. klasse.' },
     },
     mer_pleie_alert: {
         tittel: {

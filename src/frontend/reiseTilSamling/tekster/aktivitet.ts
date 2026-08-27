@@ -8,24 +8,20 @@ import {
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { AktivitetTypeUtdanning, AnnenAktivitetType } from '../../typer/aktivitet';
 import { JaNei } from '../../typer/søknad';
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnholdDagligAktivitet extends AktivitetInnhold {
-    radio_type_arbeidsrettede_aktiviteter: Radiogruppe<AktivitetTypeUtdanning>;
-    radio_type_arbeidsrettede_aktiviteter_feilmelding: TekstElement<string>;
+    radio_type_arbeidsrettede_aktiviteter: RadiogruppePåkrevd<AktivitetTypeUtdanning>;
     radio_type_arbeidsrettede_aktiviteter_lesmer: {
         header: TekstElement<string>;
         innhold: TekstElement<string>[];
     };
     radio_ikke_kvalifisert_tittel: TekstElement<string>;
-    radio_dekket_reise: Radiogruppe<JaNei>;
-    radio_dekket_reise_feilmelding: TekstElement<string>;
+    radio_dekket_reise: RadiogruppePåkrevd<JaNei>;
     radio_dekket_reise_alert_content: TekstElement<string>;
-    radio_under_25_år: Radiogruppe<JaNei>;
-    radio_under_25_år_feilmelding: TekstElement<string>;
+    radio_under_25_år: RadiogruppePåkrevd<JaNei>;
     radio_under_25_år_alert_content: TekstElement<string>;
-    radio_må_betale_for_reise_til_skole: Radiogruppe<JaNei>;
-    radio_må_betale_for_reise_til_skole_feilmelding: TekstElement<string>;
+    radio_må_betale_for_reise_til_skole: RadiogruppePåkrevd<JaNei>;
     radio_må_betale_for_reise_til_skole_alert_content: TekstElement<string>;
     radio_opplæring_for_voksne_alert_content: TekstElement<string>;
 }
@@ -131,17 +127,14 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
     radio_annet: {
         header: { nb: 'Hvilken annen type arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekstReiseTilSamling,
+        feilmelding: {
+            nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
+        },
     },
     radio_annet_uten_registeraktivitet: {
         header: { nb: 'Hvilken arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekstReiseTilSamling,
-    },
-    radio_annet_uten_registeraktivitet_feilmelding: {
-        nb: 'Du må velge en aktivitet',
-    },
-    radio_type_arbeidsrettede_aktiviteter: {
-        header: { nb: 'Hva slags type arbeidsrettet aktivitet går du på?' },
-        alternativer: AktivitetTypeUtdanningTilTekst,
+        feilmelding: { nb: 'Du må velge en aktivitet' },
     },
     radio_type_arbeidsrettede_aktiviteter_lesmer: {
         header: { nb: 'Hva betyr alternativene?' },
@@ -157,15 +150,17 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
             },
         ],
     },
-    radio_type_arbeidsrettede_aktiviteter_feilmelding: {
-        nb: 'Du må svare på hva slags type arbeidsrettet aktivitet du går på.',
+    radio_type_arbeidsrettede_aktiviteter: {
+        header: { nb: 'Hva slags type arbeidsrettet aktivitet går du på?' },
+        alternativer: AktivitetTypeUtdanningTilTekst,
+        feilmelding: { nb: 'Du må svare på hva slags type arbeidsrettet aktivitet du går på.' },
     },
     radio_dekket_reise: {
         header: { nb: 'Får du dekket reisen til aktivitetsstedet av arbeidsgiveren din?' },
         alternativer: JaNeiTilTekst,
-    },
-    radio_dekket_reise_feilmelding: {
-        nb: 'Du må svare på om du får dekket reisen til aktivitetsstedet av arbeidsgiveren din.',
+        feilmelding: {
+            nb: 'Du må svare på om du får dekket reisen til aktivitetsstedet av arbeidsgiveren din.',
+        },
     },
     radio_ikke_kvalifisert_tittel: {
         nb: 'Du er ikke kvalifisert for å motta støtten',
@@ -176,9 +171,9 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
     radio_under_25_år: {
         header: { nb: 'Er/var du under 25 år det kalenderåret skoleåret starter?' },
         alternativer: JaNeiTilTekst,
-    },
-    radio_under_25_år_feilmelding: {
-        nb: 'Du må svare på om du var under 25 år det kalenderåret skoleåret startet.',
+        feilmelding: {
+            nb: 'Du må svare på om du var under 25 år det kalenderåret skoleåret startet.',
+        },
     },
     radio_under_25_år_alert_content: {
         nb: 'Vi tror du har rett til gratis skoleskyss fordi du går på videregående skole og ikke fyller 25 år i kalenderåret skoleåret starter. Da har du ikke rett til pengestøtte til reise til samling. Hvis du likevel må betale for reisen til skolen selv, må du bekrefte dette i spørsmålet under.',
@@ -186,9 +181,7 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
     radio_må_betale_for_reise_til_skole: {
         header: { nb: 'Må du betale for reisen til skolen selv?' },
         alternativer: JaNeiTilTekst,
-    },
-    radio_må_betale_for_reise_til_skole_feilmelding: {
-        nb: 'Du må svare på om du må betale for reisen til skolen selv.',
+        feilmelding: { nb: 'Du må svare på om du må betale for reisen til skolen selv.' },
     },
     radio_må_betale_for_reise_til_skole_alert_content: {
         nb: 'Siden du ikke må betale for reisen til skolen selv, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynlig få avslag.',

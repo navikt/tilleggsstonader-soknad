@@ -108,7 +108,7 @@ export const AvreiseadresseReiseTilSamling = () => {
                             <VStack gap="space-16">
                                 <Landvelger
                                     id={valideringsfeil[errorKeyAvreiseLand]?.id}
-                                    label={avreiseadresseTekster.velg_land_label}
+                                    label={avreiseadresseTekster.velg_land.label}
                                     value={avreiseadresse.adresseDetSkalReisesFra?.land?.verdi}
                                     onChange={(verdi) => {
                                         settAdresseDetSkalReisesFra({ land: verdi });
@@ -121,7 +121,7 @@ export const AvreiseadresseReiseTilSamling = () => {
                                 <TextField
                                     id={valideringsfeil[errorKeyAvreiseGateadresse]?.id}
                                     label={
-                                        avreiseadresseTekster.avreiseadresse_vegadresse_label[
+                                        avreiseadresseTekster.avreiseadresse_vegadresse.label[
                                             locale
                                         ]
                                     }
@@ -135,7 +135,7 @@ export const AvreiseadresseReiseTilSamling = () => {
                                         settAdresseDetSkalReisesFra({
                                             gateadresse: {
                                                 label: avreiseadresseTekster
-                                                    .avreiseadresse_vegadresse_label[locale],
+                                                    .avreiseadresse_vegadresse.label[locale],
                                                 verdi,
                                             },
                                         });
@@ -145,7 +145,7 @@ export const AvreiseadresseReiseTilSamling = () => {
                                 <PostnummerFelt
                                     id={valideringsfeil[errorKeyAvreisePostnummer]?.id}
                                     label={
-                                        avreiseadresseTekster.avreiseadresse_postnummer_label[
+                                        avreiseadresseTekster.avreiseadresse_postnummer.label[
                                             locale
                                         ]
                                     }
@@ -160,7 +160,7 @@ export const AvreiseadresseReiseTilSamling = () => {
                                         settAdresseDetSkalReisesFra({
                                             postnummer: {
                                                 label: avreiseadresseTekster
-                                                    .avreiseadresse_postnummer_label[locale],
+                                                    .avreiseadresse_postnummer.label[locale],
                                                 verdi,
                                             },
                                         });
@@ -170,7 +170,7 @@ export const AvreiseadresseReiseTilSamling = () => {
                                 <TextField
                                     id={valideringsfeil[errorKeyAvreisePoststed]?.id}
                                     label={
-                                        avreiseadresseTekster.avreiseadresse_poststed_label[locale]
+                                        avreiseadresseTekster.avreiseadresse_poststed.label[locale]
                                     }
                                     value={
                                         avreiseadresse.adresseDetSkalReisesFra?.poststed?.verdi ??
@@ -181,8 +181,8 @@ export const AvreiseadresseReiseTilSamling = () => {
                                         const verdi = e.target.value;
                                         settAdresseDetSkalReisesFra({
                                             poststed: {
-                                                label: avreiseadresseTekster
-                                                    .avreiseadresse_poststed_label[locale],
+                                                label: avreiseadresseTekster.avreiseadresse_poststed
+                                                    .label[locale],
                                                 verdi,
                                             },
                                         });
