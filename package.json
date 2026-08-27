@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "ci": "pnpm install --no-frozen-lockfile && pnpm --dir src/backend install --no-frozen-lockfile",
+    "ci": "pnpm install --frozen-lockfile && pnpm --dir src/backend install --frozen-lockfile",
     "build": "pnpm lint && PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.production.js && pnpm --dir src/backend install --frozen-lockfile && pnpm --dir src/backend build",
     "build:dev": "PUBLIC_URL=/tilleggsstonader/soknad webpack --config ./webpack/webpack.development.js",
     "start:dev": "PUBLIC_URL=/tilleggsstonader/soknad webpack serve --config ./webpack/webpack.development.js",
