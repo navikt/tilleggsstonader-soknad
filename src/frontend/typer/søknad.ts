@@ -35,14 +35,10 @@ export interface SøknadReiseTilSamling {
 export type KanBenytteEgenBil = 'JA' | 'NEI' | 'NEI_SITTER_PÅ_MED_ANDRE';
 
 export type KanIkkeReiseMedOffentligTransportBegrunnelser =
-    | 'DÅRLIG_TRANSPORTTILBUD'
-    | 'HELSEMESSIGE_ÅRSAKER'
-    | 'LEVERING_HENTING_I_BARNEHAGE';
+    'DÅRLIG_TRANSPORTTILBUD' | 'HELSEMESSIGE_ÅRSAKER' | 'LEVERING_HENTING_I_BARNEHAGE';
 
 export type KanIkkeBenytteEgenBilBegrunnelser =
-    | 'HAR_IKKE_BIL_ELLER_FØRERKORT'
-    | 'HELSEMESSIGE_ÅRSAKER'
-    | 'ANNET';
+    'HAR_IKKE_BIL_ELLER_FØRERKORT' | 'HELSEMESSIGE_ÅRSAKER' | 'ANNET';
 
 export type DrivstoffType = 'BENSIN' | 'DIESEL' | 'ELBIL' | 'HYBRID' | 'HYDROGEN';
 
@@ -131,12 +127,7 @@ export type JaNei = 'JA' | 'NEI';
 export type MottarPengestøtteTyper = 'SYKEPENGER' | 'PENSJON' | 'ANNEN_PENGESTØTTE' | 'MOTTAR_IKKE';
 
 export type ÅrsakOppholdUtenforNorge =
-    | 'JOBB'
-    | 'STUDIER'
-    | 'MEDISINSK_BEHANDLING'
-    | 'FERIE'
-    | 'FAMILIE_BESØK'
-    | 'ANNET';
+    'JOBB' | 'STUDIER' | 'MEDISINSK_BEHANDLING' | 'FERIE' | 'FAMILIE_BESØK' | 'ANNET';
 
 export interface Periode {
     fom: string;
