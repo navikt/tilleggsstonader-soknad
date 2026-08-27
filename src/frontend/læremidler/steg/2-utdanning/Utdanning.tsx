@@ -34,6 +34,7 @@ import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
+import { erProd } from '../../../utils/miljø';
 import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
 import { utdanningTekster } from '../../tekster/utdanning';
 import { AnnenUtdanningType } from '../../typer/søknad';
@@ -209,7 +210,9 @@ export const Utdanning = () => {
         ) {
             feil = feilHarTidligereFullførtVgs(feil, locale);
         }
+        // TODO Fjerne erProd-sjekk når vi har orientert SBer om endringen
         if (
+            !erProd() &&
             skalViseHarRettTilUtstyrsstipend &&
             erLærlingEllerLiknende?.verdi === 'JA' &&
             tarOpplæringVgsSamtidig === undefined
@@ -284,7 +287,8 @@ export const Utdanning = () => {
                         />
                     )}
 
-                    {erLærlingEllerLiknende?.verdi === 'JA' && (
+                    {/* TODO Fjerne erProd-sjekk når vi har orientert SBer om endringen */}
+                    {!erProd() && erLærlingEllerLiknende?.verdi === 'JA' && (
                         <TarOpplæringVgsSamtidig
                             tarOpplæringVgsSamtidig={tarOpplæringVgsSamtidig}
                             oppdaterTarOpplæringVgsSamtidig={oppdaterTarOpplæringVgsSamtidig}
