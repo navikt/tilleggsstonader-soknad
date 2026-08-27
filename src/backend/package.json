@@ -2,6 +2,7 @@
   "name": "tilleggsstonader-soknad-server",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.24.0",
   "type": "module",
     "engines": {
         "node": ">=24.0.0"
@@ -39,10 +40,8 @@
     "@types/node-jose": "^1.1.10",
     "ts-node": "^10.9.2"
   },
-  "pnpm": {
-    "overrides": {
-      "node-forge": "1.4.0",
-      "qs": "^6.15.2"
-    }
+  "overrides": {
+    "node-forge": "1.4.0",
+    "qs": "^6.15.2"
   }
 }

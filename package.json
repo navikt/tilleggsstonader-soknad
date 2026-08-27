@@ -1,6 +1,7 @@
 {
   "name": "tilleggsstonader-soknad",
   "version": "0.1.0",
+  "packageManager": "pnpm@11.24.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -82,10 +83,8 @@
     "styled-components": "^6.5.1",
     "uuid": "^14.0.2"
   },
-  "pnpm": {
-    "overrides": {
-      "styled-components": "^6",
-      "qs": "^6.15.2"
-    }
+  "overrides": {
+    "styled-components": "^6",
+    "qs": "^6.15.2"
   }
 }
