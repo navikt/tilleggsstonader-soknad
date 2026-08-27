@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Routes } from 'react-router';
+import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 

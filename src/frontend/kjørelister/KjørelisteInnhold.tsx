@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useQuery } from '@tanstack/react-query';
-import { Routes } from 'react-router';
+import { Routes } from 'react-router-dom';
 import { Route, useParams } from 'react-router-dom';
 
 import { Alert, Loader, VStack } from '@navikt/ds-react';
