@@ -15,7 +15,6 @@ on:
       - 'Dockerfile'
       - 'package.json'
       - 'tsconfig.json'
-      - 'yarn.lock'
       - 'pnpm-lock.yaml'
 
 jobs:
