@@ -55,7 +55,7 @@ export const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbei
                 <BlåVenstreRammeContainer>
                     <Landvelger
                         id={valideringsfeil.jobbAnnetLand?.id}
-                        label={jobberIAnnetLandInnhold.select_hvilket_land}
+                        label={jobberIAnnetLandInnhold.select_hvilket_land.label}
                         onChange={oppdaterHvilketLand}
                         value={arbeidOgOpphold.jobbAnnetLand?.verdi || ''}
                         error={valideringsfeil.jobbAnnetLand?.melding}

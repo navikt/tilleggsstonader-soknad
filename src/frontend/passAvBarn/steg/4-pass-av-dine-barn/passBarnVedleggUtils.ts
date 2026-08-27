@@ -28,7 +28,7 @@ export const valider = (
                     id: `${indeks}-0`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.hvem_passer_feilmelding[locale]
+                        barnepassTekster.hvem_passer_radio.feilmelding[locale]
                     ),
                 },
             };
@@ -40,7 +40,7 @@ export const valider = (
                     id: `${indeks}-3`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.har_utgifter_feilmelding[locale]
+                        barnepassTekster.har_utgifter_til_pass_radio.feilmelding[locale]
                     ),
                 },
             };
@@ -55,7 +55,7 @@ export const valider = (
                     id: `${indeks}-4`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.utgifter_fom_feilmelding[locale]
+                        barnepassTekster.utgifter_dato.feilmelding_fom[locale]
                     ),
                 },
             };
@@ -70,7 +70,7 @@ export const valider = (
                     id: `${indeks}-5`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.utgifter_tom_feilmelding[locale]
+                        barnepassTekster.utgifter_dato.feilmelding_tom[locale]
                     ),
                 },
             };
@@ -99,7 +99,7 @@ export const valider = (
                     id: `${indeks}-1`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.startet_femte_feilmelding[locale]
+                        barnepassTekster.startet_femte_radio.feilmelding[locale]
                     ),
                 },
             };
@@ -111,7 +111,7 @@ export const valider = (
                     id: `${indeks}-2`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.årsak_ekstra_pass_feilmelding[locale]
+                        barnepassTekster.årsak_ekstra_pass_radio.feilmelding[locale]
                     ),
                 },
             };

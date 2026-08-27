@@ -140,14 +140,14 @@ export const AktivitetPassAvBarn = () => {
         if (skalViseLønnetTiltak && lønnetAktivitet?.verdi === undefined) {
             feil = feilLønnetAktivitet(
                 feil,
-                aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale]
+                aktivitetTekster.radio_lønnet_tiltak.feilmelding[locale]
             );
         }
         if (
             (skalViseAnnenAktivitet || !skalViseArbeidsrettedeAktiviteter) &&
             annenAktivitet === undefined
         ) {
-            feil = feilAnnenAktivitet(feil, aktivitetTekster.radio_annet_feilmelding[locale]);
+            feil = feilAnnenAktivitet(feil, aktivitetTekster.radio_annet.feilmelding[locale]);
         }
         settValideringsfeil(feil);
         return !inneholderFeil(feil);

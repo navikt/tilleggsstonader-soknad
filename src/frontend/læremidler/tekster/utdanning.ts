@@ -1,7 +1,7 @@
 import { tekstArbeidsrettedeAktiviteter } from '../../tekster/aktivitet';
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { JaNei } from '../../typer/søknad';
-import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { InlineLenke, LesMer, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
 import { AnnenUtdanningType } from '../typer/søknad';
 
 interface AktivitetInnhold {
@@ -10,18 +10,14 @@ interface AktivitetInnhold {
     hvilken_aktivitet: HvilkenAktivitet;
     ingen_registrerte_aktiviterer_overskrift: TekstElement<string>;
     checkbox_velge_aktivitet_feilmelding: TekstElement<string>;
-    radio_annen_utdanning: Radiogruppe<AnnenUtdanningType>;
-    radio_annen_utdanning_feilmelding: TekstElement<string>;
+    radio_annen_utdanning: RadiogruppePåkrevd<AnnenUtdanningType>;
     ingen_utdanning_alert_tittel: TekstElement<string>;
     ingen_utdanning_alert_innhold: TekstElement<string>;
-    radio_mottar_har_funksjonsnedsettelse: Radiogruppe<JaNei>;
-    radio_mottar_har_funksjonsnedsettelse_feilmelding: TekstElement<string>;
-    radio_har_fullført_vgs: Radiogruppe<JaNei>;
-    radio_har_fullført_vgs_feilmelding: TekstElement<string>;
+    radio_mottar_har_funksjonsnedsettelse: RadiogruppePåkrevd<JaNei>;
+    radio_har_fullført_vgs: RadiogruppePåkrevd<JaNei>;
     har_fullført_vgs_info_boks_header: TekstElement<string>;
     har_fullført_vgs_info_boks: TekstElement<string>;
-    radio_tar_opplæring_vgs_samtidig: Radiogruppe<JaNei>;
-    radio_tar_opplæring_vgs_samtidig_feilmelding: TekstElement<string>;
+    radio_tar_opplæring_vgs_samtidig: RadiogruppePåkrevd<JaNei>;
     radio_annet_lesmer: LesMer<InlineLenke>;
 }
 
@@ -100,9 +96,9 @@ export const utdanningTekster: AktivitetInnhold = {
             nb: 'Utdanningen må godkjennes og avtales med veileder.',
         },
         alternativer: AnnenUtdanningTypeTilTekst,
-    },
-    radio_annen_utdanning_feilmelding: {
-        nb: 'Du må svare på hvilken utdanning du søker om støtte i forbindelse med.',
+        feilmelding: {
+            nb: 'Du må svare på hvilken utdanning du søker om støtte i forbindelse med.',
+        },
     },
     ingen_utdanning_alert_tittel: {
         nb: 'Hvis du ikke gjennomfører utdanning, har du ikke rett til støtte til læremidler',
@@ -118,9 +114,9 @@ export const utdanningTekster: AktivitetInnhold = {
             nb: 'Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell. Alle utgiftene du ønsker å få dekket, må dokumenteres.',
         },
         alternativer: JaNeiTilTekst,
-    },
-    radio_mottar_har_funksjonsnedsettelse_feilmelding: {
-        nb: 'Du må svare på om du har en funksjonsnedsettelse som fører til økte utgifter til læremidler.',
+        feilmelding: {
+            nb: 'Du må svare på om du har en funksjonsnedsettelse som fører til økte utgifter til læremidler.',
+        },
     },
     radio_har_fullført_vgs: {
         header: {
@@ -130,9 +126,7 @@ export const utdanningTekster: AktivitetInnhold = {
             nb: 'Det betyr at du har bestått alle fag og har oppnådd studie- eller yrkeskompentanse.',
         },
         alternativer: JaNeiTilTekst,
-    },
-    radio_har_fullført_vgs_feilmelding: {
-        nb: 'Du må svare på om du tidligere har fullført videregående skole.',
+        feilmelding: { nb: 'Du må svare på om du tidligere har fullført videregående skole.' },
     },
     har_fullført_vgs_info_boks_header: {
         nb: 'Du har mest sannsynlig rett til utstyrsstipend fra lånekassa, og da har du ikke rett til denne pengestøtten.',
@@ -145,9 +139,9 @@ export const utdanningTekster: AktivitetInnhold = {
             nb: 'Tar du opplæring i videregående skole (fellesfag og/eller programfag) samtidig som du er lærling, lærekandidat, praksisbrevkandidat eller tar fagbrev på jobb?',
         },
         alternativer: JaNeiTilTekst,
-    },
-    radio_tar_opplæring_vgs_samtidig_feilmelding: {
-        nb: 'Du må svare på om du tar opplæring i videregående skole samtidig som du er lærling, lærekandidat, praksisbrevkandidat eller tar fagbrev på jobb.',
+        feilmelding: {
+            nb: 'Du må svare på om du tar opplæring i videregående skole samtidig som du er lærling, lærekandidat, praksisbrevkandidat eller tar fagbrev på jobb.',
+        },
     },
     radio_annet_lesmer: {
         header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
