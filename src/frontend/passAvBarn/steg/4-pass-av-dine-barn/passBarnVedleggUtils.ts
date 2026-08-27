@@ -55,7 +55,7 @@ export const valider = (
                     id: `${indeks}-4`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.utgifter_dato.feilmelding_fom![locale]
+                        barnepassTekster.utgifter_dato.feilmelding_fom[locale]
                     ),
                 },
             };
@@ -70,7 +70,7 @@ export const valider = (
                     id: `${indeks}-5`,
                     melding: hentBeskjedMedEttParameter(
                         barnPerson.fornavn,
-                        barnepassTekster.utgifter_dato.feilmelding_tom![locale]
+                        barnepassTekster.utgifter_dato.feilmelding_tom[locale]
                     ),
                 },
             };

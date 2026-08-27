@@ -116,7 +116,7 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [keyFom]: {
                 id: keyFom,
-                melding: samlingerTekster.dato.feilmelding_fom![locale],
+                melding: samlingerTekster.dato.feilmelding_fom[locale],
             },
         };
     }
@@ -126,7 +126,7 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [keyTom]: {
                 id: keyTom,
-                melding: samlingerTekster.dato.feilmelding_tom![locale],
+                melding: samlingerTekster.dato.feilmelding_tom[locale],
             },
         };
     }
@@ -137,7 +137,7 @@ export const validerSamlingUnderRedigering = (
                 ...feil,
                 [keyTom]: {
                     id: keyTom,
-                    melding: samlingerTekster.dato.feilmelding_tom_før_fom![locale],
+                    melding: samlingerTekster.dato.feilmelding_tom_før_fom[locale],
                 },
             };
         }

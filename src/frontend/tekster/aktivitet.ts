@@ -37,7 +37,6 @@ interface AktivitetInnholdFelles {
     ingen_registrerte_aktiviterer_overskrift: TekstElement<string>;
     tittel: TekstElement<string>;
     ingen_aktivitet_infoalert_title: TekstElement<string>;
-    radio_fortsatt_søke: TekstElement<string>;
     søker_fra: InputFelt;
 }
 
@@ -130,9 +129,6 @@ export const aktivitetTeksterFelles: AktivitetInnholdFelles = {
     },
     ingen_aktivitet_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
     ingen_registrerte_aktiviterer_overskrift: {
-        nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.',
-    },
-    radio_fortsatt_søke: {
         nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.',
     },
 };

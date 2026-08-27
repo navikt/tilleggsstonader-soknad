@@ -108,7 +108,7 @@ export const mottarPengestøtteInnhold: MottarDuPengestøtteInnhold = {
 const siste12mndInnhold: OppholdInnhold = {
     select_hvilket_land: {
         label: { nb: 'Hvilket land har du oppholdt deg i?' },
-        feilmelding: { nb: 'Du må velge hva du gjorde i landet du har oppholdt deg i.' },
+        feilmelding: { nb: 'Du må velge hvilket land du har oppholdt deg i.' },
     },
     checkbox_årsak: {
         legend: {
