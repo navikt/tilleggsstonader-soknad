@@ -7,7 +7,7 @@ export const formaterFilstørrelse = (bytes: number, decimals: number = 2) => {
 
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    return `${parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
 };
 
 export const MAX_FILSTØRRELSE = 1024 * 1024 * 10; // 10mb
@@ -17,14 +17,14 @@ enum Filtyper {
     PDF = 'PDF',
     PNG = 'PNG',
     JPG = 'JPG',
-    JPEG = 'JPEG',
+    JPEG = 'JPEG'
 }
 
 export const filtypeTilFilendelse: Record<Filtyper, string> = {
     PDF: '.pdf',
     PNG: '.png',
     JPG: '.jpg',
-    JPEG: '.jpeg',
+    JPEG: '.jpeg'
 };
 
 export const TILLATE_FILENDELSER: string = Object.values(filtypeTilFilendelse).join(',');

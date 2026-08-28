@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React, { type ReactNode } from 'react';
 
 import { Side } from '../Side';
 

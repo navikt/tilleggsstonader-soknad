@@ -1,5 +1,6 @@
-import React from 'react';
-
+import type React from 'react';
+import { type StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
+import { Skjematype } from '../typer/skjematyper';
 import { useReiseTilSamlingSøknad } from './context/ReiseTilSamlingSøknadContext';
 import { Forside } from './Forside';
 import { HovedytelseReiseTilSamling } from './steg/1-hovedytelse/HovedytelseReiseTilSamling';
@@ -10,8 +11,6 @@ import { ReisemåteReiseTilSamling } from './steg/5-reisemåte/ReisemåteReiseTi
 import { VedleggReiseTilSamling } from './steg/6-vedlegg/VedleggReiseTilSamling';
 import { Oppsummering } from './steg/7-oppsummering/Oppsummering';
 import { forsideTekster } from './tekster/forside';
-import { StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
-import { Skjematype } from '../typer/skjematyper';
 
 const steg: StegRoute[] = [
     { path: '/hovedytelse', element: <HovedytelseReiseTilSamling /> },
@@ -20,7 +19,7 @@ const steg: StegRoute[] = [
     { path: '/samlinger', element: <SamlingerReiseTilSamling /> },
     { path: '/reisemate', element: <ReisemåteReiseTilSamling /> },
     { path: '/vedlegg', element: <VedleggReiseTilSamling /> },
-    { path: '/oppsummering', element: <Oppsummering /> },
+    { path: '/oppsummering', element: <Oppsummering /> }
 ];
 
 export const Søknadsdialog: React.FC = () => {

@@ -1,5 +1,5 @@
 import { HovedytelseSide } from '../../../components/Hovedytelse/Hovedytelse';
-import { Hovedytelse } from '../../../typer/søknad';
+import type { Hovedytelse } from '../../../typer/søknad';
 import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
 
 export const HovedytelseLæremidler = () => {

@@ -1,10 +1,5 @@
-import { useState } from 'react';
-
 import { GuidePanel, VStack } from '@navikt/ds-react';
-
-import { BarnepassSpørsmål } from './BarnepassSpørsmål';
-import { valider } from './passBarnVedleggUtils';
-import { BarnepassIntern } from './typer';
+import { useState } from 'react';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
@@ -15,7 +10,10 @@ import { inneholderFeil } from '../../../typer/validering';
 import { valueOrThrow } from '../../../utils/typeUtils';
 import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { barnepassTekster } from '../../tekster/barnepass';
-import { Barnepass } from '../../typer/barnepass';
+import type { Barnepass } from '../../typer/barnepass';
+import { BarnepassSpørsmål } from './BarnepassSpørsmål';
+import { valider } from './passBarnVedleggUtils';
+import type { BarnepassIntern } from './typer';
 
 export const PassAvDineBarn = () => {
     const { person } = usePerson();
@@ -26,8 +24,8 @@ export const PassAvDineBarn = () => {
     const [barnMedPass, settBarnMedPass] = useState<BarnepassIntern[]>(
         valgteBarnIdenter.map(
             (ident) =>
-                barnMedBarnepass.find((barnepass) => barnepass.ident == ident) || {
-                    ident: ident,
+                barnMedBarnepass.find((barnepass) => barnepass.ident === ident) || {
+                    ident: ident
                 }
         )
     );
@@ -35,7 +33,7 @@ export const PassAvDineBarn = () => {
     const nullstillValideringsfeil = (key: string) => {
         settValideringsfeil((prevState) => ({
             ...prevState,
-            [key]: undefined,
+            [key]: undefined
         }));
     };
 

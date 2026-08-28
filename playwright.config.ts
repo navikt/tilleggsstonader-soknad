@@ -11,7 +11,7 @@ export default defineConfig({
          * Maximum time expect() should wait for the condition to be met.
          * For example in `await expect(locator).toHaveText();`
          */
-        timeout: 10 * 1000,
+        timeout: 10 * 1000
     },
     fullyParallel: true,
     /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -30,20 +30,20 @@ export default defineConfig({
 
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
-        screenshot: 'only-on-failure',
+        screenshot: 'only-on-failure'
     },
 
     /* Configure projects for major browsers */
     projects: [
         {
             name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
-        },
+            use: { ...devices['Desktop Chrome'] }
+        }
     ],
 
     webServer: {
         command: 'OPEN_BROWSER=false yarn start:dev',
         port: 8080,
-        reuseExistingServer: !process.env.CI,
-    },
+        reuseExistingServer: !process.env.CI
+    }
 });

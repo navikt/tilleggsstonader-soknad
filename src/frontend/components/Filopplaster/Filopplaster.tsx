@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
-
-import styled from 'styled-components';
-
 import {
-    FileAccepted,
-    FileObject,
-    FileRejected,
-    FileRejectionReason,
+    type FileAccepted,
+    type FileObject,
+    type FileRejected,
+    type FileRejectionReason,
     FileUpload,
     Heading,
-    VStack,
+    VStack
 } from '@navikt/ds-react';
-
-import { utledFeilmelding } from './feilmeldingOpplasting';
-import {
-    MAX_FILSTØRRELSE,
-    TILLATE_FILENDELSER,
-    TILLATTE_SAMTIDIGE_OPPLASTINGER,
-} from './filopplasterUtils';
+import type React from 'react';
+import { useState } from 'react';
+import styled from 'styled-components';
 import { lastOppVedlegg } from '../../api/api';
 import { useSpråk } from '../../context/SpråkContext';
 import { fellesTekster } from '../../tekster/felles';
 import { teksterFeilmeldinger } from '../../tekster/filopplasting';
 import { vedleggTekster } from '../../tekster/vedlegg';
-import { Dokument } from '../../typer/skjema';
+import type { Dokument } from '../../typer/skjema';
 import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
+import { utledFeilmelding } from './feilmeldingOpplasting';
+import {
+    MAX_FILSTØRRELSE,
+    TILLATE_FILENDELSER,
+    TILLATTE_SAMTIDIGE_OPPLASTINGER
+} from './filopplasterUtils';
 
 type AvslåttFil = FileRejected & { feil: unknown };
 type FilAvslåttGrunn = FileRejectionReason | 'ukjent';
@@ -91,7 +89,7 @@ export const Filopplaster: React.FC<{
                     leggTilDokument({
                         id,
                         navn: file.name,
-                        previewUrl,
+                        previewUrl
                     });
                 })
                 .catch((err) => {
@@ -101,8 +99,8 @@ export const Filopplaster: React.FC<{
                             file,
                             error: true,
                             feil: err,
-                            reasons: ['ukjent'],
-                        },
+                            reasons: ['ukjent']
+                        }
                     ]);
                 })
                 .finally(() => {
@@ -123,7 +121,7 @@ export const Filopplaster: React.FC<{
                 maxSizeInBytes={MAX_FILSTØRRELSE}
                 fileLimit={{
                     max: TILLATTE_SAMTIDIGE_OPPLASTINGER,
-                    current: opplastedeVedlegg.length,
+                    current: opplastedeVedlegg.length
                 }}
                 onSelect={lastOppValgteFiler}
             />
@@ -142,7 +140,7 @@ export const Filopplaster: React.FC<{
                                 file={{ name: dokument.navn }}
                                 style={{
                                     marginBottom: '1rem',
-                                    cursor: 'pointer',
+                                    cursor: 'pointer'
                                 }}
                                 onClick={() => åpneFil(dokument)}
                                 button={{
@@ -150,7 +148,7 @@ export const Filopplaster: React.FC<{
                                     onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
                                         e.stopPropagation();
                                         slettDokument(dokument);
-                                    },
+                                    }
                                 }}
                             />
                         ))}
@@ -161,14 +159,14 @@ export const Filopplaster: React.FC<{
                                 style={{ marginBottom: '1rem' }}
                                 status="uploading"
                                 translations={{
-                                    uploading: vedleggTekster.laster_opp[locale],
+                                    uploading: vedleggTekster.laster_opp[locale]
                                 }}
                                 button={{
                                     action: 'delete',
                                     onClick: () =>
                                         settVedleggLastesOpp((prev) =>
                                             prev.filter((v) => v !== vedlegg)
-                                        ),
+                                        )
                                 }}
                             />
                         ))}
@@ -193,7 +191,7 @@ export const Filopplaster: React.FC<{
                                 )}
                                 button={{
                                     action: 'delete',
-                                    onClick: () => fjernFil(avslåttFil),
+                                    onClick: () => fjernFil(avslåttFil)
                                 }}
                             />
                         ))}

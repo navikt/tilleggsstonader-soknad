@@ -1,9 +1,7 @@
-import React from 'react';
-
 import { Box, Checkbox, ErrorMessage } from '@navikt/ds-react';
-
-import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
+import type React from 'react';
 import { fellesTekster } from '../tekster/felles';
+import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
 
 interface Props {
     skalViseFeilmelding: boolean;
@@ -16,7 +14,7 @@ export const BekreftelseCheckbox: React.FC<Props> = ({
     skalViseFeilmelding,
     harBekreftet,
     oppdaterHarBekreftet,
-    fjernFeilmelding,
+    fjernFeilmelding
 }) => {
     return (
         <Box paddingBlock="space-16 space-32">

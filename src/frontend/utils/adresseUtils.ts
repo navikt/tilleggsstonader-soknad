@@ -35,7 +35,7 @@ export const adressefelterTilVisning = (adresse: {
     return [
         adresse.gateadresse,
         [adresse.postnummer, adresse.poststed].filter(Boolean).join(' '),
-        landkodeTilNavn[adresse.land || ''],
+        landkodeTilNavn[adresse.land || '']
     ]
         .filter(Boolean)
         .join(', ');

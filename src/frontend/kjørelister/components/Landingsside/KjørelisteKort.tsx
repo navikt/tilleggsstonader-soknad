@@ -1,10 +1,9 @@
-import React from 'react';
-
 import { BodyShort, LinkCard, Tag } from '@navikt/ds-react';
+import type React from 'react';
 
 import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
 import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';
-import { formaterAktivitetsnavn, Rammevedtak } from '../../types/Rammevedtak';
+import { formaterAktivitetsnavn, type Rammevedtak } from '../../types/Rammevedtak';
 
 export const KjørelisteKort: React.FC<{ rammevedtak: Rammevedtak }> = ({ rammevedtak }) => {
     return (

@@ -1,9 +1,9 @@
-import React from 'react';
+import type React from 'react';
 
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { EnumFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
-import { Feilmelding } from '../../../typer/validering';
+import type { EnumFelt } from '../../../typer/skjema';
+import type { JaNei } from '../../../typer/søknad';
+import type { Feilmelding } from '../../../typer/validering';
 import { utdanningTekster } from '../../tekster/utdanning';
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 export const HarFunksjonsnedsettelse: React.FC<Props> = ({
     harFunksjonsnedsettelse,
     oppdaterHarFunksjonsnedsettelse,
-    feilmelding,
+    feilmelding
 }) => {
     return (
         <div>

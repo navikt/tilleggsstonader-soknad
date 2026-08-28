@@ -1,17 +1,16 @@
-import React from 'react';
-
+import type React from 'react';
+import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
+import { oppholdUtenforNorgeInnhold } from '../../../../passAvBarn/tekster/opphold';
+import type { EnumFelt } from '../../../../typer/skjema';
+import type { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
+import { LocaleRadioGroup } from '../../../Teksthåndtering/LocaleRadioGroup';
 import { OppholdListe } from './OppholdListe';
 import {
     opprettOppholdForNesteId,
     skalTaStillingTilOppholdNeste12mnd,
-    skalTaStillingTilOppholdSiste12mnd,
+    skalTaStillingTilOppholdSiste12mnd
 } from './util';
 import { nullstillteOppholsfeilNeste12mnd, nullstillteOppholsfeilSiste12mnd } from './validering';
-import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
-import { oppholdUtenforNorgeInnhold } from '../../../../passAvBarn/tekster/opphold';
-import { EnumFelt } from '../../../../typer/skjema';
-import { ArbeidOgOpphold, JaNei, OppholdUtenforNorge } from '../../../../typer/søknad';
-import { LocaleRadioGroup } from '../../../Teksthåndtering/LocaleRadioGroup';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
@@ -20,7 +19,7 @@ interface Props {
 
 export const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
     arbeidOgOpphold,
-    settArbeidOgOpphold,
+    settArbeidOgOpphold
 }) => {
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -35,7 +34,7 @@ export const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
                 harOppholdUtenforNorgeSiste12mnd: verdi,
                 oppholdUtenforNorgeSiste12mnd: opphold,
                 harOppholdUtenforNorgeNeste12mnd: undefined,
-                oppholdUtenforNorgeNeste12mnd: [],
+                oppholdUtenforNorgeNeste12mnd: []
             };
         });
         settValideringsfeil((prevState) => ({
@@ -43,7 +42,7 @@ export const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
             harOppholdUtenforNorgeSiste12mnd: undefined,
             harOppholdUtenforNorgeNeste12mnd: undefined,
             ...nullstillteOppholsfeilSiste12mnd,
-            ...nullstillteOppholsfeilNeste12mnd,
+            ...nullstillteOppholsfeilNeste12mnd
         }));
     };
 
@@ -56,13 +55,13 @@ export const OppholdUtenforNorgeSiste12Mnd: React.FC<Props> = ({
             return {
                 ...prevState,
                 harOppholdUtenforNorgeNeste12mnd: verdi,
-                oppholdUtenforNorgeNeste12mnd: opphold,
+                oppholdUtenforNorgeNeste12mnd: opphold
             };
         });
         settValideringsfeil((prevState) => ({
             ...prevState,
             harOppholdUtenforNorgeNeste12mnd: undefined,
-            ...nullstillteOppholsfeilNeste12mnd,
+            ...nullstillteOppholsfeilNeste12mnd
         }));
     };
 

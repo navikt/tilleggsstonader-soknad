@@ -1,5 +1,5 @@
-import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
-import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
+import type { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
+import type { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { AnnenUtdanningType } from '../../typer/søknad';
 
 export const harValgtAktivitetPåVgsNivå = (

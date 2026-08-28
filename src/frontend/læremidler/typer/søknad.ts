@@ -1,5 +1,5 @@
-import { EnumFelt, EnumFlereValgFelt } from '../../typer/skjema';
-import { JaNei } from '../../typer/søknad';
+import type { EnumFelt, EnumFlereValgFelt } from '../../typer/skjema';
+import type { JaNei } from '../../typer/søknad';
 
 export interface Utdanning {
     aktiviteter: EnumFlereValgFelt<string> | undefined;
@@ -17,5 +17,5 @@ export enum AnnenUtdanningType {
     FORKURS = 'FORKURS',
     FAGSKOLE_HØGSKOLE_UNIVERSITET = 'FAGSKOLE_HØGSKOLE_UNIVERSITET',
     KURS_LIKNENDE = 'KURS_LIKNENDE',
-    INGEN_UTDANNING = 'INGEN_UTDANNING',
+    INGEN_UTDANNING = 'INGEN_UTDANNING'
 }

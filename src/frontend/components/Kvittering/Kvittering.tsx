@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-
-import { useLocation, useNavigate } from 'react-router-dom';
-
 import { Alert, BodyLong, BodyShort, Button, VStack } from '@navikt/ds-react';
+import type React from 'react';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useSøknad } from '../../context/SøknadContext';
 import { kvitteringTekster } from '../../tekster/kvittering';
@@ -17,17 +16,16 @@ export const Kvittering: React.FC<{ pathTilForside: string }> = ({ pathTilForsid
     const navigate = useNavigate();
     const { resetSøknadOgValideringsfeil } = useSøknad();
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: resetSøknadOgValideringsfeil re-initiates on call
     useEffect(() => {
         resetSøknadOgValideringsfeil();
-        // resetSøknadOgValideringsfeil initieres på nytt ved kall mot den
-        // eslint-disable-next-line
     }, []);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: navigate er stabil, bare kjør når locationState endres
     useEffect(() => {
         if (locationState === null) {
             navigate(pathTilForside);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [locationState]);
 
     if (locationState == null) {

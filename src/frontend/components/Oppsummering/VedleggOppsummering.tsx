@@ -1,11 +1,9 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
-
-import { FormSummaryFooterMedEndreKnapp } from './FormSummaryFooterMedEndreKnapp';
+import type React from 'react';
 import { fellesOppsummeringTekster } from '../../tekster/oppsummering';
-import { DokumentasjonFelt } from '../../typer/skjema';
+import type { DokumentasjonFelt } from '../../typer/skjema';
 import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
+import { FormSummaryFooterMedEndreKnapp } from './FormSummaryFooterMedEndreKnapp';
 
 export const VedleggOppsummering: React.FC<{
     dokumentasjon: DokumentasjonFelt[];

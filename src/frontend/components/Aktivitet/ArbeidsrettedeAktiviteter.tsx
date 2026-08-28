@@ -1,13 +1,13 @@
-import React, { ReactNode, useMemo } from 'react';
-
 import { Checkbox, CheckboxGroup } from '@navikt/ds-react';
+import type React from 'react';
+import { type ReactNode, useMemo } from 'react';
 
 import { useSpråk } from '../../context/SpråkContext';
 import { tekstArbeidsrettedeAktiviteter } from '../../tekster/aktivitet';
-import { RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
-import { EnumFlereValgFelt } from '../../typer/skjema';
-import { TekstElement } from '../../typer/tekst';
-import { Feilmelding } from '../../typer/validering';
+import type { RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
+import type { EnumFlereValgFelt } from '../../typer/skjema';
+import type { TekstElement } from '../../typer/tekst';
+import type { Feilmelding } from '../../typer/validering';
 
 interface Props {
     spørsmål: TekstElement<string>;
@@ -24,7 +24,7 @@ export const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
     registerAktiviteter,
     oppdaterValgteAktiviteter,
     valgteAktiviteter,
-    feilmelding,
+    feilmelding
 }) => {
     const { locale } = useSpråk();
     const registerAktiviteterListe = useMemo(
@@ -38,7 +38,7 @@ export const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
             if (verdi === 'ANNET') {
                 return {
                     label: tekstArbeidsrettedeAktiviteter.checkboks_annet_tekst[locale],
-                    verdi: 'ANNET',
+                    verdi: 'ANNET'
                 };
             }
             const valgtAktivitet = registerAktiviteter[verdi];
@@ -48,7 +48,7 @@ export const ArbeidsrettedeAktiviteter: React.FC<Props> = ({
         const nyeValgteAktiviteter = {
             label: spørsmål[locale],
             verdier: valgteVerdier,
-            alternativer: Object.values(registerAktiviteter).map((a) => a.label),
+            alternativer: Object.values(registerAktiviteter).map((a) => a.label)
         };
         oppdaterValgteAktiviteter(nyeValgteAktiviteter);
     };

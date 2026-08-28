@@ -1,46 +1,46 @@
 {
-  "name": "tilleggsstonader-soknad-server",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
+    "name": "tilleggsstonader-soknad-server",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
     "engines": {
         "node": ">=24.0.0"
     },
-  "scripts": {
-    "ci": "yarn --prefer-offline --frozen-lockfile",
-    "build": "tsc --build --verbose",
-    "start": "NODE_ENV=production node --import=./build/register.js --es-module-specifier-resolution=node build/server.js",
-    "start:dev": "NODE_ENV=development ENV=localhost node --import=./build/register.js --es-module-specifier-resolution=node build/server.js"
-  },
-  "dependencies": {
-    "@navikt/nav-dekoratoren-moduler": "^4.3.0",
-    "cookie-parser": "^1.4.7",
-    "csp-header": "^6.3.0",
-    "dotenv": "^17.4.1",
-    "express": "^5.2.1",
-    "express-http-proxy": "^2.0.0",
-    "html-react-parser": "^6.1.0",
-    "http-proxy-middleware": "^4.2.0",
-    "jsdom": "^30.0.1",
-    "jsonwebtoken": "9.0.3",
-    "node-jose": "2.2.0",
-    "openid-client": "6.8.1",
-    "qs": "^6.15.2",
-    "react": "^19.2.4",
-    "typescript": "^6.0.2",
-    "uuid": "^14.0.2",
-    "winston": "^3.17.0"
-  },
-  "devDependencies": {
-    "@types/cookie-parser": "^1.4.9",
-    "@types/express": "^5.0.3",
-    "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^26.2.0",
-    "@types/node-jose": "^1.1.10",
-    "ts-node": "^10.9.2"
-  },
-  "resolutions": {
-    "node-forge": "1.4.0",
-    "qs": "^6.15.2"
-  }
+    "scripts": {
+        "ci": "yarn --prefer-offline --no-frozen-lockfile",
+        "build": "tsc --build --verbose",
+        "start": "NODE_ENV=production node --import=./build/register.js --es-module-specifier-resolution=node build/server.js",
+        "start:dev": "NODE_ENV=development ENV=localhost node --import=./build/register.js --es-module-specifier-resolution=node build/server.js"
+    },
+    "dependencies": {
+        "@navikt/nav-dekoratoren-moduler": "^4.3.0",
+        "cookie-parser": "^1.4.7",
+        "csp-header": "^6.3.0",
+        "dotenv": "^17.4.1",
+        "express": "^5.2.1",
+        "express-http-proxy": "^2.0.0",
+        "html-react-parser": "^6.1.0",
+        "http-proxy-middleware": "^4.2.0",
+        "jsdom": "^30.0.1",
+        "jsonwebtoken": "9.0.3",
+        "node-jose": "2.2.0",
+        "openid-client": "6.8.1",
+        "qs": "^6.15.2",
+        "react": "^19.2.4",
+        "typescript": "^7.0.2",
+        "uuid": "^14.0.2",
+        "winston": "^3.17.0"
+    },
+    "devDependencies": {
+        "@types/cookie-parser": "^1.4.9",
+        "@types/express": "^5.0.3",
+        "@types/jsonwebtoken": "^9.0.9",
+        "@types/node": "^26.2.0",
+        "@types/node-jose": "^1.1.10",
+        "ts-node": "^10.9.2"
+    },
+    "resolutions": {
+        "node-forge": "1.4.0",
+        "qs": "^6.15.2"
+    }
 }

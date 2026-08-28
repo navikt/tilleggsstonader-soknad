@@ -1,18 +1,16 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
-
-import { OppsummeringEnkeltbarn } from './OppsummerEnkeltbarn';
+import type React from 'react';
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { Person } from '../../../typer/person';
+import type { Person } from '../../../typer/person';
 import { RouteTilPath } from '../../routing/routesPassAvBarn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
-import { Barnepass } from '../../typer/barnepass';
+import type { Barnepass } from '../../typer/barnepass';
+import { OppsummeringEnkeltbarn } from './OppsummerEnkeltbarn';
 
 export const PassAvBarn: React.FC<{ person: Person; barnMedBarnepass: Barnepass[] }> = ({
     person,
-    barnMedBarnepass,
+    barnMedBarnepass
 }) => (
     <FormSummary>
         <FormSummary.Header>

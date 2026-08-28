@@ -1,13 +1,13 @@
 import { typerVedleggTekster } from '../../tekster/vedlegg';
-import { Barn } from '../../typer/barn';
+import type { Barn } from '../../typer/barn';
 import {
-    DokumentasjonFelt,
-    Dokument,
-    Dokumentasjonsbehov,
-    VedleggstypePassAvBarn,
-    Vedleggstype,
+    type Dokument,
+    type DokumentasjonFelt,
+    type Dokumentasjonsbehov,
+    type Vedleggstype,
+    VedleggstypePassAvBarn
 } from '../../typer/skjema';
-import { Locale } from '../../typer/tekst';
+import type { Locale } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
 export const leggTilVedlegg = (
@@ -19,7 +19,7 @@ export const leggTilVedlegg = (
         if (dokumentajonFeltEquals(dokumentasjon, dokumentasjonFeltSomSkalOppdateres)) {
             return {
                 ...dokumentasjon,
-                opplastedeVedlegg: [...dokumentasjon.opplastedeVedlegg, vedlegg],
+                opplastedeVedlegg: [...dokumentasjon.opplastedeVedlegg, vedlegg]
             };
         } else {
             return dokumentasjon;
@@ -38,7 +38,7 @@ export const fjernVedlegg = (
                 ...dokumentasjon,
                 opplastedeVedlegg: dokumentasjon.opplastedeVedlegg.filter(
                     (vedlegg) => vedlegg.id !== dokumentSomSkalSlettesId
-                ),
+                )
             };
         } else {
             return dokumentasjon;
@@ -133,7 +133,7 @@ const lagDokumentasjonsfelt = (
         type: type,
         label: tittel,
         opplastedeVedlegg: [],
-        barnId: barn?.ident,
+        barnId: barn?.ident
     };
 };
 
@@ -153,7 +153,7 @@ const finnEksisterendeDokumentasjonsfelt = (
 const skalHaSamletOpplasting = (dokumentasjonsbehov: Dokumentasjonsbehov): boolean => {
     const list: Vedleggstype[] = [
         VedleggstypePassAvBarn.UTGIFTER_PASS_PRIVAT,
-        VedleggstypePassAvBarn.UTGIFTER_PASS_SFO_AKS_BARNEHAGE,
+        VedleggstypePassAvBarn.UTGIFTER_PASS_SFO_AKS_BARNEHAGE
     ];
     return list.includes(dokumentasjonsbehov.type);
 };

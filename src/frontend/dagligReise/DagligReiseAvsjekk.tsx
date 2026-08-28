@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-
 import { Button, GuidePanel, Heading, Label, Radio, RadioGroup, VStack } from '@navikt/ds-react';
+import type React from 'react';
+import { useState } from 'react';
 
 import { omdirigerTilFyllut } from '../api/api';
 import { Container } from '../components/Side';
@@ -8,7 +8,7 @@ import { LocaleReadMore } from '../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { SkjematypeFyllUt } from '../typer/skjematype';
-import { LesMer, TekstElement } from '../typer/tekst';
+import type { LesMer, TekstElement } from '../typer/tekst';
 
 export interface AvsjekkTekster {
     banner_daglig_reise: TekstElement<string>;
@@ -30,7 +30,7 @@ export const DagligReiseAvsjekk: React.FC<DagligReiseAvsjekkProps> = ({
     tekster,
     legend,
     description,
-    jaBetyrNyLøsning,
+    jaBetyrNyLøsning
 }) => {
     const [svar, setSvar] = useState<RadioButtonValg | undefined>(undefined);
     const [feilmeldingRadio, settFeilmeldingRadio] = useState('');

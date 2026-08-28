@@ -2,13 +2,13 @@ import { typerVedleggTeksterKjørelister } from '../kjørelister/tekster/vedlegg
 import { typerVedleggTeksterLæremidler } from '../læremidler/tekster/vedlegg';
 import { typerVedleggTeksterPassAvBarn } from '../passAvBarn/tekster/vedlegg';
 import { typerVedleggTeksterReiseTilSamling } from '../reiseTilSamling/tekster/vedlegg';
-import { TekstElement } from '../typer/tekst';
+import type { TekstElement } from '../typer/tekst';
 
 export const typerVedleggTekster = {
     ...typerVedleggTeksterLæremidler,
     ...typerVedleggTeksterPassAvBarn,
     ...typerVedleggTeksterKjørelister,
-    ...typerVedleggTeksterReiseTilSamling,
+    ...typerVedleggTeksterReiseTilSamling
 };
 
 interface VedleggInnhold {
@@ -37,64 +37,64 @@ interface VedleggInnhold {
 
 const formatKvalitetAccordian: VedleggInnhold['accordians']['format_kvalitet'] = {
     tittel: {
-        nb: 'Format og kvalitet på vedlegg',
+        nb: 'Format og kvalitet på vedlegg'
     },
     innhold: {
-        nb: 'Du kan laste opp vedlegg med filformat .png, .pdf .jpg eller .jpeg. Det er viktig at bildet har god nok oppløsning/kvalitet til at vi kan lese det. ',
-    },
+        nb: 'Du kan laste opp vedlegg med filformat .png, .pdf .jpg eller .jpeg. Det er viktig at bildet har god nok oppløsning/kvalitet til at vi kan lese det. '
+    }
 };
 
 const harIkkeVedleggDigitalAccordian: VedleggInnhold['accordians']['har_ikke_vedlegg_digital'] = {
     har_ikke_vedlegg_digital: {
-        nb: 'Har du bare vedlegg på papir?',
+        nb: 'Har du bare vedlegg på papir?'
     },
     slik_ta_bilde: {
-        nb: 'Du kan skanne eller ta bilde med mobilen:',
+        nb: 'Du kan skanne eller ta bilde med mobilen:'
     },
     instruksjoner: {
         nb: [
             'Hold mobilen eller kameraet direkte over dokumentet.',
             'Dokumentet skal fylle hele bildet. Bildet skal ikke inneholde annen dokumentasjon eller gjenstander.',
-            'Bildet må inneholde all tekst i dokumentet. Hvis dokumentet er på mer enn èn side, bør du laste opp flere bilder.',
-        ],
+            'Bildet må inneholde all tekst i dokumentet. Hvis dokumentet er på mer enn èn side, bør du laste opp flere bilder.'
+        ]
     },
     ettet_tatt_bilde: {
-        nb: 'Etter at du har tatt bildet, sjekk følgende før du laster opp:',
+        nb: 'Etter at du har tatt bildet, sjekk følgende før du laster opp:'
     },
     instruksjoner_etter: {
         nb: [
             'Dokumentet har riktig retning.',
             'Teksten til dokumentet er godt leselig.',
-            'Bildet er godt opplyst, uten skygger.',
-        ],
-    },
+            'Bildet er godt opplyst, uten skygger.'
+        ]
+    }
 };
 
 export const vedleggTekster: VedleggInnhold = {
     tittel: {
-        nb: 'Vedlegg',
+        nb: 'Vedlegg'
     },
     guide_innhold: {
         nb: [
-            'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, senest innen 14 dager. Trenger du mer tid, kan du be om lenger frist på Min side på Nav.no etter at søknaden er sendt inn.',
-        ],
+            'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, senest innen 14 dager. Trenger du mer tid, kan du be om lenger frist på Min side på Nav.no etter at søknaden er sendt inn.'
+        ]
     },
     dokumentasjonskrav_tittel: { nb: 'Ut fra det du har svart i søknaden, må du legge ved:' },
     dokumentasjonskrav_samlet_faktura: {
-        nb: 'Har du samlet faktura for flere barn, trenger du bare å laste den opp en gang.',
+        nb: 'Har du samlet faktura for flere barn, trenger du bare å laste den opp en gang.'
     },
 
     informasjon_all_dokumentasjon: {
-        nb: 'For at vi skal kunne behandle saken din så raskt som mulig, anbefaler vi at du sender inn all nødvendig dokumentasjon sammen med søknaden. Hvis du ikke har dokumentasjonen klar, kan du sende den inn senere.',
+        nb: 'For at vi skal kunne behandle saken din så raskt som mulig, anbefaler vi at du sender inn all nødvendig dokumentasjon sammen med søknaden. Hvis du ikke har dokumentasjonen klar, kan du sende den inn senere.'
     },
     accordians: {
         har_ikke_vedlegg_digital: harIkkeVedleggDigitalAccordian,
-        format_kvalitet: formatKvalitetAccordian,
+        format_kvalitet: formatKvalitetAccordian
     },
     ingen_dokumentasjonsbehov: { nb: 'Du trenger ikke å legge ved noen dokumentasjon' },
     laster_opp: {
-        nb: 'Laster opp vedlegg...',
-    },
+        nb: 'Laster opp vedlegg...'
+    }
 };
 
 interface VedleggManglerModalInnhold {
@@ -111,12 +111,12 @@ export const vedleggModalTekster: VedleggManglerModalInnhold = {
     heading: { nb: 'Vedlegg mangler' },
     punktliste_tittel: { nb: 'Vi kan ikke se at du har lagt ved:' },
     ekstra_info1: {
-        nb: 'For at vi skal kunne behandle saken din så raskt som mulig, anbefaler vi at du sender inn all nødvendig dokumentasjon sammen med søknaden. Hvis du ikke har dokumentasjonen klar, kan du sende den inn senere.',
+        nb: 'For at vi skal kunne behandle saken din så raskt som mulig, anbefaler vi at du sender inn all nødvendig dokumentasjon sammen med søknaden. Hvis du ikke har dokumentasjonen klar, kan du sende den inn senere.'
     },
     ekstra_info2: {
-        nb: 'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, innen 14 dager.',
+        nb: 'Har du ikke alle vedleggene i dag, kan du ettersende digitalt eller per post, innen 14 dager.'
     },
     vil_du_fortsette: { nb: 'Vil du fortsatt sende søknaden nå? ' },
     fortsettKnapp: { nb: 'Ja, gå til neste side' },
-    avbrytKnapp: { nb: 'Nei, gå tilbake til vedlegg' },
+    avbrytKnapp: { nb: 'Nei, gå tilbake til vedlegg' }
 };

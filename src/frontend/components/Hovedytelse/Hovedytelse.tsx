@@ -1,26 +1,24 @@
-import { useState } from 'react';
-
 import { GuidePanel } from '@navikt/ds-react';
-
-import { ArbeidOgOppholdUtenforNorge } from './ArbeidOgOpphold/ArbeidOgOppholdUtenforNorge';
-import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
-import { Ytelse } from './typer';
-import { validerHovedytelse } from './validering';
+import { useState } from 'react';
 import { useSpråk } from '../../context/SpråkContext';
 import { useValideringsfeil } from '../../context/ValideringsfeilContext';
 import { hovedytelseInnhold } from '../../tekster/hovedytelse';
-import { EnumFlereValgFelt } from '../../typer/skjema';
-import { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
+import type { EnumFlereValgFelt } from '../../typer/skjema';
+import type { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
 import { inneholderFeil } from '../../typer/validering';
 import { AdvarselEndringOvergangsstønad } from '../AdvarselEndringOvergangsstønad';
 import { Side } from '../Side';
 import { LocaleCheckboxGroup } from '../Teksthåndtering/LocaleCheckboxGroup';
 import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
 import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
+import { ArbeidOgOppholdUtenforNorge } from './ArbeidOgOpphold/ArbeidOgOppholdUtenforNorge';
+import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
+import type { Ytelse } from './typer';
+import { validerHovedytelse } from './validering';
 
 const defaultArbeidOgOpphold: ArbeidOgOpphold = {
     oppholdUtenforNorgeSiste12mnd: [],
-    oppholdUtenforNorgeNeste12mnd: [],
+    oppholdUtenforNorgeNeste12mnd: []
 };
 
 interface Props {
@@ -67,7 +65,7 @@ export const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedyte
                 if (ytelse !== undefined) {
                     oppdaterHovedytelse({
                         ytelse: ytelse,
-                        arbeidOgOpphold: arbeidOgOpphold,
+                        arbeidOgOpphold: arbeidOgOpphold
                     });
                 }
             }}

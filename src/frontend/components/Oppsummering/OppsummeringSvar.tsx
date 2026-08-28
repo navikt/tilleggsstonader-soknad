@@ -1,8 +1,7 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
+import type React from 'react';
 
-import { EnumFelt, EnumFlereValgFelt, VerdiFelt } from '../../typer/skjema';
+import type { EnumFelt, EnumFlereValgFelt, VerdiFelt } from '../../typer/skjema';
 
 type OppsummeringSvarProps = {
     felt: EnumFelt<unknown> | EnumFlereValgFelt<unknown> | VerdiFelt<string | number> | undefined;

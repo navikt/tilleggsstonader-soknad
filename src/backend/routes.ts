@@ -1,5 +1,5 @@
-import express, { Request, Response, Router } from 'express';
-import path from 'path';
+import path from 'node:path';
+import express, { type Request, type Response, Router } from 'express';
 
 import { applyCspDirectives, logCspViolation } from './csp';
 import { getDecoratedHtml } from './decorator';

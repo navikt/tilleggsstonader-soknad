@@ -1,11 +1,11 @@
-import { BarnepassIntern } from './typer';
-import { Barn } from '../../../typer/barn';
-import { Locale } from '../../../typer/tekst';
-import { Valideringsfeil } from '../../../typer/validering';
+import type { Barn } from '../../../typer/barn';
+import type { Locale } from '../../../typer/tekst';
+import type { Valideringsfeil } from '../../../typer/validering';
 import { erDatoEtterEllerLik } from '../../../utils/datoUtils';
 import { hentBeskjedMedEttParameter } from '../../../utils/tekstUtils';
 import { harVerdi } from '../../../utils/typeUtils';
 import { barnepassTekster } from '../../tekster/barnepass';
+import type { BarnepassIntern } from './typer';
 
 export const errorKeyHvemPasser = (barn: Barn) => `${barn.ident}_hvemPasser`;
 export const errorKeyStartetFemte = (barn: Barn) => `${barn.ident}_startetFemte`;
@@ -22,57 +22,45 @@ export const valider = (
     return barnMedPass.reduce((acc, barn, indeks) => {
         const barnPerson = finnBarn(personbarn, barn.ident);
         if (!barn.type) {
-            acc = {
-                ...acc,
-                [errorKeyHvemPasser(barnPerson)]: {
-                    id: `${indeks}-0`,
-                    melding: hentBeskjedMedEttParameter(
-                        barnPerson.fornavn,
-                        barnepassTekster.hvem_passer_feilmelding[locale]
-                    ),
-                },
+            acc[errorKeyHvemPasser(barnPerson)] = {
+                id: `${indeks}-0`,
+                melding: hentBeskjedMedEttParameter(
+                    barnPerson.fornavn,
+                    barnepassTekster.hvem_passer_feilmelding[locale]
+                )
             };
         }
         if (!barn.utgifter?.harUtgifterTilPassHelePerioden) {
-            acc = {
-                ...acc,
-                [errorKeyHarUtgifter(barnPerson)]: {
-                    id: `${indeks}-3`,
-                    melding: hentBeskjedMedEttParameter(
-                        barnPerson.fornavn,
-                        barnepassTekster.har_utgifter_feilmelding[locale]
-                    ),
-                },
+            acc[errorKeyHarUtgifter(barnPerson)] = {
+                id: `${indeks}-3`,
+                melding: hentBeskjedMedEttParameter(
+                    barnPerson.fornavn,
+                    barnepassTekster.har_utgifter_feilmelding[locale]
+                )
             };
         }
         if (
             barn.utgifter?.harUtgifterTilPassHelePerioden?.verdi === 'NEI' &&
             harVerdi(barn.utgifter?.fom?.verdi) === false
         ) {
-            acc = {
-                ...acc,
-                [errorKeyUtgifterFom(barnPerson)]: {
-                    id: `${indeks}-4`,
-                    melding: hentBeskjedMedEttParameter(
-                        barnPerson.fornavn,
-                        barnepassTekster.utgifter_fom_feilmelding[locale]
-                    ),
-                },
+            acc[errorKeyUtgifterFom(barnPerson)] = {
+                id: `${indeks}-4`,
+                melding: hentBeskjedMedEttParameter(
+                    barnPerson.fornavn,
+                    barnepassTekster.utgifter_fom_feilmelding[locale]
+                )
             };
         }
         if (
             barn.utgifter?.harUtgifterTilPassHelePerioden?.verdi === 'NEI' &&
             harVerdi(barn.utgifter?.tom?.verdi) === false
         ) {
-            acc = {
-                ...acc,
-                [errorKeyUtgifterTom(barnPerson)]: {
-                    id: `${indeks}-5`,
-                    melding: hentBeskjedMedEttParameter(
-                        barnPerson.fornavn,
-                        barnepassTekster.utgifter_tom_feilmelding[locale]
-                    ),
-                },
+            acc[errorKeyUtgifterTom(barnPerson)] = {
+                id: `${indeks}-5`,
+                melding: hentBeskjedMedEttParameter(
+                    barnPerson.fornavn,
+                    barnepassTekster.utgifter_tom_feilmelding[locale]
+                )
             };
         }
         if (harVerdi(barn.utgifter?.fom?.verdi) && harVerdi(barn.utgifter?.tom?.verdi)) {
@@ -82,38 +70,29 @@ export const valider = (
                     barn.utgifter?.tom?.verdi || ''
                 )
             ) {
-                acc = {
-                    ...acc,
-                    [errorKeyUtgifterTom(barnPerson)]: {
-                        id: `${indeks}-6`,
-                        melding: barnepassTekster.feilmelding_tom_før_fom[locale],
-                    },
+                acc[errorKeyUtgifterTom(barnPerson)] = {
+                    id: `${indeks}-6`,
+                    melding: barnepassTekster.feilmelding_tom_før_fom[locale]
                 };
             }
         }
 
         if (er9ellerEldre(barnPerson) && barn.startetIFemte === undefined) {
-            acc = {
-                ...acc,
-                [errorKeyStartetFemte(barnPerson)]: {
-                    id: `${indeks}-1`,
-                    melding: hentBeskjedMedEttParameter(
-                        barnPerson.fornavn,
-                        barnepassTekster.startet_femte_feilmelding[locale]
-                    ),
-                },
+            acc[errorKeyStartetFemte(barnPerson)] = {
+                id: `${indeks}-1`,
+                melding: hentBeskjedMedEttParameter(
+                    barnPerson.fornavn,
+                    barnepassTekster.startet_femte_feilmelding[locale]
+                )
             };
         }
         if (barn.startetIFemte?.verdi === 'JA' && !barn.årsak) {
-            acc = {
-                ...acc,
-                [errorKeyÅrsak(barnPerson)]: {
-                    id: `${indeks}-2`,
-                    melding: hentBeskjedMedEttParameter(
-                        barnPerson.fornavn,
-                        barnepassTekster.årsak_ekstra_pass_feilmelding[locale]
-                    ),
-                },
+            acc[errorKeyÅrsak(barnPerson)] = {
+                id: `${indeks}-2`,
+                melding: hentBeskjedMedEttParameter(
+                    barnPerson.fornavn,
+                    barnepassTekster.årsak_ekstra_pass_feilmelding[locale]
+                )
             };
         }
         return acc;
@@ -121,6 +100,7 @@ export const valider = (
 };
 
 export const finnBarn = (barn: Barn[], ident: string): Barn => {
+    // biome-ignore lint/style/noNonNullAssertion: skal være barn her
     return barn.find((b) => b.ident === ident)!;
 };
 

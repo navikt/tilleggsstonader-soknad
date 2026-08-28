@@ -1,9 +1,8 @@
-import React from 'react';
-
-import { Heading, HeadingProps } from '@navikt/ds-react';
+import { Heading, type HeadingProps } from '@navikt/ds-react';
+import type React from 'react';
 
 import { useSpråk } from '../../context/SpråkContext';
-import { TekstElement } from '../../typer/tekst';
+import type { TekstElement } from '../../typer/tekst';
 
 interface LocaleHeadingProps extends Omit<HeadingProps, 'children'> {
     tekst: TekstElement<string>;

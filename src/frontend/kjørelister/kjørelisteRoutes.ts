@@ -3,7 +3,7 @@ export enum KjørelisteRoutes {
     SKJEMA = 'skjema',
     VEDLEGG = 'vedlegg',
     OPPSUMMERING = 'oppsummering',
-    KVITTERING = 'kvittering',
+    KVITTERING = 'kvittering'
 }
 
 export const kjørelistePath = '/kjoreliste';

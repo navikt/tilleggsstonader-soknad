@@ -1,6 +1,6 @@
-import { FeilmeldingerFraDokument } from '../components/Filopplaster/feilmeldingOpplasting';
+import type { FeilmeldingerFraDokument } from '../components/Filopplaster/feilmeldingOpplasting';
 import { MAKS_FILSTØRRELSE_FORMATTERT } from '../components/Filopplaster/filopplasterUtils';
-import { TekstElement } from '../typer/tekst';
+import type { TekstElement } from '../typer/tekst';
 
 export const teksterFeilmeldinger: {
     maksstørrelse: TekstElement<string>;
@@ -11,22 +11,22 @@ export const teksterFeilmeldinger: {
     };
 } = {
     maksstørrelse: {
-        nb: `Filen er for stor (maksimal filstørrelse er ${MAKS_FILSTØRRELSE_FORMATTERT}).`,
+        nb: `Filen er for stor (maksimal filstørrelse er ${MAKS_FILSTØRRELSE_FORMATTERT}).`
     },
     filtype: {
-        nb: 'Ugyldig filtype. Tillatte filtyper er .pdf, .png, .jpg og .jpeg.',
+        nb: 'Ugyldig filtype. Tillatte filtyper er .pdf, .png, .jpg og .jpeg.'
     },
     feilmeldinger: {
         generisk: {
-            nb: 'Feilet opplasting. ', // Space på slutten fordi det kommer en mer spesifik feilmelding etterpå
+            nb: 'Feilet opplasting. ' // Space på slutten fordi det kommer en mer spesifik feilmelding etterpå
         },
         fra_dokument: {
             IMAGE_DIMENSIONS_TOO_SMALL: {
-                nb: 'Bildet du har forsøkt å laste opp er for lite. Bildet må være større enn 400x400 piksler.',
+                nb: 'Bildet du har forsøkt å laste opp er for lite. Bildet må være større enn 400x400 piksler.'
             },
             IMAGE_TOO_LARGE: {
-                nb: 'Filen er for stor.',
-            },
-        },
-    },
+                nb: 'Filen er for stor.'
+            }
+        }
+    }
 };

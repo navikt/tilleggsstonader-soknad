@@ -1,18 +1,18 @@
-import { RegisterAktivitet, RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
-import { EnumFlereValgFelt } from '../../typer/skjema';
+import type { RegisterAktivitet, RegisterAktivitetMedLabel } from '../../typer/registerAktivitet';
+import type { EnumFlereValgFelt } from '../../typer/skjema';
 import { tilTekstligDato } from '../../utils/datoUtils';
 
 export const mapTilRegisterAktiviteterObjektMedLabel = (
     registerAktiviteter: RegisterAktivitet[]
 ): Record<string, RegisterAktivitetMedLabel> => {
     return registerAktiviteter.reduce(
-        (acc, curr) => ({
-            ...acc,
-            [curr.id]: {
+        (acc, curr) => {
+            acc[curr.id] = {
                 ...curr,
-                label: `${curr.typeNavn}: ${tilTekstligDato(curr.fom)} - ${curr.tom ? tilTekstligDato(curr.tom) : ''}`,
-            },
-        }),
+                label: `${curr.typeNavn}: ${tilTekstligDato(curr.fom)} - ${curr.tom ? tilTekstligDato(curr.tom) : ''}`
+            };
+            return acc;
+        },
         {} as Record<string, RegisterAktivitetMedLabel>
     );
 };

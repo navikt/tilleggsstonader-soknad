@@ -1,4 +1,4 @@
-import { Barn } from './barn';
+import type { Barn } from './barn';
 
 export interface Adresse {
     land: string;

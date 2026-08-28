@@ -1,4 +1,4 @@
-import { OppholdUtenforNorge, ArbeidOgOpphold } from '../../../../typer/søknad';
+import type { ArbeidOgOpphold, OppholdUtenforNorge } from '../../../../typer/søknad';
 
 /**
  * Oppdaterer felt i [OppholdUtenforNorge] med gitt verdi
@@ -13,7 +13,7 @@ export const oppdaterOpphold = <T extends OppholdUtenforNorge, K extends keyof T
         if (opphold._id === id) {
             return {
                 ...opphold,
-                [key]: verdi,
+                [key]: verdi
             };
         } else {
             return opphold;

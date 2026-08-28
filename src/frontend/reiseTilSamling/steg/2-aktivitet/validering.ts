@@ -1,3 +1,10 @@
+import { erLærlingEllerLiknendeTekster } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
+import type { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
+import type { Locale } from '../../../typer/tekst';
+import type { Valideringsfeil } from '../../../typer/validering';
+import { harVerdi } from '../../../utils/typeUtils';
+import { aktivitetTekster } from '../../tekster/aktivitet';
+import type { AktivitetReiseTilSamling } from '../../typer/aktivitet';
 import {
     skalViseAktivitetTypeUtdanningValg,
     skalViseArbeidsrettedeAktiviteter,
@@ -5,15 +12,8 @@ import {
     skalViseErUnder25År,
     skalViseFårDekketReise,
     skalViseLønnetTiltak,
-    skalViseMåBetaleForReiseTilSkole,
+    skalViseMåBetaleForReiseTilSkole
 } from './synlighet';
-import { erLærlingEllerLiknendeTekster } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
-import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
-import { Locale } from '../../../typer/tekst';
-import { Valideringsfeil } from '../../../typer/validering';
-import { harVerdi } from '../../../utils/typeUtils';
-import { aktivitetTekster } from '../../tekster/aktivitet';
-import { AktivitetReiseTilSamling } from '../../typer/aktivitet';
 export const errorKeyValgteAktiviteter = 'aktivitet_valgteAktiviteter';
 export const errorKeyAnnenAktivitet = 'aktivitet_annenAktivitet';
 export const errorKeyAnnenAktivitetTypeUtdanning = 'aktivitet_annenAktivitetTypeUtdanning';
@@ -44,8 +44,8 @@ export const validerAktivitetReiseTilSamling = (
                 ...feil,
                 [errorKeyValgteAktiviteter]: {
                     id: errorKeyValgteAktiviteter,
-                    melding: aktivitetTekster.checkbox_velge_aktivitet_feilmelding[locale],
-                },
+                    melding: aktivitetTekster.checkbox_velge_aktivitet_feilmelding[locale]
+                }
             };
         }
     } else if (!harVerdi(annenAktivitet?.verdi)) {
@@ -53,8 +53,8 @@ export const validerAktivitetReiseTilSamling = (
             ...feil,
             [errorKeyAnnenAktivitet]: {
                 id: errorKeyAnnenAktivitet,
-                melding: aktivitetTekster.radio_annet_uten_registeraktivitet_feilmelding[locale],
-            },
+                melding: aktivitetTekster.radio_annet_uten_registeraktivitet_feilmelding[locale]
+            }
         };
     }
 
@@ -65,8 +65,8 @@ export const validerAktivitetReiseTilSamling = (
                 [errorKeyAnnenAktivitetTypeUtdanning]: {
                     id: errorKeyAnnenAktivitetTypeUtdanning,
                     melding:
-                        aktivitetTekster.radio_type_arbeidsrettede_aktiviteter_feilmelding[locale],
-                },
+                        aktivitetTekster.radio_type_arbeidsrettede_aktiviteter_feilmelding[locale]
+                }
             };
         } else if (skalViseErLærlingEllerLiknende(annenAktivitetTypeUtdanning)) {
             if (!harVerdi(erLærlingEllerLiknende?.verdi)) {
@@ -74,8 +74,8 @@ export const validerAktivitetReiseTilSamling = (
                     ...feil,
                     [errorKeyErLærlingEllerLiknende]: {
                         id: errorKeyErLærlingEllerLiknende,
-                        melding: erLærlingEllerLiknendeTekster.radio_lærling_feilmelding[locale],
-                    },
+                        melding: erLærlingEllerLiknendeTekster.radio_lærling_feilmelding[locale]
+                    }
                 };
             } else if (skalViseFårDekketReise(erLærlingEllerLiknende)) {
                 if (!harVerdi(tilleggsopplysninger?.fårDekketReise?.verdi)) {
@@ -83,8 +83,8 @@ export const validerAktivitetReiseTilSamling = (
                         ...feil,
                         [errorKeyFårDekketReise]: {
                             id: errorKeyFårDekketReise,
-                            melding: aktivitetTekster.radio_dekket_reise_feilmelding[locale],
-                        },
+                            melding: aktivitetTekster.radio_dekket_reise_feilmelding[locale]
+                        }
                     };
                 }
             } else if (skalViseErUnder25År(erLærlingEllerLiknende)) {
@@ -93,8 +93,8 @@ export const validerAktivitetReiseTilSamling = (
                         ...feil,
                         [errorKeyErUnder25År]: {
                             id: errorKeyErUnder25År,
-                            melding: aktivitetTekster.radio_under_25_år_feilmelding[locale],
-                        },
+                            melding: aktivitetTekster.radio_under_25_år_feilmelding[locale]
+                        }
                     };
                 } else if (skalViseMåBetaleForReiseTilSkole(erUnder25År)) {
                     if (!harVerdi(tilleggsopplysninger?.måBetaleForReiseTilSkole?.verdi)) {
@@ -104,8 +104,8 @@ export const validerAktivitetReiseTilSamling = (
                                 id: errorKeyMåBetaleForReiseTilSkole,
                                 melding:
                                     aktivitetTekster
-                                        .radio_må_betale_for_reise_til_skole_feilmelding[locale],
-                            },
+                                        .radio_må_betale_for_reise_til_skole_feilmelding[locale]
+                            }
                         };
                     }
                 }
@@ -119,8 +119,8 @@ export const validerAktivitetReiseTilSamling = (
                 ...feil,
                 [errorKeyLønnetAktivitet]: {
                     id: errorKeyLønnetAktivitet,
-                    melding: aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale],
-                },
+                    melding: aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale]
+                }
             };
         }
     }

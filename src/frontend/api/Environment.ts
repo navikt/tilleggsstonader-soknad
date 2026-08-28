@@ -17,7 +17,7 @@ interface IModellversjon {
 const SkjematypeTilPapirskjema: Record<Skjematype, string> = {
     [Skjematype.SØKNAD_PASS_AV_BARN]: 'nav111215b',
     [Skjematype.SØKNAD_LÆREMIDLER]: 'nav111216b',
-    [Skjematype.SØKNAD_REISE_TIL_SAMLING]: 'nav111217b',
+    [Skjematype.SØKNAD_REISE_TIL_SAMLING]: 'nav111217b'
 };
 
 const urlPapirsøknadProd = (skjematype: Skjematype) =>
@@ -38,7 +38,7 @@ export const Environment = (): EnvironmentProps => {
             logoutUrl: 'https://login.ekstern.dev.nav.no/oauth2/logout',
             urlPapirsøknad: urlPapirsøknadDev,
             miljø: 'preprod',
-            modellVersjon: modellVersjon,
+            modellVersjon: modellVersjon
         };
     } else if (window.location.hostname.indexOf('nav.no') > -1) {
         const baseUrl = 'https://www.nav.no/tilleggsstonader/soknad';
@@ -49,7 +49,7 @@ export const Environment = (): EnvironmentProps => {
             logoutUrl: 'https://login.nav.no/oauth2/logout',
             urlPapirsøknad: urlPapirsøknadProd,
             miljø: 'production',
-            modellVersjon: modellVersjon,
+            modellVersjon: modellVersjon
         };
     } else {
         const baseUrl = 'http://localhost:8080';
@@ -60,7 +60,7 @@ export const Environment = (): EnvironmentProps => {
             logoutUrl: 'http://localhost:8000/oauth2/logout',
             urlPapirsøknad: urlPapirsøknadDev,
             miljø: 'local',
-            modellVersjon: modellVersjon,
+            modellVersjon: modellVersjon
         };
     }
 };

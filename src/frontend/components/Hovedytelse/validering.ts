@@ -1,11 +1,11 @@
+import { hovedytelseInnhold } from '../../tekster/hovedytelse';
+import type { EnumFlereValgFelt } from '../../typer/skjema';
+import type { ArbeidOgOpphold } from '../../typer/søknad';
+import type { Locale } from '../../typer/tekst';
+import type { Valideringsfeil } from '../../typer/validering';
 import { validerArbeidOgOpphold } from './ArbeidOgOpphold/validering';
 import { skalTaStillingTilOppholdINorge } from './taStillingTilOpphold';
-import { Ytelse } from './typer';
-import { hovedytelseInnhold } from '../../tekster/hovedytelse';
-import { EnumFlereValgFelt } from '../../typer/skjema';
-import { ArbeidOgOpphold } from '../../typer/søknad';
-import { Locale } from '../../typer/tekst';
-import { Valideringsfeil } from '../../typer/validering';
+import type { Ytelse } from './typer';
 
 /**
  * For å ha unike feilid på felter
@@ -19,7 +19,7 @@ export enum FeilIdDinSituasjon {
     HAR_OPPHOLD_SISTE_12_MND = '6',
     OPPHOLD_SISTE_12_MND = '7',
     HAR_OPPHOLD_NESTE_12_MND = '8',
-    OPPHOLD_NESTE_12_MND = '9',
+    OPPHOLD_NESTE_12_MND = '9'
 }
 
 export const validerHovedytelse = (
@@ -34,8 +34,8 @@ export const validerHovedytelse = (
             ...feil,
             ytelse: {
                 id: FeilIdDinSituasjon.YTELSE,
-                melding: hovedytelseInnhold.hovedytelse_feilmelding[locale],
-            },
+                melding: hovedytelseInnhold.hovedytelse_feilmelding[locale]
+            }
         };
     }
 
@@ -43,7 +43,7 @@ export const validerHovedytelse = (
     if (skalTaStillingTilOpphold) {
         feil = {
             ...feil,
-            ...validerArbeidOgOpphold(opphold, locale),
+            ...validerArbeidOgOpphold(opphold, locale)
         };
     }
     return feil;

@@ -1,12 +1,11 @@
-import React from 'react';
-
+import { VStack } from '@navikt/ds-react';
+import { BreakpointMd } from '@navikt/ds-tokens/js';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 import { Routes } from 'react-router';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { VStack } from '@navikt/ds-react';
-import { BreakpointMd } from '@navikt/ds-tokens/js';
 
 import { KjørelisteArenaLenke } from './components/KjørelisteArenaLenke';
 import { KjørelisteHeader } from './components/KjørelisteHeader';

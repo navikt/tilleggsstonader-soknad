@@ -1,15 +1,14 @@
-import React from 'react';
-
 import { VStack } from '@navikt/ds-react';
-
-import { Kjøreliste } from './Kjøreliste';
-import { KjørelisteMetadata } from './KjørelisteMetadata';
-import { SlikFyllerDuUtKjørelister } from './SlikFyllerDuUtKjørelister';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { Valideringsfeil } from '../../../typer/validering';
+import type { Valideringsfeil } from '../../../typer/validering';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
+import { Kjøreliste } from './Kjøreliste';
+import { KjørelisteMetadata } from './KjørelisteMetadata';
+import { SlikFyllerDuUtKjørelister } from './SlikFyllerDuUtKjørelister';
 
 export function KjørelisteSkjema() {
     const { kjøreliste } = useKjøreliste();
@@ -29,7 +28,7 @@ export function KjørelisteSkjema() {
         if (ukerKlarForUtfylling.length > 0 && !harMinstEnUtfyltReisedag) {
             feil.reisedager = {
                 id: 'klart-til-innsending',
-                melding: 'Du må fylle ut minst én reisedag',
+                melding: 'Du må fylle ut minst én reisedag'
             };
         }
 
@@ -39,7 +38,7 @@ export function KjørelisteSkjema() {
                 .forEach((reisdag) => {
                     feil[reisdag.dato.verdi] = {
                         id: reisdag.dato.verdi,
-                        melding: 'Utgiften må være større enn 0',
+                        melding: 'Utgiften må være større enn 0'
                     };
                 });
         });

@@ -1,14 +1,13 @@
-import React from 'react';
-
-import { skalTaStillingTilLandForJobberIAnnetLand } from './util';
+import type React from 'react';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { jobberIAnnetLandInnhold } from '../../../passAvBarn/tekster/opphold';
-import { EnumFelt, SelectFelt } from '../../../typer/skjema';
-import { ArbeidOgOpphold, JaNei } from '../../../typer/søknad';
+import type { EnumFelt, SelectFelt } from '../../../typer/skjema';
+import type { ArbeidOgOpphold, JaNei } from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typeUtils';
 import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
 import { Landvelger } from '../../Landvelger/Landvelger';
 import { LocaleRadioGroup } from '../../Teksthåndtering/LocaleRadioGroup';
+import { skalTaStillingTilLandForJobberIAnnetLand } from './util';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
@@ -20,23 +19,23 @@ export const JobberDuIAnnetLand: React.FC<Props> = ({ arbeidOgOpphold, settArbei
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
             jobberIAnnetLand: verdi,
-            jobbAnnetLand: undefined,
+            jobbAnnetLand: undefined
         }));
         settValideringsfeil((prevState) => ({
             ...prevState,
             jobberIAnnetLand: undefined,
-            jobbAnnetLand: undefined,
+            jobbAnnetLand: undefined
         }));
     };
     const oppdaterHvilketLand = (verdi: SelectFelt) => {
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
-            jobbAnnetLand: verdi,
+            jobbAnnetLand: verdi
         }));
         if (harVerdi(verdi.verdi)) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                jobbAnnetLand: undefined,
+                jobbAnnetLand: undefined
             }));
         }
     };

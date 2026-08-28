@@ -1,17 +1,16 @@
-import React, { ChangeEvent, useState } from 'react';
+import { BodyLong, Checkbox, ErrorMessage, GuidePanel, Heading, HStack } from '@navikt/ds-react';
 
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React, { type ChangeEvent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
-import { BodyLong, Checkbox, ErrorMessage, GuidePanel, Heading, HStack } from '@navikt/ds-react';
-
-import { OppsummeringUke } from './OppsummeringUke';
-import { VedleggOppsummering } from './VedleggOppsummering';
 import { sendInnKjøreliste } from '../../../api/api';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
+import { OppsummeringUke } from './OppsummeringUke';
+import { VedleggOppsummering } from './VedleggOppsummering';
 
 export const Oppsummeringsside = () => {
     const navigate = useNavigate();
@@ -32,7 +31,7 @@ export const Oppsummeringsside = () => {
     const {
         mutate: sendInnKjørelisteMutation,
         isPending: laster,
-        error,
+        error
     } = useMutation({
         mutationFn: () => {
             const kjørelisteMedKjørteDager = {
@@ -41,7 +40,7 @@ export const Oppsummeringsside = () => {
                     (uke) =>
                         !uke.sendtInnTidligere &&
                         uke.reisedager.some((reisedag) => reisedag.harKjørt)
-                ),
+                )
             };
             return sendInnKjøreliste(kjørelisteMedKjørteDager);
         },
@@ -49,10 +48,10 @@ export const Oppsummeringsside = () => {
             navigate(finnPath(reiseId, KjørelisteRoutes.KVITTERING), {
                 state: {
                     mottattTidspunkt: res.mottattTidspunkt,
-                    saksnummer: res.saksnummer,
-                },
+                    saksnummer: res.saksnummer
+                }
             });
-        },
+        }
     });
 
     const håndterSendInnKjøreliste = () => {

@@ -1,6 +1,6 @@
-import React from 'react';
-
 import { Alert, BodyLong, Heading } from '@navikt/ds-react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 
 export const AdvarselEndringOvergangsstønad = () => {
     return (

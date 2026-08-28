@@ -1,24 +1,21 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
+import type React from 'react';
 
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../../../context/SpråkContext';
-import { AktivitetFelles } from '../../../typer/søknad';
+import type { AktivitetFelles } from '../../../typer/søknad';
 import { verdiFelterTilTekstElement } from '../../../utils/tekstUtils';
 import { RouteTilPath } from '../../routing/routesPassAvBarn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const ArbeidsrettetAktivitet: React.FC<{ aktivitet?: AktivitetFelles }> = ({
-    aktivitet,
+    aktivitet
 }) => {
     const { locale } = useSpråk();
 
     const aktiviteterSomTekstfelt =
-        aktivitet &&
-        aktivitet.aktiviteter &&
-        verdiFelterTilTekstElement(aktivitet.aktiviteter.verdier);
+        aktivitet?.aktiviteter && verdiFelterTilTekstElement(aktivitet.aktiviteter.verdier);
 
     const aktiviteterLabel = aktivitet?.aktiviteter?.label;
     const annenAktivitetLabel = aktivitet?.annenAktivitet?.label;

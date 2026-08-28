@@ -1,14 +1,12 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
-
-import { flervalgTilKommaStreng } from './utils';
+import type React from 'react';
 import { fellesTekster } from '../../../tekster/felles';
-import { EnumFelt } from '../../../typer/skjema';
-import { JaNei, OppholdUtenforNorge } from '../../../typer/søknad';
-import { TekstElement } from '../../../typer/tekst';
+import type { EnumFelt } from '../../../typer/skjema';
+import type { JaNei, OppholdUtenforNorge } from '../../../typer/søknad';
+import type { TekstElement } from '../../../typer/tekst';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';
+import { flervalgTilKommaStreng } from './utils';
 
 export const OppholdOppsummering: React.FC<{
     tittel: TekstElement<string>;

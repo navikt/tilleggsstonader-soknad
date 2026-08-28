@@ -1,11 +1,10 @@
-import React from 'react';
-
 import { Link } from '@navikt/ds-react';
+import type React from 'react';
 
 import { logNavigereEvent } from '../../api/analytics';
 import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
-import { InlineLenke, Lenke, StyledTekst, TekstElement } from '../../typer/tekst';
+import type { InlineLenke, Lenke, StyledTekst, TekstElement } from '../../typer/tekst';
 
 export const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> = ({ tekst }) => {
     const { locale } = useSpråk();
@@ -16,7 +15,7 @@ export const LocaleInlineLenke: React.FC<{ tekst: TekstElement<InlineLenke> }> =
 };
 
 export const LenkeEllerTekst: React.FC<{ tekstElement: string | StyledTekst | Lenke }> = ({
-    tekstElement,
+    tekstElement
 }) => {
     const { skjematype } = useSøknad();
 

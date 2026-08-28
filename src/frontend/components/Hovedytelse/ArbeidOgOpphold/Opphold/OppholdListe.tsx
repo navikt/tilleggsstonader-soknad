@@ -1,25 +1,25 @@
-import React from 'react';
-
-import styled from 'styled-components';
-
 import { ArrowUndoIcon, PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { BorderAccent } from '@navikt/ds-tokens/js';
-
+import type React from 'react';
+import styled from 'styled-components';
+import { useSpråk } from '../../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
+import {
+    type OppholdInnhold,
+    oppholdUtenforNorgeInnhold
+} from '../../../../passAvBarn/tekster/opphold';
+import type { ArbeidOgOpphold } from '../../../../typer/søknad';
+import { inneholderFeil } from '../../../../typer/validering';
 import { LagredeOpphold } from './LagredeOpphold';
 import { NyttOpphold } from './NyttOpphold';
-import { OppdatertOppholdFelt } from './typer';
+import type { OppdatertOppholdFelt } from './typer';
 import { oppdaterOpphold, opprettOppholdForNesteId } from './util';
 import {
     nullstillteOppholsfeilNeste12mnd,
     nullstillteOppholsfeilSiste12mnd,
-    validerOppholdUtenforNorgeUnderRedigering,
+    validerOppholdUtenforNorgeUnderRedigering
 } from './validering';
-import { useSpråk } from '../../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
-import { OppholdInnhold, oppholdUtenforNorgeInnhold } from '../../../../passAvBarn/tekster/opphold';
-import { ArbeidOgOpphold } from '../../../../typer/søknad';
-import { inneholderFeil } from '../../../../typer/validering';
 
 const BlåVenstreRammeContainer = styled(VStack)`
     border-left: 5px solid ${BorderAccent};
@@ -55,7 +55,7 @@ export const OppholdListe: React.FC<{
         settArbeidOgOpphold((prevState) => {
             return {
                 ...prevState,
-                [keyOpphold]: oppdaterOpphold(prevState[keyOpphold], id, key, verdi),
+                [keyOpphold]: oppdaterOpphold(prevState[keyOpphold], id, key, verdi)
             };
         });
     };
@@ -74,7 +74,7 @@ export const OppholdListe: React.FC<{
             if (inneholderFeil(feil)) {
                 settValideringsfeil((prevState) => ({
                     ...prevState,
-                    ...feil,
+                    ...feil
                 }));
                 return false;
             }
@@ -93,8 +93,8 @@ export const OppholdListe: React.FC<{
                 ...prevState,
                 [keyOpphold]: [
                     ...prevOppholdListe.map((prevOpphold) => ({ ...prevOpphold, lagret: true })),
-                    opprettOppholdForNesteId(prevOppholdListe),
-                ],
+                    opprettOppholdForNesteId(prevOppholdListe)
+                ]
             };
         });
     };
@@ -107,7 +107,7 @@ export const OppholdListe: React.FC<{
                     : nullstillteOppholsfeilNeste12mnd;
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                ...nullstiltefeilter,
+                ...nullstiltefeilter
             }));
         }
     };
@@ -115,7 +115,7 @@ export const OppholdListe: React.FC<{
     const slettOpphold = (id: number) => {
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
-            [keyOpphold]: prevState[keyOpphold].filter((opphold) => opphold._id !== id),
+            [keyOpphold]: prevState[keyOpphold].filter((opphold) => opphold._id !== id)
         }));
         slettValideringsfeilHvisUlagret(id);
     };

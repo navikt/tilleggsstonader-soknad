@@ -1,15 +1,14 @@
-import React from 'react';
-
 import { Alert, Heading, VStack } from '@navikt/ds-react';
-
-import {
-    finnVedleggMedParkeringsutgifter,
-    harUtgiftOver100krIGjeldendeInnsending,
-} from './VedleggUtils';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 import { Filopplaster } from '../../../components/Filopplaster/Filopplaster';
 import { useKjøreliste } from '../../KjørelisteContext';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { KjørelisteNavigasjonsKnapper } from '../KjørelisteNavigasjonsKnapper';
+import {
+    finnVedleggMedParkeringsutgifter,
+    harUtgiftOver100krIGjeldendeInnsending
+} from './VedleggUtils';
 
 export const Vedleggside = () => {
     const { kjøreliste, leggTilDokument, slettDokument } = useKjøreliste();

@@ -1,6 +1,6 @@
-import { Barn } from '../../typer/barn';
-import { Dokumentasjonsbehov, VedleggstypePassAvBarn } from '../../typer/skjema';
-import { Barnepass, PassType, ÅrsakBarnepass } from '../typer/barnepass';
+import type { Barn } from '../../typer/barn';
+import { type Dokumentasjonsbehov, VedleggstypePassAvBarn } from '../../typer/skjema';
+import { type Barnepass, PassType, ÅrsakBarnepass } from '../typer/barnepass';
 
 export const oppdaterDokumentasjonsbehovForBarnMedPass = (
     barnMedPass: Barnepass[],
@@ -11,7 +11,7 @@ export const oppdaterDokumentasjonsbehovForBarnMedPass = (
         (dokument) => dokument.barn === undefined
     );
     const dokumentasjonsbehovForBarn = barnMedPass.flatMap((passInfo) => {
-        const aktueltBarn = barn.find((barn) => barn.ident === passInfo.ident)!;
+        const aktueltBarn = barn.find((barn) => barn.ident === passInfo.ident);
         return utledDokumentasjonsbehovForBarn(passInfo, aktueltBarn);
     });
 
@@ -20,7 +20,7 @@ export const oppdaterDokumentasjonsbehovForBarnMedPass = (
 
 const utledDokumentasjonsbehovForBarn = (
     passInfo: Barnepass,
-    barn: Barn
+    barn?: Barn
 ): Dokumentasjonsbehov[] => {
     const dokumentasjonsbehov = [utledDokumentasjonsbehovPassType(passInfo, barn)];
 
@@ -30,28 +30,31 @@ const utledDokumentasjonsbehovForBarn = (
     if (årsakEkstraPassVedleggType !== undefined) {
         dokumentasjonsbehov.push({
             barn: barn,
-            type: årsakEkstraPassVedleggType,
+            type: årsakEkstraPassVedleggType
         });
     }
 
     return dokumentasjonsbehov;
 };
 
-const utledDokumentasjonsbehovPassType = (passInfo: Barnepass, barn: Barn): Dokumentasjonsbehov => {
+const utledDokumentasjonsbehovPassType = (
+    passInfo: Barnepass,
+    barn?: Barn
+): Dokumentasjonsbehov => {
     return {
         barn: barn,
-        type: passTypeTilVedlegg[passInfo.type.verdi],
+        type: passTypeTilVedlegg[passInfo.type.verdi]
     };
 };
 
 const passTypeTilVedlegg: Record<PassType, VedleggstypePassAvBarn> = {
     [PassType.BARNEHAGE_SFO_AKS]: VedleggstypePassAvBarn.UTGIFTER_PASS_SFO_AKS_BARNEHAGE,
-    [PassType.PRIVAT]: VedleggstypePassAvBarn.UTGIFTER_PASS_PRIVAT,
+    [PassType.PRIVAT]: VedleggstypePassAvBarn.UTGIFTER_PASS_PRIVAT
 };
 
 const årsakEkstraPassTilVedlegg: Partial<Record<ÅrsakBarnepass, VedleggstypePassAvBarn>> = {
     [ÅrsakBarnepass.TRENGER_MER_PASS_ENN_JEVNALDRENDE]:
         VedleggstypePassAvBarn.SKRIFTLIG_UTTALELSE_HELSEPERSONELL,
     [ÅrsakBarnepass.MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID]:
-        VedleggstypePassAvBarn.TILTAKSSTED_ELLER_UTDANNINGSSTED,
+        VedleggstypePassAvBarn.TILTAKSSTED_ELLER_UTDANNINGSSTED
 };

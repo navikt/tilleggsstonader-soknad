@@ -1,4 +1,4 @@
-import { TekstElement } from '../../typer/tekst';
+import type { TekstElement } from '../../typer/tekst';
 
 interface OppsummeringInnhold {
     tittel: TekstElement<string>;
@@ -13,23 +13,23 @@ interface OppsummeringInnhold {
 
 export const oppsummeringTekster: OppsummeringInnhold = {
     tittel: {
-        nb: 'Oppsummering',
+        nb: 'Oppsummering'
     },
     guide_innhold: {
-        nb: 'Se over søknaden din før du sender den inn. Alt du har fylt inn er lagret. Hvis noe er feil, så kan du gå tilbake og endre det.',
+        nb: 'Se over søknaden din før du sender den inn. Alt du har fylt inn er lagret. Hvis noe er feil, så kan du gå tilbake og endre det.'
     },
     arbeidsrettet_aktivitet: {
-        nb: 'Arbeidsrettet aktivitet',
+        nb: 'Arbeidsrettet aktivitet'
     },
     dine_barn: {
         tittel: {
-            nb: 'Dine barn',
+            nb: 'Dine barn'
         },
         label: {
-            nb: 'Hvilke barn søker du om støtte til pass for?',
-        },
+            nb: 'Hvilke barn søker du om støtte til pass for?'
+        }
     },
     barnepass: {
-        nb: 'Pass av barn',
-    },
+        nb: 'Pass av barn'
+    }
 };

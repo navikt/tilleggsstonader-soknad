@@ -1,9 +1,6 @@
-import React from 'react';
-
 import { BodyShort } from '@navikt/ds-react';
-
-import { SamlingerListe } from './SamlingerListe';
-import { validerSamlinger } from './validering';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -11,6 +8,8 @@ import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { inneholderFeil } from '../../../typer/validering';
 import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { samlingerTekster } from '../../tekster/samlinger';
+import { SamlingerListe } from './SamlingerListe';
+import { validerSamlinger } from './validering';
 
 export const SamlingerReiseTilSamling = () => {
     const { locale } = useSpråk();

@@ -1,5 +1,5 @@
-import { Ytelse } from '../components/Hovedytelse/typer';
-import { CheckboxGruppe, TekstElement } from '../typer/tekst';
+import type { Ytelse } from '../components/Hovedytelse/typer';
+import type { CheckboxGruppe, TekstElement } from '../typer/tekst';
 
 interface HovedytelseInnhold {
     tittel: TekstElement<string>;
@@ -18,24 +18,24 @@ export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
     SYKEPENGER: { nb: 'Sykepenger' },
     KVALIFISERINGSSTØNAD: { nb: 'Kvalifiseringsstønad ' },
     INGEN_PENGESTØTTE: { nb: 'Mottar ingen pengestøtte, men har nedsatt arbeidsevne' },
-    INGEN_PASSENDE_ALTERNATIVER: { nb: 'Ingen av alternativene passer for meg' },
+    INGEN_PASSENDE_ALTERNATIVER: { nb: 'Ingen av alternativene passer for meg' }
 };
 
 export const hovedytelseInnhold: HovedytelseInnhold = {
     tittel: { nb: 'Din situasjon' },
     guide_innhold: {
-        nb: 'Vi spør om dette for å vite hvilke rettigheter du har og hvilke spørsmål vi må stille deg i søknadsskjemaet.',
+        nb: 'Vi spør om dette for å vite hvilke rettigheter du har og hvilke spørsmål vi må stille deg i søknadsskjemaet.'
     },
     checkbox_hovedytelse: {
         legend: {
-            nb: 'Mottar du eller har du nylig søkt om noe av dette?',
+            nb: 'Mottar du eller har du nylig søkt om noe av dette?'
         },
         beskrivelse: {
-            nb: 'Du kan velge flere.',
+            nb: 'Du kan velge flere.'
         },
-        alternativer: YtelseTilTekst,
+        alternativer: YtelseTilTekst
     },
     hovedytelse_feilmelding: {
-        nb: 'Du må huke av for minst én ytelse eller situasjon som passer for deg',
-    },
+        nb: 'Du må huke av for minst én ytelse eller situasjon som passer for deg'
+    }
 };

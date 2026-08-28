@@ -5,7 +5,7 @@ import { tilTekstligDato } from './datoUtils';
 export const datoFormat = {
     day: '2-digit',
     month: '2-digit',
-    year: 'numeric',
+    year: 'numeric'
 } as const;
 
 export const formaterIsoDato = (dato: string): string => {

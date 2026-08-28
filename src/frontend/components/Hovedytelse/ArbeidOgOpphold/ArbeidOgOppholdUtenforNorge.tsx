@@ -1,15 +1,13 @@
-import React from 'react';
-
 import { GuidePanel, Heading, VStack } from '@navikt/ds-react';
-
-import { JobberDuIAnnetLand } from './JobberDuIAnnetLand';
-import { OppholdUtenforNorgeSiste12Mnd } from './Opphold/OppholdUtenforNorgeSiste12Mnd';
-import { Pengestøtte } from './Pengestøtte';
+import type React from 'react';
 import { arbeidOgOppholdInnhold } from '../../../passAvBarn/tekster/opphold';
-import { ArbeidOgOpphold } from '../../../typer/søknad';
+import type { ArbeidOgOpphold } from '../../../typer/søknad';
 import { LocaleInlineLenke } from '../../Teksthåndtering/LocaleInlineLenke';
 import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../UnderspørsmålContainer';
+import { JobberDuIAnnetLand } from './JobberDuIAnnetLand';
+import { OppholdUtenforNorgeSiste12Mnd } from './Opphold/OppholdUtenforNorgeSiste12Mnd';
+import { Pengestøtte } from './Pengestøtte';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
@@ -18,7 +16,7 @@ interface Props {
 
 export const ArbeidOgOppholdUtenforNorge: React.FC<Props> = ({
     arbeidOgOpphold,
-    settArbeidOgOpphold,
+    settArbeidOgOpphold
 }) => {
     return (
         <UnderspørsmålContainer>

@@ -1,5 +1,5 @@
 import { Skjematype } from '../typer/skjematyper';
-import { InlineLenke, TekstElement } from '../typer/tekst';
+import type { InlineLenke, TekstElement } from '../typer/tekst';
 
 interface HarEksistendeBehandlingInnhold {
     spørsmål_om_søknaden: TekstElement<string>;
@@ -15,7 +15,7 @@ interface HarEksistendeBehandlingInnhold {
 
 export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = {
     spørsmål_om_søknaden: {
-        nb: 'Spørsmål om søknaden eller saksbehandlingstid?',
+        nb: 'Spørsmål om søknaden eller saksbehandlingstid?'
     },
 
     spørsmål_om_søknaden_innhold: {
@@ -23,39 +23,39 @@ export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = 
             'Du kan se forventet saksbehandlingstid på ',
             {
                 tekst: ' nav.no/saksbehandlingstid',
-                url: 'https://www.nav.no/saksbehandlingstid',
+                url: 'https://www.nav.no/saksbehandlingstid'
             },
-            ' (åpnes i nytt vindu).',
-        ],
+            ' (åpnes i nytt vindu).'
+        ]
     },
     vil_forstatt_sende_søknad: {
-        nb: 'Vil du likevel sende ny søknad?',
+        nb: 'Vil du likevel sende ny søknad?'
     },
     vil_forstatt_sende_søknad_innhold: {
         [Skjematype.SØKNAD_PASS_AV_BARN]: {
-            nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er et nytt skole/barnehageår kan du sende ny søknad.',
+            nb: 'Hvis du har begynt på nytt tiltak, ny utdanning eller det er et nytt skole/barnehageår kan du sende ny søknad.'
         },
         [Skjematype.SØKNAD_LÆREMIDLER]: {
-            nb: 'Hvis du har begynt på en ny utdanning eller opplæring, eller det gjelder et nytt skoleår, kan du sende ny søknad.',
+            nb: 'Hvis du har begynt på en ny utdanning eller opplæring, eller det gjelder et nytt skoleår, kan du sende ny søknad.'
         },
         [Skjematype.SØKNAD_REISE_TIL_SAMLING]: {
-            nb: 'Hvis du har deltatt på en ny samling, kan du sende ny søknad.',
-        },
+            nb: 'Hvis du har deltatt på en ny samling, kan du sende ny søknad.'
+        }
     },
     alert_for_skjematype: {
-        nb: 'Du har allerede sendt oss en søknad om støtte til [0]. ',
+        nb: 'Du har allerede sendt oss en søknad om støtte til [0]. '
     },
     alert_innhold: {
         nb: [
             'Søknaden venter på behandling hos oss. Du kan se søknaden på ',
             {
                 tekst: ' Min side',
-                url: 'https://www.nav.no/min-side',
+                url: 'https://www.nav.no/min-side'
             },
-            ' (åpnes i ny fane) ',
-        ],
+            ' (åpnes i ny fane) '
+        ]
     },
     startNySøknad: {
-        nb: 'Start ny søknad',
-    },
+        nb: 'Start ny søknad'
+    }
 };

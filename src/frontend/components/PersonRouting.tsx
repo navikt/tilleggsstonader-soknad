@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-
-import axios, { AxiosError } from 'axios';
+import axios, { type AxiosError } from 'axios';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 import { hentPersonData } from '../api/api';
 import { PersonProvider } from '../context/PersonContext';
 import { initiellPerson } from '../mock/initiellPerson';
-import { Person } from '../typer/person';
+import type { Person } from '../typer/person';
+import { Skjematype } from '../typer/skjematyper';
 import { sendSøkerTilPapirsøknad } from './SkjemaRouting/sendSøkerTilFyllUtSøknad';
 import { useSjekkBehandlingStatus } from './Søknadside/SjekkBehandlingStatus';
-import { Skjematype } from '../typer/skjematyper';
+
 const erFeilOgSkalRouteTilPapirsøknad = (req: AxiosError<{ detail?: string }, unknown>) => {
     return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
 };
@@ -19,7 +20,7 @@ const skalHenteMedBarn = (skjematype: Skjematype) => skjematyperMedBarn.indexOf(
 
 export const PersonRouting: React.FC<{ skjematype: Skjematype; children: React.ReactNode }> = ({
     skjematype,
-    children,
+    children
 }) => {
     const [person, settPerson] = useState<Person>(initiellPerson);
     const [harLastetPerson, settHarLastetPerson] = useState<boolean>(false);

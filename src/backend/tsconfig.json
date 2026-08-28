@@ -1,18 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "module": "es6",
-    "strict": true,
-    "noImplicitAny": true,
-    "esModuleInterop": true,
-    "outDir": "build",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "exclude": [
-    "node_modules",
-    "**/*.test.ts"
-  ]
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es6",
+        "strict": true,
+        "noImplicitAny": true,
+        "esModuleInterop": true,
+        "outDir": "build",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "exclude": ["node_modules", "**/*.test.ts"]
 }

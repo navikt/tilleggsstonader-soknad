@@ -1,10 +1,10 @@
 import { useSpråk } from '../../context/SpråkContext';
-import { TekstElement } from '../../typer/tekst';
+import type { TekstElement } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
 export const LocaleTekst: React.FC<{ tekst: TekstElement<string>; argument0?: string }> = ({
     tekst,
-    argument0,
+    argument0
 }) => {
     const { locale } = useSpråk();
     const tekstStreng = tekst[locale];

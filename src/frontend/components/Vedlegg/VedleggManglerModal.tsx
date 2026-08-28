@@ -1,8 +1,7 @@
-import React, { RefObject } from 'react';
-
-import { useNavigate } from 'react-router-dom';
-
 import { BodyLong, Box, Button, Heading, HStack, List, Modal } from '@navikt/ds-react';
+import type React from 'react';
+import type { RefObject } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';

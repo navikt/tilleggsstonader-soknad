@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
-
-import { useLocation, useNavigate } from 'react-router';
-
 import { Accordion, BodyLong, Button, GuidePanel, HStack, Label, VStack } from '@navikt/ds-react';
-
-import { routesLæremidler } from './routing/routesLæremidler';
-import { forsideTekster } from './tekster/forside';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
-import { useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
@@ -21,6 +16,9 @@ import { usePerson } from '../context/PersonContext';
 import { fellesTekster } from '../tekster/felles';
 import { Skjematype } from '../typer/skjematyper';
 import { hentNesteRoute } from '../utils/routeUtils';
+import { useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
+import { routesLæremidler } from './routing/routesLæremidler';
+import { forsideTekster } from './tekster/forside';
 
 export const Forside: React.FC = () => {
     const navigate = useNavigate();

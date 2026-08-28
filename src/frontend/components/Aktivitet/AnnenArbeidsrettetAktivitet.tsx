@@ -1,17 +1,16 @@
-import React from 'react';
-
 import { Box, List } from '@navikt/ds-react';
+import type React from 'react';
 
-import { AktivitetInnhold } from '../../tekster/aktivitet';
-import { AnnenAktivitetType } from '../../typer/aktivitet';
-import { EnumFelt } from '../../typer/skjema';
-import { RadiogruppeMedUtvalg } from '../../typer/tekst';
-import { Feilmelding } from '../../typer/validering';
+import type { AktivitetInnhold } from '../../tekster/aktivitet';
+import type { AnnenAktivitetType } from '../../typer/aktivitet';
+import type { EnumFelt } from '../../typer/skjema';
+import type { RadiogruppeMedUtvalg } from '../../typer/tekst';
+import type { Feilmelding } from '../../typer/validering';
 import { LocaleInlineLenke } from '../Teksthåndtering/LocaleInlineLenke';
 import { LocaleRadioGroup } from '../Teksthåndtering/LocaleRadioGroup';
 import {
     LocaleReadMoreMedChildren,
-    LocaleReadMoreMedLenke,
+    LocaleReadMoreMedLenke
 } from '../Teksthåndtering/LocaleReadMore';
 import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
 
@@ -28,7 +27,7 @@ export const AnnenArbeidsrettetAktivitet: React.FC<Props> = ({
     radioTekst,
     annenAktivitet,
     oppdaterAnnenAktivitet,
-    feilmelding,
+    feilmelding
 }) => {
     return (
         <div>

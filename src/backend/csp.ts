@@ -1,6 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
-
 import { buildCspHeader } from '@navikt/nav-dekoratoren-moduler/ssr/index.js';
+import type { NextFunction, Request, Response } from 'express';
 
 import { logger } from './logger';
 import { miljø } from './miljø';
@@ -15,7 +14,7 @@ const appDirectives = {
     'style-src-elem': ["'self'"],
     'img-src': ["'self'", 'data:'],
     'connect-src': ["'self'", 'm3pb011r.apicdn.sanity.io'],
-    'font-src': ["'self'"],
+    'font-src': ["'self'"]
 };
 
 const CSP_TIMEOUT_MS = 2000;
@@ -34,10 +33,10 @@ export async function applyCspDirectives(_: Request, res: Response, next: NextFu
         );
         const cspHeader = await Promise.race([
             buildCspHeader(appDirectives, { env: getEnv() }),
-            timeoutPromise,
+            timeoutPromise
         ]);
 
-        res.header('Content-Security-Policy', cspHeader + '; report-to csp-violation');
+        res.header('Content-Security-Policy', `${cspHeader}; report-to csp-violation`);
         res.header('Reporting-Endpoints', `csp-violation="${rapporteringsendepunkt}"`);
     } catch (error) {
         logger.warn('Kunne ikke hente CSP-headere fra dekoratøren. Fortsetter uten CSP.', error);
@@ -51,7 +50,7 @@ export async function applyCspDirectives(_: Request, res: Response, next: NextFu
 const IGNORERTE_CSP_DOMENER = [
     'translate.google.com',
     'translate.googleapis.com',
-    'fonts.gstatic.com', // Google Translate-ikon
+    'fonts.gstatic.com' // Google Translate-ikon
 ];
 
 function shouldReportViolation(blockedURL: string): boolean {
@@ -77,7 +76,7 @@ export function logCspViolation(req: Request, res: Response) {
             blockedURL,
             documentURL,
             violatedDirective,
-            sourceFile,
+            sourceFile
         });
     }
 

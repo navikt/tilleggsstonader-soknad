@@ -1,12 +1,10 @@
-import { useMemo, useState } from 'react';
-
 import createUseContext from 'constate';
-
-import { oppdaterDokumentasjonsbehovForBarnMedPass } from './barnepassDokumentUtil';
+import { useMemo, useState } from 'react';
 import { usePerson } from '../../context/PersonContext';
-import { DokumentasjonFelt } from '../../typer/skjema';
-import { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
-import { Barnepass } from '../typer/barnepass';
+import type { DokumentasjonFelt } from '../../typer/skjema';
+import type { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
+import type { Barnepass } from '../typer/barnepass';
+import { oppdaterDokumentasjonsbehovForBarnMedPass } from './barnepassDokumentUtil';
 
 const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() => {
     PassAvBarnSøknadProvider.displayName = 'SØKNAD_PASS_AV_BARN_PROVIDER';
@@ -47,7 +45,7 @@ const [PassAvBarnSøknadProvider, usePassAvBarnSøknad] = createUseContext(() =>
         dokumentasjonsbehov,
         dokumentasjon,
         settDokumentasjon,
-        resetSøknad,
+        resetSøknad
     };
 });
 

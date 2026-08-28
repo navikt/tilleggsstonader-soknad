@@ -1,4 +1,4 @@
-import { Person } from '../typer/person';
+import type { Person } from '../typer/person';
 
 export const initiellPerson: Person = {
     fornavn: '',
@@ -9,7 +9,7 @@ export const initiellPerson: Person = {
         land: 'NOR',
         gateadresse: '',
         postnummer: '',
-        poststed: '',
+        poststed: ''
     },
-    barn: [],
+    barn: []
 };

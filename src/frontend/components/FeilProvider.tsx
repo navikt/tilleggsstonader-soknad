@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-
-import { Feilside } from './Feilside';
 import { settGlobalFeilHandler } from '../api/globalFeil';
+import { Feilside } from './Feilside';
 
 export const FeilProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [harFeil, settHarFeil] = useState(false);

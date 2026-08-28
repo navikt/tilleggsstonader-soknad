@@ -1,11 +1,11 @@
-import React from 'react';
-
 import { ApmErrorBoundary } from '@nais/apm/react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import '@navikt/ds-css';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { initApm } from './api/apm';
 import { FeilProvider } from './components/FeilProvider';
@@ -28,6 +28,7 @@ import { erProd } from './utils/miljø';
 initApm();
 
 const rootElement = document.getElementById('app');
+// biome-ignore lint/style/noNonNullAssertion: Den finnes
 const root = createRoot(rootElement!);
 
 const AppRoutes = () => {

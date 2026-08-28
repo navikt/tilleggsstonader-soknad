@@ -1,9 +1,8 @@
-import React from 'react';
-
-import { PersonRouting } from './PersonRouting';
+import type React from 'react';
 import { RegisterAktiviteterProvider } from '../context/RegisterAktiviteterContext';
 import { ValideringsfeilProvider } from '../context/ValideringsfeilContext';
-import { Skjematype } from '../typer/skjematyper';
+import type { Skjematype } from '../typer/skjematyper';
+import { PersonRouting } from './PersonRouting';
 
 interface Props {
     skjematype: Skjematype;

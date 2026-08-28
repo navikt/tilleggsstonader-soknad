@@ -1,7 +1,7 @@
 import constate from 'constate';
 
-import { Skjematype } from '../typer/skjematyper';
-import { Søknad } from '../typer/søknad';
+import type { Skjematype } from '../typer/skjematyper';
+import type { Søknad } from '../typer/søknad';
 
 interface Props {
     skjematype: Skjematype;
@@ -22,7 +22,7 @@ const [SøknadProvider, useSøknad] = constate(
         return {
             skjematype,
             søknad,
-            resetSøknadOgValideringsfeil,
+            resetSøknadOgValideringsfeil
         };
     }
 );

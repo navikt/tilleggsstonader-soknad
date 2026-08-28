@@ -1,10 +1,8 @@
-import React from 'react';
-
-import { Box, List, ListProps } from '@navikt/ds-react';
-
-import { LenkeEllerTekst } from './LocaleInlineLenke';
+import { Box, List, type ListProps } from '@navikt/ds-react';
+import type React from 'react';
 import { useSpråk } from '../../context/SpråkContext';
-import { InlineLenke, TekstElement } from '../../typer/tekst';
+import type { InlineLenke, TekstElement } from '../../typer/tekst';
+import { LenkeEllerTekst } from './LocaleInlineLenke';
 
 interface LocalePuntlisteProps extends Omit<ListProps, 'children'> {
     innhold: TekstElement<(string | InlineLenke)[]>;

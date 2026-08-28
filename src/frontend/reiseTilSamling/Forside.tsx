@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from 'react';
-
-import { useLocation, useNavigate } from 'react-router-dom';
-
 import {
     Accordion,
-    Box,
     BodyLong,
     BodyShort,
+    Box,
     Button,
     GuidePanel,
     HStack,
-    VStack,
+    VStack
 } from '@navikt/ds-react';
-
-import { routesReiseTilSamling } from './routing/routesReiseTilSamling';
-import { forsideTekster } from './tekster/forside';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
-import { useReiseTilSamlingSøknad } from './context/ReiseTilSamlingSøknadContext';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
@@ -28,6 +23,9 @@ import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 import { Skjematype } from '../typer/skjematyper';
 import { hentNesteRoute } from '../utils/routeUtils';
+import { useReiseTilSamlingSøknad } from './context/ReiseTilSamlingSøknadContext';
+import { routesReiseTilSamling } from './routing/routesReiseTilSamling';
+import { forsideTekster } from './tekster/forside';
 
 export const Forside: React.FC = () => {
     const navigate = useNavigate();

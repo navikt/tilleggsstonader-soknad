@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-
-import { useLocation, useNavigate } from 'react-router-dom';
-
 import { Alert, BodyShort, Heading, Link, VStack } from '@navikt/ds-react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { formaterNullableIsoDatoTid } from '../../../utils/formateringUtils';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
@@ -25,7 +24,7 @@ export const Kvitteringsside = () => {
         <VStack
             gap="space-32"
             style={{
-                paddingBottom: '2rem',
+                paddingBottom: '2rem'
             }}
         >
             <Heading size={'medium'} level={'2'}>

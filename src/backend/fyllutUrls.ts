@@ -4,24 +4,24 @@ export enum SkjematypeFyllUt {
     SØKNAD_BOUTGIFTER = 'SØKNAD_BOUTGIFTER',
     SØKNAD_DAGLIG_REISE = 'SØKNAD_DAGLIG_REISE',
     DAGLIG_REISE_KJØRELISTE = 'DAGLIG_REISE_KJØRELISTE',
-    SØKNAD_REISE_TIL_SAMLING = 'SØKNAD_REISE_TIL_SAMLING',
+    SØKNAD_REISE_TIL_SAMLING = 'SØKNAD_REISE_TIL_SAMLING'
 }
 
 const SKJEMAKODER: Record<SkjematypeFyllUt, { ny?: string; gammel: string }> = {
     [SkjematypeFyllUt.SØKNAD_BOUTGIFTER]: {
         ny: 'nav111219',
-        gammel: 'nav111219b',
+        gammel: 'nav111219b'
     },
     [SkjematypeFyllUt.SØKNAD_DAGLIG_REISE]: {
         ny: 'nav111221',
-        gammel: 'nav111221b',
+        gammel: 'nav111221b'
     },
     [SkjematypeFyllUt.DAGLIG_REISE_KJØRELISTE]: {
-        gammel: 'nav111224b',
+        gammel: 'nav111224b'
     },
     [SkjematypeFyllUt.SØKNAD_REISE_TIL_SAMLING]: {
-        gammel: 'nav111217b',
-    },
+        gammel: 'nav111217b'
+    }
 };
 
 export const getFyllutUrl = (

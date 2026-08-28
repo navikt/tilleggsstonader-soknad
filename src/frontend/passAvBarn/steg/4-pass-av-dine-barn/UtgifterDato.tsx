@@ -1,14 +1,12 @@
-import React from 'react';
-
 import { DatePicker, HStack, useDatepicker } from '@navikt/ds-react';
-
-import { errorKeyUtgifterFom, errorKeyUtgifterTom } from './passBarnVedleggUtils';
-import { BarnepassIntern } from './typer';
-import { Barn } from '../../../typer/barn';
-import { Locale } from '../../../typer/tekst';
-import { Valideringsfeil } from '../../../typer/validering';
+import type React from 'react';
+import type { Barn } from '../../../typer/barn';
+import type { Locale } from '../../../typer/tekst';
+import type { Valideringsfeil } from '../../../typer/validering';
 import { nullableTilDato, tilLocaleDateString } from '../../../utils/formateringUtils';
 import { barnepassTekster } from '../../tekster/barnepass';
+import { errorKeyUtgifterFom, errorKeyUtgifterTom } from './passBarnVedleggUtils';
+import type { BarnepassIntern } from './typer';
 
 interface Props {
     barn: Barn;
@@ -24,7 +22,7 @@ export const UtgifterDato: React.FC<Props> = ({
     oppdaterBarnMedBarnepass,
     valideringsfeil,
     nullstillValideringsfeil,
-    locale,
+    locale
 }) => {
     const { datepickerProps: datepickerPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(barnepass.utgifter?.fom?.verdi),
@@ -32,18 +30,18 @@ export const UtgifterDato: React.FC<Props> = ({
             const verdi = val
                 ? {
                       label: barnepassTekster.utgifter_dato.fom[locale],
-                      verdi: tilLocaleDateString(val),
+                      verdi: tilLocaleDateString(val)
                   }
                 : undefined;
             oppdaterBarnMedBarnepass({
                 ...barnepass,
                 utgifter: {
                     ...barnepass.utgifter,
-                    fom: verdi,
-                },
+                    fom: verdi
+                }
             });
             nullstillValideringsfeil(errorKeyUtgifterFom(barn));
-        },
+        }
     });
 
     const { datepickerProps: datepickerPropsTom, inputProps: inputPropsTom } = useDatepicker({
@@ -52,40 +50,38 @@ export const UtgifterDato: React.FC<Props> = ({
             const verdi = val
                 ? {
                       label: barnepassTekster.utgifter_dato.tom[locale],
-                      verdi: tilLocaleDateString(val),
+                      verdi: tilLocaleDateString(val)
                   }
                 : undefined;
             oppdaterBarnMedBarnepass({
                 ...barnepass,
                 utgifter: {
                     ...barnepass.utgifter,
-                    tom: verdi,
-                },
+                    tom: verdi
+                }
             });
             nullstillValideringsfeil(errorKeyUtgifterTom(barn));
-        },
+        }
     });
 
     return (
-        <>
-            <HStack gap="space-16">
-                <DatePicker {...datepickerPropsFom}>
-                    <DatePicker.Input
-                        id={valideringsfeil[errorKeyUtgifterFom(barn)]?.id}
-                        label={barnepassTekster.utgifter_dato.fom[locale]}
-                        error={valideringsfeil[errorKeyUtgifterFom(barn)]?.melding}
-                        {...inputPropsFom}
-                    />
-                </DatePicker>
-                <DatePicker {...datepickerPropsTom}>
-                    <DatePicker.Input
-                        id={valideringsfeil[errorKeyUtgifterTom(barn)]?.id}
-                        label={barnepassTekster.utgifter_dato.tom[locale]}
-                        error={valideringsfeil[errorKeyUtgifterTom(barn)]?.melding}
-                        {...inputPropsTom}
-                    />
-                </DatePicker>
-            </HStack>
-        </>
+        <HStack gap="space-16">
+            <DatePicker {...datepickerPropsFom}>
+                <DatePicker.Input
+                    id={valideringsfeil[errorKeyUtgifterFom(barn)]?.id}
+                    label={barnepassTekster.utgifter_dato.fom[locale]}
+                    error={valideringsfeil[errorKeyUtgifterFom(barn)]?.melding}
+                    {...inputPropsFom}
+                />
+            </DatePicker>
+            <DatePicker {...datepickerPropsTom}>
+                <DatePicker.Input
+                    id={valideringsfeil[errorKeyUtgifterTom(barn)]?.id}
+                    label={barnepassTekster.utgifter_dato.tom[locale]}
+                    error={valideringsfeil[errorKeyUtgifterTom(barn)]?.melding}
+                    {...inputPropsTom}
+                />
+            </DatePicker>
+        </HStack>
     );
 };

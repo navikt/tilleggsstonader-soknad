@@ -1,22 +1,20 @@
-import React from 'react';
-
 import { DatePicker, HStack, Label, useDatepicker, VStack } from '@navikt/ds-react';
-
-import { OppdatertOppholdFelt } from './typer';
-import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from './validering';
+import type React from 'react';
 import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
-import { OppholdInnhold } from '../../../../passAvBarn/tekster/opphold';
-import { SelectFelt, EnumFlereValgFelt } from '../../../../typer/skjema';
-import {
+import type { OppholdInnhold } from '../../../../passAvBarn/tekster/opphold';
+import type { EnumFlereValgFelt, SelectFelt } from '../../../../typer/skjema';
+import type {
     ArbeidOgOpphold,
     OppholdUtenforNorge,
-    ÅrsakOppholdUtenforNorge,
+    ÅrsakOppholdUtenforNorge
 } from '../../../../typer/søknad';
-import { Locale } from '../../../../typer/tekst';
+import type { Locale } from '../../../../typer/tekst';
 import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formateringUtils';
 import { harVerdi } from '../../../../utils/typeUtils';
 import { Landvelger } from '../../../Landvelger/Landvelger';
 import { LocaleCheckboxGroup } from '../../../Teksthåndtering/LocaleCheckboxGroup';
+import type { OppdatertOppholdFelt } from './typer';
+import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from './validering';
 
 export const NyttOpphold: React.FC<{
     keyOpphold: keyof Pick<
@@ -34,7 +32,7 @@ export const NyttOpphold: React.FC<{
         if (harVerdi(verdi)) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                [errorKey]: undefined,
+                [errorKey]: undefined
             }));
         }
     };
@@ -47,7 +45,7 @@ export const NyttOpphold: React.FC<{
                 : undefined;
             oppdater(opphold._id, 'fom', verdi);
             nullstillFeil(verdi?.verdi, errorKeyFom(keyOpphold));
-        },
+        }
     });
 
     const { datepickerProps: datepickerPropsTom, inputProps: inputPropsTom } = useDatepicker({
@@ -58,7 +56,7 @@ export const NyttOpphold: React.FC<{
                 : undefined;
             oppdater(opphold._id, 'tom', verdi);
             nullstillFeil(verdi?.verdi, errorKeyTom(keyOpphold));
-        },
+        }
     });
 
     const oppdatertHvilketLandOppholdUtenforNorge = (verdi: SelectFelt) => {
@@ -71,7 +69,7 @@ export const NyttOpphold: React.FC<{
         if (verdi.verdier.length > 0) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                [errorKeyÅrsak(keyOpphold)]: undefined,
+                [errorKeyÅrsak(keyOpphold)]: undefined
             }));
         }
     };

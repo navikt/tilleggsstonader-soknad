@@ -1,6 +1,5 @@
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
 import React from 'react';
-
-import { UtdanningOppsummering } from './Utdanning';
 import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
@@ -9,6 +8,7 @@ import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeadin
 import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
 import { RouteTilPath } from '../../routing/routesLæremidler';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
+import { UtdanningOppsummering } from './Utdanning';
 
 export const Oppsummering = () => {
     const { hovedytelse, utdanning, dokumentasjonsbehov, dokumentasjon } = useLæremidlerSøknad();

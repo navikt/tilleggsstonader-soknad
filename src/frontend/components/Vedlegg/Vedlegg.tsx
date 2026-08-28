@@ -1,21 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-
-import { styled } from 'styled-components';
-
 import { BodyShort, GuidePanel } from '@navikt/ds-react';
-
-import { Dokumentasjonskrav } from './Dokumentasjonskrav';
-import { VedleggManglerModal } from './VedleggManglerModal';
-import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './VedleggUtils';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { styled } from 'styled-components';
 import { useSpråk } from '../../context/SpråkContext';
 import { vedleggTekster } from '../../tekster/vedlegg';
-import { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
+import type { Dokument, DokumentasjonFelt, Dokumentasjonsbehov } from '../../typer/skjema';
 import { Filopplaster } from '../Filopplaster/Filopplaster';
 import { Side } from '../Side';
 import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
 import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
 import { VedleggGenerellInfo } from '../VedleggGenerellInfo';
+import { Dokumentasjonskrav } from './Dokumentasjonskrav';
+import { VedleggManglerModal } from './VedleggManglerModal';
+import { fjernVedlegg, leggTilVedlegg, opprettDokumentasjonsfelt } from './VedleggUtils';
 
 const VedleggContainer = styled.div`
     display: flex;
@@ -38,18 +36,18 @@ interface Props {
 export const Vedlegg: React.FC<Props> = ({
     dokumentasjon,
     settDokumentasjon,
-    dokumentasjonsbehov,
+    dokumentasjonsbehov
 }) => {
     const { locale } = useSpråk();
 
     const vedleggManglerModalRef = useRef<HTMLDialogElement>(null);
     const [ikkeOpplastedeDokumenter, settIkkeOpplastedeDokumenter] = useState<string[]>([]);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: kun kjøre ved mount
     useEffect(() => {
         settDokumentasjon((prevState) =>
             opprettDokumentasjonsfelt(dokumentasjonsbehov, prevState, locale)
         );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const leggTilDokument = (dokumentasjonFelt: DokumentasjonFelt, vedlegg: Dokument) => {

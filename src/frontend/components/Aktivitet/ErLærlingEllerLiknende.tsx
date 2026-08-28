@@ -1,12 +1,11 @@
-import React from 'react';
-
 import { BodyLong, VStack } from '@navikt/ds-react';
+import type React from 'react';
 
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { EnumFelt } from '../../typer/skjema';
-import { JaNei } from '../../typer/søknad';
-import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
-import { Feilmelding } from '../../typer/validering';
+import type { EnumFelt } from '../../typer/skjema';
+import type { JaNei } from '../../typer/søknad';
+import type { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
+import type { Feilmelding } from '../../typer/validering';
 import { LocaleInlineLenke } from '../Teksthåndtering/LocaleInlineLenke';
 import { LocaleRadioGroup } from '../Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../Teksthåndtering/LocaleReadMore';
@@ -32,16 +31,16 @@ interface ErLærlingEllerLiknendeTekster {
 export const erLærlingEllerLiknendeTekster: ErLærlingEllerLiknendeTekster = {
     radio_lærling_etc: {
         header: {
-            nb: 'Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?',
+            nb: 'Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?'
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: JaNeiTilTekst
     },
     radio_lærling_feilmelding: {
-        nb: 'Du må svare på om du er lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb.',
+        nb: 'Du må svare på om du er lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb.'
     },
     les_mer_lærling_etc: {
         header: {
-            nb: 'Hva betyr alternativene?',
+            nb: 'Hva betyr alternativene?'
         },
         innhold_lærling: {
             nb: [
@@ -50,10 +49,10 @@ export const erLærlingEllerLiknendeTekster: ErLærlingEllerLiknendeTekster = {
                 ' betyr at du utdanner deg til et yrke ved å jobbe i en bedrift, hvor du får både opplæring og praksis i ett fag. ',
                 {
                     tekst: 'Les mer om lærlinger på Vilbli.no',
-                    url: 'https://www.vilbli.no/nb/no/a/laerling-6',
+                    url: 'https://www.vilbli.no/nb/no/a/laerling-6'
                 },
-                '.',
-            ],
+                '.'
+            ]
         },
         innhold_lærekandidatordningen: {
             nb: [
@@ -61,10 +60,10 @@ export const erLærlingEllerLiknendeTekster: ErLærlingEllerLiknendeTekster = {
                 ' er et alternativ med færre kompetansemål for de som tror det kan bli vanskelig å fullføre et fag- eller svennebrev. ',
                 {
                     tekst: 'Les mer om lærekandidatordningen på Vilbli.no',
-                    url: 'https://www.vilbli.no/nb/no/a/laerekandidat-6',
+                    url: 'https://www.vilbli.no/nb/no/a/laerekandidat-6'
                 },
-                '.',
-            ],
+                '.'
+            ]
         },
         innhold_praksisbrevkandidater: {
             nb: [
@@ -72,10 +71,10 @@ export const erLærlingEllerLiknendeTekster: ErLærlingEllerLiknendeTekster = {
                 ' går et toårig opplæringsløp på de yrkesfaglige utdanningsprogrammene. Det er en mer praktisk opplæring, hovedsakelig i bedrift. ',
                 {
                     tekst: 'Les mer om praksisbrevkandidater på Vilbli.no',
-                    url: 'https://www.vilbli.no/nb/no/a/praksisbrevkandidat-6',
+                    url: 'https://www.vilbli.no/nb/no/a/praksisbrevkandidat-6'
                 },
-                '.',
-            ],
+                '.'
+            ]
         },
         innhold_fagbrev_på_jobb: {
             nb: [
@@ -83,18 +82,18 @@ export const erLærlingEllerLiknendeTekster: ErLærlingEllerLiknendeTekster = {
                 ' er for de som er ufaglært og vil ta fagbrev samtidig som de er i lønnet arbeid. ',
                 {
                     tekst: 'Les mer om fagbrev på jobb på Vilbli.no',
-                    url: 'https://www.vilbli.no/nb/no/a/laerling-6',
+                    url: 'https://www.vilbli.no/nb/no/a/laerling-6'
                 },
-                '.',
-            ],
-        },
-    },
+                '.'
+            ]
+        }
+    }
 };
 
 export const ErLærlingEllerLiknende: React.FC<Props> = ({
     erLærlingEllerLiknende,
     oppdatererLærlingEllerLiknende,
-    feilmelding,
+    feilmelding
 }) => {
     return (
         <LocaleRadioGroup

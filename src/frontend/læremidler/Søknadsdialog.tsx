@@ -1,10 +1,9 @@
-import React from 'react';
-
-import { useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
-import { Forside } from './Forside';
-import { StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
+import type React from 'react';
+import { type StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
 import { fellesTekster } from '../tekster/felles';
 import { Skjematype } from '../typer/skjematyper';
+import { useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
+import { Forside } from './Forside';
 import { HovedytelseLæremidler } from './steg/1-hovedytelse/HovedytelseLæremidler';
 import { Utdanning } from './steg/2-utdanning/Utdanning';
 import { VedleggLæremidler } from './steg/3-vedlegg/VedleggLæremidler';
@@ -14,7 +13,7 @@ const steg: StegRoute[] = [
     { path: '/hovedytelse', element: <HovedytelseLæremidler /> },
     { path: '/utdanning', element: <Utdanning /> },
     { path: '/vedlegg', element: <VedleggLæremidler /> },
-    { path: '/oppsummering', element: <Oppsummering /> },
+    { path: '/oppsummering', element: <Oppsummering /> }
 ];
 
 export const Søknadsdialog: React.FC = () => {

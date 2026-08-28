@@ -1,16 +1,15 @@
-import React from 'react';
-
-import { useQuery } from '@tanstack/react-query';
-
 import { Alert, BodyShort, Heading, Link, Skeleton, VStack } from '@navikt/ds-react';
 
-import { KjørelisteKort } from './KjørelisteKort';
+import { useQuery } from '@tanstack/react-query';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 import { hentAlleRammevedtak } from '../../../api/api';
+import { KjørelisteKort } from './KjørelisteKort';
 
 export function Landingsside() {
     const { isPending, error, data } = useQuery({
         queryKey: ['rammevedtak'],
-        queryFn: () => hentAlleRammevedtak(),
+        queryFn: () => hentAlleRammevedtak()
     });
 
     if (error) {

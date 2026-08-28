@@ -15,7 +15,7 @@ export function getDecoratedHtml(path: string) {
         params: {
             simple: true,
             redirectToApp: true,
-            level: 'Level4',
-        },
+            level: 'Level4'
+        }
     });
 }

@@ -1,18 +1,17 @@
 import { Alert, Heading } from '@navikt/ds-react';
-
-import { errorKeyStartetFemte, errorKeyÅrsak } from './passBarnVedleggUtils';
-import { BarnepassIntern } from './typer';
 import { LocalePunktliste } from '../../../components/Teksthåndtering/LocalePunktliste';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
-import { Barn } from '../../../typer/barn';
-import { EnumFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
-import { Valideringsfeil } from '../../../typer/validering';
+import type { Barn } from '../../../typer/barn';
+import type { EnumFelt } from '../../../typer/skjema';
+import type { JaNei } from '../../../typer/søknad';
+import type { Valideringsfeil } from '../../../typer/validering';
 import { barnepassTekster } from '../../tekster/barnepass';
 import { ÅrsakBarnepass } from '../../typer/barnepass';
+import { errorKeyStartetFemte, errorKeyÅrsak } from './passBarnVedleggUtils';
+import type { BarnepassIntern } from './typer';
 
 interface Props {
     barn: Barn;
@@ -26,13 +25,13 @@ export const BarnOver9År: React.FC<Props> = ({
     passInfo,
     oppdaterBarnMedBarnepass,
     valideringsfeil,
-    nullstillValideringsfeil,
+    nullstillValideringsfeil
 }) => {
     const oppdaterStartetIFemte = (val: EnumFelt<JaNei>) => {
         oppdaterBarnMedBarnepass({
             ...passInfo,
             startetIFemte: val,
-            årsak: undefined,
+            årsak: undefined
         });
         nullstillValideringsfeil(errorKeyStartetFemte(barn));
     };
@@ -54,7 +53,7 @@ export const BarnOver9År: React.FC<Props> = ({
                     />
                 </LocaleReadMoreMedChildren>
             </LocaleRadioGroup>
-            {passInfo.startetIFemte?.verdi == 'JA' && (
+            {passInfo.startetIFemte?.verdi === 'JA' && (
                 <UnderspørsmålContainer>
                     <LocaleRadioGroup
                         id={valideringsfeil[errorKeyÅrsak(barn)]?.id}

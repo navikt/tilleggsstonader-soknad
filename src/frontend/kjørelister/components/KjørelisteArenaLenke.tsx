@@ -1,14 +1,14 @@
-import React from 'react';
-
 import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Heading, Link, VStack } from '@navikt/ds-react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 
 export const KjørelisteArenaLenke = () => {
     return (
         <VStack
             gap="space-8"
             style={{
-                paddingBottom: '2rem',
+                paddingBottom: '2rem'
             }}
         >
             <Heading level="2" size="medium">

@@ -1,12 +1,10 @@
-import React from 'react';
-
-import styled from 'styled-components';
-
 import { Checkbox, TextField, VStack } from '@navikt/ds-react';
+import type React from 'react';
+import styled from 'styled-components';
 
 import { erHelg } from '../../../utils/datoUtils';
 import { useKjøreliste } from '../../KjørelisteContext';
-import { Reisedag } from '../../types/Kjøreliste';
+import type { Reisedag } from '../../types/Kjøreliste';
 
 const Card = styled(VStack)`
     border: 1px solid black;
@@ -26,7 +24,7 @@ const StyledTextField = styled(TextField)`
 
 export const KjørelisteDag: React.FC<{ reisedag: Reisedag; erLesevisning: boolean }> = ({
     reisedag,
-    erLesevisning,
+    erLesevisning
 }) => {
     const { oppdaterHarReist, oppdaterParkeringsutgift } = useKjøreliste();
 

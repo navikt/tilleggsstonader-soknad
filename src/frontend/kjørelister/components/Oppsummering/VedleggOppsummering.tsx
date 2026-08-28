@@ -1,9 +1,8 @@
-import React from 'react';
-
-import { useNavigate } from 'react-router';
-
 import { FileCheckmarkIcon } from '@navikt/aksel-icons';
 import { Box, FormSummary, List } from '@navikt/ds-react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
+import { useNavigate } from 'react-router';
 
 import { useKjøreliste } from '../../KjørelisteContext';
 import { finnPath, KjørelisteRoutes } from '../../kjørelisteRoutes';

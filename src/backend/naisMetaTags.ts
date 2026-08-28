@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 
 const buildMetaTags = (): string => {
     const app = process.env.NAIS_APP_NAME ?? '';
@@ -10,7 +10,7 @@ const buildMetaTags = (): string => {
     return [
         app ? `<meta name="nais-app" content="${app}">` : '',
         team ? `<meta name="nais-team" content="${team}">` : '',
-        cluster ? `<meta name="nais-cluster" content="${cluster}">` : '',
+        cluster ? `<meta name="nais-cluster" content="${cluster}">` : ''
     ]
         .filter(Boolean)
         .join('\n    ');

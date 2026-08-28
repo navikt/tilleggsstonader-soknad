@@ -1,6 +1,6 @@
-import { Samling } from '../../../typer/søknad';
-import { Locale } from '../../../typer/tekst';
-import { Valideringsfeil } from '../../../typer/validering';
+import type { Samling } from '../../../typer/søknad';
+import type { Locale } from '../../../typer/tekst';
+import type { Valideringsfeil } from '../../../typer/validering';
 import { erDatoEtterEllerLik } from '../../../utils/datoUtils';
 import { harVerdi } from '../../../utils/typeUtils';
 import { samlingerTekster } from '../../tekster/samlinger';
@@ -19,22 +19,19 @@ export const errorKeyPoststed = (samlingId: number) => `samling_${samlingId}_pos
 export const errorKeyAntallKm = (samlingId: number) => `samling_${samlingId}_antallKm`;
 
 export const nullstillteSamlingsfeil = (samlinger: Samling[]): Valideringsfeil =>
-    samlinger.reduce(
-        (acc, samling) => ({
-            ...acc,
-            [errorKeyFom(samling._id)]: undefined,
-            [errorKeyTom(samling._id)]: undefined,
-            [errorKeyErObligatorisk(samling._id)]: undefined,
-            [errorKeyHarBruktEkstraReiseDager(samling._id)]: undefined,
-            [errorKeyBrukSammeAdresse(samling._id)]: undefined,
-            [errorKeyLand(samling._id)]: undefined,
-            [errorKeyGateadresse(samling._id)]: undefined,
-            [errorKeyPostnummer(samling._id)]: undefined,
-            [errorKeyPoststed(samling._id)]: undefined,
-            [errorKeyAntallKm(samling._id)]: undefined,
-        }),
-        {}
-    );
+    samlinger.reduce((acc, samling) => {
+        acc[errorKeyFom(samling._id)] = undefined;
+        acc[errorKeyTom(samling._id)] = undefined;
+        acc[errorKeyErObligatorisk(samling._id)] = undefined;
+        acc[errorKeyHarBruktEkstraReiseDager(samling._id)] = undefined;
+        acc[errorKeyBrukSammeAdresse(samling._id)] = undefined;
+        acc[errorKeyLand(samling._id)] = undefined;
+        acc[errorKeyGateadresse(samling._id)] = undefined;
+        acc[errorKeyPostnummer(samling._id)] = undefined;
+        acc[errorKeyPoststed(samling._id)] = undefined;
+        acc[errorKeyAntallKm(samling._id)] = undefined;
+        return acc;
+    }, {} as Valideringsfeil);
 
 const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsfeil => {
     let feil: Valideringsfeil = {};
@@ -44,8 +41,8 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyLand(samling._id)]: {
                 id: errorKeyLand(samling._id),
-                melding: samlingerTekster.feilmelding_land[locale],
-            },
+                melding: samlingerTekster.feilmelding_land[locale]
+            }
         };
     }
 
@@ -54,8 +51,8 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyGateadresse(samling._id)]: {
                 id: errorKeyGateadresse(samling._id),
-                melding: samlingerTekster.feilmelding_gateadresse[locale],
-            },
+                melding: samlingerTekster.feilmelding_gateadresse[locale]
+            }
         };
     }
 
@@ -64,8 +61,8 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyPostnummer(samling._id)]: {
                 id: errorKeyPostnummer(samling._id),
-                melding: samlingerTekster.feilmelding_postnummer[locale],
-            },
+                melding: samlingerTekster.feilmelding_postnummer[locale]
+            }
         };
     }
 
@@ -74,8 +71,8 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyPoststed(samling._id)]: {
                 id: errorKeyPoststed(samling._id),
-                melding: samlingerTekster.feilmelding_poststed[locale],
-            },
+                melding: samlingerTekster.feilmelding_poststed[locale]
+            }
         };
     }
 
@@ -85,16 +82,16 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyAntallKm(samling._id)]: {
                 id: errorKeyAntallKm(samling._id),
-                melding: samlingerTekster.feilmelding_antall_km[locale],
-            },
+                melding: samlingerTekster.feilmelding_antall_km[locale]
+            }
         };
-    } else if (isNaN(Number(km)) || Number(km) <= 0) {
+    } else if (Number.isNaN(Number(km)) || Number(km) <= 0) {
         feil = {
             ...feil,
             [errorKeyAntallKm(samling._id)]: {
                 id: errorKeyAntallKm(samling._id),
-                melding: samlingerTekster.feilmelding_antall_km_ugyldig[locale],
-            },
+                melding: samlingerTekster.feilmelding_antall_km_ugyldig[locale]
+            }
         };
     }
 
@@ -116,8 +113,8 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [keyFom]: {
                 id: keyFom,
-                melding: samlingerTekster.feilmelding_startdato[locale],
-            },
+                melding: samlingerTekster.feilmelding_startdato[locale]
+            }
         };
     }
 
@@ -126,19 +123,19 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [keyTom]: {
                 id: keyTom,
-                melding: samlingerTekster.feilmelding_sluttdato[locale],
-            },
+                melding: samlingerTekster.feilmelding_sluttdato[locale]
+            }
         };
     }
 
     if (harVerdi(samling.fom?.verdi) && harVerdi(samling.tom?.verdi)) {
-        if (!erDatoEtterEllerLik(samling.fom!.verdi, samling.tom!.verdi)) {
+        if (!erDatoEtterEllerLik(samling.fom.verdi, samling.tom.verdi)) {
             feil = {
                 ...feil,
                 [keyTom]: {
                     id: keyTom,
-                    melding: samlingerTekster.feilmelding_sluttdato_før_startdato[locale],
-                },
+                    melding: samlingerTekster.feilmelding_sluttdato_før_startdato[locale]
+                }
             };
         }
     }
@@ -148,8 +145,8 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [keyErObligatorisk]: {
                 id: keyErObligatorisk,
-                melding: samlingerTekster.feilmelding_radio_samling_obligatorisk[locale],
-            },
+                melding: samlingerTekster.feilmelding_radio_samling_obligatorisk[locale]
+            }
         };
     }
 
@@ -158,8 +155,8 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [errorKeyHarBruktEkstraReiseDager(samling._id)]: {
                 id: errorKeyHarBruktEkstraReiseDager(samling._id),
-                melding: samlingerTekster.feilmelding_radio_ekstra_reisedag[locale],
-            },
+                melding: samlingerTekster.feilmelding_radio_ekstra_reisedag[locale]
+            }
         };
     }
 
@@ -168,8 +165,8 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [errorKeyBrukSammeAdresse(samling._id)]: {
                 id: errorKeyBrukSammeAdresse(samling._id),
-                melding: samlingerTekster.feilmelding_brukSammeAdresseSomForrige[locale],
-            },
+                melding: samlingerTekster.feilmelding_brukSammeAdresseSomForrige[locale]
+            }
         };
     }
 
@@ -183,9 +180,7 @@ export const validerSamlingUnderRedigering = (
 
 export const validerSamlinger = (samlinger: Samling[], locale: Locale): Valideringsfeil =>
     samlinger.reduce(
-        (acc, samling, index) => ({
-            ...acc,
-            ...validerSamlingUnderRedigering(samling, locale, index === 0),
-        }),
-        {}
+        (acc, samling, index) =>
+            Object.assign(acc, validerSamlingUnderRedigering(samling, locale, index === 0)),
+        {} as Valideringsfeil
     );
