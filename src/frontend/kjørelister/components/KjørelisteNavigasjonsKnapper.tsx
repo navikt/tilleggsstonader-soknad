@@ -1,13 +1,12 @@
-import React, { useRef } from 'react';
-
-import { useNavigate, useParams } from 'react-router-dom';
-
 import { ArrowLeftIcon, ArrowRightIcon, PaperplaneIcon } from '@navikt/aksel-icons';
 import { Alert, Button, ErrorSummary, HStack, VStack } from '@navikt/ds-react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React, { useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useValideringsfeil } from '../../context/ValideringsfeilContext';
 import { inneholderFeil } from '../../typer/validering';
-import { finnPath, KjørelisteRoutes } from '../kjørelisteRoutes';
+import { finnPath, type KjørelisteRoutes } from '../kjørelisteRoutes';
 
 interface KjørelisteNavigasonsKnapperProps {
     nesteSide: KjørelisteRoutes;
@@ -24,7 +23,7 @@ export const KjørelisteNavigasjonsKnapper = ({
     laster,
     sendInnKjøreliste,
     innsendingFeilmelding,
-    validerKanGåVidere,
+    validerKanGåVidere
 }: KjørelisteNavigasonsKnapperProps) => {
     const navigate = useNavigate();
     const { valideringsfeil } = useValideringsfeil();

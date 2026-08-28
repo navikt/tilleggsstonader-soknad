@@ -1,15 +1,14 @@
-import React from 'react';
+import type React from 'react';
 
 import { Route, Routes } from 'react-router';
-
+import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
+import type { Skjematype } from '../typer/skjematyper';
+import type { TekstElement } from '../typer/tekst';
+import { hentStartRoute } from '../utils/routeUtils';
 import { Kvittering } from './Kvittering/Kvittering';
 import { RedirectTilStart } from './RedirectTilStart';
 import { RootRoute } from './RootRoute';
 import { SøknadsskjemaHeader } from './SøknadsskjemaHeader';
-import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
-import { Skjematype } from '../typer/skjematyper';
-import { TekstElement } from '../typer/tekst';
-import { hentStartRoute } from '../utils/routeUtils';
 
 export interface StegRoute {
     path: string;
@@ -31,7 +30,7 @@ export const Søknadsdialog: React.FC<Props> = ({
     harBekreftet,
     forside,
     steg,
-    offentligeSteg = [],
+    offentligeSteg = []
 }) => {
     return (
         <>
@@ -56,7 +55,7 @@ export const Søknadsdialog: React.FC<Props> = ({
 
 const SøknadsdialogInnhold: React.FC<{ harBekreftet: boolean; steg: StegRoute[] }> = ({
     harBekreftet,
-    steg,
+    steg
 }) => {
     return (
         <RedirectTilStart harBekreftet={harBekreftet}>

@@ -1,24 +1,5 @@
-import styled from 'styled-components';
-
 import { Alert, TextField, VStack } from '@navikt/ds-react';
-
-import {
-    errorKeyBetalerForReiseSelv,
-    errorKeyEgenbilUtgifterBompenger,
-    errorKeyEgenbilUtgifterDrivstoffType,
-    errorKeyEgenbilUtgifterFerge,
-    errorKeyEgenbilUtgifterPiggdekkavgift,
-    errorKeyØnskerDekketUtgifterForDrosje as errorKeyØnskerDekketUtgifterForDrosje,
-    errorKeyKanBenytteEgenBil,
-    errorKeyKanIkkeBenytteEgenBilBegrunnelse,
-    errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse,
-    errorKeyKanReiseMedOffentligTransport,
-    errorKeyTotalutgifterOffentligTransport,
-    validerReisemåte,
-    errorKeyHarTTKort,
-    errorKeyBarnehageAdresse,
-    errorKeyBarnehagePostnummer,
-} from './validering';
+import styled from 'styled-components';
 import { Side } from '../../../components/Side';
 import { LocaleCheckboxGroup } from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
@@ -27,16 +8,33 @@ import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import {
+import type { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
+import type {
     DrivstoffType,
     JaNei,
     KanIkkeBenytteEgenBilBegrunnelser,
-    KanIkkeReiseMedOffentligTransportBegrunnelser,
+    KanIkkeReiseMedOffentligTransportBegrunnelser
 } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { reisemåteTekster } from '../../tekster/reisemåte';
+import {
+    errorKeyBarnehageAdresse,
+    errorKeyBarnehagePostnummer,
+    errorKeyBetalerForReiseSelv,
+    errorKeyEgenbilUtgifterBompenger,
+    errorKeyEgenbilUtgifterDrivstoffType,
+    errorKeyEgenbilUtgifterFerge,
+    errorKeyEgenbilUtgifterPiggdekkavgift,
+    errorKeyHarTTKort,
+    errorKeyKanBenytteEgenBil,
+    errorKeyKanIkkeBenytteEgenBilBegrunnelse,
+    errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse,
+    errorKeyKanReiseMedOffentligTransport,
+    errorKeyTotalutgifterOffentligTransport,
+    errorKeyØnskerDekketUtgifterForDrosje,
+    validerReisemåte
+} from './validering';
 
 const TotalutgifterFelt = styled(TextField)`
     input {
@@ -51,6 +49,7 @@ export const ReisemåteReiseTilSamling = () => {
 
     const nullstillFeil = (errorKey: string | string[]) => {
         if (Array.isArray(errorKey)) {
+            // biome-ignore lint/suspicious/useIterableCallbackReturn: den gjorde det før, og det er ikke noe problem her
             errorKey.forEach((key) =>
                 settValideringsfeil((prev) => ({ ...prev, [key]: undefined }))
             );
@@ -81,7 +80,7 @@ export const ReisemåteReiseTilSamling = () => {
             errorKeyEgenbilUtgifterFerge,
             errorKeyEgenbilUtgifterPiggdekkavgift,
             errorKeyBarnehageAdresse,
-            errorKeyBarnehagePostnummer,
+            errorKeyBarnehagePostnummer
         ]);
     };
 
@@ -95,7 +94,7 @@ export const ReisemåteReiseTilSamling = () => {
             ...prev,
             kanIkkeReiseMedOffentligTransportBegrunnelser: felter,
             barnehageGateadresse: skalNullstilleBarnehage ? undefined : prev?.barnehageGateadresse,
-            barnehagePostnummer: skalNullstilleBarnehage ? undefined : prev?.barnehagePostnummer,
+            barnehagePostnummer: skalNullstilleBarnehage ? undefined : prev?.barnehagePostnummer
         }));
 
         nullstillFeil([errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse]);
@@ -112,7 +111,7 @@ export const ReisemåteReiseTilSamling = () => {
                 prev?.kanIkkeReiseMedOffentligTransportBegrunnelser,
             barnehageGateadresse: prev?.barnehageGateadresse,
             barnehagePostnummer: prev?.barnehagePostnummer,
-            kanBenytteEgenBil: verdi,
+            kanBenytteEgenBil: verdi
         }));
         nullstillFeil([
             errorKeyKanBenytteEgenBil,
@@ -123,7 +122,7 @@ export const ReisemåteReiseTilSamling = () => {
             errorKeyEgenbilUtgifterDrivstoffType,
             errorKeyEgenbilUtgifterBompenger,
             errorKeyEgenbilUtgifterFerge,
-            errorKeyEgenbilUtgifterPiggdekkavgift,
+            errorKeyEgenbilUtgifterPiggdekkavgift
         ]);
     };
 
@@ -132,7 +131,7 @@ export const ReisemåteReiseTilSamling = () => {
     ) => {
         settReisemåte((prev) => ({
             ...prev,
-            kanIkkeBenytteEgenBilBegrunnelser: verdier,
+            kanIkkeBenytteEgenBilBegrunnelser: verdier
         }));
         nullstillFeil(errorKeyKanIkkeBenytteEgenBilBegrunnelse);
     };
@@ -142,7 +141,7 @@ export const ReisemåteReiseTilSamling = () => {
             ...prev,
             kanReiseMedOffentligTransport: prev?.kanReiseMedOffentligTransport,
             kanBenytteEgenBil: prev?.kanBenytteEgenBil,
-            ønskerDekketUtgifterForDrosje: verdi,
+            ønskerDekketUtgifterForDrosje: verdi
         }));
         nullstillFeil(errorKeyØnskerDekketUtgifterForDrosje);
     };
@@ -154,8 +153,8 @@ export const ReisemåteReiseTilSamling = () => {
             ...prev,
             reiseMedBilUtgifter: {
                 ...prev?.reiseMedBilUtgifter,
-                drivstoffType: verdi,
-            },
+                drivstoffType: verdi
+            }
         }));
         nullstillFeil(errorKeyEgenbilUtgifterDrivstoffType);
     };
@@ -164,21 +163,21 @@ export const ReisemåteReiseTilSamling = () => {
         settReisemåte((prev) => ({
             ...prev,
             betalerForReiseSelv: verdi,
-            reiseMedBilUtgifter: undefined,
+            reiseMedBilUtgifter: undefined
         }));
         nullstillFeil([
             errorKeyBetalerForReiseSelv,
             errorKeyEgenbilUtgifterDrivstoffType,
             errorKeyEgenbilUtgifterBompenger,
             errorKeyEgenbilUtgifterFerge,
-            errorKeyEgenbilUtgifterPiggdekkavgift,
+            errorKeyEgenbilUtgifterPiggdekkavgift
         ]);
     };
 
     const oppdaterHarTTKort = (verdi: EnumFelt<JaNei>) => {
         settReisemåte((prev) => ({
             ...prev,
-            harTTKort: verdi,
+            harTTKort: verdi
         }));
         nullstillFeil(errorKeyHarTTKort);
     };
@@ -240,8 +239,8 @@ export const ReisemåteReiseTilSamling = () => {
                                     totalUtgifterOffentligTransport: {
                                         label: reisemåteTekster
                                             .totalutgifter_offentlig_transport_label[locale],
-                                        verdi,
-                                    },
+                                        verdi
+                                    }
                                 }));
                                 nullstillFeil(errorKeyTotalutgifterOffentligTransport);
                             }}
@@ -295,8 +294,8 @@ export const ReisemåteReiseTilSamling = () => {
                                                 verdi: e.target.value,
                                                 label: reisemåteTekster.info_barnehage_adresse[
                                                     locale
-                                                ],
-                                            },
+                                                ]
+                                            }
                                         }));
                                         nullstillFeil(errorKeyBarnehageAdresse);
                                     }}
@@ -313,8 +312,8 @@ export const ReisemåteReiseTilSamling = () => {
                                                 verdi: e.target.value,
                                                 label: reisemåteTekster.info_barnehage_postnummer[
                                                     locale
-                                                ],
-                                            },
+                                                ]
+                                            }
                                         }));
                                         nullstillFeil(errorKeyBarnehagePostnummer);
                                     }}
@@ -453,9 +452,9 @@ export const ReisemåteReiseTilSamling = () => {
                                                 bompenger: {
                                                     verdi: e.target.value,
                                                     label: reisemåteTekster
-                                                        .egen_bil_utgifter_bompenger_tittel[locale],
-                                                },
-                                            },
+                                                        .egen_bil_utgifter_bompenger_tittel[locale]
+                                                }
+                                            }
                                         }));
                                         nullstillFeil(errorKeyEgenbilUtgifterBompenger);
                                     }}
@@ -476,9 +475,9 @@ export const ReisemåteReiseTilSamling = () => {
                                                 ferge: {
                                                     verdi: e.target.value,
                                                     label: reisemåteTekster
-                                                        .egen_bil_utgifter_ferge_tittel[locale],
-                                                },
-                                            },
+                                                        .egen_bil_utgifter_ferge_tittel[locale]
+                                                }
+                                            }
                                         }));
                                         nullstillFeil(errorKeyEgenbilUtgifterFerge);
                                     }}
@@ -505,9 +504,9 @@ export const ReisemåteReiseTilSamling = () => {
                                                     label: reisemåteTekster
                                                         .egen_bil_utgifter_piggdekkavgift_tittel[
                                                         locale
-                                                    ],
-                                                },
-                                            },
+                                                    ]
+                                                }
+                                            }
                                         }));
                                         nullstillFeil(errorKeyEgenbilUtgifterPiggdekkavgift);
                                     }}

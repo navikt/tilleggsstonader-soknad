@@ -1,8 +1,8 @@
 import { skalTaStillingTilRegisterAktiviteter } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { AktivitetTypeUtdanning, AnnenAktivitetType } from '../../../typer/aktivitet';
-import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
-import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
+import type { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
+import type { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
+import type { JaNei } from '../../../typer/søknad';
 
 export const skalViseArbeidsrettedeAktiviteter = (
     registerAktiviteter: Record<string, RegisterAktivitetMedLabel>

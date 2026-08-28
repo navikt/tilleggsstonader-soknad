@@ -1,20 +1,17 @@
-import { useState } from 'react';
-
 import { Alert, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
-
-import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
+import { useState } from 'react';
+import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/AnnenArbeidsrettetAktivitet';
+import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
 import {
     feilAnnenAktivitet,
     feilLønnetAktivitet,
-    feilValgtAktivitet,
+    feilValgtAktivitet
 } from '../../../components/Aktivitet/aktivitetValidering';
-import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/AnnenArbeidsrettetAktivitet';
-import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
 import {
     skalTaStillingTilAnnenAktivitet,
-    skalTaStillingTilRegisterAktiviteter,
+    skalTaStillingTilRegisterAktiviteter
 } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
@@ -26,11 +23,12 @@ import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterCont
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { AnnenAktivitetType } from '../../../typer/aktivitet';
-import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
-import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
+import type { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
+import type { JaNei } from '../../../typer/søknad';
+import { inneholderFeil, type Valideringsfeil } from '../../../typer/validering';
 import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { aktivitetTekster } from '../../tekster/aktivitet';
+import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 
 export const AktivitetPassAvBarn = () => {
     const { locale } = useSpråk();
@@ -54,7 +52,7 @@ export const AktivitetPassAvBarn = () => {
         settAktivitet({
             aktiviteter: valgteAktiviteter,
             annenAktivitet: annenAktivitet,
-            lønnetAktivitet: lønnetAktivitet,
+            lønnetAktivitet: lønnetAktivitet
         });
     };
 
@@ -71,7 +69,7 @@ export const AktivitetPassAvBarn = () => {
             setLønnetAktivitet(undefined);
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                lønnetAktivitet: undefined,
+                lønnetAktivitet: undefined
             }));
         }
     };
@@ -81,7 +79,7 @@ export const AktivitetPassAvBarn = () => {
             setAnnenAktivitet(undefined);
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                annenAktivitet: undefined,
+                annenAktivitet: undefined
             }));
         }
     };
@@ -91,7 +89,7 @@ export const AktivitetPassAvBarn = () => {
         if (nyeValgteAktiviteter.verdier.length > 0) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                valgteAktiviteter: undefined,
+                valgteAktiviteter: undefined
             }));
         }
         nullstillAnnenAktivitet(nyeValgteAktiviteter);
@@ -102,7 +100,7 @@ export const AktivitetPassAvBarn = () => {
         setAnnenAktivitet(verdi);
         settValideringsfeil((prevState) => ({
             ...prevState,
-            annenAktivitet: undefined,
+            annenAktivitet: undefined
         }));
         nullstillLønnetAktivitet(valgteAktiviteter, verdi);
     };
@@ -111,7 +109,7 @@ export const AktivitetPassAvBarn = () => {
         setLønnetAktivitet(verdi);
         settValideringsfeil((prevState) => ({
             ...prevState,
-            lønnetAktivitet: undefined,
+            lønnetAktivitet: undefined
         }));
     };
 

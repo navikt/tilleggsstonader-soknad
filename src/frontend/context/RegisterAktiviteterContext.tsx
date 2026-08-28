@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-
 import constate from 'constate';
+import { useEffect, useState } from 'react';
 
 import { hentArbeidsrettedeAktiviteter } from '../api/api';
 import { mapTilRegisterAktiviteterObjektMedLabel } from '../components/Aktivitet/registerAktivitetUtil';
-import { RegisterAktivitetMedLabel } from '../typer/registerAktivitet';
-import { Skjematype } from '../typer/skjematyper';
+import type { RegisterAktivitetMedLabel } from '../typer/registerAktivitet';
+import type { Skjematype } from '../typer/skjematyper';
 
 interface Props {
     skjematype: Skjematype;
@@ -30,7 +29,7 @@ const [RegisterAktiviteterProvider, useRegisterAktiviteter] = constate(({ skjema
     }, [skjematype]);
 
     return {
-        registerAktiviteter,
+        registerAktiviteter
     };
 });
 

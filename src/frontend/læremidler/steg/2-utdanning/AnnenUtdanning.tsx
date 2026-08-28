@@ -1,12 +1,11 @@
-import React from 'react';
-
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
+import type React from 'react';
 
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { EnumFelt } from '../../../typer/skjema';
-import { Feilmelding } from '../../../typer/validering';
+import type { EnumFelt } from '../../../typer/skjema';
+import type { Feilmelding } from '../../../typer/validering';
 import { utdanningTekster } from '../../tekster/utdanning';
 import { AnnenUtdanningType } from '../../typer/søknad';
 
@@ -19,7 +18,7 @@ interface Props {
 export const AnnenUtdanning: React.FC<Props> = ({
     annenUtdanning,
     oppdaterAnnenUtdanning,
-    feilmelding,
+    feilmelding
 }) => {
     return (
         <div>

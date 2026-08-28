@@ -1,5 +1,5 @@
-import { Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import { erHelg } from '../utils/datoUtils';
+import type { Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 
 export const harReist = (reisedager: Reisedag[]): boolean =>
     reisedager.some((reisedag) => reisedag.harKjørt);
@@ -13,7 +13,8 @@ export const harValgtHelligdag = (reisedager: Reisedag[]) =>
 export const hentValgteHelligdagnavn = (reisedager: Reisedag[]): string[] =>
     reisedager
         .filter((reisedag) => reisedag.erHelligdag && reisedag.harKjørt && reisedag.helligdagnavn)
-        .map((reisedag) => reisedag.helligdagnavn!);
+        .map((reisedag) => reisedag.helligdagnavn ?? null)
+        .filter((navn): navn is string => navn !== null);
 
 export const finnAntallDagerReist = (reisedager: Reisedag[]) =>
     reisedager.filter((reisedag) => reisedag.harKjørt).length;

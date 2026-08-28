@@ -1,8 +1,8 @@
 import { tekstArbeidsrettedeAktiviteter } from '../../tekster/aktivitet';
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { JaNei } from '../../typer/søknad';
-import { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
-import { AnnenUtdanningType } from '../typer/søknad';
+import type { JaNei } from '../../typer/søknad';
+import type { InlineLenke, LesMer, Radiogruppe, TekstElement } from '../../typer/tekst';
+import type { AnnenUtdanningType } from '../typer/søknad';
 
 interface AktivitetInnhold {
     tittel: TekstElement<string>;
@@ -40,41 +40,41 @@ const AnnenUtdanningTypeTilTekst: Record<AnnenUtdanningType, TekstElement<string
     VIDEREGÅENDE: { nb: 'Videregående utdanning' },
     FORKURS: { nb: 'Forkurs for å få generell studiekompetanse eller realfag' },
     FAGSKOLE_HØGSKOLE_UNIVERSITET: {
-        nb: 'Høgskole, universitet eller fagskole',
+        nb: 'Høgskole, universitet eller fagskole'
     },
     KURS_LIKNENDE: {
-        nb: 'Kurs eller lignende',
+        nb: 'Kurs eller lignende'
     },
     INGEN_UTDANNING: {
-        nb: 'Jeg skal ikke ta utdanning eller opplæring',
-    },
+        nb: 'Jeg skal ikke ta utdanning eller opplæring'
+    }
 };
 
 const hvilkenAktivitet: HvilkenAktivitet = {
     spm: {
-        nb: 'Hvilken utdanning eller opplæring søker du om støtte til læremidler for?',
+        nb: 'Hvilken utdanning eller opplæring søker du om støtte til læremidler for?'
     },
     les_mer: {
         header: tekstArbeidsrettedeAktiviteter.lesMer.header,
         header_ingen_registrerte_aktiviteter:
             tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
         del1: {
-            nb: 'Vi henter tiltak og utdanning registrert på deg 6 måneder tilbake i tid. Er du enslig eller gjenlevende så er det ikke alltid dette er registert på en måte så vi klare å hente det.',
+            nb: 'Vi henter tiltak og utdanning registrert på deg 6 måneder tilbake i tid. Er du enslig eller gjenlevende så er det ikke alltid dette er registert på en måte så vi klare å hente det.'
         },
         del2: {
-            nb: 'Går du på arbeidsavklaringspenger eller mottar uføretrygd, og utdanningen din mangler? Da anbefaler vi at du tar kontakt med veilederen din via aktivitetsplanen og ber om at den registreres. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
+            nb: 'Går du på arbeidsavklaringspenger eller mottar uføretrygd, og utdanningen din mangler? Da anbefaler vi at du tar kontakt med veilederen din via aktivitetsplanen og ber om at den registreres. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.'
         },
         del3: {
             nb: [
                 'Hvis du skal søke støtte i forbindelse med en utdanning som ble avsluttet for over 6 måneder siden, må du ',
                 {
                     tekst: 'fylle ut papirsøknad',
-                    url: 'https://www.nav.no/fyllut/nav111215b?sub=paper',
+                    url: 'https://www.nav.no/fyllut/nav111215b?sub=paper'
                 },
-                '.',
-            ],
-        },
-    },
+                '.'
+            ]
+        }
+    }
 };
 
 export const utdanningTekster: AktivitetInnhold = {
@@ -82,72 +82,72 @@ export const utdanningTekster: AktivitetInnhold = {
     guide_innhold: {
         nb: [
             'For å få støtte til læremidler må du ta en utdannelse eller opplæring godkjent av Nav.',
-            'Vi viser utdanninger registrert på deg de siste 6 månedene.',
-        ],
+            'Vi viser utdanninger registrert på deg de siste 6 månedene.'
+        ]
     },
     hvilken_aktivitet: hvilkenAktivitet,
     ingen_registrerte_aktiviterer_overskrift: {
-        nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.',
+        nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.'
     },
     checkbox_velge_aktivitet_feilmelding: {
-        nb: 'Du må svare på hvilken utdanning eller opplæring du søker om støtte i forbindelse med.',
+        nb: 'Du må svare på hvilken utdanning eller opplæring du søker om støtte i forbindelse med.'
     },
     radio_annen_utdanning: {
         header: {
-            nb: 'Hva slags utdanning eller opplæring skal du ta?',
+            nb: 'Hva slags utdanning eller opplæring skal du ta?'
         },
         beskrivelse: {
-            nb: 'Utdanningen må godkjennes og avtales med veileder.',
+            nb: 'Utdanningen må godkjennes og avtales med veileder.'
         },
-        alternativer: AnnenUtdanningTypeTilTekst,
+        alternativer: AnnenUtdanningTypeTilTekst
     },
     radio_annen_utdanning_feilmelding: {
-        nb: 'Du må svare på hvilken utdanning du søker om støtte i forbindelse med.',
+        nb: 'Du må svare på hvilken utdanning du søker om støtte i forbindelse med.'
     },
     ingen_utdanning_alert_tittel: {
-        nb: 'Hvis du ikke gjennomfører utdanning, har du ikke rett til støtte til læremidler',
+        nb: 'Hvis du ikke gjennomfører utdanning, har du ikke rett til støtte til læremidler'
     },
     ingen_utdanning_alert_innhold: {
-        nb: 'Du kan fortsatt søke, men du kan få avslag.',
+        nb: 'Du kan fortsatt søke, men du kan få avslag.'
     },
     radio_mottar_har_funksjonsnedsettelse: {
         header: {
-            nb: 'Har du særlig store utgifter til læremidler på grunn av en funksjonsnedsettelse?',
+            nb: 'Har du særlig store utgifter til læremidler på grunn av en funksjonsnedsettelse?'
         },
         beskrivelse: {
-            nb: 'Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell. Alle utgiftene du ønsker å få dekket, må dokumenteres.',
+            nb: 'Du må dokumentere din funksjonsnedsettelse med uttalelse fra helsepersonell. Alle utgiftene du ønsker å få dekket, må dokumenteres.'
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: JaNeiTilTekst
     },
     radio_mottar_har_funksjonsnedsettelse_feilmelding: {
-        nb: 'Du må svare på om du har en funksjonsnedsettelse som fører til økte utgifter til læremidler.',
+        nb: 'Du må svare på om du har en funksjonsnedsettelse som fører til økte utgifter til læremidler.'
     },
     radio_har_fullført_vgs: {
         header: {
-            nb: 'Har du tidligere fullført videregående skole?',
+            nb: 'Har du tidligere fullført videregående skole?'
         },
         beskrivelse: {
-            nb: 'Det betyr at du har bestått alle fag og har oppnådd studie- eller yrkeskompentanse.',
+            nb: 'Det betyr at du har bestått alle fag og har oppnådd studie- eller yrkeskompentanse.'
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: JaNeiTilTekst
     },
     radio_har_fullført_vgs_feilmelding: {
-        nb: 'Du må svare på om du tidligere har fullført videregående skole.',
+        nb: 'Du må svare på om du tidligere har fullført videregående skole.'
     },
     har_fullført_vgs_info_boks_header: {
-        nb: 'Du har mest sannsynlig rett til utstyrsstipend fra lånekassa, og da har du ikke rett til denne pengestøtten.',
+        nb: 'Du har mest sannsynlig rett til utstyrsstipend fra lånekassa, og da har du ikke rett til denne pengestøtten.'
     },
     har_fullført_vgs_info_boks: {
-        nb: 'Når du er under 21 år og tar videregående utdanning, har du vanligvis rett til utstyrsstipend fra lånekassen. Du kan søke om støtte til læremidler, men du vil mest sannsynligvis få avslag.',
+        nb: 'Når du er under 21 år og tar videregående utdanning, har du vanligvis rett til utstyrsstipend fra lånekassen. Du kan søke om støtte til læremidler, men du vil mest sannsynligvis få avslag.'
     },
     radio_tar_opplæring_vgs_samtidig: {
         header: {
-            nb: 'Tar du opplæring i videregående skole (fellesfag og/eller programfag) samtidig som du er lærling, lærekandidat, praksisbrevkandidat eller tar fagbrev på jobb?',
+            nb: 'Tar du opplæring i videregående skole (fellesfag og/eller programfag) samtidig som du er lærling, lærekandidat, praksisbrevkandidat eller tar fagbrev på jobb?'
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: JaNeiTilTekst
     },
     radio_tar_opplæring_vgs_samtidig_feilmelding: {
-        nb: 'Du må svare på om du tar opplæring i videregående skole samtidig som du er lærling, lærekandidat, praksisbrevkandidat eller tar fagbrev på jobb.',
+        nb: 'Du må svare på om du tar opplæring i videregående skole samtidig som du er lærling, lærekandidat, praksisbrevkandidat eller tar fagbrev på jobb.'
     },
     radio_annet_lesmer: {
         header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
@@ -156,10 +156,10 @@ export const utdanningTekster: AktivitetInnhold = {
                 'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden. ',
                 {
                     tekst: 'Søknad på papir',
-                    url: 'https://www.nav.no/fyllut/nav111216b?sub=paper',
+                    url: 'https://www.nav.no/fyllut/nav111216b?sub=paper'
                 },
-                '.',
-            ],
-        },
-    },
+                '.'
+            ]
+        }
+    }
 };

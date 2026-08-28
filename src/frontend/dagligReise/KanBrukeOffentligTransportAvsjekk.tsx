@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 import { DagligReiseAvsjekk } from './DagligReiseAvsjekk';
 import { dagligReiseTekster } from './offentligTransportAvsjekkTekster';

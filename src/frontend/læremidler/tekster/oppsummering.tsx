@@ -1,4 +1,4 @@
-import { TekstElement } from '../../typer/tekst';
+import type { TekstElement } from '../../typer/tekst';
 
 interface OppsummeringInnhold {
     tittel: TekstElement<string>;
@@ -7,5 +7,5 @@ interface OppsummeringInnhold {
 
 export const oppsummeringTekster: OppsummeringInnhold = {
     tittel: { nb: 'Oppsummering' },
-    utdanning_tittel: { nb: 'Utdanning' },
+    utdanning_tittel: { nb: 'Utdanning' }
 };

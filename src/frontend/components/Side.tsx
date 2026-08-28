@@ -1,33 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react';
-
-import { useLocation, useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
-
 import { Alert, Button, ErrorSummary, HGrid, VStack } from '@navikt/ds-react';
 import { BreakpointMd } from '@navikt/ds-tokens/js';
-
-import { StegIndikator } from './StegIndikator';
-import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { styled } from 'styled-components';
 import {
     loggBesøk,
     loggSkjemaFullført,
     loggSkjemaInnsendtFeilet,
-    loggSkjemaStegFullført,
+    loggSkjemaStegFullført
 } from '../api/analytics';
 import { sendInnSøknad } from '../api/api';
 import { useSpråk } from '../context/SpråkContext';
 import { useSøknad } from '../context/SøknadContext';
 import { useValideringsfeil } from '../context/ValideringsfeilContext';
 import { fellesTekster } from '../tekster/felles';
-import { IRoute } from '../typer/routes';
+import type { IRoute } from '../typer/routes';
 import { inneholderFeil } from '../typer/validering';
 import {
     erOppsummeringsside,
     hentForrigeRoute,
     hentNesteRoute,
     hentRoutes,
-    Skjemasteg,
+    type Skjemasteg
 } from '../utils/routeUtils';
+import { StegIndikator } from './StegIndikator';
+import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
 
 interface Props {
     children?: React.ReactNode;
@@ -60,6 +58,7 @@ export const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }
     const [sendInnFeil, settSendInnFeil] = useState<boolean>(false);
 
     const harValideringsfeil = inneholderFeil(valideringsfeil);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: harValideringsfeil er triggeren for fokus
     useEffect(() => {
         if (errorRef.current) {
             errorRef.current.focus();

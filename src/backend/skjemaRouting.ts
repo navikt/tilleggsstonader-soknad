@@ -1,13 +1,13 @@
-import { Request } from 'express';
+import type { Request } from 'express';
 
-import { SkjematypeFyllUt } from './fyllutUrls';
+import type { SkjematypeFyllUt } from './fyllutUrls';
 import { logger } from './logger';
 import { miljø } from './miljø';
 
 export enum SkjemaRoutingAksjon {
     NY_LØSNING = 'NY_LØSNING',
     GAMMEL_LØSNING = 'GAMMEL_LØSNING',
-    AVSJEKK = 'AVSJEKK',
+    AVSJEKK = 'AVSJEKK'
 }
 
 interface SkjemaRoutingResponse {
@@ -23,9 +23,9 @@ export async function hentSkjemaRoutingAksjon(
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                authorization: req.headers.authorization || '',
+                authorization: req.headers.authorization || ''
             },
-            body: JSON.stringify({ skjematype }),
+            body: JSON.stringify({ skjematype })
         });
 
         if (!response.ok) {

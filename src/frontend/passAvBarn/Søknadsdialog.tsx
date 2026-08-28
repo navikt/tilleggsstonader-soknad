@@ -1,10 +1,9 @@
-import React from 'react';
-
-import { usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
-import { Forside } from './Forside';
-import { StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
+import type React from 'react';
+import { type StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
 import { fellesTekster } from '../tekster/felles';
 import { Skjematype } from '../typer/skjematyper';
+import { usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
+import { Forside } from './Forside';
 import { HovedytelsePassBarn } from './steg/1-hovedytelse/HovedytelsePassBarn';
 import { AktivitetPassAvBarn } from './steg/2-aktivitet/AktivitetPassAvBarn';
 import { DineBarn } from './steg/3-dine-barn/DineBarn';
@@ -18,7 +17,7 @@ const steg: StegRoute[] = [
     { path: '/dine-barn', element: <DineBarn /> },
     { path: '/barnepass', element: <PassAvDineBarn /> },
     { path: '/vedlegg', element: <VedleggPassAvBarn /> },
-    { path: '/oppsummering', element: <Oppsummering /> },
+    { path: '/oppsummering', element: <Oppsummering /> }
 ];
 
 export const Søknadsdialog: React.FC = () => {

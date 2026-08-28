@@ -1,6 +1,6 @@
-import { Reisemåte } from '../../../typer/søknad';
-import { Locale } from '../../../typer/tekst';
-import { Valideringsfeil } from '../../../typer/validering';
+import type { Reisemåte } from '../../../typer/søknad';
+import type { Locale } from '../../../typer/tekst';
+import type { Valideringsfeil } from '../../../typer/validering';
 import { erGyldigKostnad } from '../../../utils/tall';
 import { harVerdi } from '../../../utils/typeUtils';
 import { reisemåteTekster } from '../../tekster/reisemåte';
@@ -37,8 +37,8 @@ export const validerReisemåte = (
         return {
             [errorKeyKanReiseMedOffentligTransport]: {
                 id: errorKeyKanReiseMedOffentligTransport,
-                melding: reisemåteTekster.feilmelding_offentlig_mangler[locale],
-            },
+                melding: reisemåteTekster.feilmelding_offentlig_mangler[locale]
+            }
         };
     }
 
@@ -49,16 +49,16 @@ export const validerReisemåte = (
                 ...feil,
                 [errorKeyTotalutgifterOffentligTransport]: {
                     id: errorKeyTotalutgifterOffentligTransport,
-                    melding: reisemåteTekster.feilmelding_totalutgifter_mangler[locale],
-                },
+                    melding: reisemåteTekster.feilmelding_totalutgifter_mangler[locale]
+                }
             };
         } else if (!erGyldigKostnad(utgifter)) {
             feil = {
                 ...feil,
                 [errorKeyTotalutgifterOffentligTransport]: {
                     id: errorKeyTotalutgifterOffentligTransport,
-                    melding: reisemåteTekster.feilmelding_totalutgifter_ugyldig[locale],
-                },
+                    melding: reisemåteTekster.feilmelding_totalutgifter_ugyldig[locale]
+                }
             };
         }
     }
@@ -74,8 +74,8 @@ export const validerReisemåte = (
                 [errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse]: {
                     id: errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse,
                     melding:
-                        reisemåteTekster.feilmelding_kan_ikke_reise_offentlig_begrunnelse[locale],
-                },
+                        reisemåteTekster.feilmelding_kan_ikke_reise_offentlig_begrunnelse[locale]
+                }
             };
         }
 
@@ -89,8 +89,8 @@ export const validerReisemåte = (
                     ...feil,
                     [errorKeyBarnehageAdresse]: {
                         id: errorKeyBarnehageAdresse,
-                        melding: reisemåteTekster.feilmelding_barnehage_adresse[locale],
-                    },
+                        melding: reisemåteTekster.feilmelding_barnehage_adresse[locale]
+                    }
                 };
             }
 
@@ -99,8 +99,8 @@ export const validerReisemåte = (
                     ...feil,
                     [errorKeyBarnehagePostnummer]: {
                         id: errorKeyBarnehagePostnummer,
-                        melding: reisemåteTekster.feilmelding_barnehage_postnummer[locale],
-                    },
+                        melding: reisemåteTekster.feilmelding_barnehage_postnummer[locale]
+                    }
                 };
             }
         }
@@ -110,8 +110,8 @@ export const validerReisemåte = (
                 ...feil,
                 [errorKeyKanBenytteEgenBil]: {
                     id: errorKeyKanBenytteEgenBil,
-                    melding: reisemåteTekster.feilmelding_bil_mangler[locale],
-                },
+                    melding: reisemåteTekster.feilmelding_bil_mangler[locale]
+                }
             };
         } else if (reisemåte?.kanBenytteEgenBil?.verdi === 'NEI') {
             if (
@@ -126,8 +126,8 @@ export const validerReisemåte = (
                         melding:
                             reisemåteTekster.feilmelding_kan_ikke_benytte_egen_bil_begrunnelse[
                                 locale
-                            ],
-                    },
+                            ]
+                    }
                 };
             }
 
@@ -136,8 +136,8 @@ export const validerReisemåte = (
                     ...feil,
                     [errorKeyØnskerDekketUtgifterForDrosje]: {
                         id: errorKeyØnskerDekketUtgifterForDrosje,
-                        melding: reisemåteTekster.feilmelding_utgifter_drosje_mangler[locale],
-                    },
+                        melding: reisemåteTekster.feilmelding_utgifter_drosje_mangler[locale]
+                    }
                 };
             }
 
@@ -152,8 +152,8 @@ export const validerReisemåte = (
                         ...feil,
                         [errorKeyHarTTKort]: {
                             id: errorKeyHarTTKort,
-                            melding: reisemåteTekster.feilmelding_har_tt_kort[locale],
-                        },
+                            melding: reisemåteTekster.feilmelding_har_tt_kort[locale]
+                        }
                     };
                 }
             }
@@ -168,8 +168,8 @@ export const validerReisemåte = (
                     [errorKeyEgenbilUtgifterDrivstoffType]: {
                         id: errorKeyEgenbilUtgifterDrivstoffType,
                         melding:
-                            reisemåteTekster.feilmelding_egenbil_utgifter_drivstoff_type[locale],
-                    },
+                            reisemåteTekster.feilmelding_egenbil_utgifter_drivstoff_type[locale]
+                    }
                 };
             }
 
@@ -179,8 +179,8 @@ export const validerReisemåte = (
                     ...feil,
                     [errorKeyEgenbilUtgifterBompenger]: {
                         id: errorKeyEgenbilUtgifterBompenger,
-                        melding: reisemåteTekster.feilmelding_egenbil_utgifter_bompenger[locale],
-                    },
+                        melding: reisemåteTekster.feilmelding_egenbil_utgifter_bompenger[locale]
+                    }
                 };
             }
 
@@ -190,8 +190,8 @@ export const validerReisemåte = (
                     ...feil,
                     [errorKeyEgenbilUtgifterFerge]: {
                         id: errorKeyEgenbilUtgifterFerge,
-                        melding: reisemåteTekster.feilmelding_egenbil_utgifter_ferge[locale],
-                    },
+                        melding: reisemåteTekster.feilmelding_egenbil_utgifter_ferge[locale]
+                    }
                 };
             }
 
@@ -202,8 +202,8 @@ export const validerReisemåte = (
                     [errorKeyEgenbilUtgifterPiggdekkavgift]: {
                         id: errorKeyEgenbilUtgifterPiggdekkavgift,
                         melding:
-                            reisemåteTekster.feilmelding_egenbil_utgifter_piggdekkavgift[locale],
-                    },
+                            reisemåteTekster.feilmelding_egenbil_utgifter_piggdekkavgift[locale]
+                    }
                 };
             }
         } else if (reisemåte?.kanBenytteEgenBil?.verdi === 'NEI_SITTER_PÅ_MED_ANDRE') {
@@ -212,8 +212,8 @@ export const validerReisemåte = (
                     ...feil,
                     [errorKeyBetalerForReiseSelv]: {
                         id: errorKeyBetalerForReiseSelv,
-                        melding: reisemåteTekster.feilmelding_betaler_for_reise_selv[locale],
-                    },
+                        melding: reisemåteTekster.feilmelding_betaler_for_reise_selv[locale]
+                    }
                 };
             }
         }

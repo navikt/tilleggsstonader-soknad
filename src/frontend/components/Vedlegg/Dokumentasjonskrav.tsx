@@ -1,11 +1,10 @@
-import styled from 'styled-components';
-
 import { BodyShort, Box, Heading, List } from '@navikt/ds-react';
+import styled from 'styled-components';
 
 import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
 import { typerVedleggTekster, vedleggTekster } from '../../tekster/vedlegg';
-import { Dokumentasjonsbehov } from '../../typer/skjema';
+import type { Dokumentasjonsbehov } from '../../typer/skjema';
 import { Skjematype } from '../../typer/skjematyper';
 import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 

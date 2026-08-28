@@ -1,7 +1,7 @@
-import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { ClientRequest, IncomingMessage } from 'http';
+import type { ClientRequest, IncomingMessage } from 'node:http';
+import * as querystring from 'node:querystring';
+import type { NextFunction, Request, RequestHandler, Response } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import * as querystring from 'querystring';
 import { v4 as uuid } from 'uuid';
 
 import { logger } from './logger';
@@ -11,7 +11,7 @@ const restream = (proxyReq: ClientRequest, req: IncomingMessage) => {
     if (requestBody) {
         const contentType = proxyReq.getHeader('Content-Type');
 
-        let bodyData;
+        let bodyData: string | undefined;
 
         if (contentType === 'application/json') {
             bodyData = JSON.stringify(requestBody);
@@ -33,11 +33,11 @@ export const doProxy = (targetUrl: string, ignorePath: boolean = false): Request
         target: targetUrl,
         ignorePath, // hvis proxy path er en tom streng, vil ignorePath=true hindre trailing slash etter targetUrl
         on: {
-            proxyReq: restream,
+            proxyReq: restream
         },
         changeOrigin: true,
         secure: true,
-        logger,
+        logger
     });
 };
 

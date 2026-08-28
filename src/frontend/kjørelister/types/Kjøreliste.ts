@@ -1,5 +1,5 @@
-import { DokumentasjonFelt, VerdiFelt } from '../../typer/skjema';
-import { SøknadMetadata } from '../../typer/søknad';
+import type { DokumentasjonFelt, VerdiFelt } from '../../typer/skjema';
+import type { SøknadMetadata } from '../../typer/søknad';
 
 export interface Kjøreliste {
     reiseId: string;

@@ -1,26 +1,24 @@
-import React from 'react';
-
 import { Alert, Heading, Label, VStack } from '@navikt/ds-react';
-
+import type React from 'react';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
+import type { Barn } from '../../../typer/barn';
+import type { EnumFelt } from '../../../typer/skjema';
+import type { JaNei } from '../../../typer/søknad';
+import type { Locale } from '../../../typer/tekst';
+import type { Valideringsfeil } from '../../../typer/validering';
+import { barnepassTekster } from '../../tekster/barnepass';
+import { PassType } from '../../typer/barnepass';
 import { BarnOver9År } from './BarnOver9År';
 import {
     er9ellerEldre,
     errorKeyHarUtgifter,
     errorKeyHvemPasser,
     errorKeyUtgifterFom,
-    errorKeyUtgifterTom,
+    errorKeyUtgifterTom
 } from './passBarnVedleggUtils';
-import { BarnepassIntern } from './typer';
+import type { BarnepassIntern } from './typer';
 import { UtgifterDato } from './UtgifterDato';
-import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { Barn } from '../../../typer/barn';
-import { EnumFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
-import { Locale } from '../../../typer/tekst';
-import { Valideringsfeil } from '../../../typer/validering';
-import { barnepassTekster } from '../../tekster/barnepass';
-import { PassType } from '../../typer/barnepass';
 
 interface Props {
     barn: Barn;
@@ -37,7 +35,7 @@ export const BarnepassSpørsmål: React.FC<Props> = ({
     oppdaterBarnMedBarnepass,
     valideringsfeil,
     nullstillValideringsfeil,
-    locale,
+    locale
 }) => {
     const oppdaterUtgifter = (harUtgifterTilPassHelePerioden: EnumFelt<JaNei>) => {
         const skalNullstilleDato = harUtgifterTilPassHelePerioden.verdi === 'JA';
@@ -53,8 +51,8 @@ export const BarnepassSpørsmål: React.FC<Props> = ({
                 ...barnepass.utgifter,
                 harUtgifterTilPassHelePerioden,
                 fom: skalNullstilleDato ? undefined : barnepass.utgifter?.fom,
-                tom: skalNullstilleDato ? undefined : barnepass.utgifter?.tom,
-            },
+                tom: skalNullstilleDato ? undefined : barnepass.utgifter?.tom
+            }
         });
 
         nullstillValideringsfeil(errorKeyHarUtgifter(barn));

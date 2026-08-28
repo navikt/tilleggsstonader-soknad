@@ -1,10 +1,10 @@
-import React from 'react';
+import { Alert, Loader, VStack } from '@navikt/ds-react';
 
 import { useQuery } from '@tanstack/react-query';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 import { Routes } from 'react-router';
 import { Route, useParams } from 'react-router-dom';
-
-import { Alert, Loader, VStack } from '@navikt/ds-react';
 
 import { hentRammevedtak, hentTidligereInnsendt } from '../api/api';
 import { ValideringsfeilProvider } from '../context/ValideringsfeilContext';
@@ -20,19 +20,19 @@ export const KjørelisteInnhold = () => {
     const {
         isPending: rammevedtakPending,
         error: rammevedtakError,
-        data: rammevedtak,
+        data: rammevedtak
     } = useQuery({
         queryKey: [`rammevedtakDetaljer:${reiseId}`],
-        queryFn: () => hentRammevedtak(reiseId),
+        queryFn: () => hentRammevedtak(reiseId)
     });
 
     const {
         isPending: tidligereInnsendtPending,
         error: tidligereInnsendtError,
-        data: tidligereInnsendt,
+        data: tidligereInnsendt
     } = useQuery({
         queryKey: [`tidligereInnsendt:${reiseId}`],
-        queryFn: () => hentTidligereInnsendt(reiseId),
+        queryFn: () => hentTidligereInnsendt(reiseId)
     });
 
     if (rammevedtakPending || tidligereInnsendtPending) {

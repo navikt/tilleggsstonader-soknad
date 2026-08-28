@@ -1,11 +1,10 @@
-import React from 'react';
-
 import { Alert } from '@navikt/ds-react';
+import type React from 'react';
 
-import { EnumFelt } from '../../typer/skjema';
-import { JaNei } from '../../typer/søknad';
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
-import { Feilmelding } from '../../typer/validering';
+import type { EnumFelt } from '../../typer/skjema';
+import type { JaNei } from '../../typer/søknad';
+import type { Radiogruppe, TekstElement } from '../../typer/tekst';
+import type { Feilmelding } from '../../typer/validering';
 import { LocaleRadioGroup } from '../Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
 
@@ -22,7 +21,7 @@ export const LønnetTiltak: React.FC<Props> = ({
     oppdaterLønnetAktivitet,
     feilmelding,
     radioTekst,
-    infoalertInnhold,
+    infoalertInnhold
 }) => {
     return (
         <div>

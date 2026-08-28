@@ -1,14 +1,13 @@
-import React from 'react';
-
 import { VStack } from '@navikt/ds-react';
+import type React from 'react';
 
-import { Punktliste } from '../typer/tekst';
+import type { Punktliste } from '../typer/tekst';
 import { LocaleHeading } from './Teksthåndtering/LocaleHeading';
 import { LocalePunktliste } from './Teksthåndtering/LocalePunktliste';
 
 export const InfoPunktliste: React.FC<{ liste: Punktliste[]; spacingBottom?: boolean }> = ({
     liste,
-    spacingBottom = false,
+    spacingBottom = false
 }) => {
     return (
         <VStack gap="space-24" marginBlock={`space-0 ${spacingBottom ? 'space-24' : 'space-0'}`}>

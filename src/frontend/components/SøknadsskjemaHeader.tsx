@@ -1,10 +1,8 @@
-import styled from 'styled-components';
-
 import { BodyShort, Heading, VStack } from '@navikt/ds-react';
 import { BreakpointMdDown } from '@navikt/ds-tokens/js';
-
+import styled from 'styled-components';
+import type { TekstElement } from '../typer/tekst';
 import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
-import { TekstElement } from '../typer/tekst';
 
 const Container = styled.div`
     padding: 2rem 1rem 0.5rem 1rem;
@@ -18,7 +16,7 @@ const Container = styled.div`
 
 export const SøknadsskjemaHeader: React.FC<{ tittel: TekstElement<string>; skjemaId: string }> = ({
     tittel,
-    skjemaId,
+    skjemaId
 }) => {
     return (
         <Container>

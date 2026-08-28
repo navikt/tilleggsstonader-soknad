@@ -5,14 +5,13 @@ import { v4 as uuid } from 'uuid';
 
 import { logger } from './logger';
 import { miljø } from './miljø';
-import { ApplicationName } from './tokenProxy';
+import type { ApplicationName } from './tokenProxy';
 
 const namespace: { [key in ApplicationName]: string } = {
     'familie-dokument': 'teamfamilie',
-    'tilleggsstonader-soknad-api': 'tilleggsstonader',
+    'tilleggsstonader-soknad-api': 'tilleggsstonader'
 };
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export class TokenXClient {
     private tokenxClient: any = null;
     private audience: any = null;
@@ -38,7 +37,7 @@ export class TokenXClient {
                 client_assertion: clientAssertion,
                 subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
                 subject_token: idportenToken,
-                audience: `${tokenxConfig.clusterName}:${namespace[applicationName]}:${applicationName}`,
+                audience: `${tokenxConfig.clusterName}:${namespace[applicationName]}:${applicationName}`
             }
         )
             .then((tokenSet: any) => {
@@ -60,7 +59,7 @@ export class TokenXClient {
             jti: uuid(),
             nbf: now,
             iat: now,
-            exp: now + 60, // max 120
+            exp: now + 60 // max 120
         };
 
         const key = await this.asKey(tokenxConfig.privateJwk);
@@ -70,8 +69,8 @@ export class TokenXClient {
             header: {
                 kid: key.kid,
                 typ: 'JWT',
-                alg: 'RS256',
-            },
+                alg: 'RS256'
+            }
         };
 
         return jwt.sign(payload, key.toPEM(true), options);
@@ -121,5 +120,5 @@ const tokenxConfig = {
     clientId: process.env.TOKEN_X_CLIENT_ID,
     privateJwk: process.env.TOKEN_X_PRIVATE_JWK,
     redirectUri: miljø.oauthCallbackUri,
-    clusterName: process.env.NAIS_CLUSTER_NAME,
+    clusterName: process.env.NAIS_CLUSTER_NAME
 };

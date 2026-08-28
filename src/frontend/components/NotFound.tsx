@@ -1,4 +1,4 @@
-import { Box, VStack, Heading, BodyShort, Page, Link } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, Link, Page, VStack } from '@navikt/ds-react';
 
 export const NotFound: React.FC = () => {
     return (

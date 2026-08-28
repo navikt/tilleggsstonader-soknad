@@ -1,17 +1,17 @@
+import {
+    jobberIAnnetLandInnhold,
+    mottarPengestøtteInnhold
+} from '../../../passAvBarn/tekster/opphold';
+import type { ArbeidOgOpphold } from '../../../typer/søknad';
+import type { Locale } from '../../../typer/tekst';
+import type { Valideringsfeil } from '../../../typer/validering';
+import { harVerdi } from '../../../utils/typeUtils';
+import { FeilIdDinSituasjon } from '../validering';
 import { validerOpphold } from './Opphold/validering';
 import {
     skalTaStillingTilLandForJobberIAnnetLand,
-    skalTaStillingTilLandForPengestøtte,
+    skalTaStillingTilLandForPengestøtte
 } from './util';
-import {
-    jobberIAnnetLandInnhold,
-    mottarPengestøtteInnhold,
-} from '../../../passAvBarn/tekster/opphold';
-import { ArbeidOgOpphold } from '../../../typer/søknad';
-import { Locale } from '../../../typer/tekst';
-import { Valideringsfeil } from '../../../typer/validering';
-import { harVerdi } from '../../../utils/typeUtils';
-import { FeilIdDinSituasjon } from '../validering';
 
 export const validerArbeidOgOpphold = (
     opphold: ArbeidOgOpphold,
@@ -20,7 +20,7 @@ export const validerArbeidOgOpphold = (
     return {
         ...validerJobberIAnnetLand(opphold, locale),
         ...validerMottarPengestøtte(opphold, locale),
-        ...validerOpphold(opphold, locale),
+        ...validerOpphold(opphold, locale)
     };
 };
 
@@ -31,8 +31,8 @@ const validerJobberIAnnetLand = (opphold: ArbeidOgOpphold, locale: Locale): Vali
             ...feil,
             jobberIAnnetLand: {
                 id: FeilIdDinSituasjon.JOBBER_I_ANNET_LAND,
-                melding: jobberIAnnetLandInnhold.feilmnelding_jobber_annet_land[locale],
-            },
+                melding: jobberIAnnetLandInnhold.feilmnelding_jobber_annet_land[locale]
+            }
         };
     }
     if (
@@ -43,8 +43,8 @@ const validerJobberIAnnetLand = (opphold: ArbeidOgOpphold, locale: Locale): Vali
             ...feil,
             jobbAnnetLand: {
                 id: FeilIdDinSituasjon.JOBBER_I_ANNET_LAND_HVILKET_LAND,
-                melding: jobberIAnnetLandInnhold.feilmelding_select_hvilket_land[locale],
-            },
+                melding: jobberIAnnetLandInnhold.feilmelding_select_hvilket_land[locale]
+            }
         };
     }
     return feil;
@@ -61,8 +61,8 @@ const validerMottarPengestøtte = (opphold: ArbeidOgOpphold, locale: Locale): Va
             ...feil,
             harPengestøtteAnnetLand: {
                 id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE,
-                melding: mottarPengestøtteInnhold.feilmnelding_mottar_du_pengestøtte[locale],
-            },
+                melding: mottarPengestøtteInnhold.feilmnelding_mottar_du_pengestøtte[locale]
+            }
         };
     } else if (harValgtMottarIkkeOgAnnetValg) {
         feil = {
@@ -72,8 +72,8 @@ const validerMottarPengestøtte = (opphold: ArbeidOgOpphold, locale: Locale): Va
                 melding:
                     mottarPengestøtteInnhold.feilmnelding_mottar_ikke_pengestøtte_med_andre_valg[
                         locale
-                    ],
-            },
+                    ]
+            }
         };
     }
 
@@ -85,8 +85,8 @@ const validerMottarPengestøtte = (opphold: ArbeidOgOpphold, locale: Locale): Va
             ...feil,
             pengestøtteAnnetLand: {
                 id: FeilIdDinSituasjon.MOTTAR_DU_PENGESTØTTE_HVILKET_LAND,
-                melding: mottarPengestøtteInnhold.feilmelding_select_hvilket_land[locale],
-            },
+                melding: mottarPengestøtteInnhold.feilmelding_select_hvilket_land[locale]
+            }
         };
     }
     return feil;

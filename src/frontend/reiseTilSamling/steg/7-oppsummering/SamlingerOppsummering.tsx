@@ -1,11 +1,10 @@
-import React from 'react';
-
 import { BodyShort, FormSummary } from '@navikt/ds-react';
+import type React from 'react';
 
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { EnumFelt, VerdiFelt } from '../../../typer/skjema';
-import { Samling } from '../../../typer/søknad';
+import type { EnumFelt, VerdiFelt } from '../../../typer/skjema';
+import type { Samling } from '../../../typer/søknad';
 import { adressefelterTilVisning } from '../../../utils/adresseUtils';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { harVerdi } from '../../../utils/typeUtils';
@@ -42,7 +41,7 @@ export const SamlingerOppsummering: React.FC<{ samlinger: Samling[] }> = ({ saml
                         gateadresse: samling.adresse?.gateadresse?.verdi,
                         postnummer: samling.adresse?.postnummer?.verdi,
                         poststed: samling.adresse?.poststed?.verdi,
-                        land: samling.adresse?.land?.verdi,
+                        land: samling.adresse?.land?.verdi
                     });
 
                     return (

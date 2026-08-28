@@ -1,11 +1,10 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
+import type React from 'react';
 
-import { Reisedag } from '../../types/Kjøreliste';
+import type { Reisedag } from '../../types/Kjøreliste';
 
 export const OppsummeringDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) => {
-    if (!reisedag || !reisedag.harKjørt) {
+    if (!reisedag?.harKjørt) {
         return null;
     }
     return (
@@ -16,7 +15,8 @@ export const OppsummeringDag: React.FC<{ reisedag: Reisedag }> = ({ reisedag }) 
             </FormSummary.Label>
             {reisedag.parkeringsutgift.verdi != null ? (
                 <FormSummary.Value>
-                    Har reist{`, med parkeringsutgift ${reisedag.parkeringsutgift.verdi} kr.`}
+                    Har reist
+                    {`, med parkeringsutgift ${reisedag.parkeringsutgift.verdi} kr.`}
                 </FormSummary.Value>
             ) : (
                 <FormSummary.Value>Har reist uten parkeringsutgift.</FormSummary.Value>

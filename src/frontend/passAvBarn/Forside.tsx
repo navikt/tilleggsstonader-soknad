@@ -1,7 +1,3 @@
-import React, { useEffect, useState } from 'react';
-
-import { useLocation, useNavigate } from 'react-router';
-
 import {
     Accordion,
     Alert,
@@ -11,17 +7,16 @@ import {
     Heading,
     HStack,
     Label,
-    VStack,
+    VStack
 } from '@navikt/ds-react';
-
-import { routesPassAvBarn } from './routing/routesPassAvBarn';
-import { forsideTekster } from './tekster/forside';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
 import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
-import { usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
 import { LocaleHeading } from '../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../components/Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../components/Teksthåndtering/LocalePunktliste';
@@ -32,6 +27,9 @@ import { fellesTekster } from '../tekster/felles';
 import { Skjematype } from '../typer/skjematyper';
 import { erSnartNyttSkoleår } from '../utils/datoUtils';
 import { hentNesteRoute } from '../utils/routeUtils';
+import { usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
+import { routesPassAvBarn } from './routing/routesPassAvBarn';
+import { forsideTekster } from './tekster/forside';
 
 export const Forside: React.FC = () => {
     const navigate = useNavigate();

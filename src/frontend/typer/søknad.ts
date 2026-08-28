@@ -1,9 +1,15 @@
-import { AnnenAktivitetType } from './aktivitet';
-import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
-import { Ytelse } from '../components/Hovedytelse/typer';
-import { Utdanning } from '../læremidler/typer/søknad';
-import { Barnepass } from '../passAvBarn/typer/barnepass';
-import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
+import type { Ytelse } from '../components/Hovedytelse/typer';
+import type { Utdanning } from '../læremidler/typer/søknad';
+import type { Barnepass } from '../passAvBarn/typer/barnepass';
+import type { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
+import type { AnnenAktivitetType } from './aktivitet';
+import type {
+    DokumentasjonFelt,
+    EnumFelt,
+    EnumFlereValgFelt,
+    SelectFelt,
+    VerdiFelt
+} from './skjema';
 
 export type Søknad = SøknadPassAvBarn | SøknadLæremidler | SøknadReiseTilSamling;
 
@@ -35,10 +41,14 @@ export interface SøknadReiseTilSamling {
 export type KanBenytteEgenBil = 'JA' | 'NEI' | 'NEI_SITTER_PÅ_MED_ANDRE';
 
 export type KanIkkeReiseMedOffentligTransportBegrunnelser =
-    'DÅRLIG_TRANSPORTTILBUD' | 'HELSEMESSIGE_ÅRSAKER' | 'LEVERING_HENTING_I_BARNEHAGE';
+    | 'DÅRLIG_TRANSPORTTILBUD'
+    | 'HELSEMESSIGE_ÅRSAKER'
+    | 'LEVERING_HENTING_I_BARNEHAGE';
 
 export type KanIkkeBenytteEgenBilBegrunnelser =
-    'HAR_IKKE_BIL_ELLER_FØRERKORT' | 'HELSEMESSIGE_ÅRSAKER' | 'ANNET';
+    | 'HAR_IKKE_BIL_ELLER_FØRERKORT'
+    | 'HELSEMESSIGE_ÅRSAKER'
+    | 'ANNET';
 
 export type DrivstoffType = 'BENSIN' | 'DIESEL' | 'ELBIL' | 'HYBRID' | 'HYDROGEN';
 
@@ -127,7 +137,12 @@ export type JaNei = 'JA' | 'NEI';
 export type MottarPengestøtteTyper = 'SYKEPENGER' | 'PENSJON' | 'ANNEN_PENGESTØTTE' | 'MOTTAR_IKKE';
 
 export type ÅrsakOppholdUtenforNorge =
-    'JOBB' | 'STUDIER' | 'MEDISINSK_BEHANDLING' | 'FERIE' | 'FAMILIE_BESØK' | 'ANNET';
+    | 'JOBB'
+    | 'STUDIER'
+    | 'MEDISINSK_BEHANDLING'
+    | 'FERIE'
+    | 'FAMILIE_BESØK'
+    | 'ANNET';
 
 export interface Periode {
     fom: string;

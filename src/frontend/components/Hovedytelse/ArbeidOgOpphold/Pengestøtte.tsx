@@ -1,14 +1,13 @@
-import React from 'react';
-
-import { skalTaStillingTilLandForPengestøtte } from './util';
+import type React from 'react';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { mottarPengestøtteInnhold } from '../../../passAvBarn/tekster/opphold';
-import { EnumFlereValgFelt, SelectFelt } from '../../../typer/skjema';
-import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
+import type { EnumFlereValgFelt, SelectFelt } from '../../../typer/skjema';
+import type { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typeUtils';
 import { BlåVenstreRammeContainer } from '../../BlåVenstreRammeContainer';
 import { Landvelger } from '../../Landvelger/Landvelger';
 import { LocaleCheckboxGroup } from '../../Teksthåndtering/LocaleCheckboxGroup';
+import { skalTaStillingTilLandForPengestøtte } from './util';
 
 interface Props {
     arbeidOgOpphold: ArbeidOgOpphold;
@@ -24,24 +23,24 @@ export const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpp
             harPengestøtteAnnetLand: verdi,
             pengestøtteAnnetLand: skalTaStillingTilLandForPengestøtte(verdi)
                 ? prevState.pengestøtteAnnetLand
-                : undefined,
+                : undefined
         }));
         settValideringsfeil((prevState) => ({
             ...prevState,
             harPengestøtteAnnetLand: undefined,
-            pengestøtteAnnetLand: undefined,
+            pengestøtteAnnetLand: undefined
         }));
     };
 
     const oppdatertHvilketLandMottarPengestøtte = (verdi: SelectFelt) => {
         settArbeidOgOpphold((prevState) => ({
             ...prevState,
-            pengestøtteAnnetLand: verdi,
+            pengestøtteAnnetLand: verdi
         }));
         if (harVerdi(verdi.verdi)) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                pengestøtteAnnetLand: undefined,
+                pengestøtteAnnetLand: undefined
             }));
         }
     };

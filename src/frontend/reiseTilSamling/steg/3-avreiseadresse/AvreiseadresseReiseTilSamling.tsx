@@ -1,18 +1,8 @@
-import React from 'react';
-
-import styled from 'styled-components';
-
 import { BodyShort, InlineMessage, Link, TextField, VStack } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
-
-import {
-    errorKeyAvreiseGateadresse,
-    errorKeyAvreiseLand,
-    errorKeyAvreisePostnummer,
-    errorKeyAvreisePoststed,
-    errorKeySkalReiseFraFolkeregAdr,
-    validerAvreiseadresse,
-} from './validering';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
+import styled from 'styled-components';
 import { Landvelger } from '../../../components/Landvelger/Landvelger';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
@@ -21,11 +11,19 @@ import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { EnumFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
+import type { EnumFelt } from '../../../typer/skjema';
+import type { JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { avreiseadresseTekster } from '../../tekster/avreiseadresse';
+import {
+    errorKeyAvreiseGateadresse,
+    errorKeyAvreiseLand,
+    errorKeyAvreisePostnummer,
+    errorKeyAvreisePoststed,
+    errorKeySkalReiseFraFolkeregAdr,
+    validerAvreiseadresse
+} from './validering';
 
 const AdresseBoks = styled.div`
     background: ${BgSunken};
@@ -60,8 +58,7 @@ export const AvreiseadresseReiseTilSamling = () => {
         settAvreiseadresse((prev) => ({
             ...prev,
             skalReiseFraFolkeregistrertAdresse: felt,
-            adresseDetSkalReisesFra:
-                felt.verdi === 'NEI' ? prev.adresseDetSkalReisesFra : undefined,
+            adresseDetSkalReisesFra: felt.verdi === 'NEI' ? prev.adresseDetSkalReisesFra : undefined
         }));
         settValideringsfeil((prev) => ({ ...prev, [errorKeySkalReiseFraFolkeregAdr]: undefined }));
     };
@@ -136,8 +133,8 @@ export const AvreiseadresseReiseTilSamling = () => {
                                             gateadresse: {
                                                 label: avreiseadresseTekster
                                                     .avreiseadresse_vegadresse_label[locale],
-                                                verdi,
-                                            },
+                                                verdi
+                                            }
                                         });
                                         nullstillFeil(verdi, errorKeyAvreiseGateadresse);
                                     }}
@@ -161,8 +158,8 @@ export const AvreiseadresseReiseTilSamling = () => {
                                             postnummer: {
                                                 label: avreiseadresseTekster
                                                     .avreiseadresse_postnummer_label[locale],
-                                                verdi,
-                                            },
+                                                verdi
+                                            }
                                         });
                                         nullstillFeil(verdi, errorKeyAvreisePostnummer);
                                     }}
@@ -183,8 +180,8 @@ export const AvreiseadresseReiseTilSamling = () => {
                                             poststed: {
                                                 label: avreiseadresseTekster
                                                     .avreiseadresse_poststed_label[locale],
-                                                verdi,
-                                            },
+                                                verdi
+                                            }
                                         });
                                         nullstillFeil(verdi, errorKeyAvreisePoststed);
                                     }}

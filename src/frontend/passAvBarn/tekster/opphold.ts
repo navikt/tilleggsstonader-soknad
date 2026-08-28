@@ -1,6 +1,6 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { JaNei, MottarPengestøtteTyper, ÅrsakOppholdUtenforNorge } from '../../typer/søknad';
-import { CheckboxGruppe, InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
+import type { JaNei, MottarPengestøtteTyper, ÅrsakOppholdUtenforNorge } from '../../typer/søknad';
+import type { CheckboxGruppe, InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
 
 export interface ArbeidOgOppholdInnhold {
     tittel: TekstElement<string>;
@@ -56,227 +56,227 @@ export interface OppholdInnhold {
 
 export const arbeidOgOppholdInnhold: ArbeidOgOppholdInnhold = {
     tittel: {
-        nb: 'Arbeid og opphold utenfor Norge',
+        nb: 'Arbeid og opphold utenfor Norge'
     },
     guide_innhold: {
         nb: [
             'For å finne ut om du oppfyller kravene til ',
             {
                 tekst: 'medlemskap i folketrygden',
-                url: 'https://www.nav.no/no/person/flere-tema/arbeid-og-opphold-i-norge/relatert-informasjon/medlemskap-i-folketrygden',
+                url: 'https://www.nav.no/no/person/flere-tema/arbeid-og-opphold-i-norge/relatert-informasjon/medlemskap-i-folketrygden'
             },
-            ' (åpnes i ny fane), trenger vi å vite om du har bodd eller jobbet i utlandet.',
-        ],
-    },
+            ' (åpnes i ny fane), trenger vi å vite om du har bodd eller jobbet i utlandet.'
+        ]
+    }
 };
 
 export const jobberIAnnetLandInnhold: JobberIAnnetLandInnhold = {
     radio_jobber_annet_land: {
         header: {
-            nb: 'Jobber du i et annet land enn Norge?',
+            nb: 'Jobber du i et annet land enn Norge?'
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: JaNeiTilTekst
     },
     feilmnelding_jobber_annet_land: {
-        nb: 'Du må svare på om du jobber i et annet land enn Norge.',
+        nb: 'Du må svare på om du jobber i et annet land enn Norge.'
     },
     select_hvilket_land: {
-        nb: 'Hvilket land jobber du i?',
+        nb: 'Hvilket land jobber du i?'
     },
     feilmelding_select_hvilket_land: {
-        nb: 'Du må velge hvilket land du jobber i.',
-    },
+        nb: 'Du må velge hvilket land du jobber i.'
+    }
 };
 
 export const mottarPengestøtteInnhold: MottarDuPengestøtteInnhold = {
     checkbox_mottar_du_pengestøtte: {
         legend: {
-            nb: 'Mottar du pengestøtte fra et annet land enn Norge?',
+            nb: 'Mottar du pengestøtte fra et annet land enn Norge?'
         },
         alternativer: {
             SYKEPENGER: {
-                nb: 'Sykepenger',
+                nb: 'Sykepenger'
             },
             PENSJON: {
-                nb: 'Pensjon',
+                nb: 'Pensjon'
             },
             ANNEN_PENGESTØTTE: {
-                nb: 'Annen pengestøtte',
+                nb: 'Annen pengestøtte'
             },
             MOTTAR_IKKE: {
-                nb: 'Mottar ikke pengestøtte fra ennet land',
-            },
-        },
+                nb: 'Mottar ikke pengestøtte fra ennet land'
+            }
+        }
     },
     feilmnelding_mottar_du_pengestøtte: {
-        nb: 'Du må svare på om du mottar pengestøtte fra annet land enn Norge.',
+        nb: 'Du må svare på om du mottar pengestøtte fra annet land enn Norge.'
     },
     feilmnelding_mottar_ikke_pengestøtte_med_andre_valg: {
-        nb: '“Ingen pengestøtte” kan ikke kombineres med andre valg',
+        nb: '“Ingen pengestøtte” kan ikke kombineres med andre valg'
     },
     select_hvilket_land: {
-        nb: 'Hvilket land mottar du pengestøtte fra?',
+        nb: 'Hvilket land mottar du pengestøtte fra?'
     },
     feilmelding_select_hvilket_land: {
-        nb: 'Du må velge hvilket land du mottar pengestøtte fra.',
-    },
+        nb: 'Du må velge hvilket land du mottar pengestøtte fra.'
+    }
 };
 
 const siste12mndInnhold: OppholdInnhold = {
     select_hvilket_land: {
-        nb: 'Hvilket land har du oppholdt deg i?',
+        nb: 'Hvilket land har du oppholdt deg i?'
     },
     feilmelding_hvilket_land: {
-        nb: 'Du må velge hva du gjorde i landet du har oppholdt deg i.',
+        nb: 'Du må velge hva du gjorde i landet du har oppholdt deg i.'
     },
 
     checkbox_årsak: {
         legend: {
-            nb: 'Hva gjorde du i dette landet?',
+            nb: 'Hva gjorde du i dette landet?'
         },
         alternativer: {
             JOBB: {
-                nb: 'Jobbet',
+                nb: 'Jobbet'
             },
             STUDIER: {
-                nb: 'Studerte',
+                nb: 'Studerte'
             },
             MEDISINSK_BEHANDLING: {
-                nb: 'Fikk medisinsk behandling',
+                nb: 'Fikk medisinsk behandling'
             },
             FERIE: {
-                nb: 'Var på ferie',
+                nb: 'Var på ferie'
             },
             FAMILIE_BESØK: {
-                nb: 'Besøkte familie',
+                nb: 'Besøkte familie'
             },
             ANNET: {
-                nb: 'Annet',
-            },
-        },
+                nb: 'Annet'
+            }
+        }
     },
     feilmelding_årsak: {
-        nb: 'Du må velge hva du gjorde i landet du oppholdt deg i.',
+        nb: 'Du må velge hva du gjorde i landet du oppholdt deg i.'
     },
     dato: {
         label: {
-            nb: 'Når var du i dette landet?',
+            nb: 'Når var du i dette landet?'
         },
         fom: {
-            nb: 'Fra',
+            nb: 'Fra'
         },
         tom: {
-            nb: 'Til',
+            nb: 'Til'
         },
         feilmelding_fom: {
-            nb: 'Du må velge fra-dato.',
+            nb: 'Du må velge fra-dato.'
         },
         feilmelding_tom: {
-            nb: 'Du må velge til-dato.',
+            nb: 'Du må velge til-dato.'
         },
         feilmelding_tom_før_fom: {
-            nb: 'Til-dato kan ikke være før fra-dato.',
-        },
-    },
+            nb: 'Til-dato kan ikke være før fra-dato.'
+        }
+    }
 };
 const neste12mndInnhold: OppholdInnhold = {
     select_hvilket_land: {
-        nb: 'Hvilket land skal du oppholde deg i?',
+        nb: 'Hvilket land skal du oppholde deg i?'
     },
     feilmelding_hvilket_land: {
-        nb: 'Du må velge hvilket land du skal oppholde deg i.',
+        nb: 'Du må velge hvilket land du skal oppholde deg i.'
     },
 
     checkbox_årsak: {
         legend: {
-            nb: 'Hva skal du gjøre i dette landet?',
+            nb: 'Hva skal du gjøre i dette landet?'
         },
         alternativer: {
             JOBB: {
-                nb: 'Jobbe',
+                nb: 'Jobbe'
             },
             STUDIER: {
-                nb: 'Studere',
+                nb: 'Studere'
             },
             MEDISINSK_BEHANDLING: {
-                nb: 'Få medisinsk behandling',
+                nb: 'Få medisinsk behandling'
             },
             FERIE: {
-                nb: 'Være på ferie',
+                nb: 'Være på ferie'
             },
             FAMILIE_BESØK: {
-                nb: 'Besøke familie',
+                nb: 'Besøke familie'
             },
             ANNET: {
-                nb: 'Annet',
-            },
-        },
+                nb: 'Annet'
+            }
+        }
     },
     feilmelding_årsak: {
-        nb: 'Du må velge hva du skal gjøre i landet du skal oppholde deg i.',
+        nb: 'Du må velge hva du skal gjøre i landet du skal oppholde deg i.'
     },
     dato: {
         label: {
-            nb: 'Når skal du være i dette landet?',
+            nb: 'Når skal du være i dette landet?'
         },
         fom: {
-            nb: 'Fra',
+            nb: 'Fra'
         },
         tom: {
-            nb: 'Til',
+            nb: 'Til'
         },
         feilmelding_fom: {
-            nb: 'Du må velge fra-dato.',
+            nb: 'Du må velge fra-dato.'
         },
         feilmelding_tom: {
-            nb: 'Du må velge til-dato.',
+            nb: 'Du må velge til-dato.'
         },
         feilmelding_tom_før_fom: {
-            nb: 'Til-dato kan ikke være før fra-dato.',
-        },
-    },
+            nb: 'Til-dato kan ikke være før fra-dato.'
+        }
+    }
 };
 export const oppholdUtenforNorgeInnhold: OppholdUtenforNorgeInnhold = {
     dineOpphold: {
-        nb: 'Dine opphold utenfor Norge siste 12 mnd:',
+        nb: 'Dine opphold utenfor Norge siste 12 mnd:'
     },
     radioSiste12mnd: {
         header: {
-            nb: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?',
+            nb: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?'
         },
         beskrivelse: {
-            nb: 'Opphold under 5 uker trenger du ikke opplyse om.',
+            nb: 'Opphold under 5 uker trenger du ikke opplyse om.'
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: JaNeiTilTekst
     },
     feilmelding_radioSiste12mnd: {
-        nb: 'Du må svare på om du har oppholdt deg utenfor Norge.',
+        nb: 'Du må svare på om du har oppholdt deg utenfor Norge.'
     },
 
     siste12mnd: siste12mndInnhold,
     radioNeste12mnd: {
         header: {
-            nb: 'Planlegger du å oppholde deg utenfor Norge de neste 12 månedene?',
+            nb: 'Planlegger du å oppholde deg utenfor Norge de neste 12 månedene?'
         },
         beskrivelse: {
-            nb: 'Opphold under 5 uker trenger du ikke opplyse om.',
+            nb: 'Opphold under 5 uker trenger du ikke opplyse om.'
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: JaNeiTilTekst
     },
     feilmelding_radioNeste12mnd: {
-        nb: 'Du må ta stilling til om du planlegger opphold utenfor Norge de neste 12 månedene.',
+        nb: 'Du må ta stilling til om du planlegger opphold utenfor Norge de neste 12 månedene.'
     },
     neste12mnd: neste12mndInnhold,
     knapp_legg_til: {
-        nb: 'Legg til flere land',
+        nb: 'Legg til flere land'
     },
     label_flere_utenlandsopphold: {
-        nb: 'Flere utenlandsopphold',
+        nb: 'Flere utenlandsopphold'
     },
     knapp_angre_legg_til: {
-        nb: 'Angre legg til flere',
+        nb: 'Angre legg til flere'
     },
     knapp_slett: {
-        nb: 'Slett',
-    },
+        nb: 'Slett'
+    }
 };

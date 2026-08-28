@@ -1,16 +1,14 @@
-import React from 'react';
-
 import { PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
-
+import type React from 'react';
+import { useSpråk } from '../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import type { Samling } from '../../../typer/søknad';
+import { inneholderFeil } from '../../../typer/validering';
+import { samlingerTekster } from '../../tekster/samlinger';
 import { NySamling } from './NySamling';
 import { oppdaterSamling, opprettSamlingForNesteId, synkroniserGjenbrukAdresser } from './util';
 import { nullstillteSamlingsfeil, validerSamlingUnderRedigering } from './validering';
-import { useSpråk } from '../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { Samling } from '../../../typer/søknad';
-import { inneholderFeil } from '../../../typer/validering';
-import { samlingerTekster } from '../../tekster/samlinger';
 
 export const SamlingerListe: React.FC<{
     samlinger: Samling[];
@@ -47,12 +45,12 @@ export const SamlingerListe: React.FC<{
 
         settValideringsfeil((prevState) => ({
             ...prevState,
-            ...nullstillteSamlingsfeil(samlinger),
+            ...nullstillteSamlingsfeil(samlinger)
         }));
         settSamlinger((prev) =>
             synkroniserGjenbrukAdresser([
                 ...prev.map((s) => ({ ...s, lagret: true })),
-                opprettSamlingForNesteId(prev),
+                opprettSamlingForNesteId(prev)
             ])
         );
     };
@@ -64,7 +62,7 @@ export const SamlingerListe: React.FC<{
         if (ulagretSamling?._id === id) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                ...nullstillteSamlingsfeil(samlinger),
+                ...nullstillteSamlingsfeil(samlinger)
             }));
         }
         settSamlinger((prev) => synkroniserGjenbrukAdresser(prev.filter((s) => s._id !== id)));

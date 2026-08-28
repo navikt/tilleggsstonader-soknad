@@ -1,4 +1,4 @@
-import { Samling } from '../../../typer/søknad';
+import type { Samling } from '../../../typer/søknad';
 
 export const oppdaterSamling = <K extends keyof Samling>(
     samlinger: Samling[],
@@ -15,7 +15,7 @@ const utledMaxId = (samlinger: Samling[]): number => {
 
 export const opprettSamlingForNesteId = (samlinger: Samling[]): Samling => ({
     _id: utledMaxId(samlinger) + 1,
-    lagret: false,
+    lagret: false
 });
 
 // Kopierer adresse og reiseavstand fra forrige samling til samlinger som gjenbruker adressen.
@@ -28,7 +28,7 @@ export const synkroniserGjenbrukAdresser = (samlinger: Samling[]): Samling[] => 
             synkroniserte.push({
                 ...samling,
                 adresse: forrige.adresse,
-                antallKilometerEnVei: forrige.antallKilometerEnVei,
+                antallKilometerEnVei: forrige.antallKilometerEnVei
             });
         } else {
             synkroniserte.push(samling);

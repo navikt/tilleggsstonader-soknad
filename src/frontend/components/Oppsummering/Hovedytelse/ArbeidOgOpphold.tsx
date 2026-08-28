@@ -1,15 +1,13 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
-
+import type React from 'react';
+import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
+import type { ArbeidOgOpphold } from '../../../typer/søknad';
+import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';
 import { OppholdOppsummering } from './Opphold';
 import { flervalgTilKommaStreng } from './utils';
-import { fellesOppsummeringTekster } from '../../../tekster/oppsummering';
-import { ArbeidOgOpphold } from '../../../typer/søknad';
-import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';
 
 export const ArbeidOgOppholdOppsummering: React.FC<{ arbeidOgOpphold: ArbeidOgOpphold }> = ({
-    arbeidOgOpphold,
+    arbeidOgOpphold
 }) => {
     const tekster = fellesOppsummeringTekster.arbeid_og_opphold;
     return (

@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
-
 import { UNSAFE_Combobox } from '@navikt/ds-react';
+import type React from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useSpråk } from '../../context/SpråkContext';
 import { fellesTekster } from '../../tekster/felles';
-import { SelectFelt } from '../../typer/skjema';
-import { TekstElement } from '../../typer/tekst';
+import type { SelectFelt } from '../../typer/skjema';
+import type { TekstElement } from '../../typer/tekst';
 import { landkodeTilNavn } from '../../utils/adresseUtils';
 
 interface Props {
@@ -34,7 +34,7 @@ export const Landvelger: React.FC<Props> = ({
     onChange,
     medNorskeOmråder,
     error,
-    defaultNorge = false,
+    defaultNorge = false
 }) => {
     const { locale } = useSpråk();
 
@@ -61,7 +61,7 @@ export const Landvelger: React.FC<Props> = ({
             onChange({
                 label: label[locale],
                 verdi: NORGE_KODE,
-                svarTekst: landkodeTilNavn[NORGE_KODE],
+                svarTekst: landkodeTilNavn[NORGE_KODE]
             });
         }
     }, [defaultNorge, value, label, locale, onChange]);
@@ -71,13 +71,13 @@ export const Landvelger: React.FC<Props> = ({
             onChange({
                 label: label[locale],
                 verdi: option,
-                svarTekst: landkodeTilNavn[option] || '',
+                svarTekst: landkodeTilNavn[option] || ''
             });
         } else {
             onChange({
                 label: label[locale],
                 verdi: '',
-                svarTekst: '',
+                svarTekst: ''
             });
         }
     };

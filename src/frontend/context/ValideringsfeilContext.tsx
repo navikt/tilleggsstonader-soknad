@@ -1,8 +1,7 @@
+import createUseContext from 'constate';
 import { useState } from 'react';
 
-import createUseContext from 'constate';
-
-import { Valideringsfeil } from '../typer/validering';
+import type { Valideringsfeil } from '../typer/validering';
 
 const [ValideringsfeilProvider, useValideringsfeil] = createUseContext(() => {
     ValideringsfeilProvider.displayName = 'VALIDERINGSFEIL_PROVIDER';
@@ -16,8 +15,8 @@ const [ValideringsfeilProvider, useValideringsfeil] = createUseContext(() => {
     return {
         valideringsfeil,
         settValideringsfeil,
-        resetValideringsfeil,
+        resetValideringsfeil
     };
 });
 
-export { ValideringsfeilProvider, useValideringsfeil };
+export { useValideringsfeil, ValideringsfeilProvider };

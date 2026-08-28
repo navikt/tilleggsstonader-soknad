@@ -1,18 +1,16 @@
-import React from 'react';
-
 import { Accordion, Alert, BodyShort, Heading, HStack, Tag, VStack } from '@navikt/ds-react';
-
-import { KjørelisteDag } from './KjørelisteDag';
+import type React from 'react';
 import {
     finnAntallDagerReist,
     harReist,
     harValgtFlereDagerEnnRammevedtak,
     harValgtHelgedag,
     harValgtHelligdag,
-    hentValgteHelligdagnavn,
+    hentValgteHelligdagnavn
 } from '../../kjørelisteUtils';
-import { UkeMedReisedager } from '../../types/Kjøreliste';
+import type { UkeMedReisedager } from '../../types/Kjøreliste';
 import { WideAccordionHeader } from '../WideAccordionHeader';
+import { KjørelisteDag } from './KjørelisteDag';
 
 export const KjørelisteUke: React.FC<{
     ukeMedReisedag: UkeMedReisedager;

@@ -1,6 +1,6 @@
 import constate from 'constate';
 
-import { Person } from '../typer/person';
+import type { Person } from '../typer/person';
 
 interface Props {
     person: Person;

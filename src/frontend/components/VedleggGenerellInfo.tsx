@@ -1,10 +1,9 @@
-import React from 'react';
-
 import { Accordion, Label } from '@navikt/ds-react';
-
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
+import { vedleggTekster } from '../tekster/vedlegg';
 import { LocalePunktliste } from './Teksthåndtering/LocalePunktliste';
 import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
-import { vedleggTekster } from '../tekster/vedlegg';
 
 export const VedleggGenerellInfo = () => {
     return (

@@ -1,16 +1,13 @@
-import React from 'react';
-
-import { useNavigate } from 'react-router';
-
 import { FormSummary } from '@navikt/ds-react';
-
-import { OppsummeringDag } from './OppsummeringDag';
+import type React from 'react';
+import { useNavigate } from 'react-router';
 import { KjørelisteRoutes } from '../../kjørelisteRoutes';
 import { harReist } from '../../kjørelisteUtils';
-import { UkeMedReisedager } from '../../types/Kjøreliste';
+import type { UkeMedReisedager } from '../../types/Kjøreliste';
+import { OppsummeringDag } from './OppsummeringDag';
 
 export const OppsummeringUke: React.FC<{ ukeMedReisedager: UkeMedReisedager }> = ({
-    ukeMedReisedager,
+    ukeMedReisedager
 }) => {
     const navigate = useNavigate();
 

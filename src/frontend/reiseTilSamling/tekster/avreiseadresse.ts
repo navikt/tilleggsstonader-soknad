@@ -1,6 +1,6 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { JaNei } from '../../typer/søknad';
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import type { JaNei } from '../../typer/søknad';
+import type { Radiogruppe, TekstElement } from '../../typer/tekst';
 
 interface AvreiseadresseInnhold {
     tittel: TekstElement<string>;
@@ -23,53 +23,53 @@ interface AvreiseadresseInnhold {
 
 export const avreiseadresseTekster: AvreiseadresseInnhold = {
     tittel: {
-        nb: 'Avreiseadresse',
+        nb: 'Avreiseadresse'
     },
     folkereg_adresse: {
-        nb: 'Din folkeregistrerte adresse er [0].',
+        nb: 'Din folkeregistrerte adresse er [0].'
     },
     radio_skalReiseFraFolkeregAdr: {
         header: {
-            nb: 'Skal du reise fra din folkeregistrerte adresse?',
+            nb: 'Skal du reise fra din folkeregistrerte adresse?'
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: JaNeiTilTekst
     },
     avreiseadresse_fra_folkereg_info: {
-        nb: 'Adressen er hentet fra Folkeregisteret. Det er viktig at denne adressen er korrekt. Du kan ',
+        nb: 'Adressen er hentet fra Folkeregisteret. Det er viktig at denne adressen er korrekt. Du kan '
     },
     avreiseadresse_fra_folkereg_lenke_tekst: {
-        nb: 'endre adressen på Skatteetatens nettsider (åpnes i ny fane)',
+        nb: 'endre adressen på Skatteetatens nettsider (åpnes i ny fane)'
     },
     avreiseadresse_fra_folkereg_lenke_url:
         'https://www.skatteetaten.no/person/folkeregister/endre/',
     avreiseadresse_tittel: {
-        nb: 'Oppgi adressen du skal reise fra',
+        nb: 'Oppgi adressen du skal reise fra'
     },
     avreiseadresse_vegadresse_label: {
-        nb: 'Gateadresse',
+        nb: 'Gateadresse'
     },
     avreiseadresse_postnummer_label: {
-        nb: 'Postnummer',
+        nb: 'Postnummer'
     },
     avreiseadresse_poststed_label: {
-        nb: 'Poststed',
+        nb: 'Poststed'
     },
     velg_land_label: {
-        nb: 'Velg land',
+        nb: 'Velg land'
     },
     feilmelding_skalReiseFraFolkeregAdr: {
-        nb: 'Du må svare på om du skal reise fra din folkeregistrerte adresse.',
+        nb: 'Du må svare på om du skal reise fra din folkeregistrerte adresse.'
     },
     feilmelding_avreise_land: {
-        nb: 'Du må velge land.',
+        nb: 'Du må velge land.'
     },
     feilmelding_avreise_gateadresse: {
-        nb: 'Du må fylle inn gateadresse.',
+        nb: 'Du må fylle inn gateadresse.'
     },
     feilmelding_avreise_postnummer: {
-        nb: 'Du må fylle inn postnummer.',
+        nb: 'Du må fylle inn postnummer.'
     },
     feilmelding_avreise_poststed: {
-        nb: 'Du må fylle inn poststed.',
-    },
+        nb: 'Du må fylle inn poststed.'
+    }
 };

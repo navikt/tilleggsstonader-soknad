@@ -1,27 +1,26 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-
+import type { Kjøreliste, KjørelisteKvittering } from '../kjørelister/types/Kjøreliste';
+import type { KjørelisteVisningDto } from '../kjørelister/types/KjørelisteVisningDto';
+import type { Rammevedtak } from '../kjørelister/types/Rammevedtak';
+import type { Person } from '../typer/person';
+import type { RegisterAktivitet, RegisterAktiviteterResponse } from '../typer/registerAktivitet';
+import type { SkjematypeFyllUt } from '../typer/skjematype';
+import { Skjematype } from '../typer/skjematyper';
+import type { Kvittering } from '../typer/søknad';
 import { Environment } from './Environment';
 import { triggGlobalFeil } from './globalFeil';
-import { Kjøreliste, KjørelisteKvittering } from '../kjørelister/types/Kjøreliste';
-import { KjørelisteVisningDto } from '../kjørelister/types/KjørelisteVisningDto';
-import { Rammevedtak } from '../kjørelister/types/Rammevedtak';
-import { Person } from '../typer/person';
-import { RegisterAktivitet, RegisterAktiviteterResponse } from '../typer/registerAktivitet';
-import { SkjematypeFyllUt } from '../typer/skjematype';
-import { Skjematype } from '../typer/skjematyper';
-import { Kvittering } from '../typer/søknad';
 
 const requestId = () => uuidv4().replaceAll('-', '');
 
 const defaultHeaders = () => ({
     'Content-Type': 'application/json;charset=utf-8',
-    'x-request-id': requestId(),
+    'x-request-id': requestId()
 });
 
 export const defaultConfig = () => ({
     headers: defaultHeaders(),
-    withCredentials: true,
+    withCredentials: true
 });
 
 const er401Feil = (error: unknown): boolean =>
@@ -113,9 +112,9 @@ export const lastOppVedlegg = (fil: File): Promise<string> =>
             headers: {
                 'x-request-id': requestId(),
                 'Content-Type': 'multipart/form-data',
-                accept: 'application/json',
+                accept: 'application/json'
             },
-            transformRequest: () => requestData,
+            transformRequest: () => requestData
         });
         return response.data.dokumentId;
     });

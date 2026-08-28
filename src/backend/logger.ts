@@ -1,20 +1,20 @@
-import { Request } from 'express';
+import type { Request } from 'express';
 import winston from 'winston';
 
 export const logger = winston.createLogger({
     format: winston.format.combine(winston.format.splat(), winston.format.simple()),
     transports: [
         new winston.transports.Console({
-            format: winston.format.json(),
-        }),
-    ],
+            format: winston.format.json()
+        })
+    ]
 });
 
 const prefix = (req: Request) => {
     return `${req.method} - ${req.originalUrl}`;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: error-parameter kan være av enhver type
 const utledMetadata = (req: Request, error?: any) => {
     const callId = req.header('nav-call-id');
     const requestId = req.header('x-request-id');
@@ -22,7 +22,7 @@ const utledMetadata = (req: Request, error?: any) => {
     return {
         ...(callId ? { x_callId: callId } : {}),
         ...(requestId ? { x_requestId: requestId } : {}),
-        ...(error ? { error: error } : {}),
+        ...(error ? { error: error } : {})
     };
 };
 
@@ -33,7 +33,7 @@ export const logInfo = (message: string, req: Request) => {
     logger.info(melding, meta);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: error-parameter kan være av enhver type
 export const logWarn = (message: string, req: Request, error?: any) => {
     const melding = `${prefix(req)}: ${message}`;
     const meta = utledMetadata(req, error);

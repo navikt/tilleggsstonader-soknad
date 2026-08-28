@@ -1,7 +1,6 @@
-import React from 'react';
-
 import { ChevronRightIcon, MultiplyIcon } from '@navikt/aksel-icons';
 import { Alert, BodyLong, Button, Heading, HStack, VStack } from '@navikt/ds-react';
+import type React from 'react';
 
 import { loggSkjemaSpørsmålBesvart } from '../api/analytics';
 import { Environment } from '../api/Environment';
@@ -12,7 +11,7 @@ import { fellesTekster } from '../tekster/felles';
 import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBehandling';
 import { kvitteringTekster } from '../tekster/kvittering';
 import { skjematypeTilSkjemanavn } from '../typer/skjemanavn';
-import { Skjematype } from '../typer/skjematyper';
+import type { Skjematype } from '../typer/skjematyper';
 
 interface SøknadsideProps {
     startSøknad: () => void;
@@ -21,7 +20,7 @@ interface SøknadsideProps {
 
 export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
     startSøknad,
-    skjematype,
+    skjematype
 }: SøknadsideProps) => {
     const loggUt = () => {
         window.location.href = Environment().logoutUrl;

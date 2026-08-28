@@ -1,6 +1,6 @@
-import { Avreiseadresse } from '../../../typer/søknad';
-import { Locale } from '../../../typer/tekst';
-import { Valideringsfeil } from '../../../typer/validering';
+import type { Avreiseadresse } from '../../../typer/søknad';
+import type { Locale } from '../../../typer/tekst';
+import type { Valideringsfeil } from '../../../typer/validering';
 import { harVerdi } from '../../../utils/typeUtils';
 import { avreiseadresseTekster } from '../../tekster/avreiseadresse';
 
@@ -21,8 +21,8 @@ export const validerAvreiseadresse = (
             ...feil,
             [errorKeySkalReiseFraFolkeregAdr]: {
                 id: errorKeySkalReiseFraFolkeregAdr,
-                melding: avreiseadresseTekster.feilmelding_skalReiseFraFolkeregAdr[locale],
-            },
+                melding: avreiseadresseTekster.feilmelding_skalReiseFraFolkeregAdr[locale]
+            }
         };
     } else if (avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi === 'NEI') {
         if (!harVerdi(avreiseadresse.adresseDetSkalReisesFra?.land?.verdi)) {
@@ -30,8 +30,8 @@ export const validerAvreiseadresse = (
                 ...feil,
                 [errorKeyAvreiseLand]: {
                     id: errorKeyAvreiseLand,
-                    melding: avreiseadresseTekster.feilmelding_avreise_land[locale],
-                },
+                    melding: avreiseadresseTekster.feilmelding_avreise_land[locale]
+                }
             };
         }
         if (!harVerdi(avreiseadresse.adresseDetSkalReisesFra?.gateadresse?.verdi)) {
@@ -39,8 +39,8 @@ export const validerAvreiseadresse = (
                 ...feil,
                 [errorKeyAvreiseGateadresse]: {
                     id: errorKeyAvreiseGateadresse,
-                    melding: avreiseadresseTekster.feilmelding_avreise_gateadresse[locale],
-                },
+                    melding: avreiseadresseTekster.feilmelding_avreise_gateadresse[locale]
+                }
             };
         }
         if (!harVerdi(avreiseadresse.adresseDetSkalReisesFra?.postnummer?.verdi)) {
@@ -48,8 +48,8 @@ export const validerAvreiseadresse = (
                 ...feil,
                 [errorKeyAvreisePostnummer]: {
                     id: errorKeyAvreisePostnummer,
-                    melding: avreiseadresseTekster.feilmelding_avreise_postnummer[locale],
-                },
+                    melding: avreiseadresseTekster.feilmelding_avreise_postnummer[locale]
+                }
             };
         }
         if (!harVerdi(avreiseadresse.adresseDetSkalReisesFra?.poststed?.verdi)) {
@@ -57,8 +57,8 @@ export const validerAvreiseadresse = (
                 ...feil,
                 [errorKeyAvreisePoststed]: {
                     id: errorKeyAvreisePoststed,
-                    melding: avreiseadresseTekster.feilmelding_avreise_poststed[locale],
-                },
+                    melding: avreiseadresseTekster.feilmelding_avreise_poststed[locale]
+                }
             };
         }
     }

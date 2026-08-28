@@ -1,17 +1,16 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
+import type React from 'react';
 
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
-import { Avreiseadresse } from '../../../typer/søknad';
+import type { Avreiseadresse } from '../../../typer/søknad';
 import { adressefelterTilVisning } from '../../../utils/adresseUtils';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const AvreiseadresseOppsummering: React.FC<{ avreiseadresse: Avreiseadresse }> = ({
-    avreiseadresse,
+    avreiseadresse
 }) => {
     const { person } = usePerson();
 
@@ -26,7 +25,7 @@ export const AvreiseadresseOppsummering: React.FC<{ avreiseadresse: Avreiseadres
             gateadresse: avreiseadresse.adresseDetSkalReisesFra?.gateadresse?.verdi,
             postnummer: avreiseadresse.adresseDetSkalReisesFra?.postnummer?.verdi,
             poststed: avreiseadresse.adresseDetSkalReisesFra?.poststed?.verdi,
-            land: avreiseadresse.adresseDetSkalReisesFra?.land?.verdi,
+            land: avreiseadresse.adresseDetSkalReisesFra?.land?.verdi
         });
     };
 

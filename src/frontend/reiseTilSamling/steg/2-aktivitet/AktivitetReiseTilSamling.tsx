@@ -1,26 +1,4 @@
 import { Alert, BodyLong, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
-
-import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
-import {
-    skalViseAktivitetTypeUtdanningValg,
-    skalViseArbeidsrettedeAktiviteter,
-    skalViseErLærlingEllerLiknende,
-    skalViseErUnder25År,
-    skalViseFårDekketReise,
-    skalViseLønnetTiltak,
-    skalViseMåBetaleForReiseTilSkole,
-} from './synlighet';
-import {
-    errorKeyAnnenAktivitet,
-    errorKeyAnnenAktivitetTypeUtdanning,
-    errorKeyErLærlingEllerLiknende,
-    errorKeyErUnder25År,
-    errorKeyFårDekketReise,
-    errorKeyLønnetAktivitet,
-    errorKeyMåBetaleForReiseTilSkole,
-    errorKeyValgteAktiviteter,
-    validerAktivitetReiseTilSamling,
-} from './validering';
 import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/AnnenArbeidsrettetAktivitet';
 import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { ErLærlingEllerLiknende } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
@@ -36,11 +14,32 @@ import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterCont
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { AktivitetTypeUtdanning, AnnenAktivitetType } from '../../../typer/aktivitet';
-import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
+import type { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
+import type { JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { aktivitetTekster } from '../../tekster/aktivitet';
+import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
+import {
+    skalViseAktivitetTypeUtdanningValg,
+    skalViseArbeidsrettedeAktiviteter,
+    skalViseErLærlingEllerLiknende,
+    skalViseErUnder25År,
+    skalViseFårDekketReise,
+    skalViseLønnetTiltak,
+    skalViseMåBetaleForReiseTilSkole
+} from './synlighet';
+import {
+    errorKeyAnnenAktivitet,
+    errorKeyAnnenAktivitetTypeUtdanning,
+    errorKeyErLærlingEllerLiknende,
+    errorKeyErUnder25År,
+    errorKeyFårDekketReise,
+    errorKeyLønnetAktivitet,
+    errorKeyMåBetaleForReiseTilSkole,
+    errorKeyValgteAktiviteter,
+    validerAktivitetReiseTilSamling
+} from './validering';
 
 export const AktivitetReiseTilSamling = () => {
     const { locale } = useSpråk();
@@ -51,7 +50,7 @@ export const AktivitetReiseTilSamling = () => {
 
     const nullstillTilleggsopplysninger = () => {
         oppdaterAktivitet({
-            tilleggsopplysningerAnnenAktivitet: undefined,
+            tilleggsopplysningerAnnenAktivitet: undefined
         });
 
         settValideringsfeil((prevState) => ({
@@ -60,7 +59,7 @@ export const AktivitetReiseTilSamling = () => {
             [errorKeyFårDekketReise]: undefined,
             [errorKeyErUnder25År]: undefined,
             [errorKeyMåBetaleForReiseTilSkole]: undefined,
-            [errorKeyAnnenAktivitetTypeUtdanning]: undefined,
+            [errorKeyAnnenAktivitetTypeUtdanning]: undefined
         }));
     };
 
@@ -69,14 +68,14 @@ export const AktivitetReiseTilSamling = () => {
             aktiviteter: nyeValgteAktiviteter,
             annenAktivitet: undefined,
             lønnetAktivitet: undefined,
-            annenAktivitetTypeUtdanning: undefined,
+            annenAktivitetTypeUtdanning: undefined
         });
 
         settValideringsfeil((prevState) => ({
             ...prevState,
             [errorKeyValgteAktiviteter]: undefined,
             [errorKeyAnnenAktivitet]: undefined,
-            [errorKeyLønnetAktivitet]: undefined,
+            [errorKeyLønnetAktivitet]: undefined
         }));
 
         nullstillTilleggsopplysninger();
@@ -87,13 +86,13 @@ export const AktivitetReiseTilSamling = () => {
             annenAktivitet: verdi,
             aktiviteter: undefined,
             lønnetAktivitet: undefined,
-            annenAktivitetTypeUtdanning: undefined,
+            annenAktivitetTypeUtdanning: undefined
         });
         settValideringsfeil((prevState) => ({
             ...prevState,
             [errorKeyValgteAktiviteter]: undefined,
             [errorKeyAnnenAktivitet]: undefined,
-            [errorKeyLønnetAktivitet]: undefined,
+            [errorKeyLønnetAktivitet]: undefined
         }));
         nullstillTilleggsopplysninger();
     };
@@ -102,18 +101,18 @@ export const AktivitetReiseTilSamling = () => {
         oppdaterAktivitet({ lønnetAktivitet: verdi });
         settValideringsfeil((prevState) => ({
             ...prevState,
-            [errorKeyLønnetAktivitet]: undefined,
+            [errorKeyLønnetAktivitet]: undefined
         }));
     };
 
     const oppdaterAnnenAktivitetTypeUtdanning = (verdi: EnumFelt<AktivitetTypeUtdanning>) => {
         oppdaterAktivitet({
             annenAktivitetTypeUtdanning: verdi,
-            lønnetAktivitet: undefined,
+            lønnetAktivitet: undefined
         });
         settValideringsfeil((prevState) => ({
             ...prevState,
-            [errorKeyLønnetAktivitet]: undefined,
+            [errorKeyLønnetAktivitet]: undefined
         }));
         nullstillTilleggsopplysninger();
     };
@@ -123,14 +122,14 @@ export const AktivitetReiseTilSamling = () => {
             erLærlingEllerLiknende: verdi,
             fårDekketReise: undefined,
             erUnder25År: undefined,
-            måBetaleForReiseTilSkole: undefined,
+            måBetaleForReiseTilSkole: undefined
         });
         settValideringsfeil((prevState) => ({
             ...prevState,
             [errorKeyErLærlingEllerLiknende]: undefined,
             [errorKeyFårDekketReise]: undefined,
             [errorKeyErUnder25År]: undefined,
-            [errorKeyMåBetaleForReiseTilSkole]: undefined,
+            [errorKeyMåBetaleForReiseTilSkole]: undefined
         }));
     };
 
@@ -138,7 +137,7 @@ export const AktivitetReiseTilSamling = () => {
         oppdaterTilleggsopplysninger({ fårDekketReise: verdi });
         settValideringsfeil((prevState) => ({
             ...prevState,
-            [errorKeyFårDekketReise]: undefined,
+            [errorKeyFårDekketReise]: undefined
         }));
     };
 
@@ -147,7 +146,7 @@ export const AktivitetReiseTilSamling = () => {
         settValideringsfeil((prevState) => ({
             ...prevState,
             [errorKeyErUnder25År]: undefined,
-            [errorKeyMåBetaleForReiseTilSkole]: undefined,
+            [errorKeyMåBetaleForReiseTilSkole]: undefined
         }));
     };
 
@@ -155,7 +154,7 @@ export const AktivitetReiseTilSamling = () => {
         oppdaterTilleggsopplysninger({ måBetaleForReiseTilSkole: verdi });
         settValideringsfeil((prevState) => ({
             ...prevState,
-            [errorKeyMåBetaleForReiseTilSkole]: undefined,
+            [errorKeyMåBetaleForReiseTilSkole]: undefined
         }));
     };
 

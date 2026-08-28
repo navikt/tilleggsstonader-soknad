@@ -1,6 +1,6 @@
-import { AktivitetTypeUtdanning } from '../../typer/aktivitet';
-import { EnumFelt } from '../../typer/skjema';
-import { AktivitetFelles, JaNei } from '../../typer/søknad';
+import type { AktivitetTypeUtdanning } from '../../typer/aktivitet';
+import type { EnumFelt } from '../../typer/skjema';
+import type { AktivitetFelles, JaNei } from '../../typer/søknad';
 
 export interface TilleggsopplysningerAnnenAktivitet {
     erLærlingEllerLiknende: EnumFelt<JaNei> | undefined;

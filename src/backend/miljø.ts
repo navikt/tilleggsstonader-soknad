@@ -6,7 +6,7 @@ const lokaltMiljø = {
     vedleggUrl: 'http://localhost:8001/api/vedlegg',
     fyllUtUrl: (skjemakode: string) =>
         `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/test/login?formPath=${skjemakode}&sub=digital`,
-    oauthCallbackUri: 'https://localhost:8080/tilleggsstonader/soknad/soknad/oauth2/callback',
+    oauthCallbackUri: 'https://localhost:8080/tilleggsstonader/soknad/soknad/oauth2/callback'
 };
 const devMiljø = {
     apiUrl: 'http://tilleggsstonader-soknad-api/api',
@@ -15,14 +15,14 @@ const devMiljø = {
     fyllUtUrl: (skjemakode: string) =>
         `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/test/login?formPath=${skjemakode}&sub=digital`,
     oauthCallbackUri:
-        'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/callback',
+        'https://tilleggsstonader.ekstern.dev.nav.no/tilleggsstonader/soknad/oauth2/callback'
 };
 const prodMiljø = {
     apiUrl: 'http://tilleggsstonader-soknad-api/api',
     reportingUrl: 'https://www.nav.no/tilleggsstonader/soknad/reporting',
     vedleggUrl: 'http://familie-dokument.teamfamilie/api/mapper/tilleggsstonad',
     fyllUtUrl: (skjemakode: string) => `https://www.nav.no/fyllut/${skjemakode}?sub=digital`,
-    oauthCallbackUri: 'https://www.nav.no/tilleggsstonader/soknad/soknad/oauth2/callback',
+    oauthCallbackUri: 'https://www.nav.no/tilleggsstonader/soknad/soknad/oauth2/callback'
 };
 
 const initierMiljøvariabler = () => {

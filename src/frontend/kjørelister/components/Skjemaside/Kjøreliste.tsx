@@ -1,9 +1,8 @@
-import React from 'react';
-
 import { Accordion, BodyShort, Heading, VStack } from '@navikt/ds-react';
-
-import { KjørelisteUke } from './KjørelisteUke';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 import { useKjøreliste } from '../../KjørelisteContext';
+import { KjørelisteUke } from './KjørelisteUke';
 
 export const Kjøreliste = () => {
     const { kjøreliste } = useKjøreliste();

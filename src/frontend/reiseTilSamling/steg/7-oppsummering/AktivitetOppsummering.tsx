@@ -1,13 +1,12 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
+import type React from 'react';
 
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { OppsummeringSvar } from '../../../components/Oppsummering/OppsummeringSvar';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
-import { AktivitetReiseTilSamling } from '../../typer/aktivitet';
+import type { AktivitetReiseTilSamling } from '../../typer/aktivitet';
 
 export const AktivitetOppsummering: React.FC<{
     aktivitet: AktivitetReiseTilSamling;

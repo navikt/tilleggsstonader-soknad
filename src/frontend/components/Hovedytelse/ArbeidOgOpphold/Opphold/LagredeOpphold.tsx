@@ -1,11 +1,10 @@
-import styled from 'styled-components';
-
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { BorderAccent } from '@navikt/ds-tokens/js';
+import styled from 'styled-components';
 
 import { oppholdUtenforNorgeInnhold } from '../../../../passAvBarn/tekster/opphold';
-import { OppholdUtenforNorge } from '../../../../typer/søknad';
-import { Locale } from '../../../../typer/tekst';
+import type { OppholdUtenforNorge } from '../../../../typer/søknad';
+import type { Locale } from '../../../../typer/tekst';
 import { formaterNullableIsoDato } from '../../../../utils/formateringUtils';
 
 const VisningAvOpphold = styled(VStack)`

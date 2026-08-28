@@ -1,6 +1,10 @@
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
 import React from 'react';
 
-import { DokumentasjonFeltMedVedleggstekst, Vedlegg } from '../../../components/Vedlegg/Vedlegg';
+import {
+    type DokumentasjonFeltMedVedleggstekst,
+    Vedlegg
+} from '../../../components/Vedlegg/Vedlegg';
 import { useSpråk } from '../../../context/SpråkContext';
 import { typerVedleggTekster } from '../../../tekster/vedlegg';
 import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
@@ -15,7 +19,7 @@ export const VedleggLæremidler = () => {
             return {
                 ...dokumentasjon,
                 tittel: vedleggstekster.tittel[locale],
-                beskrivelse: vedleggstekster.beskrivelse[locale],
+                beskrivelse: vedleggstekster.beskrivelse[locale]
             };
         });
 

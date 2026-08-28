@@ -1,4 +1,4 @@
-import { TekstElement } from '../../typer/tekst';
+import type { TekstElement } from '../../typer/tekst';
 
 interface OppsummeringInnhold {
     tittel: TekstElement<string>;
@@ -19,5 +19,5 @@ export const oppsummeringTekster: OppsummeringInnhold = {
     adressen_du_skal_reise_til: { nb: 'Adressen du skal reise til' },
     reiseavstand_label: { nb: 'Reiseavstand' },
     samlinger_tittel: { nb: 'Samlinger' },
-    reisemåte_tittel: { nb: 'Reisemåte' },
+    reisemåte_tittel: { nb: 'Reisemåte' }
 };

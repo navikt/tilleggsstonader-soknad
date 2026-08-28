@@ -1,4 +1,4 @@
-import { Box, VStack, Heading, BodyShort, Page, Button } from '@navikt/ds-react';
+import { BodyShort, Box, Button, Heading, Page, VStack } from '@navikt/ds-react';
 
 export const Feilside: React.FC = () => {
     return (

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 import { loggBesøk } from '../api/analytics';
 import { usePerson } from '../context/PersonContext';
@@ -15,13 +16,13 @@ export const RootRoute: React.FC<RootRouteProps> = ({ forside }) => {
     const { skjematype } = useSøknad();
     const [visHarBehandlingSide, settVisHarBehandlingSide] = useState<boolean>(harBehandling);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: kun kjøre ved mount
     useEffect(() => {
         loggBesøk(
             skjematype,
             hentRoutes(skjematype)[0].path,
             `Forside - harBehandling=${harBehandling ? 'Ja' : 'Nei'}`
         );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (visHarBehandlingSide) {

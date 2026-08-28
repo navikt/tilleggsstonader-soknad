@@ -1,23 +1,24 @@
-import { useMemo, useState } from 'react';
-
 import createUseContext from 'constate';
-
+import { useMemo, useState } from 'react';
+import {
+    type DokumentasjonFelt,
+    type Dokumentasjonsbehov,
+    VedleggstypeReiseTilSamling
+} from '../../typer/skjema';
+import type { Adresse, Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../../typer/søknad';
+import type {
+    AktivitetReiseTilSamling,
+    TilleggsopplysningerAnnenAktivitet
+} from '../typer/aktivitet';
 import {
     initialAktivitet,
+    initialAvreiseadresse,
     initialDokumentasjon,
     initialHarBekreftet,
     initialHovedytelse,
-    initialAvreiseadresse,
     initialReisemåte,
-    initialSamlinger,
+    initialSamlinger
 } from './reiseTilSamlingInitialState';
-import {
-    DokumentasjonFelt,
-    Dokumentasjonsbehov,
-    VedleggstypeReiseTilSamling,
-} from '../../typer/skjema';
-import { Adresse, Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../../typer/søknad';
-import { AktivitetReiseTilSamling, TilleggsopplysningerAnnenAktivitet } from '../typer/aktivitet';
 
 const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseContext(() => {
     ReiseTilSamlingSøknadProvider.displayName = 'SØKNAD_REISE_TIL_SAMLING_PROVIDER';
@@ -29,8 +30,9 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const [avreiseadresse, settAvreiseadresse] = useState<Avreiseadresse>(initialAvreiseadresse());
     const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(initialReisemåte());
 
-    const [dokumentasjon, settDokumentasjon] =
-        useState<DokumentasjonFelt[]>(initialDokumentasjon());
+    const [dokumentasjon, settDokumentasjon] = useState<DokumentasjonFelt[]>(
+        initialDokumentasjon()
+    );
 
     const resetSøknad = () => {
         settHarBekreftet(initialHarBekreftet());
@@ -45,13 +47,13 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const oppdaterAktivitet = (oppdatering: Partial<AktivitetReiseTilSamling>) => {
         settAktivitet((prev) => ({
             ...prev,
-            ...oppdatering,
+            ...oppdatering
         }));
     };
 
     const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
         const behov: Dokumentasjonsbehov[] = [
-            { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
+            { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER }
         ];
 
         if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA') {
@@ -67,7 +69,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
             )
         ) {
             behov.push({
-                type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING,
+                type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING
             });
         }
 
@@ -84,7 +86,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier,
         reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier,
         reisemåte?.ønskerDekketUtgifterForDrosje?.verdi,
-        reisemåte?.harTTKort?.verdi,
+        reisemåte?.harTTKort?.verdi
     ]);
 
     const oppdaterTilleggsopplysninger = (
@@ -99,15 +101,15 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
                 erUnder25År: prev.tilleggsopplysningerAnnenAktivitet?.erUnder25År,
                 måBetaleForReiseTilSkole:
                     prev.tilleggsopplysningerAnnenAktivitet?.måBetaleForReiseTilSkole,
-                ...oppdatering,
-            },
+                ...oppdatering
+            }
         }));
     };
 
     const settAdresseDetSkalReisesFra = (oppdatering: Partial<Adresse>) => {
         settAvreiseadresse((prev) => ({
             ...prev,
-            adresseDetSkalReisesFra: { ...prev.adresseDetSkalReisesFra, ...oppdatering },
+            adresseDetSkalReisesFra: { ...prev.adresseDetSkalReisesFra, ...oppdatering }
         }));
     };
 
@@ -130,7 +132,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         dokumentasjonsbehov,
         dokumentasjon,
         settDokumentasjon,
-        resetSøknad,
+        resetSøknad
     };
 });
 

@@ -1,17 +1,16 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
+import type React from 'react';
 
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { Person } from '../../../typer/person';
+import type { Person } from '../../../typer/person';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { RouteTilPath } from '../../routing/routesPassAvBarn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const DineBarn: React.FC<{ person: Person; valgteBarnIdenter: string[] }> = ({
     person,
-    valgteBarnIdenter,
+    valgteBarnIdenter
 }) => (
     <FormSummary>
         <FormSummary.Header>

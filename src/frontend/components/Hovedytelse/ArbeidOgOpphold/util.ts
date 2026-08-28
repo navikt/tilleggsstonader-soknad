@@ -1,5 +1,5 @@
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
+import type { EnumFlereValgFelt } from '../../../typer/skjema';
+import type { ArbeidOgOpphold, MottarPengestøtteTyper } from '../../../typer/søknad';
 
 export const skalTaStillingTilLandForJobberIAnnetLand = (opphold: ArbeidOgOpphold): boolean =>
     opphold.jobberIAnnetLand?.verdi === 'JA';
@@ -7,7 +7,7 @@ export const skalTaStillingTilLandForJobberIAnnetLand = (opphold: ArbeidOgOpphol
 const pengestøtteTyperSomMåOppgiLand: MottarPengestøtteTyper[] = [
     'SYKEPENGER',
     'PENSJON',
-    'ANNEN_PENGESTØTTE',
+    'ANNEN_PENGESTØTTE'
 ];
 
 export const skalTaStillingTilLandForPengestøtte = (

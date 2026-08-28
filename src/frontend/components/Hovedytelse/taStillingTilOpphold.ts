@@ -1,5 +1,5 @@
-import { Ytelse } from './typer';
-import { EnumFlereValgFelt } from '../../typer/skjema';
+import type { EnumFlereValgFelt } from '../../typer/skjema';
+import type { Ytelse } from './typer';
 
 const ytelserMedImplisittMedlemskap: Ytelse[] = [
     'AAP',
@@ -7,7 +7,7 @@ const ytelserMedImplisittMedlemskap: Ytelse[] = [
     'GJENLEVENDEPENSJON',
     'UFØRETRYGD',
     'SYKEPENGER',
-    'DAGPENGER',
+    'DAGPENGER'
 ];
 
 export const skalTaStillingTilOppholdINorge = (ytelse: EnumFlereValgFelt<Ytelse>): boolean => {

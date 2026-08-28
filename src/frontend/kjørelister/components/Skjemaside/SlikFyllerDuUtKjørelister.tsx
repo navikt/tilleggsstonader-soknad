@@ -1,6 +1,6 @@
-import React from 'react';
-
 import { Box, Heading, List, VStack } from '@navikt/ds-react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 
 export const SlikFyllerDuUtKjørelister = () => {
     return (

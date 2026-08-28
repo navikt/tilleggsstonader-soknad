@@ -1,10 +1,9 @@
 import { BodyLong, Box, List, ReadMore } from '@navikt/ds-react';
-
-import { LocaleInlineLenke } from './LocaleInlineLenke';
 import { loggAccordionEvent } from '../../api/analytics';
 import { useSpråk } from '../../context/SpråkContext';
 import { useSøknad } from '../../context/SøknadContext';
-import { InlineLenke, LesMer, TekstElement } from '../../typer/tekst';
+import type { InlineLenke, LesMer, TekstElement } from '../../typer/tekst';
+import { LocaleInlineLenke } from './LocaleInlineLenke';
 
 export const LocaleReadMore: React.FC<{
     tekst: LesMer<string | string[]>;

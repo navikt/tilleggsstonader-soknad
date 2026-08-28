@@ -1,20 +1,17 @@
-import React from 'react';
-
 import {
-    CheckboxGroupProps as AkselCheckboxGroupProps,
-    CheckboxGroup,
+    type CheckboxGroupProps as AkselCheckboxGroupProps,
     Checkbox,
+    CheckboxGroup
 } from '@navikt/ds-react';
+import type React from 'react';
 
 import { useSpråk } from '../../context/SpråkContext';
-import { EnumFlereValgFelt, VerdiFelt } from '../../typer/skjema';
-import { CheckboxGruppe } from '../../typer/tekst';
+import type { EnumFlereValgFelt, VerdiFelt } from '../../typer/skjema';
+import type { CheckboxGruppe } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
-interface CheckboxGroupProps<T extends string> extends Omit<
-    AkselCheckboxGroupProps,
-    'onChange' | 'legend' | 'children'
-> {
+interface CheckboxGroupProps<T extends string>
+    extends Omit<AkselCheckboxGroupProps, 'onChange' | 'legend' | 'children'> {
     tekst: CheckboxGruppe<T>;
     onChange: (enumFelt: EnumFlereValgFelt<T>) => void;
     children?: React.ReactNode;
@@ -39,7 +36,7 @@ export function LocaleCheckboxGroup<T extends string>({
     const oppdaterValgteVerdier = (values: T[]) => {
         const verdier: VerdiFelt<T>[] = values.map((verdi) => ({
             verdi,
-            label: tekst.alternativer[verdi][locale],
+            label: tekst.alternativer[verdi][locale]
         }));
 
         onChange({
@@ -47,7 +44,7 @@ export function LocaleCheckboxGroup<T extends string>({
             verdier: verdier,
             alternativer: Object.keys(tekst.alternativer).map(
                 (key) => tekst.alternativer[key as T][locale]
-            ),
+            )
         });
     };
 

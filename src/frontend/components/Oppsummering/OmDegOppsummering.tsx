@@ -1,6 +1,6 @@
-import React from 'react';
-
 import { FormSummary } from '@navikt/ds-react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 
 import { usePerson } from '../../context/PersonContext';
 import { fellesOppsummeringTekster } from '../../tekster/oppsummering';

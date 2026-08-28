@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { hentBehandlingStatus } from '../../api/api';
-import { Skjematype } from '../../typer/skjematyper';
+import type { Skjematype } from '../../typer/skjematyper';
 
 export const useSjekkBehandlingStatus = (stonadstype: Skjematype) => {
     const [harBehandling, setHarBehandling] = useState<boolean>(false);

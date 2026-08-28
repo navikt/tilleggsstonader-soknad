@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 import { teksterFeilmeldinger } from '../../tekster/filopplasting';
-import { Locale, TekstElement } from '../../typer/tekst';
+import type { Locale, TekstElement } from '../../typer/tekst';
 import { hentBeskjedMedEttParameter } from '../../utils/tekstUtils';
 
 export enum FeilmeldingerFraDokument {
     IMAGE_DIMENSIONS_TOO_SMALL = 'IMAGE_DIMENSIONS_TOO_SMALL',
-    IMAGE_TOO_LARGE = 'IMAGE_TOO_LARGE',
+    IMAGE_TOO_LARGE = 'IMAGE_TOO_LARGE'
 }
 
 const harMappingForFeilmelding = (melding?: string): melding is FeilmeldingerFraDokument =>

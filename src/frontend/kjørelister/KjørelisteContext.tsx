@@ -1,15 +1,13 @@
-import { useState } from 'react';
-
 import createUseContext from 'constate';
 import { isEqual } from 'date-fns';
-
-import { Rammevedtak } from './types/Rammevedtak';
-import { Dokument, VedleggstypeKjøreliste } from '../typer/skjema';
+import { useState } from 'react';
+import { type Dokument, VedleggstypeKjøreliste } from '../typer/skjema';
 import { appConfig } from '../utils/appConfig';
 import { finnDagerMellomFomOgTomInklusiv, tilTekstligDato, tilUkedag } from '../utils/datoUtils';
-import { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
 import { tilLocaleDateString } from '../utils/formateringUtils';
-import { KjørelisteVisningDto, ReisedagVisningDto } from './types/KjørelisteVisningDto';
+import type { Kjøreliste, Reisedag, UkeMedReisedager } from './types/Kjøreliste';
+import type { KjørelisteVisningDto, ReisedagVisningDto } from './types/KjørelisteVisningDto';
+import type { Rammevedtak } from './types/Rammevedtak';
 
 interface Props {
     rammevedtak: Rammevedtak;
@@ -31,8 +29,8 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
                     ...uke,
                     reisedager: uke.reisedager.map((reisedag) =>
                         isEqual(reisedag.dato.verdi, dato) ? { ...reisedag, harKjørt } : reisedag
-                    ),
-                })),
+                    )
+                }))
             }));
         };
 
@@ -47,13 +45,13 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
                                 ...reisedag,
                                 parkeringsutgift: {
                                     verdi: parkeringsutgift,
-                                    label: reisedag.parkeringsutgift.label,
-                                },
+                                    label: reisedag.parkeringsutgift.label
+                                }
                             };
                         }
                         return reisedag;
-                    }),
-                })),
+                    })
+                }))
             }));
         };
 
@@ -64,7 +62,7 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
                     felt.type === VedleggstypeKjøreliste.PARKERINGSUTGIFT
                         ? { ...felt, opplastedeVedlegg: oppdater(felt.opplastedeVedlegg) }
                         : felt
-                ),
+                )
             }));
         };
 
@@ -84,7 +82,7 @@ const [KjørelisteProvider, useKjøreliste] = createUseContext(
             oppdaterHarReist,
             oppdaterParkeringsutgift,
             leggTilDokument,
-            slettDokument,
+            slettDokument
         };
     }
 );
@@ -109,15 +107,15 @@ const initialiserKjøreliste = (
                 return {
                     dato: {
                         verdi: dato,
-                        label: `${tilUkedag(rammevedtakDag)} ${tilTekstligDato(rammevedtakDag.toISOString())}`,
+                        label: `${tilUkedag(rammevedtakDag)} ${tilTekstligDato(rammevedtakDag.toISOString())}`
                     },
                     harKjørt: tidligereReisedag?.harKjørt ?? false,
                     parkeringsutgift: {
                         verdi: tidligereReisedag?.parkeringsutgift ?? null,
-                        label: 'Parkeringsutgifter (kr)',
+                        label: 'Parkeringsutgifter (kr)'
                     },
                     erHelligdag: helligdag !== undefined,
-                    helligdagnavn: helligdag?.navn ?? null,
+                    helligdagnavn: helligdag?.navn ?? null
                 };
             });
             return {
@@ -126,7 +124,7 @@ const initialiserKjøreliste = (
                 reisedagerLabel: `Ukentlige reisedager: ${rammevedtakUke.reisedagerPerUke}`,
                 antallReisedagerIUke: rammevedtakUke.reisedagerPerUke,
                 reisedager: reisedager,
-                sendtInnTidligere: rammevedtakUke.innsendtDato != null,
+                sendtInnTidligere: rammevedtakUke.innsendtDato != null
             };
         });
     return {
@@ -136,12 +134,12 @@ const initialiserKjøreliste = (
             {
                 type: VedleggstypeKjøreliste.PARKERINGSUTGIFT,
                 label: 'Vedlegg parkeringsutgift',
-                opplastedeVedlegg: [],
-            },
+                opplastedeVedlegg: []
+            }
         ],
         søknadMetadata: {
-            søknadFrontendGitHash: appConfig.commitHash,
-        },
+            søknadFrontendGitHash: appConfig.commitHash
+        }
     };
 };
 

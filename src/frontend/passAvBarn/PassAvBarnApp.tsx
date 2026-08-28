@@ -1,13 +1,13 @@
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
 import React from 'react';
-
-import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
-import { Søknadsdialog } from './Søknadsdialog';
 import { SøknadAppShell } from '../components/SøknadAppShell';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil } from '../context/ValideringsfeilContext';
 import { Skjematype } from '../typer/skjematyper';
 import { appConfig } from '../utils/appConfig';
 import { useDokumentTittel } from '../utils/useDokumentTittel';
+import { PassAvBarnSøknadProvider, usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
+import { Søknadsdialog } from './Søknadsdialog';
 
 const PassAvBarnInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
@@ -23,8 +23,8 @@ const PassAvBarnInnhold = () => {
                 barnMedBarnepass: barnMedBarnepass,
                 dokumentasjon: dokumentasjon,
                 søknadMetadata: {
-                    søknadFrontendGitHash: appConfig.commitHash,
-                },
+                    søknadFrontendGitHash: appConfig.commitHash
+                }
             }}
             resetValideringsfeil={resetValideringsfeil}
             resetSøknad={resetSøknad}

@@ -1,5 +1,5 @@
 export enum Locale {
-    NB = 'nb',
+    NB = 'nb'
 }
 
 export type TekstElement<T> = Record<Locale, T>;

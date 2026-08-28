@@ -1,5 +1,5 @@
-import { Dokument, VedleggstypeKjøreliste } from '../../../typer/skjema';
-import { Kjøreliste } from '../../types/Kjøreliste';
+import { type Dokument, VedleggstypeKjøreliste } from '../../../typer/skjema';
+import type { Kjøreliste } from '../../types/Kjøreliste';
 
 export const harUtgiftOver100krIGjeldendeInnsending = (kjøreliste: Kjøreliste): boolean =>
     kjøreliste.reisedagerPerUkeAvsnitt

@@ -1,10 +1,6 @@
-import React from 'react';
-
 import { GuidePanel } from '@navikt/ds-react';
-
-import { ArbeidsrettetAktivitet } from './ArbeidsrettetAktivitet';
-import { DineBarn } from './DineBarn';
-import { PassAvBarn } from './PassAvBarn';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React from 'react';
 import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
@@ -15,6 +11,9 @@ import { usePerson } from '../../../context/PersonContext';
 import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { RouteTilPath } from '../../routing/routesPassAvBarn';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
+import { ArbeidsrettetAktivitet } from './ArbeidsrettetAktivitet';
+import { DineBarn } from './DineBarn';
+import { PassAvBarn } from './PassAvBarn';
 
 export const Oppsummering = () => {
     const { hovedytelse, aktivitet, valgteBarnIdenter, barnMedBarnepass, dokumentasjon } =

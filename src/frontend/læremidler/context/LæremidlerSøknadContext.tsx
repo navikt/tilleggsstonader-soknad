@@ -1,10 +1,9 @@
+import createUseContext from 'constate';
 import { useMemo, useState } from 'react';
 
-import createUseContext from 'constate';
-
-import { DokumentasjonFelt, VedleggstypeLæremidler } from '../../typer/skjema';
-import { Hovedytelse } from '../../typer/søknad';
-import { Utdanning } from '../typer/søknad';
+import { type DokumentasjonFelt, VedleggstypeLæremidler } from '../../typer/skjema';
+import type { Hovedytelse } from '../../typer/søknad';
+import type { Utdanning } from '../typer/søknad';
 
 const [LæremidlerSøknadProvider, useLæremidlerSøknad] = createUseContext(() => {
     LæremidlerSøknadProvider.displayName = 'SØKNAD_LÆREMIDLER_PROVIDER';
@@ -17,7 +16,7 @@ const [LæremidlerSøknadProvider, useLæremidlerSøknad] = createUseContext(() 
         if (harFunksjonsnedsettelse && harFunksjonsnedsettelse.verdi === 'JA') {
             return [
                 { type: VedleggstypeLæremidler.DOKUMENTASJON_FUNKSJONSNEDSETTELSE },
-                { type: VedleggstypeLæremidler.UTGIFTER_LÆREMIDLER },
+                { type: VedleggstypeLæremidler.UTGIFTER_LÆREMIDLER }
             ];
         }
         return [];
@@ -41,7 +40,7 @@ const [LæremidlerSøknadProvider, useLæremidlerSøknad] = createUseContext(() 
         dokumentasjonsbehov,
         dokumentasjon,
         settDokumentasjon,
-        resetSøknad,
+        resetSøknad
     };
 });
 

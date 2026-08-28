@@ -1,7 +1,28 @@
-import React, { useState } from 'react';
-
 import { GuidePanel, Label } from '@navikt/ds-react';
-
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React, { useState } from 'react';
+import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
+import { ErLærlingEllerLiknende } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
+import {
+    skalTaStillingTilAnnenAktivitet,
+    skalTaStillingTilRegisterAktiviteter
+} from '../../../components/Aktivitet/registerAktivitetUtil';
+import { Side } from '../../../components/Side';
+import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
+import { usePerson } from '../../../context/PersonContext';
+import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
+import { useSpråk } from '../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import type { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
+import type { JaNei } from '../../../typer/søknad';
+import { inneholderFeil, type Valideringsfeil } from '../../../typer/validering';
+import { erProd } from '../../../utils/miljø';
+import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
+import { utdanningTekster } from '../../tekster/utdanning';
+import type { AnnenUtdanningType } from '../../typer/søknad';
 import { AnnenUtdanning } from './AnnenUtdanning';
 import { HarFunksjonsnedsettelse } from './HarFunksjonsnedsettelse';
 import { HarTidligereFullførtVgs } from './HarTidligereFullførtVgs';
@@ -14,30 +35,8 @@ import {
     feilHarFunksjonsnedsettelse,
     feilHarTidligereFullførtVgs,
     feilTarOpplæringVgsSamtidig,
-    feilValgtAktivitet,
+    feilValgtAktivitet
 } from './validering';
-import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
-import { ErLærlingEllerLiknende } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
-import {
-    skalTaStillingTilAnnenAktivitet,
-    skalTaStillingTilRegisterAktiviteter,
-} from '../../../components/Aktivitet/registerAktivitetUtil';
-import { Side } from '../../../components/Side';
-import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
-import { usePerson } from '../../../context/PersonContext';
-import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
-import { useSpråk } from '../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
-import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
-import { erProd } from '../../../utils/miljø';
-import { useLæremidlerSøknad } from '../../context/LæremidlerSøknadContext';
-import { utdanningTekster } from '../../tekster/utdanning';
-import { AnnenUtdanningType } from '../../typer/søknad';
 
 export const Utdanning = () => {
     const { locale } = useSpråk();
@@ -73,9 +72,9 @@ export const Utdanning = () => {
             harRettTilUtstyrsstipend: {
                 erLærlingEllerLiknende: erLærlingEllerLiknende,
                 harTidligereFullførtVgs: harTidligereFullførtVgs,
-                tarOpplæringVgsSamtidig: tarOpplæringVgsSamtidig,
+                tarOpplæringVgsSamtidig: tarOpplæringVgsSamtidig
             },
-            harFunksjonsnedsettelse: harFunksjonsnedsettelse,
+            harFunksjonsnedsettelse: harFunksjonsnedsettelse
         });
     };
 
@@ -89,12 +88,12 @@ export const Utdanning = () => {
                 ...prevState,
                 erLærlingEllerLiknende: undefined,
                 harTidligereFullførtVgs: undefined,
-                tarOpplæringVgsSamtidig: undefined,
+                tarOpplæringVgsSamtidig: undefined
             }));
         }
         settValideringsfeil((prevState) => ({
             ...prevState,
-            annenUtdanning: undefined,
+            annenUtdanning: undefined
         }));
     };
 
@@ -102,7 +101,7 @@ export const Utdanning = () => {
         settHarFunksjonsnedsettelse(verdi);
         settValideringsfeil((prevState) => ({
             ...prevState,
-            harFunksjonsnedsettelse: undefined,
+            harFunksjonsnedsettelse: undefined
         }));
     };
 
@@ -112,18 +111,18 @@ export const Utdanning = () => {
             settHarTidligereFullførtVgs(undefined);
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                harTidligereFullførtVgs: undefined,
+                harTidligereFullførtVgs: undefined
             }));
         } else {
             settTarOpplæringVgsSamtidig(undefined);
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                tarOpplæringVgsSamtidig: undefined,
+                tarOpplæringVgsSamtidig: undefined
             }));
         }
         settValideringsfeil((prevState) => ({
             ...prevState,
-            erLærlingEllerLiknende: undefined,
+            erLærlingEllerLiknende: undefined
         }));
     };
 
@@ -131,7 +130,7 @@ export const Utdanning = () => {
         settHarTidligereFullførtVgs(verdi);
         settValideringsfeil((prevState) => ({
             ...prevState,
-            harTidligereFullførtVgs: undefined,
+            harTidligereFullførtVgs: undefined
         }));
     };
 
@@ -139,7 +138,7 @@ export const Utdanning = () => {
         settTarOpplæringVgsSamtidig(verdi);
         settValideringsfeil((prevState) => ({
             ...prevState,
-            tarOpplæringVgsSamtidig: undefined,
+            tarOpplæringVgsSamtidig: undefined
         }));
     };
 
@@ -148,7 +147,7 @@ export const Utdanning = () => {
             settAnnenUtdanning(undefined);
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                annenUtdanning: undefined,
+                annenUtdanning: undefined
             }));
         }
     };
@@ -165,13 +164,13 @@ export const Utdanning = () => {
                 ...prevState,
                 erLærlingEllerLiknende: undefined,
                 harTidligereFullførtVgs: undefined,
-                tarOpplæringVgsSamtidig: undefined,
+                tarOpplæringVgsSamtidig: undefined
             }));
         }
         if (nyeValgteAktiviteter.verdier.length > 0) {
             settValideringsfeil((prevState) => ({
                 ...prevState,
-                valgteAktiviteter: undefined,
+                valgteAktiviteter: undefined
             }));
         }
         nullstillAnnenAktivitet(nyeValgteAktiviteter);
@@ -248,21 +247,19 @@ export const Utdanning = () => {
                 />
             )}
             {!skalViseArbeidsrettedeAktiviteter && (
-                <>
-                    <div>
-                        <Label>
-                            <LocaleTekst
-                                tekst={utdanningTekster.ingen_registrerte_aktiviterer_overskrift}
-                            ></LocaleTekst>
-                        </Label>
-                        <LesMerHvilkenAktivitet
-                            header={
-                                utdanningTekster.hvilken_aktivitet.les_mer
-                                    .header_ingen_registrerte_aktiviteter
-                            }
-                        />
-                    </div>
-                </>
+                <div>
+                    <Label>
+                        <LocaleTekst
+                            tekst={utdanningTekster.ingen_registrerte_aktiviterer_overskrift}
+                        ></LocaleTekst>
+                    </Label>
+                    <LesMerHvilkenAktivitet
+                        header={
+                            utdanningTekster.hvilken_aktivitet.les_mer
+                                .header_ingen_registrerte_aktiviteter
+                        }
+                    />
+                </div>
             )}
             {skalViseAnnenAktivitet && (
                 <AnnenUtdanning

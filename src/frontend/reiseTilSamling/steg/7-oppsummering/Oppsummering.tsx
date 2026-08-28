@@ -1,7 +1,3 @@
-import { AktivitetOppsummering } from './AktivitetOppsummering';
-import { AvreiseadresseOppsummering } from './AvreiseadresseOppsummering';
-import { ReisemåteOppsummering } from './ReisemåteOppsummering';
-import { SamlingerOppsummering } from './SamlingerOppsummering';
 import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
@@ -10,6 +6,10 @@ import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeadin
 import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
+import { AktivitetOppsummering } from './AktivitetOppsummering';
+import { AvreiseadresseOppsummering } from './AvreiseadresseOppsummering';
+import { ReisemåteOppsummering } from './ReisemåteOppsummering';
+import { SamlingerOppsummering } from './SamlingerOppsummering';
 
 export const Oppsummering = () => {
     const {
@@ -19,7 +19,7 @@ export const Oppsummering = () => {
         samlinger,
         reisemåte,
         dokumentasjonsbehov,
-        dokumentasjon,
+        dokumentasjon
     } = useReiseTilSamlingSøknad();
 
     return (

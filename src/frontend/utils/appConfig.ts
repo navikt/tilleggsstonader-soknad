@@ -7,5 +7,5 @@ interface AppConfig {
 export const appConfig: AppConfig = {
     publicUrl: __PUBLIC_URL__,
     commitHash: __COMMIT_HASH__,
-    nodeEnv: __NODE_ENV__,
+    nodeEnv: __NODE_ENV__
 };

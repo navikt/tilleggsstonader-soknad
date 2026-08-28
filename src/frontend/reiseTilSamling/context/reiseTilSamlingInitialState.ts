@@ -1,14 +1,14 @@
 import {
     mockAktivitet,
-    mockHovedytelse,
     mockAvreiseadresse,
+    mockHovedytelse,
     mockReisemåte,
-    mockSamlinger,
+    mockSamlinger
 } from '../../mock/reiseTilSamlingMock';
-import { DokumentasjonFelt } from '../../typer/skjema';
-import { Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../../typer/søknad';
+import type { DokumentasjonFelt } from '../../typer/skjema';
+import type { Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../../typer/søknad';
 import { erLokal } from '../../utils/miljø';
-import { AktivitetReiseTilSamling } from '../typer/aktivitet';
+import type { AktivitetReiseTilSamling } from '../typer/aktivitet';
 
 export const initialHarBekreftet = (): boolean => erLokal();
 
@@ -23,7 +23,7 @@ export const initialAktivitet = (): AktivitetReiseTilSamling =>
               aktiviteter: undefined,
               annenAktivitet: undefined,
               lønnetAktivitet: undefined,
-              tilleggsopplysningerAnnenAktivitet: undefined,
+              tilleggsopplysningerAnnenAktivitet: undefined
           };
 
 export const initialSamlinger = (): Samling[] =>

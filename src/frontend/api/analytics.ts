@@ -1,8 +1,7 @@
 import { logAnalyticsCustomEvent } from '@navikt/nav-dekoratoren-moduler';
-
-import { Environment } from './Environment';
 import { skjematypeTilSkjemaId, skjematypeTilSkjemanavn } from '../typer/skjemanavn';
-import { Skjematype } from '../typer/skjematyper';
+import type { Skjematype } from '../typer/skjematyper';
+import { Environment } from './Environment';
 
 const APP_NAVN = 'tilleggsstonader-soknad';
 
@@ -32,7 +31,7 @@ export const sendUmamiEvent = (
     eventProperties?: Record<string, unknown>
 ) => {
     if (Environment().miljø === 'local') {
-        // eslint-disable-next-line no-console
+        // biome-ignore lint/suspicious/noConsole: kun i lokalt miljø
         console.log(
             `[BARE LOKALT] Sender umami-event med eventType=${event} og eventProperties=${JSON.stringify(eventProperties)}`
         );
@@ -43,8 +42,8 @@ export const sendUmamiEvent = (
         eventData: {
             skjemanavn: skjematypeTilSkjemanavn[skjematype],
             skjemaId: skjematypeTilSkjemaId[skjematype],
-            ...eventProperties,
-        },
+            ...eventProperties
+        }
     }).catch(() => {
         // enten feil med lastingen av Umami, eller så har brukeren ikke samtykket.
     });
@@ -73,21 +72,21 @@ export const logNavigereEvent = (
 ) => {
     sendUmamiEvent('navigere', skjematype, {
         destinasjon: destinasjon,
-        lenketekst: lenketekst,
+        lenketekst: lenketekst
     });
 };
 
 export const loggAlertVist = (skjematype: Skjematype, variant: string, tekst: string) => {
     sendUmamiEvent('alert vist', skjematype, {
         variant: variant,
-        tekst: tekst,
+        tekst: tekst
     });
 };
 
 export const loggBesøk = (skjematype: Skjematype, url: string, sidetittel: string) => {
     sendUmamiEvent('besøk', skjematype, {
         url: url,
-        sidetittel: sidetittel,
+        sidetittel: sidetittel
     });
 };
 
@@ -101,7 +100,7 @@ export const loggAccordionEvent = (
 
     sendUmamiEvent(event, skjematype, {
         tekst: tekst,
-        side: side,
+        side: side
     });
 };
 
@@ -112,6 +111,6 @@ export const loggSkjemaSpørsmålBesvart = (
 ) => {
     sendUmamiEvent('skjema spørsmål besvart', skjematype, {
         spørsmål: spørsmål,
-        svar: svar,
+        svar: svar
     });
 };

@@ -5,7 +5,7 @@ export const tilTall = (verdi: number | string | undefined): number | undefined 
 
     const verdiNumber = Number(verdi);
 
-    return isNaN(verdiNumber) ? undefined : verdiNumber;
+    return Number.isNaN(verdiNumber) ? undefined : verdiNumber;
 };
 
 export const erGyldigKostnad = (verdi: string | undefined): boolean => {

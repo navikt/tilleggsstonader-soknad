@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react';
-
 import {
     Alert,
-    BodyShort,
     BodyLong,
+    BodyShort,
     Checkbox,
     CheckboxGroup,
-    Heading,
     GuidePanel,
+    Heading
 } from '@navikt/ds-react';
+import { useEffect, useState } from 'react';
 
-import { Ytelse } from '../../../components/Hovedytelse/typer';
+import type { Ytelse } from '../../../components/Hovedytelse/typer';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
@@ -19,8 +18,8 @@ import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { inneholderFeil, Valideringsfeil } from '../../../typer/validering';
+import type { EnumFlereValgFelt } from '../../../typer/skjema';
+import { inneholderFeil, type Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 import { dineBarnTekster } from '../../tekster/dineBarn';
@@ -55,7 +54,7 @@ export const DineBarn = () => {
         if (valgteBarn.length === 0) {
             feil = {
                 ...feil,
-                hvilkeBarn: { id: '1', melding: dineBarnTekster.hvilke_barn_feilmelding[locale] },
+                hvilkeBarn: { id: '1', melding: dineBarnTekster.hvilke_barn_feilmelding[locale] }
             };
         }
         settValideringsfeil(feil);

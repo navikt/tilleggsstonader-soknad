@@ -1,4 +1,4 @@
-import { InlineLenke, LesMer, TekstElement } from '../typer/tekst';
+import type { InlineLenke, LesMer, TekstElement } from '../typer/tekst';
 
 interface OppsummeringInnhold {
     endre_knapp: TekstElement<string>;
@@ -30,28 +30,28 @@ export const fellesOppsummeringTekster: OppsummeringInnhold = {
                 'Hvis adressen er feil, må du ',
                 {
                     tekst: 'melde fra til folkeregisteret',
-                    url: 'https://www.skatteetaten.no/person/folkeregister/flytte/endre-postadresse/',
+                    url: 'https://www.skatteetaten.no/person/folkeregister/flytte/endre-postadresse/'
                 },
-                ' (åpnes i ny fane). Du trenger ikke gjøre det før du sender inn søknaden.',
-            ],
-        },
+                ' (åpnes i ny fane). Du trenger ikke gjøre det før du sender inn søknaden.'
+            ]
+        }
     },
 
     hovedytelse_tittel: { nb: 'Din situasjon' },
     arbeid_og_opphold: {
         jobb: {
-            nb: 'Jobb utenfor Norge',
+            nb: 'Jobb utenfor Norge'
         },
         pengestøtte: {
-            nb: 'Pengestøtte fra annet land enn Norge',
+            nb: 'Pengestøtte fra annet land enn Norge'
         },
         oppholdSiste12mnd: {
-            nb: 'Opphold utenfor Norge siste 12 mnd',
+            nb: 'Opphold utenfor Norge siste 12 mnd'
         },
         oppholdNeste12mnd: {
-            nb: 'Opphold utenfor Norge neste 12 mnd',
-        },
+            nb: 'Opphold utenfor Norge neste 12 mnd'
+        }
     },
     vedlegg_tittel: { nb: 'Vedlegg' },
-    ingen_vedlegg: { nb: 'Ingen vedlegg' },
+    ingen_vedlegg: { nb: 'Ingen vedlegg' }
 };

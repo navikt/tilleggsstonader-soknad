@@ -1,7 +1,3 @@
-import React, { useState } from 'react';
-
-import styled from 'styled-components';
-
 import { MinusIcon } from '@navikt/aksel-icons';
 import {
     Alert,
@@ -13,10 +9,20 @@ import {
     InlineMessage,
     TextField,
     useDatepicker,
-    VStack,
+    VStack
 } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
-
+import type React from 'react';
+import { useState } from 'react';
+import styled from 'styled-components';
+import { Landvelger } from '../../../components/Landvelger/Landvelger';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { useSpråk } from '../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import type { Adresse, Samling } from '../../../typer/søknad';
+import { nullableTilDato, tilLocaleDateString } from '../../../utils/formateringUtils';
+import { harVerdi } from '../../../utils/typeUtils';
+import { samlingerTekster } from '../../tekster/samlinger';
 import {
     errorKeyAntallKm,
     errorKeyBrukSammeAdresse,
@@ -27,16 +33,8 @@ import {
     errorKeyLand,
     errorKeyPostnummer,
     errorKeyPoststed,
-    errorKeyTom,
+    errorKeyTom
 } from './validering';
-import { Landvelger } from '../../../components/Landvelger/Landvelger';
-import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
-import { useSpråk } from '../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { Adresse, Samling } from '../../../typer/søknad';
-import { nullableTilDato, tilLocaleDateString } from '../../../utils/formateringUtils';
-import { harVerdi } from '../../../utils/typeUtils';
-import { samlingerTekster } from '../../tekster/samlinger';
 
 const SamlingBoks = styled.div`
     background: ${BgSunken};
@@ -104,7 +102,7 @@ export const NySamling: React.FC<{
 
     const km = samling.antallKilometerEnVei?.verdi;
     const visAdvarselForLavAvstand =
-        visAdvarsel && !isNaN(Number(km)) && Number(km) > 0 && Number(km) < 30;
+        visAdvarsel && !Number.isNaN(Number(km)) && Number(km) > 0 && Number(km) < 30;
 
     const { datepickerProps: dpPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(samling.fom?.verdi),
@@ -112,12 +110,12 @@ export const NySamling: React.FC<{
             const verdi = val
                 ? {
                       label: samlingerTekster.startdato_label[locale],
-                      verdi: tilLocaleDateString(val),
+                      verdi: tilLocaleDateString(val)
                   }
                 : undefined;
             oppdater(samling._id, 'fom', verdi);
             nullstillFeil(verdi?.verdi, keyFom);
-        },
+        }
     });
 
     const { datepickerProps: dpPropsTom, inputProps: inputPropsTom } = useDatepicker({
@@ -126,12 +124,12 @@ export const NySamling: React.FC<{
             const verdi = val
                 ? {
                       label: samlingerTekster.sluttdato_label[locale],
-                      verdi: tilLocaleDateString(val),
+                      verdi: tilLocaleDateString(val)
                   }
                 : undefined;
             oppdater(samling._id, 'tom', verdi);
             nullstillFeil(verdi?.verdi, keyTom);
-        },
+        }
     });
 
     return (
@@ -192,8 +190,8 @@ export const NySamling: React.FC<{
                                 oppdaterAdresse({
                                     gateadresse: {
                                         label: samlingerTekster.gateadresse_label[locale],
-                                        verdi,
-                                    },
+                                        verdi
+                                    }
                                 });
                                 nullstillFeil(verdi, keyGateadresse);
                             }}
@@ -209,8 +207,8 @@ export const NySamling: React.FC<{
                                 oppdaterAdresse({
                                     postnummer: {
                                         label: samlingerTekster.postnummer_label[locale],
-                                        verdi,
-                                    },
+                                        verdi
+                                    }
                                 });
                                 nullstillFeil(verdi, keyPostnummer);
                             }}
@@ -225,8 +223,8 @@ export const NySamling: React.FC<{
                                 oppdaterAdresse({
                                     poststed: {
                                         label: samlingerTekster.poststed_label[locale],
-                                        verdi,
-                                    },
+                                        verdi
+                                    }
                                 });
                                 nullstillFeil(verdi, keyPoststed);
                             }}
@@ -242,7 +240,7 @@ export const NySamling: React.FC<{
                                 const verdi = e.target.value;
                                 oppdater(samling._id, 'antallKilometerEnVei', {
                                     label: samlingerTekster.antall_km_label[locale],
-                                    verdi,
+                                    verdi
                                 });
                                 nullstillFeil(verdi, keyAntallKm);
                             }}

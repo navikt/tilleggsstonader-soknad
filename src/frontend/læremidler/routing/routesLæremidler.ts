@@ -1,4 +1,4 @@
-import { IRoute, Steg } from '../../typer/routes';
+import type { IRoute, Steg } from '../../typer/routes';
 
 export type LæremidlerSteg = Steg | 'UTDANNING';
 
@@ -6,11 +6,11 @@ export const læremidlerPath = '/laremidler';
 
 export const RouteTilPath: Record<LæremidlerSteg, string> = {
     FORSIDE: læremidlerPath,
-    HOVEDYTELSE: læremidlerPath + '/hovedytelse',
-    UTDANNING: læremidlerPath + '/utdanning',
-    VEDLEGG: læremidlerPath + '/vedlegg',
-    OPPSUMMERING: læremidlerPath + '/oppsummering',
-    KVITTERING: læremidlerPath + '/kvittering',
+    HOVEDYTELSE: `${læremidlerPath}/hovedytelse`,
+    UTDANNING: `${læremidlerPath}/utdanning`,
+    VEDLEGG: `${læremidlerPath}/vedlegg`,
+    OPPSUMMERING: `${læremidlerPath}/oppsummering`,
+    KVITTERING: `${læremidlerPath}/kvittering`
 };
 
 export const routesLæremidler: IRoute<LæremidlerSteg>[] = [
@@ -18,26 +18,26 @@ export const routesLæremidler: IRoute<LæremidlerSteg>[] = [
     {
         path: RouteTilPath.HOVEDYTELSE,
         label: 'Hovedytelse',
-        route: 'HOVEDYTELSE',
+        route: 'HOVEDYTELSE'
     },
     {
         path: RouteTilPath.UTDANNING,
         label: 'Utdanning',
-        route: 'UTDANNING',
+        route: 'UTDANNING'
     },
     {
         path: RouteTilPath.VEDLEGG,
         label: 'Vedlegg',
-        route: 'VEDLEGG',
+        route: 'VEDLEGG'
     },
     {
         path: RouteTilPath.OPPSUMMERING,
         label: 'Oppsummering',
-        route: 'OPPSUMMERING',
+        route: 'OPPSUMMERING'
     },
     {
         path: RouteTilPath.KVITTERING,
         label: 'Kvittering',
-        route: 'KVITTERING',
-    },
+        route: 'KVITTERING'
+    }
 ];

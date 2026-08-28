@@ -1,6 +1,6 @@
-import { NextFunction, Request, RequestHandler, Response } from 'express';
+import type { NextFunction, Request, RequestHandler, Response } from 'express';
 
-import { logWarn, logInfo } from './logger';
+import { logInfo, logWarn } from './logger';
 import { TokenXClient } from './tokenx';
 
 const { exchangeToken } = new TokenXClient();
@@ -51,12 +51,12 @@ const prepareSecuredRequest = async (req: Request, applicationName: ApplicationN
     logInfo('PrepareSecuredRequest', req);
     const { authorization } = req.headers;
     const token = utledToken(req, authorization);
-    logInfo('IdPorten-token found: ' + (token.length > 1), req);
+    logInfo(`IdPorten-token found: ${token.length > 1}`, req);
     const accessToken = await exchangeToken(token, applicationName).then(
         (accessToken) => accessToken
     );
     logInfo('PrepareSecuredRequest done', req);
     return {
-        authorization: `Bearer ${accessToken}`,
+        authorization: `Bearer ${accessToken}`
     };
 };

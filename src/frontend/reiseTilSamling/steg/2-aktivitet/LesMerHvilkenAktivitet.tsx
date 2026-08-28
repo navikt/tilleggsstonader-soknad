@@ -1,11 +1,10 @@
-import React from 'react';
-
 import { Box, List } from '@navikt/ds-react';
+import type React from 'react';
 
 import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { TekstElement } from '../../../typer/tekst';
+import type { TekstElement } from '../../../typer/tekst';
 import { aktivitetTekster } from '../../tekster/aktivitet';
 
 interface Props {

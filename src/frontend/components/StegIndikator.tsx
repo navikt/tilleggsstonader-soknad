@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-
 import { BodyShort } from '@navikt/ds-react';
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
+import React, { useEffect, useRef } from 'react';
 
 export function StegIndikator(props: {
     gjeldendeSteg: string | number;
@@ -19,7 +19,8 @@ export function StegIndikator(props: {
         if (props.autofokoserSkjermleser) {
             fokuserPåStegindikatoren();
         }
-    }, [props.autofokoserSkjermleser]);
+        // biome-ignore lint/correctness/useExhaustiveDependencies: må være der
+    }, [props.autofokoserSkjermleser, fokuserPåStegindikatoren]);
 
     const tekst = `Steg ${props.gjeldendeSteg} av ${props.antallStegTotalt}`;
 

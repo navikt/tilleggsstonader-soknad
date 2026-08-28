@@ -1,6 +1,5 @@
-import { useState } from 'react';
-
 import createUseContext from 'constate';
+import { useState } from 'react';
 
 import { Locale } from '../typer/tekst';
 

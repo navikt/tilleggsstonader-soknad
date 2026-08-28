@@ -1,10 +1,14 @@
+// biome-ignore lint/correctness/noUnusedImports: React er nødvendig for webpack JSX-transform
 import React from 'react';
 
-import { DokumentasjonFeltMedVedleggstekst, Vedlegg } from '../../../components/Vedlegg/Vedlegg';
+import {
+    type DokumentasjonFeltMedVedleggstekst,
+    Vedlegg
+} from '../../../components/Vedlegg/Vedlegg';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { typerVedleggTekster } from '../../../tekster/vedlegg';
-import { DokumentasjonFelt } from '../../../typer/skjema';
+import type { DokumentasjonFelt } from '../../../typer/skjema';
 import { hentBeskjedMedEttParameter } from '../../../utils/tekstUtils';
 import { usePassAvBarnSøknad } from '../../context/PassAvBarnSøknadContext';
 
@@ -29,7 +33,7 @@ export const VedleggPassAvBarn = () => {
                 beskrivelse: hentBeskjedMedEttParameter(
                     barnetsFornavn,
                     vedleggstekster.beskrivelse[locale]
-                ),
+                )
             };
         });
 
