@@ -87,6 +87,8 @@ const skjematypeTilPath = (skjematype: Skjematype): string => {
             return 'laremidler';
         case Skjematype.SØKNAD_REISE_TIL_SAMLING:
             return 'reise-til-samling';
+        case Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE:
+            return 'reise-oppstart-avslutning-hjemreise';
     }
 };
 

@@ -5,7 +5,11 @@ import { Utdanning } from '../læremidler/typer/søknad';
 import { Barnepass } from '../passAvBarn/typer/barnepass';
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
 
-export type Søknad = SøknadPassAvBarn | SøknadLæremidler | SøknadReiseTilSamling;
+export type Søknad =
+    | SøknadPassAvBarn
+    | SøknadLæremidler
+    | SøknadReiseTilSamling
+    | SøknadReiseOppstartAvslutningHjemreise;
 
 export interface SøknadPassAvBarn {
     hovedytelse: Hovedytelse | undefined;
@@ -28,6 +32,14 @@ export interface SøknadReiseTilSamling {
     samlinger: Samling[];
     avreiseadresse?: Avreiseadresse;
     reisemåte?: Reisemåte;
+    dokumentasjon: DokumentasjonFelt[];
+    søknadMetadata: SøknadMetadata;
+}
+
+// Skjelett - flere felt legges til etter hvert som resten av flyten bygges ut
+export interface SøknadReiseOppstartAvslutningHjemreise {
+    hovedytelse: Hovedytelse | undefined;
+    aktivitet: AktivitetFelles | undefined;
     dokumentasjon: DokumentasjonFelt[];
     søknadMetadata: SøknadMetadata;
 }
