@@ -19,6 +19,7 @@ import {
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
@@ -50,11 +51,16 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         aktivitet ? aktivitet.lønnetAktivitet : undefined
     );
 
+    const [måBoBorteHjemmefra, setMåBoBorteHjemmefra] = useState<EnumFelt<JaNei> | undefined>(
+        aktivitet ? aktivitet.måBoBorteHjemmefra : undefined
+    );
+
     const oppdaterAktivitetISøknad = () => {
         settAktivitet({
             aktiviteter: valgteAktiviteter,
             annenAktivitet: annenAktivitet,
             lønnetAktivitet: lønnetAktivitet,
+            måBoBorteHjemmefra: måBoBorteHjemmefra,
         });
     };
 
@@ -86,6 +92,22 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         }
     };
 
+    const nullstillMåBoBorteHjemmefra = (
+        valgteAktiviteter: EnumFlereValgFelt<string> | undefined,
+        annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined
+    ) => {
+        const skalIkkeTaStilling = !(
+            (valgteAktiviteter?.verdier.length ?? 0) > 0 || annenAktivitet !== undefined
+        );
+        if (måBoBorteHjemmefra && skalIkkeTaStilling) {
+            setMåBoBorteHjemmefra(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                måBoBorteHjemmefra: undefined,
+            }));
+        }
+    };
+
     const oppdaterValgteAktiviteter = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
         settValgteAktiviteter(nyeValgteAktiviteter);
         if (nyeValgteAktiviteter.verdier.length > 0) {
@@ -96,6 +118,7 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         }
         nullstillAnnenAktivitet(nyeValgteAktiviteter);
         nullstillLønnetAktivitet(nyeValgteAktiviteter, annenAktivitet);
+        nullstillMåBoBorteHjemmefra(nyeValgteAktiviteter, annenAktivitet);
     };
 
     const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenAktivitetType>) => {
@@ -115,12 +138,24 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         }));
     };
 
+    const oppdaterMåBoBorteHjemmefra = (verdi: EnumFelt<JaNei>) => {
+        setMåBoBorteHjemmefra(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            måBoBorteHjemmefra: undefined,
+        }));
+    };
+
     const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
     const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak(
         valgteAktiviteter,
         annenAktivitet,
         registerAktiviteter
     );
+    // Vises når bruker har valgt minst én aktivitet (enten fra registeret eller "annen aktivitet")
+    const skalViseMåBoBorteHjemmefra =
+        (valgteAktiviteter?.verdier.length ?? 0) > 0 || annenAktivitet !== undefined;
+
     if (!registerAktiviteter) {
         // ønsker ikke å vise siden før man har hentet aktivteter fra backend
         return null;
@@ -149,6 +184,16 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         ) {
             feil = feilAnnenAktivitet(feil, aktivitetTekster.radio_annet_feilmelding[locale]);
         }
+        if (skalViseMåBoBorteHjemmefra && måBoBorteHjemmefra?.verdi === undefined) {
+            feil = {
+                ...feil,
+                måBoBorteHjemmefra: {
+                    id: 'aktivitet_måBoBorteHjemmefra',
+                    melding: aktivitetTekster.radio_må_bo_borte_hjemmefra_feilmelding[locale],
+                },
+            };
+        }
+
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
@@ -217,6 +262,24 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                                 radioTekst={aktivitetTekster.radio_lønnet_tiltak}
                                 infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
                             />
+                        )}
+                        {skalViseMåBoBorteHjemmefra && (
+                            <div>
+                                <LocaleRadioGroup
+                                    id={valideringsfeil.måBoBorteHjemmefra?.id}
+                                    tekst={aktivitetTekster.radio_må_bo_borte_hjemmefra}
+                                    value={måBoBorteHjemmefra?.verdi || []}
+                                    onChange={oppdaterMåBoBorteHjemmefra}
+                                    error={valideringsfeil.måBoBorteHjemmefra?.melding}
+                                ></LocaleRadioGroup>
+                                {måBoBorteHjemmefra?.verdi === 'NEI' && (
+                                    <Alert variant={'warning'}>
+                                        <LocaleTekst
+                                            tekst={aktivitetTekster.advarsel_må_bo_borte_hjemmefra}
+                                        />
+                                    </Alert>
+                                )}
+                            </div>
                         )}
                     </VStack>
                 </UnderspørsmålContainer>

@@ -4,7 +4,10 @@ import {
     plukkAktivitetTekster,
     tekstArbeidsrettedeAktiviteter,
 } from '../../tekster/aktivitet';
+import { JaNeiTilTekst } from '../../tekster/felles';
 import { AnnenAktivitetType } from '../../typer/aktivitet';
+import { JaNei } from '../../typer/søknad';
+import { Radiogruppe, TekstElement } from '../../typer/tekst';
 
 // TODO: placeholder-tekster - dette er et skjelett og innholdet må erstattes med endelig tekst
 export const AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise = plukkAktivitetTekster(
@@ -14,7 +17,13 @@ export const AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise = plukkAktivi
     AnnenAktivitetType.INGEN_AKTIVITET
 );
 
-export const aktivitetTekster: AktivitetInnhold = {
+interface AktivitetInnholdReiseOppstartAvslutningHjemreise extends AktivitetInnhold {
+    radio_må_bo_borte_hjemmefra: Radiogruppe<JaNei>;
+    radio_må_bo_borte_hjemmefra_feilmelding: TekstElement<string>;
+    advarsel_må_bo_borte_hjemmefra: TekstElement<string>;
+}
+
+export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise = {
     ...aktivitetTeksterFelles,
     søker_fra_lesmer: {
         header: { nb: 'Hvilken dato velger jeg?' },
@@ -94,5 +103,17 @@ export const aktivitetTekster: AktivitetInnhold = {
     radio_annet_uten_registeraktivitet: {
         header: { nb: 'Hvilken arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise,
+    },
+    radio_må_bo_borte_hjemmefra: {
+        header: {
+            nb: 'Må du midlertidig bo borte hjemmefra for å delta på denne aktiviteten?',
+        },
+        alternativer: JaNeiTilTekst,
+    },
+    radio_må_bo_borte_hjemmefra_feilmelding: {
+        nb: 'Du må svare på om du må bo borte hjemmefra for å delta på aktiviteten.',
+    },
+    advarsel_må_bo_borte_hjemmefra: {
+        nb: 'Du har ikke rett på pengestøtte til reise ved oppstart, avslutning eller hjemreise dersom du ikke midlertidig må bo borte hjemmefra. Du kan fortsatt søke, men det kan hende du får avslag.',
     },
 };
