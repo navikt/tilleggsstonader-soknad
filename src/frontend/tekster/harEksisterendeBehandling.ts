@@ -42,7 +42,7 @@ export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = 
             nb: 'Hvis du har deltatt på en ny samling, kan du sende ny søknad.',
         },
         // TODO: placeholder-tekst, avklar endelig tekst
-        [Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: {
+        [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: {
             nb: 'Hvis situasjonen din har endret seg, kan du sende ny søknad.',
         },
     },

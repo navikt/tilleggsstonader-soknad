@@ -19,7 +19,7 @@ const ReiseOppstartAvslutningHjemreiseInnhold = () => {
 
     return (
         <SøknadProvider
-            skjematype={Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE}
+            skjematype={Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE}
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
@@ -37,12 +37,10 @@ const ReiseOppstartAvslutningHjemreiseInnhold = () => {
 };
 
 export const ReiseOppstartAvslutningHjemreiseApp = () => {
-    useDokumentTittel(Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE);
+    useDokumentTittel(Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE);
 
     return (
-        <SøknadAppShell
-            skjematype={Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE}
-        >
+        <SøknadAppShell skjematype={Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE}>
             <ReiseOppstartAvslutningHjemreiseSøknadProvider>
                 <ReiseOppstartAvslutningHjemreiseInnhold />
             </ReiseOppstartAvslutningHjemreiseSøknadProvider>

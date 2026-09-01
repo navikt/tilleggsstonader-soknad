@@ -18,8 +18,7 @@ const routesPerSkjematype: Record<Skjematype, IRoute<Skjemasteg>[]> = {
     [Skjematype.SØKNAD_PASS_AV_BARN]: routesPassAvBarn,
     [Skjematype.SØKNAD_LÆREMIDLER]: routesLæremidler,
     [Skjematype.SØKNAD_REISE_TIL_SAMLING]: routesReiseTilSamling,
-    [Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE]:
-        routesReiseOppstartAvslutningHjemreise,
+    [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: routesReiseOppstartAvslutningHjemreise,
 };
 
 export const hentRoutes = (skjematype: Skjematype): IRoute<Skjemasteg>[] =>

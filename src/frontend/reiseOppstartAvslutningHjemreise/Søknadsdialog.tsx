@@ -22,7 +22,7 @@ export const Søknadsdialog: React.FC = () => {
     return (
         <SøknadsdialogShell
             tittel={forsideTekster.banner_tittel}
-            skjematype={Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE}
+            skjematype={Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE}
             harBekreftet={harBekreftet}
             forside={<Forside />}
             steg={steg}

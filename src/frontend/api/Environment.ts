@@ -18,7 +18,7 @@ const SkjematypeTilPapirskjema: Record<Skjematype, string> = {
     [Skjematype.SØKNAD_PASS_AV_BARN]: 'nav111215b',
     [Skjematype.SØKNAD_LÆREMIDLER]: 'nav111216b',
     [Skjematype.SØKNAD_REISE_TIL_SAMLING]: 'nav111217b',
-    [Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: 'nav111218b',
+    [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: 'nav111218b',
 };
 
 const urlPapirsøknadProd = (skjematype: Skjematype) =>

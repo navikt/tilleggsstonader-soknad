@@ -15,7 +15,7 @@ import { AktivitetReiseOppstartAvslutningHjemreise } from '../typer/aktivitet';
 const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutningHjemreiseSøknad] =
     createUseContext(() => {
         ReiseOppstartAvslutningHjemreiseSøknadProvider.displayName =
-            'SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_PROVIDER';
+            'SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE_PROVIDER';
 
         const [harBekreftet, settHarBekreftet] = useState<boolean>(initialHarBekreftet());
         const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(

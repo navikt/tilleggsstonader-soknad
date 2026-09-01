@@ -17,7 +17,7 @@ export const teksterStønad: StønadInnhold = {
             nb: 'Søknad om støtte til reise til samling',
         },
         // TODO: placeholder-tittel, avklar endelig tekst
-        [Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: {
+        [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: {
             nb: 'Søknad om støtte til reise ved oppstart, avslutning og hjemreise',
         },
     },

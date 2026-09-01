@@ -37,11 +37,7 @@ export const Forside: React.FC = () => {
 
     useEffect(() => {
         const route = routesReiseOppstartAvslutningHjemreise[0];
-        loggBesøk(
-            Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE,
-            route.path,
-            route.label
-        );
+        loggBesøk(Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE, route.path, route.label);
     }, []);
 
     const startSøknad = () => {
@@ -50,7 +46,7 @@ export const Forside: React.FC = () => {
             return;
         }
 
-        loggSkjemaStartet(Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE);
+        loggSkjemaStartet(Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE);
         const nesteRoute = hentNesteRoute(
             routesReiseOppstartAvslutningHjemreise,
             location.pathname
