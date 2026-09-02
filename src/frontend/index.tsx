@@ -20,6 +20,8 @@ import { LæremidlerApp } from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { PassAvBarnApp } from './passAvBarn/PassAvBarnApp';
 import { passAvBarnPath } from './passAvBarn/routing/routesPassAvBarn';
+import { ReiseOppstartAvslutningHjemreiseApp } from './reiseOppstartAvslutningHjemreise/ReiseOppstartAvslutningHjemreiseApp';
+import { reiseOppstartAvslutningHjemreisePath } from './reiseOppstartAvslutningHjemreise/routing/routesReiseOppstartAvslutningHjemreise';
 import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
 import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
 import { appConfig } from './utils/appConfig';
@@ -32,6 +34,8 @@ const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
     const kanBrukeReiseTilSamling = !erProd();
+    // TODO: skjelett under bygging - skru på for alle miljø når flyten er ferdig
+    const kanBrukeReiseOppstartAvslutningHjemreise = !erProd();
     return (
         <BrowserRouter basename={appConfig.publicUrl}>
             <ScrollToTop />
@@ -42,6 +46,12 @@ const AppRoutes = () => {
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
                 {kanBrukeReiseTilSamling && (
                     <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
+                )}
+                {kanBrukeReiseOppstartAvslutningHjemreise && (
+                    <Route
+                        path={`${reiseOppstartAvslutningHjemreisePath}/*`}
+                        element={<ReiseOppstartAvslutningHjemreiseApp />}
+                    />
                 )}
                 <Route
                     path="/daglig-reise/skjema-offentlig-transport"
