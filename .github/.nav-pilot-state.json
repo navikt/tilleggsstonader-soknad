@@ -1,8 +1,8 @@
 {
   "collection": "nextjs-frontend",
-  "version": "2026.08.10-101926-2d0911b",
+  "version": "2026.09.07-074612-5c0c44d",
   "scope": "repo",
-  "source_sha": "2d0911b",
+  "source_sha": "5c0c44d",
   "installed_at": "2026-04-21T11:17:24Z",
   "files": [
     {
@@ -15,7 +15,7 @@
     },
     {
       "path": ".github/agents/forfatter.agent.md",
-      "hash": "3dd47103e9bf04a8"
+      "hash": "2529faa6918e3520"
     },
     {
       "path": ".github/agents/forfatter.metadata.json",
@@ -23,7 +23,7 @@
     },
     {
       "path": ".github/agents/nav-pilot.agent.md",
-      "hash": "09c7351bf3ceb03b"
+      "hash": "eed57b0a1dd623bf"
     },
     {
       "path": ".github/agents/nav-pilot.metadata.json",
@@ -43,7 +43,7 @@
     },
     {
       "path": ".github/skills/nav-plan/",
-      "hash": "0a160744cf2b4e82"
+      "hash": "db7618d269cd2f07"
     },
     {
       "path": ".github/skills/nav-deep-interview/",
@@ -63,7 +63,7 @@
     },
     {
       "path": ".github/instructions/performance.instructions.md",
-      "hash": "23b58fe157ef8f0e"
+      "hash": "74be7b9e34c1681e"
     },
     {
       "path": ".github/instructions/testing.instructions.md",
@@ -91,7 +91,7 @@
     },
     {
       "path": ".github/prompts/nextjs-api-route.prompt.md",
-      "hash": "691c380aa1e47757"
+      "hash": "5f65db6b410ea3e6"
     },
     {
       "path": ".github/prompts/nais-manifest.prompt.md",
