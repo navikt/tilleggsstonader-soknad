@@ -53,7 +53,7 @@ export const validerAktivitetReiseTilSamling = (
             ...feil,
             [errorKeyAnnenAktivitet]: {
                 id: errorKeyAnnenAktivitet,
-                melding: aktivitetTekster.radio_annet_uten_registeraktivitet_feilmelding[locale],
+                melding: aktivitetTekster.radio_annet_uten_registeraktivitet.feilmelding[locale],
             },
         };
     }
@@ -65,7 +65,7 @@ export const validerAktivitetReiseTilSamling = (
                 [errorKeyAnnenAktivitetTypeUtdanning]: {
                     id: errorKeyAnnenAktivitetTypeUtdanning,
                     melding:
-                        aktivitetTekster.radio_type_arbeidsrettede_aktiviteter_feilmelding[locale],
+                        aktivitetTekster.radio_type_arbeidsrettede_aktiviteter.feilmelding[locale],
                 },
             };
         } else if (skalViseErLærlingEllerLiknende(annenAktivitetTypeUtdanning)) {
@@ -74,7 +74,8 @@ export const validerAktivitetReiseTilSamling = (
                     ...feil,
                     [errorKeyErLærlingEllerLiknende]: {
                         id: errorKeyErLærlingEllerLiknende,
-                        melding: erLærlingEllerLiknendeTekster.radio_lærling_feilmelding[locale],
+                        melding:
+                            erLærlingEllerLiknendeTekster.radio_lærling_etc.feilmelding[locale],
                     },
                 };
             } else if (skalViseFårDekketReise(erLærlingEllerLiknende)) {
@@ -83,7 +84,7 @@ export const validerAktivitetReiseTilSamling = (
                         ...feil,
                         [errorKeyFårDekketReise]: {
                             id: errorKeyFårDekketReise,
-                            melding: aktivitetTekster.radio_dekket_reise_feilmelding[locale],
+                            melding: aktivitetTekster.radio_dekket_reise.feilmelding[locale],
                         },
                     };
                 }
@@ -93,7 +94,7 @@ export const validerAktivitetReiseTilSamling = (
                         ...feil,
                         [errorKeyErUnder25År]: {
                             id: errorKeyErUnder25År,
-                            melding: aktivitetTekster.radio_under_25_år_feilmelding[locale],
+                            melding: aktivitetTekster.radio_under_25_år.feilmelding[locale],
                         },
                     };
                 } else if (skalViseMåBetaleForReiseTilSkole(erUnder25År)) {
@@ -103,8 +104,8 @@ export const validerAktivitetReiseTilSamling = (
                             [errorKeyMåBetaleForReiseTilSkole]: {
                                 id: errorKeyMåBetaleForReiseTilSkole,
                                 melding:
-                                    aktivitetTekster
-                                        .radio_må_betale_for_reise_til_skole_feilmelding[locale],
+                                    aktivitetTekster.radio_må_betale_for_reise_til_skole
+                                        .feilmelding[locale],
                             },
                         };
                     }
@@ -119,7 +120,7 @@ export const validerAktivitetReiseTilSamling = (
                 ...feil,
                 [errorKeyLønnetAktivitet]: {
                     id: errorKeyLønnetAktivitet,
-                    melding: aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale],
+                    melding: aktivitetTekster.radio_lønnet_tiltak.feilmelding[locale],
                 },
             };
         }

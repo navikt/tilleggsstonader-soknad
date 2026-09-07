@@ -55,7 +55,7 @@ export const DineBarn = () => {
         if (valgteBarn.length === 0) {
             feil = {
                 ...feil,
-                hvilkeBarn: { id: '1', melding: dineBarnTekster.hvilke_barn_feilmelding[locale] },
+                hvilkeBarn: { id: '1', melding: dineBarnTekster.hvilke_barn.feilmelding[locale] },
             };
         }
         settValideringsfeil(feil);
@@ -76,7 +76,7 @@ export const DineBarn = () => {
             <div>
                 <CheckboxGroup
                     id={valideringsfeil.hvilkeBarn?.id}
-                    legend={dineBarnTekster.hvilke_barn_spm[locale]}
+                    legend={dineBarnTekster.hvilke_barn.label[locale]}
                     error={valideringsfeil.hvilkeBarn?.melding}
                     value={barnIdenter}
                     onChange={settBarnIdenter}

@@ -80,7 +80,7 @@ export const NyttOpphold: React.FC<{
         <>
             <Landvelger
                 id={valideringsfeil[errorKeyLand(keyOpphold)]?.id}
-                label={tekster.select_hvilket_land}
+                label={tekster.select_hvilket_land.label}
                 onChange={oppdatertHvilketLandOppholdUtenforNorge}
                 value={opphold.land?.verdi || ''}
                 error={valideringsfeil[errorKeyLand(keyOpphold)]?.melding}

@@ -34,7 +34,7 @@ export const validerHovedytelse = (
             ...feil,
             ytelse: {
                 id: FeilIdDinSituasjon.YTELSE,
-                melding: hovedytelseInnhold.hovedytelse_feilmelding[locale],
+                melding: hovedytelseInnhold.checkbox_hovedytelse.feilmelding[locale],
             },
         };
     }

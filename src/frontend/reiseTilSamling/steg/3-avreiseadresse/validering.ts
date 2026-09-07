@@ -21,7 +21,7 @@ export const validerAvreiseadresse = (
             ...feil,
             [errorKeySkalReiseFraFolkeregAdr]: {
                 id: errorKeySkalReiseFraFolkeregAdr,
-                melding: avreiseadresseTekster.feilmelding_skalReiseFraFolkeregAdr[locale],
+                melding: avreiseadresseTekster.radio_skalReiseFraFolkeregAdr.feilmelding[locale],
             },
         };
     } else if (avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi === 'NEI') {
@@ -30,7 +30,7 @@ export const validerAvreiseadresse = (
                 ...feil,
                 [errorKeyAvreiseLand]: {
                     id: errorKeyAvreiseLand,
-                    melding: avreiseadresseTekster.feilmelding_avreise_land[locale],
+                    melding: avreiseadresseTekster.velg_land.feilmelding[locale],
                 },
             };
         }
@@ -39,7 +39,7 @@ export const validerAvreiseadresse = (
                 ...feil,
                 [errorKeyAvreiseGateadresse]: {
                     id: errorKeyAvreiseGateadresse,
-                    melding: avreiseadresseTekster.feilmelding_avreise_gateadresse[locale],
+                    melding: avreiseadresseTekster.avreiseadresse_vegadresse.feilmelding[locale],
                 },
             };
         }
@@ -48,7 +48,7 @@ export const validerAvreiseadresse = (
                 ...feil,
                 [errorKeyAvreisePostnummer]: {
                     id: errorKeyAvreisePostnummer,
-                    melding: avreiseadresseTekster.feilmelding_avreise_postnummer[locale],
+                    melding: avreiseadresseTekster.avreiseadresse_postnummer.feilmelding[locale],
                 },
             };
         }
@@ -57,7 +57,7 @@ export const validerAvreiseadresse = (
                 ...feil,
                 [errorKeyAvreisePoststed]: {
                     id: errorKeyAvreisePoststed,
-                    melding: avreiseadresseTekster.feilmelding_avreise_poststed[locale],
+                    melding: avreiseadresseTekster.avreiseadresse_poststed.feilmelding[locale],
                 },
             };
         }
