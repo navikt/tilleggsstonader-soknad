@@ -115,7 +115,7 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         nb: 'Du må svare på om du må bo borte hjemmefra for å delta på aktiviteten.',
     },
     advarsel_må_bo_borte_hjemmefra: {
-        nb: 'For å ha rett på pengestøtte til reise ved oppstart, avslutning eller hjemreise må man midlertidig må bo borte hjemmefra på grunn av deltakelse på arbeidsrettet aktivitet. Du kan fortsatt søke, men det kan hende du får avslag.',
+        nb: 'For å ha rett på pengestøtte til reise ved oppstart, avslutning eller hjemreise må man midlertidig bo borte hjemmefra på grunn av deltakelse på arbeidsrettet aktivitet. Du kan fortsatt søke, men det kan hende du får avslag.',
     },
     info_arbeidssøker_ingen_rett: {
         nb: 'Som arbeidssøker har du ikke rett på denne stønaden. Du kan fortsatt søke, men det kan hende du får avslag.',
