@@ -100,10 +100,14 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
     radio_annet: {
         header: { nb: 'Hvilken annen type arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise,
+        feilmelding: {
+            nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
+        },
     },
     radio_annet_uten_registeraktivitet: {
         header: { nb: 'Hvilken arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise,
+        feilmelding: { nb: 'Du må velge en aktivitet' },
     },
     radio_må_bo_borte_hjemmefra: {
         header: {
