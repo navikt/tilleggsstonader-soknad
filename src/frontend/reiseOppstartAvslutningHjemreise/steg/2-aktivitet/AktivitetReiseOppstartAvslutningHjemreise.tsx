@@ -175,14 +175,19 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         if (skalViseLønnetTiltak && lønnetAktivitet?.verdi === undefined) {
             feil = feilLønnetAktivitet(
                 feil,
-                aktivitetTekster.radio_lønnet_tiltak_feilmelding[locale]
+                aktivitetTekster.radio_lønnet_tiltak.feilmelding[locale]
             );
         }
         if (
             (skalViseAnnenAktivitet || !skalViseArbeidsrettedeAktiviteter) &&
             annenAktivitet === undefined
         ) {
-            feil = feilAnnenAktivitet(feil, aktivitetTekster.radio_annet_feilmelding[locale]);
+            feil = feilAnnenAktivitet(
+                feil,
+                skalViseArbeidsrettedeAktiviteter
+                    ? aktivitetTekster.radio_annet.feilmelding[locale]
+                    : aktivitetTekster.radio_annet_uten_registeraktivitet.feilmelding[locale]
+            );
         }
         if (skalViseMåBoBorteHjemmefra && måBoBorteHjemmefra?.verdi === undefined) {
             feil = {

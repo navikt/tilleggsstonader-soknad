@@ -21,6 +21,7 @@ interface AktivitetInnholdReiseOppstartAvslutningHjemreise extends AktivitetInnh
     radio_må_bo_borte_hjemmefra: Radiogruppe<JaNei>;
     radio_må_bo_borte_hjemmefra_feilmelding: TekstElement<string>;
     advarsel_må_bo_borte_hjemmefra: TekstElement<string>;
+    info_arbeidssøker_ingen_rett: TekstElement<string>;
 }
 
 export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise = {
@@ -99,10 +100,14 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
     radio_annet: {
         header: { nb: 'Hvilken annen type arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise,
+        feilmelding: {
+            nb: 'Du må svare på hvilken aktivitet du søker om støtte i forbindelse med.',
+        },
     },
     radio_annet_uten_registeraktivitet: {
         header: { nb: 'Hvilken arbeidsrettet aktivitet har du?' },
         alternativer: AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise,
+        feilmelding: { nb: 'Du må velge en aktivitet' },
     },
     radio_må_bo_borte_hjemmefra: {
         header: {
@@ -114,6 +119,9 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         nb: 'Du må svare på om du må bo borte hjemmefra for å delta på aktiviteten.',
     },
     advarsel_må_bo_borte_hjemmefra: {
-        nb: 'Du har ikke rett på pengestøtte til reise ved oppstart, avslutning eller hjemreise dersom du ikke midlertidig må bo borte hjemmefra. Du kan fortsatt søke, men det kan hende du får avslag.',
+        nb: 'For å ha rett på pengestøtte til reise ved oppstart, avslutning eller hjemreise må man midlertidig bo borte hjemmefra på grunn av deltakelse på arbeidsrettet aktivitet. Du kan fortsatt søke, men det kan hende du får avslag.',
+    },
+    info_arbeidssøker_ingen_rett: {
+        nb: 'Som arbeidssøker har du ikke rett på denne stønaden. Du kan fortsatt søke, men det kan hende du får avslag.',
     },
 };

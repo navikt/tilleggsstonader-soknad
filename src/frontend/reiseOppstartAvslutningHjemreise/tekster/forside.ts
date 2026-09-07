@@ -24,7 +24,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Hei!',
     },
     veileder_innhold: {
-        nb: 'Du kan få dekket reiseutgifter mellom hjemstedet ditt og aktivitetsstedet når du må flytte for å delta på aktivitet. Du får dekket reiseutgifter til oppstart og avslutning av aktiviteten, og til hjemreiser.',
+        nb: 'Du kan få dekket reiseutgifter mellom hjemstedet ditt og aktivitetsstedet når du midlertidig må bo borte for å delta på en arbeidsrettet aktivitet. Du får dekket reiseutgifter til oppstart og avslutning av aktiviteten, og til hjemreiser.',
     },
 
     for_du_soker_tittel: {
