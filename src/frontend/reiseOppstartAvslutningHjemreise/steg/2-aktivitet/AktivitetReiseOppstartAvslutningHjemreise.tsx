@@ -2,6 +2,10 @@ import { useState } from 'react';
 
 import { Alert, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
 
+import {
+    skalTaStillingTilBarnUnder18SomHarFlyttetMed,
+    skalTaStillingTilBorMidlertidigBorte,
+} from './aktivitetUtil';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
 import {
@@ -55,12 +59,17 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         aktivitet ? aktivitet.måBoBorteHjemmefra : undefined
     );
 
+    const [harBarnUnder18SomHarFlyttetMed, setHarBarnUnder18SomHarFlyttetMed] = useState<
+        EnumFelt<JaNei> | undefined
+    >(aktivitet ? aktivitet.harBarnUnder18SomHarFlyttetMed : undefined);
+
     const oppdaterAktivitetISøknad = () => {
         settAktivitet({
             aktiviteter: valgteAktiviteter,
             annenAktivitet: annenAktivitet,
             lønnetAktivitet: lønnetAktivitet,
             måBoBorteHjemmefra: måBoBorteHjemmefra,
+            harBarnUnder18SomHarFlyttetMed: harBarnUnder18SomHarFlyttetMed,
         });
     };
 
@@ -105,6 +114,17 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                 ...prevState,
                 måBoBorteHjemmefra: undefined,
             }));
+            nullstillHarBarnUnder18SomHarFlyttetMed();
+        }
+    };
+
+    const nullstillHarBarnUnder18SomHarFlyttetMed = () => {
+        if (harBarnUnder18SomHarFlyttetMed) {
+            setHarBarnUnder18SomHarFlyttetMed(undefined);
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                harBarnUnder18SomHarFlyttetMed: undefined,
+            }));
         }
     };
 
@@ -144,6 +164,17 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
             ...prevState,
             måBoBorteHjemmefra: undefined,
         }));
+        if (verdi.verdi !== 'JA') {
+            nullstillHarBarnUnder18SomHarFlyttetMed();
+        }
+    };
+
+    const oppdaterHarBarnUnder18SomHarFlyttetMed = (verdi: EnumFelt<JaNei>) => {
+        setHarBarnUnder18SomHarFlyttetMed(verdi);
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            harBarnUnder18SomHarFlyttetMed: undefined,
+        }));
     };
 
     const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
@@ -153,8 +184,13 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         registerAktiviteter
     );
     // Vises når bruker har valgt minst én aktivitet (enten fra registeret eller "annen aktivitet")
-    const skalViseMåBoBorteHjemmefra =
-        (valgteAktiviteter?.verdier.length ?? 0) > 0 || annenAktivitet !== undefined;
+    const skalViseMåBoBorteHjemmefra = skalTaStillingTilBorMidlertidigBorte(
+        annenAktivitet,
+        valgteAktiviteter
+    );
+
+    const skalViseHarBarnUnder18SomHarFlyttetMed =
+        skalTaStillingTilBarnUnder18SomHarFlyttetMed(måBoBorteHjemmefra);
 
     if (!registerAktiviteter) {
         // ønsker ikke å vise siden før man har hentet aktivteter fra backend
@@ -195,6 +231,21 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                 måBoBorteHjemmefra: {
                     id: 'aktivitet_måBoBorteHjemmefra',
                     melding: aktivitetTekster.radio_må_bo_borte_hjemmefra_feilmelding[locale],
+                },
+            };
+        }
+        if (
+            skalViseHarBarnUnder18SomHarFlyttetMed &&
+            harBarnUnder18SomHarFlyttetMed?.verdi === undefined
+        ) {
+            feil = {
+                ...feil,
+                harBarnUnder18SomHarFlyttetMed: {
+                    id: 'aktivitet_harBarnUnder18SomHarFlyttetMed',
+                    melding:
+                        aktivitetTekster.radio_har_barn_under_18_som_har_flyttet_med_feilmelding[
+                            locale
+                        ],
                 },
             };
         }
@@ -247,7 +298,10 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                     />
                 </>
             )}
-            {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
+            {(skalViseAnnenAktivitet ||
+                skalViseLønnetTiltak ||
+                skalViseMåBoBorteHjemmefra ||
+                skalViseHarBarnUnder18SomHarFlyttetMed) && (
                 <UnderspørsmålContainer>
                     <VStack gap="space-24">
                         {skalViseAnnenAktivitet && (
@@ -278,7 +332,7 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                                     error={valideringsfeil.måBoBorteHjemmefra?.melding}
                                 ></LocaleRadioGroup>
                                 {måBoBorteHjemmefra?.verdi === 'NEI' && (
-                                    <Alert variant={'warning'}>
+                                    <Alert variant="info">
                                         <LocaleTekst
                                             tekst={aktivitetTekster.advarsel_må_bo_borte_hjemmefra}
                                         />
@@ -286,8 +340,26 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                                 )}
                             </div>
                         )}
+                        {skalViseHarBarnUnder18SomHarFlyttetMed && (
+                            <div>
+                                <LocaleRadioGroup
+                                    id={valideringsfeil.harBarnUnder18SomHarFlyttetMed?.id}
+                                    tekst={
+                                        aktivitetTekster.radio_har_barn_under_18_som_har_flyttet_med
+                                    }
+                                    value={harBarnUnder18SomHarFlyttetMed?.verdi || []}
+                                    onChange={oppdaterHarBarnUnder18SomHarFlyttetMed}
+                                    error={valideringsfeil.harBarnUnder18SomHarFlyttetMed?.melding}
+                                ></LocaleRadioGroup>
+                            </div>
+                        )}
                     </VStack>
                 </UnderspørsmålContainer>
+            )}
+            {annenAktivitet?.verdi === AnnenAktivitetType.ARBEIDSSØKER && (
+                <Alert variant={'info'}>
+                    <LocaleTekst tekst={aktivitetTekster.info_arbeidssøker_ingen_rett} />
+                </Alert>
             )}
             {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
                 <Alert variant={'info'}>

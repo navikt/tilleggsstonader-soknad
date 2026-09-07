@@ -22,6 +22,8 @@ interface AktivitetInnholdReiseOppstartAvslutningHjemreise extends AktivitetInnh
     radio_må_bo_borte_hjemmefra_feilmelding: TekstElement<string>;
     advarsel_må_bo_borte_hjemmefra: TekstElement<string>;
     info_arbeidssøker_ingen_rett: TekstElement<string>;
+    radio_har_barn_under_18_som_har_flyttet_med: Radiogruppe<JaNei>;
+    radio_har_barn_under_18_som_har_flyttet_med_feilmelding: TekstElement<string>;
 }
 
 export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise = {
@@ -123,5 +125,14 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
     },
     info_arbeidssøker_ingen_rett: {
         nb: 'Som arbeidssøker har du ikke rett på denne stønaden. Du kan fortsatt søke, men det kan hende du får avslag.',
+    },
+    radio_har_barn_under_18_som_har_flyttet_med: {
+        header: {
+            nb: 'Har du ett eller flere barn under 18 år som har flyttet med deg?',
+        },
+        alternativer: JaNeiTilTekst,
+    },
+    radio_har_barn_under_18_som_har_flyttet_med_feilmelding: {
+        nb: 'Du må svare på om du har barn under 18 år som har flyttet med deg.',
     },
 };
