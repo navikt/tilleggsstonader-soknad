@@ -44,7 +44,7 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyLand(samling._id)]: {
                 id: errorKeyLand(samling._id),
-                melding: samlingerTekster.feilmelding_land[locale],
+                melding: samlingerTekster.velg_land.feilmelding[locale],
             },
         };
     }
@@ -54,7 +54,7 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyGateadresse(samling._id)]: {
                 id: errorKeyGateadresse(samling._id),
-                melding: samlingerTekster.feilmelding_gateadresse[locale],
+                melding: samlingerTekster.gateadresse.feilmelding[locale],
             },
         };
     }
@@ -64,7 +64,7 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyPostnummer(samling._id)]: {
                 id: errorKeyPostnummer(samling._id),
-                melding: samlingerTekster.feilmelding_postnummer[locale],
+                melding: samlingerTekster.postnummer.feilmelding[locale],
             },
         };
     }
@@ -74,7 +74,7 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyPoststed(samling._id)]: {
                 id: errorKeyPoststed(samling._id),
-                melding: samlingerTekster.feilmelding_poststed[locale],
+                melding: samlingerTekster.poststed.feilmelding[locale],
             },
         };
     }
@@ -85,7 +85,7 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyAntallKm(samling._id)]: {
                 id: errorKeyAntallKm(samling._id),
-                melding: samlingerTekster.feilmelding_antall_km[locale],
+                melding: samlingerTekster.antall_km.feilmelding[locale],
             },
         };
     } else if (isNaN(Number(km)) || Number(km) <= 0) {
@@ -93,7 +93,7 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
             ...feil,
             [errorKeyAntallKm(samling._id)]: {
                 id: errorKeyAntallKm(samling._id),
-                melding: samlingerTekster.feilmelding_antall_km_ugyldig[locale],
+                melding: samlingerTekster.antall_km.feilmelding_ugyldig[locale],
             },
         };
     }
@@ -116,7 +116,7 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [keyFom]: {
                 id: keyFom,
-                melding: samlingerTekster.feilmelding_startdato[locale],
+                melding: samlingerTekster.dato.feilmelding_fom[locale],
             },
         };
     }
@@ -126,7 +126,7 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [keyTom]: {
                 id: keyTom,
-                melding: samlingerTekster.feilmelding_sluttdato[locale],
+                melding: samlingerTekster.dato.feilmelding_tom[locale],
             },
         };
     }
@@ -137,7 +137,7 @@ export const validerSamlingUnderRedigering = (
                 ...feil,
                 [keyTom]: {
                     id: keyTom,
-                    melding: samlingerTekster.feilmelding_sluttdato_før_startdato[locale],
+                    melding: samlingerTekster.dato.feilmelding_tom_før_fom[locale],
                 },
             };
         }
@@ -148,7 +148,7 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [keyErObligatorisk]: {
                 id: keyErObligatorisk,
-                melding: samlingerTekster.feilmelding_radio_samling_obligatorisk[locale],
+                melding: samlingerTekster.radio_samling_obligatorisk.feilmelding[locale],
             },
         };
     }
@@ -158,7 +158,7 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [errorKeyHarBruktEkstraReiseDager(samling._id)]: {
                 id: errorKeyHarBruktEkstraReiseDager(samling._id),
-                melding: samlingerTekster.feilmelding_radio_ekstra_reisedag[locale],
+                melding: samlingerTekster.radio_ekstra_reisedag.feilmelding[locale],
             },
         };
     }
@@ -168,7 +168,7 @@ export const validerSamlingUnderRedigering = (
             ...feil,
             [errorKeyBrukSammeAdresse(samling._id)]: {
                 id: errorKeyBrukSammeAdresse(samling._id),
-                melding: samlingerTekster.feilmelding_brukSammeAdresseSomForrige[locale],
+                melding: samlingerTekster.radio_brukSammeAdresseSomForrige.feilmelding[locale],
             },
         };
     }

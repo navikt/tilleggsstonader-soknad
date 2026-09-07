@@ -59,7 +59,7 @@ export const Pengestøtte: React.FC<Props> = ({ arbeidOgOpphold, settArbeidOgOpp
                 <BlåVenstreRammeContainer>
                     <Landvelger
                         id={valideringsfeil.pengestøtteAnnetLand?.id}
-                        label={mottarPengestøtteInnhold.select_hvilket_land}
+                        label={mottarPengestøtteInnhold.select_hvilket_land.label}
                         onChange={oppdatertHvilketLandMottarPengestøtte}
                         value={arbeidOgOpphold.pengestøtteAnnetLand?.verdi || ''}
                         error={valideringsfeil.pengestøtteAnnetLand?.melding}
