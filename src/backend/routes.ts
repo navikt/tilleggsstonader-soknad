@@ -109,7 +109,7 @@ async function sendHtmlMedDekoratør(_req: Request, res: Response) {
                 res.send(html);
             } catch (readError) {
                 logger.error(readError);
-                res.status(500).send(readError);
+                res.status(500).send('Feil ved lasting av app');
             }
         });
 }
