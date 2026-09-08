@@ -1,4 +1,5 @@
 import express, { Request, Response, Router } from 'express';
+import { readFile } from 'fs/promises';
 import path from 'path';
 
 import { applyCspDirectives, logCspViolation } from './csp';
@@ -96,12 +97,19 @@ export const routes = () => {
 };
 
 async function sendHtmlMedDekoratør(_req: Request, res: Response) {
-    getDecoratedHtml(path.join(buildPath, 'index.html'))
+    const indexHtmlPath = path.join(buildPath, 'index.html');
+    getDecoratedHtml(indexHtmlPath)
         .then((html) => {
             res.send(html);
         })
-        .catch((e) => {
-            logger.error(e);
-            res.status(500).send(e);
+        .catch(async (error) => {
+            logger.error(error);
+            try {
+                const html = await readFile(indexHtmlPath, 'utf-8');
+                res.send(html);
+            } catch (readError) {
+                logger.error(readError);
+                res.status(500).send(readError);
+            }
         });
 }
