@@ -430,10 +430,15 @@ create-require@^1.1.0:
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
-csp-header@6.3.1, csp-header@^6.3.0:
+csp-header@6.3.1:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/csp-header/-/csp-header-6.3.1.tgz#eab336e6205082e82f5e54ba13d07e703d2a384b"
   integrity sha512-ykcqGMOGP/uU7RLXDD83k2Ge5Stgc/N3qgKgSN+dATDlNgLHnIoI1IdZBjOskD5Ev1RSKTabLdIETJ6VzXTmvA==
+
+csp-header@^6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/csp-header/-/csp-header-6.4.0.tgz#0a096b2108e17935668056ea727204d73de9d47f"
+  integrity sha512-9YEpW20tPtKzVouyAxNtXqSE4EGaTd4ZiT1n/FbUQ5xhmFkPCjC3Db/gHDbesryQoO/TigBAUCqgKypOHviRgQ==
 
 css-tree@^3.0.0, css-tree@^3.2.1:
   version "3.2.1"
