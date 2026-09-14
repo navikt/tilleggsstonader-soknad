@@ -9,8 +9,18 @@ export function getDecoratedHtml(path: string) {
         logger.error('Mangler miljø for dekoratøren');
     }
 
+    // Dekoratøren krever `localUrl` når env er 'localhost' - se
+    // https://github.com/navikt/nav-dekoratoren#starte-dekoratøren-lokalt
+    const envProps =
+        env === 'localhost'
+            ? {
+                  env: 'localhost' as const,
+                  localUrl: process.env.DECORATOR_URL ?? 'http://localhost:8089',
+              }
+            : { env: (env === 'prod' ? 'prod' : 'dev') as 'dev' | 'prod' };
+
     return injectDecoratorServerSide({
-        env: env as 'dev' | 'prod',
+        ...envProps,
         filePath: path,
         params: {
             simple: true,

@@ -13,7 +13,11 @@ import { attachToken } from './tokenProxy';
 import { BASE_PATH_SOKNAD } from './url';
 import { matchAllPathsExcluding } from './utils';
 
-const buildPath = path.resolve(process.cwd(), '../../app/build');
+// I Docker matcher dette WORKDIR-strukturen (server + build ved siden av hverandre).
+// Lokalt kan denne overstyres med BUILD_PATH for å peke på f.eks. dist_development.
+const buildPath = process.env.BUILD_PATH
+    ? path.resolve(process.env.BUILD_PATH)
+    : path.resolve(process.cwd(), '../../app/build');
 
 export const routes = () => {
     const expressRouter = Router();

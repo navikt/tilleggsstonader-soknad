@@ -12,6 +12,31 @@ Med api må du sette cookie første gang:
 http://localhost:8001/test/cookie?redirect=http://localhost:8080/tilleggsstonader/soknad/pass-av-barn
 Kan sende med annet fnr med `&subject=<fnr>`
 
+##### Kjøre med Nav-dekoratøren (header/footer)
+`yarn start:dev` kjører kun webpack dev-server og viser appen **uten** dekoratøren - den injiseres
+server-side av Express-appen i `src/backend`. For å se dekoratøren må du bygge frontend og kjøre
+backend-serveren mot det bygde bundlet:
+
+```bash
+yarn build:dev                        # bygger frontend til dist_development
+yarn --cwd src/backend build          # bygger backend (tsc)
+cd src/backend
+BUILD_PATH=../../dist_development ENV=dev NODE_ENV=development \
+  node --import=./build/register.js --es-module-specifier-resolution=node build/server.js
+```
+
+Appen kjører da på http://localhost:3000. `ENV=dev` henter den ekte dev-dekoratøren og krever at du
+er tilkoblet naisdevice/VPN.
+
+> Merk: Lokalt mangler du normalt `TOKEN_X_WELL_KNOWN_URL` (settes vanligvis av TokenX-sidecaren i
+> nais). Serveren hopper nå over TokenX-oppsettet med en advarsel i loggen i stedet for å krasje -
+> ruter som proxyer mot backend-API-et vil da svare 401, men appen og dekoratøren lastes som normalt.
+
+Ønsker du å teste mot en dekoratør du kjører helt lokalt (uten VPN), følg
+["Starte Dekoratøren lokalt"](https://github.com/navikt/nav-dekoratoren#starte-dekoratøren-lokalt)
+i nav-dekoratoren-repoet (kjører på http://localhost:8089), og bytt ut `ENV=dev` med `ENV=localhost`
+i kommandoen over. Peker den lokale dekoratøren på en annen port/URL, sett `DECORATOR_URL` til den.
+
 ##### Playwright-tester
 * Installer chromium-browser `npx playwright install chromium`
 * Kjør tester `PLAYWRIGHT_PARALLEL=false yarn playwright test`

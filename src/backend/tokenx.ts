@@ -90,8 +90,14 @@ export class TokenXClient {
 
     private init = async () => {
         if (!tokenxConfig.discoveryUrl) {
-            logger.error('Mangler miljøvariabel TOKEN_X_WELL_KNOWN_URL');
-            throw new TypeError('Miljøvariabelen "TOKEN_X_WELL_KNOWN_URL må være satt');
+            // I nais (dev/prod) settes TOKEN_X_WELL_KNOWN_URL alltid av TokenX-sidecaren, så denne
+            // grenen trigges kun ved lokal kjøring uten ekte TokenX-oppsett (f.eks. for å teste
+            // dekoratøren). Hopper over init i stedet for å krasje hele serveren - kall som trenger
+            // et ekte token vil da feile med 401 i stedet, jf. attachToken sin try/catch.
+            logger.warn(
+                'Mangler miljøvariabel TOKEN_X_WELL_KNOWN_URL - hopper over TokenX-oppsett'
+            );
+            return undefined;
         }
         const config = await discovery(
             new URL(tokenxConfig.discoveryUrl),
