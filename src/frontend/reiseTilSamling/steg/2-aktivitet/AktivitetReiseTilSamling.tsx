@@ -25,6 +25,7 @@ import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/Annen
 import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { ErLærlingEllerLiknende } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
 import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
+import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
@@ -281,27 +282,18 @@ export const AktivitetReiseTilSamling = () => {
                             {skalViseFårDekketReise(erLærlingEllerLiknende) && (
                                 <>
                                     <LocaleRadioGroup
-                                        tekst={aktivitetTekster.radio_dekket_reise}
+                                        tekst={aktivitetTekster.radio_dekket_reise_av_arbeidsgiver}
                                         onChange={oppdaterFårDekketReise}
                                         id={valideringsfeil[errorKeyFårDekketReise]?.id}
                                         error={valideringsfeil[errorKeyFårDekketReise]?.melding}
                                         value={fårDekketReise?.verdi || ''}
                                     />
                                     {fårDekketReise?.verdi === 'JA' && (
-                                        <Alert variant={'info'}>
-                                            <Heading size="small">
-                                                <LocaleTekst
-                                                    tekst={
-                                                        aktivitetTekster.radio_ikke_kvalifisert_tittel
-                                                    }
-                                                />
-                                            </Heading>
-                                            <LocaleTekst
-                                                tekst={
-                                                    aktivitetTekster.radio_dekket_reise_alert_content
-                                                }
-                                            />
-                                        </Alert>
+                                        <AlertIkkeRett
+                                            beskrivelse={
+                                                aktivitetTekster.radio_dekket_reise_av_arbeidsgiver_alert_content
+                                            }
+                                        />
                                     )}
                                 </>
                             )}
@@ -316,20 +308,11 @@ export const AktivitetReiseTilSamling = () => {
                                     />
                                     {skalViseMåBetaleForReiseTilSkole(erUnder25År) && (
                                         <>
-                                            <Alert variant={'info'}>
-                                                <Heading size="small">
-                                                    <LocaleTekst
-                                                        tekst={
-                                                            aktivitetTekster.radio_ikke_kvalifisert_tittel
-                                                        }
-                                                    />
-                                                </Heading>
-                                                <LocaleTekst
-                                                    tekst={
-                                                        aktivitetTekster.radio_under_25_år_alert_content
-                                                    }
-                                                />
-                                            </Alert>
+                                            <AlertIkkeRett
+                                                beskrivelse={
+                                                    aktivitetTekster.radio_under_25_år_alert_content
+                                                }
+                                            />
                                             <LocaleRadioGroup
                                                 tekst={
                                                     aktivitetTekster.radio_må_betale_for_reise_til_skole
@@ -348,20 +331,11 @@ export const AktivitetReiseTilSamling = () => {
                                                 onChange={oppdaterMåBetaleForReiseTilSkole}
                                             />
                                             {måBetaleForReiseTilSkole?.verdi === 'NEI' && (
-                                                <Alert variant={'info'}>
-                                                    <Heading size="small">
-                                                        <LocaleTekst
-                                                            tekst={
-                                                                aktivitetTekster.radio_ikke_kvalifisert_tittel
-                                                            }
-                                                        />
-                                                    </Heading>
-                                                    <LocaleTekst
-                                                        tekst={
-                                                            aktivitetTekster.radio_må_betale_for_reise_til_skole_alert_content
-                                                        }
-                                                    />
-                                                </Alert>
+                                                <AlertIkkeRett
+                                                    beskrivelse={
+                                                        aktivitetTekster.radio_må_betale_for_reise_til_skole_alert_content
+                                                    }
+                                                />
                                             )}
                                         </>
                                     )}

@@ -17,8 +17,8 @@ interface AktivitetInnholdDagligAktivitet extends AktivitetInnhold {
         innhold: TekstElement<string>[];
     };
     radio_ikke_kvalifisert_tittel: TekstElement<string>;
-    radio_dekket_reise: RadiogruppePåkrevd<JaNei>;
-    radio_dekket_reise_alert_content: TekstElement<string>;
+    radio_dekket_reise_av_arbeidsgiver: RadiogruppePåkrevd<JaNei>;
+    radio_dekket_reise_av_arbeidsgiver_alert_content: TekstElement<string>;
     radio_under_25_år: RadiogruppePåkrevd<JaNei>;
     radio_under_25_år_alert_content: TekstElement<string>;
     radio_må_betale_for_reise_til_skole: RadiogruppePåkrevd<JaNei>;
@@ -155,7 +155,7 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         alternativer: AktivitetTypeUtdanningTilTekst,
         feilmelding: { nb: 'Du må svare på hva slags type arbeidsrettet aktivitet du går på.' },
     },
-    radio_dekket_reise: {
+    radio_dekket_reise_av_arbeidsgiver: {
         header: { nb: 'Får du dekket reisen til aktivitetsstedet av arbeidsgiveren din?' },
         alternativer: JaNeiTilTekst,
         feilmelding: {
@@ -165,8 +165,8 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
     radio_ikke_kvalifisert_tittel: {
         nb: 'Du er ikke kvalifisert for å motta støtten',
     },
-    radio_dekket_reise_alert_content: {
-        nb: 'Siden du får dekket kostnader for daglig reise av arbeidsgiveren, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynlig få avslag.',
+    radio_dekket_reise_av_arbeidsgiver_alert_content: {
+        nb: 'Ut fra svarene dine ser det ut som får dekket kostnader for reise av arbeidsgiveren. Da har du ikke rett til pengestøtte til reise til samling. Du kan søke om pengestøtte til reise til samling, men vil mest sannsynlig få avslag.',
     },
     radio_under_25_år: {
         header: { nb: 'Er/var du under 25 år det kalenderåret skoleåret starter?' },
@@ -176,7 +176,7 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         },
     },
     radio_under_25_år_alert_content: {
-        nb: 'Vi tror du har rett til gratis skoleskyss fordi du går på videregående skole og ikke fyller 25 år i kalenderåret skoleåret starter. Da har du ikke rett til pengestøtte til reise til samling. Hvis du likevel må betale for reisen til skolen selv, må du bekrefte dette i spørsmålet under.',
+        nb: 'Ut fra svarene dine ser det ut som du har rett til gratis skoleskyss fordi du går på videregående skole og ikke fyller 25 år i kalenderåret skoleåret starter. Da har du ikke rett til pengestøtte til reise til samling. Hvis du likevel må betale for reisen til skolen selv, må du bekrefte dette i spørsmålet under.',
     },
     radio_må_betale_for_reise_til_skole: {
         header: { nb: 'Må du betale for reisen til skolen selv?' },
@@ -184,9 +184,9 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         feilmelding: { nb: 'Du må svare på om du må betale for reisen til skolen selv.' },
     },
     radio_må_betale_for_reise_til_skole_alert_content: {
-        nb: 'Siden du ikke må betale for reisen til skolen selv, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynlig få avslag.',
+        nb: 'Ut fra svarene dine ser det ut som at du ikke trenger du ikke å betale for reisen til skolen selv. Da har du ikke rett til pengestøtte til reise til samling. Du kan søke om pengestøtte til reise til samling, men vil mest sannsynlig få avslag.',
     },
     radio_opplæring_for_voksne_alert_content: {
-        nb: 'Siden du går på forberedende opplæring for voksne, skal kommunen dekke dine utgifter til skoleskyss hvis reiseavstanden er over 4 km. Du kan søke om pengestøtte til reise til samling, men du vil mest sannsynlig få avslag.',
+        nb: 'Siden du går på forberedende opplæring for voksne, skal kommunen dekke dine utgifter til skoleskyss hvis reiseavstanden er over 4 km. Du kan søke om pengestøtte til reise til samling, men vil mest sannsynlig få avslag.',
     },
 };
