@@ -15,7 +15,7 @@ import {
     useDatepicker,
     VStack,
 } from '@navikt/ds-react';
-import { BgSunken } from '@navikt/ds-tokens/dist/';
+import { BgSunken } from '@navikt/ds-tokens/js';
 
 import {
     adresseFeilIderForSamling,
@@ -27,7 +27,6 @@ import {
     errorKeyTom,
 } from './validering';
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
-import { AdresseValideringsfeil } from '../../../components/AdresseVelger/validering';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -82,14 +81,7 @@ export const NySamling: React.FC<{
     const feilBrukSammeAdresse = visValideringsfeil
         ? valideringsfeil[keyBrukSammeAdresse]
         : undefined;
-    const feilAdresse: AdresseValideringsfeil = visValideringsfeil
-        ? {
-              land: valideringsfeil[adresseFeilIder.land],
-              gateadresse: valideringsfeil[adresseFeilIder.gateadresse],
-              postnummer: valideringsfeil[adresseFeilIder.postnummer],
-              poststed: valideringsfeil[adresseFeilIder.poststed],
-          }
-        : {};
+
     const feilAntallKm = visValideringsfeil ? valideringsfeil[keyAntallKm] : undefined;
 
     const oppdaterAdresse = (felt: Partial<Adresse>) =>
@@ -174,7 +166,7 @@ export const NySamling: React.FC<{
                             adresse={samling.adresse}
                             onChange={håndterAdresseEndring}
                             tekster={samlingerTekster.adresse_spørsmål}
-                            feil={feilAdresse}
+                            feil={visValideringsfeil ? valideringsfeil : undefined}
                         />
                         <KmFelt
                             id={feilAntallKm?.id}

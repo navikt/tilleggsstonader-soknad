@@ -1,25 +1,19 @@
 import React from 'react';
 
-import styled from 'styled-components';
-
 import { VStack } from '@navikt/ds-react';
 
-import { AdresseValideringsfeil } from './validering';
 import { useSpråk } from '../../context/SpråkContext';
 import { Adresse } from '../../typer/søknad';
 import { InputFelt } from '../../typer/tekst';
+import { Valideringsfeil } from '../../typer/validering';
 import { Landvelger } from '../Landvelger/Landvelger';
 import { LocaleTextField } from '../Teksthåndtering/LocaleTextField';
-
-const PostnummerFelt = styled(LocaleTextField)`
-    max-width: 6rem;
-`;
 
 interface Props {
     adresse?: Adresse;
     onChange: (felt: Partial<Adresse>, feltNavn: keyof Adresse) => void;
     tekster: Record<keyof Adresse, InputFelt>;
-    feil?: AdresseValideringsfeil;
+    feil: Valideringsfeil | undefined;
     medNorskeOmråder?: boolean;
     defaultNorge?: boolean;
 }
@@ -59,7 +53,7 @@ export const AdresseVelger: React.FC<Props> = ({
                     );
                 }}
             />
-            <PostnummerFelt
+            <LocaleTextField
                 id={feil?.postnummer?.id}
                 tekst={tekster.postnummer}
                 value={adresse?.postnummer?.verdi ?? ''}
@@ -72,6 +66,7 @@ export const AdresseVelger: React.FC<Props> = ({
                         'postnummer'
                     );
                 }}
+                htmlSize={10}
             />
             <LocaleTextField
                 id={feil?.poststed?.id}

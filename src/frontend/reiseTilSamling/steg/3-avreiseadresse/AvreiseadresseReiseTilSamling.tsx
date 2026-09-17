@@ -11,7 +11,6 @@ import {
     validerAvreiseadresse,
 } from './validering';
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
-import { AdresseValideringsfeil } from '../../../components/AdresseVelger/validering';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -62,13 +61,6 @@ export const AvreiseadresseReiseTilSamling = () => {
 
     const skalReiseFraFolkeregAdr = avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi;
 
-    const feilAdresse: AdresseValideringsfeil = {
-        land: valideringsfeil[avreiseadresseFeilIder.land],
-        gateadresse: valideringsfeil[avreiseadresseFeilIder.gateadresse],
-        postnummer: valideringsfeil[avreiseadresseFeilIder.postnummer],
-        poststed: valideringsfeil[avreiseadresseFeilIder.poststed],
-    };
-
     const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
         settAdresseDetSkalReisesFra(felt);
         nullstillFeil(felt[feltNavn]?.verdi, avreiseadresseFeilIder[feltNavn]);
@@ -116,7 +108,7 @@ export const AvreiseadresseReiseTilSamling = () => {
                             adresse={avreiseadresse.adresseDetSkalReisesFra}
                             onChange={håndterAdresseEndring}
                             tekster={avreiseadresseTekster.avreiseadresse_spørsmål}
-                            feil={feilAdresse}
+                            feil={valideringsfeil}
                         />
                     </AdresseBoks>
                 </VStack>
