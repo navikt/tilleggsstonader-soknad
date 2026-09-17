@@ -166,7 +166,7 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         nb: 'Du er ikke kvalifisert for å motta støtten',
     },
     radio_dekket_reise_av_arbeidsgiver_alert_content: {
-        nb: 'Ut fra svarene dine ser det ut som får dekket kostnader for reise av arbeidsgiveren. Da har du ikke rett til pengestøtte til reise til samling. Du kan søke om pengestøtte til reise til samling, men vil mest sannsynlig få avslag.',
+        nb: 'Ut fra svarene dine ser det ut som du får dekket kostnader for reise av arbeidsgiveren. Da har du ikke rett til pengestøtte til reise til samling. Du kan søke om pengestøtte til reise til samling, men vil mest sannsynlig få avslag.',
     },
     radio_under_25_år: {
         header: { nb: 'Er/var du under 25 år det kalenderåret skoleåret starter?' },
