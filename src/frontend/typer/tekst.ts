@@ -32,10 +32,18 @@ export type Radiogruppe<T extends string> = {
     alternativer: Alternativer<T>;
 };
 
+export type RadiogruppePåkrevd<T extends string> = Radiogruppe<T> & {
+    feilmelding: TekstElement<string>;
+};
+
 export type SelectGruppe<T extends string> = {
     header: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
     alternativer: Alternativer<T>;
+};
+
+export type SelectGruppePåkrevd<T extends string> = SelectGruppe<T> & {
+    feilmelding: TekstElement<string>;
 };
 
 export type RadiogruppeMedUtvalg<T extends string> = {
@@ -44,10 +52,32 @@ export type RadiogruppeMedUtvalg<T extends string> = {
     alternativer: Partial<Alternativer<T>>;
 };
 
+export type RadiogruppeMedUtvalgPåkrevd<T extends string> = RadiogruppeMedUtvalg<T> & {
+    feilmelding: TekstElement<string>;
+};
+
 export type CheckboxGruppe<T extends string> = {
     legend: TekstElement<string>;
     beskrivelse?: TekstElement<string>;
     alternativer: Alternativer<T>;
+};
+
+export type CheckboxGruppePåkrevd<T extends string> = CheckboxGruppe<T> & {
+    feilmelding: TekstElement<string>;
+};
+
+export type InputFelt = {
+    label: TekstElement<string>;
+    feilmelding: TekstElement<string>;
+};
+
+export type Datoperiode = {
+    label: TekstElement<string>;
+    fom: TekstElement<string>;
+    tom: TekstElement<string>;
+    feilmelding_fom: TekstElement<string>;
+    feilmelding_tom: TekstElement<string>;
+    feilmelding_tom_før_fom: TekstElement<string>;
 };
 
 export type Vedleggstekst = {

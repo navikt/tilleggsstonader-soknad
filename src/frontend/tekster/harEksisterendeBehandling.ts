@@ -41,6 +41,10 @@ export const harEksisterendeBehandlingTekster: HarEksistendeBehandlingInnhold = 
         [Skjematype.SØKNAD_REISE_TIL_SAMLING]: {
             nb: 'Hvis du har deltatt på en ny samling, kan du sende ny søknad.',
         },
+        // TODO: placeholder-tekst, avklar endelig tekst
+        [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: {
+            nb: 'Hvis situasjonen din har endret seg, kan du sende ny søknad.',
+        },
     },
     alert_for_skjematype: {
         nb: 'Du har allerede sendt oss en søknad om støtte til [0]. ',

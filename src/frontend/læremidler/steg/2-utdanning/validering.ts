@@ -15,7 +15,7 @@ export const feilAnnenUtdanning = (feil: Valideringsfeil, locale: Locale) => ({
     ...feil,
     annenUtdanning: {
         id: '2',
-        melding: utdanningTekster.radio_annen_utdanning_feilmelding[locale],
+        melding: utdanningTekster.radio_annen_utdanning.feilmelding[locale],
     },
 });
 
@@ -23,7 +23,7 @@ export const feilErLærlingEllerLiknende = (feil: Valideringsfeil, locale: Local
     ...feil,
     erLærlingEllerLiknende: {
         id: '3',
-        melding: erLærlingEllerLiknendeTekster.radio_lærling_feilmelding[locale],
+        melding: erLærlingEllerLiknendeTekster.radio_lærling_etc.feilmelding[locale],
     },
 });
 
@@ -31,7 +31,7 @@ export const feilHarTidligereFullførtVgs = (feil: Valideringsfeil, locale: Loca
     ...feil,
     harTidligereFullførtVgs: {
         id: '4',
-        melding: utdanningTekster.radio_har_fullført_vgs_feilmelding[locale],
+        melding: utdanningTekster.radio_har_fullført_vgs.feilmelding[locale],
     },
 });
 
@@ -39,7 +39,7 @@ export const feilHarFunksjonsnedsettelse = (feil: Valideringsfeil, locale: Local
     ...feil,
     harFunksjonsnedsettelse: {
         id: '5',
-        melding: utdanningTekster.radio_mottar_har_funksjonsnedsettelse_feilmelding[locale],
+        melding: utdanningTekster.radio_mottar_har_funksjonsnedsettelse.feilmelding[locale],
     },
 });
 
@@ -47,6 +47,6 @@ export const feilTarOpplæringVgsSamtidig = (feil: Valideringsfeil, locale: Loca
     ...feil,
     tarOpplæringVgsSamtidig: {
         id: '6',
-        melding: utdanningTekster.radio_tar_opplæring_vgs_samtidig_feilmelding[locale],
+        melding: utdanningTekster.radio_tar_opplæring_vgs_samtidig.feilmelding[locale],
     },
 });

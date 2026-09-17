@@ -111,7 +111,7 @@ export const NySamling: React.FC<{
         onDateChange: (val) => {
             const verdi = val
                 ? {
-                      label: samlingerTekster.startdato_label[locale],
+                      label: samlingerTekster.dato.fom[locale],
                       verdi: tilLocaleDateString(val),
                   }
                 : undefined;
@@ -125,7 +125,7 @@ export const NySamling: React.FC<{
         onDateChange: (val) => {
             const verdi = val
                 ? {
-                      label: samlingerTekster.sluttdato_label[locale],
+                      label: samlingerTekster.dato.tom[locale],
                       verdi: tilLocaleDateString(val),
                   }
                 : undefined;
@@ -140,7 +140,7 @@ export const NySamling: React.FC<{
                 <DatePicker {...dpPropsFom}>
                     <DatePicker.Input
                         id={feilFom?.id}
-                        label={samlingerTekster.startdato_label[locale]}
+                        label={samlingerTekster.dato.fom[locale]}
                         error={feilFom?.melding}
                         {...inputPropsFom}
                     />
@@ -148,7 +148,7 @@ export const NySamling: React.FC<{
                 <DatePicker {...dpPropsTom}>
                     <DatePicker.Input
                         id={feilTom?.id}
-                        label={samlingerTekster.sluttdato_label[locale]}
+                        label={samlingerTekster.dato.tom[locale]}
                         error={feilTom?.melding}
                         {...inputPropsTom}
                     />
@@ -172,7 +172,7 @@ export const NySamling: React.FC<{
                         </BodyShort>
                         <Landvelger
                             id={feilLand?.id}
-                            label={samlingerTekster.velg_land_label}
+                            label={samlingerTekster.velg_land.label}
                             value={samling.adresse?.land?.verdi}
                             onChange={(verdi) => {
                                 oppdaterAdresse({ land: verdi });
@@ -184,14 +184,14 @@ export const NySamling: React.FC<{
                         />
                         <TextField
                             id={feilGateadresse?.id}
-                            label={samlingerTekster.gateadresse_label[locale]}
+                            label={samlingerTekster.gateadresse.label[locale]}
                             value={samling.adresse?.gateadresse?.verdi ?? ''}
                             error={feilGateadresse?.melding}
                             onChange={(e) => {
                                 const verdi = e.target.value;
                                 oppdaterAdresse({
                                     gateadresse: {
-                                        label: samlingerTekster.gateadresse_label[locale],
+                                        label: samlingerTekster.gateadresse.label[locale],
                                         verdi,
                                     },
                                 });
@@ -200,7 +200,7 @@ export const NySamling: React.FC<{
                         />
                         <PostnummerFelt
                             id={feilPostnummer?.id}
-                            label={samlingerTekster.postnummer_label[locale]}
+                            label={samlingerTekster.postnummer.label[locale]}
                             value={samling.adresse?.postnummer?.verdi ?? ''}
                             error={feilPostnummer?.melding}
                             inputMode="numeric"
@@ -208,7 +208,7 @@ export const NySamling: React.FC<{
                                 const verdi = e.target.value;
                                 oppdaterAdresse({
                                     postnummer: {
-                                        label: samlingerTekster.postnummer_label[locale],
+                                        label: samlingerTekster.postnummer.label[locale],
                                         verdi,
                                     },
                                 });
@@ -217,14 +217,14 @@ export const NySamling: React.FC<{
                         />
                         <TextField
                             id={feilPoststed?.id}
-                            label={samlingerTekster.poststed_label[locale]}
+                            label={samlingerTekster.poststed.label[locale]}
                             value={samling.adresse?.poststed?.verdi ?? ''}
                             error={feilPoststed?.melding}
                             onChange={(e) => {
                                 const verdi = e.target.value;
                                 oppdaterAdresse({
                                     poststed: {
-                                        label: samlingerTekster.poststed_label[locale],
+                                        label: samlingerTekster.poststed.label[locale],
                                         verdi,
                                     },
                                 });
@@ -233,15 +233,15 @@ export const NySamling: React.FC<{
                         />
                         <KmFelt
                             id={feilAntallKm?.id}
-                            label={samlingerTekster.antall_km_label[locale]}
-                            description={samlingerTekster.antall_km_beskrivelse[locale]}
+                            label={samlingerTekster.antall_km.label[locale]}
+                            description={samlingerTekster.antall_km.beskrivelse[locale]}
                             inputMode="numeric"
                             value={samling.antallKilometerEnVei?.verdi ?? ''}
                             error={feilAntallKm?.melding}
                             onChange={(e) => {
                                 const verdi = e.target.value;
                                 oppdater(samling._id, 'antallKilometerEnVei', {
-                                    label: samlingerTekster.antall_km_label[locale],
+                                    label: samlingerTekster.antall_km.label[locale],
                                     verdi,
                                 });
                                 nullstillFeil(verdi, keyAntallKm);

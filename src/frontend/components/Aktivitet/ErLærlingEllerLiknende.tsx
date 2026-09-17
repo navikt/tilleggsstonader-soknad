@@ -5,7 +5,7 @@ import { BodyLong, VStack } from '@navikt/ds-react';
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { EnumFelt } from '../../typer/skjema';
 import { JaNei } from '../../typer/søknad';
-import { InlineLenke, Radiogruppe, TekstElement } from '../../typer/tekst';
+import { InlineLenke, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
 import { Feilmelding } from '../../typer/validering';
 import { LocaleInlineLenke } from '../Teksthåndtering/LocaleInlineLenke';
 import { LocaleRadioGroup } from '../Teksthåndtering/LocaleRadioGroup';
@@ -18,8 +18,7 @@ interface Props {
 }
 
 interface ErLærlingEllerLiknendeTekster {
-    radio_lærling_etc: Radiogruppe<JaNei>;
-    radio_lærling_feilmelding: TekstElement<string>;
+    radio_lærling_etc: RadiogruppePåkrevd<JaNei>;
     les_mer_lærling_etc: {
         header: TekstElement<string>;
         innhold_lærling: TekstElement<InlineLenke>;
@@ -35,9 +34,9 @@ export const erLærlingEllerLiknendeTekster: ErLærlingEllerLiknendeTekster = {
             nb: 'Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?',
         },
         alternativer: JaNeiTilTekst,
-    },
-    radio_lærling_feilmelding: {
-        nb: 'Du må svare på om du er lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb.',
+        feilmelding: {
+            nb: 'Du må svare på om du er lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb.',
+        },
     },
     les_mer_lærling_etc: {
         header: {
