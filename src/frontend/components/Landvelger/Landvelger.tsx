@@ -11,6 +11,7 @@ import { landkodeTilNavn } from '../../utils/adresseUtils';
 interface Props {
     id?: string;
     label: TekstElement<string>;
+    description?: TekstElement<string>;
     value?: string;
     onChange: (verdi: SelectFelt) => void;
     medNorskeOmråder: boolean;
@@ -30,6 +31,7 @@ const NORGE_KODE = 'NOR';
 export const Landvelger: React.FC<Props> = ({
     id,
     label,
+    description,
     value,
     onChange,
     medNorskeOmråder,
@@ -92,6 +94,7 @@ export const Landvelger: React.FC<Props> = ({
             error={error}
             placeholder={fellesTekster.velg_land[locale]}
             shouldAutocomplete
+            description={description ? description[locale] : undefined}
         />
     );
 };

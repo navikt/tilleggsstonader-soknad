@@ -1,5 +1,5 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { JaNei } from '../../typer/søknad';
+import { Adresse, JaNei } from '../../typer/søknad';
 import { Datoperiode, InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
 
 interface SamlingerInnhold {
@@ -14,10 +14,7 @@ interface SamlingerInnhold {
     radio_ekstra_reisedag: RadiogruppePåkrevd<JaNei>;
     radio_brukSammeAdresseSomForrige: RadiogruppePåkrevd<JaNei>;
     adresse_tittel: TekstElement<string>;
-    velg_land: InputFelt;
-    gateadresse: InputFelt;
-    postnummer: InputFelt;
-    poststed: InputFelt;
+    adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     antall_km: InputFelt & {
         feilmelding_ugyldig: TekstElement<string>;
         beskrivelse: TekstElement<string>;
@@ -83,21 +80,23 @@ export const samlingerTekster: SamlingerInnhold = {
     adresse_tittel: {
         nb: 'Oppgi adressen du skal reise til',
     },
-    velg_land: {
-        label: { nb: 'Velg land' },
-        feilmelding: { nb: 'Du må velge land.' },
-    },
-    gateadresse: {
-        label: { nb: 'Gateadresse' },
-        feilmelding: { nb: 'Du må fylle inn gateadresse.' },
-    },
-    postnummer: {
-        label: { nb: 'Postnummer' },
-        feilmelding: { nb: 'Du må fylle inn postnummer.' },
-    },
-    poststed: {
-        label: { nb: 'Poststed' },
-        feilmelding: { nb: 'Du må fylle inn poststed.' },
+    adresse_spørsmål: {
+        land: {
+            label: { nb: 'Velg land' },
+            feilmelding: { nb: 'Du må velge land.' },
+        },
+        gateadresse: {
+            label: { nb: 'Gateadresse' },
+            feilmelding: { nb: 'Du må fylle inn gateadresse.' },
+        },
+        postnummer: {
+            label: { nb: 'Postnummer' },
+            feilmelding: { nb: 'Du må fylle inn postnummer.' },
+        },
+        poststed: {
+            label: { nb: 'Poststed' },
+            feilmelding: { nb: 'Du må fylle inn poststed.' },
+        },
     },
     antall_km: {
         label: { nb: 'Hvor lang reisevei har du?' },
