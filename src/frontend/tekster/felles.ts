@@ -20,7 +20,6 @@ export interface FellesInnhold {
     vedlegg_med_feil: TekstElement<string>;
     viktig_med_rett_opplysninger: TekstElement<InlineLenke>;
     avsluttOgLoggUt: TekstElement<string>;
-    alert_ikke_rett_tittel: TekstElement<string>;
 }
 
 export const fellesTekster: FellesInnhold = {
@@ -81,9 +80,6 @@ export const fellesTekster: FellesInnhold = {
     },
     avsluttOgLoggUt: {
         nb: 'Avslutt og logg ut',
-    },
-    alert_ikke_rett_tittel: {
-        nb: 'Ut fra svarene dine ser det ut til at du ikke har rett til denne pengestøtten',
     },
 };
 
