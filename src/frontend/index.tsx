@@ -24,6 +24,8 @@ import { ReiseOppstartAvslutningHjemreiseApp } from './reiseOppstartAvslutningHj
 import { reiseOppstartAvslutningHjemreisePath } from './reiseOppstartAvslutningHjemreise/routing/routesReiseOppstartAvslutningHjemreise';
 import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
 import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
+import { ReiseTilSamlingApp as ReiseTilSamlingNyApp } from './reiseTilSamlingNy/ReiseTilSamlingApp';
+import { reiseTilSamlingPath as reiseTilSamlingNyPath } from './reiseTilSamlingNy/routing/routesReiseTilSamling';
 import { appConfig } from './utils/appConfig';
 import { erProd } from './utils/miljø';
 
@@ -45,7 +47,13 @@ const AppRoutes = () => {
                 <Route path={'/barnetilsyn/*'} element={<Navigate to={passAvBarnPath} replace />} />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
                 {kanBrukeReiseTilSamling && (
-                    <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
+                    <>
+                        <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
+                        <Route
+                            path={`${reiseTilSamlingNyPath}/*`}
+                            element={<ReiseTilSamlingNyApp />}
+                        />
+                    </>
                 )}
                 {kanBrukeReiseOppstartAvslutningHjemreise && (
                     <Route

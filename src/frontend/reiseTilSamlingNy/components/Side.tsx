@@ -6,28 +6,23 @@ import { styled } from 'styled-components';
 import { Alert, Button, ErrorSummary, HGrid, VStack } from '@navikt/ds-react';
 import { BreakpointMd } from '@navikt/ds-tokens/js';
 
-import { StegIndikator } from './StegIndikator';
-import { LocaleTekst } from './Teksthåndtering/LocaleTekst';
 import {
     loggBesøk,
     loggSkjemaFullført,
     loggSkjemaInnsendtFeilet,
     loggSkjemaStegFullført,
-} from '../api/analytics';
-import { sendInnSøknad } from '../api/api';
-import { useSpråk } from '../context/SpråkContext';
-import { useSøknad } from '../context/SøknadContext';
-import { useValideringsfeil } from '../context/ValideringsfeilContext';
-import { fellesTekster } from '../tekster/felles';
-import { IRoute } from '../typer/routes';
-import { inneholderFeil } from '../typer/validering';
-import {
-    erOppsummeringsside,
-    hentForrigeRoute,
-    hentNesteRoute,
-    hentRoutes,
-    Skjemasteg,
-} from '../utils/routeUtils';
+} from '../../api/analytics';
+import { sendInnSøknad } from '../../api/api';
+import { StegIndikator } from '../../components/StegIndikator';
+import { LocaleTekst } from '../../components/Teksthåndtering/LocaleTekst';
+import { useSpråk } from '../../context/SpråkContext';
+import { useSøknad } from '../../context/SøknadContext';
+import { useValideringsfeil } from '../../context/ValideringsfeilContext';
+import { fellesTekster } from '../../tekster/felles';
+import { IRoute } from '../../typer/routes';
+import { inneholderFeil } from '../../typer/validering';
+import { erOppsummeringsside, hentForrigeRoute, hentNesteRoute } from '../../utils/routeUtils';
+import { routesReiseTilSamling, ReiseTilSamlingSteg } from '../routing/routesReiseTilSamling';
 
 interface Props {
     children?: React.ReactNode;
@@ -66,10 +61,10 @@ export const Side: React.FC<Props> = ({ children, validerSteg, oppdaterSøknad }
         }
     }, [harValideringsfeil]);
 
-    const routes = hentRoutes(skjematype);
+    const routes = routesReiseTilSamling;
     const nåværendePath = location.pathname;
     const aktivtStegIndex = routes.findIndex((steg) => steg.path === nåværendePath);
-    const aktivtSteg: IRoute<Skjemasteg> | undefined = routes[aktivtStegIndex];
+    const aktivtSteg: IRoute<ReiseTilSamlingSteg> | undefined = routes[aktivtStegIndex];
 
     useEffect(() => {
         if (aktivtSteg) {
