@@ -84,7 +84,10 @@ export const validerAktivitetReiseTilSamling = (
                         ...feil,
                         [errorKeyFårDekketReise]: {
                             id: errorKeyFårDekketReise,
-                            melding: aktivitetTekster.radio_dekket_reise.feilmelding[locale],
+                            melding:
+                                aktivitetTekster.radio_dekket_reise_av_arbeidsgiver.feilmelding[
+                                    locale
+                                ],
                         },
                     };
                 }
