@@ -90,30 +90,30 @@ export const AvreiseadresseReiseTilSamling = () => {
                         .
                     </BodyShort>
                 </InlineMessage>
+                <LocaleRadioGroup
+                    id={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.id}
+                    tekst={avreiseadresseTekster.radio_skalReiseFraFolkeregAdr}
+                    value={avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi ?? ''}
+                    onChange={oppdaterSkalReiseFraFolkeregAdr}
+                    error={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.melding}
+                />
+                {skalReiseFraFolkeregAdr === 'NEI' && (
+                    <VStack gap="space-4" style={{ marginBottom: 'var(--a-spacing-2)' }}>
+                        <BodyShort weight="semibold">
+                            {avreiseadresseTekster.avreiseadresse_tittel[locale]}
+                        </BodyShort>
+                        <AdresseBoks>
+                            <AdresseVelger
+                                adresse={avreiseadresse.adresseDetSkalReisesFra}
+                                onChange={håndterAdresseEndring}
+                                tekster={avreiseadresseTekster.avreiseadresse_spørsmål}
+                                feil={valideringsfeil}
+                                feilIder={avreiseadresseFeilIder}
+                            />
+                        </AdresseBoks>
+                    </VStack>
+                )}
             </VStack>
-            <LocaleRadioGroup
-                id={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.id}
-                tekst={avreiseadresseTekster.radio_skalReiseFraFolkeregAdr}
-                value={avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi ?? ''}
-                onChange={oppdaterSkalReiseFraFolkeregAdr}
-                error={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.melding}
-            />
-            {skalReiseFraFolkeregAdr === 'NEI' && (
-                <VStack gap="space-4" style={{ marginBottom: 'var(--a-spacing-2)' }}>
-                    <BodyShort weight="semibold">
-                        {avreiseadresseTekster.avreiseadresse_tittel[locale]}
-                    </BodyShort>
-                    <AdresseBoks>
-                        <AdresseVelger
-                            adresse={avreiseadresse.adresseDetSkalReisesFra}
-                            onChange={håndterAdresseEndring}
-                            tekster={avreiseadresseTekster.avreiseadresse_spørsmål}
-                            feil={valideringsfeil}
-                            feilIder={avreiseadresseFeilIder}
-                        />
-                    </AdresseBoks>
-                </VStack>
-            )}
         </Side>
     );
 };
