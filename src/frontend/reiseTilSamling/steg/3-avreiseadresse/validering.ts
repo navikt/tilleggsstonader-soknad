@@ -37,7 +37,6 @@ export const validerAvreiseadresse = (
             avreiseadresse.adresseDetSkalReisesFra,
             locale,
             avreiseadresseTekster.avreiseadresse_spørsmål,
-
             avreiseadresseFeilIder
         );
         feil = { ...feil, ...feilAdresse };
