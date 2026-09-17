@@ -1,9 +1,7 @@
 import { Adresse } from '../../typer/søknad';
 import { Locale, TekstElement } from '../../typer/tekst';
-import { Feilmelding, Valideringsfeil } from '../../typer/validering';
+import { Valideringsfeil } from '../../typer/validering';
 import { harVerdi } from '../../utils/typeUtils';
-
-export type AdresseValideringsfeil = Partial<Record<keyof Adresse, Feilmelding>>;
 
 export type AdresseFeilmeldingTekster = Record<
     keyof Adresse,
@@ -17,26 +15,29 @@ export const validerAdresse = (
     locale: Locale,
     feilmeldinger: AdresseFeilmeldingTekster,
     feilIder: AdresseFeilIder
-): AdresseValideringsfeil => {
-    const feil: AdresseValideringsfeil = {};
+): Valideringsfeil => {
+    const feil: Valideringsfeil = {};
 
     if (!harVerdi(adresse?.land?.verdi)) {
-        feil.land = { id: feilIder.land, melding: feilmeldinger.land.feilmelding[locale] };
+        feil[feilIder.land] = {
+            id: feilIder.land,
+            melding: feilmeldinger.land.feilmelding[locale],
+        };
     }
     if (!harVerdi(adresse?.gateadresse?.verdi)) {
-        feil.gateadresse = {
+        feil[feilIder.gateadresse] = {
             id: feilIder.gateadresse,
             melding: feilmeldinger.gateadresse.feilmelding[locale],
         };
     }
     if (!harVerdi(adresse?.postnummer?.verdi)) {
-        feil.postnummer = {
+        feil[feilIder.postnummer] = {
             id: feilIder.postnummer,
             melding: feilmeldinger.postnummer.feilmelding[locale],
         };
     }
     if (!harVerdi(adresse?.poststed?.verdi)) {
-        feil.poststed = {
+        feil[feilIder.poststed] = {
             id: feilIder.poststed,
             melding: feilmeldinger.poststed.feilmelding[locale],
         };
@@ -44,14 +45,3 @@ export const validerAdresse = (
 
     return feil;
 };
-
-export const adresseValideringsfeilTilValideringsfeil = (
-    feil: AdresseValideringsfeil
-): Valideringsfeil =>
-    (Object.keys(feil) as Array<keyof Adresse>).reduce((acc, feltNavn) => {
-        const feilmelding = feil[feltNavn];
-        if (!feilmelding) {
-            return acc;
-        }
-        return { ...acc, [feilmelding.id]: feilmelding };
-    }, {} as Valideringsfeil);

@@ -1,8 +1,4 @@
-import {
-    AdresseFeilIder,
-    adresseValideringsfeilTilValideringsfeil,
-    validerAdresse,
-} from '../../../components/AdresseVelger/validering';
+import { AdresseFeilIder, validerAdresse } from '../../../components/AdresseVelger/validering';
 import { Samling } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
@@ -56,7 +52,7 @@ const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsf
         adresseFeilIderForSamling(samling._id)
     );
 
-    let feil: Valideringsfeil = adresseValideringsfeilTilValideringsfeil(feilAdresse);
+    let feil: Valideringsfeil = feilAdresse;
 
     const km = samling.antallKilometerEnVei?.verdi;
     if (!harVerdi(km)) {

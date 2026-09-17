@@ -1,8 +1,4 @@
-import {
-    AdresseFeilIder,
-    adresseValideringsfeilTilValideringsfeil,
-    validerAdresse,
-} from '../../../components/AdresseVelger/validering';
+import { AdresseFeilIder, validerAdresse } from '../../../components/AdresseVelger/validering';
 import { Avreiseadresse } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
@@ -43,7 +39,7 @@ export const validerAvreiseadresse = (
             avreiseadresseTekster.avreiseadresse_spørsmål,
             avreiseadresseFeilIder
         );
-        feil = { ...feil, ...adresseValideringsfeilTilValideringsfeil(feilAdresse) };
+        feil = { ...feil, ...feilAdresse };
     }
 
     return feil;

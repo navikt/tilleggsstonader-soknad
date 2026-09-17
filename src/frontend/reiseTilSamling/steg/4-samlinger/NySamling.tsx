@@ -167,6 +167,7 @@ export const NySamling: React.FC<{
                             onChange={håndterAdresseEndring}
                             tekster={samlingerTekster.adresse_spørsmål}
                             feil={visValideringsfeil ? valideringsfeil : undefined}
+                            feilIder={adresseFeilIder}
                         />
                         <KmFelt
                             id={feilAntallKm?.id}

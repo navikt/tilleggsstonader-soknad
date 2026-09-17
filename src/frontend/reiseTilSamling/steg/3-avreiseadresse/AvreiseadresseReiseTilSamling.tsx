@@ -109,6 +109,7 @@ export const AvreiseadresseReiseTilSamling = () => {
                             onChange={håndterAdresseEndring}
                             tekster={avreiseadresseTekster.avreiseadresse_spørsmål}
                             feil={valideringsfeil}
+                            feilIder={avreiseadresseFeilIder}
                         />
                     </AdresseBoks>
                 </VStack>

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { VStack } from '@navikt/ds-react';
 
+import { AdresseFeilIder } from './validering';
 import { useSpråk } from '../../context/SpråkContext';
 import { Adresse } from '../../typer/søknad';
 import { InputFelt } from '../../typer/tekst';
@@ -14,6 +15,7 @@ interface Props {
     onChange: (felt: Partial<Adresse>, feltNavn: keyof Adresse) => void;
     tekster: Record<keyof Adresse, InputFelt>;
     feil: Valideringsfeil | undefined;
+    feilIder: AdresseFeilIder;
     medNorskeOmråder?: boolean;
     defaultNorge?: boolean;
 }
@@ -23,6 +25,7 @@ export const AdresseVelger: React.FC<Props> = ({
     onChange,
     tekster,
     feil,
+    feilIder,
     medNorskeOmråder = true,
     defaultNorge = true,
 }) => {
@@ -31,20 +34,20 @@ export const AdresseVelger: React.FC<Props> = ({
     return (
         <VStack gap="space-16">
             <Landvelger
-                id={feil?.land?.id}
+                id={feil?.[feilIder.land]?.id}
                 label={tekster.land.label}
                 description={tekster.land.description}
                 value={adresse?.land?.verdi}
                 onChange={(verdi) => onChange({ land: verdi }, 'land')}
                 medNorskeOmråder={medNorskeOmråder}
-                error={feil?.land?.melding}
+                error={feil?.[feilIder.land]?.melding}
                 defaultNorge={defaultNorge}
             />
             <LocaleTextField
-                id={feil?.gateadresse?.id}
+                id={feil?.[feilIder.gateadresse]?.id}
                 tekst={tekster.gateadresse}
                 value={adresse?.gateadresse?.verdi ?? ''}
-                error={feil?.gateadresse?.melding}
+                error={feil?.[feilIder.gateadresse]?.melding}
                 onChange={(e) => {
                     const verdi = e.target.value;
                     onChange(
@@ -54,10 +57,10 @@ export const AdresseVelger: React.FC<Props> = ({
                 }}
             />
             <LocaleTextField
-                id={feil?.postnummer?.id}
+                id={feil?.[feilIder.postnummer]?.id}
                 tekst={tekster.postnummer}
                 value={adresse?.postnummer?.verdi ?? ''}
-                error={feil?.postnummer?.melding}
+                error={feil?.[feilIder.postnummer]?.melding}
                 inputMode="numeric"
                 onChange={(e) => {
                     const verdi = e.target.value;
@@ -69,10 +72,10 @@ export const AdresseVelger: React.FC<Props> = ({
                 htmlSize={10}
             />
             <LocaleTextField
-                id={feil?.poststed?.id}
+                id={feil?.[feilIder.poststed]?.id}
                 tekst={tekster.poststed}
                 value={adresse?.poststed?.verdi ?? ''}
-                error={feil?.poststed?.melding}
+                error={feil?.[feilIder.poststed]?.melding}
                 onChange={(e) => {
                     const verdi = e.target.value;
                     onChange(
