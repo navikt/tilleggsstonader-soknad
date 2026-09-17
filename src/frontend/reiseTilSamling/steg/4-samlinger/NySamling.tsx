@@ -205,15 +205,6 @@ export const NySamling: React.FC<{
                     error={feilErObligatorisk?.melding}
                 />
                 <LocaleRadioGroup
-                    tekst={samlingerTekster.radio_samling_obligatorisk}
-                    value={samling.erObligatorisk?.verdi || ''}
-                    onChange={(verdi) => {
-                        oppdater(samling._id, 'erObligatorisk', verdi);
-                        nullstillFeil(verdi?.verdi, keyErObligatorisk);
-                    }}
-                    error={feilErObligatorisk?.melding}
-                />
-                <LocaleRadioGroup
                     tekst={samlingerTekster.radio_ekstra_reisedag}
                     value={samling.harBruktEkstraReiseDager?.verdi || ''}
                     onChange={(verdi) => {
