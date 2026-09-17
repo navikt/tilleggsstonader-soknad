@@ -1,5 +1,5 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { JaNei } from '../../typer/søknad';
+import { Adresse, JaNei } from '../../typer/søknad';
 import { InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
 
 interface AvreiseadresseInnhold {
@@ -10,6 +10,7 @@ interface AvreiseadresseInnhold {
     avreiseadresse_fra_folkereg_lenke_tekst: TekstElement<string>;
     avreiseadresse_fra_folkereg_lenke_url: string;
     avreiseadresse_tittel: TekstElement<string>;
+    avreiseadresse_spørsmål: Record<keyof Adresse, InputFelt>;
     avreiseadresse_vegadresse: InputFelt;
     avreiseadresse_postnummer: InputFelt;
     avreiseadresse_poststed: InputFelt;
@@ -42,6 +43,24 @@ export const avreiseadresseTekster: AvreiseadresseInnhold = {
         'https://www.skatteetaten.no/person/folkeregister/endre/',
     avreiseadresse_tittel: {
         nb: 'Oppgi adressen du skal reise fra',
+    },
+    avreiseadresse_spørsmål: {
+        land: {
+            label: { nb: 'Velg land' },
+            feilmelding: { nb: 'Du må velge land.' },
+        },
+        gateadresse: {
+            label: { nb: 'Gateadresse' },
+            feilmelding: { nb: 'Du må fylle inn gateadresse.' },
+        },
+        postnummer: {
+            label: { nb: 'Postnummer' },
+            feilmelding: { nb: 'Du må fylle inn postnummer.' },
+        },
+        poststed: {
+            label: { nb: 'Poststed' },
+            feilmelding: { nb: 'Du må fylle inn poststed.' },
+        },
     },
     avreiseadresse_vegadresse: {
         label: { nb: 'Gateadresse' },
