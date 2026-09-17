@@ -1,6 +1,6 @@
 import { Adresse } from '../../typer/søknad';
 import { Locale, TekstElement } from '../../typer/tekst';
-import { Feilmelding } from '../../typer/validering';
+import { Feilmelding, Valideringsfeil } from '../../typer/validering';
 import { harVerdi } from '../../utils/typeUtils';
 
 export type AdresseValideringsfeil = Partial<Record<keyof Adresse, Feilmelding>>;
@@ -44,3 +44,14 @@ export const validerAdresse = (
 
     return feil;
 };
+
+export const adresseValideringsfeilTilValideringsfeil = (
+    feil: AdresseValideringsfeil
+): Valideringsfeil =>
+    (Object.keys(feil) as Array<keyof Adresse>).reduce((acc, feltNavn) => {
+        const feilmelding = feil[feltNavn];
+        if (!feilmelding) {
+            return acc;
+        }
+        return { ...acc, [feilmelding.id]: feilmelding };
+    }, {} as Valideringsfeil);
