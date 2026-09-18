@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router-dom';
 
 import { Kvittering } from './Kvittering/Kvittering';
 import { RedirectTilStart } from './RedirectTilStart';
