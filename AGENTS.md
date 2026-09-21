@@ -11,8 +11,8 @@ Frontend-app for tilleggstønader-søknader og kjørelister fore daglige reiser.
 
 ```bash
 # Playwright (E2E)
-PLAYWRIGHT_PARALLEL=false yarn playwright test      # Kjør alle tester
-yarn playwright test -g "testnavn"                  # Kjør én enkelt test
+PLAYWRIGHT_PARALLEL=false pnpm exec playwright test      # Kjør alle tester
+pnpm exec playwright test -g "testnavn"                  # Kjør én enkelt test
 ```
 
 ## Key Patterns
