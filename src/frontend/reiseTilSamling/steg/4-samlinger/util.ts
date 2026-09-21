@@ -37,3 +37,9 @@ export const synkroniserGjenbrukAdresser = (samlinger: Samling[]): Samling[] => 
 
     return synkroniserte;
 };
+
+export const erReiseavstandUnder30km = (samling: Samling): boolean => {
+    const reiseavstand = samling.antallKilometerEnVei?.verdi;
+
+    return !isNaN(Number(reiseavstand)) && Number(reiseavstand) > 0 && Number(reiseavstand) < 30;
+};
