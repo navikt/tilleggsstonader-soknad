@@ -1,3 +1,4 @@
+import { AdresseFeilIder, validerAdresse } from '../../../components/AdresseVelger/validering';
 import { Samling } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
@@ -18,6 +19,13 @@ export const errorKeyPostnummer = (samlingId: number) => `samling_${samlingId}_p
 export const errorKeyPoststed = (samlingId: number) => `samling_${samlingId}_poststed`;
 export const errorKeyAntallKm = (samlingId: number) => `samling_${samlingId}_antallKm`;
 
+export const adresseFeilIderForSamling = (samlingId: number): AdresseFeilIder => ({
+    land: errorKeyLand(samlingId),
+    gateadresse: errorKeyGateadresse(samlingId),
+    postnummer: errorKeyPostnummer(samlingId),
+    poststed: errorKeyPoststed(samlingId),
+});
+
 export const nullstillteSamlingsfeil = (samlinger: Samling[]): Valideringsfeil =>
     samlinger.reduce(
         (acc, samling) => ({
@@ -37,47 +45,14 @@ export const nullstillteSamlingsfeil = (samlinger: Samling[]): Valideringsfeil =
     );
 
 const validerAdresseOgAvstand = (samling: Samling, locale: Locale): Valideringsfeil => {
-    let feil: Valideringsfeil = {};
+    const feilAdresse = validerAdresse(
+        samling.adresse,
+        locale,
+        samlingerTekster.adresse_spørsmål,
+        adresseFeilIderForSamling(samling._id)
+    );
 
-    if (!harVerdi(samling.adresse?.land?.verdi)) {
-        feil = {
-            ...feil,
-            [errorKeyLand(samling._id)]: {
-                id: errorKeyLand(samling._id),
-                melding: samlingerTekster.velg_land.feilmelding[locale],
-            },
-        };
-    }
-
-    if (!harVerdi(samling.adresse?.gateadresse?.verdi)) {
-        feil = {
-            ...feil,
-            [errorKeyGateadresse(samling._id)]: {
-                id: errorKeyGateadresse(samling._id),
-                melding: samlingerTekster.gateadresse.feilmelding[locale],
-            },
-        };
-    }
-
-    if (!harVerdi(samling.adresse?.postnummer?.verdi)) {
-        feil = {
-            ...feil,
-            [errorKeyPostnummer(samling._id)]: {
-                id: errorKeyPostnummer(samling._id),
-                melding: samlingerTekster.postnummer.feilmelding[locale],
-            },
-        };
-    }
-
-    if (!harVerdi(samling.adresse?.poststed?.verdi)) {
-        feil = {
-            ...feil,
-            [errorKeyPoststed(samling._id)]: {
-                id: errorKeyPoststed(samling._id),
-                melding: samlingerTekster.poststed.feilmelding[locale],
-            },
-        };
-    }
+    let feil: Valideringsfeil = feilAdresse;
 
     const km = samling.antallKilometerEnVei?.verdi;
     if (!harVerdi(km)) {

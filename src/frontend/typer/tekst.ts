@@ -68,6 +68,7 @@ export type CheckboxGruppePåkrevd<T extends string> = CheckboxGruppe<T> & {
 
 export type InputFelt = {
     label: TekstElement<string>;
+    description?: TekstElement<string>;
     feilmelding: TekstElement<string>;
 };
 

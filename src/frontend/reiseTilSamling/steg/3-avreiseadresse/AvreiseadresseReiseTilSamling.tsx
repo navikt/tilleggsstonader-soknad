@@ -2,18 +2,15 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { BodyShort, InlineMessage, Link, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, InlineMessage, Link, VStack } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
 import {
-    errorKeyAvreiseGateadresse,
-    errorKeyAvreiseLand,
-    errorKeyAvreisePostnummer,
-    errorKeyAvreisePoststed,
+    avreiseadresseFeilIder,
     errorKeySkalReiseFraFolkeregAdr,
     validerAvreiseadresse,
 } from './validering';
-import { Landvelger } from '../../../components/Landvelger/Landvelger';
+import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -22,7 +19,7 @@ import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
+import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { avreiseadresseTekster } from '../../tekster/avreiseadresse';
@@ -31,10 +28,6 @@ const AdresseBoks = styled.div`
     background: ${BgSunken};
     padding: 1.5rem;
     border-radius: 4px;
-`;
-
-const PostnummerFelt = styled(TextField)`
-    max-width: 6rem;
 `;
 
 export const AvreiseadresseReiseTilSamling = () => {
@@ -67,6 +60,11 @@ export const AvreiseadresseReiseTilSamling = () => {
     };
 
     const skalReiseFraFolkeregAdr = avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi;
+
+    const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
+        settAdresseDetSkalReisesFra(felt);
+        nullstillFeil(felt[feltNavn]?.verdi, avreiseadresseFeilIder[feltNavn]);
+    };
 
     return (
         <Side validerSteg={kanFortsette}>
@@ -105,91 +103,13 @@ export const AvreiseadresseReiseTilSamling = () => {
                             {avreiseadresseTekster.avreiseadresse_tittel[locale]}
                         </BodyShort>
                         <AdresseBoks>
-                            <VStack gap="space-16">
-                                <Landvelger
-                                    id={valideringsfeil[errorKeyAvreiseLand]?.id}
-                                    label={avreiseadresseTekster.velg_land.label}
-                                    value={avreiseadresse.adresseDetSkalReisesFra?.land?.verdi}
-                                    onChange={(verdi) => {
-                                        settAdresseDetSkalReisesFra({ land: verdi });
-                                        nullstillFeil(verdi.verdi, errorKeyAvreiseLand);
-                                    }}
-                                    medNorskeOmråder={true}
-                                    error={valideringsfeil[errorKeyAvreiseLand]?.melding}
-                                    defaultNorge
-                                />
-                                <TextField
-                                    id={valideringsfeil[errorKeyAvreiseGateadresse]?.id}
-                                    label={
-                                        avreiseadresseTekster.avreiseadresse_vegadresse.label[
-                                            locale
-                                        ]
-                                    }
-                                    value={
-                                        avreiseadresse.adresseDetSkalReisesFra?.gateadresse
-                                            ?.verdi ?? ''
-                                    }
-                                    error={valideringsfeil[errorKeyAvreiseGateadresse]?.melding}
-                                    onChange={(e) => {
-                                        const verdi = e.target.value;
-                                        settAdresseDetSkalReisesFra({
-                                            gateadresse: {
-                                                label: avreiseadresseTekster
-                                                    .avreiseadresse_vegadresse.label[locale],
-                                                verdi,
-                                            },
-                                        });
-                                        nullstillFeil(verdi, errorKeyAvreiseGateadresse);
-                                    }}
-                                />
-                                <PostnummerFelt
-                                    id={valideringsfeil[errorKeyAvreisePostnummer]?.id}
-                                    label={
-                                        avreiseadresseTekster.avreiseadresse_postnummer.label[
-                                            locale
-                                        ]
-                                    }
-                                    value={
-                                        avreiseadresse.adresseDetSkalReisesFra?.postnummer?.verdi ??
-                                        ''
-                                    }
-                                    error={valideringsfeil[errorKeyAvreisePostnummer]?.melding}
-                                    inputMode="numeric"
-                                    onChange={(e) => {
-                                        const verdi = e.target.value;
-                                        settAdresseDetSkalReisesFra({
-                                            postnummer: {
-                                                label: avreiseadresseTekster
-                                                    .avreiseadresse_postnummer.label[locale],
-                                                verdi,
-                                            },
-                                        });
-                                        nullstillFeil(verdi, errorKeyAvreisePostnummer);
-                                    }}
-                                />
-                                <TextField
-                                    id={valideringsfeil[errorKeyAvreisePoststed]?.id}
-                                    label={
-                                        avreiseadresseTekster.avreiseadresse_poststed.label[locale]
-                                    }
-                                    value={
-                                        avreiseadresse.adresseDetSkalReisesFra?.poststed?.verdi ??
-                                        ''
-                                    }
-                                    error={valideringsfeil[errorKeyAvreisePoststed]?.melding}
-                                    onChange={(e) => {
-                                        const verdi = e.target.value;
-                                        settAdresseDetSkalReisesFra({
-                                            poststed: {
-                                                label: avreiseadresseTekster.avreiseadresse_poststed
-                                                    .label[locale],
-                                                verdi,
-                                            },
-                                        });
-                                        nullstillFeil(verdi, errorKeyAvreisePoststed);
-                                    }}
-                                />
-                            </VStack>
+                            <AdresseVelger
+                                adresse={avreiseadresse.adresseDetSkalReisesFra}
+                                onChange={håndterAdresseEndring}
+                                tekster={avreiseadresseTekster.avreiseadresse_spørsmål}
+                                feil={valideringsfeil}
+                                feilIder={avreiseadresseFeilIder}
+                            />
                         </AdresseBoks>
                     </VStack>
                 )}

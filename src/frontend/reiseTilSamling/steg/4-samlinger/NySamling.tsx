@@ -18,18 +18,15 @@ import {
 import { BgSunken } from '@navikt/ds-tokens/js';
 
 import {
+    adresseFeilIderForSamling,
     errorKeyAntallKm,
     errorKeyBrukSammeAdresse,
     errorKeyErObligatorisk,
     errorKeyFom,
-    errorKeyGateadresse,
     errorKeyHarBruktEkstraReiseDager,
-    errorKeyLand,
-    errorKeyPostnummer,
-    errorKeyPoststed,
     errorKeyTom,
 } from './validering';
-import { Landvelger } from '../../../components/Landvelger/Landvelger';
+import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -42,10 +39,6 @@ const SamlingBoks = styled.div`
     background: ${BgSunken};
     padding: 1.5rem;
     border-radius: 4px;
-`;
-
-const PostnummerFelt = styled(TextField)`
-    max-width: 6rem;
 `;
 
 const KmFelt = styled(TextField)`
@@ -68,11 +61,8 @@ export const NySamling: React.FC<{
     const keyErObligatorisk = errorKeyErObligatorisk(samling._id);
     const keyHarBruktEkstraReiseDager = errorKeyHarBruktEkstraReiseDager(samling._id);
     const keyBrukSammeAdresse = errorKeyBrukSammeAdresse(samling._id);
-    const keyLand = errorKeyLand(samling._id);
-    const keyGateadresse = errorKeyGateadresse(samling._id);
-    const keyPostnummer = errorKeyPostnummer(samling._id);
-    const keyPoststed = errorKeyPoststed(samling._id);
     const keyAntallKm = errorKeyAntallKm(samling._id);
+    const adresseFeilIder = adresseFeilIderForSamling(samling._id);
 
     const [visAdvarsel, setVisAdvarsel] = useState(false);
 
@@ -91,14 +81,16 @@ export const NySamling: React.FC<{
     const feilBrukSammeAdresse = visValideringsfeil
         ? valideringsfeil[keyBrukSammeAdresse]
         : undefined;
-    const feilLand = visValideringsfeil ? valideringsfeil[keyLand] : undefined;
-    const feilGateadresse = visValideringsfeil ? valideringsfeil[keyGateadresse] : undefined;
-    const feilPostnummer = visValideringsfeil ? valideringsfeil[keyPostnummer] : undefined;
-    const feilPoststed = visValideringsfeil ? valideringsfeil[keyPoststed] : undefined;
+
     const feilAntallKm = visValideringsfeil ? valideringsfeil[keyAntallKm] : undefined;
 
     const oppdaterAdresse = (felt: Partial<Adresse>) =>
         oppdater(samling._id, 'adresse', { ...samling.adresse, ...felt });
+
+    const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
+        oppdaterAdresse(felt);
+        nullstillFeil(felt[feltNavn]?.verdi, adresseFeilIder[feltNavn]);
+    };
 
     const gjenbrukerAdresse = !erFørste && samling._brukSammeAdresseSomForrige?.verdi === 'JA';
 
@@ -170,66 +162,12 @@ export const NySamling: React.FC<{
                         <BodyShort weight="semibold">
                             {samlingerTekster.adresse_tittel[locale]}
                         </BodyShort>
-                        <Landvelger
-                            id={feilLand?.id}
-                            label={samlingerTekster.velg_land.label}
-                            value={samling.adresse?.land?.verdi}
-                            onChange={(verdi) => {
-                                oppdaterAdresse({ land: verdi });
-                                nullstillFeil(verdi.verdi, keyLand);
-                            }}
-                            medNorskeOmråder={true}
-                            error={feilLand?.melding}
-                            defaultNorge
-                        />
-                        <TextField
-                            id={feilGateadresse?.id}
-                            label={samlingerTekster.gateadresse.label[locale]}
-                            value={samling.adresse?.gateadresse?.verdi ?? ''}
-                            error={feilGateadresse?.melding}
-                            onChange={(e) => {
-                                const verdi = e.target.value;
-                                oppdaterAdresse({
-                                    gateadresse: {
-                                        label: samlingerTekster.gateadresse.label[locale],
-                                        verdi,
-                                    },
-                                });
-                                nullstillFeil(verdi, keyGateadresse);
-                            }}
-                        />
-                        <PostnummerFelt
-                            id={feilPostnummer?.id}
-                            label={samlingerTekster.postnummer.label[locale]}
-                            value={samling.adresse?.postnummer?.verdi ?? ''}
-                            error={feilPostnummer?.melding}
-                            inputMode="numeric"
-                            onChange={(e) => {
-                                const verdi = e.target.value;
-                                oppdaterAdresse({
-                                    postnummer: {
-                                        label: samlingerTekster.postnummer.label[locale],
-                                        verdi,
-                                    },
-                                });
-                                nullstillFeil(verdi, keyPostnummer);
-                            }}
-                        />
-                        <TextField
-                            id={feilPoststed?.id}
-                            label={samlingerTekster.poststed.label[locale]}
-                            value={samling.adresse?.poststed?.verdi ?? ''}
-                            error={feilPoststed?.melding}
-                            onChange={(e) => {
-                                const verdi = e.target.value;
-                                oppdaterAdresse({
-                                    poststed: {
-                                        label: samlingerTekster.poststed.label[locale],
-                                        verdi,
-                                    },
-                                });
-                                nullstillFeil(verdi, keyPoststed);
-                            }}
+                        <AdresseVelger
+                            adresse={samling.adresse}
+                            onChange={håndterAdresseEndring}
+                            tekster={samlingerTekster.adresse_spørsmål}
+                            feil={visValideringsfeil ? valideringsfeil : undefined}
+                            feilIder={adresseFeilIder}
                         />
                         <KmFelt
                             id={feilAntallKm?.id}
