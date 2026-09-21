@@ -94,7 +94,7 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await fjernWebpackOverlay(page);
 
     await expect(page).toHaveURL(`${urlSøknad}/samlinger`);
-    await expect(page.getByRole('heading', { name: 'Den reise' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Din reise' })).toBeVisible();
 
     await forventIngenWcagViolations(page);
 
