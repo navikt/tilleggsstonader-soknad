@@ -26,9 +26,14 @@ const defaultArbeidOgOpphold: ArbeidOgOpphold = {
 interface Props {
     hovedytelse: Hovedytelse | undefined;
     oppdaterHovedytelse: (hovedytelse: Hovedytelse) => void;
+    brukNyAlert?: boolean;
 }
 
-export const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) => {
+export const HovedytelseSide: React.FC<Props> = ({
+    hovedytelse,
+    oppdaterHovedytelse,
+    brukNyAlert = false,
+}) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -92,7 +97,9 @@ export const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedyte
                     settArbeidOgOpphold={settArbeidOgOpphold}
                 />
             )}
-            {skalViseVarselOmRegelendring && <AdvarselEndringOvergangsstønad />}
+            {skalViseVarselOmRegelendring && (
+                <AdvarselEndringOvergangsstønad brukNyAlert={brukNyAlert} />
+            )}
         </Side>
     );
 };
