@@ -93,7 +93,6 @@ export interface Samling {
     fom?: VerdiFelt<string>;
     tom?: VerdiFelt<string>;
     erObligatorisk?: EnumFelt<JaNei>;
-    harBruktEkstraReiseDager?: EnumFelt<JaNei>;
     adresse?: Adresse;
     antallKilometerEnVei?: VerdiFelt<string>;
 }

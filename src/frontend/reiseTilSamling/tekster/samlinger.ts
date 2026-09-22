@@ -5,13 +5,12 @@ import { Datoperiode, InputFelt, RadiogruppePåkrevd, TekstElement } from '../..
 interface SamlingerInnhold {
     tittel: TekstElement<string>;
     guide_tekst: TekstElement<string>;
-    info_minsteavstand: TekstElement<string>;
     dato: Datoperiode;
-    vedlegg_alert_innhold: TekstElement<string>;
     knapp_legg_til: TekstElement<string>;
     knapp_slett: TekstElement<string>;
     radio_samling_obligatorisk: RadiogruppePåkrevd<JaNei>;
-    radio_ekstra_reisedag: RadiogruppePåkrevd<JaNei>;
+    samling_obligatorisk_alert_dokumentasjon: TekstElement<string>;
+    samling_obligatorisk_alert_ikke_rett: TekstElement<string>;
     radio_brukSammeAdresseSomForrige: RadiogruppePåkrevd<JaNei>;
     adresse_tittel: TekstElement<string>;
     adresse_spørsmål: Record<keyof Adresse, InputFelt>;
@@ -19,30 +18,24 @@ interface SamlingerInnhold {
         feilmelding_ugyldig: TekstElement<string>;
         beskrivelse: TekstElement<string>;
     };
-    advarsel_antall_km_for_lav_tittel: TekstElement<string>;
     advarsel_antall_km_for_lav: TekstElement<string>;
 }
 
 export const samlingerTekster: SamlingerInnhold = {
     tittel: {
-        nb: 'Informasjon om samling',
+        nb: 'Din reise',
     },
     guide_tekst: {
-        nb: 'Velg «Legg til samling» nedenfor hvis du har deltatt eller skal delta på flere samlinger.',
-    },
-    info_minsteavstand: {
-        nb: 'For at du skal få støtte, må det være minst 30 kilometer mellom hjemmet ditt og aktivitetsadressen.',
+        nb: 'Oppgi informasjon om reisen din. Du må ha gjennomført reisen for å få den innvilget.  Hvis du har reist til flere samlinger kan disse legges til med knappen “Legg til reise”.  Du kan søke for reiser gjennomført inntil 6 måneder tilbake i tid.',
     },
     dato: {
         label: { nb: 'Dato for samling' },
-        fom: { nb: 'Startdato (dd.mm.åååå)' },
-        tom: { nb: 'Sluttdato (dd.mm.åååå)' },
+        fom: { nb: 'Fra og med (dd.mm.åååå)' },
+        description_fom: { nb: 'Vi kan ikke innvilge reiser som ikke er gjennomført' },
+        tom: { nb: 'Til og med (dd.mm.åååå)' },
         feilmelding_fom: { nb: 'Du må fylle inn startdato.' },
         feilmelding_tom: { nb: 'Du må fylle inn sluttdato.' },
         feilmelding_tom_før_fom: { nb: 'Sluttdato kan ikke være før startdato.' },
-    },
-    vedlegg_alert_innhold: {
-        nb: 'Du må legge ved bekreftelse på samlingen. Du får instruksjoner om innsending av vedlegg senere i søknaden.',
     },
     knapp_legg_til: {
         nb: 'Legg til samling',
@@ -55,20 +48,13 @@ export const samlingerTekster: SamlingerInnhold = {
             nb: 'Er samlingen obligatorisk?',
         },
         alternativer: JaNeiTilTekst,
-        beskrivelse: {
-            nb: 'Dersom samlingen ikke er obligatorisk har du ikke rett til støtte ved reise til samling. Du kan fortsatt søke, men du kan få avslag.',
-        },
         feilmelding: { nb: 'Du må velge om samlingen er obligatorisk eller ikke.' },
     },
-    radio_ekstra_reisedag: {
-        header: {
-            nb: 'Benyttet du deg av en ekstra reisedag i forbindelse med samlingen?',
-        },
-        alternativer: JaNeiTilTekst,
-        beskrivelse: {
-            nb: 'Dersom du måtte bruke en ekstra dag, enten før eller etter samlingen, så ønsker vi å vite det. Du kan få dekket utgifter til reise og opphold for denne dagen.',
-        },
-        feilmelding: { nb: 'Du må velge om du har benyttet en ekstra reisedag eller ikke.' },
+    samling_obligatorisk_alert_dokumentasjon: {
+        nb: 'Du må legge ved bekreftelse på at samlingen er obligatorisk. Du får instruksjoner om innsending av vedlegg senere i søknaden.',
+    },
+    samling_obligatorisk_alert_ikke_rett: {
+        nb: 'Samlingen må være obligatorisk for å ha rett til denne pengestøtten. Du kan søke om pengestøtte til reise til samling, men vil mest sannsynlig få avslag.',
     },
     radio_brukSammeAdresseSomForrige: {
         header: {
@@ -102,12 +88,9 @@ export const samlingerTekster: SamlingerInnhold = {
         label: { nb: 'Hvor lang reisevei har du?' },
         beskrivelse: { nb: 'Angi antall kilometer mellom bostedet ditt og samlingsstedet.' },
         feilmelding: { nb: 'Du må fylle inn antall kilometer.' },
-        feilmelding_ugyldig: { nb: 'Antall kilometer må være et positivt tall.' },
-    },
-    advarsel_antall_km_for_lav_tittel: {
-        nb: 'Dersom avstanden er under 30 kilometer har du ikke rett på pengestøtte til reise til samling.',
+        feilmelding_ugyldig: { nb: 'Antall kilometer må være større enn 0.' },
     },
     advarsel_antall_km_for_lav: {
-        nb: 'Du kan fortsatt søke, men du kan få avslag.',
+        nb: 'Reiseavstanden må være minst 30 kilometer for å ha rett til denne pengestøtten. Du kan søke om pengestøtte til reise til samling, men vil mest sannsynlig få avslag.',
     },
 };

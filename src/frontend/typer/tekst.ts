@@ -79,6 +79,8 @@ export type Datoperiode = {
     feilmelding_fom: TekstElement<string>;
     feilmelding_tom: TekstElement<string>;
     feilmelding_tom_før_fom: TekstElement<string>;
+    description_fom?: TekstElement<string>;
+    description_tom?: TekstElement<string>;
 };
 
 export type Vedleggstekst = {

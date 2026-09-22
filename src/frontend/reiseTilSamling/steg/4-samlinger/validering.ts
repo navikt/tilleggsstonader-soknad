@@ -9,8 +9,6 @@ import { samlingerTekster } from '../../tekster/samlinger';
 export const errorKeyFom = (samlingId: number) => `samling_${samlingId}_fom`;
 export const errorKeyTom = (samlingId: number) => `samling_${samlingId}_tom`;
 export const errorKeyErObligatorisk = (samlingId: number) => `samling_${samlingId}_erObligatorisk`;
-export const errorKeyHarBruktEkstraReiseDager = (samlingId: number) =>
-    `samling_${samlingId}_harBruktEkstraReiseDager`;
 export const errorKeyBrukSammeAdresse = (samlingId: number) =>
     `samling_${samlingId}_brukSammeAdresseSomForrige`;
 export const errorKeyLand = (samlingId: number) => `samling_${samlingId}_land`;
@@ -33,7 +31,6 @@ export const nullstillteSamlingsfeil = (samlinger: Samling[]): Valideringsfeil =
             [errorKeyFom(samling._id)]: undefined,
             [errorKeyTom(samling._id)]: undefined,
             [errorKeyErObligatorisk(samling._id)]: undefined,
-            [errorKeyHarBruktEkstraReiseDager(samling._id)]: undefined,
             [errorKeyBrukSammeAdresse(samling._id)]: undefined,
             [errorKeyLand(samling._id)]: undefined,
             [errorKeyGateadresse(samling._id)]: undefined,
@@ -124,16 +121,6 @@ export const validerSamlingUnderRedigering = (
             [keyErObligatorisk]: {
                 id: keyErObligatorisk,
                 melding: samlingerTekster.radio_samling_obligatorisk.feilmelding[locale],
-            },
-        };
-    }
-
-    if (!harVerdi(samling.harBruktEkstraReiseDager?.verdi)) {
-        feil = {
-            ...feil,
-            [errorKeyHarBruktEkstraReiseDager(samling._id)]: {
-                id: errorKeyHarBruktEkstraReiseDager(samling._id),
-                melding: samlingerTekster.radio_ekstra_reisedag.feilmelding[locale],
             },
         };
     }
