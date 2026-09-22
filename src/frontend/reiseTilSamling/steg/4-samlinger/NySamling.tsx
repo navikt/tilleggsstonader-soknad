@@ -189,11 +189,13 @@ export const NySamling: React.FC<{
                                     });
                                     nullstillFeil(verdi, keyAntallKm);
                                 }}
-                                onBlur={() => setVisAdvarselKmAvstand(true)}
+                                onBlur={() =>
+                                    setVisAdvarselKmAvstand(() => erReiseavstandUnder30km(samling))
+                                }
                                 htmlSize={5}
                             />
 
-                            {visAdvarselKmAvstand && erReiseavstandUnder30km(samling) && (
+                            {visAdvarselKmAvstand && (
                                 <AlertIkkeRett
                                     beskrivelse={samlingerTekster.advarsel_antall_km_for_lav}
                                 />
