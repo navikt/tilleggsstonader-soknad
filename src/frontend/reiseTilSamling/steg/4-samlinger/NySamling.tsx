@@ -159,32 +159,6 @@ export const NySamling: React.FC<{
                     )}
                 </VStack>
 
-                <VStack gap="space-16">
-                    <LocaleTextField
-                        id={feilAntallKm?.id}
-                        tekst={samlingerTekster.antall_km}
-                        inputMode="numeric"
-                        value={samling.antallKilometerEnVei?.verdi ?? ''}
-                        error={feilAntallKm?.melding}
-                        onChange={(e) => {
-                            const verdi = e.target.value;
-                            oppdater(samling._id, 'antallKilometerEnVei', {
-                                label: samlingerTekster.antall_km.label[locale],
-                                verdi,
-                            });
-                            nullstillFeil(verdi, keyAntallKm);
-                        }}
-                        onBlur={() => setVisAdvarselKmAvstand(true)}
-                        htmlSize={5}
-                    />
-
-                    {visAdvarselKmAvstand && erReiseavstandUnder30km(samling) && (
-                        <AlertIkkeRett beskrivelse={samlingerTekster.advarsel_antall_km_for_lav} />
-                    )}
-                </VStack>
-
-                <Skillelinje />
-
                 {!erFørste && (
                     <LocaleRadioGroup
                         id={feilBrukSammeAdresse?.id}
@@ -197,17 +171,50 @@ export const NySamling: React.FC<{
                         error={feilBrukSammeAdresse?.melding}
                     />
                 )}
+
                 {!gjenbrukerAdresse && (
-                    <VStack gap="space-16">
-                        <Heading size="small">{samlingerTekster.adresse_tittel[locale]}</Heading>
-                        <AdresseVelger
-                            adresse={samling.adresse}
-                            onChange={håndterAdresseEndring}
-                            tekster={samlingerTekster.adresse_spørsmål}
-                            feil={visValideringsfeil ? valideringsfeil : undefined}
-                            feilIder={adresseFeilIder}
-                        />
-                    </VStack>
+                    <>
+                        <VStack gap="space-16">
+                            <LocaleTextField
+                                id={feilAntallKm?.id}
+                                tekst={samlingerTekster.antall_km}
+                                inputMode="numeric"
+                                value={samling.antallKilometerEnVei?.verdi ?? ''}
+                                error={feilAntallKm?.melding}
+                                onChange={(e) => {
+                                    const verdi = e.target.value;
+                                    oppdater(samling._id, 'antallKilometerEnVei', {
+                                        label: samlingerTekster.antall_km.label[locale],
+                                        verdi,
+                                    });
+                                    nullstillFeil(verdi, keyAntallKm);
+                                }}
+                                onBlur={() => setVisAdvarselKmAvstand(true)}
+                                htmlSize={5}
+                            />
+
+                            {visAdvarselKmAvstand && erReiseavstandUnder30km(samling) && (
+                                <AlertIkkeRett
+                                    beskrivelse={samlingerTekster.advarsel_antall_km_for_lav}
+                                />
+                            )}
+                        </VStack>
+
+                        <Skillelinje />
+
+                        <VStack gap="space-16">
+                            <Heading size="small">
+                                {samlingerTekster.adresse_tittel[locale]}
+                            </Heading>
+                            <AdresseVelger
+                                adresse={samling.adresse}
+                                onChange={håndterAdresseEndring}
+                                tekster={samlingerTekster.adresse_spørsmål}
+                                feil={visValideringsfeil ? valideringsfeil : undefined}
+                                feilIder={adresseFeilIder}
+                            />
+                        </VStack>
+                    </>
                 )}
 
                 <Skillelinje />
