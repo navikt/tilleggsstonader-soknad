@@ -116,12 +116,12 @@ export const NySamling: React.FC<{
         <SamlingBoks>
             <VStack gap="space-40">
                 <VStack gap="space-24">
+                    <Heading size="small">{samlingerTekster.dato.label[locale]}</Heading>
                     <DatePicker {...dpPropsFom}>
                         <DatePicker.Input
                             id={feilFom?.id}
                             label={samlingerTekster.dato.fom[locale]}
                             error={feilFom?.melding}
-                            description={samlingerTekster.dato.description_fom?.[locale]}
                             {...inputPropsFom}
                         />
                     </DatePicker>
@@ -135,28 +135,32 @@ export const NySamling: React.FC<{
                     </DatePicker>
                 </VStack>
 
-                <VStack gap="space-16">
-                    <LocaleRadioGroup
-                        tekst={samlingerTekster.radio_samling_obligatorisk}
-                        value={samling.erObligatorisk?.verdi || ''}
-                        onChange={(verdi) => {
-                            oppdater(samling._id, 'erObligatorisk', verdi);
-                            nullstillFeil(verdi?.verdi, keyErObligatorisk);
-                        }}
-                        error={feilErObligatorisk?.melding}
-                    />
-
-                    {samling.erObligatorisk?.verdi === 'JA' && (
-                        <InlineMessage status="info">
-                            {samlingerTekster.samling_obligatorisk_alert_dokumentasjon[locale]}
-                        </InlineMessage>
-                    )}
-
-                    {samling.erObligatorisk?.verdi === 'NEI' && (
-                        <AlertIkkeRett
-                            beskrivelse={samlingerTekster.samling_obligatorisk_alert_ikke_rett}
+                <Skillelinje />
+                <VStack gap="space-24">
+                    <Heading size="small">{samlingerTekster.info_samling_header[locale]}</Heading>
+                    <VStack gap="space-16">
+                        <LocaleRadioGroup
+                            tekst={samlingerTekster.radio_samling_obligatorisk}
+                            value={samling.erObligatorisk?.verdi || ''}
+                            onChange={(verdi) => {
+                                oppdater(samling._id, 'erObligatorisk', verdi);
+                                nullstillFeil(verdi?.verdi, keyErObligatorisk);
+                            }}
+                            error={feilErObligatorisk?.melding}
                         />
-                    )}
+
+                        {samling.erObligatorisk?.verdi === 'JA' && (
+                            <InlineMessage status="info">
+                                {samlingerTekster.samling_obligatorisk_alert_dokumentasjon[locale]}
+                            </InlineMessage>
+                        )}
+
+                        {samling.erObligatorisk?.verdi === 'NEI' && (
+                            <AlertIkkeRett
+                                beskrivelse={samlingerTekster.samling_obligatorisk_alert_ikke_rett}
+                            />
+                        )}
+                    </VStack>
                 </VStack>
 
                 {!erFørste && (
@@ -174,7 +178,7 @@ export const NySamling: React.FC<{
 
                 {!gjenbrukerAdresse && (
                     <>
-                        <VStack gap="space-16">
+                        <VStack gap="space-24">
                             <LocaleTextField
                                 id={feilAntallKm?.id}
                                 tekst={samlingerTekster.antall_km}
@@ -204,7 +208,7 @@ export const NySamling: React.FC<{
 
                         <Skillelinje />
 
-                        <VStack gap="space-16">
+                        <VStack gap="space-24">
                             <Heading size="small">
                                 {samlingerTekster.adresse_tittel[locale]}
                             </Heading>

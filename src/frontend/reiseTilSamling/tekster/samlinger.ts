@@ -8,6 +8,7 @@ interface SamlingerInnhold {
     dato: Datoperiode;
     knapp_legg_til: TekstElement<string>;
     knapp_slett: TekstElement<string>;
+    info_samling_header: TekstElement<string>;
     radio_samling_obligatorisk: RadiogruppePåkrevd<JaNei>;
     samling_obligatorisk_alert_dokumentasjon: TekstElement<string>;
     samling_obligatorisk_alert_ikke_rett: TekstElement<string>;
@@ -16,7 +17,6 @@ interface SamlingerInnhold {
     adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     antall_km: InputFelt & {
         feilmelding_ugyldig: TekstElement<string>;
-        beskrivelse: TekstElement<string>;
     };
     advarsel_antall_km_for_lav: TekstElement<string>;
 }
@@ -26,12 +26,11 @@ export const samlingerTekster: SamlingerInnhold = {
         nb: 'Din reise',
     },
     guide_tekst: {
-        nb: 'Oppgi informasjon om reisen din. Du må ha gjennomført reisen for å få den innvilget.  Hvis du har reist til flere samlinger kan disse legges til med knappen “Legg til reise”.  Du kan søke for reiser gjennomført inntil 6 måneder tilbake i tid.',
+        nb: 'Oppgi informasjon om reisen din, og benytt  deg av billigste reise måte, med offentlig transport som fly, buss, tog, trikk, ferge og lignende  Du må ha gjennomført reisen for å få den innvilget.  Hvis du har reist til flere samlinger kan disse legges til med knappen “Legg til reise”.  Du kan søke for reiser gjennomført inntil 6 måneder tilbake i tid.',
     },
     dato: {
-        label: { nb: 'Dato for samling' },
+        label: { nb: 'Periode for reisen' },
         fom: { nb: 'Fra og med (dd.mm.åååå)' },
-        description_fom: { nb: 'Vi kan ikke innvilge reiser som ikke er gjennomført' },
         tom: { nb: 'Til og med (dd.mm.åååå)' },
         feilmelding_fom: { nb: 'Du må fylle inn startdato.' },
         feilmelding_tom: { nb: 'Du må fylle inn sluttdato.' },
@@ -42,6 +41,9 @@ export const samlingerTekster: SamlingerInnhold = {
     },
     knapp_slett: {
         nb: 'Fjern samling',
+    },
+    info_samling_header: {
+        nb: 'Informasjon om samlingen',
     },
     radio_samling_obligatorisk: {
         header: {
@@ -85,8 +87,7 @@ export const samlingerTekster: SamlingerInnhold = {
         },
     },
     antall_km: {
-        label: { nb: 'Hvor lang reisevei har du?' },
-        beskrivelse: { nb: 'Angi antall kilometer mellom bostedet ditt og samlingsstedet.' },
+        label: { nb: 'Hvor mange kilometer er det mellom avreiseadresse og samlingsstedet?' },
         feilmelding: { nb: 'Du må fylle inn antall kilometer.' },
         feilmelding_ugyldig: { nb: 'Antall kilometer må være større enn 0.' },
     },
