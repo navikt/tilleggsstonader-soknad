@@ -4,30 +4,30 @@ import styled from 'styled-components';
 
 import { MinusIcon } from '@navikt/aksel-icons';
 import {
-    Alert,
-    BodyShort,
     Button,
     DatePicker,
     Heading,
     HStack,
     InlineMessage,
-    TextField,
     useDatepicker,
     VStack,
 } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
+import { erReiseavstandUnder30km } from './util';
 import {
     adresseFeilIderForSamling,
     errorKeyAntallKm,
     errorKeyBrukSammeAdresse,
     errorKeyErObligatorisk,
     errorKeyFom,
-    errorKeyHarBruktEkstraReiseDager,
     errorKeyTom,
 } from './validering';
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
+import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
+import { Skillelinje } from '../../../components/Skillelinje';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleTextField } from '../../../components/Teksthåndtering/LocaleTextField';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Adresse, Samling } from '../../../typer/søknad';
@@ -39,12 +39,6 @@ const SamlingBoks = styled.div`
     background: ${BgSunken};
     padding: 1.5rem;
     border-radius: 4px;
-`;
-
-const KmFelt = styled(TextField)`
-    input {
-        width: 6rem;
-    }
 `;
 
 export const NySamling: React.FC<{
@@ -59,12 +53,11 @@ export const NySamling: React.FC<{
     const keyFom = errorKeyFom(samling._id);
     const keyTom = errorKeyTom(samling._id);
     const keyErObligatorisk = errorKeyErObligatorisk(samling._id);
-    const keyHarBruktEkstraReiseDager = errorKeyHarBruktEkstraReiseDager(samling._id);
     const keyBrukSammeAdresse = errorKeyBrukSammeAdresse(samling._id);
     const keyAntallKm = errorKeyAntallKm(samling._id);
     const adresseFeilIder = adresseFeilIderForSamling(samling._id);
 
-    const [visAdvarsel, setVisAdvarsel] = useState(false);
+    const [visAdvarselKmAvstand, setVisAdvarselKmAvstand] = useState(false);
 
     const nullstillFeil = (verdi: string | undefined, errorKey: string) => {
         if (visValideringsfeil && harVerdi(verdi)) {
@@ -75,9 +68,6 @@ export const NySamling: React.FC<{
     const feilFom = visValideringsfeil ? valideringsfeil[keyFom] : undefined;
     const feilTom = visValideringsfeil ? valideringsfeil[keyTom] : undefined;
     const feilErObligatorisk = visValideringsfeil ? valideringsfeil[keyErObligatorisk] : undefined;
-    const feilHarBruktEkstraReiseDager = visValideringsfeil
-        ? valideringsfeil[keyHarBruktEkstraReiseDager]
-        : undefined;
     const feilBrukSammeAdresse = visValideringsfeil
         ? valideringsfeil[keyBrukSammeAdresse]
         : undefined;
@@ -93,10 +83,6 @@ export const NySamling: React.FC<{
     };
 
     const gjenbrukerAdresse = !erFørste && samling._brukSammeAdresseSomForrige?.verdi === 'JA';
-
-    const km = samling.antallKilometerEnVei?.verdi;
-    const visAdvarselForLavAvstand =
-        visAdvarsel && !isNaN(Number(km)) && Number(km) > 0 && Number(km) < 30;
 
     const { datepickerProps: dpPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(samling.fom?.verdi),
@@ -128,23 +114,55 @@ export const NySamling: React.FC<{
 
     return (
         <SamlingBoks>
-            <VStack gap="space-16">
-                <DatePicker {...dpPropsFom}>
-                    <DatePicker.Input
-                        id={feilFom?.id}
-                        label={samlingerTekster.dato.fom[locale]}
-                        error={feilFom?.melding}
-                        {...inputPropsFom}
-                    />
-                </DatePicker>
-                <DatePicker {...dpPropsTom}>
-                    <DatePicker.Input
-                        id={feilTom?.id}
-                        label={samlingerTekster.dato.tom[locale]}
-                        error={feilTom?.melding}
-                        {...inputPropsTom}
-                    />
-                </DatePicker>
+            <VStack gap="space-40">
+                <VStack gap="space-24">
+                    <Heading size="small">{samlingerTekster.dato.label[locale]}</Heading>
+                    <DatePicker {...dpPropsFom}>
+                        <DatePicker.Input
+                            id={feilFom?.id}
+                            label={samlingerTekster.dato.fom[locale]}
+                            error={feilFom?.melding}
+                            {...inputPropsFom}
+                        />
+                    </DatePicker>
+                    <DatePicker {...dpPropsTom}>
+                        <DatePicker.Input
+                            id={feilTom?.id}
+                            label={samlingerTekster.dato.tom[locale]}
+                            error={feilTom?.melding}
+                            {...inputPropsTom}
+                        />
+                    </DatePicker>
+                </VStack>
+
+                <Skillelinje />
+                <VStack gap="space-24">
+                    <Heading size="small">{samlingerTekster.info_samling_header[locale]}</Heading>
+                    <VStack gap="space-16">
+                        <LocaleRadioGroup
+                            tekst={samlingerTekster.radio_samling_obligatorisk}
+                            value={samling.erObligatorisk?.verdi || ''}
+                            onChange={(verdi) => {
+                                oppdater(samling._id, 'erObligatorisk', verdi);
+                                nullstillFeil(verdi?.verdi, keyErObligatorisk);
+                            }}
+                            error={feilErObligatorisk?.melding}
+                        />
+
+                        {samling.erObligatorisk?.verdi === 'JA' && (
+                            <InlineMessage status="info">
+                                {samlingerTekster.samling_obligatorisk_alert_dokumentasjon[locale]}
+                            </InlineMessage>
+                        )}
+
+                        {samling.erObligatorisk?.verdi === 'NEI' && (
+                            <AlertIkkeRett
+                                beskrivelse={samlingerTekster.samling_obligatorisk_alert_ikke_rett}
+                            />
+                        )}
+                    </VStack>
+                </VStack>
+
                 {!erFørste && (
                     <LocaleRadioGroup
                         id={feilBrukSammeAdresse?.id}
@@ -157,66 +175,58 @@ export const NySamling: React.FC<{
                         error={feilBrukSammeAdresse?.melding}
                     />
                 )}
+
                 {!gjenbrukerAdresse && (
-                    <VStack gap="space-16">
-                        <BodyShort weight="semibold">
-                            {samlingerTekster.adresse_tittel[locale]}
-                        </BodyShort>
-                        <AdresseVelger
-                            adresse={samling.adresse}
-                            onChange={håndterAdresseEndring}
-                            tekster={samlingerTekster.adresse_spørsmål}
-                            feil={visValideringsfeil ? valideringsfeil : undefined}
-                            feilIder={adresseFeilIder}
-                        />
-                        <KmFelt
-                            id={feilAntallKm?.id}
-                            label={samlingerTekster.antall_km.label[locale]}
-                            description={samlingerTekster.antall_km.beskrivelse[locale]}
-                            inputMode="numeric"
-                            value={samling.antallKilometerEnVei?.verdi ?? ''}
-                            error={feilAntallKm?.melding}
-                            onChange={(e) => {
-                                const verdi = e.target.value;
-                                oppdater(samling._id, 'antallKilometerEnVei', {
-                                    label: samlingerTekster.antall_km.label[locale],
-                                    verdi,
-                                });
-                                nullstillFeil(verdi, keyAntallKm);
-                            }}
-                            onBlur={() => setVisAdvarsel(true)}
-                        />
-                        {visAdvarselForLavAvstand && (
-                            <Alert variant="info">
-                                <Heading size="small">
-                                    {samlingerTekster.advarsel_antall_km_for_lav_tittel[locale]}
-                                </Heading>
-                                {samlingerTekster.advarsel_antall_km_for_lav[locale]}
-                            </Alert>
-                        )}
-                    </VStack>
+                    <>
+                        <VStack gap="space-24">
+                            <LocaleTextField
+                                id={feilAntallKm?.id}
+                                tekst={samlingerTekster.antall_km}
+                                inputMode="numeric"
+                                value={samling.antallKilometerEnVei?.verdi ?? ''}
+                                error={feilAntallKm?.melding}
+                                onChange={(e) => {
+                                    const verdi = e.target.value;
+                                    oppdater(samling._id, 'antallKilometerEnVei', {
+                                        label: samlingerTekster.antall_km.label[locale],
+                                        verdi,
+                                    });
+                                    nullstillFeil(verdi, keyAntallKm);
+                                }}
+                                onBlur={() =>
+                                    setVisAdvarselKmAvstand(() => erReiseavstandUnder30km(samling))
+                                }
+                                htmlSize={5}
+                            />
+
+                            {visAdvarselKmAvstand && (
+                                <AlertIkkeRett
+                                    beskrivelse={samlingerTekster.advarsel_antall_km_for_lav}
+                                />
+                            )}
+                        </VStack>
+
+                        <Skillelinje />
+
+                        <VStack gap="space-24">
+                            <Heading size="small">
+                                {samlingerTekster.adresse_tittel[locale]}
+                            </Heading>
+                            <AdresseVelger
+                                adresse={samling.adresse}
+                                onChange={håndterAdresseEndring}
+                                tekster={samlingerTekster.adresse_spørsmål}
+                                feil={visValideringsfeil ? valideringsfeil : undefined}
+                                feilIder={adresseFeilIder}
+                            />
+                        </VStack>
+                    </>
                 )}
-                <LocaleRadioGroup
-                    tekst={samlingerTekster.radio_samling_obligatorisk}
-                    value={samling.erObligatorisk?.verdi || ''}
-                    onChange={(verdi) => {
-                        oppdater(samling._id, 'erObligatorisk', verdi);
-                        nullstillFeil(verdi?.verdi, keyErObligatorisk);
-                    }}
-                    error={feilErObligatorisk?.melding}
-                />
-                <LocaleRadioGroup
-                    tekst={samlingerTekster.radio_ekstra_reisedag}
-                    value={samling.harBruktEkstraReiseDager?.verdi || ''}
-                    onChange={(verdi) => {
-                        oppdater(samling._id, 'harBruktEkstraReiseDager', verdi);
-                        nullstillFeil(verdi?.verdi, keyHarBruktEkstraReiseDager);
-                    }}
-                    error={feilHarBruktEkstraReiseDager?.melding}
-                />
-                <InlineMessage status="info">
-                    <BodyShort>{samlingerTekster.vedlegg_alert_innhold[locale]}</BodyShort>
-                </InlineMessage>
+
+                <Skillelinje />
+
+                {/* TODO: Spørsmål om reisemåte inn her */}
+
                 {onSlett && (
                     <HStack>
                         <Button variant="tertiary" onClick={onSlett} icon={<MinusIcon />}>
