@@ -1,31 +1,35 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
-import {
-    DrivstoffType,
-    JaNei,
-    KanBenytteEgenBil,
-    KanIkkeBenytteEgenBilBegrunnelser,
-    KanIkkeReiseMedOffentligTransportBegrunnelser,
-} from '../../typer/søknad';
+import { JaNei } from '../../typer/søknad';
 import {
     CheckboxGruppePåkrevd,
     InputFelt,
     RadiogruppePåkrevd,
     TekstElement,
 } from '../../typer/tekst';
+import {
+    ÅrsakKanIkkeBenytteOffentligTransport,
+    KanBenytteEgenBil,
+    ÅrsakKanIkkeBenytteEgenBil,
+    DrivstoffType,
+    Transportmiddel,
+} from '../typer/reisemåte';
 
 interface ReisemåteInnhold {
     tittel: TekstElement<string>;
+    check_hvilke_transportmidler: CheckboxGruppePåkrevd<Transportmiddel>;
+
     radio_kan_reise_offentlig: RadiogruppePåkrevd<JaNei>;
     kan_reise_offentlig_info: TekstElement<string>;
-    check_kan_ikke_reise_offentlig_begrunnelse: CheckboxGruppePåkrevd<KanIkkeReiseMedOffentligTransportBegrunnelser>;
+    check_kan_ikke_reise_offentlig_begrunnelse: CheckboxGruppePåkrevd<ÅrsakKanIkkeBenytteOffentligTransport>;
     totalutgifter_offentlig_transport: InputFelt & {
         feilmelding_ugyldig: TekstElement<string>;
         beskrivelse: TekstElement<string>;
     };
     info_barnehage_adresse: TekstElement<string>;
     info_barnehage_postnummer: TekstElement<string>;
+    egen_bil_tittel: TekstElement<string>;
     radio_kan_benytte_egen_bil: RadiogruppePåkrevd<KanBenytteEgenBil>;
-    check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppePåkrevd<KanIkkeBenytteEgenBilBegrunnelser>;
+    check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppePåkrevd<ÅrsakKanIkkeBenytteEgenBil>;
     egen_bil_utgifter_tittel: TekstElement<string>;
     egen_bil_utgifter_beskrivelse: TekstElement<string>;
     egen_bil_utgifter_drivstoff_type: RadiogruppePåkrevd<DrivstoffType>;
@@ -49,6 +53,24 @@ export const reisemåteTekster: ReisemåteInnhold = {
     tittel: {
         nb: 'Reisemåte',
     },
+    check_hvilke_transportmidler: {
+        legend: {
+            nb: 'Hvilke transportmidler benytter du for å reise til samlingen?',
+        },
+        alternativer: {
+            OFFENTLIG_TRANSPORT: {
+                nb: 'Offentlig transport',
+            },
+            PRIVAT_BIL: {
+                nb: 'Privat bil',
+            },
+            DROSJE: {
+                nb: 'Drosje',
+            },
+        },
+        feilmelding: { nb: 'Du må oppgi hvilke transportmidler du benyttet.' },
+    },
+
     radio_kan_reise_offentlig: {
         header: {
             nb: 'Kan du reise med offentlig transport?',
@@ -60,7 +82,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
         feilmelding: { nb: 'Du må svare på om du kan reise med offentlig transport.' },
     },
     kan_reise_offentlig_info: {
-        nb: 'Du må dokumentere beløpet med kvitteringer eller annen dokumentasjon. Dette kan legges ved i et senere steg.',
+        nb: 'Du må dokumentere beløpet med kvitteringer eller annen dokumentasjon. Du får instruksjoner om innsending av vedlegg senere i søknaden.',
     },
     check_kan_ikke_reise_offentlig_begrunnelse: {
         legend: {
@@ -97,6 +119,9 @@ export const reisemåteTekster: ReisemåteInnhold = {
     info_barnehage_postnummer: {
         nb: 'Postnummeret hvor du henter eller leverer barn',
     },
+    egen_bil_tittel: {
+        nb: 'Privat bil',
+    },
     radio_kan_benytte_egen_bil: {
         header: {
             nb: 'Skal du kjøre bil til aktivitetsstedet?',
@@ -112,7 +137,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
                 nb: 'Nei, jeg sitter på med andre',
             },
         },
-        feilmelding: { nb: 'Du må svare på om du kan benytte egen bil.' },
+        feilmelding: { nb: 'Du må svare på om du benyttet egen bil.' },
     },
     check_kan_ikke_benytte_egen_bil_begrunnelse: {
         legend: {
@@ -124,6 +149,9 @@ export const reisemåteTekster: ReisemåteInnhold = {
             },
             HELSEMESSIGE_ÅRSAKER: {
                 nb: 'Helsemessige årsaker',
+            },
+            FRAKT_AV_NØDVENDIG_UTSTYR: {
+                nb: 'Frakt av nødvendig utstyr til samlingen',
             },
             ANNET: {
                 nb: 'Annet',
