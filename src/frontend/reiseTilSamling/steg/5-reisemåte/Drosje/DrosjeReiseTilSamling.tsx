@@ -1,12 +1,13 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { Alert } from '@navikt/ds-react';
+import { InlineMessage } from '@navikt/ds-react';
 
 import {
     errorKeyHarTTKort,
     errorKeyØnskerDekketUtgifterForDrosje,
     nullstillteDrosjefeil as nullstilteDrosjefeil,
 } from './validering';
+import { AlertIkkeRett } from '../../../../components/AlertIkkeRett';
 import { LocaleRadioGroup } from '../../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekstAvsnitt } from '../../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useSpråk } from '../../../../context/SpråkContext';
@@ -14,19 +15,26 @@ import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
 import { EnumFelt, EnumFlereValgFelt } from '../../../../typer/skjema';
 import { JaNei } from '../../../../typer/søknad';
 import { reisemåteTekster } from '../../../tekster/reisemåte';
-import { ÅrsakKanIkkeBenytteEgenBil, Reisemåte, DrosjeInfo } from '../../../typer/reisemåte';
+import {
+    ÅrsakKanIkkeBenytteEgenBil,
+    Reisemåte,
+    DrosjeInfo,
+    ÅrsakKanIkkeBenytteOffentligTransport,
+} from '../../../typer/reisemåte';
 
 export const DrosjeReiseTilSamling: React.FC<{
     unntakFraPrivatBil: EnumFlereValgFelt<ÅrsakKanIkkeBenytteEgenBil> | undefined;
     drosje: DrosjeInfo | undefined;
+    unntakFraOffentligTransport:
+        EnumFlereValgFelt<ÅrsakKanIkkeBenytteOffentligTransport> | undefined;
     settReisemåte: Dispatch<SetStateAction<Reisemåte | undefined>>;
-}> = ({ unntakFraPrivatBil, drosje, settReisemåte }) => {
+}> = ({ unntakFraPrivatBil, drosje, settReisemåte, unntakFraOffentligTransport }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
-    const helsemessigeÅrsakerBilValgt = unntakFraPrivatBil?.verdier
-        .map((v) => v.verdi)
-        .includes('HELSEMESSIGE_ÅRSAKER');
+    const helsemessigeÅrsakerBilValgt =
+        unntakFraPrivatBil?.verdier.map((v) => v.verdi).includes('HELSEMESSIGE_ÅRSAKER') ||
+        unntakFraOffentligTransport?.verdier.map((v) => v.verdi).includes('HELSEMESSIGE_ÅRSAKER');
 
     const drosjeJa = drosje?.ønskerDekketUtgifterForDrosje?.verdi === 'JA';
     const drosjeNei = drosje?.ønskerDekketUtgifterForDrosje?.verdi === 'NEI';
@@ -34,7 +42,7 @@ export const DrosjeReiseTilSamling: React.FC<{
     const oppdaterØnskerÅReiseMedDrosje = (verdi: EnumFelt<JaNei>) => {
         settReisemåte((prev) => ({
             ...prev,
-            taxi: {
+            drosje: {
                 ønskerDekketUtgifterForDrosje: verdi,
             },
         }));
@@ -49,7 +57,7 @@ export const DrosjeReiseTilSamling: React.FC<{
             ...prev,
             drosje: {
                 ...prev?.drosje,
-                ønskerDekketUtgifterForDrosje: verdi,
+                harTTKort: verdi,
             },
         }));
         settValideringsfeil((prev) => ({
@@ -69,9 +77,9 @@ export const DrosjeReiseTilSamling: React.FC<{
             />
             {drosjeJa && (
                 <>
-                    <Alert variant="info">
+                    <InlineMessage status="info">
                         {reisemåteTekster.info_drosje_dokumentasjon[locale]}
-                    </Alert>
+                    </InlineMessage>
                     {helsemessigeÅrsakerBilValgt && (
                         <>
                             <LocaleRadioGroup
@@ -82,17 +90,15 @@ export const DrosjeReiseTilSamling: React.FC<{
                                 error={valideringsfeil[errorKeyHarTTKort]?.melding}
                             />
                             {drosje?.harTTKort?.verdi === 'JA' && (
-                                <Alert variant="info">
+                                <InlineMessage status="info">
                                     <LocaleTekstAvsnitt tekst={reisemåteTekster.info_tt_kort} />
-                                </Alert>
+                                </InlineMessage>
                             )}
                         </>
                     )}
                 </>
             )}
-            {drosjeNei && (
-                <Alert variant="info">{reisemåteTekster.advarsel_ingen_reisemåte[locale]}</Alert>
-            )}
+            {drosjeNei && <AlertIkkeRett beskrivelse={reisemåteTekster.advarsel_ingen_reisemåte} />}
         </>
     );
 };

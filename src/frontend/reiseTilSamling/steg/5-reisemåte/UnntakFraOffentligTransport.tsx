@@ -160,6 +160,7 @@ export const UnntakIkkeOffentligTransport: React.FC<{
                                 errorKeyUnntakFraOffentligTransportBarnehagePostnummer
                             )
                         }
+                        htmlSize={10}
                     />
                 </>
             )}

@@ -92,7 +92,7 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
                 value={utgifterPrivatBil?.bompenger?.verdi ?? ''}
                 onChange={(e) => oppdaterBompenger(e.target.value)}
                 error={valideringsfeil[errorKeyPrivatBilUtgifterBompenger]?.melding}
-                htmlSize={8}
+                htmlSize={10}
             />
             <TextField
                 id={valideringsfeil[errorKeyPrivatBilUtgifterFerge]?.id}
@@ -101,7 +101,7 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
                 value={utgifterPrivatBil?.ferge?.verdi ?? ''}
                 onChange={(e) => oppdaterFerge(e.target.value)}
                 error={valideringsfeil[errorKeyPrivatBilUtgifterFerge]?.melding}
-                htmlSize={8}
+                htmlSize={10}
             />
             <TextField
                 id={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.id}
@@ -110,7 +110,7 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
                 value={utgifterPrivatBil?.parkering?.verdi ?? ''}
                 onChange={(e) => oppdaterParkering(e.target.value)}
                 error={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.melding}
-                htmlSize={8}
+                htmlSize={10}
             />
             <TextField
                 id={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.id}
@@ -119,7 +119,7 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
                 value={utgifterPrivatBil?.piggdekkavgift?.verdi ?? ''}
                 onChange={(e) => oppdaterPiggdekkavgift(e.target.value)}
                 error={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.melding}
-                htmlSize={8}
+                htmlSize={10}
             />
 
             {/* TODO: Gjør om til select */}

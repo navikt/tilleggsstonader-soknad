@@ -35,6 +35,7 @@ export const Reisemåte = () => {
                     unntakFraPrivatBil={reisemåte?.unntakFraPrivatBil}
                     drosje={reisemåte?.drosje}
                     settReisemåte={settReisemåte}
+                    unntakFraOffentligTransport={reisemåte?.unntakFraOffentligTransport?.årsaker}
                 />
             )}
         </VStack>

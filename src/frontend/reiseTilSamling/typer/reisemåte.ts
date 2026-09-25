@@ -53,7 +53,10 @@ export interface InfoBilKunDelerAvStrekning {
 export type KanBenytteEgenBil = 'JA' | 'NEI' | 'NEI_SITTER_PÅ_MED_ANDRE';
 
 export type ÅrsakKanIkkeBenytteOffentligTransport =
-    'DÅRLIG_TRANSPORTTILBUD' | 'HELSEMESSIGE_ÅRSAKER' | 'LEVERING_HENTING_I_BARNEHAGE';
+    | 'DÅRLIG_TRANSPORTTILBUD'
+    | 'HELSEMESSIGE_ÅRSAKER'
+    | 'LEVERING_HENTING_I_BARNEHAGE'
+    | 'FRAKT_AV_NØDVENDIG_UTSTYR';
 
 export type ÅrsakKanIkkeBenytteEgenBil =
     'HAR_IKKE_BIL_ELLER_FØRERKORT' | 'HELSEMESSIGE_ÅRSAKER' | 'FRAKT_AV_NØDVENDIG_UTSTYR' | 'ANNET';

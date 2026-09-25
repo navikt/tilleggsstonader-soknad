@@ -55,7 +55,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     check_hvilke_transportmidler: {
         legend: {
-            nb: 'Hvilke transportmidler benytter du for å reise til samlingen?',
+            nb: 'Hvilke transportmidler benyttet du på reisen?',
         },
         alternativer: {
             OFFENTLIG_TRANSPORT: {
@@ -79,7 +79,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     check_kan_ikke_reise_offentlig_begrunnelse: {
         legend: {
-            nb: 'Hvorfor kan du ikke reise med offentlig transport?',
+            nb: 'Hvorfor kunne du ikke benytte offentlig transport hele eller deler av reisen?',
         },
         alternativer: {
             DÅRLIG_TRANSPORTTILBUD: {
@@ -90,6 +90,9 @@ export const reisemåteTekster: ReisemåteInnhold = {
             },
             LEVERING_HENTING_I_BARNEHAGE: {
                 nb: 'Levering/henting i barnehage eller skolefritidsordning (SFO/AKS)',
+            },
+            FRAKT_AV_NØDVENDIG_UTSTYR: {
+                nb: 'Frakt av nødvendig utstyr til samlingen',
             },
         },
         feilmelding: { nb: 'Du må oppgi hvorfor du ikke kan reise med offentlig transport.' },
@@ -111,7 +114,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     radio_kan_benytte_egen_bil: {
         header: {
-            nb: 'Skal du kjøre bil til aktivitetsstedet?',
+            nb: 'Benyttet du egen bil?',
         },
         alternativer: {
             JA: {
@@ -121,14 +124,14 @@ export const reisemåteTekster: ReisemåteInnhold = {
                 nb: 'Nei',
             },
             NEI_SITTER_PÅ_MED_ANDRE: {
-                nb: 'Nei, jeg sitter på med andre',
+                nb: 'Nei, jeg satt på med andre',
             },
         },
         feilmelding: { nb: 'Du må svare på om du benyttet egen bil.' },
     },
     check_kan_ikke_benytte_egen_bil_begrunnelse: {
         legend: {
-            nb: 'Hvorfor kan du ikke kjøre bil til aktivitetsstedet?',
+            nb: 'Hvorfor kunne du ikke benytte bil for hele eller deler av reisen?',
         },
         alternativer: {
             HAR_IKKE_BIL_ELLER_FØRERKORT: {
@@ -190,13 +193,13 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     radio_ønsker_dekket_utgifter_for_drosje: {
         header: {
-            nb: 'Ønsker du å søke om få dekket utgifter til reise med taxi?',
+            nb: 'Ønsker du å søke om få dekket utgifter til reise med drosje?',
         },
         alternativer: JaNeiTilTekst,
-        feilmelding: { nb: 'Du må svare på om du kan benytte drosje.' },
+        feilmelding: { nb: 'Du må svare på om du ønsker å få dekket utgifter til drosje.' },
     },
     info_drosje_dokumentasjon: {
-        nb: 'Vi kan dekke utgifter til taxi hvis du oppfyller kravene til dette. Hvis du har hatt utgifter til taxi og ønsker å få disse dekket, må du legge ved kvitteringene i søknaden.',
+        nb: 'Vi kan dekke utgifter til drosje hvis du oppfyller kravene til dette. Hvis du har hatt utgifter til drosje og ønsker å få disse dekket, må du legge ved kvitteringene i søknaden.',
     },
     radio_har_du_tt_kort: {
         header: {
@@ -213,10 +216,10 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     radio_betaler_for_reise_selv: {
         header: {
-            nb: 'Skal du betale for reisen selv?',
+            nb: 'Betalte du for reisen selv?',
         },
         alternativer: JaNeiTilTekst,
-        feilmelding: { nb: 'Du må svare på om du betaler for reisen selv.' },
+        feilmelding: { nb: 'Du må svare på om du betalte for reisen selv.' },
     },
     advarsel_ingen_reisemåte: {
         nb: 'Du har oppgitt at du ikke kan reise med offentlig transport, benytte egen bil eller drosje, og oppfyller dermed ikke kravene for å få støtte. Du kan fortsatt søke, men du kan få avslag.',
