@@ -20,7 +20,7 @@ export const validerDrosje = (
 
     const harHelsemessigÅrsakSomUnntak =
         reisemåte?.unntakFraOffentligTransport?.årsaker?.verdier.some(
-            (felt) => (felt.verdi = 'HELSEMESSIGE_ÅRSAKER')
+            (felt) => felt.verdi === 'HELSEMESSIGE_ÅRSAKER'
         );
 
     if (harHelsemessigÅrsakSomUnntak) {

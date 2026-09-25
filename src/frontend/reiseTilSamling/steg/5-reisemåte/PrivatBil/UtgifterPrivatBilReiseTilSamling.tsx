@@ -91,7 +91,7 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
                 inputMode="numeric"
                 value={utgifterPrivatBil?.parkering?.verdi ?? ''}
                 onChange={(e) => oppdaterParkering(e.target.value)}
-                error={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.melding}
+                error={valideringsfeil[errorKeyPrivatBilUtgifterParkering]?.melding}
                 htmlSize={10}
             />
             <TextField
