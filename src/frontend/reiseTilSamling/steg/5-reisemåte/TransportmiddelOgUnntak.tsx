@@ -90,13 +90,21 @@ export const TransportmiddelOgUnntak = () => {
 
     return (
         <>
-            <LocaleCheckboxGroup
-                id={valideringsfeil[errorKeyHvilkeTransportmidlerBleBenyttet]?.id}
-                tekst={reisemåteTekster.check_hvilke_transportmidler}
-                onChange={oppdaterHvilkeTransportmidler}
-                value={reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier ?? []}
-                error={valideringsfeil[errorKeyHvilkeTransportmidlerBleBenyttet]?.melding}
-            />
+            <VStack gap="space-16">
+                <LocaleCheckboxGroup
+                    id={valideringsfeil[errorKeyHvilkeTransportmidlerBleBenyttet]?.id}
+                    tekst={reisemåteTekster.check_hvilke_transportmidler}
+                    onChange={oppdaterHvilkeTransportmidler}
+                    value={reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier ?? []}
+                    error={valideringsfeil[errorKeyHvilkeTransportmidlerBleBenyttet]?.melding}
+                />
+
+                {drosjeHuketAv && (
+                    <InlineMessage status="info">
+                        {reisemåteTekster.info_drosje_dokumentasjon[locale]}
+                    </InlineMessage>
+                )}
+            </VStack>
 
             {(privatBilHuketAv || drosjeHuketAv) && (
                 <UnntakIkkeOffentligTransport

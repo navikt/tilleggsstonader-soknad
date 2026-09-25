@@ -73,7 +73,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
             });
         }
 
-        if (reisemåte?.drosje?.ønskerDekketUtgifterForDrosje?.verdi === 'JA') {
+        if (transportmidlerBenyttet.includes('DROSJE')) {
             behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_TAXI });
         }
         if (reisemåte?.drosje?.harTTKort?.verdi === 'JA') {
@@ -83,7 +83,6 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         return behov;
     }, [
         reisemåte?.drosje?.harTTKort?.verdi,
-        reisemåte?.drosje?.ønskerDekketUtgifterForDrosje?.verdi,
         reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier,
         reisemåte?.unntakFraOffentligTransport?.årsaker?.verdier,
         reisemåte?.unntakFraPrivatBil?.verdier,

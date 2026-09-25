@@ -3,13 +3,11 @@ import { JaNei } from '../../typer/søknad';
 import {
     CheckboxGruppePåkrevd,
     InputFelt,
-    InputFeltMedVurderingAvVerdi,
     RadiogruppePåkrevd,
     TekstElement,
 } from '../../typer/tekst';
 import {
     ÅrsakKanIkkeBenytteOffentligTransport,
-    KanBenytteEgenBil,
     ÅrsakKanIkkeBenytteEgenBil,
     DrivstoffType,
     Transportmiddel,
@@ -27,15 +25,15 @@ interface ReisemåteInnhold {
         beskrivelse: TekstElement<string>;
     };
     egen_bil_tittel: TekstElement<string>;
-    radio_kan_benytte_egen_bil: RadiogruppePåkrevd<KanBenytteEgenBil>;
+    radio_kan_benytte_egen_bil: RadiogruppePåkrevd<JaNei>;
     check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppePåkrevd<ÅrsakKanIkkeBenytteEgenBil>;
     privat_bil_utgifter_tittel: TekstElement<string>;
     privat_bil_utgifter_beskrivelse: TekstElement<string>;
     privat_bil_utgifter_drivstoff_type: RadiogruppePåkrevd<DrivstoffType>;
-    privat_bil_utgifter_bompenger: InputFeltMedVurderingAvVerdi;
-    privat_bil_utgifter_ferge: InputFeltMedVurderingAvVerdi;
-    privat_bil_utgifter_parkering: InputFeltMedVurderingAvVerdi;
-    privat_bil_utgifter_piggdekkavgift: InputFeltMedVurderingAvVerdi;
+    privat_bil_utgifter_bompenger: InputFelt;
+    privat_bil_utgifter_ferge: InputFelt;
+    privat_bil_utgifter_parkering: InputFelt;
+    privat_bil_utgifter_piggdekkavgift: InputFelt;
     radio_betaler_for_reise_selv: RadiogruppePåkrevd<JaNei>;
     radio_ønsker_dekket_utgifter_for_drosje: RadiogruppePåkrevd<JaNei>;
     advarsel_ingen_reisemåte: TekstElement<string>;
@@ -123,9 +121,6 @@ export const reisemåteTekster: ReisemåteInnhold = {
             NEI: {
                 nb: 'Nei',
             },
-            NEI_SITTER_PÅ_MED_ANDRE: {
-                nb: 'Nei, jeg satt på med andre',
-            },
         },
         feilmelding: { nb: 'Du må svare på om du benyttet egen bil.' },
     },
@@ -173,23 +168,19 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     privat_bil_utgifter_bompenger: {
         label: { nb: 'Totale bompengeutgifter' },
-        feilmelding: { nb: 'Du må oppgi totale bompengeutgifter.' },
-        feilmelding_ugyldig_verdi: { nb: 'Bompenger må være større enn 0.' },
+        feilmelding: { nb: 'Bompenger må være større enn 0.' },
     },
     privat_bil_utgifter_ferge: {
         label: { nb: 'Totale fergeutgifter' },
-        feilmelding: { nb: 'Du må oppgi totale fergeutgifter.' },
-        feilmelding_ugyldig_verdi: { nb: 'Ferge må må være større enn 0.' },
+        feilmelding: { nb: 'Ferge må må være større enn 0.' },
     },
     privat_bil_utgifter_parkering: {
         label: { nb: 'Totale parkeringsutgifter' },
-        feilmelding: { nb: 'Du må oppgi totale parkeringsutgifter.' },
-        feilmelding_ugyldig_verdi: { nb: 'Parkeringsutgifter må være større enn 0.' },
+        feilmelding: { nb: 'Parkeringsutgifter må være større enn 0.' },
     },
     privat_bil_utgifter_piggdekkavgift: {
         label: { nb: 'Piggdekkavgift' },
-        feilmelding: { nb: 'Du må oppgi piggdekkavgift.' },
-        feilmelding_ugyldig_verdi: { nb: 'Piggdekkavgift må være større enn 0.' },
+        feilmelding: { nb: 'Piggdekkavgift må være større enn 0.' },
     },
     radio_ønsker_dekket_utgifter_for_drosje: {
         header: {

@@ -86,6 +86,15 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
                 <LocaleTekst tekst={reisemåteTekster.privat_bil_utgifter_beskrivelse} />
             </div>
             <TextField
+                id={valideringsfeil[errorKeyPrivatBilUtgifterParkering]?.id}
+                label={reisemåteTekster.privat_bil_utgifter_parkering.label[locale]}
+                inputMode="numeric"
+                value={utgifterPrivatBil?.parkering?.verdi ?? ''}
+                onChange={(e) => oppdaterParkering(e.target.value)}
+                error={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.melding}
+                htmlSize={10}
+            />
+            <TextField
                 id={valideringsfeil[errorKeyPrivatBilUtgifterBompenger]?.id}
                 label={reisemåteTekster.privat_bil_utgifter_bompenger.label[locale]}
                 inputMode="numeric"
@@ -101,15 +110,6 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
                 value={utgifterPrivatBil?.ferge?.verdi ?? ''}
                 onChange={(e) => oppdaterFerge(e.target.value)}
                 error={valideringsfeil[errorKeyPrivatBilUtgifterFerge]?.melding}
-                htmlSize={10}
-            />
-            <TextField
-                id={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.id}
-                label={reisemåteTekster.privat_bil_utgifter_parkering.label[locale]}
-                inputMode="numeric"
-                value={utgifterPrivatBil?.parkering?.verdi ?? ''}
-                onChange={(e) => oppdaterParkering(e.target.value)}
-                error={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.melding}
                 htmlSize={10}
             />
             <TextField

@@ -17,12 +17,7 @@ import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
 import { EnumFelt } from '../../../../typer/skjema';
 import { JaNei } from '../../../../typer/søknad';
 import { reisemåteTekster } from '../../../tekster/reisemåte';
-import {
-    KanBenytteEgenBil,
-    PrivatBilInfo,
-    Reisemåte,
-    UtgifterPrivatBil,
-} from '../../../typer/reisemåte';
+import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../typer/reisemåte';
 
 /**
  * Oppfølgingsspørsmål/innhold når man skal benytte egen bil (eller sitter på med
@@ -35,7 +30,7 @@ export const PrivatBilReiseTilSamling: React.FC<{
 }> = ({ privatBil, settReisemåte }) => {
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
-    const oppdaterBenyttetEgenBil = (enumFelt: EnumFelt<KanBenytteEgenBil>) => {
+    const oppdaterBenyttetEgenBil = (enumFelt: EnumFelt<JaNei>) => {
         settReisemåte((prev) => ({
             ...prev,
             privatBil: { benyttetEgenBil: enumFelt },
@@ -85,7 +80,7 @@ export const PrivatBilReiseTilSamling: React.FC<{
                 error={valideringsfeil[errorKeyPrivatBilBenyttetEgenBil]?.melding}
             />
 
-            {privatBil?.benyttetEgenBil?.verdi === 'NEI_SITTER_PÅ_MED_ANDRE' && (
+            {privatBil?.benyttetEgenBil?.verdi === 'NEI' && (
                 <VStack gap="space-16">
                     <LocaleRadioGroup
                         id={valideringsfeil[errorKeyPrivatBilBetalteForReiseSelv]?.id}
