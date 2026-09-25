@@ -9,15 +9,15 @@ import {
     nullstiltePrivatBilFeil,
     nullstilteUtgifterPrivatBilFeil,
 } from './validering';
-import { AlertIkkeRett } from '../../../../components/AlertIkkeRett';
-import { Skillelinje } from '../../../../components/Skillelinje';
-import { LocaleHeading } from '../../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleRadioGroup } from '../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
-import { EnumFelt } from '../../../../typer/skjema';
-import { JaNei } from '../../../../typer/søknad';
-import { reisemåteTekster } from '../../../tekster/reisemåte';
-import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../typer/reisemåte';
+import { AlertIkkeRett } from '../../../../../components/AlertIkkeRett';
+import { Skillelinje } from '../../../../../components/Skillelinje';
+import { LocaleHeading } from '../../../../../components/Teksthåndtering/LocaleHeading';
+import { LocaleRadioGroup } from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
+import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
+import { EnumFelt } from '../../../../../typer/skjema';
+import { JaNei } from '../../../../../typer/søknad';
+import { reisemåteTekster } from '../../../../tekster/reisemåte';
+import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../../typer/reisemåte';
 
 /**
  * Oppfølgingsspørsmål/innhold når man skal benytte egen bil (eller sitter på med

@@ -2,9 +2,9 @@ import { nullstillteDrosjefeil } from './Drosje/validering';
 import { nullstilteOffentligTransportFeil } from './OffentligTransport/validering';
 import { nullstiltePrivatBilFeil } from './PrivatBil/validering';
 import { errorKeyUnntakFraOffentligTransport, errorKeyUnntakFraPrivatBil } from './validering';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { Valideringsfeil } from '../../../typer/validering';
-import { Transportmiddel } from '../../typer/reisemåte';
+import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import { Valideringsfeil } from '../../../../typer/validering';
+import { Transportmiddel } from '../../../typer/reisemåte';
 
 export const finnValgteTransportmidler = (
     transportmidler: EnumFlereValgFelt<Transportmiddel> | undefined

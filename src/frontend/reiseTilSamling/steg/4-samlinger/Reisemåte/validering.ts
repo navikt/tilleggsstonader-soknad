@@ -1,16 +1,16 @@
 import { validerDrosje } from './Drosje/validering';
 import { validerOffentligTransport } from './OffentligTransport/validering';
 import { validerPrivatBil } from './PrivatBil/validering';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { Locale } from '../../../typer/tekst';
-import { Valideringsfeil } from '../../../typer/validering';
-import { harVerdi } from '../../../utils/typeUtils';
-import { reisemåteTekster } from '../../tekster/reisemåte';
+import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import { Locale } from '../../../../typer/tekst';
+import { Valideringsfeil } from '../../../../typer/validering';
+import { harVerdi } from '../../../../utils/typeUtils';
+import { reisemåteTekster } from '../../../tekster/reisemåte';
 import {
     Reisemåte,
     UnntakFraOffentligTransport,
     ÅrsakKanIkkeBenytteEgenBil,
-} from '../../typer/reisemåte';
+} from '../../../typer/reisemåte';
 
 export const errorKeyHvilkeTransportmidlerBleBenyttet =
     'reisemåte_hvilke_transportmidler_ble_benyttet';

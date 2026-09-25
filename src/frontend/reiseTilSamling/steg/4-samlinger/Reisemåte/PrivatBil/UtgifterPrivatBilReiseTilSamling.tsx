@@ -7,15 +7,15 @@ import {
     errorKeyPrivatBilUtgifterParkering,
     errorKeyPrivatBilUtgifterPiggdekkavgift,
 } from './validering';
-import { Skillelinje } from '../../../../components/Skillelinje';
-import { LocaleHeading } from '../../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleRadioGroup } from '../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleTekst } from '../../../../components/Teksthåndtering/LocaleTekst';
-import { useSpråk } from '../../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
-import { EnumFelt } from '../../../../typer/skjema';
-import { reisemåteTekster } from '../../../tekster/reisemåte';
-import { DrivstoffType, UtgifterPrivatBil } from '../../../typer/reisemåte';
+import { Skillelinje } from '../../../../../components/Skillelinje';
+import { LocaleHeading } from '../../../../../components/Teksthåndtering/LocaleHeading';
+import { LocaleRadioGroup } from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleTekst } from '../../../../../components/Teksthåndtering/LocaleTekst';
+import { useSpråk } from '../../../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
+import { EnumFelt } from '../../../../../typer/skjema';
+import { reisemåteTekster } from '../../../../tekster/reisemåte';
+import { DrivstoffType, UtgifterPrivatBil } from '../../../../typer/reisemåte';
 
 export const UtgifterPrivatBilReiseTilSamling: React.FC<{
     utgifterPrivatBil: UtgifterPrivatBil | undefined;

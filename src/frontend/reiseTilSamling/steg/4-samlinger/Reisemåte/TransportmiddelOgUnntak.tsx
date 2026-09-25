@@ -1,5 +1,13 @@
 import { InlineMessage, VStack } from '@navikt/ds-react';
 
+import { errorKeyHvilkeTransportmidlerBleBenyttet, errorKeyUnntakFraPrivatBil } from './validering';
+import { LocaleCheckboxGroup } from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
+import { useSpråk } from '../../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
+import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
+import { reisemåteTekster } from '../../../tekster/reisemåte';
+import { Transportmiddel, ÅrsakKanIkkeBenytteEgenBil } from '../../../typer/reisemåte';
 import {
     finnValgteTransportmidler,
     nullstillEllerBeholdVerdi,
@@ -7,16 +15,8 @@ import {
     vurderOffentligTransportFelterForNullstilling,
     vurderPrivatBilFelterForNullstillng,
     vurderUnntakFeilForNullstilling,
-} from './transportmiddelUtils';
-import { UnntakIkkeOffentligTransport } from './UnntakFraOffentligTransport';
-import { errorKeyHvilkeTransportmidlerBleBenyttet, errorKeyUnntakFraPrivatBil } from './validering';
-import { LocaleCheckboxGroup } from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import { useSpråk } from '../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
-import { reisemåteTekster } from '../../tekster/reisemåte';
-import { Transportmiddel, ÅrsakKanIkkeBenytteEgenBil } from '../../typer/reisemåte';
+} from '../../5-reisemåte/transportmiddelUtils';
+import { UnntakIkkeOffentligTransport } from '../../5-reisemåte/UnntakFraOffentligTransport';
 
 export const TransportmiddelOgUnntak = () => {
     const { locale } = useSpråk();

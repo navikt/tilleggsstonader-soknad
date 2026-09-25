@@ -5,7 +5,7 @@ import { OffentligTransportReiseTilSamling } from './OffentligTransport/Offentli
 import { PrivatBilReiseTilSamling } from './PrivatBil/PrivatBilReiseTilSamling';
 import { TransportmiddelOgUnntak } from './TransportmiddelOgUnntak';
 import { finnValgteTransportmidler } from './transportmiddelUtils';
-import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
+import { useReiseTilSamlingSøknad } from '../../../context/ReiseTilSamlingSøknadContext';
 
 export const Reisemåte = () => {
     const { reisemåte, settReisemåte } = useReiseTilSamlingSøknad();

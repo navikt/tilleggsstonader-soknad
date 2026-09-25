@@ -7,18 +7,18 @@ import {
     errorKeyUnntakFraOffentligTransportBarnehageAdresse,
     errorKeyUnntakFraOffentligTransportBarnehagePostnummer,
 } from './validering';
-import { LocaleCheckboxGroup } from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import { LocaleTextField } from '../../../components/Teksthåndtering/LocaleTextField';
-import { useSpråk } from '../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { reisemåteTekster } from '../../tekster/reisemåte';
+import { LocaleCheckboxGroup } from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
+import { LocaleTextField } from '../../../../components/Teksthåndtering/LocaleTextField';
+import { useSpråk } from '../../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
+import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import { reisemåteTekster } from '../../../tekster/reisemåte';
 import {
     LeveringOgHentingIBarnehage,
     Reisemåte,
     UnntakFraOffentligTransport,
     ÅrsakKanIkkeBenytteOffentligTransport,
-} from '../../typer/reisemåte';
+} from '../../../typer/reisemåte';
 
 export const UnntakIkkeOffentligTransport: React.FC<{
     unntakFraOffentligTransport: UnntakFraOffentligTransport | undefined;

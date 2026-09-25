@@ -1,9 +1,9 @@
-import { Locale } from '../../../../typer/tekst';
-import { Valideringsfeil } from '../../../../typer/validering';
-import { erGyldigKostnad } from '../../../../utils/tall';
-import { harVerdi } from '../../../../utils/typeUtils';
-import { reisemåteTekster } from '../../../tekster/reisemåte';
-import { OffentligTransportInfo } from '../../../typer/reisemåte';
+import { Locale } from '../../../../../typer/tekst';
+import { Valideringsfeil } from '../../../../../typer/validering';
+import { erGyldigKostnad } from '../../../../../utils/tall';
+import { harVerdi } from '../../../../../utils/typeUtils';
+import { reisemåteTekster } from '../../../../tekster/reisemåte';
+import { OffentligTransportInfo } from '../../../../typer/reisemåte';
 
 export const errorKeyTotalutgifterOffentligTransport =
     'reisemåte_totalutgifter_offentlig_transport';
