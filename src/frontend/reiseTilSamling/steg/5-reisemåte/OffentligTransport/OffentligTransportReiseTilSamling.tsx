@@ -1,8 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { InlineMessage, VStack } from '@navikt/ds-react';
+import { Heading, InlineMessage, VStack } from '@navikt/ds-react';
 
 import { errorKeyTotalutgifterOffentligTransport } from './validering';
+import { Skillelinje } from '../../../../components/Skillelinje';
 import { LocaleTextField } from '../../../../components/Teksthåndtering/LocaleTextField';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
@@ -35,19 +36,25 @@ export const OffentligTransportReiseTilSamling: React.FC<{
     };
 
     return (
-        <VStack gap="space-16">
-            <LocaleTextField
-                id={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.id}
-                tekst={reisemåteTekster.totalutgifter_offentlig_transport}
-                inputMode="numeric"
-                value={offentligTransport?.totalUtgifterOffentligTransport?.verdi ?? ''}
-                error={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.melding}
-                onChange={(e) => oppdaterTotalUtgifterOffentligTransport(e.target.value)}
-                htmlSize={6} // TODO se over størrelsen her
-            />
-            <InlineMessage status="info">
-                {reisemåteTekster.kan_reise_offentlig_info[locale]}
-            </InlineMessage>
-        </VStack>
+        <>
+            <Skillelinje />
+            <Heading level="3" size="small">
+                {reisemåteTekster.offentlig_transport_tittel[locale]}
+            </Heading>
+            <VStack gap="space-16">
+                <LocaleTextField
+                    id={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.id}
+                    tekst={reisemåteTekster.totalutgifter_offentlig_transport}
+                    inputMode="numeric"
+                    value={offentligTransport?.totalUtgifterOffentligTransport?.verdi ?? ''}
+                    error={valideringsfeil[errorKeyTotalutgifterOffentligTransport]?.melding}
+                    onChange={(e) => oppdaterTotalUtgifterOffentligTransport(e.target.value)}
+                    htmlSize={6} // TODO se over størrelsen her
+                />
+                <InlineMessage status="info">
+                    {reisemåteTekster.kan_reise_offentlig_info[locale]}
+                </InlineMessage>
+            </VStack>
+        </>
     );
 };
