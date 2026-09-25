@@ -1,5 +1,13 @@
 import { InlineMessage, VStack } from '@navikt/ds-react';
 
+import {
+    finnValgteTransportmidler,
+    nullstillEllerBeholdVerdi,
+    vurderDrosjeFelterForNullstilling,
+    vurderOffentligTransportFelterForNullstilling,
+    vurderPrivatBilFelterForNullstillng,
+    vurderUnntakFeilForNullstilling,
+} from './transportmiddelUtils';
 import { UnntakIkkeOffentligTransport } from './UnntakFraOffentligTransport';
 import { errorKeyHvilkeTransportmidlerBleBenyttet, errorKeyUnntakFraPrivatBil } from './validering';
 import { LocaleCheckboxGroup } from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
@@ -15,18 +23,53 @@ export const TransportmiddelOgUnntak = () => {
     const { reisemåte, settReisemåte } = useReiseTilSamlingSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
-    const transportmidlerHuketAv =
-        reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier.map((v) => v.verdi) ?? [];
+    const transportmidlerHuketAv = finnValgteTransportmidler(
+        reisemåte?.hvilkeTransportmidlerBleBenyttet
+    );
 
     const privatBilHuketAv = transportmidlerHuketAv.includes('PRIVAT_BIL');
     const drosjeHuketAv = transportmidlerHuketAv.includes('DROSJE');
 
     const oppdaterHvilkeTransportmidler = (felt: EnumFlereValgFelt<Transportmiddel>) => {
+        const inkluderteTransportmidler = finnValgteTransportmidler(felt);
+
         settReisemåte((prev) => ({
             ...prev,
             hvilkeTransportmidlerBleBenyttet: felt,
+
+            unntakFraOffentligTransport: nullstillEllerBeholdVerdi(
+                inkluderteTransportmidler,
+                ['PRIVAT_BIL', 'DROSJE'],
+                prev?.unntakFraOffentligTransport
+            ),
+
+            unntakFraPrivatBil: nullstillEllerBeholdVerdi(
+                inkluderteTransportmidler,
+                ['DROSJE'],
+                prev?.unntakFraPrivatBil
+            ),
+
+            offentligTransport: nullstillEllerBeholdVerdi(
+                inkluderteTransportmidler,
+                ['OFFENTLIG_TRANSPORT'],
+                prev?.offentligTransport
+            ),
+            privatBil: nullstillEllerBeholdVerdi(
+                inkluderteTransportmidler,
+                ['PRIVAT_BIL'],
+                prev?.privatBil
+            ),
+            drosje: nullstillEllerBeholdVerdi(inkluderteTransportmidler, ['DROSJE'], prev?.drosje),
         }));
-        // TODO: Håndter nullstilling av felter og feil
+
+        // Nullstiller feil for de ulike grenene
+        settValideringsfeil((prev) => ({
+            ...prev,
+            ...vurderOffentligTransportFelterForNullstilling(inkluderteTransportmidler),
+            ...vurderPrivatBilFelterForNullstillng(inkluderteTransportmidler),
+            ...vurderDrosjeFelterForNullstilling(inkluderteTransportmidler),
+            ...vurderUnntakFeilForNullstilling(inkluderteTransportmidler),
+        }));
     };
 
     const oppdaterUnntakFraPrivatBil = (felt: EnumFlereValgFelt<ÅrsakKanIkkeBenytteEgenBil>) => {
