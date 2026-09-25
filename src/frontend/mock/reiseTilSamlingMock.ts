@@ -1,5 +1,6 @@
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
-import { Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../typer/søknad';
+import { Reisemåte } from '../reiseTilSamling/typer/reisemåte';
+import { Avreiseadresse, Hovedytelse, Samling } from '../typer/søknad';
 
 export const mockHovedytelse: Hovedytelse = {
     ytelse: {
@@ -52,14 +53,33 @@ export const mockAvreiseadresse: Avreiseadresse = {
 };
 
 export const mockReisemåte: Reisemåte = {
-    kanReiseMedOffentligTransport: {
-        label: 'Kan du reise med offentlig transport?',
-        verdi: 'JA',
-        svarTekst: 'Ja',
-        alternativer: ['Ja', 'Nei'],
+    hvilkeTransportmidlerBleBenyttet: {
+        label: 'Hvilke transportmidler ble benyttet?',
+        verdier: [
+            { verdi: 'OFFENTLIG_TRANSPORT', label: 'Offentlig transport' },
+            { verdi: 'PRIVAT_BIL', label: 'Privat bil' },
+        ],
+        alternativer: ['Privat bil', 'Drosje', 'Offentlig transport'],
     },
-    totalUtgifterOffentligTransport: {
-        verdi: '500',
-        label: 'Hva er totalutgiftene til offentlig transport til og fra samlingene?',
+    unntakFraOffentligTransport: {
+        årsaker: {
+            label: 'Hvorfor ikke offentlig transport?',
+            verdier: [{ verdi: 'DÅRLIG_TRANSPORTTILBUD', label: 'Dårlig transporttilbud' }],
+            alternativer: ['Dårlig transporttilbud', 'Helsemessige årsaker', 'Leving i bhg'],
+        },
+    },
+    offentligTransport: {
+        totalUtgifterOffentligTransport: {
+            verdi: '500',
+            label: 'Hva er totalutgiftene til offentlig transport til og fra samlingene?',
+        },
+    },
+    privatBil: {
+        benyttetEgenBil: {
+            label: 'Benyttet du egen bil?',
+            verdi: 'JA',
+            svarTekst: 'Ja',
+            alternativer: ['Ja', 'Nei'],
+        },
     },
 };

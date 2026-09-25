@@ -16,8 +16,9 @@ import {
     Dokumentasjonsbehov,
     VedleggstypeReiseTilSamling,
 } from '../../typer/skjema';
-import { Adresse, Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../../typer/søknad';
+import { Adresse, Avreiseadresse, Hovedytelse, Samling } from '../../typer/søknad';
 import { AktivitetReiseTilSamling, TilleggsopplysningerAnnenAktivitet } from '../typer/aktivitet';
+import { Reisemåte } from '../typer/reisemåte';
 
 const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseContext(() => {
     ReiseTilSamlingSøknadProvider.displayName = 'SØKNAD_REISE_TIL_SAMLING_PROVIDER';
@@ -54,37 +55,37 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
             { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
         ];
 
-        if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA') {
+        const transportmidlerBenyttet =
+            reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier.map((v) => v.verdi) ?? [];
+
+        if (transportmidlerBenyttet.includes('OFFENTLIG_TRANSPORT')) {
             behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
         }
 
         if (
-            reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier.some(
+            reisemåte?.unntakFraOffentligTransport?.årsaker?.verdier.some(
                 (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
             ) ||
-            reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier.some(
-                (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
-            )
+            reisemåte?.unntakFraPrivatBil?.verdier.some((v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER')
         ) {
             behov.push({
                 type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING,
             });
         }
 
-        if (reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'JA') {
+        if (transportmidlerBenyttet.includes('DROSJE')) {
             behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_TAXI });
         }
-        if (reisemåte?.harTTKort?.verdi === 'JA') {
+        if (reisemåte?.drosje?.harTTKort?.verdi === 'JA') {
             behov.push({ type: VedleggstypeReiseTilSamling.TT_KORT });
         }
 
         return behov;
     }, [
-        reisemåte?.kanReiseMedOffentligTransport?.verdi,
-        reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier,
-        reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier,
-        reisemåte?.ønskerDekketUtgifterForDrosje?.verdi,
-        reisemåte?.harTTKort?.verdi,
+        reisemåte?.drosje?.harTTKort?.verdi,
+        reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier,
+        reisemåte?.unntakFraOffentligTransport?.årsaker?.verdier,
+        reisemåte?.unntakFraPrivatBil?.verdier,
     ]);
 
     const oppdaterTilleggsopplysninger = (

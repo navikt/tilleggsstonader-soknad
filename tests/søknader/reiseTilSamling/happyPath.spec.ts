@@ -139,3 +139,82 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
 
     await forventIngenWcagViolations(page);
 });
+
+test('At privatbil-feil og -verdier nullstilles når privat bil skjules', async ({ page }) => {
+    await mockSøknadRoutingApi(page);
+    await mockPersonApi(page);
+    await mockAktivitet(page);
+    await mockHarIngenSøknadReiseTilSamlingFraFør(page);
+    await page.goto(`${urlSøknad}`);
+    await fjernWebpackOverlay(page);
+
+    await page.getByRole('button', { name: 'Start søknad' }).click();
+    await fjernWebpackOverlay(page);
+
+    await page.getByRole('checkbox', { name: 'Arbeidsavklaringspenger (AAP)' }).check();
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await page.getByLabel('Type navn: 2. februar 2025 - 2. februar 2025').check();
+    await page
+        .getByRole('radiogroup', { name: 'Hva slags type arbeidsrettet aktivitet går du på?' })
+        .getByLabel('Videregående skole')
+        .check();
+    await page
+        .getByRole('radiogroup', {
+            name: 'Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?',
+        })
+        .getByLabel('Ja')
+        .check();
+    await page
+        .getByRole('radiogroup', {
+            name: 'Får du dekket reisen til aktivitetsstedet av arbeidsgiveren din?',
+        })
+        .getByLabel('Nei')
+        .check();
+
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await page
+        .getByRole('radiogroup', { name: 'Skal du reise fra din folkeregistrerte adresse?' })
+        .getByLabel('Ja')
+        .check();
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await page.getByLabel('Fra og med (dd.mm.åååå)').fill('01.06.2025');
+    await page.getByLabel('Til og med (dd.mm.åååå)').fill('05.06.2025');
+    await page
+        .getByRole('radiogroup', { name: 'Er samlingen obligatorisk?' })
+        .getByLabel('Ja')
+        .check();
+    await page.getByLabel('Hvor lang reisevei har du?').fill('45');
+    await page.getByLabel('Gateadresse').fill('Testveien 1');
+    await page.getByLabel('Postnummer').fill('0123');
+    await page.getByLabel('Poststed').fill('Oslo');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await expect(page).toHaveURL(`${urlSøknad}/reisemate`);
+
+    await page.getByRole('checkbox', { name: 'Offentlig transport' }).check();
+    await page
+        .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingene?')
+        .fill('500');
+    await page.getByRole('checkbox', { name: 'Privat bil' }).check();
+    await page.getByRole('radiogroup', { name: 'Benyttet du egen bil?' }).getByLabel('Ja').check();
+    await page.getByLabel('Totale bompengeutgifter').fill('123');
+
+    await page.getByRole('checkbox', { name: 'Privat bil' }).uncheck();
+
+    await expect(page.getByRole('heading', { name: 'Privat bil' })).not.toBeVisible();
+    await expect(page.getByText('Utgifter til kjøring med privat bil')).not.toBeVisible();
+    await expect(
+        page.getByRole('group', { name: 'Hvorfor kan du ikke reise med offentlig transport?' })
+    ).not.toBeVisible();
+
+    await page.getByRole('checkbox', { name: 'Privat bil' }).check();
+    await page.getByRole('radiogroup', { name: 'Benyttet du egen bil?' }).getByLabel('Ja').check();
+    await expect(page.getByLabel('Totale bompengeutgifter')).toHaveValue('');
+});
