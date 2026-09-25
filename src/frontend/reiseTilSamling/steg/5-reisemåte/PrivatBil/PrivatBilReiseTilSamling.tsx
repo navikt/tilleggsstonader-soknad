@@ -49,7 +49,7 @@ export const PrivatBilReiseTilSamling: React.FC<{
             ...prev,
             privatBil: {
                 benyttetEgenBil: prev?.privatBil?.benyttetEgenBil,
-                betalerForReiseSelv: enumFelt,
+                betalteForReisen: enumFelt,
             },
         }));
 
