@@ -3,6 +3,7 @@ import { JaNei } from '../../typer/søknad';
 import {
     CheckboxGruppePåkrevd,
     InputFelt,
+    InputFeltMedVurderingAvVerdi,
     RadiogruppePåkrevd,
     TekstElement,
 } from '../../typer/tekst';
@@ -18,24 +19,23 @@ interface ReisemåteInnhold {
     tittel: TekstElement<string>;
     check_hvilke_transportmidler: CheckboxGruppePåkrevd<Transportmiddel>;
 
-    radio_kan_reise_offentlig: RadiogruppePåkrevd<JaNei>;
     kan_reise_offentlig_info: TekstElement<string>;
+    offentlig_transport_tittel: TekstElement<string>;
     check_kan_ikke_reise_offentlig_begrunnelse: CheckboxGruppePåkrevd<ÅrsakKanIkkeBenytteOffentligTransport>;
     totalutgifter_offentlig_transport: InputFelt & {
         feilmelding_ugyldig: TekstElement<string>;
         beskrivelse: TekstElement<string>;
     };
-    info_barnehage_adresse: TekstElement<string>;
-    info_barnehage_postnummer: TekstElement<string>;
     egen_bil_tittel: TekstElement<string>;
     radio_kan_benytte_egen_bil: RadiogruppePåkrevd<KanBenytteEgenBil>;
     check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppePåkrevd<ÅrsakKanIkkeBenytteEgenBil>;
-    egen_bil_utgifter_tittel: TekstElement<string>;
-    egen_bil_utgifter_beskrivelse: TekstElement<string>;
-    egen_bil_utgifter_drivstoff_type: RadiogruppePåkrevd<DrivstoffType>;
-    egen_bil_utgifter_bompenger: InputFelt;
-    egen_bil_utgifter_ferge: InputFelt;
-    egen_bil_utgifter_piggdekkavgift: InputFelt;
+    privat_bil_utgifter_tittel: TekstElement<string>;
+    privat_bil_utgifter_beskrivelse: TekstElement<string>;
+    privat_bil_utgifter_drivstoff_type: RadiogruppePåkrevd<DrivstoffType>;
+    privat_bil_utgifter_bompenger: InputFeltMedVurderingAvVerdi;
+    privat_bil_utgifter_ferge: InputFeltMedVurderingAvVerdi;
+    privat_bil_utgifter_parkering: InputFeltMedVurderingAvVerdi;
+    privat_bil_utgifter_piggdekkavgift: InputFeltMedVurderingAvVerdi;
     radio_betaler_for_reise_selv: RadiogruppePåkrevd<JaNei>;
     radio_ønsker_dekket_utgifter_for_drosje: RadiogruppePåkrevd<JaNei>;
     advarsel_ingen_reisemåte: TekstElement<string>;
@@ -70,17 +70,10 @@ export const reisemåteTekster: ReisemåteInnhold = {
         },
         feilmelding: { nb: 'Du må oppgi hvilke transportmidler du benyttet.' },
     },
-
-    radio_kan_reise_offentlig: {
-        header: {
-            nb: 'Kan du reise med offentlig transport?',
-        },
-        alternativer: JaNeiTilTekst,
-        beskrivelse: {
-            nb: 'Med offentlig transport menes fly, buss, tog, trikk, t-bane, ferge og lignende.',
-        },
-        feilmelding: { nb: 'Du må svare på om du kan reise med offentlig transport.' },
+    offentlig_transport_tittel: {
+        nb: 'Offentlig transport',
     },
+
     kan_reise_offentlig_info: {
         nb: 'Du må dokumentere beløpet med kvitteringer eller annen dokumentasjon. Du får instruksjoner om innsending av vedlegg senere i søknaden.',
     },
@@ -112,12 +105,6 @@ export const reisemåteTekster: ReisemåteInnhold = {
         beskrivelse: { nb: 'Oppgi totalbeløpet i kroner for alle samlingene du søker for.' },
         feilmelding: { nb: 'Du må fylle inn totalutgiftene.' },
         feilmelding_ugyldig: { nb: 'Totalutgiftene må være et positivt tall.' },
-    },
-    info_barnehage_adresse: {
-        nb: 'Gateadressen hvor du henter eller leverer barn',
-    },
-    info_barnehage_postnummer: {
-        nb: 'Postnummeret hvor du henter eller leverer barn',
     },
     egen_bil_tittel: {
         nb: 'Privat bil',
@@ -159,13 +146,13 @@ export const reisemåteTekster: ReisemåteInnhold = {
         },
         feilmelding: { nb: 'Du må oppgi hvorfor du ikke kan benytte egen bil.' },
     },
-    egen_bil_utgifter_tittel: {
+    privat_bil_utgifter_tittel: {
         nb: 'Utgifter til kjøring med privat bil',
     },
-    egen_bil_utgifter_beskrivelse: {
+    privat_bil_utgifter_beskrivelse: {
         nb: 'Du trenger bare å fylle inn det som gjelder for din reise.',
     },
-    egen_bil_utgifter_drivstoff_type: {
+    privat_bil_utgifter_drivstoff_type: {
         header: {
             nb: 'Bilens drivstofftype?',
         },
@@ -181,17 +168,25 @@ export const reisemåteTekster: ReisemåteInnhold = {
         },
         feilmelding: { nb: 'Du må oppgi bilens drivstofftype.' },
     },
-    egen_bil_utgifter_bompenger: {
-        label: { nb: 'Bompenger per dag (valgfritt)' },
-        feilmelding: { nb: 'Bompenger må være et positivt tall.' },
+    privat_bil_utgifter_bompenger: {
+        label: { nb: 'Totale bompengeutgifter' },
+        feilmelding: { nb: 'Du må oppgi totale bompengeutgifter.' },
+        feilmelding_ugyldig_verdi: { nb: 'Bompenger må være større enn 0.' },
     },
-    egen_bil_utgifter_ferge: {
-        label: { nb: 'Ferge per dag (valgfritt)' },
-        feilmelding: { nb: 'Ferge må være et positivt tall.' },
+    privat_bil_utgifter_ferge: {
+        label: { nb: 'Totale fergeutgifter' },
+        feilmelding: { nb: 'Du må oppgi totale fergeutgifter.' },
+        feilmelding_ugyldig_verdi: { nb: 'Ferge må må være større enn 0.' },
     },
-    egen_bil_utgifter_piggdekkavgift: {
-        label: { nb: 'Piggdekkavgift per dag (valgfritt)' },
-        feilmelding: { nb: 'Piggdekkavgift må være et positivt tall.' },
+    privat_bil_utgifter_parkering: {
+        label: { nb: 'Totale parkeringsutgifter' },
+        feilmelding: { nb: 'Du må oppgi totale parkeringsutgifter.' },
+        feilmelding_ugyldig_verdi: { nb: 'Parkeringsutgifter må være større enn 0.' },
+    },
+    privat_bil_utgifter_piggdekkavgift: {
+        label: { nb: 'Piggdekkavgift' },
+        feilmelding: { nb: 'Du må oppgi piggdekkavgift.' },
+        feilmelding_ugyldig_verdi: { nb: 'Piggdekkavgift må være større enn 0.' },
     },
     radio_ønsker_dekket_utgifter_for_drosje: {
         header: {

@@ -41,6 +41,7 @@ export interface UtgifterPrivatBil {
     bompenger?: VerdiFelt<string>;
     ferge?: VerdiFelt<string>;
     piggdekkavgift?: VerdiFelt<string>;
+    parkering?: VerdiFelt<string>;
     drivstoffType?: EnumFelt<DrivstoffType>;
 }
 

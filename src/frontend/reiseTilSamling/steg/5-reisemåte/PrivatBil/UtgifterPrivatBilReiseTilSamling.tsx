@@ -4,6 +4,7 @@ import {
     errorKeyPrivatBilUtgifterBompenger,
     errorKeyPrivatBilUtgifterDrivstoffType,
     errorKeyPrivatBilUtgifterFerge,
+    errorKeyPrivatBilUtgifterParkering,
     errorKeyPrivatBilUtgifterPiggdekkavgift,
 } from './validering';
 import { Skillelinje } from '../../../../components/Skillelinje';
@@ -32,28 +33,42 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
         nullstillFeil(errorKeyPrivatBilUtgifterDrivstoffType);
     };
 
-    const oppdaterEgenBilUtgifterBompenger = (verdi: string) => {
+    const oppdaterBompenger = (verdi: string) => {
         oppdaterUtgifterPrivatBil({
-            bompenger: { verdi, label: reisemåteTekster.egen_bil_utgifter_bompenger.label[locale] },
+            bompenger: {
+                verdi,
+                label: reisemåteTekster.privat_bil_utgifter_bompenger.label[locale],
+            },
         });
         nullstillFeil(errorKeyPrivatBilUtgifterBompenger);
     };
 
-    const oppdaterEgenBilUtgifterFerge = (verdi: string) => {
+    const oppdaterFerge = (verdi: string) => {
         oppdaterUtgifterPrivatBil({
-            ferge: { verdi, label: reisemåteTekster.egen_bil_utgifter_ferge.label[locale] },
+            ferge: { verdi, label: reisemåteTekster.privat_bil_utgifter_ferge.label[locale] },
         });
+
         nullstillFeil(errorKeyPrivatBilUtgifterFerge);
     };
 
-    const oppdaterEgenBilUtgifterPiggdekkavgift = (verdi: string) => {
+    const oppdaterPiggdekkavgift = (verdi: string) => {
         oppdaterUtgifterPrivatBil({
             piggdekkavgift: {
                 verdi,
-                label: reisemåteTekster.egen_bil_utgifter_piggdekkavgift.label[locale],
+                label: reisemåteTekster.privat_bil_utgifter_piggdekkavgift.label[locale],
             },
         });
         nullstillFeil(errorKeyPrivatBilUtgifterPiggdekkavgift);
+    };
+
+    const oppdaterParkering = (verdi: string) => {
+        oppdaterUtgifterPrivatBil({
+            parkering: {
+                verdi,
+                label: reisemåteTekster.privat_bil_utgifter_parkering.label[locale],
+            },
+        });
+        nullstillFeil(errorKeyPrivatBilUtgifterParkering);
     };
 
     const skalSpørreOmDrivstoffType =
@@ -64,42 +79,54 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
             <Skillelinje />
             <div>
                 <LocaleHeading
-                    tekst={reisemåteTekster.egen_bil_utgifter_tittel}
+                    tekst={reisemåteTekster.privat_bil_utgifter_tittel}
                     level="3"
                     size="small"
                 />
-                <LocaleTekst tekst={reisemåteTekster.egen_bil_utgifter_beskrivelse} />
+                <LocaleTekst tekst={reisemåteTekster.privat_bil_utgifter_beskrivelse} />
             </div>
             <TextField
                 id={valideringsfeil[errorKeyPrivatBilUtgifterBompenger]?.id}
-                label={reisemåteTekster.egen_bil_utgifter_bompenger.label[locale]}
+                label={reisemåteTekster.privat_bil_utgifter_bompenger.label[locale]}
                 inputMode="numeric"
                 value={utgifterPrivatBil?.bompenger?.verdi ?? ''}
-                onChange={(e) => oppdaterEgenBilUtgifterBompenger(e.target.value)}
+                onChange={(e) => oppdaterBompenger(e.target.value)}
                 error={valideringsfeil[errorKeyPrivatBilUtgifterBompenger]?.melding}
+                htmlSize={8}
             />
             <TextField
                 id={valideringsfeil[errorKeyPrivatBilUtgifterFerge]?.id}
-                label={reisemåteTekster.egen_bil_utgifter_ferge.label[locale]}
+                label={reisemåteTekster.privat_bil_utgifter_ferge.label[locale]}
                 inputMode="numeric"
                 value={utgifterPrivatBil?.ferge?.verdi ?? ''}
-                onChange={(e) => oppdaterEgenBilUtgifterFerge(e.target.value)}
+                onChange={(e) => oppdaterFerge(e.target.value)}
                 error={valideringsfeil[errorKeyPrivatBilUtgifterFerge]?.melding}
+                htmlSize={8}
             />
             <TextField
                 id={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.id}
-                label={reisemåteTekster.egen_bil_utgifter_piggdekkavgift.label[locale]}
+                label={reisemåteTekster.privat_bil_utgifter_parkering.label[locale]}
+                inputMode="numeric"
+                value={utgifterPrivatBil?.parkering?.verdi ?? ''}
+                onChange={(e) => oppdaterParkering(e.target.value)}
+                error={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.melding}
+                htmlSize={8}
+            />
+            <TextField
+                id={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.id}
+                label={reisemåteTekster.privat_bil_utgifter_piggdekkavgift.label[locale]}
                 inputMode="numeric"
                 value={utgifterPrivatBil?.piggdekkavgift?.verdi ?? ''}
-                onChange={(e) => oppdaterEgenBilUtgifterPiggdekkavgift(e.target.value)}
+                onChange={(e) => oppdaterPiggdekkavgift(e.target.value)}
                 error={valideringsfeil[errorKeyPrivatBilUtgifterPiggdekkavgift]?.melding}
+                htmlSize={8}
             />
 
             {/* TODO: Gjør om til select */}
             {skalSpørreOmDrivstoffType && (
                 <LocaleRadioGroup
                     id={valideringsfeil[errorKeyPrivatBilUtgifterDrivstoffType]?.id}
-                    tekst={reisemåteTekster.egen_bil_utgifter_drivstoff_type}
+                    tekst={reisemåteTekster.privat_bil_utgifter_drivstoff_type}
                     value={utgifterPrivatBil?.drivstoffType?.verdi ?? ''}
                     onChange={oppdaterEgenBilUtgifterDrivstoffType}
                     error={valideringsfeil[errorKeyPrivatBilUtgifterDrivstoffType]?.melding}

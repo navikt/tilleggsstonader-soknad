@@ -13,21 +13,20 @@ export const errorKeyPrivatBilUtgifterBompenger = 'reisemåte_privatbil_utgifter
 export const errorKeyPrivatBilUtgifterFerge = 'reisemåte_privatbil_utgifter_ferge';
 export const errorKeyPrivatBilUtgifterPiggdekkavgift =
     'reisemåte_privatbil_utgifter_piggdekkavgift';
-
-export const nullstiltePrivatBilFeil: Valideringsfeil = {
-    [errorKeyPrivatBilBenyttetEgenBil]: undefined,
-    [errorKeyPrivatBilBetalteForReiseSelv]: undefined,
-    [errorKeyPrivatBilUtgifterDrivstoffType]: undefined,
-    [errorKeyPrivatBilUtgifterBompenger]: undefined,
-    [errorKeyPrivatBilUtgifterFerge]: undefined,
-    [errorKeyPrivatBilUtgifterPiggdekkavgift]: undefined,
-};
+export const errorKeyPrivatBilUtgifterParkering = 'reisemåte_privatbil_utgifter_parkering';
 
 export const nullstilteUtgifterPrivatBilFeil: Valideringsfeil = {
     [errorKeyPrivatBilUtgifterDrivstoffType]: undefined,
     [errorKeyPrivatBilUtgifterBompenger]: undefined,
     [errorKeyPrivatBilUtgifterFerge]: undefined,
     [errorKeyPrivatBilUtgifterPiggdekkavgift]: undefined,
+    [errorKeyPrivatBilUtgifterParkering]: undefined,
+};
+
+export const nullstiltePrivatBilFeil: Valideringsfeil = {
+    [errorKeyPrivatBilBenyttetEgenBil]: undefined,
+    [errorKeyPrivatBilBetalteForReiseSelv]: undefined,
+    ...nullstilteUtgifterPrivatBilFeil,
 };
 
 export const validerPrivatBil = (
@@ -48,7 +47,7 @@ export const validerPrivatBil = (
         if (privatBil?.benyttetEgenBil?.verdi === 'JA') {
             feil = {
                 ...feil,
-                ...validerUtgifterPrivatBilGruppe(privatBil?.utgifterPrivatBil, locale),
+                ...validerUtgifterPrivatBil(privatBil?.utgifterPrivatBil, locale),
             };
         }
         if (privatBil?.benyttetEgenBil?.verdi === 'NEI_SITTER_PÅ_MED_ANDRE') {
@@ -63,7 +62,7 @@ export const validerPrivatBil = (
             } else if (privatBil?.betalteForReisen?.verdi === 'JA') {
                 feil = {
                     ...feil,
-                    ...validerUtgifterPrivatBilGruppe(privatBil?.utgifterPrivatBil, locale),
+                    ...validerUtgifterPrivatBil(privatBil?.utgifterPrivatBil, locale),
                 };
             }
         }
@@ -74,7 +73,7 @@ export const validerPrivatBil = (
     return feil;
 };
 
-const validerUtgifterPrivatBilGruppe = (
+const validerUtgifterPrivatBil = (
     utgifterPrivatBil: UtgifterPrivatBil | undefined,
     locale: Locale
 ): Valideringsfeil => {
@@ -82,35 +81,89 @@ const validerUtgifterPrivatBilGruppe = (
 
     const bompenger = utgifterPrivatBil?.bompenger?.verdi;
     const bompengerHarVerdi = harVerdi(bompenger);
-    if (bompengerHarVerdi && !erGyldigKostnad(bompenger)) {
+
+    if (!bompengerHarVerdi) {
         feil = {
             ...feil,
             [errorKeyPrivatBilUtgifterBompenger]: {
                 id: errorKeyPrivatBilUtgifterBompenger,
-                melding: reisemåteTekster.egen_bil_utgifter_bompenger.feilmelding[locale],
+                melding: reisemåteTekster.privat_bil_utgifter_bompenger.feilmelding[locale],
+            },
+        };
+    } else if (!erGyldigKostnad(bompenger)) {
+        feil = {
+            ...feil,
+            [errorKeyPrivatBilUtgifterBompenger]: {
+                id: errorKeyPrivatBilUtgifterBompenger,
+                melding:
+                    reisemåteTekster.privat_bil_utgifter_bompenger.feilmelding_ugyldig_verdi[
+                        locale
+                    ],
             },
         };
     }
 
     const ferge = utgifterPrivatBil?.ferge?.verdi;
     const fergeHarVerdi = harVerdi(ferge);
-    if (fergeHarVerdi && !erGyldigKostnad(ferge)) {
+    if (!fergeHarVerdi) {
         feil = {
             ...feil,
             [errorKeyPrivatBilUtgifterFerge]: {
                 id: errorKeyPrivatBilUtgifterFerge,
-                melding: reisemåteTekster.egen_bil_utgifter_ferge.feilmelding[locale],
+                melding: reisemåteTekster.privat_bil_utgifter_ferge.feilmelding[locale],
+            },
+        };
+    } else if (!erGyldigKostnad(ferge)) {
+        feil = {
+            ...feil,
+            [errorKeyPrivatBilUtgifterFerge]: {
+                id: errorKeyPrivatBilUtgifterFerge,
+                melding:
+                    reisemåteTekster.privat_bil_utgifter_ferge.feilmelding_ugyldig_verdi[locale],
             },
         };
     }
 
     const piggdekkavgift = utgifterPrivatBil?.piggdekkavgift?.verdi;
-    if (harVerdi(piggdekkavgift) && !erGyldigKostnad(piggdekkavgift)) {
+    if (!harVerdi(piggdekkavgift)) {
         feil = {
             ...feil,
             [errorKeyPrivatBilUtgifterPiggdekkavgift]: {
                 id: errorKeyPrivatBilUtgifterPiggdekkavgift,
-                melding: reisemåteTekster.egen_bil_utgifter_piggdekkavgift.feilmelding[locale],
+                melding: reisemåteTekster.privat_bil_utgifter_piggdekkavgift.feilmelding[locale],
+            },
+        };
+    } else if (!erGyldigKostnad(piggdekkavgift)) {
+        feil = {
+            ...feil,
+            [errorKeyPrivatBilUtgifterPiggdekkavgift]: {
+                id: errorKeyPrivatBilUtgifterPiggdekkavgift,
+                melding:
+                    reisemåteTekster.privat_bil_utgifter_piggdekkavgift.feilmelding_ugyldig_verdi[
+                        locale
+                    ],
+            },
+        };
+    }
+
+    const parkering = utgifterPrivatBil?.parkering?.verdi;
+    if (!harVerdi(parkering)) {
+        feil = {
+            ...feil,
+            [errorKeyPrivatBilUtgifterParkering]: {
+                id: errorKeyPrivatBilUtgifterParkering,
+                melding: reisemåteTekster.privat_bil_utgifter_parkering.feilmelding[locale],
+            },
+        };
+    } else if (!erGyldigKostnad(parkering)) {
+        feil = {
+            ...feil,
+            [errorKeyPrivatBilUtgifterParkering]: {
+                id: errorKeyPrivatBilUtgifterParkering,
+                melding:
+                    reisemåteTekster.privat_bil_utgifter_parkering.feilmelding_ugyldig_verdi[
+                        locale
+                    ],
             },
         };
     }
@@ -123,7 +176,7 @@ const validerUtgifterPrivatBilGruppe = (
             ...feil,
             [errorKeyPrivatBilUtgifterDrivstoffType]: {
                 id: errorKeyPrivatBilUtgifterDrivstoffType,
-                melding: reisemåteTekster.egen_bil_utgifter_drivstoff_type.feilmelding[locale],
+                melding: reisemåteTekster.privat_bil_utgifter_drivstoff_type.feilmelding[locale],
             },
         };
     }
