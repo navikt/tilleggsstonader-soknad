@@ -14,15 +14,8 @@ import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const ReiseTilSamlingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const {
-        resetSøknad,
-        hovedytelse,
-        aktivitet,
-        samlinger,
-        avreiseadresse,
-        reisemåte,
-        dokumentasjon,
-    } = useReiseTilSamlingSøknad();
+    const { resetSøknad, hovedytelse, aktivitet, samlinger, avreiseadresse, dokumentasjon } =
+        useReiseTilSamlingSøknad();
 
     return (
         <SøknadProvider
@@ -32,7 +25,6 @@ const ReiseTilSamlingInnhold = () => {
                 aktivitet: aktivitet,
                 samlinger: samlinger,
                 avreiseadresse: avreiseadresse,
-                reisemåte: reisemåte,
                 dokumentasjon: dokumentasjon,
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,

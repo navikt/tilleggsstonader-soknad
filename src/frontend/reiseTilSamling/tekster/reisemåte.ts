@@ -169,19 +169,19 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     privat_bil_utgifter_bompenger: {
         label: { nb: 'Totale bompengeutgifter' },
-        feilmelding: { nb: 'Bompenger må være større enn 0.' },
+        feilmelding: { nb: 'Bompengeutgifter må være et tall som er større enn 0.' },
     },
     privat_bil_utgifter_ferge: {
         label: { nb: 'Totale fergeutgifter' },
-        feilmelding: { nb: 'Ferge må må være større enn 0.' },
+        feilmelding: { nb: 'Fergeutgifter må være et tall som er  større enn 0.' },
     },
     privat_bil_utgifter_parkering: {
         label: { nb: 'Totale parkeringsutgifter' },
-        feilmelding: { nb: 'Parkeringsutgifter må være større enn 0.' },
+        feilmelding: { nb: 'Parkeringsutgifter må være et tall som er større enn 0.' },
     },
     privat_bil_utgifter_piggdekkavgift: {
         label: { nb: 'Piggdekkavgift' },
-        feilmelding: { nb: 'Piggdekkavgift må være større enn 0.' },
+        feilmelding: { nb: 'Piggdekkavgift må være et tall som er større enn 0.' },
     },
     radio_ønsker_dekket_utgifter_for_drosje: {
         header: {

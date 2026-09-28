@@ -14,6 +14,7 @@ import {
 } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
+import { Reisemåte as ReisemåteSamling } from './Reisemåte/Reisemåte';
 import { erReiseavstandUnder30km } from './util';
 import {
     adresseFeilIderForSamling,
@@ -76,6 +77,11 @@ export const NySamling: React.FC<{
 
     const oppdaterAdresse = (felt: Partial<Adresse>) =>
         oppdater(samling._id, 'adresse', { ...samling.adresse, ...felt });
+
+    const settReisemåte: React.Dispatch<React.SetStateAction<Samling['reisemåte']>> = (verdi) => {
+        const nesteReisemåte = typeof verdi === 'function' ? verdi(samling.reisemåte) : verdi;
+        oppdater(samling._id, 'reisemåte', nesteReisemåte);
+    };
 
     const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
         oppdaterAdresse(felt);
@@ -225,7 +231,11 @@ export const NySamling: React.FC<{
 
                 <Skillelinje />
 
-                {/* TODO: Spørsmål om reisemåte inn her */}
+                <ReisemåteSamling
+                    samlingId={samling._id}
+                    reisemåte={samling.reisemåte}
+                    settReisemåte={settReisemåte}
+                />
 
                 {onSlett && (
                     <HStack>

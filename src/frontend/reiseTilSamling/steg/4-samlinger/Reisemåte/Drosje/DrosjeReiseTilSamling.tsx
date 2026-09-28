@@ -3,27 +3,28 @@ import { Dispatch, SetStateAction } from 'react';
 import { InlineMessage } from '@navikt/ds-react';
 
 import { errorKeyHarTTKort } from './validering';
-import { Skillelinje } from '../../../../components/Skillelinje';
-import { LocaleRadioGroup } from '../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleTekstAvsnitt } from '../../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
-import { EnumFelt, EnumFlereValgFelt } from '../../../../typer/skjema';
-import { JaNei } from '../../../../typer/søknad';
-import { reisemåteTekster } from '../../../tekster/reisemåte';
+import { Skillelinje } from '../../../../../components/Skillelinje';
+import { LocaleRadioGroup } from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleTekstAvsnitt } from '../../../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
+import { EnumFelt, EnumFlereValgFelt } from '../../../../../typer/skjema';
+import { JaNei } from '../../../../../typer/søknad';
+import { reisemåteTekster } from '../../../../tekster/reisemåte';
 import {
     ÅrsakKanIkkeBenytteEgenBil,
     Reisemåte,
     DrosjeInfo,
     ÅrsakKanIkkeBenytteOffentligTransport,
-} from '../../../typer/reisemåte';
+} from '../../../../typer/reisemåte';
 
 export const DrosjeReiseTilSamling: React.FC<{
+    samlingId: number;
     unntakFraPrivatBil: EnumFlereValgFelt<ÅrsakKanIkkeBenytteEgenBil> | undefined;
     drosje: DrosjeInfo | undefined;
     unntakFraOffentligTransport:
         EnumFlereValgFelt<ÅrsakKanIkkeBenytteOffentligTransport> | undefined;
     settReisemåte: Dispatch<SetStateAction<Reisemåte | undefined>>;
-}> = ({ unntakFraPrivatBil, drosje, settReisemåte, unntakFraOffentligTransport }) => {
+}> = ({ samlingId, unntakFraPrivatBil, drosje, settReisemåte, unntakFraOffentligTransport }) => {
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const helsemessigeÅrsakerBilValgt =
@@ -40,7 +41,7 @@ export const DrosjeReiseTilSamling: React.FC<{
         }));
         settValideringsfeil((prev) => ({
             ...prev,
-            [errorKeyHarTTKort]: undefined,
+            [errorKeyHarTTKort(samlingId)]: undefined,
         }));
     };
 
@@ -52,11 +53,11 @@ export const DrosjeReiseTilSamling: React.FC<{
         <>
             <Skillelinje />
             <LocaleRadioGroup
-                id={valideringsfeil[errorKeyHarTTKort]?.id}
+                id={valideringsfeil[errorKeyHarTTKort(samlingId)]?.id}
                 tekst={reisemåteTekster.radio_har_du_tt_kort}
                 value={drosje?.harTTKort?.verdi ?? ''}
                 onChange={(verdi: EnumFelt<JaNei>) => oppdaterTTKort(verdi)}
-                error={valideringsfeil[errorKeyHarTTKort]?.melding}
+                error={valideringsfeil[errorKeyHarTTKort(samlingId)]?.melding}
             />
             {drosje?.harTTKort?.verdi === 'JA' && (
                 <InlineMessage status="info">

@@ -56,6 +56,9 @@ export function LocaleSelect<T extends string>({
             {...props}
         >
             {children}
+            <option value="" disabled>
+                Velg et alternativ
+            </option>
             {Object.entries(tekst.alternativer).map(([value, tekst]) => (
                 <option value={value} key={value}>
                     {(tekst as TekstElement<string>)[locale]}

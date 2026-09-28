@@ -33,7 +33,6 @@ export interface SøknadReiseTilSamling {
     aktivitet: AktivitetReiseTilSamling | undefined;
     samlinger: Samling[];
     avreiseadresse?: Avreiseadresse;
-    reisemåte?: Reisemåte;
     dokumentasjon: DokumentasjonFelt[];
     søknadMetadata: SøknadMetadata;
 }
@@ -67,6 +66,7 @@ export interface Samling {
     erObligatorisk?: EnumFelt<JaNei>;
     adresse?: Adresse;
     antallKilometerEnVei?: VerdiFelt<string>;
+    reisemåte?: Reisemåte;
 }
 
 export interface Hovedytelse {
