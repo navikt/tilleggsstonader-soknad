@@ -5,9 +5,9 @@ import { FormSummary } from '@navikt/ds-react';
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { OppsummeringSvar } from '../../../components/Oppsummering/OppsummeringSvar';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
-import { Reisemåte } from '../../../typer/søknad';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
+import { Reisemåte } from '../../typer/reisemåte';
 
 export const ReisemåteOppsummering: React.FC<{ reisemåte: Reisemåte }> = ({ reisemåte }) => {
     return (
@@ -18,29 +18,37 @@ export const ReisemåteOppsummering: React.FC<{ reisemåte: Reisemåte }> = ({ r
                 </FormSummary.Heading>
             </FormSummary.Header>
             <FormSummary.Answers>
-                <OppsummeringSvar felt={reisemåte.kanReiseMedOffentligTransport} />
-                <OppsummeringSvar
-                    felt={reisemåte.totalUtgifterOffentligTransport}
+                {/* TODO: Oppdater oppsummering etter flytting over til samling */}
+                <OppsummeringSvar felt={reisemåte.hvilkeTransportmidlerBleBenyttet} />
+                {/*<OppsummeringSvar
+                    felt={reisemåte.offentligTransport?.totalUtgifterOffentligTransport}
                     valuePostfix="kr"
                 />
-                <OppsummeringSvar felt={reisemåte.kanIkkeReiseMedOffentligTransportBegrunnelser} />
-                <OppsummeringSvar felt={reisemåte.barnehageGateadresse} />
-                <OppsummeringSvar felt={reisemåte.barnehagePostnummer} />
-                <OppsummeringSvar felt={reisemåte.kanBenytteEgenBil} />
-                <OppsummeringSvar felt={reisemåte.kanIkkeBenytteEgenBilBegrunnelser} />
-                <OppsummeringSvar felt={reisemåte.betalerForReiseSelv} />
-                <OppsummeringSvar felt={reisemåte.ønskerDekketUtgifterForDrosje} />
-                <OppsummeringSvar felt={reisemåte.harTTKort} />
-                <OppsummeringSvar felt={reisemåte.reiseMedBilUtgifter?.drivstoffType} />
+                <OppsummeringSvar felt={reisemåte.privatBil?.unntakFraOffentligTransport} />
                 <OppsummeringSvar
-                    felt={reisemåte.reiseMedBilUtgifter?.bompenger}
+                    felt={reisemåte.privatBil?.leveringOgHentingIBarnehage?.gateadresse}
+                />
+                <OppsummeringSvar
+                    felt={reisemåte.privatBil?.leveringOgHentingIBarnehage?.postnummer}
+                />
+                <OppsummeringSvar felt={reisemåte.privatBil?.kanBenytteEgenBil} />
+                <OppsummeringSvar felt={reisemåte.taxi?.unntakFraPrivatBil} />
+                <OppsummeringSvar felt={reisemåte.privatBil?.betalerForReiseSelv} />
+                <OppsummeringSvar felt={reisemåte.taxi?.ønskerDekketUtgifterForDrosje} />
+                <OppsummeringSvar felt={reisemåte.taxi?.harTTKort} />
+                <OppsummeringSvar felt={reisemåte.privatBil?.utgifterPrivatBil?.drivstoffType} />
+                <OppsummeringSvar
+                    felt={reisemåte.privatBil?.utgifterPrivatBil?.bompenger}
                     valuePostfix="kr"
                 />
-                <OppsummeringSvar felt={reisemåte.reiseMedBilUtgifter?.ferge} valuePostfix="kr" />
                 <OppsummeringSvar
-                    felt={reisemåte.reiseMedBilUtgifter?.piggdekkavgift}
+                    felt={reisemåte.privatBil?.utgifterPrivatBil?.ferge}
                     valuePostfix="kr"
                 />
+                <OppsummeringSvar
+                    felt={reisemåte.privatBil?.utgifterPrivatBil?.piggdekkavgift}
+                    valuePostfix="kr"
+                /> */}
             </FormSummary.Answers>
             <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.REISEMÅTE} />
         </FormSummary>

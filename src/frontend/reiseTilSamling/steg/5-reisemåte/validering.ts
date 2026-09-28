@@ -1,229 +1,157 @@
-import { Reisemåte } from '../../../typer/søknad';
+import { validerDrosje } from './Drosje/validering';
+import { validerOffentligTransport } from './OffentligTransport/validering';
+import { validerPrivatBil } from './PrivatBil/validering';
+import { EnumFlereValgFelt } from '../../../typer/skjema';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
-import { erGyldigKostnad } from '../../../utils/tall';
 import { harVerdi } from '../../../utils/typeUtils';
 import { reisemåteTekster } from '../../tekster/reisemåte';
+import {
+    Reisemåte,
+    UnntakFraOffentligTransport,
+    ÅrsakKanIkkeBenytteEgenBil,
+} from '../../typer/reisemåte';
 
-export const errorKeyKanReiseMedOffentligTransport = 'reisemåte_kan_reise_med_offentlig_transport';
-export const errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse =
-    'reisemåte_kan_ikke_reise_med_offentlig_transport_begrunnelse';
-export const errorKeyTotalutgifterOffentligTransport =
-    'reisemåte_totalutgifter_offentlig_transport';
-export const errorKeyKanBenytteEgenBil = 'reisemåte_kan_benytte_egen_bil';
-export const errorKeyØnskerDekketUtgifterForDrosje = 'reisemåte_ønsker_dekket_utgifter_for_drosje';
-export const errorKeyHarTTKort = 'reisemåte_har_tt_kort';
+export const errorKeyHvilkeTransportmidlerBleBenyttet =
+    'reisemåte_hvilke_transportmidler_ble_benyttet';
 
-export const errorKeyKanIkkeBenytteEgenBilBegrunnelse =
-    'reisemåte_kan_ikke_benytte_egen_bil_begrunnelse';
+export const errorKeyUnntakFraOffentligTransport = 'reisemåte_unntak_fra_offentlig_transport';
+export const errorKeyUnntakFraOffentligTransportBarnehageAdresse =
+    'reisemåte_unntak_fra_offentlig_transport_barnehage_adresse';
+export const errorKeyUnntakFraOffentligTransportBarnehagePostnummer =
+    'reisemåte_unntak_fra_offentlig_transport_barnehage_postnummer';
+export const errorKeyUnntakFraPrivatBil = 'reisemåte_unntak_fra_privat_bil';
 
-export const errorKeyBetalerForReiseSelv = 'reisemåte_betaler_for_reise_selv';
+export const nullstilteUnntakFraOffentligTransport = {
+    [errorKeyUnntakFraOffentligTransport]: undefined,
+    [errorKeyUnntakFraOffentligTransportBarnehageAdresse]: undefined,
+    [errorKeyUnntakFraOffentligTransportBarnehagePostnummer]: undefined,
+};
 
-export const errorKeyEgenbilUtgifterDrivstoffType = 'reisemåte_egenbil_utgifter_drivstoff_type';
-export const errorKeyEgenbilUtgifterBompenger = 'reisemåte_egenbil_utgifter_bompenger';
-export const errorKeyEgenbilUtgifterFerge = 'reisemåte_egenbil_utgifter_ferge';
-export const errorKeyEgenbilUtgifterPiggdekkavgift = 'reisemåte_egenbil_utgifter_piggdekkavgift';
-
-export const errorKeyBarnehageAdresse = 'reisemåte_barnehage_adresse';
-export const errorKeyBarnehagePostnummer = 'reisemåte_barnehage_postnummer';
-
+// TODO: Sjekk at ting ikke kjæsjer av dobbelt sjekk på unntak fra offentlig transport
 export const validerReisemåte = (
     reisemåte: Reisemåte | undefined,
     locale: Locale
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
-    if (!harVerdi(reisemåte?.kanReiseMedOffentligTransport?.verdi)) {
-        return {
-            [errorKeyKanReiseMedOffentligTransport]: {
-                id: errorKeyKanReiseMedOffentligTransport,
-                melding: reisemåteTekster.radio_kan_reise_offentlig.feilmelding[locale],
+    if (
+        !reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier.some((felt) => harVerdi(felt.verdi))
+    ) {
+        feil = {
+            ...feil,
+            [errorKeyHvilkeTransportmidlerBleBenyttet]: {
+                id: errorKeyHvilkeTransportmidlerBleBenyttet,
+                melding: reisemåteTekster.check_hvilke_transportmidler.feilmelding[locale],
             },
         };
     }
 
-    if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'JA') {
-        const utgifter = reisemåte?.totalUtgifterOffentligTransport?.verdi;
-        if (!harVerdi(utgifter)) {
-            feil = {
-                ...feil,
-                [errorKeyTotalutgifterOffentligTransport]: {
-                    id: errorKeyTotalutgifterOffentligTransport,
-                    melding: reisemåteTekster.totalutgifter_offentlig_transport.feilmelding[locale],
-                },
-            };
-        } else if (!erGyldigKostnad(utgifter)) {
-            feil = {
-                ...feil,
-                [errorKeyTotalutgifterOffentligTransport]: {
-                    id: errorKeyTotalutgifterOffentligTransport,
-                    melding:
-                        reisemåteTekster.totalutgifter_offentlig_transport.feilmelding_ugyldig[
-                            locale
-                        ],
-                },
-            };
-        }
+    const valgteTransportmidler =
+        reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier.map((felt) => felt.verdi) || [];
+
+    if (valgteTransportmidler.includes('OFFENTLIG_TRANSPORT')) {
+        feil = {
+            ...feil,
+            ...validerOffentligTransport(reisemåte?.offentligTransport, locale),
+        };
     }
 
-    if (reisemåte?.kanReiseMedOffentligTransport?.verdi === 'NEI') {
-        if (
-            !reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier.some((felt) =>
-                harVerdi(felt.verdi)
-            )
-        ) {
-            feil = {
-                ...feil,
-                [errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse]: {
-                    id: errorKeyKanIkkeReiseMedOffentligTransportBegrunnelse,
-                    melding:
-                        reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[
-                            locale
-                        ],
-                },
-            };
-        }
+    if (valgteTransportmidler.includes('PRIVAT_BIL')) {
+        feil = {
+            ...feil,
+            ...validerUnntakFraOffentligTransport(reisemåte?.unntakFraOffentligTransport, locale),
+            ...validerPrivatBil(reisemåte?.privatBil, locale),
+        };
+    }
 
-        if (
-            reisemåte?.kanIkkeReiseMedOffentligTransportBegrunnelser?.verdier.some(
-                (felt) => felt.verdi === 'LEVERING_HENTING_I_BARNEHAGE'
-            )
-        ) {
-            if (!harVerdi(reisemåte?.barnehageGateadresse?.verdi)) {
-                feil = {
-                    ...feil,
-                    [errorKeyBarnehageAdresse]: {
-                        id: errorKeyBarnehageAdresse,
-                        melding: reisemåteTekster.barnehage_adresse.feilmelding[locale],
-                    },
-                };
-            }
+    if (valgteTransportmidler.includes('DROSJE')) {
+        feil = {
+            ...feil,
+            ...validerUnntakFraOffentligTransport(reisemåte?.unntakFraOffentligTransport, locale),
+            ...validerUnntakFraPrivatBil(reisemåte?.unntakFraPrivatBil, locale),
+            ...validerDrosje(reisemåte, locale),
+        };
+    }
 
-            if (!harVerdi(reisemåte?.barnehagePostnummer?.verdi)) {
-                feil = {
-                    ...feil,
-                    [errorKeyBarnehagePostnummer]: {
-                        id: errorKeyBarnehagePostnummer,
-                        melding: reisemåteTekster.barnehage_postnummer.feilmelding[locale],
-                    },
-                };
-            }
-        }
+    return feil;
+};
 
-        if (!harVerdi(reisemåte?.kanBenytteEgenBil?.verdi)) {
-            feil = {
-                ...feil,
-                [errorKeyKanBenytteEgenBil]: {
-                    id: errorKeyKanBenytteEgenBil,
-                    melding: reisemåteTekster.radio_kan_benytte_egen_bil.feilmelding[locale],
-                },
-            };
-        } else if (reisemåte?.kanBenytteEgenBil?.verdi === 'NEI') {
+const validerUnntakFraOffentligTransport = (
+    unntakFraOffentligTransport: UnntakFraOffentligTransport | undefined,
+    locale: Locale
+): Valideringsfeil => {
+    let feil: Valideringsfeil = {};
+
+    if (!unntakFraOffentligTransport?.årsaker?.verdier.some((felt) => harVerdi(felt.verdi))) {
+        feil = {
+            ...feil,
+            [errorKeyUnntakFraOffentligTransport]: {
+                id: errorKeyUnntakFraOffentligTransport,
+                melding:
+                    reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[locale],
+            },
+        };
+    } else {
+        const valgteÅrsaker =
+            unntakFraOffentligTransport?.årsaker?.verdier.map((felt) => felt.verdi) || [];
+
+        if (valgteÅrsaker.includes('LEVERING_HENTING_I_BARNEHAGE')) {
             if (
-                !reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier.some((felt) =>
-                    harVerdi(felt.verdi)
+                !harVerdi(
+                    unntakFraOffentligTransport.leveringOgHentingIBarnehage?.gateadresse?.verdi
                 )
             ) {
                 feil = {
                     ...feil,
-                    [errorKeyKanIkkeBenytteEgenBilBegrunnelse]: {
-                        id: errorKeyKanIkkeBenytteEgenBilBegrunnelse,
+                    [errorKeyUnntakFraOffentligTransportBarnehageAdresse]: {
+                        id: errorKeyUnntakFraOffentligTransportBarnehageAdresse,
                         melding:
-                            reisemåteTekster.check_kan_ikke_benytte_egen_bil_begrunnelse
-                                .feilmelding[locale],
-                    },
-                };
-            }
-
-            if (!harVerdi(reisemåte?.ønskerDekketUtgifterForDrosje?.verdi)) {
-                feil = {
-                    ...feil,
-                    [errorKeyØnskerDekketUtgifterForDrosje]: {
-                        id: errorKeyØnskerDekketUtgifterForDrosje,
-                        melding:
-                            reisemåteTekster.radio_ønsker_dekket_utgifter_for_drosje.feilmelding[
+                            reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[
                                 locale
                             ],
                     },
                 };
             }
-
             if (
-                reisemåte?.ønskerDekketUtgifterForDrosje?.verdi === 'JA' &&
-                reisemåte?.kanIkkeBenytteEgenBilBegrunnelser?.verdier.some(
-                    (felt) => felt.verdi === 'HELSEMESSIGE_ÅRSAKER'
+                !harVerdi(
+                    unntakFraOffentligTransport.leveringOgHentingIBarnehage?.postnummer?.verdi
                 )
             ) {
-                if (!harVerdi(reisemåte?.harTTKort?.verdi)) {
-                    feil = {
-                        ...feil,
-                        [errorKeyHarTTKort]: {
-                            id: errorKeyHarTTKort,
-                            melding: reisemåteTekster.radio_har_du_tt_kort.feilmelding[locale],
-                        },
-                    };
-                }
-            }
-        } else if (
-            reisemåte?.kanBenytteEgenBil?.verdi === 'JA' ||
-            (reisemåte?.kanBenytteEgenBil?.verdi === 'NEI_SITTER_PÅ_MED_ANDRE' &&
-                reisemåte?.betalerForReiseSelv?.verdi === 'JA')
-        ) {
-            if (!harVerdi(reisemåte?.reiseMedBilUtgifter?.drivstoffType?.verdi)) {
                 feil = {
                     ...feil,
-                    [errorKeyEgenbilUtgifterDrivstoffType]: {
-                        id: errorKeyEgenbilUtgifterDrivstoffType,
+                    [errorKeyUnntakFraOffentligTransportBarnehagePostnummer]: {
+                        id: errorKeyUnntakFraOffentligTransportBarnehagePostnummer,
                         melding:
-                            reisemåteTekster.egen_bil_utgifter_drivstoff_type.feilmelding[locale],
-                    },
-                };
-            }
-
-            const bompenger = reisemåte?.reiseMedBilUtgifter?.bompenger?.verdi;
-            if (harVerdi(bompenger) && !erGyldigKostnad(bompenger)) {
-                feil = {
-                    ...feil,
-                    [errorKeyEgenbilUtgifterBompenger]: {
-                        id: errorKeyEgenbilUtgifterBompenger,
-                        melding: reisemåteTekster.egen_bil_utgifter_bompenger.feilmelding[locale],
-                    },
-                };
-            }
-
-            const ferge = reisemåte?.reiseMedBilUtgifter?.ferge?.verdi;
-            if (harVerdi(ferge) && !erGyldigKostnad(ferge)) {
-                feil = {
-                    ...feil,
-                    [errorKeyEgenbilUtgifterFerge]: {
-                        id: errorKeyEgenbilUtgifterFerge,
-                        melding: reisemåteTekster.egen_bil_utgifter_ferge.feilmelding[locale],
-                    },
-                };
-            }
-
-            const piggdekkavgift = reisemåte?.reiseMedBilUtgifter?.piggdekkavgift?.verdi;
-            if (harVerdi(piggdekkavgift) && !erGyldigKostnad(piggdekkavgift)) {
-                feil = {
-                    ...feil,
-                    [errorKeyEgenbilUtgifterPiggdekkavgift]: {
-                        id: errorKeyEgenbilUtgifterPiggdekkavgift,
-                        melding:
-                            reisemåteTekster.egen_bil_utgifter_piggdekkavgift.feilmelding[locale],
-                    },
-                };
-            }
-        } else if (reisemåte?.kanBenytteEgenBil?.verdi === 'NEI_SITTER_PÅ_MED_ANDRE') {
-            if (!harVerdi(reisemåte?.betalerForReiseSelv?.verdi)) {
-                feil = {
-                    ...feil,
-                    [errorKeyBetalerForReiseSelv]: {
-                        id: errorKeyBetalerForReiseSelv,
-                        melding: reisemåteTekster.radio_betaler_for_reise_selv.feilmelding[locale],
+                            reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[
+                                locale
+                            ],
                     },
                 };
             }
         }
+    }
+
+    return feil;
+};
+
+const validerUnntakFraPrivatBil = (
+    unntakFraPrivatBil: EnumFlereValgFelt<ÅrsakKanIkkeBenytteEgenBil> | undefined,
+    locale: Locale
+): Valideringsfeil => {
+    let feil: Valideringsfeil = {};
+
+    if (!unntakFraPrivatBil?.verdier.some((felt) => harVerdi(felt.verdi))) {
+        feil = {
+            ...feil,
+            [errorKeyUnntakFraPrivatBil]: {
+                id: errorKeyUnntakFraPrivatBil,
+                melding:
+                    reisemåteTekster.check_kan_ikke_benytte_egen_bil_begrunnelse.feilmelding[
+                        locale
+                    ],
+            },
+        };
     }
 
     return feil;

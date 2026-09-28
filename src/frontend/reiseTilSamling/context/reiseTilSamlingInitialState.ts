@@ -6,9 +6,10 @@ import {
     mockSamlinger,
 } from '../../mock/reiseTilSamlingMock';
 import { DokumentasjonFelt } from '../../typer/skjema';
-import { Avreiseadresse, Hovedytelse, Reisemåte, Samling } from '../../typer/søknad';
+import { Avreiseadresse, Hovedytelse, Samling } from '../../typer/søknad';
 import { erLokal } from '../../utils/miljø';
 import { AktivitetReiseTilSamling } from '../typer/aktivitet';
+import { Reisemåte } from '../typer/reisemåte';
 
 export const initialHarBekreftet = (): boolean => erLokal();
 
