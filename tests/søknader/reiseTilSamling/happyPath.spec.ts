@@ -104,7 +104,9 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
         .getByRole('radiogroup', { name: 'Er samlingen obligatorisk?' })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvor lang reisevei har du?').fill('45');
+    await page
+        .getByLabel('Hvor mange kilometer er det mellom avreiseadresse og samlingsstedet?')
+        .fill('45');
 
     await page.getByLabel('Gateadresse').fill('Testveien 1');
     await page.getByLabel('Postnummer').fill('0123');
@@ -118,10 +120,8 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
 
     await forventIngenWcagViolations(page);
 
-    await page
-        .getByRole('radiogroup', { name: 'Kan du reise med offentlig transport?' })
-        .getByLabel('Ja')
-        .check();
+    await page.getByRole('checkbox', { name: 'Offentlig transport' }).check();
+
     await page
         .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingene?')
         .fill('500');
@@ -189,7 +189,9 @@ test('At privatbil-feil og -verdier nullstilles når privat bil skjules', async 
         .getByRole('radiogroup', { name: 'Er samlingen obligatorisk?' })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvor lang reisevei har du?').fill('45');
+    await page
+        .getByLabel('Hvor mange kilometer er det mellom avreiseadresse og samlingsstedet?')
+        .fill('45');
     await page.getByLabel('Gateadresse').fill('Testveien 1');
     await page.getByLabel('Postnummer').fill('0123');
     await page.getByLabel('Poststed').fill('Oslo');
@@ -203,24 +205,18 @@ test('At privatbil-feil og -verdier nullstilles når privat bil skjules', async 
         .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingene?')
         .fill('500');
     await page.getByRole('checkbox', { name: 'Privat bil' }).check();
-    await page
-        .getByRole('radiogroup', { name: 'Skal du kjøre bil til aktivitetsstedet?' })
-        .getByLabel('Ja')
-        .check();
-    await page.getByLabel('Bompenger per dag (valgfritt)').fill('123');
-
-    await page.getByRole('button', { name: 'Neste' }).click();
-    await expect(page.getByText('Du må oppgi bilens drivstofftype.')).toBeVisible();
+    await page.getByRole('radiogroup', { name: 'Benyttet du egen bil?' }).getByLabel('Ja').check();
+    await page.getByLabel('Totale bompengeutgifter').fill('123');
 
     await page.getByRole('checkbox', { name: 'Privat bil' }).uncheck();
 
     await expect(page.getByRole('heading', { name: 'Privat bil' })).not.toBeVisible();
     await expect(page.getByText('Utgifter til kjøring med privat bil')).not.toBeVisible();
-    await expect(page.getByText('Du må oppgi bilens drivstofftype.')).not.toBeVisible();
     await expect(
         page.getByRole('group', { name: 'Hvorfor kan du ikke reise med offentlig transport?' })
     ).not.toBeVisible();
 
     await page.getByRole('checkbox', { name: 'Privat bil' }).check();
-    await expect(page.getByLabel('Bompenger per dag (valgfritt)')).toHaveValue('');
+    await page.getByRole('radiogroup', { name: 'Benyttet du egen bil?' }).getByLabel('Ja').check();
+    await expect(page.getByLabel('Totale bompengeutgifter')).toHaveValue('');
 });

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { VStack } from '@navikt/ds-react';
 
 import { DrosjeReiseTilSamling } from './Drosje/DrosjeReiseTilSamling';
@@ -5,20 +7,28 @@ import { OffentligTransportReiseTilSamling } from './OffentligTransport/Offentli
 import { PrivatBilReiseTilSamling } from './PrivatBil/PrivatBilReiseTilSamling';
 import { TransportmiddelOgUnntak } from './TransportmiddelOgUnntak';
 import { finnValgteTransportmidler } from './transportmiddelUtils';
-import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
+import { Reisemåte as ReisemåteType } from '../../../typer/reisemåte';
 
-export const Reisemåte = () => {
-    const { reisemåte, settReisemåte } = useReiseTilSamlingSøknad();
+export const Reisemåte: React.FC<{
+    samlingId: number;
+    reisemåte: ReisemåteType | undefined;
+    settReisemåte: Dispatch<SetStateAction<ReisemåteType | undefined>>;
+}> = ({ samlingId, reisemåte, settReisemåte }) => {
     const transportmidlerHuketAv = finnValgteTransportmidler(
         reisemåte?.hvilkeTransportmidlerBleBenyttet
     );
 
     return (
         <VStack gap="space-40">
-            <TransportmiddelOgUnntak />
+            <TransportmiddelOgUnntak
+                samlingId={samlingId}
+                reisemåte={reisemåte}
+                settReisemåte={settReisemåte}
+            />
 
             {transportmidlerHuketAv.includes('OFFENTLIG_TRANSPORT') && (
                 <OffentligTransportReiseTilSamling
+                    samlingId={samlingId}
                     offentligTransport={reisemåte?.offentligTransport}
                     settReisemåte={settReisemåte}
                 />
@@ -26,12 +36,14 @@ export const Reisemåte = () => {
 
             {transportmidlerHuketAv.includes('PRIVAT_BIL') && (
                 <PrivatBilReiseTilSamling
+                    samlingId={samlingId}
                     privatBil={reisemåte?.privatBil}
                     settReisemåte={settReisemåte}
                 />
             )}
             {transportmidlerHuketAv.includes('DROSJE') && (
                 <DrosjeReiseTilSamling
+                    samlingId={samlingId}
                     unntakFraPrivatBil={reisemåte?.unntakFraPrivatBil}
                     drosje={reisemåte?.drosje}
                     settReisemåte={settReisemåte}

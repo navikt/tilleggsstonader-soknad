@@ -16,7 +16,7 @@ export interface OffentligTransportInfo {
 }
 
 export interface PrivatBilInfo {
-    benyttetEgenBil?: EnumFelt<KanBenytteEgenBil>;
+    benyttetEgenBil?: EnumFelt<JaNei>;
     betalteForReisen?: EnumFelt<JaNei>;
     infoBilKunDelerAvStrekning?: InfoBilKunDelerAvStrekning;
     utgifterPrivatBil?: UtgifterPrivatBil;
@@ -24,7 +24,6 @@ export interface PrivatBilInfo {
 
 export interface DrosjeInfo {
     harTTKort?: EnumFelt<JaNei>;
-    ønskerDekketUtgifterForDrosje?: EnumFelt<JaNei>;
 }
 
 export interface UnntakFraOffentligTransport {

@@ -1,10 +1,14 @@
 import { nullstillteDrosjefeil } from './Drosje/validering';
 import { nullstilteOffentligTransportFeil } from './OffentligTransport/validering';
 import { nullstiltePrivatBilFeil } from './PrivatBil/validering';
-import { errorKeyUnntakFraOffentligTransport, errorKeyUnntakFraPrivatBil } from './validering';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { Valideringsfeil } from '../../../typer/validering';
-import { Transportmiddel } from '../../typer/reisemåte';
+import {
+    errorKeyUnntakFraOffentligTransport,
+    errorKeyUnntakFraPrivatBil,
+    nullstilteUnntakFraOffentligTransport,
+} from './validering';
+import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import { Valideringsfeil } from '../../../../typer/validering';
+import { Transportmiddel } from '../../../typer/reisemåte';
 
 export const finnValgteTransportmidler = (
     transportmidler: EnumFlereValgFelt<Transportmiddel> | undefined
@@ -21,27 +25,30 @@ export const nullstillEllerBeholdVerdi = <T>(
 
 // Nullstiller feilmeldinger for offentlig transport om den ikke lenger er inkludert
 export const vurderOffentligTransportFelterForNullstilling = (
-    inkluderteTransportmidler: Transportmiddel[]
+    inkluderteTransportmidler: Transportmiddel[],
+    samlingId: number
 ): Valideringsfeil =>
     inkluderteTransportmidler.includes('OFFENTLIG_TRANSPORT')
         ? {}
-        : nullstilteOffentligTransportFeil;
+        : nullstilteOffentligTransportFeil(samlingId);
 
 // Nullstiller feilmeldinger for privat bil om den ikke lenger er inkludert
 export const vurderPrivatBilFelterForNullstillng = (
-    inkluderteTransportmidler: Transportmiddel[]
+    inkluderteTransportmidler: Transportmiddel[],
+    samlingId: number
 ): Valideringsfeil =>
-    inkluderteTransportmidler.includes('PRIVAT_BIL') ? {} : nullstiltePrivatBilFeil;
+    inkluderteTransportmidler.includes('PRIVAT_BIL') ? {} : nullstiltePrivatBilFeil(samlingId);
 
 // Nullstiller feilmeldinger for drosje om den ikke lenger er inkludert
 export const vurderDrosjeFelterForNullstilling = (
-    inkluderteTransportmidler: Transportmiddel[]
-): Valideringsfeil => (inkluderteTransportmidler.includes('DROSJE') ? {} : nullstillteDrosjefeil);
+    inkluderteTransportmidler: Transportmiddel[],
+    samlingId: number
+): Valideringsfeil =>
+    inkluderteTransportmidler.includes('DROSJE') ? {} : nullstillteDrosjefeil(samlingId);
 
-// Skal nullstille feil for unntak privat bil dersom drosje ikke er inkludert
-// Skal nullstille feil for unntak fra offentlig transport dersom hverken privat bil eller drosje er injludert ikke er inkludert
 export const vurderUnntakFeilForNullstilling = (
-    inkluderteTransportmidler: Transportmiddel[]
+    inkluderteTransportmidler: Transportmiddel[],
+    samlingId: number
 ): Valideringsfeil => {
     // Nullstiller ingen feil dersom drosje fortsatt er inkludert siden begge unntak skal vises
     if (inkluderteTransportmidler.includes('DROSJE')) {
@@ -51,12 +58,13 @@ export const vurderUnntakFeilForNullstilling = (
     // Nullstiller feil for unntak fra privat bil dersom drosje ikke er inkludert, men bil er inkludert
     if (inkluderteTransportmidler.includes('PRIVAT_BIL')) {
         return {
-            [errorKeyUnntakFraPrivatBil]: undefined,
+            [errorKeyUnntakFraPrivatBil(samlingId)]: undefined,
         };
     }
 
     return {
-        [errorKeyUnntakFraPrivatBil]: undefined,
-        [errorKeyUnntakFraOffentligTransport]: undefined,
+        ...nullstilteUnntakFraOffentligTransport(samlingId),
+        [errorKeyUnntakFraPrivatBil(samlingId)]: undefined,
+        [errorKeyUnntakFraOffentligTransport(samlingId)]: undefined,
     };
 };

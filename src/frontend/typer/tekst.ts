@@ -72,13 +72,6 @@ export type InputFelt = {
     feilmelding: TekstElement<string>;
 };
 
-export type InputFeltMedVurderingAvVerdi = {
-    label: TekstElement<string>;
-    description?: TekstElement<string>;
-    feilmelding: TekstElement<string>;
-    feilmelding_ugyldig_verdi: TekstElement<string>;
-};
-
 export type Datoperiode = {
     label: TekstElement<string>;
     fom: TekstElement<string>;

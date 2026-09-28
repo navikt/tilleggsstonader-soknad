@@ -1,4 +1,6 @@
-import { InlineMessage, VStack } from '@navikt/ds-react';
+import { Dispatch, SetStateAction } from 'react';
+
+import { Heading, InlineMessage, VStack } from '@navikt/ds-react';
 
 import {
     finnValgteTransportmidler,
@@ -10,17 +12,19 @@ import {
 } from './transportmiddelUtils';
 import { UnntakIkkeOffentligTransport } from './UnntakFraOffentligTransport';
 import { errorKeyHvilkeTransportmidlerBleBenyttet, errorKeyUnntakFraPrivatBil } from './validering';
-import { LocaleCheckboxGroup } from '../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import { useSpråk } from '../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { EnumFlereValgFelt } from '../../../typer/skjema';
-import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
-import { reisemåteTekster } from '../../tekster/reisemåte';
-import { Transportmiddel, ÅrsakKanIkkeBenytteEgenBil } from '../../typer/reisemåte';
+import { LocaleCheckboxGroup } from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
+import { useSpråk } from '../../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
+import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import { reisemåteTekster } from '../../../tekster/reisemåte';
+import { Reisemåte, Transportmiddel, ÅrsakKanIkkeBenytteEgenBil } from '../../../typer/reisemåte';
 
-export const TransportmiddelOgUnntak = () => {
+export const TransportmiddelOgUnntak: React.FC<{
+    samlingId: number;
+    reisemåte: Reisemåte | undefined;
+    settReisemåte: Dispatch<SetStateAction<Reisemåte | undefined>>;
+}> = ({ samlingId, reisemåte, settReisemåte }) => {
     const { locale } = useSpråk();
-    const { reisemåte, settReisemåte } = useReiseTilSamlingSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const transportmidlerHuketAv = finnValgteTransportmidler(
@@ -65,10 +69,10 @@ export const TransportmiddelOgUnntak = () => {
         // Nullstiller feil for de ulike grenene
         settValideringsfeil((prev) => ({
             ...prev,
-            ...vurderOffentligTransportFelterForNullstilling(inkluderteTransportmidler),
-            ...vurderPrivatBilFelterForNullstillng(inkluderteTransportmidler),
-            ...vurderDrosjeFelterForNullstilling(inkluderteTransportmidler),
-            ...vurderUnntakFeilForNullstilling(inkluderteTransportmidler),
+            ...vurderOffentligTransportFelterForNullstilling(inkluderteTransportmidler, samlingId),
+            ...vurderPrivatBilFelterForNullstillng(inkluderteTransportmidler, samlingId),
+            ...vurderDrosjeFelterForNullstilling(inkluderteTransportmidler, samlingId),
+            ...vurderUnntakFeilForNullstilling(inkluderteTransportmidler, samlingId),
         }));
     };
 
@@ -80,7 +84,7 @@ export const TransportmiddelOgUnntak = () => {
 
         settValideringsfeil((prev) => ({
             ...prev,
-            [errorKeyUnntakFraPrivatBil]: undefined,
+            [errorKeyUnntakFraPrivatBil(samlingId)]: undefined,
         }));
     };
 
@@ -89,17 +93,30 @@ export const TransportmiddelOgUnntak = () => {
         .includes('HELSEMESSIGE_ÅRSAKER');
 
     return (
-        <>
-            <LocaleCheckboxGroup
-                id={valideringsfeil[errorKeyHvilkeTransportmidlerBleBenyttet]?.id}
-                tekst={reisemåteTekster.check_hvilke_transportmidler}
-                onChange={oppdaterHvilkeTransportmidler}
-                value={reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier ?? []}
-                error={valideringsfeil[errorKeyHvilkeTransportmidlerBleBenyttet]?.melding}
-            />
+        <VStack gap="space-24">
+            <Heading size="small">{reisemåteTekster.tittel[locale]}</Heading>
+            <VStack gap="space-16">
+                <LocaleCheckboxGroup
+                    id={valideringsfeil[errorKeyHvilkeTransportmidlerBleBenyttet(samlingId)]?.id}
+                    tekst={reisemåteTekster.check_hvilke_transportmidler}
+                    onChange={oppdaterHvilkeTransportmidler}
+                    value={reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier ?? []}
+                    error={
+                        valideringsfeil[errorKeyHvilkeTransportmidlerBleBenyttet(samlingId)]
+                            ?.melding
+                    }
+                />
+
+                {drosjeHuketAv && (
+                    <InlineMessage status="info">
+                        {reisemåteTekster.info_drosje_dokumentasjon[locale]}
+                    </InlineMessage>
+                )}
+            </VStack>
 
             {(privatBilHuketAv || drosjeHuketAv) && (
                 <UnntakIkkeOffentligTransport
+                    samlingId={samlingId}
                     unntakFraOffentligTransport={reisemåte?.unntakFraOffentligTransport}
                     settReisemåte={settReisemåte}
                 />
@@ -108,11 +125,11 @@ export const TransportmiddelOgUnntak = () => {
             {drosjeHuketAv && (
                 <VStack gap="space-16">
                     <LocaleCheckboxGroup
-                        id={valideringsfeil[errorKeyUnntakFraPrivatBil]?.id}
+                        id={valideringsfeil[errorKeyUnntakFraPrivatBil(samlingId)]?.id}
                         tekst={reisemåteTekster.check_kan_ikke_benytte_egen_bil_begrunnelse}
                         onChange={oppdaterUnntakFraPrivatBil}
                         value={reisemåte?.unntakFraPrivatBil?.verdier ?? []}
-                        error={valideringsfeil[errorKeyUnntakFraPrivatBil]?.melding}
+                        error={valideringsfeil[errorKeyUnntakFraPrivatBil(samlingId)]?.melding}
                     />
                     {helsemessigeÅrsakerBilValgt && (
                         <InlineMessage status="info">
@@ -121,6 +138,6 @@ export const TransportmiddelOgUnntak = () => {
                     )}
                 </VStack>
             )}
-        </>
+        </VStack>
     );
 };

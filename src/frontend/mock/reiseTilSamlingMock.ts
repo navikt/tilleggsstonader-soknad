@@ -1,5 +1,4 @@
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
-import { Reisemåte } from '../reiseTilSamling/typer/reisemåte';
 import { Avreiseadresse, Hovedytelse, Samling } from '../typer/søknad';
 
 export const mockHovedytelse: Hovedytelse = {
@@ -40,6 +39,41 @@ export const mockSamlinger: Samling[] = [
             postnummer: { verdi: '0123', label: 'Postnummer' },
             poststed: { verdi: 'Oslo', label: 'Poststed' },
         },
+        reisemåte: {
+            hvilkeTransportmidlerBleBenyttet: {
+                label: 'Hvilke transportmidler ble benyttet?',
+                verdier: [
+                    { verdi: 'OFFENTLIG_TRANSPORT', label: 'Offentlig transport' },
+                    { verdi: 'PRIVAT_BIL', label: 'Privat bil' },
+                ],
+                alternativer: ['Privat bil', 'Drosje', 'Offentlig transport'],
+            },
+            unntakFraOffentligTransport: {
+                årsaker: {
+                    label: 'Hvorfor ikke offentlig transport?',
+                    verdier: [{ verdi: 'DÅRLIG_TRANSPORTTILBUD', label: 'Dårlig transporttilbud' }],
+                    alternativer: [
+                        'Dårlig transporttilbud',
+                        'Helsemessige årsaker',
+                        'Leving i bhg',
+                    ],
+                },
+            },
+            offentligTransport: {
+                totalUtgifterOffentligTransport: {
+                    verdi: '500',
+                    label: 'Hva er totalutgiftene til offentlig transport til og fra samlingene?',
+                },
+            },
+            privatBil: {
+                benyttetEgenBil: {
+                    label: 'Benyttet du egen bil?',
+                    verdi: 'JA',
+                    svarTekst: 'Ja',
+                    alternativer: ['Ja', 'Nei'],
+                },
+            },
+        },
     },
 ];
 
@@ -49,37 +83,5 @@ export const mockAvreiseadresse: Avreiseadresse = {
         verdi: 'JA',
         svarTekst: 'Ja',
         alternativer: ['Ja', 'Nei'],
-    },
-};
-
-export const mockReisemåte: Reisemåte = {
-    hvilkeTransportmidlerBleBenyttet: {
-        label: 'Hvilke transportmidler ble benyttet?',
-        verdier: [
-            { verdi: 'OFFENTLIG_TRANSPORT', label: 'Offentlig transport' },
-            { verdi: 'PRIVAT_BIL', label: 'Privat bil' },
-        ],
-        alternativer: ['Privat bil', 'Drosje', 'Offentlig transport'],
-    },
-    unntakFraOffentligTransport: {
-        årsaker: {
-            label: 'Hvorfor ikke offentlig transport?',
-            verdier: [{ verdi: 'DÅRLIG_TRANSPORTTILBUD', label: 'Dårlig transporttilbud' }],
-            alternativer: ['Dårlig transporttilbud', 'Helsemessige årsaker', 'Leving i bhg'],
-        },
-    },
-    offentligTransport: {
-        totalUtgifterOffentligTransport: {
-            verdi: '500',
-            label: 'Hva er totalutgiftene til offentlig transport til og fra samlingene?',
-        },
-    },
-    privatBil: {
-        benyttetEgenBil: {
-            label: 'Benyttet du egen bil?',
-            verdi: 'JA',
-            svarTekst: 'Ja',
-            alternativer: ['Ja', 'Nei'],
-        },
     },
 };

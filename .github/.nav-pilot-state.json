@@ -1,8 +1,8 @@
 {
   "collection": "nextjs-frontend",
-  "version": "2026.09.18-103546-54547e2",
+  "version": "2026.09.28-081152-6efd04e",
   "scope": "repo",
-  "source_sha": "54547e2",
+  "source_sha": "6efd04e",
   "installed_at": "2026-04-21T11:17:24Z",
   "files": [
     {
@@ -23,7 +23,7 @@
     },
     {
       "path": ".github/agents/nav-pilot.agent.md",
-      "hash": "edcfcf867dd98045"
+      "hash": "7c5e22547febef94"
     },
     {
       "path": ".github/agents/nav-pilot.metadata.json",
@@ -59,11 +59,11 @@
     },
     {
       "path": ".github/instructions/nextjs-aksel.instructions.md",
-      "hash": "75e0932dfe465508"
+      "hash": "342cce96431f6ca5"
     },
     {
       "path": ".github/instructions/performance.instructions.md",
-      "hash": "74be7b9e34c1681e"
+      "hash": "cde5b75a73890cbc"
     },
     {
       "path": ".github/instructions/testing.instructions.md",
@@ -75,15 +75,15 @@
     },
     {
       "path": ".github/instructions/accessibility.instructions.md",
-      "hash": "986ef7aa27d8a1d9"
+      "hash": "c3715d3fc2782a5b"
     },
     {
       "path": ".github/instructions/github-actions.instructions.md",
-      "hash": "bbef6f3e56b8b3b3"
+      "hash": "553b61e739b1430d"
     },
     {
       "path": ".github/instructions/docker.instructions.md",
-      "hash": "32db7a2f8aaab2ac"
+      "hash": "d29c19982baad0d4"
     },
     {
       "path": ".github/prompts/aksel-component.prompt.md",
@@ -91,11 +91,11 @@
     },
     {
       "path": ".github/prompts/nextjs-api-route.prompt.md",
-      "hash": "5f65db6b410ea3e6"
+      "hash": "f5344c834c5fb492"
     },
     {
       "path": ".github/prompts/nais-manifest.prompt.md",
-      "hash": "f90a562ca7f8233c"
+      "hash": "df650deedb8cf0f0"
     },
     {
       "path": ".github/skills/observability-debugging/",

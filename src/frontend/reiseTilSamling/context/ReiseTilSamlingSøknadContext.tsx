@@ -8,7 +8,6 @@ import {
     initialHarBekreftet,
     initialHovedytelse,
     initialAvreiseadresse,
-    initialReisemåte,
     initialSamlinger,
 } from './reiseTilSamlingInitialState';
 import {
@@ -18,7 +17,6 @@ import {
 } from '../../typer/skjema';
 import { Adresse, Avreiseadresse, Hovedytelse, Samling } from '../../typer/søknad';
 import { AktivitetReiseTilSamling, TilleggsopplysningerAnnenAktivitet } from '../typer/aktivitet';
-import { Reisemåte } from '../typer/reisemåte';
 
 const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseContext(() => {
     ReiseTilSamlingSøknadProvider.displayName = 'SØKNAD_REISE_TIL_SAMLING_PROVIDER';
@@ -28,7 +26,6 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
     const [aktivitet, settAktivitet] = useState<AktivitetReiseTilSamling>(initialAktivitet());
     const [samlinger, settSamlinger] = useState<Samling[]>(initialSamlinger());
     const [avreiseadresse, settAvreiseadresse] = useState<Avreiseadresse>(initialAvreiseadresse());
-    const [reisemåte, settReisemåte] = useState<Reisemåte | undefined>(initialReisemåte());
 
     const [dokumentasjon, settDokumentasjon] =
         useState<DokumentasjonFelt[]>(initialDokumentasjon());
@@ -39,7 +36,6 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         settAktivitet(initialAktivitet());
         settSamlinger(initialSamlinger());
         settAvreiseadresse(initialAvreiseadresse());
-        settReisemåte(initialReisemåte());
         settDokumentasjon(initialDokumentasjon());
     };
 
@@ -55,39 +51,41 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
             { type: VedleggstypeReiseTilSamling.BEKREFTELSE_SAMLINGER },
         ];
 
-        const transportmidlerBenyttet =
-            reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier.map((v) => v.verdi) ?? [];
+        const reisemåter = samlinger.map((samling) => samling.reisemåte);
+        const transportmidlerBenyttet = reisemåter.flatMap(
+            (reisemåte) =>
+                reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier.map((v) => v.verdi) ?? []
+        );
 
         if (transportmidlerBenyttet.includes('OFFENTLIG_TRANSPORT')) {
             behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
         }
 
         if (
-            reisemåte?.unntakFraOffentligTransport?.årsaker?.verdier.some(
-                (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
-            ) ||
-            reisemåte?.unntakFraPrivatBil?.verdier.some((v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER')
+            reisemåter.some(
+                (reisemåte) =>
+                    reisemåte?.unntakFraOffentligTransport?.årsaker?.verdier.some(
+                        (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
+                    ) ||
+                    reisemåte?.unntakFraPrivatBil?.verdier.some(
+                        (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
+                    )
+            )
         ) {
             behov.push({
                 type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING,
             });
         }
 
-        if (reisemåte?.drosje?.ønskerDekketUtgifterForDrosje?.verdi === 'JA') {
+        if (transportmidlerBenyttet.includes('DROSJE')) {
             behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_TAXI });
         }
-        if (reisemåte?.drosje?.harTTKort?.verdi === 'JA') {
+        if (reisemåter.some((reisemåte) => reisemåte?.drosje?.harTTKort?.verdi === 'JA')) {
             behov.push({ type: VedleggstypeReiseTilSamling.TT_KORT });
         }
 
         return behov;
-    }, [
-        reisemåte?.drosje?.harTTKort?.verdi,
-        reisemåte?.drosje?.ønskerDekketUtgifterForDrosje?.verdi,
-        reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier,
-        reisemåte?.unntakFraOffentligTransport?.årsaker?.verdier,
-        reisemåte?.unntakFraPrivatBil?.verdier,
-    ]);
+    }, [samlinger]);
 
     const oppdaterTilleggsopplysninger = (
         oppdatering: Partial<TilleggsopplysningerAnnenAktivitet>
@@ -127,8 +125,6 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         avreiseadresse,
         settAvreiseadresse,
         settAdresseDetSkalReisesFra,
-        reisemåte,
-        settReisemåte,
         dokumentasjonsbehov,
         dokumentasjon,
         settDokumentasjon,
