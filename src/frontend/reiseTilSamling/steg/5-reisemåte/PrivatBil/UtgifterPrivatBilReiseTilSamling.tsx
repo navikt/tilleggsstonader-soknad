@@ -9,7 +9,7 @@ import {
 } from './validering';
 import { Skillelinje } from '../../../../components/Skillelinje';
 import { LocaleHeading } from '../../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleRadioGroup } from '../../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleSelect } from '../../../../components/Teksthåndtering/LocaleSelect';
 import { LocaleTekst } from '../../../../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
@@ -122,9 +122,8 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
                 htmlSize={10}
             />
 
-            {/* TODO: Gjør om til select */}
             {skalSpørreOmDrivstoffType && (
-                <LocaleRadioGroup
+                <LocaleSelect
                     id={valideringsfeil[errorKeyPrivatBilUtgifterDrivstoffType]?.id}
                     tekst={reisemåteTekster.privat_bil_utgifter_drivstoff_type}
                     value={utgifterPrivatBil?.drivstoffType?.verdi ?? ''}

@@ -4,6 +4,7 @@ import {
     CheckboxGruppePåkrevd,
     InputFelt,
     RadiogruppePåkrevd,
+    SelectGruppePåkrevd,
     TekstElement,
 } from '../../typer/tekst';
 import {
@@ -29,7 +30,7 @@ interface ReisemåteInnhold {
     check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppePåkrevd<ÅrsakKanIkkeBenytteEgenBil>;
     privat_bil_utgifter_tittel: TekstElement<string>;
     privat_bil_utgifter_beskrivelse: TekstElement<string>;
-    privat_bil_utgifter_drivstoff_type: RadiogruppePåkrevd<DrivstoffType>;
+    privat_bil_utgifter_drivstoff_type: SelectGruppePåkrevd<DrivstoffType>;
     privat_bil_utgifter_bompenger: InputFelt;
     privat_bil_utgifter_ferge: InputFelt;
     privat_bil_utgifter_parkering: InputFelt;
