@@ -104,7 +104,9 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
         .getByRole('radiogroup', { name: 'Er samlingen obligatorisk?' })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvor lang reisevei har du?').fill('45');
+    await page
+        .getByLabel('Hvor mange kilometer er det mellom avreiseadresse og samlingsstedet?')
+        .fill('45');
 
     await page.getByLabel('Gateadresse').fill('Testveien 1');
     await page.getByLabel('Postnummer').fill('0123');
@@ -118,10 +120,8 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
 
     await forventIngenWcagViolations(page);
 
-    await page
-        .getByRole('radiogroup', { name: 'Kan du reise med offentlig transport?' })
-        .getByLabel('Ja')
-        .check();
+    await page.getByRole('checkbox', { name: 'Offentlig transport' }).check();
+
     await page
         .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingene?')
         .fill('500');
@@ -189,7 +189,9 @@ test('At privatbil-feil og -verdier nullstilles når privat bil skjules', async 
         .getByRole('radiogroup', { name: 'Er samlingen obligatorisk?' })
         .getByLabel('Ja')
         .check();
-    await page.getByLabel('Hvor lang reisevei har du?').fill('45');
+    await page
+        .getByLabel('Hvor mange kilometer er det mellom avreiseadresse og samlingsstedet?')
+        .fill('45');
     await page.getByLabel('Gateadresse').fill('Testveien 1');
     await page.getByLabel('Postnummer').fill('0123');
     await page.getByLabel('Poststed').fill('Oslo');
