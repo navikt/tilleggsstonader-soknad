@@ -173,7 +173,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     privat_bil_utgifter_ferge: {
         label: { nb: 'Totale fergeutgifter' },
-        feilmelding: { nb: 'Fergeutgifter må være et tall som er  større enn 0.' },
+        feilmelding: { nb: 'Fergeutgifter må være et tall som er større enn 0.' },
     },
     privat_bil_utgifter_parkering: {
         label: { nb: 'Totale parkeringsutgifter' },
