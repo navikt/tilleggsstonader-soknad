@@ -112,14 +112,6 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await page.getByLabel('Postnummer').fill('0123');
     await page.getByLabel('Poststed').fill('Oslo');
 
-    await page.getByRole('button', { name: 'Neste' }).click();
-    await fjernWebpackOverlay(page);
-
-    await expect(page).toHaveURL(`${urlSøknad}/reisemate`);
-    await expect(page.getByRole('heading', { name: 'Reisemåte' })).toBeVisible();
-
-    await forventIngenWcagViolations(page);
-
     await page.getByRole('checkbox', { name: 'Offentlig transport' }).check();
 
     await page
@@ -195,10 +187,6 @@ test('At privatbil-feil og -verdier nullstilles når privat bil skjules', async 
     await page.getByLabel('Gateadresse').fill('Testveien 1');
     await page.getByLabel('Postnummer').fill('0123');
     await page.getByLabel('Poststed').fill('Oslo');
-    await page.getByRole('button', { name: 'Neste' }).click();
-    await fjernWebpackOverlay(page);
-
-    await expect(page).toHaveURL(`${urlSøknad}/reisemate`);
 
     await page.getByRole('checkbox', { name: 'Offentlig transport' }).check();
     await page

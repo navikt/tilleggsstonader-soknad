@@ -1,3 +1,4 @@
+import { nullstilteReisemåteFeil, validerReisemåte } from './Reisemåte/validering';
 import { AdresseFeilIder, validerAdresse } from '../../../components/AdresseVelger/validering';
 import { Samling } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
@@ -37,6 +38,7 @@ export const nullstillteSamlingsfeil = (samlinger: Samling[]): Valideringsfeil =
             [errorKeyPostnummer(samling._id)]: undefined,
             [errorKeyPoststed(samling._id)]: undefined,
             [errorKeyAntallKm(samling._id)]: undefined,
+            ...nullstilteReisemåteFeil(samling._id),
         }),
         {}
     );
@@ -139,6 +141,8 @@ export const validerSamlingUnderRedigering = (
     if (!gjenbrukerAdresse) {
         feil = { ...feil, ...validerAdresseOgAvstand(samling, locale) };
     }
+
+    feil = { ...feil, ...validerReisemåte(samling.reisemåte, locale, samling._id) };
 
     return feil;
 };

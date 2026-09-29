@@ -14,6 +14,7 @@ import {
 } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
+import { Reisemåte as ReisemåteSamling } from './Reisemåte/Reisemåte';
 import { erReiseavstandUnder30km } from './util';
 import {
     adresseFeilIderForSamling,
@@ -77,12 +78,15 @@ export const NySamling: React.FC<{
     const oppdaterAdresse = (felt: Partial<Adresse>) =>
         oppdater(samling._id, 'adresse', { ...samling.adresse, ...felt });
 
+    const settReisemåte: React.Dispatch<React.SetStateAction<Samling['reisemåte']>> = (verdi) => {
+        const nesteReisemåte = typeof verdi === 'function' ? verdi(samling.reisemåte) : verdi;
+        oppdater(samling._id, 'reisemåte', nesteReisemåte);
+    };
+
     const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
         oppdaterAdresse(felt);
         nullstillFeil(felt[feltNavn]?.verdi, adresseFeilIder[feltNavn]);
     };
-
-    const gjenbrukerAdresse = !erFørste && samling._brukSammeAdresseSomForrige?.verdi === 'JA';
 
     const { datepickerProps: dpPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(samling.fom?.verdi),
@@ -176,7 +180,8 @@ export const NySamling: React.FC<{
                     />
                 )}
 
-                {!gjenbrukerAdresse && (
+                {(erFørste ||
+                    (!erFørste && samling._brukSammeAdresseSomForrige?.verdi === 'NEI')) && (
                     <>
                         <VStack gap="space-24">
                             <LocaleTextField
@@ -225,7 +230,11 @@ export const NySamling: React.FC<{
 
                 <Skillelinje />
 
-                {/* TODO: Spørsmål om reisemåte inn her */}
+                <ReisemåteSamling
+                    samlingId={samling._id}
+                    reisemåte={samling.reisemåte}
+                    settReisemåte={settReisemåte}
+                />
 
                 {onSlett && (
                     <HStack>
