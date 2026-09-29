@@ -88,8 +88,6 @@ export const NySamling: React.FC<{
         nullstillFeil(felt[feltNavn]?.verdi, adresseFeilIder[feltNavn]);
     };
 
-    const gjenbrukerAdresse = !erFørste && samling._brukSammeAdresseSomForrige?.verdi === 'JA';
-
     const { datepickerProps: dpPropsFom, inputProps: inputPropsFom } = useDatepicker({
         defaultSelected: nullableTilDato(samling.fom?.verdi),
         onDateChange: (val) => {
@@ -182,7 +180,8 @@ export const NySamling: React.FC<{
                     />
                 )}
 
-                {!gjenbrukerAdresse && (
+                {(erFørste ||
+                    (!erFørste && samling._brukSammeAdresseSomForrige?.verdi === 'NEI')) && (
                     <>
                         <VStack gap="space-24">
                             <LocaleTextField
