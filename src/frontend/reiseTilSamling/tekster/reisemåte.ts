@@ -43,6 +43,7 @@ interface ReisemåteInnhold {
     info_dårlig_transporttilbud_valg: TekstElement<string>;
     info_drosje_dokumentasjon: TekstElement<string>;
     radio_har_du_tt_kort: RadiogruppePåkrevd<JaNei>;
+    drosje_tittel: TekstElement<string>;
     info_tt_kort: TekstElement<string[]>;
     barnehage_adresse: InputFelt;
     barnehage_postnummer: InputFelt;
@@ -199,6 +200,9 @@ export const reisemåteTekster: ReisemåteInnhold = {
         },
         alternativer: JaNeiTilTekst,
         feilmelding: { nb: 'Du må svare på om du har TT-kort.' },
+    },
+    drosje_tittel: {
+        nb: 'Drosje',
     },
     info_tt_kort: {
         nb: [

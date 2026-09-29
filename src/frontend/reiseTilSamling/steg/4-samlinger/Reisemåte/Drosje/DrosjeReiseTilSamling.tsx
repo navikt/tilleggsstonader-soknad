@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { InlineMessage } from '@navikt/ds-react';
+import { InlineMessage, VStack } from '@navikt/ds-react';
 
 import { errorKeyHarTTKort } from './validering';
 import { Skillelinje } from '../../../../../components/Skillelinje';
+import { LocaleHeading } from '../../../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekstAvsnitt } from '../../../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
@@ -50,8 +51,9 @@ export const DrosjeReiseTilSamling: React.FC<{
     }
 
     return (
-        <>
+        <VStack gap="space-24">
             <Skillelinje />
+            <LocaleHeading tekst={reisemåteTekster.drosje_tittel} level="3" size="small" />
             <LocaleRadioGroup
                 id={valideringsfeil[errorKeyHarTTKort(samlingId)]?.id}
                 tekst={reisemåteTekster.radio_har_du_tt_kort}
@@ -64,6 +66,6 @@ export const DrosjeReiseTilSamling: React.FC<{
                     <LocaleTekstAvsnitt tekst={reisemåteTekster.info_tt_kort} />
                 </InlineMessage>
             )}
-        </>
+        </VStack>
     );
 };
