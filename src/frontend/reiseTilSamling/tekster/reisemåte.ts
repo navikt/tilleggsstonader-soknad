@@ -28,6 +28,8 @@ interface ReisemåteInnhold {
     egen_bil_tittel: TekstElement<string>;
     radio_kan_benytte_egen_bil: RadiogruppePåkrevd<JaNei>;
     check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppePåkrevd<ÅrsakKanIkkeBenytteEgenBil>;
+    privat_bil_strekning_kjørt: InputFelt;
+    privat_bil_km_kjørt: InputFelt;
     privat_bil_utgifter_tittel: TekstElement<string>;
     privat_bil_utgifter_beskrivelse: TekstElement<string>;
     privat_bil_utgifter_drivstoff_type: SelectGruppePåkrevd<DrivstoffType>;
@@ -145,6 +147,19 @@ export const reisemåteTekster: ReisemåteInnhold = {
             },
         },
         feilmelding: { nb: 'Du må oppgi hvorfor du ikke kan benytte egen bil.' },
+    },
+    privat_bil_strekning_kjørt: {
+        label: { nb: 'Hvilken del av reisen ble kjørt med privat bil?' },
+        description: {
+            nb: 'Oppgi alle strekninger dersom det var mer enn én del av reisen som ble kjørt med privat bil.',
+        },
+        feilmelding: {
+            nb: 'Du må oppgi hvilken del av strekningen som ble kjørt med privat bil.',
+        },
+    },
+    privat_bil_km_kjørt: {
+        label: { nb: 'Hvor mange kilometer kjørte du totalt med privat bil?' },
+        feilmelding: { nb: 'Du må oppgi hvor mange kilometer som ble kjørt med bil.' },
     },
     privat_bil_utgifter_tittel: {
         nb: 'Utgifter til kjøring med privat bil',
