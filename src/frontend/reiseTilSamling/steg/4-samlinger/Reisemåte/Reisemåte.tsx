@@ -39,6 +39,7 @@ export const Reisemåte: React.FC<{
                     samlingId={samlingId}
                     privatBil={reisemåte?.privatBil}
                     settReisemåte={settReisemåte}
+                    valgteTransportmidler={transportmidlerHuketAv}
                 />
             )}
             {transportmidlerHuketAv.includes('DROSJE') && (

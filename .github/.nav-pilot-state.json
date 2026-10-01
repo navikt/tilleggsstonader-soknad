@@ -1,13 +1,13 @@
 {
   "collection": "nextjs-frontend",
-  "version": "2026.09.28-081152-6efd04e",
+  "version": "2026.09.30-072123-4a3593b",
   "scope": "repo",
-  "source_sha": "6efd04e",
+  "source_sha": "4a3593b",
   "installed_at": "2026-04-21T11:17:24Z",
   "files": [
     {
       "path": ".github/agents/accessibility.agent.md",
-      "hash": "4ad090f6791eb845"
+      "hash": "03d2ec6ccc4a2101"
     },
     {
       "path": ".github/agents/accessibility.metadata.json",
@@ -15,15 +15,15 @@
     },
     {
       "path": ".github/agents/forfatter.agent.md",
-      "hash": "7647c85972f59fa7"
+      "hash": "aee2b3b98fa5ec39"
     },
     {
       "path": ".github/agents/forfatter.metadata.json",
-      "hash": "415648fcdc323588"
+      "hash": "b03b0a90c355fd33"
     },
     {
       "path": ".github/agents/nav-pilot.agent.md",
-      "hash": "7c5e22547febef94"
+      "hash": "c2ec92805bae041b"
     },
     {
       "path": ".github/agents/nav-pilot.metadata.json",
@@ -87,7 +87,7 @@
     },
     {
       "path": ".github/prompts/aksel-component.prompt.md",
-      "hash": "721f879cfd8e89da"
+      "hash": "fa646ea49f00e34e"
     },
     {
       "path": ".github/prompts/nextjs-api-route.prompt.md",

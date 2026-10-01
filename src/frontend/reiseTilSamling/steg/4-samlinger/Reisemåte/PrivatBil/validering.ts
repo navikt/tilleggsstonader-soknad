@@ -9,6 +9,10 @@ export const errorKeyPrivatBilBenyttetEgenBil = (samlingId: number) =>
     `samling_${samlingId}_reisemåte_privatbil_benyttet_egen_bil`;
 export const errorKeyPrivatBilBetalteForReiseSelv = (samlingId: number) =>
     `samling_${samlingId}_reisemåte_privatbil_betalte_for_reise_selv`;
+export const errorKeyPrivatBilStrekningHvorBilBleBenyttet = (samlingId: number) =>
+    `samling_${samlingId}_reisemåte_privatbil_strekning_hvor_bil_ble_benyttet`;
+export const errorKeyPrivatBilAntallKilometerKjørt = (samlingId: number) =>
+    `samling_${samlingId}_reisemåte_privatbil_antall_kilometer_kjort`;
 
 export const errorKeyPrivatBilUtgifterDrivstoffType = (samlingId: number) =>
     `samling_${samlingId}_reisemåte_privatbil_utgifter_drivstoff_type`;
@@ -29,52 +33,93 @@ export const nullstilteUtgifterPrivatBilFeil = (samlingId: number): Valideringsf
     [errorKeyPrivatBilUtgifterParkering(samlingId)]: undefined,
 });
 
+export const nullstilteInfoBilKunDelerAvStrekningFeil = (samlingId: number): Valideringsfeil => ({
+    [errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]: undefined,
+    [errorKeyPrivatBilAntallKilometerKjørt(samlingId)]: undefined,
+});
+
 export const nullstiltePrivatBilFeil = (samlingId: number): Valideringsfeil => ({
     [errorKeyPrivatBilBenyttetEgenBil(samlingId)]: undefined,
     [errorKeyPrivatBilBetalteForReiseSelv(samlingId)]: undefined,
+    ...nullstilteInfoBilKunDelerAvStrekningFeil(samlingId),
     ...nullstilteUtgifterPrivatBilFeil(samlingId),
 });
 
 export const validerPrivatBil = (
     privatBil: PrivatBilInfo | undefined,
     locale: Locale,
-    samlingId: number
+    samlingId: number,
+    skalReiseMedFlereTransportmidler: boolean
 ): Valideringsfeil => {
-    let feil: Valideringsfeil = {};
-
     if (!harVerdi(privatBil?.benyttetEgenBil?.verdi)) {
-        feil = {
-            ...feil,
+        return {
             [errorKeyPrivatBilBenyttetEgenBil(samlingId)]: {
                 id: errorKeyPrivatBilBenyttetEgenBil(samlingId),
                 melding: reisemåteTekster.radio_kan_benytte_egen_bil.feilmelding[locale],
             },
         };
-    } else {
-        if (privatBil?.benyttetEgenBil?.verdi === 'JA') {
-            feil = {
-                ...feil,
-                ...validerUtgifterPrivatBil(privatBil?.utgifterPrivatBil, locale, samlingId),
-            };
-        }
-        if (privatBil?.benyttetEgenBil?.verdi === 'NEI') {
-            if (!harVerdi(privatBil?.betalteForReisen?.verdi)) {
-                feil = {
-                    ...feil,
-                    [errorKeyPrivatBilBetalteForReiseSelv(samlingId)]: {
-                        id: errorKeyPrivatBilBetalteForReiseSelv(samlingId),
-                        melding: reisemåteTekster.radio_betaler_for_reise_selv.feilmelding[locale],
-                    },
-                };
-            } else if (privatBil?.betalteForReisen?.verdi === 'JA') {
-                feil = {
-                    ...feil,
-                    ...validerUtgifterPrivatBil(privatBil?.utgifterPrivatBil, locale, samlingId),
-                };
-            }
-        }
+    }
 
-        return feil;
+    if (
+        privatBil?.benyttetEgenBil?.verdi === 'NEI' &&
+        !harVerdi(privatBil?.betalteForReisen?.verdi)
+    ) {
+        return {
+            [errorKeyPrivatBilBetalteForReiseSelv(samlingId)]: {
+                id: errorKeyPrivatBilBetalteForReiseSelv(samlingId),
+                melding: reisemåteTekster.radio_betaler_for_reise_selv.feilmelding[locale],
+            },
+        };
+    }
+
+    if (
+        privatBil?.benyttetEgenBil?.verdi === 'JA' ||
+        (privatBil?.benyttetEgenBil?.verdi === 'NEI' && privatBil?.betalteForReisen?.verdi === 'JA')
+    ) {
+        return {
+            ...validerInfoBilKunDelerAvStrekning(
+                privatBil?.infoBilKunDelerAvStrekning,
+                locale,
+                samlingId,
+                skalReiseMedFlereTransportmidler
+            ),
+            ...validerUtgifterPrivatBil(privatBil?.utgifterPrivatBil, locale, samlingId),
+        };
+    }
+
+    return {};
+};
+
+const validerInfoBilKunDelerAvStrekning = (
+    infoBilKunDelerAvStrekning: PrivatBilInfo['infoBilKunDelerAvStrekning'],
+    locale: Locale,
+    samlingId: number,
+    skalReiseMedFlereTransportmidler: boolean
+): Valideringsfeil => {
+    if (!skalReiseMedFlereTransportmidler) {
+        return {};
+    }
+
+    let feil: Valideringsfeil = {};
+
+    if (!harVerdi(infoBilKunDelerAvStrekning?.strekningHvorBilBleBenyttet?.verdi)) {
+        feil = {
+            ...feil,
+            [errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]: {
+                id: errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId),
+                melding: reisemåteTekster.privat_bil_strekning_kjørt.feilmelding[locale],
+            },
+        };
+    }
+
+    if (!harVerdi(infoBilKunDelerAvStrekning?.antallKilometerKjørt?.verdi)) {
+        feil = {
+            ...feil,
+            [errorKeyPrivatBilAntallKilometerKjørt(samlingId)]: {
+                id: errorKeyPrivatBilAntallKilometerKjørt(samlingId),
+                melding: reisemåteTekster.privat_bil_km_kjørt.feilmelding[locale],
+            },
+        };
     }
 
     return feil;

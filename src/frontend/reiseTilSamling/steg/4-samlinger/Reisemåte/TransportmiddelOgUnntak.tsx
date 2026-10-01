@@ -69,6 +69,7 @@ export const TransportmiddelOgUnntak: React.FC<{
         // Nullstiller feil for de ulike grenene
         settValideringsfeil((prev) => ({
             ...prev,
+            [errorKeyHvilkeTransportmidlerBleBenyttet(samlingId)]: undefined,
             ...vurderOffentligTransportFelterForNullstilling(inkluderteTransportmidler, samlingId),
             ...vurderPrivatBilFelterForNullstillng(inkluderteTransportmidler, samlingId),
             ...vurderDrosjeFelterForNullstilling(inkluderteTransportmidler, samlingId),

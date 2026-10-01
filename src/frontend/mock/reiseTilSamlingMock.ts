@@ -42,10 +42,7 @@ export const mockSamlinger: Samling[] = [
         reisemåte: {
             hvilkeTransportmidlerBleBenyttet: {
                 label: 'Hvilke transportmidler ble benyttet?',
-                verdier: [
-                    { verdi: 'OFFENTLIG_TRANSPORT', label: 'Offentlig transport' },
-                    { verdi: 'PRIVAT_BIL', label: 'Privat bil' },
-                ],
+                verdier: [{ verdi: 'OFFENTLIG_TRANSPORT', label: 'Offentlig transport' }],
                 alternativer: ['Privat bil', 'Drosje', 'Offentlig transport'],
             },
             unntakFraOffentligTransport: {
@@ -63,14 +60,6 @@ export const mockSamlinger: Samling[] = [
                 totalUtgifterOffentligTransport: {
                     verdi: '500',
                     label: 'Hva er totalutgiftene til offentlig transport til og fra samlingene?',
-                },
-            },
-            privatBil: {
-                benyttetEgenBil: {
-                    label: 'Benyttet du egen bil?',
-                    verdi: 'JA',
-                    svarTekst: 'Ja',
-                    alternativer: ['Ja', 'Nei'],
                 },
             },
         },

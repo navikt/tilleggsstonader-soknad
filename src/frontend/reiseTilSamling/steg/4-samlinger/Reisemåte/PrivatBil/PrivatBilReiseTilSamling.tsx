@@ -4,8 +4,11 @@ import { VStack } from '@navikt/ds-react';
 
 import { UtgifterPrivatBilReiseTilSamling } from './UtgifterPrivatBilReiseTilSamling';
 import {
+    errorKeyPrivatBilAntallKilometerKjørt,
     errorKeyPrivatBilBenyttetEgenBil,
     errorKeyPrivatBilBetalteForReiseSelv,
+    errorKeyPrivatBilStrekningHvorBilBleBenyttet,
+    nullstilteInfoBilKunDelerAvStrekningFeil,
     nullstiltePrivatBilFeil,
     nullstilteUtgifterPrivatBilFeil,
 } from './validering';
@@ -13,22 +16,22 @@ import { AlertIkkeRett } from '../../../../../components/AlertIkkeRett';
 import { Skillelinje } from '../../../../../components/Skillelinje';
 import { LocaleHeading } from '../../../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleTextarea } from '../../../../../components/Teksthåndtering/LocaleTextarea';
+import { LocaleTextField } from '../../../../../components/Teksthåndtering/LocaleTextField';
+import { useSpråk } from '../../../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
-import { EnumFelt } from '../../../../../typer/skjema';
+import { EnumFelt, VerdiFelt } from '../../../../../typer/skjema';
 import { JaNei } from '../../../../../typer/søknad';
 import { reisemåteTekster } from '../../../../tekster/reisemåte';
 import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../../typer/reisemåte';
 
-/**
- * Oppfølgingsspørsmål/innhold når man skal benytte egen bil (eller sitter på med
- * andre og betaler for reisen selv): utgifter knyttet til bilbruk. Eier
- * `privatBil.utgifterPrivatBil`. Rendres av Reisemåte.tsx.
- */
 export const PrivatBilReiseTilSamling: React.FC<{
     samlingId: number;
     privatBil: PrivatBilInfo | undefined;
     settReisemåte: Dispatch<SetStateAction<Reisemåte | undefined>>;
-}> = ({ samlingId, privatBil, settReisemåte }) => {
+    valgteTransportmidler: string[];
+}> = ({ samlingId, privatBil, settReisemåte, valgteTransportmidler }) => {
+    const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const oppdaterBenyttetEgenBil = (enumFelt: EnumFelt<JaNei>) => {
@@ -52,7 +55,42 @@ export const PrivatBilReiseTilSamling: React.FC<{
         settValideringsfeil((prev) => ({
             ...prev,
             [errorKeyPrivatBilBetalteForReiseSelv(samlingId)]: undefined,
+            ...nullstilteInfoBilKunDelerAvStrekningFeil(samlingId),
             ...nullstilteUtgifterPrivatBilFeil(samlingId),
+        }));
+    };
+
+    const oppdaterStrekningHvorBilBleBenyttet = (felt: VerdiFelt<string>) => {
+        settReisemåte((prev) => ({
+            ...prev,
+            privatBil: {
+                ...prev?.privatBil,
+                infoBilKunDelerAvStrekning: {
+                    ...prev?.privatBil?.infoBilKunDelerAvStrekning,
+                    strekningHvorBilBleBenyttet: felt,
+                },
+            },
+        }));
+        settValideringsfeil((prev) => ({
+            ...prev,
+            [errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]: undefined,
+        }));
+    };
+
+    const oppdaterAntallKilometerKjørt = (felt: VerdiFelt<string>) => {
+        settReisemåte((prev) => ({
+            ...prev,
+            privatBil: {
+                ...prev?.privatBil,
+                infoBilKunDelerAvStrekning: {
+                    ...prev?.privatBil?.infoBilKunDelerAvStrekning,
+                    antallKilometerKjørt: felt,
+                },
+            },
+        }));
+        settValideringsfeil((prev) => ({
+            ...prev,
+            [errorKeyPrivatBilAntallKilometerKjørt(samlingId)]: undefined,
         }));
     };
 
@@ -65,6 +103,9 @@ export const PrivatBilReiseTilSamling: React.FC<{
             },
         }));
     };
+
+    const skalReiseMedFlereTransportmidler =
+        valgteTransportmidler.filter((t) => t !== 'PRIVAT_BIL').length > 0;
 
     const skalViseUtgifter =
         privatBil?.benyttetEgenBil?.verdi === 'JA' || privatBil?.betalteForReisen?.verdi === 'JA';
@@ -104,7 +145,46 @@ export const PrivatBilReiseTilSamling: React.FC<{
                     </VStack>
                 )}
             </VStack>
-            {/* TODO: Legg inn spørsmål om hvilken del av strekningen som er kjørt */}
+            {skalViseUtgifter && skalReiseMedFlereTransportmidler && (
+                <>
+                    <LocaleTextarea
+                        id={
+                            valideringsfeil[errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]
+                                ?.id
+                        }
+                        tekst={reisemåteTekster.privat_bil_strekning_kjørt}
+                        value={
+                            privatBil?.infoBilKunDelerAvStrekning?.strekningHvorBilBleBenyttet
+                                ?.verdi ?? ''
+                        }
+                        maxLength={100}
+                        onChange={oppdaterStrekningHvorBilBleBenyttet}
+                        error={
+                            valideringsfeil[errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]
+                                ?.melding
+                        }
+                    />
+                    <LocaleTextField
+                        id={valideringsfeil[errorKeyPrivatBilAntallKilometerKjørt(samlingId)]?.id}
+                        tekst={reisemåteTekster.privat_bil_km_kjørt}
+                        value={
+                            privatBil?.infoBilKunDelerAvStrekning?.antallKilometerKjørt?.verdi ?? ''
+                        }
+                        onChange={(e) =>
+                            oppdaterAntallKilometerKjørt({
+                                label: reisemåteTekster.privat_bil_km_kjørt.label[locale],
+                                verdi: e.target.value,
+                            })
+                        }
+                        error={
+                            valideringsfeil[errorKeyPrivatBilAntallKilometerKjørt(samlingId)]
+                                ?.melding
+                        }
+                        htmlSize={10}
+                        inputMode="numeric"
+                    />
+                </>
+            )}
 
             {skalViseUtgifter && (
                 <UtgifterPrivatBilReiseTilSamling

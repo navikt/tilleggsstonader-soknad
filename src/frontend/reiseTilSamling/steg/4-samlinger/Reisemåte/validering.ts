@@ -72,6 +72,10 @@ export const validerReisemåte = (
     }
 
     if (valgteTransportmidler.includes('PRIVAT_BIL')) {
+        const skalReiseMedFlereTransportmidler =
+            valgteTransportmidler.filter((transportmiddel) => transportmiddel !== 'PRIVAT_BIL')
+                .length > 0;
+
         feil = {
             ...feil,
             ...validerUnntakFraOffentligTransport(
@@ -79,7 +83,12 @@ export const validerReisemåte = (
                 locale,
                 samlingId
             ),
-            ...validerPrivatBil(reisemåte?.privatBil, locale, samlingId),
+            ...validerPrivatBil(
+                reisemåte?.privatBil,
+                locale,
+                samlingId,
+                skalReiseMedFlereTransportmidler
+            ),
         };
     }
 
