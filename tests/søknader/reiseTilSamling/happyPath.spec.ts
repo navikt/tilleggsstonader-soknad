@@ -117,6 +117,7 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await page
         .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingene?')
         .fill('500');
+
     await page.getByRole('button', { name: 'Neste' }).click();
     await fjernWebpackOverlay(page);
 
