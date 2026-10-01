@@ -13,6 +13,7 @@ export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
     GJENLEVENDEPENSJON: { nb: 'Gjenlevendepensjon / etterlattepensjon / omstillingsstønad' },
     UFØRETRYGD: { nb: 'Uføretrygd' },
     TILTAKSPENGER: { nb: 'Tiltakspenger' },
+    AKTIVITETSPENGER: { nb: 'Aktivitetspenger' },
     DAGPENGER: { nb: 'Dagpenger' },
     SYKEPENGER: { nb: 'Sykepenger' },
     KVALIFISERINGSSTØNAD: { nb: 'Kvalifiseringsstønad ' },
