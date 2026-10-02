@@ -5,7 +5,9 @@ import { InfoCard } from '@navikt/ds-react';
 import { useSpråk } from '../context/SpråkContext';
 import { TekstElement } from '../typer/tekst';
 
-export const AlertIkkeRett: React.FC<{ beskrivelse: TekstElement<string> }> = ({ beskrivelse }) => {
+export const AlertIkkeRett: React.FC<{ beskrivelse: TekstElement<string | string[]> }> = ({
+    beskrivelse,
+}) => {
     const { locale } = useSpråk();
     return (
         <InfoCard data-color="info">
