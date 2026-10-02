@@ -8,6 +8,7 @@ import {
     skalViseMåBetaleForReiseTilSkole,
 } from './synlighet';
 import { erLærlingEllerLiknendeTekster } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
+import { skalTaStillingTilAnnenAktivitet } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
@@ -45,6 +46,18 @@ export const validerAktivitetReiseTilSamling = (
                 [errorKeyValgteAktiviteter]: {
                     id: errorKeyValgteAktiviteter,
                     melding: aktivitetTekster.checkbox_velge_aktivitet_feilmelding[locale],
+                },
+            };
+        }
+        if (
+            skalTaStillingTilAnnenAktivitet(valgteAktiviteter) &&
+            !harVerdi(annenAktivitet?.verdi)
+        ) {
+            feil = {
+                ...feil,
+                [errorKeyAnnenAktivitet]: {
+                    id: errorKeyAnnenAktivitet,
+                    melding: aktivitetTekster.radio_annet.feilmelding[locale],
                 },
             };
         }
