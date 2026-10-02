@@ -3,10 +3,12 @@ import React from 'react';
 import { BodyShort, FormSummary } from '@navikt/ds-react';
 
 import { Answer, GruppertAnswer } from '../../../components/Oppsummering/Answer';
+import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { OppsummeringSvar } from '../../../components/Oppsummering/OppsummeringSvar';
 import { Samling } from '../../../typer/søknad';
 import { adressefelterTilVisning } from '../../../utils/adresseUtils';
 import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
+import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../typer/reisemåte';
 
 export const OppsummeringSamling: React.FC<{ samling: Samling }> = ({ samling }) => {
@@ -33,6 +35,7 @@ export const OppsummeringSamling: React.FC<{ samling: Samling }> = ({ samling })
                 </GruppertAnswer>
                 {samling.reisemåte && <ReisemåteOppsummering reisemåte={samling.reisemåte} />}
             </FormSummary.Answers>
+            <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.SAMLINGER} />
         </FormSummary>
     );
 };
