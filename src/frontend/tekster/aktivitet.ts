@@ -75,7 +75,7 @@ export interface AktivitetInnhold extends AktivitetInnholdFelles {
     radio_annet_lesmer: LesMer<InlineLenke>;
     radio_annet_lesmer_hva_betyr_alternativene: HvaBetyrAlternativene;
     hvilken_aktivitet: HvilkenAktivitet;
-    ingen_aktivitet_infoalert_innhold: IngenAktivitet;
+    ingen_aktivitet_infoalert_innhold?: IngenAktivitet;
     lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
     søker_fra_lesmer: LesMer<string[]>;
 }

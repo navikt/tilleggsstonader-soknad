@@ -24,6 +24,7 @@ interface AktivitetInnholdDagligAktivitet extends AktivitetInnhold {
     radio_må_betale_for_reise_til_skole: RadiogruppePåkrevd<JaNei>;
     radio_må_betale_for_reise_til_skole_alert_content: TekstElement<string>;
     radio_opplæring_for_voksne_alert_content: TekstElement<string>;
+    ingen_aktivitet_infoalert: TekstElement<string>;
 }
 
 export const AktivitetTypeTilTekst: Record<AnnenAktivitetType, TekstElement<string>> = {
@@ -88,14 +89,8 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
             'Som lærling kan du ha rett til støtte ved reise til samling selv om du mottar lønn.',
         ],
     },
-    ingen_aktivitet_infoalert_innhold: {
-        del1: {
-            nb: [
-                'Du kan fortsatt søke, men du kan få avslag hvis du ikke oppfyller vilkårene for støtten.',
-                'Merk deg at medisinsk behandling ikke gir rett til støtte ved reise til samling.',
-            ],
-        },
-        del2_lenker: [],
+    ingen_aktivitet_infoalert: {
+        nb: 'Ut i fra svarene dine ser det ikke ut som du deltar på arbeidsrettet aktivitet. Du kan fortsatt søke, men vil mest sannsynlig få avslag.',
     },
     radio_annet_lesmer: {
         header: { nb: 'Søke lengre tilbake enn 6 måneder?' },

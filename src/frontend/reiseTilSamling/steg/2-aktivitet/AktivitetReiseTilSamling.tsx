@@ -1,4 +1,4 @@
-import { Alert, BodyLong, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
+import { BodyLong, GuidePanel, Label, VStack } from '@navikt/ds-react';
 
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import {
@@ -28,7 +28,6 @@ import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleReadMoreMedChildren } from '../../../components/Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
@@ -345,16 +344,9 @@ export const AktivitetReiseTilSamling = () => {
                     )}
                     {annenAktivitetTypeUtdanning?.verdi ===
                         AktivitetTypeUtdanning.OPPLÆRING_FOR_VOKSNE && (
-                        <Alert variant={'info'}>
-                            <Heading size="small">
-                                <LocaleTekst
-                                    tekst={aktivitetTekster.radio_ikke_kvalifisert_tittel}
-                                />
-                            </Heading>
-                            <LocaleTekst
-                                tekst={aktivitetTekster.radio_opplæring_for_voksne_alert_content}
-                            />
-                        </Alert>
+                        <AlertIkkeRett
+                            beskrivelse={aktivitetTekster.radio_opplæring_for_voksne_alert_content}
+                        />
                     )}
                     {skalViseLønnetTiltak(annenAktivitetTypeUtdanning) && (
                         <LønnetTiltak
@@ -368,25 +360,7 @@ export const AktivitetReiseTilSamling = () => {
                 </>
             )}
             {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
-                <Alert variant={'info'}>
-                    <Heading size="small">
-                        <LocaleTekst tekst={aktivitetTekster.ingen_aktivitet_infoalert_title} />
-                    </Heading>
-                    <LocaleTekstAvsnitt
-                        tekst={aktivitetTekster.ingen_aktivitet_infoalert_innhold.del1}
-                    />
-                    <Box marginBlock="space-16" asChild>
-                        <List>
-                            {aktivitetTekster.ingen_aktivitet_infoalert_innhold.del2_lenker.map(
-                                (lenke, indeks) => (
-                                    <List.Item key={indeks}>
-                                        <LocaleInlineLenke tekst={lenke} />
-                                    </List.Item>
-                                )
-                            )}
-                        </List>
-                    </Box>
-                </Alert>
+                <AlertIkkeRett beskrivelse={aktivitetTekster.ingen_aktivitet_infoalert} />
             )}
         </Side>
     );
