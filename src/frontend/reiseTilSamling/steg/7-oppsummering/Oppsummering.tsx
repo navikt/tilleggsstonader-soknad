@@ -1,6 +1,6 @@
 import { AktivitetOppsummering } from './AktivitetOppsummering';
 import { AvreiseadresseOppsummering } from './AvreiseadresseOppsummering';
-import { SamlingerOppsummering } from './SamlingerOppsummering';
+import { OppsummeringSamling } from './SamlingerOppsummering';
 import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
@@ -32,7 +32,11 @@ export const Oppsummering = () => {
             )}
             {aktivitet && <AktivitetOppsummering aktivitet={aktivitet} />}
             {avreiseadresse && <AvreiseadresseOppsummering avreiseadresse={avreiseadresse} />}
-            <SamlingerOppsummering samlinger={samlinger} />
+            {samlinger.map((samling, index) => (
+                <>
+                    <OppsummeringSamling key={index} samling={samling} />
+                </>
+            ))}
             {dokumentasjonsbehov.length > 0 && (
                 <VedleggOppsummering
                     dokumentasjon={dokumentasjon}
