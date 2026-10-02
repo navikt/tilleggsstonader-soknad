@@ -1,6 +1,7 @@
 import {
     AktivitetInnhold,
     aktivitetTeksterFelles,
+    IngenAktivitet,
     plukkAktivitetTekster,
     tekstArbeidsrettedeAktiviteter,
 } from '../../tekster/aktivitet';
@@ -24,6 +25,7 @@ interface AktivitetInnholdReiseOppstartAvslutningHjemreise extends AktivitetInnh
     info_arbeidssøker_ingen_rett: TekstElement<string>;
     radio_har_barn_under_18_som_har_flyttet_med: Radiogruppe<JaNei>;
     radio_har_barn_under_18_som_har_flyttet_med_feilmelding: TekstElement<string>;
+    ingen_aktivitet_infoalert_innhold: IngenAktivitet;
 }
 
 export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise = {

@@ -1,6 +1,7 @@
 import {
     AktivitetInnhold,
     aktivitetTeksterFelles,
+    IngenAktivitet,
     plukkAktivitetTekster,
     tekstArbeidsrettedeAktiviteter,
 } from '../../tekster/aktivitet';
@@ -13,7 +14,11 @@ export const AktivitetTypeTilTekstPassAvBarn = plukkAktivitetTekster(
     AnnenAktivitetType.INGEN_AKTIVITET
 );
 
-export const aktivitetTekster: AktivitetInnhold = {
+interface AktivitetTekstPassAvBarn extends AktivitetInnhold {
+    ingen_aktivitet_infoalert_innhold: IngenAktivitet;
+}
+
+export const aktivitetTekster: AktivitetTekstPassAvBarn = {
     ...aktivitetTeksterFelles,
     søker_fra_lesmer: {
         header: { nb: 'Hvilken dato velger jeg?' },
