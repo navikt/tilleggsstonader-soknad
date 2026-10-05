@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Alert, Box, GuidePanel, Heading, Label, List, VStack } from '@navikt/ds-react';
+import { GuidePanel, Label } from '@navikt/ds-react';
 
 import {
     skalTaStillingTilBarnUnder18SomHarFlyttetMed,
@@ -20,13 +20,12 @@ import {
     skalTaStillingTilAnnenAktivitet,
     skalTaStillingTilRegisterAktiviteter,
 } from '../../../components/Aktivitet/registerAktivitetUtil';
+import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -275,112 +274,74 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                 />
             )}
             {!skalViseArbeidsrettedeAktiviteter && (
-                <>
-                    <div>
-                        <Label>
-                            <LocaleTekst
-                                tekst={aktivitetTekster.ingen_registrerte_aktiviterer_overskrift}
-                            ></LocaleTekst>
-                        </Label>
-                        <LesMerHvilkenAktivitet
-                            header={
-                                aktivitetTekster.hvilken_aktivitet.les_mer
-                                    .header_ingen_registrerte_aktiviteter
-                            }
-                        />
-                    </div>
-                    <AnnenArbeidsrettetAktivitet
-                        aktivitetTekster={aktivitetTekster}
-                        radioTekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
-                        oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
-                        annenAktivitet={annenAktivitet}
-                        feilmelding={valideringsfeil.annenAktivitet}
+                <div>
+                    <Label>
+                        <LocaleTekst
+                            tekst={aktivitetTekster.ingen_registrerte_aktiviterer_overskrift}
+                        ></LocaleTekst>
+                    </Label>
+                    <LesMerHvilkenAktivitet
+                        header={
+                            aktivitetTekster.hvilken_aktivitet.les_mer
+                                .header_ingen_registrerte_aktiviteter
+                        }
                     />
-                </>
+                </div>
             )}
-            {(skalViseAnnenAktivitet ||
-                skalViseLønnetTiltak ||
-                skalViseMåBoBorteHjemmefra ||
-                skalViseHarBarnUnder18SomHarFlyttetMed) && (
-                <UnderspørsmålContainer>
-                    <VStack gap="space-24">
-                        {skalViseAnnenAktivitet && (
-                            <AnnenArbeidsrettetAktivitet
-                                aktivitetTekster={aktivitetTekster}
-                                radioTekst={aktivitetTekster.radio_annet}
-                                oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
-                                annenAktivitet={annenAktivitet}
-                                feilmelding={valideringsfeil.annenAktivitet}
-                            />
-                        )}
-                        {skalViseLønnetTiltak && (
-                            <LønnetTiltak
-                                lønnetAktivitet={lønnetAktivitet}
-                                oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
-                                feilmelding={valideringsfeil.lønnetAktivitet}
-                                radioTekst={aktivitetTekster.radio_lønnet_tiltak}
-                                infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
-                            />
-                        )}
-                        {skalViseMåBoBorteHjemmefra && (
-                            <div>
-                                <LocaleRadioGroup
-                                    id={valideringsfeil.måBoBorteHjemmefra?.id}
-                                    tekst={aktivitetTekster.radio_må_bo_borte_hjemmefra}
-                                    value={måBoBorteHjemmefra?.verdi || []}
-                                    onChange={oppdaterMåBoBorteHjemmefra}
-                                    error={valideringsfeil.måBoBorteHjemmefra?.melding}
-                                ></LocaleRadioGroup>
-                                {måBoBorteHjemmefra?.verdi === 'NEI' && (
-                                    <Alert variant="info">
-                                        <LocaleTekst
-                                            tekst={aktivitetTekster.advarsel_må_bo_borte_hjemmefra}
-                                        />
-                                    </Alert>
-                                )}
-                            </div>
-                        )}
-                        {skalViseHarBarnUnder18SomHarFlyttetMed && (
-                            <div>
-                                <LocaleRadioGroup
-                                    id={valideringsfeil.harBarnUnder18SomHarFlyttetMed?.id}
-                                    tekst={
-                                        aktivitetTekster.radio_har_barn_under_18_som_har_flyttet_med
-                                    }
-                                    value={harBarnUnder18SomHarFlyttetMed?.verdi || []}
-                                    onChange={oppdaterHarBarnUnder18SomHarFlyttetMed}
-                                    error={valideringsfeil.harBarnUnder18SomHarFlyttetMed?.melding}
-                                ></LocaleRadioGroup>
-                            </div>
-                        )}
-                    </VStack>
-                </UnderspørsmålContainer>
+            {(!skalViseArbeidsrettedeAktiviteter || skalViseAnnenAktivitet) && (
+                <AnnenArbeidsrettetAktivitet
+                    aktivitetTekster={aktivitetTekster}
+                    radioTekst={aktivitetTekster.radio_annet_uten_registeraktivitet}
+                    oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                    annenAktivitet={annenAktivitet}
+                    feilmelding={valideringsfeil.annenAktivitet}
+                />
             )}
+
+            {skalViseLønnetTiltak && (
+                <LønnetTiltak
+                    lønnetAktivitet={lønnetAktivitet}
+                    oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
+                    feilmelding={valideringsfeil.lønnetAktivitet}
+                    radioTekst={aktivitetTekster.radio_lønnet_tiltak}
+                    infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
+                />
+            )}
+
+            {skalViseMåBoBorteHjemmefra && (
+                <div>
+                    <LocaleRadioGroup
+                        id={valideringsfeil.måBoBorteHjemmefra?.id}
+                        tekst={aktivitetTekster.radio_må_bo_borte_hjemmefra}
+                        value={måBoBorteHjemmefra?.verdi || []}
+                        onChange={oppdaterMåBoBorteHjemmefra}
+                        error={valideringsfeil.måBoBorteHjemmefra?.melding}
+                    ></LocaleRadioGroup>
+                    {måBoBorteHjemmefra?.verdi === 'NEI' && (
+                        <AlertIkkeRett
+                            beskrivelse={aktivitetTekster.advarsel_må_bo_borte_hjemmefra}
+                        />
+                    )}
+                </div>
+            )}
+
+            {skalViseHarBarnUnder18SomHarFlyttetMed && (
+                <div>
+                    <LocaleRadioGroup
+                        id={valideringsfeil.harBarnUnder18SomHarFlyttetMed?.id}
+                        tekst={aktivitetTekster.radio_har_barn_under_18_som_har_flyttet_med}
+                        value={harBarnUnder18SomHarFlyttetMed?.verdi || []}
+                        onChange={oppdaterHarBarnUnder18SomHarFlyttetMed}
+                        error={valideringsfeil.harBarnUnder18SomHarFlyttetMed?.melding}
+                    />
+                </div>
+            )}
+
             {annenAktivitet?.verdi === AnnenAktivitetType.ARBEIDSSØKER && (
-                <Alert variant={'info'}>
-                    <LocaleTekst tekst={aktivitetTekster.info_arbeidssøker_ingen_rett} />
-                </Alert>
+                <AlertIkkeRett beskrivelse={aktivitetTekster.info_arbeidssøker_ingen_rett} />
             )}
             {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
-                <Alert variant={'info'}>
-                    <Heading size="small">
-                        <LocaleTekst tekst={aktivitetTekster.ingen_aktivitet_infoalert_title} />
-                    </Heading>
-                    <LocaleTekstAvsnitt
-                        tekst={aktivitetTekster.ingen_aktivitet_infoalert_innhold.del1}
-                    />
-                    <Box marginBlock="space-16" asChild>
-                        <List>
-                            {aktivitetTekster.ingen_aktivitet_infoalert_innhold.del2_lenker.map(
-                                (lenke, indeks) => (
-                                    <List.Item key={indeks}>
-                                        <LocaleInlineLenke tekst={lenke} />
-                                    </List.Item>
-                                )
-                            )}
-                        </List>
-                    </Box>
-                </Alert>
+                <AlertIkkeRett beskrivelse={aktivitetTekster.ingen_aktivitet_infoalert_innhold} />
             )}
         </Side>
     );

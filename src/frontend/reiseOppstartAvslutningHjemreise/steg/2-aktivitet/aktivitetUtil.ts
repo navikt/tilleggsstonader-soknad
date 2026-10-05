@@ -6,7 +6,7 @@ export const skalTaStillingTilBorMidlertidigBorte = (
     annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined,
     valgteAktiviteter: EnumFlereValgFelt<string> | undefined
 ) => {
-    if (valgteAktiviteter != undefined && valgteAktiviteter.verdier.length > 0) {
+    if (harValgtEnRegisterAktivitet(valgteAktiviteter)) {
         return true;
     }
 
@@ -24,3 +24,7 @@ export const skalTaStillingTilBorMidlertidigBorte = (
 export const skalTaStillingTilBarnUnder18SomHarFlyttetMed = (
     måBoBorteHjemmefra: EnumFelt<JaNei> | undefined
 ) => måBoBorteHjemmefra?.verdi === 'JA';
+
+const harValgtEnRegisterAktivitet = (valgteAktiviteter: EnumFlereValgFelt<string> | undefined) =>
+    valgteAktiviteter != undefined &&
+    valgteAktiviteter.verdier.filter((aktivitet) => aktivitet.verdi !== 'ANNET').length > 0;

@@ -1,7 +1,6 @@
 import {
     AktivitetInnhold,
     aktivitetTeksterFelles,
-    IngenAktivitet,
     plukkAktivitetTekster,
     tekstArbeidsrettedeAktiviteter,
 } from '../../tekster/aktivitet';
@@ -25,7 +24,7 @@ interface AktivitetInnholdReiseOppstartAvslutningHjemreise extends AktivitetInnh
     info_arbeidssøker_ingen_rett: TekstElement<string>;
     radio_har_barn_under_18_som_har_flyttet_med: Radiogruppe<JaNei>;
     radio_har_barn_under_18_som_har_flyttet_med_feilmelding: TekstElement<string>;
-    ingen_aktivitet_infoalert_innhold: IngenAktivitet;
+    ingen_aktivitet_infoalert_innhold: TekstElement<string>;
 }
 
 export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise = {
@@ -71,10 +70,7 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         ],
     },
     ingen_aktivitet_infoalert_innhold: {
-        del1: {
-            nb: ['Du kan fortsatt søke, men du kan få avslag.'],
-        },
-        del2_lenker: [],
+        nb: 'Ut i fra svarene dine ser det ikke ut som du deltar på arbeidsrettet aktivitet. Du kan fortsatt søke, men vil mest sannsynlig få avslag.',
     },
     radio_annet_lesmer: {
         header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
@@ -123,7 +119,7 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         nb: 'Du må svare på om du må bo borte hjemmefra for å delta på aktiviteten.',
     },
     advarsel_må_bo_borte_hjemmefra: {
-        nb: 'For å ha rett på pengestøtte til reise ved oppstart, avslutning eller hjemreise må man midlertidig bo borte hjemmefra på grunn av deltakelse på arbeidsrettet aktivitet. Du kan fortsatt søke, men det kan hende du får avslag.',
+        nb: 'Ut fra svarene dine ser det ut som du ikke må bo midlertidig borte hjemmefra på grunn av deltakelse på arbeidsrettet aktivitet. Da har du ikke rett på pengestøtte til reise ved oppstart, avslutning og hjemreiser. Du kan fortsatt søke, men det kan hende du får avslag.',
     },
     info_arbeidssøker_ingen_rett: {
         nb: 'Som arbeidssøker har du ikke rett på denne stønaden. Du kan fortsatt søke, men det kan hende du får avslag.',
