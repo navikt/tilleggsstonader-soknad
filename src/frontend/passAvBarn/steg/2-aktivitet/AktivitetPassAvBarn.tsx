@@ -21,7 +21,6 @@ import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeadin
 import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -198,28 +197,26 @@ export const AktivitetPassAvBarn = () => {
                 </>
             )}
             {(skalViseAnnenAktivitet || skalViseLønnetTiltak) && (
-                <UnderspørsmålContainer>
-                    <VStack gap="space-24">
-                        {skalViseAnnenAktivitet && (
-                            <AnnenArbeidsrettetAktivitet
-                                aktivitetTekster={aktivitetTekster}
-                                radioTekst={aktivitetTekster.radio_annet}
-                                oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
-                                annenAktivitet={annenAktivitet}
-                                feilmelding={valideringsfeil.annenAktivitet}
-                            />
-                        )}
-                        {skalViseLønnetTiltak && (
-                            <LønnetTiltak
-                                lønnetAktivitet={lønnetAktivitet}
-                                oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
-                                feilmelding={valideringsfeil.lønnetAktivitet}
-                                radioTekst={aktivitetTekster.radio_lønnet_tiltak}
-                                infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
-                            />
-                        )}
-                    </VStack>
-                </UnderspørsmålContainer>
+                <VStack gap="space-24">
+                    {skalViseAnnenAktivitet && (
+                        <AnnenArbeidsrettetAktivitet
+                            aktivitetTekster={aktivitetTekster}
+                            radioTekst={aktivitetTekster.radio_annet}
+                            oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                            annenAktivitet={annenAktivitet}
+                            feilmelding={valideringsfeil.annenAktivitet}
+                        />
+                    )}
+                    {skalViseLønnetTiltak && (
+                        <LønnetTiltak
+                            lønnetAktivitet={lønnetAktivitet}
+                            oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}
+                            feilmelding={valideringsfeil.lønnetAktivitet}
+                            radioTekst={aktivitetTekster.radio_lønnet_tiltak}
+                            infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
+                        />
+                    )}
+                </VStack>
             )}
             {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
                 <Alert variant={'info'}>

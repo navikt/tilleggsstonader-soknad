@@ -25,6 +25,7 @@ import { AnnenArbeidsrettetAktivitet } from '../../../components/Aktivitet/Annen
 import { ArbeidsrettedeAktiviteter } from '../../../components/Aktivitet/ArbeidsrettedeAktiviteter';
 import { ErLærlingEllerLiknende } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
 import { LønnetTiltak } from '../../../components/Aktivitet/LønnetTiltak';
+import { skalTaStillingTilAnnenAktivitet } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
@@ -67,35 +68,60 @@ export const AktivitetReiseTilSamling = () => {
     const oppdaterValgteAktiviteter = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
         oppdaterAktivitet({
             aktiviteter: nyeValgteAktiviteter,
-            annenAktivitet: undefined,
-            lønnetAktivitet: undefined,
-            annenAktivitetTypeUtdanning: undefined,
         });
+
+        const harValgtAnnet = nyeValgteAktiviteter?.verdier.some(
+            (aktivitet) => aktivitet.verdi === 'ANNET'
+        );
+
+        const harValgtAktivitet = nyeValgteAktiviteter?.verdier.some(
+            (aktivitet) => aktivitet.verdi !== 'ANNET'
+        );
+
+        if (
+            (harValgtAnnet && annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET) ||
+            (!harValgtAktivitet && !harValgtAnnet)
+        ) {
+            oppdaterAktivitet({
+                annenAktivitetTypeUtdanning: undefined,
+                lønnetAktivitet: undefined,
+            });
+
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                [errorKeyAnnenAktivitetTypeUtdanning]: undefined,
+                [errorKeyLønnetAktivitet]: undefined,
+            }));
+
+            nullstillTilleggsopplysninger();
+        }
+
+        if (!harValgtAnnet) {
+            oppdaterAktivitet({
+                annenAktivitet: undefined,
+            });
+
+            settValideringsfeil((prevState) => ({
+                ...prevState,
+                [errorKeyAnnenAktivitet]: undefined,
+            }));
+        }
 
         settValideringsfeil((prevState) => ({
             ...prevState,
             [errorKeyValgteAktiviteter]: undefined,
-            [errorKeyAnnenAktivitet]: undefined,
-            [errorKeyLønnetAktivitet]: undefined,
         }));
-
-        nullstillTilleggsopplysninger();
     };
 
     const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenAktivitetType>) => {
         oppdaterAktivitet({
             annenAktivitet: verdi,
-            aktiviteter: undefined,
-            lønnetAktivitet: undefined,
-            annenAktivitetTypeUtdanning: undefined,
         });
+
         settValideringsfeil((prevState) => ({
             ...prevState,
-            [errorKeyValgteAktiviteter]: undefined,
             [errorKeyAnnenAktivitet]: undefined,
-            [errorKeyLønnetAktivitet]: undefined,
         }));
-        nullstillTilleggsopplysninger();
     };
 
     const oppdaterLønnetAktivitet = (verdi: EnumFelt<JaNei>) => {
@@ -180,6 +206,7 @@ export const AktivitetReiseTilSamling = () => {
     const erUnder25År = aktivitet?.tilleggsopplysningerAnnenAktivitet?.erUnder25År;
     const måBetaleForReiseTilSkole =
         aktivitet?.tilleggsopplysningerAnnenAktivitet?.måBetaleForReiseTilSkole;
+    const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
 
     return (
         <Side validerSteg={kanFortsette}>
@@ -187,7 +214,7 @@ export const AktivitetReiseTilSamling = () => {
             <GuidePanel>
                 <LocaleTekstAvsnitt tekst={aktivitetTekster.guide_innhold} />
             </GuidePanel>
-            {skalViseArbeidsrettedeAktiviteter(registerAktiviteter) && (
+            {skalViseArbeidsrettedeAktiviteter(registerAktiviteter) ? (
                 <ArbeidsrettedeAktiviteter
                     spørsmål={aktivitetTekster.hvilken_aktivitet.spm}
                     lesMer={
@@ -200,8 +227,7 @@ export const AktivitetReiseTilSamling = () => {
                     valgteAktiviteter={valgteAktiviteter}
                     feilmelding={valideringsfeil[errorKeyValgteAktiviteter]}
                 />
-            )}
-            {!skalViseArbeidsrettedeAktiviteter(registerAktiviteter) && (
+            ) : (
                 <>
                     <div>
                         <Label>
@@ -225,6 +251,16 @@ export const AktivitetReiseTilSamling = () => {
                     />
                 </>
             )}
+            {skalViseAnnenAktivitet && (
+                <AnnenArbeidsrettetAktivitet
+                    aktivitetTekster={aktivitetTekster}
+                    radioTekst={aktivitetTekster.radio_annet}
+                    oppdaterAnnenAktivitet={oppdaterAnnenAktivitet}
+                    annenAktivitet={annenAktivitet}
+                    feilmelding={valideringsfeil[errorKeyAnnenAktivitet]}
+                />
+            )}
+
             {skalViseAktivitetTypeUtdanningValg(annenAktivitet, valgteAktiviteter) && (
                 <>
                     <LocaleRadioGroup
@@ -359,9 +395,10 @@ export const AktivitetReiseTilSamling = () => {
                     )}
                 </>
             )}
-            {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
-                <AlertIkkeRett beskrivelse={aktivitetTekster.ingen_aktivitet_infoalert} />
-            )}
+            {valgteAktiviteter?.verdier.every((aktivitet) => aktivitet.verdi === 'ANNET') &&
+                annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
+                    <AlertIkkeRett beskrivelse={aktivitetTekster.ingen_aktivitet_infoalert} />
+                )}
         </Side>
     );
 };

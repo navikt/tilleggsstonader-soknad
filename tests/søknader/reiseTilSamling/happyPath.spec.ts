@@ -61,6 +61,11 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await forventIngenWcagViolations(page);
 
     await page.getByLabel('Type navn: 2. februar 2025 - 2. februar 2025').check();
+    await page.getByLabel('Annet').check();
+    await page
+        .getByRole('radiogroup', { name: 'Hvilken annen type arbeidsrettet aktivitet har du?' })
+        .getByLabel('Utdanning godkjent av Nav')
+        .check();
     await page
         .getByRole('radiogroup', { name: 'Hva slags type arbeidsrettet aktivitet går du på?' })
         .getByLabel('Videregående skole')
