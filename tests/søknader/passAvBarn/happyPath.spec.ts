@@ -139,7 +139,7 @@ test('At enkel gjennomkjøring av tilsyn barn fungerer', async ({ page }) => {
     await forventIngenWcagViolations(page);
 });
 
-test('Velger hovedytelse Tiltakspenger som trigger ekstra spørsmål koblet til arbeid utenfor Norge', async ({
+test('Velger ingen pengestøtte, men nedsatt arbeidsevne som trigger ekstra spørsmål koblet til arbeid utenfor Norge', async ({
     page,
 }) => {
     await page.goto(PassAvBarnUrls.START);
@@ -152,7 +152,7 @@ test('Velger hovedytelse Tiltakspenger som trigger ekstra spørsmål koblet til 
     await klikkPåKnapp(page, 'Start søknad');
 
     await expect(page).toHaveURL(PassAvBarnUrls.DIN_SITUASJON);
-    await page.getByLabel('Tiltakspenger').check();
+    await page.getByLabel('Mottar ingen pengestøtte, men har nedsatt arbeidsevne').check();
     await page
         .getByRole('radiogroup', { name: 'Jobber du i et annet land enn Norge?' })
         .getByLabel('Ja')
