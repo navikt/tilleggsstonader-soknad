@@ -26,7 +26,7 @@ export const samlingerTekster: SamlingerInnhold = {
         nb: 'Din reise',
     },
     guide_tekst: {
-        nb: 'Oppgi informasjon om reisen din, og benytt  deg av billigste reise måte, med offentlig transport som fly, buss, tog, trikk, ferge og lignende. Du må ha gjennomført reisen for å få den innvilget.  Hvis du har reist til flere samlinger kan disse legges til med knappen “Legg til reise”.  Du kan søke for reiser gjennomført inntil 6 måneder tilbake i tid.',
+        nb: 'Oppgi informasjon om reisen din, og benytt deg av billigste reisemåte, med offentlig transport som fly, buss, tog, trikk, ferge og lignende. Du må ha gjennomført reisen for å få den innvilget. Hvis du har reist til flere samlinger kan disse legges til med knappen “Legg til reise”.  Du kan søke for reiser gjennomført inntil 6 måneder tilbake i tid.',
     },
     dato: {
         label: { nb: 'Periode for reisen' },
@@ -47,7 +47,7 @@ export const samlingerTekster: SamlingerInnhold = {
     },
     radio_samling_obligatorisk: {
         header: {
-            nb: 'Var samlingen obligatorisk?',
+            nb: 'Er samlingen obligatorisk?',
         },
         alternativer: JaNeiTilTekst,
         feilmelding: { nb: 'Du må velge om samlingen er obligatorisk eller ikke.' },
