@@ -70,7 +70,18 @@ export const AktivitetReiseTilSamling = () => {
             aktiviteter: nyeValgteAktiviteter,
         });
 
-        const nullstillAvhengigheter = () => {
+        const harValgtAnnet = nyeValgteAktiviteter?.verdier.some(
+            (aktivitet) => aktivitet.verdi === 'ANNET'
+        );
+
+        const harValgtAktivitet = nyeValgteAktiviteter?.verdier.some(
+            (aktivitet) => aktivitet.verdi !== 'ANNET'
+        );
+
+        if (
+            (harValgtAnnet && annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET) ||
+            (!harValgtAktivitet && !harValgtAnnet)
+        ) {
             oppdaterAktivitet({
                 annenAktivitetTypeUtdanning: undefined,
                 lønnetAktivitet: undefined,
@@ -83,18 +94,6 @@ export const AktivitetReiseTilSamling = () => {
             }));
 
             nullstillTilleggsopplysninger();
-        };
-
-        const harValgtAnnet = nyeValgteAktiviteter?.verdier.some(
-            (aktivitet) => aktivitet.verdi === 'ANNET'
-        );
-
-        const harValgtAktivitet = nyeValgteAktiviteter?.verdier.some(
-            (aktivitet) => aktivitet.verdi !== 'ANNET'
-        );
-
-        if (harValgtAnnet && annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET) {
-            nullstillAvhengigheter();
         }
 
         if (!harValgtAnnet) {
@@ -106,10 +105,6 @@ export const AktivitetReiseTilSamling = () => {
                 ...prevState,
                 [errorKeyAnnenAktivitet]: undefined,
             }));
-        }
-
-        if (!harValgtAktivitet && !harValgtAnnet) {
-            nullstillAvhengigheter();
         }
 
         settValideringsfeil((prevState) => ({
