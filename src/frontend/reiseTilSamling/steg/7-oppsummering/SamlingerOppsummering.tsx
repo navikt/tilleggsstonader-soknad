@@ -5,35 +5,48 @@ import { BodyShort, FormSummary } from '@navikt/ds-react';
 import { Answer, GruppertAnswer } from '../../../components/Oppsummering/Answer';
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { OppsummeringSvar } from '../../../components/Oppsummering/OppsummeringSvar';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { Samling } from '../../../typer/søknad';
 import { adressefelterTilVisning } from '../../../utils/adresseUtils';
 import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
+import { oppsummeringTekster } from '../../tekster/oppsummering';
 import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../typer/reisemåte';
 
-export const OppsummeringSamling: React.FC<{ samling: Samling }> = ({ samling }) => {
-    const adresse = adressefelterTilVisning({
-        gateadresse: samling.adresse?.gateadresse?.verdi,
-        postnummer: samling.adresse?.postnummer?.verdi,
-        poststed: samling.adresse?.poststed?.verdi,
-        land: samling.adresse?.land?.verdi,
-    });
-
+export const SamlingerOppsummering: React.FC<{ samlinger: Samling[] }> = ({ samlinger }) => {
     return (
         <FormSummary>
             <FormSummary.Header>
                 <FormSummary.Heading level="3">
-                    Reise til samling (
-                    {formaterPeriodeTekstlig(samling.fom?.verdi, samling.tom?.verdi)})
+                    <LocaleTekst tekst={oppsummeringTekster.samlinger_tittel} />
                 </FormSummary.Heading>
             </FormSummary.Header>
             <FormSummary.Answers>
-                <GruppertAnswer label="Informasjon om samlingen">
-                    <Answer label="Adresse">{adresse}</Answer>
-                    <OppsummeringSvar felt={samling.erObligatorisk} />
-                    <OppsummeringSvar felt={samling.antallKilometerEnVei} valuePostfix="km" />
-                </GruppertAnswer>
-                {samling.reisemåte && <ReisemåteOppsummering reisemåte={samling.reisemåte} />}
+                {samlinger.map((samling, index) => {
+                    const adresse = adressefelterTilVisning({
+                        gateadresse: samling.adresse?.gateadresse?.verdi,
+                        postnummer: samling.adresse?.postnummer?.verdi,
+                        poststed: samling.adresse?.poststed?.verdi,
+                        land: samling.adresse?.land?.verdi,
+                    });
+
+                    return (
+                        <GruppertAnswer
+                            label={`Reise til samling (${formaterPeriodeTekstlig(samling.fom?.verdi, samling.tom?.verdi)})`}
+                            key={index}
+                        >
+                            <Answer label="Adresse">{adresse}</Answer>
+                            <OppsummeringSvar felt={samling.erObligatorisk} />
+                            <OppsummeringSvar
+                                felt={samling.antallKilometerEnVei}
+                                valuePostfix="km"
+                            />
+                            {samling.reisemåte && (
+                                <ReisemåteOppsummering reisemåte={samling.reisemåte} />
+                            )}
+                        </GruppertAnswer>
+                    );
+                })}
             </FormSummary.Answers>
             <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.SAMLINGER} />
         </FormSummary>
@@ -59,43 +72,40 @@ const ReisemåteOppsummering: React.FC<{ reisemåte: Reisemåte }> = ({ reisemå
 
     return (
         <>
-            <GruppertAnswer label="Reisemåte">
-                <OppsummeringSvar felt={hvilkeTransportmidlerBleBenyttet} />
+            <OppsummeringSvar felt={hvilkeTransportmidlerBleBenyttet} />
 
-                {unntakFraOffentligTransport && (
-                    <Answer label={unntakFraOffentligTransport?.årsaker?.label || ''}>
+            {unntakFraOffentligTransport && (
+                <FormSummary.Answer>
+                    <FormSummary.Label>
+                        {unntakFraOffentligTransport?.årsaker?.label || ''}
+                    </FormSummary.Label>
+                    <FormSummary.Value>
                         {unntakFraOffentligTransport?.årsaker?.verdier
                             .map((verdi) => verdi.label)
                             .join(', ')}
-                        <br />
-                        {unntakFraOffentligTransport?.leveringOgHentingIBarnehage &&
-                            'Adresse barnehage: ' + adresseBarnehage}
-                    </Answer>
-                )}
+                    </FormSummary.Value>
+                    {unntakFraOffentligTransport?.leveringOgHentingIBarnehage && (
+                        <FormSummary.Value>Adresse barnehage: {adresseBarnehage}</FormSummary.Value>
+                    )}
+                </FormSummary.Answer>
+            )}
 
-                <OppsummeringSvar felt={unntakFraPrivatBil} />
-            </GruppertAnswer>
+            <OppsummeringSvar felt={unntakFraPrivatBil} />
 
             {offentligTransport && (
-                <GruppertAnswer label="Offentlig transport">
-                    <OppsummeringSvar felt={offentligTransport.totalUtgifterOffentligTransport} />
-                </GruppertAnswer>
+                <OppsummeringSvar felt={offentligTransport.totalUtgifterOffentligTransport} />
             )}
 
             {privatBil && <PrivatBilInfoOppsummering privatBil={privatBil} />}
 
-            {drosje && (
-                <GruppertAnswer label="Drosje">
-                    <OppsummeringSvar felt={drosje.harTTKort} />
-                </GruppertAnswer>
-            )}
+            {drosje && <OppsummeringSvar felt={drosje.harTTKort} />}
         </>
     );
 };
 
 const PrivatBilInfoOppsummering: React.FC<{ privatBil: PrivatBilInfo }> = ({ privatBil }) => {
     return (
-        <GruppertAnswer label="Privat bil">
+        <>
             <OppsummeringSvar felt={privatBil.benyttetEgenBil} />
             <OppsummeringSvar felt={privatBil.betalteForReisen} />
             <OppsummeringSvar
@@ -105,11 +115,10 @@ const PrivatBilInfoOppsummering: React.FC<{ privatBil: PrivatBilInfo }> = ({ pri
             <OppsummeringSvar
                 felt={privatBil.infoBilKunDelerAvStrekning?.strekningHvorBilBleBenyttet}
             />
-
             {privatBil.utgifterPrivatBil && (
                 <OppsummeringUtgifterPrivatBil utgifter={privatBil.utgifterPrivatBil} />
             )}
-        </GruppertAnswer>
+        </>
     );
 };
 
