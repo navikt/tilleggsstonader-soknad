@@ -85,11 +85,11 @@ export const AktivitetReiseTilSamling = () => {
             nullstillTilleggsopplysninger();
         };
 
-        const harValgtAnnet = valgteAktiviteter?.verdier.some(
+        const harValgtAnnet = nyeValgteAktiviteter?.verdier.some(
             (aktivitet) => aktivitet.verdi === 'ANNET'
         );
 
-        const harValgtAktivitet = valgteAktiviteter?.verdier.some(
+        const harValgtAktivitet = nyeValgteAktiviteter?.verdier.some(
             (aktivitet) => aktivitet.verdi !== 'ANNET'
         );
 
