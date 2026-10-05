@@ -70,7 +70,7 @@ export const AktivitetReiseTilSamling = () => {
             aktiviteter: nyeValgteAktiviteter,
         });
 
-        const nullStillAltUnder = () => {
+        const nullstillAvhengigheter = () => {
             oppdaterAktivitet({
                 annenAktivitetTypeUtdanning: undefined,
                 lønnetAktivitet: undefined,
@@ -94,7 +94,7 @@ export const AktivitetReiseTilSamling = () => {
         );
 
         if (harValgtAnnet && annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET) {
-            nullStillAltUnder();
+            nullstillAvhengigheter();
         }
 
         if (!harValgtAnnet) {
@@ -109,7 +109,7 @@ export const AktivitetReiseTilSamling = () => {
         }
 
         if (!harValgtAktivitet && !harValgtAnnet) {
-            nullStillAltUnder();
+            nullstillAvhengigheter();
         }
 
         settValideringsfeil((prevState) => ({
