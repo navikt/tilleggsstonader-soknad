@@ -16,6 +16,7 @@ export function getDecoratedHtml(path: string) {
             simple: true,
             redirectToApp: true,
             level: 'Level4',
+            teamName: 'tilleggsstonader',
         },
     });
 }
