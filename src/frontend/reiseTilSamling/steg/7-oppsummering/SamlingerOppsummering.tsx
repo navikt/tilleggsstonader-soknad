@@ -33,7 +33,7 @@ export const SamlingerOppsummering: React.FC<{ samlinger: Samling[] }> = ({ saml
                     return (
                         <GruppertAnswer
                             label={`Reise til samling (${formaterPeriodeTekstlig(samling.fom?.verdi, samling.tom?.verdi)})`}
-                            key={index}
+                            key={samling._id}
                         >
                             <Answer label="Adresse">{adresse}</Answer>
                             <OppsummeringSvar felt={samling.erObligatorisk} />
