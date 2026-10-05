@@ -4,16 +4,15 @@ import { useReiseOppstartAvslutningHjemreiseSøknad } from './context/ReiseOppst
 import { Forside } from './Forside';
 import { HovedytelseReiseOppstartAvslutningHjemreise } from './steg/1-hovedytelse/HovedytelseReiseOppstartAvslutningHjemreise';
 import { AktivitetReiseOppstartAvslutningHjemreise } from './steg/2-aktivitet/AktivitetReiseOppstartAvslutningHjemreise';
-import { NesteStegReiseOppstartAvslutningHjemreise } from './steg/3-neste-steg/NesteStegReiseOppstartAvslutningHjemreise';
+import { Oppsummering } from './steg/3-oppsummering/Oppsummering';
 import { forsideTekster } from './tekster/forside';
 import { StegRoute, Søknadsdialog as SøknadsdialogShell } from '../components/Søknadsdialog';
 import { Skjematype } from '../typer/skjematyper';
 
-// TODO: steg utover hovedytelse/aktivitet bygges ut i senere PR-er, se NesteStegReiseOppstartAvslutningHjemreise
 const steg: StegRoute[] = [
     { path: '/hovedytelse', element: <HovedytelseReiseOppstartAvslutningHjemreise /> },
     { path: '/aktivitet', element: <AktivitetReiseOppstartAvslutningHjemreise /> },
-    { path: '/neste-steg', element: <NesteStegReiseOppstartAvslutningHjemreise /> },
+    { path: '/oppsummering', element: <Oppsummering /> },
 ];
 
 export const Søknadsdialog: React.FC = () => {
