@@ -22,7 +22,7 @@ export const SamlingerOppsummering: React.FC<{ samlinger: Samling[] }> = ({ saml
                 </FormSummary.Heading>
             </FormSummary.Header>
             <FormSummary.Answers>
-                {samlinger.map((samling, index) => {
+                {samlinger.map((samling) => {
                     const adresse = adressefelterTilVisning({
                         gateadresse: samling.adresse?.gateadresse?.verdi,
                         postnummer: samling.adresse?.postnummer?.verdi,
