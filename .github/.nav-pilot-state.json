@@ -1,8 +1,8 @@
 {
   "collection": "nextjs-frontend",
-  "version": "2026.09.30-072123-4a3593b",
+  "version": "2026.10.01-162107-72ba505",
   "scope": "repo",
-  "source_sha": "4a3593b",
+  "source_sha": "72ba505",
   "installed_at": "2026-04-21T11:17:24Z",
   "files": [
     {
@@ -15,7 +15,7 @@
     },
     {
       "path": ".github/agents/forfatter.agent.md",
-      "hash": "aee2b3b98fa5ec39"
+      "hash": "81d4560449214a21"
     },
     {
       "path": ".github/agents/forfatter.metadata.json",
