@@ -14,6 +14,8 @@ export const errorKeyPrivatBilStrekningHvorBilBleBenyttet = (samlingId: number) 
 export const errorKeyPrivatBilAntallKilometerKjørt = (samlingId: number) =>
     `samling_${samlingId}_reisemåte_privatbil_antall_kilometer_kjort`;
 
+export const maksLengdeStrekningHvorBilBleBenyttet = 100;
+
 export const errorKeyPrivatBilUtgifterDrivstoffType = (samlingId: number) =>
     `samling_${samlingId}_reisemåte_privatbil_utgifter_drivstoff_type`;
 export const errorKeyPrivatBilUtgifterBompenger = (samlingId: number) =>
@@ -102,12 +104,23 @@ const validerInfoBilKunDelerAvStrekning = (
 
     let feil: Valideringsfeil = {};
 
-    if (!harVerdi(infoBilKunDelerAvStrekning?.strekningHvorBilBleBenyttet?.verdi)) {
+    const strekningHvorBilBleBenyttetVerdi =
+        infoBilKunDelerAvStrekning?.strekningHvorBilBleBenyttet?.verdi;
+
+    if (!harVerdi(strekningHvorBilBleBenyttetVerdi)) {
         feil = {
             ...feil,
             [errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]: {
                 id: errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId),
                 melding: reisemåteTekster.privat_bil_strekning_kjørt.feilmelding[locale],
+            },
+        };
+    } else if (strekningHvorBilBleBenyttetVerdi.length > maksLengdeStrekningHvorBilBleBenyttet) {
+        feil = {
+            ...feil,
+            [errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]: {
+                id: errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId),
+                melding: reisemåteTekster.privat_bil_strekning_kjørt.feilmelding_for_lang[locale],
             },
         };
     }
