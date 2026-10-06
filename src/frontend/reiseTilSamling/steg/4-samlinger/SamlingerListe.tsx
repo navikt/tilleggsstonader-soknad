@@ -72,30 +72,34 @@ export const SamlingerListe: React.FC<{
 
     return (
         <VStack gap="space-16">
-            {lagredeSamlinger.map((samling) => (
-                <NySamling
-                    key={samling._id}
-                    samling={samling}
-                    erFørste={samling._id === førsteSamlingId}
-                    oppdater={oppdaterSamlingFelt}
-                    onSlett={
-                        kanSletteSamling(samling._id) ? () => slettSamling(samling._id) : undefined
-                    }
-                />
-            ))}
-            {ulagretSamling && (
-                <NySamling
-                    key={ulagretSamling._id}
-                    samling={ulagretSamling}
-                    erFørste={ulagretSamling._id === førsteSamlingId}
-                    oppdater={oppdaterSamlingFelt}
-                    onSlett={
-                        kanSletteSamling(ulagretSamling._id)
-                            ? () => slettSamling(ulagretSamling._id)
-                            : undefined
-                    }
-                />
-            )}
+            <VStack gap="space-40">
+                {lagredeSamlinger.map((samling) => (
+                    <NySamling
+                        key={samling._id}
+                        samling={samling}
+                        erFørste={samling._id === førsteSamlingId}
+                        oppdater={oppdaterSamlingFelt}
+                        onSlett={
+                            kanSletteSamling(samling._id)
+                                ? () => slettSamling(samling._id)
+                                : undefined
+                        }
+                    />
+                ))}
+                {ulagretSamling && (
+                    <NySamling
+                        key={ulagretSamling._id}
+                        samling={ulagretSamling}
+                        erFørste={ulagretSamling._id === førsteSamlingId}
+                        oppdater={oppdaterSamlingFelt}
+                        onSlett={
+                            kanSletteSamling(ulagretSamling._id)
+                                ? () => slettSamling(ulagretSamling._id)
+                                : undefined
+                        }
+                    />
+                )}
+            </VStack>
             <HStack>
                 <Button variant="tertiary" onClick={leggTilSamling} icon={<PlusIcon aria-hidden />}>
                     {samlingerTekster.knapp_legg_til[locale]}
