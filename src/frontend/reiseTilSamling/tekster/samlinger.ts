@@ -26,7 +26,7 @@ export const samlingerTekster: SamlingerInnhold = {
         nb: 'Din reise',
     },
     guide_tekst: {
-        nb: 'Oppgi informasjon om reisen din, og benytt deg av billigste reisemåte, med offentlig transport som fly, buss, tog, trikk, ferge og lignende. Du må ha gjennomført reisen for å få den innvilget. Hvis du har reist til flere samlinger kan disse legges til med knappen “Legg til reise”.  Du kan søke for reiser gjennomført inntil 6 måneder tilbake i tid.',
+        nb: 'Oppgi informasjon om reisen din, og benytt deg av billigste reisemåte, med offentlig transport som fly, buss, tog, trikk, ferge og lignende. Du kan få stønad til reiser du har gjennomført. Hvis du har reist til flere samlinger kan disse legges til med knappen “Legg til reise”.  Du kan søke om reiser gjennomført inntil 6 måneder tilbake i tid.',
     },
     dato: {
         label: { nb: 'Periode for reisen' },
