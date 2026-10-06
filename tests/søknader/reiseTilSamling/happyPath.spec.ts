@@ -26,7 +26,11 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await expect(
         page.getByRole('heading', { name: 'Søknad om støtte ved reise til samling' })
     ).toBeVisible();
-    await expect(page.getByText('Vi dekker den billigste reisemåten.')).toBeVisible();
+    await expect(
+        page.getByText(
+            'Vi dekker som hovedregel den billigste reisemåten med offentlig transport. Hvis det ikke er praktisk mulig å bruke offentlig transport, kan du få dekket nødvendige utgifter til annen reisemåte.'
+        )
+    ).toBeVisible();
     await expect(
         page.getByText(
             'Du får støtten utbetalt i etterkant, basert på kvitteringene du sender inn.'
