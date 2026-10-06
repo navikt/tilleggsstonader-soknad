@@ -30,7 +30,7 @@ export const Oppsummering = () => {
                     redigerLenke={RouteTilPath.HOVEDYTELSE}
                 />
             )}
-            {aktivitet && <AktivitetOppsummering aktivitet={aktivitet} />}
+            {aktivitet && <AktivitetOppsummering aktivitet={aktivitet} hovedytelse={hovedytelse} />}
             {avreiseadresse && <AvreiseadresseOppsummering avreiseadresse={avreiseadresse} />}
             <SamlingerOppsummering samlinger={samlinger} />
             {dokumentasjonsbehov.length > 0 && (
