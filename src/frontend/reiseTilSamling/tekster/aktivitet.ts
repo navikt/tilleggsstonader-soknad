@@ -11,6 +11,7 @@ import { JaNei } from '../../typer/søknad';
 import { RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
 
 interface AktivitetInnholdDagligAktivitet extends AktivitetInnhold {
+    guide_innhold_reise_til_samling: TekstElement<string[]>;
     radio_type_arbeidsrettede_aktiviteter: RadiogruppePåkrevd<AktivitetTypeUtdanning>;
     radio_type_arbeidsrettede_aktiviteter_lesmer: {
         header: TekstElement<string>;
@@ -48,6 +49,12 @@ export const AktivitetTypeTilTekstReiseTilSamling = plukkAktivitetTekster(
 
 export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
     ...aktivitetTeksterFelles,
+    guide_innhold_reise_til_samling: {
+        nb: [
+            'For å få denne stønaden må du delta på tiltak, ta en utdanning godkjent av Nav eller gjennomføre en arbeidsrettet utredning.',
+            'Vi viser aktivitetene som er registrert på deg de siste 3 månedene.',
+        ],
+    },
     søker_fra_lesmer: {
         header: { nb: 'Hvilken dato velger jeg?' },
         innhold: {

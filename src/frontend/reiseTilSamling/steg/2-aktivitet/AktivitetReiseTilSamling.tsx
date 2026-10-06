@@ -212,7 +212,7 @@ export const AktivitetReiseTilSamling = () => {
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={aktivitetTekster.tittel} level="2" size="medium" />
             <GuidePanel>
-                <LocaleTekstAvsnitt tekst={aktivitetTekster.guide_innhold} />
+                <LocaleTekstAvsnitt tekst={aktivitetTekster.guide_innhold_reise_til_samling} />
             </GuidePanel>
             {skalViseArbeidsrettedeAktiviteter(registerAktiviteter) ? (
                 <ArbeidsrettedeAktiviteter
