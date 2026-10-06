@@ -90,11 +90,11 @@ export const reisemåteTekster: ReisemåteInnhold = {
             HELSEMESSIGE_ÅRSAKER: {
                 nb: 'Helsemessige årsaker',
             },
-            LEVERING_HENTING_I_BARNEHAGE: {
-                nb: 'Levering/henting i barnehage eller skolefritidsordning (SFO/AKS)',
-            },
             FRAKT_AV_NØDVENDIG_UTSTYR: {
                 nb: 'Frakt av nødvendig utstyr til samlingen',
+            },
+            LEVERING_HENTING_I_BARNEHAGE: {
+                nb: 'Levering/henting i barnehage eller skolefritidsordning (SFO/AKS)',
             },
         },
         feilmelding: { nb: 'Du må oppgi hvorfor du ikke kan reise med offentlig transport.' },
