@@ -46,7 +46,7 @@ import { aktivitetTekster } from '../../tekster/aktivitet';
 export const AktivitetReiseTilSamling = () => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
-    const { aktivitet, oppdaterAktivitet, oppdaterTilleggsopplysninger } =
+    const { aktivitet, oppdaterAktivitet, oppdaterTilleggsopplysninger, hovedytelse } =
         useReiseTilSamlingSøknad();
     const { registerAktiviteter } = useRegisterAktiviteter();
 
@@ -190,7 +190,12 @@ export const AktivitetReiseTilSamling = () => {
     }
 
     const kanFortsette = (): boolean => {
-        const feil = validerAktivitetReiseTilSamling(aktivitet, registerAktiviteter, locale);
+        const feil = validerAktivitetReiseTilSamling(
+            aktivitet,
+            registerAktiviteter,
+            locale,
+            hovedytelse
+        );
 
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
@@ -384,7 +389,7 @@ export const AktivitetReiseTilSamling = () => {
                             beskrivelse={aktivitetTekster.radio_opplæring_for_voksne_alert_content}
                         />
                     )}
-                    {skalViseLønnetTiltak(annenAktivitetTypeUtdanning) && (
+                    {skalViseLønnetTiltak(annenAktivitetTypeUtdanning, hovedytelse) && (
                         <LønnetTiltak
                             lønnetAktivitet={lønnetAktivitet}
                             oppdaterLønnetAktivitet={oppdaterLønnetAktivitet}

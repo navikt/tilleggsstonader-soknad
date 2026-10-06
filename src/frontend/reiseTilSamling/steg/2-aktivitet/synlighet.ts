@@ -1,8 +1,19 @@
 import { skalTaStillingTilRegisterAktiviteter } from '../../../components/Aktivitet/registerAktivitetUtil';
+import { Ytelse } from '../../../components/Hovedytelse/typer';
 import { AktivitetTypeUtdanning, AnnenAktivitetType } from '../../../typer/aktivitet';
 import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
-import { JaNei } from '../../../typer/søknad';
+import { Hovedytelse, JaNei } from '../../../typer/søknad';
+
+// Disse målgruppene skal ikke få spørsmål om lønnet tiltak,
+// uavhengig av hvilken aktivitet/tiltak/utdanning de har valgt.
+const ytelserUtenSpørsmålOmLønnetTiltak: Ytelse[] = [
+    'TILTAKSPENGER',
+    'KVALIFISERINGSSTØNAD',
+    'GJENLEVENDEPENSJON',
+    'OVERGANGSSTØNAD',
+    'DAGPENGER',
+];
 
 export const skalViseArbeidsrettedeAktiviteter = (
     registerAktiviteter: Record<string, RegisterAktivitetMedLabel>
@@ -30,5 +41,16 @@ export const skalViseMåBetaleForReiseTilSkole = (erUnder25År: EnumFelt<JaNei> 
     erUnder25År?.verdi === 'JA';
 
 export const skalViseLønnetTiltak = (
-    annenAktivitetTypeUtdanning: EnumFelt<AktivitetTypeUtdanning> | undefined
-) => annenAktivitetTypeUtdanning?.verdi === AktivitetTypeUtdanning.ANNET_TILTAK;
+    annenAktivitetTypeUtdanning: EnumFelt<AktivitetTypeUtdanning> | undefined,
+    hovedytelse: Hovedytelse | undefined
+) => {
+    const harYtelseMedSpørsmålOmLønnetTiltak =
+        hovedytelse?.ytelse.verdier.some(
+            (ytelse) => !ytelserUtenSpørsmålOmLønnetTiltak.includes(ytelse.verdi)
+        ) ?? false;
+
+    return (
+        annenAktivitetTypeUtdanning?.verdi === AktivitetTypeUtdanning.ANNET_TILTAK &&
+        harYtelseMedSpørsmålOmLønnetTiltak
+    );
+};

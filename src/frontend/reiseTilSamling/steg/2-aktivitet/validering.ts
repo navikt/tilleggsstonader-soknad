@@ -10,6 +10,7 @@ import {
 import { erLærlingEllerLiknendeTekster } from '../../../components/Aktivitet/ErLærlingEllerLiknende';
 import { skalTaStillingTilAnnenAktivitet } from '../../../components/Aktivitet/registerAktivitetUtil';
 import { RegisterAktivitetMedLabel } from '../../../typer/registerAktivitet';
+import { Hovedytelse } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { harVerdi } from '../../../utils/typeUtils';
@@ -27,7 +28,8 @@ export const errorKeyLønnetAktivitet = 'aktivitet_lønnetAktivitet';
 export const validerAktivitetReiseTilSamling = (
     aktivitetReiseTilSamling: AktivitetReiseTilSamling,
     registerAktiviteter: Record<string, RegisterAktivitetMedLabel>,
-    locale: Locale
+    locale: Locale,
+    hovedytelse: Hovedytelse | undefined
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -130,7 +132,7 @@ export const validerAktivitetReiseTilSamling = (
         }
     }
 
-    if (skalViseLønnetTiltak(annenAktivitetTypeUtdanning)) {
+    if (skalViseLønnetTiltak(annenAktivitetTypeUtdanning, hovedytelse)) {
         if (!harVerdi(lønnetAktivitet?.verdi)) {
             feil = {
                 ...feil,
