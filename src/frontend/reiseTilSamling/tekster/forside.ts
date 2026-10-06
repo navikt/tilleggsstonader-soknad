@@ -34,8 +34,8 @@ export const forsideTekster: ForsideInnhold = {
         nb: [
             'å få dekket nødvendige reiseutgifter til og fra en samling i forbindelse med et arbeidsrettet tiltak.',
             'Samlingen må være obligatorisk.',
-            'Reiseavstanden må være minst 30 km.',
-            'Vi dekker den billigste reisemåten.',
+            'Reiseavstanden må være minst 30 km èn vei.',
+            'Vi dekker som hovedregel den billigste reisemåten med offentlig transport. Hvis det ikke er praktisk mulig å bruke offentlig transport, kan du få dekket nødvendige utgifter til annen reisemåte.',
         ],
     },
     kan_ikke_soke_tittel: {
