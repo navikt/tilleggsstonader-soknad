@@ -4,6 +4,7 @@ export type Ytelse =
     | 'GJENLEVENDEPENSJON'
     | 'UFØRETRYGD'
     | 'TILTAKSPENGER'
+    | 'AKTIVITETSPENGER'
     | 'DAGPENGER'
     | 'SYKEPENGER'
     | 'KVALIFISERINGSSTØNAD'
