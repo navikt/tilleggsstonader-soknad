@@ -17,7 +17,9 @@ export const YtelseTilTekst: Record<Ytelse, TekstElement<string>> = {
     DAGPENGER: { nb: 'Dagpenger' },
     SYKEPENGER: { nb: 'Sykepenger' },
     KVALIFISERINGSSTØNAD: { nb: 'Kvalifiseringsstønad ' },
-    INGEN_PENGESTØTTE: { nb: 'Mottar ingen pengestøtte, men har nedsatt arbeidsevne' },
+    INGEN_PENGESTØTTE: {
+        nb: 'Mottar ingen pengestøtte, men har nedsatt arbeidsevne. Mitt lokale Nav-kontor har vurdert at jeg har nedsatt arbeidsevne på grunn av sykdom, skade eller medfødt funksjonsnedsettelse.',
+    },
     INGEN_PASSENDE_ALTERNATIVER: { nb: 'Ingen av alternativene passer for meg' },
 };
 
