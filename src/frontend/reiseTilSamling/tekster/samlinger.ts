@@ -92,6 +92,6 @@ export const samlingerTekster: SamlingerInnhold = {
         feilmelding_ugyldig: { nb: 'Antall kilometer må være større enn 0.' },
     },
     advarsel_antall_km_for_lav: {
-        nb: 'Reiseavstanden må være minst 30 kilometer for å ha rett til denne pengestøtten. Du kan søke om pengestøtte til reise til samling, men vil mest sannsynlig få avslag.',
+        nb: 'Reiseavstanden må være minst 30 kilometer èn vei for å ha rett til denne pengestøtten. Du kan søke om pengestøtte til reise til samling, men vil mest sannsynlig få avslag.',
     },
 };
