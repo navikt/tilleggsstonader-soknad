@@ -130,7 +130,7 @@ export const reisemåteTekster: ReisemåteInnhold = {
     },
     check_kan_ikke_benytte_egen_bil_begrunnelse: {
         legend: {
-            nb: 'Hvorfor kunne du ikke benytte bil for hele eller deler av reisen?',
+            nb: 'Hvorfor kunne du ikke benytte privat bil for hele eller deler av reisen?',
         },
         alternativer: {
             HAR_IKKE_BIL_ELLER_FØRERKORT: {
