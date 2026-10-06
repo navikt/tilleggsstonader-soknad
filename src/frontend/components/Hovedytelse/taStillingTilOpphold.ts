@@ -8,6 +8,7 @@ const ytelserMedImplisittMedlemskap: Ytelse[] = [
     'UFØRETRYGD',
     'SYKEPENGER',
     'DAGPENGER',
+    'AKTIVITETSPENGER',
 ];
 
 // Ytelser som krever at bruker oppholder seg i Norge.
