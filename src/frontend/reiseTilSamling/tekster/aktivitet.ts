@@ -117,7 +117,7 @@ export const aktivitetTekster: AktivitetInnholdDagligAktivitet = {
         innhold: {
             del1: {
                 nb: [
-                    'Tiltak og arbeidsrettet utredning er for deg som mottar arbeidsavklaringspenger, uføretrygd, tiltakspenger, dagpenger, kvalifikasjonsstønad, har nedsatt arbeidsevne, er enslig mor eller far, er gjenlevende eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
+                    'Tiltak og arbeidsrettet utredning er for deg som mottar arbeidsavklaringspenger, uføretrygd, tiltakspenger, dagpenger, kvalifiseringsstønad, har nedsatt arbeidsevne, er enslig mor eller far, er gjenlevende eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
                     'Et tiltak kan for eksempel være kurs eller arbeidstrening. Arbeidsrettet utredning er en prosess der ferdighetene og mulighetene dine til å utføre arbeid blir vurdert og kartlagt.',
                     'Utdanningen må være godkjent av Nav for å gi rett til støtte.',
                     'Er du enslig mor eller far eller gjenlevende må en utdanning godkjennes av din veileder for å gi rett til støtte for daglige reiser.',
