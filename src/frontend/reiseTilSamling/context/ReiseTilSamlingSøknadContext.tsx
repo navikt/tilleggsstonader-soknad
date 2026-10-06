@@ -16,6 +16,7 @@ import {
     VedleggstypeReiseTilSamling,
 } from '../../typer/skjema';
 import { Adresse, Avreiseadresse, Hovedytelse, Samling } from '../../typer/søknad';
+import { skalViseLønnetTiltak } from '../steg/2-aktivitet/synlighet';
 import { AktivitetReiseTilSamling, TilleggsopplysningerAnnenAktivitet } from '../typer/aktivitet';
 
 const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseContext(() => {
@@ -44,6 +45,18 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
             ...prev,
             ...oppdatering,
         }));
+    };
+
+    // Lønnet tiltak-spørsmålet skal ikke stilles for enkelte hovedytelser.
+    // Når hovedytelsen endres til kun å inneholde slike ytelser, må et evt.
+    // tidligere lagret svar fjernes, så det ikke blir med i innsendingen.
+    const oppdaterHovedytelse = (nyHovedytelse: Hovedytelse) => {
+        settHovedytelse(nyHovedytelse);
+        settAktivitet((prev) =>
+            skalViseLønnetTiltak(prev.annenAktivitetTypeUtdanning, nyHovedytelse)
+                ? prev
+                : { ...prev, lønnetAktivitet: undefined }
+        );
     };
 
     const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
@@ -115,7 +128,7 @@ const [ReiseTilSamlingSøknadProvider, useReiseTilSamlingSøknad] = createUseCon
         harBekreftet,
         settHarBekreftet,
         hovedytelse,
-        settHovedytelse,
+        oppdaterHovedytelse,
         aktivitet,
         settAktivitet,
         oppdaterAktivitet,
