@@ -28,7 +28,7 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     ).toBeVisible();
     await expect(
         page.getByText(
-            'Vi dekker som hovedregel den billigste reisemåten med offentlig transport. Hvis det ikke er praktisk mulig å bruke offentlig transport, kan du få dekket nødvendige utgifter til annen reisemåte.'
+            'Vi dekker som hovedregel den billigste reisemåten med offentlig transport. Hvis det ikke er praktisk mulig å bruke offentlig transport, kan du få dekket nødvendige utgifter til annen reisemåte. Vi kommer til å gjøre en konkret vurdering av om du oppfyller vilkårene til annen reisemåte basert på den informasjonen og dokumentasjonen du oppgir.'
         )
     ).toBeVisible();
     await expect(
