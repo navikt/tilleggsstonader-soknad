@@ -8,6 +8,7 @@ import {
     errorKeyPrivatBilBenyttetEgenBil,
     errorKeyPrivatBilBetalteForReiseSelv,
     errorKeyPrivatBilStrekningHvorBilBleBenyttet,
+    maksLengdeStrekningHvorBilBleBenyttet,
     nullstilteInfoBilKunDelerAvStrekningFeil,
     nullstiltePrivatBilFeil,
     nullstilteUtgifterPrivatBilFeil,
@@ -157,7 +158,7 @@ export const PrivatBilReiseTilSamling: React.FC<{
                             privatBil?.infoBilKunDelerAvStrekning?.strekningHvorBilBleBenyttet
                                 ?.verdi ?? ''
                         }
-                        maxLength={100}
+                        maxLength={maksLengdeStrekningHvorBilBleBenyttet}
                         onChange={oppdaterStrekningHvorBilBleBenyttet}
                         error={
                             valideringsfeil[errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]

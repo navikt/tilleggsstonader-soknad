@@ -28,7 +28,9 @@ interface ReisemåteInnhold {
     egen_bil_tittel: TekstElement<string>;
     radio_kan_benytte_egen_bil: RadiogruppePåkrevd<JaNei>;
     check_kan_ikke_benytte_egen_bil_begrunnelse: CheckboxGruppePåkrevd<ÅrsakKanIkkeBenytteEgenBil>;
-    privat_bil_strekning_kjørt: InputFelt;
+    privat_bil_strekning_kjørt: InputFelt & {
+        feilmelding_for_lang: TekstElement<string>;
+    };
     privat_bil_km_kjørt: InputFelt;
     privat_bil_utgifter_tittel: TekstElement<string>;
     privat_bil_utgifter_beskrivelse: TekstElement<string>;
@@ -155,6 +157,9 @@ export const reisemåteTekster: ReisemåteInnhold = {
         },
         feilmelding: {
             nb: 'Du må oppgi hvilken del av strekningen som ble kjørt med privat bil.',
+        },
+        feilmelding_for_lang: {
+            nb: 'Du kan skrive maks 100 tegn.',
         },
     },
     privat_bil_km_kjørt: {
