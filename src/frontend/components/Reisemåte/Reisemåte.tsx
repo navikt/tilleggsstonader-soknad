@@ -7,7 +7,7 @@ import { OffentligTransportReiseTilSamling } from './OffentligTransport/Offentli
 import { PrivatBilReiseTilSamling } from './PrivatBil/PrivatBilReiseTilSamling';
 import { TransportmiddelOgUnntak } from './TransportmiddelOgUnntak';
 import { finnValgteTransportmidler } from './transportmiddelUtils';
-import { Reisemåte as ReisemåteType } from '../../../../typer/reisemåte';
+import { Reisemåte as ReisemåteType } from '../../typer/reisemåte';
 
 export const Reisemåte: React.FC<{
     samlingId: number;

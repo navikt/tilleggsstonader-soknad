@@ -4,16 +4,16 @@ import { nullstilteOffentligTransportFeil } from './OffentligTransport/validerin
 import { validerOffentligTransport } from './OffentligTransport/validering';
 import { nullstiltePrivatBilFeil } from './PrivatBil/validering';
 import { validerPrivatBil } from './PrivatBil/validering';
+import { reisemåteTekster } from '../../reiseTilSamling/tekster/reisemåte';
 import {
     Reisemåte,
     UnntakFraOffentligTransport,
     ÅrsakKanIkkeBenytteEgenBil,
-} from '../../../../typer/reisemåte';
-import { EnumFlereValgFelt } from '../../../../typer/skjema';
-import { Locale } from '../../../../typer/tekst';
-import { Valideringsfeil } from '../../../../typer/validering';
-import { harVerdi } from '../../../../utils/typeUtils';
-import { reisemåteTekster } from '../../../tekster/reisemåte';
+} from '../../typer/reisemåte';
+import { EnumFlereValgFelt } from '../../typer/skjema';
+import { Locale } from '../../typer/tekst';
+import { Valideringsfeil } from '../../typer/validering';
+import { harVerdi } from '../../utils/typeUtils';
 
 export const errorKeyHvilkeTransportmidlerBleBenyttet = (samlingId: number) =>
     `samling_${samlingId}_reisemåte_hvilke_transportmidler_ble_benyttet`;

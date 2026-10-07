@@ -13,18 +13,18 @@ import {
     nullstiltePrivatBilFeil,
     nullstilteUtgifterPrivatBilFeil,
 } from './validering';
-import { AlertIkkeRett } from '../../../../../components/AlertIkkeRett';
-import { Skillelinje } from '../../../../../components/Skillelinje';
-import { LocaleHeading } from '../../../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleRadioGroup } from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleTextarea } from '../../../../../components/Teksthåndtering/LocaleTextarea';
-import { LocaleTextField } from '../../../../../components/Teksthåndtering/LocaleTextField';
-import { useSpråk } from '../../../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
-import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../../../typer/reisemåte';
-import { EnumFelt, VerdiFelt } from '../../../../../typer/skjema';
-import { JaNei } from '../../../../../typer/søknad';
-import { reisemåteTekster } from '../../../../tekster/reisemåte';
+import { useSpråk } from '../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
+import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../typer/reisemåte';
+import { EnumFelt, VerdiFelt } from '../../../typer/skjema';
+import { JaNei } from '../../../typer/søknad';
+import { AlertIkkeRett } from '../../AlertIkkeRett';
+import { Skillelinje } from '../../Skillelinje';
+import { LocaleHeading } from '../../Teksthåndtering/LocaleHeading';
+import { LocaleRadioGroup } from '../../Teksthåndtering/LocaleRadioGroup';
+import { LocaleTextarea } from '../../Teksthåndtering/LocaleTextarea';
+import { LocaleTextField } from '../../Teksthåndtering/LocaleTextField';
 
 export const PrivatBilReiseTilSamling: React.FC<{
     samlingId: number;

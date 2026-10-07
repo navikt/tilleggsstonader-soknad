@@ -3,12 +3,12 @@ import { Dispatch, SetStateAction } from 'react';
 import { Heading, InlineMessage, VStack } from '@navikt/ds-react';
 
 import { errorKeyTotalutgifterOffentligTransport } from './validering';
-import { Skillelinje } from '../../../../../components/Skillelinje';
-import { LocaleTextField } from '../../../../../components/Teksthåndtering/LocaleTextField';
-import { useSpråk } from '../../../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
-import { OffentligTransportInfo, Reisemåte } from '../../../../../typer/reisemåte';
-import { reisemåteTekster } from '../../../../tekster/reisemåte';
+import { useSpråk } from '../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
+import { OffentligTransportInfo, Reisemåte } from '../../../typer/reisemåte';
+import { Skillelinje } from '../../Skillelinje';
+import { LocaleTextField } from '../../Teksthåndtering/LocaleTextField';
 
 export const OffentligTransportReiseTilSamling: React.FC<{
     samlingId: number;
