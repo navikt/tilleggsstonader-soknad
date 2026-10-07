@@ -1,6 +1,6 @@
 import { IRoute, Steg } from '../../typer/routes';
 
-export type ReiseOppstartAvslutningHjemreiseSteg = Steg | 'AKTIVITET';
+export type ReiseOppstartAvslutningHjemreiseSteg = Steg | 'AKTIVITET' | 'ADRESSER';
 
 export const reiseOppstartAvslutningHjemreisePath = '/reise-oppstart-avslutning-hjemreise';
 
@@ -8,6 +8,7 @@ export const RouteTilPath: Record<ReiseOppstartAvslutningHjemreiseSteg, string> 
     FORSIDE: reiseOppstartAvslutningHjemreisePath,
     HOVEDYTELSE: reiseOppstartAvslutningHjemreisePath + '/hovedytelse',
     AKTIVITET: reiseOppstartAvslutningHjemreisePath + '/aktivitet',
+    ADRESSER: reiseOppstartAvslutningHjemreisePath + '/adresser',
     VEDLEGG: reiseOppstartAvslutningHjemreisePath + '/vedlegg',
     OPPSUMMERING: reiseOppstartAvslutningHjemreisePath + '/oppsummering',
     KVITTERING: reiseOppstartAvslutningHjemreisePath + '/kvittering',
@@ -25,6 +26,11 @@ export const routesReiseOppstartAvslutningHjemreise: IRoute<ReiseOppstartAvslutn
             path: RouteTilPath.AKTIVITET,
             label: 'Aktivitet',
             route: 'AKTIVITET',
+        },
+        {
+            path: RouteTilPath.ADRESSER,
+            label: 'Adresser',
+            route: 'ADRESSER',
         },
         {
             path: RouteTilPath.OPPSUMMERING,

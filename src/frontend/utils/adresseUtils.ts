@@ -2,6 +2,8 @@ import countries from 'i18n-iso-countries';
 import codesData from 'i18n-iso-countries/codes.json';
 import nbLocale from 'i18n-iso-countries/langs/nb.json';
 
+import { Adresse } from '../typer/søknad';
+
 countries.registerLocale(nbLocale);
 
 // Webpack fjerner innholdet i codes.json fra i18n-iso-countries når den bygger,
@@ -25,6 +27,14 @@ export const landkodeTilNavn = Object.entries(countries.getNames('nb', { select:
         },
         {} as { [key: string]: string }
     );
+
+export const formaterAdresse = (adresse: Adresse | undefined) =>
+    adressefelterTilVisning({
+        gateadresse: adresse?.gateadresse?.verdi,
+        postnummer: adresse?.postnummer?.verdi,
+        poststed: adresse?.poststed?.verdi,
+        land: adresse?.land?.verdi,
+    });
 
 export const adressefelterTilVisning = (adresse: {
     gateadresse?: string;
