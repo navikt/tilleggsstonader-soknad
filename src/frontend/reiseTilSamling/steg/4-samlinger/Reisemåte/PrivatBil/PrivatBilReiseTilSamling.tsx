@@ -21,10 +21,10 @@ import { LocaleTextarea } from '../../../../../components/Teksthåndtering/Local
 import { LocaleTextField } from '../../../../../components/Teksthåndtering/LocaleTextField';
 import { useSpråk } from '../../../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
+import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../../../typer/reisemåte';
 import { EnumFelt, VerdiFelt } from '../../../../../typer/skjema';
 import { JaNei } from '../../../../../typer/søknad';
 import { reisemåteTekster } from '../../../../tekster/reisemåte';
-import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../../typer/reisemåte';
 
 export const PrivatBilReiseTilSamling: React.FC<{
     samlingId: number;

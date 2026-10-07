@@ -1,4 +1,10 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
+import {
+    ÅrsakKanIkkeBenytteOffentligTransport,
+    ÅrsakKanIkkeBenytteEgenBil,
+    DrivstoffType,
+    Transportmiddel,
+} from '../../typer/reisemåte';
 import { JaNei } from '../../typer/søknad';
 import {
     CheckboxGruppePåkrevd,
@@ -7,12 +13,6 @@ import {
     SelectGruppePåkrevd,
     TekstElement,
 } from '../../typer/tekst';
-import {
-    ÅrsakKanIkkeBenytteOffentligTransport,
-    ÅrsakKanIkkeBenytteEgenBil,
-    DrivstoffType,
-    Transportmiddel,
-} from '../typer/reisemåte';
 
 interface ReisemåteInnhold {
     tittel: TekstElement<string>;

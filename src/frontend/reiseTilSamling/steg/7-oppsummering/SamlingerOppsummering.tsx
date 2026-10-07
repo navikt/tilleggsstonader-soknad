@@ -6,12 +6,12 @@ import { Answer, GruppertAnswer } from '../../../components/Oppsummering/Answer'
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { OppsummeringSvar } from '../../../components/Oppsummering/OppsummeringSvar';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
+import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../typer/reisemåte';
 import { Samling } from '../../../typer/søknad';
 import { adressefelterTilVisning } from '../../../utils/adresseUtils';
 import { formaterPeriodeTekstlig } from '../../../utils/formateringUtils';
 import { RouteTilPath } from '../../routing/routesReiseTilSamling';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
-import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../typer/reisemåte';
 
 export const SamlingerOppsummering: React.FC<{ samlinger: Samling[] }> = ({ samlinger }) => {
     return (

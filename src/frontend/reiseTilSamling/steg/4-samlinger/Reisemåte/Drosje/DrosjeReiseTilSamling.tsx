@@ -8,15 +8,15 @@ import { LocaleHeading } from '../../../../../components/Teksthåndtering/Locale
 import { LocaleRadioGroup } from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekstAvsnitt } from '../../../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
-import { EnumFelt, EnumFlereValgFelt } from '../../../../../typer/skjema';
-import { JaNei } from '../../../../../typer/søknad';
-import { reisemåteTekster } from '../../../../tekster/reisemåte';
 import {
     ÅrsakKanIkkeBenytteEgenBil,
     Reisemåte,
     DrosjeInfo,
     ÅrsakKanIkkeBenytteOffentligTransport,
-} from '../../../../typer/reisemåte';
+} from '../../../../../typer/reisemåte';
+import { EnumFelt, EnumFlereValgFelt } from '../../../../../typer/skjema';
+import { JaNei } from '../../../../../typer/søknad';
+import { reisemåteTekster } from '../../../../tekster/reisemåte';
 
 export const DrosjeReiseTilSamling: React.FC<{
     samlingId: number;

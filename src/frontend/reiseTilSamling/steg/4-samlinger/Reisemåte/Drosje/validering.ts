@@ -1,8 +1,8 @@
+import { Reisemåte } from '../../../../../typer/reisemåte';
 import { Locale } from '../../../../../typer/tekst';
 import { Valideringsfeil } from '../../../../../typer/validering';
 import { harVerdi } from '../../../../../utils/typeUtils';
 import { reisemåteTekster } from '../../../../tekster/reisemåte';
-import { Reisemåte } from '../../../../typer/reisemåte';
 
 export const errorKeyHarTTKort = (samlingId: number) =>
     `samling_${samlingId}_reisemåte_har_tt_kort`;

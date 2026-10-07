@@ -11,14 +11,14 @@ import { LocaleCheckboxGroup } from '../../../../components/Teksthåndtering/Loc
 import { LocaleTextField } from '../../../../components/Teksthåndtering/LocaleTextField';
 import { useSpråk } from '../../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
-import { EnumFlereValgFelt } from '../../../../typer/skjema';
-import { reisemåteTekster } from '../../../tekster/reisemåte';
 import {
     LeveringOgHentingIBarnehage,
     Reisemåte,
     UnntakFraOffentligTransport,
     ÅrsakKanIkkeBenytteOffentligTransport,
-} from '../../../typer/reisemåte';
+} from '../../../../typer/reisemåte';
+import { EnumFlereValgFelt } from '../../../../typer/skjema';
+import { reisemåteTekster } from '../../../tekster/reisemåte';
 
 export const UnntakIkkeOffentligTransport: React.FC<{
     unntakFraOffentligTransport: UnntakFraOffentligTransport | undefined;

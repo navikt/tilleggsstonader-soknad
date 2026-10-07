@@ -1,9 +1,9 @@
+import { PrivatBilInfo, UtgifterPrivatBil } from '../../../../../typer/reisemåte';
 import { Locale } from '../../../../../typer/tekst';
 import { Valideringsfeil } from '../../../../../typer/validering';
 import { erGyldigKostnad } from '../../../../../utils/tall';
 import { harVerdi } from '../../../../../utils/typeUtils';
 import { reisemåteTekster } from '../../../../tekster/reisemåte';
-import { PrivatBilInfo, UtgifterPrivatBil } from '../../../../typer/reisemåte';
 
 export const errorKeyPrivatBilBenyttetEgenBil = (samlingId: number) =>
     `samling_${samlingId}_reisemåte_privatbil_benyttet_egen_bil`;

@@ -13,9 +13,9 @@ import { LocaleSelect } from '../../../../../components/Teksthåndtering/LocaleS
 import { LocaleTekst } from '../../../../../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../../../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
+import { DrivstoffType, UtgifterPrivatBil } from '../../../../../typer/reisemåte';
 import { EnumFelt } from '../../../../../typer/skjema';
 import { reisemåteTekster } from '../../../../tekster/reisemåte';
-import { DrivstoffType, UtgifterPrivatBil } from '../../../../typer/reisemåte';
 
 export const UtgifterPrivatBilReiseTilSamling: React.FC<{
     samlingId: number;

@@ -1,5 +1,5 @@
-import { EnumFlereValgFelt, EnumFelt, VerdiFelt } from '../../typer/skjema';
-import { JaNei } from '../../typer/søknad';
+import { EnumFlereValgFelt, EnumFelt, VerdiFelt } from './skjema';
+import { JaNei } from './søknad';
 
 export interface Reisemåte {
     hvilkeTransportmidlerBleBenyttet?: EnumFlereValgFelt<Transportmiddel>;
