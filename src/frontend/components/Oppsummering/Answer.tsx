@@ -1,12 +1,19 @@
 import { FormSummary } from '@navikt/ds-react';
 
-export const Answer: React.FC<{ label: string; children: React.ReactNode }> = ({
-    label,
-    children,
-}) => {
+import { useSpråk } from '../../context/SpråkContext';
+import { TekstElement } from '../../typer/tekst';
+
+export const Answer: React.FC<{
+    label: string | TekstElement<string>;
+    children: React.ReactNode;
+}> = ({ label, children }) => {
+    const { locale } = useSpråk();
+
+    const labelTekst = typeof label === 'string' ? label : label[locale];
+
     return (
         <FormSummary.Answer>
-            <FormSummary.Label>{label}</FormSummary.Label>
+            <FormSummary.Label>{labelTekst}</FormSummary.Label>
             <FormSummary.Value>{children}</FormSummary.Value>
         </FormSummary.Answer>
     );

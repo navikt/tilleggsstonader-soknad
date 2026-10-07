@@ -1,6 +1,7 @@
 import { DokumentasjonFelt } from '../../typer/skjema';
 import { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
 import { erLokal } from '../../utils/miljø';
+import { AdresseReiseOppstartAvslutningHjemreise } from '../typer/søknad';
 
 export const initialHarBekreftet = (): boolean => erLokal();
 
@@ -8,5 +9,7 @@ export const initialHarBekreftet = (): boolean => erLokal();
 export const initialHovedytelse = (): Hovedytelse | undefined => undefined;
 
 export const initialAktivitet = (): AktivitetFelles | undefined => undefined;
+
+export const initialAdresser = (): AdresseReiseOppstartAvslutningHjemreise | undefined => undefined;
 
 export const initialDokumentasjon = (): DokumentasjonFelt[] => [];

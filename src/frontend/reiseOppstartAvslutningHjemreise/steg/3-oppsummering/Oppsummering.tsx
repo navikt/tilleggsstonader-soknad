@@ -1,3 +1,4 @@
+import { AdresserOppsummering } from './AdresserOppsummering';
 import { AktivitetOppsummering } from './AktivitetOppsummering';
 import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
@@ -8,7 +9,7 @@ import { RouteTilPath } from '../../routing/routesReiseOppstartAvslutningHjemrei
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const Oppsummering = () => {
-    const { hovedytelse, aktivitet } = useReiseOppstartAvslutningHjemreiseSøknad();
+    const { hovedytelse, aktivitet, adresser } = useReiseOppstartAvslutningHjemreiseSøknad();
 
     return (
         <OppsummeringSide>
@@ -21,6 +22,7 @@ export const Oppsummering = () => {
                 />
             )}
             {aktivitet && <AktivitetOppsummering aktivitet={aktivitet} />}
+            {adresser && <AdresserOppsummering adresser={adresser} />}
         </OppsummeringSide>
     );
 };

@@ -4,12 +4,14 @@ import createUseContext from 'constate';
 
 import {
     initialAktivitet,
+    initialAdresser,
     initialDokumentasjon,
     initialHarBekreftet,
     initialHovedytelse,
 } from './reiseOppstartAvslutningHjemreiseInitialState';
 import { DokumentasjonFelt } from '../../typer/skjema';
 import { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
+import { AdresseReiseOppstartAvslutningHjemreise } from '../typer/søknad';
 
 const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutningHjemreiseSøknad] =
     createUseContext(() => {
@@ -23,6 +25,10 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
         const [aktivitet, settAktivitet] = useState<AktivitetFelles | undefined>(
             initialAktivitet()
         );
+        const [adresser, settAdresser] = useState<
+            AdresseReiseOppstartAvslutningHjemreise | undefined
+        >(initialAdresser());
+
         const [dokumentasjon, settDokumentasjon] =
             useState<DokumentasjonFelt[]>(initialDokumentasjon());
 
@@ -30,6 +36,7 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             settHarBekreftet(initialHarBekreftet());
             settHovedytelse(initialHovedytelse());
             settAktivitet(initialAktivitet());
+            settAdresser(initialAdresser());
             settDokumentasjon(initialDokumentasjon());
         };
 
@@ -40,6 +47,8 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             settHovedytelse,
             aktivitet,
             settAktivitet,
+            adresser,
+            settAdresser,
             dokumentasjon,
             settDokumentasjon,
             resetSøknad,
