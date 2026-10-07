@@ -108,9 +108,9 @@ export const TransportmiddelOgUnntak: React.FC<{
                     }
                 />
 
-                {drosjeHuketAv && (
+                {(drosjeHuketAv || privatBilHuketAv) && (
                     <InlineMessage status="info">
-                        {reisemåteTekster.info_drosje_dokumentasjon[locale]}
+                        {reisemåteTekster.info_ikke_offentlig_transport_reise_til_samling[locale]}
                     </InlineMessage>
                 )}
             </VStack>
