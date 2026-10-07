@@ -3,20 +3,20 @@ import { Dispatch, SetStateAction } from 'react';
 import { InlineMessage, VStack } from '@navikt/ds-react';
 
 import { errorKeyHarTTKort } from './validering';
-import { Skillelinje } from '../../../../../components/Skillelinje';
-import { LocaleHeading } from '../../../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleRadioGroup } from '../../../../../components/Teksthåndtering/LocaleRadioGroup';
-import { LocaleTekstAvsnitt } from '../../../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
-import { EnumFelt, EnumFlereValgFelt } from '../../../../../typer/skjema';
-import { JaNei } from '../../../../../typer/søknad';
-import { reisemåteTekster } from '../../../../tekster/reisemåte';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
 import {
     ÅrsakKanIkkeBenytteEgenBil,
-    Reisemåte,
     DrosjeInfo,
     ÅrsakKanIkkeBenytteOffentligTransport,
-} from '../../../../typer/reisemåte';
+    Reisemåte,
+} from '../../../typer/reisemåte';
+import { EnumFlereValgFelt, EnumFelt } from '../../../typer/skjema';
+import { JaNei } from '../../../typer/søknad';
+import { Skillelinje } from '../../Skillelinje';
+import { LocaleHeading } from '../../Teksthåndtering/LocaleHeading';
+import { LocaleRadioGroup } from '../../Teksthåndtering/LocaleRadioGroup';
+import { LocaleTekstAvsnitt } from '../../Teksthåndtering/LocaleTekstAvsnitt';
 
 export const DrosjeReiseTilSamling: React.FC<{
     samlingId: number;

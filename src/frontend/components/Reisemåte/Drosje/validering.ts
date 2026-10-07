@@ -1,20 +1,19 @@
-import { Locale } from '../../../../../typer/tekst';
-import { Valideringsfeil } from '../../../../../typer/validering';
-import { harVerdi } from '../../../../../utils/typeUtils';
-import { reisemåteTekster } from '../../../../tekster/reisemåte';
-import { Reisemåte } from '../../../../typer/reisemåte';
+import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
+import { Reisemåte } from '../../../typer/reisemåte';
+import { Locale } from '../../../typer/tekst';
+import { Valideringsfeil } from '../../../typer/validering';
+import { harVerdi } from '../../../utils/typeUtils';
 
-export const errorKeyHarTTKort = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_har_tt_kort`;
+export const errorKeyHarTTKort = (reiseId: number) => `reise_${reiseId}_reisemåte_har_tt_kort`;
 
-export const nullstillteDrosjefeil = (samlingId: number): Valideringsfeil => ({
-    [errorKeyHarTTKort(samlingId)]: undefined,
+export const nullstillteDrosjefeil = (reiseId: number): Valideringsfeil => ({
+    [errorKeyHarTTKort(reiseId)]: undefined,
 });
 
 export const validerDrosje = (
     reisemåte: Reisemåte | undefined,
     locale: Locale,
-    samlingId: number
+    reiseId: number
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -29,8 +28,8 @@ export const validerDrosje = (
         if (!harVerdi(drosje?.harTTKort?.verdi)) {
             feil = {
                 ...feil,
-                [errorKeyHarTTKort(samlingId)]: {
-                    id: errorKeyHarTTKort(samlingId),
+                [errorKeyHarTTKort(reiseId)]: {
+                    id: errorKeyHarTTKort(reiseId),
                     melding: reisemåteTekster.radio_har_du_tt_kort.feilmelding[locale],
                 },
             };

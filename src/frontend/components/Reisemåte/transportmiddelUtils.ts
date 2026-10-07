@@ -6,9 +6,9 @@ import {
     errorKeyUnntakFraPrivatBil,
     nullstilteUnntakFraOffentligTransport,
 } from './validering';
-import { EnumFlereValgFelt } from '../../../../typer/skjema';
-import { Valideringsfeil } from '../../../../typer/validering';
-import { Transportmiddel } from '../../../typer/reisemåte';
+import { Transportmiddel } from '../../typer/reisemåte';
+import { EnumFlereValgFelt } from '../../typer/skjema';
+import { Valideringsfeil } from '../../typer/validering';
 
 export const finnValgteTransportmidler = (
     transportmidler: EnumFlereValgFelt<Transportmiddel> | undefined

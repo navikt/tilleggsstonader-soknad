@@ -12,12 +12,12 @@ import {
 } from './transportmiddelUtils';
 import { UnntakIkkeOffentligTransport } from './UnntakFraOffentligTransport';
 import { errorKeyHvilkeTransportmidlerBleBenyttet, errorKeyUnntakFraPrivatBil } from './validering';
-import { LocaleCheckboxGroup } from '../../../../components/Teksthåndtering/LocaleCheckboxGroup';
-import { useSpråk } from '../../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../../context/ValideringsfeilContext';
-import { EnumFlereValgFelt } from '../../../../typer/skjema';
-import { reisemåteTekster } from '../../../tekster/reisemåte';
-import { Reisemåte, Transportmiddel, ÅrsakKanIkkeBenytteEgenBil } from '../../../typer/reisemåte';
+import { useSpråk } from '../../context/SpråkContext';
+import { useValideringsfeil } from '../../context/ValideringsfeilContext';
+import { reisemåteTekster } from '../../reiseTilSamling/tekster/reisemåte';
+import { Reisemåte, Transportmiddel, ÅrsakKanIkkeBenytteEgenBil } from '../../typer/reisemåte';
+import { EnumFlereValgFelt } from '../../typer/skjema';
+import { LocaleCheckboxGroup } from '../Teksthåndtering/LocaleCheckboxGroup';
 
 export const TransportmiddelOgUnntak: React.FC<{
     samlingId: number;

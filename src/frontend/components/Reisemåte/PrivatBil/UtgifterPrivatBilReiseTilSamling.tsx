@@ -7,15 +7,15 @@ import {
     errorKeyPrivatBilUtgifterParkering,
     errorKeyPrivatBilUtgifterPiggdekkavgift,
 } from './validering';
-import { Skillelinje } from '../../../../../components/Skillelinje';
-import { LocaleHeading } from '../../../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleSelect } from '../../../../../components/Teksthåndtering/LocaleSelect';
-import { LocaleTekst } from '../../../../../components/Teksthåndtering/LocaleTekst';
-import { useSpråk } from '../../../../../context/SpråkContext';
-import { useValideringsfeil } from '../../../../../context/ValideringsfeilContext';
-import { EnumFelt } from '../../../../../typer/skjema';
-import { reisemåteTekster } from '../../../../tekster/reisemåte';
-import { DrivstoffType, UtgifterPrivatBil } from '../../../../typer/reisemåte';
+import { useSpråk } from '../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
+import { UtgifterPrivatBil, DrivstoffType } from '../../../typer/reisemåte';
+import { EnumFelt } from '../../../typer/skjema';
+import { Skillelinje } from '../../Skillelinje';
+import { LocaleHeading } from '../../Teksthåndtering/LocaleHeading';
+import { LocaleSelect } from '../../Teksthåndtering/LocaleSelect';
+import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';
 
 export const UtgifterPrivatBilReiseTilSamling: React.FC<{
     samlingId: number;
