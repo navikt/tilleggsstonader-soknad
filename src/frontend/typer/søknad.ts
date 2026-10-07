@@ -4,7 +4,11 @@ import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt }
 import { Ytelse } from '../components/Hovedytelse/typer';
 import { Utdanning } from '../læremidler/typer/søknad';
 import { Barnepass } from '../passAvBarn/typer/barnepass';
-import { AktivitetReiseOppstartAvslutningHjemreise } from '../reiseOppstartAvslutningHjemreise/typer/aktivitet';
+import {
+    AdresseReiseOppstartAvslutningHjemreise,
+    BarnOgHelseReiseOppstartAvslutningHjemreise,
+    ReiseInfoReiseOppstartAvslutningHjemreise,
+} from '../reiseOppstartAvslutningHjemreise/typer/søknad';
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
 
 export type Søknad =
@@ -37,10 +41,12 @@ export interface SøknadReiseTilSamling {
     søknadMetadata: SøknadMetadata;
 }
 
-// Skjelett - flere felt legges til etter hvert som resten av flyten bygges ut
 export interface SøknadReiseOppstartAvslutningHjemreise {
     hovedytelse: Hovedytelse | undefined;
-    aktivitet: AktivitetReiseOppstartAvslutningHjemreise | undefined;
+    aktivitet: AktivitetFelles | undefined;
+    adresser: AdresseReiseOppstartAvslutningHjemreise | undefined;
+    barnOgHelse: BarnOgHelseReiseOppstartAvslutningHjemreise | undefined;
+    reise: ReiseInfoReiseOppstartAvslutningHjemreise | undefined;
     dokumentasjon: DokumentasjonFelt[];
     søknadMetadata: SøknadMetadata;
 }

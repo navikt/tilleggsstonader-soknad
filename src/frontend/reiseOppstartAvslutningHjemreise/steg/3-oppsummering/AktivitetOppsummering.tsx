@@ -5,12 +5,12 @@ import { FormSummary } from '@navikt/ds-react';
 import { FormSummaryFooterMedEndreKnapp } from '../../../components/Oppsummering/FormSummaryFooterMedEndreKnapp';
 import { OppsummeringSvar } from '../../../components/Oppsummering/OppsummeringSvar';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
+import { AktivitetFelles } from '../../../typer/søknad';
 import { RouteTilPath } from '../../routing/routesReiseOppstartAvslutningHjemreise';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
-import { AktivitetReiseOppstartAvslutningHjemreise } from '../../typer/aktivitet';
 
 export const AktivitetOppsummering: React.FC<{
-    aktivitet: AktivitetReiseOppstartAvslutningHjemreise;
+    aktivitet: AktivitetFelles;
 }> = ({ aktivitet }) => {
     return (
         <FormSummary>
@@ -23,8 +23,6 @@ export const AktivitetOppsummering: React.FC<{
                 <OppsummeringSvar felt={aktivitet.aktiviteter} />
                 <OppsummeringSvar felt={aktivitet.annenAktivitet} />
                 <OppsummeringSvar felt={aktivitet.lønnetAktivitet} />
-                <OppsummeringSvar felt={aktivitet.måBoBorteHjemmefra} />
-                <OppsummeringSvar felt={aktivitet.harBarnUnder18SomHarFlyttetMed} />
             </FormSummary.Answers>
             <FormSummaryFooterMedEndreKnapp lenke={RouteTilPath.AKTIVITET} />
         </FormSummary>

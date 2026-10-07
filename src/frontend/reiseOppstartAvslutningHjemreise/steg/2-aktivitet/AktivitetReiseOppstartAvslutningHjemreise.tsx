@@ -2,10 +2,6 @@ import { useState } from 'react';
 
 import { GuidePanel, Label } from '@navikt/ds-react';
 
-import {
-    skalTaStillingTilBarnUnder18SomHarFlyttetMed,
-    skalTaStillingTilBorMidlertidigBorte,
-} from './aktivitetUtil';
 import { LesMerHvilkenAktivitet } from './LesMerHvilkenAktivitet';
 import { skalTaStillingTilLønnetTiltak } from '../../../components/Aktivitet/aktivitetUtils';
 import {
@@ -23,7 +19,6 @@ import {
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { useRegisterAktiviteter } from '../../../context/RegisterAktiviteterContext';
@@ -54,21 +49,11 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         aktivitet ? aktivitet.lønnetAktivitet : undefined
     );
 
-    const [måBoBorteHjemmefra, setMåBoBorteHjemmefra] = useState<EnumFelt<JaNei> | undefined>(
-        aktivitet ? aktivitet.måBoBorteHjemmefra : undefined
-    );
-
-    const [harBarnUnder18SomHarFlyttetMed, setHarBarnUnder18SomHarFlyttetMed] = useState<
-        EnumFelt<JaNei> | undefined
-    >(aktivitet ? aktivitet.harBarnUnder18SomHarFlyttetMed : undefined);
-
     const oppdaterAktivitetISøknad = () => {
         settAktivitet({
             aktiviteter: valgteAktiviteter,
             annenAktivitet: annenAktivitet,
             lønnetAktivitet: lønnetAktivitet,
-            måBoBorteHjemmefra: måBoBorteHjemmefra,
-            harBarnUnder18SomHarFlyttetMed: harBarnUnder18SomHarFlyttetMed,
         });
     };
 
@@ -100,33 +85,6 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         }
     };
 
-    const nullstillMåBoBorteHjemmefra = (
-        valgteAktiviteter: EnumFlereValgFelt<string> | undefined,
-        annenAktivitet: EnumFelt<AnnenAktivitetType> | undefined
-    ) => {
-        const skalIkkeTaStilling = !(
-            (valgteAktiviteter?.verdier.length ?? 0) > 0 || annenAktivitet !== undefined
-        );
-        if (måBoBorteHjemmefra && skalIkkeTaStilling) {
-            setMåBoBorteHjemmefra(undefined);
-            settValideringsfeil((prevState) => ({
-                ...prevState,
-                måBoBorteHjemmefra: undefined,
-            }));
-            nullstillHarBarnUnder18SomHarFlyttetMed();
-        }
-    };
-
-    const nullstillHarBarnUnder18SomHarFlyttetMed = () => {
-        if (harBarnUnder18SomHarFlyttetMed) {
-            setHarBarnUnder18SomHarFlyttetMed(undefined);
-            settValideringsfeil((prevState) => ({
-                ...prevState,
-                harBarnUnder18SomHarFlyttetMed: undefined,
-            }));
-        }
-    };
-
     const oppdaterValgteAktiviteter = (nyeValgteAktiviteter: EnumFlereValgFelt<string>) => {
         settValgteAktiviteter(nyeValgteAktiviteter);
         if (nyeValgteAktiviteter.verdier.length > 0) {
@@ -137,7 +95,6 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         }
         nullstillAnnenAktivitet(nyeValgteAktiviteter);
         nullstillLønnetAktivitet(nyeValgteAktiviteter, annenAktivitet);
-        nullstillMåBoBorteHjemmefra(nyeValgteAktiviteter, annenAktivitet);
     };
 
     const oppdaterAnnenAktivitet = (verdi: EnumFelt<AnnenAktivitetType>) => {
@@ -157,39 +114,12 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
         }));
     };
 
-    const oppdaterMåBoBorteHjemmefra = (verdi: EnumFelt<JaNei>) => {
-        setMåBoBorteHjemmefra(verdi);
-        settValideringsfeil((prevState) => ({
-            ...prevState,
-            måBoBorteHjemmefra: undefined,
-        }));
-        if (verdi.verdi !== 'JA') {
-            nullstillHarBarnUnder18SomHarFlyttetMed();
-        }
-    };
-
-    const oppdaterHarBarnUnder18SomHarFlyttetMed = (verdi: EnumFelt<JaNei>) => {
-        setHarBarnUnder18SomHarFlyttetMed(verdi);
-        settValideringsfeil((prevState) => ({
-            ...prevState,
-            harBarnUnder18SomHarFlyttetMed: undefined,
-        }));
-    };
-
     const skalViseAnnenAktivitet = skalTaStillingTilAnnenAktivitet(valgteAktiviteter);
     const skalViseLønnetTiltak = skalTaStillingTilLønnetTiltak(
         valgteAktiviteter,
         annenAktivitet,
         registerAktiviteter
     );
-    // Vises når bruker har valgt minst én aktivitet (enten fra registeret eller "annen aktivitet")
-    const skalViseMåBoBorteHjemmefra = skalTaStillingTilBorMidlertidigBorte(
-        annenAktivitet,
-        valgteAktiviteter
-    );
-
-    const skalViseHarBarnUnder18SomHarFlyttetMed =
-        skalTaStillingTilBarnUnder18SomHarFlyttetMed(måBoBorteHjemmefra);
 
     if (!registerAktiviteter) {
         // ønsker ikke å vise siden før man har hentet aktivteter fra backend
@@ -224,31 +154,6 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                     : aktivitetTekster.radio_annet_uten_registeraktivitet.feilmelding[locale]
             );
         }
-        if (skalViseMåBoBorteHjemmefra && måBoBorteHjemmefra?.verdi === undefined) {
-            feil = {
-                ...feil,
-                måBoBorteHjemmefra: {
-                    id: 'aktivitet_måBoBorteHjemmefra',
-                    melding: aktivitetTekster.radio_må_bo_borte_hjemmefra_feilmelding[locale],
-                },
-            };
-        }
-        if (
-            skalViseHarBarnUnder18SomHarFlyttetMed &&
-            harBarnUnder18SomHarFlyttetMed?.verdi === undefined
-        ) {
-            feil = {
-                ...feil,
-                harBarnUnder18SomHarFlyttetMed: {
-                    id: 'aktivitet_harBarnUnder18SomHarFlyttetMed',
-                    melding:
-                        aktivitetTekster.radio_har_barn_under_18_som_har_flyttet_med_feilmelding[
-                            locale
-                        ],
-                },
-            };
-        }
-
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
@@ -306,35 +211,6 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                     radioTekst={aktivitetTekster.radio_lønnet_tiltak}
                     infoalertInnhold={aktivitetTekster.lønnet_tiltak_infoalert_innhold}
                 />
-            )}
-
-            {skalViseMåBoBorteHjemmefra && (
-                <div>
-                    <LocaleRadioGroup
-                        id={valideringsfeil.måBoBorteHjemmefra?.id}
-                        tekst={aktivitetTekster.radio_må_bo_borte_hjemmefra}
-                        value={måBoBorteHjemmefra?.verdi || []}
-                        onChange={oppdaterMåBoBorteHjemmefra}
-                        error={valideringsfeil.måBoBorteHjemmefra?.melding}
-                    ></LocaleRadioGroup>
-                    {måBoBorteHjemmefra?.verdi === 'NEI' && (
-                        <AlertIkkeRett
-                            beskrivelse={aktivitetTekster.advarsel_må_bo_borte_hjemmefra}
-                        />
-                    )}
-                </div>
-            )}
-
-            {skalViseHarBarnUnder18SomHarFlyttetMed && (
-                <div>
-                    <LocaleRadioGroup
-                        id={valideringsfeil.harBarnUnder18SomHarFlyttetMed?.id}
-                        tekst={aktivitetTekster.radio_har_barn_under_18_som_har_flyttet_med}
-                        value={harBarnUnder18SomHarFlyttetMed?.verdi || []}
-                        onChange={oppdaterHarBarnUnder18SomHarFlyttetMed}
-                        error={valideringsfeil.harBarnUnder18SomHarFlyttetMed?.melding}
-                    />
-                </div>
             )}
 
             {annenAktivitet?.verdi === AnnenAktivitetType.ARBEIDSSØKER && (

@@ -9,8 +9,7 @@ import {
     initialHovedytelse,
 } from './reiseOppstartAvslutningHjemreiseInitialState';
 import { DokumentasjonFelt } from '../../typer/skjema';
-import { Hovedytelse } from '../../typer/søknad';
-import { AktivitetReiseOppstartAvslutningHjemreise } from '../typer/aktivitet';
+import { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
 
 const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutningHjemreiseSøknad] =
     createUseContext(() => {
@@ -21,9 +20,9 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
         const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(
             initialHovedytelse()
         );
-        const [aktivitet, settAktivitet] = useState<
-            AktivitetReiseOppstartAvslutningHjemreise | undefined
-        >(initialAktivitet());
+        const [aktivitet, settAktivitet] = useState<AktivitetFelles | undefined>(
+            initialAktivitet()
+        );
         const [dokumentasjon, settDokumentasjon] =
             useState<DokumentasjonFelt[]>(initialDokumentasjon());
 

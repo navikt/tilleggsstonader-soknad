@@ -4,10 +4,8 @@ import {
     plukkAktivitetTekster,
     tekstArbeidsrettedeAktiviteter,
 } from '../../tekster/aktivitet';
-import { JaNeiTilTekst } from '../../tekster/felles';
 import { AnnenAktivitetType } from '../../typer/aktivitet';
-import { JaNei } from '../../typer/søknad';
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { TekstElement } from '../../typer/tekst';
 
 // TODO: placeholder-tekster - dette er et skjelett og innholdet må erstattes med endelig tekst
 export const AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise = plukkAktivitetTekster(
@@ -18,12 +16,7 @@ export const AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise = plukkAktivi
 );
 
 interface AktivitetInnholdReiseOppstartAvslutningHjemreise extends AktivitetInnhold {
-    radio_må_bo_borte_hjemmefra: Radiogruppe<JaNei>;
-    radio_må_bo_borte_hjemmefra_feilmelding: TekstElement<string>;
-    advarsel_må_bo_borte_hjemmefra: TekstElement<string>;
     info_arbeidssøker_ingen_rett: TekstElement<string>;
-    radio_har_barn_under_18_som_har_flyttet_med: Radiogruppe<JaNei>;
-    radio_har_barn_under_18_som_har_flyttet_med_feilmelding: TekstElement<string>;
     ingen_aktivitet_infoalert_innhold: TekstElement<string>;
 }
 
@@ -109,28 +102,7 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         alternativer: AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise,
         feilmelding: { nb: 'Du må velge en aktivitet' },
     },
-    radio_må_bo_borte_hjemmefra: {
-        header: {
-            nb: 'Må du midlertidig bo borte hjemmefra for å delta på denne aktiviteten?',
-        },
-        alternativer: JaNeiTilTekst,
-    },
-    radio_må_bo_borte_hjemmefra_feilmelding: {
-        nb: 'Du må svare på om du må bo borte hjemmefra for å delta på aktiviteten.',
-    },
-    advarsel_må_bo_borte_hjemmefra: {
-        nb: 'Ut fra svarene dine ser det ut som du ikke må bo midlertidig borte hjemmefra på grunn av deltakelse på arbeidsrettet aktivitet. Da har du ikke rett på pengestøtte til reise ved oppstart, avslutning og hjemreiser. Du kan fortsatt søke, men det kan hende du får avslag.',
-    },
     info_arbeidssøker_ingen_rett: {
         nb: 'Som arbeidssøker har du ikke rett på denne stønaden. Du kan fortsatt søke, men det kan hende du får avslag.',
-    },
-    radio_har_barn_under_18_som_har_flyttet_med: {
-        header: {
-            nb: 'Har du ett eller flere barn under 18 år som har flyttet med deg?',
-        },
-        alternativer: JaNeiTilTekst,
-    },
-    radio_har_barn_under_18_som_har_flyttet_med_feilmelding: {
-        nb: 'Du må svare på om du har barn under 18 år som har flyttet med deg.',
     },
 };

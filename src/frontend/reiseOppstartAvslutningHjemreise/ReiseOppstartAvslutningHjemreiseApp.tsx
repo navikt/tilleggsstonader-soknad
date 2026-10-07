@@ -23,6 +23,9 @@ const ReiseOppstartAvslutningHjemreiseInnhold = () => {
             søknad={{
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
+                adresser: undefined,
+                barnOgHelse: undefined,
+                reise: undefined,
                 dokumentasjon: dokumentasjon,
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,
