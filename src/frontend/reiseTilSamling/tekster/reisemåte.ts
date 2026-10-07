@@ -45,7 +45,7 @@ interface ReisemåteInnhold {
     advarsel_skal_ikke_betale_selv: TekstElement<string>;
     info_helsemessige_årsaker_valg: TekstElement<string>;
     info_dårlig_transporttilbud_valg: TekstElement<string>;
-    info_drosje_dokumentasjon: TekstElement<string>;
+    info_ikke_offentlig_transport_reise_til_samling: TekstElement<string>;
     radio_har_du_tt_kort: RadiogruppePåkrevd<JaNei>;
     drosje_tittel: TekstElement<string>;
     info_tt_kort: TekstElement<string[]>;
@@ -211,8 +211,8 @@ export const reisemåteTekster: ReisemåteInnhold = {
         alternativer: JaNeiTilTekst,
         feilmelding: { nb: 'Du må svare på om du ønsker å få dekket utgifter til drosje.' },
     },
-    info_drosje_dokumentasjon: {
-        nb: 'Vi kan dekke utgifter til drosje hvis du oppfyller kravene til dette. Hvis du har hatt utgifter til drosje og ønsker å få disse dekket, må du legge ved kvitteringene i søknaden.',
+    info_ikke_offentlig_transport_reise_til_samling: {
+        nb: 'Vi dekker som hovedregel den billigste reisemåten med offentlig transport. Hvis det ikke er praktisk mulig å bruke offentlig transport, kan du få dekket nødvendige utgifter til annen reisemåte. Vi kommer til å gjøre en konkret vurdering av om du oppfyller vilkårene til annen reisemåte basert på den informasjonen og dokumentasjonen du oppgir.',
     },
     radio_har_du_tt_kort: {
         header: {
