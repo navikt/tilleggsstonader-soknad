@@ -15,37 +15,37 @@ import { Locale } from '../../typer/tekst';
 import { Valideringsfeil } from '../../typer/validering';
 import { harVerdi } from '../../utils/typeUtils';
 
-export const errorKeyHvilkeTransportmidlerBleBenyttet = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_hvilke_transportmidler_ble_benyttet`;
+export const errorKeyHvilkeTransportmidlerBleBenyttet = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_hvilke_transportmidler_ble_benyttet`;
 
-export const errorKeyUnntakFraOffentligTransport = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_unntak_fra_offentlig_transport`;
-export const errorKeyUnntakFraOffentligTransportBarnehageAdresse = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_unntak_fra_offentlig_transport_barnehage_adresse`;
-export const errorKeyUnntakFraOffentligTransportBarnehagePostnummer = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_unntak_fra_offentlig_transport_barnehage_postnummer`;
-export const errorKeyUnntakFraPrivatBil = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_unntak_fra_privat_bil`;
+export const errorKeyUnntakFraOffentligTransport = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_unntak_fra_offentlig_transport`;
+export const errorKeyUnntakFraOffentligTransportBarnehageAdresse = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_unntak_fra_offentlig_transport_barnehage_adresse`;
+export const errorKeyUnntakFraOffentligTransportBarnehagePostnummer = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_unntak_fra_offentlig_transport_barnehage_postnummer`;
+export const errorKeyUnntakFraPrivatBil = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_unntak_fra_privat_bil`;
 
-export const nullstilteUnntakFraOffentligTransport = (samlingId: number): Valideringsfeil => ({
-    [errorKeyUnntakFraOffentligTransport(samlingId)]: undefined,
-    [errorKeyUnntakFraOffentligTransportBarnehageAdresse(samlingId)]: undefined,
-    [errorKeyUnntakFraOffentligTransportBarnehagePostnummer(samlingId)]: undefined,
+export const nullstilteUnntakFraOffentligTransport = (reiseId: number): Valideringsfeil => ({
+    [errorKeyUnntakFraOffentligTransport(reiseId)]: undefined,
+    [errorKeyUnntakFraOffentligTransportBarnehageAdresse(reiseId)]: undefined,
+    [errorKeyUnntakFraOffentligTransportBarnehagePostnummer(reiseId)]: undefined,
 });
 
-export const nullstilteReisemåteFeil = (samlingId: number): Valideringsfeil => ({
-    [errorKeyHvilkeTransportmidlerBleBenyttet(samlingId)]: undefined,
-    ...nullstilteOffentligTransportFeil(samlingId),
-    ...nullstiltePrivatBilFeil(samlingId),
-    ...nullstillteDrosjefeil(samlingId),
-    ...nullstilteUnntakFraOffentligTransport(samlingId),
-    [errorKeyUnntakFraPrivatBil(samlingId)]: undefined,
+export const nullstilteReisemåteFeil = (reiseId: number): Valideringsfeil => ({
+    [errorKeyHvilkeTransportmidlerBleBenyttet(reiseId)]: undefined,
+    ...nullstilteOffentligTransportFeil(reiseId),
+    ...nullstiltePrivatBilFeil(reiseId),
+    ...nullstillteDrosjefeil(reiseId),
+    ...nullstilteUnntakFraOffentligTransport(reiseId),
+    [errorKeyUnntakFraPrivatBil(reiseId)]: undefined,
 });
 
 export const validerReisemåte = (
     reisemåte: Reisemåte | undefined,
     locale: Locale,
-    samlingId: number
+    reiseId: number
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -54,8 +54,8 @@ export const validerReisemåte = (
     ) {
         feil = {
             ...feil,
-            [errorKeyHvilkeTransportmidlerBleBenyttet(samlingId)]: {
-                id: errorKeyHvilkeTransportmidlerBleBenyttet(samlingId),
+            [errorKeyHvilkeTransportmidlerBleBenyttet(reiseId)]: {
+                id: errorKeyHvilkeTransportmidlerBleBenyttet(reiseId),
                 melding: reisemåteTekster.check_hvilke_transportmidler.feilmelding[locale],
             },
         };
@@ -67,7 +67,7 @@ export const validerReisemåte = (
     if (valgteTransportmidler.includes('OFFENTLIG_TRANSPORT')) {
         feil = {
             ...feil,
-            ...validerOffentligTransport(reisemåte?.offentligTransport, locale, samlingId),
+            ...validerOffentligTransport(reisemåte?.offentligTransport, locale, reiseId),
         };
     }
 
@@ -81,12 +81,12 @@ export const validerReisemåte = (
             ...validerUnntakFraOffentligTransport(
                 reisemåte?.unntakFraOffentligTransport,
                 locale,
-                samlingId
+                reiseId
             ),
             ...validerPrivatBil(
                 reisemåte?.privatBil,
                 locale,
-                samlingId,
+                reiseId,
                 skalReiseMedFlereTransportmidler
             ),
         };
@@ -98,10 +98,10 @@ export const validerReisemåte = (
             ...validerUnntakFraOffentligTransport(
                 reisemåte?.unntakFraOffentligTransport,
                 locale,
-                samlingId
+                reiseId
             ),
-            ...validerUnntakFraPrivatBil(reisemåte?.unntakFraPrivatBil, locale, samlingId),
-            ...validerDrosje(reisemåte, locale, samlingId),
+            ...validerUnntakFraPrivatBil(reisemåte?.unntakFraPrivatBil, locale, reiseId),
+            ...validerDrosje(reisemåte, locale, reiseId),
         };
     }
 
@@ -111,15 +111,15 @@ export const validerReisemåte = (
 const validerUnntakFraOffentligTransport = (
     unntakFraOffentligTransport: UnntakFraOffentligTransport | undefined,
     locale: Locale,
-    samlingId: number
+    reiseId: number
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
     if (!unntakFraOffentligTransport?.årsaker?.verdier.some((felt) => harVerdi(felt.verdi))) {
         feil = {
             ...feil,
-            [errorKeyUnntakFraOffentligTransport(samlingId)]: {
-                id: errorKeyUnntakFraOffentligTransport(samlingId),
+            [errorKeyUnntakFraOffentligTransport(reiseId)]: {
+                id: errorKeyUnntakFraOffentligTransport(reiseId),
                 melding:
                     reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[locale],
             },
@@ -136,8 +136,8 @@ const validerUnntakFraOffentligTransport = (
             ) {
                 feil = {
                     ...feil,
-                    [errorKeyUnntakFraOffentligTransportBarnehageAdresse(samlingId)]: {
-                        id: errorKeyUnntakFraOffentligTransportBarnehageAdresse(samlingId),
+                    [errorKeyUnntakFraOffentligTransportBarnehageAdresse(reiseId)]: {
+                        id: errorKeyUnntakFraOffentligTransportBarnehageAdresse(reiseId),
                         melding:
                             reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[
                                 locale
@@ -152,8 +152,8 @@ const validerUnntakFraOffentligTransport = (
             ) {
                 feil = {
                     ...feil,
-                    [errorKeyUnntakFraOffentligTransportBarnehagePostnummer(samlingId)]: {
-                        id: errorKeyUnntakFraOffentligTransportBarnehagePostnummer(samlingId),
+                    [errorKeyUnntakFraOffentligTransportBarnehagePostnummer(reiseId)]: {
+                        id: errorKeyUnntakFraOffentligTransportBarnehagePostnummer(reiseId),
                         melding:
                             reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[
                                 locale
@@ -170,15 +170,15 @@ const validerUnntakFraOffentligTransport = (
 const validerUnntakFraPrivatBil = (
     unntakFraPrivatBil: EnumFlereValgFelt<ÅrsakKanIkkeBenytteEgenBil> | undefined,
     locale: Locale,
-    samlingId: number
+    reiseId: number
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
     if (!unntakFraPrivatBil?.verdier.some((felt) => harVerdi(felt.verdi))) {
         feil = {
             ...feil,
-            [errorKeyUnntakFraPrivatBil(samlingId)]: {
-                id: errorKeyUnntakFraPrivatBil(samlingId),
+            [errorKeyUnntakFraPrivatBil(reiseId)]: {
+                id: errorKeyUnntakFraPrivatBil(reiseId),
                 melding:
                     reisemåteTekster.check_kan_ikke_benytte_egen_bil_begrunnelse.feilmelding[
                         locale

@@ -5,17 +5,17 @@ import { Valideringsfeil } from '../../../typer/validering';
 import { erGyldigKostnad } from '../../../utils/tall';
 import { harVerdi } from '../../../utils/typeUtils';
 
-export const errorKeyTotalutgifterOffentligTransport = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_totalutgifter_offentlig_transport`;
+export const errorKeyTotalutgifterOffentligTransport = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_totalutgifter_offentlig_transport`;
 
-export const nullstilteOffentligTransportFeil = (samlingId: number): Valideringsfeil => ({
-    [errorKeyTotalutgifterOffentligTransport(samlingId)]: undefined,
+export const nullstilteOffentligTransportFeil = (reiseId: number): Valideringsfeil => ({
+    [errorKeyTotalutgifterOffentligTransport(reiseId)]: undefined,
 });
 
 export const validerOffentligTransport = (
     offentligTransport: OffentligTransportInfo | undefined,
     locale: Locale,
-    samlingId: number
+    reiseId: number
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -24,16 +24,16 @@ export const validerOffentligTransport = (
     if (!harVerdi(utgifter)) {
         feil = {
             ...feil,
-            [errorKeyTotalutgifterOffentligTransport(samlingId)]: {
-                id: errorKeyTotalutgifterOffentligTransport(samlingId),
+            [errorKeyTotalutgifterOffentligTransport(reiseId)]: {
+                id: errorKeyTotalutgifterOffentligTransport(reiseId),
                 melding: reisemåteTekster.totalutgifter_offentlig_transport.feilmelding[locale],
             },
         };
     } else if (!erGyldigKostnad(utgifter)) {
         feil = {
             ...feil,
-            [errorKeyTotalutgifterOffentligTransport(samlingId)]: {
-                id: errorKeyTotalutgifterOffentligTransport(samlingId),
+            [errorKeyTotalutgifterOffentligTransport(reiseId)]: {
+                id: errorKeyTotalutgifterOffentligTransport(reiseId),
                 melding:
                     reisemåteTekster.totalutgifter_offentlig_transport.feilmelding_ugyldig[locale],
             },

@@ -1,5 +1,8 @@
-import { nullstilteReisemåteFeil, validerReisemåte } from './Reisemåte/validering';
 import { AdresseFeilIder, validerAdresse } from '../../../components/AdresseVelger/validering';
+import {
+    nullstilteReisemåteFeil,
+    validerReisemåte,
+} from '../../../components/Reisemåte/validering';
 import { Samling } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';

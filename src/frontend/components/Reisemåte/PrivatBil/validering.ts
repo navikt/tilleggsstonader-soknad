@@ -5,58 +5,58 @@ import { Valideringsfeil } from '../../../typer/validering';
 import { erGyldigKostnad } from '../../../utils/tall';
 import { harVerdi } from '../../../utils/typeUtils';
 
-export const errorKeyPrivatBilBenyttetEgenBil = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_privatbil_benyttet_egen_bil`;
-export const errorKeyPrivatBilBetalteForReiseSelv = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_privatbil_betalte_for_reise_selv`;
-export const errorKeyPrivatBilStrekningHvorBilBleBenyttet = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_privatbil_strekning_hvor_bil_ble_benyttet`;
-export const errorKeyPrivatBilAntallKilometerKjørt = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_privatbil_antall_kilometer_kjort`;
+export const errorKeyPrivatBilBenyttetEgenBil = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_privatbil_benyttet_egen_bil`;
+export const errorKeyPrivatBilBetalteForReiseSelv = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_privatbil_betalte_for_reise_selv`;
+export const errorKeyPrivatBilStrekningHvorBilBleBenyttet = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_privatbil_strekning_hvor_bil_ble_benyttet`;
+export const errorKeyPrivatBilAntallKilometerKjørt = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_privatbil_antall_kilometer_kjort`;
 
 export const maksLengdeStrekningHvorBilBleBenyttet = 100;
 
-export const errorKeyPrivatBilUtgifterDrivstoffType = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_privatbil_utgifter_drivstoff_type`;
-export const errorKeyPrivatBilUtgifterBompenger = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_privatbil_utgifter_bompenger`;
-export const errorKeyPrivatBilUtgifterFerge = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_privatbil_utgifter_ferge`;
-export const errorKeyPrivatBilUtgifterPiggdekkavgift = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_privatbil_utgifter_piggdekkavgift`;
-export const errorKeyPrivatBilUtgifterParkering = (samlingId: number) =>
-    `samling_${samlingId}_reisemåte_privatbil_utgifter_parkering`;
+export const errorKeyPrivatBilUtgifterDrivstoffType = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_privatbil_utgifter_drivstoff_type`;
+export const errorKeyPrivatBilUtgifterBompenger = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_privatbil_utgifter_bompenger`;
+export const errorKeyPrivatBilUtgifterFerge = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_privatbil_utgifter_ferge`;
+export const errorKeyPrivatBilUtgifterPiggdekkavgift = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_privatbil_utgifter_piggdekkavgift`;
+export const errorKeyPrivatBilUtgifterParkering = (reiseId: number) =>
+    `reise_${reiseId}_reisemåte_privatbil_utgifter_parkering`;
 
-export const nullstilteUtgifterPrivatBilFeil = (samlingId: number): Valideringsfeil => ({
-    [errorKeyPrivatBilUtgifterDrivstoffType(samlingId)]: undefined,
-    [errorKeyPrivatBilUtgifterBompenger(samlingId)]: undefined,
-    [errorKeyPrivatBilUtgifterFerge(samlingId)]: undefined,
-    [errorKeyPrivatBilUtgifterPiggdekkavgift(samlingId)]: undefined,
-    [errorKeyPrivatBilUtgifterParkering(samlingId)]: undefined,
+export const nullstilteUtgifterPrivatBilFeil = (reiseId: number): Valideringsfeil => ({
+    [errorKeyPrivatBilUtgifterDrivstoffType(reiseId)]: undefined,
+    [errorKeyPrivatBilUtgifterBompenger(reiseId)]: undefined,
+    [errorKeyPrivatBilUtgifterFerge(reiseId)]: undefined,
+    [errorKeyPrivatBilUtgifterPiggdekkavgift(reiseId)]: undefined,
+    [errorKeyPrivatBilUtgifterParkering(reiseId)]: undefined,
 });
 
-export const nullstilteInfoBilKunDelerAvStrekningFeil = (samlingId: number): Valideringsfeil => ({
-    [errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]: undefined,
-    [errorKeyPrivatBilAntallKilometerKjørt(samlingId)]: undefined,
+export const nullstilteInfoBilKunDelerAvStrekningFeil = (reiseId: number): Valideringsfeil => ({
+    [errorKeyPrivatBilStrekningHvorBilBleBenyttet(reiseId)]: undefined,
+    [errorKeyPrivatBilAntallKilometerKjørt(reiseId)]: undefined,
 });
 
-export const nullstiltePrivatBilFeil = (samlingId: number): Valideringsfeil => ({
-    [errorKeyPrivatBilBenyttetEgenBil(samlingId)]: undefined,
-    [errorKeyPrivatBilBetalteForReiseSelv(samlingId)]: undefined,
-    ...nullstilteInfoBilKunDelerAvStrekningFeil(samlingId),
-    ...nullstilteUtgifterPrivatBilFeil(samlingId),
+export const nullstiltePrivatBilFeil = (reiseId: number): Valideringsfeil => ({
+    [errorKeyPrivatBilBenyttetEgenBil(reiseId)]: undefined,
+    [errorKeyPrivatBilBetalteForReiseSelv(reiseId)]: undefined,
+    ...nullstilteInfoBilKunDelerAvStrekningFeil(reiseId),
+    ...nullstilteUtgifterPrivatBilFeil(reiseId),
 });
 
 export const validerPrivatBil = (
     privatBil: PrivatBilInfo | undefined,
     locale: Locale,
-    samlingId: number,
+    reiseId: number,
     skalReiseMedFlereTransportmidler: boolean
 ): Valideringsfeil => {
     if (!harVerdi(privatBil?.benyttetEgenBil?.verdi)) {
         return {
-            [errorKeyPrivatBilBenyttetEgenBil(samlingId)]: {
-                id: errorKeyPrivatBilBenyttetEgenBil(samlingId),
+            [errorKeyPrivatBilBenyttetEgenBil(reiseId)]: {
+                id: errorKeyPrivatBilBenyttetEgenBil(reiseId),
                 melding: reisemåteTekster.radio_kan_benytte_egen_bil.feilmelding[locale],
             },
         };
@@ -67,8 +67,8 @@ export const validerPrivatBil = (
         !harVerdi(privatBil?.betalteForReisen?.verdi)
     ) {
         return {
-            [errorKeyPrivatBilBetalteForReiseSelv(samlingId)]: {
-                id: errorKeyPrivatBilBetalteForReiseSelv(samlingId),
+            [errorKeyPrivatBilBetalteForReiseSelv(reiseId)]: {
+                id: errorKeyPrivatBilBetalteForReiseSelv(reiseId),
                 melding: reisemåteTekster.radio_betaler_for_reise_selv.feilmelding[locale],
             },
         };
@@ -82,10 +82,10 @@ export const validerPrivatBil = (
             ...validerInfoBilKunDelerAvStrekning(
                 privatBil?.infoBilKunDelerAvStrekning,
                 locale,
-                samlingId,
+                reiseId,
                 skalReiseMedFlereTransportmidler
             ),
-            ...validerUtgifterPrivatBil(privatBil?.utgifterPrivatBil, locale, samlingId),
+            ...validerUtgifterPrivatBil(privatBil?.utgifterPrivatBil, locale, reiseId),
         };
     }
 
@@ -95,7 +95,7 @@ export const validerPrivatBil = (
 const validerInfoBilKunDelerAvStrekning = (
     infoBilKunDelerAvStrekning: PrivatBilInfo['infoBilKunDelerAvStrekning'],
     locale: Locale,
-    samlingId: number,
+    reiseId: number,
     skalReiseMedFlereTransportmidler: boolean
 ): Valideringsfeil => {
     if (!skalReiseMedFlereTransportmidler) {
@@ -110,16 +110,16 @@ const validerInfoBilKunDelerAvStrekning = (
     if (!harVerdi(strekningHvorBilBleBenyttetVerdi)) {
         feil = {
             ...feil,
-            [errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]: {
-                id: errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId),
+            [errorKeyPrivatBilStrekningHvorBilBleBenyttet(reiseId)]: {
+                id: errorKeyPrivatBilStrekningHvorBilBleBenyttet(reiseId),
                 melding: reisemåteTekster.privat_bil_strekning_kjørt.feilmelding[locale],
             },
         };
     } else if (strekningHvorBilBleBenyttetVerdi.length > maksLengdeStrekningHvorBilBleBenyttet) {
         feil = {
             ...feil,
-            [errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]: {
-                id: errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId),
+            [errorKeyPrivatBilStrekningHvorBilBleBenyttet(reiseId)]: {
+                id: errorKeyPrivatBilStrekningHvorBilBleBenyttet(reiseId),
                 melding: reisemåteTekster.privat_bil_strekning_kjørt.feilmelding_for_lang[locale],
             },
         };
@@ -128,8 +128,8 @@ const validerInfoBilKunDelerAvStrekning = (
     if (!harVerdi(infoBilKunDelerAvStrekning?.antallKilometerKjørt?.verdi)) {
         feil = {
             ...feil,
-            [errorKeyPrivatBilAntallKilometerKjørt(samlingId)]: {
-                id: errorKeyPrivatBilAntallKilometerKjørt(samlingId),
+            [errorKeyPrivatBilAntallKilometerKjørt(reiseId)]: {
+                id: errorKeyPrivatBilAntallKilometerKjørt(reiseId),
                 melding: reisemåteTekster.privat_bil_km_kjørt.feilmelding[locale],
             },
         };
@@ -141,7 +141,7 @@ const validerInfoBilKunDelerAvStrekning = (
 const validerUtgifterPrivatBil = (
     utgifterPrivatBil: UtgifterPrivatBil | undefined,
     locale: Locale,
-    samlingId: number
+    reiseId: number
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -151,8 +151,8 @@ const validerUtgifterPrivatBil = (
     if (bompengerHarVerdi && !erGyldigKostnad(bompenger)) {
         feil = {
             ...feil,
-            [errorKeyPrivatBilUtgifterBompenger(samlingId)]: {
-                id: errorKeyPrivatBilUtgifterBompenger(samlingId),
+            [errorKeyPrivatBilUtgifterBompenger(reiseId)]: {
+                id: errorKeyPrivatBilUtgifterBompenger(reiseId),
                 melding: reisemåteTekster.privat_bil_utgifter_bompenger.feilmelding[locale],
             },
         };
@@ -163,8 +163,8 @@ const validerUtgifterPrivatBil = (
     if (fergeHarVerdi && !erGyldigKostnad(ferge)) {
         feil = {
             ...feil,
-            [errorKeyPrivatBilUtgifterFerge(samlingId)]: {
-                id: errorKeyPrivatBilUtgifterFerge(samlingId),
+            [errorKeyPrivatBilUtgifterFerge(reiseId)]: {
+                id: errorKeyPrivatBilUtgifterFerge(reiseId),
                 melding: reisemåteTekster.privat_bil_utgifter_ferge.feilmelding[locale],
             },
         };
@@ -174,8 +174,8 @@ const validerUtgifterPrivatBil = (
     if (harVerdi(piggdekkavgift) && !erGyldigKostnad(piggdekkavgift)) {
         feil = {
             ...feil,
-            [errorKeyPrivatBilUtgifterPiggdekkavgift(samlingId)]: {
-                id: errorKeyPrivatBilUtgifterPiggdekkavgift(samlingId),
+            [errorKeyPrivatBilUtgifterPiggdekkavgift(reiseId)]: {
+                id: errorKeyPrivatBilUtgifterPiggdekkavgift(reiseId),
                 melding: reisemåteTekster.privat_bil_utgifter_piggdekkavgift.feilmelding[locale],
             },
         };
@@ -185,8 +185,8 @@ const validerUtgifterPrivatBil = (
     if (harVerdi(parkering) && !erGyldigKostnad(parkering)) {
         feil = {
             ...feil,
-            [errorKeyPrivatBilUtgifterParkering(samlingId)]: {
-                id: errorKeyPrivatBilUtgifterParkering(samlingId),
+            [errorKeyPrivatBilUtgifterParkering(reiseId)]: {
+                id: errorKeyPrivatBilUtgifterParkering(reiseId),
                 melding: reisemåteTekster.privat_bil_utgifter_parkering.feilmelding[locale],
             },
         };
@@ -198,8 +198,8 @@ const validerUtgifterPrivatBil = (
     ) {
         feil = {
             ...feil,
-            [errorKeyPrivatBilUtgifterDrivstoffType(samlingId)]: {
-                id: errorKeyPrivatBilUtgifterDrivstoffType(samlingId),
+            [errorKeyPrivatBilUtgifterDrivstoffType(reiseId)]: {
+                id: errorKeyPrivatBilUtgifterDrivstoffType(reiseId),
                 melding: reisemåteTekster.privat_bil_utgifter_drivstoff_type.feilmelding[locale],
             },
         };

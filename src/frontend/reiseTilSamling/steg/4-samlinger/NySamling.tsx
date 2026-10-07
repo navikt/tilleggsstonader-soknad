@@ -14,7 +14,6 @@ import {
 } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
-import { Reisemåte as ReisemåteSamling } from './Reisemåte/Reisemåte';
 import { erReiseavstandUnder30km } from './util';
 import {
     adresseFeilIderForSamling,
@@ -26,6 +25,7 @@ import {
 } from './validering';
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
+import { Reisemåte } from '../../../components/Reisemåte/Reisemåte';
 import { Skillelinje } from '../../../components/Skillelinje';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTextField } from '../../../components/Teksthåndtering/LocaleTextField';
@@ -230,7 +230,7 @@ export const NySamling: React.FC<{
 
                 <Skillelinje />
 
-                <ReisemåteSamling
+                <Reisemåte
                     samlingId={samling._id}
                     reisemåte={samling.reisemåte}
                     settReisemåte={settReisemåte}
