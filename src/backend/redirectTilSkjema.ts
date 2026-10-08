@@ -46,9 +46,6 @@ function routeTilAvsjekk(skjematype: SkjematypeFyllUt, res: Response) {
         case SkjematypeFyllUt.SØKNAD_DAGLIG_REISE:
             res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema-offentlig-transport`);
             return;
-        case SkjematypeFyllUt.SØKNAD_REISE_TIL_SAMLING:
-            res.redirect(302, `${BASE_PATH_SOKNAD}/reise-til-samling`);
-            return;
         default:
             throw new Error(`Ingen avsjekk definert for skjematype: ${skjematype}`);
     }
