@@ -33,7 +33,6 @@ const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
-    const kanBrukeReiseTilSamling = !erProd();
     // TODO: skjelett under bygging - skru på for alle miljø når flyten er ferdig
     const kanBrukeReiseOppstartAvslutningHjemreise = !erProd();
     return (
@@ -44,9 +43,7 @@ const AppRoutes = () => {
                 {/* Fallback for gamle lenker */}
                 <Route path={'/barnetilsyn/*'} element={<Navigate to={passAvBarnPath} replace />} />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
-                {kanBrukeReiseTilSamling && (
-                    <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
-                )}
+                <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
                 {kanBrukeReiseOppstartAvslutningHjemreise && (
                     <Route
                         path={`${reiseOppstartAvslutningHjemreisePath}/*`}
