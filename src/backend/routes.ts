@@ -47,6 +47,13 @@ export const routes = () => {
         redirectTilSkjema(SkjematypeFyllUt.DAGLIG_REISE_KJØRELISTE)
     );
 
+    expressRouter.get(
+        new RegExp(`^${BASE_PATH_SOKNAD}/reise-til-samling/?$`),
+        addRequestInfo(),
+        attachToken('tilleggsstonader-soknad-api'),
+        redirectTilSkjema(SkjematypeFyllUt.SØKNAD_REISE_TIL_SAMLING)
+    );
+
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
     expressRouter.use(
