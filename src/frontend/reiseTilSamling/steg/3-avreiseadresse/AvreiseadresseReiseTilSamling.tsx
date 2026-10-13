@@ -45,7 +45,7 @@ export const AvreiseadresseReiseTilSamling = () => {
     };
 
     const kanFortsette = (): boolean => {
-        const feil = validerAvreiseadresse(avreiseadresse, locale, manglerFolkeregistrertAddresse);
+        const feil = validerAvreiseadresse(avreiseadresse, locale, manglerFolkeregistrertAdresse);
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
@@ -61,7 +61,7 @@ export const AvreiseadresseReiseTilSamling = () => {
 
     const skalReiseFraFolkeregAdr = avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi;
 
-    const manglerFolkeregistrertAddresse =
+    const manglerFolkeregistrertAdresse =
         person.strukturertAdresse === null || person.strukturertAdresse === undefined;
 
     const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
@@ -72,7 +72,7 @@ export const AvreiseadresseReiseTilSamling = () => {
     return (
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={avreiseadresseTekster.tittel} level="2" size="medium" />
-            {manglerFolkeregistrertAddresse && (
+            {manglerFolkeregistrertAdresse && (
                 <VStack gap="space-4" style={{ marginBottom: 'var(--a-spacing-2)' }}>
                     <BodyShort weight="semibold">
                         {avreiseadresseTekster.avreiseadresse_tittel[locale]}
@@ -88,7 +88,7 @@ export const AvreiseadresseReiseTilSamling = () => {
                     </AdresseBoks>
                 </VStack>
             )}
-            {!manglerFolkeregistrertAddresse && (
+            {!manglerFolkeregistrertAdresse && (
                 <VStack gap="space-8">
                     <BodyShort spacing>
                         <LocaleTekst

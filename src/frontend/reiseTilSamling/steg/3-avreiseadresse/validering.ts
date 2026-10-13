@@ -21,11 +21,11 @@ export const avreiseadresseFeilIder: AdresseFeilIder = {
 export const validerAvreiseadresse = (
     avreiseadresse: Avreiseadresse,
     locale: Locale,
-    manglerFolkeregistrertAddresse: boolean
+    manglerFolkeregistrertAdresse: boolean
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
-    if (manglerFolkeregistrertAddresse) {
+    if (manglerFolkeregistrertAdresse) {
         const feilAdresse = validerAdresse(
             avreiseadresse.adresseDetSkalReisesFra,
             locale,
