@@ -48,7 +48,7 @@ export function mapAdresse(person: Person): Adresse | undefined {
         land: {
             label: 'Land',
             verdi: person.strukturertAdresse.land,
-            svarTekst: person.strukturertAdresse.land,
+            svarTekst: landkodeTilNavn[person.strukturertAdresse.land],
         },
     };
 }
