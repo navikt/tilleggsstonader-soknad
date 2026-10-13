@@ -21,6 +21,7 @@ import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt } from '../../../typer/skjema';
 import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
+import { mapAdresse } from '../../../utils/adresseUtils';
 import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { avreiseadresseTekster } from '../../tekster/avreiseadresse';
 
@@ -44,7 +45,7 @@ export const AvreiseadresseReiseTilSamling = () => {
     };
 
     const kanFortsette = (): boolean => {
-        const feil = validerAvreiseadresse(avreiseadresse, locale);
+        const feil = validerAvreiseadresse(avreiseadresse, locale, manglerFolkeregistrertAdresse);
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
@@ -53,13 +54,15 @@ export const AvreiseadresseReiseTilSamling = () => {
         settAvreiseadresse((prev) => ({
             ...prev,
             skalReiseFraFolkeregistrertAdresse: felt,
-            adresseDetSkalReisesFra:
-                felt.verdi === 'NEI' ? prev.adresseDetSkalReisesFra : undefined,
+            adresseDetSkalReisesFra: felt.verdi === 'NEI' ? undefined : mapAdresse(person),
         }));
         settValideringsfeil((prev) => ({ ...prev, [errorKeySkalReiseFraFolkeregAdr]: undefined }));
     };
 
     const skalReiseFraFolkeregAdr = avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi;
+
+    const manglerFolkeregistrertAdresse =
+        person.strukturertAdresse === null || person.strukturertAdresse === undefined;
 
     const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
         settAdresseDetSkalReisesFra(felt);
@@ -69,51 +72,73 @@ export const AvreiseadresseReiseTilSamling = () => {
     return (
         <Side validerSteg={kanFortsette}>
             <LocaleHeading tekst={avreiseadresseTekster.tittel} level="2" size="medium" />
-            <VStack gap="space-8">
-                <BodyShort spacing>
-                    <LocaleTekst
-                        tekst={avreiseadresseTekster.folkereg_adresse}
-                        argument0={person.adresse}
-                    />
-                </BodyShort>
-                <InlineMessage status="info">
-                    <BodyShort spacing>
-                        {avreiseadresseTekster.avreiseadresse_fra_folkereg_info[locale]}
-                        <Link
-                            href={avreiseadresseTekster.avreiseadresse_fra_folkereg_lenke_url}
-                            target="_blank"
-                            inlineText
-                            rel="noopener noreferrer"
-                        >
-                            {avreiseadresseTekster.avreiseadresse_fra_folkereg_lenke_tekst[locale]}
-                        </Link>
-                        .
+            {manglerFolkeregistrertAdresse && (
+                <VStack gap="space-4" style={{ marginBottom: 'var(--a-spacing-2)' }}>
+                    <BodyShort weight="semibold">
+                        {avreiseadresseTekster.avreiseadresse_tittel[locale]}
                     </BodyShort>
-                </InlineMessage>
-                <LocaleRadioGroup
-                    id={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.id}
-                    tekst={avreiseadresseTekster.radio_skalReiseFraFolkeregAdr}
-                    value={avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi ?? ''}
-                    onChange={oppdaterSkalReiseFraFolkeregAdr}
-                    error={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.melding}
-                />
-                {skalReiseFraFolkeregAdr === 'NEI' && (
-                    <VStack gap="space-4" style={{ marginBottom: 'var(--a-spacing-2)' }}>
-                        <BodyShort weight="semibold">
-                            {avreiseadresseTekster.avreiseadresse_tittel[locale]}
+                    <AdresseBoks>
+                        <AdresseVelger
+                            adresse={avreiseadresse.adresseDetSkalReisesFra}
+                            onChange={håndterAdresseEndring}
+                            tekster={avreiseadresseTekster.avreiseadresse_spørsmål}
+                            feil={valideringsfeil}
+                            feilIder={avreiseadresseFeilIder}
+                        />
+                    </AdresseBoks>
+                </VStack>
+            )}
+            {!manglerFolkeregistrertAdresse && (
+                <VStack gap="space-8">
+                    <BodyShort spacing>
+                        <LocaleTekst
+                            tekst={avreiseadresseTekster.folkereg_adresse}
+                            argument0={person.adresse}
+                        />
+                    </BodyShort>
+                    <InlineMessage status="info">
+                        <BodyShort spacing>
+                            {avreiseadresseTekster.avreiseadresse_fra_folkereg_info[locale]}
+                            <Link
+                                href={avreiseadresseTekster.avreiseadresse_fra_folkereg_lenke_url}
+                                target="_blank"
+                                inlineText
+                                rel="noopener noreferrer"
+                            >
+                                {
+                                    avreiseadresseTekster.avreiseadresse_fra_folkereg_lenke_tekst[
+                                        locale
+                                    ]
+                                }
+                            </Link>
+                            .
                         </BodyShort>
-                        <AdresseBoks>
-                            <AdresseVelger
-                                adresse={avreiseadresse.adresseDetSkalReisesFra}
-                                onChange={håndterAdresseEndring}
-                                tekster={avreiseadresseTekster.avreiseadresse_spørsmål}
-                                feil={valideringsfeil}
-                                feilIder={avreiseadresseFeilIder}
-                            />
-                        </AdresseBoks>
-                    </VStack>
-                )}
-            </VStack>
+                    </InlineMessage>
+                    <LocaleRadioGroup
+                        id={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.id}
+                        tekst={avreiseadresseTekster.radio_skalReiseFraFolkeregAdr}
+                        value={avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi ?? ''}
+                        onChange={oppdaterSkalReiseFraFolkeregAdr}
+                        error={valideringsfeil[errorKeySkalReiseFraFolkeregAdr]?.melding}
+                    />
+                    {skalReiseFraFolkeregAdr === 'NEI' && (
+                        <VStack gap="space-4" style={{ marginBottom: 'var(--a-spacing-2)' }}>
+                            <BodyShort weight="semibold">
+                                {avreiseadresseTekster.avreiseadresse_tittel[locale]}
+                            </BodyShort>
+                            <AdresseBoks>
+                                <AdresseVelger
+                                    adresse={avreiseadresse.adresseDetSkalReisesFra}
+                                    onChange={håndterAdresseEndring}
+                                    tekster={avreiseadresseTekster.avreiseadresse_spørsmål}
+                                    feil={valideringsfeil}
+                                    feilIder={avreiseadresseFeilIder}
+                                />
+                            </AdresseBoks>
+                        </VStack>
+                    )}
+                </VStack>
+            )}
         </Side>
     );
 };

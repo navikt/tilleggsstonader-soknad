@@ -41,6 +41,24 @@ export const mockPersonApi = async (page: Page) => {
             alder: 20,
             visningsnavn: 'fornavn etternavn',
             adresse: 'Hildes vei 3 a, 0100 Oslo',
+            strukturertAdresse: {
+                land: 'NOR',
+                gateadresse: 'Hildes vei',
+                postnummer: '0100',
+                poststed: 'Oslo',
+            },
+        };
+        await route.fulfill({ json });
+    });
+};
+
+export const mockPersonUtenAdresseApi = async (page: Page) => {
+    await page.route('api/person', async (route) => {
+        const json = {
+            fornavn: 'fornavn',
+            alder: 20,
+            visningsnavn: 'fornavn etternavn',
+            adresse: '',
         };
         await route.fulfill({ json });
     });
