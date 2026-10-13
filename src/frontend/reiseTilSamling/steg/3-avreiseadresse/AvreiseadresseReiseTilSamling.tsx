@@ -18,6 +18,7 @@ import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { Person } from '../../../typer/person';
 import { EnumFelt } from '../../../typer/skjema';
 import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
@@ -48,13 +49,28 @@ export const AvreiseadresseReiseTilSamling = () => {
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
+    function mapAdresse(person: Person): Adresse | undefined {
+        if (!person.strukturertAdresse) {
+            return undefined;
+        }
+        return {
+            gateadresse: { verdi: person.strukturertAdresse.gateadresse, label: 'Gateadresse' },
+            postnummer: { verdi: person.strukturertAdresse.postnummer, label: 'Postnummer' },
+            poststed: { verdi: person.strukturertAdresse.poststed, label: 'Poststed' },
+            land: {
+                label: 'Land',
+                verdi: person.strukturertAdresse.land,
+                svarTekst: person.strukturertAdresse.land,
+            },
+        };
+    }
 
     const oppdaterSkalReiseFraFolkeregAdr = (felt: EnumFelt<JaNei>) => {
         settAvreiseadresse((prev) => ({
             ...prev,
             skalReiseFraFolkeregistrertAdresse: felt,
             adresseDetSkalReisesFra:
-                felt.verdi === 'NEI' ? prev.adresseDetSkalReisesFra : undefined,
+                felt.verdi === 'NEI' ? prev.adresseDetSkalReisesFra : mapAdresse(person),
         }));
         settValideringsfeil((prev) => ({ ...prev, [errorKeySkalReiseFraFolkeregAdr]: undefined }));
     };
