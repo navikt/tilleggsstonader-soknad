@@ -33,9 +33,7 @@ export const validerAvreiseadresse = (
             avreiseadresseFeilIder
         );
         feil = { ...feil, ...feilAdresse };
-        return feil;
-    }
-    if (!harVerdi(avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi)) {
+    } else if (!harVerdi(avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi)) {
         feil = {
             ...feil,
             [errorKeySkalReiseFraFolkeregAdr]: {
