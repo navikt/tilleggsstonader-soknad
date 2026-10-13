@@ -2,6 +2,7 @@ import countries from 'i18n-iso-countries';
 import codesData from 'i18n-iso-countries/codes.json';
 import nbLocale from 'i18n-iso-countries/langs/nb.json';
 
+import { Person } from '../typer/person';
 import { Adresse } from '../typer/søknad';
 
 countries.registerLocale(nbLocale);
@@ -35,6 +36,22 @@ export const formaterAdresse = (adresse: Adresse | undefined) =>
         poststed: adresse?.poststed?.verdi,
         land: adresse?.land?.verdi,
     });
+
+export function mapAdresse(person: Person): Adresse | undefined {
+    if (!person.strukturertAdresse) {
+        return undefined;
+    }
+    return {
+        gateadresse: { verdi: person.strukturertAdresse.gateadresse, label: 'Gateadresse' },
+        postnummer: { verdi: person.strukturertAdresse.postnummer, label: 'Postnummer' },
+        poststed: { verdi: person.strukturertAdresse.poststed, label: 'Poststed' },
+        land: {
+            label: 'Land',
+            verdi: person.strukturertAdresse.land,
+            svarTekst: person.strukturertAdresse.land,
+        },
+    };
+}
 
 export const adressefelterTilVisning = (adresse: {
     gateadresse?: string;
