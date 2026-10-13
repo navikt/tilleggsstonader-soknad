@@ -45,7 +45,7 @@ export const AvreiseadresseReiseTilSamling = () => {
     };
 
     const kanFortsette = (): boolean => {
-        const feil = validerAvreiseadresse(avreiseadresse, locale);
+        const feil = validerAvreiseadresse(avreiseadresse, locale, manglerFolkeregistrertAddresse);
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };

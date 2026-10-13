@@ -2,7 +2,7 @@ import { expect, Page, test } from '@playwright/test';
 
 import { mockAktivitet } from '../../mocks/aktivitet';
 import { mockHarIngenSøknadReiseTilSamlingFraFør } from '../../mocks/harSøknadFraFør';
-import { mockPersonApi } from '../../mocks/person';
+import { mockPersonApi, mockPersonUtenAdresseApi } from '../../mocks/person';
 import { mockSøknadRoutingApi } from '../../mocks/søknadRouting';
 import { søknadBaseUrl } from '../../utils/utils';
 import { forventIngenWcagViolations } from '../../utils/wcag';
@@ -217,4 +217,57 @@ test('At privatbil-feil og -verdier nullstilles når privat bil skjules', async 
     await page.getByRole('checkbox', { name: 'Privat bil' }).check();
     await page.getByRole('radiogroup', { name: 'Benyttet du egen bil?' }).getByLabel('Ja').check();
     await expect(page.getByLabel('Totale bompengeutgifter')).toHaveValue('');
+});
+
+test('At person uten folkeregistrert adresse kan oppgi avreiseadresse og gå videre', async ({
+    page,
+}) => {
+    await mockSøknadRoutingApi(page);
+    await mockPersonUtenAdresseApi(page);
+    await mockAktivitet(page);
+    await mockHarIngenSøknadReiseTilSamlingFraFør(page);
+    await page.goto(`${urlSøknad}`);
+    await fjernWebpackOverlay(page);
+
+    await page.getByRole('button', { name: 'Start søknad' }).click();
+    await fjernWebpackOverlay(page);
+
+    await page.getByRole('checkbox', { name: 'Arbeidsavklaringspenger (AAP)' }).check();
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await page.getByLabel('Type navn: 2. februar 2025 - 2. februar 2025').check();
+    await page
+        .getByRole('radiogroup', { name: 'Hva slags type arbeidsrettet aktivitet går du på?' })
+        .getByLabel('Videregående skole')
+        .check();
+    await page
+        .getByRole('radiogroup', {
+            name: 'Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?',
+        })
+        .getByLabel('Ja')
+        .check();
+    await page
+        .getByRole('radiogroup', {
+            name: 'Får du dekket reisen til aktivitetsstedet av arbeidsgiveren din?',
+        })
+        .getByLabel('Nei')
+        .check();
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await expect(page).toHaveURL(`${urlSøknad}/avreiseadresse`);
+    await expect(
+        page.getByRole('radiogroup', { name: 'Skal du reise fra din folkeregistrerte adresse?' })
+    ).not.toBeVisible();
+
+    await forventIngenWcagViolations(page);
+
+    await page.getByLabel('Gateadresse').fill('Testveien 1');
+    await page.getByLabel('Postnummer').fill('0123');
+    await page.getByLabel('Poststed').fill('Oslo');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await fjernWebpackOverlay(page);
+
+    await expect(page).toHaveURL(`${urlSøknad}/samlinger`);
 });
