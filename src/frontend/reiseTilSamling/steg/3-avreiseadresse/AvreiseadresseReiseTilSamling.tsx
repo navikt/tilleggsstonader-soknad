@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 
@@ -18,7 +18,6 @@ import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { JaNeiTilTekst } from '../../../tekster/felles';
 import { EnumFelt } from '../../../typer/skjema';
 import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
@@ -64,23 +63,6 @@ export const AvreiseadresseReiseTilSamling = () => {
 
     const manglerFolkeregistrertAddresse =
         person.strukturertAdresse === null || person.strukturertAdresse === undefined;
-
-    useEffect(() => {
-        if (manglerFolkeregistrertAddresse && skalReiseFraFolkeregAdr !== 'NEI') {
-            const tekst = avreiseadresseTekster.radio_skalReiseFraFolkeregAdr;
-            settAvreiseadresse((prev) => ({
-                ...prev,
-                skalReiseFraFolkeregistrertAdresse: {
-                    label: tekst.header[locale],
-                    verdi: 'NEI',
-                    svarTekst: JaNeiTilTekst.NEI[locale],
-                    alternativer: Object.values(tekst.alternativer).map(
-                        (alternativ) => alternativ[locale]
-                    ),
-                },
-            }));
-        }
-    }, [manglerFolkeregistrertAddresse, skalReiseFraFolkeregAdr, locale, settAvreiseadresse]);
 
     const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
         settAdresseDetSkalReisesFra(felt);
