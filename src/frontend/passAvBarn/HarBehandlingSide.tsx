@@ -11,7 +11,7 @@ import { LocaleTekst } from '../components/Teksthåndtering/LocaleTekst';
 import { fellesTekster } from '../tekster/felles';
 import { harEksisterendeBehandlingTekster } from '../tekster/harEksisterendeBehandling';
 import { kvitteringTekster } from '../tekster/kvittering';
-import { skjematypeTilSkjemanavn } from '../typer/skjemanavn';
+import { skjematypeTilSkjemainfo } from '../typer/skjemanavn';
 import { Skjematype } from '../typer/skjematyper';
 
 interface SøknadsideProps {
@@ -34,7 +34,7 @@ export const HarBehandlingSide: React.FC<SøknadsideProps> = ({
                     <Heading size="medium">
                         <LocaleTekst
                             tekst={harEksisterendeBehandlingTekster.alert_for_skjematype}
-                            argument0={skjematypeTilSkjemanavn[skjematype].toLowerCase()}
+                            argument0={skjematypeTilSkjemainfo[skjematype].skjemanavn.toLowerCase()}
                         />
                         <BodyLong>
                             <LocaleInlineLenke
