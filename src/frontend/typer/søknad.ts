@@ -11,45 +11,44 @@ import {
 } from '../reiseOppstartAvslutningHjemreise/typer/søknad';
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
 
-export type Søknad =
-    | SøknadPassAvBarn
-    | SøknadLæremidler
-    | SøknadReiseTilSamling
-    | SøknadReiseOppstartAvslutningHjemreise;
-
-export interface SøknadPassAvBarn {
+export interface SøknadBase {
     hovedytelse: Hovedytelse | undefined;
+    dokumentasjon: DokumentasjonFelt[];
+    søknadMetadata: SøknadMetadata;
+}
+
+export interface SøknadPassAvBarn extends SøknadBase {
     aktivitet: AktivitetFelles | undefined;
     barnMedBarnepass: Barnepass[];
-    dokumentasjon: DokumentasjonFelt[];
-    søknadMetadata: SøknadMetadata;
 }
 
-export interface SøknadLæremidler {
-    hovedytelse: Hovedytelse | undefined;
+export interface SøknadLæremidler extends SøknadBase {
     utdanning: Utdanning | undefined;
-    dokumentasjon: DokumentasjonFelt[];
-    søknadMetadata: SøknadMetadata;
 }
 
-export interface SøknadReiseTilSamling {
-    hovedytelse: Hovedytelse | undefined;
+export interface SøknadReiseTilSamling extends SøknadBase {
     aktivitet: AktivitetReiseTilSamling | undefined;
     samlinger: Samling[];
     avreiseadresse?: Avreiseadresse;
-    dokumentasjon: DokumentasjonFelt[];
-    søknadMetadata: SøknadMetadata;
 }
 
-export interface SøknadReiseOppstartAvslutningHjemreise {
-    hovedytelse: Hovedytelse | undefined;
+export interface SøknadReiseOppstartAvslutningHjemreise extends SøknadBase {
     aktivitet: AktivitetFelles | undefined;
     adresser: AdresseReiseOppstartAvslutningHjemreise | undefined;
     barnOgHelse: BarnOgHelseReiseOppstartAvslutningHjemreise | undefined;
     reise: ReiseInfoReiseOppstartAvslutningHjemreise | undefined;
-    dokumentasjon: DokumentasjonFelt[];
-    søknadMetadata: SøknadMetadata;
 }
+
+// TODO Kommer mer her
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface SøknadFlytting extends SøknadBase {}
+
+export type Søknad =
+    | SøknadPassAvBarn
+    | SøknadLæremidler
+    | SøknadReiseTilSamling
+    | SøknadReiseOppstartAvslutningHjemreise
+    | SøknadFlytting;
 
 export interface Adresse {
     land?: SelectFelt;

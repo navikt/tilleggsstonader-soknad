@@ -44,3 +44,9 @@ export const mockHarIngenSøknadReiseTilSamlingFraFør = async (page: Page) => {
         }
     );
 };
+
+export const mockHarIngenSøknadFlyttingFraFør = async (page: Page) => {
+    await page.route('api/person/har-behandling?skjematype=S%C3%98KNAD_FLYTTING', async (route) => {
+        await route.fulfill({ json: false });
+    });
+};
