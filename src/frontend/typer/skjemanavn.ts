@@ -5,8 +5,7 @@ export const skjematypeTilSkjemaId: Record<Skjematype, string> = {
     [Skjematype.SØKNAD_LÆREMIDLER]: 'NAV 11-12.16',
     [Skjematype.SØKNAD_REISE_TIL_SAMLING]: 'NAV 11-12.17',
     [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: 'NAV 11-12.18',
-    // TODO: Erstatt med riktig skjema-ID når den er avklart.
-    [Skjematype.SØKNAD_FLYTTING]: 'TODO',
+    [Skjematype.SØKNAD_FLYTTING]: 'NAV 11-12.23',
 };
 
 export const skjematypeTilSkjemanavn: Record<Skjematype, string> = {
