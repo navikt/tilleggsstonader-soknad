@@ -14,7 +14,7 @@ import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const ReiseOppstartAvslutningHjemreiseInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, hovedytelse, aktivitet, adresser, dokumentasjon } =
+    const { resetSøknad, hovedytelse, aktivitet, adresser, barnOgHelse, dokumentasjon } =
         useReiseOppstartAvslutningHjemreiseSøknad();
 
     return (
@@ -24,7 +24,7 @@ const ReiseOppstartAvslutningHjemreiseInnhold = () => {
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
                 adresser: adresser,
-                barnOgHelse: undefined,
+                barnOgHelse: barnOgHelse,
                 reise: undefined,
                 dokumentasjon: dokumentasjon,
                 søknadMetadata: {

@@ -5,13 +5,17 @@ import createUseContext from 'constate';
 import {
     initialAktivitet,
     initialAdresser,
+    initialBarnOgHelse,
     initialDokumentasjon,
     initialHarBekreftet,
     initialHovedytelse,
 } from './reiseOppstartAvslutningHjemreiseInitialState';
 import { DokumentasjonFelt } from '../../typer/skjema';
 import { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
-import { AdresseReiseOppstartAvslutningHjemreise } from '../typer/søknad';
+import {
+    AdresseReiseOppstartAvslutningHjemreise,
+    BarnOgHelseReiseOppstartAvslutningHjemreise,
+} from '../typer/søknad';
 
 const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutningHjemreiseSøknad] =
     createUseContext(() => {
@@ -28,6 +32,9 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
         const [adresser, settAdresser] = useState<
             AdresseReiseOppstartAvslutningHjemreise | undefined
         >(initialAdresser());
+        const [barnOgHelse, settBarnOgHelse] = useState<
+            BarnOgHelseReiseOppstartAvslutningHjemreise | undefined
+        >(initialBarnOgHelse());
 
         const [dokumentasjon, settDokumentasjon] =
             useState<DokumentasjonFelt[]>(initialDokumentasjon());
@@ -37,6 +44,7 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             settHovedytelse(initialHovedytelse());
             settAktivitet(initialAktivitet());
             settAdresser(initialAdresser());
+            settBarnOgHelse(initialBarnOgHelse());
             settDokumentasjon(initialDokumentasjon());
         };
 
@@ -49,6 +57,8 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             settAktivitet,
             adresser,
             settAdresser,
+            barnOgHelse,
+            settBarnOgHelse,
             dokumentasjon,
             settDokumentasjon,
             resetSøknad,

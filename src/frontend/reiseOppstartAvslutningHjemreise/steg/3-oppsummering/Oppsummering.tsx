@@ -1,5 +1,6 @@
 import { AdresserOppsummering } from './AdresserOppsummering';
 import { AktivitetOppsummering } from './AktivitetOppsummering';
+import { BarnOgHelseOppsummering } from './BarnOgHelseOppsummering';
 import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
@@ -9,7 +10,8 @@ import { RouteTilPath } from '../../routing/routesReiseOppstartAvslutningHjemrei
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const Oppsummering = () => {
-    const { hovedytelse, aktivitet, adresser } = useReiseOppstartAvslutningHjemreiseSøknad();
+    const { hovedytelse, aktivitet, adresser, barnOgHelse } =
+        useReiseOppstartAvslutningHjemreiseSøknad();
 
     return (
         <OppsummeringSide>
@@ -23,6 +25,7 @@ export const Oppsummering = () => {
             )}
             {aktivitet && <AktivitetOppsummering aktivitet={aktivitet} />}
             {adresser && <AdresserOppsummering adresser={adresser} />}
+            {barnOgHelse && <BarnOgHelseOppsummering barnOgHelse={barnOgHelse} />}
         </OppsummeringSide>
     );
 };
