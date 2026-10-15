@@ -9,6 +9,7 @@ import { AktivitetReiseOppstartAvslutningHjemreise } from './steg/2-aktivitet/Ak
 import { AdresserReiseOppstartAvslutningHjemreise } from './steg/3-adresser/AdresserReiseOppstartAvslutningHjemreise';
 import { Oppsummering } from './steg/3-oppsummering/Oppsummering';
 import { BarnOgHelseSteg } from './steg/4-barn-og-helse/BarnOgHelseReiseOppstartAvslutningHjemreise';
+import { ReiseinfoSteg } from './steg/5-reiseinfo/ReiseinfoReiseOppstartAvslutningHjemreise';
 import { forsideTekster } from './tekster/forside';
 
 const steg: StegRoute[] = [
@@ -16,6 +17,7 @@ const steg: StegRoute[] = [
     { path: '/aktivitet', element: <AktivitetReiseOppstartAvslutningHjemreise /> },
     { path: '/adresser', element: <AdresserReiseOppstartAvslutningHjemreise /> },
     { path: '/barn-og-helse', element: <BarnOgHelseSteg /> },
+    { path: '/reiseinfo', element: <ReiseinfoSteg /> },
     { path: '/oppsummering', element: <Oppsummering /> },
 ];
 

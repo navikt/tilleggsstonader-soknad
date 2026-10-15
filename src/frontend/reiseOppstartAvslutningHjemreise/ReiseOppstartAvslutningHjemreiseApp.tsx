@@ -14,7 +14,7 @@ import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const ReiseOppstartAvslutningHjemreiseInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, hovedytelse, aktivitet, adresser, barnOgHelse, dokumentasjon } =
+    const { resetSøknad, hovedytelse, aktivitet, adresser, barnOgHelse, reiser, dokumentasjon } =
         useReiseOppstartAvslutningHjemreiseSøknad();
 
     return (
@@ -25,7 +25,7 @@ const ReiseOppstartAvslutningHjemreiseInnhold = () => {
                 aktivitet: aktivitet,
                 adresser: adresser,
                 barnOgHelse: barnOgHelse,
-                reise: undefined,
+                reiser: reiser,
                 dokumentasjon: dokumentasjon,
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,

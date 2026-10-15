@@ -19,6 +19,8 @@ export interface BarnOgHelseReiseOppstartAvslutningHjemreise {
 }
 
 export interface ReiseInfoReiseOppstartAvslutningHjemreise {
+    _id: number; // for å kunne lenke valideringsfeil til riktig reise i liste
+    lagret: boolean;
     typeReise?: EnumFelt<TypeReise>;
     fom?: VerdiFelt<string>;
     tom?: VerdiFelt<string>; // Brukes kun for hjemreise
