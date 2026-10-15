@@ -5,6 +5,7 @@ export const skjematypeTilSkjemaId: Record<Skjematype, string> = {
     [Skjematype.SØKNAD_LÆREMIDLER]: 'NAV 11-12.16',
     [Skjematype.SØKNAD_REISE_TIL_SAMLING]: 'NAV 11-12.17',
     [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: 'NAV 11-12.18',
+    [Skjematype.SØKNAD_FLYTTING]: 'NAV 11-12.23',
 };
 
 export const skjematypeTilSkjemanavn: Record<Skjematype, string> = {
@@ -14,4 +15,5 @@ export const skjematypeTilSkjemanavn: Record<Skjematype, string> = {
     // TODO: placeholder-navn, avklar endelig visningsnavn
     [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]:
         'Reise ved oppstart, avslutning og hjemreise',
+    [Skjematype.SØKNAD_FLYTTING]: 'Flytting',
 };

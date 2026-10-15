@@ -20,5 +20,8 @@ export const teksterStønad: StønadInnhold = {
         [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: {
             nb: 'Søknad om støtte til reise ved oppstart, avslutning og hjemreise',
         },
+        [Skjematype.SØKNAD_FLYTTING]: {
+            nb: 'Søknad om støtte ved flytting',
+        },
     },
 };

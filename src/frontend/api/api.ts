@@ -89,6 +89,8 @@ const skjematypeTilPath = (skjematype: Skjematype): string => {
             return 'reise-til-samling';
         case Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE:
             return 'reise-oppstart-avslutning-hjemreise';
+        case Skjematype.SØKNAD_FLYTTING:
+            return 'flytting';
     }
 };
 

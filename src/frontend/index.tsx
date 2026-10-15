@@ -15,6 +15,8 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentligTransportAvsjekk';
 import { SkalBrukeTaxiAvsjekk } from './dagligReise/SkalBrukeTaxiAvsjekk';
+import { FlyttingApp } from './flytting/FlyttingApp';
+import { flyttingPath } from './flytting/routing/routesFlytting';
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import { LæremidlerApp } from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
@@ -36,6 +38,7 @@ const AppRoutes = () => {
     const kanBrukeReiseTilSamling = !erProd();
     // TODO: skjelett under bygging - skru på for alle miljø når flyten er ferdig
     const kanBrukeReiseOppstartAvslutningHjemreise = !erProd();
+    const kanBrukeFlytting = !erProd();
     return (
         <BrowserRouter basename={appConfig.publicUrl}>
             <ScrollToTop />
@@ -53,6 +56,7 @@ const AppRoutes = () => {
                         element={<ReiseOppstartAvslutningHjemreiseApp />}
                     />
                 )}
+                {kanBrukeFlytting && <Route path={`${flyttingPath}/*`} element={<FlyttingApp />} />}
                 <Route
                     path="/daglig-reise/skjema-offentlig-transport"
                     element={<KanBrukeOffentligTransportAvsjekk />}
