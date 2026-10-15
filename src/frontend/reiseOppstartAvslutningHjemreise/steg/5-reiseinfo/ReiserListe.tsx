@@ -5,7 +5,11 @@ import { Button, HStack, VStack } from '@navikt/ds-react';
 
 import { NyReise } from './NyReise';
 import { oppdaterReise, opprettReiseForNesteId } from './util';
-import { nullstillteReisefeil, validerReiseUnderRedigering } from './validering';
+import {
+    nullstillteReisefeil,
+    nullstillteReisefeilForReise,
+    validerReiseUnderRedigering,
+} from './validering';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { inneholderFeil } from '../../../typer/validering';
@@ -57,12 +61,10 @@ export const ReiserListe: React.FC<{
             return;
         }
 
-        if (ulagretReise?._id === id) {
-            settValideringsfeil((prev) => ({
-                ...prev,
-                ...nullstillteReisefeil(reiser),
-            }));
-        }
+        settValideringsfeil((prev) => ({
+            ...prev,
+            ...nullstillteReisefeilForReise(id),
+        }));
 
         settReiser((prev) => prev.filter((reise) => reise._id !== id));
     };

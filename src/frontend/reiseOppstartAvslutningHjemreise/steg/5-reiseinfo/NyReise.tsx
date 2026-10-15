@@ -169,9 +169,7 @@ export const NyReise: React.FC<{
                         samlingId={reise._id}
                         reisemåte={reise.reisemåte}
                         settReisemåte={settReisemåte}
-                        totalutgifterOffentligTransportTekst={
-                            reiseinfoTekster.totalutgifter_offentlig_transport
-                        }
+                        tekster={reiseinfoTekster.reisemåte}
                     />
                 )}
 

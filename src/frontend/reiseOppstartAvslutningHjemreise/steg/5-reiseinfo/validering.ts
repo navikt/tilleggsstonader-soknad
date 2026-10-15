@@ -27,6 +27,13 @@ export const nullstillteReisefeil = (
         {}
     );
 
+export const nullstillteReisefeilForReise = (reiseId: number): Valideringsfeil => ({
+    [errorKeyTypeReise(reiseId)]: undefined,
+    [errorKeyFom(reiseId)]: undefined,
+    [errorKeyTom(reiseId)]: undefined,
+    ...nullstilteReisemåteFeil(reiseId),
+});
+
 export const validerReiseUnderRedigering = (
     reise: ReiseInfoReiseOppstartAvslutningHjemreise,
     locale: Locale
@@ -91,7 +98,7 @@ export const validerReiseUnderRedigering = (
 
     return {
         ...feil,
-        ...validerReisemåte(reise.reisemåte, locale, reise._id),
+        ...validerReisemåte(reise.reisemåte, locale, reise._id, reiseinfoTekster.reisemåte),
     };
 };
 

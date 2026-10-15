@@ -1,3 +1,5 @@
+import { ReisemåteTekstInnhold } from '../../components/Reisemåte/tekster';
+import { reisemåteTekster as reisemåteTeksterReiseTilSamling } from '../../reiseTilSamling/tekster/reisemåte';
 import { InputFelt, RadiogruppePåkrevd, TekstElement, Datoperiode } from '../../typer/tekst';
 import { TypeReise } from '../typer/søknad';
 
@@ -9,6 +11,7 @@ interface ReiseinfoInnhold {
     radio_type_reise: RadiogruppePåkrevd<TypeReise>;
     dato_enkelt: InputFelt;
     dato_periode: Datoperiode;
+    reisemåte: ReisemåteTekstInnhold;
 }
 
 export const reiseinfoTekster: ReiseinfoInnhold = {
@@ -38,5 +41,18 @@ export const reiseinfoTekster: ReiseinfoInnhold = {
         feilmelding_fom: { nb: 'Du må fylle inn startdato.' },
         feilmelding_tom: { nb: 'Du må fylle inn sluttdato.' },
         feilmelding_tom_før_fom: { nb: 'Sluttdato kan ikke være før startdato.' },
+    },
+    // TODO: Implementer egne tekster for reiseOppstartAvslutningHjemreise på reisemåte
+    reisemåte: {
+        ...reisemåteTeksterReiseTilSamling,
+        offentligTransport: {
+            ...reisemåteTeksterReiseTilSamling.offentligTransport,
+            totalutgifter_offentlig_transport: {
+                ...reisemåteTeksterReiseTilSamling.offentligTransport
+                    .totalutgifter_offentlig_transport,
+                label: { nb: 'Hva er totalutgiftene til offentlig transport for denne reisen?' },
+                beskrivelse: { nb: 'Oppgi totalbeløpet i kroner for reisen du registrerer nå.' },
+            },
+        },
     },
 };

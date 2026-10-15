@@ -1,9 +1,9 @@
-import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
 import { OffentligTransportInfo } from '../../../typer/reisemåte';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { erGyldigKostnad } from '../../../utils/tall';
 import { harVerdi } from '../../../utils/typeUtils';
+import { OffentligTransportTekster } from '../tekster';
 
 export const errorKeyTotalutgifterOffentligTransport = (reiseId: number) =>
     `reise_${reiseId}_reisemåte_totalutgifter_offentlig_transport`;
@@ -15,7 +15,8 @@ export const nullstilteOffentligTransportFeil = (reiseId: number): Valideringsfe
 export const validerOffentligTransport = (
     offentligTransport: OffentligTransportInfo | undefined,
     locale: Locale,
-    reiseId: number
+    reiseId: number,
+    tekster: OffentligTransportTekster
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -26,7 +27,7 @@ export const validerOffentligTransport = (
             ...feil,
             [errorKeyTotalutgifterOffentligTransport(reiseId)]: {
                 id: errorKeyTotalutgifterOffentligTransport(reiseId),
-                melding: reisemåteTekster.totalutgifter_offentlig_transport.feilmelding[locale],
+                melding: tekster.totalutgifter_offentlig_transport.feilmelding[locale],
             },
         };
     } else if (!erGyldigKostnad(utgifter)) {
@@ -34,8 +35,7 @@ export const validerOffentligTransport = (
             ...feil,
             [errorKeyTotalutgifterOffentligTransport(reiseId)]: {
                 id: errorKeyTotalutgifterOffentligTransport(reiseId),
-                melding:
-                    reisemåteTekster.totalutgifter_offentlig_transport.feilmelding_ugyldig[locale],
+                melding: tekster.totalutgifter_offentlig_transport.feilmelding_ugyldig[locale],
             },
         };
     }

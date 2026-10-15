@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { Heading, InlineMessage, VStack } from '@navikt/ds-react';
 
+import { TransportmiddelOgUnntakTekster, UnntakFraOffentligTransportTekster } from './tekster';
 import {
     finnValgteTransportmidler,
     nullstillEllerBeholdVerdi,
@@ -14,7 +15,6 @@ import { UnntakIkkeOffentligTransport } from './UnntakFraOffentligTransport';
 import { errorKeyHvilkeTransportmidlerBleBenyttet, errorKeyUnntakFraPrivatBil } from './validering';
 import { useSpråk } from '../../context/SpråkContext';
 import { useValideringsfeil } from '../../context/ValideringsfeilContext';
-import { reisemåteTekster } from '../../reiseTilSamling/tekster/reisemåte';
 import { Reisemåte, Transportmiddel, ÅrsakKanIkkeBenytteEgenBil } from '../../typer/reisemåte';
 import { EnumFlereValgFelt } from '../../typer/skjema';
 import { LocaleCheckboxGroup } from '../Teksthåndtering/LocaleCheckboxGroup';
@@ -23,7 +23,9 @@ export const TransportmiddelOgUnntak: React.FC<{
     samlingId: number;
     reisemåte: Reisemåte | undefined;
     settReisemåte: Dispatch<SetStateAction<Reisemåte | undefined>>;
-}> = ({ samlingId, reisemåte, settReisemåte }) => {
+    tekster: TransportmiddelOgUnntakTekster;
+    unntakFraOffentligTransportTekster: UnntakFraOffentligTransportTekster;
+}> = ({ samlingId, reisemåte, settReisemåte, tekster, unntakFraOffentligTransportTekster }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -95,11 +97,11 @@ export const TransportmiddelOgUnntak: React.FC<{
 
     return (
         <VStack gap="space-24">
-            <Heading size="small">{reisemåteTekster.tittel[locale]}</Heading>
+            <Heading size="small">{tekster.tittel[locale]}</Heading>
             <VStack gap="space-16">
                 <LocaleCheckboxGroup
                     id={valideringsfeil[errorKeyHvilkeTransportmidlerBleBenyttet(samlingId)]?.id}
-                    tekst={reisemåteTekster.check_hvilke_transportmidler}
+                    tekst={tekster.check_hvilke_transportmidler}
                     onChange={oppdaterHvilkeTransportmidler}
                     value={reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier ?? []}
                     error={
@@ -110,7 +112,7 @@ export const TransportmiddelOgUnntak: React.FC<{
 
                 {(drosjeHuketAv || privatBilHuketAv) && (
                     <InlineMessage status="info">
-                        {reisemåteTekster.info_ikke_offentlig_transport_reise_til_samling[locale]}
+                        {tekster.info_ikke_offentlig_transport_reise_til_samling[locale]}
                     </InlineMessage>
                 )}
             </VStack>
@@ -120,6 +122,7 @@ export const TransportmiddelOgUnntak: React.FC<{
                     samlingId={samlingId}
                     unntakFraOffentligTransport={reisemåte?.unntakFraOffentligTransport}
                     settReisemåte={settReisemåte}
+                    tekster={unntakFraOffentligTransportTekster}
                 />
             )}
 
@@ -127,14 +130,14 @@ export const TransportmiddelOgUnntak: React.FC<{
                 <VStack gap="space-16">
                     <LocaleCheckboxGroup
                         id={valideringsfeil[errorKeyUnntakFraPrivatBil(samlingId)]?.id}
-                        tekst={reisemåteTekster.check_kan_ikke_benytte_egen_bil_begrunnelse}
+                        tekst={tekster.check_kan_ikke_benytte_egen_bil_begrunnelse}
                         onChange={oppdaterUnntakFraPrivatBil}
                         value={reisemåte?.unntakFraPrivatBil?.verdier ?? []}
                         error={valideringsfeil[errorKeyUnntakFraPrivatBil(samlingId)]?.melding}
                     />
                     {helsemessigeÅrsakerBilValgt && (
                         <InlineMessage status="info">
-                            {reisemåteTekster.info_helsemessige_årsaker_valg[locale]}
+                            {tekster.info_helsemessige_årsaker_valg[locale]}
                         </InlineMessage>
                     )}
                 </VStack>
