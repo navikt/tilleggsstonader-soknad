@@ -1,6 +1,7 @@
 import {
     AdresseReiseOppstartAvslutningHjemreise,
     BarnOgHelseReiseOppstartAvslutningHjemreise,
+    ReiseInfoReiseOppstartAvslutningHjemreise,
 } from '../reiseOppstartAvslutningHjemreise/typer/søknad';
 import { AktivitetFelles, Hovedytelse } from '../typer/søknad';
 
@@ -74,3 +75,25 @@ export const mockBarnOgHelseReiseOppstartAvslutningHjemreise: BarnOgHelseReiseOp
             alternativer: ['Ja', 'Nei'],
         },
     };
+
+export const mockReiseinfoReiseOppstartAvslutningHjemreise: ReiseInfoReiseOppstartAvslutningHjemreise[] =
+    [
+        {
+            _id: 1,
+            lagret: false,
+            typeReise: {
+                label: 'Hvilken type reise søker du om?',
+                verdi: 'HJEMREISE',
+                svarTekst: 'Hjemreise',
+                alternativer: ['Oppstart', 'Avslutning', 'Hjemreise'],
+            },
+            fom: {
+                label: 'Fra og med (dd.mm.åååå)',
+                verdi: '2026-01-01',
+            },
+            tom: {
+                label: 'Til og med (dd.mm.åååå)',
+                verdi: '2026-03-31',
+            },
+        },
+    ];

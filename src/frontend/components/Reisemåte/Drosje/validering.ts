@@ -1,8 +1,8 @@
-import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
 import { Reisemåte } from '../../../typer/reisemåte';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { harVerdi } from '../../../utils/typeUtils';
+import { DrosjeTekster } from '../tekster';
 
 export const errorKeyHarTTKort = (reiseId: number) => `reise_${reiseId}_reisemåte_har_tt_kort`;
 
@@ -13,7 +13,8 @@ export const nullstillteDrosjefeil = (reiseId: number): Valideringsfeil => ({
 export const validerDrosje = (
     reisemåte: Reisemåte | undefined,
     locale: Locale,
-    reiseId: number
+    reiseId: number,
+    tekster: DrosjeTekster
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -30,7 +31,7 @@ export const validerDrosje = (
                 ...feil,
                 [errorKeyHarTTKort(reiseId)]: {
                     id: errorKeyHarTTKort(reiseId),
-                    melding: reisemåteTekster.radio_har_du_tt_kort.feilmelding[locale],
+                    melding: tekster.radio_har_du_tt_kort.feilmelding[locale],
                 },
             };
         }

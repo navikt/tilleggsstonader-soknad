@@ -4,7 +4,11 @@ import { nullstilteOffentligTransportFeil } from './OffentligTransport/validerin
 import { validerOffentligTransport } from './OffentligTransport/validering';
 import { nullstiltePrivatBilFeil } from './PrivatBil/validering';
 import { validerPrivatBil } from './PrivatBil/validering';
-import { reisemåteTekster } from '../../reiseTilSamling/tekster/reisemåte';
+import {
+    ReisemåteTekstInnhold,
+    TransportmiddelOgUnntakTekster,
+    UnntakFraOffentligTransportTekster,
+} from './tekster';
 import {
     Reisemåte,
     UnntakFraOffentligTransport,
@@ -45,7 +49,8 @@ export const nullstilteReisemåteFeil = (reiseId: number): Valideringsfeil => ({
 export const validerReisemåte = (
     reisemåte: Reisemåte | undefined,
     locale: Locale,
-    reiseId: number
+    reiseId: number,
+    tekster: ReisemåteTekstInnhold
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -56,7 +61,10 @@ export const validerReisemåte = (
             ...feil,
             [errorKeyHvilkeTransportmidlerBleBenyttet(reiseId)]: {
                 id: errorKeyHvilkeTransportmidlerBleBenyttet(reiseId),
-                melding: reisemåteTekster.check_hvilke_transportmidler.feilmelding[locale],
+                melding:
+                    tekster.transportmiddelOgUnntak.check_hvilke_transportmidler.feilmelding[
+                        locale
+                    ],
             },
         };
     }
@@ -67,7 +75,12 @@ export const validerReisemåte = (
     if (valgteTransportmidler.includes('OFFENTLIG_TRANSPORT')) {
         feil = {
             ...feil,
-            ...validerOffentligTransport(reisemåte?.offentligTransport, locale, reiseId),
+            ...validerOffentligTransport(
+                reisemåte?.offentligTransport,
+                locale,
+                reiseId,
+                tekster.offentligTransport
+            ),
         };
     }
 
@@ -81,13 +94,15 @@ export const validerReisemåte = (
             ...validerUnntakFraOffentligTransport(
                 reisemåte?.unntakFraOffentligTransport,
                 locale,
-                reiseId
+                reiseId,
+                tekster.unntakFraOffentligTransport
             ),
             ...validerPrivatBil(
                 reisemåte?.privatBil,
                 locale,
                 reiseId,
-                skalReiseMedFlereTransportmidler
+                skalReiseMedFlereTransportmidler,
+                tekster.privatBil
             ),
         };
     }
@@ -98,10 +113,16 @@ export const validerReisemåte = (
             ...validerUnntakFraOffentligTransport(
                 reisemåte?.unntakFraOffentligTransport,
                 locale,
-                reiseId
+                reiseId,
+                tekster.unntakFraOffentligTransport
             ),
-            ...validerUnntakFraPrivatBil(reisemåte?.unntakFraPrivatBil, locale, reiseId),
-            ...validerDrosje(reisemåte, locale, reiseId),
+            ...validerUnntakFraPrivatBil(
+                reisemåte?.unntakFraPrivatBil,
+                locale,
+                reiseId,
+                tekster.transportmiddelOgUnntak
+            ),
+            ...validerDrosje(reisemåte, locale, reiseId, tekster.drosje),
         };
     }
 
@@ -111,7 +132,8 @@ export const validerReisemåte = (
 const validerUnntakFraOffentligTransport = (
     unntakFraOffentligTransport: UnntakFraOffentligTransport | undefined,
     locale: Locale,
-    reiseId: number
+    reiseId: number,
+    tekster: UnntakFraOffentligTransportTekster
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -120,8 +142,7 @@ const validerUnntakFraOffentligTransport = (
             ...feil,
             [errorKeyUnntakFraOffentligTransport(reiseId)]: {
                 id: errorKeyUnntakFraOffentligTransport(reiseId),
-                melding:
-                    reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[locale],
+                melding: tekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[locale],
             },
         };
     } else {
@@ -139,9 +160,7 @@ const validerUnntakFraOffentligTransport = (
                     [errorKeyUnntakFraOffentligTransportBarnehageAdresse(reiseId)]: {
                         id: errorKeyUnntakFraOffentligTransportBarnehageAdresse(reiseId),
                         melding:
-                            reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[
-                                locale
-                            ],
+                            tekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[locale],
                     },
                 };
             }
@@ -155,9 +174,7 @@ const validerUnntakFraOffentligTransport = (
                     [errorKeyUnntakFraOffentligTransportBarnehagePostnummer(reiseId)]: {
                         id: errorKeyUnntakFraOffentligTransportBarnehagePostnummer(reiseId),
                         melding:
-                            reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[
-                                locale
-                            ],
+                            tekster.check_kan_ikke_reise_offentlig_begrunnelse.feilmelding[locale],
                     },
                 };
             }
@@ -170,7 +187,8 @@ const validerUnntakFraOffentligTransport = (
 const validerUnntakFraPrivatBil = (
     unntakFraPrivatBil: EnumFlereValgFelt<ÅrsakKanIkkeBenytteEgenBil> | undefined,
     locale: Locale,
-    reiseId: number
+    reiseId: number,
+    tekster: TransportmiddelOgUnntakTekster
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -179,10 +197,7 @@ const validerUnntakFraPrivatBil = (
             ...feil,
             [errorKeyUnntakFraPrivatBil(reiseId)]: {
                 id: errorKeyUnntakFraPrivatBil(reiseId),
-                melding:
-                    reisemåteTekster.check_kan_ikke_benytte_egen_bil_begrunnelse.feilmelding[
-                        locale
-                    ],
+                melding: tekster.check_kan_ikke_benytte_egen_bil_begrunnelse.feilmelding[locale],
             },
         };
     }

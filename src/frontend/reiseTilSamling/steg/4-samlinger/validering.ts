@@ -8,6 +8,7 @@ import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { erDatoEtterEllerLik } from '../../../utils/datoUtils';
 import { harVerdi } from '../../../utils/typeUtils';
+import { reisemåteTekster } from '../../tekster/reisemåte';
 import { samlingerTekster } from '../../tekster/samlinger';
 
 export const errorKeyFom = (samlingId: number) => `samling_${samlingId}_fom`;
@@ -145,7 +146,10 @@ export const validerSamlingUnderRedigering = (
         feil = { ...feil, ...validerAdresseOgAvstand(samling, locale) };
     }
 
-    feil = { ...feil, ...validerReisemåte(samling.reisemåte, locale, samling._id) };
+    feil = {
+        ...feil,
+        ...validerReisemåte(samling.reisemåte, locale, samling._id, reisemåteTekster),
+    };
 
     return feil;
 };
