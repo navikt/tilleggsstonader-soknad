@@ -32,7 +32,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     kan_soke_innhold: {
         nb: [
-            'å få dekket nødvendige reiseutgifter til og fra en samling i forbindelse med et arbeidsrettet tiltak.',
+            'å få dekket nødvendige reiseutgifter til og fra en samling i forbindelse med et arbeidsrettet tiltak eller utdanning/opplæring godkjent av Nav.',
             'Samlingen må være obligatorisk.',
             'Reiseavstanden må være minst 30 km èn vei.',
             'Vi dekker som hovedregel den billigste reisemåten med offentlig transport. Hvis det ikke er praktisk mulig å bruke offentlig transport, kan du få dekket nødvendige utgifter til annen reisemåte. Vi kommer til å gjøre en konkret vurdering av om du oppfyller vilkårene til annen reisemåte basert på den informasjonen og dokumentasjonen du oppgir.',
