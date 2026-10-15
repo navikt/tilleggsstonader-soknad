@@ -124,7 +124,7 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await page.getByRole('checkbox', { name: 'Offentlig transport' }).check();
 
     await page
-        .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingene?')
+        .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingen?')
         .fill('500');
 
     await page.getByRole('button', { name: 'Neste' }).click();
@@ -200,7 +200,7 @@ test('At privatbil-feil og -verdier nullstilles når privat bil skjules', async 
 
     await page.getByRole('checkbox', { name: 'Offentlig transport' }).check();
     await page
-        .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingene?')
+        .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingen?')
         .fill('500');
     await page.getByRole('checkbox', { name: 'Privat bil' }).check();
     await page.getByRole('radiogroup', { name: 'Benyttet du egen bil?' }).getByLabel('Ja').check();

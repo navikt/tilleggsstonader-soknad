@@ -97,8 +97,8 @@ export const reisemåteTekster: ReisemåteTekstInnhold = {
             nb: 'Du må dokumentere beløpet med kvitteringer eller annen dokumentasjon. Du får instruksjoner om innsending av vedlegg senere i søknaden.',
         },
         totalutgifter_offentlig_transport: {
-            label: { nb: 'Hva er totalutgiftene til offentlig transport til og fra samlingene?' },
-            beskrivelse: { nb: 'Oppgi totalbeløpet i kroner for alle samlingene du søker for.' },
+            label: { nb: 'Hva er totalutgiftene til offentlig transport til og fra samlingen?' },
+            beskrivelse: { nb: 'Oppgi totalbeløpet i kroner for samlingen du søker for.' },
             feilmelding: { nb: 'Du må fylle inn totalutgiftene.' },
             feilmelding_ugyldig: { nb: 'Totalutgiftene må være et positivt tall.' },
         },
