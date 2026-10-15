@@ -108,8 +108,8 @@ export const reisemåteTekster: ReisemåteInnhold = {
         nb: 'Siden du valgte at du ikke kan reise med offentlig transport grunnet dårlig transporttilbud, kommer vi til å gjøre en vurdering av dette.',
     },
     totalutgifter_offentlig_transport: {
-        label: { nb: 'Hva er totalutgiftene til offentlig transport til og fra samlingene?' },
-        beskrivelse: { nb: 'Oppgi totalbeløpet i kroner for alle samlingene du søker for.' },
+        label: { nb: 'Hva er totalutgiftene til offentlig transport til og fra samlingen?' },
+        beskrivelse: { nb: 'Oppgi totalbeløpet i kroner for samlingen du søker for.' },
         feilmelding: { nb: 'Du må fylle inn totalutgiftene.' },
         feilmelding_ugyldig: { nb: 'Totalutgiftene må være et positivt tall.' },
     },
