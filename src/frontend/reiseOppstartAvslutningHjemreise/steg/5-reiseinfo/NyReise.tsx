@@ -46,13 +46,6 @@ export const NyReise: React.FC<{
         );
     };
 
-    const oppdaterTypeReise = (felt: EnumFelt<TypeReise>) => {
-        oppdater(reise._id, 'typeReise', felt);
-        oppdater(reise._id, 'fom', undefined);
-        oppdater(reise._id, 'tom', undefined);
-        nullstillFeil([keyTypeReise, keyFom, keyTom]);
-    };
-
     const oppdaterFom = (verdi: VerdiFelt<string> | undefined) => {
         oppdater(reise._id, 'fom', verdi);
         if (verdi?.verdi) {
@@ -78,7 +71,11 @@ export const NyReise: React.FC<{
     const feilFom = visValideringsfeil ? valideringsfeil[keyFom] : undefined;
     const feilTom = visValideringsfeil ? valideringsfeil[keyTom] : undefined;
 
-    const { datepickerProps: datepickerPropsFom, inputProps: inputPropsFom } = useDatepicker({
+    const {
+        datepickerProps: datepickerPropsFom,
+        inputProps: inputPropsFom,
+        setSelected: setFomSelected,
+    } = useDatepicker({
         defaultSelected: nullableTilDato(reise.fom?.verdi),
         onDateChange: (val) =>
             oppdaterFom(
@@ -94,7 +91,11 @@ export const NyReise: React.FC<{
             ),
     });
 
-    const { datepickerProps: datepickerPropsTom, inputProps: inputPropsTom } = useDatepicker({
+    const {
+        datepickerProps: datepickerPropsTom,
+        inputProps: inputPropsTom,
+        setSelected: setTomSelected,
+    } = useDatepicker({
         defaultSelected: nullableTilDato(reise.tom?.verdi),
         onDateChange: (val) =>
             oppdaterTom(
@@ -106,6 +107,15 @@ export const NyReise: React.FC<{
                     : undefined
             ),
     });
+
+    const oppdaterTypeReise = (felt: EnumFelt<TypeReise>) => {
+        oppdater(reise._id, 'typeReise', felt);
+        setFomSelected(undefined);
+        setTomSelected(undefined);
+        oppdater(reise._id, 'fom', undefined);
+        oppdater(reise._id, 'tom', undefined);
+        nullstillFeil([keyTypeReise, keyFom, keyTom]);
+    };
 
     return (
         <ReiseBoks>
@@ -159,6 +169,9 @@ export const NyReise: React.FC<{
                         samlingId={reise._id}
                         reisemåte={reise.reisemåte}
                         settReisemåte={settReisemåte}
+                        totalutgifterOffentligTransportTekst={
+                            reiseinfoTekster.totalutgifter_offentlig_transport
+                        }
                     />
                 )}
 
