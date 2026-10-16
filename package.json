@@ -86,6 +86,8 @@
     "styled-components": "^6",
     "qs": "^6.15.2",
     "proxy-addr": "^2.0.8",
-    "shell-quote": "^1.11.0"
+    "shell-quote": "^1.11.0",
+    "micromatch/picomatch": "^2.3.2",
+    "source-map-js": "^1.2.2"
   }
 }
