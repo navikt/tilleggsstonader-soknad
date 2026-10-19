@@ -1,7 +1,7 @@
-import { AvsjekkTekster } from './DagligReiseAvsjekk';
+import { AvsjekkTekster } from '../components/Avsjekk/Avsjekk';
 
 export const taxiAvsjekkTekster: AvsjekkTekster = {
-    banner_daglig_reise: {
+    banner: {
         nb: 'Søknad om støtte til daglige reiser',
     },
     hvorfor_spør_vi: {
