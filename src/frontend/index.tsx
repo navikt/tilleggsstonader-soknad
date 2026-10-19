@@ -8,7 +8,6 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Theme } from '@navikt/ds-react';
 
 import { initApm } from './api/apm';
-import { MottarAktivitetspengerAvsjekk } from './components/Avsjekk/MottarAktivitetspengerAvsjekk';
 import { FeilProvider } from './components/FeilProvider';
 import { Feilside } from './components/Feilside';
 import { NotFound } from './components/NotFound';
@@ -16,21 +15,19 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentligTransportAvsjekk';
 import { SkalBrukeTaxiAvsjekk } from './dagligReise/SkalBrukeTaxiAvsjekk';
+import { FlyttingAktivitetspengerAvsjekk } from './flytting/FlyttingAktivitetspengerAvsjekk';
 import { FlyttingApp, flyttingPath } from './flytting/FlyttingApp';
-import { flyttingAvsjekkTekster } from './flytting/flyttingAvsjekkTekster';
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import { LæremidlerApp } from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { PassAvBarnApp } from './passAvBarn/PassAvBarnApp';
 import { passAvBarnPath } from './passAvBarn/routing/routesPassAvBarn';
+import { ReiseOppstartAvslutningHjemreiseAktivitetspengerAvsjekk } from './reiseOppstartAvslutningHjemreise/ReiseOppstartAvslutningHjemreiseAktivitetspengerAvsjekk';
 import { ReiseOppstartAvslutningHjemreiseApp } from './reiseOppstartAvslutningHjemreise/ReiseOppstartAvslutningHjemreiseApp';
-import { reiseOppstartAvslutningHjemreiseAvsjekkTekster } from './reiseOppstartAvslutningHjemreise/reiseOppstartAvslutningHjemreiseAvsjekkTekster';
 import { reiseOppstartAvslutningHjemreisePath } from './reiseOppstartAvslutningHjemreise/routing/routesReiseOppstartAvslutningHjemreise';
 import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
 import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
-import { SkjematypeFyllUt } from './typer/skjematype';
 import { appConfig } from './utils/appConfig';
-import { erProd } from './utils/miljø';
 
 initApm();
 
@@ -38,9 +35,6 @@ const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
-    // TODO: skjelett under bygging - skru på for alle miljø når flyten er ferdig
-    const kanBrukeReiseOppstartAvslutningHjemreise = !erProd();
-    const kanBrukeFlytting = !erProd();
     return (
         <BrowserRouter basename={appConfig.publicUrl}>
             <ScrollToTop />
@@ -50,41 +44,19 @@ const AppRoutes = () => {
                 <Route path={'/barnetilsyn/*'} element={<Navigate to={passAvBarnPath} replace />} />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
                 <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
-                {kanBrukeReiseOppstartAvslutningHjemreise && (
-                    <>
-                        <Route
-                            path={`${reiseOppstartAvslutningHjemreisePath}/*`}
-                            element={<ReiseOppstartAvslutningHjemreiseApp />}
-                        />
-                        <Route
-                            path={`${reiseOppstartAvslutningHjemreisePath}/avsjekk-aktivitetspenger`}
-                            element={
-                                <MottarAktivitetspengerAvsjekk
-                                    skjematype={
-                                        SkjematypeFyllUt.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE
-                                    }
-                                    tekster={reiseOppstartAvslutningHjemreiseAvsjekkTekster}
-                                    nySøknadPath={reiseOppstartAvslutningHjemreisePath}
-                                />
-                            }
-                        />
-                    </>
-                )}
-                {kanBrukeFlytting && (
-                    <>
-                        <Route path={`${flyttingPath}/*`} element={<FlyttingApp />} />
-                        <Route
-                            path={`${flyttingPath}/avsjekk-aktivitetspenger`}
-                            element={
-                                <MottarAktivitetspengerAvsjekk
-                                    skjematype={SkjematypeFyllUt.SØKNAD_FLYTTING}
-                                    tekster={flyttingAvsjekkTekster}
-                                    nySøknadPath={flyttingPath}
-                                />
-                            }
-                        />
-                    </>
-                )}
+                <Route
+                    path={`${reiseOppstartAvslutningHjemreisePath}/*`}
+                    element={<ReiseOppstartAvslutningHjemreiseApp />}
+                />
+                <Route
+                    path={`${reiseOppstartAvslutningHjemreisePath}/avsjekk-aktivitetspenger`}
+                    element={<ReiseOppstartAvslutningHjemreiseAktivitetspengerAvsjekk />}
+                />
+                <Route path={`${flyttingPath}/*`} element={<FlyttingApp />} />
+                <Route
+                    path={`${flyttingPath}/avsjekk-aktivitetspenger`}
+                    element={<FlyttingAktivitetspengerAvsjekk />}
+                />
                 <Route
                     path="/daglig-reise/skjema-offentlig-transport"
                     element={<KanBrukeOffentligTransportAvsjekk />}
