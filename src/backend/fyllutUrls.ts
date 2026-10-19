@@ -5,6 +5,8 @@ export enum SkjematypeFyllUt {
     SØKNAD_DAGLIG_REISE = 'SØKNAD_DAGLIG_REISE',
     DAGLIG_REISE_KJØRELISTE = 'DAGLIG_REISE_KJØRELISTE',
     SØKNAD_REISE_TIL_SAMLING = 'SØKNAD_REISE_TIL_SAMLING',
+    SØKNAD_FLYTTING = 'SØKNAD_FLYTTING',
+    SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE = 'SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE',
 }
 
 const SKJEMAKODER: Record<SkjematypeFyllUt, { ny?: string; gammel: string }> = {
@@ -21,6 +23,12 @@ const SKJEMAKODER: Record<SkjematypeFyllUt, { ny?: string; gammel: string }> = {
     },
     [SkjematypeFyllUt.SØKNAD_REISE_TIL_SAMLING]: {
         gammel: 'nav111217b',
+    },
+    [SkjematypeFyllUt.SØKNAD_FLYTTING]: {
+        gammel: 'nav111223b',
+    },
+    [SkjematypeFyllUt.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: {
+        gammel: 'nav111218b',
     },
 };
 

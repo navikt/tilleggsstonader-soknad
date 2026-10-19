@@ -46,6 +46,15 @@ function routeTilAvsjekk(skjematype: SkjematypeFyllUt, res: Response) {
         case SkjematypeFyllUt.SØKNAD_DAGLIG_REISE:
             res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema-offentlig-transport`);
             return;
+        case SkjematypeFyllUt.SØKNAD_FLYTTING:
+            res.redirect(302, `${BASE_PATH_SOKNAD}/flytting/avsjekk-aktivitetspenger`);
+            return;
+        case SkjematypeFyllUt.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE:
+            res.redirect(
+                302,
+                `${BASE_PATH_SOKNAD}/reise-oppstart-avslutning-hjemreise/avsjekk-aktivitetspenger`
+            );
+            return;
         default:
             throw new Error(`Ingen avsjekk definert for skjematype: ${skjematype}`);
     }

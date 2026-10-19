@@ -54,6 +54,20 @@ export const routes = () => {
         redirectTilSkjema(SkjematypeFyllUt.SØKNAD_REISE_TIL_SAMLING)
     );
 
+    expressRouter.get(
+        new RegExp(`^${BASE_PATH_SOKNAD}/flytting/?$`),
+        addRequestInfo(),
+        attachToken('tilleggsstonader-soknad-api'),
+        redirectTilSkjema(SkjematypeFyllUt.SØKNAD_FLYTTING)
+    );
+
+    expressRouter.get(
+        new RegExp(`^${BASE_PATH_SOKNAD}/reise-oppstart-avslutning-hjemreise/?$`),
+        addRequestInfo(),
+        attachToken('tilleggsstonader-soknad-api'),
+        redirectTilSkjema(SkjematypeFyllUt.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE)
+    );
+
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));
 
     expressRouter.use(
