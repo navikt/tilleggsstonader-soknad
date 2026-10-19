@@ -57,15 +57,18 @@ export const routes = () => {
         redirectTilSkjema(SkjematypeFyllUt.SØKNAD_REISE_TIL_SAMLING)
     );
 
+    // Rota og alle underURL-er går via routing, unntatt avsjekk-siden som har egen guard
     expressRouter.get(
-        new RegExp(`^${BASE_PATH_SOKNAD}/flytting/?$`),
+        new RegExp(`^${BASE_PATH_SOKNAD}/flytting(?:/(?!avsjekk-aktivitetspenger/?$).*)?$`),
         addRequestInfo(),
         attachToken('tilleggsstonader-soknad-api'),
         redirectTilSkjema(SkjematypeFyllUt.SØKNAD_FLYTTING)
     );
 
     expressRouter.get(
-        new RegExp(`^${BASE_PATH_SOKNAD}/reise-oppstart-avslutning-hjemreise/?$`),
+        new RegExp(
+            `^${BASE_PATH_SOKNAD}/reise-oppstart-avslutning-hjemreise(?:/(?!avsjekk-aktivitetspenger/?$).*)?$`
+        ),
         addRequestInfo(),
         attachToken('tilleggsstonader-soknad-api'),
         redirectTilSkjema(SkjematypeFyllUt.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE)
