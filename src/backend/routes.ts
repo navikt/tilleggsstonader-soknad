@@ -8,7 +8,10 @@ import { logger } from './logger';
 import { miljø } from './miljø';
 import { injectNaisMetaTags } from './naisMetaTags';
 import { addRequestInfo, doProxy } from './proxy';
-import { redirectTilSkjema } from './redirectTilSkjema';
+import {
+    redirectTilGammelLøsningHvisToggleErSkruddAv,
+    redirectTilSkjema,
+} from './redirectTilSkjema';
 import { attachToken } from './tokenProxy';
 import { BASE_PATH_SOKNAD } from './url';
 import { matchAllPathsExcluding } from './utils';
@@ -66,6 +69,24 @@ export const routes = () => {
         addRequestInfo(),
         attachToken('tilleggsstonader-soknad-api'),
         redirectTilSkjema(SkjematypeFyllUt.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE)
+    );
+
+    expressRouter.get(
+        new RegExp(`^${BASE_PATH_SOKNAD}/flytting/avsjekk-aktivitetspenger/?$`),
+        addRequestInfo(),
+        attachToken('tilleggsstonader-soknad-api'),
+        redirectTilGammelLøsningHvisToggleErSkruddAv(SkjematypeFyllUt.SØKNAD_FLYTTING)
+    );
+
+    expressRouter.get(
+        new RegExp(
+            `^${BASE_PATH_SOKNAD}/reise-oppstart-avslutning-hjemreise/avsjekk-aktivitetspenger/?$`
+        ),
+        addRequestInfo(),
+        attachToken('tilleggsstonader-soknad-api'),
+        redirectTilGammelLøsningHvisToggleErSkruddAv(
+            SkjematypeFyllUt.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE
+        )
     );
 
     expressRouter.use(BASE_PATH_SOKNAD, express.static(buildPath, { index: false }));

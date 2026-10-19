@@ -85,3 +85,20 @@ export const redirectTilSkjema = (skjematype: SkjematypeFyllUt) => {
         }
     };
 };
+
+export const redirectTilGammelLøsningHvisToggleErSkruddAv = (skjematype: SkjematypeFyllUt) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const aksjon = await hentSkjemaRoutingAksjon(skjematype, req);
+
+            if (aksjon === SkjemaRoutingAksjon.GAMMEL_LØSNING) {
+                routeTilGammelLøsning(skjematype, res);
+                return;
+            }
+            next();
+        } catch (error) {
+            logger.error('Feil ved sjekk av tilgang til avsjekk:', error);
+            res.status(500).send('Feil ved omdirigering');
+        }
+    };
+};
