@@ -47,7 +47,13 @@ export type Vedleggstype =
     | VedleggstypePassAvBarn
     | VedleggstypeLæremidler
     | VedleggstypeKjøreliste
-    | VedleggstypeReiseTilSamling;
+    | VedleggstypeReiseTilSamling
+    | VedleggstypeFlytting;
+
+export enum VedleggstypeFlytting {
+    TILBUD_FLYTTEBYRÅ_1 = 'TILBUD_FLYTTEBYRÅ_1',
+    TILBUD_FLYTTEBYRÅ_2 = 'TILBUD_FLYTTEBYRÅ_2',
+}
 
 export enum VedleggstypePassAvBarn {
     UTGIFTER_PASS_SFO_AKS_BARNEHAGE = 'UTGIFTER_PASS_SFO_AKS_BARNEHAGE',

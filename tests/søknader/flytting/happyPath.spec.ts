@@ -1,42 +1,309 @@
-import { expect, test } from '@playwright/test';
+import { expect, Page, test } from '@playwright/test';
 
 import { mockAktivitet } from '../../mocks/aktivitet';
 import { mockHarIngenSøknadFlyttingFraFør } from '../../mocks/harSøknadFraFør';
 import { mockPersonApi } from '../../mocks/person';
 import { mockSøknadRoutingApi } from '../../mocks/søknadRouting';
+import { mockLastOppVedlegg } from '../../mocks/vedlegg';
+import { lastOppFil } from '../../utils/filoppladding/uploadFile';
 import { søknadBaseUrl } from '../../utils/utils';
 import { forventIngenWcagViolations } from '../../utils/wcag';
 
 const urlSøknad = `${søknadBaseUrl}/flytting`;
 
-test('Flytting viser generiske steg fra forside til oppsummering', async ({ page }) => {
+test.use({ baseURL: `${new URL(søknadBaseUrl).origin}/` });
+
+test.beforeEach(async ({ page }) => {
     await mockSøknadRoutingApi(page);
     await mockPersonApi(page);
     await mockAktivitet(page);
     await mockHarIngenSøknadFlyttingFraFør(page);
+    await mockLastOppVedlegg(page);
+    await page.route('**/api/soknad/flytting', (route) =>
+        route.fulfill({ json: { mottattTidspunkt: '2025-02-02T10:50:09.906814' } })
+    );
+});
 
+const startSøknad = async (page: Page) => {
     await page.goto(urlSøknad);
     await expect(
         page.getByRole('heading', { name: 'Søknad om støtte ved flytting' })
     ).toBeVisible();
     await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check();
-    await forventIngenWcagViolations(page);
     await page.getByRole('button', { name: 'Start søknad' }).click();
 
     await expect(page).toHaveURL(`${urlSøknad}/hovedytelse`);
     await expect(page.getByRole('heading', { name: 'Din situasjon' })).toBeVisible();
+    await page.getByLabel('Arbeidsavklaringspenger (AAP)').check();
     await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/flytting`);
+};
 
-    await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
-    await expect(
-        page.getByText('Dokumentasjonskrav for Flytting er ikke avklart ennå.')
-    ).toBeVisible();
-    await page.getByRole('button', { name: 'Neste' }).click();
+const fyllFellesDetaljer = async (page: Page, nyJobb = false) => {
+    await page
+        .getByLabel(
+            nyJobb
+                ? 'Jeg flytter fordi jeg har fått ny jobb'
+                : 'Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet'
+        )
+        .check();
+    await page.getByRole('textbox', { name: 'Når flytter du?' }).fill('15.06.2025');
+    if (nyJobb) {
+        await page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' }).fill('01.06.2025');
+    }
+    await page.getByRole('textbox', { name: 'Gateadresse', exact: true }).fill('Testveien 1');
+    await page.getByRole('textbox', { name: 'Postnummer', exact: true }).fill('0123');
+    await page.getByRole('textbox', { name: 'Poststed', exact: true }).fill('Oslo');
+    await page
+        .getByRole('radiogroup', {
+            name: 'Får du dekket utgiftene dine til flytting på annen måte enn med stønad fra Nav?',
+        })
+        .getByLabel('Ja', { exact: true })
+        .check();
+};
 
-    await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
-    await expect(page.getByRole('heading', { name: 'Oppsummering' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Om deg' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Din situasjon' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Vedlegg' })).toBeVisible();
+const fyllTilbud = async (page: Page) => {
+    await page.getByLabel('Jeg vil bruke flyttebyrå').check();
+    await page
+        .getByRole('textbox', { name: 'Navn på flyttebyrå 1', exact: true })
+        .fill('Testbyrå 1');
+    await page.getByRole('textbox', { name: 'Beløp for flyttebyrå 1', exact: true }).fill('800,50');
+    await page
+        .getByRole('textbox', { name: 'Navn på flyttebyrå 2', exact: true })
+        .fill('Testbyrå 2');
+    await page.getByRole('textbox', { name: 'Beløp for flyttebyrå 2', exact: true }).fill('400.25');
+    await page.getByRole('radio', { name: 'Flyttebyrå 1', exact: true }).check();
+};
+
+const lastOppTilbud = async (page: Page, label: string) => {
+    const response = page.waitForResponse('**/api/vedlegg/tillegg');
+    await lastOppFil(page, label);
+    await (await response).finished();
+    await expect(page.getByText('Laster opp vedlegg...', { exact: true })).toHaveCount(0);
+};
+
+test('Ny jobb og egen flytting viser oppsummering og sender riktig payload, også etter API-feil', async ({
+    page,
+}) => {
+    await startSøknad(page);
+    await fyllFellesDetaljer(page, true);
+    await page.getByLabel('Jeg flytter selv', { exact: true }).check();
+    await page.getByRole('textbox', { name: 'Hvor langt skal du flytte (km)?' }).fill('120,25');
+    await page.getByRole('textbox', { name: 'Bom (valgfritt)', exact: true }).fill('0');
+    await page.getByRole('textbox', { name: 'Hengerleie (valgfritt)', exact: true }).fill('350.50');
     await forventIngenWcagViolations(page);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
+    await expect(page.getByLabel('Tilbud fra flyttebyrå 1')).toHaveCount(0);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
+    await expect(page.getByText('120,25 km', { exact: true })).toBeVisible();
+    await expect(page.getByText('01.06.2025', { exact: true })).toBeVisible();
+    await forventIngenWcagViolations(page);
+
+    await page.route('**/api/soknad/flytting', (route) => route.fulfill({ status: 400 }));
+    await page.getByRole('button', { name: 'Send inn søknad' }).click();
+    await expect(page.getByText('Innsending feilet, prøv på nytt.')).toBeVisible();
+    await page.route('**/api/soknad/flytting', (route) =>
+        route.fulfill({ json: { mottattTidspunkt: '2025-02-02T10:50:09.906814' } })
+    );
+    const requestPromise = page.waitForRequest('**/api/soknad/flytting');
+    await page.getByRole('button', { name: 'Send inn søknad' }).click();
+    const request = await requestPromise;
+    expect(request.postDataJSON()).toMatchObject({
+        flyttingDetaljer: {
+            årsak: { verdi: 'NY_JOBB' },
+            flyttedato: { verdi: '2025-06-15' },
+            førsteArbeidsdag: { verdi: '2025-06-01' },
+            adresse: { gateadresse: { verdi: 'Testveien 1' }, land: { verdi: 'NOR' } },
+            flyttemåte: { verdi: 'FLYTTER_SELV' },
+            utgifterDekketPåAnnenMåte: { verdi: 'JA' },
+            utgifterEgenFlytting: {
+                avstand: { verdi: '120,25' },
+                bom: { verdi: '0' },
+                hengerleie: { verdi: '350.50' },
+            },
+        },
+        dokumentasjon: [],
+    });
+    expect(request.postDataJSON().flyttingDetaljer.utgifterEgenFlytting.annet).toBeUndefined();
+    await expect(page).toHaveURL(`${urlSøknad}/kvittering`);
+});
+
+test('Byråtilbud viser varsel bare for dyrere valg og lar brukeren laste opp begge tilbud', async ({
+    page,
+}) => {
+    await startSøknad(page);
+    await fyllFellesDetaljer(page);
+    await expect(page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' })).toHaveCount(0);
+    await fyllTilbud(page);
+    const varsel = page.getByText('Du har valgt det dyreste tilbudet.', { exact: false });
+    await expect(varsel).toBeVisible();
+    await page.getByRole('radio', { name: 'Flyttebyrå 2', exact: true }).check();
+    await expect(varsel).toHaveCount(0);
+    await page.getByRole('textbox', { name: 'Beløp for flyttebyrå 2', exact: true }).fill('800,50');
+    await expect(varsel).toHaveCount(0);
+    await page
+        .getByRole('textbox', { name: 'Beløp for flyttebyrå 2', exact: true })
+        .fill('ugyldig');
+    await expect(varsel).toHaveCount(0);
+    await page.getByRole('textbox', { name: 'Beløp for flyttebyrå 2', exact: true }).fill('0');
+    await forventIngenWcagViolations(page);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
+    await lastOppTilbud(page, 'Tilbud fra flyttebyrå 1');
+    await lastOppTilbud(page, 'Tilbud fra flyttebyrå 2');
+    await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(2);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
+    await expect(page.getByText('Testbyrå 2, 0 kr', { exact: true })).toBeVisible();
+    await forventIngenWcagViolations(page);
+    const requestPromise = page.waitForRequest('**/api/soknad/flytting');
+    await page.getByRole('button', { name: 'Send inn søknad' }).click();
+    expect((await requestPromise).postDataJSON()).toMatchObject({
+        flyttingDetaljer: {
+            årsak: { verdi: 'AKTIVITET' },
+            flyttebyrå: { valgtTilbud: { verdi: 'TILBUD_2' }, tilbud2: { beløp: { verdi: '0' } } },
+        },
+        dokumentasjon: [
+            { type: 'TILBUD_FLYTTEBYRÅ_1', opplastedeVedlegg: [{ id: 'test-dokument-id' }] },
+            { type: 'TILBUD_FLYTTEBYRÅ_2', opplastedeVedlegg: [{ id: 'test-dokument-id' }] },
+        ],
+    });
+    await expect(page).toHaveURL(`${urlSøknad}/kvittering`);
+});
+
+test('Skjulte svar og vedlegg beholdes ved bytte, mens oppsummering viser aktiv gren', async ({
+    page,
+}) => {
+    await startSøknad(page);
+    await fyllFellesDetaljer(page, true);
+    await fyllTilbud(page);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await lastOppTilbud(page, 'Tilbud fra flyttebyrå 1');
+    await lastOppTilbud(page, 'Tilbud fra flyttebyrå 2');
+    await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(2);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await page
+        .getByRole('link', { name: /Endre/ })
+        .and(page.locator('[href$="/flytting"]'))
+        .click();
+    await page
+        .getByLabel('Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet')
+        .check();
+    await page.getByLabel('Jeg flytter selv', { exact: true }).check();
+    await page.getByRole('textbox', { name: 'Hvor langt skal du flytte (km)?' }).fill('10');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(0);
+    await page.getByRole('button', { name: 'Forrige' }).click();
+    await page.getByLabel('Jeg vil bruke flyttebyrå').check();
+    await expect(
+        page.getByRole('textbox', { name: 'Navn på flyttebyrå 1', exact: true })
+    ).toHaveValue('Testbyrå 1');
+    await page.getByLabel('Jeg flytter fordi jeg har fått ny jobb').check();
+    await expect(page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' })).toHaveValue(
+        '01.06.2025'
+    );
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(2);
+    await page.getByRole('button', { name: 'Forrige' }).click();
+    await page
+        .getByLabel('Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet')
+        .check();
+    await page.getByLabel('Jeg flytter selv', { exact: true }).check();
+    await expect(
+        page.getByRole('textbox', { name: 'Hvor langt skal du flytte (km)?' })
+    ).toHaveValue('10');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page.getByText('Oppgi første dag i ny jobb', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('Testbyrå 1', { exact: false })).toHaveCount(0);
+    await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(0);
+    const requestPromise = page.waitForRequest('**/api/soknad/flytting');
+    await page.getByRole('button', { name: 'Send inn søknad' }).click();
+    expect((await requestPromise).postDataJSON()).toMatchObject({
+        flyttingDetaljer: {
+            årsak: { verdi: 'AKTIVITET' },
+            førsteArbeidsdag: { verdi: '2025-06-01' },
+            flyttemåte: { verdi: 'FLYTTER_SELV' },
+            flyttebyrå: { tilbud1: { navn: { verdi: 'Testbyrå 1' } } },
+        },
+        dokumentasjon: [
+            { type: 'TILBUD_FLYTTEBYRÅ_1', opplastedeVedlegg: [{ id: 'test-dokument-id' }] },
+            { type: 'TILBUD_FLYTTEBYRÅ_2', opplastedeVedlegg: [{ id: 'test-dokument-id' }] },
+        ],
+    });
+});
+
+test('Manglende tilbud kan ettersendes og opplastingsfeil vises', async ({ page }) => {
+    await startSøknad(page);
+    await fyllFellesDetaljer(page);
+    await fyllTilbud(page);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await page.getByRole('button', { name: 'Neste' }).click();
+    const modal = page.getByRole('dialog', { name: 'Vedlegg mangler' });
+    await expect(modal.getByText('Tilbud fra flyttebyrå 1', { exact: true })).toBeVisible();
+    await expect(modal.getByText('Tilbud fra flyttebyrå 2', { exact: true })).toBeVisible();
+    await modal.getByRole('button', { name: 'Nei, gå tilbake til vedlegg' }).click();
+    await page.route('**/api/vedlegg/tillegg', (route) => route.fulfill({ status: 400 }));
+    await lastOppTilbud(page, 'Tilbud fra flyttebyrå 1');
+    await expect(page.getByRole('heading', { name: 'Vedlegg med feil' })).toBeVisible();
+    await page.route('**/api/vedlegg/tillegg', (route) =>
+        route.fulfill({ json: { dokumentId: 'test-dokument-id' } })
+    );
+    await lastOppTilbud(page, 'Tilbud fra flyttebyrå 1');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(modal.getByText('Tilbud fra flyttebyrå 1', { exact: true })).toHaveCount(0);
+    await expect(modal.getByText('Tilbud fra flyttebyrå 2', { exact: true })).toBeVisible();
+    await modal.getByRole('button', { name: 'Ja, gå til neste side' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
+});
+
+test('Obligatoriske svar og ugyldige datoer og tall stopper videreføring', async ({ page }) => {
+    await startSøknad(page);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page.getByRole('link', { name: 'Du må oppgi hvorfor du flytter.' })).toBeVisible();
+    await fyllFellesDetaljer(page, true);
+    await page.getByLabel('Jeg flytter selv', { exact: true }).check();
+    const avstand = page.getByRole('textbox', { name: 'Hvor langt skal du flytte (km)?' });
+    await avstand.fill('0');
+    await page.getByRole('textbox', { name: 'Når flytter du?' }).fill('31.02.2025');
+    await page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' }).fill('ugyldig');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(
+        page.getByRole('link', { name: 'Oppgi en gyldig flyttedato på formatet dd.mm.åååå.' })
+    ).toBeVisible();
+    await expect(
+        page.getByRole('link', {
+            name: 'Oppgi en gyldig første arbeidsdag på formatet dd.mm.åååå.',
+        })
+    ).toBeVisible();
+    await expect(
+        page.getByRole('link', {
+            name: 'Oppgi en avstand som er større enn 0, med inntil to desimaler.',
+        })
+    ).toBeVisible();
+    await page
+        .getByLabel('Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet')
+        .check();
+    await expect(
+        page.getByRole('link', {
+            name: 'Oppgi en gyldig første arbeidsdag på formatet dd.mm.åååå.',
+        })
+    ).toHaveCount(0);
+    await page.getByRole('textbox', { name: 'Når flytter du?' }).fill('15.06.2025');
+    await avstand.fill('1.234');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/flytting`);
+    await avstand.fill('1.25');
+    await page.getByRole('textbox', { name: 'Bom (valgfritt)', exact: true }).fill('-1');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(
+        page.getByRole('link', {
+            name: 'Oppgi et beløp som er 0 eller større, med inntil to desimaler.',
+        })
+    ).toBeVisible();
+    await page.getByRole('textbox', { name: 'Bom (valgfritt)', exact: true }).fill('');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
 });

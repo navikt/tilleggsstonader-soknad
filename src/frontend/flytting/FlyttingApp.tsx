@@ -11,13 +11,15 @@ import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const FlyttingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, hovedytelse, dokumentasjon } = useFlyttingSøknad();
+    const { resetSøknad, hovedytelse, dokumentasjon, flyttingDetaljer } = useFlyttingSøknad();
 
     return (
         <SøknadProvider
             skjematype={Skjematype.SØKNAD_FLYTTING}
             søknad={{
                 hovedytelse,
+                // TODO: Vurder å utelate skjulte grensvar og inaktive vedlegg fra payloaden.
+                flyttingDetaljer,
                 dokumentasjon,
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,

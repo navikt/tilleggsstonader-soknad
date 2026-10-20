@@ -1,3 +1,4 @@
+import { typerVedleggTeksterFlytting } from '../flytting/tekster/vedlegg';
 import { typerVedleggTeksterKjørelister } from '../kjørelister/tekster/vedlegg';
 import { typerVedleggTeksterLæremidler } from '../læremidler/tekster/vedlegg';
 import { typerVedleggTeksterPassAvBarn } from '../passAvBarn/tekster/vedlegg';
@@ -5,6 +6,7 @@ import { typerVedleggTeksterReiseTilSamling } from '../reiseTilSamling/tekster/v
 import { TekstElement } from '../typer/tekst';
 
 export const typerVedleggTekster = {
+    ...typerVedleggTeksterFlytting,
     ...typerVedleggTeksterLæremidler,
     ...typerVedleggTeksterPassAvBarn,
     ...typerVedleggTeksterKjørelister,

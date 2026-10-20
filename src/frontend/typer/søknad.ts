@@ -2,6 +2,7 @@ import { AnnenAktivitetType } from './aktivitet';
 import { Reisemåte } from './reisemåte';
 import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
 import { Ytelse } from '../components/Hovedytelse/typer';
+import { FlyttingDetaljer } from '../flytting/typer/flyttingDetaljer';
 import { Utdanning } from '../læremidler/typer/søknad';
 import { Barnepass } from '../passAvBarn/typer/barnepass';
 import {
@@ -39,9 +40,9 @@ export interface SøknadReiseOppstartAvslutningHjemreise extends SøknadBase {
     reise: ReiseInfoReiseOppstartAvslutningHjemreise | undefined;
 }
 
-// TODO Kommer mer her
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface SøknadFlytting extends SøknadBase {}
+export interface SøknadFlytting extends SøknadBase {
+    flyttingDetaljer: FlyttingDetaljer | undefined;
+}
 
 export type Søknad =
     | SøknadPassAvBarn
