@@ -26,7 +26,11 @@ interface FlyttingDetaljerInnhold {
         beløp: InputFelt;
     };
     radio_valgt_tilbud: RadiogruppePåkrevd<ValgtTilbud>;
-    advarsel_dyrere_tilbud: TekstElement<string>;
+    varsel_annen_dekning: TekstElement<string>;
+    varsel_dyrere_tilbud: {
+        tittel: TekstElement<string>;
+        innhold: TekstElement<string>;
+    };
 }
 
 const beløpFeilmelding: TekstElement<string> = {
@@ -77,6 +81,9 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         },
         alternativer: JaNeiTilTekst,
         feilmelding: { nb: 'Du må svare på om du får dekket flytteutgiftene på annen måte.' },
+    },
+    varsel_annen_dekning: {
+        nb: 'Hvis du får flytteutgiftene dekket på annen måte, kan du mangle rett til støtte fra Nav.',
     },
     egenutgifter_tittel: { nb: 'Utgifter til flytting' },
     antall_km: {
@@ -145,7 +152,10 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         },
         feilmelding: { nb: 'Du må velge hvilket flyttebyrå du vil bruke.' },
     },
-    advarsel_dyrere_tilbud: {
-        nb: 'Du har valgt det dyreste tilbudet. Nav dekker det laveste tilbudet. Du vil mest sannsynlig få avslag på beløpet som overstiger det laveste tilbudet.',
+    varsel_dyrere_tilbud: {
+        tittel: { nb: 'Du har valgt det dyreste tilbudet' },
+        innhold: {
+            nb: 'Du kan fortsatt få støtte, men Nav dekker maksimalt beløpet i tilbudet med lavest pris. Du må betale mellomlegget selv.',
+        },
     },
 };

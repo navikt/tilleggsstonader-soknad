@@ -40,7 +40,7 @@ export interface SøknadReiseOppstartAvslutningHjemreise extends SøknadBase {
     reise: ReiseInfoReiseOppstartAvslutningHjemreise | undefined;
 }
 
-export interface SøknadFlytting extends SøknadBase {
+export interface SøknadFlytting extends Omit<SøknadBase, 'hovedytelse'> {
     flyttingDetaljer: FlyttingDetaljer | undefined;
 }
 

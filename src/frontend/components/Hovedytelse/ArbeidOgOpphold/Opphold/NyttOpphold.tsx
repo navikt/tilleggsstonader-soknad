@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DatePicker, HStack, Label, useDatepicker, VStack } from '@navikt/ds-react';
+import { HStack, Label, VStack } from '@navikt/ds-react';
 
 import { OppdatertOppholdFelt } from './typer';
 import { errorKeyFom, errorKeyLand, errorKeyTom, errorKeyÅrsak } from './validering';
@@ -13,8 +13,8 @@ import {
     ÅrsakOppholdUtenforNorge,
 } from '../../../../typer/søknad';
 import { Locale } from '../../../../typer/tekst';
-import { nullableTilDato, tilLocaleDateString } from '../../../../utils/formateringUtils';
 import { harVerdi } from '../../../../utils/typeUtils';
+import { DateInput } from '../../../DateInput';
 import { Landvelger } from '../../../Landvelger/Landvelger';
 import { LocaleCheckboxGroup } from '../../../Teksthåndtering/LocaleCheckboxGroup';
 
@@ -38,28 +38,6 @@ export const NyttOpphold: React.FC<{
             }));
         }
     };
-
-    const { datepickerProps: datepickerPropsFom, inputProps: inputPropsFom } = useDatepicker({
-        defaultSelected: nullableTilDato(opphold.fom?.verdi),
-        onDateChange: (val) => {
-            const verdi = val
-                ? { label: tekster.dato.fom[locale], verdi: tilLocaleDateString(val) }
-                : undefined;
-            oppdater(opphold._id, 'fom', verdi);
-            nullstillFeil(verdi?.verdi, errorKeyFom(keyOpphold));
-        },
-    });
-
-    const { datepickerProps: datepickerPropsTom, inputProps: inputPropsTom } = useDatepicker({
-        defaultSelected: nullableTilDato(opphold.fom?.verdi),
-        onDateChange: (val) => {
-            const verdi = val
-                ? { label: tekster.dato.tom[locale], verdi: tilLocaleDateString(val) }
-                : undefined;
-            oppdater(opphold._id, 'tom', verdi);
-            nullstillFeil(verdi?.verdi, errorKeyTom(keyOpphold));
-        },
-    });
 
     const oppdatertHvilketLandOppholdUtenforNorge = (verdi: SelectFelt) => {
         oppdater(opphold._id, 'land', verdi);
@@ -96,22 +74,32 @@ export const NyttOpphold: React.FC<{
             <VStack>
                 <Label>{tekster.dato.label[locale]}</Label>
                 <HStack gap="space-16">
-                    <DatePicker {...datepickerPropsFom}>
-                        <DatePicker.Input
-                            id={valideringsfeil[errorKeyFom(keyOpphold)]?.id}
-                            label={tekster.dato.fom[locale]}
-                            error={valideringsfeil[errorKeyFom(keyOpphold)]?.melding}
-                            {...inputPropsFom}
-                        />
-                    </DatePicker>
-                    <DatePicker {...datepickerPropsTom}>
-                        <DatePicker.Input
-                            id={valideringsfeil[errorKeyTom(keyOpphold)]?.id}
-                            label={tekster.dato.tom[locale]}
-                            error={valideringsfeil[errorKeyTom(keyOpphold)]?.melding}
-                            {...inputPropsTom}
-                        />
-                    </DatePicker>
+                    <DateInput
+                        id={valideringsfeil[errorKeyFom(keyOpphold)]?.id}
+                        label={tekster.dato.fom[locale]}
+                        value={opphold.fom?.verdi}
+                        error={valideringsfeil[errorKeyFom(keyOpphold)]?.melding}
+                        onChange={(date) => {
+                            const verdi = date
+                                ? { label: tekster.dato.fom[locale], verdi: date }
+                                : undefined;
+                            oppdater(opphold._id, 'fom', verdi);
+                            nullstillFeil(verdi?.verdi, errorKeyFom(keyOpphold));
+                        }}
+                    />
+                    <DateInput
+                        id={valideringsfeil[errorKeyTom(keyOpphold)]?.id}
+                        label={tekster.dato.tom[locale]}
+                        value={opphold.tom?.verdi}
+                        error={valideringsfeil[errorKeyTom(keyOpphold)]?.melding}
+                        onChange={(date) => {
+                            const verdi = date
+                                ? { label: tekster.dato.tom[locale], verdi: date }
+                                : undefined;
+                            oppdater(opphold._id, 'tom', verdi);
+                            nullstillFeil(verdi?.verdi, errorKeyTom(keyOpphold));
+                        }}
+                    />
                 </HStack>
             </VStack>
         </>

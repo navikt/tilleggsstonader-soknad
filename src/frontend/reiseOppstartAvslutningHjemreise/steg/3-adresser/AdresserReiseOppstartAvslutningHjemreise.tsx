@@ -1,15 +1,6 @@
 import React from 'react';
 
-import {
-    BodyShort,
-    DatePicker,
-    GuidePanel,
-    Heading,
-    InlineMessage,
-    Link,
-    VStack,
-    useDatepicker,
-} from '@navikt/ds-react';
+import { BodyShort, GuidePanel, Heading, InlineMessage, Link, VStack } from '@navikt/ds-react';
 
 import {
     errorKeyFomFlyttedato,
@@ -22,6 +13,7 @@ import {
 } from './validering';
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
+import { DateInput } from '../../../components/DateInput';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -34,7 +26,6 @@ import { EnumFelt, VerdiFelt } from '../../../typer/skjema';
 import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { landkodeTilNavn } from '../../../utils/adresseUtils';
-import { nullableTilDato, tilLocaleDateString } from '../../../utils/formateringUtils';
 import { useReiseOppstartAvslutningHjemreiseSøknad } from '../../context/ReiseOppstartAvslutningHjemreiseSøknadContext';
 import { adresserTekster } from '../../tekster/adresser';
 
@@ -149,32 +140,6 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
         }
     };
 
-    const { datepickerProps: datepickerPropsFom, inputProps: inputPropsFom } = useDatepicker({
-        defaultSelected: nullableTilDato(adresser?.fomFlyttedato?.verdi),
-        onDateChange: (val) =>
-            oppdaterFomFlyttedato(
-                val
-                    ? {
-                          label: adresserTekster.dato_flytting.fom[locale],
-                          verdi: tilLocaleDateString(val),
-                      }
-                    : undefined
-            ),
-    });
-
-    const { datepickerProps: datepickerPropsTom, inputProps: inputPropsTom } = useDatepicker({
-        defaultSelected: nullableTilDato(adresser?.tomFlyttedato?.verdi),
-        onDateChange: (val) =>
-            oppdaterTomFlyttedato(
-                val
-                    ? {
-                          label: adresserTekster.dato_flytting.tom[locale],
-                          verdi: tilLocaleDateString(val),
-                      }
-                    : undefined
-            ),
-    });
-
     const kanFortsette = (): boolean => {
         const feil = validerAdresser(adresser, locale, harStrukturertAdresse);
         settValideringsfeil(feil);
@@ -203,22 +168,38 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
                         <Heading level="3" size="small">
                             <LocaleTekst tekst={adresserTekster.dato_flytting.label} />
                         </Heading>
-                        <DatePicker {...datepickerPropsFom}>
-                            <DatePicker.Input
-                                id={valideringsfeil[errorKeyFomFlyttedato]?.id}
-                                label={adresserTekster.dato_flytting.fom[locale]}
-                                error={valideringsfeil[errorKeyFomFlyttedato]?.melding}
-                                {...inputPropsFom}
-                            />
-                        </DatePicker>
-                        <DatePicker {...datepickerPropsTom}>
-                            <DatePicker.Input
-                                id={valideringsfeil[errorKeyTomFlyttedato]?.id}
-                                label={adresserTekster.dato_flytting.tom[locale]}
-                                error={valideringsfeil[errorKeyTomFlyttedato]?.melding}
-                                {...inputPropsTom}
-                            />
-                        </DatePicker>
+                        <DateInput
+                            id={valideringsfeil[errorKeyFomFlyttedato]?.id}
+                            label={adresserTekster.dato_flytting.fom[locale]}
+                            value={adresser?.fomFlyttedato?.verdi}
+                            error={valideringsfeil[errorKeyFomFlyttedato]?.melding}
+                            onChange={(date) =>
+                                oppdaterFomFlyttedato(
+                                    date
+                                        ? {
+                                              label: adresserTekster.dato_flytting.fom[locale],
+                                              verdi: date,
+                                          }
+                                        : undefined
+                                )
+                            }
+                        />
+                        <DateInput
+                            id={valideringsfeil[errorKeyTomFlyttedato]?.id}
+                            label={adresserTekster.dato_flytting.tom[locale]}
+                            value={adresser?.tomFlyttedato?.verdi}
+                            error={valideringsfeil[errorKeyTomFlyttedato]?.melding}
+                            onChange={(date) =>
+                                oppdaterTomFlyttedato(
+                                    date
+                                        ? {
+                                              label: adresserTekster.dato_flytting.tom[locale],
+                                              verdi: date,
+                                          }
+                                        : undefined
+                                )
+                            }
+                        />
                     </VStack>
 
                     <VStack gap="space-16">

@@ -1,6 +1,5 @@
-import { Heading, BodyLong, VStack } from '@navikt/ds-react';
+import { BodyLong, Heading, LocalAlert, VStack } from '@navikt/ds-react';
 
-import { DatoInput } from './DatoInput';
 import {
     adresseFeilIder,
     feilId,
@@ -9,6 +8,7 @@ import {
 } from './validering';
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
+import { DateInput } from '../../../components/DateInput';
 import { Side } from '../../../components/Side';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
@@ -66,19 +66,33 @@ export const FlyttingDetaljerSide = () => {
                     if (verdi.verdi === 'AKTIVITET') fjernFeil('førsteArbeidsdag');
                 }}
             />
-            <DatoInput
+            <DateInput
                 id={feilId('flyttedato')}
-                tekst={tekster.dato_flytting}
-                verdi={detaljer?.flyttedato}
-                onChange={(verdi) => oppdater('flyttedato', verdi)}
+                label={tekster.dato_flytting.label[locale]}
+                description={tekster.dato_flytting.description?.[locale]}
+                value={detaljer?.flyttedato?.verdi}
+                onChange={(verdi) =>
+                    oppdater(
+                        'flyttedato',
+                        verdi ? { verdi, label: tekster.dato_flytting.label[locale] } : undefined
+                    )
+                }
                 error={feil[feilId('flyttedato')]?.melding}
             />
             {detaljer?.årsak?.verdi === 'NY_JOBB' && (
-                <DatoInput
+                <DateInput
                     id={feilId('førsteArbeidsdag')}
-                    tekst={tekster.dato_første_arbeidsdag}
-                    verdi={detaljer.førsteArbeidsdag}
-                    onChange={(verdi) => oppdater('førsteArbeidsdag', verdi)}
+                    label={tekster.dato_første_arbeidsdag.label[locale]}
+                    description={tekster.dato_første_arbeidsdag.description?.[locale]}
+                    value={detaljer.førsteArbeidsdag?.verdi}
+                    onChange={(verdi) =>
+                        oppdater(
+                            'førsteArbeidsdag',
+                            verdi
+                                ? { verdi, label: tekster.dato_første_arbeidsdag.label[locale] }
+                                : undefined
+                        )
+                    }
                     error={feil[feilId('førsteArbeidsdag')]?.melding}
                 />
             )}
@@ -128,6 +142,9 @@ export const FlyttingDetaljerSide = () => {
                 error={feil[feilId('utgifterDekketPåAnnenMåte')]?.melding}
                 onChange={(verdi) => oppdater('utgifterDekketPåAnnenMåte', verdi)}
             />
+            {detaljer?.utgifterDekketPåAnnenMåte?.verdi === 'JA' && (
+                <AlertIkkeRett beskrivelse={tekster.varsel_annen_dekning} />
+            )}
             {detaljer?.flyttemåte?.verdi === 'FLYTTER_SELV' && (
                 <VStack gap="space-16">
                     <Heading size="small" level="3">
@@ -213,7 +230,16 @@ export const FlyttingDetaljerSide = () => {
                         }}
                     />
                     {harValgtDyrereTilbud(detaljer.flyttebyrå) && (
-                        <AlertIkkeRett beskrivelse={tekster.advarsel_dyrere_tilbud} />
+                        <LocalAlert status="warning">
+                            <LocalAlert.Header>
+                                <LocalAlert.Title as="h4">
+                                    <LocaleTekst tekst={tekster.varsel_dyrere_tilbud.tittel} />
+                                </LocalAlert.Title>
+                            </LocalAlert.Header>
+                            <LocalAlert.Content>
+                                <LocaleTekst tekst={tekster.varsel_dyrere_tilbud.innhold} />
+                            </LocalAlert.Content>
+                        </LocalAlert>
                     )}
                 </VStack>
             )}

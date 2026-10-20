@@ -3,15 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { MinusIcon } from '@navikt/aksel-icons';
-import {
-    Button,
-    DatePicker,
-    Heading,
-    HStack,
-    InlineMessage,
-    useDatepicker,
-    VStack,
-} from '@navikt/ds-react';
+import { Button, Heading, HStack, InlineMessage, VStack } from '@navikt/ds-react';
 import { BgSunken } from '@navikt/ds-tokens/js';
 
 import { erReiseavstandUnder30km } from './util';
@@ -25,6 +17,7 @@ import {
 } from './validering';
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
+import { DateInput } from '../../../components/DateInput';
 import { Reisemåte } from '../../../components/Reisemåte/Reisemåte';
 import { Skillelinje } from '../../../components/Skillelinje';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -32,7 +25,6 @@ import { LocaleTextField } from '../../../components/Teksthåndtering/LocaleText
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Adresse, Samling } from '../../../typer/søknad';
-import { nullableTilDato, tilLocaleDateString } from '../../../utils/formateringUtils';
 import { harVerdi } from '../../../utils/typeUtils';
 import { samlingerTekster } from '../../tekster/samlinger';
 
@@ -88,55 +80,37 @@ export const NySamling: React.FC<{
         nullstillFeil(felt[feltNavn]?.verdi, adresseFeilIder[feltNavn]);
     };
 
-    const { datepickerProps: dpPropsFom, inputProps: inputPropsFom } = useDatepicker({
-        defaultSelected: nullableTilDato(samling.fom?.verdi),
-        onDateChange: (val) => {
-            const verdi = val
-                ? {
-                      label: samlingerTekster.dato.fom[locale],
-                      verdi: tilLocaleDateString(val),
-                  }
-                : undefined;
-            oppdater(samling._id, 'fom', verdi);
-            nullstillFeil(verdi?.verdi, keyFom);
-        },
-    });
-
-    const { datepickerProps: dpPropsTom, inputProps: inputPropsTom } = useDatepicker({
-        defaultSelected: nullableTilDato(samling.tom?.verdi),
-        onDateChange: (val) => {
-            const verdi = val
-                ? {
-                      label: samlingerTekster.dato.tom[locale],
-                      verdi: tilLocaleDateString(val),
-                  }
-                : undefined;
-            oppdater(samling._id, 'tom', verdi);
-            nullstillFeil(verdi?.verdi, keyTom);
-        },
-    });
-
     return (
         <SamlingBoks>
             <VStack gap="space-40">
                 <VStack gap="space-24">
                     <Heading size="small">{samlingerTekster.dato.label[locale]}</Heading>
-                    <DatePicker {...dpPropsFom}>
-                        <DatePicker.Input
-                            id={feilFom?.id}
-                            label={samlingerTekster.dato.fom[locale]}
-                            error={feilFom?.melding}
-                            {...inputPropsFom}
-                        />
-                    </DatePicker>
-                    <DatePicker {...dpPropsTom}>
-                        <DatePicker.Input
-                            id={feilTom?.id}
-                            label={samlingerTekster.dato.tom[locale]}
-                            error={feilTom?.melding}
-                            {...inputPropsTom}
-                        />
-                    </DatePicker>
+                    <DateInput
+                        id={feilFom?.id}
+                        label={samlingerTekster.dato.fom[locale]}
+                        value={samling.fom?.verdi}
+                        error={feilFom?.melding}
+                        onChange={(date) => {
+                            const verdi = date
+                                ? { label: samlingerTekster.dato.fom[locale], verdi: date }
+                                : undefined;
+                            oppdater(samling._id, 'fom', verdi);
+                            nullstillFeil(verdi?.verdi, keyFom);
+                        }}
+                    />
+                    <DateInput
+                        id={feilTom?.id}
+                        label={samlingerTekster.dato.tom[locale]}
+                        value={samling.tom?.verdi}
+                        error={feilTom?.melding}
+                        onChange={(date) => {
+                            const verdi = date
+                                ? { label: samlingerTekster.dato.tom[locale], verdi: date }
+                                : undefined;
+                            oppdater(samling._id, 'tom', verdi);
+                            nullstillFeil(verdi?.verdi, keyTom);
+                        }}
+                    />
                 </VStack>
 
                 <Skillelinje />
