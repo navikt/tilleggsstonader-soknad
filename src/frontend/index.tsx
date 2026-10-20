@@ -15,17 +15,19 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { SpråkProvider } from './context/SpråkContext';
 import { KanBrukeOffentligTransportAvsjekk } from './dagligReise/KanBrukeOffentligTransportAvsjekk';
 import { SkalBrukeTaxiAvsjekk } from './dagligReise/SkalBrukeTaxiAvsjekk';
+import { FlyttingAktivitetspengerAvsjekk } from './flytting/FlyttingAktivitetspengerAvsjekk';
+import { FlyttingApp, flyttingPath } from './flytting/FlyttingApp';
 import { KjørelisterApp } from './kjørelister/KjørelisterApp';
 import { LæremidlerApp } from './læremidler/LæremidlerApp';
 import { læremidlerPath } from './læremidler/routing/routesLæremidler';
 import { PassAvBarnApp } from './passAvBarn/PassAvBarnApp';
 import { passAvBarnPath } from './passAvBarn/routing/routesPassAvBarn';
+import { ReiseOppstartAvslutningHjemreiseAktivitetspengerAvsjekk } from './reiseOppstartAvslutningHjemreise/ReiseOppstartAvslutningHjemreiseAktivitetspengerAvsjekk';
 import { ReiseOppstartAvslutningHjemreiseApp } from './reiseOppstartAvslutningHjemreise/ReiseOppstartAvslutningHjemreiseApp';
 import { reiseOppstartAvslutningHjemreisePath } from './reiseOppstartAvslutningHjemreise/routing/routesReiseOppstartAvslutningHjemreise';
 import { ReiseTilSamlingApp } from './reiseTilSamling/ReiseTilSamlingApp';
 import { reiseTilSamlingPath } from './reiseTilSamling/routing/routesReiseTilSamling';
 import { appConfig } from './utils/appConfig';
-import { erProd } from './utils/miljø';
 
 initApm();
 
@@ -33,8 +35,6 @@ const rootElement = document.getElementById('app');
 const root = createRoot(rootElement!);
 
 const AppRoutes = () => {
-    // TODO: skjelett under bygging - skru på for alle miljø når flyten er ferdig
-    const kanBrukeReiseOppstartAvslutningHjemreise = !erProd();
     return (
         <BrowserRouter basename={appConfig.publicUrl}>
             <ScrollToTop />
@@ -44,12 +44,19 @@ const AppRoutes = () => {
                 <Route path={'/barnetilsyn/*'} element={<Navigate to={passAvBarnPath} replace />} />
                 <Route path={`/${læremidlerPath}/*`} element={<LæremidlerApp />} />
                 <Route path={`${reiseTilSamlingPath}/*`} element={<ReiseTilSamlingApp />} />
-                {kanBrukeReiseOppstartAvslutningHjemreise && (
-                    <Route
-                        path={`${reiseOppstartAvslutningHjemreisePath}/*`}
-                        element={<ReiseOppstartAvslutningHjemreiseApp />}
-                    />
-                )}
+                <Route
+                    path={`${reiseOppstartAvslutningHjemreisePath}/*`}
+                    element={<ReiseOppstartAvslutningHjemreiseApp />}
+                />
+                <Route
+                    path={`${reiseOppstartAvslutningHjemreisePath}/avsjekk-aktivitetspenger`}
+                    element={<ReiseOppstartAvslutningHjemreiseAktivitetspengerAvsjekk />}
+                />
+                <Route path={`${flyttingPath}/*`} element={<FlyttingApp />} />
+                <Route
+                    path={`${flyttingPath}/avsjekk-aktivitetspenger`}
+                    element={<FlyttingAktivitetspengerAvsjekk />}
+                />
                 <Route
                     path="/daglig-reise/skjema-offentlig-transport"
                     element={<KanBrukeOffentligTransportAvsjekk />}

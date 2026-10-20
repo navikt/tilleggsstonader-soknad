@@ -1,13 +1,15 @@
-import { AvsjekkTekster } from './DagligReiseAvsjekk';
+import { AvsjekkTekster } from '../components/Avsjekk/Avsjekk';
 
 export const dagligReiseTekster: AvsjekkTekster = {
-    banner_daglig_reise: {
+    banner: {
         nb: 'Søknad om støtte til daglige reiser',
     },
     hvorfor_spør_vi: {
         header: { nb: 'Hvorfor spør vi om dette?' },
         innhold: {
-            nb: 'Vi trenger å vite om du skal reise med offentlig transport for å kunne sende deg til riktig søknad.',
+            nb: [
+                'Vi trenger å vite om du skal reise med offentlig transport for å kunne sende deg til riktig søknad.',
+            ],
         },
     },
     veileder_tittel: {

@@ -46,6 +46,15 @@ function routeTilAvsjekk(skjematype: SkjematypeFyllUt, res: Response) {
         case SkjematypeFyllUt.SØKNAD_DAGLIG_REISE:
             res.redirect(302, `${BASE_PATH_SOKNAD}/daglig-reise/skjema-offentlig-transport`);
             return;
+        case SkjematypeFyllUt.SØKNAD_FLYTTING:
+            res.redirect(302, `${BASE_PATH_SOKNAD}/flytting/avsjekk-aktivitetspenger`);
+            return;
+        case SkjematypeFyllUt.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE:
+            res.redirect(
+                302,
+                `${BASE_PATH_SOKNAD}/reise-oppstart-avslutning-hjemreise/avsjekk-aktivitetspenger`
+            );
+            return;
         default:
             throw new Error(`Ingen avsjekk definert for skjematype: ${skjematype}`);
     }
@@ -72,6 +81,23 @@ export const redirectTilSkjema = (skjematype: SkjematypeFyllUt) => {
             }
         } catch (error) {
             logger.error('Feil ved omdirigering:', error);
+            res.status(500).send('Feil ved omdirigering');
+        }
+    };
+};
+
+export const redirectTilGammelLøsningHvisToggleErSkruddAv = (skjematype: SkjematypeFyllUt) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const aksjon = await hentSkjemaRoutingAksjon(skjematype, req);
+
+            if (aksjon === SkjemaRoutingAksjon.GAMMEL_LØSNING) {
+                routeTilGammelLøsning(skjematype, res);
+                return;
+            }
+            next();
+        } catch (error) {
+            logger.error('Feil ved sjekk av tilgang til avsjekk:', error);
             res.status(500).send('Feil ved omdirigering');
         }
     };
