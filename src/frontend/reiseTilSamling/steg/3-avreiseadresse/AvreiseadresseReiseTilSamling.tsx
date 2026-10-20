@@ -18,6 +18,7 @@ import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { Person } from '../../../typer/person';
 import { EnumFelt } from '../../../typer/skjema';
 import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
@@ -61,10 +62,21 @@ export const AvreiseadresseReiseTilSamling = () => {
 
     const skalReiseFraFolkeregAdr = avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi;
 
-    const manglerFolkeregistrertAdresse =
-        person.strukturertAdresse === null ||
-        person.strukturertAdresse === undefined ||
-        person.adresse === '';
+    const manglerFolkeregistrertAdresse = !erStrukturertAdresseDefinert(person);
+
+    function erStrukturertAdresseDefinert(person: Person): boolean {
+        if (person.strukturertAdresse === undefined) {
+            return false;
+        } else if (
+            person.strukturertAdresse.land != null ||
+            person.strukturertAdresse.gateadresse != null ||
+            person.strukturertAdresse.postnummer != null ||
+            person.strukturertAdresse.poststed != null
+        ) {
+            return true;
+        }
+        return false;
+    }
 
     const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
         settAdresseDetSkalReisesFra(felt);
