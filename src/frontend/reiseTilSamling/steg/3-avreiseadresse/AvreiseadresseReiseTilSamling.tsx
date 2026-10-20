@@ -62,7 +62,9 @@ export const AvreiseadresseReiseTilSamling = () => {
     const skalReiseFraFolkeregAdr = avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi;
 
     const manglerFolkeregistrertAdresse =
-        person.strukturertAdresse === null || person.strukturertAdresse === undefined;
+        person.strukturertAdresse === null ||
+        person.strukturertAdresse === undefined ||
+        person.adresse === '';
 
     const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
         settAdresseDetSkalReisesFra(felt);
