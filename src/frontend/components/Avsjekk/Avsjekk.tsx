@@ -10,7 +10,7 @@ import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
 
 export interface AvsjekkTekster {
     banner: TekstElement<string>;
-    hvorfor_spør_vi: LesMer<string>;
+    hvorfor_spør_vi: LesMer<string[]>;
     veileder_tittel: TekstElement<string>;
     veileder_innhold: TekstElement<string[]>;
 }

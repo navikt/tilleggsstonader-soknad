@@ -26,7 +26,7 @@ export const MottarAktivitetspengerAvsjekk: React.FC<Props> = ({
     return (
         <Avsjekk
             tekster={tekster}
-            legend={'Mottar du aktivitetspenger?'}
+            legend={'Mottar eller har du nylig søkt om Aktivitetspenger for unge?'}
             onJa={() => navigate(nySøknadPath)}
             onNei={() => omdirigerTilFyllut(skjematype, 'GAMMEL')}
         />

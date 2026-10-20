@@ -7,7 +7,9 @@ export const taxiAvsjekkTekster: AvsjekkTekster = {
     hvorfor_spør_vi: {
         header: { nb: 'Hvorfor spør vi om dette?' },
         innhold: {
-            nb: 'Vi trenger å vite om du skal reise med taxi for å kunne sende deg til riktig søknad.',
+            nb: [
+                'Vi trenger å vite om du skal reise med taxi for å kunne sende deg til riktig søknad.',
+            ],
         },
     },
     veileder_tittel: {
