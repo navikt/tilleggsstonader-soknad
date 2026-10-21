@@ -1,4 +1,4 @@
-import { BodyLong, Heading, LocalAlert, VStack } from '@navikt/ds-react';
+import { BodyLong, Heading, InfoCard, VStack } from '@navikt/ds-react';
 
 import {
     adresseFeilIder,
@@ -13,6 +13,7 @@ import { Side } from '../../../components/Side';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTextField } from '../../../components/Teksthåndtering/LocaleTextField';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { VerdiFelt } from '../../../typer/skjema';
@@ -79,6 +80,7 @@ export const FlyttingDetaljerSide = () => {
                 }
                 error={feil[feilId('flyttedato')]?.melding}
             />
+            {/* // TODO: TRENGS DENNE? */}
             {detaljer?.årsak?.verdi === 'NY_JOBB' && (
                 <DateInput
                     id={feilId('førsteArbeidsdag')}
@@ -135,6 +137,18 @@ export const FlyttingDetaljerSide = () => {
                     );
                 }}
             />
+            {detaljer?.flyttemåte && (
+                <InfoCard data-color="info">
+                    <InfoCard.Header>
+                        <InfoCard.Title as="h3">
+                            <LocaleTekst tekst={tekster.varsel_dokumentasjon.tittel} />
+                        </InfoCard.Title>
+                    </InfoCard.Header>
+                    <InfoCard.Content>
+                        <LocaleTekst tekst={tekster.varsel_dokumentasjon.innhold} />
+                    </InfoCard.Content>
+                </InfoCard>
+            )}
             <LocaleRadioGroup
                 id={feilId('utgifterDekketPåAnnenMåte')}
                 tekst={tekster.radio_annen_dekning}
@@ -146,102 +160,110 @@ export const FlyttingDetaljerSide = () => {
                 <AlertIkkeRett beskrivelse={tekster.varsel_annen_dekning} />
             )}
             {detaljer?.flyttemåte?.verdi === 'FLYTTER_SELV' && (
-                <VStack gap="space-16">
-                    <Heading size="small" level="3">
-                        <LocaleTekst tekst={tekster.egenutgifter_tittel} />
-                    </Heading>
-                    {(['avstand', ...egenutgiftFelter] as const).map((felt) => {
-                        const tekst =
-                            felt === 'avstand'
-                                ? tekster.antall_km
-                                : tekster.egenutgifter_beløp[felt];
-                        return (
-                            <LocaleTextField
-                                key={felt}
-                                id={feilId(felt)}
-                                tekst={tekst}
-                                inputMode="decimal"
-                                htmlSize={12}
-                                value={detaljer.utgifterEgenFlytting?.[felt]?.verdi ?? ''}
-                                error={feil[feilId(felt)]?.melding}
-                                onChange={(event) => {
-                                    const verdi = verdiFelt(event.target.value, tekst);
-                                    settFlyttingDetaljer((tidligere) => ({
-                                        ...tidligere,
-                                        utgifterEgenFlytting: {
-                                            ...tidligere?.utgifterEgenFlytting,
-                                            [felt]: verdi,
-                                        },
-                                    }));
-                                    fjernFeil(felt);
-                                }}
-                            />
-                        );
-                    })}
-                </VStack>
-            )}
-            {detaljer?.flyttemåte?.verdi === 'FLYTTEBYRÅ' && (
-                <VStack gap="space-24">
-                    <Heading size="small" level="3">
-                        <LocaleTekst tekst={tekster.tilbud_tittel} />
-                    </Heading>
-                    <BodyLong>
-                        <LocaleTekst tekst={tekster.info_tilbud} />
-                    </BodyLong>
-                    {(['tilbud1', 'tilbud2'] as const).map((tilbud) => (
-                        <VStack key={tilbud} gap="space-16">
-                            {(['navn', 'beløp'] as const).map((felt) => (
+                <UnderspørsmålContainer>
+                    <VStack gap="space-16">
+                        <Heading size="small" level="3">
+                            <LocaleTekst tekst={tekster.egenutgifter_tittel} />
+                        </Heading>
+                        {(['avstand', ...egenutgiftFelter] as const).map((felt) => {
+                            const tekst =
+                                felt === 'avstand'
+                                    ? tekster.antall_km
+                                    : tekster.egenutgifter_beløp[felt];
+                            return (
                                 <LocaleTextField
                                     key={felt}
-                                    id={feilId(`${tilbud}_${felt}`)}
-                                    tekst={tekster[`${tilbud}_spørsmål`][felt]}
-                                    inputMode={felt === 'beløp' ? 'decimal' : 'text'}
-                                    value={detaljer.flyttebyrå?.[tilbud]?.[felt]?.verdi ?? ''}
-                                    error={feil[feilId(`${tilbud}_${felt}`)]?.melding}
+                                    id={feilId(felt)}
+                                    tekst={tekst}
+                                    inputMode="decimal"
+                                    htmlSize={12}
+                                    value={detaljer.utgifterEgenFlytting?.[felt]?.verdi ?? ''}
+                                    error={feil[feilId(felt)]?.melding}
                                     onChange={(event) => {
-                                        const verdi = verdiFelt(
-                                            event.target.value,
-                                            tekster[`${tilbud}_spørsmål`][felt]
-                                        );
+                                        const verdi = verdiFelt(event.target.value, tekst);
                                         settFlyttingDetaljer((tidligere) => ({
                                             ...tidligere,
-                                            flyttebyrå: {
-                                                ...tidligere?.flyttebyrå,
-                                                [tilbud]: {
-                                                    ...tidligere?.flyttebyrå?.[tilbud],
-                                                    [felt]: verdi,
-                                                },
+                                            utgifterEgenFlytting: {
+                                                ...tidligere?.utgifterEgenFlytting,
+                                                [felt]: verdi,
                                             },
                                         }));
-                                        fjernFeil(`${tilbud}_${felt}`);
+                                        fjernFeil(felt);
                                     }}
                                 />
-                            ))}
-                        </VStack>
-                    ))}
-                    <LocaleRadioGroup
-                        id={feilId('valgtTilbud')}
-                        tekst={tekster.radio_valgt_tilbud}
-                        value={detaljer.flyttebyrå?.valgtTilbud?.verdi ?? ''}
-                        error={feil[feilId('valgtTilbud')]?.melding}
-                        onChange={(verdi) => {
-                            oppdater('flyttebyrå', { ...detaljer.flyttebyrå, valgtTilbud: verdi });
-                            fjernFeil('valgtTilbud');
-                        }}
-                    />
-                    {harValgtDyrereTilbud(detaljer.flyttebyrå) && (
-                        <LocalAlert status="warning">
-                            <LocalAlert.Header>
-                                <LocalAlert.Title as="h4">
-                                    <LocaleTekst tekst={tekster.varsel_dyrere_tilbud.tittel} />
-                                </LocalAlert.Title>
-                            </LocalAlert.Header>
-                            <LocalAlert.Content>
-                                <LocaleTekst tekst={tekster.varsel_dyrere_tilbud.innhold} />
-                            </LocalAlert.Content>
-                        </LocalAlert>
-                    )}
-                </VStack>
+                            );
+                        })}
+                    </VStack>
+                </UnderspørsmålContainer>
+            )}
+            {detaljer?.flyttemåte?.verdi === 'FLYTTEBYRÅ' && (
+                <UnderspørsmålContainer>
+                    <VStack gap="space-24">
+                        <Heading size="small" level="3">
+                            <LocaleTekst tekst={tekster.tilbud_tittel} />
+                        </Heading>
+                        <BodyLong>
+                            <LocaleTekst tekst={tekster.info_tilbud} />
+                        </BodyLong>
+                        {(['tilbud1', 'tilbud2'] as const).map((tilbud) => (
+                            <VStack key={tilbud} gap="space-16">
+                                {(['navn', 'beløp'] as const).map((felt) => (
+                                    <LocaleTextField
+                                        key={felt}
+                                        id={feilId(`${tilbud}_${felt}`)}
+                                        tekst={tekster[`${tilbud}_spørsmål`][felt]}
+                                        inputMode={felt === 'beløp' ? 'decimal' : 'text'}
+                                        htmlSize={felt === 'beløp' ? 12 : undefined}
+                                        value={detaljer.flyttebyrå?.[tilbud]?.[felt]?.verdi ?? ''}
+                                        error={feil[feilId(`${tilbud}_${felt}`)]?.melding}
+                                        onChange={(event) => {
+                                            const verdi = verdiFelt(
+                                                event.target.value,
+                                                tekster[`${tilbud}_spørsmål`][felt]
+                                            );
+                                            settFlyttingDetaljer((tidligere) => ({
+                                                ...tidligere,
+                                                flyttebyrå: {
+                                                    ...tidligere?.flyttebyrå,
+                                                    [tilbud]: {
+                                                        ...tidligere?.flyttebyrå?.[tilbud],
+                                                        [felt]: verdi,
+                                                    },
+                                                },
+                                            }));
+                                            fjernFeil(`${tilbud}_${felt}`);
+                                        }}
+                                    />
+                                ))}
+                            </VStack>
+                        ))}
+                        <LocaleRadioGroup
+                            id={feilId('valgtTilbud')}
+                            tekst={tekster.radio_valgt_tilbud}
+                            value={detaljer.flyttebyrå?.valgtTilbud?.verdi ?? ''}
+                            error={feil[feilId('valgtTilbud')]?.melding}
+                            onChange={(verdi) => {
+                                oppdater('flyttebyrå', {
+                                    ...detaljer.flyttebyrå,
+                                    valgtTilbud: verdi,
+                                });
+                                fjernFeil('valgtTilbud');
+                            }}
+                        />
+                        {harValgtDyrereTilbud(detaljer.flyttebyrå) && (
+                            <InfoCard data-color="warning">
+                                <InfoCard.Header>
+                                    <InfoCard.Title as="h3">
+                                        <LocaleTekst tekst={tekster.varsel_dyrere_tilbud.tittel} />
+                                    </InfoCard.Title>
+                                </InfoCard.Header>
+                                <InfoCard.Content>
+                                    <LocaleTekst tekst={tekster.varsel_dyrere_tilbud.innhold} />
+                                </InfoCard.Content>
+                            </InfoCard>
+                        )}
+                    </VStack>
+                </UnderspørsmålContainer>
             )}
         </Side>
     );

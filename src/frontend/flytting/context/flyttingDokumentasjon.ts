@@ -3,13 +3,19 @@ import { FlyttingDetaljer } from '../typer/flyttingDetaljer';
 
 export const hentDokumentasjonsbehovFlytting = (
     detaljer: FlyttingDetaljer | undefined
-): Dokumentasjonsbehov[] =>
-    detaljer?.flyttemåte?.verdi === 'FLYTTEBYRÅ'
-        ? [
-              { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_1 },
-              { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_2 },
-          ]
-        : [];
+): Dokumentasjonsbehov[] => {
+    switch (detaljer?.flyttemåte?.verdi) {
+        case 'FLYTTER_SELV':
+            return [{ type: VedleggstypeFlytting.UTGIFTER_EGEN_FLYTTING }];
+        case 'FLYTTEBYRÅ':
+            return [
+                { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_1 },
+                { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_2 },
+            ];
+        default:
+            return [];
+    }
+};
 
 export const hentAktivDokumentasjon = (
     dokumentasjon: DokumentasjonFelt[],

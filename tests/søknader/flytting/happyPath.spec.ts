@@ -31,11 +31,6 @@ const startSøknad = async (page: Page) => {
     ).toBeVisible();
     await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check();
     await page.getByRole('button', { name: 'Start søknad' }).click();
-
-    await expect(page).toHaveURL(`${urlSøknad}/hovedytelse`);
-    await expect(page.getByRole('heading', { name: 'Din situasjon' })).toBeVisible();
-    await page.getByLabel('Arbeidsavklaringspenger (AAP)').check();
-    await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/flytting`);
 };
 
@@ -47,7 +42,7 @@ const fyllFellesDetaljer = async (page: Page, nyJobb = false) => {
                 : 'Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet'
         )
         .check();
-    await page.getByRole('textbox', { name: 'Når flytter du?' }).fill('15.06.2025');
+    await page.getByRole('textbox', { name: 'Flyttedato' }).fill('15.06.2025');
     if (nyJobb) {
         await page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' }).fill('01.06.2025');
     }
@@ -88,14 +83,24 @@ test('Ny jobb og egen flytting viser oppsummering og sender riktig payload, ogs�
     await startSøknad(page);
     await fyllFellesDetaljer(page, true);
     await page.getByLabel('Jeg flytter selv', { exact: true }).check();
-    await page.getByRole('textbox', { name: 'Hvor langt skal du flytte (km)?' }).fill('120,25');
-    await page.getByRole('textbox', { name: 'Bom (valgfritt)', exact: true }).fill('0');
-    await page.getByRole('textbox', { name: 'Hengerleie (valgfritt)', exact: true }).fill('350.50');
+    await expect(
+        page.getByText(
+            'Du må dokumentere alle utgiftene du søker om. Hvis du ikke har dokumentasjonen nå, kan du ettersende den senere.'
+        )
+    ).toBeVisible();
+    await page.getByRole('textbox', { name: 'Hvor lang reisevei har du?' }).fill('120,25');
+    await page.getByRole('textbox', { name: 'Bom', exact: true }).fill('0');
+    await page.getByRole('textbox', { name: 'Hengerleie', exact: true }).fill('350.50');
     await forventIngenWcagViolations(page);
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
-    await expect(page.getByLabel('Tilbud fra flyttebyrå 1')).toHaveCount(0);
+    await expect(
+        page.getByText('Dokumentasjon av utgifter ved egen flytting', { exact: true })
+    ).toBeVisible();
     await page.getByRole('button', { name: 'Neste' }).click();
+    const modal = page.getByRole('dialog', { name: 'Vedlegg mangler' });
+    await expect(modal.getByText('Dokumentasjon av utgifter ved egen flytting')).toBeVisible();
+    await modal.getByRole('button', { name: 'Ja, gå til neste side' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
     await expect(page.getByText('120,25 km', { exact: true })).toBeVisible();
     await expect(page.getByText('01.06.2025', { exact: true })).toBeVisible();
@@ -124,7 +129,7 @@ test('Ny jobb og egen flytting viser oppsummering og sender riktig payload, ogs�
                 hengerleie: { verdi: '350.50' },
             },
         },
-        dokumentasjon: [],
+        dokumentasjon: [{ type: 'UTGIFTER_EGEN_FLYTTING', opplastedeVedlegg: [] }],
     });
     expect(request.postDataJSON().flyttingDetaljer.utgifterEgenFlytting.annet).toBeUndefined();
     await expect(page).toHaveURL(`${urlSøknad}/kvittering`);
@@ -139,6 +144,7 @@ test('Byråtilbud viser varsel bare for dyrere valg og lar brukeren laste opp be
     await fyllTilbud(page);
     const varsel = page.getByText('Du har valgt det dyreste tilbudet.', { exact: false });
     await expect(varsel).toBeVisible();
+    await expect(page.getByText('Du kan fortsatt få støtte', { exact: false })).toBeVisible();
     await page.getByRole('radio', { name: 'Flyttebyrå 2', exact: true }).check();
     await expect(varsel).toHaveCount(0);
     await page.getByRole('textbox', { name: 'Beløp for flyttebyrå 2', exact: true }).fill('800,50');
@@ -192,8 +198,13 @@ test('Skjulte svar og vedlegg beholdes ved bytte, mens oppsummering viser aktiv 
         .getByLabel('Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet')
         .check();
     await page.getByLabel('Jeg flytter selv', { exact: true }).check();
-    await page.getByRole('textbox', { name: 'Hvor langt skal du flytte (km)?' }).fill('10');
+    await page.getByRole('textbox', { name: 'Hvor lang reisevei har du?' }).fill('10');
     await page.getByRole('button', { name: 'Neste' }).click();
+    const egenflyttingModal = page.getByRole('dialog', { name: 'Vedlegg mangler' });
+    await expect(
+        egenflyttingModal.getByText('Dokumentasjon av utgifter ved egen flytting')
+    ).toBeVisible();
+    await egenflyttingModal.getByRole('button', { name: 'Ja, gå til neste side' }).click();
     await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(0);
     await page.getByRole('button', { name: 'Forrige' }).click();
     await page.getByLabel('Jeg vil bruke flyttebyrå').check();
@@ -211,10 +222,14 @@ test('Skjulte svar og vedlegg beholdes ved bytte, mens oppsummering viser aktiv 
         .getByLabel('Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet')
         .check();
     await page.getByLabel('Jeg flytter selv', { exact: true }).check();
-    await expect(
-        page.getByRole('textbox', { name: 'Hvor langt skal du flytte (km)?' })
-    ).toHaveValue('10');
+    await expect(page.getByRole('textbox', { name: 'Hvor lang reisevei har du?' })).toHaveValue(
+        '10'
+    );
     await page.getByRole('button', { name: 'Neste' }).click();
+    await page
+        .getByRole('dialog', { name: 'Vedlegg mangler' })
+        .getByRole('button', { name: 'Ja, gå til neste side' })
+        .click();
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page.getByText('Oppgi første dag i ny jobb', { exact: true })).toHaveCount(0);
     await expect(page.getByText('Testbyrå 1', { exact: false })).toHaveCount(0);
@@ -228,10 +243,7 @@ test('Skjulte svar og vedlegg beholdes ved bytte, mens oppsummering viser aktiv 
             flyttemåte: { verdi: 'FLYTTER_SELV' },
             flyttebyrå: { tilbud1: { navn: { verdi: 'Testbyrå 1' } } },
         },
-        dokumentasjon: [
-            { type: 'TILBUD_FLYTTEBYRÅ_1', opplastedeVedlegg: [{ id: 'test-dokument-id' }] },
-            { type: 'TILBUD_FLYTTEBYRÅ_2', opplastedeVedlegg: [{ id: 'test-dokument-id' }] },
-        ],
+        dokumentasjon: [{ type: 'UTGIFTER_EGEN_FLYTTING', opplastedeVedlegg: [] }],
     });
 });
 
@@ -265,9 +277,9 @@ test('Obligatoriske svar og ugyldige datoer og tall stopper videreføring', asyn
     await expect(page.getByRole('link', { name: 'Du må oppgi hvorfor du flytter.' })).toBeVisible();
     await fyllFellesDetaljer(page, true);
     await page.getByLabel('Jeg flytter selv', { exact: true }).check();
-    const avstand = page.getByRole('textbox', { name: 'Hvor langt skal du flytte (km)?' });
+    const avstand = page.getByRole('textbox', { name: 'Hvor lang reisevei har du?' });
     await avstand.fill('0');
-    await page.getByRole('textbox', { name: 'Når flytter du?' }).fill('31.02.2025');
+    await page.getByRole('textbox', { name: 'Flyttedato' }).fill('31.02.2025');
     await page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' }).fill('ugyldig');
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(
@@ -291,19 +303,19 @@ test('Obligatoriske svar og ugyldige datoer og tall stopper videreføring', asyn
             name: 'Oppgi en gyldig første arbeidsdag på formatet dd.mm.åååå.',
         })
     ).toHaveCount(0);
-    await page.getByRole('textbox', { name: 'Når flytter du?' }).fill('15.06.2025');
+    await page.getByRole('textbox', { name: 'Flyttedato' }).fill('15.06.2025');
     await avstand.fill('1.234');
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/flytting`);
     await avstand.fill('1.25');
-    await page.getByRole('textbox', { name: 'Bom (valgfritt)', exact: true }).fill('-1');
+    await page.getByRole('textbox', { name: 'Bom', exact: true }).fill('-1');
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(
         page.getByRole('link', {
             name: 'Oppgi et beløp som er 0 eller større, med inntil to desimaler.',
         })
     ).toBeVisible();
-    await page.getByRole('textbox', { name: 'Bom (valgfritt)', exact: true }).fill('');
+    await page.getByRole('textbox', { name: 'Bom', exact: true }).fill('');
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
 });

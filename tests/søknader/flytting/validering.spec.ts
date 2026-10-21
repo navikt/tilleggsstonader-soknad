@@ -192,12 +192,34 @@ test('Tilbud sammenlignes nøyaktig også når Number avrunder bort forskjellen'
 
 test('Dokumentasjonsbehov følger flyttemåten, ikke bevarte tilbud i inaktiv gren', () => {
     const detaljer = gyldigeDetaljer();
-    expect(hentDokumentasjonsbehovFlytting(detaljer)).toEqual([]);
+    expect(hentDokumentasjonsbehovFlytting(detaljer)).toEqual([
+        { type: VedleggstypeFlytting.UTGIFTER_EGEN_FLYTTING },
+    ]);
     detaljer.flyttemåte = enumFelt('FLYTTEBYRÅ');
     expect(hentDokumentasjonsbehovFlytting(detaljer)).toEqual([
         { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_1 },
         { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_2 },
     ]);
+});
+
+test('Payloaden inneholder bare vedlegg for valgt flyttemåte', () => {
+    const egenFlytting = {
+        type: VedleggstypeFlytting.UTGIFTER_EGEN_FLYTTING,
+        label: 'Dokumentasjon av utgifter ved egen flytting',
+        opplastedeVedlegg: [],
+    };
+    const tilbud1 = {
+        type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_1,
+        label: 'Tilbud fra flyttebyrå 1',
+        opplastedeVedlegg: [{ id: 'tilbud-1', navn: 'tilbud1.png' }],
+    };
+
+    expect(
+        hentAktivDokumentasjon(
+            [egenFlytting, tilbud1],
+            hentDokumentasjonsbehovFlytting(gyldigeDetaljer())
+        )
+    ).toEqual([egenFlytting]);
 });
 
 test('Oppdatering av aktive vedlegg beholder inaktive tilbud, men respekterer sletting', () => {

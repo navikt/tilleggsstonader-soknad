@@ -12,6 +12,10 @@ interface FlyttingDetaljerInnhold {
     adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     radio_flyttemåte: RadiogruppePåkrevd<Flyttemåte>;
     radio_annen_dekning: RadiogruppePåkrevd<JaNei>;
+    varsel_dokumentasjon: {
+        tittel: TekstElement<string>;
+        innhold: TekstElement<string>;
+    };
     egenutgifter_tittel: TekstElement<string>;
     antall_km: InputFelt;
     egenutgifter_beløp: Record<EgenutgiftFelt, InputFelt>;
@@ -48,7 +52,7 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         feilmelding: { nb: 'Du må oppgi hvorfor du flytter.' },
     },
     dato_flytting: {
-        label: { nb: 'Når flytter du?' },
+        label: { nb: 'Flyttedato' },
         description: { nb: 'Format: dd.mm.åååå' },
         feilmelding: { nb: 'Oppgi en gyldig flyttedato på formatet dd.mm.åååå.' },
     },
@@ -57,9 +61,9 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         description: { nb: 'Format: dd.mm.åååå' },
         feilmelding: { nb: 'Oppgi en gyldig første arbeidsdag på formatet dd.mm.åååå.' },
     },
-    adresse_tittel: { nb: 'Hvor flytter du?' },
+    adresse_tittel: { nb: 'Adressen du flytter til' },
     adresse_spørsmål: {
-        land: { label: { nb: 'Land' }, feilmelding: { nb: 'Du må velge land.' } },
+        land: { label: { nb: 'Velg land' }, feilmelding: { nb: 'Du må velge land.' } },
         gateadresse: {
             label: { nb: 'Gateadresse' },
             feilmelding: { nb: 'Du må oppgi gateadresse.' },
@@ -68,12 +72,18 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         poststed: { label: { nb: 'Poststed' }, feilmelding: { nb: 'Du må oppgi poststed.' } },
     },
     radio_flyttemåte: {
-        header: { nb: 'Ordner du flyttingen selv eller kommer du til å bruke flyttebyrå?' },
+        header: { nb: 'Flytter du selv eller kommer du til å bruke flyttebyrå?' },
         alternativer: {
             FLYTTER_SELV: { nb: 'Jeg flytter selv' },
             FLYTTEBYRÅ: { nb: 'Jeg vil bruke flyttebyrå' },
         },
         feilmelding: { nb: 'Du må velge hvordan du skal flytte.' },
+    },
+    varsel_dokumentasjon: {
+        tittel: { nb: 'Dokumentasjon av utgifter' },
+        innhold: {
+            nb: 'Du må dokumentere alle utgiftene du søker om. Hvis du ikke har dokumentasjonen nå, kan du ettersende den senere.',
+        },
     },
     radio_annen_dekning: {
         header: {
@@ -87,40 +97,35 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
     },
     egenutgifter_tittel: { nb: 'Utgifter til flytting' },
     antall_km: {
-        label: { nb: 'Hvor langt skal du flytte (km)?' },
-        description: { nb: 'Oppgi avstand i kilometer.' },
+        label: { nb: 'Hvor lang reisevei har du?' },
+        description: { nb: 'Angi antall kilometer mellom bostedet ditt og der du skal flytte' },
         feilmelding: { nb: 'Oppgi en avstand som er større enn 0, med inntil to desimaler.' },
     },
     egenutgifter_beløp: {
         hengerleie: {
-            label: { nb: 'Hengerleie (valgfritt)' },
-            description: { nb: 'Beløp i kroner.' },
+            label: { nb: 'Hengerleie' },
             feilmelding: beløpFeilmelding,
         },
         bom: {
-            label: { nb: 'Bom (valgfritt)' },
-            description: { nb: 'Beløp i kroner.' },
+            label: { nb: 'Bom' },
             feilmelding: beløpFeilmelding,
         },
         parkering: {
-            label: { nb: 'Parkering (valgfritt)' },
-            description: { nb: 'Beløp i kroner.' },
+            label: { nb: 'Parkering' },
             feilmelding: beløpFeilmelding,
         },
         ferje: {
-            label: { nb: 'Ferje (valgfritt)' },
-            description: { nb: 'Beløp i kroner.' },
+            label: { nb: 'Ferje' },
             feilmelding: beløpFeilmelding,
         },
         annet: {
-            label: { nb: 'Annet (valgfritt)' },
-            description: { nb: 'Beløp i kroner.' },
+            label: { nb: 'Annet' },
             feilmelding: beløpFeilmelding,
         },
     },
     tilbud_tittel: { nb: 'Tilbud fra to flyttebyrå' },
     info_tilbud: {
-        nb: 'Dersom du bruker flyttebyrå, må du innhente minst to tilbud fra ulike flyttebyråer. Du må legge ved dokumentasjon av at du har innhentet tilbud, og opplyse Nav om hvilket tilbud du velger. Du vil få dekket det laveste tilbudet.',
+        nb: 'Hvis du bruker flyttebyrå, må du hente inn minst to tilbud fra ulike flyttebyråer og oppgi hvilket tilbud du velger. Nav dekker utgiftene etter det laveste tilbudet.',
     },
     tilbud1_spørsmål: {
         navn: {
@@ -129,7 +134,6 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         },
         beløp: {
             label: { nb: 'Beløp for flyttebyrå 1' },
-            description: { nb: 'Beløp i kroner.' },
             feilmelding: beløpFeilmelding,
         },
     },
@@ -140,7 +144,6 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         },
         beløp: {
             label: { nb: 'Beløp for flyttebyrå 2' },
-            description: { nb: 'Beløp i kroner.' },
             feilmelding: beløpFeilmelding,
         },
     },
