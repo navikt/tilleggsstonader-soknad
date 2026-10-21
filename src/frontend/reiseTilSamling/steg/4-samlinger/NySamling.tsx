@@ -26,6 +26,7 @@ import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { Adresse, Samling } from '../../../typer/søknad';
 import { harVerdi } from '../../../utils/typeUtils';
+import { reisemåteTekster } from '../../tekster/reisemåte';
 import { samlingerTekster } from '../../tekster/samlinger';
 
 const SamlingBoks = styled.div`
@@ -208,6 +209,7 @@ export const NySamling: React.FC<{
                     samlingId={samling._id}
                     reisemåte={samling.reisemåte}
                     settReisemåte={settReisemåte}
+                    tekster={reisemåteTekster}
                 />
 
                 {onSlett && (

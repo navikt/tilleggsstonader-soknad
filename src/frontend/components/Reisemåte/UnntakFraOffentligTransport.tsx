@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { InlineMessage, TextField, VStack } from '@navikt/ds-react';
 
+import { UnntakFraOffentligTransportTekster } from './tekster';
 import {
     errorKeyUnntakFraOffentligTransport,
     errorKeyUnntakFraOffentligTransportBarnehageAdresse,
@@ -9,7 +10,6 @@ import {
 } from './validering';
 import { useSpråk } from '../../context/SpråkContext';
 import { useValideringsfeil } from '../../context/ValideringsfeilContext';
-import { reisemåteTekster } from '../../reiseTilSamling/tekster/reisemåte';
 import {
     UnntakFraOffentligTransport,
     Reisemåte,
@@ -24,7 +24,8 @@ export const UnntakIkkeOffentligTransport: React.FC<{
     unntakFraOffentligTransport: UnntakFraOffentligTransport | undefined;
     samlingId: number;
     settReisemåte: Dispatch<SetStateAction<Reisemåte | undefined>>;
-}> = ({ unntakFraOffentligTransport, samlingId, settReisemåte }) => {
+    tekster: UnntakFraOffentligTransportTekster;
+}> = ({ unntakFraOffentligTransport, samlingId, settReisemåte, tekster }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -96,19 +97,19 @@ export const UnntakIkkeOffentligTransport: React.FC<{
             <VStack gap="space-16">
                 <LocaleCheckboxGroup
                     id={valideringsfeil[errorKeyUnntakFraOffentligTransport(samlingId)]?.id}
-                    tekst={reisemåteTekster.check_kan_ikke_reise_offentlig_begrunnelse}
+                    tekst={tekster.check_kan_ikke_reise_offentlig_begrunnelse}
                     onChange={oppdaterÅrsaker}
                     value={unntakFraOffentligTransport?.årsaker?.verdier ?? []}
                     error={valideringsfeil[errorKeyUnntakFraOffentligTransport(samlingId)]?.melding}
                 />
                 {dårligTransporttilbudValgt && (
                     <InlineMessage status="info">
-                        {reisemåteTekster.info_dårlig_transporttilbud_valg[locale]}
+                        {tekster.info_dårlig_transporttilbud_valg[locale]}
                     </InlineMessage>
                 )}
                 {helsemessigeÅrsakerOffentligValgt && (
                     <InlineMessage status="info">
-                        {reisemåteTekster.info_helsemessige_årsaker_valg[locale]}
+                        {tekster.info_helsemessige_årsaker_valg[locale]}
                     </InlineMessage>
                 )}
             </VStack>
@@ -125,7 +126,7 @@ export const UnntakIkkeOffentligTransport: React.FC<{
                                 errorKeyUnntakFraOffentligTransportBarnehageAdresse(samlingId)
                             ]?.melding
                         }
-                        tekst={reisemåteTekster.barnehage_adresse}
+                        tekst={tekster.barnehage_adresse}
                         value={
                             unntakFraOffentligTransport?.leveringOgHentingIBarnehage?.gateadresse
                                 ?.verdi ?? ''
@@ -134,7 +135,7 @@ export const UnntakIkkeOffentligTransport: React.FC<{
                             oppdaterLeveringOgHentingIBarnehage(
                                 {
                                     gateadresse: {
-                                        label: reisemåteTekster.barnehage_adresse.label[locale],
+                                        label: tekster.barnehage_adresse.label[locale],
                                         verdi: e.target.value,
                                     },
                                 },
@@ -153,7 +154,7 @@ export const UnntakIkkeOffentligTransport: React.FC<{
                                 errorKeyUnntakFraOffentligTransportBarnehagePostnummer(samlingId)
                             ]?.melding
                         }
-                        label={reisemåteTekster.barnehage_postnummer.label[locale]}
+                        label={tekster.barnehage_postnummer.label[locale]}
                         value={
                             unntakFraOffentligTransport?.leveringOgHentingIBarnehage?.postnummer
                                 ?.verdi ?? ''
@@ -162,7 +163,7 @@ export const UnntakIkkeOffentligTransport: React.FC<{
                             oppdaterLeveringOgHentingIBarnehage(
                                 {
                                     postnummer: {
-                                        label: reisemåteTekster.barnehage_postnummer.label[locale],
+                                        label: tekster.barnehage_postnummer.label[locale],
                                         verdi: e.target.value,
                                     },
                                 },

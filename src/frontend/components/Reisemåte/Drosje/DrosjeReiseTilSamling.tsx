@@ -4,7 +4,6 @@ import { InlineMessage, VStack } from '@navikt/ds-react';
 
 import { errorKeyHarTTKort } from './validering';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
 import {
     ÅrsakKanIkkeBenytteEgenBil,
     DrosjeInfo,
@@ -17,6 +16,7 @@ import { Skillelinje } from '../../Skillelinje';
 import { LocaleHeading } from '../../Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekstAvsnitt } from '../../Teksthåndtering/LocaleTekstAvsnitt';
+import { DrosjeTekster } from '../tekster';
 
 export const DrosjeReiseTilSamling: React.FC<{
     samlingId: number;
@@ -25,7 +25,15 @@ export const DrosjeReiseTilSamling: React.FC<{
     unntakFraOffentligTransport:
         EnumFlereValgFelt<ÅrsakKanIkkeBenytteOffentligTransport> | undefined;
     settReisemåte: Dispatch<SetStateAction<Reisemåte | undefined>>;
-}> = ({ samlingId, unntakFraPrivatBil, drosje, settReisemåte, unntakFraOffentligTransport }) => {
+    tekster: DrosjeTekster;
+}> = ({
+    samlingId,
+    unntakFraPrivatBil,
+    drosje,
+    settReisemåte,
+    unntakFraOffentligTransport,
+    tekster,
+}) => {
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const helsemessigeÅrsakerBilValgt =
@@ -53,17 +61,17 @@ export const DrosjeReiseTilSamling: React.FC<{
     return (
         <VStack gap="space-24">
             <Skillelinje />
-            <LocaleHeading tekst={reisemåteTekster.drosje_tittel} level="3" size="small" />
+            <LocaleHeading tekst={tekster.drosje_tittel} level="3" size="small" />
             <LocaleRadioGroup
                 id={valideringsfeil[errorKeyHarTTKort(samlingId)]?.id}
-                tekst={reisemåteTekster.radio_har_du_tt_kort}
+                tekst={tekster.radio_har_du_tt_kort}
                 value={drosje?.harTTKort?.verdi ?? ''}
                 onChange={(verdi: EnumFelt<JaNei>) => oppdaterTTKort(verdi)}
                 error={valideringsfeil[errorKeyHarTTKort(samlingId)]?.melding}
             />
             {drosje?.harTTKort?.verdi === 'JA' && (
                 <InlineMessage status="info">
-                    <LocaleTekstAvsnitt tekst={reisemåteTekster.info_tt_kort} />
+                    <LocaleTekstAvsnitt tekst={tekster.info_tt_kort} />
                 </InlineMessage>
             )}
         </VStack>

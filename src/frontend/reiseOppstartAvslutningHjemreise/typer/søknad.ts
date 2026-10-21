@@ -1,5 +1,5 @@
 import { Reisemåte } from '../../typer/reisemåte';
-import { EnumFelt, VerdiFelt } from '../../typer/skjema';
+import { EnumFelt, EnumFlereValgFelt, VerdiFelt } from '../../typer/skjema';
 import { Adresse, JaNei } from '../../typer/søknad';
 
 export interface AdresseReiseOppstartAvslutningHjemreise {
@@ -13,12 +13,14 @@ export interface AdresseReiseOppstartAvslutningHjemreise {
 
 export interface BarnOgHelseReiseOppstartAvslutningHjemreise {
     harBarnUnder18SomHarFlyttetMed?: EnumFelt<JaNei>;
+    hvilkeBarnFlytterMed?: EnumFlereValgFelt<string>;
     harBarnHjemmeUnder4Klasse?: EnumFelt<JaNei>;
-    harHelseutfordringer?: EnumFelt<JaNei>;
     harSærligeBehovForFlereHjemreiser?: EnumFelt<JaNei>;
 }
 
 export interface ReiseInfoReiseOppstartAvslutningHjemreise {
+    _id: number; // for å kunne lenke valideringsfeil til riktig reise i liste
+    lagret: boolean;
     typeReise?: EnumFelt<TypeReise>;
     fom?: VerdiFelt<string>;
     tom?: VerdiFelt<string>; // Brukes kun for hjemreise

@@ -1,9 +1,9 @@
-import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
 import { PrivatBilInfo, UtgifterPrivatBil } from '../../../typer/reisemåte';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { erGyldigKostnad } from '../../../utils/tall';
 import { harVerdi } from '../../../utils/typeUtils';
+import { PrivatBilTekster } from '../tekster';
 
 export const errorKeyPrivatBilBenyttetEgenBil = (reiseId: number) =>
     `reise_${reiseId}_reisemåte_privatbil_benyttet_egen_bil`;
@@ -51,13 +51,14 @@ export const validerPrivatBil = (
     privatBil: PrivatBilInfo | undefined,
     locale: Locale,
     reiseId: number,
-    skalReiseMedFlereTransportmidler: boolean
+    skalReiseMedFlereTransportmidler: boolean,
+    tekster: PrivatBilTekster
 ): Valideringsfeil => {
     if (!harVerdi(privatBil?.benyttetEgenBil?.verdi)) {
         return {
             [errorKeyPrivatBilBenyttetEgenBil(reiseId)]: {
                 id: errorKeyPrivatBilBenyttetEgenBil(reiseId),
-                melding: reisemåteTekster.radio_kan_benytte_egen_bil.feilmelding[locale],
+                melding: tekster.radio_kan_benytte_egen_bil.feilmelding[locale],
             },
         };
     }
@@ -69,7 +70,7 @@ export const validerPrivatBil = (
         return {
             [errorKeyPrivatBilBetalteForReiseSelv(reiseId)]: {
                 id: errorKeyPrivatBilBetalteForReiseSelv(reiseId),
-                melding: reisemåteTekster.radio_betaler_for_reise_selv.feilmelding[locale],
+                melding: tekster.radio_betaler_for_reise_selv.feilmelding[locale],
             },
         };
     }
@@ -83,9 +84,10 @@ export const validerPrivatBil = (
                 privatBil?.infoBilKunDelerAvStrekning,
                 locale,
                 reiseId,
-                skalReiseMedFlereTransportmidler
+                skalReiseMedFlereTransportmidler,
+                tekster
             ),
-            ...validerUtgifterPrivatBil(privatBil?.utgifterPrivatBil, locale, reiseId),
+            ...validerUtgifterPrivatBil(privatBil?.utgifterPrivatBil, locale, reiseId, tekster),
         };
     }
 
@@ -96,7 +98,8 @@ const validerInfoBilKunDelerAvStrekning = (
     infoBilKunDelerAvStrekning: PrivatBilInfo['infoBilKunDelerAvStrekning'],
     locale: Locale,
     reiseId: number,
-    skalReiseMedFlereTransportmidler: boolean
+    skalReiseMedFlereTransportmidler: boolean,
+    tekster: PrivatBilTekster
 ): Valideringsfeil => {
     if (!skalReiseMedFlereTransportmidler) {
         return {};
@@ -112,7 +115,7 @@ const validerInfoBilKunDelerAvStrekning = (
             ...feil,
             [errorKeyPrivatBilStrekningHvorBilBleBenyttet(reiseId)]: {
                 id: errorKeyPrivatBilStrekningHvorBilBleBenyttet(reiseId),
-                melding: reisemåteTekster.privat_bil_strekning_kjørt.feilmelding[locale],
+                melding: tekster.privat_bil_strekning_kjørt.feilmelding[locale],
             },
         };
     } else if (strekningHvorBilBleBenyttetVerdi.length > maksLengdeStrekningHvorBilBleBenyttet) {
@@ -120,7 +123,7 @@ const validerInfoBilKunDelerAvStrekning = (
             ...feil,
             [errorKeyPrivatBilStrekningHvorBilBleBenyttet(reiseId)]: {
                 id: errorKeyPrivatBilStrekningHvorBilBleBenyttet(reiseId),
-                melding: reisemåteTekster.privat_bil_strekning_kjørt.feilmelding_for_lang[locale],
+                melding: tekster.privat_bil_strekning_kjørt.feilmelding_for_lang[locale],
             },
         };
     }
@@ -130,7 +133,7 @@ const validerInfoBilKunDelerAvStrekning = (
             ...feil,
             [errorKeyPrivatBilAntallKilometerKjørt(reiseId)]: {
                 id: errorKeyPrivatBilAntallKilometerKjørt(reiseId),
-                melding: reisemåteTekster.privat_bil_km_kjørt.feilmelding[locale],
+                melding: tekster.privat_bil_km_kjørt.feilmelding[locale],
             },
         };
     }
@@ -141,7 +144,8 @@ const validerInfoBilKunDelerAvStrekning = (
 const validerUtgifterPrivatBil = (
     utgifterPrivatBil: UtgifterPrivatBil | undefined,
     locale: Locale,
-    reiseId: number
+    reiseId: number,
+    tekster: PrivatBilTekster
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -153,7 +157,7 @@ const validerUtgifterPrivatBil = (
             ...feil,
             [errorKeyPrivatBilUtgifterBompenger(reiseId)]: {
                 id: errorKeyPrivatBilUtgifterBompenger(reiseId),
-                melding: reisemåteTekster.privat_bil_utgifter_bompenger.feilmelding[locale],
+                melding: tekster.privat_bil_utgifter_bompenger.feilmelding[locale],
             },
         };
     }
@@ -165,7 +169,7 @@ const validerUtgifterPrivatBil = (
             ...feil,
             [errorKeyPrivatBilUtgifterFerge(reiseId)]: {
                 id: errorKeyPrivatBilUtgifterFerge(reiseId),
-                melding: reisemåteTekster.privat_bil_utgifter_ferge.feilmelding[locale],
+                melding: tekster.privat_bil_utgifter_ferge.feilmelding[locale],
             },
         };
     }
@@ -176,7 +180,7 @@ const validerUtgifterPrivatBil = (
             ...feil,
             [errorKeyPrivatBilUtgifterPiggdekkavgift(reiseId)]: {
                 id: errorKeyPrivatBilUtgifterPiggdekkavgift(reiseId),
-                melding: reisemåteTekster.privat_bil_utgifter_piggdekkavgift.feilmelding[locale],
+                melding: tekster.privat_bil_utgifter_piggdekkavgift.feilmelding[locale],
             },
         };
     }
@@ -187,7 +191,7 @@ const validerUtgifterPrivatBil = (
             ...feil,
             [errorKeyPrivatBilUtgifterParkering(reiseId)]: {
                 id: errorKeyPrivatBilUtgifterParkering(reiseId),
-                melding: reisemåteTekster.privat_bil_utgifter_parkering.feilmelding[locale],
+                melding: tekster.privat_bil_utgifter_parkering.feilmelding[locale],
             },
         };
     }
@@ -200,7 +204,7 @@ const validerUtgifterPrivatBil = (
             ...feil,
             [errorKeyPrivatBilUtgifterDrivstoffType(reiseId)]: {
                 id: errorKeyPrivatBilUtgifterDrivstoffType(reiseId),
-                melding: reisemåteTekster.privat_bil_utgifter_drivstoff_type.feilmelding[locale],
+                melding: tekster.privat_bil_utgifter_drivstoff_type.feilmelding[locale],
             },
         };
     }

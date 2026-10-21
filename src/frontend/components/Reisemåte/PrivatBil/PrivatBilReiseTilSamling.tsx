@@ -15,7 +15,6 @@ import {
 } from './validering';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
 import { PrivatBilInfo, Reisemåte, UtgifterPrivatBil } from '../../../typer/reisemåte';
 import { EnumFelt, VerdiFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
@@ -25,13 +24,15 @@ import { LocaleHeading } from '../../Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../Teksthåndtering/LocaleRadioGroup';
 import { LocaleTextarea } from '../../Teksthåndtering/LocaleTextarea';
 import { LocaleTextField } from '../../Teksthåndtering/LocaleTextField';
+import { PrivatBilTekster } from '../tekster';
 
 export const PrivatBilReiseTilSamling: React.FC<{
     samlingId: number;
     privatBil: PrivatBilInfo | undefined;
     settReisemåte: Dispatch<SetStateAction<Reisemåte | undefined>>;
     valgteTransportmidler: string[];
-}> = ({ samlingId, privatBil, settReisemåte, valgteTransportmidler }) => {
+    tekster: PrivatBilTekster;
+}> = ({ samlingId, privatBil, settReisemåte, valgteTransportmidler, tekster }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -115,10 +116,10 @@ export const PrivatBilReiseTilSamling: React.FC<{
         <>
             <VStack gap="space-24">
                 <Skillelinje />
-                <LocaleHeading tekst={reisemåteTekster.egen_bil_tittel} level="3" size="small" />
+                <LocaleHeading tekst={tekster.egen_bil_tittel} level="3" size="small" />
                 <LocaleRadioGroup
                     id={valideringsfeil[errorKeyPrivatBilBenyttetEgenBil(samlingId)]?.id}
-                    tekst={reisemåteTekster.radio_kan_benytte_egen_bil}
+                    tekst={tekster.radio_kan_benytte_egen_bil}
                     value={privatBil?.benyttetEgenBil?.verdi ?? ''}
                     onChange={oppdaterBenyttetEgenBil}
                     error={valideringsfeil[errorKeyPrivatBilBenyttetEgenBil(samlingId)]?.melding}
@@ -130,7 +131,7 @@ export const PrivatBilReiseTilSamling: React.FC<{
                             id={
                                 valideringsfeil[errorKeyPrivatBilBetalteForReiseSelv(samlingId)]?.id
                             }
-                            tekst={reisemåteTekster.radio_betaler_for_reise_selv}
+                            tekst={tekster.radio_betaler_for_reise_selv}
                             value={privatBil?.betalteForReisen?.verdi ?? ''}
                             onChange={oppdaterBetalerForReisen}
                             error={
@@ -139,9 +140,7 @@ export const PrivatBilReiseTilSamling: React.FC<{
                             }
                         />
                         {privatBil?.betalteForReisen?.verdi === 'NEI' && (
-                            <AlertIkkeRett
-                                beskrivelse={reisemåteTekster.advarsel_skal_ikke_betale_selv}
-                            />
+                            <AlertIkkeRett beskrivelse={tekster.advarsel_skal_ikke_betale_selv} />
                         )}
                     </VStack>
                 )}
@@ -153,7 +152,7 @@ export const PrivatBilReiseTilSamling: React.FC<{
                             valideringsfeil[errorKeyPrivatBilStrekningHvorBilBleBenyttet(samlingId)]
                                 ?.id
                         }
-                        tekst={reisemåteTekster.privat_bil_strekning_kjørt}
+                        tekst={tekster.privat_bil_strekning_kjørt}
                         value={
                             privatBil?.infoBilKunDelerAvStrekning?.strekningHvorBilBleBenyttet
                                 ?.verdi ?? ''
@@ -167,13 +166,13 @@ export const PrivatBilReiseTilSamling: React.FC<{
                     />
                     <LocaleTextField
                         id={valideringsfeil[errorKeyPrivatBilAntallKilometerKjørt(samlingId)]?.id}
-                        tekst={reisemåteTekster.privat_bil_km_kjørt}
+                        tekst={tekster.privat_bil_km_kjørt}
                         value={
                             privatBil?.infoBilKunDelerAvStrekning?.antallKilometerKjørt?.verdi ?? ''
                         }
                         onChange={(e) =>
                             oppdaterAntallKilometerKjørt({
-                                label: reisemåteTekster.privat_bil_km_kjørt.label[locale],
+                                label: tekster.privat_bil_km_kjørt.label[locale],
                                 verdi: e.target.value,
                             })
                         }
@@ -192,6 +191,7 @@ export const PrivatBilReiseTilSamling: React.FC<{
                     samlingId={samlingId}
                     utgifterPrivatBil={privatBil.utgifterPrivatBil}
                     oppdaterUtgifterPrivatBil={oppdaterUtgifterPrivatBil}
+                    tekster={tekster}
                 />
             )}
         </>

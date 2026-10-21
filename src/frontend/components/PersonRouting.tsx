@@ -13,7 +13,10 @@ const erFeilOgSkalRouteTilPapirsøknad = (req: AxiosError<{ detail?: string }, u
     return req?.response?.data?.detail === 'ROUTING_GAMMEL_SØKNAD';
 };
 
-const skjematyperMedBarn = [Skjematype.SØKNAD_PASS_AV_BARN];
+const skjematyperMedBarn = [
+    Skjematype.SØKNAD_PASS_AV_BARN,
+    Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE,
+];
 
 const skalHenteMedBarn = (skjematype: Skjematype) => skjematyperMedBarn.indexOf(skjematype) > -1;
 

@@ -37,7 +37,7 @@ export interface SøknadReiseOppstartAvslutningHjemreise extends SøknadBase {
     aktivitet: AktivitetFelles | undefined;
     adresser: AdresseReiseOppstartAvslutningHjemreise | undefined;
     barnOgHelse: BarnOgHelseReiseOppstartAvslutningHjemreise | undefined;
-    reise: ReiseInfoReiseOppstartAvslutningHjemreise | undefined;
+    reiser: ReiseInfoReiseOppstartAvslutningHjemreise[];
 }
 
 export interface SøknadFlytting extends Omit<SøknadBase, 'hovedytelse'> {

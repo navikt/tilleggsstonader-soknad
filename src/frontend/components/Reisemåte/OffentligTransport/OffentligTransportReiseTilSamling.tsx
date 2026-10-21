@@ -5,18 +5,20 @@ import { Heading, InlineMessage, VStack } from '@navikt/ds-react';
 import { errorKeyTotalutgifterOffentligTransport } from './validering';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { reisemåteTekster } from '../../../reiseTilSamling/tekster/reisemåte';
 import { OffentligTransportInfo, Reisemåte } from '../../../typer/reisemåte';
 import { Skillelinje } from '../../Skillelinje';
 import { LocaleTextField } from '../../Teksthåndtering/LocaleTextField';
+import { OffentligTransportTekster } from '../tekster';
 
 export const OffentligTransportReiseTilSamling: React.FC<{
     samlingId: number;
     offentligTransport: OffentligTransportInfo | undefined;
     settReisemåte: Dispatch<SetStateAction<Reisemåte | undefined>>;
-}> = ({ samlingId, offentligTransport, settReisemåte }) => {
+    tekster: OffentligTransportTekster;
+}> = ({ samlingId, offentligTransport, settReisemåte, tekster }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
+    const tekstTotalutgifter = tekster.totalutgifter_offentlig_transport;
 
     const oppdaterTotalUtgifterOffentligTransport = (verdi: string) => {
         settReisemåte((prev) => ({
@@ -24,7 +26,7 @@ export const OffentligTransportReiseTilSamling: React.FC<{
             offentligTransport: {
                 ...prev?.offentligTransport,
                 totalUtgifterOffentligTransport: {
-                    label: reisemåteTekster.totalutgifter_offentlig_transport.label[locale],
+                    label: tekstTotalutgifter.label[locale],
                     verdi,
                 },
             },
@@ -40,12 +42,12 @@ export const OffentligTransportReiseTilSamling: React.FC<{
         <VStack gap="space-24">
             <Skillelinje />
             <Heading level="3" size="small">
-                {reisemåteTekster.offentlig_transport_tittel[locale]}
+                {tekster.offentlig_transport_tittel[locale]}
             </Heading>
             <VStack gap="space-16">
                 <LocaleTextField
                     id={valideringsfeil[errorKeyTotalutgifterOffentligTransport(samlingId)]?.id}
-                    tekst={reisemåteTekster.totalutgifter_offentlig_transport}
+                    tekst={tekstTotalutgifter}
                     inputMode="numeric"
                     value={offentligTransport?.totalUtgifterOffentligTransport?.verdi ?? ''}
                     error={
@@ -55,7 +57,7 @@ export const OffentligTransportReiseTilSamling: React.FC<{
                     htmlSize={6} // TODO se over størrelsen her
                 />
                 <InlineMessage status="info">
-                    {reisemåteTekster.kan_reise_offentlig_info[locale]}
+                    {tekster.kan_reise_offentlig_info[locale]}
                 </InlineMessage>
             </VStack>
         </VStack>
