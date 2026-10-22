@@ -15,8 +15,8 @@ import {
 import { routesReiseOppstartAvslutningHjemreise } from './routing/routesReiseOppstartAvslutningHjemreise';
 import { forsideTekster } from './tekster/forside';
 import { loggBesøk, loggSkjemaStartet } from '../api/analytics';
-import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
+import { EndringEnsligForsørgerExpansionCard } from '../components/EndringEnsligForsørger/EndringEnsligForsørgerExpansionCard';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
 import { useReiseOppstartAvslutningHjemreiseSøknad } from './context/ReiseOppstartAvslutningHjemreiseSøknadContext';
@@ -62,24 +62,37 @@ export const Forside: React.FC = () => {
                         <LocaleTekst tekst={forsideTekster.veileder_tittel} />
                     </strong>
                 </BodyShort>
-                <BodyShort spacing>
-                    <LocaleTekst tekst={forsideTekster.veileder_innhold} />
-                </BodyShort>
+                <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </GuidePanel>
-            <AdvarselEndringOvergangsstønad />
             <div>
-                <LocaleHeading tekst={forsideTekster.for_du_soker_tittel} level="2" size="small" />
-                <LocalePunktliste innhold={forsideTekster.for_du_soker_innhold} />
+                <LocaleHeading
+                    tekst={forsideTekster.dette_ma_du_vite_tittel}
+                    level="2"
+                    size="large"
+                    spacing
+                />
+                <LocalePunktliste innhold={forsideTekster.dette_ma_du_vite_innhold} />
             </div>
+            <div>
+                <LocaleHeading
+                    tekst={forsideTekster.var_klar_over_tittel}
+                    level="2"
+                    size="large"
+                    spacing
+                />
+                <LocalePunktliste innhold={forsideTekster.var_klar_over_innhold} />
+            </div>
+            <div>
+                <LocaleHeading
+                    tekst={forsideTekster.kan_ikke_soke_tittel}
+                    level="2"
+                    size="large"
+                    spacing
+                />
+                <LocalePunktliste innhold={forsideTekster.kan_ikke_soke_innhold} />
+            </div>
+            <EndringEnsligForsørgerExpansionCard />
             <Accordion>
-                <Accordion.Item>
-                    <Accordion.Header>
-                        <LocaleTekst tekst={forsideTekster.utgifter_som_dekkes_tittel} />
-                    </Accordion.Header>
-                    <Accordion.Content>
-                        <LocaleTekstAvsnitt tekst={forsideTekster.utgifter_som_dekkes_innhold} />
-                    </Accordion.Content>
-                </Accordion.Item>
                 <Accordion.Item>
                     <Accordion.Header>
                         <LocaleTekst tekst={forsideTekster.info_som_hentes_tittel} />

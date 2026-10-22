@@ -1,15 +1,15 @@
 import { InlineLenke, Punktliste, TekstElement } from '../../typer/tekst';
 
-// TODO: placeholder-tekster - dette er et skjelett og innholdet må erstattes med endelig tekst
 interface ForsideInnhold {
     banner_tittel: TekstElement<string>;
     veileder_tittel: TekstElement<string>;
-    veileder_innhold: TekstElement<string>;
-    for_du_soker_tittel: TekstElement<string>;
-    for_du_soker_innhold: TekstElement<string[]>;
-
-    utgifter_som_dekkes_tittel: TekstElement<string>;
-    utgifter_som_dekkes_innhold: TekstElement<string[]>;
+    veileder_innhold: TekstElement<string[]>;
+    dette_ma_du_vite_tittel: TekstElement<string>;
+    dette_ma_du_vite_innhold: TekstElement<string[]>;
+    var_klar_over_tittel: TekstElement<string>;
+    var_klar_over_innhold: TekstElement<string[]>;
+    kan_ikke_soke_tittel: TekstElement<string>;
+    kan_ikke_soke_innhold: TekstElement<(string | InlineLenke)[]>;
 
     info_som_hentes_tittel: TekstElement<string>;
     info_som_hentes_innhold: Punktliste[];
@@ -24,29 +24,50 @@ export const forsideTekster: ForsideInnhold = {
         nb: 'Hei!',
     },
     veileder_innhold: {
-        nb: 'Du kan få dekket reiseutgifter mellom hjemstedet ditt og aktivitetsstedet når du midlertidig må bo borte for å delta på en arbeidsrettet aktivitet. Du får dekket reiseutgifter til oppstart og avslutning av aktiviteten, og til hjemreiser.',
-    },
-
-    for_du_soker_tittel: {
-        nb: 'Før du søker',
-    },
-    for_du_soker_innhold: {
-        // TODO: placeholder - fyll ut endelig innhold
         nb: [
-            'Du må dokumentere utgiftene dine i søknaden.',
-            'Du må gi oss beskjed hvis situasjonen din endrer seg.',
-            'Hvis du får penger du ikke har rett på, kan vi kreve dem tilbake.',
-            'De fleste feltene i skjemaet er obligatoriske å fylle ut. Felt som ikke er obligatoriske er merket med: (valgfritt).',
+            'Her kan du søke om pengestøtte til reise på grunn av oppstart, avslutning og hjemreise.',
+            'Pengestøtten gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar arbeidsavklaringspenger, aktivitetspenger, dagpenger, kvalifiseringsstønad eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
         ],
     },
-    utgifter_som_dekkes_tittel: {
-        nb: 'Hvilke utgifter dekker vi?',
+    dette_ma_du_vite_tittel: {
+        nb: 'Dette må du vite',
     },
-    utgifter_som_dekkes_innhold: {
+    dette_ma_du_vite_innhold: {
         nb: [
-            'Du får vanligvis dekket inntil fire hjemreiser per år.',
-            'Du får dekket den rimeligste reisemåten med kollektiv transport. Dersom du ikke kan reise kollektivt, kan du få godkjent bruk av egen bil.',
-            'Du kan også få dekket reiseutgifter for barn under 18 år som reiser sammen med deg.',
+            'Nav kan dekke reiseutgifter mellom hjemstedet ditt og aktivitetsstedet når du midlertidig må bo borte for å delta på arbeidsrettet tiltak eller utdanning/opplæring godkjent av Nav.',
+            'Du får som hovedregel dekket den billigste reisemåten med offentlig transport. Hvis det ikke er praktisk mulig å bruke offentlig transport, kan du få dekket nødvendige utgifter til annen reisemåte.',
+            'Du kan få dekket reiseutgifter til oppstart, avslutning og hjemreiser, og får vanligvis dekket inntil 4 hjemreiser tur/retur per år.',
+            'Du kan få dekket utgifter til flere hjemreiser hvis du har barn som ennå ikke har fullført 4. skoleår og blir igjen på hjemstedet.',
+            'Du kan også få dekket utgifter til hjemreise ved særlige grunner som for eksempel helsemessige årsaker.',
+            'Hvis tiltaket varer i flere år, må du sende ny søknad for hvert år.',
+            'Du kan få dekket reiseutgifter for barn under 18 år som flytter sammen med deg.',
+            'Du får støtten utbetalt i etterkant, basert på innsendt dokumentasjon som for eksempel kvitteringer på reiseutgifter.',
+        ],
+    },
+    var_klar_over_tittel: {
+        nb: 'Vær klar over',
+    },
+    var_klar_over_innhold: {
+        nb: [
+            'Du må gi oss beskjed hvis situasjonen din endrer seg, for eksempel hvis du avbryter tiltaket eller utdanningen.',
+            'Hvis du får penger du ikke har rett på, kan vi kreve dem tilbake.',
+        ],
+    },
+    kan_ikke_soke_tittel: {
+        nb: 'Du kan ikke bruke denne søknaden hvis',
+    },
+    kan_ikke_soke_innhold: {
+        nb: [
+            'Du er under 18 år',
+            'Du søker på vegne av andre',
+            [
+                'Du søker støtte for en aktivitet som ble avsluttet for mer enn 6 måneder siden. Da må du fylle ut ',
+                {
+                    tekst: 'dette skjemaet i stedet',
+                    url: 'https://www.nav.no/fyllut/nav111218b?sub=paper',
+                },
+                ' (åpnes i ny fane).',
+            ],
         ],
     },
     info_som_hentes_tittel: {
@@ -63,14 +84,6 @@ export const forsideTekster: ForsideInnhold = {
                     'opplysninger om utdanning eller tiltak du har avtalt med veilederen din i Nav',
                     'opplysninger om andre ytelser du får fra Nav',
                 ],
-            },
-        },
-        {
-            tittel: {
-                nb: 'Ved behov sjekker vi:',
-            },
-            innhold: {
-                nb: ['om du er medlem i folketrygden'],
             },
         },
     ],
