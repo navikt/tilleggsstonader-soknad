@@ -8,6 +8,7 @@ import { BgSunken } from '@navikt/ds-tokens/js';
 
 import { errorKeyFom, errorKeyTom, errorKeyTypeReise } from './validering';
 import { Reisemåte } from '../../../components/Reisemåte/Reisemåte';
+import { Skillelinje } from '../../../components/Skillelinje';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { useSpråk } from '../../../context/SpråkContext';
@@ -127,7 +128,6 @@ export const NyReise: React.FC<{
                     onChange={oppdaterTypeReise}
                     error={feilTypeReise?.melding}
                 />
-
                 {(reise.typeReise?.verdi === 'OPPSTART' ||
                     reise.typeReise?.verdi === 'AVSLUTNING') && (
                     <DatePicker {...datepickerPropsFom}>
@@ -139,7 +139,6 @@ export const NyReise: React.FC<{
                         />
                     </DatePicker>
                 )}
-
                 {reise.typeReise?.verdi === 'HJEMREISE' && (
                     <VStack gap="space-16">
                         <Heading level="3" size="small">
@@ -165,14 +164,16 @@ export const NyReise: React.FC<{
                 )}
 
                 {reise.typeReise?.verdi && (
-                    <Reisemåte
-                        samlingId={reise._id}
-                        reisemåte={reise.reisemåte}
-                        settReisemåte={settReisemåte}
-                        tekster={reiseinfoTekster.reisemåte}
-                    />
+                    <>
+                        <Skillelinje />
+                        <Reisemåte
+                            samlingId={reise._id}
+                            reisemåte={reise.reisemåte}
+                            settReisemåte={settReisemåte}
+                            tekster={reiseinfoTekster.reisemåte}
+                        />
+                    </>
                 )}
-
                 {onSlett && (
                     <HStack>
                         <Button variant="tertiary" onClick={onSlett} icon={<MinusIcon />}>
