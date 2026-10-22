@@ -1,6 +1,6 @@
 import {
     AdresseReiseOppstartAvslutningHjemreise,
-    BarnOgHelseReiseOppstartAvslutningHjemreise,
+    BarnOgSærligeBehovReiseOppstartAvslutningHjemreise,
     ReiseInfoReiseOppstartAvslutningHjemreise,
 } from '../reiseOppstartAvslutningHjemreise/typer/søknad';
 import { AktivitetFelles, Hovedytelse } from '../typer/søknad';
@@ -53,7 +53,7 @@ export const mockAdresserReiseOppstartAvslutningHjemreise: AdresseReiseOppstartA
         },
     };
 
-export const mockBarnOgHelseReiseOppstartAvslutningHjemreise: BarnOgHelseReiseOppstartAvslutningHjemreise =
+export const mockBarnOgSærligeBehovReiseOppstartAvslutningHjemreise: BarnOgSærligeBehovReiseOppstartAvslutningHjemreise =
     {
         harBarnUnder18SomHarFlyttetMed: {
             label: 'Har du ett eller flere barn under 18 år som har flyttet med deg?',

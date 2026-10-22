@@ -6,7 +6,7 @@ import { Utdanning } from '../læremidler/typer/søknad';
 import { Barnepass } from '../passAvBarn/typer/barnepass';
 import {
     AdresseReiseOppstartAvslutningHjemreise,
-    BarnOgHelseReiseOppstartAvslutningHjemreise,
+    BarnOgSærligeBehovReiseOppstartAvslutningHjemreise,
     ReiseInfoReiseOppstartAvslutningHjemreise,
 } from '../reiseOppstartAvslutningHjemreise/typer/søknad';
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
@@ -45,7 +45,7 @@ export interface SøknadReiseOppstartAvslutningHjemreise {
     hovedytelse: Hovedytelse | undefined;
     aktivitet: AktivitetFelles | undefined;
     adresser: AdresseReiseOppstartAvslutningHjemreise | undefined;
-    barnOgHelse: BarnOgHelseReiseOppstartAvslutningHjemreise | undefined;
+    barnOgHelse: BarnOgSærligeBehovReiseOppstartAvslutningHjemreise | undefined;
     reiser: ReiseInfoReiseOppstartAvslutningHjemreise[];
     dokumentasjon: DokumentasjonFelt[];
     søknadMetadata: SøknadMetadata;

@@ -5,7 +5,7 @@ import createUseContext from 'constate';
 import {
     initialAktivitet,
     initialAdresser,
-    initialBarnOgHelse,
+    initialBarnOgSærligeBehov,
     initialDokumentasjon,
     initialHarBekreftet,
     initialHovedytelse,
@@ -15,7 +15,7 @@ import { DokumentasjonFelt } from '../../typer/skjema';
 import { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
 import {
     AdresseReiseOppstartAvslutningHjemreise,
-    BarnOgHelseReiseOppstartAvslutningHjemreise,
+    BarnOgSærligeBehovReiseOppstartAvslutningHjemreise,
     ReiseInfoReiseOppstartAvslutningHjemreise,
 } from '../typer/søknad';
 
@@ -35,9 +35,9 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             AdresseReiseOppstartAvslutningHjemreise | undefined
         >(initialAdresser());
 
-        const [barnOgHelse, settBarnOgHelse] = useState<
-            BarnOgHelseReiseOppstartAvslutningHjemreise | undefined
-        >(initialBarnOgHelse());
+        const [barnOgSærligeBehov, settBarnOgSærligeBehov] = useState<
+            BarnOgSærligeBehovReiseOppstartAvslutningHjemreise | undefined
+        >(initialBarnOgSærligeBehov());
 
         const [reiser, settReiser] =
             useState<ReiseInfoReiseOppstartAvslutningHjemreise[]>(initialReiser());
@@ -50,7 +50,7 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             settHovedytelse(initialHovedytelse());
             settAktivitet(initialAktivitet());
             settAdresser(initialAdresser());
-            settBarnOgHelse(initialBarnOgHelse());
+            settBarnOgSærligeBehov(initialBarnOgSærligeBehov());
             settReiser(initialReiser());
             settDokumentasjon(initialDokumentasjon());
         };
@@ -64,8 +64,8 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             settAktivitet,
             adresser,
             settAdresser,
-            barnOgHelse,
-            settBarnOgHelse,
+            barnOgSærligeBehov,
+            settBarnOgSærligeBehov,
             reiser,
             settReiser,
             dokumentasjon,

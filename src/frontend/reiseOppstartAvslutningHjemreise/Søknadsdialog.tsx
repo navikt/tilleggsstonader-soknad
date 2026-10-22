@@ -8,7 +8,7 @@ import { HovedytelseReiseOppstartAvslutningHjemreise } from './steg/1-hovedytels
 import { AktivitetReiseOppstartAvslutningHjemreise } from './steg/2-aktivitet/AktivitetReiseOppstartAvslutningHjemreise';
 import { AdresserReiseOppstartAvslutningHjemreise } from './steg/3-adresser/AdresserReiseOppstartAvslutningHjemreise';
 import { Oppsummering } from './steg/3-oppsummering/Oppsummering';
-import { BarnOgHelseSteg } from './steg/4-barn-og-helse/BarnOgHelseReiseOppstartAvslutningHjemreise';
+import { BarnOgSærligeBehovSteg } from './steg/4-barn-og-særlige-behov/BarnOgSærligeBehovReiseOppstartAvslutningHjemreise';
 import { ReiseinfoSteg } from './steg/5-reiseinfo/ReiseinfoReiseOppstartAvslutningHjemreise';
 import { forsideTekster } from './tekster/forside';
 
@@ -16,7 +16,7 @@ const steg: StegRoute[] = [
     { path: '/hovedytelse', element: <HovedytelseReiseOppstartAvslutningHjemreise /> },
     { path: '/aktivitet', element: <AktivitetReiseOppstartAvslutningHjemreise /> },
     { path: '/adresser', element: <AdresserReiseOppstartAvslutningHjemreise /> },
-    { path: '/barn-og-helse', element: <BarnOgHelseSteg /> },
+    { path: '/barn-og-serlige-behov', element: <BarnOgSærligeBehovSteg /> },
     { path: '/reiseinfo', element: <ReiseinfoSteg /> },
     { path: '/oppsummering', element: <Oppsummering /> },
 ];
