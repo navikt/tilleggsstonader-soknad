@@ -43,9 +43,6 @@ const fyllFellesDetaljer = async (page: Page, nyJobb = false) => {
         )
         .check();
     await page.getByRole('textbox', { name: 'Flyttedato' }).fill('15.06.2025');
-    if (nyJobb) {
-        await page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' }).fill('01.06.2025');
-    }
     await page.getByRole('textbox', { name: 'Gateadresse', exact: true }).fill('Testveien 1');
     await page.getByRole('textbox', { name: 'Postnummer', exact: true }).fill('0123');
     await page.getByRole('textbox', { name: 'Poststed', exact: true }).fill('Oslo');
@@ -67,7 +64,6 @@ const fyllTilbud = async (page: Page) => {
         .getByRole('textbox', { name: 'Navn på flyttebyrå 2', exact: true })
         .fill('Testbyrå 2');
     await page.getByRole('textbox', { name: 'Beløp for flyttebyrå 2', exact: true }).fill('400.25');
-    await page.getByRole('radio', { name: 'Flyttebyrå 1', exact: true }).check();
 };
 
 const lastOppTilbud = async (page: Page, label: string) => {
@@ -82,6 +78,7 @@ test('Ny jobb og egen flytting viser oppsummering og sender riktig payload, ogs�
 }) => {
     await startSøknad(page);
     await fyllFellesDetaljer(page, true);
+    await expect(page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' })).toHaveCount(0);
     await page.getByLabel('Jeg flytter selv', { exact: true }).check();
     await expect(
         page.getByText(
@@ -103,7 +100,6 @@ test('Ny jobb og egen flytting viser oppsummering og sender riktig payload, ogs�
     await modal.getByRole('button', { name: 'Ja, gå til neste side' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
     await expect(page.getByText('120,25 km', { exact: true })).toBeVisible();
-    await expect(page.getByText('01.06.2025', { exact: true })).toBeVisible();
     await forventIngenWcagViolations(page);
 
     await page.route('**/api/soknad/flytting', (route) => route.fulfill({ status: 400 }));
@@ -119,7 +115,6 @@ test('Ny jobb og egen flytting viser oppsummering og sender riktig payload, ogs�
         flyttingDetaljer: {
             årsak: { verdi: 'NY_JOBB' },
             flyttedato: { verdi: '2025-06-15' },
-            førsteArbeidsdag: { verdi: '2025-06-01' },
             adresse: { gateadresse: { verdi: 'Testveien 1' }, land: { verdi: 'NOR' } },
             flyttemåte: { verdi: 'FLYTTER_SELV' },
             utgifterDekketPåAnnenMåte: { verdi: 'JA' },
@@ -135,24 +130,22 @@ test('Ny jobb og egen flytting viser oppsummering og sender riktig payload, ogs�
     await expect(page).toHaveURL(`${urlSøknad}/kvittering`);
 });
 
-test('Byråtilbud viser varsel bare for dyrere valg og lar brukeren laste opp begge tilbud', async ({
+test('Byråtilbud viser at Nav dekker laveste tilbud og lar brukeren laste opp begge tilbud', async ({
     page,
 }) => {
     await startSøknad(page);
-    await fyllFellesDetaljer(page);
-    await expect(page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' })).toHaveCount(0);
+    await fyllFellesDetaljer(page, true);
     await fyllTilbud(page);
-    const varsel = page.getByText('Du har valgt det dyreste tilbudet.', { exact: false });
-    await expect(varsel).toBeVisible();
-    await expect(page.getByText('Du kan fortsatt få støtte', { exact: false })).toBeVisible();
-    await page.getByRole('radio', { name: 'Flyttebyrå 2', exact: true }).check();
-    await expect(varsel).toHaveCount(0);
+    await expect(
+        page.getByText(
+            'Hvis du bruker flyttebyrå, må du hente inn to tilbud fra ulike flyttebyråer. Nav dekker utgiftene etter det laveste tilbudet.'
+        )
+    ).toBeVisible();
+    await expect(page.getByRole('radiogroup', { name: 'Jeg velger å bruke' })).toHaveCount(0);
     await page.getByRole('textbox', { name: 'Beløp for flyttebyrå 2', exact: true }).fill('800,50');
-    await expect(varsel).toHaveCount(0);
     await page
         .getByRole('textbox', { name: 'Beløp for flyttebyrå 2', exact: true })
         .fill('ugyldig');
-    await expect(varsel).toHaveCount(0);
     await page.getByRole('textbox', { name: 'Beløp for flyttebyrå 2', exact: true }).fill('0');
     await forventIngenWcagViolations(page);
     await page.getByRole('button', { name: 'Neste' }).click();
@@ -169,7 +162,18 @@ test('Byråtilbud viser varsel bare for dyrere valg og lar brukeren laste opp be
     expect((await requestPromise).postDataJSON()).toMatchObject({
         flyttingDetaljer: {
             årsak: { verdi: 'AKTIVITET' },
-            flyttebyrå: { valgtTilbud: { verdi: 'TILBUD_2' }, tilbud2: { beløp: { verdi: '0' } } },
+            flyttebyrå: {
+                tilbud: [
+                    {
+                        navn: { verdi: 'Testbyrå 1', label: 'Navn på flyttebyrå 1' },
+                        beløp: { verdi: '800,50', label: 'Beløp for flyttebyrå 1' },
+                    },
+                    {
+                        navn: { verdi: 'Testbyrå 2', label: 'Navn på flyttebyrå 2' },
+                        beløp: { verdi: '0', label: 'Beløp for flyttebyrå 2' },
+                    },
+                ],
+            },
         },
         dokumentasjon: [
             { type: 'TILBUD_FLYTTEBYRÅ_1', opplastedeVedlegg: [{ id: 'test-dokument-id' }] },
@@ -212,9 +216,6 @@ test('Skjulte svar og vedlegg beholdes ved bytte, mens oppsummering viser aktiv 
         page.getByRole('textbox', { name: 'Navn på flyttebyrå 1', exact: true })
     ).toHaveValue('Testbyrå 1');
     await page.getByLabel('Jeg flytter fordi jeg har fått ny jobb').check();
-    await expect(page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' })).toHaveValue(
-        '01.06.2025'
-    );
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(2);
     await page.getByRole('button', { name: 'Forrige' }).click();
@@ -231,7 +232,6 @@ test('Skjulte svar og vedlegg beholdes ved bytte, mens oppsummering viser aktiv 
         .getByRole('button', { name: 'Ja, gå til neste side' })
         .click();
     await page.getByRole('button', { name: 'Neste' }).click();
-    await expect(page.getByText('Oppgi første dag i ny jobb', { exact: true })).toHaveCount(0);
     await expect(page.getByText('Testbyrå 1', { exact: false })).toHaveCount(0);
     await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(0);
     const requestPromise = page.waitForRequest('**/api/soknad/flytting');
@@ -239,9 +239,7 @@ test('Skjulte svar og vedlegg beholdes ved bytte, mens oppsummering viser aktiv 
     expect((await requestPromise).postDataJSON()).toMatchObject({
         flyttingDetaljer: {
             årsak: { verdi: 'AKTIVITET' },
-            førsteArbeidsdag: { verdi: '2025-06-01' },
             flyttemåte: { verdi: 'FLYTTER_SELV' },
-            flyttebyrå: { tilbud1: { navn: { verdi: 'Testbyrå 1' } } },
         },
         dokumentasjon: [{ type: 'UTGIFTER_EGEN_FLYTTING', opplastedeVedlegg: [] }],
     });
@@ -280,15 +278,9 @@ test('Obligatoriske svar og ugyldige datoer og tall stopper videreføring', asyn
     const avstand = page.getByRole('textbox', { name: 'Hvor lang reisevei har du?' });
     await avstand.fill('0');
     await page.getByRole('textbox', { name: 'Flyttedato' }).fill('31.02.2025');
-    await page.getByRole('textbox', { name: 'Oppgi første dag i ny jobb' }).fill('ugyldig');
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(
         page.getByRole('link', { name: 'Oppgi en gyldig flyttedato på formatet dd.mm.åååå.' })
-    ).toBeVisible();
-    await expect(
-        page.getByRole('link', {
-            name: 'Oppgi en gyldig første arbeidsdag på formatet dd.mm.åååå.',
-        })
     ).toBeVisible();
     await expect(
         page.getByRole('link', {
@@ -298,11 +290,6 @@ test('Obligatoriske svar og ugyldige datoer og tall stopper videreføring', asyn
     await page
         .getByLabel('Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet')
         .check();
-    await expect(
-        page.getByRole('link', {
-            name: 'Oppgi en gyldig første arbeidsdag på formatet dd.mm.åååå.',
-        })
-    ).toHaveCount(0);
     await page.getByRole('textbox', { name: 'Flyttedato' }).fill('15.06.2025');
     await avstand.fill('1.234');
     await page.getByRole('button', { name: 'Neste' }).click();

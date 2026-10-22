@@ -9,13 +9,13 @@ import {
 import {
     erGyldigFlyttedato,
     feilId,
-    harValgtDyrereTilbud,
     tilDesimaltall,
     validerFlyttingDetaljer,
 } from '../../../src/frontend/flytting/steg/2-flytting/validering';
 import {
     egenutgiftFelter,
     FlyttingDetaljer,
+    tilFlyttingDetaljerForInnsending,
 } from '../../../src/frontend/flytting/typer/flyttingDetaljer';
 import {
     DokumentasjonFelt,
@@ -32,7 +32,6 @@ const enumFelt = <T extends string>(verdi: T): EnumFelt<T> => ({
     svarTekst: verdi,
     alternativer: [verdi],
 });
-
 const gyldigeDetaljer = (): FlyttingDetaljer => ({
     årsak: enumFelt('AKTIVITET'),
     flyttedato: felt('2025-06-15'),
@@ -46,9 +45,10 @@ const gyldigeDetaljer = (): FlyttingDetaljer => ({
     utgifterDekketPåAnnenMåte: enumFelt('JA'),
     utgifterEgenFlytting: { avstand: felt('1,25') },
     flyttebyrå: {
-        tilbud1: { navn: felt('Testbyrå 1'), beløp: felt('800,50') },
-        tilbud2: { navn: felt('Testbyrå 2'), beløp: felt('400.25') },
-        valgtTilbud: enumFelt('TILBUD_1'),
+        tilbud: [
+            { navn: felt('Testbyrå 1'), beløp: felt('800,50') },
+            { navn: felt('Testbyrå 2'), beløp: felt('400.25') },
+        ],
     },
 });
 
@@ -79,6 +79,7 @@ for (const [verdi, forventet] of [
     ['1.25', 1.25],
     ['1,25', 1.25],
     ['125', 125],
+    ['10000000', 10000000],
 ] as const) {
     test(`Tallvalidering godtar ${verdi}`, () => {
         expect(tilDesimaltall(verdi)).toBe(forventet);
@@ -99,12 +100,11 @@ test('Validering krever grunnspørsmål og adresse, men ikke skjulte grener', ()
             feilId('adresse_poststed'),
         ])
     );
-    expect(feil[feilId('førsteArbeidsdag')]).toBeUndefined();
     expect(feil[feilId('tilbud1_beløp')]).toBeUndefined();
     expect(validerFlyttingDetaljer(gyldigeDetaljer(), Locale.NB)).toEqual({});
 });
 
-test('Datoer må finnes i kalenderen, men kan være i fortid og fremtid', () => {
+test('Flyttedato må finnes i kalenderen, men kan være i fortid og fremtid', () => {
     for (const verdi of [
         undefined,
         '',
@@ -120,8 +120,6 @@ test('Datoer må finnes i kalenderen, men kan være i fortid og fremtid', () => 
         expect(erGyldigFlyttedato(verdi)).toBe(true);
     }
     const detaljer = { ...gyldigeDetaljer(), årsak: enumFelt('NY_JOBB' as const) };
-    expect(validerFlyttingDetaljer(detaljer, Locale.NB)[feilId('førsteArbeidsdag')]).toBeDefined();
-    detaljer.førsteArbeidsdag = felt('1900-01-01');
     expect(validerFlyttingDetaljer(detaljer, Locale.NB)).toEqual({});
 });
 
@@ -141,53 +139,48 @@ test('Egen flytting krever positiv avstand og tillater blanke utgifter og nullbe
     }
 });
 
-test('Byrå krever to komplette tilbud og valg, men ignorerer inaktive egenutgifter', () => {
+test('Byrå krever to komplette tilbud, men ignorerer inaktive egenutgifter', () => {
     const detaljer = gyldigeDetaljer();
     detaljer.flyttemåte = enumFelt('FLYTTEBYRÅ');
     detaljer.utgifterEgenFlytting = { avstand: felt('-1'), bom: felt('ugyldig') };
-    detaljer.flyttebyrå = {};
+    detaljer.flyttebyrå = { tilbud: [] };
     expect(Object.keys(validerFlyttingDetaljer(detaljer, Locale.NB))).toEqual([
         feilId('tilbud1_navn'),
         feilId('tilbud1_beløp'),
         feilId('tilbud2_navn'),
         feilId('tilbud2_beløp'),
-        feilId('valgtTilbud'),
     ]);
     detaljer.flyttebyrå = {
-        tilbud1: { navn: felt('Testbyrå 1'), beløp: felt('0') },
-        tilbud2: { navn: felt('Testbyrå 2'), beløp: felt('0,00') },
-        valgtTilbud: enumFelt('TILBUD_2'),
+        tilbud: [
+            { navn: felt('Testbyrå 1'), beløp: felt('0') },
+            { navn: felt('Testbyrå 2'), beløp: felt('0,00') },
+        ],
     };
     expect(validerFlyttingDetaljer(detaljer, Locale.NB)).toEqual({});
-    detaljer.flyttebyrå.tilbud1 = { navn: felt(' '), beløp: felt('1.234') };
+    detaljer.flyttebyrå.tilbud[0] = { navn: felt(' '), beløp: felt('1.234') };
     expect(Object.keys(validerFlyttingDetaljer(detaljer, Locale.NB))).toEqual([
         feilId('tilbud1_navn'),
         feilId('tilbud1_beløp'),
     ]);
 });
 
-test('Dyrere tilbud varsles, men like, billigere og ugyldige beløp varsles ikke', () => {
-    const detaljer = gyldigeDetaljer();
-    expect(harValgtDyrereTilbud(detaljer.flyttebyrå)).toBe(true);
-    const byrå = { ...detaljer.flyttebyrå, valgtTilbud: enumFelt('TILBUD_2' as const) };
-    expect(harValgtDyrereTilbud(byrå)).toBe(false);
-    byrå.tilbud2 = { beløp: felt('800.50') };
-    expect(harValgtDyrereTilbud(byrå)).toBe(false);
-    byrå.tilbud2 = { beløp: felt('800,51') };
-    expect(harValgtDyrereTilbud(byrå)).toBe(true);
-    byrå.tilbud1 = { beløp: felt('ugyldig') };
-    expect(harValgtDyrereTilbud(byrå)).toBe(false);
-    expect(harValgtDyrereTilbud(undefined)).toBe(false);
-});
+test('Innsending beholder tilbudslista og fjerner data fra inaktiv flyttemåte', () => {
+    const tilbud = [
+        { navn: felt('Testbyrå 1'), beløp: felt('800,50') },
+        { navn: felt('Testbyrå 2'), beløp: felt('400.25') },
+    ];
+    const byrå = { tilbud };
+    const detaljer = {
+        ...gyldigeDetaljer(),
+        flyttemåte: enumFelt('FLYTTEBYRÅ' as const),
+        flyttebyrå: byrå,
+    };
 
-test('Tilbud sammenlignes nøyaktig også når Number avrunder bort forskjellen', () => {
-    expect(
-        harValgtDyrereTilbud({
-            tilbud1: { beløp: felt('9007199254740993,01') },
-            tilbud2: { beløp: felt('9007199254740993.00') },
-            valgtTilbud: enumFelt('TILBUD_1'),
-        })
-    ).toBe(true);
+    expect(tilFlyttingDetaljerForInnsending(detaljer)).toMatchObject({
+        flyttemåte: { verdi: 'FLYTTEBYRÅ' },
+        flyttebyrå: { tilbud },
+        utgifterEgenFlytting: undefined,
+    });
 });
 
 test('Dokumentasjonsbehov følger flyttemåten, ikke bevarte tilbud i inaktiv gren', () => {

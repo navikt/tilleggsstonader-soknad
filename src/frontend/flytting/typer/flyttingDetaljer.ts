@@ -3,7 +3,8 @@ import { Adresse, JaNei } from '../../typer/søknad';
 
 export type Flytteårsak = 'NY_JOBB' | 'AKTIVITET';
 export type Flyttemåte = 'FLYTTER_SELV' | 'FLYTTEBYRÅ';
-export type ValgtTilbud = 'TILBUD_1' | 'TILBUD_2';
+
+export const flyttebyråTilbudIndekser = [0, 1] as const;
 
 export const egenutgiftFelter = ['hengerleie', 'bom', 'parkering', 'ferje', 'annet'] as const;
 export type EgenutgiftFelt = (typeof egenutgiftFelter)[number];
@@ -18,15 +19,29 @@ export interface FlyttebyråTilbud {
 }
 
 export interface Flyttebyrå {
-    tilbud1?: FlyttebyråTilbud;
-    tilbud2?: FlyttebyråTilbud;
-    valgtTilbud?: EnumFelt<ValgtTilbud>;
+    tilbud: FlyttebyråTilbud[];
 }
+
+export const tilFlyttingDetaljerForInnsending = (
+    detaljer: FlyttingDetaljer | undefined
+): FlyttingDetaljer | undefined => {
+    if (!detaljer) {
+        return undefined;
+    }
+
+    return {
+        ...detaljer,
+        utgifterEgenFlytting:
+            detaljer.flyttemåte?.verdi === 'FLYTTER_SELV'
+                ? detaljer.utgifterEgenFlytting
+                : undefined,
+        flyttebyrå: detaljer.flyttemåte?.verdi === 'FLYTTEBYRÅ' ? detaljer.flyttebyrå : undefined,
+    };
+};
 
 export interface FlyttingDetaljer {
     årsak?: EnumFelt<Flytteårsak>;
     flyttedato?: VerdiFelt<string>;
-    førsteArbeidsdag?: VerdiFelt<string>;
     adresse?: Adresse;
     flyttemåte?: EnumFelt<Flyttemåte>;
     utgifterDekketPåAnnenMåte?: EnumFelt<JaNei>;

@@ -3,6 +3,7 @@ import React from 'react';
 import { hentAktivDokumentasjon } from './context/flyttingDokumentasjon';
 import { FlyttingSøknadProvider, useFlyttingSøknad } from './context/FlyttingSøknadContext';
 import { Søknadsdialog } from './Søknadsdialog';
+import { tilFlyttingDetaljerForInnsending } from './typer/flyttingDetaljer';
 import { SøknadAppShell } from '../components/SøknadAppShell';
 import { SøknadProvider } from '../context/SøknadContext';
 import { useValideringsfeil } from '../context/ValideringsfeilContext';
@@ -19,7 +20,7 @@ const FlyttingInnhold = () => {
         <SøknadProvider
             skjematype={Skjematype.SØKNAD_FLYTTING}
             søknad={{
-                flyttingDetaljer,
+                flyttingDetaljer: tilFlyttingDetaljerForInnsending(flyttingDetaljer),
                 dokumentasjon: hentAktivDokumentasjon(dokumentasjon, dokumentasjonsbehov),
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,

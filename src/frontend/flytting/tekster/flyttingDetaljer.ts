@@ -1,13 +1,12 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { Adresse, JaNei } from '../../typer/søknad';
 import { InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
-import { EgenutgiftFelt, Flytteårsak, Flyttemåte, ValgtTilbud } from '../typer/flyttingDetaljer';
+import { EgenutgiftFelt, Flytteårsak, Flyttemåte } from '../typer/flyttingDetaljer';
 
 interface FlyttingDetaljerInnhold {
     tittel: TekstElement<string>;
     radio_årsak: RadiogruppePåkrevd<Flytteårsak>;
     dato_flytting: InputFelt;
-    dato_første_arbeidsdag: InputFelt;
     adresse_tittel: TekstElement<string>;
     adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     radio_flyttemåte: RadiogruppePåkrevd<Flyttemåte>;
@@ -21,20 +20,17 @@ interface FlyttingDetaljerInnhold {
     egenutgifter_beløp: Record<EgenutgiftFelt, InputFelt>;
     tilbud_tittel: TekstElement<string>;
     info_tilbud: TekstElement<string>;
-    tilbud1_spørsmål: {
-        navn: InputFelt;
-        beløp: InputFelt;
-    };
-    tilbud2_spørsmål: {
-        navn: InputFelt;
-        beløp: InputFelt;
-    };
-    radio_valgt_tilbud: RadiogruppePåkrevd<ValgtTilbud>;
+    tilbud_spørsmål: [
+        {
+            navn: InputFelt;
+            beløp: InputFelt;
+        },
+        {
+            navn: InputFelt;
+            beløp: InputFelt;
+        },
+    ];
     varsel_annen_dekning: TekstElement<string>;
-    varsel_dyrere_tilbud: {
-        tittel: TekstElement<string>;
-        innhold: TekstElement<string>;
-    };
 }
 
 const beløpFeilmelding: TekstElement<string> = {
@@ -55,11 +51,6 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         label: { nb: 'Flyttedato' },
         description: { nb: 'Format: dd.mm.åååå' },
         feilmelding: { nb: 'Oppgi en gyldig flyttedato på formatet dd.mm.åååå.' },
-    },
-    dato_første_arbeidsdag: {
-        label: { nb: 'Oppgi første dag i ny jobb' },
-        description: { nb: 'Format: dd.mm.åååå' },
-        feilmelding: { nb: 'Oppgi en gyldig første arbeidsdag på formatet dd.mm.åååå.' },
     },
     adresse_tittel: { nb: 'Adressen du flytter til' },
     adresse_spørsmål: {
@@ -125,40 +116,28 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
     },
     tilbud_tittel: { nb: 'Tilbud fra to flyttebyrå' },
     info_tilbud: {
-        nb: 'Hvis du bruker flyttebyrå, må du hente inn minst to tilbud fra ulike flyttebyråer og oppgi hvilket tilbud du velger. Nav dekker utgiftene etter det laveste tilbudet.',
+        nb: 'Hvis du bruker flyttebyrå, må du hente inn to tilbud fra ulike flyttebyråer. Nav dekker utgiftene etter det laveste tilbudet.',
     },
-    tilbud1_spørsmål: {
-        navn: {
-            label: { nb: 'Navn på flyttebyrå 1' },
-            feilmelding: { nb: 'Du må oppgi navn på flyttebyrå 1.' },
+    tilbud_spørsmål: [
+        {
+            navn: {
+                label: { nb: 'Navn på flyttebyrå 1' },
+                feilmelding: { nb: 'Du må oppgi navn på flyttebyrå 1.' },
+            },
+            beløp: {
+                label: { nb: 'Beløp for flyttebyrå 1' },
+                feilmelding: beløpFeilmelding,
+            },
         },
-        beløp: {
-            label: { nb: 'Beløp for flyttebyrå 1' },
-            feilmelding: beløpFeilmelding,
+        {
+            navn: {
+                label: { nb: 'Navn på flyttebyrå 2' },
+                feilmelding: { nb: 'Du må oppgi navn på flyttebyrå 2.' },
+            },
+            beløp: {
+                label: { nb: 'Beløp for flyttebyrå 2' },
+                feilmelding: beløpFeilmelding,
+            },
         },
-    },
-    tilbud2_spørsmål: {
-        navn: {
-            label: { nb: 'Navn på flyttebyrå 2' },
-            feilmelding: { nb: 'Du må oppgi navn på flyttebyrå 2.' },
-        },
-        beløp: {
-            label: { nb: 'Beløp for flyttebyrå 2' },
-            feilmelding: beløpFeilmelding,
-        },
-    },
-    radio_valgt_tilbud: {
-        header: { nb: 'Jeg velger å bruke' },
-        alternativer: {
-            TILBUD_1: { nb: 'Flyttebyrå 1' },
-            TILBUD_2: { nb: 'Flyttebyrå 2' },
-        },
-        feilmelding: { nb: 'Du må velge hvilket flyttebyrå du vil bruke.' },
-    },
-    varsel_dyrere_tilbud: {
-        tittel: { nb: 'Du har valgt det dyreste tilbudet' },
-        innhold: {
-            nb: 'Du kan fortsatt få støtte, men Nav dekker maksimalt beløpet i tilbudet med lavest pris. Du må betale mellomlegget selv.',
-        },
-    },
+    ],
 };

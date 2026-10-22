@@ -8,7 +8,11 @@ import { formaterAdresse } from '../../../utils/adresseUtils';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
 import { RouteTilPath } from '../../routing/routesFlytting';
 import { flyttingDetaljerTekster as tekster } from '../../tekster/flyttingDetaljer';
-import { egenutgiftFelter, FlyttingDetaljer } from '../../typer/flyttingDetaljer';
+import {
+    egenutgiftFelter,
+    flyttebyråTilbudIndekser,
+    FlyttingDetaljer,
+} from '../../typer/flyttingDetaljer';
 
 export const FlyttingDetaljerOppsummering = ({ detaljer }: { detaljer: FlyttingDetaljer }) => (
     <FormSummary>
@@ -22,11 +26,6 @@ export const FlyttingDetaljerOppsummering = ({ detaljer }: { detaljer: FlyttingD
             {detaljer.flyttedato && (
                 <Answer label={tekster.dato_flytting.label}>
                     {formaterIsoDato(detaljer.flyttedato.verdi)}
-                </Answer>
-            )}
-            {detaljer.årsak?.verdi === 'NY_JOBB' && detaljer.førsteArbeidsdag && (
-                <Answer label={tekster.dato_første_arbeidsdag.label}>
-                    {formaterIsoDato(detaljer.førsteArbeidsdag.verdi)}
                 </Answer>
             )}
             {detaljer.adresse && (
@@ -51,19 +50,18 @@ export const FlyttingDetaljerOppsummering = ({ detaljer }: { detaljer: FlyttingD
             )}
             {detaljer.flyttemåte?.verdi === 'FLYTTEBYRÅ' && (
                 <>
-                    {(['tilbud1', 'tilbud2'] as const).map((tilbud) => (
-                        <FormSummary.Answer key={tilbud}>
+                    {flyttebyråTilbudIndekser.map((index) => (
+                        <FormSummary.Answer key={index}>
                             <FormSummary.Label>
-                                <LocaleTekst tekst={tekster[`${tilbud}_spørsmål`].navn.label} />
+                                <LocaleTekst tekst={tekster.tilbud_spørsmål[index].navn.label} />
                             </FormSummary.Label>
                             <FormSummary.Value>
-                                {detaljer.flyttebyrå?.[tilbud]?.navn?.verdi}
+                                {detaljer.flyttebyrå?.tilbud[index]?.navn?.verdi}
                                 {', '}
-                                {detaljer.flyttebyrå?.[tilbud]?.beløp?.verdi} kr
+                                {detaljer.flyttebyrå?.tilbud[index]?.beløp?.verdi} kr
                             </FormSummary.Value>
                         </FormSummary.Answer>
                     ))}
-                    <OppsummeringSvar felt={detaljer.flyttebyrå?.valgtTilbud} />
                 </>
             )}
         </FormSummary.Answers>

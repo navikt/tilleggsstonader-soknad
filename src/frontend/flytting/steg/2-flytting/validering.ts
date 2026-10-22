@@ -4,7 +4,11 @@ import { AdresseFeilIder, validerAdresse } from '../../../components/AdresseVelg
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { flyttingDetaljerTekster } from '../../tekster/flyttingDetaljer';
-import { egenutgiftFelter, Flyttebyrå, FlyttingDetaljer } from '../../typer/flyttingDetaljer';
+import {
+    egenutgiftFelter,
+    flyttebyråTilbudIndekser,
+    FlyttingDetaljer,
+} from '../../typer/flyttingDetaljer';
 
 export const feilId = (felt: string): string => `flyttingDetaljer_${felt}`;
 
@@ -26,30 +30,6 @@ export const tilDesimaltall = (verdi: string | undefined): number | undefined =>
 export const erGyldigFlyttedato = (verdi: string | undefined): boolean =>
     verdi !== undefined && /^\d{4}-\d{2}-\d{2}$/.test(verdi) && isValid(parseISO(verdi));
 
-const tilHundredeler = (verdi: string): bigint => {
-    const [heltall, desimaler = ''] = verdi.trim().split(/[.,]/);
-    return BigInt(heltall + desimaler.padEnd(2, '0'));
-};
-
-export const harValgtDyrereTilbud = (flyttebyrå: Flyttebyrå | undefined): boolean => {
-    const verdi1 = flyttebyrå?.tilbud1?.beløp?.verdi;
-    const verdi2 = flyttebyrå?.tilbud2?.beløp?.verdi;
-    if (
-        verdi1 === undefined ||
-        verdi2 === undefined ||
-        tilDesimaltall(verdi1) === undefined ||
-        tilDesimaltall(verdi2) === undefined
-    ) {
-        return false;
-    }
-    const beløp1 = tilHundredeler(verdi1);
-    const beløp2 = tilHundredeler(verdi2);
-    return (
-        (flyttebyrå?.valgtTilbud?.verdi === 'TILBUD_1' && beløp1 > beløp2) ||
-        (flyttebyrå?.valgtTilbud?.verdi === 'TILBUD_2' && beløp2 > beløp1)
-    );
-};
-
 export const validerFlyttingDetaljer = (
     detaljer: FlyttingDetaljer | undefined,
     locale: Locale
@@ -66,12 +46,6 @@ export const validerFlyttingDetaljer = (
     }
     if (!erGyldigFlyttedato(detaljer?.flyttedato?.verdi)) {
         leggTilFeil('flyttedato', tekster.dato_flytting.feilmelding[locale]);
-    }
-    if (
-        detaljer?.årsak?.verdi === 'NY_JOBB' &&
-        !erGyldigFlyttedato(detaljer.førsteArbeidsdag?.verdi)
-    ) {
-        leggTilFeil('førsteArbeidsdag', tekster.dato_første_arbeidsdag.feilmelding[locale]);
     }
     Object.assign(
         feil,
@@ -98,18 +72,22 @@ export const validerFlyttingDetaljer = (
     }
 
     if (detaljer?.flyttemåte?.verdi === 'FLYTTEBYRÅ') {
-        (['tilbud1', 'tilbud2'] as const).forEach((felt) => {
-            const tilbud = detaljer.flyttebyrå?.[felt];
+        flyttebyråTilbudIndekser.forEach((index) => {
+            const tilbud = detaljer.flyttebyrå?.tilbud[index];
+            const felt = `tilbud${index + 1}`;
             if (!tilbud?.navn?.verdi.trim()) {
-                leggTilFeil(`${felt}_navn`, tekster[`${felt}_spørsmål`].navn.feilmelding[locale]);
+                leggTilFeil(
+                    `${felt}_navn`,
+                    tekster.tilbud_spørsmål[index].navn.feilmelding[locale]
+                );
             }
             if (tilDesimaltall(tilbud?.beløp?.verdi) === undefined) {
-                leggTilFeil(`${felt}_beløp`, tekster[`${felt}_spørsmål`].beløp.feilmelding[locale]);
+                leggTilFeil(
+                    `${felt}_beløp`,
+                    tekster.tilbud_spørsmål[index].beløp.feilmelding[locale]
+                );
             }
         });
-        if (!detaljer.flyttebyrå?.valgtTilbud) {
-            leggTilFeil('valgtTilbud', tekster.radio_valgt_tilbud.feilmelding[locale]);
-        }
     }
     return feil;
 };
