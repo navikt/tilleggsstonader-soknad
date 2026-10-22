@@ -13,34 +13,37 @@ import {
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
 
 export interface SøknadBase {
-    hovedytelse: Hovedytelse | undefined;
     dokumentasjon: DokumentasjonFelt[];
     søknadMetadata: SøknadMetadata;
 }
 
 export interface SøknadPassAvBarn extends SøknadBase {
+    hovedytelse: Hovedytelse | undefined;
     aktivitet: AktivitetFelles | undefined;
     barnMedBarnepass: Barnepass[];
 }
 
 export interface SøknadLæremidler extends SøknadBase {
+    hovedytelse: Hovedytelse | undefined;
     utdanning: Utdanning | undefined;
 }
 
 export interface SøknadReiseTilSamling extends SøknadBase {
+    hovedytelse: Hovedytelse | undefined;
     aktivitet: AktivitetReiseTilSamling | undefined;
     samlinger: Samling[];
     avreiseadresse?: Avreiseadresse;
 }
 
 export interface SøknadReiseOppstartAvslutningHjemreise extends SøknadBase {
+    hovedytelse: Hovedytelse | undefined;
     aktivitet: AktivitetFelles | undefined;
     adresser: AdresseReiseOppstartAvslutningHjemreise | undefined;
     barnOgHelse: BarnOgHelseReiseOppstartAvslutningHjemreise | undefined;
     reiser: ReiseInfoReiseOppstartAvslutningHjemreise[];
 }
 
-export interface SøknadFlytting extends Omit<SøknadBase, 'hovedytelse'> {
+export interface SøknadFlytting extends SøknadBase {
     flyttingDetaljer: FlyttingDetaljer | undefined;
 }
 
