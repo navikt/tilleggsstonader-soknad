@@ -110,7 +110,7 @@ export const aktivitetTeksterFelles: AktivitetInnholdFelles = {
     },
     guide_innhold: {
         nb: [
-            'For å få denne stønaden må du delta på tiltak, ta en utdanning godkjent av Nav, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
+            'For å få denne stønaden må du delta på tiltak, gjennomføre en utdanning godkjent av Nav, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
             'Vi viser aktivitetene som er registrert på deg de siste 3 månedene.',
         ],
     },
