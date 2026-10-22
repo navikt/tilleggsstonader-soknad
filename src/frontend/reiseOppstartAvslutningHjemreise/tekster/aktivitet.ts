@@ -22,6 +22,12 @@ interface AktivitetInnholdReiseOppstartAvslutningHjemreise extends AktivitetInnh
 
 export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise = {
     ...aktivitetTeksterFelles,
+    guide_innhold: {
+        nb: [
+            'For å få denne stønaden må du delta på tiltak, gjennomføre en utdanning godkjent av Nav, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
+            'Vi viser aktivitetene som er registrert på deg de siste 6 månedene.',
+        ],
+    },
     søker_fra_lesmer: {
         header: { nb: 'Hvilken dato velger jeg?' },
         innhold: {
