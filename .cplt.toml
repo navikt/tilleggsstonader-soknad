@@ -8,6 +8,6 @@
 # Suggested by: (root)
 allow_docker = true
 
+
 # The following are machine-specific — add to ~/.config/cplt/config.toml:
 # sandbox.allow_cache_exec += ["ms-playwright"]  # in personal config
-

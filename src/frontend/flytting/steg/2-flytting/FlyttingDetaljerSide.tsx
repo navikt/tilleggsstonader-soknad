@@ -1,0 +1,234 @@
+import { BodyLong, Heading, InfoCard, VStack } from '@navikt/ds-react';
+
+import { adresseFeilIder, feilId, validerFlyttingDetaljer } from './validering';
+import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
+import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
+import { DateInput } from '../../../components/DateInput';
+import { Side } from '../../../components/Side';
+import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
+import { LocaleTextField } from '../../../components/Teksthåndtering/LocaleTextField';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
+import { useSpråk } from '../../../context/SpråkContext';
+import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
+import { VerdiFelt } from '../../../typer/skjema';
+import { InputFelt } from '../../../typer/tekst';
+import { inneholderFeil } from '../../../typer/validering';
+import { useFlyttingSøknad } from '../../context/FlyttingSøknadContext';
+import { flyttingDetaljerTekster as tekster } from '../../tekster/flyttingDetaljer';
+import {
+    egenutgiftFelter,
+    flyttebyråTilbudIndekser,
+    FlyttingDetaljer,
+} from '../../typer/flyttingDetaljer';
+
+export const FlyttingDetaljerSide = () => {
+    const { flyttingDetaljer: detaljer, settFlyttingDetaljer } = useFlyttingSøknad();
+    const { locale } = useSpråk();
+    const { valideringsfeil: feil, settValideringsfeil } = useValideringsfeil();
+
+    const fjernFeil = (...felter: string[]) =>
+        settValideringsfeil((tidligere) =>
+            Object.fromEntries(
+                Object.entries(tidligere).filter(
+                    ([id]) => !felter.some((felt) => feilId(felt) === id)
+                )
+            )
+        );
+
+    const oppdater = <K extends keyof FlyttingDetaljer>(felt: K, verdi: FlyttingDetaljer[K]) => {
+        settFlyttingDetaljer((tidligere) => ({ ...tidligere, [felt]: verdi }));
+        fjernFeil(felt);
+    };
+
+    const verdiFelt = (verdi: string, tekst: InputFelt): VerdiFelt<string> | undefined =>
+        verdi.trim() ? { verdi, label: tekst.label[locale] } : undefined;
+
+    const validerSteg = () => {
+        const nyeFeil = validerFlyttingDetaljer(detaljer, locale);
+        settValideringsfeil(nyeFeil);
+        return !inneholderFeil(nyeFeil);
+    };
+
+    return (
+        <Side validerSteg={validerSteg}>
+            <Heading size="medium" level="2">
+                <LocaleTekst tekst={tekster.tittel} />
+            </Heading>
+            <LocaleRadioGroup
+                id={feilId('årsak')}
+                tekst={tekster.radio_årsak}
+                value={detaljer?.årsak?.verdi ?? ''}
+                error={feil[feilId('årsak')]?.melding}
+                onChange={(verdi) => {
+                    oppdater('årsak', verdi);
+                }}
+            />
+            <DateInput
+                id={feilId('flyttedato')}
+                label={tekster.dato_flytting.label[locale]}
+                description={tekster.dato_flytting.description?.[locale]}
+                value={detaljer?.flyttedato?.verdi}
+                onChange={(verdi) =>
+                    oppdater(
+                        'flyttedato',
+                        verdi ? { verdi, label: tekster.dato_flytting.label[locale] } : undefined
+                    )
+                }
+                error={feil[feilId('flyttedato')]?.melding}
+            />
+            <VStack gap="space-16">
+                <Heading size="small" level="3">
+                    <LocaleTekst tekst={tekster.adresse_tittel} />
+                </Heading>
+                <AdresseVelger
+                    adresse={detaljer?.adresse}
+                    tekster={tekster.adresse_spørsmål}
+                    feil={feil}
+                    feilIder={adresseFeilIder}
+                    onChange={(verdi, felt) => {
+                        settFlyttingDetaljer((tidligere) => ({
+                            ...tidligere,
+                            adresse: { ...tidligere?.adresse, ...verdi },
+                        }));
+                        fjernFeil(`adresse_${felt}`);
+                    }}
+                />
+            </VStack>
+            <LocaleRadioGroup
+                id={feilId('flyttemåte')}
+                tekst={tekster.radio_flyttemåte}
+                value={detaljer?.flyttemåte?.verdi ?? ''}
+                error={feil[feilId('flyttemåte')]?.melding}
+                onChange={(verdi) => {
+                    // TODO: Vurder å rydde utgifter og tilbud i den inaktive grenen.
+                    oppdater('flyttemåte', verdi);
+                    fjernFeil(
+                        ...(verdi.verdi === 'FLYTTEBYRÅ'
+                            ? ['avstand', ...egenutgiftFelter]
+                            : [
+                                  ...flyttebyråTilbudIndekser.flatMap((index) => [
+                                      `tilbud${index + 1}_navn`,
+                                      `tilbud${index + 1}_beløp`,
+                                  ]),
+                              ])
+                    );
+                }}
+            />
+            {detaljer?.flyttemåte && (
+                <InfoCard data-color="info">
+                    <InfoCard.Header>
+                        <InfoCard.Title as="h3">
+                            <LocaleTekst tekst={tekster.varsel_dokumentasjon.tittel} />
+                        </InfoCard.Title>
+                    </InfoCard.Header>
+                    <InfoCard.Content>
+                        <LocaleTekst tekst={tekster.varsel_dokumentasjon.innhold} />
+                    </InfoCard.Content>
+                </InfoCard>
+            )}
+            <LocaleRadioGroup
+                id={feilId('utgifterDekketPåAnnenMåte')}
+                tekst={tekster.radio_annen_dekning}
+                value={detaljer?.utgifterDekketPåAnnenMåte?.verdi ?? ''}
+                error={feil[feilId('utgifterDekketPåAnnenMåte')]?.melding}
+                onChange={(verdi) => oppdater('utgifterDekketPåAnnenMåte', verdi)}
+            />
+            {detaljer?.utgifterDekketPåAnnenMåte?.verdi === 'JA' && (
+                <AlertIkkeRett beskrivelse={tekster.varsel_annen_dekning} />
+            )}
+            {detaljer?.flyttemåte?.verdi === 'FLYTTER_SELV' && (
+                <UnderspørsmålContainer>
+                    <VStack gap="space-16">
+                        <Heading size="small" level="3">
+                            <LocaleTekst tekst={tekster.egenutgifter_tittel} />
+                        </Heading>
+                        {(['avstand', ...egenutgiftFelter] as const).map((felt) => {
+                            const tekst =
+                                felt === 'avstand'
+                                    ? tekster.antall_km
+                                    : tekster.egenutgifter_beløp[felt];
+                            return (
+                                <LocaleTextField
+                                    key={felt}
+                                    id={feilId(felt)}
+                                    tekst={tekst}
+                                    inputMode="decimal"
+                                    htmlSize={12}
+                                    value={detaljer.utgifterEgenFlytting?.[felt]?.verdi ?? ''}
+                                    error={feil[feilId(felt)]?.melding}
+                                    onChange={(event) => {
+                                        const verdi = verdiFelt(event.target.value, tekst);
+                                        settFlyttingDetaljer((tidligere) => ({
+                                            ...tidligere,
+                                            utgifterEgenFlytting: {
+                                                ...tidligere?.utgifterEgenFlytting,
+                                                [felt]: verdi,
+                                            },
+                                        }));
+                                        fjernFeil(felt);
+                                    }}
+                                />
+                            );
+                        })}
+                    </VStack>
+                </UnderspørsmålContainer>
+            )}
+            {detaljer?.flyttemåte?.verdi === 'FLYTTEBYRÅ' && (
+                <UnderspørsmålContainer>
+                    <VStack gap="space-24">
+                        <Heading size="small" level="3">
+                            <LocaleTekst tekst={tekster.tilbud_tittel} />
+                        </Heading>
+                        <BodyLong>
+                            <LocaleTekst tekst={tekster.info_tilbud} />
+                        </BodyLong>
+                        {flyttebyråTilbudIndekser.map((index) => (
+                            <VStack key={index} gap="space-16">
+                                {(['navn', 'beløp'] as const).map((felt) => {
+                                    const feltId = `tilbud${index + 1}_${felt}`;
+                                    const tekst = tekster.tilbud_spørsmål[index][felt];
+                                    return (
+                                        <LocaleTextField
+                                            key={felt}
+                                            id={feilId(feltId)}
+                                            tekst={tekst}
+                                            inputMode={felt === 'beløp' ? 'decimal' : 'text'}
+                                            htmlSize={felt === 'beløp' ? 12 : undefined}
+                                            maxLength={felt === 'navn' ? 200 : undefined}
+                                            value={
+                                                detaljer.flyttebyrå?.tilbud[index]?.[felt]?.verdi ??
+                                                ''
+                                            }
+                                            error={feil[feilId(feltId)]?.melding}
+                                            onChange={(event) => {
+                                                const verdi = verdiFelt(event.target.value, tekst);
+                                                settFlyttingDetaljer((tidligere) => ({
+                                                    ...tidligere,
+                                                    flyttebyrå: {
+                                                        ...tidligere?.flyttebyrå,
+                                                        tilbud: flyttebyråTilbudIndekser.map(
+                                                            (tilbudIndex) => ({
+                                                                ...tidligere?.flyttebyrå?.tilbud[
+                                                                    tilbudIndex
+                                                                ],
+                                                                ...(tilbudIndex === index && {
+                                                                    [felt]: verdi,
+                                                                }),
+                                                            })
+                                                        ),
+                                                    },
+                                                }));
+                                                fjernFeil(feltId);
+                                            }}
+                                        />
+                                    );
+                                })}
+                            </VStack>
+                        ))}
+                    </VStack>
+                </UnderspørsmålContainer>
+            )}
+        </Side>
+    );
+};

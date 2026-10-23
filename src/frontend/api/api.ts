@@ -8,6 +8,7 @@ import { KjørelisteVisningDto } from '../kjørelister/types/KjørelisteVisningD
 import { Rammevedtak } from '../kjørelister/types/Rammevedtak';
 import { Person } from '../typer/person';
 import { RegisterAktivitet, RegisterAktiviteterResponse } from '../typer/registerAktivitet';
+import { skjematypeTilSkjemainfo } from '../typer/skjemanavn';
 import { SkjematypeFyllUt } from '../typer/skjematype';
 import { Skjematype } from '../typer/skjematyper';
 import { Kvittering } from '../typer/søknad';
@@ -79,22 +80,9 @@ export const hentBehandlingStatus = (skjematype: Skjematype): Promise<boolean> =
         return response.data;
     });
 
-const skjematypeTilPath = (skjematype: Skjematype): string => {
-    switch (skjematype) {
-        case Skjematype.SØKNAD_PASS_AV_BARN:
-            return 'pass-av-barn';
-        case Skjematype.SØKNAD_LÆREMIDLER:
-            return 'laremidler';
-        case Skjematype.SØKNAD_REISE_TIL_SAMLING:
-            return 'reise-til-samling';
-        case Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE:
-            return 'reise-oppstart-avslutning-hjemreise';
-    }
-};
-
 export const sendInnSøknad = (skjematype: Skjematype, søknad: object): Promise<Kvittering> =>
     utførApiKall(async () => {
-        const url = `${Environment().apiProxyUrl}/soknad/${skjematypeTilPath(skjematype)}`;
+        const url = `${Environment().apiProxyUrl}/soknad/${skjematypeTilSkjemainfo[skjematype].apiPath}`;
         const response = await axios.post(url, søknad, defaultConfig());
         return response.data;
     });
