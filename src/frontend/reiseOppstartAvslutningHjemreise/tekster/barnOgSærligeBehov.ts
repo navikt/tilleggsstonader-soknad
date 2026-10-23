@@ -9,6 +9,7 @@ interface BarnOgSærligeBehovInnhold {
     hvilke_barn_flytter_med: InputFelt;
     radio_har_barn_hjemme_under_4_klasse: RadiogruppePåkrevd<JaNei>;
     radio_har_særlige_behov_for_flere_hjemreiser: RadiogruppePåkrevd<JaNei>;
+    advarsel_dokumentasjon_særlige_behov: TekstElement<string[]>;
 }
 
 export const barnOgSærligeBehovTekster: BarnOgSærligeBehovInnhold = {
@@ -40,5 +41,10 @@ export const barnOgSærligeBehovTekster: BarnOgSærligeBehovInnhold = {
         feilmelding: {
             nb: 'Du må svare på om du har særlige behov for flere hjemreiser.',
         },
+    },
+    advarsel_dokumentasjon_særlige_behov: {
+        nb: [
+            'Du må legge ved bekreftelse på særlige behov for flere hjemreiser. Du får instruksjoner om innsending av vedlegg senere i søknaden.',
+        ],
     },
 };
