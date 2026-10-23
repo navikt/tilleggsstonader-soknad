@@ -45,7 +45,7 @@ export interface SøknadReiseOppstartAvslutningHjemreise {
     hovedytelse: Hovedytelse | undefined;
     aktivitet: AktivitetFelles | undefined;
     adresser: AdresseReiseOppstartAvslutningHjemreise | undefined;
-    barnOgHelse: BarnOgSærligeBehovReiseOppstartAvslutningHjemreise | undefined;
+    barnOgSærligeBehov: BarnOgSærligeBehovReiseOppstartAvslutningHjemreise | undefined;
     reiser: ReiseInfoReiseOppstartAvslutningHjemreise[];
     dokumentasjon: DokumentasjonFelt[];
     søknadMetadata: SøknadMetadata;

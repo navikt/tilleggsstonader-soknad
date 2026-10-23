@@ -31,7 +31,7 @@ const ReiseOppstartAvslutningHjemreiseInnhold = () => {
                 hovedytelse: hovedytelse,
                 aktivitet: aktivitet,
                 adresser: adresser,
-                barnOgHelse: barnOgSærligeBehov,
+                barnOgSærligeBehov: barnOgSærligeBehov,
                 reiser: reiser,
                 dokumentasjon: dokumentasjon,
                 søknadMetadata: {
