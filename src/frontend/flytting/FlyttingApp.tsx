@@ -13,13 +13,14 @@ import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const FlyttingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, dokumentasjon, dokumentasjonsbehov, flyttingDetaljer } =
+    const { resetSøknad, hovedytelse, dokumentasjon, dokumentasjonsbehov, flyttingDetaljer } =
         useFlyttingSøknad();
 
     return (
         <SøknadProvider
             skjematype={Skjematype.SØKNAD_FLYTTING}
             søknad={{
+                hovedytelse,
                 flyttingDetaljer: tilFlyttingDetaljerForInnsending(flyttingDetaljer),
                 dokumentasjon: hentAktivDokumentasjon(dokumentasjon, dokumentasjonsbehov),
                 søknadMetadata: {

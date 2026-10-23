@@ -31,6 +31,9 @@ const startSøknad = async (page: Page) => {
     ).toBeVisible();
     await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check();
     await page.getByRole('button', { name: 'Start søknad' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/hovedytelse`);
+    await page.getByRole('checkbox', { name: 'Arbeidsavklaringspenger (AAP)' }).check();
+    await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/flytting`);
 };
 

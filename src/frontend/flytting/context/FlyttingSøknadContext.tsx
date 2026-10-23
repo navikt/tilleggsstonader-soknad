@@ -3,13 +3,19 @@ import { useState } from 'react';
 import createUseContext from 'constate';
 
 import { hentDokumentasjonsbehovFlytting } from './flyttingDokumentasjon';
-import { initialDokumentasjon, initialHarBekreftet } from './flyttingInitialState';
+import {
+    initialDokumentasjon,
+    initialHarBekreftet,
+    initialHovedytelse,
+} from './flyttingInitialState';
 import { DokumentasjonFelt } from '../../typer/skjema';
+import { Hovedytelse } from '../../typer/søknad';
 import { FlyttingDetaljer } from '../typer/flyttingDetaljer';
 
 const [FlyttingSøknadProvider, useFlyttingSøknad] = createUseContext(() => {
     FlyttingSøknadProvider.displayName = 'SØKNAD_FLYTTING_PROVIDER';
     const [harBekreftet, settHarBekreftet] = useState<boolean>(initialHarBekreftet());
+    const [hovedytelse, settHovedytelse] = useState<Hovedytelse | undefined>(initialHovedytelse());
     const [dokumentasjon, settDokumentasjon] =
         useState<DokumentasjonFelt[]>(initialDokumentasjon());
     const [flyttingDetaljer, settFlyttingDetaljer] = useState<FlyttingDetaljer>();
@@ -17,6 +23,7 @@ const [FlyttingSøknadProvider, useFlyttingSøknad] = createUseContext(() => {
 
     const resetSøknad = () => {
         settHarBekreftet(initialHarBekreftet());
+        settHovedytelse(initialHovedytelse());
         settDokumentasjon(initialDokumentasjon());
         settFlyttingDetaljer(undefined);
     };
@@ -24,6 +31,8 @@ const [FlyttingSøknadProvider, useFlyttingSøknad] = createUseContext(() => {
     return {
         harBekreftet,
         settHarBekreftet,
+        hovedytelse,
+        settHovedytelse,
         dokumentasjon,
         settDokumentasjon,
         flyttingDetaljer,
