@@ -1,7 +1,7 @@
 import { IRoute, Steg } from '../../typer/routes';
 
 export type ReiseOppstartAvslutningHjemreiseSteg =
-    Steg | 'AKTIVITET' | 'ADRESSER' | 'BARN_OG_HELSE' | 'REISEINFO';
+    Steg | 'AKTIVITET' | 'ADRESSER' | 'BARN_OG_SÆRLIGE_BEHOV' | 'REISEINFO';
 
 export const reiseOppstartAvslutningHjemreisePath = '/reise-oppstart-avslutning-hjemreise';
 
@@ -10,7 +10,7 @@ export const RouteTilPath: Record<ReiseOppstartAvslutningHjemreiseSteg, string> 
     HOVEDYTELSE: reiseOppstartAvslutningHjemreisePath + '/hovedytelse',
     AKTIVITET: reiseOppstartAvslutningHjemreisePath + '/aktivitet',
     ADRESSER: reiseOppstartAvslutningHjemreisePath + '/adresser',
-    BARN_OG_HELSE: reiseOppstartAvslutningHjemreisePath + '/barn-og-helse',
+    BARN_OG_SÆRLIGE_BEHOV: reiseOppstartAvslutningHjemreisePath + '/barn-og-serlige-behov',
     REISEINFO: reiseOppstartAvslutningHjemreisePath + '/reiseinfo',
     VEDLEGG: reiseOppstartAvslutningHjemreisePath + '/vedlegg',
     OPPSUMMERING: reiseOppstartAvslutningHjemreisePath + '/oppsummering',
@@ -36,9 +36,9 @@ export const routesReiseOppstartAvslutningHjemreise: IRoute<ReiseOppstartAvslutn
             route: 'ADRESSER',
         },
         {
-            path: RouteTilPath.BARN_OG_HELSE,
-            label: 'Barn og helse',
-            route: 'BARN_OG_HELSE',
+            path: RouteTilPath.BARN_OG_SÆRLIGE_BEHOV,
+            label: 'Barn og særlige behov',
+            route: 'BARN_OG_SÆRLIGE_BEHOV',
         },
         {
             path: RouteTilPath.REISEINFO,

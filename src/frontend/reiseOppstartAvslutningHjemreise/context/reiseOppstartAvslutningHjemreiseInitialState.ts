@@ -1,6 +1,6 @@
 import {
     mockAdresserReiseOppstartAvslutningHjemreise,
-    mockBarnOgHelseReiseOppstartAvslutningHjemreise,
+    mockBarnOgSærligeBehovReiseOppstartAvslutningHjemreise,
     mockReiseinfoReiseOppstartAvslutningHjemreise,
 } from '../../mock/reiseOppstartAvslutningHjemreiseMock';
 import { mockHovedytelse } from '../../mock/reiseTilSamlingMock';
@@ -9,7 +9,7 @@ import { Hovedytelse, AktivitetFelles } from '../../typer/søknad';
 import { erLokal } from '../../utils/miljø';
 import {
     AdresseReiseOppstartAvslutningHjemreise,
-    BarnOgHelseReiseOppstartAvslutningHjemreise,
+    BarnOgSærligeBehovReiseOppstartAvslutningHjemreise,
     ReiseInfoReiseOppstartAvslutningHjemreise,
 } from '../typer/søknad';
 
@@ -26,8 +26,9 @@ export const initialAktivitet = (): AktivitetFelles | undefined => undefined;
 export const initialAdresser = (): AdresseReiseOppstartAvslutningHjemreise | undefined =>
     skalBrukeMockData ? mockAdresserReiseOppstartAvslutningHjemreise : undefined;
 
-export const initialBarnOgHelse = (): BarnOgHelseReiseOppstartAvslutningHjemreise | undefined =>
-    skalBrukeMockData ? mockBarnOgHelseReiseOppstartAvslutningHjemreise : undefined;
+export const initialBarnOgSærligeBehov = ():
+    BarnOgSærligeBehovReiseOppstartAvslutningHjemreise | undefined =>
+    skalBrukeMockData ? mockBarnOgSærligeBehovReiseOppstartAvslutningHjemreise : undefined;
 
 export const initialReiser = (): ReiseInfoReiseOppstartAvslutningHjemreise[] =>
     skalBrukeMockData ? mockReiseinfoReiseOppstartAvslutningHjemreise : [{ _id: 1, lagret: false }];

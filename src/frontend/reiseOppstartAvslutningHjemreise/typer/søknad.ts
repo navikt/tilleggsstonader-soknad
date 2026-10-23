@@ -11,7 +11,7 @@ export interface AdresseReiseOppstartAvslutningHjemreise {
     adresseMidlertidigBosted?: Adresse;
 }
 
-export interface BarnOgHelseReiseOppstartAvslutningHjemreise {
+export interface BarnOgSærligeBehovReiseOppstartAvslutningHjemreise {
     harBarnUnder18SomHarFlyttetMed?: EnumFelt<JaNei>;
     hvilkeBarnFlytterMed?: EnumFlereValgFelt<string>;
     harBarnHjemmeUnder4Klasse?: EnumFelt<JaNei>;

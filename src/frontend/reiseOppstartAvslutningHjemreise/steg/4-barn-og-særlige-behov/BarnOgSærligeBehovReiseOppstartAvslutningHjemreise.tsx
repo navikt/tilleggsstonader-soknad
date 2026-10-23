@@ -6,7 +6,7 @@ import { BarnSomFlytterMed } from './BarnSomFlytterMed';
 import {
     errorKeyHarBarnHjemmeUnder4Klasse,
     errorKeyHarSærligeBehovForFlereHjemreiser,
-    validerBarnOgHelse,
+    validerBarnOgSærligeBehov,
 } from './validering';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
@@ -19,52 +19,53 @@ import { EnumFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { useReiseOppstartAvslutningHjemreiseSøknad } from '../../context/ReiseOppstartAvslutningHjemreiseSøknadContext';
-import { barnOgHelseTekster } from '../../tekster/barnOgHelse';
-import { BarnOgHelseReiseOppstartAvslutningHjemreise } from '../../typer/søknad';
+import { barnOgSærligeBehovTekster } from '../../tekster/barnOgSærligeBehov';
+import { BarnOgSærligeBehovReiseOppstartAvslutningHjemreise } from '../../typer/søknad';
 
-export const BarnOgHelseSteg = () => {
+export const BarnOgSærligeBehovSteg = () => {
     const { locale } = useSpråk();
     const { person } = usePerson();
-    const { barnOgHelse, settBarnOgHelse } = useReiseOppstartAvslutningHjemreiseSøknad();
+    const { barnOgSærligeBehov, settBarnOgSærligeBehov } =
+        useReiseOppstartAvslutningHjemreiseSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
     const harBarn = person.barn.length > 0;
 
     const oppdaterEnumFelt = (
-        key: keyof BarnOgHelseReiseOppstartAvslutningHjemreise,
+        key: keyof BarnOgSærligeBehovReiseOppstartAvslutningHjemreise,
         errorKey: string,
         verdi: EnumFelt<JaNei>
     ) => {
-        settBarnOgHelse((prev) => ({ ...prev, [key]: verdi }));
+        settBarnOgSærligeBehov((prev) => ({ ...prev, [key]: verdi }));
         settValideringsfeil((prev) => ({ ...prev, [errorKey]: undefined }));
     };
 
     const kanFortsette = (): boolean => {
-        const feil = validerBarnOgHelse(barnOgHelse, locale, harBarn);
+        const feil = validerBarnOgSærligeBehov(barnOgSærligeBehov, locale, harBarn);
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
 
     return (
         <Side validerSteg={kanFortsette}>
-            <LocaleHeading tekst={barnOgHelseTekster.tittel} level="2" size="medium" />
+            <LocaleHeading tekst={barnOgSærligeBehovTekster.tittel} level="2" size="medium" />
             <GuidePanel>
-                <LocaleTekstAvsnitt tekst={barnOgHelseTekster.guide_innhold} />
+                <LocaleTekstAvsnitt tekst={barnOgSærligeBehovTekster.guide_innhold} />
             </GuidePanel>
             {harBarn && (
                 <>
                     <BarnSomFlytterMed
                         locale={locale}
                         barn={person.barn}
-                        barnOgHelse={barnOgHelse}
+                        barnOgSærligeBehov={barnOgSærligeBehov}
                         valideringsfeil={valideringsfeil}
-                        settBarnOgHelse={settBarnOgHelse}
+                        settBarnOgSærligeBehov={settBarnOgSærligeBehov}
                         settValideringsfeil={settValideringsfeil}
                     />
                     <LocaleRadioGroup
                         id={valideringsfeil[errorKeyHarBarnHjemmeUnder4Klasse]?.id}
-                        tekst={barnOgHelseTekster.radio_har_barn_hjemme_under_4_klasse}
-                        value={barnOgHelse?.harBarnHjemmeUnder4Klasse?.verdi ?? ''}
+                        tekst={barnOgSærligeBehovTekster.radio_har_barn_hjemme_under_4_klasse}
+                        value={barnOgSærligeBehov?.harBarnHjemmeUnder4Klasse?.verdi ?? ''}
                         onChange={(verdi) =>
                             oppdaterEnumFelt(
                                 'harBarnHjemmeUnder4Klasse',
@@ -78,8 +79,8 @@ export const BarnOgHelseSteg = () => {
             )}
             <LocaleRadioGroup
                 id={valideringsfeil[errorKeyHarSærligeBehovForFlereHjemreiser]?.id}
-                tekst={barnOgHelseTekster.radio_har_særlige_behov_for_flere_hjemreiser}
-                value={barnOgHelse?.harSærligeBehovForFlereHjemreiser?.verdi ?? ''}
+                tekst={barnOgSærligeBehovTekster.radio_har_særlige_behov_for_flere_hjemreiser}
+                value={barnOgSærligeBehov?.harSærligeBehovForFlereHjemreiser?.verdi ?? ''}
                 onChange={(verdi) =>
                     oppdaterEnumFelt(
                         'harSærligeBehovForFlereHjemreiser',

@@ -2,7 +2,7 @@ import { JaNeiTilTekst } from '../../tekster/felles';
 import { JaNei } from '../../typer/søknad';
 import { InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
 
-interface BarnOgHelseInnhold {
+interface BarnOgSærligeBehovInnhold {
     tittel: TekstElement<string>;
     guide_innhold: TekstElement<string[]>;
     radio_har_barn_under_18_som_har_flyttet_med: RadiogruppePåkrevd<JaNei>;
@@ -11,8 +11,8 @@ interface BarnOgHelseInnhold {
     radio_har_særlige_behov_for_flere_hjemreiser: RadiogruppePåkrevd<JaNei>;
 }
 
-export const barnOgHelseTekster: BarnOgHelseInnhold = {
-    tittel: { nb: 'Barn og helse' },
+export const barnOgSærligeBehovTekster: BarnOgSærligeBehovInnhold = {
+    tittel: { nb: 'Barn og særlige behov' },
     guide_innhold: {
         nb: ['Vi trenger disse opplysningene for å vurdere hva du kan ha rett til.'],
     },

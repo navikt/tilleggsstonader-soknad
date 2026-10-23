@@ -10,16 +10,16 @@ import { JaNei } from '../../../typer/søknad';
 import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { formaterIsoDato } from '../../../utils/formateringUtils';
-import { barnOgHelseTekster } from '../../tekster/barnOgHelse';
-import { BarnOgHelseReiseOppstartAvslutningHjemreise } from '../../typer/søknad';
+import { barnOgSærligeBehovTekster } from '../../tekster/barnOgSærligeBehov';
+import { BarnOgSærligeBehovReiseOppstartAvslutningHjemreise } from '../../typer/søknad';
 
 interface Props {
     locale: Locale;
     barn: Barn[];
-    barnOgHelse: BarnOgHelseReiseOppstartAvslutningHjemreise | undefined;
+    barnOgSærligeBehov: BarnOgSærligeBehovReiseOppstartAvslutningHjemreise | undefined;
     valideringsfeil: Valideringsfeil;
-    settBarnOgHelse: React.Dispatch<
-        React.SetStateAction<BarnOgHelseReiseOppstartAvslutningHjemreise | undefined>
+    settBarnOgSærligeBehov: React.Dispatch<
+        React.SetStateAction<BarnOgSærligeBehovReiseOppstartAvslutningHjemreise | undefined>
     >;
     settValideringsfeil: React.Dispatch<React.SetStateAction<Valideringsfeil>>;
 }
@@ -27,9 +27,9 @@ interface Props {
 export const BarnSomFlytterMed: React.FC<Props> = ({
     locale,
     barn,
-    barnOgHelse,
+    barnOgSærligeBehov,
     valideringsfeil,
-    settBarnOgHelse,
+    settBarnOgSærligeBehov,
     settValideringsfeil,
 }) => {
     const barnAlternativer = barn
@@ -41,7 +41,7 @@ export const BarnSomFlytterMed: React.FC<Props> = ({
     const barnPerIdent = new Map(barnAlternativer.map((it) => [it.ident, it.label]));
 
     const oppdaterHarBarnUnder18SomHarFlyttetMed = (verdi: EnumFelt<JaNei>) => {
-        settBarnOgHelse((prev) => ({
+        settBarnOgSærligeBehov((prev) => ({
             ...prev,
             harBarnUnder18SomHarFlyttetMed: verdi,
             hvilkeBarnFlytterMed: verdi.verdi === 'NEI' ? undefined : prev?.hvilkeBarnFlytterMed,
@@ -55,7 +55,7 @@ export const BarnSomFlytterMed: React.FC<Props> = ({
 
     const oppdaterHvilkeBarnFlytterMed = (valgteBarn: string[]) => {
         const felt: EnumFlereValgFelt<string> = {
-            label: barnOgHelseTekster.hvilke_barn_flytter_med.label[locale],
+            label: barnOgSærligeBehovTekster.hvilke_barn_flytter_med.label[locale],
             verdier: valgteBarn.map((ident) => ({
                 verdi: ident,
                 label: barnPerIdent.get(ident) ?? ident,
@@ -63,7 +63,7 @@ export const BarnSomFlytterMed: React.FC<Props> = ({
             alternativer: barnAlternativer.map((it) => it.label),
         };
 
-        settBarnOgHelse((prev) => ({
+        settBarnOgSærligeBehov((prev) => ({
             ...prev,
             hvilkeBarnFlytterMed: felt,
         }));
@@ -77,17 +77,17 @@ export const BarnSomFlytterMed: React.FC<Props> = ({
         <VStack gap="space-24">
             <LocaleRadioGroup
                 id={valideringsfeil[errorKeyHarBarnUnder18SomHarFlyttetMed]?.id}
-                tekst={barnOgHelseTekster.radio_har_barn_under_18_som_har_flyttet_med}
-                value={barnOgHelse?.harBarnUnder18SomHarFlyttetMed?.verdi ?? ''}
+                tekst={barnOgSærligeBehovTekster.radio_har_barn_under_18_som_har_flyttet_med}
+                value={barnOgSærligeBehov?.harBarnUnder18SomHarFlyttetMed?.verdi ?? ''}
                 onChange={oppdaterHarBarnUnder18SomHarFlyttetMed}
                 error={valideringsfeil[errorKeyHarBarnUnder18SomHarFlyttetMed]?.melding}
             />
-            {barnOgHelse?.harBarnUnder18SomHarFlyttetMed?.verdi === 'JA' && (
+            {barnOgSærligeBehov?.harBarnUnder18SomHarFlyttetMed?.verdi === 'JA' && (
                 <CheckboxGroup
                     id={valideringsfeil[errorKeyHvilkeBarnFlytterMed]?.id}
-                    legend={barnOgHelseTekster.hvilke_barn_flytter_med.label[locale]}
+                    legend={barnOgSærligeBehovTekster.hvilke_barn_flytter_med.label[locale]}
                     value={
-                        barnOgHelse?.hvilkeBarnFlytterMed?.verdier.map(
+                        barnOgSærligeBehov?.hvilkeBarnFlytterMed?.verdier.map(
                             (valgtBarn) => valgtBarn.verdi
                         ) ?? []
                     }
