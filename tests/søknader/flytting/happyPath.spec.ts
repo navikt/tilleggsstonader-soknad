@@ -98,11 +98,40 @@ test('Byråtilbud viser at Nav dekker laveste tilbud og lar brukeren laste opp b
     await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
     await lastOppTilbud(page, 'Tilbud fra flyttebyrå 1');
     await lastOppTilbud(page, 'Tilbud fra flyttebyrå 2');
-    await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(2);
+    await lastOppTilbud(page, 'Arbeidskontrakt');
+    await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(3);
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
     await expect(page.getByText('Testbyrå 2, 0 kr', { exact: true })).toBeVisible();
     await forventIngenWcagViolations(page);
+});
+
+test('Arbeidskontrakt informeres om, men innsending kan fortsette uten vedlegget', async ({
+    page,
+}) => {
+    await startSøknad(page);
+    await fyllFellesDetaljer(page, true);
+    await page.getByLabel('Jeg flytter selv', { exact: true }).check();
+    await page.getByRole('textbox', { name: 'Hvor lang reisevei har du?' }).fill('1');
+
+    await expect(
+        page.getByText(
+            'Du må legge ved arbeidskontrakten din. Har du ikke den nå, kan du ettersende den senere.'
+        )
+    ).toBeVisible();
+
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
+    await expect(page.getByText('Arbeidskontrakt', { exact: true }).first()).toBeVisible();
+    await page.getByRole('button', { name: 'Neste' }).click();
+
+    const manglerModal = page.getByRole('dialog');
+    await expect(manglerModal.getByText('Arbeidskontrakt')).toBeVisible();
+    await manglerModal.getByRole('button', { name: 'Ja, gå til neste side' }).click();
+
+    await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
+    await expect(page.getByText('Arbeidskontrakt', { exact: true }).first()).toBeVisible();
+    await page.getByRole('button', { name: 'Send søknad' }).click();
 });
 
 test('Obligatoriske svar og ugyldige datoer og tall stopper videreføring', async ({ page }) => {

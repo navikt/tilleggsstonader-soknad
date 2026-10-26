@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { hentAktivDokumentasjon } from './context/flyttingDokumentasjon';
 import { FlyttingSøknadProvider, useFlyttingSøknad } from './context/FlyttingSøknadContext';
 import { Søknadsdialog } from './Søknadsdialog';
 import { tilFlyttingDetaljerForInnsending } from './typer/flyttingDetaljer';
@@ -13,8 +12,7 @@ import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const FlyttingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, hovedytelse, dokumentasjon, dokumentasjonsbehov, flyttingDetaljer } =
-        useFlyttingSøknad();
+    const { resetSøknad, hovedytelse, dokumentasjon, flyttingDetaljer } = useFlyttingSøknad();
 
     return (
         <SøknadProvider
@@ -22,7 +20,7 @@ const FlyttingInnhold = () => {
             søknad={{
                 hovedytelse,
                 flyttingDetaljer: tilFlyttingDetaljerForInnsending(flyttingDetaljer),
-                dokumentasjon: hentAktivDokumentasjon(dokumentasjon, dokumentasjonsbehov),
+                dokumentasjon,
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,
                 },

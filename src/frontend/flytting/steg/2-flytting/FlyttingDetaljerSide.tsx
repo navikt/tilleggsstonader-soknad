@@ -1,4 +1,4 @@
-import { BodyLong, Heading, InfoCard, VStack } from '@navikt/ds-react';
+import { BodyLong, Heading, InlineMessage, VStack } from '@navikt/ds-react';
 
 import { adresseFeilIder, feilId, validerFlyttingDetaljer } from './validering';
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
@@ -64,6 +64,11 @@ export const FlyttingDetaljerSide = () => {
                     oppdater('årsak', verdi);
                 }}
             />
+            {detaljer?.årsak?.verdi === 'NY_JOBB' && (
+                <InlineMessage status="info">
+                    <LocaleTekst tekst={tekster.varsel_arbeidskontrakt} />
+                </InlineMessage>
+            )}
             <DateInput
                 id={feilId('flyttedato')}
                 label={tekster.dato_flytting.label[locale]}
@@ -116,16 +121,9 @@ export const FlyttingDetaljerSide = () => {
                 }}
             />
             {detaljer?.flyttemåte && (
-                <InfoCard data-color="info">
-                    <InfoCard.Header>
-                        <InfoCard.Title as="h3">
-                            <LocaleTekst tekst={tekster.varsel_dokumentasjon.tittel} />
-                        </InfoCard.Title>
-                    </InfoCard.Header>
-                    <InfoCard.Content>
-                        <LocaleTekst tekst={tekster.varsel_dokumentasjon.innhold} />
-                    </InfoCard.Content>
-                </InfoCard>
+                <InlineMessage status="info">
+                    <LocaleTekst tekst={tekster.varsel_dokumentasjon} />
+                </InlineMessage>
             )}
             <LocaleRadioGroup
                 id={feilId('utgifterDekketPåAnnenMåte')}

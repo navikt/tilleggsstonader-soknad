@@ -4,14 +4,12 @@ import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsumm
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
 import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
-import { hentAktivDokumentasjon } from '../../context/flyttingDokumentasjon';
 import { useFlyttingSøknad } from '../../context/FlyttingSøknadContext';
 import { RouteTilPath } from '../../routing/routesFlytting';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const Oppsummering = () => {
-    const { hovedytelse, dokumentasjon, flyttingDetaljer, dokumentasjonsbehov } =
-        useFlyttingSøknad();
+    const { hovedytelse, dokumentasjon, flyttingDetaljer } = useFlyttingSøknad();
 
     return (
         <OppsummeringSide>
@@ -25,7 +23,7 @@ export const Oppsummering = () => {
             )}
             {flyttingDetaljer && <FlyttingDetaljerOppsummering detaljer={flyttingDetaljer} />}
             <VedleggOppsummering
-                dokumentasjon={hentAktivDokumentasjon(dokumentasjon, dokumentasjonsbehov)}
+                dokumentasjon={dokumentasjon}
                 redigerLenke={RouteTilPath.VEDLEGG}
             />
         </OppsummeringSide>
