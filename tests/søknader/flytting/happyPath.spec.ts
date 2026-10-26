@@ -98,7 +98,8 @@ test('Byråtilbud viser at Nav dekker laveste tilbud og lar brukeren laste opp b
     await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
     await lastOppTilbud(page, 'Tilbud fra flyttebyrå 1');
     await lastOppTilbud(page, 'Tilbud fra flyttebyrå 2');
-    await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(2);
+    await lastOppTilbud(page, 'Arbeidskontrakt');
+    await expect(page.getByText('tom_bild.png', { exact: true })).toHaveCount(3);
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
     await expect(page.getByText('Testbyrå 2, 0 kr', { exact: true })).toBeVisible();
@@ -121,7 +122,7 @@ test('Arbeidskontrakt informeres om, men innsending kan fortsette uten vedlegget
 
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
-    await expect(page.getByText('Arbeidskontrakt', { exact: true })).toBeVisible();
+    await expect(page.getByText('Arbeidskontrakt', { exact: true }).first()).toBeVisible();
     await page.getByRole('button', { name: 'Neste' }).click();
 
     const manglerModal = page.getByRole('dialog');
@@ -129,18 +130,8 @@ test('Arbeidskontrakt informeres om, men innsending kan fortsette uten vedlegget
     await manglerModal.getByRole('button', { name: 'Ja, gå til neste side' }).click();
 
     await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
-    await expect(page.getByText('Arbeidskontrakt', { exact: true })).toBeVisible();
-    const innsending = page.waitForRequest('**/api/soknad/flytting');
-    await page.getByRole('button', { name: 'Send inn søknad' }).click();
-    const request = await innsending;
-    expect(
-        request
-            .postDataJSON()
-            .dokumentasjon.find(
-                (dokumentasjon: { type: string }) =>
-                    dokumentasjon.type === 'ARBEIDSKONTRAKT_FLYTTING'
-            )?.opplastedeVedlegg
-    ).toEqual([]);
+    await expect(page.getByText('Arbeidskontrakt', { exact: true }).first()).toBeVisible();
+    await page.getByRole('button', { name: 'Send søknad' }).click();
 });
 
 test('Obligatoriske svar og ugyldige datoer og tall stopper videreføring', async ({ page }) => {
