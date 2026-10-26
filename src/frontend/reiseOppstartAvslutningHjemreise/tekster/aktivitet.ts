@@ -45,14 +45,14 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
                 tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
             del1: {
                 nb: [
-                    'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du registrert arbeidssøker kan vi ikke hente det.',
+                    'Vi henter tiltak og utdanning registrert på deg 6 måneder tilbake i tid.',
                     'Hvis aktiviteten din mangler eller det er noe feil anbefaler vi deg å ta kontakt med veilederen din. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
                 ],
             },
             del2_lenker: [],
             del3: {
                 nb: [
-                    'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for mer enn 3 måneder siden, må du ',
+                    'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for mer enn 6 måneder siden, må du ',
                     {
                         tekst: 'fylle ut papirsøknad',
                         url: 'https://www.nav.no/fyllut/nav111218b?sub=paper',
@@ -72,10 +72,10 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         nb: 'Ut i fra svarene dine ser det ikke ut som du deltar på arbeidsrettet aktivitet. Du kan fortsatt søke, men vil mest sannsynlig få avslag.',
     },
     radio_annet_lesmer: {
-        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
+        header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
         innhold: {
             nb: [
-                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 3 måneder siden. ',
+                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden. ',
                 {
                     tekst: 'Søknad på papir',
                     url: 'https://www.nav.no/fyllut/nav111218b?sub=paper',
