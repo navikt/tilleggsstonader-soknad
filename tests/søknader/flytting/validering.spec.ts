@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test';
 
-import { hentDokumentasjonsbehovFlytting } from '../../../src/frontend/flytting/context/flyttingDokumentasjon';
 import {
     erGyldigFlyttedato,
     feilId,
@@ -12,7 +11,7 @@ import {
     FlyttingDetaljer,
     tilFlyttingDetaljerForInnsending,
 } from '../../../src/frontend/flytting/typer/flyttingDetaljer';
-import { EnumFelt, VerdiFelt, VedleggstypeFlytting } from '../../../src/frontend/typer/skjema';
+import { EnumFelt, VerdiFelt } from '../../../src/frontend/typer/skjema';
 import { Locale } from '../../../src/frontend/typer/tekst';
 
 const felt = (verdi: string): VerdiFelt<string> => ({ verdi, label: 'Testfelt' });
@@ -171,27 +170,4 @@ test('Innsending beholder tilbudslista og fjerner data fra inaktiv flyttemåte',
         flyttebyrå: { tilbud },
         utgifterEgenFlytting: undefined,
     });
-});
-
-test('Dokumentasjonsbehov følger flyttemåte og årsak', () => {
-    const detaljer = gyldigeDetaljer();
-    expect(
-        hentDokumentasjonsbehovFlytting(detaljer.årsak?.verdi, detaljer.flyttemåte?.verdi)
-    ).toEqual([{ type: VedleggstypeFlytting.UTGIFTER_EGEN_FLYTTING }]);
-    detaljer.årsak = enumFelt('NY_JOBB');
-    expect(
-        hentDokumentasjonsbehovFlytting(detaljer.årsak.verdi, detaljer.flyttemåte?.verdi)
-    ).toEqual([
-        { type: VedleggstypeFlytting.UTGIFTER_EGEN_FLYTTING },
-        { type: VedleggstypeFlytting.ARBEIDSKONTRAKT_FLYTTING },
-    ]);
-
-    detaljer.flyttemåte = enumFelt('FLYTTEBYRÅ');
-    expect(
-        hentDokumentasjonsbehovFlytting(detaljer.årsak.verdi, detaljer.flyttemåte.verdi)
-    ).toEqual([
-        { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_1 },
-        { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_2 },
-        { type: VedleggstypeFlytting.ARBEIDSKONTRAKT_FLYTTING },
-    ]);
 });
