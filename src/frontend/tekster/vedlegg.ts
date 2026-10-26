@@ -1,6 +1,7 @@
 import { typerVedleggTeksterKjørelister } from '../kjørelister/tekster/vedlegg';
 import { typerVedleggTeksterLæremidler } from '../læremidler/tekster/vedlegg';
 import { typerVedleggTeksterPassAvBarn } from '../passAvBarn/tekster/vedlegg';
+import { typerVedleggTeksterROAH } from '../reiseOppstartAvslutningHjemreise/tekster/vedlegg';
 import { typerVedleggTeksterReiseTilSamling } from '../reiseTilSamling/tekster/vedlegg';
 import { TekstElement } from '../typer/tekst';
 
@@ -9,6 +10,7 @@ export const typerVedleggTekster = {
     ...typerVedleggTeksterPassAvBarn,
     ...typerVedleggTeksterKjørelister,
     ...typerVedleggTeksterReiseTilSamling,
+    ...typerVedleggTeksterROAH,
 };
 
 interface VedleggInnhold {

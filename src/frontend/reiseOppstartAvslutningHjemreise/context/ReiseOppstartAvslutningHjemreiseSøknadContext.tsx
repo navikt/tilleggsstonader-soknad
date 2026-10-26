@@ -11,11 +11,7 @@ import {
     initialHovedytelse,
     initialReiser,
 } from './reiseOppstartAvslutningHjemreiseInitialState';
-import {
-    DokumentasjonFelt,
-    Dokumentasjonsbehov,
-    VedleggstypeReiseTilSamling,
-} from '../../typer/skjema';
+import { DokumentasjonFelt, Dokumentasjonsbehov, VedleggstypeROAH } from '../../typer/skjema';
 import { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
 import {
     AdresseReiseOppstartAvslutningHjemreise,
@@ -59,20 +55,36 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             );
 
             if (transportmidlerBenyttet.includes('OFFENTLIG_TRANSPORT')) {
-                behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_OFFENTLIG_TRANSPORT });
+                behov.push({ type: VedleggstypeROAH.UTGIFTER_ROAH });
             }
 
             if (transportmidlerBenyttet.includes('DROSJE')) {
-                behov.push({ type: VedleggstypeReiseTilSamling.UTGIFTER_TAXI });
+                behov.push({ type: VedleggstypeROAH.UTGIFTER_ROAH });
             }
 
             if (reisemåter.some((reisemåte) => reisemåte?.drosje?.harTTKort?.verdi === 'JA')) {
-                behov.push({ type: VedleggstypeReiseTilSamling.TT_KORT });
+                behov.push({ type: VedleggstypeROAH.TT_KORT_ROAH });
             }
 
             if (barnOgSærligeBehov?.harSærligeBehovForFlereHjemreiser?.verdi === 'JA') {
                 behov.push({
-                    type: VedleggstypeReiseTilSamling.SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING,
+                    type: VedleggstypeROAH.SÆRLIGE_BEHOV_ROAH,
+                });
+            }
+
+            if (
+                reisemåter.some(
+                    (reisemåte) =>
+                        reisemåte?.unntakFraOffentligTransport?.årsaker?.verdier.some(
+                            (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
+                        ) ||
+                        reisemåte?.unntakFraPrivatBil?.verdier.some(
+                            (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
+                        )
+                )
+            ) {
+                behov.push({
+                    type: VedleggstypeROAH.SKRIFTLIG_UTTALELSE_HELSEPERSONELL_ROAH,
                 });
             }
 

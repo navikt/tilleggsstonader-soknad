@@ -47,7 +47,8 @@ export type Vedleggstype =
     | VedleggstypePassAvBarn
     | VedleggstypeLæremidler
     | VedleggstypeKjøreliste
-    | VedleggstypeReiseTilSamling;
+    | VedleggstypeReiseTilSamling
+    | VedleggstypeROAH;
 
 export enum VedleggstypePassAvBarn {
     UTGIFTER_PASS_SFO_AKS_BARNEHAGE = 'UTGIFTER_PASS_SFO_AKS_BARNEHAGE',
@@ -71,4 +72,11 @@ export enum VedleggstypeReiseTilSamling {
     SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING = 'SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING',
     UTGIFTER_TAXI = 'UTGIFTER_TAXI',
     TT_KORT = 'TT_KORT',
+}
+
+export enum VedleggstypeROAH {
+    UTGIFTER_ROAH = 'UTGIFTER_ROAH',
+    SKRIFTLIG_UTTALELSE_HELSEPERSONELL_ROAH = 'SKRIFTLIG_UTTALELSE_HELSEPERSONELL_ROAH',
+    SÆRLIGE_BEHOV_ROAH = 'SÆRLIGE_BEHOV_ROAH',
+    TT_KORT_ROAH = 'TT_KORT_ROAH',
 }
