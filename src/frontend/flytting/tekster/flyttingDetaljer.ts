@@ -7,6 +7,10 @@ interface FlyttingDetaljerInnhold {
     tittel: TekstElement<string>;
     radio_årsak: RadiogruppePåkrevd<Flytteårsak>;
     dato_flytting: InputFelt;
+    radio_skalFlytteFraFolkeregistrertAdresse: RadiogruppePåkrevd<JaNei>;
+    folkereg_adresse: TekstElement<string>;
+    adresse_fra_tittel: TekstElement<string>;
+    adresse_fra_spørsmål: Record<keyof Adresse, InputFelt>;
     adresse_tittel: TekstElement<string>;
     adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     radio_flyttemåte: RadiogruppePåkrevd<Flyttemåte>;
@@ -49,6 +53,22 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         label: { nb: 'Flyttedato' },
         description: { nb: 'Format: dd.mm.åååå' },
         feilmelding: { nb: 'Oppgi en gyldig flyttedato på formatet dd.mm.åååå.' },
+    },
+    radio_skalFlytteFraFolkeregistrertAdresse: {
+        header: { nb: 'Flytter du fra din folkeregistrerte adresse?' },
+        alternativer: JaNeiTilTekst,
+        feilmelding: { nb: 'Du må svare på om du flytter fra din folkeregistrerte adresse.' },
+    },
+    folkereg_adresse: { nb: 'Din folkeregistrerte adresse er [0].' },
+    adresse_fra_tittel: { nb: 'Oppgi adressen du flytter fra' },
+    adresse_fra_spørsmål: {
+        land: { label: { nb: 'Velg land' }, feilmelding: { nb: 'Du må velge land.' } },
+        gateadresse: {
+            label: { nb: 'Gateadresse' },
+            feilmelding: { nb: 'Du må oppgi gateadresse.' },
+        },
+        postnummer: { label: { nb: 'Postnummer' }, feilmelding: { nb: 'Du må oppgi postnummer.' } },
+        poststed: { label: { nb: 'Poststed' }, feilmelding: { nb: 'Du må oppgi poststed.' } },
     },
     adresse_tittel: { nb: 'Adressen du flytter til' },
     adresse_spørsmål: {

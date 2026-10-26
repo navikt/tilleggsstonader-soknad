@@ -43,6 +43,8 @@ export interface FlyttingDetaljer {
     årsak?: EnumFelt<Flytteårsak>;
     flyttedato?: VerdiFelt<string>;
     adresse?: Adresse;
+    skalFlytteFraFolkeregistrertAdresse?: EnumFelt<JaNei>;
+    adresseDetSkalFlyttesFra?: Adresse;
     flyttemåte?: EnumFelt<Flyttemåte>;
     utgifterDekketPåAnnenMåte?: EnumFelt<JaNei>;
     utgifterEgenFlytting?: UtgifterEgenFlytting;
