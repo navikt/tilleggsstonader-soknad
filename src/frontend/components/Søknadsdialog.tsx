@@ -6,7 +6,7 @@ import { Kvittering } from './Kvittering/Kvittering';
 import { RedirectTilStart } from './RedirectTilStart';
 import { RootRoute } from './RootRoute';
 import { SøknadsskjemaHeader } from './SøknadsskjemaHeader';
-import { skjematypeTilSkjemaId } from '../typer/skjemanavn';
+import { skjematypeTilSkjemainfo } from '../typer/skjemanavn';
 import { Skjematype } from '../typer/skjematyper';
 import { TekstElement } from '../typer/tekst';
 import { hentStartRoute } from '../utils/routeUtils';
@@ -35,7 +35,10 @@ export const Søknadsdialog: React.FC<Props> = ({
 }) => {
     return (
         <>
-            <SøknadsskjemaHeader tittel={tittel} skjemaId={skjematypeTilSkjemaId[skjematype]} />
+            <SøknadsskjemaHeader
+                tittel={tittel}
+                skjemaId={skjematypeTilSkjemainfo[skjematype].skjemaId}
+            />
             <Routes>
                 <Route path={'/'} element={<RootRoute forside={forside} />} />
                 {offentligeSteg.map((it) => (

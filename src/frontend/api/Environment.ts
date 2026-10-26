@@ -1,3 +1,4 @@
+import { skjematypeTilSkjemainfo } from '../typer/skjemanavn';
 import { Skjematype } from '../typer/skjematyper';
 
 interface EnvironmentProps {
@@ -14,18 +15,11 @@ interface IModellversjon {
     pass_av_barn: number;
 }
 
-const SkjematypeTilPapirskjema: Record<Skjematype, string> = {
-    [Skjematype.SØKNAD_PASS_AV_BARN]: 'nav111215b',
-    [Skjematype.SØKNAD_LÆREMIDLER]: 'nav111216b',
-    [Skjematype.SØKNAD_REISE_TIL_SAMLING]: 'nav111217b',
-    [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: 'nav111218b',
-};
-
 const urlPapirsøknadProd = (skjematype: Skjematype) =>
-    `https://www.nav.no/fyllut/${SkjematypeTilPapirskjema[skjematype]}?sub=paper`;
+    `https://www.nav.no/fyllut/${skjematypeTilSkjemainfo[skjematype].papirskjemaId}?sub=paper`;
 
 const urlPapirsøknadDev = (skjematype: Skjematype) =>
-    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${SkjematypeTilPapirskjema[skjematype]}?sub=paper`;
+    `https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/${skjematypeTilSkjemainfo[skjematype].papirskjemaId}?sub=paper`;
 
 export const Environment = (): EnvironmentProps => {
     const modellVersjon = { overgangsstønad: 7, pass_av_barn: 2, skolepenger: 2 };

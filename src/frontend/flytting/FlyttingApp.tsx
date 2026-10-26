@@ -1,16 +1,46 @@
 import React from 'react';
 
-import { BodyShort, Heading } from '@navikt/ds-react';
+import { FlyttingSøknadProvider, useFlyttingSøknad } from './context/FlyttingSøknadContext';
+import { Søknadsdialog } from './Søknadsdialog';
+import { tilFlyttingDetaljerForInnsending } from './typer/flyttingDetaljer';
+import { SøknadAppShell } from '../components/SøknadAppShell';
+import { SøknadProvider } from '../context/SøknadContext';
+import { useValideringsfeil } from '../context/ValideringsfeilContext';
+import { Skjematype } from '../typer/skjematyper';
+import { appConfig } from '../utils/appConfig';
+import { useDokumentTittel } from '../utils/useDokumentTittel';
 
-import { Container } from '../components/Side';
+const FlyttingInnhold = () => {
+    const { resetValideringsfeil } = useValideringsfeil();
+    const { resetSøknad, hovedytelse, dokumentasjon, flyttingDetaljer } = useFlyttingSøknad();
 
-export const flyttingPath = '/flytting';
+    return (
+        <SøknadProvider
+            skjematype={Skjematype.SØKNAD_FLYTTING}
+            søknad={{
+                hovedytelse,
+                flyttingDetaljer: tilFlyttingDetaljerForInnsending(flyttingDetaljer),
+                dokumentasjon,
+                søknadMetadata: {
+                    søknadFrontendGitHash: appConfig.commitHash,
+                },
+            }}
+            resetValideringsfeil={resetValideringsfeil}
+            resetSøknad={resetSøknad}
+        >
+            <Søknadsdialog />
+        </SøknadProvider>
+    );
+};
 
-export const FlyttingApp: React.FC = () => (
-    <Container>
-        <Heading size="xlarge" as="h1">
-            Søknad om støtte til flytting
-        </Heading>
-        <BodyShort>Søknaden er under utvikling.</BodyShort>
-    </Container>
-);
+export const FlyttingApp = () => {
+    useDokumentTittel(Skjematype.SØKNAD_FLYTTING);
+
+    return (
+        <SøknadAppShell skjematype={Skjematype.SØKNAD_FLYTTING}>
+            <FlyttingSøknadProvider>
+                <FlyttingInnhold />
+            </FlyttingSøknadProvider>
+        </SøknadAppShell>
+    );
+};

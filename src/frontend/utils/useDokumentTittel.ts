@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
 import { useSpråk } from '../context/SpråkContext';
-import { teksterStønad } from '../tekster/stønad';
+import { skjematypeTilSkjemainfo } from '../typer/skjemanavn';
 import { Skjematype } from '../typer/skjematyper';
 
 export const useDokumentTittel = (skjematype: Skjematype) => {
     const { locale } = useSpråk();
 
     useEffect(() => {
-        document.title = teksterStønad.tittelHtml[skjematype][locale];
+        document.title = skjematypeTilSkjemainfo[skjematype].dokumentTittel[locale];
     }, [locale, skjematype]);
 };

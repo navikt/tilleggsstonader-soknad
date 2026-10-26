@@ -1,3 +1,4 @@
+import { FlyttingSteg, routesFlytting } from '../flytting/routing/routesFlytting';
 import { LæremidlerSteg, routesLæremidler } from '../læremidler/routing/routesLæremidler';
 import { PassAvBarnSteg, routesPassAvBarn } from '../passAvBarn/routing/routesPassAvBarn';
 import {
@@ -12,13 +13,18 @@ import { IRoute } from '../typer/routes';
 import { Skjematype } from '../typer/skjematyper';
 
 export type Skjemasteg =
-    PassAvBarnSteg | LæremidlerSteg | ReiseTilSamlingSteg | ReiseOppstartAvslutningHjemreiseSteg;
+    | PassAvBarnSteg
+    | LæremidlerSteg
+    | ReiseTilSamlingSteg
+    | ReiseOppstartAvslutningHjemreiseSteg
+    | FlyttingSteg;
 
 const routesPerSkjematype: Record<Skjematype, IRoute<Skjemasteg>[]> = {
     [Skjematype.SØKNAD_PASS_AV_BARN]: routesPassAvBarn,
     [Skjematype.SØKNAD_LÆREMIDLER]: routesLæremidler,
     [Skjematype.SØKNAD_REISE_TIL_SAMLING]: routesReiseTilSamling,
     [Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE]: routesReiseOppstartAvslutningHjemreise,
+    [Skjematype.SØKNAD_FLYTTING]: routesFlytting,
 };
 
 export const hentRoutes = (skjematype: Skjematype): IRoute<Skjemasteg>[] =>

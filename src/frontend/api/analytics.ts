@@ -1,7 +1,7 @@
 import { logAnalyticsCustomEvent } from '@navikt/nav-dekoratoren-moduler';
 
 import { Environment } from './Environment';
-import { skjematypeTilSkjemaId, skjematypeTilSkjemanavn } from '../typer/skjemanavn';
+import { skjematypeTilSkjemainfo } from '../typer/skjemanavn';
 import { Skjematype } from '../typer/skjematyper';
 
 const APP_NAVN = 'tilleggsstonader-soknad';
@@ -41,8 +41,8 @@ export const sendUmamiEvent = (
         origin: APP_NAVN,
         eventName: event,
         eventData: {
-            skjemanavn: skjematypeTilSkjemanavn[skjematype],
-            skjemaId: skjematypeTilSkjemaId[skjematype],
+            skjemanavn: skjematypeTilSkjemainfo[skjematype].skjemanavn,
+            skjemaId: skjematypeTilSkjemainfo[skjematype].skjemaId,
             ...eventProperties,
         },
     }).catch(() => {

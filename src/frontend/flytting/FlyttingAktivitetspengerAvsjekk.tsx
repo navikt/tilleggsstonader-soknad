@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { flyttingPath } from './FlyttingApp';
 import { flyttingAvsjekkTekster } from './flyttingAvsjekkTekster';
+import { flyttingPath } from './routing/routesFlytting';
 import { MottarAktivitetspengerAvsjekk } from '../components/Avsjekk/MottarAktivitetspengerAvsjekk';
 import { SkjematypeFyllUt } from '../typer/skjematype';
 

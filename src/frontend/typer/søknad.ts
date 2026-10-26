@@ -2,6 +2,7 @@ import { AnnenAktivitetType } from './aktivitet';
 import { Reisemåte } from './reisemåte';
 import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
 import { Ytelse } from '../components/Hovedytelse/typer';
+import { FlyttingDetaljer } from '../flytting/typer/flyttingDetaljer';
 import { Utdanning } from '../læremidler/typer/søknad';
 import { Barnepass } from '../passAvBarn/typer/barnepass';
 import {
@@ -11,45 +12,44 @@ import {
 } from '../reiseOppstartAvslutningHjemreise/typer/søknad';
 import { AktivitetReiseTilSamling } from '../reiseTilSamling/typer/aktivitet';
 
-export type Søknad =
-    | SøknadPassAvBarn
-    | SøknadLæremidler
-    | SøknadReiseTilSamling
-    | SøknadReiseOppstartAvslutningHjemreise;
-
-export interface SøknadPassAvBarn {
+export interface SøknadBase {
     hovedytelse: Hovedytelse | undefined;
+    dokumentasjon: DokumentasjonFelt[];
+    søknadMetadata: SøknadMetadata;
+}
+
+export interface SøknadPassAvBarn extends SøknadBase {
     aktivitet: AktivitetFelles | undefined;
     barnMedBarnepass: Barnepass[];
-    dokumentasjon: DokumentasjonFelt[];
-    søknadMetadata: SøknadMetadata;
 }
 
-export interface SøknadLæremidler {
-    hovedytelse: Hovedytelse | undefined;
+export interface SøknadLæremidler extends SøknadBase {
     utdanning: Utdanning | undefined;
-    dokumentasjon: DokumentasjonFelt[];
-    søknadMetadata: SøknadMetadata;
 }
 
-export interface SøknadReiseTilSamling {
-    hovedytelse: Hovedytelse | undefined;
+export interface SøknadReiseTilSamling extends SøknadBase {
     aktivitet: AktivitetReiseTilSamling | undefined;
     samlinger: Samling[];
     avreiseadresse?: Avreiseadresse;
-    dokumentasjon: DokumentasjonFelt[];
-    søknadMetadata: SøknadMetadata;
 }
 
-export interface SøknadReiseOppstartAvslutningHjemreise {
-    hovedytelse: Hovedytelse | undefined;
+export interface SøknadReiseOppstartAvslutningHjemreise extends SøknadBase {
     aktivitet: AktivitetFelles | undefined;
     adresser: AdresseReiseOppstartAvslutningHjemreise | undefined;
     barnOgSærligeBehov: BarnOgSærligeBehovReiseOppstartAvslutningHjemreise | undefined;
     reiser: ReiseInfoReiseOppstartAvslutningHjemreise[];
-    dokumentasjon: DokumentasjonFelt[];
-    søknadMetadata: SøknadMetadata;
 }
+
+export interface SøknadFlytting extends SøknadBase {
+    flyttingDetaljer: FlyttingDetaljer | undefined;
+}
+
+export type Søknad =
+    | SøknadPassAvBarn
+    | SøknadLæremidler
+    | SøknadReiseTilSamling
+    | SøknadReiseOppstartAvslutningHjemreise
+    | SøknadFlytting;
 
 export interface Adresse {
     land?: SelectFelt;
