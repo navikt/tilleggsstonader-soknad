@@ -213,9 +213,6 @@ export const AktivitetReiseOppstartAvslutningHjemreise = () => {
                 />
             )}
 
-            {annenAktivitet?.verdi === AnnenAktivitetType.ARBEIDSSØKER && (
-                <AlertIkkeRett beskrivelse={aktivitetTekster.info_arbeidssøker_ingen_rett} />
-            )}
             {annenAktivitet?.verdi === AnnenAktivitetType.INGEN_AKTIVITET && (
                 <AlertIkkeRett beskrivelse={aktivitetTekster.ingen_aktivitet_infoalert_innhold} />
             )}
