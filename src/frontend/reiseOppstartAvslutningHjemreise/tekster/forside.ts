@@ -25,8 +25,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     veileder_innhold: {
         nb: [
-            'Her kan du søke om pengestøtte til reise på grunn av oppstart, avslutning og hjemreise.',
-            'Pengestøtten gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar arbeidsavklaringspenger, aktivitetspenger, dagpenger, kvalifiseringsstønad eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
+            'Her kan du søke om pengestøtte til reise ved oppstart, avslutning og hjemreise, for å dekke reiseutgifter mellom hjemstedet ditt og aktivitetsstedet når du midlertidig må bo borte for å delta på arbeidsrettet tiltak eller utdanning/opplæring godkjent av Nav.',
         ],
     },
     dette_ma_du_vite_tittel: {
@@ -34,12 +33,10 @@ export const forsideTekster: ForsideInnhold = {
     },
     dette_ma_du_vite_innhold: {
         nb: [
-            'Nav kan dekke reiseutgifter mellom hjemstedet ditt og aktivitetsstedet når du midlertidig må bo borte for å delta på arbeidsrettet tiltak eller utdanning/opplæring godkjent av Nav.',
+            'Pengestøtten kan gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, har nedsatt arbeidsevne, mottar arbeidsavklaringspenger (AAP), uføretrygd, aktivitetspenger, tiltakspenger, dagpenger, kvalifiseringsstønad eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
             'Du får som hovedregel dekket den billigste reisemåten med offentlig transport. Hvis det ikke er praktisk mulig å bruke offentlig transport, kan du få dekket nødvendige utgifter til annen reisemåte.',
             'Du kan få dekket reiseutgifter til oppstart, avslutning og hjemreiser, og får vanligvis dekket inntil 4 hjemreiser tur/retur per år.',
-            'Du kan få dekket utgifter til flere hjemreiser hvis du har barn som ennå ikke har fullført 4. skoleår og blir igjen på hjemstedet.',
-            'Du kan også få dekket utgifter til hjemreise ved særlige grunner som for eksempel helsemessige årsaker.',
-            'Hvis tiltaket varer i flere år, må du sende ny søknad for hvert år.',
+            'Du kan få dekket utgifter til flere hjemreiser hvis du har barn som ennå ikke har fullført 4. skoleår og blir igjen på hjemstedet, eller ved særlige grunner som for eksempel helsemessige årsaker.',
             'Du kan få dekket reiseutgifter for barn under 18 år som flytter sammen med deg.',
             'Du får støtten utbetalt i etterkant, basert på innsendt dokumentasjon som for eksempel kvitteringer på reiseutgifter.',
         ],
@@ -51,6 +48,7 @@ export const forsideTekster: ForsideInnhold = {
         nb: [
             'Du må gi oss beskjed hvis situasjonen din endrer seg, for eksempel hvis du avbryter tiltaket eller utdanningen.',
             'Hvis du får penger du ikke har rett på, kan vi kreve dem tilbake.',
+            'Hvis din arbeidsrettede aktivitet varer i flere år, må du sende ny søknad for hvert år.',
         ],
     },
     kan_ikke_soke_tittel: {
