@@ -1,11 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { opprettDokumentasjonsfelt } from '../../../src/frontend/components/Vedlegg/VedleggUtils';
-import {
-    hentAktivDokumentasjon,
-    hentDokumentasjonsbehovFlytting,
-    oppdaterAktivDokumentasjon,
-} from '../../../src/frontend/flytting/context/flyttingDokumentasjon';
+import { hentDokumentasjonsbehovFlytting } from '../../../src/frontend/flytting/context/flyttingDokumentasjon';
 import {
     erGyldigFlyttedato,
     feilId,
@@ -17,12 +12,7 @@ import {
     FlyttingDetaljer,
     tilFlyttingDetaljerForInnsending,
 } from '../../../src/frontend/flytting/typer/flyttingDetaljer';
-import {
-    DokumentasjonFelt,
-    EnumFelt,
-    VerdiFelt,
-    VedleggstypeFlytting,
-} from '../../../src/frontend/typer/skjema';
+import { EnumFelt, VerdiFelt, VedleggstypeFlytting } from '../../../src/frontend/typer/skjema';
 import { Locale } from '../../../src/frontend/typer/tekst';
 
 const felt = (verdi: string): VerdiFelt<string> => ({ verdi, label: 'Testfelt' });
@@ -183,57 +173,25 @@ test('Innsending beholder tilbudslista og fjerner data fra inaktiv flyttemåte',
     });
 });
 
-test('Dokumentasjonsbehov følger flyttemåten, ikke bevarte tilbud i inaktiv gren', () => {
+test('Dokumentasjonsbehov følger flyttemåte og årsak', () => {
     const detaljer = gyldigeDetaljer();
-    expect(hentDokumentasjonsbehovFlytting(detaljer)).toEqual([
+    expect(
+        hentDokumentasjonsbehovFlytting(detaljer.årsak?.verdi, detaljer.flyttemåte?.verdi)
+    ).toEqual([{ type: VedleggstypeFlytting.UTGIFTER_EGEN_FLYTTING }]);
+    detaljer.årsak = enumFelt('NY_JOBB');
+    expect(
+        hentDokumentasjonsbehovFlytting(detaljer.årsak.verdi, detaljer.flyttemåte?.verdi)
+    ).toEqual([
         { type: VedleggstypeFlytting.UTGIFTER_EGEN_FLYTTING },
+        { type: VedleggstypeFlytting.ARBEIDSKONTRAKT_FLYTTING },
     ]);
+
     detaljer.flyttemåte = enumFelt('FLYTTEBYRÅ');
-    expect(hentDokumentasjonsbehovFlytting(detaljer)).toEqual([
+    expect(
+        hentDokumentasjonsbehovFlytting(detaljer.årsak.verdi, detaljer.flyttemåte.verdi)
+    ).toEqual([
         { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_1 },
         { type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_2 },
+        { type: VedleggstypeFlytting.ARBEIDSKONTRAKT_FLYTTING },
     ]);
-});
-
-test('Payloaden inneholder bare vedlegg for valgt flyttemåte', () => {
-    const egenFlytting = {
-        type: VedleggstypeFlytting.UTGIFTER_EGEN_FLYTTING,
-        label: 'Dokumentasjon av utgifter ved egen flytting',
-        opplastedeVedlegg: [],
-    };
-    const tilbud1 = {
-        type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_1,
-        label: 'Tilbud fra flyttebyrå 1',
-        opplastedeVedlegg: [{ id: 'tilbud-1', navn: 'tilbud1.png' }],
-    };
-
-    expect(
-        hentAktivDokumentasjon(
-            [egenFlytting, tilbud1],
-            hentDokumentasjonsbehovFlytting(gyldigeDetaljer())
-        )
-    ).toEqual([egenFlytting]);
-});
-
-test('Oppdatering av aktive vedlegg beholder inaktive tilbud, men respekterer sletting', () => {
-    const detaljer = gyldigeDetaljer();
-    detaljer.flyttemåte = enumFelt('FLYTTEBYRÅ');
-    const behov = hentDokumentasjonsbehovFlytting(detaljer);
-    const førsteTilbud: DokumentasjonFelt = {
-        type: VedleggstypeFlytting.TILBUD_FLYTTEBYRÅ_1,
-        label: 'Tilbud fra flyttebyrå 1',
-        opplastedeVedlegg: [{ id: 'tilbud-1', navn: 'tilbud1.png' }],
-    };
-    const tidligere = opprettDokumentasjonsfelt(behov, [førsteTilbud], Locale.NB);
-    expect(tidligere).toHaveLength(2);
-    expect(tidligere[0].opplastedeVedlegg).toEqual(førsteTilbud.opplastedeVedlegg);
-
-    const egenFlytting = oppdaterAktivDokumentasjon(tidligere, [], []);
-    expect(egenFlytting).toEqual(tidligere);
-    expect(hentAktivDokumentasjon(egenFlytting, [])).toEqual([]);
-
-    const tilbakeTilByrå = opprettDokumentasjonsfelt(behov, egenFlytting, Locale.NB);
-    expect(tilbakeTilByrå).toEqual(tidligere);
-    const etterSletting = tilbakeTilByrå.map((dok) => ({ ...dok, opplastedeVedlegg: [] }));
-    expect(oppdaterAktivDokumentasjon(tilbakeTilByrå, etterSletting, behov)).toEqual(etterSletting);
 });

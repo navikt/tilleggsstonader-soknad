@@ -11,10 +11,8 @@ interface FlyttingDetaljerInnhold {
     adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     radio_flyttemåte: RadiogruppePåkrevd<Flyttemåte>;
     radio_annen_dekning: RadiogruppePåkrevd<JaNei>;
-    varsel_dokumentasjon: {
-        tittel: TekstElement<string>;
-        innhold: TekstElement<string>;
-    };
+    varsel_dokumentasjon: TekstElement<string>;
+    varsel_arbeidskontrakt: TekstElement<string>;
     egenutgifter_tittel: TekstElement<string>;
     antall_km: InputFelt;
     egenutgifter_beløp: Record<EgenutgiftFelt, InputFelt>;
@@ -71,10 +69,10 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         feilmelding: { nb: 'Du må velge hvordan du skal flytte.' },
     },
     varsel_dokumentasjon: {
-        tittel: { nb: 'Dokumentasjon av utgifter' },
-        innhold: {
-            nb: 'Du må dokumentere alle utgiftene du søker om. Hvis du ikke har dokumentasjonen nå, kan du ettersende den senere.',
-        },
+        nb: 'Du må dokumentere alle utgiftene du søker om. Hvis du ikke har dokumentasjonen nå, kan du ettersende den senere.',
+    },
+    varsel_arbeidskontrakt: {
+        nb: 'Du må legge ved arbeidskontrakten din. Har du ikke den nå, kan du ettersende den senere.',
     },
     radio_annen_dekning: {
         header: {

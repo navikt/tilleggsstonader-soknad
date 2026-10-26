@@ -51,6 +51,7 @@ export type Vedleggstype =
     | VedleggstypeFlytting;
 
 export enum VedleggstypeFlytting {
+    ARBEIDSKONTRAKT_FLYTTING = 'ARBEIDSKONTRAKT_FLYTTING',
     UTGIFTER_EGEN_FLYTTING = 'UTGIFTER_EGEN_FLYTTING',
     TILBUD_FLYTTEBYRÅ_1 = 'TILBUD_FLYTTEBYRÅ_1',
     TILBUD_FLYTTEBYRÅ_2 = 'TILBUD_FLYTTEBYRÅ_2',
