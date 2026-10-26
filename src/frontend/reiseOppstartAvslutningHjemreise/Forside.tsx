@@ -73,6 +73,7 @@ export const Forside: React.FC = () => {
                 />
                 <LocalePunktliste innhold={forsideTekster.dette_ma_du_vite_innhold} />
             </div>
+            <EndringEnsligForsørgerExpansionCard />
             <div>
                 <LocaleHeading
                     tekst={forsideTekster.var_klar_over_tittel}
@@ -91,7 +92,6 @@ export const Forside: React.FC = () => {
                 />
                 <LocalePunktliste innhold={forsideTekster.kan_ikke_soke_innhold} />
             </div>
-            <EndringEnsligForsørgerExpansionCard />
             <Accordion>
                 <Accordion.Item>
                     <Accordion.Header>

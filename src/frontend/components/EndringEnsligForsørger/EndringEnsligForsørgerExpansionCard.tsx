@@ -10,7 +10,11 @@ export const EndringEnsligForsørgerExpansionCard: React.FC = () => {
     const { locale } = useSpråk();
 
     return (
-        <ExpansionCard aria-label={endringEnsligForsørgerTekster.tittel[locale]} data-color="info">
+        <ExpansionCard
+            aria-label={endringEnsligForsørgerTekster.tittel[locale]}
+            data-color="info"
+            border-color="info"
+        >
             <ExpansionCard.Header>
                 <ExpansionCard.Title as="h2" size="small">
                     <LocaleTekst tekst={endringEnsligForsørgerTekster.tittel} />
