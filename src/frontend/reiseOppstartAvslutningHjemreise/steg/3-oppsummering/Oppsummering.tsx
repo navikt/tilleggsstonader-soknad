@@ -5,14 +5,22 @@ import { ReiseinfoOppsummering } from './ReiseinfoOppsummering';
 import { HovedytelseOppsummering } from '../../../components/Oppsummering/Hovedytelse/Hovedytelse';
 import { OmDegOppsummering } from '../../../components/Oppsummering/OmDegOppsummering';
 import { OppsummeringSide } from '../../../components/Oppsummering/OppsummeringSide';
+import { VedleggOppsummering } from '../../../components/Oppsummering/VedleggOppsummering';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { useReiseOppstartAvslutningHjemreiseSøknad } from '../../context/ReiseOppstartAvslutningHjemreiseSøknadContext';
 import { RouteTilPath } from '../../routing/routesReiseOppstartAvslutningHjemreise';
 import { oppsummeringTekster } from '../../tekster/oppsummering';
 
 export const Oppsummering = () => {
-    const { hovedytelse, aktivitet, adresser, barnOgSærligeBehov, reiser } =
-        useReiseOppstartAvslutningHjemreiseSøknad();
+    const {
+        hovedytelse,
+        aktivitet,
+        adresser,
+        barnOgSærligeBehov,
+        reiser,
+        dokumentasjonsbehov,
+        dokumentasjon,
+    } = useReiseOppstartAvslutningHjemreiseSøknad();
 
     return (
         <OppsummeringSide>
@@ -30,6 +38,12 @@ export const Oppsummering = () => {
                 <BarnOgSærligeBehovOppsummering barnOgSærligeBehov={barnOgSærligeBehov} />
             )}
             {reiser.length > 0 && <ReiseinfoOppsummering reiser={reiser} />}
+            {dokumentasjonsbehov.length > 0 && (
+                <VedleggOppsummering
+                    dokumentasjon={dokumentasjon}
+                    redigerLenke={RouteTilPath.VEDLEGG}
+                />
+            )}
         </OppsummeringSide>
     );
 };

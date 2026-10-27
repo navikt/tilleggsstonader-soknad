@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import createUseContext from 'constate';
 
@@ -11,7 +11,7 @@ import {
     initialHovedytelse,
     initialReiser,
 } from './reiseOppstartAvslutningHjemreiseInitialState';
-import { DokumentasjonFelt } from '../../typer/skjema';
+import { DokumentasjonFelt, Dokumentasjonsbehov, VedleggstypeROAH } from '../../typer/skjema';
 import { AktivitetFelles, Hovedytelse } from '../../typer/søknad';
 import {
     AdresseReiseOppstartAvslutningHjemreise,
@@ -45,6 +45,52 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
         const [dokumentasjon, settDokumentasjon] =
             useState<DokumentasjonFelt[]>(initialDokumentasjon());
 
+        const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
+            const behov: Dokumentasjonsbehov[] = [];
+
+            const reisemåter = reiser.map((reise) => reise.reisemåte);
+            const transportmidlerBenyttet = reisemåter.flatMap(
+                (reisemåte) =>
+                    reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier.map((v) => v.verdi) ?? []
+            );
+
+            if (transportmidlerBenyttet.includes('OFFENTLIG_TRANSPORT')) {
+                behov.push({ type: VedleggstypeROAH.UTGIFTER_ROAH });
+            }
+
+            if (transportmidlerBenyttet.includes('DROSJE')) {
+                behov.push({ type: VedleggstypeROAH.UTGIFTER_ROAH });
+            }
+
+            if (reisemåter.some((reisemåte) => reisemåte?.drosje?.harTTKort?.verdi === 'JA')) {
+                behov.push({ type: VedleggstypeROAH.TT_KORT_ROAH });
+            }
+
+            if (barnOgSærligeBehov?.harSærligeBehovForFlereHjemreiser?.verdi === 'JA') {
+                behov.push({
+                    type: VedleggstypeROAH.SÆRLIGE_BEHOV_ROAH,
+                });
+            }
+
+            if (
+                reisemåter.some(
+                    (reisemåte) =>
+                        reisemåte?.unntakFraOffentligTransport?.årsaker?.verdier.some(
+                            (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
+                        ) ||
+                        reisemåte?.unntakFraPrivatBil?.verdier.some(
+                            (v) => v.verdi === 'HELSEMESSIGE_ÅRSAKER'
+                        )
+                )
+            ) {
+                behov.push({
+                    type: VedleggstypeROAH.SKRIFTLIG_UTTALELSE_HELSEPERSONELL_ROAH,
+                });
+            }
+
+            return behov;
+        }, [reiser, barnOgSærligeBehov?.harSærligeBehovForFlereHjemreiser?.verdi]);
+
         const resetSøknad = () => {
             settHarBekreftet(initialHarBekreftet());
             settHovedytelse(initialHovedytelse());
@@ -68,6 +114,7 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             settBarnOgSærligeBehov,
             reiser,
             settReiser,
+            dokumentasjonsbehov,
             dokumentasjon,
             settDokumentasjon,
             resetSøknad,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GuidePanel, InlineMessage } from '@navikt/ds-react';
+import { GuidePanel, InlineMessage, VStack } from '@navikt/ds-react';
 
 import { BarnSomFlytterMed } from './BarnSomFlytterMed';
 import {
@@ -83,21 +83,28 @@ export const BarnOgSærligeBehovSteg = () => {
                     />
                 </>
             )}
-
-            <LocaleRadioGroup
-                id={valideringsfeil[errorKeyHarSærligeBehovForFlereHjemreiser]?.id}
-                tekst={barnOgSærligeBehovTekster.radio_har_særlige_behov_for_flere_hjemreiser}
-                // description="I særlige tilfeller kan det gis støtte til flere hjemreiser. Særlige tilfeller kan være behov for reise knyttet til egen sykdom, behandling eller sykdom hos nær familie. Behovet for antall hjemreiser vurderes individuelt."
-                value={barnOgSærligeBehov?.harSærligeBehovForFlereHjemreiser?.verdi ?? ''}
-                onChange={(verdi) =>
-                    oppdaterEnumFelt(
-                        'harSærligeBehovForFlereHjemreiser',
-                        errorKeyHarSærligeBehovForFlereHjemreiser,
-                        verdi
-                    )
-                }
-                error={valideringsfeil[errorKeyHarSærligeBehovForFlereHjemreiser]?.melding}
-            />
+            <VStack gap="space-16">
+                <LocaleRadioGroup
+                    id={valideringsfeil[errorKeyHarSærligeBehovForFlereHjemreiser]?.id}
+                    tekst={barnOgSærligeBehovTekster.radio_har_særlige_behov_for_flere_hjemreiser}
+                    value={barnOgSærligeBehov?.harSærligeBehovForFlereHjemreiser?.verdi ?? ''}
+                    onChange={(verdi) =>
+                        oppdaterEnumFelt(
+                            'harSærligeBehovForFlereHjemreiser',
+                            errorKeyHarSærligeBehovForFlereHjemreiser,
+                            verdi
+                        )
+                    }
+                    error={valideringsfeil[errorKeyHarSærligeBehovForFlereHjemreiser]?.melding}
+                />
+                {barnOgSærligeBehov?.harSærligeBehovForFlereHjemreiser?.verdi === 'JA' && (
+                    <InlineMessage status="info">
+                        <LocaleTekstAvsnitt
+                            tekst={barnOgSærligeBehovTekster.advarsel_dokumentasjon_særlige_behov}
+                        />
+                    </InlineMessage>
+                )}
+            </VStack>
         </Side>
     );
 };
