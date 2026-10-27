@@ -133,8 +133,8 @@ test('Brukeren kan oppgi en annen adresse enn folkeregistrert adresse', async ({
     await page.getByRole('button', { name: 'Neste' }).click();
     await page.getByRole('dialog').getByRole('button', { name: 'Ja, gå til neste side' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
-    await expect(page.getByText('Hjemveien 2', { exact: true })).toBeVisible();
-    await expect(page.getByText('Testveien 1', { exact: true })).toBeVisible();
+    await expect(page.getByText('Hjemveien 2, 0123 Oslo, Norge', { exact: true })).toBeVisible();
+    await expect(page.getByText('Testveien 1, 0456 Bergen, Norge', { exact: true })).toBeVisible();
 });
 
 test('Brukeren må oppgi adresse fra manuelt når strukturert folkeregisteradresse mangler', async ({
