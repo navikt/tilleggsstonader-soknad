@@ -35,7 +35,7 @@ export const reisemåteTekster: ReisemåteTekstInnhold = {
                     nb: 'Helsemessige årsaker',
                 },
                 FRAKT_AV_NØDVENDIG_UTSTYR: {
-                    nb: 'Frakt av nødvendig utstyr til samlingen',
+                    nb: 'Frakt av nødvendig utstyr for å gjennomføre den arbeidsrettede aktiviteten',
                 },
                 ANNET: {
                     nb: 'Annet',
@@ -66,7 +66,7 @@ export const reisemåteTekster: ReisemåteTekstInnhold = {
                     nb: 'Helsemessige årsaker',
                 },
                 FRAKT_AV_NØDVENDIG_UTSTYR: {
-                    nb: 'Frakt av nødvendig utstyr til samlingen',
+                    nb: 'Frakt av nødvendig utstyr for å gjennomføre den arbeidsrettede aktiviteten',
                 },
                 LEVERING_HENTING_I_BARNEHAGE: {
                     nb: 'Levering/henting i barnehage eller skolefritidsordning (SFO/AKS)',
