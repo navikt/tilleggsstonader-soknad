@@ -17,7 +17,9 @@ interface ReiseinfoInnhold {
 export const reiseinfoTekster: ReiseinfoInnhold = {
     tittel: { nb: 'Reiseinformasjon' },
     guide_innhold: {
-        nb: ['Vi trenger informasjon om reisen for å kunne vurdere søknaden din.'],
+        nb: [
+            'Oppgi informasjon om reisen din, og benytt deg av billigste reisemåte med offentlig transport som buss, tog, fly og lignende. Hvis du har gjennomført flere reiser kan disse legges til med knappen “Legg til reise”. ',
+        ],
     },
     knapp_legg_til: { nb: 'Legg til reise' },
     knapp_slett: { nb: 'Fjern reise' },

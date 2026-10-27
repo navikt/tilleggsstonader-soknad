@@ -11,12 +11,10 @@ import { TekstElement } from '../../typer/tekst';
 export const AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise = plukkAktivitetTekster(
     AnnenAktivitetType.TILTAK,
     AnnenAktivitetType.UTDANNING,
-    AnnenAktivitetType.ARBEIDSSØKER,
     AnnenAktivitetType.INGEN_AKTIVITET
 );
 
 interface AktivitetInnholdReiseOppstartAvslutningHjemreise extends AktivitetInnhold {
-    info_arbeidssøker_ingen_rett: TekstElement<string>;
     ingen_aktivitet_infoalert_innhold: TekstElement<string>;
 }
 
@@ -24,7 +22,7 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
     ...aktivitetTeksterFelles,
     guide_innhold: {
         nb: [
-            'For å få denne stønaden må du delta på tiltak, gjennomføre en utdanning godkjent av Nav, være arbeidssøker eller gjennomføre en arbeidsrettet utredning.',
+            'For å få denne stønaden må du delta på  arbeidsrettet tiltak, gjennomføre en utdanning godkjent av Nav eller en arbeidsrettet utredning.',
             'Vi viser aktivitetene som er registrert på deg de siste 6 månedene.',
         ],
     },
@@ -45,14 +43,14 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
                 tekstArbeidsrettedeAktiviteter.lesMer.header_ingen_registrerte_aktiviteter,
             del1: {
                 nb: [
-                    'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du registrert arbeidssøker kan vi ikke hente det.',
+                    'Vi henter tiltak og utdanning registrert på deg 6 måneder tilbake i tid.',
                     'Hvis aktiviteten din mangler eller det er noe feil anbefaler vi deg å ta kontakt med veilederen din. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
                 ],
             },
             del2_lenker: [],
             del3: {
                 nb: [
-                    'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for mer enn 3 måneder siden, må du ',
+                    'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for mer enn 6 måneder siden, må du ',
                     {
                         tekst: 'fylle ut papirsøknad',
                         url: 'https://www.nav.no/fyllut/nav111218b?sub=paper',
@@ -72,10 +70,10 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         nb: 'Ut i fra svarene dine ser det ikke ut som du deltar på arbeidsrettet aktivitet. Du kan fortsatt søke, men vil mest sannsynlig få avslag.',
     },
     radio_annet_lesmer: {
-        header: { nb: 'Søke lengre tilbake enn 3 måneder?' },
+        header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
         innhold: {
             nb: [
-                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 3 måneder siden. ',
+                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden. ',
                 {
                     tekst: 'Søknad på papir',
                     url: 'https://www.nav.no/fyllut/nav111218b?sub=paper',
@@ -89,8 +87,10 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         innhold: {
             del1: {
                 nb: [
-                    'Tiltak og arbeidsrettet utredning er for deg som mottar arbeidsavklaringspenger, uføretrygd eller har nedsatt arbeidsevne. ',
-                    'Et tiltak kan for eksempel være kurs eller arbeidstrening. Arbeidsrettet utredning er en prosess der dine ferdigheter og muligheter til å utføre arbeid blir vurdert og kartlagt.',
+                    'Tiltak og arbeidsrettet utredning er for deg som mottar arbeidsavklaringspenger, uføretrygd, aktivitetspenger, tiltakspenger, dagpenger, kvalifiseringsstønad, har nedsatt arbeidsevne, er enslig mor eller far, er gjenlevende eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
+                    'Et tiltak kan for eksempel være kurs eller arbeidstrening. Arbeidsrettet utredning er en prosess der ferdighetene og mulighetene dine til å utføre arbeid blir vurdert og kartlagt.',
+                    'Utdanningen må være godkjent av Nav for å gi rett til støtte.',
+                    'Er du enslig mor eller far eller gjenlevende må en utdanning godkjennes av din veileder for å gi rett til pengestøtte til reise ved oppstart, avslutning og hjemreise.',
                 ],
             },
             del2_lenker: [],
@@ -108,7 +108,7 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         alternativer: AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise,
         feilmelding: { nb: 'Du må velge en aktivitet' },
     },
-    info_arbeidssøker_ingen_rett: {
-        nb: 'Som arbeidssøker har du ikke rett på denne stønaden. Du kan fortsatt søke, men det kan hende du får avslag.',
-    },
+    // info_arbeidssøker_ingen_rett: {
+    //     nb: 'Som arbeidssøker har du ikke rett på denne stønaden. Du kan fortsatt søke, men det kan hende du får avslag.',
+    // },
 };

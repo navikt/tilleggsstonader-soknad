@@ -10,6 +10,7 @@ import {
 } from './validering';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
+import { LocaleInlineLenke } from '../../../components/Teksthåndtering/LocaleInlineLenke';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
 import { usePerson } from '../../../context/PersonContext';
@@ -52,6 +53,11 @@ export const BarnOgSærligeBehovSteg = () => {
             <GuidePanel>
                 <LocaleTekstAvsnitt tekst={barnOgSærligeBehovTekster.guide_innhold} />
             </GuidePanel>
+            {!harBarn && (
+                <InlineMessage status="info">
+                    <LocaleInlineLenke tekst={barnOgSærligeBehovTekster.info_fant_ingen_barn} />
+                </InlineMessage>
+            )}
             {harBarn && (
                 <>
                     <BarnSomFlytterMed

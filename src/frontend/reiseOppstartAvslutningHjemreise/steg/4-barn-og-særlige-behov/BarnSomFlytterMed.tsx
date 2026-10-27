@@ -4,6 +4,8 @@ import { Checkbox, CheckboxGroup, VStack } from '@navikt/ds-react';
 
 import { errorKeyHarBarnUnder18SomHarFlyttetMed, errorKeyHvilkeBarnFlytterMed } from './validering';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
+import { LocaleReadMoreMedLenke } from '../../../components/Teksthåndtering/LocaleReadMore';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { Barn } from '../../../typer/barn';
 import { EnumFelt, EnumFlereValgFelt } from '../../../typer/skjema';
 import { JaNei } from '../../../typer/søknad';
@@ -83,23 +85,28 @@ export const BarnSomFlytterMed: React.FC<Props> = ({
                 error={valideringsfeil[errorKeyHarBarnUnder18SomHarFlyttetMed]?.melding}
             />
             {barnOgSærligeBehov?.harBarnUnder18SomHarFlyttetMed?.verdi === 'JA' && (
-                <CheckboxGroup
-                    id={valideringsfeil[errorKeyHvilkeBarnFlytterMed]?.id}
-                    legend={barnOgSærligeBehovTekster.hvilke_barn_flytter_med.label[locale]}
-                    value={
-                        barnOgSærligeBehov?.hvilkeBarnFlytterMed?.verdier.map(
-                            (valgtBarn) => valgtBarn.verdi
-                        ) ?? []
-                    }
-                    onChange={oppdaterHvilkeBarnFlytterMed}
-                    error={valideringsfeil[errorKeyHvilkeBarnFlytterMed]?.melding}
-                >
-                    {barnAlternativer.map((it) => (
-                        <Checkbox key={it.ident} value={it.ident}>
-                            {it.label}
-                        </Checkbox>
-                    ))}
-                </CheckboxGroup>
+                <UnderspørsmålContainer>
+                    <CheckboxGroup
+                        id={valideringsfeil[errorKeyHvilkeBarnFlytterMed]?.id}
+                        legend={barnOgSærligeBehovTekster.hvilke_barn_flytter_med.label[locale]}
+                        value={
+                            barnOgSærligeBehov?.hvilkeBarnFlytterMed?.verdier.map(
+                                (valgtBarn) => valgtBarn.verdi
+                            ) ?? []
+                        }
+                        onChange={oppdaterHvilkeBarnFlytterMed}
+                        error={valideringsfeil[errorKeyHvilkeBarnFlytterMed]?.melding}
+                    >
+                        <LocaleReadMoreMedLenke
+                            tekst={barnOgSærligeBehovTekster.info_søke_for_ikke_registrert_barn}
+                        />
+                        {barnAlternativer.map((it) => (
+                            <Checkbox key={it.ident} value={it.ident}>
+                                {it.label}
+                            </Checkbox>
+                        ))}
+                    </CheckboxGroup>
+                </UnderspørsmålContainer>
             )}
         </VStack>
     );

@@ -16,6 +16,7 @@ interface AdresserInnhold {
     fallback_ingen_strukturert_adresse: TekstElement<string>;
     original_adresse_tittel: TekstElement<string>;
     midlertidig_adresse_tittel: TekstElement<string>;
+    adresse_du_flyttet_fra_tittel: TekstElement<string>;
     original_adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     midlertidig_adresse_spørsmål: Record<keyof Adresse, InputFelt>;
 }
@@ -42,10 +43,7 @@ const adresseSpørsmålFelles: Record<keyof Adresse, InputFelt> = {
 export const adresserTekster: AdresserInnhold = {
     tittel: { nb: 'Adresser' },
     guide_innhold: {
-        nb: [
-            'Vi trenger adressene du flyttet fra og flyttet til for å vurdere søknaden.',
-            'Svar først på om du må bo midlertidig borte hjemmefra.',
-        ],
+        nb: ['Vi trenger adressene du flyttet fra og flyttet til for å vurdere søknaden.'],
     },
     radio_må_bo_borte_hjemmefra: {
         header: {
@@ -106,6 +104,9 @@ export const adresserTekster: AdresserInnhold = {
     },
     midlertidig_adresse_tittel: {
         nb: 'Adressen du midlertidig bor på',
+    },
+    adresse_du_flyttet_fra_tittel: {
+        nb: 'Oppgi adressen du flyttet fra',
     },
     original_adresse_spørsmål: adresseSpørsmålFelles,
     midlertidig_adresse_spørsmål: adresseSpørsmålFelles,
