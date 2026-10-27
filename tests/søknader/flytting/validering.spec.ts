@@ -2,6 +2,8 @@ import { expect, test } from '@playwright/test';
 
 import {
     erGyldigFlyttedato,
+    adresseFraFeilIder,
+    errorKeySkalFlytteFraFolkeregistrertAdresse,
     feilId,
     tilDesimaltall,
     validerFlyttingDetaljer,
@@ -28,6 +30,13 @@ const gyldigeDetaljer = (): FlyttingDetaljer => ({
         land: { label: 'Land', verdi: 'NOR', svarTekst: 'Norge' },
         gateadresse: felt('Testveien 1'),
         postnummer: felt('0123'),
+        poststed: felt('Oslo'),
+    },
+    skalFlytteFraFolkeregistrertAdresse: enumFelt('JA'),
+    adresseDetSkalFlyttesFra: {
+        land: { label: 'Land', verdi: 'NOR', svarTekst: 'Norge' },
+        gateadresse: felt('Hildes vei'),
+        postnummer: felt('0100'),
         poststed: felt('Oslo'),
     },
     flyttemåte: enumFelt('FLYTTER_SELV'),
@@ -87,10 +96,40 @@ test('Validering krever grunnspørsmål og adresse, men ikke skjulte grener', ()
             feilId('adresse_gateadresse'),
             feilId('adresse_postnummer'),
             feilId('adresse_poststed'),
+            errorKeySkalFlytteFraFolkeregistrertAdresse,
         ])
     );
     expect(feil[feilId('tilbud1_beløp')]).toBeUndefined();
     expect(validerFlyttingDetaljer(gyldigeDetaljer(), Locale.NB)).toEqual({});
+});
+
+test('Adresse fra folkeregisteret eller manuelt oppgitt adresse valideres etter valget', () => {
+    const detaljer = gyldigeDetaljer();
+    expect(validerFlyttingDetaljer(detaljer, Locale.NB)).toEqual({});
+
+    const manueltOppgitt = {
+        ...detaljer,
+        skalFlytteFraFolkeregistrertAdresse: undefined,
+    };
+    expect(validerFlyttingDetaljer(manueltOppgitt, Locale.NB, true)).toEqual({});
+
+    detaljer.skalFlytteFraFolkeregistrertAdresse = enumFelt('NEI');
+    detaljer.adresseDetSkalFlyttesFra = undefined;
+    expect(Object.keys(validerFlyttingDetaljer(detaljer, Locale.NB))).toEqual([
+        adresseFraFeilIder.land,
+        adresseFraFeilIder.gateadresse,
+        adresseFraFeilIder.postnummer,
+        adresseFraFeilIder.poststed,
+    ]);
+
+    expect(validerFlyttingDetaljer(detaljer, Locale.NB, true)).toEqual(
+        expect.objectContaining({
+            [adresseFraFeilIder.land]: expect.anything(),
+            [adresseFraFeilIder.gateadresse]: expect.anything(),
+            [adresseFraFeilIder.postnummer]: expect.anything(),
+            [adresseFraFeilIder.poststed]: expect.anything(),
+        })
+    );
 });
 
 test('Flyttedato må finnes i kalenderen, men kan være i fortid og fremtid', () => {

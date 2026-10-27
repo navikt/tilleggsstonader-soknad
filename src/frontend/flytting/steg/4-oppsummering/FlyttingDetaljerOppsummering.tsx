@@ -28,6 +28,12 @@ export const FlyttingDetaljerOppsummering = ({ detaljer }: { detaljer: FlyttingD
                     {formaterIsoDato(detaljer.flyttedato.verdi)}
                 </Answer>
             )}
+            <OppsummeringSvar felt={detaljer.skalFlytteFraFolkeregistrertAdresse} />
+            {detaljer.adresseDetSkalFlyttesFra && (
+                <Answer label={tekster.adresse_fra_tittel}>
+                    {formaterAdresse(detaljer.adresseDetSkalFlyttesFra)}
+                </Answer>
+            )}
             {detaljer.adresse && (
                 <Answer label={tekster.adresse_tittel}>{formaterAdresse(detaljer.adresse)}</Answer>
             )}

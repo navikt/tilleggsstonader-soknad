@@ -2,7 +2,7 @@ import { expect, Page, test } from '@playwright/test';
 
 import { mockAktivitet } from '../../mocks/aktivitet';
 import { mockHarIngenSøknadFlyttingFraFør } from '../../mocks/harSøknadFraFør';
-import { mockPersonApi } from '../../mocks/person';
+import { mockPersonApi, mockPersonUtenAdresseApi } from '../../mocks/person';
 import { mockSøknadRoutingApi } from '../../mocks/søknadRouting';
 import { mockLastOppVedlegg } from '../../mocks/vedlegg';
 import { lastOppFil } from '../../utils/filoppladding/uploadFile';
@@ -37,7 +37,11 @@ const startSøknad = async (page: Page) => {
     await expect(page).toHaveURL(`${urlSøknad}/flytting`);
 };
 
-const fyllFellesDetaljer = async (page: Page, nyJobb = false) => {
+const fyllFellesDetaljer = async (
+    page: Page,
+    nyJobb = false,
+    flytterFraFolkeregistrertAdresse = true
+) => {
     await page
         .getByLabel(
             nyJobb
@@ -46,9 +50,22 @@ const fyllFellesDetaljer = async (page: Page, nyJobb = false) => {
         )
         .check();
     await page.getByRole('textbox', { name: 'Flyttedato' }).fill('15.06.2025');
-    await page.getByRole('textbox', { name: 'Gateadresse', exact: true }).fill('Testveien 1');
-    await page.getByRole('textbox', { name: 'Postnummer', exact: true }).fill('0123');
-    await page.getByRole('textbox', { name: 'Poststed', exact: true }).fill('Oslo');
+    await page
+        .getByRole('radiogroup', { name: 'Flytter du fra din folkeregistrerte adresse?' })
+        .getByLabel(flytterFraFolkeregistrertAdresse ? 'Ja' : 'Nei', { exact: true })
+        .check();
+    const gateadresser = page.getByRole('textbox', { name: 'Gateadresse', exact: true });
+    const postnumre = page.getByRole('textbox', { name: 'Postnummer', exact: true });
+    const poststeder = page.getByRole('textbox', { name: 'Poststed', exact: true });
+    if (!flytterFraFolkeregistrertAdresse) {
+        await gateadresser.nth(0).fill('Hjemveien 2');
+        await postnumre.nth(0).fill('0123');
+        await poststeder.nth(0).fill('Oslo');
+    }
+    const adresseTil = flytterFraFolkeregistrertAdresse ? 0 : 1;
+    await gateadresser.nth(adresseTil).fill('Testveien 1');
+    await postnumre.nth(adresseTil).fill('0456');
+    await poststeder.nth(adresseTil).fill('Bergen');
     await page
         .getByRole('radiogroup', {
             name: 'Får du dekket utgiftene dine til flytting på annen måte enn med stønad fra Nav?',
@@ -106,6 +123,34 @@ test('Byråtilbud viser at Nav dekker laveste tilbud og lar brukeren laste opp b
     await forventIngenWcagViolations(page);
 });
 
+test('Brukeren kan oppgi en annen adresse enn folkeregistrert adresse', async ({ page }) => {
+    await startSøknad(page);
+    await fyllFellesDetaljer(page, false, false);
+    await page.getByLabel('Jeg flytter selv', { exact: true }).check();
+    await page.getByRole('textbox', { name: 'Hvor lang reisevei har du?' }).fill('1');
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
+    await page.getByRole('button', { name: 'Neste' }).click();
+    await page.getByRole('dialog').getByRole('button', { name: 'Ja, gå til neste side' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
+    await expect(page.getByText('Hjemveien 2, 0123 Oslo, Norge', { exact: true })).toBeVisible();
+    await expect(page.getByText('Testveien 1, 0456 Bergen, Norge', { exact: true })).toBeVisible();
+});
+
+test('Brukeren må oppgi adresse fra manuelt når strukturert folkeregisteradresse mangler', async ({
+    page,
+}) => {
+    await mockPersonUtenAdresseApi(page);
+    await startSøknad(page);
+
+    await expect(
+        page.getByRole('radiogroup', { name: 'Flytter du fra din folkeregistrerte adresse?' })
+    ).toHaveCount(0);
+    await expect(
+        page.getByRole('heading', { name: 'Oppgi adressen du flytter fra' })
+    ).toBeVisible();
+});
+
 test('Arbeidskontrakt informeres om, men innsending kan fortsette uten vedlegget', async ({
     page,
 }) => {
@@ -131,6 +176,7 @@ test('Arbeidskontrakt informeres om, men innsending kan fortsette uten vedlegget
 
     await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
     await expect(page.getByText('Arbeidskontrakt', { exact: true }).first()).toBeVisible();
+    await expect(page.getByText(/Hildes vei, 0100 Oslo/)).toBeVisible();
     await page.getByRole('button', { name: 'Send søknad' }).click();
 });
 

@@ -19,6 +19,17 @@ export const adresseFeilIder: AdresseFeilIder = {
     poststed: feilId('adresse_poststed'),
 };
 
+export const adresseFraFeilIder: AdresseFeilIder = {
+    land: feilId('adresseFra_land'),
+    gateadresse: feilId('adresseFra_gateadresse'),
+    postnummer: feilId('adresseFra_postnummer'),
+    poststed: feilId('adresseFra_poststed'),
+};
+
+export const errorKeySkalFlytteFraFolkeregistrertAdresse = feilId(
+    'skalFlytteFraFolkeregistrertAdresse'
+);
+
 export const tilDesimaltall = (verdi: string | undefined): number | undefined => {
     if (verdi === undefined || !/^\d+(?:[.,]\d{1,2})?$/.test(verdi.trim())) {
         return undefined;
@@ -32,7 +43,8 @@ export const erGyldigFlyttedato = (verdi: string | undefined): boolean =>
 
 export const validerFlyttingDetaljer = (
     detaljer: FlyttingDetaljer | undefined,
-    locale: Locale
+    locale: Locale,
+    manglerFolkeregistrertAdresse = false
 ): Valideringsfeil => {
     const feil: Valideringsfeil = {};
     const leggTilFeil = (felt: string, melding: string) => {
@@ -51,6 +63,32 @@ export const validerFlyttingDetaljer = (
         feil,
         validerAdresse(detaljer?.adresse, locale, tekster.adresse_spørsmål, adresseFeilIder)
     );
+    if (manglerFolkeregistrertAdresse) {
+        Object.assign(
+            feil,
+            validerAdresse(
+                detaljer?.adresseDetSkalFlyttesFra,
+                locale,
+                tekster.adresse_fra_spørsmål,
+                adresseFraFeilIder
+            )
+        );
+    } else if (!detaljer?.skalFlytteFraFolkeregistrertAdresse) {
+        leggTilFeil(
+            'skalFlytteFraFolkeregistrertAdresse',
+            tekster.radio_skalFlytteFraFolkeregistrertAdresse.feilmelding[locale]
+        );
+    } else if (detaljer.skalFlytteFraFolkeregistrertAdresse.verdi === 'NEI') {
+        Object.assign(
+            feil,
+            validerAdresse(
+                detaljer.adresseDetSkalFlyttesFra,
+                locale,
+                tekster.adresse_fra_spørsmål,
+                adresseFraFeilIder
+            )
+        );
+    }
     if (!detaljer?.flyttemåte) {
         leggTilFeil('flyttemåte', tekster.radio_flyttemåte.feilmelding[locale]);
     }
