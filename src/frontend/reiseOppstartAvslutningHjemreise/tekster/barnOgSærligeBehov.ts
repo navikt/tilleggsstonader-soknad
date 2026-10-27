@@ -57,7 +57,7 @@ export const barnOgSærligeBehovTekster: BarnOgSærligeBehovInnhold = {
                     tekst: 'fylle ut papirsøknad',
                     url: 'https://www.nav.no/fyllut/nav111218b?sub=paper',
                 },
-                '.',
+                '. Du kan få dekket reiseutgifter for barn under 18 år som flytter sammen med deg.',
             ],
         },
     },
