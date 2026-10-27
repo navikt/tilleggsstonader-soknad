@@ -19,6 +19,7 @@ import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeadin
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
+import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -148,123 +149,138 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
 
     return (
         <Side validerSteg={kanFortsette}>
-            <LocaleHeading tekst={adresserTekster.tittel} level="2" size="medium" />
-            <GuidePanel>
-                <LocaleTekstAvsnitt tekst={adresserTekster.guide_innhold} />
-            </GuidePanel>
-            <LocaleRadioGroup
-                id={valideringsfeil[errorKeyMåBoBorteHjemmefra]?.id}
-                tekst={adresserTekster.radio_må_bo_borte_hjemmefra}
-                value={adresser?.måBoBorteHjemmefra?.verdi ?? ''}
-                onChange={håndterMåBoBorteHjemmefra}
-                error={valideringsfeil[errorKeyMåBoBorteHjemmefra]?.melding}
-            />
-            {skalViseAlertIkkeRett && (
-                <AlertIkkeRett beskrivelse={adresserTekster.advarsel_må_bo_borte_hjemmefra} />
-            )}
-            {skalViseAdresseSpørsmål && (
-                <>
-                    <VStack gap="space-16">
-                        <Heading level="3" size="small">
-                            <LocaleTekst tekst={adresserTekster.dato_flytting.label} />
-                        </Heading>
-                        <DateInput
-                            id={valideringsfeil[errorKeyFomFlyttedato]?.id}
-                            label={adresserTekster.dato_flytting.fom[locale]}
-                            value={adresser?.fomFlyttedato?.verdi}
-                            error={valideringsfeil[errorKeyFomFlyttedato]?.melding}
-                            onChange={(date) =>
-                                oppdaterFomFlyttedato(
-                                    date
-                                        ? {
-                                              label: adresserTekster.dato_flytting.fom[locale],
-                                              verdi: date,
-                                          }
-                                        : undefined
-                                )
-                            }
-                        />
-                        <DateInput
-                            id={valideringsfeil[errorKeyTomFlyttedato]?.id}
-                            label={adresserTekster.dato_flytting.tom[locale]}
-                            value={adresser?.tomFlyttedato?.verdi}
-                            error={valideringsfeil[errorKeyTomFlyttedato]?.melding}
-                            onChange={(date) =>
-                                oppdaterTomFlyttedato(
-                                    date
-                                        ? {
-                                              label: adresserTekster.dato_flytting.tom[locale],
-                                              verdi: date,
-                                          }
-                                        : undefined
-                                )
-                            }
-                        />
-                    </VStack>
+            <VStack gap="space-40">
+                <LocaleHeading tekst={adresserTekster.tittel} level="2" size="medium" />
+                <GuidePanel>
+                    <LocaleTekstAvsnitt tekst={adresserTekster.guide_innhold} />
+                </GuidePanel>
+                <LocaleRadioGroup
+                    id={valideringsfeil[errorKeyMåBoBorteHjemmefra]?.id}
+                    tekst={adresserTekster.radio_må_bo_borte_hjemmefra}
+                    value={adresser?.måBoBorteHjemmefra?.verdi ?? ''}
+                    onChange={håndterMåBoBorteHjemmefra}
+                    error={valideringsfeil[errorKeyMåBoBorteHjemmefra]?.melding}
+                />
+                {skalViseAlertIkkeRett && (
+                    <AlertIkkeRett beskrivelse={adresserTekster.advarsel_må_bo_borte_hjemmefra} />
+                )}
+                {skalViseAdresseSpørsmål && (
+                    <>
+                        <VStack gap="space-16">
+                            <Heading level="3" size="small">
+                                <LocaleTekst tekst={adresserTekster.dato_flytting.label} />
+                            </Heading>
+                            <DateInput
+                                id={valideringsfeil[errorKeyFomFlyttedato]?.id}
+                                label={adresserTekster.dato_flytting.fom[locale]}
+                                value={adresser?.fomFlyttedato?.verdi}
+                                error={valideringsfeil[errorKeyFomFlyttedato]?.melding}
+                                onChange={(date) =>
+                                    oppdaterFomFlyttedato(
+                                        date
+                                            ? {
+                                                  label: adresserTekster.dato_flytting.fom[locale],
+                                                  verdi: date,
+                                              }
+                                            : undefined
+                                    )
+                                }
+                            />
+                            <DateInput
+                                id={valideringsfeil[errorKeyTomFlyttedato]?.id}
+                                label={adresserTekster.dato_flytting.tom[locale]}
+                                value={adresser?.tomFlyttedato?.verdi}
+                                error={valideringsfeil[errorKeyTomFlyttedato]?.melding}
+                                onChange={(date) =>
+                                    oppdaterTomFlyttedato(
+                                        date
+                                            ? {
+                                                  label: adresserTekster.dato_flytting.tom[locale],
+                                                  verdi: date,
+                                              }
+                                            : undefined
+                                    )
+                                }
+                            />
+                        </VStack>
 
-                    <VStack gap="space-16">
-                        <Heading level="3" size="small">
-                            <LocaleTekst tekst={adresserTekster.original_adresse_tittel} />
-                        </Heading>
-                        <BodyShort>
-                            <LocaleTekst
-                                tekst={adresserTekster.folkereg_adresse}
-                                argument0={person.adresse}
-                            />
-                        </BodyShort>
-                        <InlineMessage status="info">
-                            <BodyShort spacing>
-                                {adresserTekster.folkereg_adresse_info[locale]}
-                                <Link
-                                    href={adresserTekster.folkereg_adresse_lenke_url}
-                                    target="_blank"
-                                    inlineText
-                                    rel="noopener noreferrer"
-                                >
-                                    {adresserTekster.folkereg_adresse_lenke_tekst[locale]}
-                                </Link>
-                                .
+                        <VStack gap="space-16">
+                            <Heading level="3" size="small">
+                                <LocaleTekst tekst={adresserTekster.original_adresse_tittel} />
+                            </Heading>
+                            <BodyShort>
+                                <LocaleTekst
+                                    tekst={adresserTekster.folkereg_adresse}
+                                    argument0={person.adresse}
+                                />
                             </BodyShort>
-                        </InlineMessage>
-                        <LocaleRadioGroup
-                            id={valideringsfeil[errorKeySkalBrukeFolkeregAdresse]?.id}
-                            tekst={adresserTekster.radio_samme_som_flyttet_fra}
-                            value={adresser?.skalReiseFraFolkeregistrertAdresse?.verdi ?? ''}
-                            onChange={håndterSkalBrukeFolkeregAdresse}
-                            error={valideringsfeil[errorKeySkalBrukeFolkeregAdresse]?.melding}
-                        />
-                        {adresser?.skalReiseFraFolkeregistrertAdresse?.verdi === 'JA' &&
-                            !harStrukturertAdresse && (
-                                <BodyShort>
-                                    <LocaleTekst
-                                        tekst={adresserTekster.fallback_ingen_strukturert_adresse}
-                                    />
+                            <InlineMessage status="info">
+                                <BodyShort spacing>
+                                    {adresserTekster.folkereg_adresse_info[locale]}
+                                    <Link
+                                        href={adresserTekster.folkereg_adresse_lenke_url}
+                                        target="_blank"
+                                        inlineText
+                                        rel="noopener noreferrer"
+                                    >
+                                        {adresserTekster.folkereg_adresse_lenke_tekst[locale]}
+                                    </Link>
+                                    .
                                 </BodyShort>
-                            )}
-                        {måFylleUtOriginalAdresseManuelt && (
-                            <AdresseVelger
-                                adresse={adresser?.adresseOriginaltBosted}
-                                onChange={håndterOriginalAdresseEndring}
-                                tekster={adresserTekster.original_adresse_spørsmål}
-                                feil={valideringsfeil}
-                                feilIder={originalAdresseFeilIder}
+                            </InlineMessage>
+                            <LocaleRadioGroup
+                                id={valideringsfeil[errorKeySkalBrukeFolkeregAdresse]?.id}
+                                tekst={adresserTekster.radio_samme_som_flyttet_fra}
+                                value={adresser?.skalReiseFraFolkeregistrertAdresse?.verdi ?? ''}
+                                onChange={håndterSkalBrukeFolkeregAdresse}
+                                error={valideringsfeil[errorKeySkalBrukeFolkeregAdresse]?.melding}
                             />
-                        )}
-                    </VStack>
-                    <VStack gap="space-8">
-                        <Heading level="3" size="small">
-                            <LocaleTekst tekst={adresserTekster.midlertidig_adresse_tittel} />
-                        </Heading>
-                        <AdresseVelger
-                            adresse={adresser?.adresseMidlertidigBosted}
-                            onChange={håndterMidlertidigAdresseEndring}
-                            tekster={adresserTekster.midlertidig_adresse_spørsmål}
-                            feil={valideringsfeil}
-                            feilIder={midlertidigAdresseFeilIder}
-                        />
-                    </VStack>
-                </>
-            )}
+                            {adresser?.skalReiseFraFolkeregistrertAdresse?.verdi === 'JA' &&
+                                !harStrukturertAdresse && (
+                                    <BodyShort>
+                                        <LocaleTekst
+                                            tekst={
+                                                adresserTekster.fallback_ingen_strukturert_adresse
+                                            }
+                                        />
+                                    </BodyShort>
+                                )}
+                            {måFylleUtOriginalAdresseManuelt && (
+                                <UnderspørsmålContainer>
+                                    <VStack gap="space-8">
+                                        <Heading level="3" size="small">
+                                            <LocaleTekst
+                                                tekst={
+                                                    adresserTekster.adresse_du_flyttet_fra_tittel
+                                                }
+                                            />
+                                        </Heading>
+                                        <AdresseVelger
+                                            adresse={adresser?.adresseOriginaltBosted}
+                                            onChange={håndterOriginalAdresseEndring}
+                                            tekster={adresserTekster.original_adresse_spørsmål}
+                                            feil={valideringsfeil}
+                                            feilIder={originalAdresseFeilIder}
+                                        />
+                                    </VStack>
+                                </UnderspørsmålContainer>
+                            )}
+                        </VStack>
+                        <VStack gap="space-8">
+                            <Heading level="3" size="small">
+                                <LocaleTekst tekst={adresserTekster.midlertidig_adresse_tittel} />
+                            </Heading>
+                            <AdresseVelger
+                                adresse={adresser?.adresseMidlertidigBosted}
+                                onChange={håndterMidlertidigAdresseEndring}
+                                tekster={adresserTekster.midlertidig_adresse_spørsmål}
+                                feil={valideringsfeil}
+                                feilIder={midlertidigAdresseFeilIder}
+                            />
+                        </VStack>
+                    </>
+                )}
+            </VStack>
         </Side>
     );
 };
