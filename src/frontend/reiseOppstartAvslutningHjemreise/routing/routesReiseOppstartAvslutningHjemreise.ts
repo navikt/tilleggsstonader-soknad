@@ -46,6 +46,11 @@ export const routesReiseOppstartAvslutningHjemreise: IRoute<ReiseOppstartAvslutn
             route: 'REISEINFO',
         },
         {
+            path: RouteTilPath.VEDLEGG,
+            label: 'Vedlegg',
+            route: 'VEDLEGG',
+        },
+        {
             path: RouteTilPath.OPPSUMMERING,
             label: 'Oppsummering',
             route: 'OPPSUMMERING',
