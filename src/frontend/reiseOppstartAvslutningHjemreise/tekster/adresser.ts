@@ -7,10 +7,6 @@ interface AdresserInnhold {
     guide_innhold: TekstElement<string[]>;
     radio_må_bo_borte_hjemmefra: RadiogruppePåkrevd<JaNei>;
     advarsel_må_bo_borte_hjemmefra: TekstElement<string>;
-    folkereg_adresse: TekstElement<string>;
-    folkereg_adresse_info: TekstElement<string>;
-    folkereg_adresse_lenke_tekst: TekstElement<string>;
-    folkereg_adresse_lenke_url: string;
     dato_flytting: Datoperiode;
     radio_samme_som_flyttet_fra: RadiogruppePåkrevd<JaNei>;
     fallback_ingen_strukturert_adresse: TekstElement<string>;
@@ -57,16 +53,6 @@ export const adresserTekster: AdresserInnhold = {
     advarsel_må_bo_borte_hjemmefra: {
         nb: 'Ut fra svarene dine ser det ut som du ikke må bo midlertidig borte hjemmefra på grunn av deltakelse på arbeidsrettet aktivitet. Da har du ikke rett på pengestøtte til reise ved oppstart, avslutning og hjemreiser. Du kan fortsatt søke, men det kan hende du får avslag.',
     },
-    folkereg_adresse: {
-        nb: 'Din folkeregistrerte adresse er [0].',
-    },
-    folkereg_adresse_info: {
-        nb: 'Adressen er hentet fra Folkeregisteret. Det er viktig at denne adressen er korrekt. Du kan ',
-    },
-    folkereg_adresse_lenke_tekst: {
-        nb: 'endre adressen på Skatteetatens nettsider (åpnes i ny fane)',
-    },
-    folkereg_adresse_lenke_url: 'https://www.skatteetaten.no/person/folkeregister/endre/',
     dato_flytting: {
         label: {
             nb: 'I hvilken periode må du midlertidig bo borte hjemmefra?',

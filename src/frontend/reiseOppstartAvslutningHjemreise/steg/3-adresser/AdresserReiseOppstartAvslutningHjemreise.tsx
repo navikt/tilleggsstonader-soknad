@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { BodyShort, GuidePanel, Heading, InlineMessage, Link, VStack } from '@navikt/ds-react';
+import { GuidePanel, Heading, VStack } from '@navikt/ds-react';
 
+import { AdresseOriginaltBosted } from './AdresseOriginaltBosted';
 import {
     errorKeyFomFlyttedato,
     errorKeyMåBoBorteHjemmefra,
@@ -19,7 +20,6 @@ import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeadin
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
@@ -39,9 +39,6 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
     const harStrukturertAdresse = !!person.strukturertAdresse;
     const skalViseAdresseSpørsmål = adresser?.måBoBorteHjemmefra?.verdi === 'JA';
     const skalViseAlertIkkeRett = adresser?.måBoBorteHjemmefra?.verdi === 'NEI';
-    const måFylleUtOriginalAdresseManuelt =
-        adresser?.skalReiseFraFolkeregistrertAdresse?.verdi === 'NEI' ||
-        (adresser?.skalReiseFraFolkeregistrertAdresse?.verdi === 'JA' && !harStrukturertAdresse);
 
     const nullstillAdresseFeil = (errorKeys: string[]) => {
         settValideringsfeil((prev) =>
@@ -204,68 +201,14 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
                             />
                         </VStack>
 
-                        <VStack gap="space-16">
-                            <Heading level="3" size="small">
-                                <LocaleTekst tekst={adresserTekster.original_adresse_tittel} />
-                            </Heading>
-                            <BodyShort>
-                                <LocaleTekst
-                                    tekst={adresserTekster.folkereg_adresse}
-                                    argument0={person.adresse}
-                                />
-                            </BodyShort>
-                            <InlineMessage status="info">
-                                <BodyShort spacing>
-                                    {adresserTekster.folkereg_adresse_info[locale]}
-                                    <Link
-                                        href={adresserTekster.folkereg_adresse_lenke_url}
-                                        target="_blank"
-                                        inlineText
-                                        rel="noopener noreferrer"
-                                    >
-                                        {adresserTekster.folkereg_adresse_lenke_tekst[locale]}
-                                    </Link>
-                                    .
-                                </BodyShort>
-                            </InlineMessage>
-                            <LocaleRadioGroup
-                                id={valideringsfeil[errorKeySkalBrukeFolkeregAdresse]?.id}
-                                tekst={adresserTekster.radio_samme_som_flyttet_fra}
-                                value={adresser?.skalReiseFraFolkeregistrertAdresse?.verdi ?? ''}
-                                onChange={håndterSkalBrukeFolkeregAdresse}
-                                error={valideringsfeil[errorKeySkalBrukeFolkeregAdresse]?.melding}
-                            />
-                            {adresser?.skalReiseFraFolkeregistrertAdresse?.verdi === 'JA' &&
-                                !harStrukturertAdresse && (
-                                    <BodyShort>
-                                        <LocaleTekst
-                                            tekst={
-                                                adresserTekster.fallback_ingen_strukturert_adresse
-                                            }
-                                        />
-                                    </BodyShort>
-                                )}
-                            {måFylleUtOriginalAdresseManuelt && (
-                                <UnderspørsmålContainer>
-                                    <VStack gap="space-8">
-                                        <Heading level="3" size="small">
-                                            <LocaleTekst
-                                                tekst={
-                                                    adresserTekster.adresse_du_flyttet_fra_tittel
-                                                }
-                                            />
-                                        </Heading>
-                                        <AdresseVelger
-                                            adresse={adresser?.adresseOriginaltBosted}
-                                            onChange={håndterOriginalAdresseEndring}
-                                            tekster={adresserTekster.original_adresse_spørsmål}
-                                            feil={valideringsfeil}
-                                            feilIder={originalAdresseFeilIder}
-                                        />
-                                    </VStack>
-                                </UnderspørsmålContainer>
-                            )}
-                        </VStack>
+                        <AdresseOriginaltBosted
+                            person={person}
+                            adresser={adresser}
+                            håndterSkalBrukeFolkeregAdresse={håndterSkalBrukeFolkeregAdresse}
+                            håndterOriginalAdresseEndring={håndterOriginalAdresseEndring}
+                            valideringsfeil={valideringsfeil}
+                        />
+
                         <VStack gap="space-8">
                             <Heading level="3" size="small">
                                 <LocaleTekst tekst={adresserTekster.midlertidig_adresse_tittel} />
