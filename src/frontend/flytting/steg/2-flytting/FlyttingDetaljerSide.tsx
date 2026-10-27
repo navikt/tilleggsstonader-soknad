@@ -59,7 +59,24 @@ export const FlyttingDetaljerSide = () => {
     const validerSteg = () => {
         const nyeFeil = validerFlyttingDetaljer(detaljer, locale, manglerFolkeregistrertAdresse);
         settValideringsfeil(nyeFeil);
-        return !inneholderFeil(nyeFeil);
+        const harFeil = inneholderFeil(nyeFeil);
+        if (!harFeil && manglerFolkeregistrertAdresse) {
+            settFlyttingDetaljer((tidligere) => ({
+                ...tidligere,
+                skalFlytteFraFolkeregistrertAdresse: svarNeiFlytterIkkeFraFolkeregistrertAdresse(),
+            }));
+        }
+        return !harFeil;
+    };
+
+    const svarNeiFlytterIkkeFraFolkeregistrertAdresse = (): EnumFelt<JaNei> => {
+        const radio = tekster.radio_skalFlytteFraFolkeregistrertAdresse;
+        return {
+            label: radio.header[locale],
+            verdi: 'NEI',
+            alternativer: Object.values(radio.alternativer).map((alternativ) => alternativ[locale]),
+            svarTekst: radio.alternativer.NEI[locale],
+        };
     };
 
     const håndterSkalFlytteFraFolkeregistrertAdresse = (felt: EnumFelt<JaNei>) => {
