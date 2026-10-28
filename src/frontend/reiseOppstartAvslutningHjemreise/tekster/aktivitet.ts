@@ -90,8 +90,8 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         innhold: {
             del1: {
                 nb: [
-                    'Velg Tiltak og arbeidsrettet utredning hvis du deltar på et arbeidsrettet tiltak, for eksempel kurs eller arbeidstrening. Dette gjelder hvis du mottar arbeidsavklaringspenger (AAP), uføretrygd, aktivitetspenger for unge, tiltakspenger, dagpenger eller kvalifiseringsstønad. Det gjelder også hvis du har nedsatt arbeidsevne eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
-                    'Velg Utdanning godkjent av Nav dersom du er enslig mor eller far eller gjenlevende og gjennomfører utdanning som er godkjent av Nav.',
+                    'Velg Tiltak og arbeidsrettet utredning: Hvis du deltar på et arbeidsrettet tiltak, for eksempel kurs eller arbeidstrening. Dette gjelder hvis du mottar arbeidsavklaringspenger (AAP), uføretrygd, aktivitetspenger, tiltakspenger, dagpenger eller kvalifiseringsstønad. Det gjelder også hvis du har nedsatt arbeidsevne eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
+                    'Velg Utdanning godkjent av Nav:Dersom du er enslig mor eller far eller gjenlevende og gjennomfører utdanning som er godkjent av Nav.',
                 ],
             },
             del2_lenker: [],
