@@ -17,9 +17,6 @@ export const EndringEnsligForsørgerExpansionCard: React.FC = () => {
                 </ExpansionCard.Title>
             </ExpansionCard.Header>
             <ExpansionCard.Content>
-                <BodyLong spacing>
-                    <LocaleTekst tekst={endringEnsligForsørgerTekster.innhold} />
-                </BodyLong>
                 <BodyLong weight="semibold">
                     <LocaleTekst tekst={endringEnsligForsørgerTekster.sporsmal_tittel} />
                 </BodyLong>

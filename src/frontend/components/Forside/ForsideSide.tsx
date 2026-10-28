@@ -10,8 +10,6 @@ import {
     GuidePanel,
     Heading,
     HStack,
-    Link,
-    List,
     VStack,
 } from '@navikt/ds-react';
 
@@ -23,6 +21,7 @@ import { Skjematype } from '../../typer/skjematyper';
 import { hentNesteRoute, Skjemasteg } from '../../utils/routeUtils';
 import { BekreftelseCheckbox } from '../BekreftelseCheckbox';
 import { EndringEnsligForsørgerExpansionCard } from '../EndringEnsligForsørger/EndringEnsligForsørgerExpansionCard';
+import { InfoPunktliste } from '../InfoPunktliste';
 import { Container } from '../Side';
 import { LocaleInlineLenke } from '../Teksthåndtering/LocaleInlineLenke';
 import { LocalePunktliste } from '../Teksthåndtering/LocalePunktliste';
@@ -78,6 +77,7 @@ export const ForsideSide: React.FC<Props> = ({
                 </Heading>
                 <LocalePunktliste innhold={tekster.dette_ma_du_vite_innhold} />
             </div>
+            <EndringEnsligForsørgerExpansionCard />
             <div>
                 <Heading level="2" size="large" spacing>
                     Vær klar over
@@ -90,37 +90,38 @@ export const ForsideSide: React.FC<Props> = ({
                 </Heading>
                 <LocalePunktliste innhold={tekster.kan_ikke_soke_innhold} />
             </div>
-            <EndringEnsligForsørgerExpansionCard />
             <Accordion>
                 <Accordion.Item>
                     <Accordion.Header>Informasjon vi henter om deg</Accordion.Header>
                     <Accordion.Content>
-                        <Heading level="3" size="xsmall" spacing>
-                            I tillegg til opplysningene du gir i søknaden, henter vi:
-                        </Heading>
-                        <List>
-                            <List.Item>
-                                person- og adresseopplysninger fra Folkeregisteret
-                            </List.Item>
-                            <List.Item>
-                                opplysninger om utdanning eller tiltak du har avtalt med veilederen
-                                din i Nav
-                            </List.Item>
-                            <List.Item>opplysninger om andre ytelser du får fra Nav</List.Item>
-                        </List>
-                        <BodyLong>
-                            Nav har ansvar for å behandle personopplysningene dine. Vi deler ikke
-                            opplysningene i søknaden med andre.{' '}
-                            <Link
-                                inlineText
-                                href="https://www.nav.no/personvernerklaering"
-                                target="_blank"
-                            >
-                                Les personvernerklæringen på nav.no
-                            </Link>{' '}
-                            for å få mer informasjon om hvordan vi behandler personopplysningene
-                            dine.
-                        </BodyLong>
+                        <InfoPunktliste
+                            liste={[
+                                {
+                                    tittel: {
+                                        nb: 'I tillegg til opplysningene du gir i søknaden, henter vi:',
+                                    },
+                                    innhold: {
+                                        nb: [
+                                            'person- og adresseopplysninger fra Folkeregisteret',
+                                            'opplysninger om utdanning eller tiltak du har avtalt med veilederen din i Nav',
+                                            'opplysninger om andre ytelser du får fra Nav',
+                                        ],
+                                    },
+                                },
+                            ]}
+                        />
+                        <LocaleInlineLenke
+                            tekst={{
+                                nb: [
+                                    'Nav har ansvar for å behandle personopplysningene dine. Vi deler ikke opplysningene i søknaden med andre. ',
+                                    {
+                                        tekst: 'Les personvernerklæringen på nav.no',
+                                        url: 'https://www.nav.no/personvernerklaering',
+                                    },
+                                    ' for å få mer informasjon om hvordan vi behandler personopplysningene dine.',
+                                ],
+                            }}
+                        />
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>

@@ -199,7 +199,6 @@ export const FlyttingDetaljerSide = () => {
                 value={detaljer?.flyttemåte?.verdi ?? ''}
                 error={feil[feilId('flyttemåte')]?.melding}
                 onChange={(verdi) => {
-                    // TODO: Vurder å rydde utgifter og tilbud i den inaktive grenen.
                     oppdater('flyttemåte', verdi);
                     fjernFeil(
                         ...(verdi.verdi === 'FLYTTEBYRÅ'
