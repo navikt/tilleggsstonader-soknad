@@ -1,3 +1,4 @@
+import { FregAdresseEllerManuellAdresseInnhold } from '../../components/FolkeregistrertAdresseInformasjon/tekster';
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { Adresse, JaNei } from '../../typer/søknad';
 import { Datoperiode, InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
@@ -8,12 +9,8 @@ interface AdresserInnhold {
     radio_må_bo_borte_hjemmefra: RadiogruppePåkrevd<JaNei>;
     advarsel_må_bo_borte_hjemmefra: TekstElement<string>;
     dato_flytting: Datoperiode;
-    radio_samme_som_flyttet_fra: RadiogruppePåkrevd<JaNei>;
-    fallback_ingen_strukturert_adresse: TekstElement<string>;
     original_adresse_tittel: TekstElement<string>;
     midlertidig_adresse_tittel: TekstElement<string>;
-    adresse_du_flyttet_fra_tittel: TekstElement<string>;
-    original_adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     midlertidig_adresse_spørsmål: Record<keyof Adresse, InputFelt>;
 }
 
@@ -73,7 +70,17 @@ export const adresserTekster: AdresserInnhold = {
             nb: 'Til dato må være samme dag eller etter fra dato.',
         },
     },
-    radio_samme_som_flyttet_fra: {
+    original_adresse_tittel: {
+        nb: 'Adressen du flyttet fra',
+    },
+    midlertidig_adresse_tittel: {
+        nb: 'Adressen du midlertidig bor på',
+    },
+    midlertidig_adresse_spørsmål: adresseSpørsmålFelles,
+};
+
+export const fregAdresseEllerManuellAdresseTekster: FregAdresseEllerManuellAdresseInnhold = {
+    bruk_folkeregistrert_adresse: {
         header: {
             nb: 'Er det den folkeregistrerte adressen du skal flytte fra?',
         },
@@ -82,18 +89,6 @@ export const adresserTekster: AdresserInnhold = {
             nb: 'Du må svare på om folkeregistrert adresse er adressen du skal flytte fra.',
         },
     },
-    fallback_ingen_strukturert_adresse: {
-        nb: 'Vi mangler strukturert folkeregistrert adresse. Du må derfor fylle inn adressen du flyttet fra manuelt.',
-    },
-    original_adresse_tittel: {
-        nb: 'Adressen du flyttet fra',
-    },
-    midlertidig_adresse_tittel: {
-        nb: 'Adressen du midlertidig bor på',
-    },
-    adresse_du_flyttet_fra_tittel: {
-        nb: 'Oppgi adressen du flyttet fra',
-    },
-    original_adresse_spørsmål: adresseSpørsmålFelles,
-    midlertidig_adresse_spørsmål: adresseSpørsmålFelles,
+    manuell_adresse_tittel: { nb: 'Oppgi adressen du flyttet fra' },
+    manuell_adresse: adresseSpørsmålFelles,
 };

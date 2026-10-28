@@ -2,7 +2,6 @@ import React from 'react';
 
 import { GuidePanel, Heading, VStack } from '@navikt/ds-react';
 
-import { AdresseOriginaltBosted } from './AdresseOriginaltBosted';
 import {
     errorKeyFomFlyttedato,
     errorKeyMåBoBorteHjemmefra,
@@ -15,6 +14,7 @@ import {
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
 import { DateInput } from '../../../components/DateInput';
+import { FolkeregistrertAdresseElerManuellAdresse } from '../../../components/FolkeregistrertAdresseInformasjon/FolkeregistrertAdresseEllerManuellAdresse';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
@@ -28,7 +28,7 @@ import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
 import { landkodeTilNavn } from '../../../utils/adresseUtils';
 import { useReiseOppstartAvslutningHjemreiseSøknad } from '../../context/ReiseOppstartAvslutningHjemreiseSøknadContext';
-import { adresserTekster } from '../../tekster/adresser';
+import { adresserTekster, fregAdresseEllerManuellAdresseTekster } from '../../tekster/adresser';
 
 export const AdresserReiseOppstartAvslutningHjemreise = () => {
     const { locale } = useSpråk();
@@ -67,6 +67,7 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
     };
 
     const håndterSkalBrukeFolkeregAdresse = (felt: EnumFelt<JaNei>) => {
+        const adresseTekster = fregAdresseEllerManuellAdresseTekster.manuell_adresse;
         settAdresser((prev) => ({
             ...prev,
             skalReiseFraFolkeregistrertAdresse: felt,
@@ -74,28 +75,22 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
                 felt.verdi === 'JA' && person.strukturertAdresse
                     ? {
                           land: {
-                              label: adresserTekster.original_adresse_spørsmål.land.label[locale],
+                              label: adresseTekster.land.label[locale],
                               verdi: person.strukturertAdresse.land,
                               svarTekst:
                                   landkodeTilNavn[person.strukturertAdresse.land] ??
                                   person.strukturertAdresse.land,
                           },
                           gateadresse: {
-                              label: adresserTekster.original_adresse_spørsmål.gateadresse.label[
-                                  locale
-                              ],
+                              label: adresseTekster.gateadresse.label[locale],
                               verdi: person.strukturertAdresse.gateadresse,
                           },
                           postnummer: {
-                              label: adresserTekster.original_adresse_spørsmål.postnummer.label[
-                                  locale
-                              ],
+                              label: adresseTekster.postnummer.label[locale],
                               verdi: person.strukturertAdresse.postnummer,
                           },
                           poststed: {
-                              label: adresserTekster.original_adresse_spørsmål.poststed.label[
-                                  locale
-                              ],
+                              label: adresseTekster.poststed.label[locale],
                               verdi: person.strukturertAdresse.poststed,
                           },
                       }
@@ -201,14 +196,23 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
                             />
                         </VStack>
 
-                        <AdresseOriginaltBosted
-                            person={person}
-                            adresser={adresser}
-                            håndterSkalBrukeFolkeregAdresse={håndterSkalBrukeFolkeregAdresse}
-                            håndterOriginalAdresseEndring={håndterOriginalAdresseEndring}
-                            valideringsfeil={valideringsfeil}
-                        />
-
+                        <VStack gap="space-16">
+                            <Heading level="3" size="small">
+                                <LocaleTekst tekst={adresserTekster.original_adresse_tittel} />
+                            </Heading>
+                            <FolkeregistrertAdresseElerManuellAdresse
+                                tekster={fregAdresseEllerManuellAdresseTekster}
+                                brukFolkeregistrertAdresse={
+                                    adresser.skalReiseFraFolkeregistrertAdresse
+                                }
+                                oppdaterBrukFolkeregistrertAdresse={håndterSkalBrukeFolkeregAdresse}
+                                manuellAdresse={adresser.adresseOriginaltBosted}
+                                oppdaterManuellAdresse={håndterOriginalAdresseEndring}
+                                valideringsfeil={valideringsfeil}
+                                feilIdBrukFolkeregAdresse={errorKeySkalBrukeFolkeregAdresse}
+                                feilIdAdresser={originalAdresseFeilIder}
+                            />
+                        </VStack>
                         <VStack gap="space-8">
                             <Heading level="3" size="small">
                                 <LocaleTekst tekst={adresserTekster.midlertidig_adresse_tittel} />

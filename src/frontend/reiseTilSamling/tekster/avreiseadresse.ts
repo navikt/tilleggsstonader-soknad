@@ -1,26 +1,16 @@
+import { FregAdresseEllerManuellAdresseInnhold } from '../../components/FolkeregistrertAdresseInformasjon/tekster';
 import { JaNeiTilTekst } from '../../tekster/felles';
-import { Adresse, JaNei } from '../../typer/søknad';
-import { InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
+import { TekstElement } from '../../typer/tekst';
 
-interface AvreiseadresseInnhold {
+interface AvreiseadresseInnhold extends FregAdresseEllerManuellAdresseInnhold {
     tittel: TekstElement<string>;
-    folkereg_adresse: TekstElement<string>;
-    radio_skalReiseFraFolkeregAdr: RadiogruppePåkrevd<JaNei>;
-    avreiseadresse_fra_folkereg_info: TekstElement<string>;
-    avreiseadresse_fra_folkereg_lenke_tekst: TekstElement<string>;
-    avreiseadresse_fra_folkereg_lenke_url: string;
-    avreiseadresse_tittel: TekstElement<string>;
-    avreiseadresse_spørsmål: Record<keyof Adresse, InputFelt>;
 }
 
 export const avreiseadresseTekster: AvreiseadresseInnhold = {
     tittel: {
         nb: 'Avreiseadresse',
     },
-    folkereg_adresse: {
-        nb: 'Din folkeregistrerte adresse er [0].',
-    },
-    radio_skalReiseFraFolkeregAdr: {
+    bruk_folkeregistrert_adresse: {
         header: {
             nb: 'Skal du reise fra din folkeregistrerte adresse?',
         },
@@ -29,18 +19,8 @@ export const avreiseadresseTekster: AvreiseadresseInnhold = {
             nb: 'Du må svare på om du skal reise fra din folkeregistrerte adresse.',
         },
     },
-    avreiseadresse_fra_folkereg_info: {
-        nb: 'Adressen er hentet fra Folkeregisteret. Det er viktig at denne adressen er korrekt. Du kan ',
-    },
-    avreiseadresse_fra_folkereg_lenke_tekst: {
-        nb: 'endre adressen på Skatteetatens nettsider (åpnes i ny fane)',
-    },
-    avreiseadresse_fra_folkereg_lenke_url:
-        'https://www.skatteetaten.no/person/folkeregister/endre/',
-    avreiseadresse_tittel: {
-        nb: 'Oppgi adressen du skal reise fra',
-    },
-    avreiseadresse_spørsmål: {
+    manuell_adresse_tittel: { nb: 'Oppgi adressen du skal reise fra' },
+    manuell_adresse: {
         land: {
             label: { nb: 'Velg land' },
             feilmelding: { nb: 'Du må velge land.' },

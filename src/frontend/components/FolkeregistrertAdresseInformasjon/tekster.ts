@@ -1,5 +1,11 @@
-import { InlineLenke, TekstElement } from '../../typer/tekst';
+import { Adresse, JaNei } from '../../typer/søknad';
+import { InlineLenke, InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
 
+export interface FregAdresseEllerManuellAdresseInnhold {
+    bruk_folkeregistrert_adresse: RadiogruppePåkrevd<JaNei>;
+    manuell_adresse_tittel: TekstElement<string>;
+    manuell_adresse: Record<keyof Adresse, InputFelt>;
+}
 interface FolkeregistrertAdresseInnhold {
     folkereg_adresse: TekstElement<string>;
     info_tekst: TekstElement<InlineLenke>;

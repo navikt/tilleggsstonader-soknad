@@ -61,7 +61,11 @@ export const PersonRouting: React.FC<{ skjematype: Skjematype; children: React.R
     }
     if (harLastetPerson && harLastetBehandlingsstatus) {
         return (
-            <PersonProvider person={person} harBehandling={harBehandling}>
+            <PersonProvider
+                // person={{ fornavn: 'sara', alder: 27, visningsnavn: 'sara', adresse: '', barn: [] }}
+                person={person}
+                harBehandling={harBehandling}
+            >
                 {children}
             </PersonProvider>
         );
