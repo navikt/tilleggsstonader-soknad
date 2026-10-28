@@ -8,6 +8,7 @@ import {
     RadiogruppeMedUtvalgPåkrevd,
     RadiogruppePåkrevd,
     TekstElement,
+    InfoAlert,
 } from '../typer/tekst';
 
 export const tekstArbeidsrettedeAktiviteter: {
@@ -75,8 +76,8 @@ export interface AktivitetInnhold extends AktivitetInnholdFelles {
     radio_annet_lesmer: LesMer<InlineLenke>;
     radio_annet_lesmer_hva_betyr_alternativene: HvaBetyrAlternativene;
     hvilken_aktivitet: HvilkenAktivitet;
-    lønnet_tiltak_infoalert_innhold: TekstElement<string[]>;
     søker_fra_lesmer: LesMer<string[]>;
+    lønnet_tiltak_infoalert_innhold: InfoAlert;
 }
 
 export const AktivitetTypeUtdanningTilTekst: Record<

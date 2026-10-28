@@ -1,20 +1,20 @@
 import React from 'react';
 
-import { Alert } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 
 import { EnumFelt } from '../../typer/skjema';
 import { JaNei } from '../../typer/søknad';
-import { Radiogruppe, TekstElement } from '../../typer/tekst';
+import { InfoAlert, Radiogruppe } from '../../typer/tekst';
 import { Feilmelding } from '../../typer/validering';
+import { LocaleInfoCard } from '../Teksthåndtering/LocaleInfoCard';
 import { LocaleRadioGroup } from '../Teksthåndtering/LocaleRadioGroup';
-import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
 
 interface Props {
     lønnetAktivitet: EnumFelt<JaNei> | undefined;
     oppdaterLønnetAktivitet: (verdier: EnumFelt<JaNei>) => void;
     feilmelding: Feilmelding | undefined;
     radioTekst: Radiogruppe<JaNei>;
-    infoalertInnhold: TekstElement<string[]>;
+    infoalertInnhold: InfoAlert;
 }
 
 export const LønnetTiltak: React.FC<Props> = ({
@@ -25,7 +25,7 @@ export const LønnetTiltak: React.FC<Props> = ({
     infoalertInnhold,
 }) => {
     return (
-        <div>
+        <VStack gap="space-8">
             <LocaleRadioGroup
                 id={feilmelding?.id}
                 tekst={radioTekst}
@@ -33,11 +33,7 @@ export const LønnetTiltak: React.FC<Props> = ({
                 onChange={oppdaterLønnetAktivitet}
                 error={feilmelding?.melding}
             ></LocaleRadioGroup>
-            {lønnetAktivitet?.verdi === 'JA' && (
-                <Alert variant={'info'}>
-                    <LocaleTekstAvsnitt tekst={infoalertInnhold} />
-                </Alert>
-            )}
-        </div>
+            {lønnetAktivitet?.verdi === 'JA' && <LocaleInfoCard tekst={infoalertInnhold} />}
+        </VStack>
     );
 };

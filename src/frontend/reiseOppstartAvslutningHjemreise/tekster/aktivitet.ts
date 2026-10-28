@@ -61,10 +61,13 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         },
     },
     lønnet_tiltak_infoalert_innhold: {
-        nb: [
-            'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',
-            'Som lærling kan du ha rett til støtte selv om du mottar lønn.',
-        ],
+        header: { nb: 'Lønn i tiltak' },
+        innhold: {
+            nb: [
+                'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',
+                'Som lærling kan du ha rett til støtte til reise ved oppstart, avslutning og hjemreiser selv om du mottar lønn.',
+            ],
+        },
     },
     ingen_aktivitet_infoalert_innhold: {
         nb: 'Ut i fra svarene dine ser det ikke ut som du deltar på arbeidsrettet aktivitet. Du kan fortsatt søke, men vil mest sannsynlig få avslag.',
@@ -87,10 +90,8 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         innhold: {
             del1: {
                 nb: [
-                    'Tiltak og arbeidsrettet utredning er for deg som mottar arbeidsavklaringspenger, uføretrygd, aktivitetspenger for unge, tiltakspenger, dagpenger, kvalifiseringsstønad, har nedsatt arbeidsevne, er enslig mor eller far, er gjenlevende eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
-                    'Et tiltak kan for eksempel være kurs eller arbeidstrening. Arbeidsrettet utredning er en prosess der ferdighetene og mulighetene dine til å utføre arbeid blir vurdert og kartlagt.',
-                    'Utdanningen må være godkjent av Nav for å gi rett til støtte.',
-                    'Er du enslig mor eller far eller gjenlevende må en utdanning godkjennes av din veileder for å gi rett til pengestøtte til reise ved oppstart, avslutning og hjemreise.',
+                    'Velg Tiltak og arbeidsrettet utredning: Hvis du deltar på et arbeidsrettet tiltak, for eksempel kurs eller arbeidstrening. Dette gjelder hvis du mottar arbeidsavklaringspenger (AAP), uføretrygd, aktivitetspenger, tiltakspenger, dagpenger eller kvalifiseringsstønad. Det gjelder også hvis du har nedsatt arbeidsevne eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
+                    'Velg Utdanning godkjent av Nav:Dersom du er enslig mor eller far eller gjenlevende og gjennomfører utdanning som er godkjent av Nav.',
                 ],
             },
             del2_lenker: [],
@@ -108,7 +109,4 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         alternativer: AktivitetTypeTilTekstReiseOppstartAvslutningHjemreise,
         feilmelding: { nb: 'Du må velge en aktivitet' },
     },
-    // info_arbeidssøker_ingen_rett: {
-    //     nb: 'Som arbeidssøker har du ikke rett på denne stønaden. Du kan fortsatt søke, men det kan hende du får avslag.',
-    // },
 };

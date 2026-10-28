@@ -91,3 +91,8 @@ export type Vedleggstekst = {
 };
 
 export type Alternativer<T extends string> = Record<T, TekstElement<string>>;
+
+export type InfoAlert = {
+    header: TekstElement<string>;
+    innhold: TekstElement<string[]>;
+};
