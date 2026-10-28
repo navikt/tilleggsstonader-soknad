@@ -33,7 +33,7 @@ export const forsideTekster: ForsideInnhold = {
     },
     dette_ma_du_vite_innhold: {
         nb: [
-            'Pengestøtten kan gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, har nedsatt arbeidsevne, mottar arbeidsavklaringspenger (AAP), uføretrygd, aktivitetspenger, tiltakspenger, dagpenger, kvalifiseringsstønad eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
+            'Pengestøtten kan gis til deg som gjennomfører en arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, har nedsatt arbeidsevne, mottar arbeidsavklaringspenger (AAP), uføretrygd, aktivitetspenger for unge, tiltakspenger, dagpenger, kvalifiseringsstønad eller sitter i fengsel og ellers ville hatt rett til tiltakspenger.',
             'Du får som hovedregel dekket den billigste reisemåten med offentlig transport. Hvis det ikke er praktisk mulig å bruke offentlig transport, kan du få dekket nødvendige utgifter til annen reisemåte.',
             'Du kan få dekket reiseutgifter til oppstart, avslutning og hjemreiser, og får vanligvis dekket inntil 4 hjemreiser tur/retur per år.',
             'Du kan få dekket utgifter til flere hjemreiser hvis du har barn som ennå ikke har fullført 4. skoleår og blir igjen på hjemstedet, eller ved særlige grunner som for eksempel helsemessige årsaker.',
