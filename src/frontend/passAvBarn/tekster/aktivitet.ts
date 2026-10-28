@@ -40,7 +40,7 @@ export const aktivitetTekster: AktivitetTekstPassAvBarn = {
                     'Vi henter tiltak og utdanning registrert på deg 3 måneder tilbake i tid. Er du registrert arbeidssøker kan vi ikke hente det.',
                     'Hvis aktiviteten din mangler eller det er noe feil anbefaler vi deg å ta kontakt med veilederen din. Du kan fortsatt søke nå, men det tar lengre tid for oss å behandle din søknad hvis vi må kontakte veilederen din for deg.',
                     'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
-                    'Er du enslig forsørger/gjenlevende og i arbeid, er det andre søknader du skal fylle ut: ',
+                    'Er du enslig mor eller far/gjenlevende og i arbeid, er det andre søknader du skal fylle ut: ',
                 ],
             },
             del2_lenker: [
@@ -91,7 +91,7 @@ export const aktivitetTekster: AktivitetTekstPassAvBarn = {
             nb: [
                 'Du kan fortsatt søke, men du kan få avslag.',
                 'Merk deg at medisinsk behandling ikke gir rett til støtte for pass av barn.',
-                'Er du enslig forsørger/gjenlevende og i arbeid, er det andre søknader du skal fylle ut: ',
+                'Er du enslig mor eller far/gjenlevende og i arbeid, er det andre søknader du skal fylle ut: ',
             ],
         },
         del2_lenker: [
