@@ -46,21 +46,9 @@ const [ReiseOppstartAvslutningHjemreiseSøknadProvider, useReiseOppstartAvslutni
             useState<DokumentasjonFelt[]>(initialDokumentasjon());
 
         const dokumentasjonsbehov = useMemo((): Dokumentasjonsbehov[] => {
-            const behov: Dokumentasjonsbehov[] = [];
+            const behov: Dokumentasjonsbehov[] = [{ type: VedleggstypeROAH.UTGIFTER_ROAH }];
 
             const reisemåter = reiser.map((reise) => reise.reisemåte);
-            const transportmidlerBenyttet = reisemåter.flatMap(
-                (reisemåte) =>
-                    reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier.map((v) => v.verdi) ?? []
-            );
-
-            if (transportmidlerBenyttet.includes('OFFENTLIG_TRANSPORT')) {
-                behov.push({ type: VedleggstypeROAH.UTGIFTER_ROAH });
-            }
-
-            if (transportmidlerBenyttet.includes('DROSJE')) {
-                behov.push({ type: VedleggstypeROAH.UTGIFTER_ROAH });
-            }
 
             if (reisemåter.some((reisemåte) => reisemåte?.drosje?.harTTKort?.verdi === 'JA')) {
                 behov.push({ type: VedleggstypeROAH.TT_KORT_ROAH });
