@@ -2,6 +2,7 @@ import countries from 'i18n-iso-countries';
 import codesData from 'i18n-iso-countries/codes.json';
 import nbLocale from 'i18n-iso-countries/langs/nb.json';
 
+import { harVerdi } from './typeUtils';
 import { Person } from '../typer/person';
 import { Adresse } from '../typer/søknad';
 
@@ -66,4 +67,15 @@ export const adressefelterTilVisning = (adresse: {
     ]
         .filter(Boolean)
         .join(', ');
+};
+
+export const harAlleFelterIStrukturertAdresse = (person: Person): boolean => {
+    if (!person.strukturertAdresse) return false;
+
+    return (
+        harVerdi(person.strukturertAdresse.gateadresse) &&
+        harVerdi(person.strukturertAdresse.postnummer) &&
+        harVerdi(person.strukturertAdresse.poststed) &&
+        harVerdi(person.strukturertAdresse.land)
+    );
 };

@@ -1,3 +1,4 @@
+import { FregAdresseEllerManuellAdresseInnhold } from '../../components/FolkeregistrertAdresseInformasjon/tekster';
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { Adresse, JaNei } from '../../typer/søknad';
 import { Datoperiode, InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
@@ -7,17 +8,9 @@ interface AdresserInnhold {
     guide_innhold: TekstElement<string[]>;
     radio_må_bo_borte_hjemmefra: RadiogruppePåkrevd<JaNei>;
     advarsel_må_bo_borte_hjemmefra: TekstElement<string>;
-    folkereg_adresse: TekstElement<string>;
-    folkereg_adresse_info: TekstElement<string>;
-    folkereg_adresse_lenke_tekst: TekstElement<string>;
-    folkereg_adresse_lenke_url: string;
     dato_flytting: Datoperiode;
-    radio_samme_som_flyttet_fra: RadiogruppePåkrevd<JaNei>;
-    fallback_ingen_strukturert_adresse: TekstElement<string>;
     original_adresse_tittel: TekstElement<string>;
     midlertidig_adresse_tittel: TekstElement<string>;
-    adresse_du_flyttet_fra_tittel: TekstElement<string>;
-    original_adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     midlertidig_adresse_spørsmål: Record<keyof Adresse, InputFelt>;
 }
 
@@ -57,16 +50,6 @@ export const adresserTekster: AdresserInnhold = {
     advarsel_må_bo_borte_hjemmefra: {
         nb: 'Ut fra svarene dine ser det ut som du ikke må bo midlertidig borte hjemmefra på grunn av deltakelse på arbeidsrettet aktivitet. Da har du ikke rett på pengestøtte til reise ved oppstart, avslutning og hjemreiser. Du kan fortsatt søke, men det kan hende du får avslag.',
     },
-    folkereg_adresse: {
-        nb: 'Din folkeregistrerte adresse er [0].',
-    },
-    folkereg_adresse_info: {
-        nb: 'Adressen er hentet fra Folkeregisteret. Det er viktig at denne adressen er korrekt. Du kan ',
-    },
-    folkereg_adresse_lenke_tekst: {
-        nb: 'endre adressen på Skatteetatens nettsider (åpnes i ny fane)',
-    },
-    folkereg_adresse_lenke_url: 'https://www.skatteetaten.no/person/folkeregister/endre/',
     dato_flytting: {
         label: {
             nb: 'I hvilken periode må du midlertidig bo borte hjemmefra?',
@@ -87,7 +70,17 @@ export const adresserTekster: AdresserInnhold = {
             nb: 'Til dato må være samme dag eller etter fra dato.',
         },
     },
-    radio_samme_som_flyttet_fra: {
+    original_adresse_tittel: {
+        nb: 'Adressen du flyttet fra',
+    },
+    midlertidig_adresse_tittel: {
+        nb: 'Adressen du midlertidig bor på',
+    },
+    midlertidig_adresse_spørsmål: adresseSpørsmålFelles,
+};
+
+export const fregAdresseEllerManuellAdresseTekster: FregAdresseEllerManuellAdresseInnhold = {
+    bruk_folkeregistrert_adresse: {
         header: {
             nb: 'Er det den folkeregistrerte adressen du skal flytte fra?',
         },
@@ -96,18 +89,6 @@ export const adresserTekster: AdresserInnhold = {
             nb: 'Du må svare på om folkeregistrert adresse er adressen du skal flytte fra.',
         },
     },
-    fallback_ingen_strukturert_adresse: {
-        nb: 'Vi mangler strukturert folkeregistrert adresse. Du må derfor fylle inn adressen du flyttet fra manuelt.',
-    },
-    original_adresse_tittel: {
-        nb: 'Adressen du flyttet fra',
-    },
-    midlertidig_adresse_tittel: {
-        nb: 'Adressen du midlertidig bor på',
-    },
-    adresse_du_flyttet_fra_tittel: {
-        nb: 'Oppgi adressen du flyttet fra',
-    },
-    original_adresse_spørsmål: adresseSpørsmålFelles,
-    midlertidig_adresse_spørsmål: adresseSpørsmålFelles,
+    manuell_adresse_tittel: { nb: 'Oppgi adressen du flyttet fra' },
+    manuell_adresse: adresseSpørsmålFelles,
 };

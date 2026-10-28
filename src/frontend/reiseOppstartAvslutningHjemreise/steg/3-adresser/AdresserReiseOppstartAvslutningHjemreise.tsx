@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BodyShort, GuidePanel, Heading, InlineMessage, Link, VStack } from '@navikt/ds-react';
+import { GuidePanel, Heading, VStack } from '@navikt/ds-react';
 
 import {
     errorKeyFomFlyttedato,
@@ -14,21 +14,21 @@ import {
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
 import { DateInput } from '../../../components/DateInput';
+import { FolkeregistrertAdresseElerManuellAdresse } from '../../../components/FolkeregistrertAdresseInformasjon/FolkeregistrertAdresseEllerManuellAdresse';
 import { Side } from '../../../components/Side';
 import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeading';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../../../components/Teksthåndtering/LocaleTekstAvsnitt';
-import { UnderspørsmålContainer } from '../../../components/UnderspørsmålContainer';
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt, VerdiFelt } from '../../../typer/skjema';
 import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
-import { landkodeTilNavn } from '../../../utils/adresseUtils';
+import { harAlleFelterIStrukturertAdresse, landkodeTilNavn } from '../../../utils/adresseUtils';
 import { useReiseOppstartAvslutningHjemreiseSøknad } from '../../context/ReiseOppstartAvslutningHjemreiseSøknadContext';
-import { adresserTekster } from '../../tekster/adresser';
+import { adresserTekster, fregAdresseEllerManuellAdresseTekster } from '../../tekster/adresser';
 
 export const AdresserReiseOppstartAvslutningHjemreise = () => {
     const { locale } = useSpråk();
@@ -36,12 +36,8 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
     const { adresser, settAdresser } = useReiseOppstartAvslutningHjemreiseSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
-    const harStrukturertAdresse = !!person.strukturertAdresse;
     const skalViseAdresseSpørsmål = adresser?.måBoBorteHjemmefra?.verdi === 'JA';
     const skalViseAlertIkkeRett = adresser?.måBoBorteHjemmefra?.verdi === 'NEI';
-    const måFylleUtOriginalAdresseManuelt =
-        adresser?.skalReiseFraFolkeregistrertAdresse?.verdi === 'NEI' ||
-        (adresser?.skalReiseFraFolkeregistrertAdresse?.verdi === 'JA' && !harStrukturertAdresse);
 
     const nullstillAdresseFeil = (errorKeys: string[]) => {
         settValideringsfeil((prev) =>
@@ -70,6 +66,7 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
     };
 
     const håndterSkalBrukeFolkeregAdresse = (felt: EnumFelt<JaNei>) => {
+        const adresseTekster = fregAdresseEllerManuellAdresseTekster.manuell_adresse;
         settAdresser((prev) => ({
             ...prev,
             skalReiseFraFolkeregistrertAdresse: felt,
@@ -77,28 +74,22 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
                 felt.verdi === 'JA' && person.strukturertAdresse
                     ? {
                           land: {
-                              label: adresserTekster.original_adresse_spørsmål.land.label[locale],
+                              label: adresseTekster.land.label[locale],
                               verdi: person.strukturertAdresse.land,
                               svarTekst:
                                   landkodeTilNavn[person.strukturertAdresse.land] ??
                                   person.strukturertAdresse.land,
                           },
                           gateadresse: {
-                              label: adresserTekster.original_adresse_spørsmål.gateadresse.label[
-                                  locale
-                              ],
+                              label: adresseTekster.gateadresse.label[locale],
                               verdi: person.strukturertAdresse.gateadresse,
                           },
                           postnummer: {
-                              label: adresserTekster.original_adresse_spørsmål.postnummer.label[
-                                  locale
-                              ],
+                              label: adresseTekster.postnummer.label[locale],
                               verdi: person.strukturertAdresse.postnummer,
                           },
                           poststed: {
-                              label: adresserTekster.original_adresse_spørsmål.poststed.label[
-                                  locale
-                              ],
+                              label: adresseTekster.poststed.label[locale],
                               verdi: person.strukturertAdresse.poststed,
                           },
                       }
@@ -142,7 +133,7 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
     };
 
     const kanFortsette = (): boolean => {
-        const feil = validerAdresser(adresser, locale, harStrukturertAdresse);
+        const feil = validerAdresser(adresser, locale, harAlleFelterIStrukturertAdresse(person));
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
@@ -208,63 +199,18 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
                             <Heading level="3" size="small">
                                 <LocaleTekst tekst={adresserTekster.original_adresse_tittel} />
                             </Heading>
-                            <BodyShort>
-                                <LocaleTekst
-                                    tekst={adresserTekster.folkereg_adresse}
-                                    argument0={person.adresse}
-                                />
-                            </BodyShort>
-                            <InlineMessage status="info">
-                                <BodyShort spacing>
-                                    {adresserTekster.folkereg_adresse_info[locale]}
-                                    <Link
-                                        href={adresserTekster.folkereg_adresse_lenke_url}
-                                        target="_blank"
-                                        inlineText
-                                        rel="noopener noreferrer"
-                                    >
-                                        {adresserTekster.folkereg_adresse_lenke_tekst[locale]}
-                                    </Link>
-                                    .
-                                </BodyShort>
-                            </InlineMessage>
-                            <LocaleRadioGroup
-                                id={valideringsfeil[errorKeySkalBrukeFolkeregAdresse]?.id}
-                                tekst={adresserTekster.radio_samme_som_flyttet_fra}
-                                value={adresser?.skalReiseFraFolkeregistrertAdresse?.verdi ?? ''}
-                                onChange={håndterSkalBrukeFolkeregAdresse}
-                                error={valideringsfeil[errorKeySkalBrukeFolkeregAdresse]?.melding}
+                            <FolkeregistrertAdresseElerManuellAdresse
+                                tekster={fregAdresseEllerManuellAdresseTekster}
+                                brukFolkeregistrertAdresse={
+                                    adresser.skalReiseFraFolkeregistrertAdresse
+                                }
+                                oppdaterBrukFolkeregistrertAdresse={håndterSkalBrukeFolkeregAdresse}
+                                manuellAdresse={adresser.adresseOriginaltBosted}
+                                oppdaterManuellAdresse={håndterOriginalAdresseEndring}
+                                valideringsfeil={valideringsfeil}
+                                feilIdBrukFolkeregAdresse={errorKeySkalBrukeFolkeregAdresse}
+                                feilIdAdresser={originalAdresseFeilIder}
                             />
-                            {adresser?.skalReiseFraFolkeregistrertAdresse?.verdi === 'JA' &&
-                                !harStrukturertAdresse && (
-                                    <BodyShort>
-                                        <LocaleTekst
-                                            tekst={
-                                                adresserTekster.fallback_ingen_strukturert_adresse
-                                            }
-                                        />
-                                    </BodyShort>
-                                )}
-                            {måFylleUtOriginalAdresseManuelt && (
-                                <UnderspørsmålContainer>
-                                    <VStack gap="space-8">
-                                        <Heading level="3" size="small">
-                                            <LocaleTekst
-                                                tekst={
-                                                    adresserTekster.adresse_du_flyttet_fra_tittel
-                                                }
-                                            />
-                                        </Heading>
-                                        <AdresseVelger
-                                            adresse={adresser?.adresseOriginaltBosted}
-                                            onChange={håndterOriginalAdresseEndring}
-                                            tekster={adresserTekster.original_adresse_spørsmål}
-                                            feil={valideringsfeil}
-                                            feilIder={originalAdresseFeilIder}
-                                        />
-                                    </VStack>
-                                </UnderspørsmålContainer>
-                            )}
                         </VStack>
                         <VStack gap="space-8">
                             <Heading level="3" size="small">
