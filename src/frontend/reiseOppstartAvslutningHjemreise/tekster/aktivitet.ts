@@ -60,6 +60,15 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
             },
         },
     },
+    lønnet_tiltak_infoalert_innhold: {
+        header: { nb: 'Lønn i tiltak' },
+        innhold: {
+            nb: [
+                'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',
+                'Som lærling kan du ha rett til støtte til reise ved oppstart, avslutning og hjemreiser selv om du mottar lønn.',
+            ],
+        },
+    },
     ingen_aktivitet_infoalert_innhold: {
         nb: 'Ut i fra svarene dine ser det ikke ut som du deltar på arbeidsrettet aktivitet. Du kan fortsatt søke, men vil mest sannsynlig få avslag.',
     },

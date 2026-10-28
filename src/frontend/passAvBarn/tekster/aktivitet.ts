@@ -77,6 +77,15 @@ export const aktivitetTekster: AktivitetTekstPassAvBarn = {
             },
         },
     },
+    lønnet_tiltak_infoalert_innhold: {
+        header: { nb: 'Lønn i tiltak' },
+        innhold: {
+            nb: [
+                'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',
+                'Som lærling kan du ha rett til støtte til pass av barn selv om du mottar lønn.',
+            ],
+        },
+    },
     ingen_aktivitet_infoalert_innhold: {
         del1: {
             nb: [

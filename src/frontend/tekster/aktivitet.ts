@@ -39,7 +39,6 @@ interface AktivitetInnholdFelles {
     tittel: TekstElement<string>;
     ingen_aktivitet_infoalert_title: TekstElement<string>;
     søker_fra: InputFelt;
-    lønnet_tiltak_infoalert_innhold: InfoAlert;
 }
 
 interface HvilkenAktivitet {
@@ -78,6 +77,7 @@ export interface AktivitetInnhold extends AktivitetInnholdFelles {
     radio_annet_lesmer_hva_betyr_alternativene: HvaBetyrAlternativene;
     hvilken_aktivitet: HvilkenAktivitet;
     søker_fra_lesmer: LesMer<string[]>;
+    lønnet_tiltak_infoalert_innhold: InfoAlert;
 }
 
 export const AktivitetTypeUtdanningTilTekst: Record<
@@ -130,14 +130,5 @@ export const aktivitetTeksterFelles: AktivitetInnholdFelles = {
     ingen_aktivitet_infoalert_title: { nb: 'Ingen arbeidsrettet aktivitet?' },
     ingen_registrerte_aktiviterer_overskrift: {
         nb: 'Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.',
-    },
-    lønnet_tiltak_infoalert_innhold: {
-        header: { nb: 'Lønn i tiltak' },
-        innhold: {
-            nb: [
-                'Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.',
-                'Som lærling kan du ha rett til støtte selv om du mottar lønn.',
-            ],
-        },
     },
 };
