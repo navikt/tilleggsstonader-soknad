@@ -70,7 +70,7 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         postnummer: { label: { nb: 'Postnummer' }, feilmelding: { nb: 'Du må oppgi postnummer.' } },
         poststed: { label: { nb: 'Poststed' }, feilmelding: { nb: 'Du må oppgi poststed.' } },
     },
-    adresse_tittel: { nb: 'Adressen du flytter til' },
+    adresse_tittel: { nb: 'Oppgi adressen du flytter til' },
     adresse_spørsmål: {
         land: { label: { nb: 'Velg land' }, feilmelding: { nb: 'Du må velge land.' } },
         gateadresse: {
@@ -97,6 +97,9 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
     radio_annen_dekning: {
         header: {
             nb: 'Får du dekket utgiftene dine til flytting på annen måte enn med stønad fra Nav?',
+        },
+        beskrivelse: {
+            nb: 'Oppgi om arbeidsgiver eller andre dekker hele eller deler av flytteutgiftene dine. Nav kan ikke dekke utgifter som allerede dekkes av andre.',
         },
         alternativer: JaNeiTilTekst,
         feilmelding: { nb: 'Du må svare på om du får dekket flytteutgiftene på annen måte.' },
