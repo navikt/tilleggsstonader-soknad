@@ -26,7 +26,7 @@ import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { EnumFelt, VerdiFelt } from '../../../typer/skjema';
 import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
-import { landkodeTilNavn } from '../../../utils/adresseUtils';
+import { harAlleFelterIStrukturertAdresse, landkodeTilNavn } from '../../../utils/adresseUtils';
 import { useReiseOppstartAvslutningHjemreiseSøknad } from '../../context/ReiseOppstartAvslutningHjemreiseSøknadContext';
 import { adresserTekster, fregAdresseEllerManuellAdresseTekster } from '../../tekster/adresser';
 
@@ -36,7 +36,6 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
     const { adresser, settAdresser } = useReiseOppstartAvslutningHjemreiseSøknad();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
-    const harStrukturertAdresse = !!person.strukturertAdresse;
     const skalViseAdresseSpørsmål = adresser?.måBoBorteHjemmefra?.verdi === 'JA';
     const skalViseAlertIkkeRett = adresser?.måBoBorteHjemmefra?.verdi === 'NEI';
 
@@ -134,7 +133,7 @@ export const AdresserReiseOppstartAvslutningHjemreise = () => {
     };
 
     const kanFortsette = (): boolean => {
-        const feil = validerAdresser(adresser, locale, harStrukturertAdresse);
+        const feil = validerAdresser(adresser, locale, harAlleFelterIStrukturertAdresse(person));
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };

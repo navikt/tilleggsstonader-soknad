@@ -29,7 +29,7 @@ export const validerAvreiseadresse = (
         const feilAdresse = validerAdresse(
             avreiseadresse.adresseDetSkalReisesFra,
             locale,
-            avreiseadresseTekster.avreiseadresse_spørsmål,
+            avreiseadresseTekster.manuell_adresse,
             avreiseadresseFeilIder
         );
         feil = { ...feil, ...feilAdresse };
@@ -38,14 +38,14 @@ export const validerAvreiseadresse = (
             ...feil,
             [errorKeySkalReiseFraFolkeregAdr]: {
                 id: errorKeySkalReiseFraFolkeregAdr,
-                melding: avreiseadresseTekster.radio_skalReiseFraFolkeregAdr.feilmelding[locale],
+                melding: avreiseadresseTekster.bruk_folkeregistrert_adresse.feilmelding[locale],
             },
         };
     } else if (avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi === 'NEI') {
         const feilAdresse = validerAdresse(
             avreiseadresse.adresseDetSkalReisesFra,
             locale,
-            avreiseadresseTekster.avreiseadresse_spørsmål,
+            avreiseadresseTekster.manuell_adresse,
             avreiseadresseFeilIder
         );
         feil = { ...feil, ...feilAdresse };

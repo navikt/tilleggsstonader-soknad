@@ -3,7 +3,7 @@ import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { erDatoEtterEllerLik } from '../../../utils/datoUtils';
 import { harVerdi } from '../../../utils/typeUtils';
-import { adresserTekster } from '../../tekster/adresser';
+import { adresserTekster, fregAdresseEllerManuellAdresseTekster } from '../../tekster/adresser';
 import { AdresseReiseOppstartAvslutningHjemreise } from '../../typer/søknad';
 
 export const errorKeyMåBoBorteHjemmefra = 'adresser_måBoBorteHjemmefra';
@@ -38,7 +38,7 @@ export const midlertidigAdresseFeilIder: AdresseFeilIder = {
 export const validerAdresser = (
     adresser: AdresseReiseOppstartAvslutningHjemreise | undefined,
     locale: Locale,
-    harStrukturertAdresse: boolean
+    harFregAdresse: boolean
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
@@ -90,24 +90,27 @@ export const validerAdresser = (
         };
     }
 
-    if (!harVerdi(adresser.skalReiseFraFolkeregistrertAdresse?.verdi)) {
+    if (harFregAdresse && !harVerdi(adresser.skalReiseFraFolkeregistrertAdresse?.verdi)) {
         feil = {
             ...feil,
             [errorKeySkalBrukeFolkeregAdresse]: {
                 id: errorKeySkalBrukeFolkeregAdresse,
-                melding: adresserTekster.radio_samme_som_flyttet_fra.feilmelding[locale],
+                melding:
+                    fregAdresseEllerManuellAdresseTekster.bruk_folkeregistrert_adresse.feilmelding[
+                        locale
+                    ],
             },
         };
     }
 
-    const skalBrukeFolkeregAdresse = adresser.skalReiseFraFolkeregistrertAdresse?.verdi === 'JA';
-    const måFylleUtOriginalAdresseManuelt = !skalBrukeFolkeregAdresse || !harStrukturertAdresse;
+    const måFylleUtOriginalAdresseManuelt =
+        adresser.skalReiseFraFolkeregistrertAdresse?.verdi === 'NEI' || !harFregAdresse;
 
     if (måFylleUtOriginalAdresseManuelt) {
         const feilOriginalAdresse = validerAdresse(
             adresser.adresseOriginaltBosted,
             locale,
-            adresserTekster.original_adresse_spørsmål,
+            fregAdresseEllerManuellAdresseTekster.manuell_adresse,
             originalAdresseFeilIder
         );
         feil = { ...feil, ...feilOriginalAdresse };
