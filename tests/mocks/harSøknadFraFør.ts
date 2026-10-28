@@ -50,3 +50,12 @@ export const mockHarIngenSøknadFlyttingFraFør = async (page: Page) => {
         await route.fulfill({ json: false });
     });
 };
+
+export const mockHarIngenSøknadReiseOppstartAvslutningHjemreiseFraFør = async (page: Page) => {
+    await page.route(
+        'api/person/har-behandling?skjematype=S%C3%98KNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE',
+        async (route) => {
+            await route.fulfill({ json: false });
+        }
+    );
+};
