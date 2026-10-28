@@ -25,15 +25,10 @@ export const validerAvreiseadresse = (
 ): Valideringsfeil => {
     let feil: Valideringsfeil = {};
 
-    if (manglerFolkeregistrertAdresse) {
-        const feilAdresse = validerAdresse(
-            avreiseadresse.adresseDetSkalReisesFra,
-            locale,
-            avreiseadresseTekster.manuell_adresse,
-            avreiseadresseFeilIder
-        );
-        feil = { ...feil, ...feilAdresse };
-    } else if (!harVerdi(avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi)) {
+    if (
+        !manglerFolkeregistrertAdresse &&
+        !harVerdi(avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi)
+    ) {
         feil = {
             ...feil,
             [errorKeySkalReiseFraFolkeregAdr]: {
@@ -41,7 +36,13 @@ export const validerAvreiseadresse = (
                 melding: avreiseadresseTekster.bruk_folkeregistrert_adresse.feilmelding[locale],
             },
         };
-    } else if (avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi === 'NEI') {
+    }
+
+    const skalRegistereAdresseManuelt =
+        manglerFolkeregistrertAdresse ||
+        avreiseadresse.skalReiseFraFolkeregistrertAdresse?.verdi === 'NEI';
+
+    if (skalRegistereAdresseManuelt) {
         const feilAdresse = validerAdresse(
             avreiseadresse.adresseDetSkalReisesFra,
             locale,

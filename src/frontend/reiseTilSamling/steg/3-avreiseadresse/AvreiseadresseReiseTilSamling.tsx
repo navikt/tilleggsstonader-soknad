@@ -11,11 +11,10 @@ import { LocaleHeading } from '../../../components/Teksthåndtering/LocaleHeadin
 import { usePerson } from '../../../context/PersonContext';
 import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
-import { Person } from '../../../typer/person';
 import { EnumFelt } from '../../../typer/skjema';
 import { Adresse, JaNei } from '../../../typer/søknad';
 import { inneholderFeil } from '../../../typer/validering';
-import { mapAdresse } from '../../../utils/adresseUtils';
+import { harAlleFelterIStrukturertAdresse, mapAdresse } from '../../../utils/adresseUtils';
 import { useReiseTilSamlingSøknad } from '../../context/ReiseTilSamlingSøknadContext';
 import { avreiseadresseTekster } from '../../tekster/avreiseadresse';
 
@@ -33,7 +32,11 @@ export const AvreiseadresseReiseTilSamling = () => {
     };
 
     const kanFortsette = (): boolean => {
-        const feil = validerAvreiseadresse(avreiseadresse, locale, manglerFolkeregistrertAdresse);
+        const feil = validerAvreiseadresse(
+            avreiseadresse,
+            locale,
+            !harAlleFelterIStrukturertAdresse(person)
+        );
         settValideringsfeil(feil);
         return !inneholderFeil(feil);
     };
@@ -46,22 +49,6 @@ export const AvreiseadresseReiseTilSamling = () => {
         }));
         settValideringsfeil((prev) => ({ ...prev, [errorKeySkalReiseFraFolkeregAdr]: undefined }));
     };
-
-    const manglerFolkeregistrertAdresse = !erStrukturertAdresseDefinert(person);
-
-    function erStrukturertAdresseDefinert(person: Person): boolean {
-        if (person.strukturertAdresse === undefined) {
-            return false;
-        } else if (
-            person.strukturertAdresse.land != null ||
-            person.strukturertAdresse.gateadresse != null ||
-            person.strukturertAdresse.postnummer != null ||
-            person.strukturertAdresse.poststed != null
-        ) {
-            return true;
-        }
-        return false;
-    }
 
     const håndterAdresseEndring = (felt: Partial<Adresse>, feltNavn: keyof Adresse) => {
         settAdresseDetSkalReisesFra(felt);
