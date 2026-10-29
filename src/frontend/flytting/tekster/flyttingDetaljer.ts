@@ -119,7 +119,11 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
     },
     egenutgifter_beløp: {
         hengerleie: {
-            label: { nb: 'Leie av tilhenger eller leiebil' },
+            label: { nb: 'Leie av tilhenger' },
+            feilmelding: beløpFeilmelding,
+        },
+        leiebil: {
+            label: { nb: 'Leie av bil' },
             feilmelding: beløpFeilmelding,
         },
         bom: {

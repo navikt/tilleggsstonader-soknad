@@ -6,7 +6,14 @@ export type Flyttemåte = 'FLYTTER_SELV' | 'FLYTTEBYRÅ';
 
 export const flyttebyråTilbudIndekser = [0, 1] as const;
 
-export const egenutgiftFelter = ['hengerleie', 'bom', 'parkering', 'ferje', 'annet'] as const;
+export const egenutgiftFelter = [
+    'hengerleie',
+    'leiebil',
+    'bom',
+    'parkering',
+    'ferje',
+    'annet',
+] as const;
 export type EgenutgiftFelt = (typeof egenutgiftFelter)[number];
 
 export type UtgifterEgenFlytting = {
