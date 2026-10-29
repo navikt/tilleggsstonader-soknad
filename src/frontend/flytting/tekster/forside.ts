@@ -7,7 +7,7 @@ export const forsideTekster: ForsideTekster = {
     },
     veileder_innhold: {
         nb: [
-            'Her kan du søke om pengestøtte dersom du flytter i forbindelse med utdanning, arbeidsrettet tiltak eller overgang til arbeid. Det gjelder også enslige forsørgere og gjenlevende som flytter fra hjemstedet for å begynne i arbeid.',
+            'For å få denne støtten må du delta på arbeidsrettet tiltak, gjennomføre en utdanning godkjent av Nav, eller fått jobb et annet sted.',
         ],
     },
     dette_ma_du_vite_innhold: {
