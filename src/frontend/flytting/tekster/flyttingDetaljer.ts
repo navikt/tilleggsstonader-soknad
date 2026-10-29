@@ -15,7 +15,8 @@ interface FlyttingDetaljerInnhold {
     adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     radio_flyttemåte: RadiogruppePåkrevd<Flyttemåte>;
     radio_annen_dekning: RadiogruppePåkrevd<JaNei>;
-    varsel_dokumentasjon: TekstElement<string>;
+    varsel_dokumentasjon_flytter_selv: TekstElement<string>;
+    varsel_dokumentasjon_flyttebyrå: TekstElement<string>;
     varsel_arbeidskontrakt: TekstElement<string>;
     egenutgifter_tittel: TekstElement<string>;
     antall_km: InputFelt;
@@ -44,8 +45,8 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
     radio_årsak: {
         header: { nb: 'Hvorfor flytter du?' },
         alternativer: {
+            AKTIVITET: { nb: 'Jeg flytter fra/til hjemsted på grunn av tiltak eller utdanning' },
             NY_JOBB: { nb: 'Jeg flytter fordi jeg har fått ny jobb' },
-            AKTIVITET: { nb: 'Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet' },
         },
         feilmelding: { nb: 'Du må oppgi hvorfor du flytter.' },
     },
@@ -88,8 +89,11 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         },
         feilmelding: { nb: 'Du må velge hvordan du skal flytte.' },
     },
-    varsel_dokumentasjon: {
-        nb: 'Du må dokumentere alle utgiftene du søker om. Hvis du ikke har dokumentasjonen nå, kan du ettersende den senere.',
+    varsel_dokumentasjon_flytter_selv: {
+        nb: 'Du må dokumentere alle utgiftene du søker om. Skal du leie bil og flytte selv, må du først innhente skriftlige tilbud fra minst to flyttebyråer. Utgiftene kan dekkes opptil beløpet i det laveste tilbudet. Hvis du ikke har dokumentasjonen nå, kan du ettersende den senere.',
+    },
+    varsel_dokumentasjon_flyttebyrå: {
+        nb: 'Du må dokumentere alle utgiftene du søker om. Ved bruk av flyttebyrå så må du innhente skriftlige tilbud fra minst to flyttebyråer. Hvis du ikke har dokumentasjonen nå, kan du ettersende den senere.',
     },
     varsel_arbeidskontrakt: {
         nb: 'Du må legge ved arbeidskontrakten din. Har du ikke den nå, kan du ettersende den senere.',
@@ -110,12 +114,12 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
     egenutgifter_tittel: { nb: 'Utgifter til flytting' },
     antall_km: {
         label: { nb: 'Hvor lang reisevei har du?' },
-        description: { nb: 'Angi antall kilometer mellom bostedet ditt og der du skal flytte' },
+        description: { nb: 'Oppgi antall kilometer én vei' },
         feilmelding: { nb: 'Oppgi en avstand som er større enn 0, med inntil to desimaler.' },
     },
     egenutgifter_beløp: {
         hengerleie: {
-            label: { nb: 'Hengerleie' },
+            label: { nb: 'Leie av tilhenger eller leiebil' },
             feilmelding: beløpFeilmelding,
         },
         bom: {
