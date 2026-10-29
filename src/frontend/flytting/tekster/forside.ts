@@ -7,7 +7,7 @@ export const forsideTekster: ForsideTekster = {
     },
     veileder_innhold: {
         nb: [
-            'For å få denne støtten må du delta på arbeidsrettet tiltak, gjennomføre en utdanning godkjent av Nav, eller fått jobb et annet sted.',
+            'For å få denne støtten må du delta på arbeidsrettet tiltak, gjennomføre en utdanning godkjent av Nav eller ha fått jobb et annet sted.',
         ],
     },
     dette_ma_du_vite_innhold: {
