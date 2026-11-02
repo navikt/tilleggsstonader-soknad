@@ -18,4 +18,10 @@ export const typerVedleggTeksterFlytting: Record<VedleggstypeFlytting, Vedleggst
         tittel: { nb: 'Tilbud fra flyttebyrå 2' },
         beskrivelse: { nb: 'Last opp tilbudet fra flyttebyrå 2 med navn og beløp.' },
     },
+    [VedleggstypeFlytting.UTGIFTER_SOM_DEKKES]: {
+        tittel: { nb: 'Utgifter til flytting dekket av andre ' },
+        beskrivelse: {
+            nb: 'Last opp dokumentasjon som viser hvilke utgifter som er dekket og hvilke utgifter som ikke er dekket.',
+        },
+    },
 };

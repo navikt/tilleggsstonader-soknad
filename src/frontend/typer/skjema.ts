@@ -56,6 +56,7 @@ export enum VedleggstypeFlytting {
     UTGIFTER_EGEN_FLYTTING = 'UTGIFTER_EGEN_FLYTTING',
     TILBUD_FLYTTEBYRÅ_1 = 'TILBUD_FLYTTEBYRÅ_1',
     TILBUD_FLYTTEBYRÅ_2 = 'TILBUD_FLYTTEBYRÅ_2',
+    UTGIFTER_SOM_DEKKES = 'UTGIFTER_SOM_DEKKES',
 }
 
 export enum VedleggstypePassAvBarn {

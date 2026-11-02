@@ -1,4 +1,4 @@
-import { BodyLong, Heading, InlineMessage, VStack } from '@navikt/ds-react';
+import { BodyLong, GuidePanel, Heading, InlineMessage, VStack } from '@navikt/ds-react';
 
 import {
     adresseFeilIder,
@@ -107,6 +107,9 @@ export const FlyttingDetaljerSide = () => {
             <Heading size="medium" level="2">
                 <LocaleTekst tekst={tekster.tittel} />
             </Heading>
+            <GuidePanel>
+                <LocaleTekst tekst={tekster.guide_tekst} />
+            </GuidePanel>
             <LocaleRadioGroup
                 id={feilId('årsak')}
                 tekst={tekster.radio_årsak}
@@ -230,8 +233,13 @@ export const FlyttingDetaljerSide = () => {
                 error={feil[feilId('utgifterDekketPåAnnenMåte')]?.melding}
                 onChange={(verdi) => oppdater('utgifterDekketPåAnnenMåte', verdi)}
             />
-            {detaljer?.utgifterDekketPåAnnenMåte?.verdi === 'JA' && (
-                <AlertIkkeRett beskrivelse={tekster.varsel_annen_dekning} />
+            {detaljer?.utgifterDekketPåAnnenMåte?.verdi === 'JA_HELE' && (
+                <AlertIkkeRett beskrivelse={tekster.varsel_annen_dekning_hele} />
+            )}
+            {detaljer?.utgifterDekketPåAnnenMåte?.verdi === 'JA_DELER' && (
+                <InlineMessage status="info">
+                    <LocaleTekst tekst={tekster.varsel_annen_dekning_deler} />
+                </InlineMessage>
             )}
             {detaljer?.flyttemåte?.verdi === 'FLYTTER_SELV' && (
                 <UnderspørsmålContainer>

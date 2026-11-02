@@ -22,6 +22,7 @@ const [FlyttingSøknadProvider, useFlyttingSøknad] = createUseContext(() => {
 
     const flytteÅrsak = flyttingDetaljer?.årsak?.verdi;
     const flyttemåte = flyttingDetaljer?.flyttemåte?.verdi;
+    const utgifterDekketPåAnnenMåte = flyttingDetaljer?.utgifterDekketPåAnnenMåte?.verdi;
 
     const dokumentasjonsbehov = useMemo(() => {
         const behov: Dokumentasjonsbehov[] = [];
@@ -42,8 +43,12 @@ const [FlyttingSøknadProvider, useFlyttingSøknad] = createUseContext(() => {
             behov.push({ type: VedleggstypeFlytting.ARBEIDSKONTRAKT_FLYTTING });
         }
 
+        if (utgifterDekketPåAnnenMåte === 'JA_DELER') {
+            behov.push({ type: VedleggstypeFlytting.UTGIFTER_SOM_DEKKES });
+        }
+
         return behov;
-    }, [flytteÅrsak, flyttemåte]);
+    }, [flytteÅrsak, flyttemåte, utgifterDekketPåAnnenMåte]);
 
     const resetSøknad = () => {
         settHarBekreftet(initialHarBekreftet());

@@ -3,6 +3,7 @@ import { Adresse, JaNei } from '../../typer/søknad';
 
 export type Flytteårsak = 'NY_JOBB' | 'AKTIVITET';
 export type Flyttemåte = 'FLYTTER_SELV' | 'FLYTTEBYRÅ';
+export type UtgifterDekketPåAnnenMåte = 'JA_HELE' | 'JA_DELER' | 'NEI';
 
 export const flyttebyråTilbudIndekser = [0, 1] as const;
 
@@ -53,7 +54,7 @@ export interface FlyttingDetaljer {
     skalFlytteFraFolkeregistrertAdresse?: EnumFelt<JaNei>;
     adresseDetSkalFlyttesFra?: Adresse;
     flyttemåte?: EnumFelt<Flyttemåte>;
-    utgifterDekketPåAnnenMåte?: EnumFelt<JaNei>;
+    utgifterDekketPåAnnenMåte?: EnumFelt<UtgifterDekketPåAnnenMåte>;
     utgifterEgenFlytting?: UtgifterEgenFlytting;
     flyttebyrå?: Flyttebyrå;
 }

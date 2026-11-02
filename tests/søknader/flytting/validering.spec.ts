@@ -40,7 +40,7 @@ const gyldigeDetaljer = (): FlyttingDetaljer => ({
         poststed: felt('Oslo'),
     },
     flyttemåte: enumFelt('FLYTTER_SELV'),
-    utgifterDekketPåAnnenMåte: enumFelt('JA'),
+    utgifterDekketPåAnnenMåte: enumFelt('JA_HELE'),
     utgifterEgenFlytting: { avstand: felt('1,25') },
     flyttebyrå: {
         tilbud: [

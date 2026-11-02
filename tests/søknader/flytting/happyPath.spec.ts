@@ -70,7 +70,7 @@ const fyllFellesDetaljer = async (
         .getByRole('radiogroup', {
             name: 'Får du dekket utgiftene dine til flytting på annen måte enn med stønad fra Nav?',
         })
-        .getByLabel('Ja', { exact: true })
+        .getByLabel('Ja, hele utgiften blir dekket', { exact: true })
         .check();
 };
 

@@ -1,10 +1,16 @@
 import { JaNeiTilTekst } from '../../tekster/felles';
 import { Adresse, JaNei } from '../../typer/søknad';
 import { InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
-import { EgenutgiftFelt, Flytteårsak, Flyttemåte } from '../typer/flyttingDetaljer';
+import {
+    EgenutgiftFelt,
+    Flytteårsak,
+    Flyttemåte,
+    UtgifterDekketPåAnnenMåte,
+} from '../typer/flyttingDetaljer';
 
 interface FlyttingDetaljerInnhold {
     tittel: TekstElement<string>;
+    guide_tekst: TekstElement<string>;
     radio_årsak: RadiogruppePåkrevd<Flytteårsak>;
     dato_flytting: InputFelt;
     radio_skalFlytteFraFolkeregistrertAdresse: RadiogruppePåkrevd<JaNei>;
@@ -14,7 +20,7 @@ interface FlyttingDetaljerInnhold {
     adresse_tittel: TekstElement<string>;
     adresse_spørsmål: Record<keyof Adresse, InputFelt>;
     radio_flyttemåte: RadiogruppePåkrevd<Flyttemåte>;
-    radio_annen_dekning: RadiogruppePåkrevd<JaNei>;
+    radio_annen_dekning: RadiogruppePåkrevd<UtgifterDekketPåAnnenMåte>;
     varsel_dokumentasjon_flytter_selv: TekstElement<string>;
     varsel_dokumentasjon_flyttebyrå: TekstElement<string>;
     varsel_arbeidskontrakt: TekstElement<string>;
@@ -33,7 +39,8 @@ interface FlyttingDetaljerInnhold {
             beløp: InputFelt;
         },
     ];
-    varsel_annen_dekning: TekstElement<string>;
+    varsel_annen_dekning_hele: TekstElement<string>;
+    varsel_annen_dekning_deler: TekstElement<string>;
 }
 
 const beløpFeilmelding: TekstElement<string> = {
@@ -42,6 +49,9 @@ const beløpFeilmelding: TekstElement<string> = {
 
 export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
     tittel: { nb: 'Detaljer om flytting' },
+    guide_tekst: {
+        nb: 'For å få denne støtten må du delta på arbeidsrettet tiltak, gjennomføre en utdanning godkjent av Nav, eller fått jobb et annet sted',
+    },
     radio_årsak: {
         header: { nb: 'Hvorfor flytter du?' },
         alternativer: {
@@ -105,11 +115,18 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         beskrivelse: {
             nb: 'Oppgi om arbeidsgiver eller andre dekker hele eller deler av flytteutgiftene dine. Nav kan ikke dekke utgifter som allerede dekkes av andre.',
         },
-        alternativer: JaNeiTilTekst,
+        alternativer: {
+            JA_HELE: { nb: 'Ja, hele utgiften blir dekket' },
+            JA_DELER: { nb: 'Ja, deler av utgiften blir dekket' },
+            NEI: { nb: 'Nei' },
+        },
         feilmelding: { nb: 'Du må svare på om du får dekket flytteutgiftene på annen måte.' },
     },
-    varsel_annen_dekning: {
-        nb: 'Hvis du får flytteutgiftene dekket på annen måte, kan du mangle rett til støtte fra Nav.',
+    varsel_annen_dekning_hele: {
+        nb: 'Hvis du får dekket hele utgiften til flytting av arbeidsgiver eller andre, vil du sannsynlig få avslag, men du kan fortsatt søke. ',
+    },
+    varsel_annen_dekning_deler: {
+        nb: 'Hvis du får dekket deler av utgiftene til flytting, kan du få pengestøtte for den delen av utgiftene som ikke er dekket. Du må sende oss dokumentasjon som viser hvilke utgifter som er dekket og hvilke utgifter som ikke er dekket.',
     },
     egenutgifter_tittel: { nb: 'Utgifter til flytting' },
     antall_km: {
