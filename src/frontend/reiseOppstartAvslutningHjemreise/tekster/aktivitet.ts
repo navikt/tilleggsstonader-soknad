@@ -50,7 +50,7 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
             del2_lenker: [],
             del3: {
                 nb: [
-                    'Hvis du skal søke støtte i forbindelse med en aktivitet som ble avsluttet for mer enn 6 måneder siden, må du ',
+                    'Hvis du mottar arbeidsavklaringspenger (AAP), uføretrygd, aktivitetspenger for unge eller er enslig mor/far, gjenlevende, eller har nedsatt arbeidsevne. Og aktiviteten du søker støtte for, ble avsluttet for mer enn 6 måneder siden, må du ',
                     {
                         tekst: 'fylle ut papirsøknad',
                         url: 'https://www.nav.no/fyllut/nav111218b?sub=paper',
@@ -76,9 +76,9 @@ export const aktivitetTekster: AktivitetInnholdReiseOppstartAvslutningHjemreise 
         header: { nb: 'Søke lengre tilbake enn 6 måneder?' },
         innhold: {
             nb: [
-                'Du må sende inn søknad på papir hvis du skal søke om en aktivitet som ble avsluttet for mer enn 6 måneder siden. ',
+                'Hvis du mottar arbeidsavklaringspenger (AAP), uføretrygd, aktivitetspenger for unge eller er enslig mor/far, gjenlevende, eller har nedsatt arbeidsevne. Og aktiviteten du søker støtte for, ble avsluttet for mer enn 6 måneder siden, må du ',
                 {
-                    tekst: 'Søknad på papir',
+                    tekst: 'fylle ut papirsøknad',
                     url: 'https://www.nav.no/fyllut/nav111218b?sub=paper',
                 },
                 '.',

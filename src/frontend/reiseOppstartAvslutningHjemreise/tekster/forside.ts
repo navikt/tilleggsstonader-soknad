@@ -31,7 +31,7 @@ export const forsideTekster: ForsideTekster = {
             'Du er under 18 år',
             'Du søker på vegne av andre',
             [
-                'Du søker støtte for en aktivitet som ble avsluttet for mer enn 6 måneder siden. Da må du fylle ut ',
+                'Du mottar arbeidsavklaringspenger (AAP), uføretrygd, aktivitetspenger for unge eller er enslig mor/far, gjenlevende, eller har nedsatt arbeidsevne. Og aktiviteten du søker støtte for, ble avsluttet for mer enn 6 måneder siden. Da må du fylle ut ',
                 {
                     tekst: 'dette skjemaet i stedet',
                     url: 'https://www.nav.no/fyllut/nav111218b?sub=paper',

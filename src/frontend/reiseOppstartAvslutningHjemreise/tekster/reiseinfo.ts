@@ -18,7 +18,7 @@ export const reiseinfoTekster: ReiseinfoInnhold = {
     tittel: { nb: 'Reiseinformasjon' },
     guide_innhold: {
         nb: [
-            'Oppgi informasjon om reisen din, og benytt deg av billigste reisemåte med offentlig transport som buss, tog, fly og lignende. Hvis du har gjennomført flere reiser kan disse legges til med knappen “Legg til reise”. ',
+            'Oppgi informasjon om reisen din. Som utgangspunkt dekker vi utgifter til den billigste reisemåten med offentlig transport som buss, tog, fly og lignende. Hvis du har gjennomført flere reiser kan disse legges til med knappen “Legg til reise”. ',
         ],
     },
     knapp_legg_til: { nb: 'Legg til reise' },
