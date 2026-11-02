@@ -14,8 +14,9 @@ export const forsideTekster: ForsideTekster = {
         nb: [
             'Nav kan dekke flytteutgifter mellom hjemstedet ditt og aktivitetsstedet når du midlertidig må bo borte for å delta på arbeidsrettet tiltak eller utdanning/opplæring godkjent av Nav.',
             'Du kan velge å flytte selv eller bruke et flyttebyrå. Hvis du bruker flyttebyrå, må du innhente to skriftlige tilbud. Nav dekker kostnadene basert på det billigste tilbudet.',
-            'Du må oppfylle vilkårene for støtte til flytting. Det vurderes blant annet om arbeidsstedet ligger utenfor naturlig pendleravstand, hvor lenge arbeidsforholdet varer, og om du har arbeidskontrakt for den nye jobben.',
-            'Det vurderes også om du har søkt arbeid på hjemstedet, og om stillingen er utlyst eller meldt til Nav.',
+            'Når vi vurderer om du kan få støtte til flytting, ser vi blant annet på om tiltaksstedet, utdanningsstedet eller arbeidsstedet ligger utenfor naturlig pendleravstand.',
+            'Hvis du flytter for å begynne i arbeid, vurderer vi også hvor lenge arbeidsforholdet varer, om du har arbeidskontrakt, om du har søkt arbeid på hjemstedet og om stillingen er meldt til Nav eller er offentlig utlyst.',
+            'Du kan ikke få støtte til utgifter som arbeidsgiveren din eller andre allerede dekker.',
             'Du får støtten utbetalt i etterkant, basert på innsendt dokumentasjon som for eksempel kvitteringer eller betalt faktura.',
         ],
     },
