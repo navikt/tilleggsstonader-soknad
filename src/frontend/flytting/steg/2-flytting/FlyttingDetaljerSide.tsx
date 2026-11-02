@@ -214,7 +214,13 @@ export const FlyttingDetaljerSide = () => {
             />
             {detaljer?.flyttemåte && (
                 <InlineMessage status="info">
-                    <LocaleTekst tekst={tekster.varsel_dokumentasjon} />
+                    <LocaleTekst
+                        tekst={
+                            detaljer.flyttemåte.verdi === 'FLYTTER_SELV'
+                                ? tekster.varsel_dokumentasjon_flytter_selv
+                                : tekster.varsel_dokumentasjon_flyttebyrå
+                        }
+                    />
                 </InlineMessage>
             )}
             <LocaleRadioGroup

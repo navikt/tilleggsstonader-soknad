@@ -46,7 +46,7 @@ const fyllFellesDetaljer = async (
         .getByLabel(
             nyJobb
                 ? 'Jeg flytter fordi jeg har fått ny jobb'
-                : 'Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet'
+                : 'Jeg flytter fra/til hjemsted på grunn av tiltak eller utdanning'
         )
         .check();
     await page.getByRole('textbox', { name: 'Flyttedato' }).fill('15.06.2025');
@@ -199,7 +199,7 @@ test('Obligatoriske svar og ugyldige datoer og tall stopper videreføring', asyn
         })
     ).toBeVisible();
     await page
-        .getByLabel('Jeg flytter i forbindelse med at jeg skal gjennomføre en aktivitet')
+        .getByLabel('Jeg flytter fra/til hjemsted på grunn av tiltak eller utdanning')
         .check();
     await page.getByRole('textbox', { name: 'Flyttedato' }).fill('15.06.2025');
     await avstand.fill('1.234');
