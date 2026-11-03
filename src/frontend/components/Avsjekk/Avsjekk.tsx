@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 
-import { Button, GuidePanel, Heading, Label, Radio, RadioGroup, VStack } from '@navikt/ds-react';
+import {
+    Button,
+    GuidePanel,
+    Heading,
+    Label,
+    Radio,
+    RadioGroup,
+    ReadMore,
+    VStack,
+} from '@navikt/ds-react';
 
+import { useSpråk } from '../../context/SpråkContext';
 import { LesMer, TekstElement } from '../../typer/tekst';
 import { Container } from '../Side';
-import { LocaleReadMore } from '../Teksthåndtering/LocaleReadMore';
 import { LocaleTekst } from '../Teksthåndtering/LocaleTekst';
 import { LocaleTekstAvsnitt } from '../Teksthåndtering/LocaleTekstAvsnitt';
 
@@ -26,6 +35,7 @@ interface AvsjekkProps {
 type RadioButtonValg = 'JA' | 'NEI';
 
 export const Avsjekk: React.FC<AvsjekkProps> = ({ tekster, legend, description, onJa, onNei }) => {
+    const { locale } = useSpråk();
     const [svar, setSvar] = useState<RadioButtonValg | undefined>(undefined);
     const [feilmeldingRadio, settFeilmeldingRadio] = useState('');
 
@@ -73,7 +83,9 @@ export const Avsjekk: React.FC<AvsjekkProps> = ({ tekster, legend, description, 
                         Nei
                     </Radio>
                 </RadioGroup>
-                <LocaleReadMore tekst={tekster.hvorfor_spør_vi} />
+                <ReadMore header={tekster.hvorfor_spør_vi.header[locale]}>
+                    <LocaleTekstAvsnitt tekst={tekster.hvorfor_spør_vi.innhold} />
+                </ReadMore>
             </div>
             <Button onClick={startSøknad} variant="primary">
                 Start
