@@ -7,8 +7,8 @@ import { Accordion, BodyLong, Button, GuidePanel, HStack, Label, VStack } from '
 import { routesLæremidler } from './routing/routesLæremidler';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
-import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
+import { EndringEnsligForsørgerExpansionCard } from '../components/EndringEnsligForsørger/EndringEnsligForsørgerExpansionCard';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
 import { useLæremidlerSøknad } from './context/LæremidlerSøknadContext';
@@ -60,7 +60,7 @@ export const Forside: React.FC = () => {
                 </Label>
                 <LocaleTekstAvsnitt tekst={forsideTekster.veileder_innhold} />
             </GuidePanel>
-            <AdvarselEndringOvergangsstønad />
+            <EndringEnsligForsørgerExpansionCard />
             <div>
                 <LocaleHeading tekst={forsideTekster.viktig_å_vite_tittel} level="2" size="small" />
                 <LocalePunktliste innhold={forsideTekster.viktig_å_vite_innhold} />
