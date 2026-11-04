@@ -17,8 +17,8 @@ import {
 import { routesPassAvBarn } from './routing/routesPassAvBarn';
 import { forsideTekster } from './tekster/forside';
 import { loggAccordionEvent, loggBesøk, loggSkjemaStartet } from '../api/analytics';
-import { AdvarselEndringOvergangsstønad } from '../components/AdvarselEndringOvergangsstønad';
 import { BekreftelseCheckbox } from '../components/BekreftelseCheckbox';
+import { EndringEnsligForsørgerExpansionCard } from '../components/EndringEnsligForsørger/EndringEnsligForsørgerExpansionCard';
 import { InfoPunktliste } from '../components/InfoPunktliste';
 import { Container } from '../components/Side';
 import { usePassAvBarnSøknad } from './context/PassAvBarnSøknadContext';
@@ -79,7 +79,7 @@ export const Forside: React.FC = () => {
                     <LocaleTekstAvsnitt tekst={forsideTekster.mottatt_faktura_alert_innhold} />
                 </Alert>
             )}
-            <AdvarselEndringOvergangsstønad />
+            <EndringEnsligForsørgerExpansionCard />
             <div>
                 <LocaleHeading tekst={forsideTekster.viktig_å_vite_tittel} level="2" size="small" />
                 <LocalePunktliste innhold={forsideTekster.viktig_å_vite_innhold} />
