@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { GuidePanel } from '@navikt/ds-react';
 
@@ -12,7 +12,7 @@ import { hovedytelseInnhold } from '../../tekster/hovedytelse';
 import { EnumFlereValgFelt } from '../../typer/skjema';
 import { ArbeidOgOpphold, Hovedytelse } from '../../typer/søknad';
 import { inneholderFeil } from '../../typer/validering';
-import { AdvarselEndringOvergangsstønad } from '../AdvarselEndringOvergangsstønad';
+import { EndringEnsligForsørgerExpansionCard } from '../EndringEnsligForsørger/EndringEnsligForsørgerExpansionCard';
 import { Side } from '../Side';
 import { LocaleCheckboxGroup } from '../Teksthåndtering/LocaleCheckboxGroup';
 import { LocaleHeading } from '../Teksthåndtering/LocaleHeading';
@@ -29,11 +29,7 @@ interface Props {
     brukNyAlert?: boolean;
 }
 
-export const HovedytelseSide: React.FC<Props> = ({
-    hovedytelse,
-    oppdaterHovedytelse,
-    brukNyAlert = false,
-}) => {
+export const HovedytelseSide: React.FC<Props> = ({ hovedytelse, oppdaterHovedytelse }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
 
@@ -97,9 +93,7 @@ export const HovedytelseSide: React.FC<Props> = ({
                     settArbeidOgOpphold={settArbeidOgOpphold}
                 />
             )}
-            {skalViseVarselOmRegelendring && (
-                <AdvarselEndringOvergangsstønad brukNyAlert={brukNyAlert} />
-            )}
+            {skalViseVarselOmRegelendring && <EndringEnsligForsørgerExpansionCard />}
         </Side>
     );
 };
