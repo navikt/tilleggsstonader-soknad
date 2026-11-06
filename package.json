@@ -84,7 +84,7 @@
   },
   "resolutions": {
     "styled-components": "^6",
-    "qs": "^6.15.2",
+    "qs": "^6.16.1",
     "proxy-addr": "^2.0.8",
     "shell-quote": "^1.11.0",
     "**/micromatch/picomatch": "^2.3.2",
