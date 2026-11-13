@@ -11,9 +11,9 @@ import { useSpråk } from '../../../context/SpråkContext';
 import { useValideringsfeil } from '../../../context/ValideringsfeilContext';
 import { UtgifterPrivatBil, DrivstoffType } from '../../../typer/reisemåte';
 import { EnumFelt } from '../../../typer/skjema';
+import { drivstoffTypeTekster, DrivstoffTypeVelger } from '../../DrivstoffTypeVelger';
 import { Skillelinje } from '../../Skillelinje';
 import { LocaleHeading } from '../../Teksthåndtering/LocaleHeading';
-import { LocaleSelect } from '../../Teksthåndtering/LocaleSelect';
 import { LocaleTekst } from '../../Teksthåndtering/LocaleTekst';
 import { PrivatBilTekster } from '../tekster';
 
@@ -121,9 +121,9 @@ export const UtgifterPrivatBilReiseTilSamling: React.FC<{
             />
 
             {skalSpørreOmDrivstoffType && (
-                <LocaleSelect
+                <DrivstoffTypeVelger
                     id={valideringsfeil[errorKeyPrivatBilUtgifterDrivstoffType(samlingId)]?.id}
-                    tekst={tekster.privat_bil_utgifter_drivstoff_type}
+                    tekst={drivstoffTypeTekster}
                     value={utgifterPrivatBil?.drivstoffType?.verdi ?? ''}
                     onChange={oppdaterEgenBilUtgifterDrivstoffType}
                     error={

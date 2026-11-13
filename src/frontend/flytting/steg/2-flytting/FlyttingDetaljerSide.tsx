@@ -10,6 +10,7 @@ import {
 import { AdresseVelger } from '../../../components/AdresseVelger/AdresseVelger';
 import { AlertIkkeRett } from '../../../components/AlertIkkeRett';
 import { DateInput } from '../../../components/DateInput';
+import { DrivstoffTypeVelger } from '../../../components/DrivstoffTypeVelger';
 import { Side } from '../../../components/Side';
 import { LocaleRadioGroup } from '../../../components/Teksthåndtering/LocaleRadioGroup';
 import { LocaleTekst } from '../../../components/Teksthåndtering/LocaleTekst';
@@ -205,7 +206,7 @@ export const FlyttingDetaljerSide = () => {
                     oppdater('flyttemåte', verdi);
                     fjernFeil(
                         ...(verdi.verdi === 'FLYTTEBYRÅ'
-                            ? ['avstand', ...egenutgiftFelter]
+                            ? ['avstand', 'drivstoffType', ...egenutgiftFelter]
                             : [
                                   ...flyttebyråTilbudIndekser.flatMap((index) => [
                                       `tilbud${index + 1}_navn`,
@@ -247,6 +248,22 @@ export const FlyttingDetaljerSide = () => {
                         <Heading size="small" level="3">
                             <LocaleTekst tekst={tekster.egenutgifter_tittel} />
                         </Heading>
+                        <DrivstoffTypeVelger
+                            id={feilId('drivstoffType')}
+                            tekst={tekster.drivstoffType}
+                            value={detaljer.utgifterEgenFlytting?.drivstoffType?.verdi ?? ''}
+                            error={feil[feilId('drivstoffType')]?.melding}
+                            onChange={(verdi) => {
+                                settFlyttingDetaljer((tidligere) => ({
+                                    ...tidligere,
+                                    utgifterEgenFlytting: {
+                                        ...tidligere?.utgifterEgenFlytting,
+                                        drivstoffType: verdi,
+                                    },
+                                }));
+                                fjernFeil('drivstoffType');
+                            }}
+                        />
                         {(['avstand', ...egenutgiftFelter] as const).map((felt) => {
                             const tekst =
                                 felt === 'avstand'

@@ -1,6 +1,6 @@
 # AGENTS.md — tilleggsstonader-soknad
 
-Frontend-app for tilleggstønader-søknader og kjørelister fore daglige reiser.   
+Frontend-app for søknader om tilleggsstønader og innsending av kjørelister.
 
 ## Tech Stack
 
@@ -30,6 +30,10 @@ yarn playwright test -g "testnavn"                  # Kjør én enkelt test
 When fixing a bug or implementing a feature, change only what is necessary.
 Do not rename variables, restructure working code, or refactor beyond the task at hand.
 Keep diffs small and focused so they are easy to review.
+
+## Dataflyt for søknader
+
+- Denne appen bygger innsendingsdata fra skjematilstanden og sender søknads-DTO-er til `tilleggsstonader-soknad-api`. Opplysninger fra skjulte, inaktive deler av skjemaet skal ikke sendes med.
 
 ## Git Workflow
 

@@ -1,3 +1,4 @@
+import { DrivstoffType } from '../../typer/reisemåte';
 import { EnumFelt, VerdiFelt } from '../../typer/skjema';
 import { Adresse, JaNei } from '../../typer/søknad';
 
@@ -19,6 +20,7 @@ export type EgenutgiftFelt = (typeof egenutgiftFelter)[number];
 
 export type UtgifterEgenFlytting = {
     avstand?: VerdiFelt<string>;
+    drivstoffType?: EnumFelt<DrivstoffType>;
 } & Partial<Record<EgenutgiftFelt, VerdiFelt<string>>>;
 
 export interface FlyttebyråTilbud {

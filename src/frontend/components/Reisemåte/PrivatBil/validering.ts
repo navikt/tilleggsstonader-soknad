@@ -3,6 +3,7 @@ import { Locale } from '../../../typer/tekst';
 import { Valideringsfeil } from '../../../typer/validering';
 import { erGyldigKostnad } from '../../../utils/tall';
 import { harVerdi } from '../../../utils/typeUtils';
+import { drivstoffTypeTekster } from '../../DrivstoffTypeVelger';
 import { PrivatBilTekster } from '../tekster';
 
 export const errorKeyPrivatBilBenyttetEgenBil = (reiseId: number) =>
@@ -204,7 +205,7 @@ const validerUtgifterPrivatBil = (
             ...feil,
             [errorKeyPrivatBilUtgifterDrivstoffType(reiseId)]: {
                 id: errorKeyPrivatBilUtgifterDrivstoffType(reiseId),
-                melding: tekster.privat_bil_utgifter_drivstoff_type.feilmelding[locale],
+                melding: drivstoffTypeTekster.feilmelding[locale],
             },
         };
     }

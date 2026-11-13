@@ -41,7 +41,7 @@ const gyldigeDetaljer = (): FlyttingDetaljer => ({
     },
     flyttemåte: enumFelt('FLYTTER_SELV'),
     utgifterDekketPåAnnenMåte: enumFelt('JA_HELE'),
-    utgifterEgenFlytting: { avstand: felt('1,25') },
+    utgifterEgenFlytting: { avstand: felt('1,25'), drivstoffType: enumFelt('BENSIN') },
     flyttebyrå: {
         tilbud: [
             { navn: felt('Testbyrå 1'), beløp: felt('800,50') },
@@ -153,12 +153,19 @@ test('Flyttedato må finnes i kalenderen, men kan være i fortid og fremtid', ()
 
 test('Egen flytting krever positiv avstand og tillater blanke utgifter og nullbeløp', () => {
     const detaljer = gyldigeDetaljer();
+    detaljer.utgifterEgenFlytting = { avstand: felt('1,25') };
+    expect(validerFlyttingDetaljer(detaljer, Locale.NB)[feilId('drivstoffType')]).toBeDefined();
+
     for (const verdi of ['0', '0,00', '-1', '1.234', '']) {
-        detaljer.utgifterEgenFlytting = { avstand: felt(verdi) };
+        detaljer.utgifterEgenFlytting = { avstand: felt(verdi), drivstoffType: enumFelt('BENSIN') };
         expect(validerFlyttingDetaljer(detaljer, Locale.NB)[feilId('avstand')]).toBeDefined();
     }
     for (const utgift of egenutgiftFelter) {
-        detaljer.utgifterEgenFlytting = { avstand: felt('0.01'), [utgift]: felt('0') };
+        detaljer.utgifterEgenFlytting = {
+            avstand: felt('0.01'),
+            drivstoffType: enumFelt('BENSIN'),
+            [utgift]: felt('0'),
+        };
         expect(validerFlyttingDetaljer(detaljer, Locale.NB)).toEqual({});
         detaljer.utgifterEgenFlytting[utgift] = felt('');
         expect(validerFlyttingDetaljer(detaljer, Locale.NB)).toEqual({});
@@ -170,7 +177,11 @@ test('Egen flytting krever positiv avstand og tillater blanke utgifter og nullbe
 test('Byrå krever to komplette tilbud, men ignorerer inaktive egenutgifter', () => {
     const detaljer = gyldigeDetaljer();
     detaljer.flyttemåte = enumFelt('FLYTTEBYRÅ');
-    detaljer.utgifterEgenFlytting = { avstand: felt('-1'), bom: felt('ugyldig') };
+    detaljer.utgifterEgenFlytting = {
+        avstand: felt('-1'),
+        drivstoffType: enumFelt('BENSIN'),
+        bom: felt('ugyldig'),
+    };
     detaljer.flyttebyrå = { tilbud: [] };
     expect(Object.keys(validerFlyttingDetaljer(detaljer, Locale.NB))).toEqual([
         feilId('tilbud1_navn'),
