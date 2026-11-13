@@ -1,6 +1,13 @@
+import { drivstoffTypeTekster } from '../../components/DrivstoffTypeVelger';
 import { JaNeiTilTekst } from '../../tekster/felles';
+import { DrivstoffType } from '../../typer/reisemåte';
 import { Adresse, JaNei } from '../../typer/søknad';
-import { InputFelt, RadiogruppePåkrevd, TekstElement } from '../../typer/tekst';
+import {
+    InputFelt,
+    RadiogruppePåkrevd,
+    SelectGruppePåkrevd,
+    TekstElement,
+} from '../../typer/tekst';
 import {
     EgenutgiftFelt,
     Flytteårsak,
@@ -25,6 +32,7 @@ interface FlyttingDetaljerInnhold {
     varsel_dokumentasjon_flyttebyrå: TekstElement<string>;
     varsel_arbeidskontrakt: TekstElement<string>;
     egenutgifter_tittel: TekstElement<string>;
+    drivstoffType: SelectGruppePåkrevd<DrivstoffType>;
     antall_km: InputFelt;
     egenutgifter_beløp: Record<EgenutgiftFelt, InputFelt>;
     tilbud_tittel: TekstElement<string>;
@@ -129,6 +137,10 @@ export const flyttingDetaljerTekster: FlyttingDetaljerInnhold = {
         nb: 'Hvis du får dekket deler av utgiftene til flytting, kan du få pengestøtte for den delen av utgiftene som ikke er dekket. Du må sende oss dokumentasjon som viser hvilke utgifter som er dekket og hvilke utgifter som ikke er dekket.',
     },
     egenutgifter_tittel: { nb: 'Utgifter til flytting' },
+    drivstoffType: {
+        ...drivstoffTypeTekster,
+        header: { nb: 'Hva slags drivstoff bruker bilen du flytter med?' },
+    },
     antall_km: {
         label: { nb: 'Hvor lang reisevei har du?' },
         description: { nb: 'Oppgi antall kilometer én vei' },

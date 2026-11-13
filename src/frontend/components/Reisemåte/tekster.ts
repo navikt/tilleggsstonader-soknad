@@ -2,7 +2,6 @@ import {
     Transportmiddel,
     ÅrsakKanIkkeBenytteOffentligTransport,
     ÅrsakKanIkkeBenytteEgenBil,
-    DrivstoffType,
 } from '../../typer/reisemåte';
 import { JaNei } from '../../typer/søknad';
 import {
@@ -10,7 +9,6 @@ import {
     CheckboxGruppePåkrevd,
     InputFelt,
     RadiogruppePåkrevd,
-    SelectGruppePåkrevd,
 } from '../../typer/tekst';
 
 export type TotalutgifterOffentligTransportFelt = InputFelt & {
@@ -54,7 +52,6 @@ export interface PrivatBilTekster {
     advarsel_skal_ikke_betale_selv: TekstElement<string>;
     privat_bil_utgifter_tittel: TekstElement<string>;
     privat_bil_utgifter_beskrivelse: TekstElement<string>;
-    privat_bil_utgifter_drivstoff_type: SelectGruppePåkrevd<DrivstoffType>;
     privat_bil_utgifter_bompenger: InputFelt;
     privat_bil_utgifter_ferge: InputFelt;
     privat_bil_utgifter_parkering: InputFelt;

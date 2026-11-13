@@ -127,6 +127,9 @@ test('Brukeren kan oppgi en annen adresse enn folkeregistrert adresse', async ({
     await startSøknad(page);
     await fyllFellesDetaljer(page, false, false);
     await page.getByLabel('Jeg flytter selv', { exact: true }).check();
+    await page
+        .getByLabel('Hva slags drivstoff bruker bilen du flytter med?')
+        .selectOption('BENSIN');
     await page.getByRole('textbox', { name: 'Hvor lang reisevei har du?' }).fill('1');
     await page.getByRole('button', { name: 'Neste' }).click();
     await expect(page).toHaveURL(`${urlSøknad}/vedlegg`);
@@ -135,6 +138,7 @@ test('Brukeren kan oppgi en annen adresse enn folkeregistrert adresse', async ({
     await expect(page).toHaveURL(`${urlSøknad}/oppsummering`);
     await expect(page.getByText('Hjemveien 2, 0123 Oslo, Norge', { exact: true })).toBeVisible();
     await expect(page.getByText('Testveien 1, 0456 Bergen, Norge', { exact: true })).toBeVisible();
+    await expect(page.getByText('Bensin', { exact: true })).toBeVisible();
 });
 
 test('Brukeren må oppgi adresse fra manuelt når strukturert folkeregisteradresse mangler', async ({
@@ -157,6 +161,9 @@ test('Arbeidskontrakt informeres om, men innsending kan fortsette uten vedlegget
     await startSøknad(page);
     await fyllFellesDetaljer(page, true);
     await page.getByLabel('Jeg flytter selv', { exact: true }).check();
+    await page
+        .getByLabel('Hva slags drivstoff bruker bilen du flytter med?')
+        .selectOption('BENSIN');
     await page.getByRole('textbox', { name: 'Hvor lang reisevei har du?' }).fill('1');
 
     await expect(
@@ -198,6 +205,12 @@ test('Obligatoriske svar og ugyldige datoer og tall stopper videreføring', asyn
             name: 'Oppgi en avstand som er større enn 0, med inntil to desimaler.',
         })
     ).toBeVisible();
+    await expect(
+        page.getByRole('link', { name: 'Du må oppgi bilens drivstofftype.' })
+    ).toBeVisible();
+    await page
+        .getByLabel('Hva slags drivstoff bruker bilen du flytter med?')
+        .selectOption('BENSIN');
     await page
         .getByLabel('Jeg flytter fra/til hjemsted på grunn av tiltak eller utdanning')
         .check();

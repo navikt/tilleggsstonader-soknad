@@ -153,22 +153,6 @@ export const reisemåteTekster: ReisemåteTekstInnhold = {
         privat_bil_utgifter_beskrivelse: {
             nb: 'Du trenger bare å fylle inn det som gjelder for din reise.',
         },
-        privat_bil_utgifter_drivstoff_type: {
-            header: {
-                nb: 'Bilens drivstofftype?',
-            },
-            alternativer: {
-                ELBIL: { nb: 'Elbil' },
-                HYDROGEN: { nb: 'Hydrogen' },
-                BENSIN: { nb: 'Bensin' },
-                HYBRID: { nb: 'Hybrid' },
-                DIESEL: { nb: 'Diesel' },
-            },
-            beskrivelse: {
-                nb: 'Bompenger og fergepriser beregnes ut fra bilens offisielle miljøklasse, derfor må du velge drivstofftype.',
-            },
-            feilmelding: { nb: 'Du må oppgi bilens drivstofftype.' },
-        },
         privat_bil_utgifter_bompenger: {
             label: { nb: 'Totale bompengeutgifter' },
             feilmelding: { nb: 'Bompengeutgifter må være et tall som er større enn 0.' },

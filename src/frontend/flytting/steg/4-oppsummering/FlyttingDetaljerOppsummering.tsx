@@ -41,6 +41,7 @@ export const FlyttingDetaljerOppsummering = ({ detaljer }: { detaljer: FlyttingD
             <OppsummeringSvar felt={detaljer.utgifterDekketPåAnnenMåte} />
             {detaljer.flyttemåte?.verdi === 'FLYTTER_SELV' && (
                 <>
+                    <OppsummeringSvar felt={detaljer.utgifterEgenFlytting?.drivstoffType} />
                     <OppsummeringSvar
                         felt={detaljer.utgifterEgenFlytting?.avstand}
                         valuePostfix="km"

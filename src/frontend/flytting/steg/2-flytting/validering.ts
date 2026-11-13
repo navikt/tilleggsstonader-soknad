@@ -97,6 +97,9 @@ export const validerFlyttingDetaljer = (
     }
 
     if (detaljer?.flyttemåte?.verdi === 'FLYTTER_SELV') {
+        if (!detaljer.utgifterEgenFlytting?.drivstoffType?.verdi) {
+            leggTilFeil('drivstoffType', tekster.drivstoffType.feilmelding[locale]);
+        }
         const avstand = tilDesimaltall(detaljer.utgifterEgenFlytting?.avstand?.verdi);
         if (avstand === undefined || avstand <= 0) {
             leggTilFeil('avstand', tekster.antall_km.feilmelding[locale]);
