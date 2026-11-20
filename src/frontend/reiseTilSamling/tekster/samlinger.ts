@@ -7,6 +7,8 @@ interface SamlingerInnhold {
     guide_tekst: TekstElement<string>;
     dato: Datoperiode;
     knapp_legg_til: TekstElement<string>;
+    knapp_lagre: TekstElement<string>;
+    knapp_rediger: TekstElement<string>;
     knapp_slett: TekstElement<string>;
     info_samling_header: TekstElement<string>;
     radio_samling_obligatorisk: RadiogruppePåkrevd<JaNei>;
@@ -38,6 +40,12 @@ export const samlingerTekster: SamlingerInnhold = {
     },
     knapp_legg_til: {
         nb: 'Legg til samling',
+    },
+    knapp_lagre: {
+        nb: 'Lagre samling',
+    },
+    knapp_rediger: {
+        nb: 'Rediger',
     },
     knapp_slett: {
         nb: 'Fjern samling',

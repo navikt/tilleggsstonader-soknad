@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { PlusIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
 
+import { LagretSamlingVisning } from './LagretSamlingVisning';
 import { NySamling } from './NySamling';
 import { oppdaterSamling, opprettSamlingForNesteId, synkroniserGjenbrukAdresser } from './util';
 import { nullstillteSamlingsfeil, validerSamlingUnderRedigering } from './validering';
@@ -18,6 +19,7 @@ export const SamlingerListe: React.FC<{
 }> = ({ samlinger, settSamlinger }) => {
     const { locale } = useSpråk();
     const { settValideringsfeil } = useValideringsfeil();
+    const [redigerSamlingId, settRedigerSamlingId] = useState<number | undefined>(undefined);
 
     const ulagretSamling = samlinger.find((s) => !s.lagret);
     const lagredeSamlinger = samlinger.filter((s) => s.lagret);
@@ -32,12 +34,41 @@ export const SamlingerListe: React.FC<{
         );
     };
 
+    const lagreSamling = (samlingId: number) => {
+        const samlingSomSkalLagres = samlinger.find((s) => s._id === samlingId);
+        if (!samlingSomSkalLagres) {
+            return;
+        }
+
+        const feil = validerSamlingUnderRedigering(
+            samlingSomSkalLagres,
+            locale,
+            samlingSomSkalLagres._id === førsteSamlingId
+        );
+        if (inneholderFeil(feil)) {
+            settValideringsfeil((prevState) => ({ ...prevState, ...feil }));
+            return;
+        }
+
+        settSamlinger((prev) =>
+            synkroniserGjenbrukAdresser(
+                prev.map((samling) =>
+                    samling._id === samlingId ? { ...samling, lagret: true } : samling
+                )
+            )
+        );
+        settRedigerSamlingId((prev) => (prev === samlingId ? undefined : prev));
+    };
+
     const leggTilSamling = () => {
-        if (ulagretSamling) {
+        const samlingUnderArbeid =
+            ulagretSamling ?? samlinger.find((samling) => samling._id === redigerSamlingId);
+
+        if (samlingUnderArbeid) {
             const feil = validerSamlingUnderRedigering(
-                ulagretSamling,
+                samlingUnderArbeid,
                 locale,
-                ulagretSamling._id === førsteSamlingId
+                samlingUnderArbeid._id === førsteSamlingId
             );
             if (inneholderFeil(feil)) {
                 settValideringsfeil((prevState) => ({ ...prevState, ...feil }));
@@ -51,40 +82,59 @@ export const SamlingerListe: React.FC<{
         }));
         settSamlinger((prev) =>
             synkroniserGjenbrukAdresser([
-                ...prev.map((s) => ({ ...s, lagret: true })),
+                ...prev.map((samling) =>
+                    samlingUnderArbeid && samling._id === samlingUnderArbeid._id
+                        ? { ...samling, lagret: true }
+                        : samling
+                ),
                 opprettSamlingForNesteId(prev),
             ])
         );
+        settRedigerSamlingId(undefined);
     };
 
     const slettSamling = (id: number) => {
         if (!kanSletteSamling(id)) {
             return;
         }
-        if (ulagretSamling?._id === id) {
-            settValideringsfeil((prevState) => ({
-                ...prevState,
-                ...nullstillteSamlingsfeil(samlinger),
-            }));
-        }
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            ...nullstillteSamlingsfeil(samlinger),
+        }));
         settSamlinger((prev) => synkroniserGjenbrukAdresser(prev.filter((s) => s._id !== id)));
+        settRedigerSamlingId((prev) => (prev === id ? undefined : prev));
     };
 
     return (
         <VStack gap="space-16">
             <VStack gap="space-40">
                 {lagredeSamlinger.map((samling) => (
-                    <NySamling
-                        key={samling._id}
-                        samling={samling}
-                        erFørste={samling._id === førsteSamlingId}
-                        oppdater={oppdaterSamlingFelt}
-                        onSlett={
-                            kanSletteSamling(samling._id)
-                                ? () => slettSamling(samling._id)
-                                : undefined
-                        }
-                    />
+                    <React.Fragment key={samling._id}>
+                        {redigerSamlingId === samling._id ? (
+                            <NySamling
+                                samling={samling}
+                                erFørste={samling._id === førsteSamlingId}
+                                oppdater={oppdaterSamlingFelt}
+                                onLagre={() => lagreSamling(samling._id)}
+                                onSlett={
+                                    kanSletteSamling(samling._id)
+                                        ? () => slettSamling(samling._id)
+                                        : undefined
+                                }
+                            />
+                        ) : (
+                            <LagretSamlingVisning
+                                samling={samling}
+                                visSlett={kanSletteSamling(samling._id)}
+                                onRediger={() => settRedigerSamlingId(samling._id)}
+                                onSlett={
+                                    kanSletteSamling(samling._id)
+                                        ? () => slettSamling(samling._id)
+                                        : undefined
+                                }
+                            />
+                        )}
+                    </React.Fragment>
                 ))}
                 {ulagretSamling && (
                     <NySamling
@@ -92,6 +142,7 @@ export const SamlingerListe: React.FC<{
                         samling={ulagretSamling}
                         erFørste={ulagretSamling._id === førsteSamlingId}
                         oppdater={oppdaterSamlingFelt}
+                        onLagre={() => lagreSamling(ulagretSamling._id)}
                         onSlett={
                             kanSletteSamling(ulagretSamling._id)
                                 ? () => slettSamling(ulagretSamling._id)

@@ -104,8 +104,16 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
 
     await expect(page).toHaveURL(`${urlSøknad}/samlinger`);
     await expect(page.getByRole('heading', { name: 'Din reise' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Legg til samling' })).toBeEnabled();
 
     await forventIngenWcagViolations(page);
+
+    await page.getByRole('button', { name: 'Legg til samling' }).click();
+    await expect(page).toHaveURL(`${urlSøknad}/samlinger`);
+    await expect(
+        page.getByRole('group', { name: 'Er adressen den samme som forrige samling?' })
+    ).not.toBeVisible();
+    await expect(page.getByLabel('Fra og med (dd.mm.åååå)')).toBeVisible();
 
     await page.getByLabel('Fra og med (dd.mm.åååå)').fill('01.06.2025');
     await page.getByLabel('Til og med (dd.mm.åååå)').fill('05.06.2025');
@@ -126,6 +134,10 @@ test('At reise til samling viser førstesiden og går videre fra din situasjon',
     await page
         .getByLabel('Hva er totalutgiftene til offentlig transport til og fra samlingen?')
         .fill('500');
+
+    await expect(page.getByRole('button', { name: 'Legg til samling' })).toBeEnabled();
+    await page.getByRole('button', { name: 'Lagre samling' }).click();
+    await expect(page.getByRole('button', { name: 'Rediger' })).toBeVisible();
 
     await page.getByRole('button', { name: 'Neste' }).click();
     await fjernWebpackOverlay(page);
@@ -150,8 +162,10 @@ test('At privatbil-feil og -verdier nullstilles når privat bil skjules', async 
     await page.goto(`${urlSøknad}`);
     await fjernWebpackOverlay(page);
 
+    await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check();
     await page.getByRole('button', { name: 'Start søknad' }).click();
     await fjernWebpackOverlay(page);
+    await expect(page).toHaveURL(`${urlSøknad}/hovedytelse`);
 
     await page.getByRole('checkbox', { name: 'Arbeidsavklaringspenger (AAP)' }).check();
     await page.getByRole('button', { name: 'Neste' }).click();
@@ -185,6 +199,8 @@ test('At privatbil-feil og -verdier nullstilles når privat bil skjules', async 
     await page.getByRole('button', { name: 'Neste' }).click();
     await fjernWebpackOverlay(page);
 
+    await expect(page).toHaveURL(`${urlSøknad}/samlinger`);
+    await expect(page.getByRole('heading', { name: 'Din reise' })).toBeVisible();
     await page.getByLabel('Fra og med (dd.mm.åååå)').fill('01.06.2025');
     await page.getByLabel('Til og med (dd.mm.åååå)').fill('05.06.2025');
     await page
@@ -229,8 +245,10 @@ test('At person uten folkeregistrert adresse kan oppgi avreiseadresse og gå vid
     await page.goto(`${urlSøknad}`);
     await fjernWebpackOverlay(page);
 
+    await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check();
     await page.getByRole('button', { name: 'Start søknad' }).click();
     await fjernWebpackOverlay(page);
+    await expect(page).toHaveURL(`${urlSøknad}/hovedytelse`);
 
     await page.getByRole('checkbox', { name: 'Arbeidsavklaringspenger (AAP)' }).check();
     await page.getByRole('button', { name: 'Neste' }).click();
