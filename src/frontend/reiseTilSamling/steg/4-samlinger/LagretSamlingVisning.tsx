@@ -187,10 +187,7 @@ export const LagretSamlingVisning: React.FC<{
                         }
                         svar={
                             <BodyShort>
-                                {
-                                    samling.reisemåte.offentligTransport
-                                        .totalUtgifterOffentligTransport.verdi
-                                }
+                                {`${samling.reisemåte.offentligTransport.totalUtgifterOffentligTransport.verdi} kr`}
                             </BodyShort>
                         }
                     />
@@ -242,7 +239,7 @@ export const LagretSamlingVisning: React.FC<{
                     <SpørsmålMedSvar
                         ikon={<ParkingIcon aria-hidden />}
                         spørsmål={utgifterPrivatBil.parkering.label}
-                        svar={<BodyShort>{utgifterPrivatBil.parkering.verdi}</BodyShort>}
+                        svar={<BodyShort>{`${utgifterPrivatBil.parkering.verdi} kr`}</BodyShort>}
                     />
                 )}
 
@@ -258,7 +255,7 @@ export const LagretSamlingVisning: React.FC<{
                     <SpørsmålMedSvar
                         ikon={<RoadblockIcon aria-hidden />}
                         spørsmål={utgifterPrivatBil.bompenger.label}
-                        svar={<BodyShort>{utgifterPrivatBil.bompenger.verdi}</BodyShort>}
+                        svar={<BodyShort>{`${utgifterPrivatBil.bompenger.verdi} kr`}</BodyShort>}
                     />
                 )}
 
@@ -266,7 +263,7 @@ export const LagretSamlingVisning: React.FC<{
                     <SpørsmålMedSvar
                         ikon={<BoatIcon aria-hidden />}
                         spørsmål={utgifterPrivatBil.ferge.label}
-                        svar={<BodyShort>{utgifterPrivatBil.ferge.verdi}</BodyShort>}
+                        svar={<BodyShort>{`${utgifterPrivatBil.ferge.verdi} kr`}</BodyShort>}
                     />
                 )}
 
