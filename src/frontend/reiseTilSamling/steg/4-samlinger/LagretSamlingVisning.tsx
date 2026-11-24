@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import {
     ArrowRightLeftIcon,
+    BankNoteIcon,
     BoatIcon,
     CarIcon,
     CheckmarkIcon,
@@ -12,7 +13,9 @@ import {
     ParkingIcon,
     PersonGroupIcon,
     RaindropIcon,
+    ReceiptIcon,
     RoadblockIcon,
+    SnowIcon,
     TrainIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, HStack, Label, VStack } from '@navikt/ds-react';
@@ -134,6 +137,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {samling._brukSammeAdresseSomForrige?.svarTekst && (
                     <SpørsmålMedSvar
+                        ikon={<HouseIcon aria-hidden />}
                         spørsmål={samling._brukSammeAdresseSomForrige.label}
                         svar={
                             <AvkryssetSvar tekst={samling._brukSammeAdresseSomForrige.svarTekst} />
@@ -171,6 +175,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {unntakFraOffentligTransport?.verdier.length ? (
                     <SpørsmålMedSvar
+                        ikon={<TrainIcon aria-hidden />}
                         spørsmål={unntakFraOffentligTransport.label}
                         svar={
                             <AvkryssetSvarListe
@@ -184,6 +189,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {harValgtBarnehage && leveringOgHentingIBarnehage?.gateadresse?.verdi && (
                     <SpørsmålMedSvar
+                        ikon={<LocationPinIcon aria-hidden />}
                         spørsmål={leveringOgHentingIBarnehage.gateadresse.label}
                         svar={
                             <BodyShort>{leveringOgHentingIBarnehage.gateadresse.verdi}</BodyShort>
@@ -193,6 +199,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {harValgtBarnehage && leveringOgHentingIBarnehage?.postnummer?.verdi && (
                     <SpørsmålMedSvar
+                        ikon={<LocationPinIcon aria-hidden />}
                         spørsmål={leveringOgHentingIBarnehage.postnummer.label}
                         svar={<BodyShort>{leveringOgHentingIBarnehage.postnummer.verdi}</BodyShort>}
                     />
@@ -200,6 +207,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {unntakFraPrivatBil?.verdier.length ? (
                     <SpørsmålMedSvar
+                        ikon={<CarIcon aria-hidden />}
                         spørsmål={unntakFraPrivatBil.label}
                         svar={
                             <AvkryssetSvarListe
@@ -211,6 +219,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {samling.reisemåte?.offentligTransport?.totalUtgifterOffentligTransport?.verdi && (
                     <SpørsmålMedSvar
+                        ikon={<ReceiptIcon aria-hidden />}
                         spørsmål={
                             samling.reisemåte.offentligTransport.totalUtgifterOffentligTransport
                                 .label
@@ -233,6 +242,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {privatBil?.betalteForReisen?.svarTekst && (
                     <SpørsmålMedSvar
+                        ikon={<BankNoteIcon aria-hidden />}
                         spørsmål={privatBil.betalteForReisen.label}
                         svar={<AvkryssetSvar tekst={privatBil.betalteForReisen.svarTekst} />}
                     />
@@ -240,6 +250,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {privatBil?.infoBilKunDelerAvStrekning?.strekningHvorBilBleBenyttet?.verdi && (
                     <SpørsmålMedSvar
+                        ikon={<CarIcon aria-hidden />}
                         spørsmål={
                             privatBil.infoBilKunDelerAvStrekning.strekningHvorBilBleBenyttet.label
                         }
@@ -256,6 +267,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {privatBil?.infoBilKunDelerAvStrekning?.antallKilometerKjørt?.verdi && (
                     <SpørsmålMedSvar
+                        ikon={<CarIcon aria-hidden />}
                         spørsmål={privatBil.infoBilKunDelerAvStrekning.antallKilometerKjørt.label}
                         svar={
                             <BodyShort>
@@ -291,6 +303,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {utgifterPrivatBil?.piggdekkavgift?.verdi && (
                     <SpørsmålMedSvar
+                        ikon={<SnowIcon aria-hidden />}
                         spørsmål={utgifterPrivatBil.piggdekkavgift.label}
                         svar={
                             <BodyShort>{`${utgifterPrivatBil.piggdekkavgift.verdi} kr`}</BodyShort>
@@ -308,6 +321,7 @@ export const LagretSamlingVisning: React.FC<{
 
                 {samling.reisemåte?.drosje?.harTTKort?.svarTekst && (
                     <SpørsmålMedSvar
+                        ikon={<CarIcon aria-hidden />}
                         spørsmål={samling.reisemåte.drosje.harTTKort.label}
                         svar={
                             <AvkryssetSvar tekst={samling.reisemåte.drosje.harTTKort.svarTekst} />
