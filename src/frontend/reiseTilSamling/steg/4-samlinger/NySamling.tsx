@@ -120,6 +120,7 @@ export const NySamling: React.FC<{
                     <Heading size="small">{samlingerTekster.info_samling_header[locale]}</Heading>
                     <VStack gap="space-16">
                         <LocaleRadioGroup
+                            id={feilErObligatorisk?.id}
                             tekst={samlingerTekster.radio_samling_obligatorisk}
                             value={samling.erObligatorisk?.verdi || ''}
                             onChange={(verdi) => {

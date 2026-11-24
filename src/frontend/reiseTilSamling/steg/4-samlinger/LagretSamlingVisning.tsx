@@ -59,11 +59,20 @@ const SpørsmålMedSvar: React.FC<{
     </VStack>
 );
 
+const AvkryssetSvarRad = styled.div`
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    column-gap: 0.5rem;
+    align-items: start;
+`;
+
 const AvkryssetSvar: React.FC<{ tekst: string }> = ({ tekst }) => (
-    <HStack gap="space-8" align="center">
-        <CheckmarkIcon aria-hidden />
+    <AvkryssetSvarRad>
+        <IkonKolonne aria-hidden as="span">
+            <CheckmarkIcon aria-hidden />
+        </IkonKolonne>
         <BodyShort>{tekst}</BodyShort>
-    </HStack>
+    </AvkryssetSvarRad>
 );
 
 const AvkryssetSvarListe: React.FC<{ verdier: string[] }> = ({ verdier }) => (
@@ -86,11 +95,16 @@ export const LagretSamlingVisning: React.FC<{
         gateadresse: samling.adresse?.gateadresse?.verdi,
         postnummer: samling.adresse?.postnummer?.verdi,
         poststed: samling.adresse?.poststed?.verdi,
-        land: samling.adresse?.land?.svarTekst,
+        land: samling.adresse?.land?.verdi,
     });
 
     const transportmidler = samling.reisemåte?.hvilkeTransportmidlerBleBenyttet?.verdier ?? [];
     const unntakFraOffentligTransport = samling.reisemåte?.unntakFraOffentligTransport?.årsaker;
+    const leveringOgHentingIBarnehage =
+        samling.reisemåte?.unntakFraOffentligTransport?.leveringOgHentingIBarnehage;
+    const harValgtBarnehage = unntakFraOffentligTransport?.verdier.some(
+        (valg) => valg.verdi === 'LEVERING_HENTING_I_BARNEHAGE'
+    );
     const unntakFraPrivatBil = samling.reisemåte?.unntakFraPrivatBil;
     const privatBil = samling.reisemåte?.privatBil;
     const utgifterPrivatBil = privatBil?.utgifterPrivatBil;
@@ -167,6 +181,22 @@ export const LagretSamlingVisning: React.FC<{
                         }
                     />
                 ) : null}
+
+                {harValgtBarnehage && leveringOgHentingIBarnehage?.gateadresse?.verdi && (
+                    <SpørsmålMedSvar
+                        spørsmål={leveringOgHentingIBarnehage.gateadresse.label}
+                        svar={
+                            <BodyShort>{leveringOgHentingIBarnehage.gateadresse.verdi}</BodyShort>
+                        }
+                    />
+                )}
+
+                {harValgtBarnehage && leveringOgHentingIBarnehage?.postnummer?.verdi && (
+                    <SpørsmålMedSvar
+                        spørsmål={leveringOgHentingIBarnehage.postnummer.label}
+                        svar={<BodyShort>{leveringOgHentingIBarnehage.postnummer.verdi}</BodyShort>}
+                    />
+                )}
 
                 {unntakFraPrivatBil?.verdier.length ? (
                     <SpørsmålMedSvar
@@ -267,6 +297,15 @@ export const LagretSamlingVisning: React.FC<{
                     />
                 )}
 
+                {utgifterPrivatBil?.piggdekkavgift?.verdi && (
+                    <SpørsmålMedSvar
+                        spørsmål={utgifterPrivatBil.piggdekkavgift.label}
+                        svar={
+                            <BodyShort>{`${utgifterPrivatBil.piggdekkavgift.verdi} kr`}</BodyShort>
+                        }
+                    />
+                )}
+
                 {samling.reisemåte?.drosje?.harTTKort?.svarTekst && (
                     <SpørsmålMedSvar
                         spørsmål={samling.reisemåte.drosje.harTTKort.label}
@@ -277,11 +316,11 @@ export const LagretSamlingVisning: React.FC<{
                 )}
 
                 <HStack gap="space-16">
-                    <Button variant="secondary" onClick={onRediger}>
+                    <Button variant="secondary" data-color="neutral" onClick={onRediger}>
                         {samlingerTekster.knapp_rediger[locale]}
                     </Button>
                     {visSlett && onSlett && (
-                        <Button variant="tertiary" onClick={onSlett}>
+                        <Button variant="tertiary" data-color="neutral" onClick={onSlett}>
                             {samlingerTekster.knapp_slett[locale]}
                         </Button>
                     )}

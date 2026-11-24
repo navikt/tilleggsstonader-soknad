@@ -22,6 +22,8 @@ export const SamlingerListe: React.FC<{
     const [redigerSamlingId, settRedigerSamlingId] = useState<number | undefined>(undefined);
 
     const ulagretSamling = samlinger.find((s) => !s.lagret);
+    const aktivSamling =
+        samlinger.find((samling) => samling._id === redigerSamlingId) ?? ulagretSamling;
     const lagredeSamlinger = samlinger.filter((s) => s.lagret);
     const førsteSamlingId = Math.min(...samlinger.map((s) => s._id));
     const kanSletteSamling = (id: number) => id !== førsteSamlingId;
@@ -34,19 +36,23 @@ export const SamlingerListe: React.FC<{
         );
     };
 
+    const validerSamling = (samling: Samling): boolean => {
+        const feil = validerSamlingUnderRedigering(
+            samling,
+            locale,
+            samling._id === førsteSamlingId
+        );
+        settValideringsfeil((prevState) => ({
+            ...prevState,
+            ...nullstillteSamlingsfeil([samling]),
+            ...feil,
+        }));
+        return !inneholderFeil(feil);
+    };
+
     const lagreSamling = (samlingId: number) => {
         const samlingSomSkalLagres = samlinger.find((s) => s._id === samlingId);
-        if (!samlingSomSkalLagres) {
-            return;
-        }
-
-        const feil = validerSamlingUnderRedigering(
-            samlingSomSkalLagres,
-            locale,
-            samlingSomSkalLagres._id === førsteSamlingId
-        );
-        if (inneholderFeil(feil)) {
-            settValideringsfeil((prevState) => ({ ...prevState, ...feil }));
+        if (!samlingSomSkalLagres || !validerSamling(samlingSomSkalLagres)) {
             return;
         }
 
@@ -60,32 +66,30 @@ export const SamlingerListe: React.FC<{
         settRedigerSamlingId((prev) => (prev === samlingId ? undefined : prev));
     };
 
-    const leggTilSamling = () => {
-        const samlingUnderArbeid =
-            ulagretSamling ?? samlinger.find((samling) => samling._id === redigerSamlingId);
-
-        if (samlingUnderArbeid) {
-            const feil = validerSamlingUnderRedigering(
-                samlingUnderArbeid,
-                locale,
-                samlingUnderArbeid._id === førsteSamlingId
-            );
-            if (inneholderFeil(feil)) {
-                settValideringsfeil((prevState) => ({ ...prevState, ...feil }));
-                return;
-            }
+    const redigerSamling = (samlingId: number) => {
+        if (aktivSamling && !validerSamling(aktivSamling)) {
+            return;
         }
 
-        settValideringsfeil((prevState) => ({
-            ...prevState,
-            ...nullstillteSamlingsfeil(samlinger),
-        }));
+        settSamlinger((prev) =>
+            synkroniserGjenbrukAdresser(
+                prev.map((samling) =>
+                    samling._id === aktivSamling?._id ? { ...samling, lagret: true } : samling
+                )
+            )
+        );
+        settRedigerSamlingId(samlingId);
+    };
+
+    const leggTilSamling = () => {
+        if (aktivSamling && !validerSamling(aktivSamling)) {
+            return;
+        }
+
         settSamlinger((prev) =>
             synkroniserGjenbrukAdresser([
                 ...prev.map((samling) =>
-                    samlingUnderArbeid && samling._id === samlingUnderArbeid._id
-                        ? { ...samling, lagret: true }
-                        : samling
+                    samling._id === aktivSamling?._id ? { ...samling, lagret: true } : samling
                 ),
                 opprettSamlingForNesteId(prev),
             ])
@@ -126,7 +130,7 @@ export const SamlingerListe: React.FC<{
                             <LagretSamlingVisning
                                 samling={samling}
                                 visSlett={kanSletteSamling(samling._id)}
-                                onRediger={() => settRedigerSamlingId(samling._id)}
+                                onRediger={() => redigerSamling(samling._id)}
                                 onSlett={
                                     kanSletteSamling(samling._id)
                                         ? () => slettSamling(samling._id)
@@ -136,7 +140,7 @@ export const SamlingerListe: React.FC<{
                         )}
                     </React.Fragment>
                 ))}
-                {ulagretSamling && (
+                {ulagretSamling && redigerSamlingId === undefined && (
                     <NySamling
                         key={ulagretSamling._id}
                         samling={ulagretSamling}
