@@ -273,14 +273,6 @@ export const LagretSamlingVisning: React.FC<{
                     />
                 )}
 
-                {utgifterPrivatBil?.drivstoffType?.svarTekst && (
-                    <SpørsmålMedSvar
-                        ikon={<RaindropIcon aria-hidden />}
-                        spørsmål={utgifterPrivatBil.drivstoffType.label}
-                        svar={<BodyShort>{utgifterPrivatBil.drivstoffType.svarTekst}</BodyShort>}
-                    />
-                )}
-
                 {utgifterPrivatBil?.bompenger?.verdi && (
                     <SpørsmålMedSvar
                         ikon={<RoadblockIcon aria-hidden />}
@@ -303,6 +295,14 @@ export const LagretSamlingVisning: React.FC<{
                         svar={
                             <BodyShort>{`${utgifterPrivatBil.piggdekkavgift.verdi} kr`}</BodyShort>
                         }
+                    />
+                )}
+
+                {utgifterPrivatBil?.drivstoffType?.svarTekst && (
+                    <SpørsmålMedSvar
+                        ikon={<RaindropIcon aria-hidden />}
+                        spørsmål={utgifterPrivatBil.drivstoffType.label}
+                        svar={<BodyShort>{utgifterPrivatBil.drivstoffType.svarTekst}</BodyShort>}
                     />
                 )}
 
