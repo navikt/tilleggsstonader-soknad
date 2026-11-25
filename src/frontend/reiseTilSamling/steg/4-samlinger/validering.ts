@@ -141,8 +141,8 @@ export const validerSamlingUnderRedigering = (
         };
     }
 
-    const gjenbrukerAdresse = !erFørste && samling._brukSammeAdresseSomForrige?.verdi === 'JA';
-    if (!gjenbrukerAdresse) {
+    const viserAdresse = erFørste || samling._brukSammeAdresseSomForrige?.verdi === 'NEI';
+    if (viserAdresse) {
         feil = { ...feil, ...validerAdresseOgAvstand(samling, locale) };
     }
 

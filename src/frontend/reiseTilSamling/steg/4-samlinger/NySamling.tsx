@@ -39,9 +39,10 @@ export const NySamling: React.FC<{
     samling: Samling;
     erFørste: boolean;
     oppdater: (id: number, key: keyof Samling, verdi: unknown) => void;
+    onLagre?: () => void;
     onSlett?: () => void;
     visValideringsfeil?: boolean;
-}> = ({ samling, erFørste, oppdater, onSlett, visValideringsfeil = true }) => {
+}> = ({ samling, erFørste, oppdater, onLagre, onSlett, visValideringsfeil = true }) => {
     const { locale } = useSpråk();
     const { valideringsfeil, settValideringsfeil } = useValideringsfeil();
     const keyFom = errorKeyFom(samling._id);
@@ -119,6 +120,7 @@ export const NySamling: React.FC<{
                     <Heading size="small">{samlingerTekster.info_samling_header[locale]}</Heading>
                     <VStack gap="space-16">
                         <LocaleRadioGroup
+                            id={feilErObligatorisk?.id}
                             tekst={samlingerTekster.radio_samling_obligatorisk}
                             value={samling.erObligatorisk?.verdi || ''}
                             onChange={(verdi) => {
@@ -212,11 +214,18 @@ export const NySamling: React.FC<{
                     tekster={reisemåteTekster}
                 />
 
-                {onSlett && (
-                    <HStack>
-                        <Button variant="tertiary" onClick={onSlett} icon={<MinusIcon />}>
-                            {samlingerTekster.knapp_slett[locale]}
-                        </Button>
+                {(onLagre || onSlett) && (
+                    <HStack gap="space-16">
+                        {onLagre && (
+                            <Button variant="secondary" onClick={onLagre}>
+                                {samlingerTekster.knapp_lagre[locale]}
+                            </Button>
+                        )}
+                        {onSlett && (
+                            <Button variant="tertiary" onClick={onSlett} icon={<MinusIcon />}>
+                                {samlingerTekster.knapp_slett[locale]}
+                            </Button>
+                        )}
                     </HStack>
                 )}
             </VStack>
