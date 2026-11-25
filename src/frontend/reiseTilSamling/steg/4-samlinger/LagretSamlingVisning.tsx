@@ -37,13 +37,14 @@ const IkonKolonne = styled(Box)`
     width: 1.5rem;
     display: inline-flex;
     justify-content: center;
+    padding-top: 0.25rem;
 `;
 
 const SpørsmålRad = styled.div`
     display: grid;
     grid-template-columns: 1.5rem 1fr;
     column-gap: 0.5rem;
-    align-items: center;
+    align-items: start;
 `;
 
 const SpørsmålMedSvar: React.FC<{
