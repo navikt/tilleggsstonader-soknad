@@ -19,18 +19,27 @@ export const HovedytelseOppsummering: React.FC<{
             </FormSummary.Heading>
         </FormSummary.Header>
         <FormSummary.Answers>
-            {hovedytelse.ytelse && (
-                <FormSummary.Answer>
-                    <FormSummary.Label>{hovedytelse.ytelse.label}</FormSummary.Label>
-                    {hovedytelse.ytelse.verdier.map((ytelse) => (
-                        <FormSummary.Value key={ytelse.verdi}>{ytelse.label}</FormSummary.Value>
-                    ))}
-                </FormSummary.Answer>
-            )}
-            {hovedytelse.arbeidOgOpphold && (
-                <ArbeidOgOppholdOppsummering arbeidOgOpphold={hovedytelse.arbeidOgOpphold} />
-            )}
+            <HovedytelseSvar hovedytelse={hovedytelse} />
         </FormSummary.Answers>
         <FormSummaryFooterMedEndreKnapp lenke={redigerLenke} />
     </FormSummary>
+);
+
+/**
+ * Svarene om hovedytelse uten FormSummary rundt. Brukes av søknader som har egne spørsmål på samme side.
+ */
+export const HovedytelseSvar: React.FC<{ hovedytelse: Hovedytelse }> = ({ hovedytelse }) => (
+    <>
+        {hovedytelse.ytelse && (
+            <FormSummary.Answer>
+                <FormSummary.Label>{hovedytelse.ytelse.label}</FormSummary.Label>
+                {hovedytelse.ytelse.verdier.map((ytelse) => (
+                    <FormSummary.Value key={ytelse.verdi}>{ytelse.label}</FormSummary.Value>
+                ))}
+            </FormSummary.Answer>
+        )}
+        {hovedytelse.arbeidOgOpphold && (
+            <ArbeidOgOppholdOppsummering arbeidOgOpphold={hovedytelse.arbeidOgOpphold} />
+        )}
+    </>
 );

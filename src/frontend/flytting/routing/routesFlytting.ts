@@ -6,7 +6,7 @@ export const flyttingPath = '/flytting';
 
 export const RouteTilPath: Record<FlyttingSteg, string> = {
     FORSIDE: flyttingPath,
-    HOVEDYTELSE: flyttingPath + '/hovedytelse',
+    HOVEDYTELSE: flyttingPath + '/dinsituasjon',
     FLYTTING_DETALJER: flyttingPath + '/flytting',
     VEDLEGG: flyttingPath + '/vedlegg',
     OPPSUMMERING: flyttingPath + '/oppsummering',
@@ -17,7 +17,7 @@ export const routesFlytting: IRoute<FlyttingSteg>[] = [
     { path: RouteTilPath.FORSIDE, label: 'Forside', route: 'FORSIDE' },
     {
         path: RouteTilPath.HOVEDYTELSE,
-        label: 'Hovedytelse',
+        label: 'Din Situasjon',
         route: 'HOVEDYTELSE',
     },
     {

@@ -2,6 +2,7 @@ import { AnnenAktivitetType } from './aktivitet';
 import { Reisemåte } from './reisemåte';
 import { DokumentasjonFelt, EnumFelt, EnumFlereValgFelt, SelectFelt, VerdiFelt } from './skjema';
 import { Ytelse } from '../components/Hovedytelse/typer';
+import { Arbeidssøker } from '../flytting/typer/arbeidssøker';
 import { FlyttingDetaljer } from '../flytting/typer/flyttingDetaljer';
 import { Utdanning } from '../læremidler/typer/søknad';
 import { Barnepass } from '../passAvBarn/typer/barnepass';
@@ -42,6 +43,7 @@ export interface SøknadReiseOppstartAvslutningHjemreise extends SøknadBase {
 
 export interface SøknadFlytting extends SøknadBase {
     flyttingDetaljer: FlyttingDetaljer | undefined;
+    arbeidssøker: Arbeidssøker | undefined;
 }
 
 export type Søknad =

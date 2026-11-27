@@ -12,7 +12,8 @@ import { useDokumentTittel } from '../utils/useDokumentTittel';
 
 const FlyttingInnhold = () => {
     const { resetValideringsfeil } = useValideringsfeil();
-    const { resetSøknad, hovedytelse, dokumentasjon, flyttingDetaljer } = useFlyttingSøknad();
+    const { resetSøknad, hovedytelse, dokumentasjon, flyttingDetaljer, arbeidssøker } =
+        useFlyttingSøknad();
 
     return (
         <SøknadProvider
@@ -20,6 +21,7 @@ const FlyttingInnhold = () => {
             søknad={{
                 hovedytelse,
                 flyttingDetaljer: tilFlyttingDetaljerForInnsending(flyttingDetaljer),
+                arbeidssøker,
                 dokumentasjon,
                 søknadMetadata: {
                     søknadFrontendGitHash: appConfig.commitHash,
