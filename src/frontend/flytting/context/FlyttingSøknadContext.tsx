@@ -10,6 +10,7 @@ import {
 import { Dokumentasjonsbehov, VedleggstypeFlytting } from '../../typer/skjema';
 import { DokumentasjonFelt } from '../../typer/skjema';
 import { Hovedytelse } from '../../typer/søknad';
+import { Arbeidssøker } from '../typer/arbeidssøker';
 import { FlyttingDetaljer } from '../typer/flyttingDetaljer';
 
 const [FlyttingSøknadProvider, useFlyttingSøknad] = createUseContext(() => {
@@ -19,6 +20,7 @@ const [FlyttingSøknadProvider, useFlyttingSøknad] = createUseContext(() => {
     const [dokumentasjon, settDokumentasjon] =
         useState<DokumentasjonFelt[]>(initialDokumentasjon());
     const [flyttingDetaljer, settFlyttingDetaljer] = useState<FlyttingDetaljer>();
+    const [arbeidssøker, settArbeidssøker] = useState<Arbeidssøker>();
 
     const flytteÅrsak = flyttingDetaljer?.årsak?.verdi;
     const flyttemåte = flyttingDetaljer?.flyttemåte?.verdi;
@@ -55,6 +57,7 @@ const [FlyttingSøknadProvider, useFlyttingSøknad] = createUseContext(() => {
         settHovedytelse(initialHovedytelse());
         settDokumentasjon(initialDokumentasjon());
         settFlyttingDetaljer(undefined);
+        settArbeidssøker(undefined);
     };
 
     return {
@@ -66,6 +69,8 @@ const [FlyttingSøknadProvider, useFlyttingSøknad] = createUseContext(() => {
         settDokumentasjon,
         flyttingDetaljer,
         settFlyttingDetaljer,
+        arbeidssøker,
+        settArbeidssøker,
         dokumentasjonsbehov,
         resetSøknad,
     };

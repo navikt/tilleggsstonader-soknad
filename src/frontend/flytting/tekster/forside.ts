@@ -7,17 +7,18 @@ export const forsideTekster: ForsideTekster = {
     },
     veileder_innhold: {
         nb: [
-            'Her kan du søke om pengestøtte dersom du flytter i forbindelse med utdanning, arbeidsrettet tiltak eller overgang til arbeid. Det gjelder også enslig mor eller far og gjenlevende som flytter fra hjemstedet for å begynne i arbeid.',
+            'Her kan du søke om pengestøtte dersom du flytter i forbindelse med utdanning, arbeidsrettet tiltak eller overgang til arbeid. Det gjelder også enslig mor eller far og gjenlevende som flytter fra hjemstedet for å begynne i arbeid. I tillegg gjelder det arbeidsøkere som må flytte fra hjemsted for å starte i arbeid et annet sted.',
         ],
     },
     dette_ma_du_vite_innhold: {
         nb: [
-            'Nav kan dekke flytteutgifter mellom hjemstedet ditt og aktivitetsstedet når du midlertidig må bo borte for å delta på arbeidsrettet tiltak eller utdanning/opplæring godkjent av Nav.',
+            'Nav kan dekke flytteutgifter mellom hjemstedet ditt og aktivitetsstedet når du midlertidig må bo borte for å delta på arbeidsrettet tiltak eller utdanning/opplæring godkjent av Nav. Du kan også ha rett på utgifter til å flytte tilbake etter endt tiltak/utdanning.',
             'Du kan velge å flytte selv eller bruke et flyttebyrå. Hvis du bruker flyttebyrå, må du innhente to skriftlige tilbud. Nav dekker kostnadene basert på det billigste tilbudet.',
             'Når vi vurderer om du kan få støtte til flytting, ser vi blant annet på om tiltaksstedet, utdanningsstedet eller arbeidsstedet ligger utenfor naturlig pendleravstand.',
             'Hvis du flytter for å begynne i arbeid, vurderer vi også hvor lenge arbeidsforholdet varer, om du har arbeidskontrakt, om du har søkt arbeid på hjemstedet og om stillingen er meldt til Nav eller er offentlig utlyst.',
             'Du kan ikke få støtte til utgifter som arbeidsgiveren din eller andre allerede dekker.',
-            'Du får støtten utbetalt i etterkant, basert på innsendt dokumentasjon som for eksempel kvitteringer eller betalt faktura.',
+            'Du får støtten utbetalt i etterkant, basert på innsendt dokumentasjon som for eksempel kvitteringer eller faktura.',
+            'Dersom du er arbeidssøker må du søke om flytting før flyttingen finner sted.',
         ],
     },
     var_klar_over_innhold: {
@@ -31,7 +32,7 @@ export const forsideTekster: ForsideTekster = {
             'Du er under 18 år',
             'Du søker på vegne av andre',
             [
-                'Du søker støtte for en aktivitet som ble avsluttet for mer enn 6 måneder siden. Da må du fylle ut ',
+                'Du har nedsatt arbeidsevne, er gjenlevende, eller enslig mor eller far og søker støtte for en aktivitet som ble avsluttet for mer enn 6 måneder siden. Da må du fylle ut ',
                 {
                     tekst: 'dette skjemaet i stedet',
                     url: `https://www.nav.no/fyllut/${skjematypeTilSkjemainfo.SØKNAD_FLYTTING.papirskjemaId}?sub=paper`,
