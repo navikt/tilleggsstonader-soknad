@@ -11,7 +11,7 @@ import { Oppsummering } from './steg/4-oppsummering/Oppsummering';
 import { forsideTekster } from './tekster/forside';
 
 const steg: StegRoute[] = [
-    { path: '/hovedytelse', element: <DinSituasjonFlytting /> },
+    { path: '/dinsituasjon', element: <DinSituasjonFlytting /> },
     { path: '/flytting', element: <FlyttingDetaljerSide /> },
     { path: '/vedlegg', element: <VedleggFlytting /> },
     { path: '/oppsummering', element: <Oppsummering /> },
